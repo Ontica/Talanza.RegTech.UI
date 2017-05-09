@@ -19,6 +19,7 @@ import { HomeComponent } from './home.component';
 import { Title } from './title';
 
 describe(`Home`, () => {
+
   let comp: HomeComponent;
   let fixture: ComponentFixture<HomeComponent>;
 
@@ -41,7 +42,7 @@ describe(`Home`, () => {
         Title,
       ]
     })
-    .compileComponents(); // compile template and css
+      .compileComponents(); // compile template and css
   }));
 
   // synchronous beforeEach
@@ -50,22 +51,6 @@ describe(`Home`, () => {
     comp = fixture.componentInstance;
 
     fixture.detectChanges(); // trigger initial data binding
-  });
-
-  it('should have default data', () => {
-    expect(comp.localState).toEqual({ value: '' });
-  });
-
-  it('should have a title', () => {
-    expect(!!comp.title).toEqual(true);
-  });
-
-  it('should log ngOnInit', () => {
-    spyOn(console, 'log');
-    expect(console.log).not.toHaveBeenCalled();
-
-    comp.ngOnInit();
-    expect(console.log).toHaveBeenCalled();
   });
 
 });

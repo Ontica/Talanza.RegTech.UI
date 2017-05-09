@@ -1,16 +1,28 @@
 {
-  "name": "angular2-webpack-starter",
-  "version": "6.0.0",
-  "description": "An Angular 2 Webpack Starter kit featuring Angular 2 (Router, Http, Forms, Services, Tests, E2E, Coverage), Karma, Protractor, Jasmine, Istanbul, TypeScript, and Webpack by AngularClass",
-  "keywords": [
-    "angular",
-    "angular2",
-    "webpack",
-    "typescript"
+  "name": "empiria-steps-covar-edition",
+  "author": "La Vía Óntica SC || Ontica LLC",
+  "version": "0.0.1",
+  "description": "Empiria Steps workflow solution customized for COVAR Energy Consulting",
+  "license": "AGPL-3.0",
+  "homepage": "http://ontica.org",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Ontica/Empiria.Steps.Covar"
+  },
+  "contributors": [
+    "Christian Yáñez <cyanez@ontica.org>",
+    "José Manuel Cota  <jmcota@ontica.org>"
   ],
-  "author": "Patrick Stapleton <patrick@angularclass.com>",
-  "homepage": "https://github.com/angularclass/angular2-webpack-starter",
-  "license": "MIT",
+  "keywords": [
+    "bpmn",
+    "business process",
+    "process automation",
+    "process management",
+    "wfmc",
+    "workflow",
+    "xpdl"
+  ],
   "scripts": {
     "build:aot:prod": "npm run clean:dist && npm run clean:aot && webpack --config config/webpack.prod.js  --progress --profile --bail",
     "build:aot": "npm run build:aot:prod",
@@ -151,13 +163,6 @@
     "webpack-dev-server": "~2.4.2",
     "webpack-dll-bundles-plugin": "^1.0.0-beta.5",
     "webpack-merge": "~4.1.0"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/angularclass/angular2-webpack-starter.git"
-  },
-  "bugs": {
-    "url": "https://github.com/angularclass/angular2-webpack-starter/issues"
   },
   "engines": {
     "node": ">= 4.2.1",
