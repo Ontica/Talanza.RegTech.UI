@@ -2,7 +2,7 @@
 
 ### What is Empiria Steps?
 
-Empiria Steps is [Ontica's](http://www,ontica.org) workflow automation solution.
+Empiria Steps is [Ontica's](http://www.ontica.org/) workflow automation solution.
 
 This repo corresponds to the front-end main system custom-tailored for [Covar Energy Consulting](http://www.covarenergy.com).
 

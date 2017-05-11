@@ -1,0 +1,91 @@
+@import "../../styles/variables";
+//
+// Main layout scss
+//
+.body {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.header-container {
+  display: inline-flex;
+  flex-wrap: nowrap;
+  top: 0;
+  div {
+    margin: 8px;
+  }
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  padding: 8px;
+  height: 100vh;
+}
+
+//
+// Header-container inner items
+//
+.logo {
+  height: 60px;
+  margin-right: 14px;
+}
+
+.title {
+  color: $text-title;
+  font-size: $font-size-title;
+  font-weight: $font-weight-title;
+  min-width: 360px;
+  padding-top: 7px;
+  width: 50%;
+  small {
+    color: $text-hint;
+    display: block;
+    font-size: $font-size-hint;
+    font-weight: $font-weight-hint;
+  }
+}
+
+.configuration-bar {
+  font-size: $font-size-command;
+  font-weight: $font-weight-command;
+  width: 180px;
+}
+
+//
+// Navigation bar
+//
+.nav-bar {
+  height: 32px;
+  background-color: $secondary-color;
+}
+
+.nav-bar ul {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 10pt;
+}
+
+.nav-bar a, a:visited {
+  color: $secondary-text-color;
+  display: block;
+  padding: 5px 14px;
+  text-decoration: none;
+}
+
+.nav-bar a:hover {
+  border-bottom: 2px solid $selected-item-text-color;
+}
+
+.selected a {
+  color: $selected-item-text-color;
+  text-decoration: none;
+}
+
+.first-li {
+  margin-left: 48px;
+}

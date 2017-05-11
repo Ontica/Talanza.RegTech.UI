@@ -24,7 +24,7 @@
     "indent_size": 2,
     "indentCharacter": " ",
     "indent_char": " ",
-    "selector_separator_newline": true,
+    "selector_separator_newline": false,
     "end_with_newline": true,
     "newline_between_rules": true,
     "eol": "\n"
@@ -33,6 +33,9 @@
     "indent_inner_html": false,
     "indent_size": 2,
     "indent_char": " ",
-    "indent_character": " "
+    "indent_character": " ",
+    "preserve-newlines": true,
+    "end_with_newline": true,
+    "eol": "\n"
   }
 }

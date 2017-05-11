@@ -1,2 +1,46 @@
-$nav-button-color: #00838F;
-$background-color:  blue;
+//
+// Colors
+//
+$black: #1a1a1a !default;
+$gray: #808080!default;
+$brown: #A05000 !default;
+$blue: #204060 !default;
+$lime: #8CBF26 !default;
+$green: #17c457 !default;
+$orange: #f0b829 !default;
+$pink: #E671B8 !default;
+$purple: #A700AE !default;
+$red:#9b1b1f !default;
+$red-dark: #d04f4f !default;
+$teal: #25a1c5 !default;
+$white: #f8f8f8 !default;
+//
+// Typography
+//
+$font-family:-apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol" !default;
+$font-size-root: 13px !default;
+$font-size-base: 1.0rem !default;
+$font-weight-base: 400 !default;
+$text-color: $black !default;
+//
+$font-size-title: $font-size-base * 1.25;
+$font-weight-title: 500;
+$text-title: $blue !default;
+//
+$font-size-command: $font-size-base * 0.85;
+$font-weight-command: 300;
+//
+$font-size-hint: $font-size-base * 0.75;
+$font-weight-hint: 150;
+$text-hint: $red !default;
+//
+$text-bold: lighten($text-color, 3%);
+$text-muted: $gray !default;
+//
+// Elements colors
+//
+$background-color: $white !default;
+$secondary-color: $red !default;
+$secondary-text-color: $white !default;
+$selected-item-text-color: $orange;
+$link-color: $blue;

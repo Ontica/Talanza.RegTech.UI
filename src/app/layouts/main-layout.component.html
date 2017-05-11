@@ -1,25 +1,32 @@
 <div class="body">
-  <div class="header-container">
-    <div class="header-box header-right">
-      <img class="logo" src="./assets/img/customer-logo.png" alt="COVAR Energy Consulting">
-      <title>{{title}}</title>
-    </div>
 
-    <div class="header-box header-left">
-      Hola {{userName}}
+  <div class="header-container">
+    <div>
+      <img class="logo" src="./assets/img/customer-logo.png" alt="COVAR Energy Consulting" />
+    </div>
+    <div class="title">
+      {{title}}
+      <small>{{breadcrumb}}</small>
+    </div>
+    <div class="configuration-bar pull-right">
+      {{userName}}
     </div>
   </div>
-  <div class="main-nav">
+
+  <div class="nav-bar">
     <ul>
-      <li><a href="#">Procesos</a></li>
+      <li class="first-li"><a href="#">Inicio</a></li>
+      <li class="selected"><a href="#">Procesos</a></li>
       <li><a href="#">Implementación</a></li>
       <li><a href="#">Ejecución</a></li>
       <li><a href="#">Monitoreo</a></li>
       <li><a href="#">Optimización</a></li>
-      <li><a href="#">Tableros de información</a></li>
+      <li><a href="#">Consultas</a></li>
     </ul>
   </div>
+
   <div class="content">
-    <ng-content> </ng-content>
+    <router-outlet></router-outlet>
   </div>
+
 </div>
