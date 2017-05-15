@@ -8,10 +8,11 @@
 
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
+import { MainLayoutComponent } from './main-layout/main-layout.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { NoContentComponent } from './no-content/no-content.component';
 
 /**
  * Do not specify providers for modules that might be imported by a lazy loaded module.
@@ -19,15 +20,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
   imports: [CommonModule, RouterModule],
-  declarations: [NavbarComponent],
-  exports: [NavbarComponent, CommonModule, FormsModule, RouterModule]
+  declarations: [MainLayoutComponent, NavbarComponent, NoContentComponent],
+  exports: [MainLayoutComponent, NavbarComponent, NoContentComponent]
 })
-export class SharedModule {
-
-  public static forRoot(): ModuleWithProviders {
-    return {
-      ngModule: SharedModule,
-      providers: []
-    };
-  }
-}
+export class SharedModule {}

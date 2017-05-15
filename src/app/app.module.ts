@@ -1,6 +1,4 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
 import {
   NgModule,
   ApplicationRef
@@ -20,16 +18,22 @@ import {
  */
 import { ENV_PROVIDERS } from './environment';
 import { ROUTES } from './app.routes';
-// App is our top level component
-import { AppComponent } from './app.component';
 import { APP_RESOLVER_PROVIDERS } from './app.resolver';
 import { AppState, InternalStateType } from './app.service';
-import { HomeComponent } from './home';
 
-import { NoContentComponent } from './no-content';
+//
+// Empiria Steps Application Modules
+//
+import { DashboardModule } from './dashboard/dashboard.module';
+import { WorkflowModule } from './workflow/workflow.module';
+import { SharedModule } from './shared/shared.module';
+//
+// App is our top level component
+//
+import { AppComponent } from './app.component';
 
-import { MainLayoutComponent } from './layouts/main-layout.component';
-
+// Temporarily main SCSS file injection
+//
 import '../styles/styles.scss';
 
 // Application wide providers
@@ -49,17 +53,13 @@ type StoreType = {
  */
 @NgModule({
   bootstrap: [AppComponent],
-  declarations: [
-    AppComponent,
-    HomeComponent,
-    NoContentComponent,
-    MainLayoutComponent
-  ],
+  declarations: [AppComponent],
   imports: [ // import Angular's modules
+    DashboardModule,
+    WorkflowModule,
+    SharedModule,
     BrowserModule,
-    FormsModule,
-    HttpModule,
-    RouterModule.forRoot(ROUTES, { useHash: true, preloadingStrategy: PreloadAllModules })
+    RouterModule.forRoot(ROUTES, { useHash: true, preloadingStrategy: PreloadAllModules }),
   ],
   providers: [ // expose our Services and Providers into Angular's dependency injection
     ENV_PROVIDERS,
