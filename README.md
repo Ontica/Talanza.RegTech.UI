@@ -262,4 +262,4 @@ For third-party components, please read [ThirdPartyNotices](https://github.com/O
 
 # Copyright
 
-Copyright © 2017. La Vía Óntica SC, Ontica LLC and colaborators.
+Copyright © 2017. La Vía Óntica SC, Ontica LLC and contributors.
