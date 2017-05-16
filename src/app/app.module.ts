@@ -20,6 +20,7 @@ import { AppState, InternalStateType } from './app.service';
 /*
  * Empiria Steps Application Modules
  */
+import { SecurityModule } from './security/security.module';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { WorkflowModule } from './workflow/workflow.module';
 import { SharedModule } from './shared/shared.module';
@@ -52,6 +53,7 @@ type StoreType = {
   bootstrap: [AppComponent],
   declarations: [AppComponent],
   imports: [ // import Angular's modules
+    SecurityModule,
     DashboardModule,
     WorkflowModule,
     SharedModule,
