@@ -10,13 +10,14 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { WorkflowModelingModule } from './modeling/workflow-modeling.module';
+import { WorkflowRoutingModule } from './workflow-routing.module';
 
 /**
  * Do not specify providers for modules that might be imported by a lazy loaded module.
  */
 
 @NgModule({
-  imports: [WorkflowModelingModule, CommonModule],
+  imports: [WorkflowModelingModule, WorkflowRoutingModule, CommonModule],
   declarations: [],
   exports: [WorkflowModelingModule]
 })

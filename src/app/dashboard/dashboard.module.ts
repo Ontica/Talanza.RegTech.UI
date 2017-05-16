@@ -10,13 +10,14 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { HomeComponent } from './home/home.component';
+import { DashboardRoutingModule } from './dashboard-routing.module';
 
 /**
  * Do not specify providers for modules that might be imported by a lazy loaded module.
  */
 
 @NgModule({
-  imports: [CommonModule],
+  imports: [DashboardRoutingModule, CommonModule],
   declarations: [HomeComponent],
   exports: [HomeComponent]
 })

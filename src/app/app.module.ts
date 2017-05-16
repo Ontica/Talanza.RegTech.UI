@@ -1,39 +1,36 @@
+/**
+ * @license
+ * Copyright (c) 2017 La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
+ *
+ * See LICENSE.txt in the project root for complete license information.
+ *
+ */
+
 import { BrowserModule } from '@angular/platform-browser';
-import {
-  NgModule,
-  ApplicationRef
-} from '@angular/core';
-import {
-  removeNgStyles,
-  createNewHosts,
-  createInputTransfer
-} from '@angularclass/hmr';
-import {
-  RouterModule,
-  PreloadAllModules
-} from '@angular/router';
+import { NgModule, ApplicationRef } from '@angular/core';
+import { removeNgStyles, createNewHosts, createInputTransfer } from '@angularclass/hmr';
 
 /*
  * Platform and Environment providers/directives/pipes
  */
 import { ENV_PROVIDERS } from './environment';
-import { ROUTES } from './app.routes';
 import { APP_RESOLVER_PROVIDERS } from './app.resolver';
 import { AppState, InternalStateType } from './app.service';
 
-//
-// Empiria Steps Application Modules
-//
+/*
+ * Empiria Steps Application Modules
+ */
 import { DashboardModule } from './dashboard/dashboard.module';
 import { WorkflowModule } from './workflow/workflow.module';
 import { SharedModule } from './shared/shared.module';
-//
-// App is our top level component
-//
+
+/*
+ * Import the top level component and its routing module
+ */
 import { AppComponent } from './app.component';
+import { AppRoutingModule } from './app-routing.module';
 
 // Temporarily main SCSS file injection
-//
 import '../styles/styles.scss';
 
 // Application wide providers
@@ -59,7 +56,7 @@ type StoreType = {
     WorkflowModule,
     SharedModule,
     BrowserModule,
-    RouterModule.forRoot(ROUTES, { useHash: true, preloadingStrategy: PreloadAllModules }),
+    AppRoutingModule
   ],
   providers: [ // expose our Services and Providers into Angular's dependency injection
     ENV_PROVIDERS,
@@ -68,10 +65,11 @@ type StoreType = {
 })
 export class AppModule {
 
-  constructor(
-    public appRef: ApplicationRef,
-    public appState: AppState
-  ) { }
+  constructor(public appRef: ApplicationRef, public appState: AppState) {
+    // no-op
+  }
+
+  // Angular 2 Hot Module Replacement methods
 
   public hmrOnInit(store: StoreType) {
     if (!store || !store.state) {
