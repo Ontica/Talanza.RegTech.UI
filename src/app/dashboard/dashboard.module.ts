@@ -9,6 +9,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import { SharedModule } from '../shared/shared.module';
+
 import { HomeComponent } from './home/home.component';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 
@@ -17,7 +19,7 @@ import { DashboardRoutingModule } from './dashboard-routing.module';
  */
 
 @NgModule({
-  imports: [DashboardRoutingModule, CommonModule],
+  imports: [DashboardRoutingModule, SharedModule, CommonModule],
   declarations: [HomeComponent],
   exports: [HomeComponent]
 })

@@ -9,12 +9,17 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
+import { MainLayoutComponent } from '../shared';
 import { ProcessDefinitionComponent } from './modeling/process-definition.component';
 
 @NgModule({
-  imports: [RouterModule.forChild([
-    { path: 'workflow/modeling', component: ProcessDefinitionComponent }
-  ])],
+  imports: [
+    RouterModule.forChild([
+      {
+        path: 'workflow', component: MainLayoutComponent,
+        children: [{ path: 'modeling', component: ProcessDefinitionComponent }]
+      }
+    ])],
   exports: [RouterModule]
 })
 export class WorkflowRoutingModule { }

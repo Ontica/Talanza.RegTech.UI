@@ -9,6 +9,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import { SharedModule } from '../shared/shared.module';
+
 import { WorkflowModelingModule } from './modeling/workflow-modeling.module';
 import { WorkflowRoutingModule } from './workflow-routing.module';
 
@@ -17,7 +19,7 @@ import { WorkflowRoutingModule } from './workflow-routing.module';
  */
 
 @NgModule({
-  imports: [WorkflowModelingModule, WorkflowRoutingModule, CommonModule],
+  imports: [WorkflowRoutingModule, SharedModule, CommonModule],
   declarations: [],
   exports: [WorkflowModelingModule]
 })

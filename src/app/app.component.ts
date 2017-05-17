@@ -3,8 +3,6 @@ import { Component, ViewEncapsulation } from '@angular/core';
 @Component({
   selector: 'app',
   encapsulation: ViewEncapsulation.None,
-  template: `<main-layout>
-              <router-outlet></router-outlet>
-            </main-layout>`
+  template: '<router-outlet></router-outlet>'
 })
 export class AppComponent {}

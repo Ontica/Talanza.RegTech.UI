@@ -11,6 +11,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
 import { MainLayoutComponent } from './main-layout/main-layout.component';
+
 import { NavbarComponent } from './navbar/navbar.component';
 import { NoContentComponent } from './no-content/no-content.component';
 
@@ -19,8 +20,8 @@ import { NoContentComponent } from './no-content/no-content.component';
  */
 
 @NgModule({
-  imports: [CommonModule, RouterModule],
+  imports: [RouterModule, CommonModule],
   declarations: [MainLayoutComponent, NavbarComponent, NoContentComponent],
-  exports: [MainLayoutComponent, NavbarComponent, NoContentComponent]
+  exports: [MainLayoutComponent, NoContentComponent]
 })
-export class SharedModule {}
+export class SharedModule { }
