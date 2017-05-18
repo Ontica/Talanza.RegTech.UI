@@ -7,7 +7,7 @@
  */
 
 import { Component, OnInit } from '@angular/core';
-import { SpinnerService, SpinnerState, LoggerService } from '../../core';
+import { CoreService, SpinnerState } from '../../core';
 import { Subscription } from 'rxjs/Subscription';
 
 import { StringLibrary, Log, HttpApiClient } from 'empiria';
@@ -23,25 +23,25 @@ export class HomeComponent implements OnInit {
 
   private spinnerState: SpinnerState;
 
-  public constructor(private logger: LoggerService, private spinner: SpinnerService) {
+  public constructor(private core: CoreService) {
     this.loadHttpData();
   }
 
   public ngOnInit() {
-    this.spinner.spinnerState.subscribe((val) => this.spinnerState = val);
+    this.core.spinner.spinnerState.subscribe((val) => this.spinnerState = val);
   }
 
   public onLogMessage() {
-    this.logger.log('Logger service called on ' + Date());
+    this.core.logger.log('Logger service called on ' + Date());
   }
 
   public onToggleSpinner() {
     if (this.spinnerState && this.spinnerState.show) {
-      this.spinner.hide();
-      this.logger.log('Hide toggle spinner called on ' + Date());
+      this.core.spinner.hide();
+      this.core.logger.log('Hide toggle spinner called on ' + Date());
     } else {
-      this.spinner.show();
-      this.logger.log('Show toggle spinner called on ' + Date());
+      this.core.spinner.show();
+      this.core.logger.log('Show toggle spinner called on ' + Date());
     }
   }
 

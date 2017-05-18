@@ -9,6 +9,7 @@
 import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import { CoreService } from './core.service';
 import { LoggerService } from './logger.service';
 import { SpinnerComponent } from './spinner/spinner.component';
 import { SpinnerService } from './spinner/spinner.service';
@@ -21,7 +22,7 @@ import { throwIfAlreadyLoaded } from './module-import-guard';
   ],
   exports: [SpinnerComponent],
   declarations: [SpinnerComponent],
-  providers: [LoggerService, SpinnerService]
+  providers: [CoreService, LoggerService, SpinnerService]
 })
 export class CoreModule {
 

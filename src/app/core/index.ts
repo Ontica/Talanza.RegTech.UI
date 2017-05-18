@@ -6,5 +6,6 @@
  *
  */
 
-export { SpinnerService, SpinnerState } from './spinner/spinner.service';
+export { CoreService } from './core.service';
 export { LoggerService } from './logger.service';
+export { SpinnerService, SpinnerState } from './spinner/spinner.service';
