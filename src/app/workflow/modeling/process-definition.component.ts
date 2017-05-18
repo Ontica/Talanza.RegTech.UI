@@ -7,6 +7,9 @@
  */
 
 import { Component } from '@angular/core';
+import { BrowserModule, DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+
+import * as modeler from 'bpmn-js/lib/Modeler';
 
 @Component({
   selector: 'process-definition',
@@ -14,12 +17,15 @@ import { Component } from '@angular/core';
 })
 export class ProcessDefinitionComponent {
 
-    public constructor() {
-      this.load();
-    }
+  public url: SafeResourceUrl;
 
-    private load() {
-      console.log('loading process definition component ...');
-    }
+  public constructor(private sanitizer: DomSanitizer) {
+    this.load();
+    this.url = this.sanitizer.bypassSecurityTrustResourceUrl('./process-modeler.html');
+  }
+
+  private load() {
+    console.log('loading process definition component ...');
+  }
 
 }
