@@ -10,7 +10,7 @@ import { Component, OnInit } from '@angular/core';
 import { CoreService, SpinnerState } from '../../core';
 import { Subscription } from 'rxjs/Subscription';
 
-import { StringLibrary, Log, HttpApiClient } from 'empiria';
+import { StringLibrary, Log } from 'empiria';
 
 @Component({
   selector: 'home',
@@ -50,7 +50,7 @@ export class HomeComponent implements OnInit {
   }
 
   private async getData(): Promise<string> {
-    let httpApiClient = new HttpApiClient('https://covar.azurewebsites.net/api/');
+    let httpApiClient = this.core.getHttpClient('https://covar.azurewebsites.net/api/');
 
     return await httpApiClient.getAsyncAsPromise<string>('v1/system/license');
   }

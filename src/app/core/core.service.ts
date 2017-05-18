@@ -10,6 +10,8 @@ import { Injectable } from '@angular/core';
 
 import { LoggerService, SpinnerService } from './';
 
+import { HttpApiClient } from 'empiria';
+
 @Injectable()
 export class CoreService {
 
@@ -23,6 +25,10 @@ export class CoreService {
 
   public get spinner() {
     return this._spinner;
+  }
+
+  public getHttpClient(baseAddress: string) {
+    return new HttpApiClient(baseAddress);
   }
 
 }
