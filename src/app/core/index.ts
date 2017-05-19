@@ -7,5 +7,6 @@
  */
 
 export { CoreService } from './core.service';
-export { LoggerService } from './logger.service';
+export { ApplicationSettingsService } from './services/application-settings.service';
+export { LoggerService } from './services/logger.service';
 export { SpinnerService, SpinnerState } from './spinner/spinner.service';

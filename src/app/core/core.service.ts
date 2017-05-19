@@ -8,15 +8,20 @@
 
 import { Injectable } from '@angular/core';
 
-import { LoggerService, SpinnerService } from './';
+import { ApplicationSettingsService, LoggerService, SpinnerService } from './';
 
 import { HttpApiClient } from 'empiria';
 
 @Injectable()
 export class CoreService {
 
-  public constructor(private _logger: LoggerService, private _spinner: SpinnerService) {
+  public constructor(private _appSettings: ApplicationSettingsService,
+                     private _logger: LoggerService,
+                     private _spinner: SpinnerService) {
+  }
 
+  public get appSettings() {
+    return this._appSettings;
   }
 
   public get logger() {

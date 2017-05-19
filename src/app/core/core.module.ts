@@ -7,10 +7,14 @@
  */
 
 import { NgModule, Optional, SkipSelf } from '@angular/core';
+import { HttpModule } from '@angular/http';
+
 import { CommonModule } from '@angular/common';
 
 import { CoreService } from './core.service';
-import { LoggerService } from './logger.service';
+import { ApplicationSettingsService } from './services/application-settings.service';
+import { LoggerService } from './services/logger.service';
+
 import { SpinnerComponent } from './spinner/spinner.component';
 import { SpinnerService } from './spinner/spinner.service';
 
@@ -18,11 +22,11 @@ import { throwIfAlreadyLoaded } from './module-import-guard';
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule, HttpModule
   ],
   exports: [SpinnerComponent],
   declarations: [SpinnerComponent],
-  providers: [CoreService, LoggerService, SpinnerService]
+  providers: [CoreService, ApplicationSettingsService, LoggerService, SpinnerService]
 })
 export class CoreModule {
 

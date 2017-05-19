@@ -23,12 +23,11 @@ export class HomeComponent implements OnInit {
 
   private spinnerState: SpinnerState;
 
-  public constructor(private core: CoreService) {
-    this.loadHttpData();
-  }
+  public constructor(private core: CoreService) { }
 
   public ngOnInit() {
     this.core.spinner.spinnerState.subscribe((val) => this.spinnerState = val);
+    this.core.appSettings.onLoad().then(() => this.loadData());
   }
 
   public onLogMessage() {
@@ -45,12 +44,12 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  private loadHttpData() {
-    this.getData().then((x) => this.data = x);
+  private loadData() {
+    this.getDataFromHttpServer().then((x) => this.data = x);
   }
 
-  private async getData(): Promise<string> {
-    let httpApiClient = this.core.getHttpClient('https://covar.azurewebsites.net/api/');
+  private async getDataFromHttpServer(): Promise<string> {
+    let httpApiClient = this.core.getHttpClient(this.core.appSettings.get<string>('HTTP_API_BASE_ADDRESS'));
 
     return await httpApiClient.getAsyncAsPromise<string>('v1/system/license');
   }
