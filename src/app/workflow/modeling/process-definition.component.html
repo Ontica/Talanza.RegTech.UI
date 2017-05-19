@@ -1,5 +1,8 @@
 <h1>Process Definition component outlet</h1>
-
-<div>
-  <iframe [src]="url"></iframe>
+<button (click)="sendInfo()">mandarinfo</button>
+<button (click)="createDiagram()">Nuevo</button>
+<button (click)="openDiagram()">Cargar Modelo</button>
+<button (click)="getDiagram()">Guardar Modelo</button>
+<div class="iframe-container">
+  <iframe #modeler class="iframe-modeler" [src]="url"></iframe>
 </div>
