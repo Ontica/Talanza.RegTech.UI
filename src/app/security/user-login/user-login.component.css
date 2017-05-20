@@ -1,0 +1,78 @@
+#outer {
+  align-items: center;
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  width: 100%;
+}
+
+#login-div {
+  display: flex;
+  height: 300px;
+  width: 400px;
+}
+
+.left-column {
+  height: 300px;
+  width: 180px;
+}
+
+.logo {
+  height: 60px;
+}
+
+.central-column {
+  height: 300px;
+  width: 20px;
+  background-color: #9b1b1f;
+}
+
+.right-column {
+  height: 300px;
+  font-family: Tahoma, Verdana, Arial, Helvetica, Sans-Serif;
+  font-weight: bold;
+  color: #204060;
+  width: 200px;
+}
+
+.authentication-section-welcome {
+  padding-left: 12px;
+  padding-top: 12px;
+  font-size: 15px;
+}
+
+.authentication-section-form {
+  padding-left: 12px;
+  padding-top: 12px;
+}
+
+.authentication-section-footer {
+  margin-left: 20px;
+  margin-top: 20px;
+  font-size: 10px;
+}
+
+.button {
+  background-color: #2C3942;
+  color: white;
+}
+
+label {
+  font-size: 12px;
+}
+
+input.textBox {
+  background-color: #f0f0f0;
+  border-top: 1px solid #e0e0e0;
+  border-bottom: 1px solid #e0e0e0;
+  border-left: 1px solid #e0e0e0;
+  border-right: 1px solid #e0e0e0;
+  color: #424242;
+  font: 8pt Arial, Helvetica;
+  font-weight: bold;
+  height: 25px;
+  margin: 2px 8px 2px 0;
+  padding: 4px 2px 2px;
+  vertical-align: middle;
+  width: 99%;
+}

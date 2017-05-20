@@ -1,1 +1,27 @@
-<h1>User login</h1>
+<div id="outer">
+  <div id="login-div">
+    <div class="left-column">
+      <div>
+        <img class="logo" src="../../assets/img/customer-logo.png" alt="COVAR Energy Consulting" />
+      </div>
+    </div>
+    <div class="central-column"></div>
+    <div class="right-column">
+      <div class="authentication-section-welcome">
+        <span>Bienvenidos</span><br>
+        <span>Ingresa tu nombre de usuario o correo y contraseña registrada</span>
+      </div>
+      <div class="authentication-section-form">
+        <label>Usuario o correo:</label>
+        <input class="textBox" placeholder="Usuario o correo" (input)="userID=$event.target.value">
+        <label>Contraseña:</label>
+        <input type="password" placeholder="Contraseña" (input)="password=$event.target.value">
+        <button type="button" class="button" (click)="authenticate();">Ingresar</button>
+      </div>
+      <div class="authentication-section-footer">
+        <a href="#">Olvidé la contraseña</a><br>
+        <a href="#">Crear una cuenta</a>
+      </div>
+    </div>
+  </div>
+</div>
