@@ -9,13 +9,13 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { UserLoginService } from './user-login.service';
+import { PrincipalService } from '../../core';
 
 @Component({
   selector: 'user-login',
   templateUrl: './user-login.component.html',
   styleUrls: ['./user-login.component.css'],
-  providers: [UserLoginService]
+  providers: [PrincipalService]
 })
 
 export class UserLoginComponent {
@@ -23,11 +23,7 @@ export class UserLoginComponent {
   public userID = '';
   public password = '';
 
-  constructor(private router: Router, private loginService: UserLoginService) {
-
-  }
-
-  // region Public methods
+  constructor(private router: Router, private principal: PrincipalService) { }
 
   public async authenticate() {
     if (!this.validateForm()) {
@@ -35,15 +31,13 @@ export class UserLoginComponent {
     }
 
     try {
-      await this.loginService.authenticate(this.userID, this.password);
+      await this.principal.authenticate(this.userID, this.password);
       this.router.navigate(['default']);
 
     } catch (exception) {
       alert(exception);
     }
   }
-
-  // endregion Public methods
 
   // region Private methods
 

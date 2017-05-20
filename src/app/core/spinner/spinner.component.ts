@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 
-import { LoggerService } from '../services/logger.service';
+import { LoggerService } from '../general/logger.service';
 import { SpinnerState, SpinnerService } from './spinner.service';
 
 @Component({
