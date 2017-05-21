@@ -10,15 +10,15 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { UserLoginComponent } from './user-login/user-login.component';
-import { SecurityRoutingModule } from './security-routing.module';
+import { SecurityUIRoutingModule } from './security-ui-routing.module';
 
 /**
  * Do not specify providers for modules that might be imported by a lazy loaded module.
  */
 
 @NgModule({
-  imports: [SecurityRoutingModule, CommonModule],
+  imports: [SecurityUIRoutingModule, CommonModule],
   declarations: [UserLoginComponent],
   exports: [UserLoginComponent]
 })
-export class SecurityModule { }
+export class SecurityUIModule { }

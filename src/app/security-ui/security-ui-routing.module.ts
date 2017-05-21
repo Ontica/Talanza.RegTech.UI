@@ -17,4 +17,4 @@ import { UserLoginComponent } from './user-login/user-login.component';
   ])],
   exports: [RouterModule]
 })
-export class SecurityRoutingModule { }
+export class SecurityUIRoutingModule { }
