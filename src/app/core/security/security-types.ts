@@ -17,3 +17,27 @@ export interface Session {
   readonly token_type: string;
 
 }
+
+export interface Identity {
+
+  readonly username: string;
+
+  readonly email: string;
+
+  readonly fullname: string;
+
+}
+
+export interface Claim {
+
+  readonly type: string;
+
+  readonly value: any;
+
+}
+
+export class ClaimsList {
+
+  constructor(private claims: Claim[]) { }
+
+}

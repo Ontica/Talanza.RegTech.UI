@@ -11,7 +11,7 @@ import { Injectable } from '@angular/core';
 import { Cryptography, HttpApiClient } from 'empiria';
 
 import { ApplicationSettingsService } from '../general/application-settings.service';
-import { Session } from './session';
+import { Session, Identity, ClaimsList } from './security-types';
 
 @Injectable()
 export class SecurityDataService {
@@ -42,6 +42,20 @@ export class SecurityDataService {
     let http = new HttpApiClient(BASE_ADDRESS);
 
     await http.postAsyncAsPromise(undefined, BASE_ADDRESS + 'v1/security/logout');
+  }
+
+  public getPrincipalIdentity(): Promise<Identity> {
+    const fakeIdentity = { username: 'pparamo', email: 'pedro@escritores.com', fullname: 'Pedro Páramo' };
+
+    return Promise.resolve<Identity>(fakeIdentity);
+  }
+
+  public getPrincipalClaimsList(): Promise<ClaimsList> {
+    const list = [{ type: 'token', value: 'abc' }, { type: 'phone', value: '567-890-1234' }];
+
+    const claims = new ClaimsList(list);
+
+    return Promise.resolve<ClaimsList>(claims);
   }
 
 }
