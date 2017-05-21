@@ -20,6 +20,7 @@ import { SpinnerService } from './spinner/spinner.service';
 
 import { SecurityDataService } from './security/security-data.service';
 import { PrincipalService } from './security/principal.service';
+import { SecurityGuardService } from './security/security-guard.service';
 
 import { throwIfAlreadyLoaded } from './module-import-guard';
 
@@ -30,7 +31,8 @@ import { throwIfAlreadyLoaded } from './module-import-guard';
   exports: [SpinnerComponent],
   declarations: [SpinnerComponent],
   providers: [CoreService, ApplicationSettingsService, LoggerService,
-              SpinnerService, PrincipalService, SecurityDataService]
+              SpinnerService, PrincipalService, SecurityDataService,
+              SecurityGuardService]
 })
 export class CoreModule {
 

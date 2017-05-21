@@ -16,14 +16,20 @@ import { Session } from './session';
 @Injectable()
 export class PrincipalService {
 
+  private session: Session;
+
   constructor(private dataService: SecurityDataService) { }
+
+  public get isAuthenticated() {
+    return (this.session !== undefined);
+  }
 
   public async authenticate(userID: string, userPassword: string): Promise<void> {
     Assertion.assertValue(userID, 'userID');
     Assertion.assertValue(userPassword, 'userPassword');
 
-    await this.dataService.createSession(userID, userPassword)
-                          .catch(this.handleAuthenticationError);
+    this.session = await this.dataService.createSession(userID, userPassword)
+                                         .catch(this.handleAuthenticationError);
   }
 
   public async close() {
@@ -32,7 +38,7 @@ export class PrincipalService {
 
   private handleAuthenticationError(error): Promise<never> {
     return Promise.reject(new Error('No reconozco las credenciales proporcionadas. ' +
-                                    `${error.status} ${error.statusText}`));
+      `${error.status} ${error.statusText}`));
   }
 
 }

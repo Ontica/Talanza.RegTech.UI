@@ -31,8 +31,8 @@ export class UserLoginComponent {
     }
 
     try {
-      await this.principal.authenticate(this.userID, this.password);
-      this.router.navigate(['default']);
+      await this.principal.authenticate(this.userID, this.password)
+                          .then(() => this.router.navigate(['default']));
 
     } catch (exception) {
       alert(exception);

@@ -13,13 +13,15 @@ import { MainLayoutComponent } from '../shared';
 
 import { HomeComponent } from './home/home.component';
 
+import { SecurityGuardService } from '../core';
+
 @NgModule({
   imports: [RouterModule.forChild([
     {
       path: '', redirectTo: 'default', pathMatch: 'full'
     },
     {
-      path: '', component: MainLayoutComponent,
+      path: '', component: MainLayoutComponent, canActivate: [SecurityGuardService],
       children: [{ path: 'default', component: HomeComponent }]
     }
   ])],

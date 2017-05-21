@@ -19,7 +19,7 @@ export class SecurityDataService {
   constructor(private settings: ApplicationSettingsService) { }
 
   public async createSession(userID: string, userPassword: string): Promise<Session> {
-    await this.settings.onLoad();
+    await this.settings.onLoad(); // Todo: seek for a better solution
 
     const API_KEY = this.settings.get<string>('APPLICATION_KEY');
     const BASE_ADDRESS = this.settings.get<string>('HTTP_API_BASE_ADDRESS');
