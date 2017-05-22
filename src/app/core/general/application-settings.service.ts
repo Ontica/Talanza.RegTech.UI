@@ -28,34 +28,37 @@ export class ApplicationSettingsService {
 
   constructor(private http: Http) { }
 
-  public async onLoad(): Promise<Boolean> {
-    await this.loadSettingsFromFile();
-
-    return true;
-  }
-
   public get<T>(key: string): T {
     Assertion.assertValue(this.settings,
-              'Application settings were not loaded yet. ' +
-              'Please call ConfigurationService.onLoad() promise to ensure data were ' +
-              'loaded before using this method.');
+      'Application settings were not loaded yet. ' +
+      'Please call ConfigurationService.waitUntilLoaded() promise to ensure data were ' +
+      'loaded before using this method.');
 
     const index = this.settings.findIndex((x) => x.key === key);
 
     if (index !== -1) {
-      return <T> this.settings[index].value;
+      return this.settings[index].value as T;
     } else {
       throw new Error(`'${key}' value is not defined in application settings file.`);
     }
   }
 
-  private loadSettingsFromFile() {
+  public async waitUntilLoaded(): Promise<void> {
+    if (!this.settings) {
+      this.settings = await this.loadSettingsFromFile();
+    }
+  }
+
+  private loadSettingsFromFile(): Promise<KeyValue[]> {
     return this.http.get(this.configurationFileName)
                     .toPromise()
-                    .then((response) => this.settings = response.json()['settings'] as KeyValue[])
-                    .catch((e) => Promise.reject(
-                                new Error(`Critical error: Can't read ${this.configurationFileName} ` +
-                                          `application settings file. ${e.status} ${e.statusText}`)));
+                    .then((response) => response.json()['settings'] as KeyValue[])
+                    .catch((e) => this.handleLoadSettingsFromFileError(e));
+  }
+
+  private handleLoadSettingsFromFileError(error): Promise<never> {
+    return Promise.reject(new Error(`Critical error: Can't read ${this.configurationFileName} ` +
+                                    `application settings file. ${error.status} ${error.statusText}`));
   }
 
 }

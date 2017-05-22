@@ -27,7 +27,7 @@ export class HomeComponent implements OnInit {
 
   public ngOnInit() {
     this.core.spinner.spinnerState.subscribe((val) => this.spinnerState = val);
-    this.core.appSettings.onLoad().then(() => this.loadData());
+    this.core.appSettings.waitUntilLoaded().then(() => this.loadData());
   }
 
   public onLogMessage() {
