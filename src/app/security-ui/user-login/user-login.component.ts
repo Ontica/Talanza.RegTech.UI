@@ -6,7 +6,7 @@
  *
  */
 
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { PrincipalService } from '../../core';
@@ -16,7 +16,7 @@ import { PrincipalService } from '../../core';
   templateUrl: './user-login.component.html',
   styleUrls: ['./user-login.component.scss']
 })
-export class UserLoginComponent {
+export class UserLoginComponent implements OnInit {
 
   public userID = '';
   public password = '';
@@ -29,12 +29,16 @@ export class UserLoginComponent {
     }
 
     try {
-      await this.principal.authenticate(this.userID, this.password);
+      await this.principal.login(this.userID, this.password);
       this.router.navigate(['default']);
 
     } catch (exception) {
       alert(exception);
     }
+  }
+
+  public async ngOnInit() {
+    await this.principal.logout();
   }
 
   // region Private methods

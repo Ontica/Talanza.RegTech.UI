@@ -9,6 +9,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
+import { SecurityGuardService } from '../core';
+
 import { MainLayoutComponent } from '../shared';
 import { ProcessDefinitionComponent } from './modeling/process-definition.component';
 
@@ -16,7 +18,7 @@ import { ProcessDefinitionComponent } from './modeling/process-definition.compon
   imports: [
     RouterModule.forChild([
       {
-        path: 'workflow', component: MainLayoutComponent,
+        path: 'workflow', component: MainLayoutComponent, canActivate: [SecurityGuardService],
         children: [{ path: 'modeling', component: ProcessDefinitionComponent }]
       }
     ])],

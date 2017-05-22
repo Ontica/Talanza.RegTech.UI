@@ -7,7 +7,7 @@
   ],
   "rules": {
     // Custom
-    "trailing-comma": [false, {"multiline": "always", "singleline": "never"}],
+    "trailing-comma": [false, { "multiline": "always", "singleline": "never" }],
     "interface-name": [false, "always-prefix"],
     // Angular 2
     "component-class-suffix": true,
@@ -36,7 +36,7 @@
     ],
     "max-line-length": [
       true,
-      100
+      110
     ],
     "no-string-literal": false,
     "no-use-before-declare": true,
