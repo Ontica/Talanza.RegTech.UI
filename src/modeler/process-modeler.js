@@ -1,6 +1,5 @@
 window.addEventListener('message', function(e) {
   var message = e.data;
-  console.log(message);
 });
 
 // bundle exposes the viewer / modeler via the BpmnJS variable
@@ -9,6 +8,7 @@ var BpmnViewer = window.BpmnJS;
 var viewer = new BpmnViewer({
   container: '#canvas'
 });
+
 
 function Modeler() {}
 
@@ -65,8 +65,8 @@ Modeler.prototype = {
     xhr.send(null);
   },
 
-  parameters: function(pars) { //ToBe refactored
-    alert("Recibí los parametros enviados desde angular" + pars);
+  parameters: function(pars) { //ToBe refactored  
+    // ToDo 
   },
 
   suscribeToDoubleClick: function(callback) {
@@ -82,8 +82,18 @@ var eventBus = viewer.get('eventBus');
 
 eventBus.on('element.dblclick', function(e) {
   if (modeler.doubleClickCallback) {
-    modeler.doubleClickCallback(JSON.stringify(e.element));
+    var shape = getShapeObject(e.element);
+    modeler.doubleClickCallback(JSON.stringify(shape));
   } else {
     // no-op
   }
 });
+
+function Shape(id, bmpnType) {
+  this.id = id;
+  this.bmpnType = bmpnType;
+}
+
+function getShapeObject(element) {
+  return new Shape(element.id, element.type);
+}
