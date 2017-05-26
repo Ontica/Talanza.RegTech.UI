@@ -6,12 +6,12 @@
  *
  */
 
-export const enum HttpMethod {
-  GET,
-  POST,
-  DELETE,
-  PUT,
-  PATCH,
-  HEAD,
-  OPTIONS
+export enum HttpMethod {
+  GET = 1,
+  POST = 2,
+  DELETE = 4,
+  PUT = 8,
+  PATCH = 16,
+  HEAD = 32,
+  OPTIONS = 64
 }

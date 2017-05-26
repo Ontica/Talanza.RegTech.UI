@@ -23,17 +23,54 @@ export class DirectoryService {
     this.services = this.getServices();
   }
 
-  public getService(path: string, method?: HttpMethod): Observable<Service> {
-    Assertion.assertValue(path, 'path');
-    if (!method) {
-      method = HttpMethod.GET;
-    }
+  public getService(servicePathOrUID: string, method?: HttpMethod): Observable<Service> {
+    Assertion.assertValue(servicePathOrUID, 'servicePathOrUID');
 
-    return this.findService(path, method);
+    if (servicePathOrUID.includes('http://') || servicePathOrUID.includes('https://') ) {
+      return Observable.of<Service>(undefined);
+    } else {
+      return this.findService(servicePathOrUID, method);
+    }
   }
 
-  private findService(path: string, method: HttpMethod): Observable<Service> {
-    return this.services.map((x) => x.find((item) => item.uid === path));
+  // Private methods
+
+  private findService(servicePathOrUID: string, method: HttpMethod): Observable<Service> {
+    let condition: (Service) => boolean;
+
+    if (servicePathOrUID.includes('/') && method === undefined) {
+      condition = (item: Service) => (item.path === servicePathOrUID);
+
+    } else if (servicePathOrUID.includes('/') && method !== undefined) {
+      condition = (item: Service) => (item.path === servicePathOrUID &&
+                                      item.method.toString() === HttpMethod[method]);
+
+    } else if (!servicePathOrUID.includes('/') && method === undefined) {
+      condition = (item: Service) => (item.uid === servicePathOrUID);
+
+    } else if (!servicePathOrUID.includes('/') && method !== undefined) {
+      condition = (item: Service) => (item.uid === servicePathOrUID &&
+                                      item.method.toString() === HttpMethod[method]);
+
+    } else {
+      throw Assertion.assertNoReachThisCode('A findService condition handler is missing in code.');
+    }
+
+    return this.services.map((x: Service[]) => {
+      const filteredServices = x.filter((service) => condition(service));
+
+      if (filteredServices.length === 0) {
+        Assertion.assert(false, 'There are no services that satisfy the supplied search condition.');
+
+      } else if (filteredServices.length > 1) {
+        Assertion.assert(false,
+                        `There are defined ${filteredServices.length} services that satisfy the ` +
+                        'supplied search condition.');
+
+      } else {
+        return filteredServices[0];
+      }
+    });
   }
 
   private getServices(): Observable<Service[]> {
