@@ -15,3 +15,5 @@ export { SpinnerService, SpinnerState } from './spinner/spinner.service';
 
 export { PrincipalService } from './security/principal.service';
 export { SecurityGuardService } from './security/security-guard.service';
+
+export { DirectoryService } from './http/directory.service';

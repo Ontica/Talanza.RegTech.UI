@@ -22,6 +22,8 @@ import { SecurityDataService } from './security/security-data.service';
 import { PrincipalService } from './security/principal.service';
 import { SecurityGuardService } from './security/security-guard.service';
 
+import { DirectoryService } from './http/directory.service';
+
 import { throwIfAlreadyLoaded } from './module-import-guard';
 
 @NgModule({
@@ -32,7 +34,7 @@ import { throwIfAlreadyLoaded } from './module-import-guard';
   declarations: [SpinnerComponent],
   providers: [CoreService, ApplicationSettingsService, LoggerService,
               SpinnerService, PrincipalService, SecurityDataService,
-              SecurityGuardService]
+              SecurityGuardService, DirectoryService]
 })
 export class CoreModule {
 
