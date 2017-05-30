@@ -19,9 +19,10 @@ export class ProcessDefinitionComponent {
 
   public url: SafeResourceUrl;
   public suscriber: any;
+  public isReadOnly = true;
 
   @ViewChild('modeler') public el: ElementRef;
-
+   
   public constructor(private sanitizer: DomSanitizer, private renderer: Renderer2) {
     this.load();
     this.url = this.sanitizer.bypassSecurityTrustResourceUrl('./modeler/process-modeler.html');
@@ -30,6 +31,10 @@ export class ProcessDefinitionComponent {
   public createDiagram(): void {
     this.modeler.createDiagram();
     this.attachModelerEventHandler();
+  }
+
+  public editDiagram(): void {
+    this.isReadOnly = false;
   }
 
   public getDiagram(): void {

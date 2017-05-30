@@ -3,6 +3,7 @@
 <button (click)="createDiagram()">Nuevo</button>
 <button (click)="openDiagram()">Cargar Modelo</button>
 <button (click)="getDiagram()">Guardar Modelo</button>
+<button (click)="editDiagram()">Editar Modelo</button>
 <div class="iframe-container">
-  <iframe #modeler class="iframe-modeler" [src]="url"></iframe>
+  <iframe #modeler scrolling="no" [class.readonly-modeler]="isReadOnly" class="iframe-modeler" [src]=" url "></iframe>
 </div>

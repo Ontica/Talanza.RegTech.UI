@@ -1,10 +1,15 @@
 .iframe-container {
-  margin: 0 3px;
+  height: 65vh;
+  overflow: auto;
 }
 
 .iframe-modeler {
-  border: none;
-  display: block;
-  height: 100vh;
+  border: 0;
+  height: 1580px;
+  position: relative;
   width: 100%;
+}
+
+.readonly-modeler {
+  pointer-events: none;
 }
