@@ -28,7 +28,7 @@ export class ProcessDefinitionComponent implements OnInit {
 
   @ViewChild('modeler') public el: ElementRef;
 
-  private processId: number = -1;
+  private processUID: string = '';
 
   public constructor(private sanitizer: DomSanitizer, private renderer: Renderer2,
                      private processService: ProcessDefinitionService) {
@@ -54,19 +54,19 @@ export class ProcessDefinitionComponent implements OnInit {
     this.saveDiagram();
   }
 
-  public onChangeSelectedProcess(processId: number): void {
-    this.processId = +processId;
+  public onChangeSelectedProcess(uid: string): void {
+    this.processUID = uid;
   }
 
-  public openDiagram(): void {
-    if (this.processId === -1) {
+  public async openDiagram() {
+    if (this.processUID === '') {
       alert('Selecciona un diagrama de la lista');
       return;
     }
-    let processDiagram = this.processService.getProcessDiagram(this.processId);
 
-    this.modeler.loadXMLFile(processDiagram);
-    this.attachModelerEventHandler();
+    let process = await this.processService.getProcessDiagram(this.processUID);
+
+    this.loadXml(process.bpmnXml);
   }
 
   public sendInfo(): void {
@@ -87,6 +87,7 @@ export class ProcessDefinitionComponent implements OnInit {
 
   private loadXml(xml: any): void {
     this.modeler.loadXML(xml);
+    this.attachModelerEventHandler();
   }
 
   private onModelerDoubleClick(element: any): void {

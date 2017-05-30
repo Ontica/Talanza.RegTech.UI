@@ -1,5 +1,7 @@
 // Temporal class to define a Process
 export class Process {
-  id: number;
+  uid: string;
   name: string;
+  version: string;
+  bpmnXml: string;
 }
