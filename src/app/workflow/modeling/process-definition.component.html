@@ -1,7 +1,11 @@
 <h1>Process Definition component outlet</h1>
+<select #process (change)="onChangeSelectedProcess(process.value)">
+                    <option value="-1">(Selecciona un proceso)</option>                  
+                    <option *ngFor="let process of processes" [value]=process.id >{{process.name}}</option>
+</select>
+<button (click)="openDiagram()">Cargar Modelo</button>
 <button (click)="sendInfo()">mandarinfo</button>
 <button (click)="createDiagram()">Nuevo</button>
-<button (click)="openDiagram()">Cargar Modelo</button>
 <button (click)="getDiagram()">Guardar Modelo</button>
 <button (click)="editDiagram()">Editar Modelo</button>
 <div class="iframe-container">

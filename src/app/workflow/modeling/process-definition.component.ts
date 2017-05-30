@@ -6,26 +6,38 @@
  *
  */
 
-import { Component, ElementRef, Renderer2, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { BrowserModule, DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+
+import { Process } from './process';
+import { ProcessDefinitionService } from './Process-definition.service';
 
 @Component({
   selector: 'process-definition',
   templateUrl: './process-definition.component.html',
-  styleUrls: ['process-definition.component.css']
+  styleUrls: ['process-definition.component.css'],
+  providers: [ProcessDefinitionService]
 })
 
-export class ProcessDefinitionComponent {
+export class ProcessDefinitionComponent implements OnInit {
 
   public url: SafeResourceUrl;
   public suscriber: any;
   public isReadOnly = true;
+  public processes: Process[] = [];
 
   @ViewChild('modeler') public el: ElementRef;
-   
-  public constructor(private sanitizer: DomSanitizer, private renderer: Renderer2) {
+
+  private processId: number = -1;
+
+  public constructor(private sanitizer: DomSanitizer, private renderer: Renderer2,
+                     private processService: ProcessDefinitionService) {
     this.load();
     this.url = this.sanitizer.bypassSecurityTrustResourceUrl('./modeler/process-modeler.html');
+  }
+
+  public ngOnInit() {
+    this.setProcesses();
   }
 
   public createDiagram(): void {
@@ -42,8 +54,18 @@ export class ProcessDefinitionComponent {
     this.saveDiagram();
   }
 
+  public onChangeSelectedProcess(processId: number): void {
+    this.processId = +processId;
+  }
+
   public openDiagram(): void {
-    this.modeler.loadXMLFile('vendor/bpmn-js/sample-diagram.bpmn');
+    if (this.processId === -1) {
+      alert('Selecciona un diagrama de la lista');
+      return;
+    }
+    let processDiagram = this.processService.getProcessDiagram(this.processId);
+
+    this.modeler.loadXMLFile(processDiagram);
     this.attachModelerEventHandler();
   }
 
@@ -75,6 +97,12 @@ export class ProcessDefinitionComponent {
     this.renderer.listen('window', 'message', (evt) => {
       let xml = evt.data;
       console.log(xml);
+    });
+  }
+
+  private setProcesses(): void {
+    this.processService.getProcesses().then((processes) => {
+      this.processes = processes;
     });
   }
 
