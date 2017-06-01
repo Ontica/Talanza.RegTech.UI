@@ -73,6 +73,22 @@ Modeler.prototype = {
     this.doubleClickCallback = callback;
   },
 
+  _editionMode: false,
+
+  get editionMode() {
+    return this._editionMode;
+  },
+
+  set editionMode(enable) {
+    var stylesheet = document.styleSheets[1];
+    if (!enable) {
+      stylesheet.disabled = true;
+    } else {
+      stylesheet.disabled = false;
+    }
+    this._editionMode = enable;
+  }
+
 }
 
 var processModeler = window.Modeler;
@@ -89,9 +105,9 @@ eventBus.on('element.dblclick', function(e) {
   }
 });
 
-function Shape(id, bmpnType) {
+function Shape(id, type) {
   this.id = id;
-  this.bmpnType = bmpnType;
+  this.type = type;
 }
 
 function getShapeObject(element) {

@@ -23,8 +23,22 @@ export class ProcessDefinitionComponent implements OnInit {
 
   public url: SafeResourceUrl;
   public suscriber: any;
-  public isReadOnly = true;
   public processes: Process[] = [];
+
+  private _editionMode: boolean;
+
+   get editionMode() {
+    return this._editionMode;
+  }
+
+   set editionMode(edition: boolean) {
+    if (edition) {
+      this.modeler.editionMode = true;
+    } else {
+      this.modeler.editionMode = false;
+    }
+    this._editionMode = edition;
+  }
 
   @ViewChild('modeler') public el: ElementRef;
 
@@ -41,12 +55,13 @@ export class ProcessDefinitionComponent implements OnInit {
   }
 
   public createDiagram(): void {
+    this.editionMode = true;
     this.modeler.createDiagram();
     this.attachModelerEventHandler();
   }
 
   public editDiagram(): void {
-    this.isReadOnly = false;
+    this.editionMode = true;
   }
 
   public getDiagram(): void {
@@ -67,6 +82,7 @@ export class ProcessDefinitionComponent implements OnInit {
     let process = await this.processService.getProcessDiagram(this.processUID);
 
     this.loadXml(process.bpmnXml);
+    this.editionMode = false;
   }
 
   public sendInfo(): void {
@@ -76,6 +92,8 @@ export class ProcessDefinitionComponent implements OnInit {
   private get modeler() {
     return this.el.nativeElement.contentWindow.modeler;
   }
+
+  
 
   private attachModelerEventHandler() {
     this.modeler.suscribeToDoubleClick(this.onModelerDoubleClick);
