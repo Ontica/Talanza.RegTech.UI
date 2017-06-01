@@ -23,15 +23,18 @@ export class ProcessDefinitionComponent implements OnInit {
 
   public url: SafeResourceUrl;
   public suscriber: any;
+  public process: Process;
   public processes: Process[] = [];
+
+  @ViewChild('modeler') public el: ElementRef;
 
   private _editionMode: boolean;
 
-   get editionMode() {
+  get editionMode() {
     return this._editionMode;
   }
 
-   set editionMode(edition: boolean) {
+  set editionMode(edition: boolean) {
     if (edition) {
       this.modeler.editionMode = true;
     } else {
@@ -39,8 +42,6 @@ export class ProcessDefinitionComponent implements OnInit {
     }
     this._editionMode = edition;
   }
-
-  @ViewChild('modeler') public el: ElementRef;
 
   private processUID: string = '';
 
@@ -64,9 +65,12 @@ export class ProcessDefinitionComponent implements OnInit {
     this.editionMode = true;
   }
 
-  public getDiagram(): void {
-    this.modeler.getXML();
-    this.saveDiagram();
+  public saveDiagram(): void {
+    let xml = this.modeler.getXML();
+
+    this.process.bpmnXml = xml;
+
+    this.processService.saveProcess(this.process);
   }
 
   public onChangeSelectedProcess(uid: string): void {
@@ -79,9 +83,9 @@ export class ProcessDefinitionComponent implements OnInit {
       return;
     }
 
-    let process = await this.processService.getProcessDiagram(this.processUID);
+    this.process = await this.processService.getProcessDiagram(this.processUID);
 
-    this.loadXml(process.bpmnXml);
+    this.loadXml(this.process.bpmnXml);
     this.editionMode = false;
   }
 
@@ -92,8 +96,6 @@ export class ProcessDefinitionComponent implements OnInit {
   private get modeler() {
     return this.el.nativeElement.contentWindow.modeler;
   }
-
-  
 
   private attachModelerEventHandler() {
     this.modeler.suscribeToDoubleClick(this.onModelerDoubleClick);
@@ -110,13 +112,6 @@ export class ProcessDefinitionComponent implements OnInit {
 
   private onModelerDoubleClick(element: any): void {
     alert('elemento recibido en Angular: ' + element);
-  }
-
-  private saveDiagram(): void {
-    this.renderer.listen('window', 'message', (evt) => {
-      let xml = evt.data;
-      console.log(xml);
-    });
   }
 
   private setProcesses(): void {

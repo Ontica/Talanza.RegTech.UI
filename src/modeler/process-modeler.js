@@ -29,14 +29,16 @@ Modeler.prototype = {
   },
 
   getXML: function() {
+    var xmlDiagram;
     viewer.saveXML({ format: true }, function(err, xml) {
 
       if (err) {
         console.error('diagram save failed', err);
       } else {
-        window.parent.postMessage(xml, '*');
+        xmlDiagram = xml;
       }
     });
+    return xmlDiagram;
   },
 
   loadXML: function(xml) {
