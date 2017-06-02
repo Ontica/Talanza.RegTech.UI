@@ -22,13 +22,14 @@ import { ProcessDefinitionService } from './Process-definition.service';
 export class ProcessDefinitionComponent implements OnInit {
 
   public url: SafeResourceUrl;
-  public suscriber: any;
   public process: Process;
   public processes: Process[] = [];
 
   @ViewChild('modeler') public el: ElementRef;
 
-  private _editionMode: boolean;
+  public isAcitvateSaveNewDiagramPopup = false;
+  public isNewDiagram = false;
+  public _editionMode: boolean;
 
   get editionMode() {
     return this._editionMode;
@@ -44,9 +45,8 @@ export class ProcessDefinitionComponent implements OnInit {
   }
 
   private processUID: string = '';
-
-  public constructor(private sanitizer: DomSanitizer, private renderer: Renderer2,
-                     private processService: ProcessDefinitionService) {
+  
+  public constructor(private sanitizer: DomSanitizer, private processService: ProcessDefinitionService) {
     this.load();
     this.url = this.sanitizer.bypassSecurityTrustResourceUrl('./modeler/process-modeler.html');
   }
@@ -56,12 +56,30 @@ export class ProcessDefinitionComponent implements OnInit {
   }
 
   public createDiagram(): void {
+    this.isNewDiagram = true;
     this.editionMode = true;
     this.modeler.createDiagram();
     this.attachModelerEventHandler();
   }
 
   public editDiagram(): void {
+    this.editionMode = true;
+  }
+
+  public saveNewDiagram(value: Process): void {
+    this.closeSaveNewDiagramPopup();
+
+    this.process = value;
+    this.saveDiagram();
+    this.editionMode = true;
+  }
+  public showSaveNewDiagramPopup(): void {
+    this.editionMode = false;
+    this.isAcitvateSaveNewDiagramPopup = true;
+  }
+
+  public closeSaveNewDiagramPopup(): void {
+    this.isAcitvateSaveNewDiagramPopup = false;
     this.editionMode = true;
   }
 
@@ -78,6 +96,7 @@ export class ProcessDefinitionComponent implements OnInit {
   }
 
   public async openDiagram() {
+    this.isNewDiagram = false;
     if (this.processUID === '') {
       alert('Selecciona un diagrama de la lista');
       return;

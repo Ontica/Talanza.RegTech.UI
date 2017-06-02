@@ -1,6 +1,11 @@
+.diagram-information-popup {
+  z-index: 1;
+}
+
 .iframe-container {
   height: 65vh;
   overflow: auto;
+  z-index: 0;
 }
 
 .iframe-modeler {
