@@ -1,4 +1,4 @@
-<h1>Process Definition component outlet</h1>
+<h1>{{title}}</h1>
 <select #process (change)="onChangeSelectedProcess(process.value)">
                     <option value="">(Selecciona un proceso)</option>                  
                     <option *ngFor="let process of processes" [value]=process.uid >{{process.name}}</option>

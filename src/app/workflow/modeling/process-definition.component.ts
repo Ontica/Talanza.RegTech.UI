@@ -31,6 +31,7 @@ export class ProcessDefinitionComponent implements OnInit {
   public isNewDiagram = false;
   public _editionMode: boolean;
   public saveAsLabel = 'Guardar como';
+  public title = 'Editor de procesos';
 
   get editionMode() {
     return this._editionMode;
@@ -108,6 +109,7 @@ export class ProcessDefinitionComponent implements OnInit {
     this.process = await this.processService.getProcessDiagram(this.processUID);
 
     this.loadXml(this.process.bpmnXml);
+    this.title = this.process.name;
     this.editionMode = false;
     this.saveAsLabel = 'Guardar como';
   }
