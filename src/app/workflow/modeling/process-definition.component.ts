@@ -30,6 +30,7 @@ export class ProcessDefinitionComponent implements OnInit {
   public isAcitvateSaveNewDiagramPopup = false;
   public isNewDiagram = false;
   public _editionMode: boolean;
+  public saveAsLabel = 'Guardar como';
 
   get editionMode() {
     return this._editionMode;
@@ -45,7 +46,7 @@ export class ProcessDefinitionComponent implements OnInit {
   }
 
   private processUID: string = '';
-  
+
   public constructor(private sanitizer: DomSanitizer, private processService: ProcessDefinitionService) {
     this.load();
     this.url = this.sanitizer.bypassSecurityTrustResourceUrl('./modeler/process-modeler.html');
@@ -58,6 +59,7 @@ export class ProcessDefinitionComponent implements OnInit {
   public createDiagram(): void {
     this.isNewDiagram = true;
     this.editionMode = true;
+    this.saveAsLabel = 'Guardar';
     this.modeler.createDiagram();
     this.attachModelerEventHandler();
   }
@@ -97,6 +99,7 @@ export class ProcessDefinitionComponent implements OnInit {
 
   public async openDiagram() {
     this.isNewDiagram = false;
+
     if (this.processUID === '') {
       alert('Selecciona un diagrama de la lista');
       return;
@@ -106,6 +109,7 @@ export class ProcessDefinitionComponent implements OnInit {
 
     this.loadXml(this.process.bpmnXml);
     this.editionMode = false;
+    this.saveAsLabel = 'Guardar como';
   }
 
   public sendInfo(): void {

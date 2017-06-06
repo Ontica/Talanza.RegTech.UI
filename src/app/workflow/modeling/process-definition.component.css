@@ -5,7 +5,7 @@
 .iframe-container {
   height: 65vh;
   overflow: auto;
-  z-index: 0;
+  z-index: -1;
 }
 
 .iframe-modeler {
@@ -17,4 +17,5 @@
 
 .readonly-modeler {
   pointer-events: none;
+  z-index: -1;
 }

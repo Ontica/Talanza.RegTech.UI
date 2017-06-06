@@ -6,7 +6,7 @@
 <button (click)="openDiagram()">Cargar Modelo</button>
 <button (click)="sendInfo()">mandarinfo</button>
 <button (click)="createDiagram()">Nuevo</button>
-<button *ngIf="isNewDiagram" (click)="showSaveNewDiagramPopup()">Guardar</button>
+<button (click)="showSaveNewDiagramPopup()">{{saveAsLabel}}</button>
 <button *ngIf="!isNewDiagram" (click)="saveDiagram()">Guardar cambios</button>
 <button (click)="editDiagram()" *ngIf="!editionMode">Editar Modelo</button>
 <div *ngIf="isAcitvateSaveNewDiagramPopup" class="diagram-information-popup">
