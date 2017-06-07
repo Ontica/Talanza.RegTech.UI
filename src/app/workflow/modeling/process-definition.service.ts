@@ -24,7 +24,18 @@ export class ProcessDefinitionService {
     return httpApiClient.getAsyncAsPromise('/v1/process-definitions/' + uid);
   }
 
-  public saveProcess(process: Process) {
+  public saveDiagramChanges(process: Process) {
+    const body = {
+      bpmnXml: process.bpmnXml
+    };
+
+    let httpApiClient = this.core.getHttpClient(this.HTTP_API_BASE_ADDRESS);
+    httpApiClient.IncludeAuthorizationHeader = false;
+
+    httpApiClient.PutAsync(body, 'v1/process-definitions/' + process.uid);
+  }
+
+  public saveNewDiagram(process: Process) {
     const body = {
       name: process.name,
       version: process.version,
@@ -33,9 +44,8 @@ export class ProcessDefinitionService {
 
     let httpApiClient = this.core.getHttpClient(this.HTTP_API_BASE_ADDRESS);
     httpApiClient.IncludeAuthorizationHeader = false;
-    console.log('proceso desde el servicio');
-    console.log(process);
-    // httpApiClient.postAsync(body,'');  Tobe Completed with api call
+
+    httpApiClient.postAsync(body, 'v1/process-definitions');
   }
 
 }

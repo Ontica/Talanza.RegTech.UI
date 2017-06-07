@@ -69,11 +69,16 @@ export class ProcessDefinitionComponent implements OnInit {
     this.editionMode = true;
   }
 
-  public saveNewDiagram(value: Process): void {
+  public saveNewDiagram(process: Process): void {
     this.closeSaveNewDiagramPopup();
 
-    this.process = value;
-    this.saveDiagram();
+    this.process = process;
+    let xml = this.modeler.getXML();
+    this.process.bpmnXml = xml;
+    this.processService.saveNewDiagram(this.process);
+
+    this.isNewDiagram = false;
+    this.saveAsLabel = 'Guardar como';
     this.editionMode = true;
   }
   public showSaveNewDiagramPopup(): void {
@@ -91,8 +96,10 @@ export class ProcessDefinitionComponent implements OnInit {
 
     this.process.bpmnXml = xml;
 
-    this.processService.saveProcess(this.process);
+    this.processService.saveDiagramChanges(this.process);
   }
+
+
 
   public onChangeSelectedProcess(uid: string): void {
     this.processUID = uid;
