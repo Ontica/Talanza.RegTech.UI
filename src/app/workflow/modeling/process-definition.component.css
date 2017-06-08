@@ -1,0 +1,21 @@
+.diagram-information-popup {
+  z-index: 1;
+}
+
+.iframe-container {
+  height: 65vh;
+  overflow: auto;
+  z-index: -1;
+}
+
+.iframe-modeler {
+  border: 0;
+  height: 1580px;
+  position: relative;
+  width: 100%;
+}
+
+.readonly-modeler {
+  pointer-events: none;
+  z-index: -1;
+}

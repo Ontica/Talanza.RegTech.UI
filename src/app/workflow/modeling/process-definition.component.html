@@ -1,5 +1,17 @@
-<h1>Process Definition component outlet</h1>
-
-<div>Put the process selector component here ...</div>
-
-<div>Display the process viewer page here ...</div>
+<h1>{{title}}</h1>
+<select #process (change)="onChangeSelectedProcess(process.value)">
+                    <option value="">(Selecciona un proceso)</option>                  
+                    <option *ngFor="let process of processes" [value]=process.uid >{{process.name}}</option>
+</select>
+<button (click)="openDiagram()">Cargar Modelo</button>
+<button (click)="sendInfo()">mandarinfo</button>
+<button (click)="createDiagram()">Nuevo</button>
+<button (click)="showSaveNewDiagramPopup()">{{saveAsLabel}}</button>
+<button *ngIf="!isNewDiagram" (click)="saveDiagram()">Guardar cambios</button>
+<button (click)="editDiagram()" *ngIf="!editionMode">Editar Modelo</button>
+<div *ngIf="isAcitvateSaveNewDiagramPopup" class="diagram-information-popup">
+  <diagram-identification-popup (onSetDiagramIdentificationEvent)="saveNewDiagram($event)" (onCancelEvent)="closeSaveNewDiagramPopup()"></diagram-identification-popup>
+</div>
+<div class="iframe-container">
+  <iframe #modeler scrolling="no" [class.readonly-modeler]="!editionMode" class="iframe-modeler" [src]=" url "></iframe>
+</div>
