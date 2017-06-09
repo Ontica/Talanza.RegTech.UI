@@ -12,6 +12,7 @@ import { CommonModule } from '@angular/common';
 import { ProcessDefinitionComponent } from './process-definition.component';
 
 import { DiagramIdentificationComponent } from  './diagram-identification.component';
+import { DiagramTaskEditorComponent } from './diagram-task-editor.component';
 
 /**
  * Do not specify providers for modules that might be imported by a lazy loaded module.
@@ -19,7 +20,7 @@ import { DiagramIdentificationComponent } from  './diagram-identification.compon
 
 @NgModule({
   imports: [CommonModule],
-  declarations: [ProcessDefinitionComponent, DiagramIdentificationComponent],
+  declarations: [ProcessDefinitionComponent, DiagramIdentificationComponent, DiagramTaskEditorComponent],
   exports: [ProcessDefinitionComponent]
 })
 export class WorkflowModelingModule { }

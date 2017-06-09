@@ -6,7 +6,7 @@
  *
  */
 
-import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { BrowserModule, DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 import { Process } from './process';
@@ -27,11 +27,13 @@ export class ProcessDefinitionComponent implements OnInit {
 
   @ViewChild('modeler') public el: ElementRef;
 
-  public isAcitvateSaveNewDiagramPopup = false;
+  public activateSaveNewDiagramPopup = false;
   public isNewDiagram = false;
   public _editionMode: boolean;
   public saveAsLabel = 'Guardar como';
   public title = 'Editor de procesos';
+
+  public showShapeInfo = false;
 
   get editionMode() {
     return this._editionMode;
@@ -48,7 +50,8 @@ export class ProcessDefinitionComponent implements OnInit {
 
   private processUID: string = '';
 
-  public constructor(private sanitizer: DomSanitizer, private processService: ProcessDefinitionService) {
+  public constructor(private sanitizer: DomSanitizer, private processService: ProcessDefinitionService,
+                     private ref: ChangeDetectorRef) {
     this.load();
     this.url = this.sanitizer.bypassSecurityTrustResourceUrl('./modeler/process-modeler.html');
   }
@@ -83,12 +86,18 @@ export class ProcessDefinitionComponent implements OnInit {
   }
   public showSaveNewDiagramPopup(): void {
     this.editionMode = false;
-    this.isAcitvateSaveNewDiagramPopup = true;
+    this.activateSaveNewDiagramPopup = true;
   }
 
   public closeSaveNewDiagramPopup(): void {
-    this.isAcitvateSaveNewDiagramPopup = false;
+    this.activateSaveNewDiagramPopup = false;
     this.editionMode = true;
+  }
+
+  public closeShapeInfo(): void {
+    this.showShapeInfo = false;
+    this.editionMode = true;
+    this.ref.detectChanges();
   }
 
   public saveDiagram(): void {
@@ -98,8 +107,6 @@ export class ProcessDefinitionComponent implements OnInit {
 
     this.processService.saveDiagramChanges(this.process);
   }
-
-
 
   public onChangeSelectedProcess(uid: string): void {
     this.processUID = uid;
@@ -130,7 +137,7 @@ export class ProcessDefinitionComponent implements OnInit {
   }
 
   private attachModelerEventHandler() {
-    this.modeler.suscribeToDoubleClick(this.onModelerDoubleClick);
+    this.modeler.suscribeToDoubleClick((e) => this.onModelerDoubleClick(e));
   }
 
   private load() {
@@ -143,13 +150,30 @@ export class ProcessDefinitionComponent implements OnInit {
   }
 
   private onModelerDoubleClick(element: any): void {
-    alert('elemento recibido en Angular: ' + element);
+    this.editionMode = false;
+    let bpmnType = JSON.parse(element);
+    this.selectBpmnElmentInfo(bpmnType.type);
   }
 
   private setProcesses(): void {
     this.processService.getProcesses().then((processes) => {
       this.processes = processes;
     });
+  }
+
+  private selectBpmnElmentInfo(bpmnElementType: string): void {
+    switch (bpmnElementType) {
+      case 'bpmn:Task':
+        this.showTaskEditor();
+        break;
+      default: return;
+    }
+
+  }
+
+  private showTaskEditor(): void {
+    this.showShapeInfo = true;
+    this.ref.detectChanges();
   }
 
 }

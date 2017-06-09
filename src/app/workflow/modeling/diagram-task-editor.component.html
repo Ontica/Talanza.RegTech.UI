@@ -1,0 +1,64 @@
+<div class="container">
+  <div class="close" (click)="cancel()">&times;</div>
+  <p class="title">Permisos para accesos, cruzamientos, instalaciones marginales</p>
+  <p class="subtitle">Ronda 1.3</p>
+  <div class="tab">
+    <button class="tablinks">Información general</button>
+    <button class="tablinks">Requisitos</button>
+    <button class="tablinks">Costo y plazos</button>
+    <button class="tablinks">Lista de tareas</button>
+    <button class="tablinks">Observaciones</button>
+  </div>
+  <table>
+    <tr>
+      <td><label>Nombre del trámite:</label></td>
+      <td colspan="2"><input class="textBox" type="text" value="Permisos para accesos, cruzamientos, instalaciones marginales"></td>
+    </tr>
+    <tr>
+      <td><label>Tema:</label></td>
+      <td><select class="selectBox" name="dropdown">
+                            <option value="1" selected>Actividad Petrolera</option>
+                            <option value="">Exploración</option>
+                        </select>
+      </td>
+      <td class="align-right"><label class="align-right">¿Está regulado?</label><input type="checkbox" value="on"></td>
+    </tr>
+    <tr>
+      <td><label>Cláusula/anexo:</label></td>
+      <td colspan="2"><input type="text" class="textBox" value="CI, 3.3 f),4.2, 4.3, 5.5, 7.2, 17.1, 17.7, Anexo 13 "></td>
+    </tr>
+    <tr>
+      <td><label>Fundamento legal:</label></td>
+      <td colspan="2"><textarea class="textArea" rows="5" cols="25">art. 8 de la Ley de Caminos, Puentes y Autotransporte Federal;                                             art. 5 fracción I, 6, 6-A, 7, 9 y 10 del Reglamento para el aprovechamiento del derecho de vía de las carreteras federales y zonas aledañas.</textarea></td>
+    </tr>
+    <tr>
+      <td><label>Dependencia:</label></td>
+      <td colspan="2"><select class="selectBox">
+                               <option value="1" selected>Secretaria de Comunicaciones y Transportes</option>
+                               <option value="2" selected>Secretaria de Desarrollo Territorial y Urbano</option>
+                              </select>
+      </td>
+    </tr>
+    <tr>
+      <td><label>Autoridad:</label></td>
+      <td colspan="2"><select class="selectBox">
+                              <option value="1">Unidad de Asusntos Jurídicos del Centro SCT del Estado que corresponda</option>
+                             </select>
+      </td>
+    </tr>
+    <tr>
+      <td><label>Contacto:</label></td>
+      <td colspan="2"><textarea class="textArea" rows="5" cols="25">Juan Carlos Capistrán Fernández,
+Director Técnico,
+jcapist@sct.gob.mx
+5723-9300, ext. 15003 
+          </textarea>
+      </td>
+    </tr>
+    <tr>
+      <td><span class="align-left"><button class="button">Imprimir</button></span></td>
+      <td colspan="2" class="align-right">
+        <button class="button" (click)="cancel()">Cancelar</button> <button class="button">Guardar cambios</button>
+      </td>
+  </table>
+</div>
