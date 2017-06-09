@@ -51,7 +51,7 @@ export class ProcessDefinitionComponent implements OnInit {
   private processUID: string = '';
 
   public constructor(private sanitizer: DomSanitizer, private processService: ProcessDefinitionService,
-                     private ref: ChangeDetectorRef) {
+    private ref: ChangeDetectorRef) {
     this.load();
     this.url = this.sanitizer.bypassSecurityTrustResourceUrl('./modeler/process-modeler.html');
   }
@@ -65,6 +65,7 @@ export class ProcessDefinitionComponent implements OnInit {
     this.editionMode = true;
     this.saveAsLabel = 'Guardar';
     this.modeler.createDiagram();
+    this.title = 'Nuevo proceso';
     this.attachModelerEventHandler();
   }
 
@@ -83,6 +84,7 @@ export class ProcessDefinitionComponent implements OnInit {
     this.isNewDiagram = false;
     this.saveAsLabel = 'Guardar como';
     this.editionMode = true;
+    this.title = process.name;
   }
   public showSaveNewDiagramPopup(): void {
     this.editionMode = false;
@@ -110,6 +112,7 @@ export class ProcessDefinitionComponent implements OnInit {
 
   public onChangeSelectedProcess(uid: string): void {
     this.processUID = uid;
+    this.openDiagram();
   }
 
   public async openDiagram() {
@@ -126,10 +129,6 @@ export class ProcessDefinitionComponent implements OnInit {
     this.title = this.process.name;
     this.editionMode = false;
     this.saveAsLabel = 'Guardar como';
-  }
-
-  public sendInfo(): void {
-    this.modeler.parameters('mensaje');
   }
 
   private get modeler() {
