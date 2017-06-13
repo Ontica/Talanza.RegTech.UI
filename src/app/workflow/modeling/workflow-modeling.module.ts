@@ -12,15 +12,18 @@ import { CommonModule } from '@angular/common';
 import { ProcessDefinitionComponent } from './process-definition.component';
 
 import { DiagramIdentificationComponent } from  './diagram-identification.component';
-import { DiagramTaskEditorComponent } from './diagram-task-editor.component';
+
+import { TaskDefinitionModelingModule } from '../task-definition/task-definition-modeling.module';
+
+
 
 /**
  * Do not specify providers for modules that might be imported by a lazy loaded module.
  */
 
 @NgModule({
-  imports: [CommonModule],
-  declarations: [ProcessDefinitionComponent, DiagramIdentificationComponent, DiagramTaskEditorComponent],
+  imports: [CommonModule, TaskDefinitionModelingModule],
+  declarations: [ProcessDefinitionComponent, DiagramIdentificationComponent],
   exports: [ProcessDefinitionComponent]
 })
 export class WorkflowModelingModule { }

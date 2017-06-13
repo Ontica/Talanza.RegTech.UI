@@ -11,7 +11,7 @@
   <diagram-identification-popup (onSetDiagramIdentificationEvent)="saveNewDiagram($event)" (onCancelEvent)="closeSaveNewDiagramPopup()"></diagram-identification-popup>
 </div>
 <div *ngIf="showShapeInfo" class="popup">
-  <diagram-task-editor (onCancelEvent)="closeShapeInfo()"></diagram-task-editor>
+  <task-general-info (onCancelEvent)="closeShapeInfo()"></task-general-info>
 </div>
 <div class="iframe-container">
   <iframe #modeler scrolling="no" [class.readonly-modeler]="!editionMode" class="iframe-modeler" [src]=" url "></iframe>
