@@ -14,5 +14,6 @@
   <br>
   <div [ngSwitch]="selectedTask">
     <task-general-info *ngSwitchCase="'generalInfo'"> </task-general-info>
+    <task-requirements *ngSwitchCase="'requirements'"></task-requirements>
   </div>
 </div>
