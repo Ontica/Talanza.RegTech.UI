@@ -10,10 +10,11 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/Common';
 
 import { TaskGeneralInfoComponent } from './task-general-info.component';
+import { TaskEditorWindowComponent } from './task-editor.window.component';
 
 @NgModule({
   imports: [CommonModule],
-  declarations: [TaskGeneralInfoComponent],
-  exports: [TaskGeneralInfoComponent]
+  declarations: [TaskEditorWindowComponent, TaskGeneralInfoComponent],
+  exports: [TaskEditorWindowComponent, TaskGeneralInfoComponent]
 })
 export class TaskDefinitionModelingModule {}
