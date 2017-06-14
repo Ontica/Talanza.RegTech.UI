@@ -1,0 +1,65 @@
+table {
+  border: none;
+  font: 8pt Arial, Helvetica;
+  font-weight: bold;
+  margin-left: 1em;
+}
+
+button.button {
+  background-color: #2C3942;
+  color: white;
+}
+
+input.text-box {
+  background-color: #f0f0f0;
+  border-top: 1px solid #e0e0e0;
+  border-bottom: 1px solid #e0e0e0;
+  border-left: 1px solid #e0e0e0;
+  border-right: 1px solid #e0e0e0;
+  color: #424242;
+  font: 8pt Arial, Helvetica;
+  font-weight: bold;
+  height: 25px;
+  margin: 2px 8px 2px 0;
+  padding: 4px 2px 2px;
+  vertical-align: middle;
+  width: 99%;
+}
+
+select.select-box {
+  background-color: #f0f0f0;
+  border-top: 1px solid #e0e0e0;
+  border-bottom: 1px solid #e0e0e0;
+  border-left: 1px solid #e0e0e0;
+  border-right: 1px solid #e0e0e0;
+  color: #424242;
+  font: 8pt Arial, Helvetica;
+  font-weight: bold;
+  margin: 2px 8px 2px 0;
+  padding: 4px 2px 2px;
+  vertical-align: middle;
+  width: 99%;
+}
+
+.text-area {
+  background-color: #f0f0f0;
+  border-top: 1px solid #e0e0e0;
+  border-bottom: 1px solid #e0e0e0;
+  border-left: 1px solid #e0e0e0;
+  border-right: 1px solid #e0e0e0;
+  color: #424242;
+  font: 8pt Arial, Helvetica;
+  font-weight: bold;
+  margin: 2px 8px 2px 0;
+  padding: 4px 2px 2px;
+  vertical-align: middle;
+  width: 99%;
+}
+
+.align-left {
+  text-align: left;
+}
+
+.align-right {
+  text-align: right;
+}
