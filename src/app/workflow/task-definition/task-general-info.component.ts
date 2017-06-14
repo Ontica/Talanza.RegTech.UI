@@ -3,7 +3,7 @@ import { Component, EventEmitter, HostBinding, Output } from '@angular/core';
 @Component({
   selector: 'task-general-info',
   templateUrl: './task-general-info.component.html',
-  styleUrls: ['task-general-info.component.css']
+  styleUrls: ['task-general-info.component.scss']
 })
 
 export class TaskGeneralInfoComponent {
