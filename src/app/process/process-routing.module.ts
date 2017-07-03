@@ -12,16 +12,17 @@ import { RouterModule } from '@angular/router';
 import { SecurityGuardService } from '../core';
 
 import { MainLayoutComponent } from '../shared';
-import { ProcessDefinitionComponent } from './modeling/process-definition.component';
+import { ProcessEditorComponent } from './editor/process-editor.component';
 
 @NgModule({
   imports: [
     RouterModule.forChild([
       {
-        path: 'workflow', component: MainLayoutComponent, canActivate: [SecurityGuardService],
-        children: [{ path: 'modeling', component: ProcessDefinitionComponent }]
+        path: 'process', component: MainLayoutComponent, canActivate: [SecurityGuardService],
+        children: [{ path: 'editor', component: ProcessEditorComponent }]
+
       }
     ])],
   exports: [RouterModule]
 })
-export class WorkflowRoutingModule { }
+export class ProcessRoutingModule { }

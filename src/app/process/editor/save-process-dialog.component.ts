@@ -8,15 +8,15 @@
 
 import { Component, EventEmitter, HostBinding, Output } from '@angular/core';
 
-import { Process } from './process';
+import { Process } from '../data-types/process';
 
 @Component({
-  selector: 'diagram-identification-popup',
-  templateUrl: './diagram-identification.component.html',
-  styleUrls: ['diagram-identification.component.css']
+  selector: 'save-process-dialog',
+  templateUrl: './save-process-dialog.component.html',
+  styleUrls: ['./save-process-dialog.component.css']
 })
 
-export class DiagramIdentificationComponent {
+export class SaveProcessDialogComponent {
 
   public process: Process = new Process();
   public alerts: string;

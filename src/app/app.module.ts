@@ -9,6 +9,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, ApplicationRef } from '@angular/core';
 import { removeNgStyles, createNewHosts, createInputTransfer } from '@angularclass/hmr';
+import { FormsModule } from '@angular/forms';
 
 /*
  * Platform and Environment providers/directives/pipes
@@ -23,7 +24,7 @@ import { AppState, InternalStateType } from './app.service';
 import { CoreModule } from './core/core.module';
 import { SecurityUIModule } from './security-ui/security-ui.module';
 import { DashboardModule } from './dashboard/dashboard.module';
-import { WorkflowModule } from './workflow/workflow.module';
+import { ProcessModule } from './process/process.module';
 import { SharedModule } from './shared/shared.module';
 
 /*
@@ -57,9 +58,11 @@ type StoreType = {
     CoreModule,
     SecurityUIModule,
     DashboardModule,
-    WorkflowModule,
+    ProcessModule,
     SharedModule,
     BrowserModule,
+    FormsModule,
+
     AppRoutingModule
   ],
   providers: [ // expose our Services and Providers into Angular's dependency injection

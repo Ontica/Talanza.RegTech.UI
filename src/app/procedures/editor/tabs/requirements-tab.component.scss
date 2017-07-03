@@ -1,0 +1,29 @@
+@import "../../../../styles/general-styles";
+table {
+  border-collapse: collapse;
+  width: 580px;
+}
+
+table.grid {
+  border: 1px solid $black;
+}
+
+table.grid th {
+  background-color: $red;
+  color: $white;
+}
+
+table.grid td, th {
+  border-left: 1px solid $black;
+  padding: 5px;
+  text-align: left;
+  vertical-align: top;
+}
+
+table.grid td {
+  color: #424242;
+}
+
+table.grid tr:nth-child(even) {
+  background-color: #f0f0f0;
+}

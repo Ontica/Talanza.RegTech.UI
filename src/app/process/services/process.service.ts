@@ -2,11 +2,11 @@ import { Injectable } from '@angular/core';
 
 import { CoreService } from '../../core';
 
-import { Process } from './process';
+import { Process } from '../data-types/process';
 import { PROCESSES } from './process.mock';
 
 @Injectable()
-export class ProcessDefinitionService {
+export class ProcessService {
 
   public constructor(private core: CoreService) { }
 
