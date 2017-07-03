@@ -8,12 +8,12 @@
 import {  ChangeDetectorRef, Component } from '@angular/core';
 
 @Component ({
-  selector: 'task-requirements',
-  templateUrl: './task-requirements.component.html',
-  styleUrls: ['task-requirements.component.scss']
+  selector: 'requirements-tab',
+  templateUrl: './requirements-tab.component.html',
+  styleUrls: ['./requirements-tab.component.scss']
 })
 
-export class TaskRequirementsComponent {
+export class RequirementsTabComponent {
 
   public requirementEditorIsActive = false;
 

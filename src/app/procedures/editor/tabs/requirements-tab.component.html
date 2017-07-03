@@ -1,7 +1,7 @@
 <table>
   <tr>
     <td>Lista de requisitos</td>
-    <td class="align-right"><button class="button" type="button" (click)="addRequirement()">Agregar requisto</button></td>
+    <td class="align-right"><button class="btn" type="button" (click)="addRequirement()">Agregar requisto</button></td>
     <tr>
 </table>
 <table class="grid">
@@ -45,7 +45,8 @@
   </tr>
 </table>
 <div *ngIf="requirementEditorIsActive">
-  <table>
+  <table class="requirementEditor">
+    <caption class="align-left">Agregar requisito</caption>
     <tr>
       <td>Requisito:</td>
       <td colspan="4"><textarea class="text-area" rows="5" cols="25">Documento que contenga la descripción de las instalaciones, calendarizando  las diferentes etapas de ejecución.         
@@ -74,14 +75,13 @@
       <td><input class="text-box" type="text" value="cl45-2.ejemplos.xls">
         <td><button>Abrir</button>
     </tr>
-
   </table>
   <table>
     <tr>
-      <td><span><button class="button">Imprimir</button></span></td>
+      <td><span><button class="btn">Imprimir</button></span></td>
       <td class="align-right">
-        <button class="button" type="button" (click)="cancel()">Cancelar</button>
-        <button class="button">Guardar cambios</button>
+        <button class="btn-cancel" (click)="cancel()">Cancelar</button>
+        <button class="btn">Guardar cambios</button>
       </td>
     </tr>
   </table>

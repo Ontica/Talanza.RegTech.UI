@@ -1,0 +1,92 @@
+@import "../../../styles/general-styles";
+table {
+  border: 1px solid $black;
+  border-collapse: collapse;
+  margin: 3px 10px 3px 3px;
+  width: 100%;
+}
+
+table.grid {
+  width: 100%;
+  text-align: left;
+  min-width: 510px;
+}
+
+table.grid thead tr {
+  height: 30px;
+  padding-top: 10px
+}
+
+table.grid tbody tr {
+  height: 80px;
+}
+
+table.grid tbody {
+  height: calc(100vh - 250px);
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+table.grid th, table.grid td, table.grid tr, table.grid thead, table.grid tbody {
+  display: block;
+}
+
+table.grid td, table.grid th {
+  float: left;
+}
+
+table.grid td:nth-child(1), table.grid th:nth-child(1) {
+  width: 40%;
+  float: left;
+}
+
+table.grid td:nth-child(2), table.grid th:nth-child(2) {
+  width: 33%;
+  float: left;
+}
+
+table.grid td:nth-child(3), table.grid th:nth-child(3) {
+  width: 15%;
+  float: left;
+}
+
+table.grid td:nth-child(4), table.grid th:nth-child(4) {
+  width: 9%;
+  float: left;
+}
+
+table.grid thead {
+  background-color: $red;
+  color: $white;
+}
+
+table.grid tbody tr:nth-child(even) {
+  background-color: #f0f0f0;
+}
+
+.footer {
+  align-items: center;
+  bottom: 0px;
+  height: 35px;
+  margin: 3px 10px 3px 3px;
+  position: absolute;
+  width: 99%;
+}
+
+table.footer-items {
+  border: none;
+}
+
+table.footer-items td {
+  padding-right: 30px;
+}
+
+last-cell {
+  width: 100%;
+}
+
+
+/*
+tr td:last-child {
+  
+}*/

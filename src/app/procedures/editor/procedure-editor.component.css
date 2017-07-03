@@ -52,7 +52,7 @@ div.tab button {
   cursor: pointer;
   padding: 14px 16px;
   transition: 0.3s;
-  font-size: 12px;
+  font-size: 10px;
   font-weight: bold;
 }
 
@@ -62,6 +62,5 @@ div.tab button:hover {
 
 div.tab button:active {
   background-color: #ccc;
-  ;
   text-decoration: underline;
 }

@@ -9,12 +9,12 @@
 import { ChangeDetectorRef, Component, EventEmitter, HostBinding, Output } from '@angular/core';
 
 @Component({
-  selector: 'task-editor-window',
-  templateUrl: './task-editor.window.component.html',
-  styleUrls: ['task-editor.window.component.css']
+  selector: 'procedure-editor',
+  templateUrl: './procedure-editor.component.html',
+  styleUrls: ['./procedure-editor.component.css']
 })
 
-export class TaskEditorWindowComponent {
+export class ProcedureEditorComponent {
   @HostBinding('style.display') private display = 'block';
   @HostBinding('style.position') private position = 'absolute';
 
@@ -22,16 +22,16 @@ export class TaskEditorWindowComponent {
 
   public selectedTask = 'generalInfo';
 
-   public constructor(private ref: ChangeDetectorRef) {    
-   }
+  public constructor(private ref: ChangeDetectorRef) {
+  }
 
-  public setSelectedTask(selectedTask: string): void {   
+  public setSelectedTask(selectedTask: string): void {
     this.selectedTask = selectedTask;
     this.ref.detectChanges();
   }
 
-  private close(): void {   
-    this.onCloseEvent.emit();     
+  private close(): void {
+    this.onCloseEvent.emit();
   }
 
 }

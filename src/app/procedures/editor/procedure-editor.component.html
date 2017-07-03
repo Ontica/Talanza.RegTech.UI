@@ -6,14 +6,15 @@
   </div>
   <div class="tab">
     <button class="tablinks" (click)="setSelectedTask('generalInfo')">Información general</button>
+    <button class="tablinks">Condiciones</button>
     <button class="tablinks" (click)="setSelectedTask('requirements')">Requisitos</button>
-    <button class="tablinks">Costo y plazos</button>
-    <button class="tablinks">Lista de tareas</button>
-    <button class="tablinks">Observaciones</button>
+    <button class="tablinks">Pago de derechos</button>
+    <button class="tablinks">Interviene en</button>
+    <button class="tablinks">Estado</button>
   </div>
   <br>
   <div [ngSwitch]="selectedTask">
-    <task-general-info *ngSwitchCase="'generalInfo'"> </task-general-info>
-    <task-requirements *ngSwitchCase="'requirements'"></task-requirements>
+    <general-info-tab *ngSwitchCase="'generalInfo'"> </general-info-tab>
+    <requirements-tab *ngSwitchCase="'requirements'"></requirements-tab>
   </div>
 </div>
