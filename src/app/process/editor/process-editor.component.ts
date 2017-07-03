@@ -9,17 +9,17 @@
 import { ChangeDetectorRef, Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { BrowserModule, DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
-import { Process } from './process';
-import { ProcessDefinitionService } from './Process-definition.service';
+import { Process } from '../data-types/process';
+import { ProcessService } from '../services/process.service';
 
 @Component({
-  selector: 'process-definition',
-  templateUrl: './process-definition.component.html',
-  styleUrls: ['process-definition.component.css'],
-  providers: [ProcessDefinitionService]
+  selector: 'process-editor',
+  templateUrl: './process-editor.component.html',
+  styleUrls: ['process-editor.component.css'],
+  providers: [ProcessService]
 })
 
-export class ProcessDefinitionComponent implements OnInit {
+export class ProcessEditorComponent implements OnInit {
 
   public url: SafeResourceUrl;
   public process: Process;
@@ -50,8 +50,8 @@ export class ProcessDefinitionComponent implements OnInit {
 
   private processUID: string = '';
 
-  public constructor(private sanitizer: DomSanitizer, private processService: ProcessDefinitionService,
-    private ref: ChangeDetectorRef) {
+  public constructor(private sanitizer: DomSanitizer, private processService: ProcessService,
+                     private ref: ChangeDetectorRef) {
     this.load();
     this.url = this.sanitizer.bypassSecurityTrustResourceUrl('./modeler/process-modeler.html');
   }

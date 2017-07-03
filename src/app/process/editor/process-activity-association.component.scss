@@ -1,0 +1,30 @@
+@import "../../../styles/general-styles";
+:host {
+  position: relative;
+  top: 38%;
+  left: 35%;
+}
+
+table.association {
+  border: 1px solid $black;
+  border-collapse: collapse;
+  margin: 3px 10px 3px 3px;
+}
+
+table.association tr {
+  line-height: 20px;
+}
+
+table.association tr:first-child {
+  border-bottom: 1px solid $black;
+  background-color: $red; // #9b1b1f;
+  color: $white; // white;
+}
+
+table.association tr:nth-child(6) {
+  height: 40px;
+}
+
+table.association tr:last-child {
+  border-top: 1px solid $black;
+}
