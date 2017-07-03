@@ -1,0 +1,92 @@
+@import "variables";
+$font: 8pt Arial, Helvetica;
+$small-font: 6pt Arial, Helvetica;
+table {
+  border: none;
+  font: $font;
+  font-weight: bold;
+  margin-left: 1em;
+}
+
+button.btn {
+  background-color: #2C3942;
+  color: $white;
+}
+
+button.btn-cancel {
+  background-color: $red; //$cancel-color;
+  color: $white;
+}
+
+button.btn-warning {
+  background-color: $orange; //$warning-color;
+  color: $white;
+}
+
+@mixin input-settings {
+  background-color: #f0f0f0;
+  border-top: 1px solid #e0e0e0;
+  border-bottom: 1px solid #e0e0e0;
+  border-left: 1px solid #e0e0e0;
+  border-right: 1px solid #e0e0e0;
+  color: #424242;
+  font: $font;
+  font-weight: bold;
+  margin: 2px 8px 2px 0;
+  padding: 4px 2px 2px;
+  vertical-align: middle;
+  width: 99%;
+}
+
+select.select-box {
+  @include input-settings;
+  height: 25px;
+}
+
+input.search-box {
+  @include input-settings;
+  /*background-image: url('../../../assets/icon/search-icon.png');
+  background-position: 3px 3px;
+  background-repeat: no-repeat;
+  padding-left: 20px;*/
+}
+
+input.text-box {
+  @include input-settings;
+  height: 25px;
+}
+
+.text-area {
+  @include input-settings;
+}
+
+.align-left {
+  text-align: left;
+}
+
+.align-right {
+  text-align: right;
+}
+
+.align-center {
+  text-align: center;
+}
+
+.small-italic-notification {
+  font: $small-font;
+  font-weight: bold;
+  font-style: italic;
+}
+
+a {
+  color: black;
+}
+
+a:hover {
+  color: $red;
+  cursor: pointer;
+}
+
+.popup {
+  z-index: 1;
+}

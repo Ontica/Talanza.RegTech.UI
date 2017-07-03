@@ -1,11 +1,11 @@
 <div class="nav-bar">
   <ul>
     <li class="first-li"><a [routerLink]="['/']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{exact:true}">Inicio</a></li>
-    <li class="selected"><a [routerLink]="['/workflow/modeling']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{exact:true}">Procesos</a></li>
-    <li>Implementación</li>
-    <li>Ejecución</li>
-    <li class="disabled">Monitoreo</li>
-    <li class="disabled">Optimización</li>
-    <li class="disabled">Consultas</li>
+    <li class="disabled">Seguimiento</li>
+    <li class="disabled">Documentos</li>
+    <li class="disabled">Contratos</li>
+    <li class="selected"><a [routerLink]="['/procedures/procedures']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{exact:true}">Trámites</a></li>
+    <li class="selected"><a [routerLink]="['/process/editor']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{exact:true}">Procesos</a></li>
+    <li class="disabled">Buscar</li>
   </ul>
 </div>

@@ -18,8 +18,8 @@ import { ProcessEditorComponent } from './editor/process-editor.component';
   imports: [
     RouterModule.forChild([
       {
-        path: 'workflow', component: MainLayoutComponent, canActivate: [SecurityGuardService],
-        children: [{ path: 'modeling', component: ProcessEditorComponent }]
+        path: 'process', component: MainLayoutComponent, canActivate: [SecurityGuardService],
+        children: [{ path: 'editor', component: ProcessEditorComponent }]
 
       }
     ])],
