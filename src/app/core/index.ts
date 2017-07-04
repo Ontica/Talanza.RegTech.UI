@@ -9,11 +9,10 @@
 export { CoreService } from './core.service';
 
 export { ApplicationSettingsService } from './general/application-settings.service';
+export { HttpService } from './http/http.service';
 export { LoggerService } from './general/logger.service';
-
-export { SpinnerService, SpinnerState } from './spinner/spinner.service';
 
 export { PrincipalService } from './security/principal.service';
 export { SecurityGuardService } from './security/security-guard.service';
 
-export { DirectoryService } from './http/directory.service';
+export { SpinnerService, SpinnerState } from './spinner/spinner.service';

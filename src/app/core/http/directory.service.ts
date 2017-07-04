@@ -10,53 +10,58 @@ import { Injectable } from '@angular/core';
 import { Http, RequestOptions, Headers } from '@angular/http';
 
 import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/mergeMap';
 
 import { Assertion } from 'empiria';
-import { HttpMethod } from './common-types';
+
+import { HttpHandler } from './http-handler';
+import { Service, HttpMethod } from './common-types';
 
 @Injectable()
 export class DirectoryService {
 
-  private services: Observable<Service[]>;
+  private servicesList: Observable<Service[]>;
 
-  constructor(private http: Http) {
-    this.services = this.getServices();
+  constructor(private httpHandler: HttpHandler) {
+    this.servicesList = this.getServicesList();
   }
 
-  public getService(servicePathOrUID: string, method?: HttpMethod): Observable<Service> {
+  public getService(servicePathOrUID: string,
+                    method?: HttpMethod): Observable<Service> {
     Assertion.assertValue(servicePathOrUID, 'servicePathOrUID');
 
     if (servicePathOrUID.includes('http://') || servicePathOrUID.includes('https://') ) {
       return Observable.of<Service>(undefined);
     } else {
-      return this.findService(servicePathOrUID, method);
+      return this.getServiceFromList(servicePathOrUID, method);
     }
   }
 
   // Private methods
 
-  private findService(servicePathOrUID: string, method: HttpMethod): Observable<Service> {
+  private getServiceFromList(servicePathOrUID: string,
+                             method: HttpMethod): Observable<Service> {
     let condition: (Service) => boolean;
 
     if (servicePathOrUID.includes('/') && method === undefined) {
-      condition = (item: Service) => (item.path === servicePathOrUID);
+      condition = (service: Service) => (service.path === servicePathOrUID);
 
     } else if (servicePathOrUID.includes('/') && method !== undefined) {
-      condition = (item: Service) => (item.path === servicePathOrUID &&
-                                      item.method.toString() === HttpMethod[method]);
+      condition = (service: Service) => (service.path === servicePathOrUID &&
+                                         service.method.toString() === HttpMethod[method]);
 
     } else if (!servicePathOrUID.includes('/') && method === undefined) {
-      condition = (item: Service) => (item.uid === servicePathOrUID);
+      condition = (service: Service) => (service.uid === servicePathOrUID);
 
     } else if (!servicePathOrUID.includes('/') && method !== undefined) {
-      condition = (item: Service) => (item.uid === servicePathOrUID &&
-                                      item.method.toString() === HttpMethod[method]);
+      condition = (service: Service) => (service.uid === servicePathOrUID &&
+                                         service.method.toString() === HttpMethod[method]);
 
     } else {
       throw Assertion.assertNoReachThisCode('A findService condition handler is missing in code.');
     }
 
-    return this.services.map((x: Service[]) => {
+    return this.servicesList.map((x: Service[]) => {
       const filteredServices = x.filter((service) => condition(service));
 
       if (filteredServices.length === 0) {
@@ -73,47 +78,8 @@ export class DirectoryService {
     });
   }
 
-  private getServices(): Observable<Service[]> {
-    const options = this.getRequestOptions();
-
-    return this.http.get('http://empiria.steps/api/v1/system/service-directory', options)
-                    .map((response) => response.json()['data'] as Service[]);
+  private getServicesList(): Observable<Service[]> {
+    return this.httpHandler.get<Service[]>('v1/system/service-directory', { payloadDataField: 'data' });
   }
-
-  private getRequestOptions(): RequestOptions {
-    let requestOptions = new RequestOptions();
-    let headers = new Headers();
-
-    headers.append('Content-Type', 'application/json');
-    requestOptions.headers = headers;
-
-    return requestOptions;
-  }
-
-}
-
-export interface Service {
-
-  readonly uid: string;
-
-  readonly baseAddress: string;
-
-  readonly path: string;
-
-  readonly parameters: string[];
-
-  readonly method: HttpMethod;
-
-  readonly description: string;
-
-  readonly isProtected: Boolean;
-
-  readonly headers: string[];
-
-  readonly payloadDataField: string;
-
-  readonly payloadType: string;
-
-  readonly responseDataType: string;
 
 }
