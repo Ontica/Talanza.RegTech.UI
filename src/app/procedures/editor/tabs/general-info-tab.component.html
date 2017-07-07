@@ -26,7 +26,7 @@
         <td>Tema:</td>
         <td><select [disabled]="disabled" width="300px" class="select-box" [(ngModel)]="procedure.theme">
                             <option value="">( Seleccionar un tema )</option>
-            <option value="Actividad petrolera">Actividad petrolera</option>         
+            <option value="Actividad petrolera">Actividad petrolera</option>
             <option value="Ambiental">Ambiental</option>
             <option value="Certificación de reservas">Certificación de reservas</option>
             <option value="Contenido Nacional">Contenido Nacional</option>
@@ -41,7 +41,7 @@
             <option value="Seguridad industrial, operativa y del medio ambiente">Seguridad industrial, operativa y del medio ambiente</option>
             <option value="Seguros">Seguros</option>
             <option value="SMA">SMA</option>
-            <option value="Uso y Ocupación Superficial">Uso y Ocupación Superficial</option>          
+            <option value="Uso y Ocupación Superficial">Uso y Ocupación Superficial</option>
                         </select>
         </td>
         <td class="align-right" width="200px">#Excel <input style="width:50px" type="text" class="text-box" [(ngModel)]="procedure.msExcelNo"></td>
@@ -75,9 +75,9 @@
       </tr>
       <tr>
         <td width="100px;">Dependencia:</td>
-        <td colspan="2"><select [disabled]="disabled" class="select-box" #entity (change)="onChangeEntity(entity.value)" [(ngModel)]="procedure.authority.entity.uid">                              
+        <td colspan="2"><select [disabled]="disabled" class="select-box" #entity (change)="onChangeEntity(entity.value)" [(ngModel)]="procedure.authority.entity.uid">
                                <option value="">( Seleccionar una dependecia ) </option>
-          <option *ngFor="let entity of entities" [value]="entity.uid">{{entity.name}}</option>         
+          <option *ngFor="let entity of entities" [value]="entity.uid">{{entity.name}}</option>
                               </select>
         </td>
       </tr>
@@ -85,7 +85,7 @@
         <td>Autoridad:</td>
         <td colspan="2"><select [disabled]="disabled" class="select-box" [(ngModel)]="procedure.authority.office.uid">
                                <option value="">( Seleccionar una autoridad ) </option>
-          <option *ngFor="let office of offices" [value]="office.uid">{{office.name}}</option>         
+          <option *ngFor="let office of offices" [value]="office.uid">{{office.name}}</option>
                              </select>
         </td>
       </tr>
@@ -115,7 +115,7 @@
           <button class="btn" [disabled]="disabled" (click)="cancel()">Deshacer cambios</button>
         </td>
         <td *ngIf="disabled" class="align-right">
-          <button class="btn" (click)="editProcedure()">Editar Tramite</button>
+          <button class="btn" (click)="editProcedure()">Editar trámite</button>
         </td>
         <td *ngIf="!disabled" class="align-right">
 

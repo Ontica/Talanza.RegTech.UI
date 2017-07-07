@@ -107,10 +107,10 @@ export class GeneralInfoTabComponent implements OnInit {
     }    
     if (this.isNewProcedure) {  
      this.createNewProcedure();      
-       alert("El trámite ha sido creado");       
+       alert("El trámite fue creado sido creado.");
     } else {
       this.updateProcedure();
-      alert("El trámite ha sido actualizado");
+      alert("El trámite se actualizó correctamente.");
     }  
     this.isEditable.emit(false);
   }
@@ -127,19 +127,19 @@ export class GeneralInfoTabComponent implements OnInit {
 
   private validation(): boolean {
     if (this.procedure.name === '') {
-      alert("El nombre del Trámite se encuentra en blanco");
+      alert("El nombre del trámite se encuentra en blanco.");
       return false;
     }
     if (this.procedure.stage === '') {
-      alert("Seleccionar una Etapa de la lista de etapas");
+      alert("Seleccionar una etapa de la lista.");
       return false;
     }
     if (this.procedure.theme === '') {
-      alert("Seleccionar un Tema de la lista de temas");
+      alert("Seleccionar un tema de la lista.");
       return false;
     }      
     if (this.procedure.authority.entity.uid === '') {
-      alert("Seleccionar una Dependencia de la lista de Dependencias");
+      alert("Seleccionar una dependencia de la lista.");
       return false;
     }
     return true;

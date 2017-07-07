@@ -1,6 +1,8 @@
 @import "../../../../styles/general-styles";
 .container {
-  height: 540px;
+  height: 630px;
+  color: #6a6a6a;
+  font-weight: 300;
 }
 
 table {
@@ -8,8 +10,10 @@ table {
 }
 
 td.title-row {
-  color: $red;
-  border-bottom: 1px solid $red;
+  color: $gray;
+  border-bottom: 1px dotted $gray;
+  padding-top: 8pt;
+  padding-bottom: 4pt;
 }
 
 .footer {

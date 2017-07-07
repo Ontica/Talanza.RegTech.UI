@@ -24,17 +24,17 @@ export class ProcedureService {
 
   public getProocedures(): Promise<SmallProcedureInterface[]> {
     let httpApiClient = this.core.getHttpClient(this.HTTP_API_BASE_ADDRESS);
-    return httpApiClient.getAsyncAsPromise('/v1/procedures');
+    return httpApiClient.getAsyncAsPromise('v1/procedures');
   }
 
   public getFilterProocedures(filter: string): Promise<SmallProcedureInterface[]> {
     let httpApiClient = this.core.getHttpClient(this.HTTP_API_BASE_ADDRESS);
-    return httpApiClient.getAsyncAsPromise('/v1/procedures?filter=' + filter);
+    return httpApiClient.getAsyncAsPromise('v1/procedures?filter=' + filter);
   }
 
   public getProcuedure(uid: string): Promise<Procedure> {
      let httpApiClient = this.core.getHttpClient(this.HTTP_API_BASE_ADDRESS);
-    return httpApiClient.getAsyncAsPromise('/v1/procedures/' + uid);
+    return httpApiClient.getAsyncAsPromise('v1/procedures/' + uid);
   }
 
   public updateProcedure(procedure: Procedure): Promise<Procedure> {

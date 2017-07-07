@@ -13,12 +13,12 @@ import { ProcedureService } from '../../services/procedure.service';
 export class DutiesPaymentsTabComponent {
   @Input() public procedure: Procedure;
   public isFree = false;
-  
+
   constructor(private procedureService: ProcedureService) { }
 
   public saveProcedureChanges(): void {
     this.updateProcedure();
-    alert("El trámite se actualizó correctamente!!!");
+    alert("El trámite se actualizó correctamente.");
   }
 
   public onChangeFilingFeeType(filingFeeType: string) {
@@ -43,5 +43,5 @@ export class DutiesPaymentsTabComponent {
       this.procedure = procedure;
     });
   }
-   
+
 }

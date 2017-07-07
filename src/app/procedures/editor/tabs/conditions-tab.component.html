@@ -7,20 +7,22 @@
       <tr>
         <td width="170px">Este trámite se debe de iniciar:</td>
         <td><select style="width:220px;" class="select-box" [(ngModel)]="procedure.filingCondition.startsWhen">
-          <option value="">( Seleccionar una actividad )</option>
+          <option value="">( Seleccionar la condición de inicio )</option>
           <option value="Antes de iniciar una actividad">Antes de iniciar una actividad</option>
           <option value="Durante una actividad">Durante una actividad</option>
           <option value="Antes de terminar una actividad">Antes de terminar una actividad</option>
           <option value="Una vez concluida una actividad">Una vez concluida una actividad</option>
-          <option value="Después de ocurrir un evento">Después de ocurrir un evento</option>          
+          <option value="Después de ocurrir un evento">Después de ocurrir un evento</option>
+          <option value="Se inicia manualmente">Se inicia manualmente</option>
           </select>
         </td>
       </tr>
       <tr>
         <td>Actividad o evento:</td>
         <td><select class="select-box" [(ngModel)]="procedure.filingCondition.startsWhenTrigger">
-          <option value="">( Seleccionar un evento )</option>
-          <option value="Trigger">Ampliación de almacenamiento de residuos peligrosos</option>
+          <option value="">( Seleccionar el evento o actividad que lo inicia )</option>
+          <option value="No aplica">No aplica</option>
+          <option value="Ampliación de almacenamiento de residuos peligrosos">Ampliación de almacenamiento de residuos peligrosos</option>
           <option value="Certificación de reservas">Certificación de reservas</option>
           <option value="Disposición final de residuos peligrosos">Disposición final de residuos peligrosos</option>
           <option value="Perforación de pozos">Perforación de pozos</option>
@@ -72,9 +74,11 @@
         <td>Forma de entrega:</td>
         <td><select class="select-box" [(ngModel)]="procedure.filingCondition.howToFile">
            <option value="">( Seleccionar la forma de entrega )</option>
-            <option value="Presencial">Presencial</option>
+            <option value="Presencial, con la autoridad responsable">Presencial, con la autoridad responsable</option>
             <option value="Presencial, vía oficialía de partes">Presencial, vía oficialía de partes</option>
             <option value="Correo electrónico">Correo electrónico</option>
+            <option value="Página web">Página web</option>
+            <option value="Sistema electrónico">Sistema electrónico</option>
           </select>
         </td>
       </tr>
@@ -91,10 +95,10 @@
             <tr>
               <td width="180px" class="align-left">¿El trámite permite prórrogas?</td>
               <td><select style="width:200px;" class="select-box" [(ngModel)]="procedure.filingCondition.allowsDeferrals">
-                 <option value="">( Seleccionar permite prorroga )</option>
+                 <option value="">( ¿Permite prórrogas? )</option>
                 <option value="Sí">Sí</option>
                 <option value="No">No</option>
-                <option value="Posiblemente">Posiblemente</option>                    
+                <option value="Posiblemente">Posiblemente</option>
                 </select>
               </td>
             </tr>

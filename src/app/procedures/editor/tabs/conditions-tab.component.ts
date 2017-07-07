@@ -21,7 +21,7 @@ export class ConditionsTabComponent implements OnInit {
 
   public saveProcedureChanges(): void {
        this.updateProcedure();
-    alert("El trámite se actualizó correctamente!!!")
+    alert("El trámite se actualizó correctamente.")
 
   }
 
