@@ -7,26 +7,23 @@
  */
 
 import { Injectable } from '@angular/core';
-import { Http, RequestOptionsArgs } from '@angular/http';
+import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/mergeMap';
 
 import { Assertion } from 'empiria';
 
-import { DirectoryService, Service } from './directory.service';
+import { DirectoryService } from './directory.service';
 import { HttpHandler } from './http-handler';
-import { HttpMethod } from './http-types';
+import { HttpRequestOptions, HttpMethod } from './common-types';
 
 @Injectable()
 export class HttpService {
 
-  private readonly httpHandler: HttpHandler;
+  constructor(private httpHandler: HttpHandler,
+              private directory: DirectoryService) { }
 
-  constructor(private http: Http, private directory: DirectoryService) {
-    this.httpHandler = new HttpHandler(this.http);
-  }
-
-  public get<T>(path: string, options?: RequestOptionsArgs): Observable<T> {
+  public get<T>(path: string, options?: HttpRequestOptions): Observable<T> {
     Assertion.assertValue(path, 'path');
 
     return this.directory.getService(path, HttpMethod.GET)
@@ -35,14 +32,31 @@ export class HttpService {
                          });
   }
 
-  // public post<T>(path: string, body: any, options?: RequestOptionsArgs): Observable<T> {
-  //   Assertion.assertValue(path, 'path');
+  public post<T>(path: string, body: any, options?: HttpRequestOptions): Observable<T> {
+    Assertion.assertValue(path, 'path');
 
-  //   const service = this.directory.getService(path, HttpMethod.POST);
+    return this.directory.getService(path, HttpMethod.POST)
+                         .mergeMap((service) => {
+                            return this.httpHandler.post<T>(path, body, options, service);
+                         });
+  }
 
-  //   const handler = new HttpHandler(this.http);
+  public put<T>(path: string, body: any, options?: HttpRequestOptions): Observable<T> {
+    Assertion.assertValue(path, 'path');
 
-  //   return handler.post<T>(path, body, options, service);
-  // }
+    return this.directory.getService(path, HttpMethod.PUT)
+                         .mergeMap((service) => {
+                            return this.httpHandler.put<T>(path, body, options, service);
+                         });
+  }
+
+  public delete<T>(path: string, options?: HttpRequestOptions): Observable<T> {
+    Assertion.assertValue(path, 'path');
+
+    return this.directory.getService(path, HttpMethod.DELETE)
+                         .mergeMap((service) => {
+                            return this.httpHandler.delete<T>(path, options, service);
+                         });
+  }
 
 }
