@@ -1,20 +1,22 @@
 <div class="task-editor-window">
   <div class="header">
     <div class="close" (click)="close()">&times;</div>
-    <div class="title">Permisos para accesos, cruzamientos, instalaciones marginales</div>
-    <div class="subtitle">Ronda 1.3</div><br>
+    <div class="small-title">{{newNameLabel}}</div>
+    <div class="title">{{procedure.name}}</div>
+    <div class="subtitle">{{procedure.authority.entity.name}}</div><br>
   </div>
   <div class="tab">
-    <button class="tablinks" (click)="setSelectedTask('generalInfo')">Información general</button>
-    <button class="tablinks">Condiciones</button>
-    <button class="tablinks" (click)="setSelectedTask('requirements')">Requisitos</button>
-    <button class="tablinks">Pago de derechos</button>
+    <button class="tablinks" [class.selected]="selectedTask==='generalInfo'" (click)="setSelectedTask('generalInfo')">Información general</button>
+    <button class="tablinks" [disabled]="isDisabled" [class.selected]="selectedTask==='conditions'" (click)="setSelectedTask('conditions')">Condiciones</button>
+    <button class="tablinks" [disabled]="isDisabled" [class.selected]="selectedTask==='requirements'" (click)="setSelectedTask('requirements')">Requisitos</button>
+    <button class="tablinks" [disabled]="isDisabled" [class.selected]="selectedTask==='payments'" (click)="setSelectedTask('payments')">Pago de derechos</button>
     <button class="tablinks">Interviene en</button>
     <button class="tablinks">Estado</button>
   </div>
-  <br>
   <div [ngSwitch]="selectedTask">
-    <general-info-tab *ngSwitchCase="'generalInfo'"> </general-info-tab>
+    <general-info-tab *ngSwitchCase="'generalInfo'" [procedure]="procedure" (isEditable)="onDisabledTabs($event)" (onCancel)="cancel();"> </general-info-tab>
+    <conditions-tab *ngSwitchCase="'conditions'" [procedure]="procedure"></conditions-tab>
     <requirements-tab *ngSwitchCase="'requirements'"></requirements-tab>
+    <duties-payments-tab *ngSwitchCase="'payments'" [procedure]="procedure"></duties-payments-tab>
   </div>
 </div>

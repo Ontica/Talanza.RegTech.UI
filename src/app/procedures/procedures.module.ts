@@ -13,9 +13,12 @@ import { SharedModule } from '../shared/shared.module';
 
 import { ProcedureFilterComponent } from './main-page/procedures-filter.component';
 import { ProceduresMainPageComponent } from './main-page/procedures-main-page.component';
+
 import { ProcedureEditorComponent } from './editor/procedure-editor.component';
 import { GeneralInfoTabComponent } from './editor/tabs/general-info-tab.component';
 import { RequirementsTabComponent } from './editor/tabs/requirements-tab.component';
+import { ConditionsTabComponent } from './editor/tabs/conditions-tab.component';
+import { DutiesPaymentsTabComponent } from './editor/tabs/duties-payments-tab.component';
 
 import { ProceduresRoutingModule } from './procedures-routing.module';
 
@@ -26,7 +29,7 @@ import { ProceduresRoutingModule } from './procedures-routing.module';
 @NgModule({
   imports: [ProceduresRoutingModule, SharedModule, CommonModule, FormsModule],
   declarations: [ProceduresMainPageComponent, ProcedureFilterComponent, ProcedureEditorComponent,
-                 GeneralInfoTabComponent, RequirementsTabComponent],
+                 GeneralInfoTabComponent, RequirementsTabComponent, ConditionsTabComponent, DutiesPaymentsTabComponent],
   exports: [ProceduresMainPageComponent]
 })
 export class ProceduresModule { }

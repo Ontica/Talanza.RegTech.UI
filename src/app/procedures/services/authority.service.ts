@@ -21,7 +21,7 @@ export class AuthorityService {
     return this.core.appSettings.get<string>('HTTP_API_BASE_ADDRESS');
   }
 
-  public getAuthorities(entityUID: string): Promise<Entity> {
+  public getEntity(entityUID: string): Promise<Entity> {
     let httpApiClient = this.core.getHttpClient(this.HTTP_API_BASE_ADDRESS);
     return httpApiClient.getAsyncAsPromise('/v1/modeling/entities/' + entityUID);
   }
@@ -30,5 +30,5 @@ export class AuthorityService {
     let httpApiClient = this.core.getHttpClient(this.HTTP_API_BASE_ADDRESS);
     return httpApiClient.getAsyncAsPromise('/v1/modeling/entities');
   }
-
+ 
 }

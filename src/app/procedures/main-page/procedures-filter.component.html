@@ -1,13 +1,13 @@
 <table>
   <tr>
     <td width="45px">Autoridad:</td>
-    <td width="640px" colspan="3"><select style="width:80px;" class="select-box" #entity (change)="onChangeSelectedEntity(entity.value)" [(ngModel)]="filter.entity">
+    <td width="640px" colspan="3"><select style="width:90px;" class="select-box" #entity (change)="onChangeSelectedEntity(entity.value)" [(ngModel)]="filter.entityUID">
           <option value="">( Todos ) </option>
           <option *ngFor="let entity of entities" [value]="entity.uid">{{entity.shortName}}</option>         
         </select>
-      <select style="width:550px;" class="select-box" #authority (change)="onChangeAuthority(authority.value)" [(ngModel)]="filter.authority">
+      <select style="width:540px;" class="select-box" #authority (change)="onChangeAuthority(authority.value)" [(ngModel)]="filter.officeUID">
         <option value="">( Todos ) </option>
-        <option *ngFor="let authority of authorities" [value]="authority.uid">{{authority.name}}</option>
+        <option *ngFor="let office of offices" [value]="office.uid">{{office.name}}</option>
         </select>
     </td>
     <td width="45px">Buscar:</td>
@@ -55,6 +55,6 @@
             </select>
     </td>
     <td><a (click)="cleanCombos() ">Limpiar</a></td>
-    <td><button style="width:144px" class="btn-warning" type="button">+ Nuevo trámite</button></td>
+    <td><button style="width:144px" class="btn-warning" type="button" (click)="newProcedure()">+ Nuevo trámite</button></td>
   </tr>
 </table>

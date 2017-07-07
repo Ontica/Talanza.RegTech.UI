@@ -1,0 +1,45 @@
+<div class="container">
+  <div>
+    <table>
+      <tr>
+        <td colspan="4" class="title-row">Pago de derechos</td>
+      </tr>
+      <tr>
+        <td width="100px">Tipo de Pago:</td>
+        <td width="200px"><select class="select-box" #filingFeeType (change)="onChangeFilingFeeType(filingFeeType.value)" [(ngModel)]="procedure.filingFee.filingFeeType">
+          <option value="">( Seleccionar un tipo de pago )</option>
+          <option value="Importe fijo">Importe fijo</option>
+          <option value="Importe basado en reglas">Importe basado en reglas</option>
+          <option value="Trámite gratuito">Trámite gratuito</option>
+          </select>
+        </td>
+        <td width="50px" class="align-left">Importe:</td>
+        <td class="align-left">
+          <input type="text" style="width:80px" class="text-box" [disabled]="isFree" [(ngModel)]="procedure.filingFee.feeAmount">
+        </td>
+      </tr>
+      <tr *ngIf="procedure.filingFee.filingFeeType === 'Importe basado en reglas'">
+        <td>Regla para el pago de derechos:</td>
+        <td colspan="3 "><textarea width="100%; " class="text-area " rows="15 " cols="25 " [(ngModel)]="procedure.filingFee.rule "></textarea></td>
+      </tr>
+      <tr *ngIf="procedure.filingFee.filingFeeType === 'Importe basado en reglas'">
+        <td>Fundamento legal del pago de derechos</td>
+        <td colspan="3 "><textarea width="100%; " class="text-area " rows="5 " cols="25 " [(ngModel)]="procedure.filingFee.legalBasis "></textarea></td>
+      </tr>
+
+    </table>
+  </div>
+  <div class="footer ">
+    <table>
+      <tr>
+        <td><button class="btn">Imprimir</button></td>
+        <td class="align-center ">
+          <button class="btn" (click)="cancel()">Deshacer cambios</button>
+        </td>
+        <td class=" align-right ">
+          <button class="btn " (click)="saveProcedureChanges() ">Guardar cambios</button>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>

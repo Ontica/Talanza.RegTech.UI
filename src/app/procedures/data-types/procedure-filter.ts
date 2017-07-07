@@ -2,8 +2,8 @@ import { Entity } from './entity';
 import { Authority } from './authority';
 
 export class ProcedureFilter {
-  public authority: string;
-  public entity: string;
+  public officeUID: string;
+  public entityUID: string;
   public theme: string;
   public stage: string;
 
@@ -12,8 +12,8 @@ export class ProcedureFilter {
   }
 
   public clean(): void {
-    this.authority = '';
-    this.entity = '';
+    this.officeUID = '';
+    this.entityUID = '';
     this.theme = '';
     this.stage = '';
   }

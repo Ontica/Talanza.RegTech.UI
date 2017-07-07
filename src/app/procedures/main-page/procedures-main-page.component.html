@@ -1,4 +1,4 @@
-<procedure-filter (onSearch)="getProcedures($event)"></procedure-filter>
+<procedure-filter (onSearch)="getProcedures($event)" (onNewProcedure)="onOpenProcedureEditorWindow($event)"></procedure-filter>
 <table class="grid ">
   <thead>
     <tr>
@@ -10,7 +10,7 @@
   </thead>
   <tbody>
     <tr *ngFor="let procedure of procedures">
-      <td><a (click)="onOpenProcedureWindow()">{{procedure.name}}</a></td>
+      <td><a (click)="onOpenProcedureEditorWindow(procedure.uid)">{{procedure.name}}</a></td>
       <td>{{procedure.entity}} <br> {{procedure.authority}}</td>
       <td>{{procedure.theme}}</td>
       <td>{{procedure.stage}}</td>
@@ -30,8 +30,8 @@
       <td class="align-right ">Pagina 1 de 4</td>
     </tr>
   </table>
-
 </div>
-<div *ngIf="showProcedureWindow " class="popup ">
-  <procedure-editor (onCloseEvent)="closeProcedureWindow() "></procedure-editor>
+
+<div *ngIf="showProcedureEditorWindow " class="popup ">
+  <procedure-editor [procedureUID]="selectedProcedureUID" (onCloseEvent)="closeProcedureEditorWindow()"></procedure-editor>
 </div>

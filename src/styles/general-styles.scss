@@ -58,6 +58,7 @@ input.text-box {
 
 .text-area {
   @include input-settings;
+  resize: none;
 }
 
 .align-left {

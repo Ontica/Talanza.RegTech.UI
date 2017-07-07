@@ -6,22 +6,14 @@
  *
  */
 
-import { Office } from './office';
-import { Position } from './position';
-
-export class Entity {
+export class Officer {
   uid: string;
   name: string;
-  shortName:string;
-  offices: Office[];
-  positions: Position[];
+  email: string;
 
   constructor() {
     this.uid = '';
-    this.name = '';
-    this.shortName = '';
-    this.offices = [];
-    this.positions =[];
+    this.name = '' ;
+    this.email = '';
   }
-  
 }

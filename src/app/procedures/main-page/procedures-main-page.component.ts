@@ -8,7 +8,7 @@
 
 import { Component } from '@angular/core';
 
-import { Procedure } from '../data-types/procedure';
+import { SmallProcedureInterface } from '../data-types/small-procedure.interface';
 
 @Component({
   selector: 'task-procedures-editor',
@@ -18,18 +18,20 @@ import { Procedure } from '../data-types/procedure';
 
 export class ProceduresMainPageComponent {
 
-  public procedures: Procedure[] = [];
+  public procedures: SmallProcedureInterface[] = [];
+  public selectedProcedureUID: string;
+  public showProcedureEditorWindow = false;
 
-  public showProcedureWindow = false;
-
-  public onOpenProcedureWindow(): void {
-    this.showProcedureWindow = true;
-  }
-  public closeProcedureWindow(): void {
-    this.showProcedureWindow = false;
+  public onOpenProcedureEditorWindow(UID: string): void {
+    this.selectedProcedureUID = UID;
+    this.showProcedureEditorWindow = true;
   }
 
-  public getProcedures(procedures: Procedure[]): void {
+  public closeProcedureEditorWindow(): void {
+    this.showProcedureEditorWindow = false;
+  }
+
+  public getProcedures(procedures:SmallProcedureInterface[]): void {
     this.procedures = procedures;
   }
 
