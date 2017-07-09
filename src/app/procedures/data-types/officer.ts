@@ -7,13 +7,14 @@
  */
 
 export class Officer {
-  uid: string;
-  name: string;
-  email: string;
+  public uid: string;
+  public name: string;
+  public email: string;
 
   constructor() {
     this.uid = '';
-    this.name = '' ;
+    this.name = '';
     this.email = '';
   }
+
 }

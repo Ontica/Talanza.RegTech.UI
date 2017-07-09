@@ -23,8 +23,8 @@ import { ProcedureService } from '../services/procedure.service';
 })
 
 export class ProcedureEditorComponent implements OnInit {
-  @HostBinding('style.display') private display = 'block';
-  @HostBinding('style.position') private position = 'absolute';
+  @HostBinding('style.display') public display = 'block';
+  @HostBinding('style.position') public position = 'absolute';
 
   @Output() public onCloseEvent = new EventEmitter();
   @Input() public procedureUID: string;
@@ -36,9 +36,9 @@ export class ProcedureEditorComponent implements OnInit {
 
   private isNewProcedure = false;
 
-  public constructor(private ref: ChangeDetectorRef, private procedureService: ProcedureService) { }
+  constructor(private ref: ChangeDetectorRef, private procedureService: ProcedureService) { }
 
-  async ngOnInit() {
+  public async ngOnInit() {
     await this.setProcedure();
     this.setNewProcedureTitle();
     this.selectedTask = 'generalInfo';
@@ -57,7 +57,7 @@ export class ProcedureEditorComponent implements OnInit {
     this.isDisabled = disabled;
   }
 
-  private close(): void {
+  public close(): void {
     this.onCloseEvent.emit();
   }
 
@@ -76,6 +76,6 @@ export class ProcedureEditorComponent implements OnInit {
     await this.procedureService.getProcuedure(this.procedureUID).then((procedure) => {
       this.procedure = procedure;
     });
-  } 
+  }
 
 }

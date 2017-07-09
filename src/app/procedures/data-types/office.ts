@@ -7,12 +7,12 @@
  */
 
 export class Office {
-  uid: string;
-  name: string;
+  public uid: string;
+  public name: string;
 
   constructor() {
     this.uid = '';
     this.name = '';
   }
-}
 
+}

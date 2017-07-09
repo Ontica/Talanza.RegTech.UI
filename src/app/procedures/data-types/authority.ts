@@ -12,15 +12,15 @@ import { Position } from './position';
 import { Contact } from './contact';
 
 export class Authority {
-  entity: Entity;
-  office: Office;
-  position: Position;
-  contact: Contact;
+  public entity: Entity;
+  public office: Office;
+  public position: Position;
+  public contact: Contact;
 
-  constructor () {
+  constructor() {
     this.entity = new Entity();
     this.office = new Office();
-    this.position = new Position();    
+    this.position = new Position();
     this.contact = new Contact();
   }
 

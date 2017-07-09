@@ -8,7 +8,7 @@
   <div class="tab">
     <button class="tablinks" [class.selected]="selectedTask==='generalInfo'" (click)="setSelectedTask('generalInfo')">Información general</button>
     <button class="tablinks" [disabled]="isDisabled" [class.selected]="selectedTask==='conditions'" (click)="setSelectedTask('conditions')">Inicio y plazos</button>
-    <button class="tablinks" [disabled]="isDisabled" [class.selected]="selectedTask==='requirements'" (click)="setSelectedTask('requirements')">Requisitos</button>
+    <button class="tablinks" [disabled]="isDisabled" [class.selected]="selectedTask==='requirements'" (click)="setSelectedTask('requirements')">Requisitos y notas</button>
     <button class="tablinks" [disabled]="isDisabled" [class.selected]="selectedTask==='payments'" (click)="setSelectedTask('payments')">Pago de derechos</button>
     <button class="tablinks">Interviene en</button>
     <button class="tablinks">Estado</button>
@@ -16,7 +16,7 @@
   <div [ngSwitch]="selectedTask">
     <general-info-tab *ngSwitchCase="'generalInfo'" [procedure]="procedure" (isEditable)="onDisabledTabs($event)" (onCancel)="cancel();"> </general-info-tab>
     <conditions-tab *ngSwitchCase="'conditions'" [procedure]="procedure"></conditions-tab>
-    <requirements-tab *ngSwitchCase="'requirements'"></requirements-tab>
-    <duties-payments-tab *ngSwitchCase="'payments'" [procedure]="procedure"></duties-payments-tab>
+    <requirements-tab *ngSwitchCase="'requirements'" [procedure]="procedure"></requirements-tab>
+    <filing-fee-tab *ngSwitchCase="'payments'" [procedure]="procedure"></filing-fee-tab>
   </div>
 </div>

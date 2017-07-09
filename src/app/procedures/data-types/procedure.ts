@@ -13,36 +13,38 @@ import { FilingDocuments } from './filing-documents';
 import { FilingFee } from './filing-fee';
 
 export class Procedure {
-  uid: string;
-  name: string;
-  url: string;
-  stage: string;
-  category: string;
-  theme: string;
-  authority: Authority;
-  legalInfo: LegalInfo;
-  filignCondition: FilingCondition;
-  filingDocuments: FilingDocuments;
-  filingFee: FilingFee;
-  status: string;
-  statusNotes: string;
-  msExcelNo: number;
+  public uid: string;
+  public code: string;
+  public shortName: string;
+  public name: string;
+  public url: string;
+  public stage: string;
+  public category: string;
+  public theme: string;
+  public authority: Authority;
+  public legalInfo: LegalInfo;
+  public filingCondition: FilingCondition;
+  public filingDocuments: FilingDocuments;
+  public filingFee: FilingFee;
+  public status: string;
+  public statusNotes: string;
+  public msExcelNo: number;
 
   constructor() {
     this.uid = '';
-    this.name = '';   
-    this.url = '';    
+    this.name = '';
+    this.url = '';
     this.stage = '';
     this.category = '';
     this.theme = '';
     this.authority = new Authority();
     this.legalInfo = new LegalInfo();
-    this.filignCondition = new FilingCondition();
+    this.filingCondition = new FilingCondition();
     this.filingDocuments = new FilingDocuments();
     this.filingFee = new FilingFee();
     this.status = '';
     this.statusNotes = '';
-    this.msExcelNo = 0;    
+    this.msExcelNo = 0;
   }
 
 }

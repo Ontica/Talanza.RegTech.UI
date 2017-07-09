@@ -10,18 +10,18 @@ import { Office } from './office';
 import { Position } from './position';
 
 export class Entity {
-  uid: string;
-  name: string;
-  shortName:string;
-  offices: Office[];
-  positions: Position[];
+  public uid: string;
+  public name: string;
+  public shortName: string;
+  public offices: Office[];
+  public positions: Position[];
 
   constructor() {
     this.uid = '';
     this.name = '';
     this.shortName = '';
     this.offices = [];
-    this.positions =[];
+    this.positions = [];
   }
-  
+
 }

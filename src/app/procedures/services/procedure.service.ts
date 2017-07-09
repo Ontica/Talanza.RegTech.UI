@@ -33,20 +33,20 @@ export class ProcedureService {
   }
 
   public getProcuedure(uid: string): Promise<Procedure> {
-     let httpApiClient = this.core.getHttpClient(this.HTTP_API_BASE_ADDRESS);
+    let httpApiClient = this.core.getHttpClient(this.HTTP_API_BASE_ADDRESS);
     return httpApiClient.getAsyncAsPromise('v1/procedures/' + uid);
   }
 
   public updateProcedure(procedure: Procedure): Promise<Procedure> {
     let httpApiClient = this.core.getHttpClient(this.HTTP_API_BASE_ADDRESS);
     httpApiClient.IncludeAuthorizationHeader = false;
-    return httpApiClient.PutAsyncAsPromise<Procedure>(procedure,'v1/procedures/' + procedure.uid);
+    return httpApiClient.PutAsyncAsPromise<Procedure>(procedure, 'v1/procedures/' + procedure.uid);
   }
 
   public createProcedure(procedure: Procedure): Promise<Procedure> {
     let httpApiClient = this.core.getHttpClient(this.HTTP_API_BASE_ADDRESS);
     httpApiClient.IncludeAuthorizationHeader = false;
-    return httpApiClient.postAsyncAsPromise<Procedure>(procedure,'v1/procedures/');
+    return httpApiClient.postAsyncAsPromise<Procedure>(procedure, 'v1/procedures/');
   }
 
 }

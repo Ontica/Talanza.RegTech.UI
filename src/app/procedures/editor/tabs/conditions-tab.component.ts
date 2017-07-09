@@ -15,22 +15,22 @@ export class ConditionsTabComponent implements OnInit {
 
   constructor(private procedureService: ProcedureService) { }
 
-  ngOnInit() {
-    
-  }
+  public ngOnInit() {}
 
   public saveProcedureChanges(): void {
-       this.updateProcedure();
-    alert("El trámite se actualizó correctamente.")
+    this.updateProcedure();
+    alert('El trámite se actualizó correctamente.');
 
   }
 
   public async cancel() {
-    await this.setProcedure();   
+    await this.setProcedure();
   }
 
   private updateProcedure(): void {
-    this.procedureService.updateProcedure(this.procedure).then((procedure) => { });
+    this.procedureService.updateProcedure(this.procedure).then((procedure) => {
+      this.procedure = procedure;
+    });
   }
 
   private async setProcedure() {
@@ -38,4 +38,5 @@ export class ConditionsTabComponent implements OnInit {
       this.procedure = procedure;
     });
   }
+
 }

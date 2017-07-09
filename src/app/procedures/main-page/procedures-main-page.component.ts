@@ -31,7 +31,7 @@ export class ProceduresMainPageComponent {
     this.showProcedureEditorWindow = false;
   }
 
-  public getProcedures(procedures:SmallProcedureInterface[]): void {
+  public getProcedures(procedures: SmallProcedureInterface[]): void {
     this.procedures = procedures;
   }
 

@@ -7,10 +7,10 @@
  */
 
 export class FilingFee {
-  filingFeeType: string;
-  feeAmount: number;
-  rule: string;
-  legalBasis: string;
+  public filingFeeType: string;
+  public feeAmount: number;
+  public rule: string;
+  public legalBasis: string;
 
   constructor() {
     this.filingFeeType = '';
@@ -18,4 +18,5 @@ export class FilingFee {
     this.rule = '';
     this.legalBasis = '';
   }
+
 }

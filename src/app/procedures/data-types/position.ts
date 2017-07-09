@@ -9,18 +9,16 @@
 import { Officer } from './officer';
 
 export class Position {
-  uid: string;
-  name: string;
-  phone: string;
-  officer: Officer;
-  //officers: Officer[];
+  public uid: string;
+  public name: string;
+  public phone: string;
+  public officer: Officer;
 
   constructor() {
     this.uid = '';
     this.name = '';
     this.phone = '';
     this.officer = new Officer();
-    //this.officers = [];
   }
 
 }

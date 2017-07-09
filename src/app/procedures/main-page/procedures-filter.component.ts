@@ -23,7 +23,7 @@ import { AuthorityService } from '../services/authority.service';
   providers: [ProcedureService, AuthorityService]
 })
 
-export class ProcedureFilterComponent {
+export class ProcedureFilterComponent implements OnInit {
   public filter: ProcedureFilter = new ProcedureFilter();
 
   public offices: Office[] = [];
@@ -39,8 +39,8 @@ export class ProcedureFilterComponent {
   }
 
   public async onChangeSelectedEntity(entityUID: string) {
-   this.filter.entityUID = entityUID; 
-   await this.setOffices(entityUID);    
+    this.filter.entityUID = entityUID;
+    await this.setOffices(entityUID);
 
   }
   public onChangeSelectedTheme(theme: string): void {
@@ -55,8 +55,8 @@ export class ProcedureFilterComponent {
     this.filter.officeUID = officeUID;
   }
 
-  public newProcedure(): void {    
-    this.onNewProcedure.emit('');    
+  public newProcedure(): void {
+    this.onNewProcedure.emit('');
   }
 
   public cleanCombos(): void {
@@ -65,7 +65,8 @@ export class ProcedureFilterComponent {
   }
 
   public search(): void {
-    if ((this.filter.entityUID === '') && (this.filter.officeUID === '' ) && (this.filter.theme === '') && (this.filter.stage === '')) {
+    if ((this.filter.entityUID === '') && (this.filter.officeUID === '')
+      && (this.filter.theme === '') && (this.filter.stage === '')) {
       this.setAllprocedures();
     } else {
       let filter = this.getFilter();
@@ -97,9 +98,9 @@ export class ProcedureFilterComponent {
     return filter;
   }
 
-  private async setOffices(entityUID: string)  {
-   await this.authorityService.getEntity(entityUID).then((entity) => {       
-      this.offices = entity.offices;      
+  private async setOffices(entityUID: string) {
+    await this.authorityService.getEntity(entityUID).then((entity) => {
+      this.offices = entity.offices;
     });
     this.filter.officeUID = '';
   }

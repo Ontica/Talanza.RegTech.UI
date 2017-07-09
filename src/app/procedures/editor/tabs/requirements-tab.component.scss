@@ -1,31 +1,12 @@
 @import "../../../../styles/general-styles";
+.container {
+  height: 540px;
+  color: #6a6a6a;
+  font-weight: 300;
+}
+
 table {
-  border-collapse: collapse;
-  width: 580px;
-}
-
-table.grid {
-  border: 1px solid $black;
-}
-
-table.grid th {
-  background-color: $red;
-  color: $white;
-}
-
-table.grid td, th {
-  border-left: 1px solid $black;
-  padding: 5px;
-  text-align: left;
-  vertical-align: top;
-}
-
-table.grid td {
-  color: #424242;
-}
-
-table.grid tr:nth-child(even) {
-  background-color: #f0f0f0;
+  width: 640px;
 }
 
 td.title-row {
@@ -33,4 +14,12 @@ td.title-row {
   border-bottom: 1px dotted $gray;
   padding-top: 8pt;
   padding-bottom: 4pt;
+}
+
+.footer {
+  bottom: 0px;
+  height: 42px;
+  margin: 1px 1px 1px 1px;
+  position: absolute;
+  width: 99%;
 }

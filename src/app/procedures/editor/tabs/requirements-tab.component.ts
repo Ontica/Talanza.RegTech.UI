@@ -5,28 +5,42 @@
  * See LICENSE.txt in the project root for complete license information.
  *
  */
-import {  ChangeDetectorRef, Component } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
-@Component ({
+import { Procedure } from '../../data-types/procedure';
+import { ProcedureService } from '../../services/procedure.service';
+
+@Component({
   selector: 'requirements-tab',
   templateUrl: './requirements-tab.component.html',
-  styleUrls: ['./requirements-tab.component.scss']
+  styleUrls: ['./requirements-tab.component.scss'],
+  providers: [ProcedureService]
 })
 
 export class RequirementsTabComponent {
+  @Input() public procedure: Procedure;
 
-  public requirementEditorIsActive = false;
+  public constructor(private procedureService: ProcedureService) { }
 
-  public constructor(private ref: ChangeDetectorRef) {}
-
-  public addRequirement(): void {
-    this.requirementEditorIsActive = true;
-    this.ref.detectChanges();
+  public saveProcedureChanges(): void {
+    this.updateProcedure();
+    alert('El trámite se actualizó correctamente.');
   }
 
-  public cancel(): void {
-    this.requirementEditorIsActive = false;
-    this.ref.detectChanges();
+  public async cancel() {
+    await this.setProcedure();
+  }
+
+  private updateProcedure(): void {
+    this.procedureService.updateProcedure(this.procedure).then((procedure) => {
+      this.procedure = procedure;
+    });
+  }
+
+  private async setProcedure() {
+    await this.procedureService.getProcuedure(this.procedure.uid).then((procedure) => {
+      this.procedure = procedure;
+    });
   }
 
 }

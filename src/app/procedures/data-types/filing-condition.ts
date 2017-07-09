@@ -7,19 +7,19 @@
  */
 
 export class FilingCondition {
-  startsWhen: string;
-  startsWhenTrigger: string;
-  maxFilingTerm: string;
-  issuanceLegalTerm: string;
-  howToFile: string;
-  allowsDeferrals: string;
-  deferralsTermNotes: string;
-  deferralsConditionNotes: string;
-  validityTermWhenIssued: string;
-  simultaneousDelivery: string;
-  startsWhenNotes: string;
-  maxFilingTermNotes: string;
-  issuanceLegalTermNotes: string;
+  public startsWhen: string;
+  public startsWhenTrigger: string;
+  public maxFilingTerm: string;
+  public issuanceLegalTerm: string;
+  public howToFile: string;
+  public allowsDeferrals: string;
+  public deferralsTermNotes: string;
+  public deferralsConditionNotes: string;
+  public validityTermWhenIssued: string;
+  public simultaneousDelivery: string;
+  public startsWhenNotes: string;
+  public maxFilingTermNotes: string;
+  public issuanceLegalTermNotes: string;
 
   constructor() {
     this.startsWhen = '';
@@ -36,4 +36,5 @@ export class FilingCondition {
     this.maxFilingTermNotes = '';
     this.issuanceLegalTermNotes = '';
   }
+
 }

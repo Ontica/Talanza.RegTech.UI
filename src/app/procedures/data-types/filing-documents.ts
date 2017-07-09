@@ -7,10 +7,10 @@
  */
 
 export class FilingDocuments {
-  notes: string;
+  public notes: string;
 
   constructor() {
     this.notes = '';
   }
-}
 
+}

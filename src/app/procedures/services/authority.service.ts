@@ -30,5 +30,5 @@ export class AuthorityService {
     let httpApiClient = this.core.getHttpClient(this.HTTP_API_BASE_ADDRESS);
     return httpApiClient.getAsyncAsPromise('/v1/modeling/entities');
   }
- 
+
 }
