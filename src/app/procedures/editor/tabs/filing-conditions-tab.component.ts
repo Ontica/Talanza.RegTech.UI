@@ -4,18 +4,17 @@ import { Procedure } from '../../data-types/procedure';
 import { ProcedureService } from '../../services/procedure.service';
 
 @Component({
-  selector: 'filing-fee-tab',
-  templateUrl: './filing-fee-tab.component.html',
-  styleUrls: ['./filing-fee-tab.component.scss'],
+  selector: 'filing-conditions-tab',
+  templateUrl: './filing-conditions-tab.component.html',
+  styleUrls: ['./filing-conditions-tab.component.scss'],
   providers: [ProcedureService]
 })
 
-export class FilingFeeTabComponent implements OnInit {
+export class FilingConditionsTabComponent implements OnInit {
 
   @Output() public isEditable = new EventEmitter<boolean>();
   @Input() public procedure: Procedure;
   @Input() public isNewProcedure: boolean;
-  public isFree = false;
   public disabled = true;
 
   constructor(private procedureService: ProcedureService) { }
@@ -31,14 +30,6 @@ export class FilingFeeTabComponent implements OnInit {
     this.updateProcedure();
     alert('El trámite se actualizó correctamente.');
     this.isEditable.emit(false);
-  }
-
-  public onChangeFilingFeeType(filingFeeType: string) {
-    if (filingFeeType === 'Trámite gratuito') {
-      this.procedure.filingFee.feeAmount = 0;
-      this.isFree = true;
-    }
-
   }
 
   public async cancel() {
@@ -70,11 +61,26 @@ export class FilingFeeTabComponent implements OnInit {
   }
 
   private validation(): boolean {
-    if (this.procedure.filingFee.filingFeeType === '') {
-      alert('Seleccionar el tipo de pago de la lista.');
+    if (this.procedure.filingCondition.startsWhen === '') {
+      alert('Seleccionar cuando se debe de iniciar el trámite.');
       return false;
     }
-
+    if (this.procedure.filingCondition.startsWhenTrigger === '') {
+      alert('Seleccionar una acividad o evento de la lista.');
+      return false;
+    }
+    if (this.procedure.filingCondition.maxFilingTerm === '') {
+      alert('Seleccionar un plazo máximo de entrega de la lista.');
+      return false;
+    }
+    if (this.procedure.filingCondition.issuanceLegalTerm === '') {
+      alert('Seleccionar un plazo legal de la lista.');
+      return false;
+    }
+    if (this.procedure.filingCondition.allowsDeferrals === '') {
+      alert('Seleccionar si ¿El trámite permite prórrogas?.');
+      return false;
+    }
     return true;
   }
 

@@ -17,7 +17,6 @@ import { AuthorityService } from '../../services/authority.service';
 
 export class GeneralInfoTabComponent implements OnInit {
 
-  @Output() public onCancel = new EventEmitter();
   @Output() public isEditable = new EventEmitter<boolean>();
   @Input() public procedure: Procedure;
 
@@ -36,7 +35,8 @@ export class GeneralInfoTabComponent implements OnInit {
 
   public async cancel() {
     await this.setProcedure();
-    this.onCancel.emit();
+    this.setInitialValues();
+    this.isEditable.emit(false);
   }
 
   public editProcedure(): void {
@@ -49,6 +49,9 @@ export class GeneralInfoTabComponent implements OnInit {
     this.setPositions(entityUID);
     this.procedure.authority.office.uid = '';
     this.procedure.authority.position.uid = '';
+    this.procedure.authority.contact.name = '';
+    this.procedure.authority.contact.email = '';
+    this.procedure.authority.position.phone = '';
   }
 
   public onChangePosition(positionUID: string): void {
@@ -62,7 +65,7 @@ export class GeneralInfoTabComponent implements OnInit {
     this.procedure.authority.contact.email = position.officer.email;
   }
 
-   public async saveProcedureChanges() {
+  public async saveProcedureChanges() {
     if (!this.validation()) {
       return;
     }
@@ -118,12 +121,12 @@ export class GeneralInfoTabComponent implements OnInit {
   private updateProcedure(): void {
     this.procedureService.updateProcedure(this.procedure).then((procedure) => {
       this.procedure = procedure;
-     });
+    });
   }
 
   private async createNewProcedure() {
     let newProcedure = await this.procedureService.createProcedure(this.procedure);
-    this.procedure.uid = newProcedure.uid;    
+    this.procedure.uid = newProcedure.uid;
   }
 
   private validation(): boolean {

@@ -33,8 +33,7 @@ export class ProcedureEditorComponent implements OnInit {
   public newNameLabel = '';
   public procedure: Procedure = new Procedure();
   public isDisabled = false;
-
-  private isNewProcedure = false;
+  public isNewProcedure = false;
 
   constructor(private ref: ChangeDetectorRef, private procedureService: ProcedureService) { }
 
@@ -48,11 +47,7 @@ export class ProcedureEditorComponent implements OnInit {
     this.selectedTask = selectedTask;
     this.ref.detectChanges();
   }
-
-  public cancel() {
-    this.setProcedure();
-  }
-
+  
   public onDisabledTabs(disabled: boolean): void {
     this.isDisabled = disabled;
   }
@@ -70,6 +65,7 @@ export class ProcedureEditorComponent implements OnInit {
   private async setProcedure() {
     if (this.procedureUID === '') {
       this.isNewProcedure = true;
+      this.isDisabled = true;
       this.procedure = new Procedure();
       return;
     }

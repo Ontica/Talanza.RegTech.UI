@@ -17,7 +17,7 @@ import { ProceduresMainPageComponent } from './main-page/procedures-main-page.co
 import { ProcedureEditorComponent } from './editor/procedure-editor.component';
 import { GeneralInfoTabComponent } from './editor/tabs/general-info-tab.component';
 import { RequirementsTabComponent } from './editor/tabs/requirements-tab.component';
-import { ConditionsTabComponent } from './editor/tabs/conditions-tab.component';
+import { FilingConditionsTabComponent } from './editor/tabs/filing-conditions-tab.component';
 import { FilingFeeTabComponent } from './editor/tabs/filing-fee-tab.component';
 
 import { ProceduresRoutingModule } from './procedures-routing.module';
@@ -29,7 +29,7 @@ import { ProceduresRoutingModule } from './procedures-routing.module';
 @NgModule({
   imports: [ProceduresRoutingModule, SharedModule, CommonModule, FormsModule],
   declarations: [ProceduresMainPageComponent, ProcedureFilterComponent, ProcedureEditorComponent,
-                 GeneralInfoTabComponent, RequirementsTabComponent, ConditionsTabComponent,
+                 GeneralInfoTabComponent, RequirementsTabComponent, FilingConditionsTabComponent,
                   FilingFeeTabComponent],
   exports: [ProceduresMainPageComponent]
 })
