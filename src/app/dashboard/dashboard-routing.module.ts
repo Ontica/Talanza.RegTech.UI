@@ -18,11 +18,11 @@ import { SecurityGuardService } from '../core';
 @NgModule({
   imports: [RouterModule.forChild([
     {
-      path: '', redirectTo: 'default', pathMatch: 'full'
+      path: '', redirectTo: 'smoke-tests', pathMatch: 'full'
     },
     {
       path: '', component: MainLayoutComponent, canActivate: [SecurityGuardService],
-      children: [{ path: 'default', component: HomeComponent }]
+      children: [{ path: 'smoke-tests', component: HomeComponent }]
     }
   ])],
   exports: [RouterModule]

@@ -2,7 +2,7 @@
 <table class="grid ">
   <thead>
     <tr>
-      <th>Nombre del trámite</th>
+      <th>Trámite/Clave</th>
       <th>Dependencia/Autoridad</th>
       <th>Tema</th>
       <th>Etapa</th>
@@ -10,7 +10,10 @@
   </thead>
   <tbody>
     <tr *ngFor="let procedure of procedures">
-      <td><a (click)="onOpenProcedureEditorWindow(procedure.uid)">{{procedure.name}}</a></td>
+      <td>
+        <a (click)="onOpenProcedureEditorWindow(procedure.uid)">{{procedure.shortName}}</a>
+        <br/> {{procedure.code}}
+      </td>
       <td>{{procedure.entity}} <br> {{procedure.authority}}</td>
       <td>{{procedure.theme}}</td>
       <td>{{procedure.stage}}</td>

@@ -8,13 +8,22 @@
 
 import { Component } from '@angular/core';
 
+import { CoreService } from '../../core';
+
 @Component({
   selector: 'main-layout',
-  templateUrl: 'main-layout.component.html',
-  styleUrls: ['main-layout.component.scss']
+  templateUrl: './main-layout.component.html',
+  styleUrls: ['./main-layout.component.scss']
 })
 export class MainLayoutComponent {
+
   public userName = 'UserName || et al';
-  public title = 'Definición de procesos';
-  public breadcrumb = 'Inicio » Procesos » Definiciones';
+
+  public title = 'Administración y control del cumplimiento regulatorio';
+  public breadcrumb = 'Inicio » Edición de trámites';
+
+  public constructor(private core: CoreService) { 
+    
+  }
+
 }

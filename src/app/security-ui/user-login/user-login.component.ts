@@ -30,7 +30,7 @@ export class UserLoginComponent implements OnInit {
 
     try {
       await this.principal.login(this.userID, this.password);
-      this.router.navigate(['default']);
+      this.router.navigate(['procedures/search']);
 
     } catch (exception) {
       alert(exception);

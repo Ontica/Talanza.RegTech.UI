@@ -19,10 +19,8 @@ import { ProceduresMainPageComponent } from '../procedures/main-page/procedures-
   imports: [
     RouterModule.forChild([
       {
-
         path: 'procedures', component: MainLayoutComponent, canActivate: [SecurityGuardService],
-        children: [{ path: 'procedures', component: ProceduresMainPageComponent }]
-
+        children: [{ path: 'search', component: ProceduresMainPageComponent }]
       }
     ])],
   exports: [RouterModule]
