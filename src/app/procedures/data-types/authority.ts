@@ -6,13 +6,22 @@
  *
  */
 
+import { Entity } from './entity';
+import { Office } from './office';
+import { Position } from './position';
+import { Contact } from './contact';
+
 export class Authority {
-  uid: string;
-  name: string;
+  public entity: Entity;
+  public office: Office;
+  public position: Position;
+  public contact: Contact;
 
   constructor() {
-    this.uid = '';
-    this.name = '';
+    this.entity = new Entity();
+    this.office = new Office();
+    this.position = new Position();
+    this.contact = new Contact();
   }
-}
 
+}

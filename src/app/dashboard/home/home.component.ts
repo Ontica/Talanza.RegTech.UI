@@ -28,7 +28,31 @@ export class HomeComponent implements OnInit {
   public ngOnInit() {
     this.core.spinner.spinnerState.subscribe((val) => this.spinnerState = val);
     this.core.appSettings.waitUntilLoaded().then(() => this.loadData());
+  //  this.invokeProtectedHttpService();
+  //  this.invokeHttpService();
+  //  this.invokeProtectedHttpServiceWithParameters();
   }
+
+  // public invokeHttpService() {
+  //   this.core.http.get('System.GetLicense')
+  //                 .subscribe((service) => this.core.logger.log('directory service is ' +
+  //                                                              JSON.stringify(service)));
+  // }
+
+  // public invokeProtectedHttpService() {
+  //   this.core.http.get<any[]>('v1/procedures')
+  //                 .subscribe((service) => this.core.logger.log('protected service returned ' +
+  //                                                              service.length));
+  // }
+
+  // public invokeProtectedHttpServiceWithParameters() {
+  //   //var serviceParams = this.core.http.buildPars('uid', 'PhLEtHoEmoew2OEvlustiAs4leqi4prL');
+  //   const serviceParams = ['uid', 'PhLEtHoEmoew2OEvlustiAs4leqi4prL'];
+
+  //   this.core.http.get('Steps.Modeling.GetProcedure', { serviceParams })
+  //                 .subscribe((service) => this.core.logger.log('protected service WITH PARS returned ' +
+  //                                                              service));
+  // }
 
   public onLogMessage() {
     this.core.logger.log('Logger service called on ' + Date());

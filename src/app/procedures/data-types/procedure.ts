@@ -6,32 +6,45 @@
  *
  */
 
+import { Authority } from './authority';
+import { LegalInfo } from './legal-info';
+import { FilingCondition } from './filing-condition';
+import { FilingDocuments } from './filing-documents';
+import { FilingFee } from './filing-fee';
+
 export class Procedure {
-uid: string;
-name: string;
-obligation: string;
-url: string;
-entity: string;
-authority: string;
-authorityContact: string;
-isRegulated: boolean;
-requirements:string;
-stage: string;
-stageInnerNo: number;
-category: string;
-theme: string;
-contractClausesAndAnnexes: string;
-legalBasis: string;
-startsWhen: string;
-maxComplianceTerm: string;
-emissionLegalTerm: string;
-deferrals: string;
-deferralsTerm: string;
-cost: string;
-costLegalBasis: string;
-validityTermWhenEmitted: string;
-simultaneousDelivery: string;
-notes: string;
-id: number;
+  public uid: string;
+  public code: string;
+  public shortName: string;
+  public name: string;
+  public url: string;
+  public stage: string;
+  public category: string;
+  public theme: string;
+  public authority: Authority;
+  public legalInfo: LegalInfo;
+  public filingCondition: FilingCondition;
+  public filingDocuments: FilingDocuments;
+  public filingFee: FilingFee;
+  public status: string;
+  public statusNotes: string;
+  public msExcelNo: number;
+
+  constructor() {
+    this.uid = '';
+    this.name = '';
+    this.url = '';
+    this.stage = '';
+    this.category = '';
+    this.theme = '';
+    this.authority = new Authority();
+    this.legalInfo = new LegalInfo();
+    this.filingCondition = new FilingCondition();
+    this.filingDocuments = new FilingDocuments();
+    this.filingFee = new FilingFee();
+    this.status = '';
+    this.statusNotes = '';
+    this.msExcelNo = 0;
+  }
+
 }
-             

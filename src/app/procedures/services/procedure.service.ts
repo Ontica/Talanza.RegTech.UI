@@ -11,6 +11,7 @@ import { Injectable } from '@angular/core';
 import { CoreService } from '../../core';
 
 import { Procedure } from '../data-types/procedure';
+import { SmallProcedureInterface } from '../data-types/small-procedure.interface';
 
 @Injectable()
 export class ProcedureService {
@@ -21,14 +22,31 @@ export class ProcedureService {
     return this.core.appSettings.get<string>('HTTP_API_BASE_ADDRESS');
   }
 
-  public getProocedures(): Promise<Procedure[]> {
+  public getProocedures(): Promise<SmallProcedureInterface[]> {
     let httpApiClient = this.core.getHttpClient(this.HTTP_API_BASE_ADDRESS);
-    return httpApiClient.getAsyncAsPromise('/v1/procedures');
+    return httpApiClient.getAsyncAsPromise('v1/procedures');
   }
 
-  public getFilterProocedures(filter: string): Promise<Procedure[]> {
+  public getFilterProocedures(filter: string): Promise<SmallProcedureInterface[]> {
     let httpApiClient = this.core.getHttpClient(this.HTTP_API_BASE_ADDRESS);
-    return httpApiClient.getAsyncAsPromise('/v1/procedures?filter=' + filter);
+    return httpApiClient.getAsyncAsPromise('v1/procedures?filter=' + filter);
+  }
+
+  public getProcuedure(uid: string): Promise<Procedure> {
+    let httpApiClient = this.core.getHttpClient(this.HTTP_API_BASE_ADDRESS);
+    return httpApiClient.getAsyncAsPromise('v1/procedures/' + uid);
+  }
+
+  public updateProcedure(procedure: Procedure): Promise<Procedure> {
+    let httpApiClient = this.core.getHttpClient(this.HTTP_API_BASE_ADDRESS);
+    httpApiClient.IncludeAuthorizationHeader = false;
+    return httpApiClient.PutAsyncAsPromise<Procedure>(procedure, 'v1/procedures/' + procedure.uid);
+  }
+
+  public createProcedure(procedure: Procedure): Promise<Procedure> {
+    let httpApiClient = this.core.getHttpClient(this.HTTP_API_BASE_ADDRESS);
+    httpApiClient.IncludeAuthorizationHeader = false;
+    return httpApiClient.postAsyncAsPromise<Procedure>(procedure, 'v1/procedures/');
   }
 
 }

@@ -1,67 +1,135 @@
-<div class="general-info-container">
-  <table>
-    <tr>
-      <td>Nombre del trámite:</td>
-      <td colspan="2"><input class="text-box" type="text" value="Permisos para accesos, cruzamientos, instalaciones marginales"></td>
-    </tr>
-    <tr>
-      <td>Etapa:</td>
-      <td><select class="select-box" name="dropdown">
-                            <option value="1" selected>Actividad Petrolera</option>
-                            <option value="">Exploración</option>
+<div class="container">
+  <div>
+    <table>
+      <tr>
+        <td colspan="3" class="title-row">Nombre del trámite, clave, clasificación y página web</td>
+      </tr>
+      <tr>
+        <td>clave:</td>
+        <td colspan="2"><input [disabled]="disabled" style="width:100px" class="text-box" type="text" [(ngModel)]="procedure.code"></td>
+      </tr>
+      <tr>
+        <td>Nombre corto:</td>
+        <td colspan="2"><input [disabled]="disabled" class="text-box" type="text" value="" [(ngModel)]="procedure.shortName"></td>
+      </tr>
+      <tr>
+        <td>Nombre oficial:</td>
+        <td colspan="2"><textarea [disabled]="disabled" width="100%;" class="text-area " rows="3 " cols="25 " [(ngModel)]="procedure.name"></textarea></td>
+      </tr>
+
+      <tr>
+        <td width="100px">Etapa:</td>
+        <td width="300px"><select [disabled]="disabled" class="select-box" [(ngModel)]="procedure.stage">
+                           <option value="">( Seleccionar una etapa ) </option>
+              <option value="Etapa de Abandono">Etapa de Abandono</option>
+              <option value="Período de Desarrollo">Período de Desarrollo</option>
+              <option value="Período de Evaluación">Período de Evaluación</option>
+              <option value="Transición de Arranque">Transición de Arranque</option>
+              <option value="Transversales ">Transversales</option>
                         </select>
-      </td>
-      <td class="align-right">¿Está regulado?<input type="checkbox" value="on"></td>
-    </tr>
-    <tr>
-      <td>Tema:</td>
-      <td><select class="select-box" name="dropdown">
-                            <option value="1" selected>Actividad Petrolera</option>
-                            <option value="">Exploración</option>
+        </td>
+        <td class="align-right" width="200px">¿Está regulado?<input [disabled]="disabled" type="checkbox" [(ngModel)]="procedure.legalInfo.isRegulated"></td>
+      </tr>
+      <tr>
+        <td>Tema:</td>
+        <td><select [disabled]="disabled" width="300px" class="select-box" [(ngModel)]="procedure.theme">
+                            <option value="">( Seleccionar un tema )</option>
+            <option value="Actividad petrolera">Actividad petrolera</option>
+            <option value="Ambiental">Ambiental</option>
+            <option value="Certificación de reservas">Certificación de reservas</option>
+            <option value="Contenido Nacional">Contenido Nacional</option>
+            <option value="Impacto Social">Impacto Social</option>
+            <option value="Medición">Medición</option>
+            <option value="Pago de contraprestaciones">Pago de contraprestaciones</option>
+            <option value="Pago de derechos y aprovechamientos">	Pago de derechos y aprovechamientos</option>
+            <option value="Pago de impuestos">Pago de impuestos</option>
+            <option value="Perforación de pozos">Perforación de pozos</option>
+            <option value="Procura">Procura</option>
+            <option value="Seguridad Industrial">Seguridad Industrial</option>
+            <option value="Seguridad industrial, operativa y del medio ambiente">Seguridad industrial, operativa y del medio ambiente</option>
+            <option value="Seguros">Seguros</option>
+            <option value="SMA">SMA</option>
+            <option value="Uso y Ocupación Superficial">Uso y Ocupación Superficial</option>
                         </select>
-      </td>
-      <td class="align-right">#Excell <input type="text" class="text-box"></td>
-    </tr>
-    <tr>
-      <td>Cláusula/anexo:</td>
-      <td colspan="2"><input type="text" class="text-box" value="CI, 3.3 f),4.2, 4.3, 5.5, 7.2, 17.1, 17.7, Anexo 13 "></td>
-    </tr>
-    <tr>
-      <td>Fundamento legal:</td>
-      <td colspan="2"><textarea class="text-area" rows="5" cols="25">art. 8 de la Ley de Caminos, Puentes y Autotransporte Federal;                                             art. 5 fracción I, 6, 6-A, 7, 9 y 10 del Reglamento para el aprovechamiento del derecho de vía de las carreteras federales y zonas aledañas.</textarea></td>
-    </tr>
-    <tr>
-      <td>Dependencia:</td>
-      <td colspan="2"><select class="select-box">
-                               <option value="1" selected>Secretaria de Comunicaciones y Transportes</option>
-                               <option value="2" selected>Secretaria de Desarrollo Territorial y Urbano</option>
+        </td>
+        <td class="align-right" width="200px">#Excel <input style="width:50px" type="text" class="text-box" [(ngModel)]="procedure.msExcelNo"></td>
+      </tr>
+
+      <tr>
+        <td>Pagina web:</td>
+        <td colspan="2"><input [disabled]="disabled" type="text" class="text-box" [(ngModel)]="procedure.url"></td>
+      </tr>
+    </table>
+  </div>
+  <div>
+    <table>
+      <tr>
+        <td colspan="2" class="title-row">Fundamento Legal</td>
+      </tr>
+      <tr>
+        <td width="100px;">Obligación:</td>
+        <td><textarea [disabled]="disabled" width="100%;" class="text-area" rows="3" cols="25" [(ngModel)]="procedure.legalInfo.obligation"></textarea></td>
+      </tr>
+      <tr>
+        <td>Fundamento legal:</td>
+        <td><textarea [disabled]="disabled" class="text-area" rows="3" cols="25" [(ngModel)]="procedure.legalInfo.legalBasis"></textarea></td>
+      </tr>
+    </table>
+  </div>
+  <div>
+    <table>
+      <tr>
+        <td colspan="3" class="title-row">Dependencia, autoridad y contacto</td>
+      </tr>
+      <tr>
+        <td width="100px;">Dependencia:</td>
+        <td colspan="2"><select [disabled]="disabled" class="select-box" #entity (change)="onChangeEntity(entity.value)" [(ngModel)]="procedure.authority.entity.uid">
+                               <option value="">( Seleccionar una dependecia ) </option>
+          <option *ngFor="let entity of entities" [value]="entity.uid">{{entity.name}}</option>
                               </select>
-      </td>
-    </tr>
-    <tr>
-      <td>Autoridad:</td>
-      <td colspan="2"><select class="select-box">
-                              <option value="1">Unidad de Asusntos Jurídicos del Centro SCT del Estado que corresponda</option>
+        </td>
+      </tr>
+      <tr>
+        <td>Autoridad:</td>
+        <td colspan="2"><select [disabled]="disabled" class="select-box" [(ngModel)]="procedure.authority.office.uid">
+                               <option value="">( Seleccionar una autoridad ) </option>
+          <option *ngFor="let office of offices" [value]="office.uid">{{office.name}}</option>
                              </select>
-      </td>
-    </tr>
-    <tr>
-      <td>Contacto:</td>
-      <td colspan="2"><textarea class="text-area" rows="5" cols="25">Juan Carlos Capistrán Fernández,
-Director Técnico,
-jcapist@sct.gob.mx
-5723-9300, ext. 15003 
-          </textarea>
-      </td>
-    </tr>
-  </table>
-  <table>
-    <tr>
-      <td><span><button class="btn">Imprimir</button></span></td>
-      <td class="align-right">
-        <button class="btn-cancel" (click)="cancel()">Cancelar</button>
-        <button class="btn">Guardar cambios</button>
-      </td>
-    </tr>
-  </table>
+        </td>
+      </tr>
+      <tr>
+        <td>Contacto:</td>
+        <td colspan="2"><select [disabled]="disabled" sytle="width:100%;" class="select-box" #position (change)="onChangePosition(position.value)" [(ngModel)]="procedure.authority.position.uid">
+                        <option value="">( Seleccionar un contacto )</option>
+                         <option *ngFor="let position of positions" [value]="position.uid">{{position.name}}</option>
+                    </select>
+      </tr>
+      <tr>
+        <td></td>
+        <td colspan="2"><input sytle="width:100%;" class="text-box" type="text" [disabled]="true" [(ngModel)]="procedure.authority.contact.name"></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><input class="text-box" type="text" [disabled]="true" [(ngModel)]="procedure.authority.contact.email"></td>
+        <td><input class="text-box" type="text" [disabled]="true" [(ngModel)]="procedure.authority.position.phone"></td>
+      </tr>
+    </table>
+  </div>
+  <div class="footer">
+    <table>
+      <tr>
+        <td><button class="btn">Imprimir</button></td>
+        <td class="align-center">
+          <button class="btn" [disabled]="disabled" (click)="cancel()">Deshacer cambios</button>
+        </td>
+        <td *ngIf="disabled" class="align-right">
+          <button class="btn" (click)="editProcedure()">Editar trámite</button>
+        </td>
+        <td *ngIf="!disabled" class="align-right">
+
+          <button class="btn" (click)="saveProcedureChanges()">Guardar cambios</button>
+        </td>
+      </tr>
+    </table>
+  </div>
 </div>

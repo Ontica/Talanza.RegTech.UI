@@ -1,88 +1,56 @@
-<table>
-  <tr>
-    <td>Lista de requisitos</td>
-    <td class="align-right"><button class="btn" type="button" (click)="addRequirement()">Agregar requisto</button></td>
-    <tr>
-</table>
-<table class="grid">
-  <tr>
-    <th>#</th>
-    <th>Requisito</th>
-    <th>Formato</th>
-    <th>Ejemplo</th>
-  </tr>
-  <tr>
-    <td>1</td>
-    <td>Datos del solicitante o Representante legal</td>
-    <td>pdf</td>
-    <td>pdf</td>
-  </tr>
-  <tr>
-    <td>2</td>
-    <td>Documetación que acredite la propiedad o posesión de la superfice <br> o autorización para su aprovechamiento
-    </td>
-    <td>pdf</td>
-    <td>pdf</td>
-  </tr>
-  <tr>
-    <td>3</td>
-    <td>Plano con medidas y colindancias en el que se delimite la ubicación del predio</td>
-    <td>pdf</td>
-    <td>pdf</td>
-  </tr>
-  <tr>
-    <td>4</td>
-    <td>Comprobante que acredite el pago de derechos</td>
-    <td>doc</td>
-    <td>doc</td>
-  </tr>
-  <tr>
-    <td>5</td>
-    <td>Documento que contenga la información del uso que se <br> dará al predio objeto del acceso
-    </td>
-    <td>pdf</td>
-    <td>pdf</td>
-  </tr>
-</table>
-<div *ngIf="requirementEditorIsActive">
-  <table class="requirementEditor">
-    <caption class="align-left">Agregar requisito</caption>
-    <tr>
-      <td>Requisito:</td>
-      <td colspan="4"><textarea class="text-area" rows="5" cols="25">Documento que contenga la descripción de las instalaciones, calendarizando  las diferentes etapas de ejecución.         
-            </textarea>
-      </td>
-    </tr>
-    <tr>
-      <td>Posición:</td>
-      <td><select class="select-box">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-                </select>
-      </td>
-      <td>Formato:</td>
-      <td><input class="text-box" type="text" value="cl45-2.xls"></td>
-      <td><button>Abrir</button>
-    </tr>
-    <tr>
-      <td colspan="2"> </td>
-      <td>Ejemplo:</td>
-      <td><input class="text-box" type="text" value="cl45-2.ejemplos.xls">
-        <td><button>Abrir</button>
-    </tr>
-  </table>
-  <table>
-    <tr>
-      <td><span><button class="btn">Imprimir</button></span></td>
-      <td class="align-right">
-        <button class="btn-cancel" (click)="cancel()">Cancelar</button>
-        <button class="btn">Guardar cambios</button>
-      </td>
-    </tr>
-  </table>
+<div class="container">
+  <div>
+    <table>
+      <tr>
+        <td colspan="2" class="title-row">Requisitos de entrega</td>
+      </tr>
+      <tr>
+        <td width="100px">Descripción de los requisitos de entrega del trámite:</td>
+        <td><textarea [disabled]="disabled" width="100%; " class="text-area " rows="8" cols="25 " [(ngModel)]="procedure.filingDocuments.notes "></textarea></td>
+      </tr>
+    </table>
+  </div>
+  <div>
+    <table>
+      <tr>
+        <td colspan="2" class="title-row">Vigencia y entrega simultánea</td>
+      </tr>
+      <tr>
+        <td width="100px">Vigencia del tramite en caso de emisión:</td>
+        <td><textarea [disabled]="disabled" width="100%; " class="text-area " rows="2 " cols="25 " [(ngModel)]="procedure.filingCondition.validityTermWhenIssued "></textarea></td>
+      </tr>
+      <tr>
+        <td>Entrega simultánea:</td>
+        <td><textarea [disabled]="disabled" width="100%; " class="text-area " rows="4 " cols="25 " [(ngModel)]="procedure.filingCondition.startsWhenNotes "></textarea></td>
+      </tr>
+    </table>
+  </div>
+  <div>
+    <table>
+      <tr>
+        <td colspan="2" class="title-row">Observaciones generales</td>
+      </tr>
+      <tr>
+        <td width="100px">Observaciones generales:</td>
+        <td><textarea [disabled]="disabled" width="100%; " class="text-area " rows="5 " cols="25 " [(ngModel)]="procedure.notes "></textarea></td>
+      </tr>
+    </table>
+  </div>
+  <div class="footer ">
+    <table>
+      <tr>
+        <td><button class="btn">Imprimir</button></td>
+        <td class="align-center ">
+          <button class="btn" [disabled]="disabled" (click)="cancel()">Deshacer cambios</button>
+        </td>
+        <td *ngIf="disabled" class="align-right">
+          <button class="btn" (click)="editProcedure()">Editar trámite</button>
+        </td>
+        <td *ngIf="!disabled" class="align-right">
+
+          <button class="btn" (click)="saveProcedureChanges()">Guardar cambios</button>
+        </td>
+      </tr>
+    </table>
+  </div>
 </div>

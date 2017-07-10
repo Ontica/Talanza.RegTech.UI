@@ -1,39 +1,44 @@
-/**
- * @license
- * Copyright (c) 2017 La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
- *
- * See LICENSE.txt in the project root for complete license information.
- *
- */
-import { Component, Input, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 import { Procedure } from '../../data-types/procedure';
 import { ProcedureService } from '../../services/procedure.service';
 
 @Component({
-  selector: 'requirements-tab',
-  templateUrl: './requirements-tab.component.html',
-  styleUrls: ['./requirements-tab.component.scss'],
+  selector: 'filing-fee-tab',
+  templateUrl: './filing-fee-tab.component.html',
+  styleUrls: ['./filing-fee-tab.component.scss'],
   providers: [ProcedureService]
 })
 
-export class RequirementsTabComponent implements OnInit {
+export class FilingFeeTabComponent implements OnInit {
 
   @Output() public isEditable = new EventEmitter<boolean>();
   @Input() public procedure: Procedure;
   @Input() public isNewProcedure: boolean;
+  public isFree = false;
   public disabled = true;
 
-  public constructor(private procedureService: ProcedureService) { }
+  constructor(private procedureService: ProcedureService) { }
 
   public ngOnInit() {
     this.setProcedureStatus();
   }
 
   public saveProcedureChanges(): void {
+    if (!this.validation()) {
+      return;
+    }
     this.updateProcedure();
     alert('El trámite se actualizó correctamente.');
     this.isEditable.emit(false);
+  }
+
+  public onChangeFilingFeeType(filingFeeType: string) {
+    if (filingFeeType === 'Trámite gratuito') {
+      this.procedure.filingFee.feeAmount = 0;
+      this.isFree = true;
+    }
+
   }
 
   public async cancel() {
@@ -62,6 +67,15 @@ export class RequirementsTabComponent implements OnInit {
     if (this.isNewProcedure) {
       this.disabled = false;
     }
+  }
+
+  private validation(): boolean {
+    if (this.procedure.filingFee.filingFeeType === '') {
+      alert('Seleccionar el tipo de pago de la lista.');
+      return false;
+    }
+
+    return true;
   }
 
 }

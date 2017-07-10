@@ -1,8 +1,25 @@
 @import "../../../../styles/general-styles";
-.general-info-container {
-  height: 480px;
+.container {
+  height: 710px;
+  color: #6a6a6a;
+  font-weight: 300;
 }
 
 table {
-  width: 590px;
+  width: 640px;
+}
+
+td.title-row {
+  color: $gray;
+  border-bottom: 1px dotted $gray;
+  padding-top: 8pt;
+  padding-bottom: 4pt;
+}
+
+.footer {
+  bottom: 0px;
+  height: 42px;
+  margin: 1px 1px 1px 1px;
+  position: absolute;
+  width: 99%;
 }

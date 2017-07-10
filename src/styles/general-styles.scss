@@ -9,8 +9,11 @@ table {
 }
 
 button.btn {
-  background-color: #2C3942;
-  color: $white;
+  background-color: #dadada;
+  color: $black;
+  font-size: 8pt;
+  border: 1pt solid #c0c0c0;
+  height: 24px;
 }
 
 button.btn-cancel {
@@ -58,6 +61,7 @@ input.text-box {
 
 .text-area {
   @include input-settings;
+  resize: none;
 }
 
 .align-left {

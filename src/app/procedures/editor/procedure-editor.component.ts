@@ -6,32 +6,72 @@
  *
  */
 
-import { ChangeDetectorRef, Component, EventEmitter, HostBinding, Output } from '@angular/core';
+import {
+  ChangeDetectorRef, Component, EventEmitter, HostBinding,
+  Input, Output, OnInit
+} from '@angular/core';
+
+import { Procedure } from '../data-types/procedure';
+
+import { ProcedureService } from '../services/procedure.service';
 
 @Component({
   selector: 'procedure-editor',
   templateUrl: './procedure-editor.component.html',
-  styleUrls: ['./procedure-editor.component.css']
+  styleUrls: ['./procedure-editor.component.scss'],
+  providers: [ProcedureService]
 })
 
-export class ProcedureEditorComponent {
-  @HostBinding('style.display') private display = 'block';
-  @HostBinding('style.position') private position = 'absolute';
+export class ProcedureEditorComponent implements OnInit {
+  @HostBinding('style.display') public display = 'block';
+  @HostBinding('style.position') public position = 'absolute';
 
   @Output() public onCloseEvent = new EventEmitter();
+  @Input() public procedureUID: string;
 
-  public selectedTask = 'generalInfo';
+  public selectedTask: string = '';
+  public newNameLabel = '';
+  public procedure: Procedure = new Procedure();
+  public isDisabled = false;
+  public isNewProcedure = false;
 
-  public constructor(private ref: ChangeDetectorRef) {
+  constructor(private ref: ChangeDetectorRef, private procedureService: ProcedureService) { }
+
+  public async ngOnInit() {
+    await this.setProcedure();
+    this.setNewProcedureTitle();
+    this.selectedTask = 'generalInfo';
   }
 
   public setSelectedTask(selectedTask: string): void {
     this.selectedTask = selectedTask;
     this.ref.detectChanges();
   }
+  
+  public onDisabledTabs(disabled: boolean): void {
+    this.isDisabled = disabled;
+  }
 
-  private close(): void {
+  public close(): void {
     this.onCloseEvent.emit();
+  }
+
+  private setNewProcedureTitle(): void {
+    if (this.isNewProcedure) {
+      this.newNameLabel = 'Nuevo Trámite';
+    }
+  }
+
+  private async setProcedure() {
+    if (this.procedureUID === '') {
+      this.isNewProcedure = true;
+      this.isDisabled = true;
+      this.procedure = new Procedure();
+      return;
+    }
+    await this.procedureService.getProcuedure(this.procedureUID).then((procedure) => {
+      this.procedure = procedure;
+    });
   }
 
 }
