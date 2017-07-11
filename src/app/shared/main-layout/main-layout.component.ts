@@ -18,12 +18,13 @@ import { CoreService } from '../../core';
 export class MainLayoutComponent {
 
   public userName = 'UserName || et al';
-
-  public title = 'Administración y control del cumplimiento regulatorio';
+  public title = 'Sitio de pruebas (sólo para jugar)';
   public breadcrumb = 'Inicio » Edición de trámites';
 
-  public constructor(private core: CoreService) { 
-    
+  // public title = 'Administración y control del cumplimiento regulatorio';
+
+  public constructor(private core: CoreService) {
+    this.userName = this.core.principal.identity.fullname;
   }
 
 }

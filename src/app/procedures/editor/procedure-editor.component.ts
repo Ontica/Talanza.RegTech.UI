@@ -47,7 +47,7 @@ export class ProcedureEditorComponent implements OnInit {
     this.selectedTask = selectedTask;
     this.ref.detectChanges();
   }
-  
+
   public onDisabledTabs(disabled: boolean): void {
     this.isDisabled = disabled;
   }

@@ -58,7 +58,7 @@ export class GeneralInfoTabComponent implements OnInit {
     if (positionUID === '') {
       return;
     }
-    let position = this.positions.find((position) => position.uid === positionUID);
+    const position = this.positions.find((x) => x.uid === positionUID);
 
     this.procedure.authority.position.phone = position.phone;
     this.procedure.authority.contact.name = position.officer.name;
@@ -71,7 +71,7 @@ export class GeneralInfoTabComponent implements OnInit {
     }
     if (this.isNewProcedure) {
       await this.createNewProcedure();
-      alert('El trámite fue creado sido creado.');
+      alert('El trámite se agregó correctamente al sistema.');
     } else {
       this.updateProcedure();
       alert('El trámite se actualizó correctamente.');

@@ -8,19 +8,22 @@
         <td width="170px">Este trámite se debe de iniciar:</td>
         <td><select style="width:220px;" [disabled]="disabled" class="select-box" [(ngModel)]="procedure.filingCondition.startsWhen">
           <option value="">( Seleccionar la condición de inicio )</option>
+          <option value="No determinada">No determinada</option>
           <option value="Antes de iniciar una actividad">Antes de iniciar una actividad</option>
+          <option value="Después de iniciar una actividad">Después de iniciar una actividad</option>
           <option value="Durante una actividad">Durante una actividad</option>
           <option value="Antes de terminar una actividad">Antes de terminar una actividad</option>
           <option value="Una vez concluida una actividad">Una vez concluida una actividad</option>
           <option value="Después de ocurrir un evento">Después de ocurrir un evento</option>
-          <option value="Se inicia manualmente">Se inicia manualmente</option>
+          <option value="El trámite se inicia manualmente">El trámite se inicia manualmente</option>
           </select>
         </td>
       </tr>
       <tr>
         <td>Actividad o evento:</td>
         <td><select class="select-box" [disabled]="disabled" [(ngModel)]="procedure.filingCondition.startsWhenTrigger">
-          <option value="">( Seleccionar el evento o actividad que lo inicia )</option>
+          <option value="">( Seleccionar el evento o actividad que inicia el trámite)</option>
+          <option value="No determinado">No determinado</option>
           <option value="No aplica">No aplica</option>
           <option value="Ampliación de almacenamiento de residuos peligrosos">Ampliación de almacenamiento de residuos peligrosos</option>
           <option value="Certificación de reservas">Certificación de reservas</option>
@@ -40,10 +43,11 @@
         <td width="140px">Plazo máximo de entrega:</td>
         <td width="207px"><select [disabled]="disabled" class="select-box" [(ngModel)]="procedure.filingCondition.maxFilingTerm">
           <option value="">( Seleccionar el plazo de entrega )</option>
+          <option value="No determinado">No determinado</option>
           <option value="No aplica">No aplica</option>
           <option value="7 días hábiles">7 días hábiles</option>
           <option value="10 días hábiles">10 días hábiles</option>
-          <option value="10 días hábiles">15 días hábiles</option>
+          <option value="15 días hábiles">15 días hábiles</option>
           <option value="30 días hábiles">30 días hábiles</option>
           <option value="45 días hábiles">45 días hábiles</option>
           <option value="60 días hábiles">60 días hábiles</option>
@@ -54,10 +58,11 @@
         <td class="align-right">Plazo legal:</td>
         <td width="205px"><select [disabled]="disabled" class="select-box" [(ngModel)]="procedure.filingCondition.issuanceLegalTerm">
           <option value="">( Seleccionar el plazo legal )</option>
+          <option value="No determinado">No determinado</option>
           <option value="No aplica">No aplica</option>
           <option value="7 días hábiles">7 días hábiles</option>
           <option value="10 días hábiles">10 días hábiles</option>
-          <option value="10 días hábiles">15 días hábiles</option>
+          <option value="15 días hábiles">15 días hábiles</option>
           <option value="30 días hábiles">30 días hábiles</option>
           <option value="45 días hábiles">45 días hábiles</option>
           <option value="60 días hábiles">60 días hábiles</option>
@@ -82,6 +87,7 @@
         <td>Forma de entrega:</td>
         <td><select [disabled]="disabled" class="select-box" [(ngModel)]="procedure.filingCondition.howToFile">
            <option value="">( Seleccionar la forma de entrega )</option>
+            <option value="No determinada">No determinada</option>
             <option value="Presencial, con la autoridad responsable">Presencial, con la autoridad responsable</option>
             <option value="Presencial, vía oficialía de partes">Presencial, vía oficialía de partes</option>
             <option value="Correo electrónico">Correo electrónico</option>
@@ -102,11 +108,13 @@
           <table style="margin:0;">
             <tr>
               <td width="180px" class="align-left">¿El trámite permite prórrogas?</td>
-              <td><select [disabled]="disabled" style="width:240px;" class="select-box" [(ngModel)]="procedure.filingCondition.allowsDeferrals">
-                 <option value="">( ¿Permite prórrogas? )</option>
-                <option value="Sí">Sí</option>
-                <option value="No">No</option>
-                <option value="Vía ampliación del término o plazo">Vía ampliación del término o plazo</option>
+              <td>
+                <select [disabled]="disabled" style="width:240px;" class="select-box" [(ngModel)]="procedure.filingCondition.allowsDeferrals">
+                  <option value="">( ¿Permite prórrogas? )</option>
+                  <option value="No determinado">No determinado</option>
+                  <option value="Sí">Sí</option>
+                  <option value="No">No</option>
+                  <option value="Vía ampliación del término o plazo">Vía ampliación del término o plazo</option>            
                 </select>
               </td>
             </tr>

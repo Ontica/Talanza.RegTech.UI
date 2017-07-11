@@ -27,6 +27,10 @@ export class PrincipalService {
     return (this.session && this.identity && this.claims && true);
   }
 
+  public get identity(): Identity {
+    return this._identity;
+  }
+
   public async login(userID: string, userPassword: string): Promise<void> {
     Assertion.assertValue(userID, 'userID');
     Assertion.assertValue(userPassword, 'userPassword');

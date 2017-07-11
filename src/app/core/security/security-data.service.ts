@@ -45,7 +45,9 @@ export class SecurityDataService {
   }
 
   public getPrincipalIdentity(): Promise<Identity> {
-    const fakeIdentity = { username: 'pparamo', email: 'pedro@escritores.com', fullname: 'Pedro Páramo' };
+    const fakeIdentity = { username: 'pparamo',
+                           email: 'pedro@escritores.com',
+                           fullname: '{Nombre del usuario} || settings' };
 
     return Promise.resolve<Identity>(fakeIdentity);
   }

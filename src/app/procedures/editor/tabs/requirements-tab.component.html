@@ -6,7 +6,7 @@
       </tr>
       <tr>
         <td width="100px">Descripción de los requisitos de entrega del trámite:<br><br><br><br></td>
-        <td><textarea [disabled]="disabled" width="100%; " class="text-area " rows="8" cols="25 " [(ngModel)]="procedure.filingDocuments.notes "></textarea></td>
+        <td><textarea [disabled]="disabled" width="100%; " class="text-area " rows="8" cols="25 " [(ngModel)]="procedure.filingDocuments.notes"></textarea></td>
       </tr>
     </table>
   </div>
@@ -17,11 +17,11 @@
       </tr>
       <tr>
         <td width="100px">Vigencia del tramite en caso de emisión:</td>
-        <td><textarea [disabled]="disabled" width="100%; " class="text-area " rows="2 " cols="25 " [(ngModel)]="procedure.filingCondition.validityTermWhenIssued "></textarea></td>
+        <td><textarea [disabled]="disabled" width="100%; " class="text-area " rows="2 " cols="25 " [(ngModel)]="procedure.filingCondition.validityTermWhenIssued"></textarea></td>
       </tr>
       <tr>
         <td>Entrega simultánea:</td>
-        <td><textarea [disabled]="disabled" width="100%; " class="text-area " rows="4 " cols="25 " [(ngModel)]="procedure.filingCondition.startsWhenNotes "></textarea></td>
+        <td><textarea [disabled]="disabled" width="100%; " class="text-area " rows="4 " cols="25 " [(ngModel)]="procedure.filingCondition.simultaneousDelivery"></textarea></td>
       </tr>
     </table>
   </div>
@@ -32,18 +32,26 @@
       </tr>
       <tr>
         <td width="100px">Observaciones generales:<br><br><br></td>
-        <td><textarea [disabled]="disabled" width="100%; " class="text-area " rows="5 " cols="25 " [(ngModel)]="procedure.notes "></textarea></td>
+        <td><textarea [disabled]="disabled" width="100%; " class="text-area " rows="5 " cols="25 " [(ngModel)]="procedure.notes"></textarea></td>
       </tr>
     </table>
   </div>
   <div>
     <table>
       <tr>
-        <td colspan="2" class="title-row">Cláusulas y anexos (provisional SOLO para Ronda 1.3)</td>
+        <td colspan="4" class="title-row">Cláusulas y anexos (provisional)</td>
       </tr>
       <tr>
-        <td width="100px">Cláusulas y anexos<br>(Ronda 1.3):</td>
-        <td><textarea [disabled]="disabled" width="100%; " class="text-area " rows="2" cols="25 " [(ngModel)]="procedure.legalInfo.contractClausesAndAnnexes"></textarea></td>
+        <td width="100px"><b>Ronda 1.3</b> consorcio:</td>
+        <td><textarea [disabled]="disabled" width="100%; " class="text-area " rows="2" cols="25 " [(ngModel)]="procedure.legalInfo.ronda13Consorcio"></textarea></td>
+        <td width="100px">Ronda 1.3 individual:</td>
+        <td><textarea [disabled]="disabled" width="100%; " class="text-area " rows="2" cols="25 " [(ngModel)]="procedure.legalInfo.ronda13Individual"></textarea></td>
+      </tr>
+      <tr>
+        <td width="100px"><b>Ronda 1.4</b> consorcio:</td>
+        <td><textarea [disabled]="disabled" width="100%; " class="text-area " rows="2" cols="25 " [(ngModel)]="procedure.legalInfo.ronda14Consorcio"></textarea></td>
+        <td width="100px">Ronda 1.4 individual:</td>
+        <td><textarea [disabled]="disabled" width="100%; " class="text-area " rows="2" cols="25 " [(ngModel)]="procedure.legalInfo.ronda14Individual"></textarea></td>
       </tr>
     </table>
   </div>

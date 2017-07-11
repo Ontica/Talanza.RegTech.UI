@@ -83,7 +83,7 @@
         <td width="100px;">Dependencia:</td>
         <td colspan="2">
           <select [disabled]="disabled" class="select-box" #entity (change)="onChangeEntity(entity.value)" [(ngModel)]="procedure.authority.entity.uid">
-            <option value="">( Seleccionar una dependecia ) </option>
+            <option value="">( Seleccionar una dependencia ) </option>
             <option *ngFor="let entity of entities" [value]="entity.uid">{{entity.name}}</option>
           </select>
         </td>

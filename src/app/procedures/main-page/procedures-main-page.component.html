@@ -11,7 +11,7 @@
   <tbody>
     <tr *ngFor="let procedure of procedures">
       <td>
-        <a (click)="onOpenProcedureEditorWindow(procedure.uid)">{{procedure.shortName}}</a>
+        <a (click)="onOpenProcedureEditorWindow(procedure.uid)">{{procedure.name}}</a>
         <br/> {{procedure.code}}
       </td>
       <td>{{procedure.entity}} <br> {{procedure.authority}}</td>
