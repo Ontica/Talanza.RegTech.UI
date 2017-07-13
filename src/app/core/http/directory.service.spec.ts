@@ -2,7 +2,7 @@ import { TestBed, inject, async } from '@angular/core/testing';
 import { HttpModule, Http } from '@angular/http';
 
 import { DirectoryService } from './directory.service';
-import { HttpMethod } from './common-types';
+import { Service, HttpMethod } from './common-types';
 
 describe('DirectoryService', () => {
 
@@ -83,6 +83,20 @@ describe('DirectoryService', () => {
                   expect(value.path).toBe('v1/tests/collection');
                   expect(value.uid).toBe('Tests.PostCollection');
                   expect(value.method).toBe('POST');
+               });
+
+    })));
+
+  it(`should return a GET service with parameters using the service's uid`, async(
+    inject([DirectoryService], (directory: DirectoryService) => {
+      directory.getService('Tests.GetCollectionItem')
+               .subscribe((value) => {
+                  expect(value).toBeDefined();
+                  expect(value.path).toBe('v1/tests/collection/{0}');
+                  expect(value.uid).toBe('Tests.GetCollectionItem');
+                  // Parse parameter 'apple' then
+                  //     expect(value.mergedPath).toBe('v1/tests/collection/apple');
+                  expect(value.method).toBe('GET');
                });
 
     })));

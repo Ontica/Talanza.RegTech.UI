@@ -7,12 +7,10 @@
  */
 
 import { Component, OnInit } from '@angular/core';
-import { CoreService, SpinnerState } from '../../core';
 import { Subscription } from 'rxjs/Subscription';
 
-import { DirectoryService } from '../../core';
-
 import { StringLibrary, Log } from 'empiria';
+import { CoreService, SpinnerState } from '../../core';
 
 @Component({
   selector: 'home',
@@ -25,7 +23,7 @@ export class HomeComponent implements OnInit {
 
   private spinnerState: SpinnerState;
 
-  public constructor(private core: CoreService, private directory: DirectoryService) { }
+  public constructor(private core: CoreService) { }
 
   public ngOnInit() {
     this.core.spinner.spinnerState.subscribe((val) => this.spinnerState = val);
