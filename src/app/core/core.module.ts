@@ -13,6 +13,9 @@ import { CommonModule } from '@angular/common';
 
 import { CoreService } from './core.service';
 import { ApplicationSettingsService } from './general/application-settings.service';
+import { DirectoryService } from './http/directory.service';
+import { HttpHandler } from './http/http-handler';
+import { HttpService } from './http/http.service';
 import { LoggerService } from './general/logger.service';
 
 import { SpinnerComponent } from './spinner/spinner.component';
@@ -21,7 +24,6 @@ import { SpinnerService } from './spinner/spinner.service';
 import { SecurityDataService } from './security/security-data.service';
 import { PrincipalService } from './security/principal.service';
 import { SecurityGuardService } from './security/security-guard.service';
-
 import { throwIfAlreadyLoaded } from './module-import-guard';
 
 @NgModule({
@@ -31,8 +33,8 @@ import { throwIfAlreadyLoaded } from './module-import-guard';
   exports: [SpinnerComponent],
   declarations: [SpinnerComponent],
   providers: [CoreService, ApplicationSettingsService, LoggerService,
-              SpinnerService, PrincipalService, SecurityDataService,
-              SecurityGuardService]
+              SpinnerService, SecurityDataService, PrincipalService,
+              SecurityGuardService, HttpHandler, HttpService, DirectoryService]
 })
 export class CoreModule {
 

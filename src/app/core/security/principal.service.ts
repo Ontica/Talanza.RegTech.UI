@@ -10,21 +10,25 @@ import { Injectable } from '@angular/core';
 
 import { Assertion } from 'empiria';
 
-import { LoggerService } from '../../core';
+import { LoggerService } from '../general/logger.service';
 import { SecurityDataService } from './security-data.service';
 import { Session, Identity, ClaimsList } from './security-types';
 
 @Injectable()
 export class PrincipalService {
 
-  private session: Session;
-  private identity: Identity;
-  private claims: ClaimsList;
+  private _session: Session;
+  private _identity: Identity;
+  private _claims: ClaimsList;
 
   constructor(private dataService: SecurityDataService, private logger: LoggerService) { }
 
   public get isAuthenticated(): boolean {
-    return (this.session && this.identity && this.claims && true);
+    return (this._session && this._identity && this._claims && true);
+  }
+
+  public get session(): Session {
+    return this._session;
   }
 
   public get identity(): Identity {
@@ -35,13 +39,13 @@ export class PrincipalService {
     Assertion.assertValue(userID, 'userID');
     Assertion.assertValue(userPassword, 'userPassword');
 
-    this.session = await this.dataService.createSession(userID, userPassword)
+    this._session = await this.dataService.createSession(userID, userPassword)
                                          .catch((e) => this.handleAuthenticationError(e));
 
-    this.identity = await this.dataService.getPrincipalIdentity()
+    this._identity = await this.dataService.getPrincipalIdentity()
                                           .catch((e) => this.handleAuthenticationError(e));
 
-    this.claims = await this.dataService.getPrincipalClaimsList()
+    this._claims = await this.dataService.getPrincipalClaimsList()
                                         .catch((e) => this.handleAuthenticationError(e));
   }
 
@@ -73,9 +77,9 @@ export class PrincipalService {
   }
 
   private cleanFields() {
-    this.session = undefined;
-    this.identity = undefined;
-    this.claims = undefined;
+    this._session = undefined;
+    this._identity = undefined;
+    this._claims = undefined;
   }
 
 }

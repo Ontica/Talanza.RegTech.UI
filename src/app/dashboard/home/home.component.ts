@@ -7,10 +7,10 @@
  */
 
 import { Component, OnInit } from '@angular/core';
-import { CoreService, SpinnerState } from '../../core';
 import { Subscription } from 'rxjs/Subscription';
 
 import { StringLibrary, Log } from 'empiria';
+import { CoreService, SpinnerState } from '../../core';
 
 @Component({
   selector: 'home',
