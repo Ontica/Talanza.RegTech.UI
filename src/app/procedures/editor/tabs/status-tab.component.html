@@ -1,0 +1,40 @@
+<div class="container">
+  <div>
+    <table>
+      <tr>
+        <td colspan="2" class="title-row">Agregar estado</td>
+      </tr>
+      <tr>
+        <td width="100px">Estado actual:</td>
+        <td><select style="width:200px;" [disabled]="disabled" class="select-box">
+          <option value="">( Seleccionar el estado actual )</option>
+          <option value="Completo">Completo</option>
+          <option value="Incompleto">Incompleto</option>
+          <option value="Pendiente">Pendiente</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>Observaciones del estado actual:</td>
+        <td><textarea [disabled]="disabled" width="100%; " class="text-area" rows="12" cols="25"></textarea></td>
+      </tr>
+
+    </table>
+  </div>
+  <div class="footer ">
+    <table>
+      <tr>
+        <td><button class="btn">Imprimir</button></td>
+        <td class="align-center">
+          <button class="btn" [disabled]="disabled" (click)="cancel()">Deshacer cambios</button>
+        </td>
+        <td *ngIf="disabled" class="align-right">
+          <button class="btn" (click)="editProcedure()">Editar trámite</button>
+        </td>
+        <td *ngIf="!disabled" class="align-right">
+          <button class="btn " (click)="saveProcedureChanges() ">Guardar cambios</button>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
