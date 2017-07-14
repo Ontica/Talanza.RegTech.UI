@@ -1,0 +1,133 @@
+<div class="container">
+  <div>
+    <table>
+      <tr>
+        <td class="border-bottom">Agregar un requisito al trámite</td>
+      </tr>
+    </table>
+  </div>
+  <br>
+  <div>
+    <table>
+      <tr>
+        <td colspan="4" class="title-row">Seleccionar el tipo de requisito (formato, escrito, pago de derechos, etc.)</td>
+      </tr>
+      <tr>
+        <td width="70px">Tipo:</td>
+        <td><select style="width:150px;" class="select-box">
+          <option value="">( Seleccionar un tipo ) </option>
+          <option value="Documento oficial">Documento oficial</option>              
+          </select>
+        </td>
+        <td width="200px" class="align-right">Clasificación:</td>
+        <td width="100%" class="align-right"><select class="select-box">
+          <option value="">( Seleccionar una Requisto ) </option>
+          <option value="ANAC-MX">ANAC-MX Acta de nacimiento</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>Requisito:</td>
+        <td colspan="3" width="100%"><select class="select-box">
+          <option value="">( Seleccionar una clasificación ) </option>
+          <option value="Documento de identificación">Documento de identificación</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>Descripción:</td>
+        <td colspan="3"><textarea class="text-area" rows="5" cols="25"></textarea></td>
+      </tr>
+      <tr>
+        <td colspan="4">
+          <table style="margin:0; padding:0;">
+            <tr>
+              <td width="100px" class="align-left">Código o clave oficial:</td>
+              <td><input style="width:100px" class="text-box" type="text"></td>
+              <td class="align-left">Formato:</td>
+              <td><select style="width:360px" class="select-box">
+                <option value="">( Seleccionar un formato )</option>
+                <option value="web">http://cnh.gob.mx/acta-nacimiento.pdf</option>
+                </select>
+              </td>
+              <td width="30px" class="align-right">
+                <button class="btn">...</button>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2"></td>
+              <td>Ejemplo:</td>
+              <td>
+                <select style="width:360px" class="select-box">
+                <option value="">( Seleccionar un ejemplo )</option>
+                <option value="web">http://covar-energy.mx/acta-nacimiento.pdf</option>
+                </select>
+              </td>
+              <td class="align-right">
+                <button class="btn">...</button>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <div>
+    <table>
+      <tr>
+        <td colspan="5" class="title-row">Configuración del requisto con respecto a este trámite</td>
+      </tr>
+      <tr>
+        <td width="80px">Entrega física:</td>
+        <td><select width="240px;" class="select-box">
+          <option value="">( Seleccionar tipo de Entrega )</option>
+          <option value="1">Original y 2 copias</option>          
+          </select>
+        </td>
+        <td width="150px">Entrega electrónica:<input type="checkbox"></td>
+        <td class="align-right">Posición en la lista:</td>
+        <td class="align-left"> <select class="select-box ">
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>          
+          </select>
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="3" width="300px">¿Se entrega cuando se cumplen las siguientes condiciones?<input type="checkbox"></td>
+        <td colspan="2" class="align-right" width="200px"><select style="width:100%;" class="select-box">
+          <option value="">( Seleccionar el tipo de persona )</option>
+          <option value="Moral">Solo para personas morales</option>
+          <option value="Fisicas">Solo para personas físicas</option>
+          </select>
+        </td>
+      </tr>
+
+      <tr>
+        <td width="80px">Se entrega cuando:</td>
+        <td colspan="4" width="100px"><textarea style="width:100%" class="text-area" rows="5" cols="25"></textarea></td>
+      </tr>
+    </table>
+  </div>
+  <br>
+  <div>
+    <table>
+      <tr>
+        <td colspan="2" class="border-bottom"></td>
+      </tr>
+      <tr>
+        <td class="align-right" width="50px">
+          <button class="btn" (click)="cancel()">Cancelar</button>
+        </td>
+
+        <td width="50px" class="align-right">
+          <button class="btn" (click)="cancel()">Agregar tipo de requisito </button>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+</div>
