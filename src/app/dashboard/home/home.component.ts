@@ -27,7 +27,6 @@ export class HomeComponent implements OnInit {
 
   public ngOnInit() {
     this.core.spinner.spinnerState.subscribe((val) => this.spinnerState = val);
-    this.core.appSettings.waitUntilLoaded().then(() => this.loadData());
     this.invokeProtectedHttpService();
     this.invokeHttpService();
     this.invokeProtectedHttpServiceWithParameters();
@@ -66,16 +65,6 @@ export class HomeComponent implements OnInit {
       this.core.spinner.show();
       this.core.logger.log('Show toggle spinner called on ' + Date());
     }
-  }
-
-  private loadData() {
-    this.getDataFromHttpServer().then((x) => this.data = x);
-  }
-
-  private async getDataFromHttpServer(): Promise<string> {
-    let httpApiClient = this.core.getHttpClient(this.core.appSettings.get<string>('HTTP_API_BASE_ADDRESS'));
-
-    return await httpApiClient.getAsyncAsPromise<string>('v1/system/license');
   }
 
 }

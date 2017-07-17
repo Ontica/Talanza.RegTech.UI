@@ -9,7 +9,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { PrincipalService } from '../../core';
+import { AuthenticationService } from '../../core';
 
 @Component({
   selector: 'user-login',
@@ -21,7 +21,8 @@ export class UserLoginComponent implements OnInit {
   public userID = '';
   public password = '';
 
-  constructor(private router: Router, private principal: PrincipalService) { }
+  constructor(private router: Router,
+              private authenticationService: AuthenticationService) { }
 
   public async authenticate() {
     if (!this.validateForm()) {
@@ -29,7 +30,7 @@ export class UserLoginComponent implements OnInit {
     }
 
     try {
-      await this.principal.login(this.userID, this.password);
+      await this.authenticationService.login(this.userID, this.password);
       this.router.navigate(['procedures/search']);
 
     } catch (exception) {
@@ -38,7 +39,7 @@ export class UserLoginComponent implements OnInit {
   }
 
   public async ngOnInit() {
-    await this.principal.logout();
+    await this.authenticationService.logout();
   }
 
   // region Private methods
