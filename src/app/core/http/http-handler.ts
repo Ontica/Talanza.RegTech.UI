@@ -13,7 +13,6 @@ import 'rxjs/add/operator/map';
 
 import { Assertion } from 'empiria';
 
-import { ApplicationSettingsService } from '../general/application-settings.service';
 import { SessionService } from '../general/session.service';
 
 import { Service, HttpMethod, HttpRequestOptions } from './common-types';
@@ -23,8 +22,7 @@ import { Principal } from '../security/principal';
 export class HttpHandler {
 
   constructor(private http: Http,
-              private session: SessionService,
-              private settings: ApplicationSettingsService) {
+              private session: SessionService) {
 
   }
 
@@ -109,6 +107,8 @@ export class HttpHandler {
   // Helpers
 
   private buildUrl(path: string, service?: Service): string {
+    const settings = this.session.getSettings();
+
     if (service) {
       return service.baseAddress + service.path;
 
@@ -116,7 +116,7 @@ export class HttpHandler {
       return path;
 
     } else {
-      return this.settings.get<string>('HTTP_API_BASE_ADDRESS') + path;
+      return settings.httpApiBaseAddress + path;
 
     }
   }
@@ -124,10 +124,10 @@ export class HttpHandler {
   private buildRequestOptionsArgs(method: HttpMethod, path: string,
                                   options?: HttpRequestOptions,
                                   service?: Service): RequestOptionsArgs {
+    const settings = this.session.getSettings();
+    const principal = this.session.getPrincipal();
+
     let headers = new Headers();
-
-    const principal: Principal = this.session.getPrincipal();
-
     if (service && service.isProtected && principal.isAuthenticated) {
       headers.append('Authorization', 'bearer ' + principal.sessionToken.access_token);
 
@@ -135,7 +135,7 @@ export class HttpHandler {
       throw 'Unauthenticated user';
 
     } else if (service && !service.isProtected) {
-      headers.append('ApplicationKey', this.settings.get<string>('APPLICATION_KEY'));
+      headers.append('ApplicationKey', settings.applicationKey);
 
     } else if (path.includes('http://') || path.includes('https://') ) {
       // no-op
@@ -144,7 +144,7 @@ export class HttpHandler {
       headers.append('Authorization', 'bearer ' + principal.sessionToken.access_token);
 
     } else {
-      headers.append('ApplicationKey', this.settings.get<string>('APPLICATION_KEY'));
+      headers.append('ApplicationKey', settings.applicationKey);
     }
 
     return { headers };

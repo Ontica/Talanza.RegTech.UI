@@ -11,13 +11,9 @@ import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
 import { Assertion } from 'empiria';
+import { KeyValue } from '../core-data-types';
 
 import 'rxjs/add/operator/toPromise';
-
-interface KeyValue {
-  readonly key: string;
-  readonly value: any;
-}
 
 @Injectable()
 export class ApplicationSettingsService {
@@ -28,28 +24,7 @@ export class ApplicationSettingsService {
 
   constructor(private http: Http) { }
 
-  public get<T>(key: string): T {
-    Assertion.assertValue(this.settings,
-      'Application settings were not loaded yet. ' +
-      'Please call ConfigurationService.waitUntilLoaded() promise to ensure data were ' +
-      'loaded before using this method.');
-
-    const index = this.settings.findIndex((x) => x.key === key);
-
-    if (index !== -1) {
-      return this.settings[index].value as T;
-    } else {
-      throw new Error(`'${key}' value is not defined in application settings file.`);
-    }
-  }
-
-  public async waitUntilLoaded(): Promise<void> {
-    if (!this.settings) {
-      this.settings = await this.loadSettingsFromFile();
-    }
-  }
-
-  private loadSettingsFromFile(): Promise<KeyValue[]> {
+  public getSettingsArray(): Promise<KeyValue[]> {
     return this.http.get(this.configurationFileName)
                     .toPromise()
                     .then((response) => response.json()['settings'] as KeyValue[])

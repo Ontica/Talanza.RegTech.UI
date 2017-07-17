@@ -9,7 +9,6 @@
 export { CoreService } from './core.service';
 
 export { SessionService } from './general/session.service';
-export { ApplicationSettingsService } from './general/application-settings.service';
 export { HttpService } from './http/http.service';
 export { LoggerService } from './general/logger.service';
 

@@ -1,0 +1,35 @@
+/**
+ * @license
+ * Copyright (c) 2017 La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
+ *
+ * See LICENSE.txt in the project root for complete license information.
+ *
+ */
+
+import { KeyValue } from '../core-data-types';
+
+export class ApplicationSettings {
+
+  constructor (private settingsArray: KeyValue[]) {
+
+  }
+
+  public get applicationKey(): string {
+    return this.get<string>('APPLICATION_KEY');
+  }
+
+  public get httpApiBaseAddress(): string {
+    return this.get<string>('HTTP_API_BASE_ADDRESS');
+  }
+
+  private get<T>(key: string): T {
+    const index = this.settingsArray.findIndex((x) => x.key === key);
+
+    if (index !== -1) {
+      return this.settingsArray[index].value as T;
+    } else {
+      throw new Error(`'${key}' value is not defined in application settings file.`);
+    }
+  }
+
+}

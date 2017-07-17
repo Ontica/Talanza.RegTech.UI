@@ -27,7 +27,7 @@ export class AuthenticationService {
     Assertion.assertValue(userID, 'userID');
     Assertion.assertValue(userPassword, 'userPassword');
 
-    await this.session.waitUntilDataLoaded(); // Todo: seek for a better solution
+    await this.session.start();
 
     const sessionToken = await this.dataService.createSession(userID, userPassword)
                                                .catch((e) => this.handleAuthenticationError(e));

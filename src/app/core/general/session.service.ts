@@ -11,20 +11,27 @@ import { Injectable } from '@angular/core';
 import { Assertion } from 'empiria';
 
 import { ApplicationSettingsService } from './application-settings.service';
+import { ApplicationSettings } from './application-settings';
 import { Principal } from '../security/principal';
-
-interface KeyValue {
-  readonly key: string;
-  readonly value: any;
-}
+import { KeyValue } from '../core-data-types';
 
 @Injectable()
 export class SessionService {
 
+  private appSettings: ApplicationSettings = undefined;
   private principal: Principal = Principal.empty;
   private data: KeyValue[] = [];
 
-  constructor(private appSettings: ApplicationSettingsService) { }
+  constructor(private appSettingsService: ApplicationSettingsService) { }
+
+  public getSettings(): ApplicationSettings {
+    Assertion.assertValue(this.appSettings,
+                          'Application settings were not loaded yet. ' +
+                          'Please call SessionService.start() promise to ensure data were ' +
+                          'loaded before using this method.');
+
+    return this.appSettings;
+  }
 
   public getPrincipal(): Principal {
     return this.principal;
@@ -61,8 +68,11 @@ export class SessionService {
     }
   }
 
-  public async waitUntilDataLoaded(): Promise<void> {
-    await this.appSettings.waitUntilLoaded();   // Todo: seek for a better solution
+  public async start(): Promise<void> {
+    if (!this.appSettings) {
+      await this.appSettingsService.getSettingsArray()
+                                   .then((x) => this.appSettings = new ApplicationSettings(x));
+    }
   }
 
 }
