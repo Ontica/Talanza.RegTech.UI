@@ -8,7 +8,7 @@
 
 import { Component } from '@angular/core';
 
-import { CoreService } from '../../core';
+import { SessionService } from '../../core';
 
 @Component({
   selector: 'main-layout',
@@ -23,8 +23,10 @@ export class MainLayoutComponent {
 
   // public title = 'Administración y control del cumplimiento regulatorio';
 
-  public constructor(private core: CoreService) {
-    this.userName = this.core.principal.identity.fullname;
+  public constructor(private session: SessionService) {
+    const principal = session.getPrincipal();
+
+    this.userName = principal.identity.fullname;
   }
 
 }

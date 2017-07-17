@@ -10,47 +10,43 @@ import { Injectable } from '@angular/core';
 
 import { Assertion } from 'empiria';
 
+import { SessionService } from '../general/session.service';
 import { LoggerService } from '../general/logger.service';
 import { SecurityDataService } from './security-data.service';
-import { Session, Identity, ClaimsList } from './security-types';
+import { Principal } from './principal';
+import { SessionToken, Identity, ClaimsList } from './security-types';
 
 @Injectable()
-export class PrincipalService {
+export class AuthenticationService {
 
-  private _session: Session;
-  private _identity: Identity;
-  private _claims: ClaimsList;
-
-  constructor(private dataService: SecurityDataService, private logger: LoggerService) { }
-
-  public get isAuthenticated(): boolean {
-    return (this._session && this._identity && this._claims && true);
-  }
-
-  public get session(): Session {
-    return this._session;
-  }
-
-  public get identity(): Identity {
-    return this._identity;
-  }
+  constructor(private session: SessionService,
+              private dataService: SecurityDataService,
+              private logger: LoggerService) {}
 
   public async login(userID: string, userPassword: string): Promise<void> {
     Assertion.assertValue(userID, 'userID');
     Assertion.assertValue(userPassword, 'userPassword');
 
-    this._session = await this.dataService.createSession(userID, userPassword)
-                                         .catch((e) => this.handleAuthenticationError(e));
+    await this.session.waitUntilDataLoaded(); // Todo: seek for a better solution
 
-    this._identity = await this.dataService.getPrincipalIdentity()
-                                          .catch((e) => this.handleAuthenticationError(e));
+    const sessionToken = await this.dataService.createSession(userID, userPassword)
+                                               .catch((e) => this.handleAuthenticationError(e));
 
-    this._claims = await this.dataService.getPrincipalClaimsList()
-                                        .catch((e) => this.handleAuthenticationError(e));
+    const identity = await this.dataService.getPrincipalIdentity()
+                                           .catch((e) => this.handleAuthenticationError(e));
+
+    const claimsList = await this.dataService.getPrincipalClaimsList()
+                                             .catch((e) => this.handleAuthenticationError(e));
+
+    const principal = new Principal(sessionToken, identity, claimsList);
+
+    this.session.setPrincipal(principal);
   }
 
   public async logout(): Promise<void> {
-    if (!this.isAuthenticated) {
+    const principal = this.session.getPrincipal();
+
+    if (!principal.isAuthenticated) {
       return;
     }
 
@@ -59,14 +55,11 @@ export class PrincipalService {
     } catch (e) {
       this.logger.error(e);
     }
-
-    this.cleanFields();
   }
 
   // Private methods
 
   private handleAuthenticationError(error): Promise<never> {
-    this.cleanFields();
     if (error.status === 401) {
       return Promise.reject(new Error('No reconozco las credenciales proporcionadas. ' +
                                       `${error.status} ${error.statusText}`));
@@ -74,12 +67,6 @@ export class PrincipalService {
       return Promise.reject(new Error('Tuve un problema al intentar leer información del servidor. ' +
                                       `${error.status} ${error.statusText} ${error.message}`));
     }
-  }
-
-  private cleanFields() {
-    this._session = undefined;
-    this._identity = undefined;
-    this._claims = undefined;
   }
 
 }

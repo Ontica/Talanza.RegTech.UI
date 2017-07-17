@@ -6,7 +6,7 @@
  *
  */
 
-export interface Session {
+export interface SessionToken {
 
   readonly access_token: string;
 

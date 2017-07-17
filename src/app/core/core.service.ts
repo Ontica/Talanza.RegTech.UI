@@ -8,19 +8,17 @@
 
 import { Injectable } from '@angular/core';
 
-import { ApplicationSettingsService, LoggerService,
-         PrincipalService,
+import { SessionService,
+         ApplicationSettingsService, LoggerService,
          SpinnerService, HttpService } from './';
-
-import { HttpApiClient } from 'empiria';
 
 @Injectable()
 export class CoreService {
 
-  public constructor(private _appSettings: ApplicationSettingsService,
+  public constructor(private _session: SessionService,
+                     private _appSettings: ApplicationSettingsService,
                      private _http: HttpService,
                      private _logger: LoggerService,
-                     private _principal: PrincipalService,
                      private _spinner: SpinnerService) {
   }
 
@@ -36,16 +34,12 @@ export class CoreService {
     return this._logger;
   }
 
-  public get principal(): PrincipalService {
-    return this._principal;
+  public get session(): SessionService {
+    return this._session;
   }
 
   public get spinner(): SpinnerService {
     return this._spinner;
-  }
-
-  public getHttpClient(baseAddress: string): HttpApiClient {
-    return new HttpApiClient(baseAddress);
   }
 
 }

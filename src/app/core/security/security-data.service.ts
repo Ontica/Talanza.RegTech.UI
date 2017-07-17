@@ -8,45 +8,36 @@
 
 import { Injectable } from '@angular/core';
 
-import { Cryptography, HttpApiClient } from 'empiria';
+import { Cryptography } from 'empiria';
 
-import { ApplicationSettingsService } from '../general/application-settings.service';
-import { Session, Identity, ClaimsList } from './security-types';
+import { HttpHandler } from '../http/http-handler';
+
+import { SessionToken, Identity, ClaimsList } from './security-types';
 
 @Injectable()
 export class SecurityDataService {
 
-  constructor(private settings: ApplicationSettingsService) { }
+  constructor(private httpHandler: HttpHandler) { }
 
-  public async createSession(userID: string, userPassword: string): Promise<Session> {
-    await this.settings.waitUntilLoaded(); // Todo: seek for a better solution
-
-    const API_KEY = this.settings.get<string>('APPLICATION_KEY');
-    const BASE_ADDRESS = this.settings.get<string>('HTTP_API_BASE_ADDRESS');
+  public async createSession(userID: string, userPassword: string): Promise<SessionToken> {
 
     const body = {
-      api_key: API_KEY,
       user_name: userID,
       password: Cryptography.convertToMd5(userPassword)
     };
 
-    let http = new HttpApiClient(BASE_ADDRESS);
-    http.IncludeAuthorizationHeader = false;
-
-    return await http.postAsyncAsPromise<Session>(body, 'v1/security/login');
+    return this.httpHandler.post<SessionToken>('v2/security/login', body)
+                           .toPromise();
   }
 
   public async closeSession(): Promise<void> {
-    const BASE_ADDRESS = this.settings.get<string>('HTTP_API_BASE_ADDRESS');
-
-    let http = new HttpApiClient(BASE_ADDRESS);
-
-    await http.postAsyncAsPromise(undefined, BASE_ADDRESS + 'v1/security/logout');
+    return this.httpHandler.post<void>('v1/security/logout', undefined)
+                           .toPromise();
   }
 
   public getPrincipalIdentity(): Promise<Identity> {
-    const fakeIdentity = { username: 'pparamo',
-                           email: 'pedro@escritores.com',
+    const fakeIdentity = { username: 'jrulfo',
+                           email: 'jrulfo@escritores.com',
                            fullname: '{Nombre del usuario} || settings' };
 
     return Promise.resolve<Identity>(fakeIdentity);

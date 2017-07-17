@@ -14,46 +14,53 @@ import 'rxjs/add/operator/map';
 import { Assertion } from 'empiria';
 
 import { ApplicationSettingsService } from '../general/application-settings.service';
-import { PrincipalService } from '../security/principal.service';
+import { SessionService } from '../general/session.service';
+
 import { Service, HttpMethod, HttpRequestOptions } from './common-types';
+import { Principal } from '../security/principal';
 
 @Injectable()
 export class HttpHandler {
 
-  constructor(private http: Http, private settings: ApplicationSettingsService,
-              private principal: PrincipalService) {
+  constructor(private http: Http,
+              private session: SessionService,
+              private settings: ApplicationSettingsService) {
 
   }
 
-  public get<T>(path: string, options?: HttpRequestOptions, service?: Service): Observable<T> {
-    return this.invokeHttpCall(HttpMethod.GET, path, '', options, service);
+  public get<T>(path: string,
+                options?: HttpRequestOptions, service?: Service): Observable<T> {
+    return this.invokeHttpCall<T>(HttpMethod.GET, path, '', options, service);
   }
 
   public post<T>(path: string, body: any,
                  options?: HttpRequestOptions, service?: Service): Observable<T> {
-    return this.invokeHttpCall(HttpMethod.POST, path, body, options, service);
+    return this.invokeHttpCall<T>(HttpMethod.POST, path, body, options, service);
   }
 
-  public delete<T>(path: string, options?: HttpRequestOptions, service?: Service): Observable<T> {
-    return this.invokeHttpCall(HttpMethod.DELETE, path, '', options, service);
+  public delete<T>(path: string,
+                   options?: HttpRequestOptions, service?: Service): Observable<T> {
+    return this.invokeHttpCall<T>(HttpMethod.DELETE, path, '', options, service);
   }
 
   public put<T>(path: string, body: any,
                 options?: HttpRequestOptions, service?: Service): Observable<T> {
-    return this.invokeHttpCall(HttpMethod.PUT, path, body, options, service);
+    return this.invokeHttpCall<T>(HttpMethod.PUT, path, body, options, service);
   }
 
   public patch<T>(path: string, body: any,
                   options?: HttpRequestOptions, service?: Service): Observable<T> {
-    return this.invokeHttpCall(HttpMethod.PATCH, path, body, options, service);
+    return this.invokeHttpCall<T>(HttpMethod.PATCH, path, body, options, service);
   }
 
-  public head<T>(path: string, options?: HttpRequestOptions, service?: Service): Observable<T> {
-    return this.invokeHttpCall(HttpMethod.HEAD, path, '', options, service);
+  public head<T>(path: string,
+                 options?: HttpRequestOptions, service?: Service): Observable<T> {
+    return this.invokeHttpCall<T>(HttpMethod.HEAD, path, '', options, service);
   }
 
-  public options<T>(path: string, options?: HttpRequestOptions, service?: Service): Observable<T> {
-    return this.invokeHttpCall(HttpMethod.OPTIONS, path, '', options, service);
+  public options<T>(path: string,
+                    options?: HttpRequestOptions, service?: Service): Observable<T> {
+    return this.invokeHttpCall<T>(HttpMethod.OPTIONS, path, '', options, service);
   }
 
   // Private methods
@@ -62,8 +69,7 @@ export class HttpHandler {
                             options: HttpRequestOptions, service: Service): Observable<T> {
     const url = this.buildUrl(path, service);
     const requestOptions = this.buildRequestOptionsArgs(method, path, options, service);
-    const payloadDataField = ((service && service.payloadDataField) ||
-                              (options && options.payloadDataField) || '');
+    const payloadDataField = this.getPayloadDataField(path, options, service);
 
     return this.getHttpResponse(method, url, body, requestOptions)
                .map((response) => (payloadDataField ? response.json()[payloadDataField]
@@ -105,10 +111,13 @@ export class HttpHandler {
   private buildUrl(path: string, service?: Service): string {
     if (service) {
       return service.baseAddress + service.path;
+
     } else if (path.includes('http://') || path.includes('https://') ) {
       return path;
+
     } else {
       return this.settings.get<string>('HTTP_API_BASE_ADDRESS') + path;
+
     }
   }
 
@@ -117,10 +126,12 @@ export class HttpHandler {
                                   service?: Service): RequestOptionsArgs {
     let headers = new Headers();
 
-    if (service && service.isProtected && this.principal.isAuthenticated) {
-      headers.append('Authorization', 'bearer ' + this.principal.session.access_token);
+    const principal: Principal = this.session.getPrincipal();
 
-    } else if (service && service.isProtected && !this.principal.isAuthenticated) {
+    if (service && service.isProtected && principal.isAuthenticated) {
+      headers.append('Authorization', 'bearer ' + principal.sessionToken.access_token);
+
+    } else if (service && service.isProtected && !principal.isAuthenticated) {
       throw 'Unauthenticated user';
 
     } else if (service && !service.isProtected) {
@@ -129,15 +140,31 @@ export class HttpHandler {
     } else if (path.includes('http://') || path.includes('https://') ) {
       // no-op
 
-    } else if (this.principal.isAuthenticated) {
-      headers.append('Authorization', 'bearer ' + this.principal.session.access_token);
+    } else if (principal.isAuthenticated) {
+      headers.append('Authorization', 'bearer ' + principal.sessionToken.access_token);
 
     } else {
       headers.append('ApplicationKey', this.settings.get<string>('APPLICATION_KEY'));
     }
 
     return { headers };
+  }
 
+  private getPayloadDataField(path: string,
+                              options: HttpRequestOptions, service: Service): string {
+    if (options && options.payloadDataField) {
+      return options.payloadDataField;
+
+    } else if (service && service.payloadDataField) {
+      return service.payloadDataField;
+
+    } else if (path.includes('http://') || path.includes('https://')) {
+      return '';
+
+    } else {
+      return 'data';
+
+    }
   }
 
 }
