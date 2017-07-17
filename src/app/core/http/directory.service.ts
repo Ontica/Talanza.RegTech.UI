@@ -7,7 +7,6 @@
  */
 
 import { Injectable } from '@angular/core';
-import { Http, RequestOptions, Headers } from '@angular/http';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/mergeMap';
@@ -82,7 +81,7 @@ export class DirectoryService {
   }
 
   private getServicesList(): Observable<Service[]> {
-    return this.httpHandler.get<Service[]>('v1/system/service-directory', { payloadDataField: 'data' });
+    return this.httpHandler.get<Service[]>('v1/system/service-directory');
   }
 
 }

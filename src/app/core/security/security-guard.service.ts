@@ -9,15 +9,17 @@
 import { Injectable } from '@angular/core';
 import { Router, CanActivate } from '@angular/router';
 
-import { PrincipalService } from './principal.service';
+import { SessionService } from '../general/session.service';
 
 @Injectable()
 export class SecurityGuardService implements CanActivate {
 
-  constructor(private router: Router, private principal: PrincipalService) { }
+  constructor(private router: Router, private session: SessionService) { }
 
   public canActivate() {
-    if (!this.principal.isAuthenticated) {
+    const principal = this.session.getPrincipal();
+
+    if (!principal.isAuthenticated) {
       this.router.navigateByUrl('/login');
       return false;
     }
