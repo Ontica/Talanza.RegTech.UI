@@ -67,7 +67,7 @@ export class ProcedureFilterComponent implements OnInit {
   public search(): void {
     if ((this.filter.entityUID === '') && (this.filter.officeUID === '')
       && (this.filter.theme === '') && (this.filter.stage === '')) {
-      this.setAllprocedures();
+      this.setAllProcedures();
     } else {
       let filter = this.getFilter();
       this.setProcedures(filter);
@@ -99,29 +99,24 @@ export class ProcedureFilterComponent implements OnInit {
   }
 
   private async setOffices(entityUID: string) {
-    await this.authorityService.getEntity(entityUID).then((entity) => {
-      this.offices = entity.offices;
-    });
+    await this.authorityService.getEntity(entityUID)
+                               .then((entity) => { this.offices = entity.offices; });
     this.filter.officeUID = '';
   }
 
   private setEntities(): void {
-    this.authorityService.getEntities().then((entities) => {
-      this.entities = entities;
-
-    });
+    this.authorityService.getEntities()
+                         .then((entities) => { this.entities = entities; });
   }
 
-  private setAllprocedures(): void {
-    this.procedureService.getProocedures().then((procedures) => {
-      this.onSearch.emit(procedures);
-    });
+  private setAllProcedures(): void {
+    this.procedureService.getProceduresList()
+                         .then((procedures) => { this.onSearch.emit(procedures); });
   }
 
   private setProcedures(filter: string): void {
-    this.procedureService.getFilterProocedures(filter).then((procedures) => {
-      this.onSearch.emit(procedures);
-    });
+    this.procedureService.getProceduresList(filter)
+                         .then((procedures) => { this.onSearch.emit(procedures); });
   }
 
 }

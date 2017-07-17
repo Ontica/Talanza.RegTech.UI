@@ -18,35 +18,26 @@ export class ProcedureService {
 
   public constructor(private core: CoreService) { }
 
-  private get HTTP_API_BASE_ADDRESS() {
-    return this.core.appSettings.get<string>('HTTP_API_BASE_ADDRESS');
+  public getProcedure(uid: string): Promise<Procedure> {
+    return this.core.http.get<Procedure>('v1/procedures/' + uid)
+                         .toPromise();
   }
 
-  public getProocedures(): Promise<SmallProcedureInterface[]> {
-    let httpApiClient = this.core.getHttpClient(this.HTTP_API_BASE_ADDRESS);
-    return httpApiClient.getAsyncAsPromise('v1/procedures');
-  }
+  public getProceduresList(filter?: string): Promise<SmallProcedureInterface[]> {
+    const path = 'v1/procedures' + (filter ? '?filter=' + filter : '');
 
-  public getFilterProocedures(filter: string): Promise<SmallProcedureInterface[]> {
-    let httpApiClient = this.core.getHttpClient(this.HTTP_API_BASE_ADDRESS);
-    return httpApiClient.getAsyncAsPromise('v1/procedures?filter=' + filter);
-  }
-
-  public getProcuedure(uid: string): Promise<Procedure> {
-    let httpApiClient = this.core.getHttpClient(this.HTTP_API_BASE_ADDRESS);
-    return httpApiClient.getAsyncAsPromise('v1/procedures/' + uid);
-  }
-
-  public updateProcedure(procedure: Procedure): Promise<Procedure> {
-    let httpApiClient = this.core.getHttpClient(this.HTTP_API_BASE_ADDRESS);
-    httpApiClient.IncludeAuthorizationHeader = false;
-    return httpApiClient.PutAsyncAsPromise<Procedure>(procedure, 'v1/procedures/' + procedure.uid);
+    return this.core.http.get<SmallProcedureInterface[]>(path)
+                         .toPromise();
   }
 
   public createProcedure(procedure: Procedure): Promise<Procedure> {
-    let httpApiClient = this.core.getHttpClient(this.HTTP_API_BASE_ADDRESS);
-    httpApiClient.IncludeAuthorizationHeader = false;
-    return httpApiClient.postAsyncAsPromise<Procedure>(procedure, 'v1/procedures/');
+    return this.core.http.post<Procedure>('v1/procedures', procedure)
+                         .toPromise();
+  }
+
+  public updateProcedure(procedure: Procedure): Promise<Procedure> {
+    return this.core.http.put<Procedure>('v1/procedures/' + procedure.uid, procedure)
+                         .toPromise();
   }
 
 }

@@ -69,7 +69,7 @@ export class ProcedureEditorComponent implements OnInit {
       this.procedure = new Procedure();
       return;
     }
-    await this.procedureService.getProcuedure(this.procedureUID).then((procedure) => {
+    await this.procedureService.getProcedure(this.procedureUID).then((procedure) => {
       this.procedure = procedure;
     });
   }

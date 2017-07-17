@@ -17,18 +17,14 @@ export class AuthorityService {
 
   public constructor(private core: CoreService) { }
 
-  private get HTTP_API_BASE_ADDRESS() {
-    return this.core.appSettings.get<string>('HTTP_API_BASE_ADDRESS');
-  }
-
   public getEntity(entityUID: string): Promise<Entity> {
-    let httpApiClient = this.core.getHttpClient(this.HTTP_API_BASE_ADDRESS);
-    return httpApiClient.getAsyncAsPromise('/v1/modeling/entities/' + entityUID);
+    return this.core.http.get<Entity>('v1/modeling/entities/' + entityUID)
+                         .toPromise();
   }
 
   public getEntities(): Promise<Entity[]> {
-    let httpApiClient = this.core.getHttpClient(this.HTTP_API_BASE_ADDRESS);
-    return httpApiClient.getAsyncAsPromise('/v1/modeling/entities');
+    return this.core.http.get<Entity[]>('v1/modeling/entities')
+                         .toPromise();
   }
 
 }

@@ -106,7 +106,7 @@ export class GeneralInfoTabComponent implements OnInit {
   }
 
   private async setProcedure() {
-    await this.procedureService.getProcuedure(this.procedure.uid).then((procedure) => {
+    await this.procedureService.getProcedure(this.procedure.uid).then((procedure) => {
       this.procedure = procedure;
     });
   }
