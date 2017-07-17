@@ -19,6 +19,11 @@ import { GeneralInfoTabComponent } from './editor/tabs/general-info-tab.componen
 import { RequirementsTabComponent } from './editor/tabs/requirements-tab.component';
 import { FilingConditionsTabComponent } from './editor/tabs/filing-conditions-tab.component';
 import { FilingFeeTabComponent } from './editor/tabs/filing-fee-tab.component';
+import { StatusTabComponent } from './editor/tabs/status-tab.component';
+import { AddRequirementTabComponent } from './editor/tabs/add-requirement-tab.component';
+import { AddRequirementListTabComponent } from './editor/tabs/add-requirement-list-tab.component';
+import { RequirementTabComponent } from './editor/tabs/requirement-tab.component';
+import { RequirementGridComponent } from './editor/requirement-grid.component';
 
 import { ProceduresRoutingModule } from './procedures-routing.module';
 
@@ -30,7 +35,8 @@ import { ProceduresRoutingModule } from './procedures-routing.module';
   imports: [ProceduresRoutingModule, SharedModule, CommonModule, FormsModule],
   declarations: [ProceduresMainPageComponent, ProcedureFilterComponent, ProcedureEditorComponent,
                  GeneralInfoTabComponent, RequirementsTabComponent, FilingConditionsTabComponent,
-                  FilingFeeTabComponent],
+                 FilingFeeTabComponent, StatusTabComponent, AddRequirementTabComponent, 
+                 AddRequirementListTabComponent, RequirementTabComponent,  RequirementGridComponent],
   exports: [ProceduresMainPageComponent]
 })
 export class ProceduresModule { }

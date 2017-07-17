@@ -1,0 +1,98 @@
+<div class="container">
+  <div *ngIf="isShowGrids">
+    <table>
+      <tr>
+        <td width="300px" class="title-row">Lista de Requerimientos</td>
+        <td class="title-row align-right">
+          <button class="btn" (click)="addRequirement()">+Agregar requisito</button>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <requirement-grid></requirement-grid>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <div *ngIf="isShowGrids">
+    <table>
+      <tr>
+        <td width="300px" class="title-row">Lista de entregables por la autoridad</td>
+        <td class="title-row align-right">
+          <button class="btn" (click)="addRequirementToList()">+Agregar entregable</button>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <table class="grid">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Entregable</th>
+                <th>Clave</th>
+                <th>Forma de Entrega</th>
+                <th>Tipo</th>
+                <th>Ejemplo</th>
+                <th>Opciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>Comprobante de recepción del trámite</td>
+                <td>e</td>
+                <td>Manual</td>
+                <td>Comprobante</td>
+                <td>pdf</td>
+                <td>eliminar <br> cambiar
+                </td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>Oficio de autorización de pozos</td>
+                <td>CAP-45</td>
+                <td>eMail</td>
+                <td>oficio</td>
+                <td>pdf</td>
+                <td>eliminar <br> cambiar
+                </td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>Oficio de autorización de pozos</td>
+                <td>CAP-45</td>
+                <td>eMail</td>
+                <td>oficio</td>
+                <td>pdf</td>
+                <td>eliminar <br> cambiar
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <div *ngIf="isShowAddRequirementForm">
+    <add-requirement-tab (isCanceled)="onCancelForm($event)"></add-requirement-tab>
+  </div>
+  <div *ngIf="isAddRequirementListForm">
+    <add-requirement-list-tab (isCanceled)="onCancelForm($event)"></add-requirement-list-tab>
+  </div>
+  <div class="footer " *ngIf="isShowGrids">
+    <table>
+      <tr>
+        <td><button class="btn">Imprimir</button></td>
+        <td class="align-center">
+          <button class="btn" [disabled]="disabled" (click)="cancel()">Deshacer cambios</button>
+        </td>
+        <td *ngIf="disabled" class="align-right">
+          <button class="btn" (click)="editProcedure()">Editar trámite</button>
+        </td>
+        <td *ngIf="!disabled" class="align-right">
+          <button class="btn " (click)="saveProcedureChanges() ">Guardar cambios</button>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
