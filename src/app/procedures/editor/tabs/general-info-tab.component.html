@@ -6,11 +6,28 @@
       </tr>
       <tr>
         <td>Nombre oficial:<br><br></td>
-        <td colspan="2"><textarea [disabled]="disabled" width="100%;" class="text-area " rows="3 " cols="25 " [(ngModel)]="procedure.name"></textarea></td>
+        <td colspan="2">
+          <textarea [disabled]="disabled" width="100%;" class="text-area " rows="3 " cols="25 " [(ngModel)]="procedure.name"></textarea>
+        </td>
       </tr>
-      <tr>
+      <!-- <tr>
         <td>Nombre corto:</td>
         <td colspan="2"><input [disabled]="disabled" class="text-box" type="text" value="" [(ngModel)]="procedure.shortName"></td>
+      </tr> -->
+      <tr>
+        <td>¿Está regulado?:</td>
+        <td>
+          <select [disabled]="disabled" width="300px" class="select-box" [(ngModel)]="procedure.legalInfo.regulationStatus">
+            <option value="">( Tipo de regulación )</option>
+            <option value="Dependencia">Sólo por la dependencia</option>
+            <option value="COFEMER">Por la dependencia y COFEMER</option>
+            <option value="No regulado">Trámite no regulado</option>
+          </select>
+        </td>
+        <td class="align-right">
+          Homoclave COFEMER:
+          <input [disabled]="disabled" style="width:100px" class="text-box" type="text" [(ngModel)]="procedure.code">
+        </td>
       </tr>
       <tr>
         <td width="100px">Etapa:</td>
@@ -22,9 +39,6 @@
               <option value="Transición de Arranque">Transición de Arranque</option>
               <option value="Transversales ">Transversales</option>
           </select>
-        </td>
-        <td class="align-right" width="200px">
-          Clave: <input [disabled]="disabled" style="width:140px" class="text-box" type="text" [(ngModel)]="procedure.code">
         </td>
       </tr>
       <tr>
@@ -49,13 +63,16 @@
             <option value="Uso y Ocupación Superficial">Uso y Ocupación Superficial</option>
           </select>
         </td>
-        <td class="align-right" width="200px">
-          ¿Está regulado?<input [disabled]="disabled" type="checkbox" [(ngModel)]="procedure.legalInfo.isRegulated"> #Excel <input style="width:40px" type="text" class="text-box" [(ngModel)]="procedure.msExcelNo"></td>
+        <td class="align-right">
+          #Excel <input style="width:40px" type="text" class="text-box" [(ngModel)]="procedure.msExcelNo">
+        </td>
       </tr>
 
       <tr>
         <td>Pagina web:</td>
-        <td colspan="2"><input [disabled]="disabled" type="text" class="text-box" [(ngModel)]="procedure.url"></td>
+        <td colspan="2">
+          <input [disabled]="disabled" type="text" class="text-box" [(ngModel)]="procedure.url">
+        </td>
       </tr>
     </table>
   </div>

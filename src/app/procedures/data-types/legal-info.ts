@@ -7,13 +7,13 @@
  */
 
 export class LegalInfo {
-  public isRegulated: boolean;
+  public regulationStatus: string;
   public obligation: string;
   public legalBasis: string;
   public contractClausesAndAnnexes: string;
 
   constructor() {
-    this.isRegulated = false;
+    this.regulationStatus = '';
     this.obligation = '';
     this.legalBasis = '';
     this.contractClausesAndAnnexes = '';
