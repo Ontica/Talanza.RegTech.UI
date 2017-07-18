@@ -13,7 +13,7 @@ import { UserLoginComponent } from './user-login/user-login.component';
 
 @NgModule({
   imports: [RouterModule.forChild([
-    { path: 'login', component: UserLoginComponent }
+    { path: '', component: UserLoginComponent }
   ])],
   exports: [RouterModule]
 })

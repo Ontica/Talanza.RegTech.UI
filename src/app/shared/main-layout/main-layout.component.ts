@@ -18,7 +18,7 @@ import { SessionService } from '../../core';
 export class MainLayoutComponent {
 
   public userName = 'UserName || et al';
-  public title = 'Sitio de pruebas (sólo para jugar)';
+  public title = 'Cajón de arena para jugar';
   public breadcrumb = 'Inicio » Edición de trámites';
 
   // public title = 'Administración y control del cumplimiento regulatorio';

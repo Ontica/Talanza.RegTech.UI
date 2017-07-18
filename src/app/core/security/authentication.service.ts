@@ -43,17 +43,19 @@ export class AuthenticationService {
     this.session.setPrincipal(principal);
   }
 
-  public async logout(): Promise<void> {
+  public async logout(): Promise<boolean> {
     const principal = this.session.getPrincipal();
 
     if (!principal.isAuthenticated) {
-      return;
+      return Promise.resolve(false);
     }
 
     try {
       await this.dataService.closeSession();
+      return Promise.resolve(true);
     } catch (e) {
       this.logger.error(e);
+      return Promise.resolve(true);
     }
   }
 
