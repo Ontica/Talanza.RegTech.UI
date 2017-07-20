@@ -14,7 +14,7 @@
     </td>
     <td><button class="btn" style="width:55px;">Buscar</button></td>
     <td class="align-center">
-      <button style="width:140px" class="btn-warning">+Agregar cláusula</button>
+      <button style="width:140px" class="btn-warning" (click)="showContractEditorWindow()">+Agregar cláusula</button>
     </td>
   </tr>
   <tr>
@@ -82,4 +82,7 @@
       <td class="align-right ">Pagina 1 de 4</td>
     </tr>
   </table>
+</div>
+<div *ngIf="isShowContractEditorWindow " class="popup">
+  <contract-editor (onCloseEvent)="closeContractEditorWindow()"></contract-editor>
 </div>

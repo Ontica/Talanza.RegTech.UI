@@ -1,0 +1,16 @@
+<div class="task-editor-window">
+  <div class="header">
+    <div class="close" (click)="close()">&times;</div>
+    <div class="title">4.2 Período Inicial de Evaluación </div>
+    <div class="subtitle">Ronda 1.3 Individual</div><br>
+  </div>
+  <div class="tab">
+    <button class="tablinks" [disabled]="isDisabled" [class.selected]="selectedTask==='clauseInfo'" (click)="setSelectedTask('clauseInfo')">Cláusula</button>
+    <button class="tablinks" [disabled]="isDisabled" [class.selected]="selectedTask==='legalEnviroment'" (click)="setSelectedTask('legalEnviroment')">Marco Legal</button>
+    <button class="tablinks" [disabled]="isDisabled" [class.selected]="selectedTask==='relatedProcedures'" (click)="setSelectedTask('relatedProcedures')">Trámites involucrados</button>
+    <button class="tablinks" [disabled]="isDisabled" [class.selected]="selectedTask==='status'" (click)="setSelectedTask('status')">Estado</button>
+
+  </div>
+  <div [ngSwitch]="selectedTask">
+  </div>
+</div>

@@ -13,6 +13,8 @@ import { SharedModule } from '../shared/shared.module';
 
 import { ContractsMainPageComponent } from './main-page/contracts-main-page.component';
 
+import { ContractEditorComponent } from './editor/contract-editor.component';
+
 import { ContractsRoutingModule } from './contracts-routing.module';
 
 /**
@@ -21,7 +23,7 @@ import { ContractsRoutingModule } from './contracts-routing.module';
 
 @NgModule({
   imports: [ContractsRoutingModule, SharedModule, CommonModule, FormsModule],
-  declarations: [ContractsMainPageComponent],
+  declarations: [ContractsMainPageComponent, ContractEditorComponent],
   exports: [ContractsMainPageComponent]
 })
 export class ContractsModule { }

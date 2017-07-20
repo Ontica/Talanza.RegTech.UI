@@ -16,4 +16,14 @@ import { Component } from '@angular/core';
 
 export class ContractsMainPageComponent {
 
+  public isShowContractEditorWindow = false;
+
+  public closeContractEditorWindow(): void  {
+    this.isShowContractEditorWindow = false;
+  }
+  
+  public showContractEditorWindow(): void {
+    this.isShowContractEditorWindow = true;
+  }
+
 }
