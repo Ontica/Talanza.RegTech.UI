@@ -1,0 +1,55 @@
+<div class="container">
+  <div>
+    <table>
+      <tr>
+        <td colspan="6" class="title-row">Información de la claúsula o anexo</td>
+      </tr>
+      <tr>
+        <td>Número de la Claúsula:</td>
+        <td><input type="text" style="width:80px;" class="text-box"></td>
+        <td>Página:</td>
+        <td><input type="text" style="width:40px;" class="text-box">
+          <button style="width:40px;" class="btn">PDF</button>
+        </td>
+
+        <td>Etapa:</td>
+
+        <td class="align-right"><select style="width:100%" class="select-box">
+          <option>( Seleccionar una etapa )</option>
+          <option>Período de Evaluación</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>Nombre:</td>
+        <td colspan="5"><input type="text" class="text-box" style="width:100%"></td>
+      </tr>
+    </table>
+  </div>
+  <div>
+    <table>
+      <tr>
+        <td class="title-row">Texto:</td>
+      </tr>
+      <tr>
+        <td>
+          <textarea style="width:100%" class="text-area" rows="35" cols="25"></textarea>
+        </td>
+      </tr>
+    </table>
+
+  </div>
+  <div class="footer ">
+    <table>
+      <tr>
+        <td><button class="btn">Imprimir</button></td>
+        <td class="align-center">
+          <button class="btn">Cancelar</button>
+        </td>
+        <td class="align-right">
+          <button class="btn" (click)="editProcedure()">Guardar cambios</button>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
