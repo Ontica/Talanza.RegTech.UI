@@ -15,13 +15,17 @@ export class FilingFeeTabComponent implements OnInit {
   @Output() public isEditable = new EventEmitter<boolean>();
   @Input() public procedure: Procedure;
   @Input() public isNewProcedure: boolean;
+
+  public addButtonLabel = '';
   public isFree = false;
   public disabled = true;
-
+  public isDisabled = true;
+         
   constructor(private procedureService: ProcedureService) { }
 
   public ngOnInit() {
     this.setProcedureStatus();
+    this.setProcedure();
   }
 
   public saveProcedureChanges(): void {
@@ -30,6 +34,7 @@ export class FilingFeeTabComponent implements OnInit {
     }
     this.updateProcedure();
     alert('El trámite se actualizó correctamente.');
+    this.disabled = true;
     this.isEditable.emit(false);
   }
 
@@ -66,6 +71,10 @@ export class FilingFeeTabComponent implements OnInit {
   private setProcedureStatus(): void {
     if (this.isNewProcedure) {
       this.disabled = false;
+      this.addButtonLabel = 'Agregar trámite';
+    } 
+     else {
+        this.addButtonLabel = 'Guardar cambios';
     }
   }
 

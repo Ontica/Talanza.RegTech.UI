@@ -22,17 +22,21 @@ export class RequirementsTabComponent implements OnInit {
   @Output() public isEditable = new EventEmitter<boolean>();
   @Input() public procedure: Procedure;
   @Input() public isNewProcedure: boolean;
+
+  public addButtonLabel = '';
   public disabled = true;
 
   public constructor(private procedureService: ProcedureService) { }
 
   public ngOnInit() {
     this.setProcedureStatus();
+    this.setProcedure();
   }
 
   public saveProcedureChanges(): void {
     this.updateProcedure();
     alert('El trámite se actualizó correctamente.');
+    this.disabled = true;
     this.isEditable.emit(false);
   }
 
@@ -61,6 +65,9 @@ export class RequirementsTabComponent implements OnInit {
   private setProcedureStatus(): void {
     if (this.isNewProcedure) {
       this.disabled = false;
+      this.addButtonLabel = 'Agregar trámite';
+    } else {
+      this.addButtonLabel = 'Guardar cambios';
     }
   }
 
