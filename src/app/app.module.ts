@@ -25,6 +25,7 @@ import { CoreModule } from './core/core.module';
 import { SecurityUIModule } from './security-ui/security-ui.module';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { ProcessModule } from './process/process.module';
+import { ContractsModule } from './contracts/contracts.module';
 import { SharedModule } from './shared/shared.module';
 
 /*
@@ -56,6 +57,7 @@ type StoreType = {
   declarations: [AppComponent],
   imports: [ // import Angular's modules
     CoreModule,
+    ContractsModule,
     SecurityUIModule,
     DashboardModule,
     ProcessModule,
