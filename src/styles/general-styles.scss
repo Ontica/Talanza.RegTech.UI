@@ -41,6 +41,11 @@ button.btn-warning {
   width: 99%;
 }
 
+@mixin disabled-element {
+  color: #707070;
+  background: #dddddd;
+}
+
 select.select-box {
   @include input-settings;
   height: 25px;
@@ -93,4 +98,20 @@ a:hover {
 
 .popup {
   z-index: 1;
+}
+
+textarea:disabled {
+  @include disabled-element;
+}
+
+input[type=text]:disabled {
+  @include disabled-element;
+}
+
+select:disabled {
+  @include disabled-element;
+}
+
+button:disabled {
+  @include disabled-element();
 }
