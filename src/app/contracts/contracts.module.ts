@@ -16,6 +16,7 @@ import { ContractsMainPageComponent } from './main-page/contracts-main-page.comp
 import { ContractEditorComponent } from './editor/contract-editor.component';
 
 import { ClauseInfoTabComponent } from './editor/tabs/clause-info-tab.component';
+import { RelatedProceduresTabComponent } from './editor/tabs/related-procedures-tab.component';
 
 import { ContractsRoutingModule } from './contracts-routing.module';
 
@@ -25,7 +26,8 @@ import { ContractsRoutingModule } from './contracts-routing.module';
 
 @NgModule({
   imports: [ContractsRoutingModule, SharedModule, CommonModule, FormsModule],
-  declarations: [ContractsMainPageComponent, ContractEditorComponent, ClauseInfoTabComponent],
+  declarations: [ContractsMainPageComponent, ContractEditorComponent,
+     ClauseInfoTabComponent, RelatedProceduresTabComponent],
   exports: [ContractsMainPageComponent]
 })
 export class ContractsModule { }

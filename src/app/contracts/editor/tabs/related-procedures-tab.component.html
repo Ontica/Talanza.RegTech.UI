@@ -1,0 +1,97 @@
+<div>
+  <table>
+    <tr>
+      <td width="300px" class="title-row">Trámites involucrados</td>
+      <td class="title-row align-right">
+        <button class="btn" (click)="onShowAddProcedureEditor()">+Agregar un trámite a esta claúsula</button>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <table class="grid">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Trámite</th>
+              <th>Autoridad</th>
+              <th>Clave</th>
+              <th>Plazo</th>
+              <th>Lo inicia</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>Modificación a la Autorización de Perforación</td>
+              <td>CNH</td>
+              <td>CFMER-45</td>
+              <td>15 días antes</td>
+              <td>cambio en <br>modalidad</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>Aviso de la elección de Terceros Independientes <br>por parte de Operadores Petroleros</td>
+              <td>CNH</td>
+              <td>S/C</td>
+              <td>15 días despues</td>
+              <td>Elección <br>tercero</td>
+            </tr>
+
+          </tbody>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+<br>
+<br>
+<div *ngIf="isVisibleAddProcedureEditor">
+  <table>
+    <tr>
+      <td colspan="4" class="title-row">Asociar un trámite a esta cláusula del contrato</td>
+    </tr>
+    <tr>
+      <td>Trámite:</td>
+      <td><select class="select-box" style="width:100px">
+        <option>SENER</option>        
+        </select>
+      </td>
+      <td><select class="select-box" style="width:460px">
+        <option>Notificación de unificación</option>        
+        </select>
+      </td>
+      <td>
+        <button class="btn" sytle="width:100%">...</button>
+      </td>
+    </tr>
+    <tr>
+      <td>Plazo:</td>
+      <td><select class="select-box" style="width:100px">
+        <option>60 días</option>
+        </select>
+      </td>
+      <td><select class="select-box" style="width:200px">
+        <option>Despues de</option>
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2">Activiad o evento:</td>
+      <td><select class="select-box" style="width:460px">
+        <option>Inferir la existencia de un yacimiento compartido</option>
+        </select>
+      </td>
+    </tr>
+  </table>
+  <br>
+  <table>
+    <tr>
+      <td width="206px" class="align-right">
+        <button class="btn" (click)="cancelAddProcedure()">Cancelar</button>
+      </td>
+      <td class="align-right">
+        <button class="btn" (click)="cancelAddProcedure()">Agregar trámite</button>
+      </td>
+    </tr>
+  </table>
+</div>
