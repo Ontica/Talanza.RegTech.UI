@@ -28,7 +28,6 @@ table.grid {
   width: 100%;
   text-align: left;
   margin: 0;
-  // min-width: 250px;
 }
 
 table.grid thead tr {
@@ -41,7 +40,7 @@ table.grid tbody tr {
 }
 
 table.grid tbody {
-  height: 130px; //calc(100vh - 250px);
+  height: 130px;
   overflow-y: auto;
   overflow-x: hidden;
 }
@@ -56,37 +55,42 @@ table.grid td, table.grid th {
 
 table.grid td:nth-child(1), table.grid th:nth-child(1) {
   width: 5%;
-  float: left;
 }
 
-table.grid td:nth-child(2), table.grid th:nth-child(2) {
+table.grid th:nth-child(2) {
+  width: 29%;
+}
+
+table.grid td:nth-child(2) {
   width: 30%;
-  float: left;
 }
 
-table.grid td:nth-child(3), table.grid th:nth-child(3) {
+table.grid th:nth-child(3) {
+  width: 9.5%;
+}
+
+table.grid td:nth-child(3) {
   width: 10%;
-  float: left;
 }
 
 table.grid td:nth-child(4), table.grid th:nth-child(4) {
   width: 15%;
-  float: left;
 }
 
-table.grid td:nth-child(5), table.grid th:nth-child(5) {
+table.grid th:nth-child(5) {
+  width: 14%;
+}
+
+table.grid td:nth-child(5) {
   width: 15%;
-  float: left;
 }
 
 table.grid td:nth-child(6), table.grid th:nth-child(6) {
   width: 15%;
-  float: left;
 }
 
 table.grid td:nth-child(7), table.grid th:nth-child(7) {
   width: 10%;
-  float: left;
 }
 
 table.grid thead {
