@@ -6,9 +6,9 @@
  *
  */
 
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
-
+import { Clause } from '../../data-types/clause';
 
 @Component({
   selector: 'clause-info-tab',
@@ -18,5 +18,6 @@ import { Component } from '@angular/core';
 })
 
 export class ClauseInfoTabComponent {
+  @Input() public clause: Clause;
 
 }

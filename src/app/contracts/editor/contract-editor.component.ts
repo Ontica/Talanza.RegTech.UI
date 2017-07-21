@@ -10,6 +10,8 @@ import {
   Component, EventEmitter, HostBinding, Input, Output, OnInit
 } from '@angular/core';
 
+import { Clause } from '../data-types/clause';
+
 @Component({
   selector: 'contract-editor',
   templateUrl: './contract-editor.component.html',
@@ -21,11 +23,10 @@ export class ContractEditorComponent implements OnInit {
   @HostBinding('style.position') public position = 'absolute';
 
   @Output() public onCloseEvent = new EventEmitter();
+  @Input() public clause: Clause;
 
   public selectedTask: string = '';
   public isDisabled = false;
-
-  constructor() { }
 
   public async ngOnInit() {
     this.selectedTask = 'clauseInfo';
