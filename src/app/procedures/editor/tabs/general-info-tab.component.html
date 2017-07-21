@@ -64,7 +64,7 @@
           </select>
         </td>
         <td class="align-right">
-          #Excel <input style="width:40px" type="text" class="text-box" [(ngModel)]="procedure.msExcelNo">
+          #Excel <input [disabled]="disabled" style="width:40px" type="text" class="text-box" [(ngModel)]="procedure.msExcelNo">
         </td>
       </tr>
 
@@ -137,8 +137,11 @@
     <table>
       <tr>
         <td><button class="btn">Imprimir</button></td>
+        <td *ngIf="isNewProcedure" class="align-center">
+          <button class="btn" (click)="cancel()">Cancelar la operación</button>
+        </td>
         <td class="align-center">
-          <button class="btn" [disabled]="disabled" (click)="cancel()">Deshacer cambios</button>
+          <button *ngIf="!isNewProcedure" class="btn" [disabled]="disabled" (click)="discardChanges()">Deshacer cambios</button>
         </td>
         <td *ngIf="disabled" class="align-right">
           <button class="btn" (click)="editProcedure()">Editar trámite</button>
