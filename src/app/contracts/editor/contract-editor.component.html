@@ -1,18 +1,17 @@
 <div class="task-editor-window">
   <div class="header">
     <div class="close" (click)="close()">&times;</div>
-    <div class="title">{{clause.clauseNo}} {{clause.title}} </div>
-    <div class="subtitle">Ronda 1.3 Individual</div><br>
+    <div class="title">{{title}}</div>
+    <div class="subtitle">{{clauseInfo.contractName}}</div>
   </div>
   <div class="tab">
     <button class="tablinks" [disabled]="isDisabled" [class.selected]="selectedTask==='clauseInfo'" (click)="setSelectedTask('clauseInfo')">Cláusula</button>
-    <button class="tablinks">Marco Legal</button>
+    <button class="tablinks" [disabled]="isDisabled">Marco Legal</button>
     <button class="tablinks" [disabled]="isDisabled" [class.selected]="selectedTask==='relatedProcedures'" (click)="setSelectedTask('relatedProcedures')">Trámites involucrados</button>
-    <button class="tablinks">Estado</button>
-
+    <button class="tablinks" [disabled]="isDisabled">Estado</button>
   </div>
   <div [ngSwitch]="selectedTask">
-    <clause-info-tab *ngSwitchCase="'clauseInfo'" [clause]="clause"></clause-info-tab>
-    <related-procedures-tab *ngSwitchCase="'relatedProcedures'"></related-procedures-tab>
+    <clause-info-tab *ngSwitchCase="'clauseInfo'" [clauseInfo]="clauseInfo" (onCancel)="close()" (onSave)="setSaveOperations()"></clause-info-tab>
+    <related-procedures-tab *ngSwitchCase="'relatedProcedures'" [clauseInfo]="clauseInfo"></related-procedures-tab>
   </div>
 </div>

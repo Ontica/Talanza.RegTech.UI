@@ -6,13 +6,13 @@
       </tr>
       <tr>
         <td>Número de la Claúsula:</td>
-        <td><input type="text" style="width:80px;" class="text-box" [(ngModel)]="clause.clauseNo"></td>
+        <td><input type="text" style="width:80px;" class="text-box" [disabled]="isDisabled" [(ngModel)]="clause.clauseNo"></td>
         <td>Página:</td>
-        <td><input type="text" style="width:40px;" class="text-box" [(ngModel)]="clause.surcePageNo">
+        <td><input type="number" min="1" max="999" style="width:40px;" class="text-box" [disabled]="isDisabled" [(ngModel)]="clause.sourcePageNo">
           <button style="width:40px;" class="btn">PDF</button>
         </td>
         <td>Etapa:</td>
-        <td class="align-right"><select style="width:100%" class="select-box">
+        <td class="align-right"><select style="width:100%" class="select-box" [disabled]="isDisabled">
           <option>( Seleccionar una etapa )</option>
           <option value="Etapa de Abandono ">Etapa de Abandono</option>
           <option value="Período de Desarrollo ">Período de Desarrollo</option>
@@ -24,7 +24,7 @@
       </tr>
       <tr>
         <td>Nombre:</td>
-        <td colspan="5"><input type="text" class="text-box" style="width:100%" [(ngModel)]="clause.title"></td>
+        <td colspan="5"><input type="text" class="text-box" style="width:100%" [disabled]="isDisabled" [(ngModel)]="clause.title"></td>
       </tr>
     </table>
   </div>
@@ -35,7 +35,7 @@
       </tr>
       <tr>
         <td>
-          <textarea style="width:100%" class="text-area" rows="35" cols="25" [(ngModel)]="clause.text"></textarea>
+          <textarea style="width:100%" class="text-area" rows="35" cols="25" [disabled]="isDisabled" [(ngModel)]="clause.text"></textarea>
         </td>
       </tr>
     </table>
@@ -46,10 +46,13 @@
       <tr>
         <td><button class="btn">Imprimir</button></td>
         <td class="align-center">
-          <button class="btn">Cancelar</button>
+          <button class="btn" (click)="cancel()">Cancelar</button>
         </td>
-        <td class="align-right">
-          <button class="btn" (click)="editProcedure()">Guardar cambios</button>
+        <td class="align-right" *ngIf="isDisabled">
+          <button class="btn" (click)="edit()">Editar</button>
+        </td>
+        <td class="align-right" *ngIf="!isDisabled">
+          <button class="btn" (click)="saveClause()">{{buttonLabelSave}}</button>
         </td>
       </tr>
     </table>

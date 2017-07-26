@@ -108,6 +108,10 @@ input[type=text]:disabled {
   @include disabled-element;
 }
 
+input[type=number]:disabled {
+  @include disabled-element;
+}
+
 select:disabled {
   @include disabled-element;
 }
