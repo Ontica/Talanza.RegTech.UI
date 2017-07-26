@@ -37,7 +37,7 @@
   </thead>
   <tbody>
     <tr *ngFor="let clause of clauses">
-      <td><a (click)="showContractEditorWindow(clause)">{{clause.clauseNo}}</a></td>
+      <td><a (click)="showContractEditorWindow(clause.uid)">{{clause.clauseNo}}</a></td>
       <td>{{clause.title}}</td>
       <td>{{clause.text}}</td>
       <td> <a (click)="openURL(clause.sourcePageNo)">pdf</a></td>
@@ -60,5 +60,5 @@
   </table>
 </div>
 <div *ngIf="isShowContractEditorWindow " class="popup">
-  <contract-editor [clause]="clause" (onCloseEvent)="closeContractEditorWindow()"></contract-editor>
+  <contract-editor [clauseInfo]="clause" (onCloseEvent)="closeContractEditorWindow()"></contract-editor>
 </div>

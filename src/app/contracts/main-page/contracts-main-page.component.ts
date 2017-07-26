@@ -11,7 +11,7 @@ import { Component, OnInit } from '@angular/core';
 import { ContractService } from '../services/contract.service';
 
 import { BaseContract, BaseClause } from '../data-types/contract';
-import { Clause } from '../data-types/clause';
+import { Clause, SmallClause } from '../data-types/clause';
 
 @Component({
   selector: 'contracts-main-page',
@@ -26,7 +26,7 @@ export class ContractsMainPageComponent implements OnInit {
   public clauses: BaseClause[] = [];
   public contracts: BaseContract[] = [];
   public selectedContract: BaseContract;
-  public clause: Clause;
+  public clause = new SmallClause();
 
   constructor(private contractService: ContractService) { }
 
@@ -37,12 +37,19 @@ export class ContractsMainPageComponent implements OnInit {
     this.isShowContractEditorWindow = false;
   }
 
-  public showContractEditorWindow(clause?: BaseClause): void {
-    if (!clause) {
-      this.clause = new Clause();
-    } else {
-      this.clause = clause;
+  public showContractEditorWindow(clauseUID?: string): void {
+    if (!this.selectedContract) {
+      alert("Seleccionar primero el contrato al que se le agregará la nueva Clausual");
+      return;
+
     }
+    if (!clauseUID) {
+      this.clause.uid = '';
+    } else {
+      this.clause.uid = clauseUID;
+    }
+    this.clause.contractName = this.selectedContract.name;
+    this.clause.contractUID = this.selectedContract.uid;
 
     this.isShowContractEditorWindow = true;
   }
@@ -82,7 +89,6 @@ export class ContractsMainPageComponent implements OnInit {
   private setClauses(): void {
     this.contractService.getContractClausesList(this.selectedContract.uid).then((clauses) => {
       this.clauses = clauses;
-      console.log(clauses);
     });
   }
 
