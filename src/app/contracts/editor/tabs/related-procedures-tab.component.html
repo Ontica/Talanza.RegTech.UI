@@ -25,8 +25,8 @@
               <td>{{relatedProcedure.procedure.shortName}}</td>
               <td>{{relatedProcedure.procedure.entity}}</td>
               <td>{{relatedProcedure.procedure.code}}</td>
-              <td>{{relatedProcedure.maxFilingTerm}}</td>
-              <td>{{relatedProcedure.starsWhenTrigger}}</td>
+              <td>{{relatedProcedure.maxFilingTerm}} {{relatedProcedure.maxFilingTermType}}</td>
+              <td>{{relatedProcedure.startsWhen}} {{relatedProcedure.startsWhenTrigger}}</td>
             </tr>
           </tbody>
         </table>
@@ -39,26 +39,31 @@
 <div *ngIf="isVisibleAddProcedureEditor">
   <table>
     <tr>
-      <td colspan="4" class="title-row">Asociar un trámite a esta cláusula del contrato</td>
+      <td class="title-row">Asociar un trámite a esta cláusula del contrato</td>
     </tr>
     <tr>
-      <td>Trámite:</td>
-      <td><select class="select-box" style="width:145px" #entity (change)="onChangeEntity(entity.value)">
+      <table style="margin:0; padding:0;">
+        <tr>
+          <td>Trámite:</td>
+          <td><select class="select-box" style="width:145px" #entity (change)="onChangeEntity(entity.value)">
         <option value="">( Seleccionar entidad )</option>        
         <option *ngFor="let entity of entities" [value]="entity.uid">{{entity.shortName}}</option>
         </select>
-      </td>
-      <td><select class="select-box" style="width:415px" #procedure (change)="onChangeProcedure(procedure.value)">
+          </td>
+          <td width="100%"><select class="select-box" style="width:395px" #procedure (change)="onChangeProcedure(procedure.value)">
         <option value="">( Seleccionar trámite )</option>        
         <option *ngFor="let procedure of procedures" [value]="procedure.uid">{{procedure.shortName}}</option>
         </select>
-      </td>
-      <td>
-        <button class="btn" sytle="width:100%">...</button>
-      </td>
+          </td>
+          <td>
+            <button class="btn">...</button>
+          </td>
+        </tr>
+      </table>
     </tr>
+
     <tr>
-      <td colspan="4">
+      <td>
         <table style="margin:0; padding:0;">
           <tr>
             <td class="align-left">Plazo:</td>
@@ -74,7 +79,7 @@
         </select>
             </td>
             <td class="align-left" width="100%">
-              <select class="select-box" style="width:220px" [(ngModel)]="relatedProcedure.startsWhen">
+              <select class="select-box" style="width:100%" [(ngModel)]="relatedProcedure.startsWhen">
          <option value="">( Seleccionar la condición de inicio )</option>
           <option value="No determinada">No determinada</option>
           <option value="Antes de iniciar">Antes de iniciar...</option>
@@ -85,15 +90,18 @@
           <option value="En cualquier momento">En cualquier momento</option>          
         </select>
             </td>
-            <td></td>
           </tr>
         </table>
       </td>
     </tr>
 
     <tr>
-      <td colspan="2">Activiad o evento:</td>
-      <td><select class="select-box" style="width:415px" [(ngModel)]="relatedProcedure.startsWhenTrigger">
+      <td>
+        <table style="margin:0; padding:0;">
+          <tr>
+            <td width="110px">Actividad o evento:</td>
+            <td>
+              <select class="select-box" style="width:350px" [(ngModel)]="relatedProcedure.startsWhenTrigger">
         <option value="">( Seleccionar el evento o actividad que inicia el trámite)</option>
           <option value="No determinado">No determinado</option>
           <option value="No aplica">No aplica</option>
@@ -102,11 +110,21 @@
           <option value="Disposición final de residuos peligrosos">Disposición final de residuos peligrosos</option>
           <option value="Perforación de pozos">Perforación de pozos</option>
         </select>
+            </td>
+          </tr>
+        </table>
       </td>
     </tr>
     <tr>
-      <td>Notas:</td>
-      <td colspan="3"><textarea sytle="width:100%" class="text-area" rows="5" cols="25" [(ngModel)]="relatedProcedure.notes"></textarea></td>
+      <td>
+        <table style="margin:0; padding:0;">
+          <tr>
+            <td>Notas:</td>
+            <td colspan="3"><textarea sytle="width:100%" class="text-area" rows="5" cols="25" [(ngModel)]="relatedProcedure.notes"></textarea></td>
+          </tr>
+        </table>
+
+      </td>
     </tr>
 
   </table>

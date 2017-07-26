@@ -30,11 +30,12 @@ export class RelatedProceduresTabComponent implements OnInit {
   private procedureUID = '';
 
   constructor(private contractService: ContractService, private authorityService: AuthorityService,
-              private procedureService: ProcedureService) { }
+    private procedureService: ProcedureService) { }
 
   public ngOnInit() {
-    this.setRelatedProcedures();
+    this.updateRelatedProceduresGrid();
     this.setEntities();
+    this.clean();
   }
 
   public onShowAddProcedureEditor(): void {
@@ -74,20 +75,20 @@ export class RelatedProceduresTabComponent implements OnInit {
       return;
     }
     try {
-      await this.contractService.addRelatedProcedure(
-        this.clauseInfo.contractUID, this.clauseInfo.uid, this.relatedProcedure);
+      await this.contractService.addRelatedProcedure(this.clauseInfo.contractUID,
+        this.clauseInfo.uid,
+        this.relatedProcedure);
       alert('El trámite se ha agregado a la claúsula.');
-      this.relatedProcedure = new RelatedProcedures();
-      await this.setRelatedProcedures();
-      this.entityUID = '';
-      this.procedureUID = '';
+
+      await this.updateRelatedProceduresGrid();
+      this.clean();
       this.isVisibleAddProcedureEditor = false;
     } catch (e) {
       alert(e);
     }
   }
 
-  public async setRelatedProcedures() {
+  public async updateRelatedProceduresGrid() {
     let clause = await this.contractService.getClause(this.clauseInfo.contractUID, this.clauseInfo.uid);
     this.relatedProcedures = clause.relatedProcedures;
   }
@@ -104,7 +105,7 @@ export class RelatedProceduresTabComponent implements OnInit {
 
   private validate(): boolean {
     if (this.entityUID === '') {
-      alert('Seleccionar una etapa de la lista.');
+      alert('Seleccionar una entidad de la lista.');
       return false;
     }
     if (this.procedureUID === '') {
@@ -133,4 +134,11 @@ export class RelatedProceduresTabComponent implements OnInit {
 
     return true;
   }
+
+  private clean(): void {
+    this.entityUID = '';
+    this.procedureUID = '';
+    this.relatedProcedure = new RelatedProcedures();
+  }
+
 }
