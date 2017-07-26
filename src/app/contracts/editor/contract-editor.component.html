@@ -6,9 +6,7 @@
   </div>
   <div class="tab">
     <button class="tablinks" [disabled]="isDisabled" [class.selected]="selectedTask==='clauseInfo'" (click)="setSelectedTask('clauseInfo')">Cláusula</button>
-    <button class="tablinks" [disabled]="isDisabled">Marco Legal</button>
     <button class="tablinks" [disabled]="isDisabled" [class.selected]="selectedTask==='relatedProcedures'" (click)="setSelectedTask('relatedProcedures')">Trámites involucrados</button>
-    <button class="tablinks" [disabled]="isDisabled">Estado</button>
   </div>
   <div [ngSwitch]="selectedTask">
     <clause-info-tab *ngSwitchCase="'clauseInfo'" [clauseInfo]="clauseInfo" (onCancel)="close()" (onSave)="setSaveOperations()"></clause-info-tab>
