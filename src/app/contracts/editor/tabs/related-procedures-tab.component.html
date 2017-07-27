@@ -1,9 +1,9 @@
 <div>
   <table>
     <tr>
-      <td width="300px" class="title-row">Trámites involucrados</td>
+      <td class="title-row">Trámites relacionados con esta claúsula o anexo</td>
       <td class="title-row align-right">
-        <button class="btn" (click)="onShowAddProcedureEditor()">+Agregar un trámite a esta claúsula</button>
+        <button class="btn" (click)="onShowAddProcedureEditor()">+ Relacionar un trámite con esta claúsula</button>
       </td>
     </tr>
     <tr>
@@ -14,7 +14,7 @@
               <th>#</th>
               <th>Trámite</th>
               <th>Autoridad</th>
-              <th>Clave</th>
+              <th>Homoclave</th>
               <th>Plazo</th>
               <th>Lo inicia</th>
             </tr>
@@ -39,21 +39,23 @@
 <div *ngIf="isVisibleAddProcedureEditor">
   <table>
     <tr>
-      <td class="title-row">Asociar un trámite a esta cláusula del contrato</td>
+      <td class="title-row">Relacionar un trámite con esta cláusula o anexo del contrato</td>
     </tr>
     <tr>
       <table style="margin:0; padding:0;">
         <tr>
           <td>Trámite:</td>
-          <td><select class="select-box" style="width:145px" #entity (change)="onChangeEntity(entity.value)">
-        <option value="">( Seleccionar entidad )</option>        
-        <option *ngFor="let entity of entities" [value]="entity.uid">{{entity.shortName}}</option>
-        </select>
+          <td>
+            <select #entity class="select-box" style="width:145px" (change)="onChangeEntity(entity.value)">
+              <option value="">( Dependencia )</option>
+              <option *ngFor="let entity of entities" [value]="entity.uid">{{entity.shortName}}</option>
+            </select>
           </td>
-          <td width="100%"><select class="select-box" style="width:395px" #procedure (change)="onChangeProcedure(procedure.value)">
-        <option value="">( Seleccionar trámite )</option>        
-        <option *ngFor="let procedure of procedures" [value]="procedure.uid">{{procedure.shortName}}</option>
-        </select>
+          <td width="100%">
+            <select #procedure class="select-box" style="width:395px" (change)="onChangeProcedure(procedure.value)">
+              <option value="">( Trámite )</option>
+              <option *ngFor="let procedure of procedures" [value]="procedure.uid">{{procedure.shortName}}</option>
+            </select>
           </td>
           <td>
             <button class="btn">...</button>
@@ -67,28 +69,26 @@
         <table style="margin:0; padding:0;">
           <tr>
             <td class="align-left">Plazo:</td>
-            <td><input type="number" min="1" max="999" [disabled]="isDiabledMaxFilingTerm" style="width:40px;" class="text-box" [(ngModel)]="relatedProcedure.maxFilingTerm"></td>
             <td>
-              <select class="select-box" style="width:145px" (change)="onChangeMaxFilingTermType()" [(ngModel)]="relatedProcedure.maxFilingTermType">
-        <option value="">( Seleccionar el plazo )</option>
-          <option value="No determinado">No determinado</option>
-          <option value="No aplica">No aplica</option>
-          <option value="Días naturales">Días naturales</option>
-          <option value="Días hábiles">Días hábiles</option>
-          <option value="Horas">Horas</option>          
-        </select>
+              <input type="number" min="1" max="999" [disabled]="isDiabledMaxFilingTerm" style="width:40px;" class="text-box" [(ngModel)]="relatedProcedure.maxFilingTerm">
+            </td>
+            <td>
+              <select #timeValueType class="select-box" style="width:145px" (change)="onChangeMaxFilingTermType()" [(ngModel)]="relatedProcedure.maxFilingTermType">
+                <option value="">( Seleccionar el plazo )</option>
+                <option *ngFor="let timeValueType of timeValueTypesList" [value]="timeValueType.key">{{timeValueType.value}}</option>
+              </select>
             </td>
             <td class="align-left" width="100%">
               <select class="select-box" style="width:100%" [(ngModel)]="relatedProcedure.startsWhen">
-         <option value="">( Seleccionar la condición de inicio )</option>
-          <option value="No determinada">No determinada</option>
-          <option value="Antes de iniciar">Antes de iniciar...</option>
-          <option value="Después de iniciar">Después de iniciar...</option>
-          <option value="Durante">Durante...</option>
-          <option value="Antes de concluir">Antes de concluir...</option>
-          <option value="Después de concluir">Después de concluir...</option>
-          <option value="En cualquier momento">En cualquier momento</option>          
-        </select>
+                <option value="">( Seleccionar la condición de inicio )</option>
+                <option value="No determinada">No determinada</option>
+                <option value="Antes de iniciar">Antes de iniciar...</option>
+                <option value="Después de iniciar">Después de iniciar...</option>
+                <option value="Durante">Durante...</option>
+                <option value="Antes de concluir">Antes de concluir...</option>
+                <option value="Después de concluir">Después de concluir...</option>
+                <option value="En cualquier momento">En cualquier momento</option>
+              </select>
             </td>
           </tr>
         </table>
@@ -123,19 +123,16 @@
             <td colspan="3"><textarea sytle="width:100%" class="text-area" rows="5" cols="25" [(ngModel)]="relatedProcedure.notes"></textarea></td>
           </tr>
         </table>
-
       </td>
     </tr>
-
   </table>
-  <br>
   <table>
     <tr>
       <td width="206px" class="align-right">
         <button class="btn" (click)="cancelAddProcedure()">Cancelar</button>
       </td>
       <td class="align-right">
-        <button class="btn" (click)="addRelatedProcedure()">Agregar trámite</button>
+        <button class="btn" (click)="addRelatedProcedure()">Relacionar trámite</button>
       </td>
     </tr>
   </table>

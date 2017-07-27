@@ -8,7 +8,7 @@
 
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
-import { Clause, SmallClause } from '../../data-types/clause';
+import { ContractClause } from '../../data-types/contract';
 import { ContractService } from '../../services/contract.service';
 
 @Component({
@@ -20,11 +20,10 @@ import { ContractService } from '../../services/contract.service';
 })
 
 export class ClauseInfoTabComponent implements OnInit {
-  @Input() public clauseInfo: SmallClause;
+  @Input() public contractClause: ContractClause;
   @Output() public onCancel = new EventEmitter();
   @Output() public onSave = new EventEmitter();
 
-  public clause: Clause = new Clause();
   public isDisabled = false;
   public buttonLabelSave = '';
 
@@ -40,16 +39,15 @@ export class ClauseInfoTabComponent implements OnInit {
     }
 
     try {
-      if (this.clauseInfo.uid === '') {
+      if (this.contractClause.uid === '') {
         await this.createClause();
-        this.clauseInfo.uid = this.clause.uid;
         this.isDisabled = true;
         this.onSave.emit();
         return;
       }
 
       await this.updateClause();
-      alert('La claúsula se actualizado con exito.');
+      alert('La claúsula se actualizó correctamente.');
       this.isDisabled = true;
     } catch (e) {
       alert(e);
@@ -65,16 +63,16 @@ export class ClauseInfoTabComponent implements OnInit {
   }
 
   private async createClause() {
-    this.clause = await this.contractService.createClause(this.clauseInfo.contractUID, this.clause);
+    this.contractClause = await this.contractService.createClause(this.contractClause.contractUID, this.contractClause);
   }
 
   private async updateClause() {
-    this.clause = await this.contractService.updateClause(this.clauseInfo.contractUID, this.clause);
+    this.contractClause = await this.contractService.updateClause(this.contractClause.contractUID, this.contractClause);
   }
 
   private async setClause() {
-    if (this.clauseInfo.uid !== '') {
-      this.clause = await this.contractService.getClause(this.clauseInfo.contractUID, this.clauseInfo.uid);
+    if (this.contractClause.uid !== '') {
+      this.contractClause = await this.contractService.getClause(this.contractClause.contractUID, this.contractClause.uid);
       this.buttonLabelSave = 'Guardar cambios';
     } else {
       this.buttonLabelSave = 'Agregar claúsula';
@@ -82,21 +80,17 @@ export class ClauseInfoTabComponent implements OnInit {
   }
 
   private validate(): boolean {
-    if (this.clause.clauseNo === '') {
-      alert('El número de la claúsula se encuentra en blanco.');
+    if (this.contractClause.clauseNo === '') {
+      alert('Requiero el número que identifica a la claúsula o anexo.');
       return false;
     }
-    if (!this.clause.sourcePageNo) {
-      alert('el número de pagina donde se encuentra la claúsula en el contrato se encuentra en blanco.');
+    if (this.contractClause.title === '') {
+      alert('Necesito conocer el nombre que identifica la claúsula o anexo dentro del contrato.');
+      return false;
+    }
+    if (!this.contractClause.sourcePageNo) {
+      alert('Requiero conocer la página del archivo donde se encuentra la claúsula o anexo.');
       return;
-    }
-    if (this.clause.title === '') {
-      alert('El nombre de la claúsula se encuentra en blanco.');
-      return false;
-    }
-    if (this.clause.text === '') {
-      alert('El texto de la claúsula se encuentra en blanco.');
-      return false;
     }
     return true;
   }

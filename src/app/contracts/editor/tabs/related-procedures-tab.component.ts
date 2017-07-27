@@ -1,27 +1,32 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 import { ContractService } from '../../services/contract.service';
-import { RelatedProcedures, SmallClause } from '../../data-types/clause';
+import { ContractClause, RelatedProcedures } from '../../data-types/contract';
 
 import { Entity } from '../../../procedures/data-types/entity';
 import { SmallProcedureInterface } from '../../../procedures/data-types/small-procedure.interface';
+import { KeyValue } from '../../../core/core-data-types';
+
 import { AuthorityService } from '../../../procedures/services/authority.service';
 import { ProcedureService } from '../../../procedures/services/procedure.service';
+import { CataloguesService } from '../../../common-services';
 
 @Component({
   selector: 'related-procedures-tab',
   templateUrl: './related-procedures-tab.component.html',
   styleUrls: ['./related-procedures-tab.component.scss'],
-  providers: [AuthorityService, ProcedureService]
+  providers: [AuthorityService, ProcedureService, CataloguesService]
 })
 
 export class RelatedProceduresTabComponent implements OnInit {
 
-  @Input() public clauseInfo: SmallClause;
+  @Input() public contractClause: ContractClause;
 
   public relatedProcedures: RelatedProcedures[];
   public entities: Entity[] = [];
   public procedures: SmallProcedureInterface[] = [];
+  public timeValueTypesList: KeyValue[] = [];
+
   public relatedProcedure = new RelatedProcedures();
   public isDiabledMaxFilingTerm = true;
   public isVisibleAddProcedureEditor = false;
@@ -29,12 +34,15 @@ export class RelatedProceduresTabComponent implements OnInit {
   private entityUID = '';
   private procedureUID = '';
 
-  constructor(private contractService: ContractService, private authorityService: AuthorityService,
-    private procedureService: ProcedureService) { }
+  constructor(private contractService: ContractService,
+              private authorityService: AuthorityService,
+              private procedureService: ProcedureService,
+              private cataloguesService: CataloguesService) { }
 
   public ngOnInit() {
     this.updateRelatedProceduresGrid();
     this.setEntities();
+    this.loadTimeValueTypesList();
     this.clean();
   }
 
@@ -75,9 +83,9 @@ export class RelatedProceduresTabComponent implements OnInit {
       return;
     }
     try {
-      await this.contractService.addRelatedProcedure(this.clauseInfo.contractUID,
-        this.clauseInfo.uid,
-        this.relatedProcedure);
+      await this.contractService.addRelatedProcedure(this.contractClause.contractUID,
+                                                     this.contractClause.uid,
+                                                     this.relatedProcedure);
       alert('El trámite se ha agregado a la claúsula.');
 
       await this.updateRelatedProceduresGrid();
@@ -89,18 +97,27 @@ export class RelatedProceduresTabComponent implements OnInit {
   }
 
   public async updateRelatedProceduresGrid() {
-    let clause = await this.contractService.getClause(this.clauseInfo.contractUID, this.clauseInfo.uid);
+    let clause = await this.contractService.getClause(this.contractClause.contractUID, this.contractClause.uid);
     this.relatedProcedures = clause.relatedProcedures;
   }
 
   private setEntities(): void {
     this.authorityService.getEntities()
-      .then((entities) => { this.entities = entities; });
+                         .then((entities) => { this.entities = entities; });
   }
 
   private setProcedures(entityUID: string): void {
     this.procedureService.getProceduresList("AuthEntityUID='" + entityUID + "'")
       .then((procedures) => { this.procedures = procedures; });
+  }
+
+  private loadTimeValueTypesList(): void {
+    try {
+      this.cataloguesService.getTimeValueTypesList()
+                            .then((list) => { this.timeValueTypesList = list; });
+    } catch (e) {
+      alert(e);
+    }
   }
 
   private validate(): boolean {

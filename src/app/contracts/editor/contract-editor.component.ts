@@ -10,7 +10,7 @@ import {
   Component, EventEmitter, HostBinding, Input, Output, OnInit
 } from '@angular/core';
 
-import { Clause, SmallClause } from '../data-types/clause';
+import { Contract, ContractClause } from '../data-types/contract';
 import { ContractService } from '../services/contract.service';
 
 @Component({
@@ -24,11 +24,10 @@ export class ContractEditorComponent implements OnInit {
   @HostBinding('style.display') public display = 'block';
   @HostBinding('style.position') public position = 'absolute';
 
+  @Input() public contractClause: ContractClause;
   @Output() public onCloseEvent = new EventEmitter();
-  @Input() public clauseInfo: SmallClause;
 
-  public clause = new Clause;
-  public selectedTask = '';
+  public currentSelectedTab = 'general-info-tab';
   public isDisabled = false;
   public title = '';
 
@@ -36,7 +35,6 @@ export class ContractEditorComponent implements OnInit {
 
   public ngOnInit() {
     this.setInitialSettings();
-    this.selectedTask = 'clauseInfo';
   }
 
   public setSaveOperations(): void {
@@ -44,8 +42,8 @@ export class ContractEditorComponent implements OnInit {
     this.enableTabs();
   }
 
-  public setSelectedTask(selectedTask: string): void {
-    this.selectedTask = selectedTask;
+  public changeTab(newSelectedTab: string): void {
+    this.currentSelectedTab = newSelectedTab;
   }
 
   public close(): void {
@@ -61,8 +59,7 @@ export class ContractEditorComponent implements OnInit {
   }
 
   private setInitialSettings(): void {
-    if (this.clauseInfo.uid === '') {
-      this.title = 'Nueva claúsula ';
+    if (this.contractClause.uid === '') {
       this.disableTabs();
     } else {
       this.setTitle();
@@ -70,8 +67,17 @@ export class ContractEditorComponent implements OnInit {
   }
 
   private async setTitle() {
-    let clause = await this.contractService.getClause(this.clauseInfo.contractUID, this.clauseInfo.uid);
-    this.title = clause.clauseNo + ' ' + clause.title;
+    if (this.contractClause.uid === '') {
+      this.title = 'Nueva claúsula o anexo';
+    } else {
+      let clause = await this.getClause();
+      this.title = clause.clauseNo + ' ' + clause.title;
+    }
+  }
+
+  private getClause(): Promise<ContractClause> {
+    return this.contractService.getClause(this.contractClause.contractUID,
+                                          this.contractClause.uid);
   }
 
 }

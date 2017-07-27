@@ -8,10 +8,12 @@
 
 import { Component, OnInit } from '@angular/core';
 
+import { Assertion } from 'empiria';
+
 import { ContractService } from '../services/contract.service';
 
-import { BaseContract, BaseClause } from '../data-types/contract';
-import { Clause, SmallClause } from '../data-types/clause';
+import { Contract, ContractClause,
+         EmptyContract, EmptyContractClause } from '../data-types/contract';
 
 @Component({
   selector: 'contracts-main-page',
@@ -19,50 +21,45 @@ import { Clause, SmallClause } from '../data-types/clause';
   styleUrls: ['./contracts-main-page.component.scss'],
   providers: [ContractService]
 })
-
 export class ContractsMainPageComponent implements OnInit {
 
-  public isShowContractEditorWindow = false;
-  public clauses: BaseClause[] = [];
-  public contracts: BaseContract[] = [];
-  public selectedContract: BaseContract;
-  public clause = new SmallClause();
+  public contractsList: Contract[] = [];
+
+  public selectedContract: Contract = EmptyContract();
+  public selectedContractClause: ContractClause = EmptyContractClause();
+
+  public isClauseEditorWindowVisible = false;
 
   constructor(private contractService: ContractService) { }
 
   public ngOnInit() {
     this.setInitialValues();
   }
-  public closeContractEditorWindow(): void {
-    this.isShowContractEditorWindow = false;
+
+  public onCloseContractEditorWindow(): void {
+    this.selectedContractClause = EmptyContractClause();
+    this.isClauseEditorWindowVisible = false;
   }
 
-  public showContractEditorWindow(clauseUID?: string): void {
-    if (!this.selectedContract) {
-      alert("Seleccionar primero el contrato al que se le agregará la nueva Clausual");
-      return;
+  public onClickAddClause() {
+    this.selectedContractClause = EmptyContractClause();
+    this.isClauseEditorWindowVisible = true;
+  }
 
-    }
-    if (!clauseUID) {
-      this.clause.uid = '';
-    } else {
-      this.clause.uid = clauseUID;
-    }
-    this.clause.contractName = this.selectedContract.name;
-    this.clause.contractUID = this.selectedContract.uid;
-
-    this.isShowContractEditorWindow = true;
+  public onClickEditClause(clause: ContractClause) {
+    this.selectedContractClause = clause;
+    this.selectedContractClause.contractUID = this.selectedContract.uid;
+    this.selectedContractClause.contractName = this.selectedContract.name;
+    this.isClauseEditorWindowVisible = true;
   }
 
   public search(): void {
-    if (!this.selectedContract) {
-      return;
-    }
-    this.setClauses();
+    alert('Por el momento la búsqueda de cláusulas está deshabilitada.');
   }
 
   public onChangeContract(uid: string): void {
-    this.getSelectedContract(uid);
+    this.selectedContract = this.contractsList.find((x) => x.uid === uid);
+    this.loadSelectedContractClausesList();
   }
 
   public openURL(page?: number): void {
@@ -73,23 +70,40 @@ export class ContractsMainPageComponent implements OnInit {
   }
 
   private setInitialValues(): void {
-    this.setContracts();
+    this.loadContractsList();
   }
 
-  private setContracts(): void {
-    this.contractService.getContractList().then((contracts) => {
-      this.contracts = contracts;
-    });
+  private loadContractsList(): void {
+    const errMsg = 'Ocurrió un problema al intentar leer la lista de contratos.';
+
+    this.contractService.getContractList()
+                        .then((x) => this.contractsList = x)
+                        .catch((e) => this.exceptionHandler(e, errMsg));
   }
 
-  private getSelectedContract(uid: string) {
-    this.selectedContract = this.contracts.find((x) => x.uid === uid);
+  private loadSelectedContractClausesList(): void {
+    Assertion.assertValue(this.selectedContract, "this.selectedContract");
+
+    const errMsg = 'Ocurrió un problema al intentar leer las cláusulas del contrato.';
+
+    if (this.selectedContract.clauses) {
+      return;
+    }
+
+    this.contractService.getContractClausesList(this.selectedContract.uid)
+                        .then((x) => this.selectedContract.clauses = x)
+                        .catch((e) => this.exceptionHandler(e, errMsg));
   }
 
-  private setClauses(): void {
-    this.contractService.getContractClausesList(this.selectedContract.uid).then((clauses) => {
-      this.clauses = clauses;
-    });
+  private exceptionHandler(error: any, defaultMsg: string) : void {
+    let errMsg = 'Tengo un problema.\n\n';
+
+    if (typeof(error) === typeof(Error)) {
+      errMsg += defaultMsg + '\n\n' + (<Error> error).message;
+    } else {
+      errMsg += defaultMsg + '\n\n' + 'Error desconocido.';
+    }
+    alert(errMsg);
   }
 
 }

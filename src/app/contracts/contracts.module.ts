@@ -27,7 +27,7 @@ import { ContractsRoutingModule } from './contracts-routing.module';
 @NgModule({
   imports: [ContractsRoutingModule, SharedModule, CommonModule, FormsModule],
   declarations: [ContractsMainPageComponent, ContractEditorComponent,
-     ClauseInfoTabComponent, RelatedProceduresTabComponent],
+                 ClauseInfoTabComponent, RelatedProceduresTabComponent],
   exports: [ContractsMainPageComponent]
 })
 export class ContractsModule { }

@@ -2,14 +2,14 @@
   <div class="header">
     <div class="close" (click)="close()">&times;</div>
     <div class="title">{{title}}</div>
-    <div class="subtitle">{{clauseInfo.contractName}}</div>
+    <div class="subtitle">{{contractClause.contractName}}</div>
   </div>
   <div class="tab">
-    <button class="tablinks" [disabled]="isDisabled" [class.selected]="selectedTask==='clauseInfo'" (click)="setSelectedTask('clauseInfo')">Cláusula</button>
-    <button class="tablinks" [disabled]="isDisabled" [class.selected]="selectedTask==='relatedProcedures'" (click)="setSelectedTask('relatedProcedures')">Trámites involucrados</button>
+    <button class="tablinks" [disabled]="isDisabled" [class.selected]="currentSelectedTab==='general-info-tab'" (click)="changeTab('general-info-tab')">Cláusula</button>
+    <button class="tablinks" [disabled]="isDisabled" [class.selected]="currentSelectedTab==='related-procedures-tab'" (click)="changeTab('related-procedures-tab')">Trámites relacionados</button>
   </div>
-  <div [ngSwitch]="selectedTask">
-    <clause-info-tab *ngSwitchCase="'clauseInfo'" [clauseInfo]="clauseInfo" (onCancel)="close()" (onSave)="setSaveOperations()"></clause-info-tab>
-    <related-procedures-tab *ngSwitchCase="'relatedProcedures'" [clauseInfo]="clauseInfo"></related-procedures-tab>
+  <div [ngSwitch]="currentSelectedTab">
+    <clause-info-tab *ngSwitchCase="'general-info-tab'" [contractClause]="contractClause" (onCancel)="close()" (onSave)="setSaveOperations()"></clause-info-tab>
+    <related-procedures-tab *ngSwitchCase="'related-procedures-tab'" [contractClause]="contractClause"></related-procedures-tab>
   </div>
 </div>
