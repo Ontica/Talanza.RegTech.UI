@@ -10,38 +10,37 @@ import { Injectable } from '@angular/core';
 
 import { CoreService } from '../../core';
 
-import { BaseContract, BaseClause } from '../data-types/contract';
-import { Clause, RelatedProcedures } from '../data-types/clause';
+import { Contract, ContractClause, RelatedProcedures } from '../data-types/contract';
 
 @Injectable()
 export class ContractService {
 
   public constructor(private core: CoreService) { }
 
-  public getContractList(): Promise<BaseContract[]> {
+  public getContractList(): Promise<Contract[]> {
     const path = 'v1/contracts';
 
-    return this.core.http.get<BaseContract[]>(path).toPromise();
+    return this.core.http.get<Contract[]>(path).toPromise();
   }
 
-  public getContractClausesList(contractUID: string): Promise<BaseClause[]> {
+  public getContractClausesList(contractUID: string): Promise<ContractClause[]> {
     const path = 'v1/contracts/' + contractUID + '/clauses';
 
-    return this.core.http.get<BaseClause[]>(path).toPromise();
+    return this.core.http.get<ContractClause[]>(path).toPromise();
   }
 
-  public getClause(contractUID: string, clauseUID: string): Promise<Clause> {
+  public getClause(contractUID: string, clauseUID: string): Promise<ContractClause> {
     const path = 'v1/contracts/' + contractUID + '/clauses/' + clauseUID;
 
-    return this.core.http.get<Clause>(path).toPromise();
+    return this.core.http.get<ContractClause>(path).toPromise();
   }
 
-  public createClause(contractUID: string, clause: Clause): Promise<Clause> {
-    return this.core.http.post<Clause>('v1/contracts/' + contractUID + '/clauses', clause).toPromise();
+  public createClause(contractUID: string, clause: ContractClause): Promise<ContractClause> {
+    return this.core.http.post<ContractClause>('v1/contracts/' + contractUID + '/clauses', clause).toPromise();
   }
 
-  public updateClause(contractUID: string, clause: Clause): Promise<Clause> {
-    return this.core.http.put<Clause>('v1/contracts/' + contractUID + '/clauses/' + clause.uid, clause)
+  public updateClause(contractUID: string, clause: ContractClause): Promise<ContractClause> {
+    return this.core.http.put<ContractClause>('v1/contracts/' + contractUID + '/clauses/' + clause.uid, clause)
       .toPromise();
   }
 
