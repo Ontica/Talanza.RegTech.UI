@@ -42,14 +42,18 @@ export class ContractsMainPageComponent implements OnInit {
   }
 
   public onClickAddClause() {
+    if (this.selectedContract.uid === '') {
+      alert("Es necesario seleccionar el contrato al cual se le aplicarán los anexos ");
+      return;
+    }
     this.selectedContractClause = EmptyContractClause();
+    this.selectedContractClause.contract = this.selectedContract;    
     this.isClauseEditorWindowVisible = true;
   }
 
   public onClickEditClause(clause: ContractClause) {
     this.selectedContractClause = clause;
-    this.selectedContractClause.contractUID = this.selectedContract.uid;
-    this.selectedContractClause.contractName = this.selectedContract.name;
+    this.selectedContractClause.contract = this.selectedContract;   
     this.isClauseEditorWindowVisible = true;
   }
 
@@ -58,6 +62,11 @@ export class ContractsMainPageComponent implements OnInit {
   }
 
   public onChangeContract(uid: string): void {
+    if (uid === '') {
+      this.selectedContract.clauses = [];      
+      this.selectedContract  = EmptyContract();
+      return;
+    }
     this.selectedContract = this.contractsList.find((x) => x.uid === uid);
     this.loadSelectedContractClausesList();
   }
@@ -85,13 +94,13 @@ export class ContractsMainPageComponent implements OnInit {
     Assertion.assertValue(this.selectedContract, "this.selectedContract");
 
     const errMsg = 'Ocurrió un problema al intentar leer las cláusulas del contrato.';
-
-    if (this.selectedContract.clauses) {
+  
+    if (this.selectedContract.clauses) {    
       return;
     }
-
+    
     this.contractService.getContractClausesList(this.selectedContract.uid)
-                        .then((x) => this.selectedContract.clauses = x)
+                        .then((x) => this.selectedContract.clauses = x)              
                         .catch((e) => this.exceptionHandler(e, errMsg));
   }
 
