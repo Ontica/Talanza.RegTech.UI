@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 import { ContractService } from '../../services/contract.service';
-import { ContractClause, RelatedProcedures } from '../../data-types/contract';
+import { ContractClause, RelatedProcedure, EmptyRelatedProcedures } from '../../data-types/contract';
 
 import { Entity } from '../../../procedures/data-types/entity';
 import { SmallProcedureInterface } from '../../../procedures/data-types/small-procedure.interface';
@@ -22,14 +22,15 @@ export class RelatedProceduresTabComponent implements OnInit {
 
   @Input() public contractClause: ContractClause;
 
-  public relatedProcedures: RelatedProcedures[];
+  public relatedProcedures: RelatedProcedure[];
   public entities: Entity[] = [];
   public procedures: SmallProcedureInterface[] = [];
   public timeValueTypesList: KeyValue[] = [];
+  public startsWhenList: KeyValue[] = [];
 
-  public relatedProcedure = new RelatedProcedures();
-  public isDiabledMaxFilingTerm = true;
-  public isVisibleAddProcedureEditor = false;
+  public relatedProcedure = EmptyRelatedProcedures();
+  public isDiabledTextBoxMaxFilingTerm = true;
+  public isAddRelatedProcedureEditorVisible = false;
 
   private entityUID = '';
   private procedureUID = '';
@@ -41,18 +42,19 @@ export class RelatedProceduresTabComponent implements OnInit {
 
   public ngOnInit() {
     this.updateRelatedProceduresGrid();
-    this.setEntities();
+    this.loadEntitiesList();
     this.loadTimeValueTypesList();
+    this.loadStartsWhenList();
     this.clean();
   }
 
   public onShowAddProcedureEditor(): void {
-    this.isVisibleAddProcedureEditor = true;
+    this.isAddRelatedProcedureEditorVisible = true;
   }
 
   public onChangeEntity(entityUID: string): void {
     if (entityUID !== '') {
-      this.setProcedures(entityUID);
+      this.loadProceduresList(entityUID);
     }
     this.entityUID = entityUID;
   }
@@ -67,57 +69,78 @@ export class RelatedProceduresTabComponent implements OnInit {
   public onChangeMaxFilingTermType(): void {
     if ((this.relatedProcedure.maxFilingTermType !== 'No determinado')
       && (this.relatedProcedure.maxFilingTermType !== 'No aplica')) {
-      this.isDiabledMaxFilingTerm = false;
+      this.isDiabledTextBoxMaxFilingTerm = false;
     } else {
-      this.isDiabledMaxFilingTerm = true;
+      this.isDiabledTextBoxMaxFilingTerm = true;
     }
-
   }
 
-  public cancelAddProcedure(): void {
-    this.isVisibleAddProcedureEditor = false;
+  public onClickCancelAddProcedure(): void {
+    this.isAddRelatedProcedureEditorVisible = false;
   }
 
-  public async addRelatedProcedure() {
+  public async onClickAddRelatedProcedure() {
     if (!this.validate()) {
       return;
     }
-    try {
-      await this.contractService.addRelatedProcedure(this.contractClause.contractUID,
-                                                     this.contractClause.uid,
-                                                     this.relatedProcedure);
-      alert('El trámite se ha agregado a la claúsula.');
 
-      await this.updateRelatedProceduresGrid();
-      this.clean();
-      this.isVisibleAddProcedureEditor = false;
-    } catch (e) {
-      alert(e);
-    }
+    await this.addRelatedProcedure();
+    await this.updateRelatedProceduresGrid();
+
+    this.clean();
+    this.isAddRelatedProcedureEditorVisible = false;
   }
 
   public async updateRelatedProceduresGrid() {
-    let clause = await this.contractService.getClause(this.contractClause.contractUID, this.contractClause.uid);
-    this.relatedProcedures = clause.relatedProcedures;
+    const errMsg = 'Ocurrió un problema al intentar leer la lista de trámites relacionados.';
+
+    await this.contractService.getClause(this.contractClause.contract.uid,
+                                         this.contractClause.uid)
+                              .then((clause) => this.relatedProcedures = clause.relatedProcedures)
+                              .catch((e) => this.exceptionHandler(e, errMsg));
   }
 
-  private setEntities(): void {
+  private async addRelatedProcedure() {
+    const errMsg = 'Ocurrió un problema al intentar agregar el trámite.';
+
+    await this.contractService.addRelatedProcedure(this.contractClause.contract.uid,
+                                                   this.contractClause.uid,
+                                                   this.relatedProcedure)
+                              .then(() => alert('El trámite se ha agregado a la claúsula.'))
+                              .catch((e) => this.exceptionHandler(e, errMsg));
+
+  }
+
+  private loadEntitiesList(): void {
+    const errMsg = 'Ocurrió un problema al intentar leer la lista de trámites.';
+
     this.authorityService.getEntities()
-                         .then((entities) => { this.entities = entities; });
+                         .then((entities) => { this.entities = entities; })
+                         .catch((e) => this.exceptionHandler(e, errMsg));
   }
 
-  private setProcedures(entityUID: string): void {
+  private loadProceduresList(entityUID: string): void {
+    const errMsg = 'Ocurrió un problema al intentar leer la lista de trámites.';
+
     this.procedureService.getProceduresList("AuthEntityUID='" + entityUID + "'")
-      .then((procedures) => { this.procedures = procedures; });
+                         .then((procedures) => { this.procedures = procedures; })
+                         .catch((e) => this.exceptionHandler(e, errMsg));
   }
 
   private loadTimeValueTypesList(): void {
-    try {
-      this.cataloguesService.getTimeValueTypesList()
-                            .then((list) => { this.timeValueTypesList = list; });
-    } catch (e) {
-      alert(e);
-    }
+    const errMsg = 'Ocurrió un problema al intentar leer la lista de plazos.';
+
+    this.cataloguesService.getTermTimeUnitsList()
+                          .then((list) => this.timeValueTypesList = list)
+                          .catch((e) => this.exceptionHandler(e, errMsg));
+  }
+
+  private loadStartsWhenList(): void {
+    const errMsg = 'Ocurrió un problema al intentar leer la lista de plazos.';
+
+    this.cataloguesService.getStartsWhenList()
+                          .then((list) => this.startsWhenList = list)
+                          .catch((e) => this.exceptionHandler(e, errMsg));
   }
 
   private validate(): boolean {
@@ -134,8 +157,8 @@ export class RelatedProceduresTabComponent implements OnInit {
       return false;
     }
     if ((!this.relatedProcedure.maxFilingTerm) &&
-      ((this.relatedProcedure.maxFilingTermType !== 'No determinado') &&
-        (this.relatedProcedure.maxFilingTermType !== 'No aplica'))) {
+      ((this.relatedProcedure.maxFilingTermType !== 'Unknown') &&
+        (this.relatedProcedure.maxFilingTermType !== 'NA'))) {
 
       alert('La cantidad de: ' + this.relatedProcedure.maxFilingTermType + ' se encuntra en blanco.');
       return false;
@@ -155,7 +178,18 @@ export class RelatedProceduresTabComponent implements OnInit {
   private clean(): void {
     this.entityUID = '';
     this.procedureUID = '';
-    this.relatedProcedure = new RelatedProcedures();
+    this.relatedProcedure = EmptyRelatedProcedures();
+  }
+
+  private exceptionHandler(error: any, defaultMsg: string): void {
+    let errMsg = 'Tengo un problema.\n\n';
+
+    if (typeof (error) === typeof (Error)) {
+      errMsg += defaultMsg + '\n\n' + (<Error> error).message;
+    } else {
+      errMsg += defaultMsg + '\n\n' + 'Error desconocido.';
+    }
+    alert(errMsg);
   }
 
 }

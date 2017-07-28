@@ -36,7 +36,7 @@
 </div>
 <br>
 <br>
-<div *ngIf="isVisibleAddProcedureEditor">
+<div *ngIf="isAddRelatedProcedureEditorVisible">
   <table>
     <tr>
       <td class="title-row">Relacionar un trámite con esta cláusula o anexo del contrato</td>
@@ -70,7 +70,7 @@
           <tr>
             <td class="align-left">Plazo:</td>
             <td>
-              <input type="number" min="1" max="999" [disabled]="isDiabledMaxFilingTerm" style="width:40px;" class="text-box" [(ngModel)]="relatedProcedure.maxFilingTerm">
+              <input type="number" min="1" max="999" [disabled]="isDiabledTextBoxMaxFilingTerm" style="width:40px;" class="text-box" [(ngModel)]="relatedProcedure.maxFilingTerm">
             </td>
             <td>
               <select #timeValueType class="select-box" style="width:145px" (change)="onChangeMaxFilingTermType()" [(ngModel)]="relatedProcedure.maxFilingTermType">
@@ -81,13 +81,7 @@
             <td class="align-left" width="100%">
               <select class="select-box" style="width:100%" [(ngModel)]="relatedProcedure.startsWhen">
                 <option value="">( Seleccionar la condición de inicio )</option>
-                <option value="No determinada">No determinada</option>
-                <option value="Antes de iniciar">Antes de iniciar...</option>
-                <option value="Después de iniciar">Después de iniciar...</option>
-                <option value="Durante">Durante...</option>
-                <option value="Antes de concluir">Antes de concluir...</option>
-                <option value="Después de concluir">Después de concluir...</option>
-                <option value="En cualquier momento">En cualquier momento</option>
+                <option *ngFor="let startWhen of startsWhenList" [value]="startWhen.key">{{startWhen.value}}</option>                
               </select>
             </td>
           </tr>
@@ -129,10 +123,10 @@
   <table>
     <tr>
       <td width="206px" class="align-right">
-        <button class="btn" (click)="cancelAddProcedure()">Cancelar</button>
+        <button class="btn" (click)="onClickCancelAddProcedure()">Cancelar</button>
       </td>
       <td class="align-right">
-        <button class="btn" (click)="addRelatedProcedure()">Relacionar trámite</button>
+        <button class="btn" (click)="onClickAddRelatedProcedure()">Relacionar trámite</button>
       </td>
     </tr>
   </table>
