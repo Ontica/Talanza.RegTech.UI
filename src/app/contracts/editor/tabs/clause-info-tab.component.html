@@ -46,13 +46,13 @@
       <tr>
         <td><button class="btn">Imprimir</button></td>
         <td class="align-center">
-          <button class="btn" (click)="cancel()">Cancelar</button>
+          <button class="btn" (click)="onClickCancel()">Cancelar</button>
         </td>
         <td class="align-right" *ngIf="isDisabled">
-          <button class="btn" (click)="edit()">Editar</button>
+          <button class="btn" (click)="onClickEditContractClause()">Editar</button>
         </td>
         <td class="align-right" *ngIf="!isDisabled">
-          <button class="btn" (click)="saveClause()">{{buttonLabelSave}}</button>
+          <button class="btn" (click)="onClickSaveContractClause()">{{buttonLabelSave}}</button>
         </td>
       </tr>
     </table>

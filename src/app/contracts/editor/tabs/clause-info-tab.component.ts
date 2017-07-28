@@ -30,49 +30,81 @@ export class ClauseInfoTabComponent implements OnInit {
   public constructor(private contractService: ContractService) { }
 
   public ngOnInit() {
-    this.setClause();
+    this.setButtonSaveLabel();
   }
 
-  public async saveClause() {
+  public async onClickSaveContractClause() {
     if (!this.validate()) {
       return;
     }
 
-    try {
-      if (this.contractClause.uid === '') {
-        await this.createClause();
-        this.isDisabled = true;
-        this.onSave.emit();
-        return;
-      }
-
-      await this.updateClause();
-      alert('La claúsula se actualizó correctamente.');
-      this.isDisabled = true;
-    } catch (e) {
-      alert(e);
+    if (this.isNewContractClause()) {
+      await this.addNewClause();
+      return;
     }
+
+    await this.updateExistClause();
   }
 
-  public edit(): void {
-    this.isDisabled = false;
+  public onClickEditContractClause(): void {
+    this.enableEditor();
   }
 
-  public cancel(): void {
+  public onClickCancel(): void {
     this.onCancel.emit();
   }
 
+  private async addNewClause() {
+    await this.createClause();
+    alert('La claúsula o anexo se agregó correctamente.');
+
+    this.disableEditor();
+    this.onSave.emit();
+  }
+
+  private disableEditor(): void {
+    this.isDisabled = true;
+  }
+
+  private enableEditor(): void {
+    this.isDisabled = false;
+  }
+
+  private isNewContractClause(): boolean {
+    if (this.contractClause.uid === '') {
+      return true;
+    }
+    return false;
+  }
+
+  private async updateExistClause() {
+    await this.updateClause();
+    alert('La claúsula se actualizó correctamente.');
+
+    this.disableEditor();
+  }
+
   private async createClause() {
-    this.contractClause = await this.contractService.createClause(this.contractClause.contractUID, this.contractClause);
+    const errMsg = 'Ocurrió un problema al intentar agregar la claúsula.';
+
+    await this.contractService.createClause(this.contractClause.contract.uid,
+                                            this.contractClause)
+                              .then((contractClause) => this.contractClause.uid = contractClause.uid)
+                              .catch((e) => this.exceptionHandler(e, errMsg));
   }
 
   private async updateClause() {
-    this.contractClause = await this.contractService.updateClause(this.contractClause.contractUID, this.contractClause);
+    const errMsg = 'Ocurrió un problema al intentar actualizar la claúsula.';
+
+    await this.contractService.updateClause(this.contractClause.contract.uid,
+                                            this.contractClause)
+                              .then((contractClause) => this.contractClause = contractClause)
+                              .catch((e) => this.exceptionHandler(e, errMsg));
+
   }
 
-  private async setClause() {
-    if (this.contractClause.uid !== '') {
-      this.contractClause = await this.contractService.getClause(this.contractClause.contractUID, this.contractClause.uid);
+  private setButtonSaveLabel(): void {
+    if (!this.isNewContractClause()) {
       this.buttonLabelSave = 'Guardar cambios';
     } else {
       this.buttonLabelSave = 'Agregar claúsula';
@@ -93,6 +125,17 @@ export class ClauseInfoTabComponent implements OnInit {
       return;
     }
     return true;
+  }
+
+  private exceptionHandler(error: any, defaultMsg: string): void {
+    let errMsg = 'Tengo un problema.\n\n';
+
+    if (typeof (error) === typeof (Error)) {
+      errMsg += defaultMsg + '\n\n' + (<Error>error).message;
+    } else {
+      errMsg += defaultMsg + '\n\n' + 'Error desconocido.';
+    }
+    alert(errMsg);
   }
 
 }
