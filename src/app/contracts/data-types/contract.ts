@@ -13,64 +13,58 @@ export interface Contract {
   clauses?: ContractClause[];
 }
 
+interface ContractRef {
+  uid: string;
+  name: string;
+  url: string;
+}
+
 export interface ContractClause {
   uid: string;
+  contract: ContractRef;
   clauseNo: string;
   title: string;
   text: string;
   sourcePageNo: number;
-
   notes: string;
   status: string;
-  relatedProcedures: RelatedProcedures[];
-
-  contractUID: string;
-  contractName: string;
+  relatedProcedures: RelatedProcedure[];
 }
 
-export class RelatedProcedures {
-  public uid: string;
-  public procedure: ProcedureDef;
-  public maxFilingTerm: number;
-  public maxFilingTermType: string;
-  public startsWhen: string;
-  public startsWhenTrigger: string;
-  public notes: string;
-
-  constructor() {
-    this.uid = '';
-    this.procedure = new ProcedureDef();
-    this.maxFilingTerm = 0;
-    this.maxFilingTermType = '';
-    this.startsWhen = '';
-    this.startsWhenTrigger = '';
-    this.notes = '';
-  }
+export interface RelatedProcedure {
+  uid: string;
+  procedure: ProcedureRef;
+  maxFilingTerm: number;
+  maxFilingTermType: string;
+  startsWhen: string;
+  startsWhenTrigger: string;
+  notes: string;
 }
 
-class ProcedureDef {
-  public uid: string;
-  public code: string;
-  public entity: string;
-  public name: string;
-  public shortName: string;
-
-  constructor() {
-    this.uid = '';
-    this.code = '';
-    this.entity = '';
-    this.name = '';
-    this.shortName = '';
-  }
+interface ProcedureRef {
+  uid: string;
+  code: string;
+  entity: string;
+  name: string;
+  shortName: string;
 }
-
 
 export function EmptyContract() {
   const empty: Contract = {
     uid: '',
     name: '',
-    url: '' ,
+    url: '',
     clauses: []
+  };
+
+  return empty;
+}
+
+export function EmptyContractRef() {
+  const empty: ContractRef = {
+    uid: '',
+    name: '',
+    url: ''
   };
 
   return empty;
@@ -78,16 +72,42 @@ export function EmptyContract() {
 
 export function EmptyContractClause() {
   const empty: ContractClause = {
-      uid: '',
-      clauseNo: '',
-      notes: '',
-      relatedProcedures: [],
-      sourcePageNo: 0,
-      status: '',
-      text: '',
-      title: '',
-      contractUID: '',
-      contractName: '',
-    };
+    uid: '',
+    contract: EmptyContractRef(),
+    clauseNo: '',
+    notes: '',
+    relatedProcedures: [],
+    sourcePageNo: 0,
+    status: '',
+    text: '',
+    title: ''
+  };
+
+  return empty;
+}
+
+export function EmptyRelatedProcedures() {
+  const empty: RelatedProcedure = {
+    uid: '',
+    procedure: EmptyProcedureRef(),
+    maxFilingTerm: 0,
+    maxFilingTermType: '',
+    startsWhen: '',
+    startsWhenTrigger: '',
+    notes: ''
+  };
+
+  return empty;
+}
+
+export function EmptyProcedureRef() {
+  const empty: ProcedureRef = {
+    uid: '',
+    code: '',
+    entity: '',
+    name: '',
+    shortName: ''
+  };
+
   return empty;
 }

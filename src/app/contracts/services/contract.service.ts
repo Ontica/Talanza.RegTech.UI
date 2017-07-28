@@ -10,7 +10,7 @@ import { Injectable } from '@angular/core';
 
 import { CoreService } from '../../core';
 
-import { Contract, ContractClause, RelatedProcedures } from '../data-types/contract';
+import { Contract, ContractClause, RelatedProcedure } from '../data-types/contract';
 
 @Injectable()
 export class ContractService {
@@ -36,18 +36,22 @@ export class ContractService {
   }
 
   public createClause(contractUID: string, clause: ContractClause): Promise<ContractClause> {
-    return this.core.http.post<ContractClause>('v1/contracts/' + contractUID + '/clauses', clause).toPromise();
+    const path = 'v1/contracts/' + contractUID + '/clauses';
+
+    return this.core.http.post<ContractClause>(path, clause).toPromise();
   }
 
   public updateClause(contractUID: string, clause: ContractClause): Promise<ContractClause> {
-    return this.core.http.put<ContractClause>('v1/contracts/' + contractUID + '/clauses/' + clause.uid, clause)
-      .toPromise();
+    const path = 'v1/contracts/' + contractUID + '/clauses/' + clause.uid;
+
+    return this.core.http.put<ContractClause>(path, clause).toPromise();
   }
 
   public addRelatedProcedure(contractUID: string, clauseUID: string,
-                             relatedProcedure: RelatedProcedures): void {
-    this.core.http.post('v1/contracts/' + contractUID + '/clauses/' + clauseUID + '/related-procedures',
-      relatedProcedure).toPromise();
+                             relatedProcedure: RelatedProcedure): Promise<RelatedProcedure> {
+    const path = 'v1/contracts/' + contractUID + '/clauses/' + clauseUID + '/related-procedures';
+
+    return this.core.http.post<RelatedProcedure>(path, relatedProcedure).toPromise();
   }
 
 }
