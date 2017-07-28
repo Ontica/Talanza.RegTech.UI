@@ -42,11 +42,11 @@ export class ContractEditorComponent implements OnInit {
     this.enableTabs();
   }
 
-  public changeTab(newSelectedTab: string): void {
+  public onChangeTab(newSelectedTab: string): void {
     this.currentSelectedTab = newSelectedTab;
   }
 
-  public close(): void {
+  public onClose(): void {
     this.onCloseEvent.emit();
   }
 
@@ -61,23 +61,16 @@ export class ContractEditorComponent implements OnInit {
   private setInitialSettings(): void {
     if (this.contractClause.uid === '') {
       this.disableTabs();
-    } else {
-      this.setTitle();
     }
+    this.setTitle();
   }
 
-  private async setTitle() {
+  private setTitle(): void {
     if (this.contractClause.uid === '') {
       this.title = 'Nueva claúsula o anexo';
     } else {
-      let clause = await this.getClause();
-      this.title = clause.clauseNo + ' ' + clause.title;
+      this.title = this.contractClause.clauseNo + ' ' + this.contractClause.title;
     }
-  }
-
-  private getClause(): Promise<ContractClause> {
-    return this.contractService.getClause(this.contractClause.contractUID,
-                                          this.contractClause.uid);
   }
 
 }
