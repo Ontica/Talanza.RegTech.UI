@@ -142,8 +142,7 @@
           <button class="btn" (click)="editProcedure()">Editar trámite</button>
         </td>
         <td *ngIf="!disabled" class="align-right">
-
-          <button class="btn" (click)="saveProcedureChanges()">Guardar cambios</button>
+          <button class="btn" (click)="saveProcedureChanges()">{{addButtonLabel}}</button>
         </td>
       </tr>
     </table>

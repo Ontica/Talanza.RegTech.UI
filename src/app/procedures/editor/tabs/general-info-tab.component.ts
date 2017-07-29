@@ -20,6 +20,7 @@ export class GeneralInfoTabComponent implements OnInit {
   @Output() public isEditable = new EventEmitter<boolean>();
   @Input() public procedure: Procedure;
 
+  public addButtonLabel = '';
   public offices: Office[] = [];
   public entities: Entity[] = [];
   public positions: Position[] = [];
@@ -34,6 +35,9 @@ export class GeneralInfoTabComponent implements OnInit {
   }
 
   public async cancel() {
+    if (this.procedure.uid ==='') {      
+      return;
+    } 
     await this.setProcedure();
     this.setInitialValues();
     this.isEditable.emit(false);
@@ -71,11 +75,12 @@ export class GeneralInfoTabComponent implements OnInit {
     }
     if (this.isNewProcedure) {
       await this.createNewProcedure();
-      alert('El trámite se agregó correctamente al sistema.');
+      alert('El trámite se agregó correctamente al sistema.');      
     } else {
       this.updateProcedure();
       alert('El trámite se actualizó correctamente.');
     }
+     this.disabled = true;
     this.isEditable.emit(false);
   }
 
@@ -84,7 +89,12 @@ export class GeneralInfoTabComponent implements OnInit {
     if (!this.isNewProcedure) {
       this.setOffices(this.procedure.authority.entity.uid);
       this.setPositions(this.procedure.authority.entity.uid);
+      this.addButtonLabel = 'Guardar cambios';
+    } else 
+    {
+      this.addButtonLabel = 'Agregar trámite';
     }
+    
   }
 
   private setEntities(): void {

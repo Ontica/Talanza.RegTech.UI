@@ -15,12 +15,15 @@ export class FilingConditionsTabComponent implements OnInit {
   @Output() public isEditable = new EventEmitter<boolean>();
   @Input() public procedure: Procedure;
   @Input() public isNewProcedure: boolean;
+
+  public addButtonLabel = '';
   public disabled = true;
 
   constructor(private procedureService: ProcedureService) { }
 
   public ngOnInit() {
     this.setProcedureStatus();
+    this.setProcedure();
   }
 
   public saveProcedureChanges(): void {
@@ -29,6 +32,7 @@ export class FilingConditionsTabComponent implements OnInit {
     }
     this.updateProcedure();
     alert('El trámite se actualizó correctamente.');
+    this.disabled = true;
     this.isEditable.emit(false);
   }
 
@@ -49,14 +53,15 @@ export class FilingConditionsTabComponent implements OnInit {
   }
 
   private async setProcedure() {
-    await this.procedureService.getProcedure(this.procedure.uid).then((procedure) => {
-      this.procedure = procedure;
-    });
+    this.procedure = await this.procedureService.getProcedure(this.procedure.uid);
   }
 
   private setProcedureStatus(): void {
     if (this.isNewProcedure) {
       this.disabled = false;
+      this.addButtonLabel = 'Agregar trámite';
+    } else {
+      this.addButtonLabel = 'Guardar cambios';
     }
   }
 

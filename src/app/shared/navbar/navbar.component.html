@@ -3,7 +3,7 @@
     <li class="first-li disabled">Inicio</li>
     <li class="disabled">Seguimiento</li>
     <li class="disabled">Documentos</li>
-    <li class="disabled">Contratos</li>
+    <li class="selected"><a [routerLink]="['/contracts/search']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{exact:true}"> Contratos</a></li>
     <li class="selected"><a [routerLink]="['/procedures/search']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{exact:true}">Trámites</a></li>
     <li class="selected"><a [routerLink]="['/process/editor']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{exact:true}">Procesos</a></li>
     <li class="disabled">Buscar</li>

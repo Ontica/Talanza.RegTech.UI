@@ -1,0 +1,56 @@
+<table class="contracts-filter">
+  <tr>
+    <td>Contrato:</td>
+    <td>
+      <select #contract class="select-box" style="width:210px;" (change)="onChangeContract(contract.value)">
+         <option value="">( Seleccionar un contrato )</option>
+         <option *ngFor="let contract of contractsList" [value]="contract.uid">{{contract.name}}</option>
+      </select>
+    </td>
+    <td>Buscar:</td>
+    <td>
+      <input style="width:364px;" type="search " class="text-box ">
+    </td>
+    <td>
+      <button class="btn" style="width:55px;" (click)="search()">Buscar</button>
+    </td>
+    <td class="align-center">
+      <button style="width:140px" class="btn-warning" (click)="onClickAddClause()">+Agregar cláusula</button>
+    </td>
+  </tr>
+</table>
+
+<table class="grid">
+  <thead>
+    <tr>
+      <th>Claúsula</th>
+      <th>Nombre</th>
+      <th>Texto</th>
+      <th>PDF</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let clause of selectedContract.clauses">
+      <td><a (click)="onClickEditClause(clause)">{{clause.clauseNo}}</a></td>
+      <td><a (click)="onClickEditClause(clause)">{{clause.title}}</a></td>
+      <td>{{clause.text}}</td>
+      <td><a (click)="openURL(clause.sourcePageNo)">pdf</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="footer">
+  <table class="footer-items">
+    <tr>
+      <td>{{contractsList.length}} Cláusulas y anexos encontrados</td>
+      <td>
+
+      </td>
+      <td class="align-right ">Pagina 1 de 1</td>
+    </tr>
+  </table>
+</div>
+
+<div *ngIf="isClauseEditorWindowVisible" class="popup">
+  <contract-editor [contractClause]="selectedContractClause" (onCloseEvent)="onCloseContractEditorWindow()"></contract-editor>
+</div>

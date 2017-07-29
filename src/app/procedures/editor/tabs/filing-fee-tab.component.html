@@ -32,6 +32,7 @@
           <textarea [disabled]="disabled" width="100%" class="text-area" rows="5" cols="25" [(ngModel)]="procedure.filingFee.legalBasis"></textarea>
         </td>
       </tr>
+
     </table>
   </div>
   <div class="footer ">
@@ -45,7 +46,7 @@
           <button class="btn" (click)="editProcedure()">Editar trámite</button>
         </td>
         <td *ngIf="!disabled" class="align-right">
-          <button class="btn " (click)="saveProcedureChanges()">Guardar cambios</button>
+          <button class="btn " (click)="saveProcedureChanges()">{{addButtonLabel}}</button>
         </td>
       </tr>
     </table>

@@ -1,0 +1,133 @@
+<div>
+  <table>
+    <tr>
+      <td class="title-row">Trámites relacionados con esta claúsula o anexo</td>
+      <td class="title-row align-right">
+        <button class="btn" (click)="onShowAddProcedureEditor()">+ Relacionar un trámite con esta claúsula</button>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <table class="grid">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Trámite</th>
+              <th>Autoridad</th>
+              <th>Homoclave</th>
+              <th>Plazo</th>
+              <th>Lo inicia</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let relatedProcedure of relatedProcedures; let rowIndex = index;">
+              <td>{{rowIndex + 1}}</td>
+              <td>{{relatedProcedure.procedure.shortName}}</td>
+              <td>{{relatedProcedure.procedure.entity}}</td>
+              <td>{{relatedProcedure.procedure.code}}</td>
+              <td>{{relatedProcedure.maxFilingTerm}} {{relatedProcedure.maxFilingTermType}}</td>
+              <td>{{relatedProcedure.startsWhen}} {{relatedProcedure.startsWhenTrigger}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+<br>
+<br>
+<div *ngIf="isAddRelatedProcedureEditorVisible">
+  <table>
+    <tr>
+      <td class="title-row">Relacionar un trámite con esta cláusula o anexo del contrato</td>
+    </tr>
+    <tr>
+      <table style="margin:0; padding:0;">
+        <tr>
+          <td>Trámite:</td>
+          <td>
+            <select #entity class="select-box" style="width:145px" (change)="onChangeEntity(entity.value)">
+              <option value="">( Dependencia )</option>
+              <option *ngFor="let entity of entities" [value]="entity.uid">{{entity.shortName}}</option>
+            </select>
+          </td>
+          <td width="100%">
+            <select #procedure class="select-box" style="width:395px" (change)="onChangeProcedure(procedure.value)">
+              <option value="">( Trámite )</option>
+              <option *ngFor="let procedure of procedures" [value]="procedure.uid">{{procedure.shortName}}</option>
+            </select>
+          </td>
+          <td>
+            <button class="btn">...</button>
+          </td>
+        </tr>
+      </table>
+    </tr>
+
+    <tr>
+      <td>
+        <table style="margin:0; padding:0;">
+          <tr>
+            <td class="align-left">Plazo:</td>
+            <td>
+              <input type="number" min="1" max="999" [disabled]="isDiabledTextBoxMaxFilingTerm" style="width:40px;" class="text-box" [(ngModel)]="relatedProcedure.maxFilingTerm">
+            </td>
+            <td>
+              <select #timeValueType class="select-box" style="width:145px" (change)="onChangeMaxFilingTermType()" [(ngModel)]="relatedProcedure.maxFilingTermType">
+                <option value="">( Seleccionar el plazo )</option>
+                <option *ngFor="let timeValueType of timeValueTypesList" [value]="timeValueType.key">{{timeValueType.value}}</option>
+              </select>
+            </td>
+            <td class="align-left" width="100%">
+              <select class="select-box" style="width:100%" [(ngModel)]="relatedProcedure.startsWhen">
+                <option value="">( Seleccionar la condición de inicio )</option>
+                <option *ngFor="let startWhen of startsWhenList" [value]="startWhen.key">{{startWhen.value}}</option>                
+              </select>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <table style="margin:0; padding:0;">
+          <tr>
+            <td width="110px">Actividad o evento:</td>
+            <td>
+              <select class="select-box" style="width:350px" [(ngModel)]="relatedProcedure.startsWhenTrigger">
+        <option value="">( Seleccionar el evento o actividad que inicia el trámite)</option>
+          <option value="No determinado">No determinado</option>
+          <option value="No aplica">No aplica</option>
+          <option value="Ampliación de almacenamiento de residuos peligrosos">Ampliación de almacenamiento de residuos peligrosos</option>
+          <option value="Certificación de reservas">Certificación de reservas</option>
+          <option value="Disposición final de residuos peligrosos">Disposición final de residuos peligrosos</option>
+          <option value="Perforación de pozos">Perforación de pozos</option>
+        </select>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <table style="margin:0; padding:0;">
+          <tr>
+            <td>Notas:</td>
+            <td colspan="3"><textarea sytle="width:100%" class="text-area" rows="5" cols="25" [(ngModel)]="relatedProcedure.notes"></textarea></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+  <table>
+    <tr>
+      <td width="206px" class="align-right">
+        <button class="btn" (click)="onClickCancelAddProcedure()">Cancelar</button>
+      </td>
+      <td class="align-right">
+        <button class="btn" (click)="onClickAddRelatedProcedure()">Relacionar trámite</button>
+      </td>
+    </tr>
+  </table>
+</div>
