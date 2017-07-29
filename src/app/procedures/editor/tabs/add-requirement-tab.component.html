@@ -2,7 +2,7 @@
   <div>
     <table>
       <tr>
-        <td class="border-bottom">Agregar un requisito al trámite</td>
+        <td class="border-bottom">{{title}}</td>
       </tr>
     </table>
   </div>
@@ -28,42 +28,39 @@
       </tr>
       <tr>
         <td>Requisito:</td>
-        <td colspan="3" width="100%"><select class="select-box">
+        <td colspan="3" width="100%"><select class="select-box" #requirement (change)="onChangeRequirement(requirement.value)">
           <option value="">( Seleccionar una clasificación ) </option>
           <option value="Documento de identificación">Documento de identificación</option>
+          <option value="Add">Requirimiento no enlistado, agrear requirimiento</option>
           </select>
         </td>
       </tr>
-      <tr>
-        <td>Descripción:</td>
-        <td colspan="3"><textarea class="text-area" rows="5" cols="25"></textarea></td>
-      </tr>
+
       <tr>
         <td colspan="4">
-          <table style="margin:0; padding:0;">
+          <table style="margin:0; padding:0;" *ngIf="!isAddRequirement">
             <tr>
-              <td width="100px" class="align-left">Código o clave oficial:</td>
-              <td><input style="width:100px" class="text-box" type="text"></td>
+              <td width="70px">Descripción:</td>
+              <td colspan="4"><textarea style="width:100%" class="text-area" rows="5" cols="25" [disabled]="true"></textarea></td>
+            </tr>
+            <tr>
+              <td class="align-left">Código o clave oficial:</td>
+              <td><input style="width:100px" class="text-box" type="text" [disabled]="true"></td>
               <td class="align-left">Formato:</td>
-              <td><select style="width:360px" class="select-box">
-                <option value="">( Seleccionar un formato )</option>
-                <option value="web">http://cnh.gob.mx/acta-nacimiento.pdf</option>
-                </select>
+              <td>
+                <input style="width:370px" type="text" class="text-box" value="http://cnh.gob.mx/acta-nacimiento.pdf" [disabled]="true">
               </td>
               <td width="30px" class="align-right">
-                <button class="btn">...</button>
+                <button class="btn" (click)="onGotoURL('http://consultas.curp.gob.mx/CurpSP/inicio2_2.jsp')">...</button>
               </td>
             </tr>
             <tr>
               <td colspan="2"></td>
               <td>Ejemplo:</td>
               <td>
-                <select style="width:360px" class="select-box">
-                <option value="">( Seleccionar un ejemplo )</option>
-                <option value="web">http://covar-energy.mx/acta-nacimiento.pdf</option>
-                </select>
+                <input style="width:370px" type="text" class="text-box" value="http://cnh.gob.mx/acta-nacimiento.pdf" [disabled]="true">
               </td>
-              <td class="align-right">
+              <td class="align-right" (click)="onGotoURL('http://consultas.curp.gob.mx/CurpSP/inicio2_2.jsp')">
                 <button class="btn">...</button>
               </td>
             </tr>
@@ -73,7 +70,7 @@
     </table>
   </div>
   <div>
-    <table>
+    <table *ngIf="!isAddRequirement">
       <tr>
         <td colspan="5" class="title-row">Configuración del requisto con respecto a este trámite</td>
       </tr>
@@ -95,7 +92,6 @@
           </select>
         </td>
       </tr>
-
       <tr>
         <td colspan="3" width="300px">¿Se entrega cuando se cumplen las siguientes condiciones?<input type="checkbox"></td>
         <td colspan="2" class="align-right" width="200px"><select style="width:100%;" class="select-box">
@@ -105,7 +101,6 @@
           </select>
         </td>
       </tr>
-
       <tr>
         <td width="80px">Se entrega cuando:</td>
         <td colspan="4" width="100px"><textarea style="width:100%" class="text-area" rows="5" cols="25"></textarea></td>
@@ -114,7 +109,7 @@
   </div>
   <br>
   <div>
-    <table>
+    <table *ngIf="!isAddRequirement">
       <tr>
         <td colspan="2" class="border-bottom"></td>
       </tr>
@@ -124,7 +119,62 @@
         </td>
 
         <td width="50px" class="align-right">
-          <button class="btn" (click)="cancel()">Agregar tipo de requisito </button>
+          <button class="btn" (click)="cancel()">Agregar requisito al trámite</button>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <div *ngIf="isAddRequirement">
+    <table>
+      <tr>
+        <td colspan="5" class="title-row">Información del nuevo tipo de requisito</td>
+      </tr>
+      <tr>
+        <td width="100px">Nombre:</td>
+        <td colspan="4" width="100px"><input type="text" class="text-box"></td>
+      </tr>
+      <tr>
+        <td>Descripción:</td>
+        <td colspan="4"><textarea class="text-area" rows="5" cols="25"></textarea></td>
+      </tr>
+      <tr>
+        <td>Anotaciones:</td>
+        <td colspan="4"><textarea class="text-area" rows="5" cols="25"></textarea></td>
+      </tr>
+      <tr>
+        <td width="100px" class="align-left">Código o clave oficial:</td>
+        <td><input style="width:100px" class="text-box" type="text"></td>
+        <td class="align-left">Formato:</td>
+        <td><input style="width:370px" type="text" class="text-box" value="http://cnh.gob.mx/acta-nacimiento.pdf" [disabled]="true">
+        </td>
+        <td class="align-right" width="100%">
+          <button class="btn" (click)="onGotoURL('http://consultas.curp.gob.mx/CurpSP/inicio2_2.jsp')">...</button>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2"></td>
+        <td>Ejemplo:</td>
+        <td>
+          <input style="width:370px" type="text" class="text-box" value="http://cnh.gob.mx/acta-nacimiento.pdf" [disabled]="true">
+        </td>
+        <td class="align-right" width="100%">
+          <button class="btn" (click)="onGotoURL('http://consultas.curp.gob.mx/CurpSP/inicio2_2.jsp')">...</button>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <div *ngIf="isAddRequirement">
+    <table>
+      <tr>
+        <td colspan="2" class="border-bottom"></td>
+      </tr>
+      <tr>
+        <td class="align-right" width="50px">
+          <button class="btn" (click)="cancelRequirementToLit()">Cancelar</button>
+        </td>
+
+        <td width="50px" class="align-right">
+          <button class="btn" (click)="addRequirementToList()">Agregar tipo de requisito y continuar</button>
         </td>
       </tr>
     </table>

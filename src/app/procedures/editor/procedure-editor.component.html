@@ -15,7 +15,7 @@
     <!-- <button class="tablinks">Interviene en</button>-->
   </div>
   <div [ngSwitch]="selectedTask">
-    <general-info-tab *ngSwitchCase="'generalInfo'" [procedure]="procedure" (isEditable)="onDisabledTabs($event)"> </general-info-tab>
+    <general-info-tab *ngSwitchCase="'generalInfo'" [procedure]="procedure" (isEditable)="onDisabledTabs($event)" (onCancel)="close()"> </general-info-tab>
     <filing-conditions-tab *ngSwitchCase="'conditions'" [procedure]="procedure" [isNewProcedure]="isNewProcedure" (isEditable)="onDisabledTabs($event)"></filing-conditions-tab>
     <requirements-tab *ngSwitchCase="'requirements'" [procedure]="procedure" [isNewProcedure]="isNewProcedure" (isEditable)="onDisabledTabs($event)"></requirements-tab>
     <filing-fee-tab *ngSwitchCase="'payments'" [procedure]="procedure" [isNewProcedure]="isNewProcedure" (isEditable)="onDisabledTabs($event)"></filing-fee-tab>

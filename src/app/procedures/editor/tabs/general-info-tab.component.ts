@@ -18,6 +18,7 @@ import { AuthorityService } from '../../services/authority.service';
 export class GeneralInfoTabComponent implements OnInit {
 
   @Output() public isEditable = new EventEmitter<boolean>();
+  @Output() public onCancel = new EventEmitter();
   @Input() public procedure: Procedure;
 
   public addButtonLabel = '';
@@ -34,10 +35,11 @@ export class GeneralInfoTabComponent implements OnInit {
     this.setInitialValues();
   }
 
-  public async cancel() {
-    if (this.procedure.uid ==='') {      
-      return;
-    } 
+  public cancel() {
+    this.onCancel.emit();
+  }
+
+  public async discardChanges() {
     await this.setProcedure();
     this.setInitialValues();
     this.isEditable.emit(false);
@@ -75,12 +77,12 @@ export class GeneralInfoTabComponent implements OnInit {
     }
     if (this.isNewProcedure) {
       await this.createNewProcedure();
-      alert('El trámite se agregó correctamente al sistema.');      
+      alert('El trámite se agregó correctamente al sistema.');
     } else {
       this.updateProcedure();
       alert('El trámite se actualizó correctamente.');
     }
-     this.disabled = true;
+    this.disabled = true;
     this.isEditable.emit(false);
   }
 
@@ -90,11 +92,10 @@ export class GeneralInfoTabComponent implements OnInit {
       this.setOffices(this.procedure.authority.entity.uid);
       this.setPositions(this.procedure.authority.entity.uid);
       this.addButtonLabel = 'Guardar cambios';
-    } else 
-    {
+    } else {
       this.addButtonLabel = 'Agregar trámite';
     }
-    
+
   }
 
   private setEntities(): void {
