@@ -7,9 +7,17 @@
  */
 
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, ApplicationRef } from '@angular/core';
-import { removeNgStyles, createNewHosts, createInputTransfer } from '@angularclass/hmr';
 import { FormsModule } from '@angular/forms';
+import { HttpModule } from '@angular/http';
+import {
+  NgModule,
+  ApplicationRef
+} from '@angular/core';
+import {
+  removeNgStyles,
+  createNewHosts,
+  createInputTransfer
+} from '@angularclass/hmr';
 
 /*
  * Platform and Environment providers/directives/pipes
@@ -53,9 +61,12 @@ type StoreType = {
  * `AppModule` is the main entry point into Angular2's bootstraping process
  */
 @NgModule({
-  bootstrap: [AppComponent],
-  declarations: [AppComponent],
-  imports: [ // import Angular's modules
+  bootstrap: [ AppComponent ],
+  declarations: [ AppComponent ],
+  /**
+   * Import Angular's modules.
+   */
+  imports: [
     CoreModule,
     ContractsModule,
     SecurityUIModule,
@@ -64,10 +75,13 @@ type StoreType = {
     SharedModule,
     BrowserModule,
     FormsModule,
-
+    HttpModule,
     AppRoutingModule
   ],
-  providers: [ // expose our Services and Providers into Angular's dependency injection
+  /**
+   * Expose our Services and Providers into Angular's dependency injection.
+   */
+  providers: [
     ENV_PROVIDERS,
     APP_PROVIDERS
   ]
@@ -100,19 +114,29 @@ export class AppModule {
 
   public hmrOnDestroy(store: StoreType) {
     const cmpLocation = this.appRef.components.map((cmp) => cmp.location.nativeElement);
-    // save state
+    /**
+     * Save state
+     */
     const state = this.appState._state;
     store.state = state;
-    // recreate root elements
+    /**
+     * Recreate root elements
+     */
     store.disposeOldHosts = createNewHosts(cmpLocation);
-    // save input values
-    store.restoreInputValues = createInputTransfer();
-    // remove styles
+    /**
+     * Save input values
+     */
+    store.restoreInputValues  = createInputTransfer();
+    /**
+     * Remove styles
+     */
     removeNgStyles();
   }
 
   public hmrAfterDestroy(store: StoreType) {
-    // display new elements
+    /**
+     * Display new elements
+     */
     store.disposeOldHosts();
     delete store.disposeOldHosts;
   }
