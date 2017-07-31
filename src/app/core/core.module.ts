@@ -7,11 +7,12 @@
  */
 
 import { NgModule, Optional, SkipSelf } from '@angular/core';
-import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 
 import { CommonModule } from '@angular/common';
 
 import { CoreService } from './core.service';
+import { ExceptionHandler } from './general/exception-handler';
 import { SessionService } from './general/session.service';
 
 import { ApplicationSettingsService } from './general/application-settings.service';
@@ -30,11 +31,11 @@ import { throwIfAlreadyLoaded } from './module-import-guard';
 
 @NgModule({
   imports: [
-    CommonModule, HttpModule
+    CommonModule, HttpClientModule
   ],
   exports: [SpinnerComponent],
   declarations: [SpinnerComponent],
-  providers: [CoreService, SessionService, ApplicationSettingsService, LoggerService,
+  providers: [CoreService, ExceptionHandler, SessionService, ApplicationSettingsService, LoggerService,
               SpinnerService, SecurityDataService, AuthenticationService,
               SecurityGuardService, HttpHandler, HttpService, DirectoryService]
 })

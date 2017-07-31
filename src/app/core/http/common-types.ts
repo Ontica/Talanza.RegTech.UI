@@ -6,7 +6,7 @@
  *
  */
 
-import { RequestOptionsArgs } from '@angular/http';
+import { HttpHeaders, HttpParams } from '@angular/common/http';
 
 export enum HttpMethod {
   GET = 1,
@@ -18,9 +18,32 @@ export enum HttpMethod {
   OPTIONS = 64
 }
 
-export interface HttpRequestOptions extends RequestOptionsArgs {
-  payloadDataField?: string;
+export interface HttpClientOptions {
+
+  body?: any,
+
+  headers?: HttpHeaders,
+
+  observe: 'body' | 'events' | 'response',
+
+  params?: HttpParams,
+
+  reportProgress?: boolean,
+
+  responseType?: 'arraybuffer' | 'blob' | 'json' | 'text',
+
+  withCredentials?: boolean
+
+  dataField?: string;
+
   serviceParams?: any[];
+}
+
+export function DefaultHttpClientOptions(): HttpClientOptions {
+  return {
+    observe: 'response',
+    responseType: 'json',
+  }
 }
 
 export interface Service {

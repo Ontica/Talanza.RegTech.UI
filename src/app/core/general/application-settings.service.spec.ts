@@ -1,4 +1,4 @@
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 
 import { ApplicationSettingsService } from './application-settings.service';
 

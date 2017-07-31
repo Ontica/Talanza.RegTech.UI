@@ -7,7 +7,6 @@
  */
 
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/mergeMap';
 
@@ -15,7 +14,7 @@ import { Assertion } from 'empiria';
 
 import { DirectoryService } from './directory.service';
 import { HttpHandler } from './http-handler';
-import { HttpRequestOptions, HttpMethod } from './common-types';
+import { HttpClientOptions, HttpMethod } from './common-types';
 
 @Injectable()
 export class HttpService {
@@ -23,7 +22,7 @@ export class HttpService {
   constructor(private httpHandler: HttpHandler,
               private directory: DirectoryService) { }
 
-  public get<T>(path: string, options?: HttpRequestOptions): Observable<T> {
+  public get<T>(path: string, options?: HttpClientOptions): Observable<T> {
     Assertion.assertValue(path, 'path');
 
     return this.directory.getService(path, HttpMethod.GET)
@@ -32,7 +31,7 @@ export class HttpService {
                          });
   }
 
-  public post<T>(path: string, body: any, options?: HttpRequestOptions): Observable<T> {
+  public post<T>(path: string, body: any, options?: HttpClientOptions): Observable<T> {
     Assertion.assertValue(path, 'path');
 
     return this.directory.getService(path, HttpMethod.POST)
@@ -41,7 +40,7 @@ export class HttpService {
                          });
   }
 
-  public put<T>(path: string, body: any, options?: HttpRequestOptions): Observable<T> {
+  public put<T>(path: string, body: any, options?: HttpClientOptions): Observable<T> {
     Assertion.assertValue(path, 'path');
 
     return this.directory.getService(path, HttpMethod.PUT)
@@ -50,7 +49,7 @@ export class HttpService {
                          });
   }
 
-  public delete<T>(path: string, options?: HttpRequestOptions): Observable<T> {
+  public delete<T>(path: string, options?: HttpClientOptions): Observable<T> {
     Assertion.assertValue(path, 'path');
 
     return this.directory.getService(path, HttpMethod.DELETE)

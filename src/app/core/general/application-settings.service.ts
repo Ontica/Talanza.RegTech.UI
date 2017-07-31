@@ -7,7 +7,7 @@
  */
 
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 
 import { Assertion } from 'empiria';
@@ -22,12 +22,12 @@ export class ApplicationSettingsService {
 
   private settings: KeyValue[];
 
-  constructor(private http: Http) { }
+  constructor(private http: HttpClient) { }
 
   public getSettingsArray(): Promise<KeyValue[]> {
-    return this.http.get(this.configurationFileName)
+    return this.http.get<KeyValue[]>(this.configurationFileName, { observe: 'response' })
                     .toPromise()
-                    .then((response) => response.json()['settings'] as KeyValue[])
+                    .then((response) => response.body['settings'])
                     .catch((e) => this.handleLoadSettingsFromFileError(e));
   }
 

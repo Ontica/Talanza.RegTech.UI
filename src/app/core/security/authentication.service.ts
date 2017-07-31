@@ -30,12 +30,15 @@ export class AuthenticationService {
     await this.session.start();
 
     const sessionToken = await this.dataService.createSession(userID, userPassword)
+                                               .toPromise()
                                                .catch((e) => this.handleAuthenticationError(e));
 
     const identity = await this.dataService.getPrincipalIdentity()
+                                           .toPromise()
                                            .catch((e) => this.handleAuthenticationError(e));
 
     const claimsList = await this.dataService.getPrincipalClaimsList()
+                                             .toPromise()
                                              .catch((e) => this.handleAuthenticationError(e));
 
     const principal = new Principal(sessionToken, identity, claimsList);

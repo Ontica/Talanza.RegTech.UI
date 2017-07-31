@@ -7,6 +7,7 @@
  */
 
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
 
 import { Cryptography } from 'empiria';
 
@@ -19,15 +20,14 @@ export class SecurityDataService {
 
   constructor(private httpHandler: HttpHandler) { }
 
-  public async createSession(userID: string, userPassword: string): Promise<SessionToken> {
+  public createSession(userID: string, userPassword: string): Observable<SessionToken> {
 
     const body = {
       user_name: userID,
       password: Cryptography.convertToMd5(userPassword)
     };
 
-    return this.httpHandler.post<SessionToken>('v2/security/login', body)
-                           .toPromise();
+    return this.httpHandler.post<SessionToken>('v2/security/login', body);
   }
 
   public async closeSession(): Promise<void> {
@@ -35,20 +35,23 @@ export class SecurityDataService {
                            .toPromise();
   }
 
-  public getPrincipalIdentity(): Promise<Identity> {
+  public getPrincipalIdentity(): Observable<Identity> {
     const fakeIdentity = { username: 'jrulfo',
                            email: 'jrulfo@escritores.com',
                            fullname: '{Nombre del usuario} || settings' };
 
-    return Promise.resolve<Identity>(fakeIdentity);
+    return Observable.of<Identity>(fakeIdentity);
   }
 
-  public getPrincipalClaimsList(): Promise<ClaimsList> {
-    const list = [{ type: 'token', value: 'abc' }, { type: 'phone', value: '567-890-1234' }];
+  public getPrincipalClaimsList(): Observable<ClaimsList> {
+    const list = [
+                  { type: 'token', value: 'abc' },
+                  { type: 'phone', value: '567-890-1234' }
+                 ];
 
     const claims = new ClaimsList(list);
 
-    return Promise.resolve<ClaimsList>(claims);
+    return Observable.of<ClaimsList>(claims);
   }
 
 }
