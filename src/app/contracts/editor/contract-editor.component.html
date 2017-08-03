@@ -1,14 +1,14 @@
-<div class="task-editor-window">
+<div class="editor-container editor-container-style">
   <div class="header">
-    <div class="close" (click)="onClose()">&times;</div>
+    <div class="close-button right-position" (click)="onClose()">&times;</div>
     <div class="title">{{title}}</div>
     <div class="subtitle">{{contractClause.contract.name}}</div>
   </div>
   <div class="tab">
-    <button class="tablinks" [disabled]="isDisabled" [class.selected]="currentSelectedTab==='general-info-tab'" (click)="onChangeTab('general-info-tab')">Cláusula</button>
-    <button class="tablinks" [disabled]="isDisabled" [class.selected]="currentSelectedTab==='related-procedures-tab'" (click)="onChangeTab('related-procedures-tab')">Trámites relacionados</button>
+    <button class="tab-links left-position" [disabled]="isDisabled" [class.selected]="currentSelectedTab==='general-info-tab'" (click)="onChangeTab('general-info-tab')">Cláusula</button>
+    <button class="tab-links left-position" [disabled]="isDisabled" [class.selected]="currentSelectedTab==='related-procedures-tab'" (click)="onChangeTab('related-procedures-tab')">Trámites relacionados</button>
   </div>
-  <div [ngSwitch]="currentSelectedTab">
+  <div [ngSwitch]="currentSelectedTab" class="form-frame">
     <clause-info-tab *ngSwitchCase="'general-info-tab'" [contractClause]="contractClause" (onCancel)="onClose()" (onSave)="setSaveOperations()"></clause-info-tab>
     <related-procedures-tab *ngSwitchCase="'related-procedures-tab'" [contractClause]="contractClause"></related-procedures-tab>
   </div>
