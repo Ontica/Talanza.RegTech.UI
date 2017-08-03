@@ -14,6 +14,8 @@ $red:#9b1b1f !default;
 $red-dark: #d04f4f !default;
 $teal: #25a1c5 !default;
 $white: #f8f8f8 !default;
+$light-white: white;
+$silver: #707070;
 //
 // Typography
 //
@@ -36,6 +38,7 @@ $text-hint: $red !default;
 //
 $text-bold: lighten($text-color, 3%);
 $text-muted: $gray !default;
+$text-italic: italic;
 //
 // Elements colors
 //
@@ -44,3 +47,55 @@ $secondary-color: $red !default;
 $secondary-text-color: $white !default;
 $selected-item-text-color: $orange;
 $link-color: $blue;
+//
+//editor-window
+//
+$editor-window-border:4px solid $gray;
+$editor-window-background-color:$light-white;
+//
+//tabs
+//
+$tab-border:1px solid #ccc;
+$tab-backgorund-color: #f1f1f1;
+$tab-hover: #ddd;
+$tab-selected: $orange;
+$tab-font-size: 10px;
+$tab-selected-background-color: $secondary-color;
+//
+//close-button
+//
+$close-button-color: $black;
+$close-button-font-size: 28px;
+$close-button-hover: $black;
+//
+//tab-form
+//
+$form-color: #6a6a6a;
+$form-title-border: 1px dotted $gray;
+$form-font-weight: 300;
+$form-border-bottom:1px solid $black;
+$form-title-color:$gray;
+//
+// html controls
+//
+$control-font: 8pt Arial, Helvetica;
+$control-small-font: 6pt Arial, Helvetica;
+$cancel-color: $red;
+$warning-color: $orange;
+$control-border: 1px solid #e0e0e0;
+$control-background-color: #f0f0f0;
+$control-color: #424242;
+$control-width: 99%;
+$control-disabled-color: $silver;
+$control-disabled-background: #dddddd;
+$control-height: 25px;
+$button-background-color: #dadada;
+$button-border: 1pt solid #c0c0c0;
+$button-height: 24px;
+$control-font: 8pt Arial, Helvetica;
+$control-small-font: 6pt Arial, Helvetica;
+//
+//grid
+//
+$grid-border:1px solid $black;
+$grid-even-background-color: $control-background-color;
