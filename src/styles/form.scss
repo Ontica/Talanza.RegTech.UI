@@ -1,0 +1,32 @@
+@import "general-styles";
+.form-container-text {
+  color: $form-color;
+  font-weight: $font-weight-command;
+}
+
+.form-title {
+  padding-top: 8pt;
+  padding-bottom: 4pt;
+}
+
+.form-title-text {
+  color: $form-title-color;
+  border-bottom: $form-title-border;
+}
+
+.internal-form {
+  margin: 0;
+  padding: 0;
+}
+
+.form-footer {
+  bottom: 0px;
+  height: 42px;
+  margin: 1px 1px 1px 1px;
+  position: absolute;
+  width: 99%;
+}
+
+.border-bottom {
+  border-bottom: $form-border-bottom;
+}
