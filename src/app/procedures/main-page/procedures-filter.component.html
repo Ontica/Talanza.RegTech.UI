@@ -1,23 +1,23 @@
 <table>
   <tr>
-    <td width="45px">Autoridad:</td>
-    <td width="640px" colspan="3"><select style="width:90px;" class="select-box" #entity (change)="onChangeSelectedEntity(entity.value)" [(ngModel)]="filter.entityUID">
+    <td>Autoridad:</td>
+    <td colspan="3"><select style="width:90px;" class="select-box" #entity (change)="onChangeSelectedEntity(entity.value)" [(ngModel)]="filter.entityUID">
           <option value="">( Todos ) </option>
           <option *ngFor="let entity of entities" [value]="entity.uid">{{entity.shortName}}</option>         
         </select>
-      <select style="width:540px;" class="select-box" #authority (change)="onChangeAuthority(authority.value)" [(ngModel)]="filter.officeUID">
+      <select style="width:520px;" class="select-box" #authority (change)="onChangeAuthority(authority.value)" [(ngModel)]="filter.officeUID">
         <option value="">( Todos ) </option>
         <option *ngFor="let office of offices" [value]="office.uid">{{office.name}}</option>
         </select>
     </td>
-    <td width="45px">Buscar:</td>
-    <td colspan="3" width="370px"><input style="width:310px" type="search" class="search-box">
+    <td>Buscar:</td>
+    <td colspan="3"><input style="width:310px" type="search" class="search-box">
       <button class="btn" style="width:55px;" (click)="search()">Buscar</button>
     </td>
   </tr>
   <tr>
     <td>Tema:</td>
-    <td width="310px"><select class="select-box" style="width:310px" #theme (change)="onChangeSelectedTheme(theme.value)" [(ngModel)]="filter.theme">
+    <td><select class="select-box" style="width:310px" #theme (change)="onChangeSelectedTheme(theme.value)" [(ngModel)]="filter.theme">
                    <option value="">( Todos )</option>
             <option value="Actividad petrolera">Actividad petrolera</option>
             <option value="Certificación de reservas">Certificación de reservas</option>
@@ -36,9 +36,9 @@
             <option value="Uso y Ocupación Superficial">Uso y Ocupación Superficial</option>    
           </select>
     </td>
-    <td width="70px;">Etapa:</td>
+    <td>Etapa:</td>
     <td>
-      <select class="select-box" style="width:250px" #stage (change)="onChangeSelectedStage(stage.value)" [(ngModel)]="filter.stage">
+      <select style="width:265px" class="select-box text-align-right" #stage (change)="onChangeSelectedStage(stage.value)" [(ngModel)]="filter.stage">
               <option value="">( Todas ) </option>
               <option value="Etapa de Abandono ">Etapa de Abandono</option>
               <option value="Período de Desarrollo ">Período de Desarrollo</option>

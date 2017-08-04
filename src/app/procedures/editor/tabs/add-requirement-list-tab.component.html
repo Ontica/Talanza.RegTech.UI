@@ -1,4 +1,4 @@
-<div class="container">
+<div class="form-container-text">
   <div>
     <table>
       <tr>
@@ -10,18 +10,18 @@
   <div>
     <table>
       <tr>
-        <td colspan="4" class="title-row">Seleccionar el tipo de requisito (formato, escrito, pago de derechos, etc.)</td>
+        <td colspan="4" class="form-title form-title-text">Seleccionar el tipo de requisito (formato, escrito, pago de derechos, etc.)</td>
       </tr>
       <tr>
-        <td width="70px">Tipo:</td>
+        <td>Tipo:</td>
         <td><select style="width:150px;" class="select-box">
           <option value="">( Seleccionar un tipo ) </option>
           <option value="Documento oficial">Documento oficial</option>              
           </select>
         </td>
-        <td width="200px" class="align-right">Clasificación:</td>
-        <td width="100%" class="align-right">
-          <select class="select-box">
+        <td class="text-align-right">Clasificación:</td>
+        <td class="text-align-right">
+          <select style="width: 100%" class="select-box">
             <option value="">( Seleccionar una Requisto ) </option>
             <option value="ANAC-MX">ANAC-MX Acta de nacimiento</option>
             </select>
@@ -29,7 +29,7 @@
       </tr>
       <tr>
         <td>Requisito:</td>
-        <td colspan="3" width="100%"><select class="select-box">
+        <td colspan="3"><select style="width:100%" class="select-box">
           <option value="">( Seleccionar una clasificación ) </option>
           <option value="Documento de identificación">Documento de identificación</option>
           </select>
@@ -40,46 +40,50 @@
   <div>
     <table>
       <tr>
-        <td colspan="5" class="title-row">Información del nuevo tipo de requisito</td>
+        <td colspan="2" class="form-title form-title-text">Información del nuevo tipo de requisito</td>
       </tr>
       <tr>
-        <td width="100px">Nombre:</td>
-        <td colspan="4" width="100px"><input type="text" class="text-box"></td>
+        <td>Nombre:</td>
+        <td><input style="width: 100%" type="text" class="text-box"></td>
       </tr>
       <tr>
         <td>Descripción:</td>
-        <td colspan="4"><textarea class="text-area" rows="5" cols="25"></textarea></td>
+        <td><textarea style="width: 100%" class="text-area" rows="5" cols="25"></textarea></td>
       </tr>
       <tr>
         <td>Anotaciones:</td>
-        <td colspan="4"><textarea class="text-area" rows="5" cols="25"></textarea></td>
+        <td><textarea style="width: 100%" class="text-area" rows="5" cols="25"></textarea></td>
       </tr>
-      <tr>
-        <td width="100px" class="align-left">Código o clave oficial:</td>
-        <td><input style="width:100px" class="text-box" type="text"></td>
-        <td class="align-left">Formato:</td>
-        <td><select style="width:360px" class="select-box">
+      <td colspan="2">
+        <table class="internal-form">
+          <tr>
+            <td class="text-align-left">Código o clave oficial:</td>
+            <td><input style="width:80px" class="text-box" type="text"></td>
+            <td class="text-align-left">Formato:</td>
+            <td><select style="width:330px" class="select-box">
                 <option value="">( Seleccionar un formato )</option>
                 <option value="web">http://cnh.gob.mx/acta-nacimiento.pdf</option>
                 </select>
-        </td>
-        <td class="align-right" width="100%">
-          <button class="btn">...</button>
-        </td>
-      </tr>
-      <tr>
-        <td colspan="2"></td>
-        <td>Ejemplo:</td>
-        <td>
-          <select style="width:360px" class="select-box">
+            </td>
+            <td class="text-align-right">
+              <button style="width:100%" class="btn">...</button>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2"></td>
+            <td>Ejemplo:</td>
+            <td>
+              <select style="width:330px" class="select-box">
                 <option value="">( Seleccionar un ejemplo )</option>
                 <option value="web">http://covar-energy.mx/acta-nacimiento.pdf</option>
                 </select>
-        </td>
-        <td class="align-right" width="100%">
-          <button class="btn">...</button>
-        </td>
-      </tr>
+            </td>
+            <td class="text-align-right">
+              <button style="width: 100%" class="btn">...</button>
+            </td>
+          </tr>
+        </table>
+      </td>
     </table>
   </div>
   <br>
@@ -89,11 +93,11 @@
         <td colspan="2" class="border-bottom"></td>
       </tr>
       <tr>
-        <td class="align-right" width="50px">
+        <td class="text-align-right" width="50px">
           <button class="btn" (click)="cancel()">Cancelar</button>
         </td>
 
-        <td width="50px" class="align-right">
+        <td width="50px" class="text-align-right">
           <button class="btn" (click)="cancel()">Agregar tipo de requisito </button>
         </td>
       </tr>

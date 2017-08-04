@@ -1,21 +1,22 @@
-<div class="task-editor-window">
+<div class="editor-container editor-container-style">
   <div class="header">
-    <div class="close" (click)="close()">&times;</div>
+    <div class="close-button right-position" (click)="close()">&times;</div>
     <div class="small-title">{{newNameLabel}}</div>
     <div class="title">{{procedure.name}}</div>
     <div class="subtitle">{{procedure.authority.entity.name}}</div><br>
   </div>
   <div class="tab">
-    <button class="tablinks" [disabled]="isDisabled" [class.selected]="selectedTask==='generalInfo'" (click)="setSelectedTask('generalInfo')">Información general</button>
-    <button class="tablinks" [disabled]="isDisabled" [class.selected]="selectedTask==='conditions'" (click)="setSelectedTask('conditions')">Inicio y plazos</button>
-    <button class="tablinks" [disabled]="isDisabled" [class.selected]="selectedTask==='requirements'" (click)="setSelectedTask('requirements')">Requisitos y notas</button>
-    <button class="tablinks" [disabled]="isDisabled" [class.selected]="selectedTask==='payments'" (click)="setSelectedTask('payments')">Pago de derechos</button>
-    <button class="tablinks" [disabled]="isDisabled" [class.selected]="selectedTask==='status'" (click)="setSelectedTask('status')">Estado</button>
-    <button class="tablinks" [disabled]="isDisabled" [class.selected]="selectedTask==='requirementGrid'" (click)="setSelectedTask('requirementGrid')">Requerimientos</button>
+    <button class="tab-links left-position" [disabled]="isDisabled" [class.selected]="selectedTask==='generalInfo'" (click)="setSelectedTask('generalInfo')">Información general</button>
+    <button class="tab-links left-position" [disabled]="isDisabled" [class.selected]="selectedTask==='conditions'" (click)="setSelectedTask('conditions')">Inicio y plazos</button>
+    <button class="tab-links left-position" [disabled]="isDisabled" [class.selected]="selectedTask==='requirements'" (click)="setSelectedTask('requirements')">Requisitos y notas</button>
+    <button class="tab-links left-position" [disabled]="isDisabled" [class.selected]="selectedTask==='payments'" (click)="setSelectedTask('payments')">Pago de derechos</button>
+    <button class="tab-links left-position" [disabled]="isDisabled" [class.selected]="selectedTask==='status'" (click)="setSelectedTask('status')">Estado</button>
+    <button class="tab-links left-position" [disabled]="isDisabled" [class.selected]="selectedTask==='requirementGrid'" (click)="setSelectedTask('requirementGrid')">Requerimientos</button>
     <!-- <button class="tablinks">Interviene en</button>-->
   </div>
-  <div [ngSwitch]="selectedTask">
-    <general-info-tab *ngSwitchCase="'generalInfo'" [procedure]="procedure" (isEditable)="onDisabledTabs($event)" (onCancel)="close()"> </general-info-tab>
+
+  <div class="form-frame" [ngSwitch]="selectedTask">
+    <general-info-tab *ngSwitchCase="'generalInfo'" [procedure]="procedure" (isEditable)="onDisabledTabs($event)"> </general-info-tab>
     <filing-conditions-tab *ngSwitchCase="'conditions'" [procedure]="procedure" [isNewProcedure]="isNewProcedure" (isEditable)="onDisabledTabs($event)"></filing-conditions-tab>
     <requirements-tab *ngSwitchCase="'requirements'" [procedure]="procedure" [isNewProcedure]="isNewProcedure" (isEditable)="onDisabledTabs($event)"></requirements-tab>
     <filing-fee-tab *ngSwitchCase="'payments'" [procedure]="procedure" [isNewProcedure]="isNewProcedure" (isEditable)="onDisabledTabs($event)"></filing-fee-tab>
