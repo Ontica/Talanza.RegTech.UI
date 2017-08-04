@@ -1,9 +1,9 @@
-<div class="container">
+<div class="container form-container-text">
   <div *ngIf="isShowGrids">
     <table>
       <tr>
-        <td width="300px" class="title-row">Lista de Requerimientos</td>
-        <td class="title-row align-right">
+        <td class="form-title form-title-text">Lista de Requerimientos</td>
+        <td class="text-align-right">
           <button class="btn" (click)="addRequirement()">+Agregar requisito</button>
         </td>
       </tr>
@@ -17,8 +17,8 @@
   <div *ngIf="isShowGrids">
     <table>
       <tr>
-        <td width="300px" class="title-row">Lista de entregables por la autoridad</td>
-        <td class="title-row align-right">
+        <td class="form-title form-title-text">Lista de entregables por la autoridad</td>
+        <td class="text-align-right">
           <button class="btn" (click)="addRequirementToList()">+Agregar entregable</button>
         </td>
       </tr>
@@ -83,13 +83,13 @@
     <table>
       <tr>
         <td><button class="btn">Imprimir</button></td>
-        <td class="align-center">
+        <td class="text-align-center">
           <button class="btn" [disabled]="disabled" (click)="cancel()">Deshacer cambios</button>
         </td>
-        <td *ngIf="disabled" class="align-right">
+        <td *ngIf="disabled" class="text-align-right">
           <button class="btn" (click)="editProcedure()">Editar trámite</button>
         </td>
-        <td *ngIf="!disabled" class="align-right">
+        <td *ngIf="!disabled" class="text-align-right">
           <button class="btn " (click)="saveProcedureChanges() ">Guardar cambios</button>
         </td>
       </tr>

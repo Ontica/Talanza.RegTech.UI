@@ -1,0 +1,75 @@
+ @import "variables";
+ .editor-container-style {
+   border: $editor-window-border;
+   background-color: $editor-window-background-color;
+ }
+ 
+ .header {
+   font: $font-family;
+   font-weight: $font-weight-command;
+   padding: 2pt;
+   margin-left: 1em;
+ }
+ 
+ .title {
+   font-size: $font-size-title;
+   color: $secondary-color;
+ }
+ 
+ .subtitle {
+   font-size: $font-size-command;
+   color: $text-color;
+ }
+ 
+ .small-title {
+   font-size: $font-size-hint;
+   color: $text-title;
+ }
+ 
+ .right-position {
+   float: right;
+ }
+ 
+ .close-button {
+   color: $close-button-color;
+   font-size: $close-button-font-size;
+   font-weight: bold;
+   ;
+ }
+ 
+ .close-button:hover, .close-button:focus {
+   color: $close-button-hover;
+   text-decoration: none;
+   cursor: pointer;
+ }
+ 
+ .tab {
+   overflow: hidden;
+   border: $tab-border;
+   background-color: $tab-backgorund-color;
+ }
+ 
+ .tab-links {
+   background-color: $tab-backgorund-color;
+   border: none;
+   outline: none;
+   cursor: pointer;
+   padding: 14px 16px;
+   transition: 0.3s;
+   font-size: $tab-font-size;
+   font-weight: $font-weight-command;
+   float: left;
+ }
+ 
+ .tab-links:hover {
+   background-color: $tab-hover;
+ }
+ 
+ .tab-links.selected {
+   background-color: $tab-selected-background-color;
+   color: $tab-selected;
+ }
+ 
+ .tab-links.disabled-tab {
+   cursor: not-allowed;
+ }

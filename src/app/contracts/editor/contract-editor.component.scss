@@ -1,80 +1,16 @@
-@import "../../../styles/general-styles";
+@import "../../../styles/editor-window-style";
 :host {
   position: relative;
   top: 3%;
   left: 20%;
 }
 
-.task-editor-window {
-  border: 4px solid #a0a0a0;
-  background-color: white;
-  height: 750px;
+.editor-container {
+  height: 600px;
   width: 700px;
 }
 
-div.header {
-  font: Arial, Helvetica;
-  font-weight: bold;
-  margin-left: 1em;
-}
-
-div.header div.title {
-  font-size: 12pt;
-  padding: 2pt;
-  color: $red;
-}
-
-div.header div.subtitle {
-  font-size: 8pt;
-  padding: 2pt;
-  color: $black;
-}
-
-div.header div.small-title {
-  font-size: 8pt;
-  color: $blue;
-}
-
-.close {
-  color: black;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-}
-
-.close:hover, .close:focus {
-  color: #000;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-div.tab {
-  overflow: hidden;
-  border: 1px solid #ccc;
-  background-color: #f1f1f1;
-}
-
-div.tab button {
-  background-color: #f1f1f1;
-  float: left;
-  border: none;
-  outline: none;
-  cursor: pointer;
-  padding: 14px 16px;
-  transition: 0.3s;
-  font-size: 10px;
-  font-weight: bold;
-}
-
-div.tab button:hover {
-  background-color: #ddd;
-}
-
-div.tab button.disabled-tab {
-  cursor: not-allowed;
-}
-
-div.tab button.selected {
-  background-color: $red;
-  color: yellow;
+.form-frame {
+  height: 430px;
+  overflow-y: auto;
 }

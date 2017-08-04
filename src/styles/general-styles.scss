@@ -1,54 +1,52 @@
 @import "variables";
-$font: 8pt Arial, Helvetica;
-$small-font: 6pt Arial, Helvetica;
 table {
   border: none;
-  font: $font;
+  font: $control-font;
   font-weight: bold;
   margin-left: 1em;
 }
 
 button.btn {
-  background-color: #dadada;
-  color: $black;
-  font-size: 8pt;
-  border: 1pt solid #c0c0c0;
-  height: 24px;
+  background-color: $button-background-color;
+  color: $text-color;
+  font-size: $font-size-hint;
+  border: $button-border;
+  height: $button-height;
 }
 
 button.btn-cancel {
-  background-color: $red; //$cancel-color;
-  color: $white;
+  background-color: $cancel-color;
+  color: background-color;
 }
 
 button.btn-warning {
-  background-color: $orange; //$warning-color;
-  color: $white;
+  background-color: $warning-color;
+  color: $background-color;
 }
 
 @mixin input-settings {
-  background-color: #f0f0f0;
-  border-top: 1px solid #e0e0e0;
-  border-bottom: 1px solid #e0e0e0;
-  border-left: 1px solid #e0e0e0;
-  border-right: 1px solid #e0e0e0;
-  color: #424242;
-  font: $font;
+  background-color: $control-background-color;
+  border-top: $control-border;
+  border-bottom: $control-border;
+  border-left: $control-border;
+  border-right: $control-border;
+  color: $control-color;
+  font: $control-font;
   font-weight: bold;
   margin: 2px 8px 2px 0;
   padding: 4px 2px 2px;
   vertical-align: middle;
-  width: 99%;
+  width: $control-width;
 }
 
 @mixin disabled-element {
-  color: #707070;
-  background: #dddddd;
+  color: $control-disabled-color;
+  background: $control-disabled-background;
 }
 
 select.select-box {
   @include input-settings;
-  height: 25px;
+  height: $control-height;
 }
 
 input.search-box {
@@ -61,7 +59,7 @@ input.search-box {
 
 input.text-box {
   @include input-settings;
-  height: 25px;
+  height: $control-height;
 }
 
 .text-area {
@@ -69,30 +67,38 @@ input.text-box {
   resize: none;
 }
 
-.align-left {
+.text-align-left {
   text-align: left;
 }
 
-.align-right {
+.text-align-right {
   text-align: right;
 }
 
-.align-center {
+.text-align-center {
   text-align: center;
 }
 
+.left {
+  float: left;
+}
+
+.right {
+  float: right;
+}
+
 .small-italic-notification {
-  font: $small-font;
-  font-weight: bold;
-  font-style: italic;
+  font: $control-small-font;
+  font-weight: $text-bold;
+  font-style: $text-italic;
 }
 
 a {
-  color: black;
+  color: $link-color;
 }
 
 a:hover {
-  color: $red;
+  color: $selected-item-text-color;
   cursor: pointer;
 }
 
@@ -118,4 +124,12 @@ select:disabled {
 
 button:disabled {
   @include disabled-element();
+}
+
+table td {
+  white-space: nowrap;
+}
+
+table td:last-child {
+  width: 100%;
 }
