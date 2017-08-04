@@ -31,6 +31,7 @@ export class UserLoginComponent implements OnInit {
 
     try {
       await this.authenticationService.login(this.userID, this.password);
+
       this.router.navigate(['procedures/search']);
 
     } catch (exception) {
@@ -61,6 +62,10 @@ export class UserLoginComponent implements OnInit {
       return false;
     }
     return true;
+  }
+
+  private onClickResetCredentials() {
+    throw new Error('User reset credentials functionality no already defined...');
   }
 
 }

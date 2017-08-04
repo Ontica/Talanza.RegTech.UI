@@ -7,18 +7,22 @@
  */
 
 import { NgModule, Optional, SkipSelf } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { CommonModule } from '@angular/common';
 
 import { CoreService } from './core.service';
 import { ExceptionHandler } from './general/exception-handler';
+
 import { SessionService } from './general/session.service';
 
 import { ApplicationSettingsService } from './general/application-settings.service';
 import { DirectoryService } from './http/directory.service';
+
 import { HttpHandler } from './http/http-handler';
 import { HttpService } from './http/http.service';
+import { HttpErrorInterceptor } from './http/http-error-interceptor';
+
 import { LoggerService } from './general/logger.service';
 
 import { SpinnerComponent } from './spinner/spinner.component';
@@ -35,9 +39,13 @@ import { throwIfAlreadyLoaded } from './module-import-guard';
   ],
   exports: [SpinnerComponent],
   declarations: [SpinnerComponent],
-  providers: [CoreService, ExceptionHandler, SessionService, ApplicationSettingsService, LoggerService,
-              SpinnerService, SecurityDataService, AuthenticationService,
-              SecurityGuardService, HttpHandler, HttpService, DirectoryService]
+  providers: [CoreService, ExceptionHandler, SessionService,
+              ApplicationSettingsService, LoggerService,
+              SecurityDataService, AuthenticationService,
+              SecurityGuardService, HttpHandler, HttpService, DirectoryService,
+              SpinnerService,
+              { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true}
+            ]
 })
 export class CoreModule {
 

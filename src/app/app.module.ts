@@ -5,6 +5,7 @@
  * See LICENSE.txt in the project root for complete license information.
  *
  */
+import { ErrorHandler } from '@angular/core';
 
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
@@ -45,10 +46,16 @@ import { AppRoutingModule } from './app-routing.module';
 // Temporarily main SCSS file injection
 import '../styles/styles.scss';
 
+// Define global exception handler provider
+import { ExceptionHandler } from './core/general/exception-handler';
+
+const EXCEPTION_HANDLER_PROVIDER =  { provide: ErrorHandler, useClass: ExceptionHandler };
+
 // Application wide providers
 const APP_PROVIDERS = [
   ...APP_RESOLVER_PROVIDERS,
-  AppState
+  AppState,
+  EXCEPTION_HANDLER_PROVIDER
 ];
 
 type StoreType = {

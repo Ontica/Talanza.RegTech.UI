@@ -11,16 +11,20 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/mergeMap';
 
 import { Assertion } from 'empiria';
+import { Exception } from '../general/exception';
+import { ExceptionHandler } from '../general/exception-handler';
 
 import { DirectoryService } from './directory.service';
 import { HttpHandler } from './http-handler';
+
 import { HttpClientOptions, HttpMethod } from './common-types';
 
 @Injectable()
 export class HttpService {
 
   constructor(private httpHandler: HttpHandler,
-              private directory: DirectoryService) { }
+              private directory: DirectoryService,
+              private exceptionHandler: ExceptionHandler) { }
 
   public get<T>(path: string, options?: HttpClientOptions): Observable<T> {
     Assertion.assertValue(path, 'path');
@@ -56,6 +60,23 @@ export class HttpService {
                          .mergeMap((service) => {
                             return this.httpHandler.delete<T>(path, options, service);
                          });
+  }
+
+
+  public showAndReturn<T>(error: any, defaultMessage?: string, returnValue?: T): Observable<T> {
+    let exception = Exception.convertTo(error, defaultMessage);
+
+    exception.show();
+
+    return Observable.of<T>(returnValue);
+  }
+
+  public showAndThrow(error: any, defaultMessage?: string) {
+    const exception = Exception.convertTo(error, defaultMessage);
+
+    exception.show();
+
+    return Observable.throw(exception);
   }
 
 }

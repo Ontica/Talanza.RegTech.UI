@@ -8,6 +8,9 @@
 
 export { CoreService } from './core.service';
 
+export { ExceptionHandler } from './general/exception-handler';
+export { Exception } from './general/exception';
+
 export { SessionService } from './general/session.service';
 export { HttpService } from './http/http.service';
 export { LoggerService } from './general/logger.service';

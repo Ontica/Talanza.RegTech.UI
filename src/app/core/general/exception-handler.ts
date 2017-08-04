@@ -5,22 +5,35 @@
  * See LICENSE.txt in the project root for complete license information.
  *
  */
-import { Injectable } from '@angular/core';
+import { ErrorHandler, Injectable, Injector } from '@angular/core';
+
+import { Exception } from './exception';
 
 @Injectable()
-export class ExceptionHandler {
+export class ExceptionHandler extends ErrorHandler {
 
-  public show(exception: any, defaultMessage?: string) {
+	private trace: any[] = [];
 
-    let errMsg = 'Tengo un problema.\n\n';
+	constructor(private injector: Injector) {
+		super();
+	}
 
-    if (exception instanceof Error) {
-      errMsg += defaultMessage + '\n\n' + (<Error> exception).message;
-    } else {
-      errMsg += defaultMessage + '\n\n' + 'Error desconocido.';
-    }
-    console.log("at exception", exception);
-    alert(errMsg);
-  }
+	public handleError(error: any): void {
+		// do real error handling like logging them to a central log server
+		if (error instanceof Exception) {
+			console.log(`GLOBAL exception handler: [${error.code}] ${error.message}`);
+		} else {
+			console.log(`GLOBAL exception handler: ${error.message}`);
+		}
+
+		// if (this.trace.length != 0) {
+		//   const lastError = this.trace[this.trace.length -1];
+
+		//   if (lastError === error) {
+		//     return;
+		//   }
+		// }
+		//this.trace.push(error);
+	}
 
 }

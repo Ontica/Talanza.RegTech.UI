@@ -8,16 +8,21 @@
 
 import { Injectable } from '@angular/core';
 
-import { SessionService, HttpService,
+import { ExceptionHandler, SessionService, HttpService,
          LoggerService, SpinnerService } from './';
 
 @Injectable()
 export class CoreService {
 
-  public constructor(private _session: SessionService,
+  public constructor(private _exceptionHandler: ExceptionHandler,
+                     private _session: SessionService,
                      private _http: HttpService,
                      private _logger: LoggerService,
                      private _spinner: SpinnerService) {
+  }
+
+  public get exceptionHandler(): ExceptionHandler {
+    return this._exceptionHandler;
   }
 
   public get http(): HttpService {
