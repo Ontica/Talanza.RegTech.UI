@@ -92,12 +92,10 @@ export class RelatedProceduresTabComponent implements OnInit {
   }
 
   public async updateRelatedProceduresGrid() {
-    const errMsg = 'Ocurrió un problema al intentar leer la lista de trámites relacionados.';
-
     await this.contractService.getClause(this.contractClause.contract.uid,
                                          this.contractClause.uid)
-                              .then((clause) => this.relatedProcedures = clause.relatedProcedures)
-                              .catch((e) => this.exceptionHandler(e, errMsg));
+                              .toPromise()
+                              .then((clause) => this.relatedProcedures = clause.relatedProcedures);
   }
 
   private async addRelatedProcedure() {
@@ -106,6 +104,7 @@ export class RelatedProceduresTabComponent implements OnInit {
     await this.contractService.addRelatedProcedure(this.contractClause.contract.uid,
                                                    this.contractClause.uid,
                                                    this.relatedProcedure)
+                              .toPromise()
                               .then(() => alert('El trámite se ha agregado a la claúsula.'))
                               .catch((e) => this.exceptionHandler(e, errMsg));
 

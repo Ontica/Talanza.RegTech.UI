@@ -20,7 +20,7 @@ export class FilingFeeTabComponent implements OnInit {
   public isFree = false;
   public disabled = true;
   public isDisabled = true;
-         
+
   constructor(private procedureService: ProcedureService) { }
 
   public ngOnInit() {
@@ -72,9 +72,8 @@ export class FilingFeeTabComponent implements OnInit {
     if (this.isNewProcedure) {
       this.disabled = false;
       this.addButtonLabel = 'Agregar trámite';
-    } 
-     else {
-        this.addButtonLabel = 'Guardar cambios';
+    } else {
+      this.addButtonLabel = 'Guardar cambios';
     }
   }
 
@@ -83,7 +82,6 @@ export class FilingFeeTabComponent implements OnInit {
       alert('Seleccionar el tipo de pago de la lista.');
       return false;
     }
-
     return true;
   }
 

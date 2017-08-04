@@ -35,7 +35,7 @@ import { ProceduresRoutingModule } from './procedures-routing.module';
   imports: [ProceduresRoutingModule, SharedModule, CommonModule, FormsModule],
   declarations: [ProceduresMainPageComponent, ProcedureFilterComponent, ProcedureEditorComponent,
                  GeneralInfoTabComponent, RequirementsTabComponent, FilingConditionsTabComponent,
-                 FilingFeeTabComponent, StatusTabComponent, AddRequirementTabComponent, 
+                 FilingFeeTabComponent, StatusTabComponent, AddRequirementTabComponent,
                  AddRequirementListTabComponent, RequirementTabComponent,  RequirementGridComponent],
   exports: [ProceduresMainPageComponent]
 })

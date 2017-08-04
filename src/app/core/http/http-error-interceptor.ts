@@ -19,14 +19,12 @@ import { HttpException } from '../general/exception';
 @Injectable()
 export class HttpErrorInterceptor implements HttpInterceptor {
 
-  constructor() {}
-
-  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+  public intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(req)
-               .catch(err => Observable.throw(this.getNormalizedHttpErrorResponse(err, req)));
+               .catch((err) => Observable.throw(this.getNormalizedHttpErrorResponse(err, req)));
   }
 
-  private getNormalizedHttpErrorResponse(sourceErr: any, request: HttpRequest<any>):  HttpErrorResponse {
+  private getNormalizedHttpErrorResponse(sourceErr: any, request: HttpRequest<any>): HttpErrorResponse {
     if (!(sourceErr instanceof HttpErrorResponse)) {
       return this.getUnknownHttpError(sourceErr, request);
     }
@@ -56,9 +54,11 @@ export class HttpErrorInterceptor implements HttpInterceptor {
   }
 
   private getNormalizedErrorResponse(sourceErr: any, request: HttpRequest<any>): HttpErrorResponse {
-    const exception = new HttpException(`[${sourceErr.error.data.errorCode}] ${sourceErr.error.data.errorMessage}`,
-                                        sourceErr,
-                                        { request, response: sourceErr.error });
+    const exception = new HttpException(
+                            `[${sourceErr.error.data.errorCode}] ${sourceErr.error.data.errorMessage}`,
+                              sourceErr,
+                              { request, response: sourceErr.error }
+                          );
 
     const errorResponseData = this.getDefaultHttpErrorResponseData(sourceErr, request, exception);
     errorResponseData.statusText = sourceErr.error.data.statusCode;
@@ -67,9 +67,11 @@ export class HttpErrorInterceptor implements HttpInterceptor {
   }
 
   private getUnknownHttpError(sourceErr: any, request: HttpRequest<any>): HttpErrorResponse {
-    const exception = new HttpException(`[ERR_CONNECTION_REFUSED] Error desconocido de conexión al servidor.`,
-                                         sourceErr,
-                                        { request, response: sourceErr.error });
+    const exception = new HttpException(
+                            `[ERR_CONNECTION_REFUSED] Error desconocido de conexión al servidor.`,
+                              sourceErr,
+                              { request, response: sourceErr.error }
+                          );
 
     const errorResponseData = this.getDefaultHttpErrorResponseData(sourceErr, request, exception);
 

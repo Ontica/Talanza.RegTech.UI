@@ -18,10 +18,11 @@ import { SessionService } from '../../core';
 export class MainLayoutComponent {
 
   public userName = 'UserName || et al';
-  public title = 'Cajón de arena para jugar';
+  public title = 'Administración y control del cumplimiento regulatorio';
   public breadcrumb = 'Inicio » Edición de trámites';
 
   // public title = 'Administración y control del cumplimiento regulatorio';
+  // Cajón de arena para jugar
 
   public constructor(private session: SessionService) {
     const principal = session.getPrincipal();

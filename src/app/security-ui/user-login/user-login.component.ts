@@ -46,7 +46,7 @@ export class UserLoginComponent implements OnInit {
 
   // region Private methods
 
-  private reloadPage(mustReload) : void {
+  private reloadPage(mustReload): void {
     if (mustReload) {
       window.location.reload();
     }

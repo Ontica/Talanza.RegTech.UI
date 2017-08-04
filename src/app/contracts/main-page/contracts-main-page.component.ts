@@ -9,6 +9,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Assertion } from 'empiria';
+import { CoreService } from '../../core';
 
 import { ContractService } from '../services/contract.service';
 
@@ -30,7 +31,8 @@ export class ContractsMainPageComponent implements OnInit {
 
   public isClauseEditorWindowVisible = false;
 
-  constructor(private contractService: ContractService) { }
+  constructor(private core: CoreService,
+              private contractService: ContractService) { }
 
   public ngOnInit() {
     this.setInitialValues();
@@ -43,28 +45,36 @@ export class ContractsMainPageComponent implements OnInit {
 
   public onClickAddClause() {
     if (this.selectedContract.uid === '') {
-      alert("Es necesario seleccionar el contrato al cual se le aplicarán los anexos ");
+      alert('Es necesario seleccionar el contrato al cual se le aplicarán los anexos.');
       return;
     }
     this.selectedContractClause = EmptyContractClause();
-    this.selectedContractClause.contract = this.selectedContract;    
+    this.selectedContractClause.contract = this.selectedContract;
     this.isClauseEditorWindowVisible = true;
   }
 
   public onClickEditClause(clause: ContractClause) {
     this.selectedContractClause = clause;
-    this.selectedContractClause.contract = this.selectedContract;   
+    this.selectedContractClause.contract = this.selectedContract;
     this.isClauseEditorWindowVisible = true;
   }
 
-  public search(): void {
-    alert('Por el momento la búsqueda de cláusulas está deshabilitada.');
+  public search(): any {
+    const errMsg = 'Por el momento la búsqueda de cláusulas está deshabilitada.';
+
+    return this.contractService.searchClauses(this.selectedContractClause.uid, 'anexo 3.2')
+                               .subscribe();
+
+    // this.contractService.getClause(this.selectedContract.uid, 'abcdefg')
+    //                     .toPromise()
+    //                     .then((x) => this.selectedContractClause = x)
+    //                     .catch((e) => this.core.exceptionHandler.show(e, errMsg));
   }
 
   public onChangeContract(uid: string): void {
     if (uid === '') {
-      this.selectedContract.clauses = [];      
-      this.selectedContract  = EmptyContract();
+      this.selectedContract.clauses = [];
+      this.selectedContract = EmptyContract();
       return;
     }
     this.selectedContract = this.contractsList.find((x) => x.uid === uid);
@@ -86,33 +96,21 @@ export class ContractsMainPageComponent implements OnInit {
     const errMsg = 'Ocurrió un problema al intentar leer la lista de contratos.';
 
     this.contractService.getContractList()
+                        .toPromise()
                         .then((x) => this.contractsList = x)
-                        .catch((e) => this.exceptionHandler(e, errMsg));
+                        .catch((e) => this.core.http.showAndThrow(e, errMsg));
   }
 
   private loadSelectedContractClausesList(): void {
-    Assertion.assertValue(this.selectedContract, "this.selectedContract");
+    Assertion.assertValue(this.selectedContract, 'this.selectedContract');
 
-    const errMsg = 'Ocurrió un problema al intentar leer las cláusulas del contrato.';
-  
-    if (this.selectedContract.clauses) {    
+    if (this.selectedContract.clauses) {
       return;
     }
-    
+
     this.contractService.getContractClausesList(this.selectedContract.uid)
-                        .then((x) => this.selectedContract.clauses = x)              
-                        .catch((e) => this.exceptionHandler(e, errMsg));
-  }
-
-  private exceptionHandler(error: any, defaultMsg: string) : void {
-    let errMsg = 'Tengo un problema.\n\n';
-
-    if (typeof(error) === typeof(Error)) {
-      errMsg += defaultMsg + '\n\n' + (<Error> error).message;
-    } else {
-      errMsg += defaultMsg + '\n\n' + 'Error desconocido.';
-    }
-    alert(errMsg);
+                        .toPromise()
+                        .then((x) => this.selectedContract.clauses = x);
   }
 
 }

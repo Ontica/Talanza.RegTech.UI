@@ -9,19 +9,19 @@
 import { Component, EventEmitter, HostBinding, Output }  from '@angular/core';
 
 @Component({
-  selector:'process-activity-association',
-  templateUrl:'./process-activity-association.component.html',
+  selector: 'process-activity-association',
+  templateUrl: './process-activity-association.component.html',
   styleUrls: ['./process-activity-association.component.scss']
 })
 
 export class ProcessActivityAssociationComponent {
-  
+
   @Output() public onCancelEvent = new EventEmitter();
 
   @HostBinding('style.display') private display = 'block';
   @HostBinding('style.position') private position = 'absolute';
 
-   public cancel(): void {
+  public cancel(): void {
     this.close();
   }
 

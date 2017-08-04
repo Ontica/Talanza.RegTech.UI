@@ -20,19 +20,19 @@ export enum HttpMethod {
 
 export interface HttpClientOptions {
 
-  body?: any,
+  body?: any;
 
-  headers?: HttpHeaders,
+  headers?: HttpHeaders;
 
-  observe: 'body' | 'events' | 'response',
+  observe: 'body' | 'events' | 'response';
 
-  params?: HttpParams,
+  params?: HttpParams;
 
-  reportProgress?: boolean,
+  reportProgress?: boolean;
 
-  responseType?: 'arraybuffer' | 'blob' | 'json' | 'text',
+  responseType?: 'arraybuffer' | 'blob' | 'json' | 'text';
 
-  withCredentials?: boolean
+  withCredentials?: boolean;
 
   dataField?: string;
 
@@ -43,7 +43,7 @@ export function DefaultHttpClientOptions(): HttpClientOptions {
   return {
     observe: 'response',
     responseType: 'json',
-  }
+  };
 }
 
 export interface Service {

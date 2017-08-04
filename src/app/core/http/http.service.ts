@@ -62,7 +62,6 @@ export class HttpService {
                          });
   }
 
-
   public showAndReturn<T>(error: any, defaultMessage?: string, returnValue?: T): Observable<T> {
     let exception = Exception.convertTo(error, defaultMessage);
 

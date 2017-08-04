@@ -79,7 +79,7 @@ export class HttpHandler {
     }
 
     return this.http.request(HttpMethod[method].toString(), url, requestOptions)
-                    .map(response => (payloadDataField ? response.body[payloadDataField] : response) as T);
+                    .map((response) => (payloadDataField ? response.body[payloadDataField] : response) as T);
   }
 
   // Helpers

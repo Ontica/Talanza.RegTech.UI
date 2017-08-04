@@ -89,6 +89,7 @@ export class ClauseInfoTabComponent implements OnInit {
 
     await this.contractService.createClause(this.contractClause.contract.uid,
                                             this.contractClause)
+                              .toPromise()
                               .then((contractClause) => this.contractClause.uid = contractClause.uid)
                               .catch((e) => this.exceptionHandler(e, errMsg));
   }
@@ -98,6 +99,7 @@ export class ClauseInfoTabComponent implements OnInit {
 
     await this.contractService.updateClause(this.contractClause.contract.uid,
                                             this.contractClause)
+                              .toPromise()
                               .then((contractClause) => this.contractClause = contractClause)
                               .catch((e) => this.exceptionHandler(e, errMsg));
 
@@ -131,7 +133,7 @@ export class ClauseInfoTabComponent implements OnInit {
     let errMsg = 'Tengo un problema.\n\n';
 
     if (typeof (error) === typeof (Error)) {
-      errMsg += defaultMsg + '\n\n' + (<Error>error).message;
+      errMsg += defaultMsg + '\n\n' + (<Error> error).message;
     } else {
       errMsg += defaultMsg + '\n\n' + 'Error desconocido.';
     }

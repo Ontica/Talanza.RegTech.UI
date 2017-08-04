@@ -34,8 +34,9 @@ export class HomeComponent implements OnInit {
 
   public invokeHttpService() {
     this.core.http.get('System.GetLicense', { observe: 'response' })
-                  .subscribe((service) => this.core.logger.log('GetLicense from directory service is: ' +
-                                                               JSON.stringify(service)));
+                  .subscribe((service) =>
+                                  this.core.logger.log('GetLicense from directory service is: ' +
+                                                       JSON.stringify(service)));
   }
 
   public invokeProtectedHttpService() {
@@ -48,7 +49,8 @@ export class HomeComponent implements OnInit {
     const serviceParams = ['uid', 'JFzy4eELv0FzkDgb2cqHXyGz1oKzec5JSBiM'];
 
     this.core.http.get('Steps.Modeling.GetProcedure', { observe: 'response', serviceParams })
-                  .subscribe((service) => this.core.logger.log('protected service WITH PARS returned: ' + service));
+                  .subscribe((service) =>
+                             this.core.logger.log(`protected service WITH PARS returned: ${service}`));
   }
 
   public onLogMessage() {

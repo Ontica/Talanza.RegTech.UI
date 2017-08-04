@@ -15,13 +15,13 @@
         <td colspan="2"><input [disabled]="disabled" class="text-box" type="text" value="" [(ngModel)]="procedure.shortName"></td>
       </tr> -->
       <tr>
-        <td>¿Está regulado?:</td>
+        <td>Tipo de regulación:</td>
         <td>
           <select [disabled]="disabled" style="width:300px" class="select-box" [(ngModel)]="procedure.legalInfo.regulationStatus">
             <option value="">( Tipo de regulación )</option>
-            <option value="Dependencia">Sólo por la dependencia</option>
-            <option value="COFEMER">Por la dependencia y COFEMER</option>
-            <option value="No regulado">Trámite no regulado</option>
+            <option value="No regulado">En el contrato</option>
+            <option value="Dependencia">Normatividad aplicable</option>
+            <option value="COFEMER">Normatividad aplicable e inscrito en COFEMER</option>
           </select>
         </td>
         <td class="text-align-right">
@@ -37,7 +37,7 @@
               <option value="Período de Desarrollo">Período de Desarrollo</option>
               <option value="Período de Evaluación">Período de Evaluación</option>
               <option value="Transición de Arranque">Transición de Arranque</option>
-              <option value="Transversales ">Transversales</option>
+              <option value="Transversales">Transversales</option>
           </select>
         </td>
       </tr>
@@ -47,6 +47,7 @@
           <select [disabled]="disabled" style="width:300px" class="select-box" [(ngModel)]="procedure.theme">
             <option value="">( Seleccionar un tema )</option>
             <option value="Actividad petrolera">Actividad petrolera</option>
+            <option value="Cesión">Cesión</option>
             <option value="Certificación de reservas">Certificación de reservas</option>
             <option value="Contenido Nacional">Contenido Nacional</option>
             <option value="Impacto Social">Impacto Social</option>
