@@ -1,0 +1,6 @@
+@import "../../../../node_modules/dhtmlx-gantt/codebase/dhtmlxgantt.css";
+p {
+  font: 19px;
+  color: blue;
+  font-weight: 500px;
+}

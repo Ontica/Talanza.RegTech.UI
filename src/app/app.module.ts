@@ -35,6 +35,7 @@ import { SecurityUIModule } from './security-ui/security-ui.module';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { ProcessModule } from './process/process.module';
 import { ContractsModule } from './contracts/contracts.module';
+import { ProjectsModule } from './projects/projects.module';
 import { SharedModule } from './shared/shared.module';
 
 /*
@@ -79,6 +80,7 @@ type StoreType = {
     SecurityUIModule,
     DashboardModule,
     ProcessModule,
+    ProjectsModule,
     SharedModule,
     BrowserModule,
     FormsModule,
