@@ -1,0 +1,122 @@
+<div class="editor-container editor-container-style">
+  <div class="header border-bottom">
+    <div class="close-button right-position" (click)="onClose()">&times;</div>
+    <br>
+    <div class="title ">Agregar actividad al proyecto:R-14 (El dorado) Sierra Oil & Gas</div>
+  </div>
+  <br>
+  <div>
+    <table class="form">
+      <tr>
+        <td colspan="3" class="form-title form-title-text">1) Seleccionar una actividad o evento</td>
+      </tr>
+      <tr>
+        <td>Categoría:</td>
+        <td colspan="2"><select class="select-box" style="width:400px">
+          <option>( Seleccionar una Categoría )</option>
+          <option value="Etapa de Abandono">Actividades de mantenimiento</option>
+          <option value="Período de Desarrollo">Período de Desarrollo</option>
+          <option value="Período de Evaluación">Período de Evaluación</option>
+          <option value="Transición de Arranque">Transición de Arranque</option>
+          <option value="Transversales">Transversales</option>
+          </select></td>
+      </tr>
+      <tr>
+        <td>Acitivdad:</td>
+        <td><select class="select-box" style="width:400px">
+          <option>( Seleccionar una Actividad )</option>
+          <option value="Etapa de Abandono">Modificación de medidores</option>
+          <option value="Período de Desarrollo">Período de Desarrollo</option>
+          <option value="Período de Evaluación">Período de Evaluación</option>
+          <option value="Transición de Arranque">Transición de Arranque</option>
+          <option value="Transversales">Transversales</option>
+          </select>
+        </td>
+        <td><a class="right-position">Actividades...</a></td>
+      </tr>
+      <tr>
+        <td>Asociado a:</td>
+        <td><select class="select-box" style="width:400px">
+          <option>( Seleccinar a donde esta asociado )</option>
+          <option value="Etapa de Abandono">Pozo MX-5-PZ-234</option>
+          <option value="Período de Desarrollo">Pozo MX-1-PZ-131</option>
+          <option value="Período de Evaluación">Pozo CAMPZ-234</option>
+          <option value="Transición de Arranque">Pozo MX-5-PZ-234</option>          
+          </select>
+        </td>
+        <td><a class="right-position">Instalaciones...</a></td>
+      </tr>
+      <tr>
+        <td colspan="3">
+          <table class="internal-form">
+            <tr>
+              <td>Solicitado por:</td>
+              <td><select class="select-box" style="width:380px">
+                <option>( Seleccionar quien lo solicto )</option>
+                 <option value="Juan Gonzalez">Juan Gonzalez</option>
+                <option value="Guadalupe Pérez">Guadalupe Pérez</option>
+                <option value="Hugo Adrian García">Hugo Adrian García</option>  
+                </select>
+              </td>
+              <td>El día:</td>
+              <td><input type="text" class="text-box" style="width:100px"></td>
+              <td><button class="btn " class="right-position">..</button></td>
+            </tr>
+          </table>
+
+        </td>
+      </tr>
+    </table>
+  </div>
+  <br> <br>
+  <div>
+    <table class="form">
+      <tr>
+        <td colspan="3" class="form-title form-title-text">2) Información adicional</td>
+      </tr>
+      <tr>
+        <td>Responsable:</td>
+        <td><select class="select-box" style="width:440px">
+                <option>( Seleccionar un Responsable )</option>
+                <option value="Juan Gonzalez">Juan Gonzalez</option>
+                <option value="Guadalupe Pérez">Guadalupe Pérez</option>
+                <option value="Hugo Adrian García">Hugo Adrian García</option>               
+                </select>
+        </td>
+        <td><a class="right-position">Recursos...</a></td>
+      </tr>
+      <tr>
+        <td colspan="3">
+          <table class="internal-form">
+            <tr>
+              <td class="text-align-left">Fecha de inicio planeada:</td>
+              <td><input type="text" class="text-box" style="width:100px"></td>
+              <td><button class="btn ">..</button></td>
+              <td>Fecha de terminación estimada:</td>
+              <td><input type="text" class="text-box" style="width:100px"></td>
+              <td><button class="btn ">..</button></td>
+              <td><a class="right-position">73 días</a></td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+
+      <tr>
+        <td>Observaciones:</td>
+        <td colspan="2"><textarea style="width:100%;" class="text-area" rows="5" cols="25"></textarea></td>
+      </tr>
+    </table>
+  </div>
+  <div class="form-footer border-top">
+    <table class="form">
+      <tr>
+        <td class="text-align-right ">
+          <button class="btn " (click)="onClickCancel()">Cancelar</button>
+        </td>
+        <td class="text-align-right ">
+          <button class="btn ">Agregar actividad</button>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>

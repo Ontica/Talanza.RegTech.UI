@@ -14,5 +14,14 @@ import { Component } from '@angular/core';
 })
 
 export class ProjectsMainPageComponent {
+  
+  public isAddActivityEditorWindowVisible = false;
 
+  public onCloseAddActivityEditorWindow(): void {    
+    this.isAddActivityEditorWindowVisible = false;
+  }
+
+  public onClickAddActivity():void {
+    this.isAddActivityEditorWindowVisible = true;
+  }
 }
