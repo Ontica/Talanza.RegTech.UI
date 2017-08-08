@@ -1,5 +1,43 @@
-<p>
-  Aqui va el diagrama de gantt</p>
+<table class="worklist-filter">
+  <tr>
+    <td>Proyecto:</td>
+    <td>
+      <select style="width:320px;" class="select-box">
+        <option value="">( Todos ) </option>
+        <option value="R1-4">R1-4 (El Dorado)</option>      
+        </select>
+    </td>
+    <td>Buscar:</td>
+    <td><input style="width:320px" type="search" class="search-box">
+      <button class="btn" style="width:55px;">Buscar</button>
+    </td>
+    <td colspan="2"><button style="width:185px" class="btn-warning aling-center" type="button" (click)="onClickAddActivity()">+ Agregar actividad o evento</button></td>
+  </tr>
+
+  <tr>
+    <td>Filtrar:</td>
+    <td><select class="select-box" style="width:320px">
+                <option value="">( No filtrar )</option>
+                <option value="Trámites gubernamentales">Trámites gubernamentales</option>                
+          </select>
+    </td>
+    <td>Responsable:</td>
+    <td>
+      <select style="width:385px" class="select-box">
+              <option value="">( No filtrar ) </option>
+              <option value="112">Juan Carlos Palma Rodríguez</option>                      
+            </select>
+    </td>
+    <td>Ver como:</td>
+    <td><select style="width:130px" class="select-box">
+              <option value="">( No filtrar ) </option>
+              <option value="En proceso ">Diagrama Gantt</option>                      
+            </select>
+    </td>
+  </tr>
+
+</table>
+
 <div style="height:400px; overflow:scroll;">
   <gantt></gantt>
 </div>
