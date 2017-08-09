@@ -59,8 +59,8 @@
                 </select>
               </td>
               <td>El día:</td>
-              <td><input type="text" class="text-box" style="width:100px"></td>
-              <td><button class="btn " class="right-position">..</button></td>
+              <td><input type="text" id="requestedDateCalendar" class="text-box" style="width:100px"></td>
+              <td><button class="btn " id="requestedDateButton" class="right-position">..</button></td>
             </tr>
           </table>
 
@@ -90,11 +90,11 @@
           <table class="internal-form">
             <tr>
               <td class="text-align-left">Fecha de inicio planeada:</td>
-              <td><input type="text" class="text-box" style="width:100px"></td>
-              <td><button class="btn ">..</button></td>
+              <td><input type="text" id="startDateCalendar" class="text-box" style="width:100px"></td>
+              <td><button id="startDateCalendarButton" class="btn ">..</button></td>
               <td>Fecha de terminación estimada:</td>
-              <td><input type="text" class="text-box" style="width:100px"></td>
-              <td><button class="btn ">..</button></td>
+              <td><input id="endDateCalendar" type="text" class="text-box" style="width:100px" [(ngModel)]="date"></td>
+              <td><button id="endDateCalendarButton" class="btn ">..</button></td>
               <td><a class="right-position">73 días</a></td>
             </tr>
           </table>

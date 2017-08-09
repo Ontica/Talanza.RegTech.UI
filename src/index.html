@@ -8,26 +8,29 @@
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title><%= htmlWebpackPlugin.options.title %></title>
+  <title>
+    <%= htmlWebpackPlugin.options.title %>
+  </title>
   <meta name="description" content="<%= htmlWebpackPlugin.options.title %>">
   <!-- base url -->
   <base href="<%= htmlWebpackPlugin.options.metadata.baseUrl %>">
   <% if (webpackConfig.htmlElements.headTags) { %>
-  <!-- Configured Head Tags  -->
-  <%= webpackConfig.htmlElements.headTags %>
-  <% } %>
+    <!-- Configured Head Tags  -->
+    <%= webpackConfig.htmlElements.headTags %>
+      <% } %>
 
 
-  <%= htmlWebpackPlugin.files.webpackManifest %>
+        <%= htmlWebpackPlugin.files.webpackManifest %>
 
-  <% if (htmlWebpackPlugin.options.metadata.isDevServer && htmlWebpackPlugin.options.metadata.HMR !== true) { %>
-  <!-- Webpack Dev Server reload -->
-  <script src="/webpack-dev-server.js"></script>
-  <% } %>
+          <% if (htmlWebpackPlugin.options.metadata.isDevServer && htmlWebpackPlugin.options.metadata.HMR !== true) { %>
+            <!-- Webpack Dev Server reload -->
+            <script src="/webpack-dev-server.js"></script>
+            <% } %>
 
-  <!-- CSS will be injected by webpack here -->
-  <!-- Preload link tags will be injected by webpack here -->
-
+              <!-- CSS will be injected by webpack here -->
+              <!-- Preload link tags will be injected by webpack here -->
+              <link rel="stylesheet" href="http://cdn.dhtmlx.com/edge/dhtmlx.css" type="text/css">
+              <script src="http://cdn.dhtmlx.com/edge/dhtmlx.js" type="text/javascript"></script>
 </head>
 
 <body>
@@ -53,4 +56,5 @@
 
   <!-- Scripts will be injected by webpack here -->
 </body>
+
 </html>
