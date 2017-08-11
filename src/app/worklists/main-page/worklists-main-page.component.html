@@ -3,11 +3,17 @@
     <td>Bandeja:</td>
     <td>
       <select style="width:320px;" class="select-box">
-        <option value="">( Todos ) </option>
-        <option value="all">Tareas pendientes(mias y del equipo)</option>
-        <option value="my">Tareas pendientes (mías)</option>
-        <option value="team">Tareas pendientes (equpio)</option>
-        </select>
+        <option value="my">Mis tareas pendientes</option>
+        <option value="team">Mis tareas pendientes y las de mi equipo</option>
+        <option value=""></option>
+        <option value="my">Mis tareas terminadas</option>
+        <option value="my">Mis tareas terminadas y las de equipo</option>
+        <option value=""></option>
+        <option value="my">Todas mis tareas</option>
+        <option value="my">Todas mis tareas y las de mi equipo</option>        
+        <option value=""></option>
+        <option value="my">Todas las tareas de mi organización</option>
+      </select>
     </td>
     <td>Buscar:</td>
     <td><input style="width:320px" type="search" class="search-box"></td>
@@ -19,19 +25,21 @@
     <td>Asignado a:</td>
     <td><select class="select-box" style="width:320px">
                 <option value="">( No filtrar )</option>
-                <option value="Juan Gonzalez">Juan Gonzalez</option>
+                <option value="Juan González">Juan González</option>
                 <option value="Guadalupe Pérez">Guadalupe Pérez</option>
-                <option value="Hugo Adrian García">Hugo Adrian García</option>    
+                <option value="Hugo Adrián García">Hugo Adrian García</option>    
           </select>
     </td>
     <td>Estado:</td>
     <td>
       <select style="width:320px" class="select-box text-align-right">
-              <option value="">( No filtrar ) </option>
-              <option value="En proceso ">En proceso</option>
-              <option value="No iniciada ">No iniciada</option>
-              <option value="Terminada">Terminada</option>              
-            </select>
+        <option value="">( No filtrar ) </option>              
+        <option value="No iniciada">No iniciadas</option>
+        <option value="En proceso">En proceso</option>
+        <option value="Suspendidas">Suspendidas</option>        
+        <option value="En proceso">Terminadas</option>
+        <option value="Canceladas">Canceladas</option>
+      </select>
     </td>
     <td><a>Limpiar</a></td>
     <td></td>
@@ -47,47 +55,39 @@
       <th style="width:25%">Descripción</th>
       <th style="width:10%">Tipo</th>
       <th style="width:10%">Fechas de entrega</th>
-      <th style="width:10%">Envidado por</th>
+      <th style="width:10%">Enviado por</th>
       <th style="width:10%">Estado</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td colspan="6" style="width:90%">Mis tareas pendienes</td>
-      <td colspan="2" class="text-align-right">1 Tareas pendientes</td>
-    </tr>
-    <tr>
       <td style="width:5%">T089</td>
       <td style="width:10%">5/May/17</td>
       <td style="width:20%">Plan de Evaluación</td>
-      <td style="width:25%">Dentro de ciento veinte (120) Días siguientes <br> el contratista deberá a la CNH para </td>
+      <td style="width:25%">Dentro de ciento veinte (120) Días siguientes <br> el contratista deberá entregar a la CNH para </td>
       <td style="width:10%">Trámite CNH</td>
-      <td style="width:10%">Objetivo: 05/Jun/17 <br> Legal:15/Ago/17 </td>
-      <td style="width:10%">Envió:Sistema<br> Lo tiene:Verónica R.</td>
-      <td style="width:10%">No iniciada</td>
-    </tr>
-    <tr>
-      <td colspan="6" style="width:90%">Las tareas pendienes de mi equpio</td>
-      <td colspan="2" class="text-align-right">2 Tareas pendientes 1 terminada</td>
-    </tr>
-    <tr>
-      <td style="width:5%">T089</td>
-      <td style="width:10%">5/May/17</td>
-      <td style="width:20%">Plan de Evaluación</td>
-      <td style="width:25%">Dentro de ciento veinte (120) Días siguientes <br> el contratista deberá a la CNH para </td>
-      <td style="width:10%">Trámite CNH</td>
-      <td style="width:10%">Objetivo: 05/Jun/17 <br> Legal:15/Ago/17 </td>
-      <td style="width:10%">Envió:Sistema<br> Lo tiene:Verónica R.</td>
+      <td style="width:10%">Objetivo: 05/Jun/17 <br> Legal: 15/Ago/17 </td>
+      <td style="width:10%">Envió: Sistema<br> Lo tiene: Verónica R.</td>
       <td style="width:10%">No iniciada</td>
     </tr>
     <tr>
       <td style="width:5%">T089</td>
       <td style="width:10%">5/May/17</td>
-      <td style="width:20%">Plan de Evaluación</td>
-      <td style="width:25%">Dentro de ciento veinte (120) Días siguientes <br> el contratista deberá a la CNH para </td>
+      <td style="width:20%">Modificación de medidores</td>
+      <td style="width:25%">Dentro de ciento veinte (120) Días siguientes <br> el contratista deberá entregar a la CNH </td>
       <td style="width:10%">Trámite CNH</td>
-      <td style="width:10%">Objetivo: 05/Jun/17 <br> Legal:15/Ago/17 </td>
-      <td style="width:10%">Envió:Sistema<br> Lo tiene:Verónica R.</td>
+      <td style="width:10%">Objetivo: 09/Sep/17 <br> Legal: 15/Oct/17 </td>
+      <td style="width:10%">Envió: Lupita E.<br> Lo tiene: Verónica R.</td>
+      <td style="width:10%">No iniciada</td>
+    </tr>
+    <tr>
+      <td style="width:5%">T089</td>
+      <td style="width:10%">5/May/17</td>
+      <td style="width:20%">Oficio de taponamiento de pozos</td>
+      <td style="width:25%">Dentro de treinta (30) Días siguientes <br> el contratista deberá a la CNH para </td>
+      <td style="width:10%">Trámite CNH</td>
+      <td style="width:10%">Objetivo: 11/Sep/17 <br> Legal:15/Sep/17 </td>
+      <td style="width:10%">Envió: Pedro G.<br> Lo tiene: Verónica R.</td>
       <td style="width:10%">No iniciada</td>
     </tr>
 

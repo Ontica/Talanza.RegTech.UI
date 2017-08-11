@@ -24,7 +24,7 @@ export class ProjectsMainPageComponent implements OnInit {
   public isGanttGraphVisible = false;
   public projectList: ProjectRef[] = [];
   public selectedProject: ProjectRef = EmptyProjectRef();
-  public ganttConfig = 'ganttMonths';
+  public ganttConfig = 'ganttWeeks';
 
   public constructor(private projectService: ProjectService) { }
 

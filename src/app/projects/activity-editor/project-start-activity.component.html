@@ -92,14 +92,13 @@
               <th style="width:5%">#</th>
               <th style="width:55%">Tramite/Documentos</th>
               <th style="width:40%">Asignado a</th>
-
             </tr>
           </thead>
           <tbody>
             <tr *ngFor="let task of taksList; let i = index;">
               <td style="width:5%">{{i +1}}</td>
               <td style="width:55%">{{task.name}}</td>
-              <td style="width:40%"><select class="select-box"><option value="">( Seleccionar a quien se asignará )</option>
+              <td style="width:40%"><select class="select-box"><option value="">( Seleccionar )</option>
                 <option *ngFor="let taskManager of taskManagersList" 
                         [value]="taskManager.uid">{{taskManager.name}}</option>            
                 </select></td>
