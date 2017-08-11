@@ -12,7 +12,8 @@ import { Observable } from 'rxjs/Observable';
 import { CoreService } from '../../core';
 
 import { Task } from '../data-types/task';
-import { Activity, ProjectRef, ResourceRef, PersonRef } from '../data-types/project';
+import { Activity, ProjectRef, ResourceRef, PersonRef,
+         TaskRef } from '../data-types/project';
 
 @Injectable()
 export class ActivityService {
@@ -49,6 +50,19 @@ export class ActivityService {
 
     return this.core.http
                     .post<Activity>(path, activity);
+  }
+
+  public getActivity(itemId: number): Observable<any> {    
+    const path = `v1/project-management/activities/${itemId}`;
+
+    return this.core.http.get<any>(path);
+  }
+
+  public getTasks(itemId: number): Observable<TaskRef[]> {
+    const path =  `v1/project-management/activities/${itemId}/tasks`;
+
+    return this.core.http.get<TaskRef[]>(path);
+
   }
 }
 

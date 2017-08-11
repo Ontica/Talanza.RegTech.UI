@@ -27,6 +27,23 @@ export interface Activity {
    requestedTime: Date,
    requestedByUID:string
 }
+ 
+export interface TaskRef {
+   completionProgress: number,
+   estimatedStart: Date,
+   estimatedEnd: Date,
+   estimatedDuration: string,
+   name: string,
+   notes: string,
+   parentId: number,
+   resourceUID: string,   
+   responsibleUID:string,
+   requestedTime: Date,
+   requestedByUID:string,
+   projectUID: string,
+   type:string
+}
+
 export function EmptyProjectRef() {
   const empty: ProjectRef = {
     uid: '',
