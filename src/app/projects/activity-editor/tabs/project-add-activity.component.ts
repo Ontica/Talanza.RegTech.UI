@@ -58,10 +58,11 @@ export class ProjectAddActivityComponent implements OnInit {
     this.setDatePropertiesValueFromCalendars();
     if (!this.validate()) {
       return;
-    }    
+    }
+    
     this.activity.parentId = this.parentId;
+    console.log('this.activity', this.activity);
     await this.addActivity();
-    alert("Se agrego la actividad.");
     this.onClose();
   }
 

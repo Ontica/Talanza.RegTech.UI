@@ -33,7 +33,7 @@ export class GanttComponent implements OnChanges {
 
   public isActivityEditorWindowVisible = false;
   public isStartActivityEditorWindowVisible = false;
-  public parentId: number;
+  public parentId: number = -1;
 
   constructor(private projectService: ProjectService) { }
 
@@ -58,13 +58,8 @@ export class GanttComponent implements OnChanges {
 
   private attachEvents() {
     gantt.attachEvent("onTaskCreated", (id, item) => {
-      if (!id.parent) {
-        this.parentId = null;
-      } else {
-        this.parentId = id.parent;
-      }
+      this.parentId = id.parent || -1;
       this.isActivityEditorWindowVisible = true;
-
     });
 
     gantt.attachEvent("onTaskDblClick", (id, item) => {

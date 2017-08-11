@@ -61,7 +61,7 @@ export function EmptyActivity() {
    estimatedDuration: '',
    name: '',
    notes: '',
-   parentId: 2,
+   parentId: -1,
    resourceUID: '',   
    responsibleUID: '',
    requestedTime: new Date(),

@@ -61,11 +61,6 @@ export class ProjectAssignTasksComponent implements OnInit {
       .catch((e) => this.exceptionHandler(e, errMsg));
   }
 
-
-
- 
-
- 
   private loadActivity(itemId: number): void {
     const errMsg = 'Ocurrió un problema al intentar leer la actividad.';
 
@@ -94,6 +89,5 @@ export class ProjectAssignTasksComponent implements OnInit {
     }
     alert(errMsg);
   }
-
 
 }
