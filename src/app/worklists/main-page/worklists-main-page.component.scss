@@ -1,0 +1,11 @@
+@import "../../../styles/grid";
+.worklist-filter {
+  border: 1px solid $black;
+  border-collapse: collapse;
+  margin: 3px 10px 3px 3px;
+  width: 100%;
+}
+
+table.grid tbody {
+  height: calc(100vh - 260px);
+}

@@ -1,8 +1,8 @@
 <div class="nav-bar">
   <ul>
     <li class="first-li disabled">Inicio</li>
-    <li class="disabled">Seguimiento</li>
     <li class="disabled">Documentos</li>
+    <li class="selected"><a [routerLink]="['/worklists/search']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{exact:true}"> Seguimiento</a></li>
     <li class="selected"><a [routerLink]="['/projects/search']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{exact:true}">Proyectos</a></li>
     <li class="selected"><a [routerLink]="['/contracts/search']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{exact:true}"> Contratos</a></li>
     <li class="selected"><a [routerLink]="['/procedures/search']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{exact:true}">Trámites</a></li>

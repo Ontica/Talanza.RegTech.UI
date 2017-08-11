@@ -1,0 +1,103 @@
+<table class="worklist-filter">
+  <tr>
+    <td>Bandeja:</td>
+    <td>
+      <select style="width:320px;" class="select-box">
+        <option value="">( Todos ) </option>
+        <option value="all">Tareas pendientes(mias y del equipo)</option>
+        <option value="my">Tareas pendientes (mías)</option>
+        <option value="team">Tareas pendientes (equpio)</option>
+        </select>
+    </td>
+    <td>Buscar:</td>
+    <td><input style="width:320px" type="search" class="search-box"></td>
+    <td><button class="btn" style="width:55px;">Buscar</button></td>
+    <td class="text-align-center"><button style="width:144px" class="btn-warning aling-center" type="button" (click)="onClickAddActivity()">+ Nuevo trámite</button></td>
+  </tr>
+
+  <tr>
+    <td>Asignado a:</td>
+    <td><select class="select-box" style="width:320px">
+                <option value="">( No filtrar )</option>
+                <option value="Juan Gonzalez">Juan Gonzalez</option>
+                <option value="Guadalupe Pérez">Guadalupe Pérez</option>
+                <option value="Hugo Adrian García">Hugo Adrian García</option>    
+          </select>
+    </td>
+    <td>Estado:</td>
+    <td>
+      <select style="width:320px" class="select-box text-align-right">
+              <option value="">( No filtrar ) </option>
+              <option value="En proceso ">En proceso</option>
+              <option value="No iniciada ">No iniciada</option>
+              <option value="Terminada">Terminada</option>              
+            </select>
+    </td>
+    <td><a>Limpiar</a></td>
+    <td></td>
+  </tr>
+
+</table>
+<table class="grid">
+  <thead>
+    <tr>
+      <th style="width:5%">#</th>
+      <th style="width:10%">Recibido el</th>
+      <th style="width:20%">Asunto</th>
+      <th style="width:25%">Descripción</th>
+      <th style="width:10%">Tipo</th>
+      <th style="width:10%">Fechas de entrega</th>
+      <th style="width:10%">Envidado por</th>
+      <th style="width:10%">Estado</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td colspan="6" style="width:90%">Mis tareas pendienes</td>
+      <td colspan="2" class="text-align-right">1 Tareas pendientes</td>
+    </tr>
+    <tr>
+      <td style="width:5%">T089</td>
+      <td style="width:10%">5/May/17</td>
+      <td style="width:20%">Plan de Evaluación</td>
+      <td style="width:25%">Dentro de ciento veinte (120) Días siguientes <br> el contratista deberá a la CNH para </td>
+      <td style="width:10%">Trámite CNH</td>
+      <td style="width:10%">Objetivo: 05/Jun/17 <br> Legal:15/Ago/17 </td>
+      <td style="width:10%">Envió:Sistema<br> Lo tiene:Verónica R.</td>
+      <td style="width:10%">No iniciada</td>
+    </tr>
+    <tr>
+      <td colspan="6" style="width:90%">Las tareas pendienes de mi equpio</td>
+      <td colspan="2" class="text-align-right">2 Tareas pendientes 1 terminada</td>
+    </tr>
+    <tr>
+      <td style="width:5%">T089</td>
+      <td style="width:10%">5/May/17</td>
+      <td style="width:20%">Plan de Evaluación</td>
+      <td style="width:25%">Dentro de ciento veinte (120) Días siguientes <br> el contratista deberá a la CNH para </td>
+      <td style="width:10%">Trámite CNH</td>
+      <td style="width:10%">Objetivo: 05/Jun/17 <br> Legal:15/Ago/17 </td>
+      <td style="width:10%">Envió:Sistema<br> Lo tiene:Verónica R.</td>
+      <td style="width:10%">No iniciada</td>
+    </tr>
+    <tr>
+      <td style="width:5%">T089</td>
+      <td style="width:10%">5/May/17</td>
+      <td style="width:20%">Plan de Evaluación</td>
+      <td style="width:25%">Dentro de ciento veinte (120) Días siguientes <br> el contratista deberá a la CNH para </td>
+      <td style="width:10%">Trámite CNH</td>
+      <td style="width:10%">Objetivo: 05/Jun/17 <br> Legal:15/Ago/17 </td>
+      <td style="width:10%">Envió:Sistema<br> Lo tiene:Verónica R.</td>
+      <td style="width:10%">No iniciada</td>
+    </tr>
+
+  </tbody>
+</table>
+<div class="grid-footer">
+  <table class="grid-footer-style">
+    <tr>
+      <td>3 tareas totales encontradas</td>
+      <td class="text-align-right">Pagina 1 de 1</td>
+    </tr>
+  </table>
+</div>
