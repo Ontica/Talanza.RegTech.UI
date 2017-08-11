@@ -2,7 +2,7 @@
   <div class="header border-bottom">
     <div class="close-button right-position" (click)="onClose()">&times;</div>
     <br>
-    <div class="title ">Agregar actividad al proyecto:R-14 (El dorado) Sierra Oil & Gas</div>
+    <div class="title ">Agregar actividad al proyecto:{{project.name}} {{project.owner.name}}</div>
   </div>
   <br>
   <div>
@@ -13,35 +13,25 @@
       <tr>
         <td>Categoría:</td>
         <td colspan="2"><select class="select-box" style="width:400px">
-          <option>( Seleccionar una Categoría )</option>
-          <option value="Etapa de Abandono">Actividades de mantenimiento</option>
-          <option value="Período de Desarrollo">Período de Desarrollo</option>
-          <option value="Período de Evaluación">Período de Evaluación</option>
-          <option value="Transición de Arranque">Transición de Arranque</option>
-          <option value="Transversales">Transversales</option>
+          <option value="">( Todas )</option>
+          <option value="Actividades de mantenimiento">Actividades de mantenimiento</option>         
           </select></td>
       </tr>
       <tr>
         <td>Acitivdad:</td>
-        <td><select class="select-box" style="width:400px">
-          <option>( Seleccionar una Actividad )</option>
-          <option value="Etapa de Abandono">Modificación de medidores</option>
-          <option value="Período de Desarrollo">Período de Desarrollo</option>
-          <option value="Período de Evaluación">Período de Evaluación</option>
-          <option value="Transición de Arranque">Transición de Arranque</option>
-          <option value="Transversales">Transversales</option>
+        <td><select class="select-box" style="width:400px" [(ngModel)]="activity.name">
+          <option value="">( Todas )</option>
+          <option value="Modificación de medidores">Modificación de medidores</option>         
           </select>
         </td>
         <td><a class="right-position">Actividades...</a></td>
       </tr>
       <tr>
         <td>Asociado a:</td>
-        <td><select class="select-box" style="width:400px">
-          <option>( Seleccinar a donde esta asociado )</option>
-          <option value="Etapa de Abandono">Pozo MX-5-PZ-234</option>
-          <option value="Período de Desarrollo">Pozo MX-1-PZ-131</option>
-          <option value="Período de Evaluación">Pozo CAMPZ-234</option>
-          <option value="Transición de Arranque">Pozo MX-5-PZ-234</option>          
+        <td><select class="select-box" style="width:400px" [(ngModel)]="activity.resourceUID">
+          <option value="">( Seleccinar a donde esta asociado )</option>
+          <option *ngFor="let resource of resourceList" 
+                  [value]="resource.uid">{{resource.name}}</option>         
           </select>
         </td>
         <td><a class="right-position">Instalaciones...</a></td>
@@ -51,15 +41,14 @@
           <table class="internal-form">
             <tr>
               <td>Solicitado por:</td>
-              <td><select class="select-box" style="width:380px">
-                <option>( Seleccionar quien lo solicto )</option>
-                 <option value="Juan Gonzalez">Juan Gonzalez</option>
-                <option value="Guadalupe Pérez">Guadalupe Pérez</option>
-                <option value="Hugo Adrian García">Hugo Adrian García</option>  
+              <td><select class="select-box" style="width:380px" [(ngModel)]="activity.requestedByUID">
+                <option value="">( Seleccionar quien lo solicto )</option>
+                <option *ngFor="let requester of requestersList" 
+                        [value]="requester.uid">{{requester.name}}</option>
                 </select>
               </td>
               <td>El día:</td>
-              <td><input type="text" id="requestedDateCalendar" class="text-box" style="width:100px"></td>
+              <td><input type="text" id="requestedDateCalendar" class="text-box" style="width:100px" [(ngModel)]="activity.requestedTime"></td>
               <td><button class="btn " id="requestedDateButton" class="right-position">..</button></td>
             </tr>
           </table>
@@ -76,11 +65,10 @@
       </tr>
       <tr>
         <td>Responsable:</td>
-        <td><select class="select-box" style="width:440px">
-                <option>( Seleccionar un Responsable )</option>
-                <option value="Juan Gonzalez">Juan Gonzalez</option>
-                <option value="Guadalupe Pérez">Guadalupe Pérez</option>
-                <option value="Hugo Adrian García">Hugo Adrian García</option>               
+        <td><select class="select-box" style="width:440px" [(ngModel)]="activity.responsibleUID">
+                <option value="">( Seleccionar un Responsable )</option>
+                <option *ngFor="let responsible of responsiblesList" 
+                        [value]="responsible.uid">{{responsible.name}}</option>            
                 </select>
         </td>
         <td><a class="right-position">Recursos...</a></td>
@@ -90,10 +78,10 @@
           <table class="internal-form">
             <tr>
               <td class="text-align-left">Fecha de inicio planeada:</td>
-              <td><input type="text" id="startDateCalendar" class="text-box" style="width:100px"></td>
+              <td><input type="text" id="startDateCalendar" class="text-box" style="width:100px" [(ngModel)]="activity.estimatedStart"></td>
               <td><button id="startDateCalendarButton" class="btn ">..</button></td>
               <td>Fecha de terminación estimada:</td>
-              <td><input id="endDateCalendar" type="text" class="text-box" style="width:100px" [(ngModel)]="date"></td>
+              <td><input id="endDateCalendar" type="text" class="text-box" style="width:100px" [(ngModel)]="activity.estimatedEnd"></td>
               <td><button id="endDateCalendarButton" class="btn ">..</button></td>
               <td><a class="right-position">73 días</a></td>
             </tr>
@@ -103,7 +91,7 @@
 
       <tr>
         <td>Observaciones:</td>
-        <td colspan="2"><textarea style="width:100%;" class="text-area" rows="5" cols="25"></textarea></td>
+        <td colspan="2"><textarea style="width:100%;" class="text-area" rows="5" cols="25" [(ngModel)]="activity.notes"></textarea></td>
       </tr>
     </table>
   </div>
@@ -114,7 +102,7 @@
           <button class="btn " (click)="onClickCancel()">Cancelar</button>
         </td>
         <td class="text-align-right ">
-          <button class="btn ">Agregar actividad</button>
+          <button class="btn " (click)="onClickAddActivity()">Agregar actividad</button>
         </td>
       </tr>
     </table>

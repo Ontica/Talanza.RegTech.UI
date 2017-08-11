@@ -2,9 +2,9 @@
   <tr>
     <td>Proyecto:</td>
     <td>
-      <select style="width:320px;" class="select-box">
-        <option value="">( Todos ) </option>
-        <option value="R1-4">R1-4 (El Dorado)</option>      
+      <select style="width:320px;" class="select-box" #project (change)="onChangeProjectList(project.value)">
+        <option value="">( Todos ) </option>       
+       <option *ngFor="let project of projectList"[value]="project.uid">{{project.name}}</option>
         </select>
     </td>
     <td>Buscar:</td>
@@ -37,11 +37,10 @@
   </tr>
 
 </table>
-<div *ngIf="isAddActivityEditorWindowVisible" class="popup">
-  <project-add-activity (onCloseEvent)="onCloseAddActivityEditorWindow()"></project-add-activity>
+<div *ngIf="isAddActivityEditorWindowVisible" style="z-index:100;">
+  <project-add-activity [project]="selectedProject" (onCloseEvent)="onCloseAddActivityEditorWindow()"></project-add-activity>
 </div>
-<!--
-<div style="height:400px; overflow:scroll;">
-  <gantt></gantt>
+
+<div *ngIf="isGanttGraphVisible">
+  <gantt [projectUID]="selectedProject.uid"></gantt>
 </div>
--->

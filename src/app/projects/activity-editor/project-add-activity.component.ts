@@ -5,13 +5,21 @@
  * See LICENSE.txt in the project root for complete license information.
  *
  */
-import { Component, EventEmitter, HostBinding, Output, OnInit} from '@angular/core';
+import { Component, EventEmitter, HostBinding, Input, Output, OnInit } from '@angular/core';
+
+import { ActivityService } from '../services/activity.service';
+import {
+  ProjectRef, ResourceRef, PersonRef,
+  Activity, EmptyActivity
+} from '../data-types/project';
+
 declare var dhtmlXCalendarObject: any;
 
 @Component({
   selector: 'project-add-activity',
   templateUrl: './project-add-activity.component.html',
-  styleUrls: ['./project-add-activity.component.scss']
+  styleUrls: ['./project-add-activity.component.scss'],
+  providers: [ActivityService]
 })
 
 export class ProjectAddActivityComponent implements OnInit {
@@ -19,26 +27,126 @@ export class ProjectAddActivityComponent implements OnInit {
   @HostBinding('style.display') public display = 'block';
   @HostBinding('style.position') public position = 'absolute';
   @Output() public onCloseEvent = new EventEmitter();
+  @Input() public project: ProjectRef;
 
-  public date = '';  
+  public resourceList: ResourceRef[] = [];
+  public requestersList: PersonRef[] = [];
+  public responsiblesList: PersonRef[] = [];
+  public taskManagersList: PersonRef[] = [];
+  public activity: Activity = EmptyActivity();
+
   private requestedDateCalendar: any;
   private startDateCalendar: any;
   private endDateCalendar: any;
 
-  ngOnInit() {     
-    this.requestedDateCalendar = new dhtmlXCalendarObject({input:"requestedDateCalendar",button:"requestedDateButton"});
-    this.startDateCalendar = new dhtmlXCalendarObject({input:"startDateCalendar",button:"startDateCalendarButton"});
-    this.endDateCalendar = new dhtmlXCalendarObject({input:"endDateCalendar",button:"endDateCalendarButton"});
+  public constructor(private activityService: ActivityService) { }
+
+  ngOnInit() {
+    this.loadCalendars();
+    this.loadLists();    
   }
 
   public onClose(): void {
     this.onCloseEvent.emit();
   }
 
-  public onClickCancel(): void {  
-    this.onClose();    
+  public onClickCancel(): void {
+    this.onClose();
   }
 
-  
+  public async onClickAddActivity() {
+    this.setDatePropertiesValueFromCalendars();
+    if (!this.validate()) {
+      return;
+    }    
+    await this.addActivity();
+    alert("Se agrego la actividad.");
+    this.onClose();
+  }
+
+  private loadResourcesList(): void {
+    const errMsg = 'Ocurrió un problema al intentar leer la lista de recursos.';
+
+    this.activityService.getResourcesList().toPromise()
+      .then((x) => this.resourceList = x)
+      .catch((e) => this.exceptionHandler(e, errMsg));      
+  }
+
+  private loadRequestersList(): void {
+    const errMsg = 'Ocurrió un problema al intentar leer la lista de solicitantes.';
+
+    this.activityService.getRequestersList(this.project.uid)
+      .toPromise()
+      .then((x) => this.requestersList = x)
+      .catch((e) => this.exceptionHandler(e, errMsg));
+  }
+
+  private loadResponsiblesList(): void {
+    const errMsg = 'Ocurrió un problema al intentar leer la lista de responsables.';
+
+    this.activityService.getResponsiblesList(this.project.uid)
+      .toPromise()
+      .then((x) => this.responsiblesList = x)
+      .catch((e) => this.exceptionHandler(e, errMsg));
+  }
+
+  private loadCalendars(): void {
+    this.requestedDateCalendar = new dhtmlXCalendarObject({ input: "requestedDateCalendar", button: "requestedDateButton" });
+    this.startDateCalendar = new dhtmlXCalendarObject({ input: "startDateCalendar", button: "startDateCalendarButton" });
+    this.endDateCalendar = new dhtmlXCalendarObject({ input: "endDateCalendar", button: "endDateCalendarButton" });
+  }
+
+  private loadLists(): void {
+    this.loadResourcesList();
+    this.loadRequestersList();
+    this.loadResponsiblesList();
+  }
+
+  private setDatePropertiesValueFromCalendars(): void {
+    this.activity.requestedTime = this.requestedDateCalendar.getDate();
+    this.activity.estimatedStart = this.startDateCalendar.getDate();
+    this.activity.estimatedEnd = this.endDateCalendar.getDate();
+  }
+
+  private validate(): boolean {
+    if (this.activity.name === '') {
+      alert("Seleccionar la actividad de la lista.");
+      return false;
+    }
+    if (this.activity.resourceUID === '') {
+      alert("Seleccionar asociado a de la lista.");
+      return false;
+    }
+    if (this.activity.requestedByUID === '') {
+      alert("Seleccionar solicitado por de la lista.");
+      return false;
+    }    
+    if (this.activity.responsibleUID === '') {
+      alert("Seleccionar el responsable de la lista.");
+      return false;
+    }
+
+    return true;
+  }
+
+  private addActivity(): void {
+    const errMsg = 'Ocurrió un problema al intentar crear la actividad.';
+
+    this.activityService.createActivity(this.project.uid, this.activity)
+      .toPromise()
+      .then()
+      .catch((e) => this.exceptionHandler(e, errMsg));
+  }
+
+  private exceptionHandler(error: any, defaultMsg: string): void {
+    let errMsg = 'Tengo un problema.\n\n';
+
+    if (typeof (error) === typeof (Error)) {
+      errMsg += defaultMsg + '\n\n' + (<Error>error).message;
+    } else {
+      errMsg += defaultMsg + '\n\n' + 'Error desconocido.';
+    }
+    alert(errMsg);
+  }
 
 }
