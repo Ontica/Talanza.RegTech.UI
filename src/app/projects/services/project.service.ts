@@ -39,16 +39,5 @@ export class ProjectService {
 
   }
 
-  get(): Promise<Task[]> {
-    let tasks = [
-      //{ id: 1, text: "Task #1", start_date: "2017-02-15 00:00", duration: 3, progress: 0.6 },
-  
-      //{ id: 2, text: "Task #2", start_date: "2017-02-18 00:00", duration: 3, progress: 0.4 }
-    { id:1,  text:"Actividad padre fija", start_date:"2017-08-14 00:00",duration: 31, 
-       progress:0, type:"ObjectType.ProjectItem.Activity", parent: null}
-    ]
-    return Promise.resolve(tasks);
-  }
-
 }
 

@@ -11,7 +11,7 @@
         <td colspan="3" class="form-title form-title-text">1) Información de la actividad</td>
       </tr>
       <tr>
-        <td>Acitivdad:</td>
+        <td>Acitividad:</td>
         <td><select [disabled]="disabled" class="select-box" style="width:400px" [(ngModel)]="activity.name">
           <option value="">( Todas )</option>
           <option value="Modificación de medidores">Modificación de medidores</option>         
@@ -22,7 +22,7 @@
       <tr>
         <td>Asociado a:</td>
         <td><select [disabled]="disabled" class="select-box" style="width:400px" [(ngModel)]="activity.resourceUID">
-          <option value="">( Seleccinar a donde esta asociado )</option>
+          <option value="">( Seleccionar )</option>
           <option *ngFor="let resource of resourceList" 
                   [value]="resource.uid">{{resource.name}}</option>         
           </select>
@@ -36,7 +36,7 @@
               <td class="text-align-left">Solicitado por:</td>
               <td>
                 <select [disabled]="disabled" class="select-box" style="width:380px" [(ngModel)]="activity.requestedByUID">
-                  <option value="">( Seleccionar quien lo solicto )</option>
+                  <option value="">( Seleccionar )</option>
                   <option *ngFor="let requester of requestersList" [value]="requester.uid">{{requester.name}}</option>
                   </select>
               </td>
@@ -50,7 +50,7 @@
       <tr>
         <td>Responsable:</td>
         <td><select [disabled]="disabled" class="select-box" style="width:440px" [(ngModel)]="activity.responsibleUID">
-                <option value="">( Seleccionar un Responsable )</option>
+                <option value="">( Seleccionar )</option>
                 <option *ngFor="let responsible of responsiblesList" 
                         [value]="responsible.uid">{{responsible.name}}</option>            
                 </select>
