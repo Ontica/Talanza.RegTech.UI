@@ -35,11 +35,14 @@ export class GanttComponent implements OnInit {
     ngOnInit() {
 
         gantt.config.xml_date = "%Y-%m-%d %H:%i";
+        gantt.config.grid_resize = true;
+        gantt.config.scale_unit = 'month';
 
         gantt.init(this.ganttContainer.nativeElement);
         
-        gantt.attachEvent("onTaskDblClick", (id, item) => {		
-			 this.isAddActivityEditorWindowVisible = true;
+        gantt.attachEvent("onTaskDblClick", (id, item) => {	
+            alert(id);	
+			 //this.isAddActivityEditorWindowVisible = true;
         });
 
          Promise.all([this.projectService.getTasksList(this.projectUID),])

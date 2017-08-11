@@ -18,7 +18,7 @@
           </select></td>
       </tr>
       <tr>
-        <td>Acitivdad:</td>
+        <td>Activdad:</td>
         <td><select class="select-box" style="width:400px" [(ngModel)]="activity.name">
           <option value="">( Todas )</option>
           <option value="Modificación de medidores">Modificación de medidores</option>         
@@ -29,7 +29,7 @@
       <tr>
         <td>Asociado a:</td>
         <td><select class="select-box" style="width:400px" [(ngModel)]="activity.resourceUID">
-          <option value="">( Seleccinar a donde esta asociado )</option>
+          <option value="">( Seleccionar dónde está asociado )</option>
           <option *ngFor="let resource of resourceList" 
                   [value]="resource.uid">{{resource.name}}</option>         
           </select>
@@ -38,11 +38,11 @@
       </tr>
       <tr>
         <td colspan="3">
-          <table class="internal-form">
+          <table>
             <tr>
               <td>Solicitado por:</td>
               <td><select class="select-box" style="width:380px" [(ngModel)]="activity.requestedByUID">
-                <option value="">( Seleccionar quien lo solicto )</option>
+                <option value="">( Seleccionar quién lo solicitó )</option>
                 <option *ngFor="let requester of requestersList" 
                         [value]="requester.uid">{{requester.name}}</option>
                 </select>
@@ -59,7 +59,7 @@
   </div>
   <br> <br>
   <div>
-    <table class="form">
+    <table class="form" cellspacing="0" cellpadding="0" border="0">
       <tr>
         <td colspan="3" class="form-title form-title-text">2) Información adicional</td>
       </tr>
@@ -75,7 +75,7 @@
       </tr>
       <tr>
         <td colspan="3">
-          <table class="internal-form">
+          <table class="form internal-form">
             <tr>
               <td class="text-align-left">Fecha de inicio planeada:</td>
               <td><input type="text" id="startDateCalendar" class="text-box" style="width:100px" [(ngModel)]="activity.estimatedStart"></td>
