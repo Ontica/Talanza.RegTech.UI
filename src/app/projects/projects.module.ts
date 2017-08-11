@@ -13,8 +13,10 @@ import { SharedModule } from '../shared/shared.module';
 
 import { ProjectsMainPageComponent } from './main-page/projects-main-page.component';
 import { GanttComponent } from './components/gantt.component';
-import { ProjectAddActivityComponent} from './activity-editor/project-add-activity.component';
-import { ProjectStartActivityComponent } from './activity-editor/project-start-activity.component';
+import { ProjectEditorComponent } from './activity-editor/project-editor.component';
+import { ProjectAddActivityComponent} from './activity-editor/tabs/project-add-activity.component';
+import { ProjectStartActivityComponent } from './activity-editor/tabs/project-start-activity.component';
+import { ProjectAssignTasksComponent } from './activity-editor/tabs/project-assign-tasks.component';
 
 import { ProjectsRoutingModule } from './projects-routing.module';
 
@@ -24,8 +26,9 @@ import { ProjectsRoutingModule } from './projects-routing.module';
 
 @NgModule({
   imports: [ProjectsRoutingModule, SharedModule, CommonModule, FormsModule],
-  declarations: [ProjectsMainPageComponent, GanttComponent, ProjectAddActivityComponent,
-                 ProjectStartActivityComponent],
+  declarations: [ProjectsMainPageComponent, GanttComponent, ProjectEditorComponent,
+                 ProjectAddActivityComponent, ProjectStartActivityComponent,
+                 ProjectAssignTasksComponent],
   exports: [ProjectsMainPageComponent]
 })
 export class ProjectsModule { }

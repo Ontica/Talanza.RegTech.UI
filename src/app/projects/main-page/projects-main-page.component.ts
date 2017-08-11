@@ -49,12 +49,15 @@ export class ProjectsMainPageComponent implements OnInit {
   }
 
   public onClickAddActivity(): void {
+    alert("Esta operación se encuentra en desarrollo.");
+    /*
     if (this.selectedProject.uid === '') {
       alert("REquiero se seleccione el proyecto al cual se le agregará la actividad.");
       return;
     }
     this.hideGanttGraph();
     this.isAddActivityEditorWindowVisible = true;
+    */
   }
 
   private loadProjectList(): void {

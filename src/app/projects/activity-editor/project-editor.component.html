@@ -1,0 +1,18 @@
+<div class="editor-container editor-container-style">
+  <div class="header">
+    <div class="close-button right-position" (click)="onClose()">&times;</div>
+    <div class="title">Agregar actividad al proyecto: <b>{{project.name}}</b></div>
+  </div>
+  <br>
+  <div class="tab">
+    <button class="tab-links left-position" [disabled]="isDisabled" [class.selected]="currentSelectedTab==='general-info-tab'" (click)="onChangeTab('general-info-tab')">Actividad</button>
+    <button class="tab-links left-position" [disabled]="isDisabled" [class.selected]="currentSelectedTab==='assign-tasks-tab'" (click)="onChangeTab('assign-tasks-tab')">Asignar tareas</button>
+    <button class="tab-links left-position" [disabled]="isDisabled" [class.selected]="currentSelectedTab==='start-activity-tab'" (click)="onChangeTab('start-activity-tab')">Iniciar proyecto</button>
+  </div>
+  <div [ngSwitch]="currentSelectedTab" class="form-frame">
+    <project-add-activity *ngSwitchCase="'general-info-tab'" [project]="project" [parentId]="parentId" (onCloseEvent)="onClose()"></project-add-activity>
+    <project-assign-tasks *ngSwitchCase="'assign-tasks-tab'"></project-assign-tasks>
+    <project-start-activity *ngSwitchCase="'start-activity-tab'"> [project]="project" (onCloseEvent)="onClose()"></project-start-activity>
+
+  </div>
+</div>

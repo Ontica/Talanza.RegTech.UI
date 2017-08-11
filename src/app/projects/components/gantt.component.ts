@@ -18,12 +18,10 @@ import { ProjectRef } from '../data-types/project';
         }
     `],
   template: `<div #gantt_here style='width: 100%; height: 100%;'></div>
-                <div *ngIf="isAddActivityEditorWindowVisible" class="popup">
-                    <project-add-activity [project]="project"[parentId]="parentId" (onCloseEvent)="onCloseAddActivityEditorWindow()"></project-add-activity>
+                <div *ngIf="isActivityEditorWindowVisible" class="popup">
+                  <project-editor [project]="project" [parentId]="parentId" (onCloseEvent)="onCloseActivityEditorWindow()"></project-editor>                    
                 </div>
-                <div *ngIf="isStartActivityEditorWindowVisible" class="popup">
-                    <project-start-activity [project]="project" (onCloseEvent)="onCloseStartActivityEditorWindow()"></project-start-activity>
-                </div>`,
+                `,
   providers: [ProjectService]
 })
 
@@ -33,7 +31,7 @@ export class GanttComponent implements OnChanges {
   @Input() public project: ProjectRef;
   @Input() public config: string;
 
-  public isAddActivityEditorWindowVisible = false;
+  public isActivityEditorWindowVisible = false;
   public isStartActivityEditorWindowVisible = false;
   public parentId: number;
 
@@ -50,14 +48,11 @@ export class GanttComponent implements OnChanges {
     this.refreshData();
   }
 
-  public onCloseAddActivityEditorWindow(): void {
-    this.isAddActivityEditorWindowVisible = false;
+  public onCloseActivityEditorWindow(): void {
+    this.isActivityEditorWindowVisible = false;
     this.refreshData();
   }
 
-  public onCloseStartActivityEditorWindow(): void {
-    this.isStartActivityEditorWindowVisible = false;
-  }
 
   // Private methods
 
@@ -68,12 +63,12 @@ export class GanttComponent implements OnChanges {
       } else {
         this.parentId = id.parent;
       }
-      this.isAddActivityEditorWindowVisible = true;
+      this.isActivityEditorWindowVisible = true;
 
     });
 
     gantt.attachEvent("onTaskDblClick", (id, item) => {
-      this.isStartActivityEditorWindowVisible = true;
+      this.isActivityEditorWindowVisible = true;
     });
   }
 

@@ -43,7 +43,8 @@
 
 </table>
 <div *ngIf="isAddActivityEditorWindowVisible" style="z-index:100;">
-  <project-start-activity [project]="selectedProject" (onCloseEvent)="onCloseAddActivityEditorWindow()"></project-start-activity>
+  <!-- <project-start-activity [project]="selectedProject" (onCloseEvent)="onCloseAddActivityEditorWindow()"></project-start-activity>-->
+  <project-editor [project]="selectedProject" [parentId]="null" (onCloseEvent)="onCloseAddActivityEditorWindow()"></project-editor>
 </div>
 
 <div *ngIf="isGanttGraphVisible">

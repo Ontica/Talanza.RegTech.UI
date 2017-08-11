@@ -1,0 +1,22 @@
+<div>
+  <table class="form">
+    <tr>
+      <td colspan="2" class="form-title form-title-text">Estado de la actividad</td>
+    </tr>
+    <tr *ngIf="!isEnableActivityStateOption">
+      <td>Estado actual:<b> actividad no inciada </b></td>
+      <td><button class="btn " class="right-position" (click)="onClickStartActivity()">Iniciar actividad</button></td>
+    </tr>
+    <tr *ngIf="isEnableActivityStateOption">
+      <td>Estado actual:<b> actividad inciada </b></td>
+      <td><select class="select-box" style="width:330px">
+        <option value="">(¿Desea cambiar el estado de la actividad?)</option>
+        <option value="pause">Detener la actividad  temporalmente</option>
+        <option value="stop">Para definitivamente la actividad </option>
+        </select>
+        <button class="btn">Aceptar</button>
+      </td>
+    </tr>
+  </table>
+
+</div>

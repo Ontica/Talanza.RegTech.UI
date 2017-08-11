@@ -7,34 +7,33 @@
  */
 import { Component, EventEmitter, HostBinding, Input, Output, OnInit } from '@angular/core';
 
-import { ActivityService } from '../services/activity.service';
+import { ActivityService } from '../../services/activity.service';
 import {
   ProjectRef, ResourceRef, PersonRef,
-  Activity, EmptyActivity, TaskRef
-} from '../data-types/project';
+  Activity, EmptyActivity } from '../../data-types/project';
 
 declare var dhtmlXCalendarObject: any;
 
 @Component({
-  selector: 'project-start-activity',
-  templateUrl: './project-start-activity.component.html',
-  styleUrls: ['./project-start-activity.component.scss'],
+  selector: 'project-add-activity',
+  templateUrl: './project-add-activity.component.html',
+  styleUrls: ['./project-add-activity.component.scss'],
   providers: [ActivityService]
 })
 
-export class ProjectStartActivityComponent implements OnInit {
+export class ProjectAddActivityComponent implements OnInit {
 
-  @HostBinding('style.display') public display = 'block';
-  @HostBinding('style.position') public position = 'absolute';
+//  @HostBinding('style.display') public display = 'block';
+//  @HostBinding('style.position') public position = 'absolute';
   @Output() public onCloseEvent = new EventEmitter();
   @Input() public project: ProjectRef;
+  @Input() public parentId: number;
 
   public resourceList: ResourceRef[] = [];
   public requestersList: PersonRef[] = [];
   public responsiblesList: PersonRef[] = [];
   public taskManagersList: PersonRef[] = [];
   public activity: Activity = EmptyActivity();
-  public taksList: TaskRef[];
 
   private requestedDateCalendar: any;
   private startDateCalendar: any;
@@ -43,11 +42,8 @@ export class ProjectStartActivityComponent implements OnInit {
   public constructor(private activityService: ActivityService) { }
 
   ngOnInit() {
-    
     this.loadCalendars();
     this.loadLists();    
-    this.loadActivity(4);
-    this.loadTasks(3);
   }
 
   public onClose(): void {
@@ -58,7 +54,14 @@ export class ProjectStartActivityComponent implements OnInit {
     this.onClose();
   }
 
-  public async onClickAddActivity() {    
+  public async onClickAddActivity() {
+    this.setDatePropertiesValueFromCalendars();
+    if (!this.validate()) {
+      return;
+    }    
+    this.activity.parentId = this.parentId;
+    await this.addActivity();
+    alert("Se agrego la actividad.");
     this.onClose();
   }
 
@@ -88,17 +91,6 @@ export class ProjectStartActivityComponent implements OnInit {
       .catch((e) => this.exceptionHandler(e, errMsg));
   }
 
-   private loadTaskManagers(): void {
-    const errMsg = 'Ocurrió un problema al intentar leer la lista de personas alas cuales seles asigna alguna tarea.';
-
-    this.activityService.getTaskManagers(this.project.uid)
-      .toPromise()
-      .then((x) => this.taskManagersList = x)
-      .catch((e) => this.exceptionHandler(e, errMsg));
-  }
-
-
-
   private loadCalendars(): void {
     this.requestedDateCalendar = new dhtmlXCalendarObject({ input: "requestedDateCalendar", button: "requestedDateButton" });
     this.startDateCalendar = new dhtmlXCalendarObject({ input: "startDateCalendar", button: "startDateCalendarButton" });
@@ -109,7 +101,6 @@ export class ProjectStartActivityComponent implements OnInit {
     this.loadResourcesList();
     this.loadRequestersList();
     this.loadResponsiblesList();
-    this.loadTaskManagers();
   }
 
   private setDatePropertiesValueFromCalendars(): void {
@@ -138,23 +129,14 @@ export class ProjectStartActivityComponent implements OnInit {
 
     return true;
   }
-      
-  private loadActivity(itemId: number): void {
-    const errMsg = 'Ocurrió un problema al intentar leer la actividad.';
 
-    this.activityService.getActivity(itemId)
-                        .toPromise()
-                        .then((x) =>{ this.activity = x; })
-                        .catch((e) => this.exceptionHandler(e, errMsg));
-  }
+  private addActivity(): void {
+    const errMsg = 'Ocurrió un problema al intentar crear la actividad.';
 
-  private loadTasks(itemId: number): void {
-    const errMsg = 'Ocurrió un problema al intentar leer la lista de tareas.';
-
-    this.activityService.getTasks(itemId)
-                        .toPromise()  
-                        .then((x) => {console.log(x); this.taksList = x;})
-                        .catch((e) => this.exceptionHandler(e, errMsg));
+    this.activityService.createActivity(this.project.uid, this.activity)
+      .toPromise()
+      .then()
+      .catch((e) => this.exceptionHandler(e, errMsg));
   }
 
   private exceptionHandler(error: any, defaultMsg: string): void {
