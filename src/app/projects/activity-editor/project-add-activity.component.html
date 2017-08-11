@@ -38,14 +38,14 @@
       </tr>
       <tr>
         <td colspan="3">
-          <table>
+          <table class="form internal-form">
             <tr>
               <td>Solicitado por:</td>
               <td><select class="select-box" style="width:380px" [(ngModel)]="activity.requestedByUID">
                 <option value="">( Seleccionar quién lo solicitó )</option>
-                <option *ngFor="let requester of requestersList" 
-                        [value]="requester.uid">{{requester.name}}</option>
+                 <option *ngFor="let requester of requestersList" [value]="requester.uid">{{requester.name}}</option>                  
                 </select>
+
               </td>
               <td>El día:</td>
               <td><input type="text" id="requestedDateCalendar" class="text-box" style="width:100px" [(ngModel)]="activity.requestedTime"></td>
@@ -57,9 +57,8 @@
       </tr>
     </table>
   </div>
-  <br> <br>
   <div>
-    <table class="form" cellspacing="0" cellpadding="0" border="0">
+    <table class="form">
       <tr>
         <td colspan="3" class="form-title form-title-text">2) Información adicional</td>
       </tr>

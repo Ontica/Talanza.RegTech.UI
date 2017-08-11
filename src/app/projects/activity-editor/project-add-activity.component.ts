@@ -28,6 +28,7 @@ export class ProjectAddActivityComponent implements OnInit {
   @HostBinding('style.position') public position = 'absolute';
   @Output() public onCloseEvent = new EventEmitter();
   @Input() public project: ProjectRef;
+  @Input() public parentId: number;
 
   public resourceList: ResourceRef[] = [];
   public requestersList: PersonRef[] = [];
@@ -59,6 +60,7 @@ export class ProjectAddActivityComponent implements OnInit {
     if (!this.validate()) {
       return;
     }    
+    this.activity.parentId = this.parentId;
     await this.addActivity();
     alert("Se agrego la actividad.");
     this.onClose();
