@@ -24,7 +24,7 @@ declare var dhtmlXCalendarObject: any;
 export class ProjectAssignTasksComponent implements OnInit {
 
  @Output() public onCloseEvent = new EventEmitter();
-  @Input() public project: ProjectRef;
+ @Input() public project: ProjectRef;
  
   public taskManagersList: PersonRef[] = [];
   public activity: Activity = EmptyActivity();
@@ -34,8 +34,10 @@ export class ProjectAssignTasksComponent implements OnInit {
   public constructor(private activityService: ActivityService) { }
 
   ngOnInit() {
+    
     this.loadActivity(4);
     this.loadTasks(3);
+    this.loadTaskManagers();
   }
 
   public onClose(): void {
@@ -50,16 +52,12 @@ export class ProjectAssignTasksComponent implements OnInit {
     this.onClose();
   }
 
-
- 
- 
-
    private loadTaskManagers(): void {
     const errMsg = 'Ocurrió un problema al intentar leer la lista de personas alas cuales seles asigna alguna tarea.';
 
     this.activityService.getTaskManagers(this.project.uid)
       .toPromise()
-      .then((x) => this.taskManagersList = x)
+      .then((x) =>{ this.taskManagersList = x; console.log(x);} )
       .catch((e) => this.exceptionHandler(e, errMsg));
   }
 

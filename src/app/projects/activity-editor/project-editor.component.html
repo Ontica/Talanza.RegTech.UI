@@ -11,8 +11,8 @@
   </div>
   <div [ngSwitch]="currentSelectedTab" class="form-frame">
     <project-add-activity *ngSwitchCase="'general-info-tab'" [project]="project" [parentId]="parentId" (onCloseEvent)="onClose()"></project-add-activity>
-    <project-assign-tasks *ngSwitchCase="'assign-tasks-tab'"></project-assign-tasks>
-    <project-start-activity *ngSwitchCase="'start-activity-tab'"> [project]="project" (onCloseEvent)="onClose()"></project-start-activity>
+    <project-assign-tasks *ngSwitchCase="'assign-tasks-tab'" [project]="project"></project-assign-tasks>
+    <project-start-activity *ngSwitchCase="'start-activity-tab'"></project-start-activity>
 
   </div>
 </div>
