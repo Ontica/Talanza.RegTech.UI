@@ -55,13 +55,12 @@ export class ProjectAddActivityComponent implements OnInit {
   }
 
   public async onClickAddActivity() {
-    this.setDatePropertiesValueFromCalendars();
+    this.setDatePropertiesValueFromCalendars();    
     if (!this.validate()) {
       return;
     }
     
-    this.activity.parentId = this.parentId;
-    console.log('this.activity', this.activity);
+    this.activity.parentId = this.parentId;    
     await this.addActivity();
     this.onClose();
   }
@@ -93,9 +92,20 @@ export class ProjectAddActivityComponent implements OnInit {
   }
 
   private loadCalendars(): void {
+    this.createCalendars();
+    this.setCalendarsDateFormat();
+  }
+
+  private createCalendars(): void {
     this.requestedDateCalendar = new dhtmlXCalendarObject({ input: "requestedDateCalendar", button: "requestedDateButton" });
     this.startDateCalendar = new dhtmlXCalendarObject({ input: "startDateCalendar", button: "startDateCalendarButton" });
     this.endDateCalendar = new dhtmlXCalendarObject({ input: "endDateCalendar", button: "endDateCalendarButton" });
+  }
+
+  private setCalendarsDateFormat(): void {
+    this.requestedDateCalendar.setDateFormat("%d-%m-%Y");
+    this.startDateCalendar.setDateFormat("%d-%m-%Y");
+    this.endDateCalendar.setDateFormat("%d-%m-%Y");
   }
 
   private loadLists(): void {
@@ -105,9 +115,9 @@ export class ProjectAddActivityComponent implements OnInit {
   }
 
   private setDatePropertiesValueFromCalendars(): void {
-    this.activity.requestedTime = this.requestedDateCalendar.getDate();
-    this.activity.estimatedStart = this.startDateCalendar.getDate();
-    this.activity.estimatedEnd = this.endDateCalendar.getDate();
+    this.activity.requestedTime = this.requestedDateCalendar.getDate(true);
+    this.activity.estimatedStart = this.startDateCalendar.getDate(true);
+    this.activity.estimatedEnd = this.endDateCalendar.getDate(true);
   }
 
   private validate(): boolean {
