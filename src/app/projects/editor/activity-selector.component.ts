@@ -15,13 +15,14 @@ import { Component, EventEmitter, Output } from '@angular/core';
       <td>¿De qué tipo es el elemento que se desea agregar?</td>
       <td class="text-align-right"><select class="select-box" style="width:200px" #elementType (change)="onChangeElementType(elementType.value)">
             <option value="">( Todas )</option>
-            <option value="acitivity">Actividad</option>
+            <option value="acitivity">Proceso</option>
             <option value="event">Evento</option>
+            <option value="manual">Actividad manual</option>
           </select>
       </td>
       </tr>
      </table>  
-     <table class="form">
+     <table class="form" *ngIf="selectedElementType !== 'manual'">
      <tr>
        <td>Buscar un tipo <br>de actividad:</td>
        <td><select class="select-box" #activityType (change)="onChangeActivityType(activityType.value)">
@@ -41,8 +42,11 @@ export class ActivitySelectorComponent {
   @Output() public onSelectElementType = new EventEmitter<string>();
   @Output() public onSelectActivityType = new EventEmitter<string>();
 
-  public onChangeElementType(elementType: string): void {
-    if(elementType ==='') {
+  public selectedElementType = '';
+
+  public onChangeElementType(elementType: string): void {   
+    this.selectedElementType = elementType;     
+    if(elementType ==='') {      
       alert("Seleccionar de qué tipo es el elemento que se desea agregar.");
       return;
     }    
