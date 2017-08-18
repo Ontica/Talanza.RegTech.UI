@@ -6,9 +6,7 @@
  *
  */
 
-import {
-  Component, EventEmitter, HostBinding, Input, Output, OnInit
-} from '@angular/core';
+import { Component, EventEmitter, HostBinding, Input, Output } from '@angular/core';
 
 import { ProjectRef } from '../data-types/project';
 
@@ -19,25 +17,19 @@ import { ProjectRef } from '../data-types/project';
   
 })
 
-export class ProjectEditorComponent implements OnInit {
+export class ProjectEditorComponent  {
   @HostBinding('style.display') public display = 'block';
   @HostBinding('style.position') public position = 'absolute';
 
   @Input() public project: ProjectRef;
   @Input() public parentId: number;
+  @Input() public activityId: number;
   @Output() public onCloseEvent = new EventEmitter();
 
   public currentSelectedTab = 'general-info-tab';
   public isDisabled = false;
   public title = '';
   
-
-  //constructor(private contractService: ContractService) { }
-
-  public ngOnInit() {
-    
-  }
-
   public setSaveOperations(): void {
     
     this.enableTabs();

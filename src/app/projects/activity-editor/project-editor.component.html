@@ -10,7 +10,7 @@
     <button class="tab-links left-position" [disabled]="isDisabled" [class.selected]="currentSelectedTab==='start-activity-tab'" (click)="onChangeTab('start-activity-tab')">Controlar actividad</button>
   </div>
   <div [ngSwitch]="currentSelectedTab" class="form-frame">
-    <project-add-activity *ngSwitchCase="'general-info-tab'" [project]="project" [parentId]="parentId" (onCloseEvent)="onClose()"></project-add-activity>
+    <project-add-activity *ngSwitchCase="'general-info-tab'" [project]="project" [parentId]="parentId" [activityId]="activityId" (onCloseEvent)="onClose()"></project-add-activity>
     <project-assign-tasks *ngSwitchCase="'assign-tasks-tab'" [project]="project"></project-assign-tasks>
     <project-start-activity *ngSwitchCase="'start-activity-tab'"></project-start-activity>
 

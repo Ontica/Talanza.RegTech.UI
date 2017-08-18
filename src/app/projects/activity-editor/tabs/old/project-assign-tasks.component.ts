@@ -7,10 +7,10 @@
  */
 import { Component, EventEmitter, HostBinding, Input, Output, OnInit } from '@angular/core';
 
-import { ActivityService } from '../../services/activity.service';
+import { ActivityService } from '../../../services/activity.service';
 import {
   ProjectRef, ResourceRef, PersonRef,
-  Activity, EmptyActivity, TaskRef } from '../../data-types/project';
+  Activity, EmptyActivity, TaskRef } from '../../../data-types/project';
 
 declare var dhtmlXCalendarObject: any;
 

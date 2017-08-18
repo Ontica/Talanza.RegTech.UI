@@ -7,10 +7,10 @@
  */
 import { Component, EventEmitter, HostBinding, Input, Output, OnInit } from '@angular/core';
 
-import { ActivityService } from '../../services/activity.service';
+import { ActivityService } from '../../../services/activity.service';
 import {
   ProjectRef, ResourceRef, PersonRef,
-  Activity, EmptyActivity } from '../../data-types/project';
+  Activity, EmptyActivity } from '../../../data-types/project';
 
 declare var dhtmlXCalendarObject: any;
 
@@ -23,11 +23,10 @@ declare var dhtmlXCalendarObject: any;
 
 export class ProjectAddActivityComponent implements OnInit {
 
-//  @HostBinding('style.display') public display = 'block';
-//  @HostBinding('style.position') public position = 'absolute';
   @Output() public onCloseEvent = new EventEmitter();
   @Input() public project: ProjectRef;
   @Input() public parentId: number;
+  @Input() public activityId: number;
 
   public resourceList: ResourceRef[] = [];
   public requestersList: PersonRef[] = [];
@@ -43,7 +42,10 @@ export class ProjectAddActivityComponent implements OnInit {
 
   ngOnInit() {
     this.loadCalendars();
-    this.loadLists();    
+    this.loadLists(); 
+    if (!this.isNewActivity()) {
+      this.loadActivity(this.activityId);
+    }
   }
 
   public onClose(): void {
@@ -120,6 +122,13 @@ export class ProjectAddActivityComponent implements OnInit {
     this.activity.estimatedEnd = this.endDateCalendar.getDate(true);
   }
 
+  private isNewActivity(): boolean {
+    if (this.activityId === -1){
+      return true;
+    }
+    return false;
+  }
+
   private validate(): boolean {
     if (this.activity.name === '') {
       alert("Seleccionar la actividad de la lista.");
@@ -148,6 +157,15 @@ export class ProjectAddActivityComponent implements OnInit {
       .toPromise()
       .then()
       .catch((e) => this.exceptionHandler(e, errMsg));
+  }
+
+  private loadActivity(itemId: number): void {
+    const errMsg = 'Ocurrió un problema al intentar leer la actividad.';
+
+    this.activityService.getActivity(itemId)
+                        .toPromise()
+                        .then((x) =>{ this.activity = x; console.log(this.activity); })
+                        .catch((e) => this.exceptionHandler(e, errMsg));
   }
 
   private exceptionHandler(error: any, defaultMsg: string): void {

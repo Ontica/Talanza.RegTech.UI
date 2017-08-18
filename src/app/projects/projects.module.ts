@@ -27,7 +27,9 @@ import { ActivityInfoComponent } from './editor/activity-info.component';
 
 import { ActivityEditorComponent } from './editor/activity-editor.component';
 import { ActivityGeneralInfoComponent } from './editor/activity-general-info.component';
-
+import { ActivityCurrentStateComponent } from './editor/activity-current-state.component';
+import { ActivityNextStateComponent } from './editor/activity-next-state.component';
+import { ActivityControlAndStateComponent } from './editor/activity-control-and-state.component';
 
 import { ProjectsRoutingModule } from './projects-routing.module';
 
@@ -42,8 +44,9 @@ import { ProjectsRoutingModule } from './projects-routing.module';
                  ProjectAssignTasksComponent,
                  ActivityAddComponent,ActivitySelectorComponent, ActivityDescriptionComponent,
                  ActivityWorklistComponent, ActivityInfoComponent,
-                 ActivityEditorComponent, ActivityGeneralInfoComponent]
-               
+                 ActivityEditorComponent, ActivityGeneralInfoComponent,
+                ActivityNextStateComponent, ActivityCurrentStateComponent,
+                 ActivityControlAndStateComponent],
   exports: [ProjectsMainPageComponent]
 })
 export class ProjectsModule { }
