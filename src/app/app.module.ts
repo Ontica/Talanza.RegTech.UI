@@ -33,6 +33,7 @@ import { AppState, InternalStateType } from './app.service';
 import { CoreModule } from './core/core.module';
 import { SecurityUIModule } from './security-ui/security-ui.module';
 import { DashboardModule } from './dashboard/dashboard.module';
+import { DocumentsModule } from './documents/documents.module';
 import { ProcessModule } from './process/process.module';
 import { ContractsModule } from './contracts/contracts.module';
 import { ProjectsModule } from './projects/projects.module';
@@ -80,6 +81,7 @@ type StoreType = {
     ContractsModule,
     SecurityUIModule,
     DashboardModule,
+    DocumentsModule,
     ProcessModule,
     ProjectsModule,
     WorklistsModule,
