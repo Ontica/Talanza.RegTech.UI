@@ -25,6 +25,8 @@ import { ActivityDescriptionComponent } from './editor/activity-description.comp
 import { ActivityWorklistComponent } from './editor/activity-worklist.component';
 import { ActivityInfoComponent } from './editor/activity-info.component';
 
+import { ActivityEditorComponent } from './editor/activity-editor.component';
+
 import { ProjectsRoutingModule } from './projects-routing.module';
 
 /**
@@ -37,7 +39,8 @@ import { ProjectsRoutingModule } from './projects-routing.module';
                  ProjectAddActivityComponent, ProjectStartActivityComponent,
                  ProjectAssignTasksComponent,
                  ActivityAddComponent,ActivitySelectorComponent, ActivityDescriptionComponent,
-                 ActivityWorklistComponent, ActivityInfoComponent],
+                 ActivityWorklistComponent, ActivityInfoComponent,
+                 ActivityEditorComponent],
   exports: [ProjectsMainPageComponent]
 })
 export class ProjectsModule { }
