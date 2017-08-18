@@ -19,7 +19,8 @@ import { ProjectRef } from '../data-types/project';
     `],
   template: `<div #gantt_here style='width: 100%; height: 100%;'></div>
                 <div *ngIf="isActivityEditorWindowVisible" class="popup">
-                  <project-editor [project]="project" [parentId]="parentId" (onCloseEvent)="onCloseActivityEditorWindow()"></project-editor>                    
+                  <!--<project-editor [project]="project" [parentId]="parentId" [activityId]="activityId" (onCloseEvent)="onCloseActivityEditorWindow()"></project-editor>-->
+                  <activity-add [project]=" project " (onCloseEvent)="onCloseActivityEditorWindow()"></activity-add>
                 </div>
                 `,
   providers: [ProjectService]
@@ -34,6 +35,7 @@ export class GanttComponent implements OnChanges {
   public isActivityEditorWindowVisible = false;
   public isStartActivityEditorWindowVisible = false;
   public parentId: number = -1;
+  public activityId: number = -1;
 
   constructor(private projectService: ProjectService) { }
 
@@ -59,12 +61,31 @@ export class GanttComponent implements OnChanges {
   private attachEvents() {
     gantt.attachEvent("onTaskCreated", (id, item) => {
       this.parentId = id.parent || -1;
+      this.activityId = -1;
+
       this.isActivityEditorWindowVisible = true;
     });
 
     gantt.attachEvent("onTaskDblClick", (id, item) => {
+      this.activityId = id;
+
       this.isActivityEditorWindowVisible = true;
     });
+
+    gantt.attachEvent("onAfterTaskDrag", function (id, mode, e) {
+      let modes = gantt.config.drag_mode;    
+      if (mode === modes.resize) {
+        alert("movio la tarea" + id);
+           var modifiedTask = gantt.getTask(id);
+       
+        alert("fecha de inicio: " + modifiedTask.start_date);        
+        alert("Fecha de termino: " + modifiedTask.end_date);
+        
+        
+      }
+
+    });
+
   }
 
   private initConfig() {
