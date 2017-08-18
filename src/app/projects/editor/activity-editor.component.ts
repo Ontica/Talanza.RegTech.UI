@@ -27,8 +27,10 @@ import { ActivityService } from '../services/activity.service';
     <button class="tab-links left-position" [disabled]="isDisabled" [class.selected]="currentSelectedTab==='assign-tasks-tab'" (click)="onChangeTab('assign-tasks-tab')">Asignar tareas</button>
     <button class="tab-links left-position" [disabled]="isDisabled" [class.selected]="currentSelectedTab==='control-state-tab'" (click)="onChangeTab('control-state-tab')">Control y estado</button>
   </div>
-  <div [ngSwitch]="currentSelectedTab" class="form-frame">  
-
+  <div [ngSwitch]="currentSelectedTab" class="form-frame">   
+ 
+  <activity-general-info *ngSwitchCase="'general-info-tab'" (onCloseEvent)="onClose()"></activity-general-info>
+  <activity-info  *ngSwitchCase="'general-info-tab'" [project]="project" [parentId]="parentId" [activityId]="activityId" [activityType]="elementType" (onCloseEvent)="onClose()"></activity-info>
   </div>
 </div>
 
