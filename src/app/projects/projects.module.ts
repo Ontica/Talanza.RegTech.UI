@@ -20,7 +20,7 @@ import { ProjectStartActivityComponent } from './activity-editor/tabs/old/projec
 import { ProjectAssignTasksComponent } from './activity-editor/tabs/old/project-assign-tasks.component';
 
 import { ActivityAddComponent } from './editor/activity-add.component';
-
+import { ActivitySelectorComponent } from './editor/activity-selector.component';
 import { ProjectsRoutingModule } from './projects-routing.module';
 
 /**
@@ -32,7 +32,7 @@ import { ProjectsRoutingModule } from './projects-routing.module';
   declarations: [ProjectsMainPageComponent, GanttComponent, ProjectEditorComponent,
                  ProjectAddActivityComponent, ProjectStartActivityComponent,
                  ProjectAssignTasksComponent,
-                 ActivityAddComponent],
+                 ActivityAddComponent,ActivitySelectorComponent],
   exports: [ProjectsMainPageComponent]
 })
 export class ProjectsModule { }

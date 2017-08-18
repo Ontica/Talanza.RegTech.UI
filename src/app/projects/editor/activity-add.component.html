@@ -3,7 +3,15 @@
     <div class="close-button right-position" (click)="onClose()">&times;</div>
     <div class="title">Agregar actividad al proyecto: <b>{{project.name}}</b></div>
   </div>
+  <div>
+    <table class="form">
+      <tr>
+        <td class="form-title form-title-text">1) Seleccionar el tipo de actividad o evento que se desea agregar</td>
+      </tr>
+    </table>
+    <activity-selector></activity-selector>
 
+  </div>
   <div class="form-footer border-top">
     <table class="form">
       <tr>
