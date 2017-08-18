@@ -21,6 +21,8 @@ import { ProjectAssignTasksComponent } from './activity-editor/tabs/old/project-
 
 import { ActivityAddComponent } from './editor/activity-add.component';
 import { ActivitySelectorComponent } from './editor/activity-selector.component';
+import { ActivityDescriptionComponent } from './editor/activity-description.component';
+
 import { ProjectsRoutingModule } from './projects-routing.module';
 
 /**
@@ -32,7 +34,7 @@ import { ProjectsRoutingModule } from './projects-routing.module';
   declarations: [ProjectsMainPageComponent, GanttComponent, ProjectEditorComponent,
                  ProjectAddActivityComponent, ProjectStartActivityComponent,
                  ProjectAssignTasksComponent,
-                 ActivityAddComponent,ActivitySelectorComponent],
+                 ActivityAddComponent,ActivitySelectorComponent, ActivityDescriptionComponent],
   exports: [ProjectsMainPageComponent]
 })
 export class ProjectsModule { }
