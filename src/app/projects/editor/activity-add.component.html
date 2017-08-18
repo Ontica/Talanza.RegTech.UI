@@ -1,0 +1,19 @@
+<div class="editor-container editor-container-style">
+  <div class="header">
+    <div class="close-button right-position" (click)="onClose()">&times;</div>
+    <div class="title">Agregar actividad al proyecto: <b>{{project.name}}</b></div>
+  </div>
+
+  <div class="form-footer border-top">
+    <table class="form">
+      <tr>
+        <td class="text-align-right ">
+          <button class="btn " (click)="onClickCancel()">Cancelar</button>
+        </td>
+        <td class="text-align-right ">
+          <button class="btn " (click)="onClickAddActivity()">Guardar los cambios</button>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>

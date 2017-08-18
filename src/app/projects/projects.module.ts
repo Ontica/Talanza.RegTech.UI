@@ -13,13 +13,13 @@ import { SharedModule } from '../shared/shared.module';
 
 import { ProjectsMainPageComponent } from './main-page/projects-main-page.component';
 import { GanttComponent } from './components/gantt.component';
-import { ProjectEditorComponent } from './activity-editor/project-editor.component';
-import { ProjectAddActivityComponent} from './activity-editor/tabs/project-add-activity.component';
-import { ProjectStartActivityComponent } from './activity-editor/tabs/project-start-activity.component';
-import { ProjectAssignTasksComponent } from './activity-editor/tabs/project-assign-tasks.component';
 
-import { ActivityEditorComponent } from './activity/activity-editor.component';
-import { ActivitySelectorComponent } from './activity/activity-selector.component';
+import { ProjectEditorComponent } from './activity-editor/project-editor.component';
+import { ProjectAddActivityComponent} from './activity-editor/tabs/old/project-add-activity.component';
+import { ProjectStartActivityComponent } from './activity-editor/tabs/old/project-start-activity.component';
+import { ProjectAssignTasksComponent } from './activity-editor/tabs/old/project-assign-tasks.component';
+
+import { ActivityAddComponent } from './editor/activity-add.component';
 
 import { ProjectsRoutingModule } from './projects-routing.module';
 
@@ -31,7 +31,8 @@ import { ProjectsRoutingModule } from './projects-routing.module';
   imports: [ProjectsRoutingModule, SharedModule, CommonModule, FormsModule],
   declarations: [ProjectsMainPageComponent, GanttComponent, ProjectEditorComponent,
                  ProjectAddActivityComponent, ProjectStartActivityComponent,
-                 ProjectAssignTasksComponent, ActivityEditorComponent, ActivitySelectorComponent],
+                 ProjectAssignTasksComponent,
+                 ActivityAddComponent],
   exports: [ProjectsMainPageComponent]
 })
 export class ProjectsModule { }
