@@ -22,10 +22,17 @@ export class ActivityAddComponent {
   @HostBinding('style.position') public position = 'absolute';
 
   @Input() public project: ProjectRef;
-
+  @Input() public parentId: number;
+  @Input() public activityId: number = 3;
   @Output() public onCloseEvent = new EventEmitter();
 
   public isEvent = false;
+  public elementType = '';
+  
+  public setElementType(elementType: string): void {    
+    this.elementType = elementType;          
+    this.validateIsEvent();
+  }
 
   public onClose(): void {
     this.onCloseEvent.emit();
@@ -34,4 +41,13 @@ export class ActivityAddComponent {
   public onClickCancel(): void {
     this.onClose();
   }
+
+  private validateIsEvent(): void {
+    if (this.elementType === "event") {
+      this.isEvent = true;
+    } else {
+       this.isEvent = false;
+    }
+  }
+
 }

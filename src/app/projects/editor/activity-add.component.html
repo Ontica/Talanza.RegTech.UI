@@ -9,7 +9,7 @@
         <td class="form-title form-title-text">1) Seleccionar el tipo de actividad o evento que se desea agregar</td>
       </tr>
     </table>
-    <activity-selector></activity-selector>
+    <activity-selector (onSelectElementType)="setElementType($event)"></activity-selector>
   </div>
   <div class="form-frame">
     <div>
@@ -29,7 +29,17 @@
           <activity-worklist></activity-worklist>
         </tr>
       </table>
-
+    </div>
+    <div>
+      <table class="form">
+        <tr *ngIf="!isEvent">
+          <td class="form-title form-title-text">4) Información de la actividad </td>
+        </tr>
+        <tr *ngIf="isEvent">
+          <td class="form-title form-title-text">4) Información del evento </td>
+        </tr>
+      </table>
+      <activity-info [project]="project" [parentId]="parentId" [activityId]="activityId" [activityType]="elementType" (onCloseEvent)="onClose()"></activity-info>
     </div>
   </div>
   <div class="form-footer border-top">

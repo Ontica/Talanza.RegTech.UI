@@ -23,6 +23,7 @@ import { ActivityAddComponent } from './editor/activity-add.component';
 import { ActivitySelectorComponent } from './editor/activity-selector.component';
 import { ActivityDescriptionComponent } from './editor/activity-description.component';
 import { ActivityWorklistComponent } from './editor/activity-worklist.component';
+import { ActivityInfoComponent } from './editor/activity-info.component';
 
 import { ProjectsRoutingModule } from './projects-routing.module';
 
@@ -36,7 +37,7 @@ import { ProjectsRoutingModule } from './projects-routing.module';
                  ProjectAddActivityComponent, ProjectStartActivityComponent,
                  ProjectAssignTasksComponent,
                  ActivityAddComponent,ActivitySelectorComponent, ActivityDescriptionComponent,
-                 ActivityWorklistComponent],
+                 ActivityWorklistComponent, ActivityInfoComponent],
   exports: [ProjectsMainPageComponent]
 })
 export class ProjectsModule { }
