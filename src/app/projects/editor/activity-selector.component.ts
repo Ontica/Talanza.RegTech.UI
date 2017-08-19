@@ -7,6 +7,11 @@
  */
 import { Component, EventEmitter, Output } from '@angular/core';
 
+import { ProcessModel, EmptyProcessModel } from '../data-types/project'; 
+
+import { ActivityService } from '../services/activity.service';
+
+
 @Component({
   selector:'activity-selector', 
   template: `      
@@ -27,38 +32,90 @@ import { Component, EventEmitter, Output } from '@angular/core';
        <td>Buscar un tipo <br>de actividad:</td>
        <td><select class="select-box" #activityType (change)="onChangeActivityType(activityType.value)">
            <option value="">( Todas )</option>
-           <option value="medidor">Modificación de medidores</option>
-           <option value="extractor">Instalación de extractor de gas</option>
+           <option *ngFor="let processModel of processModels" [value]="processModel.uid">
+           {{processModel.name}}</option>           
          </select>
        </td>
      </tr>
    </table>  
     `,
-   styleUrls:['./activity-form.scss']
+   styleUrls:['./activity-form.scss'],
+   providers:[ActivityService]
  
 })
 
 export class ActivitySelectorComponent {
-  @Output() public onSelectElementType = new EventEmitter<string>();
-  @Output() public onSelectActivityType = new EventEmitter<string>();
+  @Output() public onSelectedElementType = new EventEmitter<string>();
+  @Output() public onSelectedProcessModel= new EventEmitter<ProcessModel>();
 
-  public selectedElementType = '';
+  public processModels: ProcessModel[];
+
+  private selectedElementType = '';
+  private selectedProcessModel: ProcessModel = EmptyProcessModel();
+  
+  constructor(private activityService: ActivityService) {}
 
   public onChangeElementType(elementType: string): void {   
     this.selectedElementType = elementType;     
-    if(elementType ==='') {      
+    if (elementType ==='') {      
       alert("Seleccionar de qué tipo es el elemento que se desea agregar.");
       return;
-    }    
-    this.onSelectElementType.emit(elementType);    
+    } 
+
+    this.loadActivityTypeCombo();
+    this.onSelectedElementType.emit(elementType);    
   }
 
-  public onChangeActivityType(activityType: string): void {
-    if(activityType ==='') {
+  public onChangeActivityType(uid: string): void {
+    if (uid ==='') {
       alert("Seleccionar el tipo de actividad a buscar.");
       return;
     }   
-    this.onSelectActivityType.emit(activityType);    
+
+    this.setSelectedProcessModel(uid);   
+    this.onSelectedProcessModel.emit(this.selectedProcessModel);    
+  }
+
+  public loadActivityTypeCombo(): void {
+    if (this.selectedElementType === 'event') {
+      this.loadEvents();
+    } else {
+      this.loadProcess();
+    }
+  }
+
+  public setSelectedProcessModel(uid: string): void { 
+    this.selectedProcessModel = this.processModels.find((x) => x.uid === uid);    
+  }
+
+  private loadProcess(): void {
+    const errMsg = 'Ocurrio un prolema al intentar leer la listas de procesos';
+
+    this.activityService.getProcess()
+                        .toPromise()
+                        .then((x) => this.processModels = x)
+                        .catch((e) => this.exceptionHandler(e, errMsg));
+  }
+
+  private loadEvents(): void {
+    const errMsg = 'Ocurrio un prolema al intentar leer la listas de evntos';
+
+    this.activityService.getEvents()
+                        .toPromise()
+                        .then((x) => this.processModels = x)
+                        .catch((e) => this.exceptionHandler(e, errMsg));
+  }
+  
+
+  private exceptionHandler(error: any, defaultMsg: string): void {
+    let errMsg = 'Tengo un problema.\n\n';
+
+    if (typeof (error) === typeof (Error)) {
+      errMsg += defaultMsg + '\n\n' + (<Error>error).message;
+    } else {
+      errMsg += defaultMsg + '\n\n' + 'Error desconocido.';
+    }
+    alert(errMsg);
   }
   
 }

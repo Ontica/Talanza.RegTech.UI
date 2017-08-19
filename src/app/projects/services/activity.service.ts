@@ -12,8 +12,8 @@ import { Observable } from 'rxjs/Observable';
 import { CoreService } from '../../core';
 
 import { Task } from '../data-types/task';
-import { Activity, ProjectRef, ResourceRef, PersonRef,
-         TaskRef } from '../data-types/project';
+import { Activity, ProjectRef, ResourceRef, PersonRef,TaskRef } from '../data-types/project';
+import { ProcessModel } from '../data-types/project';
 
 @Injectable()
 export class ActivityService {
@@ -62,6 +62,19 @@ export class ActivityService {
     const path =  `v1/project-management/activities/${itemId}/tasks`;
 
     return this.core.http.get<TaskRef[]>(path);
+
+  }
+
+  public getProcess(): Observable<ProcessModel[]> {
+    const path ='v1/projects/process-models/for-activities';
+
+    return this.core.http.get<ProcessModel[]>(path);
+  }
+
+  public getEvents(): Observable<ProcessModel[]> {
+    const path ='v1/projects/process-models/for-events';
+    
+    return this.core.http.get<ProcessModel[]>(path);
 
   }
 }

@@ -3,6 +3,11 @@ export interface ProjectRef {
   name: string;
   }
 
+ export interface ProcessModel {
+   uid: string;
+   name: string;
+ } 
+
 export interface ResourceRef {
   uid:string;
   name: string;   
@@ -70,3 +75,13 @@ export function EmptyActivity() {
 
   return empty;
 }
+
+export function EmptyProcessModel() {
+  const empty: ProcessModel = {
+    uid: '',
+    name: ''
+  }
+
+  return empty;
+}
+
