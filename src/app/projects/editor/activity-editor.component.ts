@@ -30,6 +30,7 @@ import { ActivityService } from '../services/activity.service';
   <div [ngSwitch]="currentSelectedTab" class="form-frame">   
  
   <activity-general-info *ngSwitchCase="'general-info-tab'" (onCloseEvent)="onClose()"></activity-general-info>
+  <activity-assing-task *ngSwitchCase="'assign-tasks-tab'"></activity-assing-task>
   <activity-control-and-state *ngSwitchCase="'control-state-tab'"></activity-control-and-state>
   </div>
 </div>

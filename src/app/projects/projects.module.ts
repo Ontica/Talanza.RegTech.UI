@@ -14,10 +14,7 @@ import { SharedModule } from '../shared/shared.module';
 import { ProjectsMainPageComponent } from './main-page/projects-main-page.component';
 import { GanttComponent } from './components/gantt.component';
 
-import { ProjectEditorComponent } from './activity-editor/project-editor.component';
-import { ProjectAddActivityComponent} from './activity-editor/tabs/old/project-add-activity.component';
-import { ProjectStartActivityComponent } from './activity-editor/tabs/old/project-start-activity.component';
-import { ProjectAssignTasksComponent } from './activity-editor/tabs/old/project-assign-tasks.component';
+
 
 import { ActivityAddComponent } from './editor/activity-add.component';
 import { ActivitySelectorComponent } from './editor/activity-selector.component';
@@ -30,6 +27,7 @@ import { ActivityGeneralInfoComponent } from './editor/activity-general-info.com
 import { ActivityCurrentStateComponent } from './editor/activity-current-state.component';
 import { ActivityNextStateComponent } from './editor/activity-next-state.component';
 import { ActivityControlAndStateComponent } from './editor/activity-control-and-state.component';
+import { ActivityAssignTaskComponent } from './editor/activity-assing-task.component';
 
 import { ProjectsRoutingModule } from './projects-routing.module';
 
@@ -39,14 +37,12 @@ import { ProjectsRoutingModule } from './projects-routing.module';
 
 @NgModule({
   imports: [ProjectsRoutingModule, SharedModule, CommonModule, FormsModule],
-  declarations: [ProjectsMainPageComponent, GanttComponent, ProjectEditorComponent,
-                 ProjectAddActivityComponent, ProjectStartActivityComponent,
-                 ProjectAssignTasksComponent,
+  declarations: [ProjectsMainPageComponent, GanttComponent,
                  ActivityAddComponent,ActivitySelectorComponent, ActivityDescriptionComponent,
                  ActivityWorklistComponent, ActivityInfoComponent,
                  ActivityEditorComponent, ActivityGeneralInfoComponent,
                 ActivityNextStateComponent, ActivityCurrentStateComponent,
-                 ActivityControlAndStateComponent],
+                 ActivityControlAndStateComponent,ActivityAssignTaskComponent],
   exports: [ProjectsMainPageComponent]
 })
 export class ProjectsModule { }

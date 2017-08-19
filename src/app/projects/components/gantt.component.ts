@@ -18,9 +18,13 @@ import { ProjectRef } from '../data-types/project';
         }
     `],
   template: `<div #gantt_here style='width: 100%; height: 100%;'></div>
-                <div *ngIf="isActivityEditorWindowVisible" class="popup">
+                <div *ngIf="isActivityAddEditorWindowVisible" class="popup">
                   <!--<project-editor [project]="project" [parentId]="parentId" [activityId]="activityId" (onCloseEvent)="onCloseActivityEditorWindow()"></project-editor>-->
-                  <activity-add [project]=" project " (onCloseEvent)="onCloseActivityEditorWindow()"></activity-add>
+                  <activity-add [project]=" project " (onCloseEvent)="onCloseActivityAddEditorWindow()"></activity-add>
+                </div>
+                <div *ngIf="isActivityEditorWindowVisible" class="popup">                
+                  <activity-editor [project]="project" [activityId]="activityId" (onCloseEvent)="onCloseActivityEditorWindow()">
+                  </activity-editor>                
                 </div>
                 `,
   providers: [ProjectService]
@@ -32,6 +36,7 @@ export class GanttComponent implements OnChanges {
   @Input() public project: ProjectRef;
   @Input() public config: string;
 
+  public isActivityAddEditorWindowVisible = false;
   public isActivityEditorWindowVisible = false;
   public isStartActivityEditorWindowVisible = false;
   public parentId: number = -1;
@@ -50,6 +55,11 @@ export class GanttComponent implements OnChanges {
     this.refreshData();
   }
 
+  public onCloseActivityAddEditorWindow(): void {
+    this.isActivityAddEditorWindowVisible = false;
+    this.refreshData();
+  }
+
   public onCloseActivityEditorWindow(): void {
     this.isActivityEditorWindowVisible = false;
     this.refreshData();
@@ -63,7 +73,7 @@ export class GanttComponent implements OnChanges {
       this.parentId = id.parent || -1;
       this.activityId = -1;
 
-      this.isActivityEditorWindowVisible = true;
+      this.isActivityAddEditorWindowVisible = true;
     });
 
     gantt.attachEvent("onTaskDblClick", (id, item) => {
