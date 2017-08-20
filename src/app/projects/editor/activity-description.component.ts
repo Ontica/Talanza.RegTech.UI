@@ -5,7 +5,9 @@
  * See LICENSE.txt in the project root for complete license information.
  *
  */
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+
+import { ProcessModel } from '../data-types/project';
 
 @Component({
   selector:'activity-description', 
@@ -13,10 +15,14 @@ import { Component } from '@angular/core';
     `<div>     
      <table class="form">
       <tr>
-      <td>Descripción: La modificación de medidores aplica en aquellos casos donde se presume la existencia de fallas.
-           <br><br>
-           <p><a> Ficha técnica</a> <a>Diagrama de procesos</a> <a>Pagina web CNH</a></p>
-      </td>   
+      <td>Descripción: {{processModel.notes}}.</td>   
+      </tr>
+      <tr>
+        <table>
+          <tr>
+            <td *ngFor="let link of processModel.links"><a (click)="openPage(link.url)">{{link.name}}</a></td>
+          </tr>
+        </table>
       </tr>
      </table>
      </div>
@@ -26,5 +32,9 @@ import { Component } from '@angular/core';
 })
 
 export class ActivityDescriptionComponent {
+  @Input() public processModel: ProcessModel;
 
+  public openPage(url:string): void {
+    alert(url);
+  }
 }

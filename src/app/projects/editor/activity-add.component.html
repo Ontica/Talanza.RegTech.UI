@@ -9,7 +9,7 @@
         <td class="form-title form-title-text">1) Seleccionar el tipo de actividad o evento que se desea agregar</td>
       </tr>
     </table>
-    <activity-selector (onSelectElementType)="setElementType($event)"></activity-selector>
+    <activity-selector (onSelectedElementType)="setElementType($event)" (onSelectedProcessModel)="loadProcessModel($event)"></activity-selector>
   </div>
   <div class="form-frame">
     <div *ngIf="elementType !== 'manual'">
@@ -18,7 +18,7 @@
           <td class="form-title form-title-text">2) Información sobre el evento seleccionado</td>
         </tr>
       </table>
-      <activity-description></activity-description>
+      <activity-description [processModel]="processModel"></activity-description>
     </div>
     <div *ngIf="elementType !== 'manual'">
       <table class="form">

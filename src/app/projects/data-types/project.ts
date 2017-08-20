@@ -6,7 +6,21 @@ export interface ProjectRef {
  export interface ProcessModel {
    uid: string;
    name: string;
+   notes: string;
+   links: Link[];
  } 
+
+ export interface Link {
+   name: string;
+   link: string;
+ }
+
+ export interface Step {
+   uid: string;
+   stepNo: string;
+   name: string;
+   involvedParty: string;
+ }
 
 export interface ResourceRef {
   uid:string;

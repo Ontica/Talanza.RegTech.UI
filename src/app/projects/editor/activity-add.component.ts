@@ -8,13 +8,13 @@
 
  import { Component, EventEmitter, HostBinding, Input, Output} from '@angular/core';
 
- import {  ProjectRef } from '../data-types/project'; 
+ import {  ProjectRef, ProcessModel, EmptyProcessModel } from '../data-types/project'; 
 
 @Component({
   selector:'activity-add', 
   templateUrl:'./activity-add.component.html',
   styleUrls:['./activity-add.component.scss']
- 
+
 })
 
 export class ActivityAddComponent {
@@ -28,6 +28,7 @@ export class ActivityAddComponent {
 
   public isEvent = false;
   public elementType = '';
+  public processModel: ProcessModel = EmptyProcessModel();
   
   public setElementType(elementType: string): void {    
     this.elementType = elementType;          
@@ -42,6 +43,14 @@ export class ActivityAddComponent {
     this.onClose();
   }
 
+  public onClickAddActivity(): void {   
+    
+  }
+
+  public loadProcessModel(selectedProcessModel: ProcessModel): void {
+    this.processModel = selectedProcessModel;    
+  }
+
   private validateIsEvent(): void {
     if (this.elementType === "event") {
       this.isEvent = true;
@@ -49,5 +58,5 @@ export class ActivityAddComponent {
        this.isEvent = false;
     }
   }
-
+   
 }
