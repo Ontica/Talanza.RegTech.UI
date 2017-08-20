@@ -44,7 +44,7 @@
           <td class="form-title form-title-text">2) Información de la actividad </td>
         </tr>
       </table>
-      <activity-info [project]="project" [parentId]="parentId" [activityId]="activityId" [activityType]="elementType" (onCloseEvent)="onClose()"></activity-info>
+      <activity-info [project]="project" [processModelUID]="processModel.uid" [operation]="activityOperation" [activityType]="elementType" [parentId]="parentId" (onCloseEvent)="onClose()"></activity-info>
     </div>
   </div>
   <div class="form-footer border-top">

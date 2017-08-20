@@ -20,7 +20,7 @@ import { ProjectRef } from '../data-types/project';
   template: `<div #gantt_here style='width: 100%; height: 100%;'></div>
                 <div *ngIf="isActivityAddEditorWindowVisible" class="popup">
                   <!--<project-editor [project]="project" [parentId]="parentId" [activityId]="activityId" (onCloseEvent)="onCloseActivityEditorWindow()"></project-editor>-->
-                  <activity-add [project]=" project " (onCloseEvent)="onCloseActivityAddEditorWindow()"></activity-add>
+                  <activity-add [project]="project" [parentId]="parentId"  (onCloseEvent)="onCloseActivityAddEditorWindow()"></activity-add>
                 </div>
                 <div *ngIf="isActivityEditorWindowVisible" class="popup">                
                   <activity-editor [project]="project" [activityId]="activityId" (onCloseEvent)="onCloseActivityEditorWindow()">
@@ -71,8 +71,7 @@ export class GanttComponent implements OnChanges {
   private attachEvents() {
     gantt.attachEvent("onTaskCreated", (id, item) => {
       this.parentId = id.parent || -1;
-      this.activityId = -1;
-
+      this.activityId = -1;      
       this.isActivityAddEditorWindowVisible = true;
     });
 

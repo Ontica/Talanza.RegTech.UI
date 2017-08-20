@@ -24,9 +24,11 @@ declare var dhtmlXCalendarObject: any;
 export class ActivityInfoComponent implements OnInit {
   
   @Input() public project: ProjectRef;
-  @Input() public parentId: number;
-  @Input() public activityId: number;
- 
+  @Input() public parentId: number = null;
+  @Input() public activityId: number = -1;
+  @Input() public processModelUID: string;
+
+  @Output() public onCloseEvent = new EventEmitter();
   
   public resourceList: ResourceRef[] = [];
   public requestersList: PersonRef[] = [];
@@ -39,6 +41,7 @@ export class ActivityInfoComponent implements OnInit {
   private startDateCalendar: any;
   private endDateCalendar: any;
   private eventDateCalendar: any;
+  public myCalendar: any;
 
   private _activityType = '';
   @Input()
@@ -50,27 +53,43 @@ export class ActivityInfoComponent implements OnInit {
     return this._activityType;
   }
 
+  private _operation = "";  
+  @Input() 
+  set operation(operation:string) {
+    this._operation = operation;
+    this.doOperation();
+  }
+  get operation():string {
+    return this._operation;
+  }
+
   public constructor(private activityService: ActivityService) { }
 
   ngOnInit() {
     this.loadCalendars();
     this.loadLists(); 
     if (!this.isNewActivity()) {
-      this.loadActivity(this.activityId);
+      //this.loadActivity(this.activityId);
     }  
 
   } 
 
-  public async onClickAddActivity() {
+  public async add() {    
     this.setDatePropertiesValueFromCalendars();    
     if (!this.validate()) {
       return;
     }
-    
-    this.activity.parentId = this.parentId;    
-    await this.addActivity();
-    
+    this.activity.parentId = this.parentId;        
+    await this.addManualActivity();
+    this.onCloseEvent.emit();
   }
+
+  public doOperation(): void {   
+    switch(this.operation) {
+      case 'save': this.add(); break;
+    }  
+  }
+
 
   private loadResourcesList(): void {
     const errMsg = 'Ocurrió un problema al intentar leer la lista de recursos.';
@@ -108,14 +127,13 @@ export class ActivityInfoComponent implements OnInit {
     this.startDateCalendar = new dhtmlXCalendarObject({ input: "startDateCalendar", button: "startDateCalendarButton" });
     this.endDateCalendar = new dhtmlXCalendarObject({ input: "endDateCalendar", button: "endDateCalendarButton" });
     this.eventDateCalendar = new dhtmlXCalendarObject({ input: "eventDateCalendar", button: "eventDateCalendarButton" });
+    this.myCalendar = new dhtmlXCalendarObject("box");
+    
   }
 
-  private setCalendarsDateFormat(): void {
-    this.requestedDateCalendar.setDateFormat("%d-%m-%Y");
-    this.startDateCalendar.setDateFormat("%d-%m-%Y");
-    this.endDateCalendar.setDateFormat("%d-%m-%Y");
-    this.eventDateCalendar.setDateFormat("%d-%m-%Y");
-  }
+  private setCalendarsDateFormat(): void {  
+    this.eventDateCalendar.setDateFormat("%d/%m/%Y");
+    }
 
   private loadLists(): void {
     this.loadResourcesList();
@@ -141,14 +159,14 @@ export class ActivityInfoComponent implements OnInit {
     if (this.activityType === 'event') {
       this.isEvent = true;
     } else{
-      this.isEvent = false;
+      this.isEvent = false;     
     }
 
   }
 
   private validate(): boolean {
     if (this.activity.name === '') {
-      alert("Seleccionar la actividad de la lista.");
+      alert("El nombre de la actividad o evento se encuentra en blanco.");
       return false;
     }
     if (this.activity.resourceUID === '') {
@@ -166,15 +184,8 @@ export class ActivityInfoComponent implements OnInit {
 
     return true;
   }
-
-  private addActivity(): void {
-    const errMsg = 'Ocurrió un problema al intentar crear la actividad.';
-
-    this.activityService.createActivity(this.project.uid, this.activity)
-      .toPromise()
-      .then()
-      .catch((e) => this.exceptionHandler(e, errMsg));
-  }
+/*
+  
 
   private loadActivity(itemId: number): void {
     const errMsg = 'Ocurrió un problema al intentar leer la actividad.';
@@ -183,6 +194,25 @@ export class ActivityInfoComponent implements OnInit {
                         .toPromise()
                         .then((x) =>{ this.activity = x; console.log(this.activity); })
                         .catch((e) => this.exceptionHandler(e, errMsg));
+  }
+*/
+
+private addManualActivity(): void {
+  const errMsg = 'Ocurrió un problema al intentar crear la actividad.';
+
+  this.activityService.addManualActivity(this.project.uid, this.activity)
+    .toPromise()
+    .then()
+    .catch((e) => this.exceptionHandler(e, errMsg));
+}
+
+  private addProcessModel(): void {
+    const errMsg = 'Ocurrió un problema al intentar guardar.';
+
+    this.activityService.addProcessModel(this.project.uid,this.processModelUID,this.activity)
+      .toPromise()
+      .then()
+      .catch((e) => this.exceptionHandler(e, errMsg));
   }
 
   private exceptionHandler(error: any, defaultMsg: string): void {

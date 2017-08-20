@@ -45,6 +45,8 @@ export interface Activity {
    responsibleUID:string,
    requestedTime: Date,
    requestedByUID:string
+   isMilestone: boolean,
+   createSubproject: boolean,
 }
  
 export interface TaskRef {
@@ -84,7 +86,9 @@ export function EmptyActivity() {
    resourceUID: '',   
    responsibleUID: '',
    requestedTime: new Date(),
-   requestedByUID: ''   
+   requestedByUID: '',
+   isMilestone: false,
+   createSubproject: false
   }
 
   return empty;
@@ -93,7 +97,9 @@ export function EmptyActivity() {
 export function EmptyProcessModel() {
   const empty: ProcessModel = {
     uid: '',
-    name: ''
+    name: '',
+    notes: '',
+    links: []
   }
 
   return empty;

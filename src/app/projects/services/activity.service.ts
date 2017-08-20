@@ -42,15 +42,7 @@ export class ActivityService {
     const path = 'v1/project-management/projects/'+ projectUID + '/task-managers';
 
     return this.core.http.get<PersonRef[]>(path);
-  }
-
-  
-  public createActivity(projectUID: string, activity: Activity): Observable<Activity> {
-    const path = `v1/project-management/projects/${projectUID}/activities`;
-
-    return this.core.http
-                    .post<Activity>(path, activity);
-  }
+  }   
 
   public getActivity(itemId: number): Observable<any> {    
     const path = `v1/project-management/activities/${itemId}`;
@@ -76,6 +68,21 @@ export class ActivityService {
     
     return this.core.http.get<ProcessModel[]>(path);
 
+  }
+
+  public addProcessModel(projectUID: string, processModelUID: string, 
+                        activity: Activity): Observable<Activity> {
+
+    const path = `v1/project-management/projects/${projectUID}/create-from-process-model/${processModelUID}`;
+
+    return this.core.http
+                        .post<Activity>(path, activity);
+  }
+
+  public addManualActivity(projectUID:string, activity:Activity): Observable<Activity> {
+    const path = `v1/project-management/projects/${projectUID}/activities`;
+
+    return this.core.http.post<Activity>(path, activity);
   }
 }
 

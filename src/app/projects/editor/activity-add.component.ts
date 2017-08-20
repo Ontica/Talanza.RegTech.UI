@@ -29,6 +29,7 @@ export class ActivityAddComponent {
   public isEvent = false;
   public elementType = '';
   public processModel: ProcessModel = EmptyProcessModel();
+  public activityOperation = "";
   
   public setElementType(elementType: string): void {    
     this.elementType = elementType;          
@@ -44,7 +45,7 @@ export class ActivityAddComponent {
   }
 
   public onClickAddActivity(): void {   
-    
+    this.activityOperation = "save";
   }
 
   public loadProcessModel(selectedProcessModel: ProcessModel): void {
