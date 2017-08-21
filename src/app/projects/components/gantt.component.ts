@@ -31,8 +31,17 @@ import { ProjectRef } from '../data-types/project';
 
 export class GanttComponent implements OnChanges {
   @ViewChild("gantt_here") ganttContainer: ElementRef;
+  private _project: ProjectRef;
+  @Input() 
+   set project(project: ProjectRef) {
+     this._project = project;
+     this.refreshData();
+   }
+   get project(): ProjectRef {
+    return this._project;
+   }
 
-  @Input() public project: ProjectRef;
+  //@Input() public project: ProjectRef;
   @Input() public config: string;
 
   public isActivityAddEditorWindowVisible = false;
@@ -54,9 +63,10 @@ export class GanttComponent implements OnChanges {
     this.refreshData();
   }
 
-  public onCloseActivityAddEditorWindow(): void {
-    this.isActivityAddEditorWindowVisible = false;
+  public onCloseActivityAddEditorWindow() {
+    this.isActivityAddEditorWindowVisible = false;      
     this.refreshData();
+  
   }
 
   public onCloseActivityEditorWindow(): void {
@@ -121,9 +131,9 @@ export class GanttComponent implements OnChanges {
     }
   }
 
-  private refreshData() {
-    this.projectService.getTasksList(this.project.uid)
-      .then((data) => {
+  private refreshData() {    
+     this.projectService.getTasksList(this.project.uid)
+      .then((data) => {        
         gantt.clearAll();
         gantt.parse({ data });
       });
