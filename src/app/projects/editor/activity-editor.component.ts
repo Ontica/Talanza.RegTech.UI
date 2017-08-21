@@ -14,28 +14,7 @@ import { ActivityService } from '../services/activity.service';
 
 @Component({
   selector:'activity-editor',
-  template:`
-    <div class="editor-container editor-container-style">
-  <div class="header">
-    <div class="close-button right-position" (click)="onClose()">&times;</div>
-    <div class="title">Modificación de medidores </div>
-    <div class="subtitle"><b>{{project.name}}</b> <div class="right-position">Inicio planeado: 22 Ago 2017</div></div>
-  </div>
-  <br>
-  <div class="tab">
-    <button class="tab-links left-position" [disabled]="isDisabled" [class.selected]="currentSelectedTab==='general-info-tab'" (click)="onChangeTab('general-info-tab')">Información general</button>
-    <button class="tab-links left-position" [disabled]="isDisabled" [class.selected]="currentSelectedTab==='assign-tasks-tab'" (click)="onChangeTab('assign-tasks-tab')">Asignar tareas</button>
-    <button class="tab-links left-position" [disabled]="isDisabled" [class.selected]="currentSelectedTab==='control-state-tab'" (click)="onChangeTab('control-state-tab')">Control y estado</button>
-  </div>
-  <div [ngSwitch]="currentSelectedTab" class="form-frame">   
- 
-  <activity-general-info *ngSwitchCase="'general-info-tab'" (onCloseEvent)="onClose()"></activity-general-info>
-  <activity-assing-task *ngSwitchCase="'assign-tasks-tab'"></activity-assing-task>
-  <activity-control-and-state *ngSwitchCase="'control-state-tab'"></activity-control-and-state>
-  </div>
-</div>
-
-  `,
+  templateUrl:'./activity-editor.component.html',
   styleUrls:['./activity-editor.component.scss'],
   providers:[ActivityService]
 
@@ -50,13 +29,14 @@ export class ActivityEditorComponent implements OnInit {
   @Input() public activityId: number;
 
   public activity: Activity = EmptyActivity();
-
-  public currentSelectedTab = 'general-info-tab';  
+  public currentSelectedTab = 'general-info-tab';    
 
   constructor(private activityService: ActivityService){}
 
-  ngOnInit() {    
-    //this.loadActivity(this.activityId);
+  async ngOnInit() {  
+  
+    await this.loadActivity(this.activityId);
+   
   }
 
   public onChangeTab(newSelectedTab: string): void {

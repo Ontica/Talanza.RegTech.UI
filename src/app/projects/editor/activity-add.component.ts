@@ -44,8 +44,16 @@ export class ActivityAddComponent {
     this.onClose();
   }
 
-  public onClickAddActivity(): void {   
-    this.activityOperation = "save";
+  public onClickAddActivity(): void {
+    if (this.elementType === '' ) {
+      return ;
+    }
+    if(this.elementType === 'manual') {
+      this.activityOperation = "saveManual";
+    } else{
+      this.activityOperation = "save";
+    }
+   
   }
 
   public loadProcessModel(selectedProcessModel: ProcessModel): void {

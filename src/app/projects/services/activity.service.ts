@@ -84,5 +84,13 @@ export class ActivityService {
 
     return this.core.http.post<Activity>(path, activity);
   }
+
+  public updateActivity(projectUID:string, activityId: number, activity: Activity): 
+                        Observable<Activity> {
+    const path = `v1/project-management/projects/${projectUID}/activities/${activityId}`;
+    
+    return this.core.http.put<Activity>(path,activity);
+    
+  }
 }
 

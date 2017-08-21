@@ -41,7 +41,6 @@ export class ActivityInfoComponent implements OnInit {
   private startDateCalendar: any;
   private endDateCalendar: any;
   private eventDateCalendar: any;
-  public myCalendar: any;
 
   private _activityType = '';
   @Input()
@@ -69,12 +68,22 @@ export class ActivityInfoComponent implements OnInit {
     this.loadCalendars();
     this.loadLists(); 
     if (!this.isNewActivity()) {
-      //this.loadActivity(this.activityId);
+      this.loadActivity(this.activityId);
     }  
 
   } 
 
   public async add() {    
+    this.setDatePropertiesValueFromCalendars();    
+    if (!this.validate()) {
+      return;
+    }
+    this.activity.parentId = this.parentId;        
+    await this.addProcessModel();
+    this.onCloseEvent.emit();
+  }
+
+  public async addManual() {    
     this.setDatePropertiesValueFromCalendars();    
     if (!this.validate()) {
       return;
@@ -87,6 +96,7 @@ export class ActivityInfoComponent implements OnInit {
   public doOperation(): void {   
     switch(this.operation) {
       case 'save': this.add(); break;
+      case 'saveManual': this.addManual();
     }  
   }
 
@@ -127,8 +137,7 @@ export class ActivityInfoComponent implements OnInit {
     this.startDateCalendar = new dhtmlXCalendarObject({ input: "startDateCalendar", button: "startDateCalendarButton" });
     this.endDateCalendar = new dhtmlXCalendarObject({ input: "endDateCalendar", button: "endDateCalendarButton" });
     this.eventDateCalendar = new dhtmlXCalendarObject({ input: "eventDateCalendar", button: "eventDateCalendarButton" });
-    this.myCalendar = new dhtmlXCalendarObject("box");
-    
+        
   }
 
   private setCalendarsDateFormat(): void {  
@@ -184,7 +193,6 @@ export class ActivityInfoComponent implements OnInit {
 
     return true;
   }
-/*
   
 
   private loadActivity(itemId: number): void {
@@ -195,7 +203,7 @@ export class ActivityInfoComponent implements OnInit {
                         .then((x) =>{ this.activity = x; console.log(this.activity); })
                         .catch((e) => this.exceptionHandler(e, errMsg));
   }
-*/
+
 
 private addManualActivity(): void {
   const errMsg = 'Ocurrió un problema al intentar crear la actividad.';

@@ -1,0 +1,20 @@
+<div class="editor-container editor-container-style">
+  <div class="header">
+    <div class="close-button right-position" (click)="onClose()">&times;</div>
+    <div class="title">{{activity.name}}</div>
+    <div class="subtitle"><b>{{project.name}}</b>
+      <div class="right-position">Inicio planeado:{{activity.estimatedStart | date:'dd-MM-yyyy'}}</div>
+    </div>
+  </div>
+  <br>
+  <div class="tab">
+    <button class="tab-links left-position" [disabled]="isDisabled" [class.selected]="currentSelectedTab==='general-info-tab'" (click)="onChangeTab('general-info-tab')">Información general</button>
+    <button class="tab-links left-position" [disabled]="isDisabled" [class.selected]="currentSelectedTab==='assign-tasks-tab'" (click)="onChangeTab('assign-tasks-tab')">Asignar tareas</button>
+    <button class="tab-links left-position" [disabled]="isDisabled" [class.selected]="currentSelectedTab==='control-state-tab'" (click)="onChangeTab('control-state-tab')">Control y estado</button>
+  </div>
+  <div [ngSwitch]="currentSelectedTab" class="form-frame">
+    <activity-general-info [activityId]="activityId" [project]="project" (onCloseEvent)="onClose()" *ngSwitchCase="'general-info-tab'"></activity-general-info>
+    <activity-assing-task *ngSwitchCase="'assign-tasks-tab'"></activity-assing-task>
+    <activity-control-and-state *ngSwitchCase="'control-state-tab'"></activity-control-and-state>
+  </div>
+</div>

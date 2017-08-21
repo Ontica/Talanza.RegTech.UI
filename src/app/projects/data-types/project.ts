@@ -75,7 +75,7 @@ export function EmptyProjectRef() {
 }
 
 export function EmptyActivity() {
-  const empty: Activity = {
+  const empty: Activity = {   
    completionProgress: 0,
    estimatedStart: new Date(),
    estimatedEnd: new Date(),
