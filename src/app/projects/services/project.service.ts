@@ -33,9 +33,8 @@ export class ProjectService {
   public getTasksList(projectId: string): Promise<Task[]> {
     const path = `v1/project-management/projects/${projectId}/activities`;
 
-    return this.core.http.get<Task[]>(path).toPromise()
-
-    //  .catch((e) => this.core.http.showAndThrow(e, ProjectServiceErr.GET_ACTIVITIES_ERR));
+    return this.core.http.get<Task[]>(path)
+                         .toPromise();
 
   }
 

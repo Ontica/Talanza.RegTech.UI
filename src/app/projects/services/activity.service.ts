@@ -71,18 +71,17 @@ export class ActivityService {
   }
 
   public addProcessModel(projectUID: string, processModelUID: string, 
-                        activity: Activity): Observable<Activity> {
+                         activity: Activity): Observable<Activity> {
 
     const path = `v1/project-management/projects/${projectUID}/create-from-process-model/${processModelUID}`;
 
-    return this.core.http
-                        .post<Activity>(path, activity);
+    return this.core.http.post<Activity>(path, activity);
   }
 
-  public addManualActivity(projectUID:string, activity:Activity): Observable<Activity> {
+  public addManualActivity(projectUID:string, activity:Activity): Observable<any[]> {
     const path = `v1/project-management/projects/${projectUID}/activities`;
 
-    return this.core.http.post<Activity>(path, activity);
+    return this.core.http.post<any[]>(path, activity);
   }
 
   public updateActivity(projectUID:string, activityId: number, activity: Activity): 

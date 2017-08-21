@@ -205,22 +205,22 @@ export class ActivityInfoComponent implements OnInit {
   }
 
 
-private addManualActivity(): void {
-  const errMsg = 'Ocurrió un problema al intentar crear la actividad.';
+  private addManualActivity(): void {
+    const errMsg = 'Ocurrió un problema al intentar crear la actividad.';
 
-  this.activityService.addManualActivity(this.project.uid, this.activity)
-    .toPromise()
-    .then()
-    .catch((e) => this.exceptionHandler(e, errMsg));
-}
+    this.activityService.addManualActivity(this.project.uid, this.activity)
+                        .toPromise()
+                        .then()
+                        .catch((e) => this.exceptionHandler(e, errMsg));
+  }
 
   private addProcessModel(): void {
     const errMsg = 'Ocurrió un problema al intentar guardar.';
 
     this.activityService.addProcessModel(this.project.uid,this.processModelUID,this.activity)
-      .toPromise()
-      .then()
-      .catch((e) => this.exceptionHandler(e, errMsg));
+                        .toPromise()
+                        .then()
+                        .catch((e) => this.exceptionHandler(e, errMsg));
   }
 
   private exceptionHandler(error: any, defaultMsg: string): void {

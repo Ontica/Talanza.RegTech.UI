@@ -59,7 +59,6 @@ export class ActivityAddComponent implements OnInit {
     } else{
       this.activityOperation = "save";
     }
-   
   }
 
   public loadProcessModel(selectedProcessModel: ProcessModel): void {
