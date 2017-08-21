@@ -15,7 +15,7 @@ import { Component } from '@angular/core';
       <tr>
       <td>Descripción: La modificación de medidores aplica en aquellos casos donde se presume la existencia de fallas.
            <br><br>
-           <p><a> Ficha técnica</a> <a>Diagrama de procesos</a> <a>Pagina web CNH</a></p>
+           <p><a> Ficha técnica</a> <a>Diagrama de procesos</a> <a>Página web CNH</a></p>
       </td>   
       </tr>
      </table>

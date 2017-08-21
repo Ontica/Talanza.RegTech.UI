@@ -3,11 +3,12 @@
 //
 $black: #1a1a1a !default;
 $gray: #909090!default;
-$brown: #A05000 !default;
+$brown: #604020 !default;
 $blue: #204060 !default;
 $lime: #8CBF26 !default;
 $green: #17c457 !default;
-$orange: #f0b829 !default;
+$orange: #f0bf68 !default;
+$light-yellow: #fffffb !default;
 $pink: #E671B8 !default;
 $purple: #A700AE !default;
 $red:#9b1b1f !default;
@@ -15,7 +16,7 @@ $red-dark: #d04f4f !default;
 $teal: #25a1c5 !default;
 $white: #f8f8f8 !default;
 $light-white: white;
-$silver: #707070;
+$silver: #909090;
 //
 // Typography
 //
@@ -50,8 +51,8 @@ $link-color: $blue;
 //
 //editor-window
 //
-$editor-window-border:4px solid $gray;
-$editor-window-background-color:$light-white;
+$editor-window-border: 1px solid #ccc;
+$editor-window-background-color: $light-yellow;
 //
 //tabs
 //
@@ -82,20 +83,21 @@ $control-font: 8pt Arial, Helvetica;
 $control-small-font: 6pt Arial, Helvetica;
 $cancel-color: $red;
 $warning-color: $orange;
-$control-border: 1px solid #e0e0e0;
+$control-border: 1px solid #d0d0d0;
 $control-background-color: #f0f0f0;
-$control-color: #424242;
+$control-color: $text-title;
 $control-width: 99%;
-$control-disabled-color: $silver;
-$control-disabled-background: #dddddd;
+$control-disabled-color: $text-title;
+$control-disabled-background: #e6e6e6;
 $control-height: 25px;
 $button-background-color: #dadada;
-$button-border: 1pt solid #c0c0c0;
+$button-border: 1px solid #cecece;
 $button-height: 24px;
 $control-font: 8pt Arial, Helvetica;
 $control-small-font: 6pt Arial, Helvetica;
 //
 //grid
 //
-$grid-border:1px solid $black;
-$grid-even-background-color: $control-background-color;
+$grid-border: none;
+$grid-even-background-color: #fffffd;
+$grid-odd-background-color: #eef7fa;

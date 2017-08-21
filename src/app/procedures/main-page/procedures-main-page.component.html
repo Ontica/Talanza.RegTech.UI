@@ -1,5 +1,5 @@
 <procedure-filter (onSearch)="getProcedures($event)" (onNewProcedure)="onOpenProcedureEditorWindow($event)"></procedure-filter>
-<table class="grid ">
+<table class="grid">
   <thead>
     <tr>
       <th>Trámite / Homoclave</th>
@@ -12,9 +12,10 @@
     <tr *ngFor="let procedure of procedures">
       <td>
         <a (click)="onOpenProcedureEditorWindow(procedure.uid)">{{procedure.name}}</a>
-        <br/> {{procedure.code}}
+        <br/>
+        <u>{{procedure.code}}</u>
       </td>
-      <td>{{procedure.entity}} <br> {{procedure.authority}}</td>
+      <td>{{procedure.entity}}</td>
       <td>{{procedure.theme}}</td>
       <td>{{procedure.stage}}</td>
     </tr>
@@ -26,11 +27,9 @@
     <tr>
       <td class="grid-footer-items">{{procedures.length}} Tramites encontrados</td>
       <td class="grid-footer-items text-align-center">
-        <img src="../../assets/icon/backward-icon.png " alt="back icon " />
-        <img src="../../assets/icon/play-icon.png " alt="back icon " />
-        <img src="../../assets/icon/forward-icon.png " alt="back icon " />
+
       </td>
-      <td class="grid-footer-items text-align-right ">Pagina 1 de 4</td>
+      <td class="grid-footer-items text-align-right ">Página 1 de 1</td>
     </tr>
   </table>
 </div>

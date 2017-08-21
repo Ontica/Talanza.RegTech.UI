@@ -15,7 +15,7 @@ import { ProcessService } from '../services/process.service';
 @Component({
   selector: 'process-editor',
   templateUrl: './process-editor.component.html',
-  styleUrls: ['process-editor.component.css'],
+  styleUrls: ['./process-editor.component.scss'],
   providers: [ProcessService]
 })
 

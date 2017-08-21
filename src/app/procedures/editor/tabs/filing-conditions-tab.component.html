@@ -138,13 +138,13 @@
       <tr>
         <td><button class="btn ">Imprimir</button></td>
         <td class="text-align-center ">
-          <button class="btn " [disabled]="disabled " (click)="cancel() ">Deshacer cambios</button>
+          <button class="btn" [disabled]="disabled" (click)="cancel() ">Deshacer cambios</button>
         </td>
         <td *ngIf="disabled " class="text-align-right ">
-          <button class="btn " (click)="editProcedure() ">Editar trámite</button>
+          <button class="btn" (click)="editProcedure() ">Editar trámite</button>
         </td>
         <td *ngIf="!disabled " class="text-align-right ">
-          <button class="btn " (click)="saveProcedureChanges() ">{{addButtonLabel}}</button>
+          <button class="btn" (click)="saveProcedureChanges() ">{{addButtonLabel}}</button>
         </td>
       </tr>
     </table>

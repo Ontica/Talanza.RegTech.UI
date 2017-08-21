@@ -9,17 +9,27 @@
 }
 
 table.grid thead {
-  background-color: $secondary-color;
-  color: $secondary-text-color;
+  background-color: $text-title;
+  color: white;
 }
 
 table.grid thead tr {
   height: 30px;
-  padding-top: 10px
+}
+
+table.grid thead th {
+  font-weight: normal;
+  font-size: 9pt;
+  color: white;
+  padding: 4pt;
 }
 
 table.grid tbody tr {
   height: 80px;
+}
+
+table.grid tbody td {
+  padding: 4pt;
 }
 
 table.grid tbody {
@@ -35,6 +45,10 @@ table.grid td, table.grid th {
   float: left;
 }
 
+table.grid tbody tr:nth-child(odd) {
+  background-color: $grid-odd-background-color;
+}
+
 table.grid tbody tr:nth-child(even) {
   background-color: $grid-even-background-color;
 }
@@ -46,4 +60,16 @@ table.grid tbody tr:nth-child(even) {
   margin: 3px 10px 3px 3px;
   position: absolute;
   width: 99%;
+}
+
+.grid-search-table {
+  border-bottom: 1px solid $text-title;
+  margin: 3px 10px 3px 3px;
+  width: 100%;
+  font-size: 9pt;
+  color: $text-title;
+}
+
+.grid-search-table td {
+  white-space: nowrap;
 }

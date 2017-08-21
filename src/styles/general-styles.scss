@@ -1,8 +1,8 @@
 @import "variables";
 table {
   border: none;
-  font: $control-font;
-  font-weight: bold;
+  font-size: 10pt;
+  font-weight: normal;
   margin-left: 1em;
 }
 
@@ -12,6 +12,8 @@ button.btn {
   font-size: $font-size-hint;
   border: $button-border;
   height: $button-height;
+  white-space: nowrap;
+  padding: 2pt;
 }
 
 button.btn-cancel {
@@ -21,7 +23,13 @@ button.btn-cancel {
 
 button.btn-warning {
   background-color: $warning-color;
-  color: $background-color;
+  color: $control-color;
+  font: $control-font;
+  font-weight: normal;
+  font-size: 10pt;
+  height: 28px;
+  border: 1px solid #cecece;
+  padding: 2pt;
 }
 
 @mixin input-settings {
@@ -32,7 +40,7 @@ button.btn-warning {
   border-right: $control-border;
   color: $control-color;
   font: $control-font;
-  font-weight: bold;
+  font-weight: normal;
   margin: 2px 8px 2px 0;
   padding: 4px 2px 2px;
   vertical-align: middle;
@@ -127,7 +135,8 @@ button:disabled {
 }
 
 table td {
-  white-space: nowrap;
+  white-space: normal;
+  padding: 4pt;
 }
 
 table td:last-child {

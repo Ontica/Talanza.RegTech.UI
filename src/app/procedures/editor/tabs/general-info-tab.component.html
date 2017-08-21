@@ -1,8 +1,8 @@
 <div class="form-container-text">
   <div>
-    <table>
-      <tr>
-        <td colspan="3" class="form-title form-title-text">Nombre del trámite, clave, clasificación y página web</td>
+    <table class="form">
+      <tr class="form-title">
+        <td colspan="3" class="form-title-text">Nombre del trámite, clave, clasificación y página web</td>
       </tr>
       <tr>
         <td>Nombre oficial:<br><br></td>
@@ -70,7 +70,7 @@
       </tr>
 
       <tr>
-        <td>Pagina web:</td>
+        <td>Página web:</td>
         <td colspan="2">
           <input [disabled]="disabled" type="text" class="text-box" [(ngModel)]="procedure.url">
         </td>

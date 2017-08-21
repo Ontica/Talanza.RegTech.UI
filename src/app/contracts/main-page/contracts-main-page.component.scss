@@ -1,11 +1,4 @@
 @import "../../../styles/grid";
-.contracts-filter {
-  border: 1px solid $black;
-  border-collapse: collapse;
-  margin: 3px 10px 3px 3px;
-  width: 100%;
-}
-
 table.grid tbody {
   height: calc(100vh - 230px);
 }
@@ -15,17 +8,13 @@ table.grid td:nth-child(1), table.grid th:nth-child(1) {
 }
 
 table.grid td:nth-child(2), table.grid th:nth-child(2) {
-  width: 35%;
+  width: 15%;
 }
 
 table.grid td:nth-child(3), table.grid th:nth-child(3) {
-  width: 40%;
+  width: 70%;
 }
 
 table.grid td:nth-child(4), table.grid th:nth-child(4) {
   width: 5%;
-}
-
-table.grid td:nth-child(5), table.grid th:nth-child(5) {
-  width: 10%;
 }

@@ -1,4 +1,4 @@
-<table class="contracts-filter">
+<table class="grid-search-table">
   <tr>
     <td>Contrato:</td>
     <td>
@@ -40,13 +40,17 @@
 </table>
 
 <div class="grid-footer">
-  <table>
+  <table class="grid-footer-style">
     <tr>
-      <td>{{contractsList.length}} Cláusulas y anexos encontrados</td>
-      <td class="text-align-right">Pagina 1 de 1</td>
+      <td class="grid-footer-items">{{selectedContract.clauses.length}} cláusulas encontradas</td>
+      <td class="grid-footer-items text-align-center">
+
+      </td>
+      <td class="grid-footer-items text-align-right">Página 1 de 1</td>
     </tr>
   </table>
 </div>
+
 
 <div *ngIf="isClauseEditorWindowVisible" class="popup">
   <contract-editor [contractClause]="selectedContractClause" (onCloseEvent)="onCloseContractEditorWindow()"></contract-editor>
