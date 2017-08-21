@@ -61,16 +61,36 @@ export class ProcessEditorComponent implements OnInit {
   }
 
   public createDiagram(): void {
-    this.isNewDiagram = true;
-    this.editionMode = true;
-    this.saveAsLabel = 'Guardar';
-    this.modeler.createDiagram();
-    this.title = 'Nuevo proceso';
-    this.attachModelerEventHandler();
+    alert('Lo sentimos ...\n\nPor el momento no es posible crear nuevos procesos.');
+
+    return;
+
+    // this.isNewDiagram = true;
+    // this.editionMode = true;
+    // this.saveAsLabel = 'Guardar';
+    // this.modeler.createDiagram();
+    // this.title = 'Nuevo proceso';
+    // this.attachModelerEventHandler();
   }
 
-  public editDiagram(): void {
+  public onOpenForEdition(): void {
     this.editionMode = true;
+  }
+
+  public onCancelChanges(): void {
+    this.refreshDiagram();
+  }
+
+  public async onSaveDiagram() {
+    this.editionMode = false;
+
+    let xml = this.modeler.getXML();
+
+    this.process.xml = xml;
+
+    await this.processService.saveDiagramChanges(this.process);
+
+    this.refreshDiagram();
   }
 
   public saveNewDiagram(process: Process): void {
@@ -78,7 +98,7 @@ export class ProcessEditorComponent implements OnInit {
 
     this.process = process;
     let xml = this.modeler.getXML();
-    this.process.bpmnXml = xml;
+    this.process.xml = xml;
     this.processService.saveNewDiagram(this.process);
 
     this.isNewDiagram = false;
@@ -86,6 +106,7 @@ export class ProcessEditorComponent implements OnInit {
     this.editionMode = true;
     this.title = process.name;
   }
+
   public showSaveNewDiagramPopup(): void {
     this.editionMode = false;
     this.activateSaveNewDiagramPopup = true;
@@ -102,20 +123,12 @@ export class ProcessEditorComponent implements OnInit {
     this.ref.detectChanges();
   }
 
-  public saveDiagram(): void {
-    let xml = this.modeler.getXML();
-
-    this.process.bpmnXml = xml;
-
-    this.processService.saveDiagramChanges(this.process);
-  }
-
   public onChangeSelectedProcess(uid: string): void {
     this.processUID = uid;
-    this.openDiagram();
+    this.refreshDiagram();
   }
 
-  public async openDiagram() {
+  public async refreshDiagram() {
     this.isNewDiagram = false;
 
     if (this.processUID === '') {
@@ -125,7 +138,7 @@ export class ProcessEditorComponent implements OnInit {
 
     this.process = await this.processService.getProcessDiagram(this.processUID);
 
-    this.loadXml(this.process.bpmnXml);
+    this.loadXml(this.process.xml);
     this.title = this.process.name;
     this.editionMode = false;
     this.saveAsLabel = 'Guardar como';

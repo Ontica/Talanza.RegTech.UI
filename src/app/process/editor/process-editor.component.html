@@ -6,16 +6,13 @@
                           <option value="">(Seleccionar un proceso de la lista)</option>                  
                           <option *ngFor="let process of processes" [value]=process.uid >{{process.name}}</option>
       </select>
-      <button class="btn" (click)="editDiagram()" *ngIf="!editionMode">Editar modelo</button>
+      <button class="btn" *ngIf="!editionMode" (click)="onOpenForEdition()">Editar proceso</button>
+      <button class="btn" *ngIf="editionMode" (click)="onSaveDiagram()">Guardar los cambios</button> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+      <button class="btn" *ngIf="editionMode" (click)="onCancelChanges()">Cancelar</button>
     </td>
     <td>
       &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
       <button class="btn-warning" (click)="createDiagram()">+ Crear un nuevo proceso</button>
-
-      <!--
-      <button (click)="showSaveNewDiagramPopup()">{{saveAsLabel}}</button>
-      <button *ngIf="!isNewDiagram" (click)="saveDiagram()">Guardar cambios</button>
-      !-->
     </td>
   </tr>
 </table>
@@ -25,6 +22,9 @@
 <div *ngIf="showShapeInfo" class="popup">
   <!--<task-editor-window (onCloseEvent)="closeShapeInfo()"></task-editor-window> -->
 </div>
+
+<div class="title">{{title}}</div>
+
 <div class="iframe-container">
-  <iframe #modeler scrolling="no" [class.readonly-modeler]="!editionMode" class="iframe-modeler" [src]=" url "></iframe>
+  <iframe #modeler class="iframe-modeler" scrolling="no" [class.readonly-modeler]="!editionMode" [src]="url"></iframe>
 </div>

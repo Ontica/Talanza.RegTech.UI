@@ -21,7 +21,7 @@ export class ProcessService {
 
   public saveDiagramChanges(process: Process): Promise<Process> {
     const body = {
-      bpmnXml: process.bpmnXml
+      xml: process.xml
     };
 
     return this.core.http.put<Process>('v1/process-definitions/' + process.uid, body)
@@ -32,7 +32,7 @@ export class ProcessService {
     const body = {
       name: process.name,
       version: process.version,
-      bpmnXml: process.bpmnXml
+      xml: process.xml
     };
 
     return this.core.http.post<Process>('v1/process-definitions', body)

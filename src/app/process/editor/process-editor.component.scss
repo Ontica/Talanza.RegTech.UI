@@ -5,7 +5,7 @@
 }
 
 .iframe-container {
-  height: 65vh;
+  height: calc(100vh - 200px);
   overflow: auto;
   z-index: -1;
 }
@@ -15,9 +15,22 @@
   height: 1580px;
   position: relative;
   width: 100%;
+  background-color: $light-yellow;
 }
 
 .readonly-modeler {
   pointer-events: none;
   z-index: -1;
+}
+
+.title {
+  background-color: $text-title;
+  color: white;
+  text-align: center;
+  height: 30px;
+  width: 100%;
+  vertical-align: middle;
+  font-weight: normal;
+  font-size: 9pt;
+  padding: 4pt;
 }
