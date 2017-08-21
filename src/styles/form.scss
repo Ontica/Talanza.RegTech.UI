@@ -6,6 +6,10 @@ table.form td {
   font-size: 9pt;
 }
 
+table.form .top {
+  vertical-align: top;
+}
+
 .form-container-text {
   color: $form-color;
   font-weight: $font-weight-command;
@@ -16,11 +20,10 @@ table.form .form-title {
   padding-bottom: 4pt;
 }
 
-.form-title-text {
+table.form .form-title-text {
   color: $form-title-color;
   border-bottom: $form-title-border;
   font: $control-font;
-  color: green;
 }
 
 .internal-form {

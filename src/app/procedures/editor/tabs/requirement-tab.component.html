@@ -1,6 +1,6 @@
 <div class="container form-container-text">
   <div *ngIf="isShowGrids">
-    <table>
+    <table class="form">
       <tr>
         <td class="form-title form-title-text">Lista de Requerimientos</td>
         <td class="text-align-right">
@@ -15,7 +15,7 @@
     </table>
   </div>
   <div *ngIf="isShowGrids">
-    <table>
+    <table class="form">
       <tr>
         <td class="form-title form-title-text">Lista de entregables por la autoridad</td>
         <td class="text-align-right">
@@ -78,21 +78,5 @@
   </div>
   <div *ngIf="isAddRequirementListForm">
     <add-requirement-list-tab (isCanceled)="onCancelForm($event)"></add-requirement-list-tab>
-  </div>
-  <div class="footer " *ngIf="isShowGrids">
-    <table>
-      <tr>
-        <td><button class="btn">Imprimir</button></td>
-        <td class="text-align-center">
-          <button class="btn" [disabled]="disabled" (click)="cancel()">Deshacer cambios</button>
-        </td>
-        <td *ngIf="disabled" class="text-align-right">
-          <button class="btn" (click)="editProcedure()">Editar trámite</button>
-        </td>
-        <td *ngIf="!disabled" class="text-align-right">
-          <button class="btn " (click)="saveProcedureChanges() ">Guardar cambios</button>
-        </td>
-      </tr>
-    </table>
   </div>
 </div>

@@ -1,4 +1,4 @@
-<div id="outer">
+<div id="outer" class="form-container-text">
   <div id="login-div">
     <div class="left-column">
       <div>
@@ -8,15 +8,16 @@
     <div class="central-column"></div>
     <div class="right-column">
       <div class="authentication-section-welcome">
-        <span>Bienvenidos</span><br>
-        <span>Ingresa tu nombre de usuario o correo y contraseña registrada</span>
+        <span><b>Bienvenidos</b></span><br>
+        <span class="hint">Ingresar el nombre de usuario y la contraseña registrada</span>
       </div>
       <div class="authentication-section-form">
         <label>Usuario o correo:</label>
-        <input class="textBox" placeholder="Usuario o correo" (input)="userID=$event.target.value">
+        <input class="text-box" placeholder="Usuario o correo" (input)="userID=$event.target.value">
         <label>Contraseña:</label>
-        <input type="password" placeholder="Contraseña" (input)="password=$event.target.value">
-        <button type="button" class="button" (click)="authenticate();">Ingresar</button>
+        <input class="text-box" type="password" placeholder="Contraseña" (input)="password=$event.target.value">
+        <br><br>
+        <button type="button" style="width:84px" class="btn-warning" (click)="authenticate();">Ingresar</button>
       </div>
       <div class="authentication-section-footer">
         <a href="#" (click)="onClickResetCredentials();">Olvidé la contraseña</a><br>

@@ -49,16 +49,18 @@
    background-color: $tab-backgorund-color;
  }
  
- .tab-links {
+ button.tab-links {
    background-color: $tab-backgorund-color;
    border: none;
    outline: none;
    cursor: pointer;
    padding: 14px 16px;
    transition: 0.3s;
-   font-size: $tab-font-size;
-   font-weight: $font-weight-command;
+   font-size: 8pt;
+   font-weight: 500;
+   color: $text-title;
    float: left;
+   font-family: $font-family;
  }
  
  .tab-links:hover {

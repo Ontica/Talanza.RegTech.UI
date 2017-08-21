@@ -153,10 +153,12 @@ export class ProjectAddActivityComponent implements OnInit {
   private addActivity(): void {
     const errMsg = 'Ocurrió un problema al intentar crear la actividad.';
 
-    this.activityService.createActivity(this.project.uid, this.activity)
-      .toPromise()
-      .then()
-      .catch((e) => this.exceptionHandler(e, errMsg));
+    alert(errMsg);
+    
+    // this.activityService.createActivity(this.project.uid, this.activity)
+    //   .toPromise()
+    //   .then()
+    //   .catch((e) => this.exceptionHandler(e, errMsg));
   }
 
   private loadActivity(itemId: number): void {
