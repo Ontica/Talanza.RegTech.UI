@@ -40,6 +40,7 @@ export class ProjectsMainPageComponent implements OnInit {
   public onChangeProjectList(projectUID: string): void {
     if (projectUID === '') {
       this.selectedProject = EmptyProjectRef();
+      this.hideGanttGraph();
       return;
     }
 
@@ -48,13 +49,11 @@ export class ProjectsMainPageComponent implements OnInit {
     this.showGanttGraph();
   }
 
-  public onClickAddActivity(): void {
-    /*alert("Esta operación se encuentra en desarrollo.");
-    
+  public onClickAddActivity(): void {       
     if (this.selectedProject.uid === '') {
-      alert("REquiero se seleccione el proyecto al cual se le agregará la actividad.");
+      alert("Requiero se seleccione el proyecto al cual se le agregará la actividad.");
       return;
-    }*/
+    }
     this.hideGanttGraph();
     this.isAddActivityEditorWindowVisible = true;
     

@@ -6,7 +6,7 @@
  *
  */
 
- import { Component, EventEmitter, HostBinding, Input, Output} from '@angular/core';
+ import { Component, EventEmitter, HostBinding, Input, Output, OnInit} from '@angular/core';
 
  import {  ProjectRef, ProcessModel, EmptyProcessModel } from '../data-types/project'; 
 
@@ -17,19 +17,25 @@
 
 })
 
-export class ActivityAddComponent {
+export class ActivityAddComponent implements OnInit {
   @HostBinding('style.display') public display = 'block';
   @HostBinding('style.position') public position = 'absolute';
+  @HostBinding('style.top') public top = '-30';
 
   @Input() public project: ProjectRef;
   @Input() public parentId: number;
-  @Input() public activityId: number = 3;
+  @Input() public activityId: number;
+  @Input() public topUbication: string;
   @Output() public onCloseEvent = new EventEmitter();
 
   public isEvent = false;
   public elementType = '';
   public processModel: ProcessModel = EmptyProcessModel();
   public activityOperation = "";
+
+  ngOnInit() {
+    this.top = (this.topUbication || '-30') +'%' ;    
+  }
   
   public setElementType(elementType: string): void {    
     this.elementType = elementType;          

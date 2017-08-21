@@ -34,7 +34,6 @@ import { ProcessModel } from '../data-types/project';
 export class ActivityDescriptionComponent {
   @Input() public processModel: ProcessModel;
 
-  public openPage(url:string): void {
-    alert(url);
+  public openPage(url:string): void {    
   }
 }

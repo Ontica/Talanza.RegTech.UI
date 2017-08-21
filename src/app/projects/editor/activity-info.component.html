@@ -13,7 +13,7 @@
     <tr>
       <td>Asociar con:</td>
       <td><select class="select-box" [(ngModel)]="activity.resourceUID">
-          <option value=" ">( Seleccionar )</option>
+          <option value="">( Seleccionar )</option>
           <option *ngFor="let resource of resourceList" 
                   [value]="resource.uid">{{resource.name}}</option>         
           </select>
@@ -55,7 +55,7 @@
   <tr>
     <td>Responsable:</td>
     <td><select class="select-box" style="width:380px" [(ngModel)]="activity.responsibleUID">
-                <option value=" ">( Seleccionar )</option>
+                <option value="">( Seleccionar )</option>
                 <option *ngFor="let responsible of responsiblesList" 
                         [value]="responsible.uid">{{responsible.name}}</option>            
                 </select>
@@ -67,17 +67,17 @@
     <td>¿Marcar esta actividad como un hito?</td>
     <td><select class="select-box" style="width:100px " [(ngModel)]="activity.isMilestone ">
                 <option value="">( Seleccionar )</option>
-                <option value="si">Si</option>            
-                <option value="no">No</option>                
+                <option value="true">Si</option>            
+                <option value="false">No</option>                
                 </select>
     </td>
   </tr>
   <tr>
     <td>¿Administrar esta actidad como un <br> proyecto separado?</td>
     <td><select class="select-box " style="width:100px " [(ngModel)]="activity.createSubproject ">
-                <option value=" ">( Seleccionar )</option>
-                <option value="si ">Si</option>            
-                <option value="no ">No</option>                
+                <option value="">( Seleccionar )</option>
+                <option value="true">Si</option>            
+                <option value="false">No</option>                
                 </select></td>
   </tr>
 </table>

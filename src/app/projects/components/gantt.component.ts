@@ -84,15 +84,11 @@ export class GanttComponent implements OnChanges {
     gantt.attachEvent("onAfterTaskDrag", function (id, mode, e) {
       let modes = gantt.config.drag_mode;    
       if (mode === modes.resize) {
-        //alert("movio la tarea" + id);
-           var modifiedTask = gantt.getTask(id);
-       
-        alert("fecha de inicio: " + modifiedTask.start_date);        
-        alert("Fecha de termino: " + modifiedTask.end_date);
-        
-        
+        var modifiedTask = gantt.getTask(id);
+        //alert("movio la tarea" + id);       
+        //alert("fecha de inicio: " + modifiedTask.start_date);        
+        //alert("Fecha de termino: " + modifiedTask.end_date);       
       }
-
     });
 
   }

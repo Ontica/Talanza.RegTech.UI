@@ -43,16 +43,10 @@
 
 </table>
 <div *ngIf="isAddActivityEditorWindowVisible" class="popup">
-  <!-- <project-start-activity [project]=" selectedProject " (onCloseEvent)="onCloseAddActivityEditorWindow() "></project-start-activity>
-  <project-editor [project]="selectedProject " [parentId]="null " (onCloseEvent)="onCloseAddActivityEditorWindow() "></project-editor>
-  -->
+  <activity-add [project]="selectedProject" [parentId]="null" [topUbication]="10" (onCloseEvent)="onCloseAddActivityEditorWindow()"></activity-add>
 
-  <!--<activity-add-manual [project]=" selectedProject " [parentId]="null " (onCloseEvent)="onCloseAddActivityEditorWindow()"></activity-add-manual>
-  
-  <activity-add [project]=" selectedProject " (onCloseEvent)="onCloseAddActivityEditorWindow()"></activity-add>-->
-  <activity-editor [project]="selectedProject" [activityId]="3" (onCloseEvent)="onCloseAddActivityEditorWindow() "></activity-editor>
 </div>
 
-<div *ngIf=" isGanttGraphVisible ">
+<div *ngIf="isGanttGraphVisible">
   <gantt [project]="selectedProject " [config]="ganttConfig "></gantt>
 </div>
