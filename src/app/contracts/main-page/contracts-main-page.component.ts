@@ -60,10 +60,10 @@ export class ContractsMainPageComponent implements OnInit {
   }
 
   public search(): any {
-    const errMsg = 'Por el momento la búsqueda de cláusulas está deshabilitada.';
+//    const errMsg = 'Por el momento la búsqueda de cláusulas está deshabilitada.';
 
-    return this.contractService.searchClauses(this.selectedContractClause.uid, 'anexo 3.2')
-                               .subscribe();
+    // return this.contractService.searchClauses(this.selectedContractClause.uid, 'anexo 3.2')
+    //                            .subscribe();
 
     // this.contractService.getClause(this.selectedContract.uid, 'abcdefg')
     //                     .toPromise()

@@ -19,7 +19,7 @@ export class MainLayoutComponent {
 
   public userName = 'UserName || et al';
   public title = 'Administración y control del cumplimiento regulatorio';
-  public breadcrumb = 'Inicio » Edición de trámites';
+  public breadcrumb = '';
 
   // public title = 'Administración y control del cumplimiento regulatorio';
   // Cajón de arena para jugar

@@ -99,12 +99,12 @@ var modeler = new processModeler();
 var eventBus = viewer.get('eventBus');
 
 eventBus.on('element.dblclick', function(e) {
-  if (modeler.doubleClickCallback) {
-    var shape = getShapeObject(e.element);
-    modeler.doubleClickCallback(JSON.stringify(shape));
-  } else {
-    // no-op
-  }
+  // if (modeler.doubleClickCallback) {
+  //   var shape = getShapeObject(e.element);
+  //   modeler.doubleClickCallback(JSON.stringify(shape));
+  // } else {
+  //   // no-op
+  // }
 });
 
 function Shape(id, type) {

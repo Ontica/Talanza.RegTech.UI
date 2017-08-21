@@ -1,17 +1,29 @@
 @import "general-styles";
+table.form td {
+  color: $text-title;
+  white-space: nowrap;
+  vertical-align: text-top;
+  font-size: 9pt;
+}
+
+table.form .top {
+  vertical-align: top;
+}
+
 .form-container-text {
   color: $form-color;
   font-weight: $font-weight-command;
 }
 
-.form-title {
-  padding-top: 8pt;
+table.form .form-title {
+  padding-top: 12pt;
   padding-bottom: 4pt;
 }
 
-.form-title-text {
+table.form .form-title-text {
   color: $form-title-color;
   border-bottom: $form-title-border;
+  font: $control-font;
 }
 
 .internal-form {
@@ -22,7 +34,7 @@
 .form-footer {
   bottom: 0px;
   height: 42px;
-  margin: 1px 1px 1px 1px;
+  margin: 96px 1px 1px 1px;
   position: absolute;
   width: 99%;
 }

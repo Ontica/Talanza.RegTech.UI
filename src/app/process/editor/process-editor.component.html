@@ -1,18 +1,30 @@
-<h1>{{title}}</h1>
-<button (click)="createDiagram()">Nuevo</button>
-<select #process (change)="onChangeSelectedProcess(process.value)">
-                    <option value="">(Selecciona un proceso)</option>                  
-                    <option *ngFor="let process of processes" [value]=process.uid >{{process.name}}</option>
-</select>
-<button (click)="showSaveNewDiagramPopup()">{{saveAsLabel}}</button>
-<button *ngIf="!isNewDiagram" (click)="saveDiagram()">Guardar cambios</button>
-<button (click)="editDiagram()" *ngIf="!editionMode">Editar Modelo</button>
+<table class="grid-search-table">
+  <tr>
+    <td>Procesos registrados:</td>
+    <td>
+      <select class="select-box" style="width:340px" #process (change)="onChangeSelectedProcess(process.value)">
+                          <option value="">(Seleccionar un proceso de la lista)</option>                  
+                          <option *ngFor="let process of processes" [value]=process.uid >{{process.name}}</option>
+      </select>
+      <button class="btn" *ngIf="!editionMode" (click)="onOpenForEdition()">Editar proceso</button>
+      <button class="btn" *ngIf="editionMode" (click)="onSaveDiagram()">Guardar los cambios</button> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+      <button class="btn" *ngIf="editionMode" (click)="onCancelChanges()">Cancelar</button>
+    </td>
+    <td>
+      &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+      <button class="btn-warning" (click)="createDiagram()">+ Crear un nuevo proceso</button>
+    </td>
+  </tr>
+</table>
 <div *ngIf="activateSaveNewDiagramPopup" class="popup">
   <save-process-dialog (onSetDiagramIdentificationEvent)="saveNewDiagram($event)" (onCancelEvent)="closeSaveNewDiagramPopup()"></save-process-dialog>
 </div>
 <div *ngIf="showShapeInfo" class="popup">
   <!--<task-editor-window (onCloseEvent)="closeShapeInfo()"></task-editor-window> -->
 </div>
+
+<div class="title">{{title}}</div>
+
 <div class="iframe-container">
-  <iframe #modeler scrolling="no" [class.readonly-modeler]="!editionMode" class="iframe-modeler" [src]=" url "></iframe>
+  <iframe #modeler class="iframe-modeler" scrolling="no" [class.readonly-modeler]="!editionMode" [src]="url"></iframe>
 </div>

@@ -1,0 +1,63 @@
+<div class="editor-container editor-container-style">
+  <div class="header">
+    <div class="close-button right-position" (click)="onClose()">&times;</div>
+    <div class="title">Agregar nuevos elementos al proyecto</div>
+    <div class="subtitle"><b>{{project.name}}</b></div>
+  </div>
+  <div>
+    <table class="form">
+      <tr>
+        <td class="form-title form-title-text">1) Seleccionar el tipo de actividad o evento que se desea agregar</td>
+      </tr>
+    </table>
+    <activity-selector (onSelectedElementType)="setElementType($event)" (onSelectedProcessModel)="loadProcessModel($event)"></activity-selector>
+  </div>
+  <div class="form-frame">
+    <div *ngIf="elementType !== 'manual'">
+      <table class="form">
+        <tr>
+          <td class="form-title form-title-text">2) Información sobre el evento seleccionado</td>
+        </tr>
+      </table>
+      <activity-description [processModel]="processModel"></activity-description>
+    </div>
+    <div *ngIf="elementType !== 'manual'">
+      <table class="form">
+        <tr>
+          <td class="form-title form-title-text">3) Lista de tareas y subactividades asociadas</td>
+        </tr>
+        <tr>
+          <activity-worklist [processModel]="processModel"></activity-worklist>
+        </tr>
+      </table>
+    </div>
+    <div>
+      <table class="form" *ngIf="elementType !=='manual' ">
+        <tr *ngIf="!isEvent">
+          <td class="form-title form-title-text">4) Información de la actividad </td>
+        </tr>
+        <tr *ngIf="isEvent">
+          <td class="form-title form-title-text">4) Información del evento </td>
+        </tr>
+      </table>
+      <table class="form" *ngIf="elementType ==='manual' ">
+        <tr>
+          <td class="form-title form-title-text">2) Información de la actividad </td>
+        </tr>
+      </table>
+      <activity-info [project]="project" [processModelUID]="processModel.uid" [operation]="activityOperation" [activityType]="elementType" [parentId]="parentId" (onCloseEvent)="onClose()"></activity-info>
+    </div>
+  </div>
+  <div class="form-footer border-top">
+    <table class="form">
+      <tr>
+        <td class="text-align-right ">
+          <button class="btn" (click)="onClickCancel()">Cancelar</button>
+        </td>
+        <td class="text-align-right ">
+          <button class="btn" (click)="onClickAddActivity()">Agregar al proyecto</button>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>

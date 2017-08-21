@@ -10,5 +10,5 @@ export class Process {
   public uid: string;
   public name: string;
   public version: string;
-  public bpmnXml: string;
+  public xml: string;
 }

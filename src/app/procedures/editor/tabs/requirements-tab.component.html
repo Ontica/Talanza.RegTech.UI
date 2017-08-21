@@ -1,43 +1,43 @@
 <div class="form-container-text">
   <div>
-    <table>
+    <table class="form">
       <tr>
         <td colspan="2" class="form-title form-title-text">Requisitos de entrega</td>
       </tr>
       <tr>
-        <td>Descripción de los requisitos de entrega del trámite:<br><br><br><br></td>
+        <td class='top'>Descripción de los<br>requisitos de entrega<br>del trámite:</td>
         <td><textarea [disabled]="disabled" style="width:100%; " class="text-area " rows="8" cols="25 " [(ngModel)]="procedure.filingDocuments.notes"></textarea></td>
       </tr>
     </table>
   </div>
   <div>
-    <table>
+    <table class="form">
       <tr>
         <td colspan="2" class="form-title form-title-text">Vigencia y entrega simultánea</td>
       </tr>
       <tr>
-        <td>Vigencia del tramite en caso de emisión:</td>
+        <td class="top">Vigencia del trámite<br>en caso de emisión:</td>
         <td><textarea [disabled]="disabled" style="width:100%; " class="text-area " rows="2 " cols="25 " [(ngModel)]="procedure.filingCondition.validityTermWhenIssued"></textarea></td>
       </tr>
       <tr>
-        <td>Entrega simultánea:</td>
+        <td class="top">Entrega simultánea:</td>
         <td><textarea [disabled]="disabled" style="width:100%; " class="text-area " rows="4 " cols="25 " [(ngModel)]="procedure.filingCondition.simultaneousDelivery"></textarea></td>
       </tr>
     </table>
   </div>
   <div>
-    <table>
+    <table class="form">
       <tr>
         <td colspan="2" class="form-title form-title-text">Observaciones generales</td>
       </tr>
       <tr>
-        <td>Observaciones generales:<br><br><br></td>
+        <td class='top'>Observaciones<br>generales:</td>
         <td><textarea [disabled]="disabled" style="width:100%; " class="text-area " rows="5 " cols="25 " [(ngModel)]="procedure.notes"></textarea></td>
       </tr>
     </table>
   </div>
   <div>
-    <table>
+    <table class="form">
       <tr>
         <td colspan="4" class="form-title form-title-text">Cláusulas y anexos (provisional)</td>
       </tr>
@@ -56,7 +56,7 @@
     </table>
   </div>
   <div class="form-footer ">
-    <table>
+    <table class="form">
       <tr>
         <td><button class="btn">Imprimir</button></td>
         <td class="text-align-center ">

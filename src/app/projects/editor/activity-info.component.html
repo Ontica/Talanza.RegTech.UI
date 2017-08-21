@@ -1,0 +1,83 @@
+<div>
+  <table class="form">
+    <tr>
+      <td>Nombre:</td>
+      <td>
+        <input type="text" class="text-box" [(ngModel)]="activity.name">
+      </td>
+    </tr>
+    <tr>
+      <td>Observaciones:</td>
+      <td><textarea class="text-area" rows="5" cols="25" [(ngModel)]="activity.notes"></textarea></td>
+    </tr>
+    <tr>
+      <td>Asociar con:</td>
+      <td><select class="select-box" [(ngModel)]="activity.resourceUID">
+          <option value="">( Seleccionar )</option>
+          <option *ngFor="let resource of resourceList" 
+                  [value]="resource.uid">{{resource.name}}</option>         
+          </select>
+      </td>
+    </tr>
+  </table>
+</div>
+<table class="form">
+  <tr>
+    <td class="text-align-left">Fecha de inicio planeada:</td>
+    <td><input type="text" id="startDateCalendar" class="text-box" style="width:100px" [ngModel]="activity.estimatedStart | date:'dd-MM-yyyy'" (target)="activity.estimatedStart=$event"></td>
+    <td><button id="startDateCalendarButton" class="btn ">..</button></td>
+    <td>Fecha de terminación estimada:</td>
+    <td><input id="endDateCalendar" type="text" class="text-box" style="width:100px" [ngModel]="activity.estimatedEnd | date:'dd-MM-yyyy'" (target)="activity.estimatedEnd=$event"></td>
+    <td><button id="endDateCalendarButton" class="btn ">..</button></td>
+    <td><a class="right-position">73 días</a></td>
+    <!--
+  <tr>
+    <td class="text-align-left ">Fecha y hora del evento:</td>
+    <td><input type="text " id="eventDateCalendar " class="text-box " style="width:100px "></td>
+    <td><button class="btn " id="eventDateCalendarButton ">..</button></td>
+
+  </tr>
+  -->
+</table>
+<table class="form">
+  <tr>
+    <td>Solicitado por:</td>
+    <td><select class="select-box" style="width:380px" [(ngModel)]="activity.requestedByUID">
+                <option value="">( Seleccionar )</option>
+                 <option *ngFor="let requester of requestersList" [value]="requester.uid">{{requester.name}}</option>                  
+                </select>
+
+    </td>
+    <td>El día:</td>
+    <td><input type="text" id="requestedDateCalendar" class="text-box" style="width:100px" [ngModel]="activity.requestedTime | date: 'dd-MM-yyyy'" (target)="activity.requestedTime=$value"></td>
+    <td><button class="btn right-position" id="requestedDateButton">..</button></td>
+  </tr>
+  <tr>
+    <td>Responsable:</td>
+    <td><select class="select-box" style="width:380px" [(ngModel)]="activity.responsibleUID">
+                <option value="">( Seleccionar )</option>
+                <option *ngFor="let responsible of responsiblesList" 
+                        [value]="responsible.uid">{{responsible.name}}</option>            
+                </select>
+    </td>
+  </tr>
+</table>
+<table class="form">
+  <tr>
+    <td>¿Marcar esta actividad como un hito?</td>
+    <td><select class="select-box" style="width:100px " [(ngModel)]="activity.isMilestone ">
+                <option value="">( Seleccionar )</option>
+                <option value="true">Si</option>            
+                <option value="false">No</option>                
+                </select>
+    </td>
+  </tr>
+  <tr>
+    <td>¿Administrar esta actidad como un <br> proyecto separado?</td>
+    <td><select class="select-box " style="width:100px " [(ngModel)]="activity.createSubproject ">
+                <option value="">( Seleccionar )</option>
+                <option value="true">Si</option>            
+                <option value="false">No</option>                
+                </select></td>
+  </tr>
+</table>

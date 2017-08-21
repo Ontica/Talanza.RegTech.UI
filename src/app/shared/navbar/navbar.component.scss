@@ -20,7 +20,7 @@
 }
 
 .nav-bar a, a:visited {
-  color: $secondary-text-color;
+  color: white;
   display: block;
   text-decoration: none;
 }
@@ -30,10 +30,10 @@
 }
 
 .selected a {
-  color: $selected-item-text-color;
+  color: white;
   text-decoration: none;
 }
 
 .first-li {
-  margin-left: 48px;
+  margin-left: 52px;
 }
