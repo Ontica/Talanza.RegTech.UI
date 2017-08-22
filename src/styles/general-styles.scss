@@ -6,6 +6,15 @@ table {
   margin-left: 1em;
 }
 
+table td {
+  white-space: normal;
+  padding: 4pt;
+}
+
+table td:last-child {
+  width: 100%;
+}
+
 button.btn {
   background-color: $button-background-color;
   color: $text-color;
@@ -132,13 +141,4 @@ select:disabled {
 
 button:disabled {
   @include disabled-element();
-}
-
-table td {
-  white-space: normal;
-  padding: 4pt;
-}
-
-table td:last-child {
-  width: 100%;
 }

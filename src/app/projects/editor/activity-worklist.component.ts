@@ -12,7 +12,7 @@ import { ProcessModel } from '../data-types/project';
 @Component({
   selector:'activity-worklist',
   template:`
-        <table class="grid">
+      <table class="grid">
         <thead>
           <tr>
             <th style="width:5%">#</th>

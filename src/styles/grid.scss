@@ -24,6 +24,10 @@ table.grid thead th {
   padding: 4pt;
 }
 
+table.grid tbody {
+  display: block;
+}
+
 table.grid tbody tr {
   height: 80px;
 }
@@ -35,10 +39,6 @@ table.grid tbody td {
 table.grid tbody {
   overflow-y: auto;
   overflow-x: hidden;
-}
-
-table.grid th, table.grid td, table.grid tr, table.grid thead, table.grid tbody {
-  display: block;
 }
 
 table.grid td, table.grid th {

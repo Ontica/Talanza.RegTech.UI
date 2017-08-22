@@ -11,16 +11,30 @@
             <option value="">( Plazo máximo de entrega )</option>
             <option value="No determinado">No determinado</option>
             <option value="No aplica">No aplica</option>
-            <option value="En cualquier momento">En cualquier momento</option>       
+            <option value="No determinado">No determinado</option>
+            <option value="No aplica">No aplica</option>
+            <option value="En cualquier momento">En cualquier momento</option>
+            <option value="6 horas">6 horas</option>
+            <option value="5 días naturales">5 días naturales</option>
             <option value="7 días hábiles">7 días hábiles</option>
+            <option value="10 días naturales">10 días naturales</option>
             <option value="10 días hábiles">10 días hábiles</option>
             <option value="15 días hábiles">15 días hábiles</option>
+            <option value="15 días naturales">15 días naturales</option>
+            <option value="17 días naturales">17 días naturales</option>
             <option value="20 días hábiles">20 días hábiles</option>
             <option value="30 días hábiles">30 días hábiles</option>
+            <option value="35 días hábiles">35 días hábiles</option>
             <option value="45 días hábiles">45 días hábiles</option>
+            <option value="45 días naturales">45 días naturales</option>
             <option value="60 días hábiles">60 días hábiles</option>
             <option value="90 días hábiles">90 días hábiles</option>
             <option value="100 días hábiles">100 días hábiles</option>
+            <option value="180 días naturales">180 días naturales</option>
+            <option value="270 días hábiles">270 días hábiles</option>
+            <option value="360 días naturales">360 días naturales</option>
+            <option value="5 meses">5 meses</option>
+            <option value="Primera semana de julio">Primera semana de julio</option>
           </select> &nbsp; &nbsp;
           <select style="width:200px;" [disabled]="disabled" class="select-box" [(ngModel)]="procedure.filingCondition.startsWhen">
             <option value="">( Condición de inicio )</option>
@@ -37,14 +51,25 @@
       </tr>
       <tr>
         <td>Actividad o evento:</td>
-        <td><select class="select-box" style="width:100%" [disabled]="disabled" [(ngModel)]="procedure.filingCondition.startsWhenTrigger">
-          <option value="">( Seleccionar el evento o actividad que inicia el trámite)</option>
-          <option value="No determinado">No determinado</option>
-          <option value="No aplica">No aplica</option>
-          <option value="Ampliación de almacenamiento de residuos peligrosos">Ampliación de almacenamiento de residuos peligrosos</option>
-          <option value="Certificación de reservas">Certificación de reservas</option>
-          <option value="Disposición final de residuos peligrosos">Disposición final de residuos peligrosos</option>
-          <option value="Perforación de pozos">Perforación de pozos</option>
+        <td>
+          <select class="select-box" style="width:100%" [disabled]="disabled" [(ngModel)]="procedure.filingCondition.startsWhenTrigger">
+            <option value="">( Seleccionar el evento o actividad que inicia el trámite )</option>
+            <option value="No determinado">No determinado</option>
+            <option value="No aplica">No aplica</option>
+            <option value="A partir de la fecha de la firma del contrato">A partir de la fecha de la firma del contrato</option>
+            <option value="Al presentarse un siniestro o contingencia">Al presentarse un siniestro o contingencia</option>
+            <option value="Actividades de Reconocimiento y Exploración Superficial (ARES)">Actividades de Reconocimiento y Exploración Superficial (ARES)</option>
+            <option value="Ampliar el almacenamiento de residuos peligrosos">Ampliar el almacenamiento de residuos peligrosos</option>
+            <option value="Aprobar el Plan de Exploración">Aprobar el Plan de Exploración</option>
+            <option value="Cada mes">Cada mes</option>
+            <option value="Certificación de reservas">Certificación de reservas</option>
+            <option value="Comercializar los datos">Comercializar los datos</option>
+            <option value="Cualquier actividad del Sector Hidrocarburos">Cualquier actividad del Sector Hidrocarburos</option>
+            <option value="Disposición final de residuos peligrosos">Disposición final de residuos peligrosos</option>
+            <option value="Ingresar al Padrón para realizar ARES">Ingresar al Padrón para realizar ARES</option>
+            <option value="Modificar o terminar contratos con terceros">Modificar o terminar contratos con terceros</option>
+            <option value="Perforación de pozos">Perforación de pozos</option>
+            <option value="Reportar cumplimiento de obligaciones bursátiles">Reportar cumplimiento de obligaciones bursátiles</option>
           </select>
         </td>
       </tr>
@@ -61,15 +86,30 @@
           <option value="">( Plazo legal )</option>
           <option value="No determinado">No determinado</option>
           <option value="No aplica">No aplica</option>
+          <option value="No determinado">No determinado</option>
+          <option value="No aplica">No aplica</option>
+          <option value="En cualquier momento">En cualquier momento</option>
+          <option value="6 horas">6 horas</option>
+          <option value="5 días naturales">5 días naturales</option>
           <option value="7 días hábiles">7 días hábiles</option>
+          <option value="10 días naturales">10 días naturales</option>
           <option value="10 días hábiles">10 días hábiles</option>
           <option value="15 días hábiles">15 días hábiles</option>
-          <option value="20 días hábiles">20 días hábiles</option>          
+          <option value="15 días naturales">15 días naturales</option>
+          <option value="17 días naturales">17 días naturales</option>
+          <option value="20 días hábiles">20 días hábiles</option>
           <option value="30 días hábiles">30 días hábiles</option>
+          <option value="35 días hábiles">35 días hábiles</option>
           <option value="45 días hábiles">45 días hábiles</option>
+          <option value="45 días naturales">45 días naturales</option>
           <option value="60 días hábiles">60 días hábiles</option>
           <option value="90 días hábiles">90 días hábiles</option>
           <option value="100 días hábiles">100 días hábiles</option>
+          <option value="180 días naturales">180 días naturales</option>
+          <option value="270 días hábiles">270 días hábiles</option>
+          <option value="360 días naturales">360 días naturales</option>
+          <option value="5 meses">5 meses</option>
+          <option value="Primera semana de julio">Primera semana de julio</option>
           </select>
         </td>
         <td class='align-right'>Forma de entrega:</td>
@@ -77,8 +117,12 @@
            <option value="">( Forma de entrega )</option>
             <option value="No determinada">No determinada</option>
             <option value="Presencial">Presencial</option>
+            <option value="Presencial vía oficialía de partes">Presencial vía oficialía de partes</option>
+            <option value="Presencial vía oficialía de partes y correo electrónico">Presencial vía oficialía de partes y correo electrónico</option>
             <option value="Vía oficialía de partes">Vía oficialía de partes</option>
             <option value="Vía correo electrónico">Vía correo electrónico</option>
+            <option value="Sistema electrónico">Sistema electrónico</option>
+            <option value="Página web">Página web</option>
           </select>
         </td>
       </tr>
@@ -110,9 +154,9 @@
                 <select [disabled]="disabled " style="width:240px; " class="select-box " [(ngModel)]="procedure.filingCondition.allowsDeferrals ">
                   <option value=" ">( ¿Permite prórrogas? )</option>
                   <option value="No determinado ">No determinado</option>
-                  <option value="Sí ">Sí</option>
-                  <option value="No ">No</option>
-                  <option value="Vía ampliación del término o plazo ">Vía ampliación del término o plazo</option>            
+                  <option value="Sí">Sí</option>
+                  <option value="No">No</option>
+                  <option value="Vía ampliación del término o plazo ">Vía ampliación del término o plazo</option>
                 </select>
               </td>
             </tr>
