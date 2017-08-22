@@ -20,7 +20,7 @@ import { ProcessModel } from '../data-types/project';
       <tr>
         <table>
           <tr>
-            <td *ngFor="let link of processModel.links"><a (click)="openPage(link.url)">{{link.name}}</a></td>
+            <td *ngFor="let link of processModel.links"><a (click)="openTabBrowser(link.url)">{{link.name}}</a></td>
           </tr>
         </table>
       </tr>
@@ -34,6 +34,7 @@ import { ProcessModel } from '../data-types/project';
 export class ActivityDescriptionComponent {
   @Input() public processModel: ProcessModel;
 
-  public openPage(url:string): void {    
+  public openTabBrowser(url:string): void {
+    window.open(url, '_blank', 'location=yes,height=570,width=520,scrollbars=yes,status=yes');
   }
 }
