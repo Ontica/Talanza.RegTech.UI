@@ -46,6 +46,7 @@
   </tr>
 
 </table>
+
 <table class="grid">
   <thead>
     <tr>
@@ -63,7 +64,7 @@
     <tr>
       <td style="width:5%">T089</td>
       <td style="width:10%">5/May/17</td>
-      <td style="width:20%">Plan de Evaluación</td>
+      <td style="width:20%"><a (click)="onShowTaskEditor()">Plan de Evaluación</a></td>
       <td style="width:25%">Dentro de ciento veinte (120) Días siguientes <br> el contratista deberá entregar a la CNH para </td>
       <td style="width:10%">Trámite CNH</td>
       <td style="width:10%">Objetivo: 05/Jun/17 <br> Legal: 15/Ago/17 </td>
@@ -100,4 +101,7 @@
       <td class="text-align-right">Página 1 de 1</td>
     </tr>
   </table>
+</div>
+<div *ngIf="isTaskEditorVisible" class="popup">
+  <task-editor (onCloseEvent)="onCloseTaskEditorWindow()"></task-editor>
 </div>

@@ -15,15 +15,18 @@ import { Component }  from '@angular/core';
 
 export class WorklistsMainPageComponent {
   
-  public isAddActivityEditorWindowVisible = false;
+  public isTaskEditorVisible = false;
 
-  public onCloseAddActivityEditorWindow(): void {    
-    this.isAddActivityEditorWindowVisible = false;
+  public onCloseTaskEditorWindow(): void {    
+    this.isTaskEditorVisible = false;
   }
 
   public onClickAddActivity():void {
     alert("Esta operación se encuentra en desarrollo...");
     
   }
+  public onShowTaskEditor(): void {
+    this.isTaskEditorVisible = true;
+  } 
 
 }
