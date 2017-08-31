@@ -1,0 +1,8 @@
+<div class="maincontainer">
+  <div class="left-panel" *ngIf="!isHideLeftPanel" [ngStyle]="{'width' : +leftPanelWidth + '%'}">
+    <button type="button" (click)="hideLeftPanel()">ocultar</button>
+  </div>
+  <div class="center-panel" [ngStyle]="{'width' : + screenSize + '%'}">
+    <kanban></kanban>
+  </div>
+</div>

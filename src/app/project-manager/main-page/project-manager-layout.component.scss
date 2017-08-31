@@ -1,0 +1,74 @@
+/*
+
+div#tree_here {
+  position: relative;
+  border: 1px solid #dfdfdf;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.09);
+  width: 300px;
+  height: 280px;
+  margin-left: 20px;
+  margin-bottom: 20px;
+}
+*/
+
+div {
+  float: left;
+  margin: 0px;
+  padding: 0;
+  outline: none;
+  vertical-align: top;
+}
+
+$height:calc(100vh - 130px);
+.maincontainer {
+  width: 100%;
+  height: $height;
+  background-color: #204060;
+}
+
+.left-navigation-bar {
+  display: inline-block;
+  height: $height;
+  width: 30px;
+}
+
+.left-panel {
+  border: 2px solid #9b1b1f;
+  background-color: #f8f8f8;
+  cursor: pointer;
+  display: inline-block;
+  height: $height;
+  //max-width: 80%;
+}
+
+.left-resize {
+  border: 2px solid #9b1b1f;
+  //background-color: #f8f8f8;
+  cursor: w-resize;
+  display: inline-block;
+  height: $height;
+  width: 5px;
+}
+
+.center-panel {
+  border: 2px solid #9b1b1f;
+  background-color: #f8f8f8;
+  display: inline-block;
+  height: $height;
+  //min-width: 16%;
+  //max-width: 90%;
+}
+
+.zoom {
+  zoom: 0.5;
+  -moz-transform: scale(0.5);
+  -moz-transform-origin: 0 0;
+  -o-transform: scale(0.5);
+  -o-transform-origin: 0 0;
+  -webkit-transform: scale(0.5);
+  -webkit-transform-origin: 0 0;
+  transform: scale(0.5);
+  /* Standard Property */
+  transform-origin: 0 0;
+  /* Standard Property */
+}
