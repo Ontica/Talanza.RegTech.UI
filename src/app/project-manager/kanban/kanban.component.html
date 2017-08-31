@@ -1,0 +1,70 @@
+<!--<div class="container">
+  <div class="tasks-column">
+    <div class="task"></div>
+    <div class="task"></div>
+    <div class="task"></div>
+    <div class="task"></div>
+    <div class="task"></div>
+    <div class="task"></div>
+  </div>
+  <div class="tasks-column"></div>
+  <div class="tasks-column"></div>
+  <div class="tasks-column"></div>
+  <div class="tasks-column"></div>
+</div>-->
+<!--
+<table class="grid">
+  <thead>
+    <tr>
+      <th>Planeadas</th>
+      <th>Siguientes</th>
+      <th>En pronceso</th>
+      <th>Terminadas</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <div class="task"></div>
+      </td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+
+  </tbody>
+</table>-->
+<div class="table-div">
+
+  <table class="Table">
+    <thead>
+      <tr>
+        <th>Planeadas</th>
+        <th>Siguientes</th>
+        <th>En proceso</th>
+        <th>Terminados</th>
+        <th>Por recibir</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td (drop)="drop($event)" (dragover)="allowDrop($event)">
+          <div id="move-div" class="task" draggable="true" (dragstart)="drag($event)"></div>
+          <div id="move-div1" class="task" draggable="true" (dragstart)="drag($event)"></div>
+          <div id="move-div2" class="task" draggable="true" (dragstart)="drag($event)"></div>
+          <div id="move-div3" class="task" draggable="true" (dragstart)="drag($event)"></div>
+          <div id="move-div4" class="task" draggable="true" (dragstart)="drag($event)"></div>
+          <div id="move-div5" class="task" draggable="true" (dragstart)="drag($event)"></div>
+          <div id="move-div6" class="task" draggable="true" (dragstart)="drag($event)"></div>
+        </td>
+        <td>
+          <div (drop)="drop($event)" (dragover)="allowDrop($event)" style="height:400px"></div>
+        </td>
+        <td (drop)="drop($event)" (dragover)="allowDrop($event)">Row 1</td>
+        <td></td>
+        <td></td>
+      </tr>
+
+    </tbody>
+  </table>
+</div>
