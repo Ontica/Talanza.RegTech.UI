@@ -17,13 +17,15 @@ import { ProjectManagerRoutingModule } from './project-manager-routing.module';
 import { KanbanComponent } from './kanban/kanban.component';
 import { KanbanTaskBoxComponent } from './kanban/kanban-task-box.component';
 
+import { TreeViewProjectsComponent } from './editor/tree-view-projects.component';
 /**
  * Do not specify providers for modules that might be imported by a lazy loaded module.
  */
 
 @NgModule({
   imports: [ProjectManagerRoutingModule, SharedModule, CommonModule, FormsModule],
-  declarations: [ProjectManagerLayoutComponent, KanbanComponent, KanbanTaskBoxComponent],
+  declarations: [ProjectManagerLayoutComponent, KanbanComponent, KanbanTaskBoxComponent,
+                TreeViewProjectsComponent],
   exports: [ProjectManagerLayoutComponent]
 })
 export class ProjectManagerModule { }
