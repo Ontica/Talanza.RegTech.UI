@@ -47,8 +47,9 @@ td {
 }
 
 .Table tbody {
-  max-height: 500px;
+  //  max-height: 500px;
   overflow-x: hidden;
+  overflow-y: scroll;
 }
 
 .Table tr {

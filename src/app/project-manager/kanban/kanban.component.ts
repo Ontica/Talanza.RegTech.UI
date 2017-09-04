@@ -1,4 +1,4 @@
-import  { Component, ElementRef, OnInit } from '@angular/core';
+import  { Component, ElementRef, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'kanban',
@@ -8,26 +8,49 @@ import  { Component, ElementRef, OnInit } from '@angular/core';
 
 export class KanbanComponent implements OnInit {
 
-constructor (private elementRef: ElementRef ){}
+    private _height: number = 0;
+    @Input() 
+    set height(height: number) {
+        this._height = height - 27;
 
-ngOnInit(){
- 
-}
+    }
+    get height(): number {
+        //alert("que llegó: " + this.height);
+        return this._height;
+    }
+    
+    constructor (private elementRef: ElementRef ){
 
-public allowDrop(ev: any): void {
-    ev.preventDefault();
-}
+    }
 
-public  drag(ev:any): void {
-  console.log("ev" , ev);
-    ev.dataTransfer.setData("text", ev.target.id);
-}
+    ngOnInit() {
+       // this.
+       
 
-public drop(ev:any): void {
-    ev.preventDefault();
-    var data = ev.dataTransfer.getData("text");
-    console.log("el valor de data " , data);
-    ev.target.appendChild(document.getElementById(data));
-}
+    }   
+
+    public allowDrop(ev: any): void {
+        ev.preventDefault();
+    }
+
+    public  drag(ev:any): void { 
+    console.log("ev" , ev);
+        ev.dataTransfer.setData("text", ev.target.id);
+    }
+
+    public drop(ev:any): void {
+        ev.preventDefault();
+        var data = ev.dataTransfer.getData("text");
+        console.log("el valor de data " , data);
+        ev.target.appendChild(document.getElementById(data));
+    }
+/*
+    public setTableHeight(): string {
+        switch(this.kanbanSizeClass) {
+            case 'full': return 'full-height';
+            case 'middle': return 'middle-height';
+            default: return 'full-height';
+        }
+    }*/
 
 }

@@ -1,5 +1,8 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 
+declare var dhtmlXTreeView: any;
+declare var myTreeView: any;
+
 @Component({
   selector:'project-manager',
  
@@ -10,26 +13,28 @@ import { Component, HostListener, OnInit } from '@angular/core';
 
 export class ProjectManagerLayoutComponent implements OnInit {
 
+  public screenSize = 0;
+  public navigationBarHeight = 38;
+  public isMapVisible = false; 
+  public height: number = 0;  
+
+  private mainHeaderBarHeight = 120;
   
-  public leftPanelWidth = 20;
-  public screenSize = 80;
-  public isHideLeftPanel = false;
-  
-  ngOnInit() {
-   
+  constructor() {
+    this.screenSize = window.innerHeight - this.mainHeaderBarHeight;
   }
 
+  ngOnInit() {  
+    this.height = this.screenSize - this.navigationBarHeight;              
+  }
 
-  public hideLeftPanel(): void {  
-    
-    this.isHideLeftPanel = !this.isHideLeftPanel;  
-    if (this.isHideLeftPanel) {
-      this.screenSize = 100;
-    }  else {
-     this.screenSize = 80;
+  public displayMap(): void {
+    this.isMapVisible = !this.isMapVisible;
+    if (!this.isMapVisible) {
+      this.height =  (this.screenSize -  this.navigationBarHeight);     
+    } else {
+      this.height = (this.screenSize -  this.navigationBarHeight) / 2;      
     }
-    
-  }
-
+  }  
 
 }

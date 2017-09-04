@@ -1,16 +1,4 @@
-/*
-
-div#tree_here {
-  position: relative;
-  border: 1px solid #dfdfdf;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.09);
-  width: 300px;
-  height: 280px;
-  margin-left: 20px;
-  margin-bottom: 20px;
-}
-*/
-
+@import "../../../styles/form";
 div {
   float: left;
   margin: 0px;
@@ -19,16 +7,13 @@ div {
   vertical-align: top;
 }
 
-$height:calc(100vh - 130px);
 .maincontainer {
   width: 100%;
-  height: $height;
   background-color: #204060;
 }
 
 .left-navigation-bar {
   display: inline-block;
-  height: $height;
   width: 30px;
 }
 
@@ -37,16 +22,13 @@ $height:calc(100vh - 130px);
   background-color: #f8f8f8;
   cursor: pointer;
   display: inline-block;
-  height: $height;
-  //max-width: 80%;
+  width: 20%;
 }
 
 .left-resize {
   border: 2px solid #9b1b1f;
-  //background-color: #f8f8f8;
   cursor: w-resize;
   display: inline-block;
-  height: $height;
   width: 5px;
 }
 
@@ -54,21 +36,19 @@ $height:calc(100vh - 130px);
   border: 2px solid #9b1b1f;
   background-color: #f8f8f8;
   display: inline-block;
-  height: $height;
-  //min-width: 16%;
-  //max-width: 90%;
+  width: 80%;
 }
 
-.zoom {
-  zoom: 0.5;
-  -moz-transform: scale(0.5);
-  -moz-transform-origin: 0 0;
-  -o-transform: scale(0.5);
-  -o-transform-origin: 0 0;
-  -webkit-transform: scale(0.5);
-  -webkit-transform-origin: 0 0;
-  transform: scale(0.5);
-  /* Standard Property */
-  transform-origin: 0 0;
-  /* Standard Property */
+.map-component {
+  width: 100%;
+  border: 1px solid blue;
+  background-color: silver;
+}
+
+.header {
+  width: 100%;
+}
+
+table {
+  width: 98%;
 }
