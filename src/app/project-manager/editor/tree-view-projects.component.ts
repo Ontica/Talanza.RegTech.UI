@@ -41,7 +41,7 @@ export class TreeViewProjectsComponent implements OnInit {
   ];
 
   ngOnInit() {
-    myTreeView = new dhtmlXTreeView({
+   var myTreeView = new dhtmlXTreeView({
       parent: "tree_here",
       items: this.jsonExample,
     });
