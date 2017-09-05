@@ -10,8 +10,10 @@ declare var myTreeView: any;
     position: relative;
     border: 1px solid #dfdfdf;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.09);
-    width: 220px;
-    height: 280px;
+    min-width: 40%;
+    width: 100%;
+    height: 270px;
+    min-height: 100px;
     margin-left: 20px;
     margin-bottom: 20px;
   }`]
@@ -41,10 +43,11 @@ export class TreeViewProjectsComponent implements OnInit {
   ];
 
   ngOnInit() {
-   var myTreeView = new dhtmlXTreeView({
+  
+   let myTreeView = new dhtmlXTreeView({
       parent: "tree_here",
       items: this.jsonExample,
-    });
+    });   
    
   }
 

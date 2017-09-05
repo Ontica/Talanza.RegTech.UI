@@ -9,8 +9,10 @@ declare var dhtmlXTreeView: any;
     position: relative;
     border: 1px solid #dfdfdf;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.09);
-    width: 280px;
-    height: 180px;
+    min-width: 40%;
+    width: 100%;
+    height: 170px;
+    min-height: 100px;
     margin-left: 20px;
     margin-bottom: 20px;
   }`]
