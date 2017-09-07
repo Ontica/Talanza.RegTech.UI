@@ -1,4 +1,12 @@
-import { Component, OnInit  } from '@angular/core';
+/**
+ * @license
+ * Copyright (c) 2017 La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
+ *
+ * See LICENSE.txt in the project root for complete license information.
+ *
+ */
+
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 declare var dhtmlXTreeView: any;
 declare var myTreeView: any;
@@ -42,14 +50,54 @@ export class TreeViewProjectsComponent implements OnInit {
     
   ];
 
+  @Output() selectetId: EventEmitter<number> = new EventEmitter<number>();
+  @Output() selectedPath: EventEmitter<string> = new EventEmitter<string>();
+
+  private path = '';
+  private treeView: any; 
+  private separator = '>>';
+
   ngOnInit() {
-  
-   let myTreeView = new dhtmlXTreeView({
+    
+    let myTreeView = new dhtmlXTreeView({
       parent: "tree_here",
       items: this.jsonExample,
-    });   
+    }); 
+
+    this.treeView = myTreeView;
+
+     myTreeView.attachEvent("onClick", (id) => {
+       this.setSelectedId(id);
+       this.setSelectedPath(id);
+       return true;
+  });
+  
+  }
+
+  public setSelectedId(id): void {    
+    this.selectetId.emit(id);
+  }
+
+  public setSelectedPath(id:number): void {
+    this.path = "";
+    this.setPath(id);
+    this.reverse();
+    this.selectedPath.emit(this.path);
+  }
+
+  private setPath(id: number): void {      
+   if (this.treeView.getLevel(id) !== 1) {
+     this.path += this.treeView.getItemText(id) + this.separator;
+     id =  this.treeView.getParentId(id);
+     this.setPath(id);
+    } else {
+      this.path += this.treeView.getItemText(id);
+    }
    
   }
 
-
+  private reverse() {
+   this.path = this.path.split(this.separator).reverse().join(this.separator);    
+  }
+ 
 }
