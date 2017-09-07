@@ -1,0 +1,109 @@
+<div class="container" [ngStyle]="{'height': + height +'px'}">
+  <div class="editor-container editor-container-style">
+    <div class="tab">
+      <button class="tab-links left-position" [disabled]="isDisabled" [class.selected]="selectedTask==='planned'" (click)="setSelectedTask('planned')">Planeadas</button>
+      <button class="tab-links left-position" [disabled]="isDisabled" [class.selected]="selectedTask==='next'" (click)="setSelectedTask('next')">Siguientes</button>
+      <button class="tab-links left-position" [disabled]="isDisabled" [class.selected]="selectedTask==='inProcess'" (click)="setSelectedTask('inProcess')">En proceso</button>
+      <button class="tab-links left-position" [disabled]="isDisabled" [class.selected]="selectedTask==='finished'" (click)="setSelectedTask('finished')">Terminados</button>
+      <button class="tab-links left-position" [disabled]="isDisabled" [class.selected]="selectedTask==='toRecive'" (click)="setSelectedTask('toRecive')">Por recibir</button>
+      <button class="tab-links left-position" [disabled]="isDisabled" [class.selected]="selectedTask==='allTasks'" (click)="setSelectedTask('alTasks')">Todas las tareas</button>
+    </div>
+  </div>
+  <table class="grid">
+    <thead>
+      <tr>
+        <th style="width:3%">#</th>
+        <th style="width:41%">Actividad</th>
+        <th style="width:20%">Responsable <br>Estado</th>
+        <th style="width:19%">Fecha de entrega</th>
+        <th style="width:17%">Opciones</th>
+
+      </tr>
+    </thead>
+    <tbody [ngStyle]="{'height': + tableBodyHeight +'px'}">
+      <tr>
+        <td style="width:3%">2</td>
+        <td style="width:42%">Permiso de perforación de pozo</td>
+        <td style="width:20%">Leticia G.<br>En proceso</td>
+        <td style="width:20%">Objetivo: 16/Sep/17 <br> Legal: 19/Sep/17</td>
+        <td style="width:15%"><a (click)="displayOptionsList()">Opciones</a>
+          <div class="wrapper" *ngIf="isOptionListVisible">
+            <div class="option-list">
+              <ul>
+                <li><b>Mover a:</b></li>
+                <li> <a>Terminados</a></li>
+                <li> <a>Siguientes</a></li>
+              </ul>
+              <hr>
+              <ul>
+                <li><a>Reasingar</a></li>
+                <li><a>Cambiar título</a></li>
+                <li><a>Agregar subtarea</a></li>
+              </ul>
+              <hr>
+              <ul>
+                <li><a>Cambiar fecha</a></li>
+                <li><a>Editar tarea</a></li>
+                <li><a>Eliminar tarea</a></li>
+              </ul>
+              <hr>
+              <ul>
+                <li><a>Ubicar en mapa</a></li>
+              </ul>
+            </div>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td style="width:3%">2.1</td>
+        <td style="width:42%"><a>Elaborar escrito técnico</a></td>
+        <td style="width:20%"></td>
+        <td style="width:20%"></td>
+        <td style="width:15%">Opciones</td>
+
+      </tr>
+      <tr>
+        <td style="width:3%">2.2</td>
+        <td style="width:42%"><a>Reunir la inforamción requerida</a></td>
+        <td style="width:20%"></td>
+        <td style="width:20%"></td>
+        <td style="width:15%">Opciones</td>
+      </tr>
+      <tr>
+        <td style="width:3%">2.3</td>
+        <td style="width:42%"><a>Enviar solicitud de persmisos al ASEA</a></td>
+        <td style="width:20%"></td>
+        <td style="width:20%"></td>
+        <td style="width:15%">Opciones</td>
+      </tr>
+      <tr>
+        <td style="width:3%">4</td>
+        <td style="width:42%">Reporte de estado del proyecto</td>
+        <td style="width:20%">Maria A.<br>En proceso</td>
+        <td style="width:20%">Objetivo: 16/Sep/17 <br> Legal: 19/Sep/17</td>
+        <td style="width:15%"><a>Opciones</a></td>
+      </tr>
+      <tr>
+        <td style="width:3%">4.1</td>
+        <td style="width:42%"><a>Redactar reporte</a></td>
+        <td style="width:20%"></td>
+        <td style="width:20%"></td>
+        <td style="width:15%">Opciones</td>
+      </tr>
+      <tr>
+        <td style="width:3%">4.2</td>
+        <td style="width:42%"><a>Entregar reporte en CNH</a></td>
+        <td style="width:20%"></td>
+        <td style="width:20%"></td>
+        <td style="width:15%">Opciones</td>
+      </tr>
+      <tr>
+        <td style="width:3%">5</td>
+        <td style="width:42%">Diseño de pozo</td>
+        <td style="width:20%">Mónica C<br>En proceso</td>
+        <td style="width:20%">Objetivo: 26/Sep/17 <br> Legal: 29/Sep/17</td>
+        <td style="width:15%">Opciones</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

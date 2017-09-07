@@ -1,0 +1,59 @@
+@import "../../../styles/form";
+div {
+  float: left;
+  margin: 0px;
+  padding: 0;
+  outline: none;
+  vertical-align: top;
+}
+
+.main-container {
+  width: 100%;
+  background-color: #204060;
+  min-height: 30%;
+}
+
+.left-navigation-bar {
+  display: inline-block;
+  width: 30px;
+}
+
+.left-panel {
+  border: 2px solid #9b1b1f;
+  background-color: #f8f8f8;
+  cursor: pointer;
+  display: inline-block;
+  width: 20%;
+}
+
+.left-resize {
+  border: 2px solid #9b1b1f;
+  cursor: w-resize;
+  display: inline-block;
+  width: 5px;
+}
+
+.center-panel {
+  border: 2px solid #9b1b1f;
+  background-color: #f8f8f8;
+  display: inline-block;
+  width: 80%;
+}
+
+.map-component {
+  width: 100%;
+  border: 1px solid blue;
+  background-color: silver;
+}
+
+.header {
+  width: 100%;
+}
+
+table {
+  width: 98%;
+}
+
+.tree-views-container {
+  width: 80%;
+}
