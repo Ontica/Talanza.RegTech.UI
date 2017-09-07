@@ -14,8 +14,7 @@ export class KanbanComponent implements OnInit {
         this._height = height - 27;
 
     }
-    get height(): number {
-        //alert("que llegó: " + this.height);
+    get height(): number {        
         return this._height;
     }
     

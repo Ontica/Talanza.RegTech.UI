@@ -7,9 +7,10 @@ div {
   vertical-align: top;
 }
 
-.maincontainer {
+.main-container {
   width: 100%;
   background-color: #204060;
+  min-height: 30%;
 }
 
 .left-navigation-bar {
@@ -51,4 +52,8 @@ div {
 
 table {
   width: 98%;
+}
+
+.tree-views-container {
+  width: 80%;
 }
