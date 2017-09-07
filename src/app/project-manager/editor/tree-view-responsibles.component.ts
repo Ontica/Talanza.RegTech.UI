@@ -1,4 +1,12 @@
-import { Component, OnInit  } from '@angular/core';
+/**
+ * @license
+ * Copyright (c) 2017 La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
+ *
+ * See LICENSE.txt in the project root for complete license information.
+ *
+ */
+
+import { Component, EventEmitter, OnInit, Output  } from '@angular/core';
 
 declare var dhtmlXTreeView: any;
 
@@ -19,46 +27,72 @@ declare var dhtmlXTreeView: any;
 
 })
 export class TreeViewResponsiblesComponent implements OnInit {
- 
+  private responsiblesList= [
+    {
+      id: 1,
+      text: "Sierra",
+      open: 1,
+      items: [{
+        id: 3,
+        text: "Juan R."
+      }, {
+        id: 4,
+        text: "Leticia G."
+      }, {
+        id: 5,
+        text: "Hugo H."
+      }],
+
+    }, {
+      id: 2,
+      text: "Talos",
+      open: 0,
+      items: [{
+        id: 7,
+        text: "Antonio E."
+      }, {
+        id: 8,
+        text: "María A."
+      }, {
+        id: 9,
+        text: "Mónica C."
+      }]
+    }
+  ];
+
+  @Output() onSelectetId: EventEmitter<number> = new EventEmitter<number>();
+  @Output() onSelectedItem: EventEmitter<string> = new EventEmitter<string>();
+
+  private path = '';
+  private treeView: any; 
+    
   ngOnInit() {  
     this.doOnLoad();
   }
 
   public doOnLoad() {
-  let  treeViewResposibles = new dhtmlXTreeView({
+       
+    let treeViewResposibles = new dhtmlXTreeView({
       parent: "tree_responsibles",
-      items: [{
-        id: 1,
-        text: "Sierra",
-        open: 1,
-        items: [{
-          id: 3,
-          text: "Juan R."
-        }, {
-          id: 4,
-          text: "Leticia G."
-        }, {
-          id: 5,
-          text: "Hugo H."
-        }],
-
-      }, {
-        id: 2,
-        text: "Talos",
-        open: 0,
-        items: [{
-          id: 7,
-          text: "Antonio E."
-        }, {
-          id: 8,
-          text: "María A."
-        }, {
-          id: 9,
-          text: "Mónica C."
-        }]
-      }],
+      items: this.responsiblesList,
     });
+
+    this.treeView = treeViewResposibles;
+
+    treeViewResposibles.attachEvent("onClick", (id) => {
+      this.setSelectedId(id);
+      this.setSelectedItem(id);
+      return true;
+    });
+
   }
 
+  public setSelectedId(id): void {   
+    this.onSelectetId.emit(id);
+  }
 
+  public setSelectedItem(id:number): void {     
+    this.onSelectedItem.emit(this.treeView.getItemText(id));
+  }  
+  
 }
