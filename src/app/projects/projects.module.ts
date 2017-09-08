@@ -43,6 +43,6 @@ import { ProjectsRoutingModule } from './projects-routing.module';
                  ActivityEditorComponent, ActivityGeneralInfoComponent,
                 ActivityNextStateComponent, ActivityCurrentStateComponent,
                  ActivityControlAndStateComponent,ActivityAssignTaskComponent],
-  exports: [ProjectsMainPageComponent]
+  exports: [ProjectsMainPageComponent, GanttComponent]
 })
 export class ProjectsModule { }
