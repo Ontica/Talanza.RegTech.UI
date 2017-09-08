@@ -66,6 +66,12 @@ select.select-box {
   height: $control-height;
 }
 
+select.select-warning {
+  @include input-settings;
+  height: $control-height;
+  background-color: $warning-color;
+}
+
 input.search-box {
   @include input-settings;
   /*background-image: url('../../../assets/icon/search-icon.png');
