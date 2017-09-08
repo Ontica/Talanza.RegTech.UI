@@ -19,11 +19,11 @@ export interface ProjectRef {
 
 export class GanttViewComponent {
   
- public ganttConfig = 'ganttWeeks';
  public selectedProject: ProjectRef = {
    uid: 'abc345klo',
    name: 'Sierra Cuenca Salina A4'
   }
+
   private _height: number = 0;
   @Input() 
   set height(height: number) {
@@ -32,5 +32,15 @@ export class GanttViewComponent {
   get height(): number {        
       return this._height;
   }
+
+  private _ganttConfig: string;
+  @Input() 
+  set ganttConfig(ganttConfig: string) {
+    this._ganttConfig = ganttConfig;
+  }
+  get ganttConfig(): string {
+    return this._ganttConfig;   
+  }
+
 
 }

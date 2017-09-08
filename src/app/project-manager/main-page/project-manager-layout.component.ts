@@ -20,6 +20,7 @@ export class ProjectManagerLayoutComponent implements OnInit {
 
   public projectPath = '';
   public selectedView = 'task-list-view';
+  public ganttConfig = 'ganttWeeks';
   private responsibleItem = '';
 
   private mainHeaderBarHeight = 120;
