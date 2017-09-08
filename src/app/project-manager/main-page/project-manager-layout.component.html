@@ -1,15 +1,15 @@
-<div class="maincontainer" [ngStyle]="{'height' : + screenSize +'px' }">
+<div class="main-container" [ngStyle]="{'height' : + screenSize +'px' }">
   <div class="left-panel" [ngStyle]="{'height' : + screenSize +'px' }">
     <div style="width:100%" [ngStyle]="{'height' : + navigationBarHeight +'px'}">
-      <select class="select-box">
-      <option>Vista: Tablero Kanban</option>
-      <option>Vista: Diagrama de Gantt</option>
-      <option>Vista: Lista de Tareas</option>
+      <select class="select-warning" #view (change)="onChangeView(view.value)" [(ngModel)]="selectedView">
+      <option value="kanban-view">Vista: Tablero Kanban</option>
+      <option value="gantt-view">Vista: Diagrama de Gantt</option>
+      <option value="task-list-view">Vista: Lista de Tareas</option>
     </select>
     </div>
-    <div>
-      <tree-view-projects></tree-view-projects>
-      <tree-view-responsibles></tree-view-responsibles>
+    <div class="tree-views-container">
+      <tree-view-projects (selectedPath)="setSelectedPath($event)"></tree-view-projects>
+      <tree-view-responsibles (onSelectedItem)="setResponsibleItem($event)"></tree-view-responsibles>
     </div>
   </div>
 
@@ -21,7 +21,7 @@
             <button style="width:100px" class="btn-warning">+Tarea</button>
           </td>
           <td>
-            <div style="width:600px">Filtrar por: >><a>CNH</a>><a>En proceso</a>><a>Pozo Alfa 33</a>><a>Letica G.</a></div>
+            <div style="width:600px">Filtrar por: <b>{{projectPath}} {{responsibleItem}}</b> </div>
           </td>
           <td class="text-align-right">Buscar</td>
           <td class="text-align-right"> <input type="text" class="text-box" value="buscar" style="width: 200px;"></td>
@@ -30,10 +30,12 @@
       </table>
     </div>
     <div class="map-component" *ngIf="isMapVisible" [ngStyle]="{'height' : + height + 'px'}">
-      <h1>cabecera</h1>
+
     </div>
-    <div class="map-component">
-      <kanban [height]="height"></kanban>
+    <div class="map-component" [ngSwitch]="selectedView">
+      <kanban [height]="height" *ngSwitchCase="'kanban-view'"></kanban>
+      <tasks-list-view [height]="height" *ngSwitchCase="'task-list-view'"></tasks-list-view>
+      <gantt-view [height]="height" *ngSwitchCase="'gantt-view'"></gantt-view>
     </div>
 
 

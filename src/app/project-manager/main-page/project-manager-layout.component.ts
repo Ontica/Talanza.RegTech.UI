@@ -18,6 +18,10 @@ export class ProjectManagerLayoutComponent implements OnInit {
   public isMapVisible = false; 
   public height: number = 0;  
 
+  public projectPath = '';
+  public selectedView = 'task-list-view';
+  private responsibleItem = '';
+
   private mainHeaderBarHeight = 120;
   
   constructor() {
@@ -36,5 +40,17 @@ export class ProjectManagerLayoutComponent implements OnInit {
       this.height = (this.screenSize -  this.navigationBarHeight) / 2;      
     }
   }  
+
+  public setSelectedPath(path: string): void {
+    this.projectPath = path;
+  }
+
+  public setResponsibleItem(selectedResponsible: string): void {
+    this.responsibleItem = '>>' + selectedResponsible;
+  }
+
+  public onChangeView(selectedView: string): void {
+    this.selectedView = selectedView;    
+  }
 
 }
