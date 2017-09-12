@@ -1,0 +1,9 @@
+<div class="main-container">
+  <div class="left-panel" *ngIf="isVisibleLeftPanel" [ngStyle]="{'width' : leftPanelWidth }">
+
+  </div>
+  <div class="left-resize" *ngIf="!isHideLeftPanel" (mousedown)='onResize($event)' [style.width.px]="leftResizeWidth"></div>
+  <div class="center-panel" [ngStyle]="{'width' : centerPanelWidth }">
+    <button type="button" (click)="onHideLeftPanel()">Ocultar el panel izquierdo</button>
+  </div>
+</div>
