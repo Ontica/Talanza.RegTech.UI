@@ -21,6 +21,7 @@ import { RelatedProceduresTabComponent } from './editor/tabs/related-procedures-
 import { ContractsRoutingModule } from './contracts-routing.module';
 
 import { ContractViewComponent } from './view/contract-view.component';
+import { ContractClauseSelectorComponent } from './view/contract-clause-selector.component';
 /**
  * Do not specify providers for modules that might be imported by a lazy loaded module.
  */
@@ -28,7 +29,8 @@ import { ContractViewComponent } from './view/contract-view.component';
 @NgModule({
   imports: [ContractsRoutingModule, SharedModule, CommonModule, FormsModule],
   declarations: [ContractsMainPageComponent, ContractEditorComponent,
-                 ClauseInfoTabComponent, RelatedProceduresTabComponent, ContractViewComponent],
+                 ClauseInfoTabComponent, RelatedProceduresTabComponent, ContractViewComponent,
+                 ContractClauseSelectorComponent],
   exports: [ContractsMainPageComponent]
 })
 export class ContractsModule { }

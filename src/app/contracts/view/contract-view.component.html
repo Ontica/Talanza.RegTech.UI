@@ -1,6 +1,6 @@
 <div class="main-container">
   <div class="left-panel" *ngIf="isVisibleLeftPanel" [ngStyle]="{'width' : leftPanelWidth }">
-
+    <contract-clause-selector (selectedClause)="onSelectedClause($event)"></contract-clause-selector>
   </div>
   <div class="left-resize" *ngIf="!isHideLeftPanel" (mousedown)='onResize($event)' [style.width.px]="leftResizeWidth"></div>
   <div class="center-panel" [ngStyle]="{'width' : centerPanelWidth }">
