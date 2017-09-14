@@ -9,7 +9,7 @@ div {
 
 .main-container {
   background-color: #204060;
-  height: 550px;
+  height: calc(100vh - 120px);
   min-height: 30%;
   width: 100%;
 }
