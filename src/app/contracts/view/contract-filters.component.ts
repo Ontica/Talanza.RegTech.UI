@@ -28,17 +28,14 @@ import { Contract, EmptyContract, ContractClause } from '../data-types/contract'
     <td>Buscar:</td>
     <td>
       <input style="width:364px;" type="search " class="text-box ">
+      <button class="btn"><i class="fa fa-search" aria-hidden="true"></i></button>
     </td>
     <td>
-      <button class="btn" style="width:55px;" (click)="search()">Buscar</button>
-    </td>
-    <td class="text-align-center">
-      <button  class="btn-warning"><i class="fa fa-search" aria-hidden="true"></i></button>
-    </td>
+      
+    </td>   
   </tr>
 </table>`,
-
-  styleUrls: [],
+  styleUrls: ['./contract-filters.component.scss'],
   providers: [ContractService]
 
 })
