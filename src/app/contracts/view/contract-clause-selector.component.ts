@@ -19,12 +19,8 @@ import { ContractClause } from '../data-types/contract';
     selector: 'contract-clause-selector',
     template: `<ul class="clause-list">
                 <li *ngFor="let clause of clauses"><a [class.selected]="clause === currentClause" (click)="onClickSelectClause(clause)">{{clause.clauseNo}} {{clause.title}}</a></li>
-               </ul>`,    
-    styleUrls: ['./contract-view.component.scss',
-                `.clause-list { list-style-type: none; }
-                 .selected { color: red;}
-                 `],
-   
+               </ul> `,    
+   styleUrls: ['./contract-clause.selector.component.scss'],            
     providers: [ContractService]
 })
 
