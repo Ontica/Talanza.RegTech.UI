@@ -1,5 +1,5 @@
-//@import "../../../styles/form";
 @import "../../../styles/grid";
+//local scss variables
 div {
   float: left;
   margin: 0px;
@@ -9,7 +9,6 @@ div {
 }
 
 .main-container {
-  //background-color: #204060;
   height: calc(100vh - 160px);
   min-height: 30%;
   width: 100%;
@@ -38,4 +37,10 @@ div {
 
 .grid-search-table {
   height: 30px;
+}
+
+.clauses-container {
+  height: 100%;
+  overflow-y: auto;
+  width: 100%;
 }
