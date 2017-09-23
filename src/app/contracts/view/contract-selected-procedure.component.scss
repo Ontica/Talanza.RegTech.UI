@@ -1,0 +1,12 @@
+@import "../../../styles/general-styles";
+table {
+  width: 50%;
+  border-collapse: collapse;
+  border: 1px solid $blue;
+}
+
+.header {
+  background-color: $blue;
+  color: $white;
+  padding: 5px;
+}

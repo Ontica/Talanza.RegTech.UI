@@ -1,0 +1,52 @@
+<div>
+  <h2>{{clause.clauseNo}} {{clause.title}}</h2>
+  <div class="procedure">
+    <p style="text-align: justify;">
+      Observaciones sobre los documentos solicitados Formato libre en el cual se adjunte: a) Aviso de la Elección del Tercero Independiente b) Estudio de mercado realizado por el Operador Petrolero para el período específico de certificación en donde detalle
+      la Identificación de al menos una terna de Terceros Independientes y justificación técnica y operativa que sustente la elección del o los Terceros Independientes que se hayan seleccionado c) Escrito de manifestación que la elección del Tercero Independiente
+      se ajusta a las necesidades de certificación de las Reservas asociadas a la asignación o contratos según corresponda en términos de los artículos 9 y 11 de los lineamientos y de cumplimiento a lo establecido en el artículo 34 y 38 de los Lineamientos
+      d) Información de Número de campos o volumen de Reservas a certificar asociadas a una Asignación o Contrato e) Personal del Tercero independiente que realizará los trabajos de clasificación análisis estimación evaluación y certificación de las Reservas
+      del proyecto en particular f) Identificación del responsable oficial y datos de contacto con la comisión.
+    </p>
+  </div>
+  <ul>
+    <li><a (click)="onDisplayProcedruesList()">Trámites</a> </li>
+  </ul>
+  <div class="procedures-table" *ngIf="isProcedruesTablesVisible">
+    <table class="grid">
+      <thead>
+        <tr>
+          <th>Trámite / Homoclave</th>
+          <th>Dependencia / Autoridad</th>
+          <th>Tema</th>
+          <th>Etapa</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><a>Avisar antes de iniciar actividad de taponamiento</a></td>
+          <td>ASEA</td>
+          <td>Seguridad industrial, operativa y del medio ambiente</td>
+          <td>Etapa de abandono</td>
+        </tr>
+        <tr>
+          <td><a>Obtención de la CURR</a></td>
+          <td>ASEA</td>
+          <td>Seguridad industrial, operativa y del medio ambiente</td>
+          <td>Transición de Arranque</td>
+        </tr>
+        <tr>
+          <td><a>Pago del Impuesto sobre la Renta</a> </td>
+          <td>SAT</td>
+          <td>Pago de impuestos</td>
+          <td>Período de Desarrollo</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="selected-procedure">
+    <selected-procedure></selected-procedure>
+  </div>
+  <!--
+-->
+</div>

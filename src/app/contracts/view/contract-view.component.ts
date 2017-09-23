@@ -29,6 +29,7 @@ export class ContractViewComponent implements OnInit {
   private centerPanelPreviousWidth = '';
 
   private clause: ContractClause;
+  public isSelectedClause = false;
 
   ngOnInit() {
     this.leftPanelWidth = 'calc(20% - '+ this.leftResizeWidth +'px)';    
@@ -74,6 +75,7 @@ export class ContractViewComponent implements OnInit {
   }
 
   public onSelectedClause(selectedClause: ContractClause ): void {
+    this.isSelectedClause = true;
     this.clause = selectedClause;  
   }
   

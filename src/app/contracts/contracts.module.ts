@@ -22,6 +22,9 @@ import { ContractsRoutingModule } from './contracts-routing.module';
 
 import { ContractViewComponent } from './view/contract-view.component';
 import { ContractClauseSelectorComponent } from './view/contract-clause-selector.component';
+import { ContractSelectedClauseComponent } from './view/contract-selected-clause.component';
+import { ContractSelectedProcedureComponent } from './view/contract-selected-procedure.component';
+
 /**
  * Do not specify providers for modules that might be imported by a lazy loaded module.
  */
@@ -30,7 +33,8 @@ import { ContractClauseSelectorComponent } from './view/contract-clause-selector
   imports: [ContractsRoutingModule, SharedModule, CommonModule, FormsModule],
   declarations: [ContractsMainPageComponent, ContractEditorComponent,
                  ClauseInfoTabComponent, RelatedProceduresTabComponent, ContractViewComponent,
-                 ContractClauseSelectorComponent],
+                 ContractClauseSelectorComponent, ContractSelectedClauseComponent,
+                 ContractSelectedProcedureComponent],
   exports: [ContractsMainPageComponent]
 })
 export class ContractsModule { }

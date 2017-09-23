@@ -22,10 +22,14 @@ import { Contract, ContractClause,
                  <option value="">( Seleccionar un contrato )</option>
                  <option *ngFor="let contract of contractsList" [value]="contract.uid">{{contract.name}}</option>
                </select>
-               <ul *ngFor="let clause of selectedContract.clauses">
-                <li><a (click)="onClickSelectClause(clause)">{{clause.clauseNo}} {{clause.title}}</a></li>
-               </ul>`,
-    styleUrls: ['./contract-view.component.scss'],
+               <ul class="clause-list">
+                <li *ngFor="let clause of selectedContract.clauses"><a [class.selected]="clause === currentClause" (click)="onClickSelectClause(clause)">{{clause.clauseNo}} {{clause.title}}</a></li>
+               </ul>`,    
+    styleUrls: ['./contract-view.component.scss',
+                `.clause-list { list-style-type: none; }
+                 .selected { color: red;}
+                 `],
+   
     providers: [ContractService]
 })
 
@@ -34,6 +38,8 @@ export class ContractClauseSelectorComponent implements OnInit{
   public contractsList: Contract[] = [];
   
   public selectedContract: Contract = EmptyContract();
+
+  public currentClause: ContractClause;
 
   @Output() selectedClause = new EventEmitter<ContractClause>();
 
@@ -55,6 +61,7 @@ export class ContractClauseSelectorComponent implements OnInit{
   }
 
   public onClickSelectClause(clause: ContractClause): void {    
+    this.currentClause = clause;
     this.selectedClause.emit(clause);
   }
 
