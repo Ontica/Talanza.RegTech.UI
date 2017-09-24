@@ -39,10 +39,10 @@ export class FilingFeeTabComponent implements OnInit {
   }
 
   public onChangeFilingFeeType(filingFeeType: string) {
-    if (filingFeeType === 'Trámite gratuito') {
-      this.procedure.filingFee.feeAmount = 0;
-      this.isFree = true;
-    }
+    // if (filingFeeType === 'Trámite gratuito') {
+    //   this.procedure.filingFee.feeAmount = 0;
+    //   this.isFree = true;
+    // }
 
   }
 

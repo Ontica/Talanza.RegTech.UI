@@ -151,12 +151,11 @@
             <tr>
               <td>¿El trámite permite prórrogas?</td>
               <td>
-                <select [disabled]="disabled " style="width:240px; " class="select-box " [(ngModel)]="procedure.filingCondition.allowsDeferrals ">
+                <select [disabled]="disabled " style="width:240px; " class="select-box " [(ngModel)]="procedure.filingCondition.hasInnerInteraction ">
                   <option value=" ">( ¿Permite prórrogas? )</option>
                   <option value="No determinado ">No determinado</option>
                   <option value="Sí">Sí</option>
                   <option value="No">No</option>
-                  <option value="Vía ampliación del término o plazo ">Vía ampliación del término o plazo</option>
                 </select>
               </td>
             </tr>

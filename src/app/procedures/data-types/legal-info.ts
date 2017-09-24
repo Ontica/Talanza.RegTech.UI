@@ -7,16 +7,14 @@
  */
 
 export class LegalInfo {
-  public regulationStatus: string;
+  public regulationMode: string;
   public obligation: string;
   public legalBasis: string;
-  public contractClausesAndAnnexes: string;
 
   constructor() {
-    this.regulationStatus = '';
+    this.regulationMode = '';
     this.obligation = '';
     this.legalBasis = '';
-    this.contractClausesAndAnnexes = '';
   }
 
 }
