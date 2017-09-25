@@ -76,13 +76,12 @@ export class ContractViewComponent implements OnInit {
   }
 
   public onSelectedClause(selectedClause: ContractClause ): void {
-    this.isSelectedClause = true;
+    this.isSelectedClause = true;   
     this.clause = selectedClause;  
   }
 
   public onLoadClauses(clauses: ContractClause[]): void {
     this.clauses = clauses;
-    console.log(clauses);
   }
   
 }
