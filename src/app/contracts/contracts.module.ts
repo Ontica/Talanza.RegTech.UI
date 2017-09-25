@@ -26,6 +26,7 @@ import { ContractSelectedClauseComponent } from './view/contract-selected-clause
 import { ContractSelectedProcedureComponent } from './view/contract-selected-procedure.component';
 import { ContractFiltersComponent } from './view/contract-filters.component';
 
+import { SafeHtmlPipe } from './view/contract-selected-procedure.component';
 /**
  * Do not specify providers for modules that might be imported by a lazy loaded module.
  */
@@ -35,7 +36,7 @@ import { ContractFiltersComponent } from './view/contract-filters.component';
   declarations: [ContractsMainPageComponent, ContractEditorComponent,
                  ClauseInfoTabComponent, RelatedProceduresTabComponent, ContractViewComponent,
                  ContractClauseSelectorComponent, ContractSelectedClauseComponent,
-                 ContractSelectedProcedureComponent, ContractFiltersComponent],
+                 ContractSelectedProcedureComponent, ContractFiltersComponent, SafeHtmlPipe],
   exports: [ContractsMainPageComponent]
 })
 export class ContractsModule { }

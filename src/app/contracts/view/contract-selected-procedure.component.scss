@@ -1,12 +1,31 @@
 @import "../../../styles/general-styles";
+@import "../../../styles/editor-window-style";
 table {
-  width: 50%;
+  width: 98%;
   border-collapse: collapse;
   border: 1px solid $blue;
 }
 
 .header {
-  background-color: $blue;
+  background-color: $red;
   color: $white;
   padding: 5px;
+}
+
+:host {
+  position: relative;
+  top: 5%;
+  left: 20%;
+}
+
+.editor-container {
+  height: 560px; //750px;
+  width: 780px;
+}
+
+.form-frame {
+  height: 80%;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  width: 100%;
 }

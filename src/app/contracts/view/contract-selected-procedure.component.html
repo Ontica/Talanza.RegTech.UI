@@ -1,148 +1,187 @@
-<div>
-  <h3>Aviso de cambio de operaciones</h3>
-  <table>
-    <thead>
-      <th colspan="2" class="header text-align-left">Información general del trámite <span class="right" (click)="onDisplayGeneralInfo()"><i class="fa fa-plus-circle" aria-hidden="true"></i></span></th>
-    </thead>
-    <tbody *ngIf="isVisibleGeneralInfo">
-      <tr>
-        <td>Homoclave COFEMER:</td>
-        <td>XALEK-35</td>
-      </tr>
-      <tr>
-        <td>Regulación:</td>
-        <td>En el contrato</td>
-      </tr>
-      <tr>
-        <td>Etapa:</td>
-        <td>Etapa de abandono</td>
-      </tr>
-      <tr>
-        <td>Tema:</td>
-        <td>Seguirdad industrial, operativa y medio ambiente</td>
-      </tr>
-      <tr>
-        <td>Pagína web:</td>
-        <td><a (click)="openExternalWindow('https://www.gob.mx/cnh')">https://www.gob.mx/cnh</a></td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-<div>
-  <br>
-  <table>
-    <thead>
-      <th colspan="2" class="header text-align-left">Inicio y plazos<span class="right" (click)="onDisplayInitialTerms()"><i class="fa fa-plus-circle" aria-hidden="true"></i></span></th>
-    </thead>
-    <tbody *ngIf="isInitialTermsVisible">
-      <tr>
-        <td>Plazo máximo de entrega:</td>
-        <td>3 días habiles Durante...</td>
-      </tr>
-      <tr>
-        <td>Actividad o evento:</td>
-        <td>Cada mes</td>
-      </tr>
-      <tr>
-        <td colspan="2" class="header text-align-left">Plazo legal y forma de entrega</td>
-      </tr>
-      <tr>
-        <td>Plazo legal:</td>
-        <td>3 días natuarles</td>
-      </tr>
-      <tr>
-        <td>Forma de entrega:</td>
-        <td>Vía correo electrónico</td>
-      </tr>
-      <tr>
-        <td>Observaciones:</td>
-        <td>15 días hábiles posteriores al término del Programa de Desmantelamiento</td>
-      </tr>
-      <tr>
-        <td colspan="2" class="header text-align-left">Prorrogas</td>
-      </tr>
-      <tr>
-        <td>Condiciones para las prórrogas:</td>
-        <td>Hasta 7 días hábiles</td>
-      </tr>
-      <tr>
-        <td>Plazo para las prórrogas:</td>
-        <td>No se prevén prórrogas, no obstante ello se puede invocar el artículo 31 de la LFPA para ampliar el término o plazo, sin que dicha ampliación exceda de la mitad del plazo previsto originalmente</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-<br>
-<div>
-  <table>
-    <thead>
-      <th colspan="2" class="header text-align-left">Pago de derechos<span class="right" (click)="onDisplayPaymentInfo()"><i class="fa fa-plus-circle" aria-hidden="true"></i></span></th>
-    </thead>
-    <tbody *ngIf="isPaymentInfoVisible">
-      <tr>
-        <td>Tipo de pago:</td>
-        <td>Importe fijo</td>
-      </tr>
-      <tr>
-        <td>Importe:</td>
-        <td>$35,500.0 M.N.</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-<br>
-<div class="autorities">
-  <table>
-    <thead>
-      <th colspan="2" class="header text-align-left">CNH<span class="right" (click)="onDisplayAuthorityInfo()"><i class="fa fa-plus-circle" aria-hidden="true"></i></span></th>
-    </thead>
-    <tbody *ngIf="isAuthorityInfoVisible">
-      <tr>
-        <td>Depenencia:</td>
-        <td>Agengcía Nacional de Seguridad y Protección al Medio Ambiente</td>
-      </tr>
-      <tr>
-        <td>Autoridad:</td>
-        <td>Dirección General de gestión de Exploración Y Extracción de Recursos no Convecionales Marítimos</td>
-      </tr>
-      <tr>
-        <td colspan="2"><img src="../../assets/img/mapa.png" width="100%" alt="mapita" />
+<div class="editor-container editor-container-style">
+  <div class="header">
+    <div class="close-button right-position" (click)="close()">&times;</div>
+    <div class="title">{{procedure.name}}</div>
+  </div>
+  <div class="form-frame">
+    <div>
+      <h3>{{procedure.name}}</h3>
+      <table>
+        <thead>
+          <th colspan=" 2 " class="header text-align-left ">Información general del trámite <span class="right " (click)="onDisplayGeneralInfo() "><i class="fa fa-plus-circle " aria-hidden="true "></i></span></th>
+        </thead>
+        <tbody *ngIf="isVisibleGeneralInfo ">
+          <tr>
+            <td>Homoclave COFEMER:</td>
+            <td>{{procedure.code}}</td>
+          </tr>
+          <tr>
+            <td>Regulación:</td>
+            <td>{{procedure.legalInfo.regulationMode}}</td>
+          </tr>
+          <tr>
+            <td>Tema:</td>
+            <td>{{procedure.theme}}</td>
+          </tr>
+          <tr>
+            <td>Página web oficial:</td>
+            <td><a (click)="openExternalWindow(procedure.officialUrl) ">{{procedure.officialUrl}}</a></td>
+          </tr>
+          <tr>
+            <td>Página web Regulación:</td>
+            <td><a (click)="openExternalWindow(procedure.regulationUrl) ">{{procedure.regulationUrl}}</a></td>
+          </tr>
+          <tr>
+            <td colspan="2 " class="header text-align-left ">Fundamento Legal</td>
+          </tr>
+          <tr>
+            <td>Obligación:</td>
+            <td>{{procedure.legalInfo.obligation}}</td>
+          </tr>
+          <tr>
+            <td>Fundamento legal:</td>
+            <td>
+              <div [innerHTML]="procedure.legalInfo.legalBasis | safeHtml "></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <br>
+    <div>
+      <table>
+        <thead>
+          <th colspan="2 " class="header text-align-left ">Inicio y plazos<span class="right " (click)="onDisplayInitialTerms() "><i class="fa fa-plus-circle " aria-hidden="true "></i></span></th>
+        </thead>
+        <tbody *ngIf="isInitialTermsVisible ">
+          <tr>
+            <td>Plazo máximo de entrega:</td>
+            <td>{{procedure.filingCondition.maxFilingTerm}} {{procedure.filingCondition.maxFilingTermUnit}}</td>
+          </tr>
+          <tr>
+            <td>Actividad o evento:</td>
+            <td>{{procedure.filingCondition.startsWhenTrigger}}</td>
+          </tr>
+          <tr>
+            <td colspan="2 " class="header text-align-left ">Plazo legal y forma de entrega</td>
+          </tr>
+          <tr>
+            <td>Plazo legal:</td>
+            <td>{{procedure.filingCondition.issuanceLegalTerm}}</td>
+          </tr>
+          <tr>
+            <td>Forma de entrega:</td>
+            <td>{{procedure.filingCondition.howToFile}}</td>
+          </tr>
+          <tr>
+            <td>Observaciones sobre<br/>condiciones de inicio:</td>
+            <td>{{procedure.filingCondition.startsWhenNotes}}</td>
+          </tr>
+          <tr>
+            <td>Observaciones sobre<br/>condiciones de inicio:</td>
+            <td>{{procedure.filingCondition.maxFilingTermNotes}}</td>
+          </tr>
+          <tr>
+            <td>Observaciones sobre<br/>condiciones de inicio:</td>
+            <td>{{procedure.filingCondition.issuanceLegalTermNotes}}</td>
+          </tr>
+          <tr>
+            <td colspan="2 " class="header text-align-left ">Prorrogas</td>
+          </tr>
+          <tr>
+            <td>Condiciones para las prórrogas:</td>
+            <td>{{procedure.filingCondition.deferralsConditionNotes}}</td>
+          </tr>
+          <tr>
+            <td>Plazo para las prórrogas:</td>
+            <td>{{procedure.filingCondition.deferralsTermNotes }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <br>
+    <div>
 
-        </td>
-      </tr>
-      <tr>
-        <td colspan="2" class="header text-align-left">Contacto</td>
-      </tr>
-      <tr>
-        <td colspan="2">Pedro Puerto Pérez</td>
-      </tr>
-      <tr>
-        <td>Correo electrónico:</td>
-        <td>pedro.puerto@asea.gob.mx</td>
-      </tr>
-      <tr>
-        <td>Teléfono:</td>
-        <td>555-555-555 ext 555</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-<br>
-<div>
-  <table>
-    <thead>
-      <th class="header text-align-left">Documentos<span class="right" (click)="onDisplayAuthorityInfo()"><i class="fa fa-plus-circle" aria-hidden="true"></i></span></th>
-    </thead>
-    <tbody *ngIf="isAuthorityInfoVisible">
-      <tbody>
-        <tr>
-          <td>
-            <object data="http://187.191.71.208/BuscadorTramites/fichasnew/CNH-02-023-B.pdf" type="application/pdf" width="100%" height="300px">
-                <p><b>Example fallback content</b>: This browser does not support PDFs. Please download the PDF to view it: <a href="http://187.191.71.208/BuscadorTramites/fichasnew/CNH-02-023-B.pdf">Download PDF</a>.</p>
-            </object>
-          </td>
-        </tr>
-      </tbody>
-  </table>
+    </div>
+    <br>
+    <div>
+      <table>
+        <thead>
+          <th colspan="2 " class="header text-align-left ">Pago de derechos<span class="right " (click)="onDisplayPaymentInfo() "><i class="fa fa-plus-circle " aria-hidden="true "></i></span></th>
+        </thead>
+        <tbody *ngIf="isPaymentInfoVisible ">
+          <tr>
+            <td>Tipo de pago:</td>
+            <td>{{procedure.filingFee.filingFeeType}}</td>
+          </tr>
+          <tr>
+            <td>Importe:</td>
+            <td>{{procedure.filingFee.feeAmount}}</td>
+          </tr>
+          <tr>
+            <td>Regla para el pago de derechos:</td>
+            <td>{{procedure.filingFee.rule}}</td>
+          </tr>
+          <tr>
+            <td>Fundamento legal:</td>
+            <td>{{procedure.filingFee.legalBasis}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <br>
+    <div class="autorities ">
+      <table>
+        <thead>
+          <th colspan="2 " class="header text-align-left ">CNH<span class="right " (click)="onDisplayAuthorityInfo() "><i class="fa fa-plus-circle " aria-hidden="true "></i></span></th>
+        </thead>
+        <tbody *ngIf="isAuthorityInfoVisible ">
+          <tr>
+            <td>Depenencia:</td>
+            <td>Agengcía Nacional de Seguridad y Protección al Medio Ambiente</td>
+          </tr>
+          <tr>
+            <td>Autoridad:</td>
+            <td>Dirección General de gestión de Exploración Y Extracción de Recursos no Convecionales Marítimos</td>
+          </tr>
+          <tr>
+            <td colspan="2 "><img src="../../assets/img/mapa.png " width="100% " alt="mapita " />
 
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2 " class="header text-align-left ">Contacto</td>
+          </tr>
+          <tr>
+            <td colspan="2 ">Pedro Puerto Pérez</td>
+          </tr>
+          <tr>
+            <td>Correo electrónico:</td>
+            <td>pedro.puerto@asea.gob.mx</td>
+          </tr>
+          <tr>
+            <td>Teléfono:</td>
+            <td>555-555-555 ext 555</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <br>
+    <div>
+      <table>
+        <thead>
+          <th class="header text-align-left ">Documentos<span class="right " (click)="onDisplayAuthorityInfo() "><i class="fa fa-plus-circle " aria-hidden="true "></i></span></th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <object data="http://187.191.71.208/BuscadorTramites/fichasnew/CNH-02-023-B.pdf " type="application/pdf " width="100% " height="300px ">
+                  <p><b>Example fallback content</b>: This browser does not support PDFs. Please download the PDF to view it: <a href="http://187.191.71.208/BuscadorTramites/fichasnew/CNH-02-023-B.pdf ">Download PDF</a>.</p>
+                </object>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>-->
+  </div>
 </div>
