@@ -25,7 +25,7 @@ import { Contract, EmptyContract, ContractClause } from '../data-types/contract'
                  <option *ngFor="let contract of contractsList" [value]="contract.uid">{{contract.name}}</option>
               </select>
     </td>
-    <td>Sección</td>
+    <td>Sección:</td>
     <td>
       <select #section class="select-box" [(ngModel)]="selectedSection" style="width:210px;" (change)="onChangeSection(section.value)" >
         <option value="">( Seleccionar una sección )</option>

@@ -54,6 +54,30 @@
               <div [innerHTML]="procedure.legalInfo.legalBasis | safeHtml "></div>
             </td>
           </tr>
+          <tr>
+            <td class='label'>Observaciones:</td>
+            <td>{{procedure.notes}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <br>
+    <div>
+      <table>
+        <thead>
+          <th colspan="2" class="header text-align-left ">Proyectos a los que aplica y modo de ejecución
+            <span class="right" (click)="onDisplayGeneralInfo()"><i class="fa fa-plus-circle " aria-hidden="true "></i></span>
+          </th>
+        </thead>
+        <tbody>
+          <tr>
+            <td class='label'>Proyectos a los que aplica:</td>
+            <td>{{procedure.projectType}}</td>
+          </tr>
+          <tr>
+            <td class='label'>Modo de ejecución:</td>
+            <td>{{procedure.executionMode}}</td>
+          </tr>
         </tbody>
       </table>
     </div>
@@ -185,6 +209,11 @@
       </table>
     </div>
     <br>
+    <div>
+      <br>
+      <br>
+      <br>
+    </div>
     <!--
     <div>
       <div class="iframe-container">
