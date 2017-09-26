@@ -65,8 +65,8 @@ export class ProcedureFilterComponent implements OnInit {
   }
 
   public search(): void {
-    if ((this.filter.entityUID === '') && (this.filter.officeUID === '')
-      && (this.filter.theme === '') && (this.filter.stage === '')) {
+    if ((this.filter.entityUID === '') && (this.filter.officeUID === '') &&
+        (this.filter.theme === '')) {
       this.setAllProcedures();
     } else {
       let filter = this.getFilter();
@@ -85,9 +85,9 @@ export class ProcedureFilterComponent implements OnInit {
     if ((this.filter.theme !== '')) {
       filter = this.addFilterConnector(filter) + "theme='" + this.filter.theme + "'";
     }
-    if ((this.filter.stage !== '')) {
-      filter = this.addFilterConnector(filter) + "stage='" + this.filter.stage + "'";
-    }
+    // if ((this.filter.stage !== '')) {
+    //   filter = this.addFilterConnector(filter) + "stage='" + this.filter.stage + "'";
+    // }
     return filter;
   }
 
