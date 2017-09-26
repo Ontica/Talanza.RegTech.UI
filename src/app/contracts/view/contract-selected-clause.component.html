@@ -1,14 +1,13 @@
 <div>
-  <h2>{{clause.clauseNo}} {{clause.title}}</h2>
+  <div class="clause-title"> &nbsp; &nbsp;{{clause.clauseNo}} {{clause.title}}</div>
   <div class="main-container">
     <div class="left-panel">
       <div class="clause-definition">
-        <p style="text-align: justify;">
-          {{clause.text}}
-        </p>
+        {{clause.text}}
       </div>
+      <br /><br />
       <div>
-        <table class="grid" *ngIf="relatedProcedures.length !== 0">
+        <table class="grid" *ngIf="relatedProcedures.length !== 0" style='max-width:600pt;'>
           <thead>
             <tr>
               <th>Trámite / Homoclave / Dependencia </th>
@@ -22,6 +21,7 @@
           </tbody>
         </table>
       </div>
+      <br /><br />
       <div class="procedure-info" *ngIf="isVisibleProcedureInfo">
         <selected-procedure [procedureUID]="procedureUID" (onCloseEvent)="onCloseProcedureInfoModal()"></selected-procedure>
       </div>

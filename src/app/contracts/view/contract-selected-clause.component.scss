@@ -22,9 +22,10 @@
 
 .clause-definition {
   padding: 2px;
-  background-color: gray;
   color: black;
   text-align: justify;
+  font-size: 11pt;
+  max-width: 600pt;
   //width: 100%;
 }
 
@@ -35,4 +36,12 @@
 
 table.grid td:nth-child(1), table.grid th:nth-child(1) {
   width: 80%;
+}
+
+.clause-title {
+  font-size: 14pt;
+  color: #3a3a3a;
+  font-weight: 600;
+  padding: 6pt;
+  line-height: 22pt;
 }
