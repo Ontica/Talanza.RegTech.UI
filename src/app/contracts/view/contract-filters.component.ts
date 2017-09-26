@@ -20,17 +20,17 @@ import { Contract, EmptyContract, ContractClause } from '../data-types/contract'
   <tr>
     <td>Contrato:</td>
     <td>
-      <select #contract class="select-box" style="width:210px;" (change)="onChangeContract(contract.value)">
+      <select #contract class="select-box" style="width:210px;" (change)="onChangeContract(contract.value)" >
                  <option value="">( Seleccionar un contrato )</option>
                  <option *ngFor="let contract of contractsList" [value]="contract.uid">{{contract.name}}</option>
               </select>
     </td>
     <td>Sección</td>
     <td>
-      <select #section class="select-box" style="width:210px;" (change)="onChangeSection(section.value)">
-        <option value="">( Seleccionar un contrato )</option>
-        <option value="Cláusulas">Cláusulas</option>
-        <option value="anexos">Anexos</option>
+      <select #section class="select-box" [(ngModel)]="selectedSection" style="width:210px;" (change)="onChangeSection(section.value)" >
+        <option value="">( Seleccionar una sección )</option>
+        <option *ngFor="let section of sections" [value]="section">{{section}}</option>
+       
       </select>     
     </td>
     <td>Buscar:</td>
@@ -52,11 +52,11 @@ export class ContractFiltersComponent implements OnInit {
   public contractsList: Contract[] = [];
   public selectedContract: Contract = EmptyContract();
   public keywords = '';
+  public sections = [];
+  public selectedSection: string  = '';
 
   @Output() clauses = new EventEmitter<ContractClause[]>();
-
-  private section = '';
-
+  
   constructor(private core: CoreService,
     private contractService: ContractService) { }
 
@@ -64,41 +64,53 @@ export class ContractFiltersComponent implements OnInit {
     this.setInitialValues();
   }
 
-  public onChangeContract(uid: string): void {
+  public async onChangeContract(uid: string) {
     if (uid === '') {
       this.selectedContract.clauses = [];
       this.selectedContract = EmptyContract();
+      this.sections  = [];
+      this.selectedSection = '';
       return;
     }
+
     this.selectedContract = this.contractsList.find((x) => x.uid === uid);
-    
+
+    await this.loadSelectedContractClausesList('');    
+
+    this.fillSectionList();
+    this.selectedSection = 'Cláusulas';
+
+    this.onChangeSection(this.selectedSection);
+   // this.clauses.emit(this.selectedContract.clauses);  
   }
 
-  public onChangeSection(section: string): void {
-    this.section = section;  
+  public onChangeSection(section: string): void {  
+    if (this.sections.length === 0) {
+      return;
+    }
+
+    let clauses = this.selectedContract.clauses.filter(item => item.section === section);
+           
+    this.clauses.emit(clauses);   
   }
 
   public async onSearch() {
-    if (this.selectedContract === EmptyContract()){
+    if (this.selectedContract.uid === '') {
+      alert("Es necesario seleccionar un contrato de la lista de contrados");
       return;
     }
-   
-    await this.loadSelectedContractClausesList('');   
-    
-    let clauses: ContractClause[];
 
-    if (this.section === "Cláusulas") {
-      clauses = this.selectedContract.clauses.filter(item => item.section === "Cláusulas");
-    } else {
-      clauses = this.selectedContract.clauses.filter(item => item.section !== "Cláusulas");
-    }
+    await this.loadSelectedContractClausesList(this.keywords); 
 
-    this.clauses.emit(clauses);       
-    
+    this.clauses.emit(this.selectedContract.clauses);                  
   }
 
   private setInitialValues(): void {
     this.loadContractsList();  
+  }
+
+  private fillSectionList(): void {
+    this.sections = Array.from(new Set(this.selectedContract.clauses.map(item => item.section)).values());   
   }
 
   private loadContractsList(): void {
@@ -112,13 +124,10 @@ export class ContractFiltersComponent implements OnInit {
 
   private async loadSelectedContractClausesList(keywords: string) {
     Assertion.assertValue(this.selectedContract, 'this.selectedContract');
-
-    if (this.selectedContract.clauses) {
-      return;
-    }
+   
     await this.contractService.searchClauses(this.selectedContract.uid,keywords)    
       .toPromise()
-      .then((x) => this.selectedContract.clauses = x       
+      .then((x) => this.selectedContract.clauses = x               
     );
   }
 
