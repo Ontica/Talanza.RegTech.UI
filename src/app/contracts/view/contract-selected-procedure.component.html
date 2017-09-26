@@ -1,7 +1,6 @@
 <div class="editor-container editor-container-style">
   <div class="header">
     <div class="close-button right-position" (click)="close()">&times;</div>
-    <div class="title">{{procedure.name}}</div>
   </div>
   <div class="form-frame">
     <div>
@@ -133,57 +132,42 @@
     <div class="autorities ">
       <table>
         <thead>
-          <th colspan="2 " class="header text-align-left ">CNH<span class="right " (click)="onDisplayAuthorityInfo() "><i class="fa fa-plus-circle " aria-hidden="true "></i></span></th>
+          <th colspan="2 " class="header text-align-left ">{{procedure.authority.entity.name}}<span class="right " (click)="onDisplayAuthorityInfo() "><i class="fa fa-plus-circle " aria-hidden="true "></i></span></th>
         </thead>
         <tbody *ngIf="isAuthorityInfoVisible ">
           <tr>
-            <td>Depenencia:</td>
-            <td>Agengcía Nacional de Seguridad y Protección al Medio Ambiente</td>
-          </tr>
-          <tr>
             <td>Autoridad:</td>
-            <td>Dirección General de gestión de Exploración Y Extracción de Recursos no Convecionales Marítimos</td>
+            <td>{{procedure.authority.office.name}}</td>
           </tr>
-          <tr>
+          <!-- <tr>
             <td colspan="2 "><img src="../../assets/img/mapa.png " width="100% " alt="mapita " />
 
-            </td>
+            </td>-->
           </tr>
           <tr>
             <td colspan="2 " class="header text-align-left ">Contacto</td>
           </tr>
           <tr>
-            <td colspan="2 ">Pedro Puerto Pérez</td>
+            <td colspan="2 ">{{procedure.authority.contact.name}}<br>{{procedure.authority.position.name}}</td>
           </tr>
           <tr>
             <td>Correo electrónico:</td>
-            <td>pedro.puerto@asea.gob.mx</td>
+            <td>{{procedure.authority.contact.email}}</td>
           </tr>
           <tr>
             <td>Teléfono:</td>
-            <td>555-555-555 ext 555</td>
+            <td>{{procedure.authority.position.phone}}</td>
           </tr>
         </tbody>
       </table>
     </div>
     <br>
+    <!--
     <div>
-      <table>
-        <thead>
-          <th class="header text-align-left ">Documentos<span class="right " (click)="onDisplayAuthorityInfo() "><i class="fa fa-plus-circle " aria-hidden="true "></i></span></th>
-        </thead>
-        <tbody>
-          <tr>
-            <td>
-              <div>
-                <embed src="http://187.191.71.208/BuscadorTramites/fichasnew/CNH-02-023-B.pdf" type="application/pdf" width="100%" height="300px">
-              </div>
-
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="iframe-container">
+        <iframe id="modeler" #modeler class="iframe-modeler" scrolling="no" [class.readonly-modeler]="!editionMode" [src]="url"></iframe>
+      </div>
     </div>
-
+  -->
   </div>
 </div>

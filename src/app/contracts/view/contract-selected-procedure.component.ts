@@ -1,12 +1,15 @@
 
 import { 
-  ChangeDetectorRef, Component, EventEmitter, HostBinding,
-  Input, Output, Pipe, PipeTransform 
+  ChangeDetectorRef, Component, ElementRef, EventEmitter, HostBinding,
+  Input, Output, Pipe, PipeTransform, Renderer2, ViewChild, OnInit 
 } from '@angular/core';
 
-import { DomSanitizer } from '@angular/platform-browser'
+import { BrowserModule, DomSanitizer, SafeResourceUrl } from '@angular/platform-browser'
 
 import { ProcedureService } from '../../procedures/services/procedure.service';
+
+import { Process } from '../../process/data-types/process';
+import { ProcessService } from '../../process/services/process.service';
 
 @Pipe({ name: 'safeHtml'})
 export class SafeHtmlPipe implements PipeTransform  {
@@ -20,18 +23,24 @@ export class SafeHtmlPipe implements PipeTransform  {
   selector:'selected-procedure',
   templateUrl:'./contract-selected-procedure.component.html',
   styleUrls:['./contract-selected-procedure.component.scss'],
-  providers:[ ProcedureService]
+  providers:[ ProcedureService, ProcessService]
 })
 
-export class ContractSelectedProcedureComponent {
+export class ContractSelectedProcedureComponent implements OnInit{
   @HostBinding('style.display') public display = 'block';
   @HostBinding('style.position') public position = 'absolute';
+
+  @ViewChild('modeler') public el: ElementRef;
 
   public isVisibleGeneralInfo = true;
   public isInitialTermsVisible = true;
   public isPaymentInfoVisible = true;
   public isAuthorityInfoVisible = true;
 
+  public process: Process;
+  public url: SafeResourceUrl;
+  public editionMode = false;
+  
   public procedure: any;
   
   @Output() public onCloseEvent = new EventEmitter();
@@ -40,14 +49,21 @@ export class ContractSelectedProcedureComponent {
   @Input()
   set procedureUID(procedureUID: string) {
     this._procedureUID = procedureUID;
-    this.loadProcedure();
-    console.log(this.procedure);
+    this.loadProcedure();    
   }
   get procedureUID(): string {
     return this._procedureUID;
   }
 
-  constructor(private procedureService: ProcedureService) {}
+  constructor(private procedureService: ProcedureService,
+              private sanitizer: DomSanitizer, 
+              private processService: ProcessService) {
+                this.url = this.sanitizer.bypassSecurityTrustResourceUrl('./modeler/process-modeler.html');              
+  } 
+
+  ngOnInit() {
+   
+  }
     
   public onDisplayGeneralInfo(): void {
     this.isVisibleGeneralInfo = !this.isVisibleGeneralInfo;
@@ -73,12 +89,39 @@ export class ContractSelectedProcedureComponent {
     this.onCloseEvent.emit();
   }
   
-  private loadProcedure(): void {
-  
+  private loadProcedure(): void {  
      this.procedureService.getProcedure(this.procedureUID).then((procedure) => {
-     this.procedure = procedure;    
-     console.log(this.procedure);
+       console.log(procedure);
+     this.procedure = procedure;         
     });
   }
+
+  private async loadProcess() {
+    this.modeler.editionMode = false;
+    let processUID = 'cOTI5kqHVhdY'
+    this.process = await this.processService.getProcessDiagram(processUID);  
+    this.loadXml(this.process.xml);
+       
+  }
+
+ private get modeler() {
+    return this.el.nativeElement.contentWindow.modeler;
+  }
+
+  private attachModelerEventHandler() {
+    this.modeler.suscribeToDoubleClick((e) => this.onModelerDoubleClick(e));
+  }
+
+  private loadXml(xml: any): void {
+    this.modeler.loadXML(xml);
+    this.attachModelerEventHandler();
+  }
+
+  private onModelerDoubleClick(element: any): void {
+  
+    let bpmnType = JSON.parse(element);
+  //  this.selectBpmnElmentInfo(bpmnType.type);
+  }
+
   
 }

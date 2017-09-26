@@ -29,3 +29,22 @@ table {
   overflow-x: hidden;
   width: 100%;
 }
+
+.iframe-container {
+  height: 350px; //calc(100vh - 200px);
+  overflow: auto;
+  //z-index: -1;
+}
+
+.iframe-modeler {
+  border: 0;
+  height: 1580px;
+  position: relative;
+  width: 100%;
+  background-color: $light-yellow;
+}
+
+.readonly-modeler {
+  pointer-events: none;
+  //z-index: -1;
+}

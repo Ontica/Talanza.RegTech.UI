@@ -31,11 +31,12 @@
 
   private  _clause: ContractClause =EmptyContractClause();
   @Input()
-  set clause(clause: ContractClause) {    
-    this._clause = clause;    
-    this.loadClause('LpaINZoGs9530F9', clause.uid);    
+  set clause(clause: any) {    
+    this._clause = clause;   
+    console.log(clause);
+    this.loadClause(clause.contractUID, clause.uid);    
   }
-  get clause(): ContractClause {
+  get clause(): any {
     return this._clause;
   }
 
