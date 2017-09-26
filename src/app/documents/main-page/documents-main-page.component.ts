@@ -15,5 +15,9 @@ import { Component } from '@angular/core';
 })
 
 export class DocumentsMainPageComponent {
+
+  public openExternalWindow(url:string): void {
+    window.open(url, '_blank', 'location=yes,height=570,width=620,scrollbars=yes,status=yes');
+  }
   
 }
