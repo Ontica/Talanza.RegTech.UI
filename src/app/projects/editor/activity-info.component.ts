@@ -174,22 +174,22 @@ export class ActivityInfoComponent implements OnInit {
   }
 
   private validate(): boolean {
-    if (this.activity.name === '') {
-      alert("El nombre de la actividad o evento se encuentra en blanco.");
-      return false;
-    }
-    if (this.activity.resourceUID === '') {
-      alert("Seleccionar asociado a de la lista.");
-      return false;
-    }
-    if (this.activity.requestedByUID === '') {
-      alert("Seleccionar solicitado por de la lista.");
-      return false;
-    }    
-    if (this.activity.responsibleUID === '') {
-      alert("Seleccionar el responsable de la lista.");
-      return false;
-    }
+    // if (this.activity.name === '') {
+    //   alert("El nombre de la actividad o evento se encuentra en blanco.");
+    //   return false;
+    // }
+    // if (this.activity.resourceUID === '') {
+    //   alert("Seleccionar asociado a de la lista.");
+    //   return false;
+    // }
+    // if (this.activity.requestedByUID === '') {
+    //   alert("Seleccionar solicitado por de la lista.");
+    //   return false;
+    // }    
+    // if (this.activity.responsibleUID === '') {
+    //   alert("Seleccionar el responsable de la lista.");
+    //   return false;
+    // }
 
     return true;
   }
