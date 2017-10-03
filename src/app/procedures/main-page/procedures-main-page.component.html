@@ -3,14 +3,14 @@
   <thead>
     <tr>
       <th>Trámite / Homoclave</th>
-      <th>Dependencia / Autoridad</th>
+      <th>Dependencia</th>
       <th>Tema</th>
       <th>Etapa</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let procedure of procedures">
-      <td>
+      <td style='width:40%'>
         <a (click)="onOpenProcedureEditorWindow(procedure.uid)">{{procedure.name}}</a>
         <br/>
         <u>{{procedure.code}}</u>

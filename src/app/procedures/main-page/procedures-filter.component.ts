@@ -11,9 +11,10 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { SmallProcedureInterface } from '../data-types/small-procedure.interface';
 import { Entity } from '../data-types/entity';
 import { Office } from '../data-types/office';
-import { ProcedureFilter } from '../data-types/procedure-filter';
 
 import { ProcedureService } from '../services/procedure.service';
+import { ProcedureFilter } from '../data-types/procedure-filter';
+
 import { AuthorityService } from '../services/authority.service';
 
 @Component({
@@ -40,20 +41,10 @@ export class ProcedureFilterComponent implements OnInit {
 
   public async onChangeSelectedEntity(entityUID: string) {
     this.filter.entityUID = entityUID;
+    
     await this.setOffices(entityUID);
-
-  }
-  public onChangeSelectedTheme(theme: string): void {
-    this.filter.theme = theme;
   }
 
-  public onChangeSelectedStage(stage: string): void {
-    this.filter.stage = stage;
-  }
-
-  public onChangeAuthority(officeUID: string): void {
-    this.filter.officeUID = officeUID;
-  }
 
   public newProcedure(): void {
     this.onNewProcedure.emit('');
@@ -65,37 +56,8 @@ export class ProcedureFilterComponent implements OnInit {
   }
 
   public search(): void {
-    if ((this.filter.entityUID === '') && (this.filter.officeUID === '') &&
-        (this.filter.theme === '')) {
-      this.setAllProcedures();
-    } else {
-      let filter = this.getFilter();
-      this.setProcedures(filter);
-    }
-  }
-
-  private getFilter(): string {
-    let filter = '';
-    if ((this.filter.entityUID !== '')) {
-      filter = this.addFilterConnector(filter) + "AuthEntityUID='" + this.filter.entityUID + "'";
-    }
-    if ((this.filter.officeUID !== '')) {
-      filter = this.addFilterConnector(filter) + "AuthOfficeUID='" + this.filter.officeUID + "'";
-    }
-    if ((this.filter.theme !== '')) {
-      filter = this.addFilterConnector(filter) + "theme='" + this.filter.theme + "'";
-    }
-    // if ((this.filter.stage !== '')) {
-    //   filter = this.addFilterConnector(filter) + "stage='" + this.filter.stage + "'";
-    // }
-    return filter;
-  }
-
-  private addFilterConnector(filter: string): string {
-    if (filter !== '') {
-      filter += ' AND ';
-    }
-    return filter;
+    this.procedureService.getProceduresList(this.filter)
+                         .then((procedures) => { this.onSearch.emit(procedures); });
   }
 
   private async setOffices(entityUID: string) {
@@ -107,16 +69,6 @@ export class ProcedureFilterComponent implements OnInit {
   private setEntities(): void {
     this.authorityService.getEntities()
                          .then((entities) => { this.entities = entities; });
-  }
-
-  private setAllProcedures(): void {
-    this.procedureService.getProceduresList()
-                         .then((procedures) => { this.onSearch.emit(procedures); });
-  }
-
-  private setProcedures(filter: string): void {
-    this.procedureService.getProceduresList(filter)
-                         .then((procedures) => { this.onSearch.emit(procedures); });
   }
 
 }

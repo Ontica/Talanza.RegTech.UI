@@ -1,7 +1,7 @@
 
-import { 
+import {
   ChangeDetectorRef, Component, ElementRef, EventEmitter, HostBinding,
-  Input, Output, Pipe, PipeTransform, Renderer2, ViewChild, OnInit 
+  Input, Output, Pipe, PipeTransform, Renderer2, ViewChild, OnInit
 } from '@angular/core';
 
 import { BrowserModule, DomSanitizer, SafeResourceUrl } from '@angular/platform-browser'
@@ -14,7 +14,7 @@ import { ProcessService } from '../../process/services/process.service';
 @Pipe({ name: 'safeHtml'})
 export class SafeHtmlPipe implements PipeTransform  {
   constructor(private sanitized: DomSanitizer) {}
-  transform(value) {  
+  transform(value) {
     return this.sanitized.bypassSecurityTrustHtml(value);
   }
 }
@@ -40,31 +40,31 @@ export class ContractSelectedProcedureComponent implements OnInit{
   public process: Process;
   public url: SafeResourceUrl;
   public editionMode = false;
-  
+
   public procedure: any;
-  
+
   @Output() public onCloseEvent = new EventEmitter();
 
   private _procedureUID: string = "";
   @Input()
   set procedureUID(procedureUID: string) {
     this._procedureUID = procedureUID;
-    this.loadProcedure();    
+    this.loadProcedure();
   }
   get procedureUID(): string {
     return this._procedureUID;
   }
 
   constructor(private procedureService: ProcedureService,
-              private sanitizer: DomSanitizer, 
+              private sanitizer: DomSanitizer,
               private processService: ProcessService) {
-                this.url = this.sanitizer.bypassSecurityTrustResourceUrl('./modeler/process-modeler.html');              
-  } 
+                this.url = this.sanitizer.bypassSecurityTrustResourceUrl('./modeler/process-modeler.html');
+  }
 
   ngOnInit() {
-   
+
   }
-    
+
   public onDisplayGeneralInfo(): void {
     this.isVisibleGeneralInfo = !this.isVisibleGeneralInfo;
   }
@@ -79,8 +79,8 @@ export class ContractSelectedProcedureComponent implements OnInit{
 
   public onDisplayAuthorityInfo(): void {
     this.isAuthorityInfoVisible = !this.isAuthorityInfoVisible;
-  } 
-  
+  }
+
   public openExternalWindow(url:string): void {
     window.open(url, '_blank', 'location=yes,height=570,width=620,scrollbars=yes,status=yes');
   }
@@ -88,20 +88,19 @@ export class ContractSelectedProcedureComponent implements OnInit{
   public close(): void {
     this.onCloseEvent.emit();
   }
-  
-  private loadProcedure(): void {  
+
+  private loadProcedure(): void {
      this.procedureService.getProcedure(this.procedureUID).then((procedure) => {
        console.log(procedure);
-     this.procedure = procedure;         
+     this.procedure = procedure;
     });
   }
 
   private async loadProcess() {
     this.modeler.editionMode = false;
     let processUID = 'cOTI5kqHVhdY'
-    this.process = await this.processService.getProcessDiagram(processUID);  
+    this.process = await this.processService.getProcessDiagram(processUID);
     this.loadXml(this.process.xml);
-       
   }
 
  private get modeler() {
@@ -118,10 +117,10 @@ export class ContractSelectedProcedureComponent implements OnInit{
   }
 
   private onModelerDoubleClick(element: any): void {
-  
+
     let bpmnType = JSON.parse(element);
   //  this.selectBpmnElmentInfo(bpmnType.type);
   }
 
-  
+
 }
