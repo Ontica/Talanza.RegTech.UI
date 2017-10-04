@@ -30,7 +30,7 @@
     </td>
     <td>Mostrar:</td>
     <td>
-      <select style="width:138px" class="select-box" [(ngModel)]="ganttConfig">>
+      <select style="width:138px" class="select-box" [(ngModel)]="selectedView">>
           <option value="ganttQuarters">Gantt (trimestres)</option>
           <option value="ganttMonths">Gantt (meses)</option>
           <option value="ganttWeeks">Gantt (semanas)</option>
@@ -44,9 +44,14 @@
 </table>
 <div *ngIf="isAddActivityEditorWindowVisible" class="popup">
   <activity-add [project]="selectedProject" [parentId]="null" [topUbication]="10" (onCloseEvent)="onCloseAddActivityEditorWindow()"></activity-add>
-
 </div>
 
+
 <div *ngIf="isGanttGraphVisible">
-  <gantt [project]="selectedProject " [config]="ganttConfig "></gantt>
+  <div [ngSwitch]="selectedView">
+    <worklists-main-page [project]="selectedProject" *ngSwitchCase="'tasksList'"></worklists-main-page>
+    <worklists-main-page [project]="selectedProject" *ngSwitchCase="'kanban'"></worklists-main-page>
+    <gantt [project]="selectedProject" [config]="selectedView" *ngSwitchDefault></gantt>
+  </div>
+  <!--<gantt [project]="selectedProject " [config]="ganttConfig"></gantt>-->
 </div>

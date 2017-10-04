@@ -25,6 +25,7 @@ export class ProjectsMainPageComponent implements OnInit {
   public projectList: ProjectRef[] = [];
   public selectedProject: ProjectRef = EmptyProjectRef();
   public ganttConfig = 'ganttWeeks';
+  public selectedView = 'tasksList';
 
   public constructor(private projectService: ProjectService) { }
 
@@ -45,8 +46,8 @@ export class ProjectsMainPageComponent implements OnInit {
     }
 
     this.selectedProject = this.projectList.find((x) => x.uid === projectUID);
-
-    this.showGanttGraph();
+    
+    this.showGanttGraph();    
   }
 
   public onClickAddActivity(): void {       

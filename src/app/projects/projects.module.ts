@@ -10,11 +10,10 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
+import {  WorklistsModule } from '../worklists/worklists.module'
 
 import { ProjectsMainPageComponent } from './main-page/projects-main-page.component';
 import { GanttComponent } from './components/gantt.component';
-
-
 
 import { ActivityAddComponent } from './editor/activity-add.component';
 import { ActivitySelectorComponent } from './editor/activity-selector.component';
@@ -36,7 +35,7 @@ import { ProjectsRoutingModule } from './projects-routing.module';
  */
 
 @NgModule({
-  imports: [ProjectsRoutingModule, SharedModule, CommonModule, FormsModule],
+  imports: [ProjectsRoutingModule, SharedModule, CommonModule, FormsModule,  WorklistsModule],
   declarations: [ProjectsMainPageComponent, GanttComponent,
                  ActivityAddComponent,ActivitySelectorComponent, ActivityDescriptionComponent,
                  ActivityWorklistComponent, ActivityInfoComponent,

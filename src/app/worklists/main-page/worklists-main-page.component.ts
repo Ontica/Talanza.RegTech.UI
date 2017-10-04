@@ -5,17 +5,34 @@
  * See LICENSE.txt in the project root for complete license information.
  *
  */
-import { Component }  from '@angular/core';
+import { Component, Input }  from '@angular/core';
+
+import { ProjectRef } from '../../projects/data-types/project';
+import { WorkListsService } from '../services/worklists.service';
 
 @Component ({
   selector: 'worklists-main-page',
   templateUrl: './worklists-main-page.component.html',
-  styleUrls: ['./worklists-main-page.component.scss']
+  styleUrls: ['./worklists-main-page.component.scss'],
+  providers: [WorkListsService]
 })
 
 export class WorklistsMainPageComponent {
   
   public isTaskEditorVisible = false;
+  public taskList: any;
+
+  private _project: ProjectRef;
+  @Input() 
+   set project(project: ProjectRef) {
+     this._project = project;
+     this.refreshData();
+   }
+   get project(): ProjectRef {
+    return this._project;
+   }
+
+  constructor (private workListService: WorkListsService) {}
 
   public onCloseTaskEditorWindow(): void {    
     this.isTaskEditorVisible = false;
@@ -27,6 +44,14 @@ export class WorklistsMainPageComponent {
   }
   public onShowTaskEditor(): void {
     this.isTaskEditorVisible = true;
+  }
+
+  private refreshData() {    
+    this.workListService.getTasksList(this.project.uid)
+     .then((data) => {
+       this.taskList = data;        
+       console.log(data);
+     });
   } 
 
 }

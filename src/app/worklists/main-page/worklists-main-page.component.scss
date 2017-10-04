@@ -2,3 +2,7 @@
 table.grid tbody {
   height: calc(100vh - 260px);
 }
+
+table.grid tbody tr {
+  height: 80px;
+}
