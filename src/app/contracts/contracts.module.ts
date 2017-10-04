@@ -37,6 +37,6 @@ import { SafeHtmlPipe } from './view/contract-selected-procedure.component';
                  ClauseInfoTabComponent, RelatedProceduresTabComponent, ContractViewComponent,
                  ContractClauseSelectorComponent, ContractSelectedClauseComponent,
                  ContractSelectedProcedureComponent, ContractFiltersComponent, SafeHtmlPipe],
-  exports: [ContractsMainPageComponent]
+  exports: [ContractsMainPageComponent,  ContractSelectedProcedureComponent]
 })
 export class ContractsModule { }
