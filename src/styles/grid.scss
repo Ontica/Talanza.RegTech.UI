@@ -30,6 +30,8 @@ table.grid tbody {
 
 table.grid tbody tr {
   height: 80px;
+  display: block;
+  overflow: hidden;
 }
 
 table.grid tbody td {
