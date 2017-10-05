@@ -1,0 +1,22 @@
+@import "../../../styles/editor-window-style";
+@import "../../../styles/form";
+:host {
+  position: relative;
+  top: 3%;
+  left: 20%;
+}
+
+.editor-container {
+  height: 600px;
+  width: 720px;
+}
+
+.form-frame {
+  height: 430px;
+  overflow-y: auto;
+}
+
+.form {
+  width: 640px;
+  overflow-y: auto;
+}

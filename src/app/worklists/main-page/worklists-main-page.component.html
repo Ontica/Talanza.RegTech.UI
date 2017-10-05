@@ -10,7 +10,7 @@
   </thead>
   <tbody>
     <tr *ngFor="let task of taskList">
-      <td style="width:25%"><a (click)="onShowTaskEditor()">{{task.name}}</a></td>
+      <td style="width:25%"><a (click)="onShowTaskEditor(task)">{{task.name}}</a></td>
       <td style="width:40%">{{task.notes}}</td>
       <td style="width:5%">{{task.progress}}%</td>
       <td style="width:15%">Solicitada :{{task.requestedBy.name}}<br> Responsable:{{task.responsible.name}} </td>
@@ -33,5 +33,6 @@
   </table>
 </div>
 <div *ngIf="isTaskEditorVisible" class="popup">
-  <task-editor (onCloseEvent)="onCloseTaskEditorWindow()"></task-editor>
+  <!--<task-editor (onCloseEvent)="onCloseTaskEditorWindow()"></task-editor>-->
+  <task-form-editor [task]="selectedTask" (onCloseEvent)="onCloseTaskEditorWindow()"></task-form-editor>
 </div>

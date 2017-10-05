@@ -21,6 +21,7 @@ export class WorklistsMainPageComponent {
   
   public isTaskEditorVisible = false;
   public taskList: any;
+  public selectedTask:any;
 
   private _project: ProjectRef;
   @Input() 
@@ -34,15 +35,17 @@ export class WorklistsMainPageComponent {
 
   constructor (private workListService: WorkListsService) {}
 
-  public onCloseTaskEditorWindow(): void {    
+  public onCloseTaskEditorWindow(): void {        
     this.isTaskEditorVisible = false;
+    this.refreshData();
   }
 
   public onClickAddActivity():void {
     alert("Esta operación se encuentra en desarrollo...");
     
   }
-  public onShowTaskEditor(): void {
+  public onShowTaskEditor(selecctedTask: any): void {
+    this.selectedTask = selecctedTask;  
     this.isTaskEditorVisible = true;
   }
 

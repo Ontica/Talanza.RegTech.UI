@@ -12,6 +12,7 @@ import { Observable } from 'rxjs/Observable';
 import { CoreService } from '../../core';
 
 import { Task } from '../../projects/data-types/task';
+import { TaskRef } from '../data-types/task';
 
 export enum ProjectServiceErr {
   GET_ACTIVITIES_ERR =
@@ -30,6 +31,15 @@ export class WorkListsService {
                          .toPromise();
 
   }
+
+  public updateTasks(projectUID:string, activityUID: string, task: TaskRef): 
+  Observable<TaskRef> {
+  const path = `v1/project-management/projects/${projectUID}/activities/${activityUID}`;
+
+
+  return this.core.http.put<TaskRef>(path,task);
+
+}
 
 }
 
