@@ -15,13 +15,11 @@
       </tr>
       <tr>
         <td>Nombre:</td>
-        <td>
-          <input type="text" class="text-box" [(ngModel)]="selectedTask.name" [disabled]="true">
-        </td>
+        <td>{{selectedTask.name}}</td>
       </tr>
       <tr>
         <td>Observaciones:</td>
-        <td><textarea class="text-area" rows="5" cols="25" [(ngModel)]="selectedTask.notes" [disabled]="true"></textarea></td>
+        <td>{{selectedTask.notes}}</td>
       </tr>
     </table>
     <table class="form">
@@ -30,12 +28,13 @@
       </tr>
       <tr>
         <td>Solicitado:</td>
-        <td><select class="select-box" style="width:380px" [(ngModel)]="selectedTask.requestedByUID" [disabled]="true">
+        <td>{{task.requestedBy.name}}
+          <!--<select class="select-box" style="width:380px" [(ngModel)]="selectedTask.requestedByUID" [disabled]="true">
                <option value="">( Seleccionar )</option>
                 <option *ngFor="let requester of requestersList" 
                         [value]="requester.uid">{{requester.name}}</option>                  
                </select>
-
+              -->
         </td>
       </tr>
       <tr>
@@ -54,14 +53,12 @@
       </tr>
       <tr>
         <td>Fecha de termino:</td>
-        <td><input type="text" id="dueCalendar" class="text-box" style="width:100px" [ngModel]="selectedTask.targetDate | date: 'dd-MM-yyyy'" (target)="selectedTask.targetDate=$value">
+        <td><input type="text" id="dueCalendar" class="text-box" style="width:100px" [ngModel]="selectedTask.targetDate | date: 'dd-MMM-yyyy'" (target)="selectedTask.targetDate=$value">
           <button id="dueButton">..</button></td>
       </tr>
       <tr>
         <td>Fecha Legal:</td>
-        <td>
-          <input type="text" class="text-box" style="width:100px" value="{{task.dueDate | date: 'dd-MM-yyyy'}}" [disabled]="true">
-        </td>
+        <td>{{task.dueDate | date: 'dd-MMM-yyyy'}}</td>
       </tr>
     </table>
     <table class="form">
@@ -70,7 +67,7 @@
       </tr>
       <tr>
         <td>Progreso:</td>
-        <td>{{task.progress * 100}}%
+        <td>
           <select class="select-box" style="width:50px">
           <option value="10">10%</option>
           <option value="20">20%</option>
@@ -81,10 +78,11 @@
           <option value="70">70%</option>
           <option value="80">80%</option>
           <option value="90">90%</option>
+          <option value="100">100%</option>
           </select>
         </td>
-        <td>
-          <button class="btn-warning" (click)="onCloseTask()">Concluir la tarea</button>
+        <td class="text-align-right">
+          <button class="btn" (click)="onCloseTask()">Concluir la tarea</button>
         </td>
       </tr>
 
@@ -97,7 +95,7 @@
           </td>
 
           <td *ngIf="!disabled " class="text-align-right ">
-            <button class="btn" (click)="onUpdateTask()">Actualizar tarea</button>
+            <button class="btn-warning" (click)="onUpdateTask()">Actualizar tarea</button>
           </td>
         </tr>
       </table>
