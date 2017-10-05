@@ -1,3 +1,13 @@
+<div class="editor-container editor-container-style">
+  <div class="tab">
+    <button class="tab-links left-position" [disabled]="isDisabled" [class.selected]="selectedTask==='planned'" (click)="setSelectedTask('planned')">Planeadas</button>
+    <button class="tab-links left-position" [disabled]="isDisabled" [class.selected]="selectedTask==='next'" (click)="setSelectedTask('next')">Siguientes</button>
+    <button class="tab-links left-position" [disabled]="isDisabled" [class.selected]="selectedTask==='inProcess'" (click)="setSelectedTask('inProcess')">En proceso</button>
+    <button class="tab-links left-position" [disabled]="isDisabled" [class.selected]="selectedTask==='finished'" (click)="setSelectedTask('finished')">Terminados</button>
+    <button class="tab-links left-position" [disabled]="isDisabled" [class.selected]="selectedTask==='toRecive'" (click)="setSelectedTask('toRecive')">Por recibir</button>
+    <button class="tab-links left-position" [disabled]="isDisabled" [class.selected]="selectedTask==='allTasks'" (click)="setSelectedTask('alTasks')">Todas las tareas</button>
+  </div>
+</div>
 <table class="grid">
   <thead>
     <tr>
