@@ -9,7 +9,7 @@
 import { Component, EventEmitter, HostBinding, Input,
          Output, OnInit } from '@angular/core';
 
-import { TaskRef, EmptyTask } from '../data-types/Task';
+import { TaskRef, EmptyTask } from '../data-types/task';
 import { WorkListsService } from '../services/worklists.service';
 
 import { PersonRef } from '../../projects/data-types/project';
@@ -31,9 +31,10 @@ export class TaskFormEditorComponent implements OnInit {
   public selectedTask: TaskRef = EmptyTask();
   public requestersList: PersonRef[] = [];
   public responsiblesList: PersonRef[] = [];
+  public isCloseTaskEditorVisible = false;
 
-  private dueDateCalendar: any;
-  private eventDateCalendar: any;
+  private dueCalendar: any;
+  private eventCalendar: any;
 
   private _task: any;
   @Input()
@@ -58,6 +59,7 @@ export class TaskFormEditorComponent implements OnInit {
   public cancel(): void {
     this.onClose();
   }
+
   public onClose(): void {
     this.onCloseEvent.emit();
   }
@@ -66,6 +68,14 @@ export class TaskFormEditorComponent implements OnInit {
     this.setDateCalendar();
     await this.updateTask();   
     alert("La tarea se ha actuaizado...");
+    this.onClose();
+  }
+
+  public onCloseTask(): void {
+    this.isCloseTaskEditorVisible  = true;
+  }
+
+  public onCloseTaskEditorIsClosed(): void {
     this.onClose();
   }
 
@@ -81,7 +91,7 @@ export class TaskFormEditorComponent implements OnInit {
     this.selectedTask.requestedByUID = this.task.requestedBy.uid;
     this.selectedTask.responsibleUID = this.task.responsible.uid;
     this.selectedTask.resourceUID = this.task.resource.uid;
-    this.selectedTask.dueDate = this.task.dueDate;   
+    this.selectedTask.targetDate = this.task.targetDate;   
     this.selectedTask.requestedTime = this.task.startDate; 
     this.selectedTask.startDate = this.task.startDate; 
   }
@@ -129,16 +139,16 @@ export class TaskFormEditorComponent implements OnInit {
   }
 
   private createCalendars(): void {
-    this.dueDateCalendar = new dhtmlXCalendarObject({ input: "dueDateCalendar", button: "dueDateButton" });
+    this.dueCalendar = new dhtmlXCalendarObject({ input: "dueCalendar", button: "dueButton" });
 
   }
 
   private setCalendarsDateFormat(): void {
-    this.eventDateCalendar.setDateFormat("%dd/%mm/%YYYY");
+    this.eventCalendar.setDateFormat("%dd/%mm/%YYYY");
   }
 
   private setDateCalendar(): void {
-    this.selectedTask.dueDate = this.dueDateCalendar.getDate(true);   
+    this.selectedTask.targetDate = this.dueCalendar.getDate(true);   
   }
 
 }

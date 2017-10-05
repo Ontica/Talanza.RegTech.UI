@@ -5,68 +5,73 @@
     <div class="subtitle"><b>{{task.project.name}}</b>
     </div>
   </div>
-  <table class="form">
-    <tr>
-      <td class="form-title form-title-text" colspan="2">Información General</td>
-    </tr>
-    <tr>
-      <td>Nombre:</td>
-      <td>
-        <input type="text" class="text-box" [(ngModel)]="selectedTask.name" [disabled]="true">
-      </td>
-    </tr>
-    <tr>
-      <td>Observaciones:</td>
-      <td><textarea class="text-area" rows="5" cols="25" [(ngModel)]="selectedTask.notes" [disabled]="true"></textarea></td>
-    </tr>
-  </table>
-  <table class="form">
-    <tr>
-      <td class="form-title form-title-text" colspan="2">Asignado y solicitado</td>
-    </tr>
-    <tr>
-      <td>Solicitado:</td>
-      <td><select class="select-box" style="width:380px" [(ngModel)]="selectedTask.requestedByUID" [disabled]="true">
+  <div *ngIf="isCloseTaskEditorVisible">
+    <task-close [task]="task" (onCloseEvent)="onCloseTaskEditorIsClosed()"></task-close>
+  </div>
+  <div *ngIf="!isCloseTaskEditorVisible">
+    <table class="form">
+      <tr>
+        <td class="form-title form-title-text" colspan="2">Información General</td>
+      </tr>
+      <tr>
+        <td>Nombre:</td>
+        <td>
+          <input type="text" class="text-box" [(ngModel)]="selectedTask.name" [disabled]="true">
+        </td>
+      </tr>
+      <tr>
+        <td>Observaciones:</td>
+        <td><textarea class="text-area" rows="5" cols="25" [(ngModel)]="selectedTask.notes" [disabled]="true"></textarea></td>
+      </tr>
+    </table>
+    <table class="form">
+      <tr>
+        <td class="form-title form-title-text" colspan="2">Asignado y solicitado</td>
+      </tr>
+      <tr>
+        <td>Solicitado:</td>
+        <td><select class="select-box" style="width:380px" [(ngModel)]="selectedTask.requestedByUID" [disabled]="true">
                <option value="">( Seleccionar )</option>
                 <option *ngFor="let requester of requestersList" 
                         [value]="requester.uid">{{requester.name}}</option>                  
                </select>
 
-      </td>
-    </tr>
-    <tr>
-      <td>Responsable:</td>
-      <td><select class="select-box" style="width:380px" [(ngModel)]="selectedTask.responsibleUID">
+        </td>
+      </tr>
+      <tr>
+        <td>Responsable:</td>
+        <td><select class="select-box" style="width:380px" [(ngModel)]="selectedTask.responsibleUID">
                <option value="">( Seleccionar )</option>
                <option *ngFor="let responsible of responsiblesList" 
                        [value]="responsible.uid">{{responsible.name}}</option>            
                </select>
-      </td>
-    </tr>
-  </table>
-  <table class="form">
-    <tr>
-      <td class="form-title form-title-text" colspan="2">Fechas importantes</td>
-    </tr>
-    <tr>
-      <td>Fecha de termino:</td>
-      <td><input type="text" id="dueDateCalendar" class="text-box" style="width:100px" [ngModel]="selectedTask.dueDate | date: 'dd-MM-yyyy'" (target)="selectedTask.dueDate=$value">
-        <button id="dueDateButton">..</button></td>
-    </tr>
-    <tr>
-      <td>Fecha Legal:</td>
-      <td>
-        <input type="text" class="text-box" style="width:100px" value="{{task.deadline | date: 'dd-MM-yyyy'}}" [disabled]="true">
-      </td>
-    </tr>
-  </table>
-  <table class="form">
-    <tr>
-      <td class="form-title form-title-text" colspan="3">Progreso</td>
-    </tr>
-    <tr>
-      <td>Progreso:</td>
-      <td><select class="select-box" style="width:50px">
+        </td>
+      </tr>
+    </table>
+    <table class="form">
+      <tr>
+        <td class="form-title form-title-text" colspan="2">Fechas importantes</td>
+      </tr>
+      <tr>
+        <td>Fecha de termino:</td>
+        <td><input type="text" id="dueCalendar" class="text-box" style="width:100px" [ngModel]="selectedTask.targetDate | date: 'dd-MM-yyyy'" (target)="selectedTask.targetDate=$value">
+          <button id="dueButton">..</button></td>
+      </tr>
+      <tr>
+        <td>Fecha Legal:</td>
+        <td>
+          <input type="text" class="text-box" style="width:100px" value="{{task.dueDate | date: 'dd-MM-yyyy'}}" [disabled]="true">
+        </td>
+      </tr>
+    </table>
+    <table class="form">
+      <tr>
+        <td class="form-title form-title-text" colspan="3">Progreso</td>
+      </tr>
+      <tr>
+        <td>Progreso:</td>
+        <td>{{task.progress * 100}}%
+          <select class="select-box" style="width:50px">
           <option value="10">10%</option>
           <option value="20">20%</option>
           <option value="30">30%</option>
@@ -77,24 +82,25 @@
           <option value="80">80%</option>
           <option value="90">90%</option>
           </select>
-      </td>
-      <td>
-        <button class="btn-warning">Concluir la tarea</button>
-      </td>
-    </tr>
-
-  </table>
-  <div class="form-footer ">
-    <table class="form">
-      <tr>
-        <td class="text-align-center ">
-          <button class="btn" [disabled]="disabled" (click)="cancel() ">Cancelar</button>
         </td>
-
-        <td *ngIf="!disabled " class="text-align-right ">
-          <button class="btn" (click)="onUpdateTask()">Actualizar tarea</button>
+        <td>
+          <button class="btn-warning" (click)="onCloseTask()">Concluir la tarea</button>
         </td>
       </tr>
+
     </table>
+    <div class="form-footer ">
+      <table class="form">
+        <tr>
+          <td class="text-align-center ">
+            <button class="btn" [disabled]="disabled" (click)="cancel() ">Cancelar</button>
+          </td>
+
+          <td *ngIf="!disabled " class="text-align-right ">
+            <button class="btn" (click)="onUpdateTask()">Actualizar tarea</button>
+          </td>
+        </tr>
+      </table>
+    </div>
   </div>
 </div>
