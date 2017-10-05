@@ -4,10 +4,10 @@ export interface TaskRef {
   notes: string,
   resourceUID: string,
   startDate: Date,
-  dueDate: Date,
-  requestedByUID:string,
+  targetDate: Date,
+  requestedByUID: string,
   requestedTime: Date,
-  responsibleUID:string 
+  responsibleUID: string 
  
   }
   
@@ -17,11 +17,25 @@ export interface TaskRef {
       notes: '',
       resourceUID: '',
       startDate: new Date(),
-      dueDate: new Date(),
+      targetDate: new Date(),
       requestedByUID: '',
       requestedTime:new Date(),
       responsibleUID:'' 
     }
   
+    return empty;
+  }
+
+  export interface ClosedTask {
+    endDate: Date,
+    requestedByUID: string
+  }
+
+  export function EmptyClosedTask() {
+    const empty: ClosedTask = {
+      endDate: new Date(),
+      requestedByUID: ''
+    }
+
     return empty;
   }

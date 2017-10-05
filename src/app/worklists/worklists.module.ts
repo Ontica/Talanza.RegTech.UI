@@ -22,6 +22,7 @@ import { TaskDeliverablesComponent } from './editor/tabs/task-deliverables.compo
 import { WorklistsRoutingModule } from './worklists-routing.module';
 
 import { TaskFormEditorComponent } from './editor/task-form-editor.component';
+import { TaskCloseComponent } from './editor/task-close.component';
 
 /**
  * Do not specify providers for modules that might be imported by a lazy loaded module.
@@ -31,7 +32,7 @@ import { TaskFormEditorComponent } from './editor/task-form-editor.component';
   imports: [WorklistsRoutingModule, SharedModule, CommonModule, FormsModule],
   declarations: [WorklistsMainPageComponent, TaskEditorComponent, TaskHistoryComponent,
                  TaskControlAndStateComponent, TaskReferencesComponent,
-                 TaskDeliverablesComponent, TaskFormEditorComponent],
+                 TaskDeliverablesComponent, TaskFormEditorComponent, TaskCloseComponent],
   exports: [WorklistsMainPageComponent]
 })
 export class WorklistsModule { }

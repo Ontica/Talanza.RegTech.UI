@@ -12,7 +12,7 @@ import { Observable } from 'rxjs/Observable';
 import { CoreService } from '../../core';
 
 import { Task } from '../../projects/data-types/task';
-import { TaskRef } from '../data-types/task';
+import { TaskRef, ClosedTask } from '../data-types/task';
 
 export enum ProjectServiceErr {
   GET_ACTIVITIES_ERR =
@@ -39,6 +39,12 @@ export class WorkListsService {
 
   return this.core.http.put<TaskRef>(path,task);
 
+}
+
+public closeTask(projectUID:string, activityUID:string, closeTask: ClosedTask): Observable<any[]> {
+  const path = `v1/project-management/projects/${projectUID}/activities/${activityUID}/close`;
+                
+  return this.core.http.post<any[]>(path, closeTask);
 }
 
 }

@@ -1,0 +1,60 @@
+<div class="editor-container editor-container-style">
+
+  <table class="form">
+    <tr>
+      <td class="form-title form-title-text" colspan="2">Fecha de termino</td>
+    </tr>
+    <tr>
+      <td>Fecha de termino:</td>
+      <td><input type="text" id="dueDateCalendar" class="text-box" style="width:100px" [ngModel]="endDate | date: 'dd-MM-yyyy'" (target)="endDate=$value">
+        <button id="dueDateButton">..</button></td>
+    </tr>
+  </table>
+  <table class="form">
+    <tr>
+      <td class="form-title form-title-text" colspan="2">Información</td>
+    </tr>
+    <tr>
+      <td>Observaciones:</td>
+      <td>{{task.notes}}</td>
+    </tr>
+    <tr>
+      <td>Solicitada por:</td>
+      <td>{{task.requestedBy.name}}</td>
+    </tr>
+    <tr>
+      <td>Responsable:</td>
+      <td>{{task.responsible.name}}</td>
+    </tr>
+    <tr>
+      <td>Tarea padre:</td>
+      <td>{{task.parent.name}}</td>
+    </tr>
+    <tr>
+      <td>Fecha legal:</td>
+      <td>{{task.dueDate | date: 'dd-MM-yyyy'}}</td>
+    </tr>
+    <tr>
+      <td>Fecha de inicio:</td>
+      <td>{{task.startDate | date: 'dd-MM-yyyy'}}</td>
+    </tr>
+    <tr>
+      <td>Tiempo esperado:</td>
+      <td>{{task.estimatedDuration}}</td>
+    </tr>
+  </table>
+
+  <div class="form-footer ">
+    <table class="form">
+      <tr>
+        <td class="text-align-center ">
+          <button class="btn" (click)="cancel() ">Cancelar</button>
+        </td>
+
+        <td class="text-align-right ">
+          <button class="btn-warning" (click)="onCloseTask()">Concluir la tarea</button>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
