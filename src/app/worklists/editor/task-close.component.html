@@ -2,16 +2,6 @@
 
   <table class="form">
     <tr>
-      <td class="form-title form-title-text" colspan="2">Fecha de termino</td>
-    </tr>
-    <tr>
-      <td>Fecha de termino:</td>
-      <td><input type="text" id="dueDateCalendar" class="text-box" style="width:100px" [ngModel]="endDate | date: 'dd-MM-yyyy'" (target)="endDate=$value">
-        <button id="dueDateButton">..</button></td>
-    </tr>
-  </table>
-  <table class="form">
-    <tr>
       <td class="form-title form-title-text" colspan="2">Información</td>
     </tr>
     <tr>
@@ -32,15 +22,25 @@
     </tr>
     <tr>
       <td>Fecha legal:</td>
-      <td>{{task.dueDate | date: 'dd-MM-yyyy'}}</td>
+      <td>{{task.dueDate | date: 'dd-MMM-yyyy'}}</td>
     </tr>
     <tr>
       <td>Fecha de inicio:</td>
-      <td>{{task.startDate | date: 'dd-MM-yyyy'}}</td>
+      <td>{{task.startDate | date: 'dd-MMM-yyyy'}}</td>
     </tr>
     <tr>
       <td>Tiempo esperado:</td>
       <td>{{task.estimatedDuration}}</td>
+    </tr>
+  </table>
+  <table class="form">
+    <tr>
+      <td class="form-title form-title-text" colspan="2">Fecha de termino</td>
+    </tr>
+    <tr>
+      <td>Fecha de termino:</td>
+      <td><input type="text" id="dueDateCalendar" class="text-box" style="width:100px" [ngModel]="endDate | date: 'dd-MM-yyyy'" (target)="endDate=$value">
+        <button id="dueDateButton">..</button></td>
     </tr>
   </table>
 

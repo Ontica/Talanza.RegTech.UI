@@ -23,7 +23,7 @@ export class TaskCloseComponent implements OnInit{
   private _task: any;
   @Input()
   set task(task: any) {
-    this._task = task;     
+    this._task = task;  
   }
   get task(): any {
     return this._task;
@@ -69,7 +69,7 @@ export class TaskCloseComponent implements OnInit{
   }
 
   private setCalendarsDateFormat(): void {
-    this.eventDateCalendar.setDateFormat("%dd/%mm/%YYYY");  
+    this.dueDateCalendar.setDateFormat("%d/%m/%YY");  
   }
 
   private setDateCalendar(): void {
