@@ -29,12 +29,12 @@ export class TaskFormEditorComponent implements OnInit {
   @HostBinding('style.position') public position = 'absolute';
 
   public selectedTask: TaskRef = EmptyTask();
-  public requestersList: PersonRef[] = [];
+ 
   public responsiblesList: PersonRef[] = [];
   public isCloseTaskEditorVisible = false;
 
-  private dueCalendar: any;
-  private eventCalendar: any;
+  private eventDateCalendar: any; 
+  private endDateCalendar: any;
 
   private _task: any;
   @Input()
@@ -79,9 +79,7 @@ export class TaskFormEditorComponent implements OnInit {
     this.onClose();
   }
 
-  private loadLists(): void {
-
-    this.loadRequestersList();
+  private loadLists(): void {   
     this.loadResponsiblesList();
   }
 
@@ -95,15 +93,7 @@ export class TaskFormEditorComponent implements OnInit {
     this.selectedTask.requestedTime = this.task.startDate; 
     this.selectedTask.startDate = this.task.startDate; 
   }
-
-  private loadRequestersList(): void {
-    const errMsg = 'Ocurrió un problema al intentar leer la lista de solicitantes.';
-
-    this.activityService.getRequestersList(this.task.project.uid)
-      .toPromise()
-      .then((x) => this.requestersList = x)
-      .catch((e) => this.exceptionHandler(e, errMsg));
-  }
+ 
 
   private loadResponsiblesList(): void {
     const errMsg = 'Ocurrió un problema al intentar leer la lista de responsables.';
@@ -139,16 +129,15 @@ export class TaskFormEditorComponent implements OnInit {
   }
 
   private createCalendars(): void {
-    this.dueCalendar = new dhtmlXCalendarObject({ input: "dueCalendar", button: "dueButton" });
-
+    this.endDateCalendar = new dhtmlXCalendarObject({ input: "endDateCalendar", button: "endDateCalendarButton" });
   }
 
   private setCalendarsDateFormat(): void {
-    this.eventCalendar.setDateFormat("%dd/%mm/%YYYY");
+    this.endDateCalendar.setDateFormat("%d-%m-%Y");
   }
 
   private setDateCalendar(): void {
-    this.selectedTask.targetDate = this.dueCalendar.getDate(true);   
+    this.selectedTask.targetDate = this.endDateCalendar.getDate();
   }
 
 }

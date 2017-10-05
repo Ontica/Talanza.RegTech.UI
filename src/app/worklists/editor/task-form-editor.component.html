@@ -28,14 +28,7 @@
       </tr>
       <tr>
         <td>Solicitado:</td>
-        <td>{{task.requestedBy.name}}
-          <!--<select class="select-box" style="width:380px" [(ngModel)]="selectedTask.requestedByUID" [disabled]="true">
-               <option value="">( Seleccionar )</option>
-                <option *ngFor="let requester of requestersList" 
-                        [value]="requester.uid">{{requester.name}}</option>                  
-               </select>
-              -->
-        </td>
+        <td>{{task.requestedBy.name}}</td>
       </tr>
       <tr>
         <td>Responsable:</td>
@@ -53,8 +46,11 @@
       </tr>
       <tr>
         <td>Fecha de termino:</td>
-        <td><input type="text" id="dueCalendar" class="text-box" style="width:100px" [ngModel]="selectedTask.targetDate | date: 'dd-MMM-yyyy'" (target)="selectedTask.targetDate=$value">
-          <button id="dueButton">..</button></td>
+        <td>
+          <input type="text" id="endDateCalendar" class="text-box" style="width:100px">
+          <button id="endDateCalendarButton">..</button>
+          <!--[ngModel]="activity.estimatedEnd | date:'dd-MM-yyyy'" (target)="activity.estimatedEnd=$event"-->
+        </td>
       </tr>
       <tr>
         <td>Fecha Legal:</td>
@@ -68,7 +64,7 @@
       <tr>
         <td>Progreso:</td>
         <td>
-          <select class="select-box" style="width:50px">
+          <select class="select-box" style="width:60px">
           <option value="10">10%</option>
           <option value="20">20%</option>
           <option value="30">30%</option>
