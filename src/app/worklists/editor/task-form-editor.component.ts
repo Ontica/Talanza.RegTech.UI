@@ -12,8 +12,8 @@ import { Component, EventEmitter, HostBinding, Input,
 import { TaskRef, EmptyTask } from '../data-types/task';
 import { WorkListsService } from '../services/worklists.service';
 
-import { PersonRef } from '../../projects/data-types/project';
-import { ActivityService } from '../../projects/services/activity.service';
+import { PersonRef } from '../data-types/project';
+import { ActivityService } from '../services/activity.service';
 
 declare var dhtmlXCalendarObject: any;
 

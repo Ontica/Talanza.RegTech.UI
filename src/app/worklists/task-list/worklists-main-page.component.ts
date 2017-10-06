@@ -7,7 +7,7 @@
  */
 import { Component, Input }  from '@angular/core';
 
-import { ProjectRef } from '../../projects/data-types/project';
+import { ProjectRef } from '../data-types/project';
 import { WorkListsService } from '../services/worklists.service';
 
 @Component ({

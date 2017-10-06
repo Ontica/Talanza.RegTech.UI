@@ -11,7 +11,7 @@ import { Observable } from 'rxjs/Observable';
 
 import { CoreService } from '../../core';
 
-import { Task } from '../../projects/data-types/task';
+import { Task } from '../data-types/task';
 import { TaskRef, ClosedTask } from '../data-types/task';
 
 export enum ProjectServiceErr {

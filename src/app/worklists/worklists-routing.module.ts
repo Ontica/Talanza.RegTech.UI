@@ -13,14 +13,14 @@ import { SecurityGuardService } from '../core';
 
 import { MainLayoutComponent } from '../shared';
 
-import { WorklistsMainPageComponent } from '../worklists/main-page/worklists-main-page.component';
+import { ProjectsMainPageComponent } from './main-page/projects-main-page.component';
 
 @NgModule({
   imports: [
     RouterModule.forChild([
       {
-        path: 'worklists', component: MainLayoutComponent, canActivate: [SecurityGuardService],
-        children: [{ path: 'search', component: WorklistsMainPageComponent }]
+        path: 'projects', component: MainLayoutComponent, canActivate: [SecurityGuardService],
+        children: [{ path: 'search', component: ProjectsMainPageComponent }]
       }
     ])],
   exports: [RouterModule]
