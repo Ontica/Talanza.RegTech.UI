@@ -13,12 +13,6 @@ import { SharedModule } from '../shared/shared.module';
 
 import { WorklistsMainPageComponent } from './main-page/worklists-main-page.component';
 
-import { TaskEditorComponent } from './editor/task-editor.component';
-import { TaskHistoryComponent } from './editor/tabs/task-history.component';
-import { TaskControlAndStateComponent } from './editor/tabs/task-control-and-state.component';
-import { TaskReferencesComponent } from './editor/tabs/task-references.component';
-import { TaskDeliverablesComponent } from './editor/tabs/task-deliverables.component';
-
 import { WorklistsRoutingModule } from './worklists-routing.module';
 
 import { TaskFormEditorComponent } from './editor/task-form-editor.component';
@@ -30,9 +24,8 @@ import { TaskCloseComponent } from './editor/task-close.component';
 
 @NgModule({
   imports: [WorklistsRoutingModule, SharedModule, CommonModule, FormsModule],
-  declarations: [WorklistsMainPageComponent, TaskEditorComponent, TaskHistoryComponent,
-                 TaskControlAndStateComponent, TaskReferencesComponent,
-                 TaskDeliverablesComponent, TaskFormEditorComponent, TaskCloseComponent],
+  declarations: [WorklistsMainPageComponent, 
+                 TaskFormEditorComponent, TaskCloseComponent],                 
   exports: [WorklistsMainPageComponent]
 })
 export class WorklistsModule { }
