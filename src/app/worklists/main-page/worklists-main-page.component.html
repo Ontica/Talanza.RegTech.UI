@@ -14,7 +14,7 @@
       <th style="width:25%">Tarea</th>
       <th style="width:39%">Observaciones</th>
       <th style="width:5%">Progreso</th>
-      <th style="width:15%">Solicitada/Responsable</th>
+      <th style="width:15%">Responsable</th>
       <th style="width:15%">Fechas</th>
     </tr>
   </thead>
@@ -23,7 +23,7 @@
       <td style="width:25%"><a (click)="onShowTaskEditor(task)">{{task.name}}</a></td>
       <td style="width:40%">{{task.notes}}</td>
       <td style="width:5%">{{task.progress}}%</td>
-      <td style="width:15%">Solicitada :{{task.requestedBy.name}}<br> Responsable:{{task.responsible.name}} </td>
+      <td style="width:15%">Responsable:{{task.responsible.name}} </td>
       <td style="width:15%">Objetivo:{{task.targetDate | date: 'dd/MMM/yyyy'}} <br> Legal:{{task.dueDate | date: 'dd/MMM/yyyy'}} </td>
     </tr>
 
