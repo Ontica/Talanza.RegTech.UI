@@ -15,11 +15,11 @@
       </tr>
       <tr>
         <td>Nombre:</td>
-        <td>{{selectedTask.name}}</td>
+        <td> <input type="text" class="text-box" [(ngModel)]="selectedTask.name"></td>
       </tr>
       <tr>
         <td>Observaciones:</td>
-        <td>{{selectedTask.notes}}</td>
+        <td><textarea class="text-area" rows="5" cols="25" [(ngModel)]="selectedTask.notes"></textarea></td>
       </tr>
     </table>
     <table class="form">
@@ -27,13 +27,10 @@
         <td class="form-title form-title-text" colspan="2">Asignado y solicitado</td>
       </tr>
       <tr>
-        <td>Solicitado:</td>
-        <td>{{task.requestedBy.name}}</td>
-      </tr>
-      <tr>
         <td>Responsable:</td>
         <td><select class="select-box" style="width:380px" [(ngModel)]="selectedTask.responsibleUID">
                <option value="">( Seleccionar )</option>
+               <option value="undefined">No asignado</option>
                <option *ngFor="let responsible of responsiblesList" 
                        [value]="responsible.uid">{{responsible.name}}</option>            
                </select>
@@ -65,6 +62,7 @@
         <td>Progreso:</td>
         <td>
           <select class="select-box" style="width:60px">
+          <option value="0">0%</option>
           <option value="10">10%</option>
           <option value="20">20%</option>
           <option value="30">30%</option>
