@@ -69,7 +69,7 @@ export class TaskCloseComponent implements OnInit{
   }
 
   private setCalendarsDateFormat(): void {
-    this.dueDateCalendar.setDateFormat("%d/%m/%YY");  
+    this.dueDateCalendar.setDateFormat("%d/%m/%Y");  
   }
 
   private setDateCalendar(): void {

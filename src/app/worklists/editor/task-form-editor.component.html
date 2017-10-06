@@ -30,7 +30,7 @@
         <td>Responsable:</td>
         <td><select class="select-box" style="width:380px" [(ngModel)]="selectedTask.responsibleUID">
                <option value="">( Seleccionar )</option>
-               <option value="undefined">No asignado</option>
+               <option value="Undefined">No asignado</option>
                <option *ngFor="let responsible of responsiblesList" 
                        [value]="responsible.uid">{{responsible.name}}</option>            
                </select>
