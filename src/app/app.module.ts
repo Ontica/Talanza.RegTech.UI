@@ -37,7 +37,6 @@ import { DocumentsModule } from './documents/documents.module';
 import { ProcessModule } from './process/process.module';
 import { ContractsModule } from './contracts/contracts.module';
 import { ProjectsModule } from './projects/projects.module';
-import { ProjectManagerModule } from './project-manager/project-manager.module';
 import { WorklistsModule } from './worklists/worklists.module';
 import { SharedModule } from './shared/shared.module';
 
@@ -84,8 +83,7 @@ type StoreType = {
     DashboardModule,
     DocumentsModule,
     ProcessModule,
-    ProjectsModule,
-    ProjectManagerModule,
+    ProjectsModule,  
     WorklistsModule,
     SharedModule,
     BrowserModule,
