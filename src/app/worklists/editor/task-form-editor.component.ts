@@ -92,6 +92,7 @@ export class TaskFormEditorComponent implements OnInit {
     this.selectedTask.targetDate = this.task.targetDate;   
     this.selectedTask.requestedTime = this.task.startDate; 
     this.selectedTask.startDate = this.task.startDate; 
+    this.selectedTask.progress = this.task.progress;
   }
  
 

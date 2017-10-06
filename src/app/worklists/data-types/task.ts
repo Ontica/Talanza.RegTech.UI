@@ -8,7 +8,7 @@ export interface TaskRef {
   requestedByUID: string,
   requestedTime: Date,
   responsibleUID: string 
- 
+  progress: number;
   }
   
   export function EmptyTask() {
@@ -20,7 +20,8 @@ export interface TaskRef {
       targetDate: new Date(),
       requestedByUID: '',
       requestedTime:new Date(),
-      responsibleUID:'' 
+      responsibleUID:'',
+      progress: 0
     }
   
     return empty;
