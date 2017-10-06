@@ -1,12 +1,13 @@
 @import "../../../styles/grid";
-@import "../../../styles/editor-window-style";
+
+/*@import "../../../styles/editor-window-style";
 .editor-container {
   height: 45px;
   width: 60%;
-}
+}*/
 
 table.grid tbody {
-  height: calc(100vh - 260px - 45px);
+  height: calc(100vh - 260px);
 }
 
 table.grid tbody tr {
