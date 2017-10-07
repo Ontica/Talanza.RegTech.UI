@@ -10,6 +10,21 @@ table.grid tbody {
   height: calc(100vh - 260px);
 }
 
-table.grid tbody tr {
+table.grid tbody tr td {
   height: 80px;
+}
+
+.summary-level1 {
+  padding-left: 5px;
+  background-color: goldenrod;
+}
+
+.summary-level2 {
+  padding-left: 35px;
+  background-color: green;
+}
+
+.summary-level3 {
+  padding-left: 55px;
+  background-color: darkorange;
 }

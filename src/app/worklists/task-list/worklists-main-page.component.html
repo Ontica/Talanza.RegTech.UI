@@ -19,15 +19,21 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let task of taskList">
-      <td style="width:25%"><a (click)="onShowTaskEditor(task)">{{task.name}}</a></td>
-      <td style="width:40%">{{task.notes}}</td>
-      <td style="width:5%">{{task.progress}}%</td>
-      <td style="width:15%">Responsable:{{task.responsible.name}} </td>
-      <td style="width:15%">Objetivo:{{task.targetDate | date: 'dd/MMM/yyyy'}} <br> Legal:{{task.dueDate | date: 'dd/MMM/yyyy'}} </td>
-    </tr>
-
-
+    <ng-container *ngFor="let task of taskList">
+      <tr [ngSwitch]="task.type">
+        <ng-template [ngSwitchCase]="'ObjectType.ProjectObject.Activity'">
+          <td style="width:25%"><a (click)="onShowTaskEditor(task)">{{task.name}}</a></td>
+          <td style="width:40%">{{task.notes}}</td>
+          <td style="width:5%">{{task.progress}}%</td>
+          <td style="width:15%">Responsable:{{task.responsible.name}} </td>
+          <td style="width:15%">Objetivo:{{task.targetDate | date: 'dd/MMM/yyyy'}} <br> Legal:{{task.dueDate | date: 'dd/MMM/yyyy'}} </td>
+        </ng-template>
+        <ng-template [ngSwitchCase]="'ObjectType.ProjectObject.Summary'">
+          <td style="width:100%" colspan="5">
+            <span [ngClass]="setSummaryCSSClass(task.level)">{{task.name}}</span> </td>
+        </ng-template>
+      </tr>
+    </ng-container>
   </tbody>
 </table>
 

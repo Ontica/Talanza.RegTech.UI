@@ -49,6 +49,16 @@ export class WorklistsMainPageComponent {
     this.isTaskEditorVisible = true;
   }
 
+  public setSummaryCSSClass(level: number) : string {  
+    switch(level) {
+      case 1 : return 'summary-level1';
+      case 2 : return 'summary-level2';
+      case 3 : return 'summary-level3';
+      default: return 'summary-level1';
+    }
+    
+  }
+
   private refreshData() {    
     this.workListService.getTasksList(this.project.uid)
      .then((data) => {
