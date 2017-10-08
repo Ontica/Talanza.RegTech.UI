@@ -2,10 +2,11 @@
 <table class="grid">
   <thead>
     <tr>
-      <th>Trámite / Homoclave</th>
-      <th>Dependencia</th>
-      <th>Tema</th>
-      <th>Etapa</th>
+      <th style='width:40%'>Trámite / Homoclave</th>
+      <th style='width:100px'>Dependencia</th>
+      <th style='width:15%'>Tema</th>
+      <th style='width:20%'>Tipo proyecto / Ejecución</th>
+      <th style='width:20%'></th>
     </tr>
   </thead>
   <tbody>
@@ -15,9 +16,12 @@
         <br/>
         <u>{{procedure.code}}</u>
       </td>
-      <td>{{procedure.entity}}</td>
-      <td>{{procedure.theme}}</td>
-      <td>{{procedure.stage}}</td>
+      <td style='width:100px'>{{procedure.entity}}</td>
+      <td style='width:15%'>{{procedure.theme}}</td>
+      <td style='width:20%'>
+        Proyecto: &nbsp;{{procedure.projectType}}<br/>Ejecución: {{procedure.executionMode}}
+      </td>
+      <th style='width:20%'></th>
     </tr>
   </tbody>
 </table>
@@ -25,7 +29,7 @@
 <div class="grid-footer">
   <table class="grid-footer-style">
     <tr>
-      <td class="grid-footer-items">{{procedures.length}} Trámites encontrados</td>
+      <td class="grid-footer-items">{{procedures.length}} trámites encontrados</td>
       <td class="grid-footer-items text-align-center">
 
       </td>

@@ -23,7 +23,7 @@ export class TaskCloseComponent implements OnInit{
   private _task: any;
   @Input()
   set task(task: any) {
-    this._task = task;  
+    this._task = task;
   }
   get task(): any {
     return this._task;
@@ -38,7 +38,7 @@ export class TaskCloseComponent implements OnInit{
   }
 
   public async onCloseTask() {
-    
+
     if (!this.validateDueDate()) {
      return;
     }
@@ -47,8 +47,8 @@ export class TaskCloseComponent implements OnInit{
     this.closedTask.requestedByUID = this.task.requestedBy.uid;
 
     await this.closeTask();
-    alert("La tarea sea cerrado correctamente");    
-    this.onClose();     
+
+    this.onClose();
    }
 
    public cancel(): void {
@@ -69,21 +69,21 @@ export class TaskCloseComponent implements OnInit{
   }
 
   private setCalendarsDateFormat(): void {
-    this.dueDateCalendar.setDateFormat("%d/%m/%Y");  
+    this.dueDateCalendar.setDateFormat("%d/%m/%Y");
   }
 
   private setDateCalendar(): void {
-    this.endDate = this.dueDateCalendar.getDate();   
-  } 
+    this.endDate = this.dueDateCalendar.getDate();
+  }
 
-  private validateDueDate(): boolean {   
+  private validateDueDate(): boolean {
     this.setDateCalendar()
-    let dueDate = new Date(this.task.dueDate);    
-     this.endDate.setHours(0,0,0,0);    
+    let dueDate = new Date(this.task.dueDate);
+     this.endDate.setHours(0,0,0,0);
      if (this.endDate <= dueDate) {
        return true;
      } else {
-      alert("La fecha de termino es mayor que la fecha legal...");
+      alert("La fecha de término no puede ser posterior a la fecha legal...");
       return false;
      }
   }
@@ -91,7 +91,7 @@ export class TaskCloseComponent implements OnInit{
   private closeTask(): void {
     const errMsg = 'Ocurrió un problema al intentar crear la actividad.';
 
-    this.workListsService.closeTask(this.task.project.uid,this.task.uid, this.closedTask)    
+    this.workListsService.closeTask(this.task.project.uid,this.task.uid, this.closedTask)
                         .toPromise()
                         .then()
                         .catch((e) => this.exceptionHandler(e, errMsg));

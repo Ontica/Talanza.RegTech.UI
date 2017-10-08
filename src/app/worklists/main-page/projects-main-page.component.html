@@ -16,28 +16,28 @@
 
   <tr>
     <td>Filtrar:</td>
-    <td><select class="select-box" style="width:320px">
-                <option value="">( No filtrar )</option>
-                <option value="Trámites gubernamentales">Trámites gubernamentales</option>
-          </select>
+    <td>
+      <select class="select-box" style="width:320px">
+        <option value="">( No filtrar )</option>
+      </select>
     </td>
     <td>Responsable:</td>
     <td>
       <select style="width:385px" class="select-box">
         <option value="">( No filtrar ) </option>
-        <option value="112">Juan Carlos Palma Rodríguez</option>
       </select>
     </td>
     <td>Mostrar:</td>
     <td>
       <select style="width:138px" class="select-box" [(ngModel)]="selectedView">
         <option value="tasksList">Asignación de tareas</option>
-        <option value="kanban">Tablero Kanban</option>       
-        <option value=""></option>          
+        <option value="kanban">Tablero Kanban</option>
+        <option value="calendar">Calendario</option>
+        <option value=""></option>
         <option value="ganttQuarters">Gantt (trimestres)</option>
         <option value="ganttMonths">Gantt (meses)</option>
         <option value="ganttWeeks">Gantt (semanas)</option>
-        </select>
+      </select>
     </td>
   </tr>
 

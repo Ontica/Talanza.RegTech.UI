@@ -29,11 +29,11 @@ export class TaskFormEditorComponent implements OnInit {
   @HostBinding('style.position') public position = 'absolute';
 
   public selectedTask: TaskRef = EmptyTask();
- 
+
   public responsiblesList: PersonRef[] = [];
   public isCloseTaskEditorVisible = false;
 
-  private eventDateCalendar: any; 
+  private eventDateCalendar: any;
   private endDateCalendar: any;
 
   private _task: any;
@@ -49,7 +49,7 @@ export class TaskFormEditorComponent implements OnInit {
 
   @Output() public onCloseEvent = new EventEmitter();
 
-  public constructor(private activityService: ActivityService, 
+  public constructor(private activityService: ActivityService,
                      private workListsService: WorkListsService ) { }
 
   ngOnInit() {
@@ -66,8 +66,7 @@ export class TaskFormEditorComponent implements OnInit {
 
   public async onUpdateTask() {
     this.setDateCalendar();
-    await this.updateTask();   
-    alert("La tarea se ha actuaizado...");
+    await this.updateTask();
     this.onClose();
   }
 
@@ -79,7 +78,7 @@ export class TaskFormEditorComponent implements OnInit {
     this.onClose();
   }
 
-  private loadLists(): void {   
+  private loadLists(): void {
     this.loadResponsiblesList();
   }
 
@@ -89,28 +88,28 @@ export class TaskFormEditorComponent implements OnInit {
     this.selectedTask.requestedByUID = this.task.requestedBy.uid;
     this.selectedTask.responsibleUID = this.task.responsible.uid;
     this.selectedTask.resourceUID = this.task.resource.uid;
-    this.selectedTask.targetDate = this.task.targetDate;   
-    this.selectedTask.requestedTime = this.task.startDate; 
-    this.selectedTask.startDate = this.task.startDate; 
+    this.selectedTask.targetDate = this.task.targetDate;
+    this.selectedTask.requestedTime = this.task.startDate;
+    this.selectedTask.startDate = this.task.startDate;
     this.selectedTask.progress = this.task.progress;
   }
- 
+
 
   private loadResponsiblesList(): void {
     const errMsg = 'Ocurrió un problema al intentar leer la lista de responsables.';
 
     this.activityService.getResponsiblesList(this.task.project.uid)
-      .toPromise()
-      .then((x) => this.responsiblesList = x)
-      .catch((e) => this.exceptionHandler(e, errMsg));
+                        .toPromise()
+                        .then((x) => this.responsiblesList = x)
+                        .catch((e) => this.exceptionHandler(e, errMsg));
   }
 
   private async updateTask() {
     const errMsg = 'Ocurrió un problema al intentar actualizar la actividad.';
 
     await this.workListsService.updateTasks(this.task.project.uid, this.task.uid, this.selectedTask)
-                        .toPromise()                        
-                        .catch((e) => this.exceptionHandler(e, errMsg));
+                              .toPromise()
+                              .catch((e) => this.exceptionHandler(e, errMsg));
   }
 
   private exceptionHandler(error: any, defaultMsg: string): void {

@@ -18,13 +18,13 @@ import { WorkListsService } from '../services/worklists.service';
 })
 
 export class WorklistsMainPageComponent {
-  
+
   public isTaskEditorVisible = false;
   public taskList: any;
   public selectedTask:any;
 
   private _project: ProjectRef;
-  @Input() 
+  @Input()
    set project(project: ProjectRef) {
      this._project = project;
      this.refreshData();
@@ -35,36 +35,50 @@ export class WorklistsMainPageComponent {
 
   constructor (private workListService: WorkListsService) {}
 
-  public onCloseTaskEditorWindow(): void {        
+  public onCloseTaskEditorWindow(): void {
     this.isTaskEditorVisible = false;
     this.refreshData();
   }
 
   public onClickAddActivity():void {
     alert("Esta operación se encuentra en desarrollo...");
-    
+
   }
-  public onShowTaskEditor(selecctedTask: any): void {
-    this.selectedTask = selecctedTask;  
+  public onShowTaskEditor(selectedTask: any): void {
+    this.selectedTask = selectedTask;
     this.isTaskEditorVisible = true;
   }
 
-  public setSummaryCSSClass(level: number) : string {  
-    switch(level) {
-      case 1 : return 'summary-level1';
-      case 2 : return 'summary-level2';
-      case 3 : return 'summary-level3';
-      default: return 'summary-level1';
+  public setSummaryCSSClass(level: number) : string {
+    switch (level) {
+      case -1:
+        return 'no-summary';
+
+      case 1:
+        return 'summary-level1';
+
+      case 2:
+        return 'summary-level2';
+
+      case 3:
+        return 'summary-level3';
+
+      default:
+        return 'summary-level3';
     }
-    
+
   }
 
-  private refreshData() {    
+  private getTaskName(task) {
+    return task.name;
+  }
+
+  private refreshData() {
     this.workListService.getTasksList(this.project.uid)
      .then((data) => {
-       this.taskList = data;        
+       this.taskList = data;
        console.log(data);
      });
-  } 
+  }
 
 }

@@ -35,7 +35,17 @@
 }
 
 table.grid td:nth-child(1), table.grid th:nth-child(1) {
-  width: 80%;
+  width: 70%;
+}
+
+table.grid tbody tr {
+  height: auto;
+  display: block;
+  overflow: inline;
+}
+
+table.grid td {
+  padding: 8pt;
 }
 
 .clause-title {

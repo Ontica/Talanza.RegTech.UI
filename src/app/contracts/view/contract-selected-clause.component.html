@@ -15,7 +15,10 @@
           </thead>
           <tbody>
             <tr *ngFor="let relatedProcedure of relatedProcedures">
-              <td><a (click)="onSelectedProcedure(relatedProcedure.procedure.uid)">{{relatedProcedure.procedure.name}}</a><br><u>{{relatedProcedure.procedure.code}}</u> <br><strong>{{relatedProcedure.procedure.entity}}</strong>
+              <td>
+                <a (click)="onSelectedProcedure(relatedProcedure.procedure.uid)">{{relatedProcedure.procedure.name}}</a><br>
+                <u>{{relatedProcedure.procedure.code}}</u> <br>
+                <strong>{{relatedProcedure.procedure.entity}}</strong>
               </td>
             </tr>
           </tbody>
