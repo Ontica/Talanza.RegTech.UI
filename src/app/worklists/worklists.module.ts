@@ -17,6 +17,7 @@ import { WorklistsRoutingModule } from './worklists-routing.module';
 
 import { TaskFormEditorComponent } from './editor/task-form-editor.component';
 import { TaskCloseComponent } from './editor/task-close.component';
+import { TaskUpdateComponent } from './editor/task-update.component';
 
 import { ProjectsMainPageComponent } from './main-page/projects-main-page.component';
 import { GanttComponent } from './gantt/gantt.component';
@@ -46,8 +47,9 @@ import { ActivityAssignTaskComponent } from './create-activity/activity-assing-t
                  ActivityAddComponent,ActivitySelectorComponent, ActivityDescriptionComponent,
                  ActivityWorklistComponent, ActivityInfoComponent,
                  ActivityEditorComponent, ActivityGeneralInfoComponent,
-                ActivityNextStateComponent, ActivityCurrentStateComponent,
-                 ActivityControlAndStateComponent,ActivityAssignTaskComponent],                 
+                 ActivityNextStateComponent, ActivityCurrentStateComponent,
+                 ActivityControlAndStateComponent,ActivityAssignTaskComponent,
+                 TaskUpdateComponent],                 
   exports: [WorklistsMainPageComponent,
             ProjectsMainPageComponent, GanttComponent,]
 })
