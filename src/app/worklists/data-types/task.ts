@@ -7,23 +7,23 @@ export interface TaskRef {
   targetDate: Date,
   requestedByUID: string,
   requestedTime: Date,
-  responsibleUID: string 
+  responsibleUID: string
   progress: number;
   }
-  
+
   export function EmptyTask() {
-    const empty: TaskRef = {      
-      name: '',      
+    const empty: TaskRef = {
+      name: '',
       notes: '',
       resourceUID: '',
       startDate: new Date(),
       targetDate: new Date(),
       requestedByUID: '',
-      requestedTime:new Date(),
+      requestedTime: new Date(),
       responsibleUID:'',
       progress: 0
     }
-  
+
     return empty;
   }
 
@@ -33,6 +33,7 @@ export interface TaskRef {
   }
 
   export function EmptyClosedTask() {
+
     const empty: ClosedTask = {
       endDate: new Date(),
       requestedByUID: ''

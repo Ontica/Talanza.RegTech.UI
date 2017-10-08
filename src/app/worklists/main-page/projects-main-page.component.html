@@ -4,14 +4,14 @@
     <td>
       <select style="width:320px;" class="select-box" #project (change)="onChangeProjectList(project.value)">
         <option value="">( Seleccionar un proyecto de la lista )</option>
-       <option *ngFor="let project of projectList"[value]="project.uid">{{project.name}}</option>
+        <option *ngFor="let project of projectList"[value]="project.uid">{{project.name}}</option>
         </select>
     </td>
     <td>Buscar:</td>
-    <td><input style="width:320px" type="search" class="search-box">
+    <td><input style="width:320px" type="search" class="text-box">
       <button class="btn" style="width:55px;">Buscar</button>
     </td>
-    <td colspan="2"><button style="width:185px" class="btn-warning aling-center" type="button" (click)="onClickAddActivity()">+ Agregar actividad o evento</button></td>
+    <td colspan="2"><button style="width:185px" class="btn-warning align-center" type="button" (click)="onClickAddActivity()">+ Agregar actividad o evento</button></td>
   </tr>
 
   <tr>

@@ -11,7 +11,7 @@
   <div *ngIf="!isCloseTaskEditorVisible">
     <table class="form">
       <tr>
-        <td class="form-title form-title-text" colspan="2">Información General</td>
+        <td class="form-title form-title-text" colspan="2">Información general de la tarea o actividad</td>
       </tr>
       <tr>
         <td>Nombre:</td>
@@ -24,72 +24,66 @@
     </table>
     <table class="form">
       <tr>
-        <td class="form-title form-title-text" colspan="2">Asignado y solicitado</td>
+        <td class="form-title form-title-text" colspan="3">Responsable de la tarea y porcentaje de progreso</td>
       </tr>
       <tr>
         <td>Responsable:</td>
-        <td><select class="select-box" style="width:380px" [(ngModel)]="selectedTask.responsibleUID">
-               <option value="">( Seleccionar )</option>
-               <option value="Undefined">No asignado</option>
-               <option *ngFor="let responsible of responsiblesList" 
-                       [value]="responsible.uid">{{responsible.name}}</option>            
-               </select>
+        <td>
+          <select class="select-box" style="width:340px" [(ngModel)]="selectedTask.responsibleUID">
+            <option value="">( Seleccionar )</option>
+            <option value="Undefined">No asignado</option>
+            <option *ngFor="let responsible of responsiblesList"
+                    [value]="responsible.uid">{{responsible.name}}</option>
+          </select>
+        </td>
+        <td class="text-align-right">
+          Progreso: &nbsp; &nbsp;
+          <select class="select-box" style="width:60px" [(ngModel)]="selectedTask.progress">
+            <option value="0">0%</option>
+            <option value="10">10%</option>
+            <option value="20">20%</option>
+            <option value="25">25%</option>
+            <option value="30">30%</option>
+            <option value="33">33%</option>
+            <option value="40">40%</option>
+            <option value="50">50%</option>
+            <option value="60">60%</option>
+            <option value="66">66%</option>
+            <option value="70">70%</option>
+            <option value="75">75%</option>
+            <option value="80">80%</option>
+            <option value="90">90%</option>
+            <option value="95">95%</option>
+            <option value="100">100%</option>
+          </select>
         </td>
       </tr>
     </table>
     <table class="form">
       <tr>
-        <td class="form-title form-title-text" colspan="2">Fechas importantes</td>
+        <td class="form-title form-title-text" colspan="3">Fecha objetivo y fecha legal</td>
       </tr>
       <tr>
-        <td>Fecha de termino:</td>
-        <td>
+        <td>Fecha objetivo:</td>
+        <td style="width:70%">
           <input type="text" id="endDateCalendar" class="text-box" style="width:100px">
           <button id="endDateCalendarButton">..</button>
           <!--[ngModel]="activity.estimatedEnd | date:'dd-MM-yyyy'" (target)="activity.estimatedEnd=$event"-->
         </td>
-      </tr>
-      <tr>
-        <td>Fecha Legal:</td>
-        <td>{{task.dueDate | date: 'dd-MMM-yyyy'}}</td>
+        <td class="text-align-right">Fecha legal: &nbsp; <b>{{task.dueDate | date: 'dd-MMM-yyyy'}}</b></td>
       </tr>
     </table>
-    <table class="form">
-      <tr>
-        <td class="form-title form-title-text" colspan="3">Progreso</td>
-      </tr>
-      <tr>
-        <td>Progreso:</td>
-        <td>
-          <select class="select-box" style="width:60px" [(ngModel)]="selectedTask.progress"> 
-          <option value="0">0%</option>
-          <option value="10">10%</option>
-          <option value="20">20%</option>
-          <option value="30">30%</option>
-          <option value="40">40%</option>
-          <option value="50">50%</option>
-          <option value="60">60%</option>
-          <option value="70">70%</option>
-          <option value="80">80%</option>
-          <option value="90">90%</option>
-          <option value="100">100%</option>
-          </select>
-        </td>
-        <td class="text-align-right">
-          <button class="btn" (click)="onCloseTask()">Concluir la tarea</button>
-        </td>
-      </tr>
-
-    </table>
-    <div class="form-footer ">
+    <div class="form-footer">
       <table class="form">
         <tr>
-          <td class="text-align-center ">
-            <button class="btn" [disabled]="disabled" (click)="cancel() ">Cancelar</button>
+          <td style='width:33%'>
+            <button class="btn" [disabled]="disabled" (click)="cancel()">Cancelar</button>
           </td>
-
-          <td *ngIf="!disabled " class="text-align-right ">
-            <button class="btn-warning" (click)="onUpdateTask()">Actualizar tarea</button>
+          <td *ngIf="selectedTask.stage !== 'Done'" class="text-align-center" style='width:33%'>
+            <button class="btn-warning" (click)="onCloseTask()">Concluir la tarea</button>
+          </td>
+          <td *ngIf="!disabled" class="text-align-right" style='width:33%'>
+            <button class="btn-action" (click)="onUpdateTask()">Guardar los cambios</button>
           </td>
         </tr>
       </table>

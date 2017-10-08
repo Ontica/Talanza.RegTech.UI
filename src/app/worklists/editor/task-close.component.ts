@@ -14,7 +14,7 @@ declare var dhtmlXCalendarObject: any;
 
 export class TaskCloseComponent implements OnInit{
 
-  public endDate: Date = new Date();
+  public endDate: Date = undefined;
 
   private closedTask = EmptyClosedTask();
   private dueDateCalendar: any;
@@ -83,7 +83,7 @@ export class TaskCloseComponent implements OnInit{
      if (this.endDate <= dueDate) {
        return true;
      } else {
-      alert("La fecha de término no puede ser posterior a la fecha legal...");
+      alert("La fecha de término de la actividad no puede ser posterior a la fecha legal.");
       return false;
      }
   }
