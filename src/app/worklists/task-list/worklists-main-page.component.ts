@@ -27,15 +27,27 @@ export class WorklistsMainPageComponent {
 
   private _project: ProjectRef;
   @Input()
-   set project(project: ProjectRef) {
-     this._project = project;
+   set project(project: ProjectRef) {     
+     this._project = project;     
      this.refreshData();
    }
    get project(): ProjectRef {
     return this._project;
    }
 
+   private _refresh: boolean;
+   @Input() 
+    set refresh(refresh: boolean) {
+      if (refresh) {
+        this.refreshData();
+      }      
+      this._refresh = refresh;
+    }
+    
+
   constructor (private workListService: WorkListsService) {}
+
+  
 
   public onCloseTaskEditorWindow(): void {
     this.isTaskEditorVisible = false;

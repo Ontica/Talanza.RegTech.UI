@@ -27,6 +27,8 @@ export class ProjectsMainPageComponent implements OnInit {
   public ganttConfig = 'ganttWeeks';
   public selectedView = 'tasksList';
 
+  public isRefreshWorkList = false;
+
   public constructor(private projectService: ProjectService) { }
 
   public ngOnInit() {
@@ -34,8 +36,9 @@ export class ProjectsMainPageComponent implements OnInit {
   }
 
   public onCloseAddActivityEditorWindow(): void {
-    this.isAddActivityEditorWindowVisible = false;
+    this.isAddActivityEditorWindowVisible = false;    
     this.showGanttGraph();
+    this.isRefreshWorkList = true;
   }
 
   public onChangeProjectList(projectUID: string): void {
