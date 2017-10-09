@@ -20,8 +20,10 @@ import { WorkListsService } from '../services/worklists.service';
 export class WorklistsMainPageComponent {
 
   public isTaskEditorVisible = false;
-  public taskList: any;
+  public isVisibleProcedureInfo = false;
+  public taskList: any = [];
   public selectedTask:any;
+  public procedureUID: string = "";
 
   private _project: ProjectRef;
   @Input()
@@ -44,11 +46,12 @@ export class WorklistsMainPageComponent {
     alert("Esta operación se encuentra en desarrollo...");
 
   }
+
   public onShowTaskEditor(selectedTask: any): void {
     this.selectedTask = selectedTask;
     this.isTaskEditorVisible = true;
   }
-
+  
   public setSummaryCSSClass(level: number) : string {
     switch (level) {
       case -1:
@@ -69,6 +72,15 @@ export class WorklistsMainPageComponent {
 
   }
 
+  public onShowProcedureInfo(procedureUID: string): void {      
+    this.procedureUID = procedureUID;
+    this.isVisibleProcedureInfo = true;  
+  }
+
+  public onCloseProcedureInfoWindow(): void {
+    this.isVisibleProcedureInfo = false;
+  }
+
   private getTaskName(task) {
     return task.name;
   }
@@ -76,8 +88,7 @@ export class WorklistsMainPageComponent {
   private refreshData() {
     this.workListService.getTasksList(this.project.uid)
      .then((data) => {
-       this.taskList = data;
-       console.log(data);
+       this.taskList = data;       
      });
   }
 

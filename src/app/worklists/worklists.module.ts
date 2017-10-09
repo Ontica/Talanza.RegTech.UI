@@ -10,6 +10,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
+import { ContractsModule } from '../contracts/contracts.module';
 
 import { WorklistsMainPageComponent } from './task-list/worklists-main-page.component';
 
@@ -40,7 +41,7 @@ import { ActivityAssignTaskComponent } from './create-activity/activity-assing-t
  */
 
 @NgModule({
-  imports: [WorklistsRoutingModule, SharedModule, CommonModule, FormsModule],
+  imports: [WorklistsRoutingModule, SharedModule, CommonModule, FormsModule, ContractsModule],
   declarations: [WorklistsMainPageComponent, 
                  TaskFormEditorComponent, TaskCloseComponent,
                  ProjectsMainPageComponent, GanttComponent,

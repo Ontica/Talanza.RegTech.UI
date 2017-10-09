@@ -11,12 +11,12 @@
 <table class="grid">
   <thead>
     <tr>
-      <th style="width:30%">Tarea</th>
-      <th style="width:25%">Observaciones</th>
+      <th style="width:32%">Tarea</th>
+      <th style="width:24%">Observaciones</th>
       <th style="width:5%">Progreso</th>
       <th style="width:15%">Responsable</th>
       <th style="width:15%">Fechas</th>
-      <th style="width:10%"></th>
+      <th style="width:8%">Trámite</th>
     </tr>
   </thead>
   <tbody>
@@ -37,7 +37,8 @@
           <td style="width:5%;white-space:nowrap">{{task.progress}}%</td>
           <td style="width:15%;white-space:nowrap">{{task.responsible.name}} </td>
           <td style="width:15%;white-space:nowrap">Objetivo: {{task.targetDate | date: 'dd/MMM/yyyy'}} <br> Legal: &nbsp; &nbsp; &nbsp;{{task.dueDate | date: 'dd/MMM/yyyy'}} </td>
-          <td style="width:10%"></td>
+          <td style="width:10%" *ngIf="task.procedure.uid !=='Undefined'"><a (click)="onShowProcedureInfo(task.procedure.uid)">{{task.procedure.entity}}</a></td>
+          <td style="width:10%" *ngIf="task.procedure.uid ==='Undefined'"></td>
         </ng-template>
       </tr>
     </ng-container>
@@ -56,6 +57,9 @@
   </table>
 </div>
 <div *ngIf="isTaskEditorVisible" class="popup">
-  <!--<task-editor (onCloseEvent)="onCloseTaskEditorWindow()"></task-editor>-->
   <task-form-editor [task]="selectedTask" (onCloseEvent)="onCloseTaskEditorWindow()"></task-form-editor>
+</div>
+
+<div *ngIf="isVisibleProcedureInfo" class="popup ">
+  <selected-procedure [procedureUID]="procedureUID" (onCloseEvent)="onCloseProcedureInfoWindow()"></selected-procedure>
 </div>
