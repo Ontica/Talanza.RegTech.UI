@@ -11,12 +11,12 @@
 <table class="grid">
   <thead>
     <tr>
-      <th style="width:32%">Tarea</th>
-      <th style="width:24%">Observaciones</th>
+      <th style="width:30%">Tarea/Actividad</th>
+      <th style="width:8%">Trámite</th>
+      <th style="width:15%">Observaciones</th>
       <th style="width:5%">Progreso</th>
       <th style="width:15%">Responsable</th>
       <th style="width:15%">Fechas</th>
-      <th style="width:8%">Trámite</th>
     </tr>
   </thead>
   <tbody>
@@ -24,7 +24,7 @@
       <tr [ngSwitch]="task.type" [ngClass]="setSummaryCSSClass(task.level || -1)">
 
         <ng-template [ngSwitchCase]="'ObjectType.ProjectObject.Summary'">
-          <td style="width:100%" colspan="5">
+          <td style="width:100%" colspan="6">
             [-] {{task.name}}
           </td>
         </ng-template>
@@ -33,12 +33,14 @@
           <td style="width:30%">
             <a (click)="onShowTaskEditor(task)">{{task.name}}</a>
           </td>
-          <td style="width:25%">{{task.notes}}</td>
+          <td style="width:10%" *ngIf="task.procedure.uid !=='Undefined'">
+            <u><a (click)="onShowProcedureInfo(task.procedure.uid)">{{task.procedure.entity}}</a></u>
+          </td>
+          <td style="width:10%" *ngIf="task.procedure.uid ==='Undefined'"></td>
+          <td style="width:15%">{{task.notes}}</td>
           <td style="width:5%;white-space:nowrap">{{task.progress}}%</td>
           <td style="width:15%;white-space:nowrap">{{task.responsible.name}} </td>
           <td style="width:15%;white-space:nowrap">Objetivo: {{task.targetDate | date: 'dd/MMM/yyyy'}} <br> Legal: &nbsp; &nbsp; &nbsp;{{task.dueDate | date: 'dd/MMM/yyyy'}} </td>
-          <td style="width:10%" *ngIf="task.procedure.uid !=='Undefined'"><a (click)="onShowProcedureInfo(task.procedure.uid)">{{task.procedure.entity}}</a></td>
-          <td style="width:10%" *ngIf="task.procedure.uid ==='Undefined'"></td>
         </ng-template>
       </tr>
     </ng-container>
