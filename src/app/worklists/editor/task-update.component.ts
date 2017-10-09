@@ -27,13 +27,15 @@ declare var dhtmlXCalendarObject: any;
 })
 
 export class TaskUpdateComponent implements OnInit {
+
   public selectedTask: TaskRef = EmptyTask();
 
   public responsiblesList: PersonRef[] = [];
 
   public calendar: any
 
-  private _task: any;
+  public _task: any;
+
   @Input()
   set task(task: any) {
     this._task = task;
@@ -72,6 +74,10 @@ export class TaskUpdateComponent implements OnInit {
 
   public onCloseTask(): void {
     this.onCloseTaskEditorVisible.emit();
+  }
+
+  public onReopenTask(): void {
+    alert('Por el momento no es posible reabrir tareas una vez que han sido cerradas, pero el administrador del sistema puede hacerlo.');
   }
 
   private loadLists(): void {
