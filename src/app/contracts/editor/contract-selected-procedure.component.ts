@@ -21,12 +21,12 @@ export class SafeHtmlPipe implements PipeTransform  {
 
 @Component({
   selector:'selected-procedure',
-  templateUrl:'./contract-selected-procedure.component.html',
-  styleUrls:['./contract-selected-procedure.component.scss'],
+  templateUrl:'./contracts-selected-procedure.component.html',
+  styleUrls:['./contracts-selected-procedure.component.scss'],
   providers:[ ProcedureService, ProcessService]
 })
 
-export class ContractSelectedProcedureComponent implements OnInit{
+export class ContractsSelectedProcedureComponent implements OnInit{
   @HostBinding('style.display') public display = 'block';
   @HostBinding('style.position') public position = 'absolute';
 

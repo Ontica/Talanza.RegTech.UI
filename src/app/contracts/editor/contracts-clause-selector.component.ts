@@ -11,7 +11,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Assertion } from 'empiria';
 import { CoreService } from '../../core';
 
-import { ContractService } from '../services/contract.service';
+import { ContractsService } from '../services/contracts.service';
 
 import { ContractClause } from '../data-types/contract';
 
@@ -20,11 +20,11 @@ import { ContractClause } from '../data-types/contract';
     template: `<ul class="clause-list">
                 <li *ngFor="let clause of clauses"><a [class.selected]="clause === currentClause" (click)="onClickSelectClause(clause)">{{clause.clauseNo}} {{clause.title}}</a></li>
                </ul> `,    
-   styleUrls: ['./contract-clause.selector.component.scss'],            
-    providers: [ContractService]
+   styleUrls: ['./contracts-clause.selector.component.scss'],            
+    providers: [ContractsService]
 })
 
-export class ContractClauseSelectorComponent {
+export class ContractsClauseSelectorComponent {
 
   @Input() clauses: ContractClause[]
 
@@ -33,7 +33,7 @@ export class ContractClauseSelectorComponent {
   public currentClause: ContractClause; 
 
   constructor(private core: CoreService,
-    private contractService: ContractService) { }
+    private contractService: ContractsService) { }
  
   public onClickSelectClause(clause: ContractClause): void {    
     this.currentClause = clause;

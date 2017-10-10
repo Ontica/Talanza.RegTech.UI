@@ -23,7 +23,7 @@ export enum ContractServiceErr {
 }
 
 @Injectable()
-export class ContractService {
+export class ContractsService {
 
   public constructor(private core: CoreService) { }
 

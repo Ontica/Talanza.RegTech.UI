@@ -13,11 +13,11 @@ import { ContractClause } from '../data-types/contract';
 
 @Component({
   selector: 'contract-view',
-  templateUrl: './contract-view.component.html',
-  styleUrls: ['./contract-view.component.scss']
+  templateUrl: './contracts-main-page.component.html',
+  styleUrls: ['./contracts-main-page.component.scss']
 })
 
-export class ContractViewComponent implements OnInit {
+export class ContractsMainPageComponent implements OnInit {
 
   public isVisibleLeftPanel = true;
   

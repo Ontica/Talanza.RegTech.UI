@@ -10,7 +10,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Assertion } from 'empiria';
 import { CoreService } from '../../core';
 
-import { ContractService } from '../services/contract.service';
+import { ContractsService } from '../services/contracts.service';
 
 import { Contract, EmptyContract, ContractClause } from '../data-types/contract';
 
@@ -43,11 +43,11 @@ import { Contract, EmptyContract, ContractClause } from '../data-types/contract'
     </td>   
   </tr>
 </table>`,
-  styleUrls: ['./contract-filters.component.scss'],
-  providers: [ContractService]
+  styleUrls: ['./contracts-filters.component.scss'],
+  providers: [ContractsService]
 
 })
-export class ContractFiltersComponent implements OnInit {
+export class ContractsFiltersComponent implements OnInit {
 
   public contractsList: Contract[] = [];
   public selectedContract: Contract = EmptyContract();
@@ -58,7 +58,7 @@ export class ContractFiltersComponent implements OnInit {
   @Output() clauses = new EventEmitter<ContractClause[]>();
   
   constructor(private core: CoreService,
-    private contractService: ContractService) { }
+    private contractService: ContractsService) { }
 
   ngOnInit() {   
     this.setInitialValues();

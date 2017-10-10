@@ -11,18 +11,18 @@
  import { Assertion } from 'empiria';
  import { CoreService } from '../../core';
  
- import { ContractService } from '../services/contract.service';
+ import { ContractsService } from '../services/contracts.service';
  
  import { ContractClause, EmptyContractClause, RelatedProcedure } from '../data-types/contract';
   
  @Component({
    selector:'selected-clause',
-   templateUrl: './contract-selected-clause.component.html',
-   styleUrls:['./contract-selected-clause.component.scss'],
-   providers: [ContractService]
+   templateUrl: './contracts-selected-clause.component.html',
+   styleUrls:['./contracts-selected-clause.component.scss'],
+   providers: [ContractsService]
  })
 
- export class ContractSelectedClauseComponent {
+ export class ContractsSelectedClauseComponent {
   
   public isProcedruesTablesVisible = !false;
   public relatedProcedures: RelatedProcedure[];
@@ -41,7 +41,7 @@
   }
 
   constructor(private core: CoreService,
-    private contractService: ContractService) { }
+    private contractService: ContractsService) { }
   
   public onDisplayProcedruesList(): void {   
     this.isProcedruesTablesVisible = !this.isProcedruesTablesVisible;
