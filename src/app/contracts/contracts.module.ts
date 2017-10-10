@@ -13,11 +13,6 @@ import { SharedModule } from '../shared/shared.module';
 
 import { ContractsMainPageComponent } from './main-page/contracts-main-page.component';
 
-import { ContractEditorComponent } from './editor/contract-editor.component';
-
-import { ClauseInfoTabComponent } from './editor/tabs/clause-info-tab.component';
-import { RelatedProceduresTabComponent } from './editor/tabs/related-procedures-tab.component';
-
 import { ContractsRoutingModule } from './contracts-routing.module';
 
 import { ContractViewComponent } from './view/contract-view.component';
@@ -33,10 +28,9 @@ import { SafeHtmlPipe } from './view/contract-selected-procedure.component';
 
 @NgModule({
   imports: [ContractsRoutingModule, SharedModule, CommonModule, FormsModule],
-  declarations: [ContractsMainPageComponent, ContractEditorComponent,
-                 ClauseInfoTabComponent, RelatedProceduresTabComponent, ContractViewComponent,
-                 ContractClauseSelectorComponent, ContractSelectedClauseComponent,
-                 ContractSelectedProcedureComponent, ContractFiltersComponent, SafeHtmlPipe],
-  exports: [ContractsMainPageComponent,  ContractSelectedProcedureComponent]
+  declarations: [ContractViewComponent, ContractClauseSelectorComponent, 
+                 ContractSelectedClauseComponent, ContractSelectedProcedureComponent,
+                 ContractFiltersComponent, SafeHtmlPipe],
+  exports: [ContractSelectedProcedureComponent]
 })
 export class ContractsModule { }
