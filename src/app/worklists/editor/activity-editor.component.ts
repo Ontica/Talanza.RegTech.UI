@@ -13,11 +13,11 @@ import { TaskRef } from '../data-types/task';
 
 @Component({
   selector: 'task-form-editor',
-  templateUrl: './task-form-editor.component.html',
-  styleUrls: ['./task-form-editor.component.scss'],  
+  templateUrl: './activity-editor.component.html',
+  styleUrls: ['./activity-editor.component.scss'],  
 })
 
-export class TaskFormEditorComponent {
+export class ActivityEditorComponent {
   @HostBinding('style.display') public display = 'block';
   @HostBinding('style.position') public position = 'absolute';
 

@@ -1,18 +1,18 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
-import { ClosedTask, EmptyClosedTask } from '../data-types/task';
-import { WorkListsService } from '../services/worklists.service';
+import { ClosedTask, EmptyClosedTask } from '../../data-types/task';
+import { WorkListsService } from '../../services/worklists.service';
 
 declare var dhtmlXCalendarObject: any;
 
 @Component({
   selector:'task-close',
-  templateUrl: './task-close.component.html',
-  styleUrls:['./task-close.component.scss'],
+  templateUrl: './activity-close.component.html',
+  styleUrls:['./activity-close.component.scss'],
   providers:[WorkListsService]
 })
 
-export class TaskCloseComponent implements OnInit{
+export class ActivityCloseComponent implements OnInit{
 
   public endDate: Date = undefined;
 

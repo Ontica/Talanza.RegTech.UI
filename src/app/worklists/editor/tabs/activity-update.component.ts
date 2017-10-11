@@ -11,22 +11,22 @@ import {
   Output, OnInit
 } from '@angular/core';
 
-import { TaskRef, EmptyTask } from '../data-types/task';
-import { WorkListsService } from '../services/worklists.service';
+import { TaskRef, EmptyTask } from '../../data-types/task';
+import { WorkListsService } from '../../services/worklists.service';
 
-import { PersonRef } from '../data-types/project';
-import { ActivityService } from '../services/activity.service';
+import { PersonRef } from '../../data-types/project';
+import { ActivityService } from '../../services/activity.service';
 
 declare var dhtmlXCalendarObject: any;
 
 @Component({
   selector: 'task-update',
-  templateUrl: './task-update.component.html',
-  styleUrls: ['./task-update.component.scss'],
+  templateUrl: './activity-update.component.html',
+  styleUrls: ['./activity-update.component.scss'],
   providers: [ActivityService, WorkListsService]
 })
 
-export class TaskUpdateComponent implements OnInit {
+export class ActivityUpdateComponent implements OnInit {
 
   public selectedTask: TaskRef = EmptyTask();
 
