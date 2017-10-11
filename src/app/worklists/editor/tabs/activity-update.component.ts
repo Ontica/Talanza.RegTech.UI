@@ -109,7 +109,7 @@ export class ActivityUpdateComponent implements OnInit {
   private async updateTask() {
     const errMsg = 'Ocurrió un problema al intentar actualizar la actividad.';
 
-    await this.workListsService.updateTasks(this.task.project.uid, this.task.uid, this.selectedTask)
+    await this.workListsService.updateActivity(this.task.project.uid, this.task.uid, this.selectedTask)
       .toPromise()
       .catch((e) => this.exceptionHandler(e, errMsg));
   }

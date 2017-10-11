@@ -91,7 +91,7 @@ export class ActivityCloseComponent implements OnInit{
   private closeTask(): void {
     const errMsg = 'Ocurrió un problema al intentar crear la actividad.';
 
-    this.workListsService.closeTask(this.task.project.uid,this.task.uid, this.closedTask)
+    this.workListsService.closeActivity(this.task.project.uid,this.task.uid, this.closedTask)
                         .toPromise()
                         .then()
                         .catch((e) => this.exceptionHandler(e, errMsg));

@@ -30,7 +30,7 @@ export class ProjectService {
     return this.core.http.get<any[]>(path);
   }
 
-  public getTasksList(projectId: string): Promise<Task[]> {
+  public getActivitiesListAsGantt(projectId: string): Promise<Task[]> {
     const path = `v1/project-management/projects/${projectId}/activities/as-gantt`;    
 
     return this.core.http.get<Task[]>(path)

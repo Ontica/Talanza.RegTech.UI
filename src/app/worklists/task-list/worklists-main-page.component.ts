@@ -98,7 +98,7 @@ export class WorklistsMainPageComponent {
   }
 
   private refreshData() {
-    this.workListService.getTasksList(this.project.uid)
+    this.workListService.getActivities(this.project.uid)
      .then((data) => {
        this.taskList = data;       
      });

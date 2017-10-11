@@ -24,7 +24,7 @@ export class WorkListsService {
 
   public constructor(private core: CoreService) { }
   
-  public getTasksList(projectId: string): Promise<Task[]> {
+  public getActivities(projectId: string): Promise<Task[]> {
     const path = `v1/project-management/projects/${projectId}/activities`;
                  
     return this.core.http.get<Task[]>(path)
@@ -32,7 +32,7 @@ export class WorkListsService {
 
   }
 
-  public updateTasks(projectUID:string, activityUID: string, task: TaskRef): 
+  public updateActivity(projectUID:string, activityUID: string, task: TaskRef): 
   Observable<TaskRef> {
   const path = `v1/project-management/projects/${projectUID}/activities/${activityUID}`;
 
@@ -41,7 +41,7 @@ export class WorkListsService {
 
 }
 
-public closeTask(projectUID:string, activityUID:string, closeTask: ClosedTask): Observable<any[]> {
+public closeActivity(projectUID:string, activityUID:string, closeTask: ClosedTask): Observable<any[]> {
   const path = `v1/project-management/projects/${projectUID}/activities/${activityUID}/close`;
                 
   return this.core.http.post<any[]>(path, closeTask);

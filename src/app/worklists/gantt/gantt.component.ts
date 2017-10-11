@@ -132,7 +132,7 @@ export class GanttComponent implements OnChanges {
   }
 
   private refreshData() {    
-     this.projectService.getTasksList(this.project.uid)
+     this.projectService.getActivitiesListAsGantt(this.project.uid)
       .then((data) => {        
         gantt.clearAll();
         gantt.parse({ data });
