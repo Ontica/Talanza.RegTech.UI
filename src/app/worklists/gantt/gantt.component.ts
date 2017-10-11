@@ -22,8 +22,8 @@ import { ProjectRef } from '../data-types/project';
                   <activity-add [project]="project" [parentId]="parentId" (onCloseEvent)="onCloseActivityAddEditorWindow()"></activity-add>
                 </div>
                 <div *ngIf="isActivityEditorWindowVisible" class="popup">                
-                  <activity-editor [project]="project" [activityId]="activityId" (onCloseEvent)="onCloseActivityEditorWindow()">
-                  </activity-editor>
+                  <!--<activity-editor [project]="project" [activityId]="activityId" (onCloseEvent)="onCloseActivityEditorWindow()">
+                  </activity-editor>-->
                 </div>
                 `,
   providers: [ProjectService]
