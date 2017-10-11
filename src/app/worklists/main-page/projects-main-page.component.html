@@ -4,7 +4,7 @@
     <td>
       <select style="width:320px;" class="select-box" #project (change)="onChangeProjectList(project.value)">
         <option value="">( Seleccionar un proyecto de la lista )</option>
-        <option *ngFor="let project of projectList"[value]="project.uid">{{project.name}}</option>
+        <option *ngFor="let project of projectsList"[value]="project.uid">{{project.name}}</option>
         </select>
     </td>
     <td>Buscar:</td>
@@ -19,6 +19,7 @@
     <td>
       <select class="select-box" style="width:320px">
         <option value="">( No filtrar )</option>
+        <option *ngFor="let resource of resourcesList" [value]="resource.uid">{{resource.name}}</option>
       </select>
     </td>
     <td>Responsable:</td>

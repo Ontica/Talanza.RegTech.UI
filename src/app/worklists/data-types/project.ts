@@ -24,7 +24,9 @@ export interface ProjectRef {
 
 export interface ResourceRef {
   uid:string;
-  name: string;   
+  name: string;  
+  notes: string;
+  type: string; 
 }
 
 export interface PersonRef {

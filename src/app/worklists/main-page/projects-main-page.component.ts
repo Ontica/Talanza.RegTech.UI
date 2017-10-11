@@ -9,7 +9,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { ProjectService } from '../services/project.service';
-import { ProjectRef, EmptyProjectRef } from '../data-types/project';
+import { EmptyProjectRef, ProjectRef, ResourceRef } from '../data-types/project';
 
 @Component({
   selector: 'projects-main-page',
@@ -22,10 +22,11 @@ export class ProjectsMainPageComponent implements OnInit {
 
   public isAddActivityEditorWindowVisible = false;
   public isGanttGraphVisible = false;
-  public projectList: ProjectRef[] = [];
+  public projectsList: ProjectRef[] = [];
   public selectedProject: ProjectRef = EmptyProjectRef();
   public ganttConfig = 'ganttWeeks';
   public selectedView = 'tasksList';
+  public resourcesList: ResourceRef[] = [];
 
   public isRefreshWorkList = false;
 
@@ -33,6 +34,7 @@ export class ProjectsMainPageComponent implements OnInit {
 
   public ngOnInit() {
     this.loadProjectList();
+
   }
 
   public onCloseAddActivityEditorWindow(): void {
@@ -45,12 +47,15 @@ export class ProjectsMainPageComponent implements OnInit {
     if (projectUID === '') {
       this.selectedProject = EmptyProjectRef();
       this.hideGanttGraph();
+      this.resourcesList = [];
       return;
     }
 
-    this.selectedProject = this.projectList.find((x) => x.uid === projectUID);
+    this.selectedProject = this.projectsList.find((x) => x.uid === projectUID);
     
-    this.showGanttGraph();    
+    this.showGanttGraph(); 
+
+    this.loadResources();    
   }
 
   public onClickAddActivity(): void {       
@@ -66,7 +71,14 @@ export class ProjectsMainPageComponent implements OnInit {
   private loadProjectList(): void {
     this.projectService.getProjectList()
                        .toPromise()
-                       .then((x) => this.projectList = x);
+                       .then((x) => this.projectsList = x);
+  }
+  
+  private loadResources(): void {
+    this.projectService.getResources(this.selectedProject.uid)
+                       .toPromise()
+                       .then((x) => this.resourcesList = x);
+
   }
 
   private showGanttGraph(): void {
