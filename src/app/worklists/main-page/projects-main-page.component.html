@@ -9,23 +9,34 @@
     </td>
     <td>Buscar:</td>
     <td><input style="width:320px" type="search" class="text-box">
-      <button class="btn" style="width:55px;">Buscar</button>
+      <button class="btn" style="width:55px;" (click)="onSearch()">Buscar</button>
     </td>
-    <td colspan="2"><button style="width:185px" class="btn-warning align-center" type="button" (click)="onClickAddActivity()">+ Agregar actividad o evento</button></td>
+    <td colspan="4"><button style="width:185px" class="btn-warning align-center" type="button" (click)="onClickAddActivity()">+ Agregar actividad o evento</button></td>
   </tr>
 
   <tr>
     <td>Filtrar:</td>
     <td>
-      <select class="select-box" style="width:320px">
+      <select class="select-box" style="width:320px" #resource (change)="onChangeResource(resource.value)">
         <option value="">( No filtrar )</option>
         <option *ngFor="let resource of resourcesList" [value]="resource.uid">{{resource.name}}</option>
       </select>
     </td>
     <td>Responsable:</td>
     <td>
-      <select style="width:385px" class="select-box">
-        <option value="">( No filtrar ) </option>
+      <select style="width:385px" class="select-box" #responsible (change)="onChangeResponsible(responsible.value)">
+        <option value="">( Todos ) </option>
+        <option *ngFor="let responsible of responsiblesList" [value]="responsible.uid">{{responsible.name}}</option>
+      </select>
+    </td>
+    <td>Ordenar:</td>
+    <td>
+      <select style="width: 140px" class="select-box" #orderBy (change)="onChangeOrderBy(orderBy.value)">
+        <option value="ItemOrdering, ProjectObjectId">(No ordenar)</option>
+        <option value="DueDate, ItemOrdering, ProjectObjectId">Fecha Legal</option>
+        <option value="TargetDate, ItemOrdering, ProjectObjectId">Fecha Objetivo</option>
+        <option value="ResponsibleName, ItemOrdering, ProjectObjectId">Responsable</option>
+        <option value="ActivityName, ItemOrdering, ProjectObjectId">Nombre de la tarea</option>
       </select>
     </td>
     <td>Mostrar:</td>

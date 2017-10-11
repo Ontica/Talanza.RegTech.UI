@@ -91,5 +91,14 @@ export class ActivityService {
     return this.core.http.put<Activity>(path,activity);
     
   }
+
+  public searchActivities(projectUID: string, filter: object,
+                          orderBy: string, keywords: string): Observable<Task[]> {
+  
+    const path = `v1/project-management/projects/${projectUID}/activities?filter=${filter}
+                          &orderBy=${orderBy}&keywords=${keywords}`;
+
+    return this.core.http.get<Task[]>(path);                      
+  }
 }
 

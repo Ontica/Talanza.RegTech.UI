@@ -9,13 +9,21 @@
 import { Component, OnInit } from '@angular/core';
 
 import { ProjectService } from '../services/project.service';
-import { EmptyProjectRef, ProjectRef, ResourceRef } from '../data-types/project';
+import { ActivityService } from '../services/activity.service';
+
+import { EmptyProjectRef, PersonRef, ProjectRef, ResourceRef } from '../data-types/project';
+
+export class Filter {
+  ResponsibleUId: string;
+  ResourceUId: string;
+ 
+}
 
 @Component({
   selector: 'projects-main-page',
   templateUrl: './projects-main-page.component.html',
   styleUrls: ['./projects-main-page.component.scss'],
-  providers: [ProjectService]
+  providers: [ProjectService, ActivityService]
 })
 
 export class ProjectsMainPageComponent implements OnInit {
@@ -27,10 +35,15 @@ export class ProjectsMainPageComponent implements OnInit {
   public ganttConfig = 'ganttWeeks';
   public selectedView = 'tasksList';
   public resourcesList: ResourceRef[] = [];
+  public responsiblesList: PersonRef[] = [];
+  public orderBy = '';
+  public keywords = '';
 
   public isRefreshWorkList = false;
 
-  public constructor(private projectService: ProjectService) { }
+  private filter: Filter;
+
+  public constructor(private projectService: ProjectService, private activityService: ActivityService) { }
 
   public ngOnInit() {
     this.loadProjectList();
@@ -55,7 +68,7 @@ export class ProjectsMainPageComponent implements OnInit {
     
     this.showGanttGraph(); 
 
-    this.loadResources();    
+    this.loadCombos();    
   }
 
   public onClickAddActivity(): void {       
@@ -68,17 +81,67 @@ export class ProjectsMainPageComponent implements OnInit {
     
   }
 
+  public onChangeOrderBy(orderBy: string): void {  
+    this.orderBy = orderBy;
+  }
+
+  public onChangeResource(resourceUID: string): void {
+   if (resourceUID === "") {
+     return;
+   }
+
+   this.filter.ResourceUId = resourceUID;
+  }
+
+  public onChangeResponsible(responsibleUID: string): void {
+    if (responsibleUID === "") {
+      return;
+    }
+
+    this.filter.ResponsibleUId = responsibleUID;
+  }
+
+  public onSearch(): void {   
+     this.search();
+  }
+
+
   private loadProjectList(): void {
+    const errMsg = 'Ocurrió un problema al intentar leer la lista de proyectos.';
+
     this.projectService.getProjectList()
                        .toPromise()
-                       .then((x) => this.projectsList = x);
+                       .then((x) => this.projectsList = x)
+                       .catch((e) => this.exceptionHandler(e, errMsg));
   }
   
   private loadResources(): void {
+    const errMsg = 'Ocurrió un problema al intentar leer la lista de recursos.';
+
     this.projectService.getResources(this.selectedProject.uid)
                        .toPromise()
-                       .then((x) => this.resourcesList = x);
+                       .then((x) => this.resourcesList = x)
+                       .catch((e) => this.exceptionHandler(e, errMsg));
 
+  }
+
+  private loadResponsibles(): void {
+    const errMsg = 'Ocurrió un problema al intentar leer la lista de responsables.';
+
+    this.activityService.getResponsiblesList(this.selectedProject.uid)
+                        .toPromise()
+                        .then((x) => this.responsiblesList = x)
+                        .catch((e) => this.exceptionHandler(e, errMsg));
+  }
+
+  private search(): void {
+    const errMsg = 'Ocurrió un problema al intentar buscar la lista de actividades.';
+
+    this.activityService.searchActivities(this.selectedProject.uid, this.filter,
+                                          this.orderBy, this.keywords)
+                        .toPromise()
+                        .then((x) => console.log(x))
+                        .catch((e) => this.exceptionHandler(e, errMsg));
   }
 
   private showGanttGraph(): void {
@@ -87,6 +150,22 @@ export class ProjectsMainPageComponent implements OnInit {
 
   private hideGanttGraph(): void {
     this.isGanttGraphVisible = false;
+  }
+
+  private loadCombos(): void  {
+    this.loadResources();
+    this.loadResponsibles();
+  }
+
+  private exceptionHandler(error: any, defaultMsg: string): void {
+    let errMsg = 'Tengo un problema.\n\n';
+
+    if (typeof (error) === typeof (Error)) {
+      errMsg += defaultMsg + '\n\n' + (<Error>error).message;
+    } else {
+      errMsg += defaultMsg + '\n\n' + 'Error desconocido.';
+    }
+    alert(errMsg);
   }
 
 }
