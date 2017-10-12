@@ -8,13 +8,13 @@
 import { Component, Input }  from '@angular/core';
 
 import { ProjectRef } from '../data-types/project';
-import { WorkListsService } from '../services/worklists.service';
+import { ActivityService } from '../services/activity.service';
 
 @Component ({
   selector: 'worklists-main-page',
   templateUrl: './worklists-main-page.component.html',
   styleUrls: ['./worklists-main-page.component.scss'],
-  providers: [WorkListsService]
+  providers: [ActivityService]
 })
 
 export class WorklistsMainPageComponent {
@@ -45,7 +45,7 @@ export class WorklistsMainPageComponent {
     }
     
 
-  constructor (private workListService: WorkListsService) {}
+  constructor (private activitiyService: ActivityService) { }
 
   
 
@@ -98,7 +98,7 @@ export class WorklistsMainPageComponent {
   }
 
   private refreshData() {
-    this.workListService.getActivities(this.project.uid)
+    this.activitiyService.getActivities(this.project.uid)
      .then((data) => {
        this.taskList = data;       
      });

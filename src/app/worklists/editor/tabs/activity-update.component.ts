@@ -12,10 +12,11 @@ import {
 } from '@angular/core';
 
 import { TaskRef, EmptyTask } from '../../data-types/task';
-import { WorkListsService } from '../../services/worklists.service';
 
 import { PersonRef } from '../../data-types/project';
+
 import { ActivityService } from '../../services/activity.service';
+import { ProjectService } from '../../services/project.service';
 
 declare var dhtmlXCalendarObject: any;
 
@@ -23,7 +24,7 @@ declare var dhtmlXCalendarObject: any;
   selector: 'task-update',
   templateUrl: './activity-update.component.html',
   styleUrls: ['./activity-update.component.scss'],
-  providers: [ActivityService, WorkListsService]
+  providers: [ActivityService, ProjectService]
 })
 
 export class ActivityUpdateComponent implements OnInit {
@@ -50,7 +51,7 @@ export class ActivityUpdateComponent implements OnInit {
   @Output() public onCloseTaskEditorVisible = new EventEmitter();
 
   public constructor(private activityService: ActivityService,
-    private workListsService: WorkListsService) { }
+                     private projectService: ProjectService) { }
 
   ngOnInit() {
     this.loadCalendar();
@@ -99,7 +100,7 @@ export class ActivityUpdateComponent implements OnInit {
   private loadResponsiblesList(): void {
     const errMsg = 'Ocurrió un problema al intentar leer la lista de responsables.';
 
-    this.activityService.getResponsiblesList(this.task.project.uid)
+    this.projectService.getResponsiblesList(this.task.project.uid)
       .toPromise()
       .then((x) => this.responsiblesList = x)
       .catch((e) => this.exceptionHandler(e, errMsg));
@@ -109,7 +110,7 @@ export class ActivityUpdateComponent implements OnInit {
   private async updateTask() {
     const errMsg = 'Ocurrió un problema al intentar actualizar la actividad.';
 
-    await this.workListsService.updateActivity(this.task.project.uid, this.task.uid, this.selectedTask)
+    await this.activityService.updateActivity(this.task.project.uid, this.task.uid, this.selectedTask)
       .toPromise()
       .catch((e) => this.exceptionHandler(e, errMsg));
   }

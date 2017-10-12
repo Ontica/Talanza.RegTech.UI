@@ -1,7 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 import { ClosedTask, EmptyClosedTask } from '../../data-types/task';
-import { WorkListsService } from '../../services/worklists.service';
+
+import { ActivityService } from '../../services/activity.service';
 
 declare var dhtmlXCalendarObject: any;
 
@@ -9,7 +10,7 @@ declare var dhtmlXCalendarObject: any;
   selector:'task-close',
   templateUrl: './activity-close.component.html',
   styleUrls:['./activity-close.component.scss'],
-  providers:[WorkListsService]
+  providers:[ActivityService]
 })
 
 export class ActivityCloseComponent implements OnInit{
@@ -31,7 +32,7 @@ export class ActivityCloseComponent implements OnInit{
 
   @Output() public onCloseEvent = new EventEmitter();
 
-  constructor(private workListsService: WorkListsService){}
+  constructor(private activityService: ActivityService) { }
 
   ngOnInit() {
     this.loadCalendars();
@@ -91,7 +92,7 @@ export class ActivityCloseComponent implements OnInit{
   private closeTask(): void {
     const errMsg = 'Ocurrió un problema al intentar crear la actividad.';
 
-    this.workListsService.closeActivity(this.task.project.uid,this.task.uid, this.closedTask)
+    this.activityService.closeActivity(this.task.project.uid,this.task.uid, this.closedTask)
                         .toPromise()
                         .then()
                         .catch((e) => this.exceptionHandler(e, errMsg));

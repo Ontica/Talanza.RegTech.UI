@@ -10,7 +10,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { ProcessModel, EmptyProcessModel } from '../data-types/project'; 
 
 import { ActivityService } from '../services/activity.service';
-
+import { ProcessModelsService } from '../services/process-models.service'
 
 @Component({
   selector:'activity-selector', 
@@ -40,7 +40,7 @@ import { ActivityService } from '../services/activity.service';
    </table>  
     `,
    styleUrls:['./activity-form.scss'],
-   providers:[ActivityService]
+   providers:[ActivityService, ProcessModelsService]
  
 })
 
@@ -53,7 +53,8 @@ export class ActivitySelectorComponent {
   private selectedElementType = '';
   private selectedProcessModel: ProcessModel = EmptyProcessModel();
   
-  constructor(private activityService: ActivityService) {}
+  constructor(private activityService: ActivityService,
+              private processModelsService: ProcessModelsService) { }
 
   public onChangeElementType(elementType: string): void {   
     this.selectedElementType = elementType;     
@@ -91,7 +92,7 @@ export class ActivitySelectorComponent {
   private loadProcess(): void {
     const errMsg = 'Ocurrio un prolema al intentar leer la listas de procesos';
 
-    this.activityService.getProcess()
+    this.processModelsService.getProcess()
                         .toPromise()
                         .then((x) => this.processModels = x)
                         .catch((e) => this.exceptionHandler(e, errMsg));
@@ -100,7 +101,7 @@ export class ActivitySelectorComponent {
   private loadEvents(): void {
     const errMsg = 'Ocurrio un prolema al intentar leer la listas de evntos';
 
-    this.activityService.getEvents()
+    this.processModelsService.getEvents()
                         .toPromise()
                         .then((x) => this.processModels = x)
                         .catch((e) => this.exceptionHandler(e, errMsg));

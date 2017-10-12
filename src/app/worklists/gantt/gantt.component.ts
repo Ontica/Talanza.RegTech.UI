@@ -3,7 +3,7 @@ import { Component, ElementRef, Input, OnChanges, ViewChild } from "@angular/cor
 import "dhtmlx-gantt";
 import { } from "@types/dhtmlxgantt";
 
-import { ProjectService } from '../services/project.service';
+import { ActivityService } from '../services/activity.service';
 import { ProjectRef } from '../data-types/project';
 
 @Component({
@@ -26,7 +26,7 @@ import { ProjectRef } from '../data-types/project';
                   </activity-editor>-->
                 </div>
                 `,
-  providers: [ProjectService]
+  providers: [ActivityService]
 })
 
 export class GanttComponent implements OnChanges {
@@ -50,7 +50,7 @@ export class GanttComponent implements OnChanges {
   public parentId: number = -1;
   public activityId: number = -1;
 
-  constructor(private projectService: ProjectService) { }
+  constructor(private activityService: ActivityService) { }
 
   ngOnChanges() {
 
@@ -132,7 +132,7 @@ export class GanttComponent implements OnChanges {
   }
 
   private refreshData() {    
-     this.projectService.getActivitiesListAsGantt(this.project.uid)
+     this.activityService.getActivitiesListAsGantt(this.project.uid)
       .then((data) => {        
         gantt.clearAll();
         gantt.parse({ data });

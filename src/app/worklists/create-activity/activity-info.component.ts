@@ -7,10 +7,13 @@
  */
 import { Component, EventEmitter, HostBinding, Input, Output, OnInit } from '@angular/core';
 
-import { ActivityService } from '../services/activity.service';
 import {
   ProjectRef, ResourceRef, PersonRef,
   Activity, EmptyActivity } from '../data-types/project';
+
+import { ProjectService } from '../services/project.service';
+import { ActivityService } from '../services/activity.service';
+import { ProcessModelsService } from '../services/process-models.service';
 
 declare var dhtmlXCalendarObject: any;
 
@@ -18,7 +21,7 @@ declare var dhtmlXCalendarObject: any;
   selector: 'activity-info',
   templateUrl: './activity-Info.component.html',
   styleUrls: ['./activity-Info.component.scss'],
-  providers: [ActivityService]
+  providers: [ActivityService, ProcessModelsService, ProjectService]
 })
 
 export class ActivityInfoComponent implements OnInit {
@@ -62,7 +65,9 @@ export class ActivityInfoComponent implements OnInit {
     return this._operation;
   }
 
-  public constructor(private activityService: ActivityService) { }
+  public constructor(private activityService: ActivityService,
+                     private processModelsService: ProcessModelsService,
+                     private projectService: ProjectService) { }
 
   ngOnInit() {
     this.loadCalendars();
@@ -104,7 +109,7 @@ export class ActivityInfoComponent implements OnInit {
   private loadResourcesList(): void {
     const errMsg = 'Ocurrió un problema al intentar leer la lista de recursos.';
 
-    this.activityService.getResourcesList(this.project.uid)
+    this.projectService.getResourcesList(this.project.uid)
                         .toPromise()
                         .then((x) => this.resourceList = x)
                         .catch((e) => this.exceptionHandler(e, errMsg));      
@@ -113,7 +118,7 @@ export class ActivityInfoComponent implements OnInit {
   private loadRequestersList(): void {
     const errMsg = 'Ocurrió un problema al intentar leer la lista de solicitantes.';
 
-    this.activityService.getRequestersList(this.project.uid)
+    this.projectService.getRequestersList(this.project.uid)
                         .toPromise()
                         .then((x) => this.requestersList = x)
                         .catch((e) => this.exceptionHandler(e, errMsg));
@@ -122,7 +127,7 @@ export class ActivityInfoComponent implements OnInit {
   private loadResponsiblesList(): void {
     const errMsg = 'Ocurrió un problema al intentar leer la lista de responsables.';
 
-    this.activityService.getResponsiblesList(this.project.uid)
+    this.projectService.getResponsiblesList(this.project.uid)
                         .toPromise()
                         .then((x) => this.responsiblesList = x)
                         .catch((e) => this.exceptionHandler(e, errMsg));
@@ -218,7 +223,7 @@ export class ActivityInfoComponent implements OnInit {
   private addProcessModel(): void {
     const errMsg = 'Ocurrió un problema al intentar guardar.';
 
-    this.activityService.addProcessModel(this.project.uid,this.processModelUID,this.activity)
+    this.processModelsService.addProcessModel(this.project.uid,this.processModelUID,this.activity)
                         .toPromise()
                         .then()
                         .catch((e) => this.exceptionHandler(e, errMsg));

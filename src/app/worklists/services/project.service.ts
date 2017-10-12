@@ -12,7 +12,7 @@ import { Observable } from 'rxjs/Observable';
 import { CoreService } from '../../core';
 
 import { Task } from '../data-types/task';
-import {  ProjectRef, ResourceRef } from '../data-types/project';
+import { ProjectRef, ResourceRef, PersonRef } from '../data-types/project';
 
 export enum ProjectServiceErr {
   GET_ACTIVITIES_ERR =
@@ -30,19 +30,31 @@ export class ProjectService {
     return this.core.http.get<any[]>(path);
   }
 
-  public getResources(projectUID: string): Observable<ResourceRef[]> {    
+  public getResourcesList(projectUID: string): Observable<ResourceRef[]> {
     const path = `v1/project-management/projects/${projectUID}/resources`;
 
     return this.core.http.get<ResourceRef[]>(path);
   }
 
-  public getActivitiesListAsGantt(projectId: string): Promise<Task[]> {
-    const path = `v1/project-management/projects/${projectId}/activities/as-gantt`;    
+  public getRequestersList(projectUID: string): Observable<PersonRef[]> {
+    const path ='v1/project-management/projects/'+ projectUID +'/requesters';
 
-    return this.core.http.get<Task[]>(path)
-                         .toPromise();
-
+    return this.core.http.get<PersonRef[]>(path);
   }
+
+  public getResponsiblesList(projectUID: string): Observable<PersonRef[]> {
+    const path ='v1/project-management/projects/'+ projectUID +'/responsibles';
+
+    return this.core.http.get<PersonRef[]>(path);
+  }
+
+  public getTaskManagers(projectUID: string): Observable<PersonRef[]> {
+    const path = 'v1/project-management/projects/'+ projectUID + '/task-managers';
+
+    return this.core.http.get<PersonRef[]>(path);
+  }   
+
+  
 
 }
 

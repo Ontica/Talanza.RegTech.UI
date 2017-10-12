@@ -119,17 +119,17 @@ export class ProjectsMainPageComponent implements OnInit {
   private loadResources(): void {
     const errMsg = 'Ocurrió un problema al intentar leer la lista de recursos.';
 
-    this.projectService.getResources(this.selectedProject.uid)
-                       .toPromise()
-                       .then((x) => this.resourcesList = x)
-                       .catch((e) => this.exceptionHandler(e, errMsg));
+    this.projectService.getResourcesList(this.selectedProject.uid)
+                        .toPromise()
+                        .then((x) => this.resourcesList = x)
+                        .catch((e) => this.exceptionHandler(e, errMsg));
 
   }
 
   private loadResponsibles(): void {
     const errMsg = 'Ocurrió un problema al intentar leer la lista de responsables.';
 
-    this.activityService.getResponsiblesList(this.selectedProject.uid)
+    this.projectService.getResponsiblesList(this.selectedProject.uid)
                         .toPromise()
                         .then((x) => this.responsiblesList = x)
                         .catch((e) => this.exceptionHandler(e, errMsg));
