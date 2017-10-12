@@ -43,8 +43,9 @@ export class ProcedureFilterComponent implements OnInit {
     this.filter.entityUID = entityUID;
     
     await this.setOffices(entityUID);
+    
+    this.search();
   }
-
 
   public newProcedure(): void {
     this.onNewProcedure.emit('');
