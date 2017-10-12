@@ -34,6 +34,7 @@ export class ProjectsMainPageComponent implements OnInit {
   public selectedProject: ProjectRef = EmptyProjectRef();
   public ganttConfig = 'ganttWeeks';
   public selectedView = 'tasksList';
+  public selectedScale = 'quarters';
   public resourcesList: ResourceRef[] = [];
   public responsiblesList: PersonRef[] = [];
   public orderBy = '';

@@ -4,13 +4,12 @@
     <td>
       <select #contract class="select-box" style="width:210px;" (change)="onChangeContract(contract.value)">
          <option value="">( Todos )</option>
-         <option value="authoritydelivery">Entregados a la autoridad</option>
-         <option value="authorityreceived">Recibidos por la autoridad</option>
-         <option value=""></option>
-         <option value="laws">Leyes y Reglamentos</option>
-         <option value=""></option>
-         <option value="contracts">Contratos</option>
-         <option value="process">Procesos</option>
+         <option value="Leyes">Leyes</option>
+         <option value="Reglamentos">Reglamentos</option>
+         <option value="Lineamientos">Lineamientos</option>
+         <option value="DAGs">DAGs</option>
+         <option value="Acuerdos">Acuerdos</option>
+         <option value="Formatos">Formatos</option>
       </select>
     </td>
     <td>Buscar:</td>
@@ -25,9 +24,9 @@
 <table class="grid">
   <thead>
     <tr>
-      <th style="width:30%">Nombre</th>
+      <th style="width:30%">Acrónimo</th>
       <th style="width:10%">Liga</th>
-      <th style="width:60%">Descripción</th>
+      <th style="width:60%">Nombre</th>
     </tr>
   </thead>
   <tbody>

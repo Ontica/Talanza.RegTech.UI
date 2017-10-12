@@ -5,23 +5,18 @@
       <th style='width:40%'>Trámite / Homoclave</th>
       <th style='width:100px'>Dependencia</th>
       <th style='width:15%'>Tema</th>
-      <th style='width:20%'>Tipo proyecto / Ejecución</th>
-      <th style='width:20%'></th>
+      <th style='width:40%'></th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let procedure of procedures">
       <td style='width:40%'>
         <a (click)="onOpenProcedureEditorWindow(procedure.uid)">{{procedure.name}}</a>
-        <br/>
-        <u>{{procedure.code}}</u>
+        <br/> {{procedure.code}}
       </td>
       <td style='width:100px'>{{procedure.entity}}</td>
       <td style='width:15%'>{{procedure.theme}}</td>
-      <td style='width:20%'>
-        Proyecto: &nbsp;{{procedure.projectType}}<br/>Ejecución: {{procedure.executionMode}}
-      </td>
-      <th style='width:20%'></th>
+      <th style='width:40%'></th>
     </tr>
   </tbody>
 </table>

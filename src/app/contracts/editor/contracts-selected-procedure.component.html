@@ -12,10 +12,12 @@
           </th>
         </thead>
         <tbody *ngIf="isVisibleGeneralInfo ">
+          <!--
           <tr>
             <td class='label'>Regulación:</td>
             <td>{{procedure.legalInfo.regulationMode}}</td>
           </tr>
+          !-->
           <tr>
             <td class='label'>Homoclave COFEMER:</td>
             <td>{{procedure.code}}</td>
@@ -29,7 +31,7 @@
             <td><a (click)="openExternalWindow(procedure.officialUrl)">{{procedure.officialUrl}}</a></td>
           </tr>
           <tr>
-            <td class='label'>Página web regulación:</td>
+            <td class='label'>Página web COFEMER:</td>
             <td><a (click)="openExternalWindow(procedure.regulationUrl)">{{procedure.regulationUrl}}</a></td>
           </tr>
         </tbody>
@@ -62,6 +64,7 @@
       </table>
     </div>
     <br>
+    <!--
     <div>
       <table>
         <thead>
@@ -80,8 +83,9 @@
           </tr>
         </tbody>
       </table>
-    </div>
+    </div>    
     <br>
+    !-->
     <div>
       <table>
         <thead>
@@ -110,7 +114,12 @@
           </tr>
           <tr>
             <td class='label'>Entregar en:</td>
-            <td>{{procedure.filingCondition.howToFileAddress}}</td>
+            <td *ngIf="procedure.filingCondition.howToFileAddress !== 'No aplicable'">
+              <a href="mailto:{{procedure.filingCondition.howToFileAddress}}">{{procedure.filingCondition.howToFileAddress}}</a>
+            </td>
+            <td *ngIf="procedure.filingCondition.howToFileAddress === 'No aplicable'">
+              {{procedure.filingCondition.howToFileAddress}}
+            </td>
           </tr>
           <tr>
             <td colspan="2" class="sub-header text-align-left">Plazo máximo de entrega</td>
@@ -130,38 +139,7 @@
     <div>
       <table>
         <thead>
-          <th colspan="2" class="header text-align-left ">Información de contacto<span class="right " (click)="onDisplayAuthorityInfo() "><i class="fa fa-plus-circle " aria-hidden="true "></i></span></th>
-        </thead>
-        <tbody *ngIf="isAuthorityInfoVisible">
-          <tr>
-            <td class='label'>Entidad:</td>
-            <td>{{procedure.entityName}}</td>
-          </tr>
-          <tr>
-            <td class='label'>Dependencia:</td>
-            <td>{{procedure.authorityName}}</td>
-          </tr>
-          <tr>
-            <td class='label'>Puesto:</td>
-            <td>{{procedure.authorityTitle}}</td>
-          </tr>
-          <tr>
-            <td class='label'>Contacto:</td>
-            <td>{{procedure.authorityContact}}</td>
-          </tr>
-          <!-- <tr>
-                  <td colspan="2 "><img src="../../assets/img/mapa.png " width="100% " alt="mapita " />
-      
-                  </td>
-                </tr>-->
-        </tbody>
-      </table>
-    </div>
-    <br>
-    <div>
-      <table>
-        <thead>
-          <th colspan="2" class="header text-align-left ">Plazo legal y prórrogas<span class="right " (click)="onDisplayInitialTerms() ">
+          <th colspan="2" class="header text-align-left ">Plazo de resolución y prórrogas<span class="right " (click)="onDisplayInitialTerms() ">
               <i class="fa fa-plus-circle " aria-hidden="true "></i></span>
           </th>
         </thead>
@@ -175,7 +153,7 @@
             <td>{{procedure.filingCondition.ficta}}</td>
           </tr>
           <tr>
-            <td class='label'>Observaciones sobre<br/>el plazo legal:</td>
+            <td class='label'>Observaciones sobre<br/>el plazo de resolución:</td>
             <td>{{procedure.filingCondition.issuanceLegalTermNotes}}</td>
           </tr>
           <tr>
@@ -209,6 +187,36 @@
       </table>
     </div>
     <br>
+    <div>
+      <table>
+        <thead>
+          <th colspan="2" class="header text-align-left ">Información de contacto<span class="right " (click)="onDisplayAuthorityInfo() "><i class="fa fa-plus-circle " aria-hidden="true "></i></span></th>
+        </thead>
+        <tbody *ngIf="isAuthorityInfoVisible">
+          <tr>
+            <td class='label'>Dependencia:</td>
+            <td>{{procedure.entityName}}</td>
+          </tr>
+          <tr>
+            <td class='label'>Autoridad:</td>
+            <td>{{procedure.authorityName}}</td>
+          </tr>
+          <tr>
+            <td class='label'>Cargo:</td>
+            <td>{{procedure.authorityTitle}}</td>
+          </tr>
+          <tr>
+            <td class='label'>Contacto:</td>
+            <td>{{procedure.authorityContact}}</td>
+          </tr>
+          <!-- <tr>
+                  <td colspan="2 "><img src="../../assets/img/mapa.png " width="100% " alt="mapita " />
+      
+                  </td>
+                </tr>-->
+        </tbody>
+      </table>
+    </div>
     <div>
       <br>
       <br>

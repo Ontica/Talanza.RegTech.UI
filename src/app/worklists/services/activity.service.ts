@@ -20,19 +20,19 @@ export class ActivityService {
 
   public constructor(private core: CoreService) { }
 
-  public getResourcesList(): Observable<ResourceRef[]> {
-    const path = 'v1/project-management/resources';
+  public getResourcesList(projectUID: string): Observable<ResourceRef[]> {
+    const path = `v1/project-management/projects/${projectUID}/resources`;
 
     return this.core.http.get<ResourceRef[]>(path);
   }
 
-  public getRequestersList(projectUID:string): Observable<PersonRef[]> {
+  public getRequestersList(projectUID: string): Observable<PersonRef[]> {
     const path ='v1/project-management/projects/'+ projectUID +'/requesters';
 
     return this.core.http.get<PersonRef[]>(path);
   }
 
-   public getResponsiblesList(projectUID:string): Observable<PersonRef[]> {
+   public getResponsiblesList(projectUID: string): Observable<PersonRef[]> {
     const path ='v1/project-management/projects/'+ projectUID +'/responsibles';
 
     return this.core.http.get<PersonRef[]>(path);

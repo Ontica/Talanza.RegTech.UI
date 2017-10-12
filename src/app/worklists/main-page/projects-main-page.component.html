@@ -1,54 +1,72 @@
 <table class="grid-search-table">
   <tr>
-    <td>Proyecto:</td>
-    <td>
+    <td>Contrato:</td>
+    <td colspan="3">
       <select style="width:320px;" class="select-box" #project (change)="onChangeProjectList(project.value)">
-        <option value="">( Seleccionar un proyecto de la lista )</option>
+        <option value="">( Seleccionar contrato )</option>
         <option *ngFor="let project of projectsList"[value]="project.uid">{{project.name}}</option>
         </select>
     </td>
     <td>Buscar:</td>
-    <td><input style="width:320px" type="search" class="text-box">
+    <td colspan="3">
+      <input style="width:344px" type="search" class="text-box">
       <button class="btn" style="width:55px;" (click)="onSearch()">Buscar</button>
     </td>
-    <td colspan="4"><button style="width:185px" class="btn-warning align-center" type="button" (click)="onClickAddActivity()">+ Agregar actividad o evento</button></td>
+    <td colspan="6"><button style="width:185px" class="btn-warning align-center" type="button" (click)="onClickAddActivity()">+ Agregar actividad o evento</button></td>
   </tr>
 
   <tr>
-    <td>Filtrar:</td>
+    <td>Etapa:</td>
     <td>
-      <select class="select-box" style="width:320px" #resource (change)="onChangeResource(resource.value)">
+      <select class="select-box" style="width:90px" #resource (change)="onChangeStage(stage.value)">
+          <option value="">( No filtrar )</option>
+          <option value="Transición de Arranque">Transición</option>
+          <option value="Evaluación">Evaluación</option>
+          <option value="Exploración">Exploración</option>
+          <option value="Desarrollo">Desarrollo</option>
+          <option value="Producción">Producción</option>
+          <option value="Abandono">Abandono</option>
+        </select>
+    </td>
+    <td>Sitio:</td>
+    <td>
+      <select class="select-box" style="width:176px" #resource (change)="onChangeResource(resource.value)">
         <option value="">( No filtrar )</option>
         <option *ngFor="let resource of resourcesList" [value]="resource.uid">{{resource.name}}</option>
       </select>
     </td>
     <td>Responsable:</td>
     <td>
-      <select style="width:385px" class="select-box" #responsible (change)="onChangeResponsible(responsible.value)">
+      <select style="width:180px" class="select-box" #responsible (change)="onChangeResponsible(responsible.value)">
         <option value="">( Todos ) </option>
         <option *ngFor="let responsible of responsiblesList" [value]="responsible.uid">{{responsible.name}}</option>
       </select>
     </td>
-    <td>Ordenar:</td>
+    <td>Ordenar por:</td>
     <td>
-      <select style="width: 140px" class="select-box" #orderBy (change)="onChangeOrderBy(orderBy.value)">
-        <option value="ItemOrdering, ProjectObjectId">(No ordenar)</option>
+      <select style="width:136px" class="select-box" #orderBy (change)="onChangeOrderBy(orderBy.value)">
+        <option value="ItemOrdering, ProjectObjectId">( No ordenar )</option>
         <option value="DueDate, ItemOrdering, ProjectObjectId">Fecha Legal</option>
         <option value="TargetDate, ItemOrdering, ProjectObjectId">Fecha Objetivo</option>
         <option value="ResponsibleName, ItemOrdering, ProjectObjectId">Responsable</option>
         <option value="ActivityName, ItemOrdering, ProjectObjectId">Nombre de la tarea</option>
       </select>
     </td>
-    <td>Mostrar:</td>
+    <td>Vista:</td>
     <td>
-      <select style="width:138px" class="select-box" [(ngModel)]="selectedView">
-        <option value="tasksList">Asignación de tareas</option>
-        <option value="kanban">Tablero Kanban</option>
+      <select style="width:146px" class="select-box" [(ngModel)]="selectedView">
+        <option value="tasksList">Lista de tareas</option>
+        <option value="kanban">Kanban</option>
         <option value="calendar">Calendario</option>
-        <option value=""></option>
-        <option value="ganttQuarters">Gantt (trimestres)</option>
-        <option value="ganttMonths">Gantt (meses)</option>
-        <option value="ganttWeeks">Gantt (semanas)</option>
+        <option value="gantt">Gantt</option>
+      </select>
+    </td>
+    <td>Escala:</td>
+    <td>
+      <select style="width:138px" class="select-box" [(ngModel)]="selectedScale">
+        <option value="quarters">Trimestral</option>
+        <option value="months">Mensual</option>
+        <option value="weeks">Semanal</option>
       </select>
     </td>
   </tr>
@@ -64,7 +82,7 @@
     <worklists-main-page [project]="selectedProject" [refresh]="isRefreshWorkList" *ngSwitchCase="'tasksList'"></worklists-main-page>
     <!--
     <worklists-main-page [project]="selectedProject" *ngSwitchCase="'kanban'"></worklists-main-page>-->
-    <gantt [project]="selectedProject" [config]="selectedView" *ngSwitchDefault></gantt>
+    <gantt [project]="selectedProject" [config]="selectedScale" *ngSwitchDefault></gantt>
   </div>
   <!--<gantt [project]="selectedProject " [config]="ganttConfig"></gantt>-->
 </div>

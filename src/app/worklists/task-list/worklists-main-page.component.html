@@ -11,12 +11,11 @@
 <table class="grid">
   <thead>
     <tr>
-      <th style="width:30%">Tarea/Actividad</th>
-      <th style="width:8%">Trámite</th>
-      <th style="width:15%">Observaciones</th>
-      <th style="width:5%">Progreso</th>
+      <th style="width:30%">Etapa » Obligación » Actividad</th>
+      <th style="width:15%">Fechas límite</th>
+      <th style="width:8%">Estado</th>
       <th style="width:15%">Responsable</th>
-      <th style="width:15%">Fechas</th>
+      <th style="width:20%">Observaciones</th>
     </tr>
   </thead>
   <tbody>
@@ -31,17 +30,20 @@
 
         <ng-template [ngSwitchCase]="'ObjectType.ProjectObject.Activity'">
           <td style="width:30%">
-            <a (click)="onShowTaskEditor(task)">{{task.name}}</a>
+            <a (click)="onShowTaskEditor(task)">{{task.name}}</a><br />
+            <i *ngIf="task.procedure.uid !=='Undefined'">
+              <a (click)="onShowProcedureInfo(task.procedure.uid)">Trámite {{task.procedure.entity}}</a>
+            </i>
           </td>
-          <td style="width:10%" *ngIf="task.procedure.uid !=='Undefined'">
-            <u><a (click)="onShowProcedureInfo(task.procedure.uid)">{{task.procedure.entity}}</a></u>
+          <td *ngIf="task.stage !=='Done'" style="width:15%;white-space:nowrap">
+            Objetivo: {{task.targetDate | date: 'dd/MMM/yyyy'}} <br> Legal: &nbsp; &nbsp; &nbsp;{{task.dueDate | date: 'dd/MMM/yyyy'}}
           </td>
-          <td style="width:10%" *ngIf="task.procedure.uid ==='Undefined'"></td>
-          <td style="width:15%">{{task.notes}}</td>
-          <td style="width:5%;white-space:nowrap">{{task.progress}}%</td>
+          <td *ngIf="task.stage ==='Done'" style="width:15%;white-space:nowrap">
+            Concluida el: {{task.endDate | date: 'dd/MMM/yyyy'}}
+          </td>
+          <td style="width:8%;white-space:nowrap">{{task.progress}}%</td>
           <td style="width:15%;white-space:nowrap">{{task.responsible.name}} </td>
-          <td *ngIf="task.stage !=='Done'" style="width:15%;white-space:nowrap">Objetivo: {{task.targetDate | date: 'dd/MMM/yyyy'}} <br> Legal: &nbsp; &nbsp; &nbsp;{{task.dueDate | date: 'dd/MMM/yyyy'}} </td>
-          <td *ngIf="task.stage ==='Done'" style="width:15%;white-space:nowrap">Terminada el: {{task.endDate | date: 'dd/MMM/yyyy'}}</td>
+          <td style="width:20%">{{task.notes}}</td>
         </ng-template>
       </tr>
     </ng-container>

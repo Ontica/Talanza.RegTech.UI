@@ -116,13 +116,13 @@ export class GanttComponent implements OnChanges {
 
   private setScaleUnit() {
     switch (this.config) {
-      case 'ganttWeeks':
+      case 'weeks':
         gantt.config.scale_unit = 'week';
         return;
-      case 'ganttMonths':
+      case 'months':
         gantt.config.scale_unit = 'month';
         return;
-      case 'ganttQuarters':
+      case 'quarters':
         gantt.config.scale_unit = 'quarter';
         return;
       default:

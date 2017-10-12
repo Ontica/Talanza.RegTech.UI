@@ -104,27 +104,28 @@ export class ActivityInfoComponent implements OnInit {
   private loadResourcesList(): void {
     const errMsg = 'Ocurrió un problema al intentar leer la lista de recursos.';
 
-    this.activityService.getResourcesList().toPromise()
-      .then((x) => this.resourceList = x)
-      .catch((e) => this.exceptionHandler(e, errMsg));      
+    this.activityService.getResourcesList(this.project.uid)
+                        .toPromise()
+                        .then((x) => this.resourceList = x)
+                        .catch((e) => this.exceptionHandler(e, errMsg));      
   }
 
   private loadRequestersList(): void {
     const errMsg = 'Ocurrió un problema al intentar leer la lista de solicitantes.';
 
     this.activityService.getRequestersList(this.project.uid)
-      .toPromise()
-      .then((x) => this.requestersList = x)
-      .catch((e) => this.exceptionHandler(e, errMsg));
+                        .toPromise()
+                        .then((x) => this.requestersList = x)
+                        .catch((e) => this.exceptionHandler(e, errMsg));
   }
 
   private loadResponsiblesList(): void {
     const errMsg = 'Ocurrió un problema al intentar leer la lista de responsables.';
 
     this.activityService.getResponsiblesList(this.project.uid)
-      .toPromise()
-      .then((x) => this.responsiblesList = x)
-      .catch((e) => this.exceptionHandler(e, errMsg));
+                        .toPromise()
+                        .then((x) => this.responsiblesList = x)
+                        .catch((e) => this.exceptionHandler(e, errMsg));
   }
 
   private loadCalendars(): void {
