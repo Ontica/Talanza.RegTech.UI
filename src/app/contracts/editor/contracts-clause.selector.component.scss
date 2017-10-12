@@ -1,0 +1,16 @@
+@import "../../../styles/general-styles";
+.clause-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  margin-left: 4pt;
+}
+
+.selected {
+  font-weight: 600;
+}
+
+li {
+  font-size: 10pt;
+  padding-top: 6pt;
+}

@@ -1,57 +1,20 @@
-<table class="grid-search-table">
-  <tr>
-    <td>Contrato:</td>
-    <td>
-      <select #contract class="select-box" style="width:210px;" (change)="onChangeContract(contract.value)">
-         <option value="">( Seleccionar un contrato )</option>
-         <option *ngFor="let contract of contractsList" [value]="contract.uid">{{contract.name}}</option>
-      </select>
-    </td>
-    <td>Buscar:</td>
-    <td>
-      <input style="width:364px;" type="search " class="text-box ">
-    </td>
-    <td>
-      <button class="btn" style="width:55px;" (click)="search()">Buscar</button>
-    </td>
-    <td class="text-align-center">
-      <button style="width:140px" class="btn-warning" (click)="onClickAddClause()">+Agregar cláusula</button>
-    </td>
-  </tr>
-</table>
-
-<table class="grid">
-  <thead>
-    <tr>
-      <th>Claúsula</th>
-      <th>Nombre</th>
-      <th>Texto</th>
-      <th>PDF</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let clause of selectedContract.clauses">
-      <td><a (click)="onClickEditClause(clause)">{{clause.clauseNo}}</a></td>
-      <td><a (click)="onClickEditClause(clause)">{{clause.title}}</a></td>
-      <td>{{clause.text}}</td>
-      <td><a (click)="openURL(clause.sourcePageNo)">pdf</a></td>
-    </tr>
-  </tbody>
-</table>
-
-<div class="grid-footer">
-  <table class="grid-footer-style">
-    <tr>
-      <td class="grid-footer-items">{{selectedContract.clauses.length}} cláusulas encontradas</td>
-      <td class="grid-footer-items text-align-center">
-
-      </td>
-      <td class="grid-footer-items text-align-right">Página 1 de 1</td>
-    </tr>
-  </table>
-</div>
+<div class="main-container">
+  <contract-filters (clauses)="onLoadClauses($event)"></contract-filters>
+  <div class="left-panel" *ngIf="isVisibleLeftPanel" [ngStyle]="{'width' : leftPanelWidth }">
+    <div class="clauses-container">
+      <contract-clause-selector [clauses]="clauses" (selectedClause)="onSelectedClause($event)"></contract-clause-selector>
+    </div>
+  </div>
+  <div class="left-resize" *ngIf="!isHideLeftPanel" (mousedown)='onResize($event)' [style.width.px]="leftResizeWidth"></div>
+  <div class="center-panel" [ngStyle]="{'width' : centerPanelWidth }">
 
 
-<div *ngIf="isClauseEditorWindowVisible" class="popup">
-  <contract-editor [contractClause]="selectedContractClause" (onCloseEvent)="onCloseContractEditorWindow()"></contract-editor>
-</div>
+    <div style="overflow-y: scroll; height:100%; width:100%;">
+
+      <!-- <button type="button" (click)="onHideLeftPanel()">Ocultar el panel izquierdo</button>-->
+      <div *ngIf="isSelectedClause">
+        <selected-clause [clause]="clause"></selected-clause>
+      </div>
+      <!-- -->
+    </div>
+  </div>

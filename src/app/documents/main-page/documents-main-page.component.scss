@@ -1,1 +1,8 @@
 @import "../../../styles/grid";
+table.grid tbody {
+  height: calc(100vh - 230px);
+}
+
+table.grid tbody tr {
+  height: 70px;
+}

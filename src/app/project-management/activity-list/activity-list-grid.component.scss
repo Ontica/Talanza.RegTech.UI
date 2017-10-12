@@ -1,0 +1,44 @@
+@import "../../../styles/grid";
+table.grid tbody {
+  height: calc(100vh - 260px);
+}
+
+table.grid tbody tr {
+  height: auto;
+  display: block;
+  overflow: hidden;
+}
+
+.summary-level1 td {
+  background-color: #fff4ed;
+  font-weight: 600;
+  font-size: 11pt;
+  height: 28pt;
+}
+
+.summary-level2 td {
+  background-color: #fff4ed;
+  font-size: 10pt;
+  font-weight: 600;
+  height: 26pt;
+  padding-left: 15pt;
+}
+
+.summary-level3 td {
+  background-color: #fff4ed;
+  font-size: 9pt;
+  height: 24pt;
+  font-weight: 600;
+  padding-left: 25pt;
+}
+
+.no-summary td {
+  padding-top: 12px;
+  min-height: 48pt;
+  height: auto;
+  padding-left: 30pt;
+}
+
+table.grid thead th {
+  padding-left: 30pt;
+}

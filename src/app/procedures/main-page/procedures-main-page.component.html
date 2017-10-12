@@ -2,22 +2,21 @@
 <table class="grid">
   <thead>
     <tr>
-      <th>Trámite / Homoclave</th>
-      <th>Dependencia / Autoridad</th>
-      <th>Tema</th>
-      <th>Etapa</th>
+      <th style='width:40%'>Trámite / Homoclave</th>
+      <th style='width:100px'>Dependencia</th>
+      <th style='width:15%'>Tema</th>
+      <th style='width:40%'></th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let procedure of procedures">
-      <td>
+      <td style='width:40%'>
         <a (click)="onOpenProcedureEditorWindow(procedure.uid)">{{procedure.name}}</a>
-        <br/>
-        <u>{{procedure.code}}</u>
+        <br/> {{procedure.code}}
       </td>
-      <td>{{procedure.entity}}</td>
-      <td>{{procedure.theme}}</td>
-      <td>{{procedure.stage}}</td>
+      <td style='width:100px'>{{procedure.entity}}</td>
+      <td style='width:15%'>{{procedure.theme}}</td>
+      <th style='width:40%'></th>
     </tr>
   </tbody>
 </table>
@@ -25,7 +24,7 @@
 <div class="grid-footer">
   <table class="grid-footer-style">
     <tr>
-      <td class="grid-footer-items">{{procedures.length}} Trámites encontrados</td>
+      <td class="grid-footer-items">{{procedures.length}} trámites encontrados</td>
       <td class="grid-footer-items text-align-center">
 
       </td>
@@ -35,5 +34,5 @@
 </div>
 
 <div *ngIf="showProcedureEditorWindow " class="popup ">
-  <procedure-editor [procedureUID]="selectedProcedureUID" (onCloseEvent)="closeProcedureEditorWindow()"></procedure-editor>
+  <selected-procedure [procedureUID]="selectedProcedureUID" (onCloseEvent)="closeProcedureEditorWindow()"></selected-procedure>
 </div>

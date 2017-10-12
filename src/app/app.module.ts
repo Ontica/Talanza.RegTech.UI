@@ -36,9 +36,8 @@ import { DashboardModule } from './dashboard/dashboard.module';
 import { DocumentsModule } from './documents/documents.module';
 import { ProcessModule } from './process/process.module';
 import { ContractsModule } from './contracts/contracts.module';
-import { ProjectsModule } from './projects/projects.module';
-import { ProjectManagerModule } from './project-manager/project-manager.module';
-import { WorklistsModule } from './worklists/worklists.module';
+
+import { ProjectManagementModule } from './project-management/project-management.module';
 import { SharedModule } from './shared/shared.module';
 
 /*
@@ -83,10 +82,8 @@ type StoreType = {
     SecurityUIModule,
     DashboardModule,
     DocumentsModule,
-    ProcessModule,
-    ProjectsModule,
-    ProjectManagerModule,
-    WorklistsModule,
+    ProcessModule,   
+    ProjectManagementModule,
     SharedModule,
     BrowserModule,
     FormsModule,

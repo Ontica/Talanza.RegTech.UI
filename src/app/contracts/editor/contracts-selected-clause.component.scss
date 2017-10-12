@@ -1,0 +1,57 @@
+@import "../../../styles/grid";
+.main-container {
+  float: left;
+  outline: none;
+  padding: 0;
+  vertical-align: top;
+  margin-left: 20px;
+  margin-right: 30px;
+}
+
+.left-panel {
+  display: inline-block;
+  width: 100%;
+  vertical-align: top;
+}
+
+.right-panel {
+  display: inline-block;
+  vertical-align: top;
+  width: 40%;
+}
+
+.clause-definition {
+  padding: 2px;
+  color: black;
+  text-align: justify;
+  font-size: 11pt;
+  max-width: 600pt;
+  //width: 100%;
+}
+
+.procedure-info {
+  display: inline-block;
+  width: 80%;
+}
+
+table.grid td:nth-child(1), table.grid th:nth-child(1) {
+  width: 70%;
+}
+
+table.grid tbody tr {
+  height: auto;
+  display: block;
+  overflow: inline;
+}
+
+table.grid td {
+  padding: 8pt;
+}
+
+.clause-title {
+  font-size: 14pt;
+  color: $blue;
+  font-weight: 600;
+  padding: 6pt;
+  line-height: 22pt;
+}

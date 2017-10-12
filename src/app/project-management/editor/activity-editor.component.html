@@ -1,0 +1,14 @@
+<div class="editor-container editor-container-style">
+  <div class="header">
+    <div class="close-button right-position" (click)="onClose()">&times;</div>
+    <div class="title">{{task.name}} </div>
+    <div class="subtitle"><b>{{task.project.name}}</b>
+    </div>
+  </div>
+  <div *ngIf="isCloseTaskEditorVisible">
+    <task-close [task]="task" (onCloseEvent)="onCloseTaskEditorIsClosed()"></task-close>
+  </div>
+  <div *ngIf="!isCloseTaskEditorVisible">
+    <task-update [task]="task" (onCloseEvent)="onCloseTaskEditorIsClosed()" (onCloseTaskEditorVisible)="onShowCloseTaskEditor()"></task-update>
+  </div>
+</div>

@@ -33,10 +33,11 @@ table.form .form-title-text {
 
 .form-footer {
   bottom: 0px;
-  height: 42px;
+  height: 52px;
   margin: 96px 1px 1px 1px;
   position: absolute;
   width: 99%;
+  border-top: $form-border-bottom;
 }
 
 .border-bottom {

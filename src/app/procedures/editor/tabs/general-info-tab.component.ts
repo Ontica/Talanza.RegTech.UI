@@ -145,14 +145,14 @@ export class GeneralInfoTabComponent implements OnInit {
       alert('El nombre del trámite se encuentra en blanco.');
       return false;
     }
-    if (this.procedure.legalInfo.regulationStatus === '') {
-      alert('Requiero saber la forma en que está regulado el trámite.');
-      return false;
-    }
-    if (this.procedure.stage === '') {
-      alert('Seleccionar una etapa de la lista.');
-      return false;
-    }
+    // if (this.procedure.legalInfo.regulationStatus === '') {
+    //   alert('Requiero saber la forma en que está regulado el trámite.');
+    //   return false;
+    // }
+    // if (this.procedure.stage === '') {
+    //   alert('Seleccionar una etapa de la lista.');
+    //   return false;
+    // }
     if (this.procedure.theme === '') {
       alert('Seleccionar un tema de la lista.');
       return false;

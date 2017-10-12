@@ -1,0 +1,45 @@
+<div class="editor-container editor-container-style">
+
+  <table class="form">
+    <tr>
+      <td class="form-title form-title-text" colspan="2">Información general</td>
+    </tr>
+    <tr>
+      <td>Nombre:</td>
+      <td>{{task.name}}</td>
+    </tr>
+    <tr>
+      <td>Observaciones:</td>
+      <td>{{task.notes}}</td>
+    </tr>
+    <tr>
+      <td>Responsable:</td>
+      <td>{{task.responsible.name}}</td>
+    </tr>
+  </table>
+  <table class="form">
+    <tr>
+      <td class="form-title form-title-text" colspan="3">Fecha de término</td>
+    </tr>
+    <tr>
+      <td>Fecha de término:</td>
+      <td><input type="text" id="dueDateCalendar" class="text-box" style="width:100px" [ngModel]="endDate | date: 'dd-MM-yyyy'" (target)="endDate=$value">
+        <button id="dueDateButton">..</button></td>
+      <td>Fecha legal: &nbsp; <b>{{task.dueDate | date: 'dd-MMM-yyyy'}}</b></td>
+    </tr>
+  </table>
+
+  <div class="form-footer">
+    <table class="form">
+      <tr>
+        <td class="text-align-center ">
+          <button class="btn" (click)="cancel() ">Cancelar</button>
+        </td>
+
+        <td class="text-align-right ">
+          <button class="btn-action" (click)="onCloseTask()">Concluir la tarea</button>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>

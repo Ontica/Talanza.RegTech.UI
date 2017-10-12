@@ -7,34 +7,53 @@
  */
 
 export class FilingCondition {
-  public startsWhen: string;
+  public startsWhen: string;  
   public startsWhenTrigger: string;
-  public maxFilingTerm: string;
-  public issuanceLegalTerm: string;
-  public howToFile: string;
-  public allowsDeferrals: string;
-  public deferralsTermNotes: string;
-  public deferralsConditionNotes: string;
-  public validityTermWhenIssued: string;
-  public simultaneousDelivery: string;
   public startsWhenNotes: string;
+
+  public maxFilingTerm: string;
+  public maxFilingTermUnit: string;
   public maxFilingTermNotes: string;
-  public issuanceLegalTermNotes: string;
+
+  public issuanceLegalTerm: string;
+  public issuanceLegalTermUnit: string;
+  public howToFile: string;
+  public howToFileAddress: string;
+
+  public deferralsTerm: string;
+  public deferralsTermUnit: string;
+  public deferralsTermNotes: string;
+
+  public validityTermWhenIssued: string;
+  public validityTermUnitWhenIssued: string;
+  public ficta: string;
+
+  public hasInnerInteraction: string;
 
   constructor() {
     this.startsWhen = '';
     this.startsWhenTrigger = '';
-    this.maxFilingTerm = '';
-    this.issuanceLegalTerm = '';
-    this.howToFile = '';
-    this.allowsDeferrals = '';
-    this.deferralsTermNotes = '';
-    this.deferralsConditionNotes = '';
-    this.validityTermWhenIssued = '';
-    this.simultaneousDelivery = '';
     this.startsWhenNotes = '';
+
+    this.maxFilingTerm = '';
+    this.maxFilingTermUnit = '';
     this.maxFilingTermNotes = '';
-    this.issuanceLegalTermNotes = '';
+
+    this.issuanceLegalTerm = '';
+    this.issuanceLegalTermUnit = '';    
+    
+    this.howToFile = '';
+    this.howToFileAddress = '';
+
+    this.deferralsTerm = '';
+    this.deferralsTermUnit = '';
+    this.deferralsTermNotes = '';
+
+    this.validityTermWhenIssued = '';
+    this.validityTermUnitWhenIssued = '';
+    this.ficta = '';
+
+    this.hasInnerInteraction = '';
   }
 
 }

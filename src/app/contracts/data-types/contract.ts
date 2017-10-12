@@ -28,6 +28,7 @@ export interface ContractClause {
   sourcePageNo: number;
   notes: string;
   status: string;
+  section: string;
   relatedProcedures: RelatedProcedure[];
 }
 
@@ -80,7 +81,8 @@ export function EmptyContractClause() {
     sourcePageNo: 0,
     status: '',
     text: '',
-    title: ''
+    title: '',
+    section:''
   };
 
   return empty;

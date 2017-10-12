@@ -6,111 +6,82 @@
  *
  */
 
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 
-import { Assertion } from 'empiria';
-import { CoreService } from '../../core';
+import { ContractClause } from '../data-types/contract';
 
-import { ContractService } from '../services/contract.service';
-
-import { Contract, ContractClause,
-         EmptyContract, EmptyContractClause } from '../data-types/contract';
 
 @Component({
-  selector: 'contracts-main-page',
+  selector: 'contract-view',
   templateUrl: './contracts-main-page.component.html',
-  styleUrls: ['./contracts-main-page.component.scss'],
-  providers: [ContractService]
+  styleUrls: ['./contracts-main-page.component.scss']
 })
+
 export class ContractsMainPageComponent implements OnInit {
 
-  public contractsList: Contract[] = [];
+  public isVisibleLeftPanel = true;
+  
+  public centerPanelWidth = '80%';
+  public leftResizeWidth = 3
+  public leftPanelWidth = '';
+ 
+  private isResizeDiv = false;
+  private centerPanelPreviousWidth = '';
 
-  public selectedContract: Contract = EmptyContract();
-  public selectedContractClause: ContractClause = EmptyContractClause();
+  private clause: ContractClause;
+  private clauses: ContractClause[] = [];
+  public isSelectedClause = false;
 
-  public isClauseEditorWindowVisible = false;
-
-  constructor(private core: CoreService,
-              private contractService: ContractService) { }
-
-  public ngOnInit() {
-    this.setInitialValues();
+  ngOnInit() {
+    this.leftPanelWidth = 'calc(20% - '+ this.leftResizeWidth +'px)';    
   }
 
-  public onCloseContractEditorWindow(): void {
-    this.selectedContractClause = EmptyContractClause();
-    this.isClauseEditorWindowVisible = false;
+  public onResize(event: MouseEvent): void {
+    this.isResizeDiv = true;
+   
+    event.preventDefault();
+    event.stopPropagation();
   }
 
-  public onClickAddClause() {
-    if (this.selectedContract.uid === '') {
-      alert('Es necesario seleccionar el contrato al cual se le aplicarán los anexos.');
-      return;
-    }
-    this.selectedContractClause = EmptyContractClause();
-    this.selectedContractClause.contract = this.selectedContract;
-    this.isClauseEditorWindowVisible = true;
-  }
+  @HostListener('document:mousemove', ['$event'])
+  onCornerMove(event: MouseEvent) {
 
-  public onClickEditClause(clause: ContractClause) {
-    this.selectedContractClause = clause;
-    this.selectedContractClause.contract = this.selectedContract;
-    this.isClauseEditorWindowVisible = true;
-  }
-
-  public search(): any {
-//    const errMsg = 'Por el momento la búsqueda de cláusulas está deshabilitada.';
-
-    // return this.contractService.searchClauses(this.selectedContractClause.uid, 'anexo 3.2')
-    //                            .subscribe();
-
-    // this.contractService.getClause(this.selectedContract.uid, 'abcdefg')
-    //                     .toPromise()
-    //                     .then((x) => this.selectedContractClause = x)
-    //                     .catch((e) => this.core.exceptionHandler.show(e, errMsg));
-  }
-
-  public onChangeContract(uid: string): void {
-    if (uid === '') {
-      this.selectedContract.clauses = [];
-      this.selectedContract = EmptyContract();
-      return;
-    }
-    this.selectedContract = this.contractsList.find((x) => x.uid === uid);
-    this.loadSelectedContractClausesList();
-  }
-
-  public openURL(page?: number): void {
-    if (!this.selectedContract) {
-      return;
-    }
-    window.open(this.selectedContract.url + (page ? '#page=' + page : ''));
-  }
-
-  private setInitialValues(): void {
-    this.loadContractsList();
-  }
-
-  private loadContractsList(): void {
-    const errMsg = 'Ocurrió un problema al intentar leer la lista de contratos.';
-
-    this.contractService.getContractList()
-                        .toPromise()
-                        .then((x) => this.contractsList = x)
-                        .catch((e) => this.core.http.showAndThrow(e, errMsg));
-  }
-
-  private loadSelectedContractClausesList(): void {
-    Assertion.assertValue(this.selectedContract, 'this.selectedContract');
-
-    if (this.selectedContract.clauses) {
+    if (!this.isResizeDiv) {
       return;
     }
 
-    this.contractService.getContractClausesList(this.selectedContract.uid)
-                        .toPromise()
-                        .then((x) => this.selectedContract.clauses = x);
+    this.leftPanelWidth= event.clientX + 'px';
+    this.centerPanelWidth = 'calc(100% - ' + (event.clientX + this.leftResizeWidth) + 'px)';  
   }
 
+  @HostListener('document:mouseup', ['$event'])
+  onCornerRelease(event: MouseEvent) {
+
+    if (this.isResizeDiv) {
+      this.isResizeDiv = false;
+    }
+
+  }
+
+  public onHideLeftPanel(): void {
+    this.isVisibleLeftPanel = !this.isVisibleLeftPanel;
+
+    if (!this.isVisibleLeftPanel) {
+      this.centerPanelPreviousWidth  = this.centerPanelWidth;
+      this.centerPanelWidth = 'calc(100% - '+ this.leftResizeWidth +'px)';
+    } else {
+      this.centerPanelWidth = this.centerPanelPreviousWidth;
+    }   
+
+  }
+
+  public onSelectedClause(selectedClause: ContractClause ): void {
+    this.isSelectedClause = true;   
+    this.clause = selectedClause;  
+  }
+
+  public onLoadClauses(clauses: ContractClause[]): void {
+    this.clauses = clauses;
+  }
+  
 }

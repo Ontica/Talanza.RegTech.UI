@@ -82,10 +82,6 @@ export class FilingConditionsTabComponent implements OnInit {
       alert('Seleccionar un plazo legal de la lista.');
       return false;
     }
-    if (this.procedure.filingCondition.allowsDeferrals === '') {
-      alert('Seleccionar si ¿El trámite permite prórrogas?.');
-      return false;
-    }
     return true;
   }
 

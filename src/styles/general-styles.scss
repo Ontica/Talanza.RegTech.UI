@@ -22,12 +22,24 @@ button.btn {
   border: $button-border;
   height: $button-height;
   white-space: nowrap;
-  padding: 2pt;
+  padding: 4pt;
+  height: 28px;
 }
 
 button.btn-cancel {
   background-color: $cancel-color;
   color: background-color;
+}
+
+button.btn-action {
+  background-color: $action-color;
+  color: $white;
+  font: $control-font;
+  font-weight: normal;
+  font-size: 10pt;
+  height: 28px;
+  border: 1px solid #cecece;
+  padding: 4pt;
 }
 
 button.btn-warning {
@@ -38,7 +50,7 @@ button.btn-warning {
   font-size: 10pt;
   height: 28px;
   border: 1px solid #cecece;
-  padding: 2pt;
+  padding: 4pt;
 }
 
 @mixin input-settings {
@@ -64,6 +76,12 @@ button.btn-warning {
 select.select-box {
   @include input-settings;
   height: $control-height;
+}
+
+select.select-warning {
+  @include input-settings;
+  height: $control-height;
+  background-color: $warning-color;
 }
 
 input.search-box {

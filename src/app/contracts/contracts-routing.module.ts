@@ -20,7 +20,7 @@ import { ContractsMainPageComponent } from '../contracts/main-page/contracts-mai
     RouterModule.forChild([
       {
         path: 'contracts', component: MainLayoutComponent, canActivate: [SecurityGuardService],
-        children: [{ path: 'search', component: ContractsMainPageComponent }]
+        children: [{ path: 'search', component:  ContractsMainPageComponent }]
       }
     ])],
   exports: [RouterModule]

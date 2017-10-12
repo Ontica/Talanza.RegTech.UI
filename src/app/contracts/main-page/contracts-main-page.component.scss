@@ -1,20 +1,46 @@
 @import "../../../styles/grid";
-table.grid tbody {
-  height: calc(100vh - 230px);
+//local scss variables
+div {
+  float: left;
+  margin: 0px;
+  outline: none;
+  padding: 0;
+  vertical-align: top;
 }
 
-table.grid td:nth-child(1), table.grid th:nth-child(1) {
-  width: 5%;
+.main-container {
+  height: calc(100vh - 160px);
+  min-height: 30%;
+  width: 100%;
 }
 
-table.grid td:nth-child(2), table.grid th:nth-child(2) {
-  width: 15%;
+.left-panel {
+  background-color: #f8f8f8;
+  border: 0px solid #9b1b1f;
+  display: inline-block;
+  height: 100%;
 }
 
-table.grid td:nth-child(3), table.grid th:nth-child(3) {
-  width: 70%;
+.center-panel {
+  background-color: #f8f8f8;
+  border: 0px solid #9b1b1f;
+  display: inline-block;
+  height: 100%;
 }
 
-table.grid td:nth-child(4), table.grid th:nth-child(4) {
-  width: 5%;
+.left-resize {
+  background-color: white;
+  cursor: w-resize;
+  display: inline-block;
+  height: 100%;
+}
+
+.grid-search-table {
+  height: 30px;
+}
+
+.clauses-container {
+  height: 100%;
+  overflow-y: auto;
+  width: 100%;
 }

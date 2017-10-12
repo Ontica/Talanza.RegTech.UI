@@ -79,9 +79,10 @@ $form-title-color:$gray;
 //
 // html controls
 //
-$control-font: 8pt Arial, Helvetica;
-$control-small-font: 6pt Arial, Helvetica;
+$control-font: 8pt Tahoma, Arial, Helvetica;
+$control-small-font: 6pt Tahoma, Arial, Helvetica;
 $cancel-color: $red;
+$action-color: $blue;
 $warning-color: $orange;
 $control-border: 1px solid #d0d0d0;
 $control-background-color: #f0f0f0;
@@ -91,8 +92,8 @@ $control-disabled-color: $text-title;
 $control-disabled-background: #e6e6e6;
 $control-height: 25px;
 $button-background-color: #dadada;
-$button-border: 1px solid #cecece;
-$button-height: 24px;
+$button-border: 0px solid #cecece;
+$button-height: 28px;
 $control-font: 8pt Arial, Helvetica;
 $control-small-font: 6pt Arial, Helvetica;
 //

@@ -28,7 +28,10 @@
             <% } %>
 
               <!-- CSS will be injected by webpack here -->
-              <!-- Preload link tags will be injected by webpack here -->
+              <!-- Preload link tags will be injected by webpack here
+              <link rel="stylesheet" href="./assets/dhtmlx.css" type="text/css">
+              <script src="./assets/dhtmlx.js" type="text/javascript"></script> -->
+              <script src="https://use.fontawesome.com/520493470d.js"></script>
               <link rel="stylesheet" href="./assets/dhtmlx.css" type="text/css">
               <script src="./assets/dhtmlx.js" type="text/javascript"></script>
 </head>
@@ -55,6 +58,12 @@
   </app>
 
   <!-- Scripts will be injected by webpack here -->
+  <script>
+    function openWindow(url) {
+      window.open(url, '_blank', 'location=yes,height=570,width=620,scrollbars=yes,status=yes');
+    }
+
+  </script>
 </body>
 
 </html>
