@@ -11,13 +11,13 @@ import { ProjectRef } from '../data-types/project';
 import { ActivityService } from '../services/activity.service';
 
 @Component ({
-  selector: 'worklists-main-page',
-  templateUrl: './worklists-main-page.component.html',
-  styleUrls: ['./worklists-main-page.component.scss'],
+  selector: 'activity-list-grid',
+  templateUrl: './activity-list-grid.component.html',
+  styleUrls: ['./activity-list-grid.component.scss'],
   providers: [ActivityService]
 })
 
-export class WorklistsMainPageComponent {
+export class ActivityListGridComponent {
 
   public isTaskEditorVisible = false;
   public isVisibleProcedureInfo = false;
@@ -46,9 +46,7 @@ export class WorklistsMainPageComponent {
     
 
   constructor (private activitiyService: ActivityService) { }
-
   
-
   public onCloseTaskEditorWindow(): void {
     this.isTaskEditorVisible = false;
     this.refreshData();

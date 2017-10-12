@@ -12,7 +12,7 @@ import { FormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
 import { ContractsModule } from '../contracts/contracts.module';
 
-import { WorklistsMainPageComponent } from './task-list/worklists-main-page.component';
+import { ActivityListGridComponent } from './activity-list/activity-list-grid.component';
 
 import { WorklistsRoutingModule } from './worklists-routing.module';
 
@@ -35,13 +35,13 @@ import { ActivityInfoComponent } from './create-activity/activity-info.component
 
 @NgModule({
   imports: [WorklistsRoutingModule, SharedModule, CommonModule, FormsModule, ContractsModule],
-  declarations: [WorklistsMainPageComponent, 
+  declarations: [ActivityListGridComponent, 
                  ActivityEditorComponent, ActivityCloseComponent,
                  ProjectsMainPageComponent, GanttComponent,
                  ActivityAddComponent,ActivitySelectorComponent, ActivityDescriptionComponent,
                  ActivityWorklistComponent, ActivityInfoComponent,
                  ActivityUpdateComponent],                 
-  exports: [WorklistsMainPageComponent,
+  exports: [ActivityListGridComponent,
             ProjectsMainPageComponent, GanttComponent,]
 })
 export class WorklistsModule { }

@@ -79,7 +79,7 @@
 
 <div *ngIf="isGanttGraphVisible">
   <div [ngSwitch]="selectedView">
-    <worklists-main-page [project]="selectedProject" [refresh]="isRefreshWorkList" *ngSwitchCase="'tasksList'"></worklists-main-page>
+    <activity-list-grid [project]="selectedProject" [refresh]="isRefreshWorkList" *ngSwitchCase="'tasksList'"></activity-list-grid>
     <!--
     <worklists-main-page [project]="selectedProject" *ngSwitchCase="'kanban'"></worklists-main-page>-->
     <gantt [project]="selectedProject" [config]="selectedScale" *ngSwitchDefault></gantt>
