@@ -25,4 +25,4 @@ import { ProjectsMainPageComponent } from './main-page/projects-main-page.compon
     ])],
   exports: [RouterModule]
 })
-export class WorklistsRoutingModule { }
+export class ProjectManagementRoutingModule { }

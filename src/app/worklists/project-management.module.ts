@@ -14,7 +14,7 @@ import { ContractsModule } from '../contracts/contracts.module';
 
 import { ActivityListGridComponent } from './activity-list/activity-list-grid.component';
 
-import { WorklistsRoutingModule } from './worklists-routing.module';
+import { ProjectManagementRoutingModule } from './project-management-routing.module';
 
 import { ActivityEditorComponent } from './editor/activity-editor.component';
 import { ActivityCloseComponent } from './editor/tabs/activity-close.component';
@@ -34,7 +34,7 @@ import { ActivityInfoComponent } from './create-activity/activity-info.component
  */
 
 @NgModule({
-  imports: [WorklistsRoutingModule, SharedModule, CommonModule, FormsModule, ContractsModule],
+  imports: [ProjectManagementRoutingModule, SharedModule, CommonModule, FormsModule, ContractsModule],
   declarations: [ActivityListGridComponent, 
                  ActivityEditorComponent, ActivityCloseComponent,
                  ProjectsMainPageComponent, GanttComponent,
@@ -44,4 +44,4 @@ import { ActivityInfoComponent } from './create-activity/activity-info.component
   exports: [ActivityListGridComponent,
             ProjectsMainPageComponent, GanttComponent,]
 })
-export class WorklistsModule { }
+export class ProjectManagementModule { }
