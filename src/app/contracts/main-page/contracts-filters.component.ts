@@ -85,6 +85,7 @@ export class ContractsFiltersComponent implements OnInit {
   }
 
   public onChangeSection(section: string): void {  
+    this.selectedSection = section;
     if (this.sections.length === 0) {
       return;
     }
@@ -100,9 +101,12 @@ export class ContractsFiltersComponent implements OnInit {
       return;
     }
 
-    await this.loadSelectedContractClausesList(this.keywords); 
+    await this.loadSelectedContractClausesList(this.keywords);
+    
+    let clauses = this.selectedContract.clauses.filter(item => item.section === this.selectedSection);
 
-    this.clauses.emit(this.selectedContract.clauses);                  
+    //this.clauses.emit(this.selectedContract.clauses);                  
+    this.clauses.emit(clauses);
   }
 
   private setInitialValues(): void {
