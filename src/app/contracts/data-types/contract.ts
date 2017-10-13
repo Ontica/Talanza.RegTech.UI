@@ -20,8 +20,8 @@ interface ContractRef {
 }
 
 export interface ContractClause {
-  uid: string;
-  contract: ContractRef;
+  uid: string;  
+  contractUID:string;
   clauseNo: string;
   title: string;
   text: string;
@@ -73,8 +73,8 @@ export function EmptyContractRef() {
 
 export function EmptyContractClause() {
   const empty: ContractClause = {
-    uid: '',
-    contract: EmptyContractRef(),
+    uid: '',    
+    contractUID: '',
     clauseNo: '',
     notes: '',
     relatedProcedures: [],

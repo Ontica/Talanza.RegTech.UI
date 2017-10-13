@@ -29,16 +29,18 @@
   public procedureUID = "";
   public isVisibleProcedureInfo = false;
 
-  private  _clause: ContractClause =EmptyContractClause();
+  private  _clause: ContractClause = EmptyContractClause();
   @Input()
-  set clause(clause: any) {    
-    this._clause = clause;   
-    console.log(clause);
-    this.loadClause(clause.contractUID, clause.uid);    
+  set clause(clause: ContractClause) {    
+    this._clause = clause;        
+    this.loadClause(); 
+    this.setClauseInfoContainerWidth(); 
   }
-  get clause(): any {
+  get clause(): ContractClause {
     return this._clause;
   }
+
+  public clauseInfoWidth = '100%';
 
   constructor(private core: CoreService,
     private contractService: ContractsService) { }
@@ -56,12 +58,16 @@
     this.isVisibleProcedureInfo = false;
   }
 
-  private loadClause(contractUID:string, clauseUID:string): void {
-    this.contractService.getClause(contractUID, clauseUID)
-    .toPromise()
-    .then((x) => {      
-      this.relatedProcedures = x.relatedProcedures;
-    });
+  private loadClause(): void {
+    this.relatedProcedures = this.clause.relatedProcedures;    
+  }
+
+  private setClauseInfoContainerWidth(): void {
+    if (this.relatedProcedures.length === 0) {
+      this.clauseInfoWidth = '100%';
+    } else {
+      this.clauseInfoWidth = '50%';
+    }
   }
 
  }

@@ -1,11 +1,12 @@
 <div>
   <div class="clause-title"> &nbsp; &nbsp;{{clause.clauseNo}} {{clause.title}}</div>
   <div class="main-container">
-    <div class="left-panel">
+    <div class="left-panel" [style.width]="clauseInfoWidth">
       <div class="clause-definition">
         {{clause.text}}
       </div>
-      <br /><br />
+    </div>
+    <div class="right-panel">
       <div>
         <table class="grid" *ngIf="relatedProcedures.length !== 0" style='max-width:600pt;'>
           <thead>
@@ -23,14 +24,11 @@
             </tr>
           </tbody>
         </table>
-      </div>
-      <br /><br />
-      <div class="procedure-info" *ngIf="isVisibleProcedureInfo">
-        <selected-procedure [procedureUID]="procedureUID" (onCloseEvent)="onCloseProcedureInfoModal()"></selected-procedure>
+        <br /><br /><br /><br />
       </div>
     </div>
-    <!--<div class="right-panel">
-
-    </div>-->
+  </div>
+  <div class="procedure-info" *ngIf="isVisibleProcedureInfo">
+    <selected-procedure [procedureUID]="procedureUID" (onCloseEvent)="onCloseProcedureInfoModal()"></selected-procedure>
   </div>
 </div>
