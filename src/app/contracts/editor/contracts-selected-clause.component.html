@@ -5,7 +5,8 @@
       <div class="clause-definition">
         {{clause.text}}
       </div>
-      <br /><br />
+    </div>
+    <div class="right-panel">
       <div>
         <table class="grid" *ngIf="relatedProcedures.length !== 0" style='max-width:600pt;'>
           <thead>
@@ -24,13 +25,10 @@
           </tbody>
         </table>
       </div>
-      <br /><br />
-      <div class="procedure-info" *ngIf="isVisibleProcedureInfo">
-        <selected-procedure [procedureUID]="procedureUID" (onCloseEvent)="onCloseProcedureInfoModal()"></selected-procedure>
-      </div>
     </div>
-    <!--<div class="right-panel">
-
-    </div>-->
+  </div>
+  <br /><br />
+  <div class="procedure-info" *ngIf="isVisibleProcedureInfo">
+    <selected-procedure [procedureUID]="procedureUID" (onCloseEvent)="onCloseProcedureInfoModal()"></selected-procedure>
   </div>
 </div>
