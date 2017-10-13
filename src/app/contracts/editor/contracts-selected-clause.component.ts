@@ -33,11 +33,14 @@
   @Input()
   set clause(clause: ContractClause) {    
     this._clause = clause;        
-    this.loadClause();    
+    this.loadClause(); 
+    this.setClauseInfoContainerWidth(); 
   }
   get clause(): ContractClause {
     return this._clause;
   }
+
+  public clauseInfoWidth = '100%';
 
   constructor(private core: CoreService,
     private contractService: ContractsService) { }
@@ -57,6 +60,14 @@
 
   private loadClause(): void {
     this.relatedProcedures = this.clause.relatedProcedures;    
+  }
+
+  private setClauseInfoContainerWidth(): void {
+    if (this.relatedProcedures.length === 0) {
+      this.clauseInfoWidth = '100%';
+    } else {
+      this.clauseInfoWidth = '50%';
+    }
   }
 
  }

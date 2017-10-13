@@ -1,7 +1,7 @@
 <div>
   <div class="clause-title"> &nbsp; &nbsp;{{clause.clauseNo}} {{clause.title}}</div>
   <div class="main-container">
-    <div class="left-panel">
+    <div class="left-panel" [style.width]="clauseInfoWidth">
       <div class="clause-definition">
         {{clause.text}}
       </div>
