@@ -1,43 +1,42 @@
 <table class="grid-search-table">
   <tr>
     <td>Dependencia:</td>
-    <td><select #entity class="select-box" style="width:90px;" (change)="onChangeSelectedEntity(entity.value)" [(ngModel)]="filter.entityUID">
+    <td><select #entity class="select-box" style="width:90px;" (change)="onChangeFilter()" [(ngModel)]="filter.entityUID">
 					<option value="">( Todas )</option>
 					<option *ngFor="let entity of entities" [value]="entity.uid">{{entity.shortName}}</option>
 				</select>
-      <select #authority class="select-box" style="width:520px;" [(ngModel)]="filter.officeUID">
-				<option value="">( Todos )</option>
-				<option *ngFor="let office of offices" [value]="office.uid">{{office.name}}</option>
-				</select>
     </td>
-    <td>Buscar:</td>
-    <td colspan="3"><input class="text-box" style="width:310px" type="search" [(ngModel)]="filter.keywords">
-      <button class="btn" style="width:55px;" (click)="search()">Buscar</button>
-    </td>
-  </tr>
-  <tr>
     <td>Tema:</td>
     <td>
-      <select class="select-box" style="width:310px" #theme [(ngModel)]="filter.theme">
+      <select #theme class="select-box" style="width:210px" (change)="onChangeFilter()" [(ngModel)]="filter.theme">
 					<option value="">( Todos )</option>
 					<option value="Actividad petrolera">Actividad petrolera</option>
+					<option value="Aprovechamiento de Gas Natural">Aprovechamiento de Gas Natural</option>
+					<option value="ARES">ARES</option>
 					<option value="Certificación de reservas">Certificación de reservas</option>
 					<option value="Cesión">Cesión</option>
 					<option value="Contenido Nacional">Contenido Nacional</option>
 					<option value="Impacto Social">Impacto Social</option>
+					<option value="Información">Información</option>
 					<option value="Medición">Medición</option>
-					<option value="Pago de contraprestaciones">Pago de contraprestaciones</option>
-					<option value="Pago de derechos y aprovechamientos">Pago de derechos y aprovechamientos</option>
-					<option value="Pago de impuestos">Pago de impuestos</option>
-					<option value="Perforación de pozos">Perforación de pozos</option>
-					<option value="Procura">Procura</option>
+					<option value="Pago de Contraprestaciones">Pago de Contraprestaciones</option>
+					<option value="Pago de Derechos y Aprovechamientos">Pago de Derechos y Aprovechamientos</option>
+					<option value="Pago de Impuestos">Pago de Impuestos</option>
+					<option value="Perforación de Pozos">Perforación de Pozos</option>
 					<option value="Seguridad industrial, operativa y del medio ambiente">Seguridad industrial, operativa y del medio ambiente</option>
 					<option value="Seguros">Seguros</option>
-					<option value="SMA">SMA</option>
 					<option value="Uso y Ocupación Superficial">Uso y Ocupación Superficial</option>
 				</select>
     </td>
-    <!--
+    <td>Buscar:</td>
+    <td colspan="3">
+      <input class="text-box" type="search" style="width:310px" (keyup.enter)="onChangeFilter()" [(ngModel)]="filter.keywords">
+      <button class="btn" style="width:55px;" (click)="onChangeFilter()">Buscar</button>
+    </td>
+    <td><a (click)="cleanCombos() ">Limpiar</a></td>
+  </tr>
+  <!--
+  <tr>
     <td>Etapa:</td>
     <td>
       <select #stage class="select-box text-align-right" style="width:245px" [(ngModel)]="filter.stage">
@@ -58,10 +57,9 @@
 							<option value="2.1">Ronda 2.1</option>
 						</select>
 		</td>
-		!-->
-    <td><a (click)="cleanCombos() ">Limpiar</a></td>
     <td>
-      <!--<button style="width:144px" class="btn-warning" type="button" (click)="newProcedure()">+ Nuevo trámite</button>!-->
+      <button style="width:144px" class="btn-warning" type="button" (click)="newProcedure()">+ Nuevo trámite</button>
     </td>
-  </tr>
+	</tr>
+	!-->
 </table>

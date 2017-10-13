@@ -37,13 +37,10 @@ export class ProcedureFilterComponent implements OnInit {
 
   public ngOnInit() {
     this.setEntities();
+    this.search();
   }
 
-  public async onChangeSelectedEntity(entityUID: string) {
-    this.filter.entityUID = entityUID;
-    
-    await this.setOffices(entityUID);
-    
+  public async onChangeFilter() {
     this.search();
   }
 
@@ -58,18 +55,18 @@ export class ProcedureFilterComponent implements OnInit {
 
   public search(): void {
     this.procedureService.getProceduresList(this.filter)
-                         .then((procedures) => { this.onSearch.emit(procedures); });
-  }
-
-  private async setOffices(entityUID: string) {
-    await this.authorityService.getEntity(entityUID)
-                               .then((entity) => { this.offices = entity.offices; });
-    this.filter.officeUID = '';
+                         .then((procedures) => this.onSearch.emit(procedures));
   }
 
   private setEntities(): void {
     this.authorityService.getEntities()
-                         .then((entities) => { this.entities = entities; });
+                         .then((entities) => this.entities = entities);
   }
+
+  // private async setOffices(entityUID: string) {
+  //   await this.authorityService.getEntity(entityUID)
+  //                              .then((entity) => { this.offices = entity.offices; });
+  //   this.filter.officeUID = '';
+  // }
 
 }
