@@ -35,7 +35,7 @@ import { Contract, EmptyContract, ContractClause } from '../data-types/contract'
     </td>
     <td>Buscar:</td>
     <td>
-      <input style="width:364px;" type="search " class="text-box " [(ngModel)]="keywords">
+      <input style="width:364px;" type="search " class="text-box " [(ngModel)]="keywords" (keyup.enter)="onSearch()">
       <button class="btn" (click)="onSearch()"><i class="fa fa-search" aria-hidden="true"></i></button>
     </td>
     <td>
@@ -80,8 +80,7 @@ export class ContractsFiltersComponent implements OnInit {
     this.fillSectionList();
     this.selectedSection = 'Cláusulas';
 
-    this.onChangeSection(this.selectedSection);
-   // this.clauses.emit(this.selectedContract.clauses);  
+    this.onChangeSection(this.selectedSection);  
   }
 
   public onChangeSection(section: string): void {  
