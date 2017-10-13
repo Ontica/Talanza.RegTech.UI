@@ -8,7 +8,7 @@
   <div class="left-resize" *ngIf="!isHideLeftPanel" (mousedown)='onResize($event)' [style.width.px]="leftResizeWidth"></div>
   <div class="center-panel" [ngStyle]="{'width' : centerPanelWidth }">
     <div class="right"><i class="fa fa-arrows-alt full-window-button" aria-hidden="true" (click)="onHideLeftPanel()"></i></div>
-    <div style="overflow-y: scroll; height:100%; width:100%;">
+    <div class="clause-info-container">
       <div *ngIf="isSelectedClause">
         <selected-clause [clause]="clause"></selected-clause>
       </div>

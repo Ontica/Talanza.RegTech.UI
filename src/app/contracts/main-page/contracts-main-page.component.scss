@@ -45,6 +45,12 @@ div {
   width: 100%;
 }
 
+.clause-info-container {
+  overflow-y: scroll;
+  height: 100%;
+  width: 100%;
+}
+
 .full-window-button:hover, .full-window-button:focus {
   cursor: pointer;
 }
