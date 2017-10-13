@@ -29,14 +29,13 @@
   public procedureUID = "";
   public isVisibleProcedureInfo = false;
 
-  private  _clause: ContractClause =EmptyContractClause();
+  private  _clause: ContractClause = EmptyContractClause();
   @Input()
-  set clause(clause: any) {    
-    this._clause = clause;   
-    console.log(clause);
-    this.loadClause(clause.contractUID, clause.uid);    
+  set clause(clause: ContractClause) {    
+    this._clause = clause;        
+    this.loadClause();    
   }
-  get clause(): any {
+  get clause(): ContractClause {
     return this._clause;
   }
 
@@ -56,12 +55,8 @@
     this.isVisibleProcedureInfo = false;
   }
 
-  private loadClause(contractUID:string, clauseUID:string): void {
-    this.contractService.getClause(contractUID, clauseUID)
-    .toPromise()
-    .then((x) => {      
-      this.relatedProcedures = x.relatedProcedures;
-    });
+  private loadClause(): void {
+    this.relatedProcedures = this.clause.relatedProcedures;    
   }
 
  }
