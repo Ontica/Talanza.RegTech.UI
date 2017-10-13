@@ -44,3 +44,7 @@ div {
   overflow-y: auto;
   width: 100%;
 }
+
+.full-window-button:hover, .full-window-button:focus {
+  cursor: pointer;
+}
