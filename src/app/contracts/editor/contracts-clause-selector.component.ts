@@ -18,7 +18,9 @@ import { ContractClause, EmptyContractClause } from '../data-types/contract';
  @Component({
     selector: 'contract-clause-selector',
     template: `<ul class="clause-list">
-                <li *ngFor="let clause of clauses"><a [class.selected]="clause === currentClause" (click)="onClickSelectClause(clause)">{{clause.clauseNo}} {{clause.title}}</a></li>
+                <li *ngFor="let clause of clauses">
+                  <a [class.selected]="clause === currentClause" (click)="onClickSelectClause(clause)">{{clause.clauseNo}} {{clause.title}}</a>
+                </li>
                </ul> `,    
    styleUrls: ['./contracts-clause.selector.component.scss'],            
     providers: [ContractsService]

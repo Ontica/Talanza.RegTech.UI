@@ -17,7 +17,7 @@ table {
   color: #3a3a3a;
   font-size: 12pt;
   font-weight: 600;
-  padding: 14pt;
+  padding: 18pt;
 }
 
 .sub-header {
@@ -35,13 +35,13 @@ table td.label {
 
 :host {
   position: relative;
-  top: 100px;
+  top: 120px;
   left: 20%;
 }
 
 .editor-container {
   height: calc(100vh - 200px);
-  width: 780px;
+  width: 720px;
 }
 
 .form-frame {

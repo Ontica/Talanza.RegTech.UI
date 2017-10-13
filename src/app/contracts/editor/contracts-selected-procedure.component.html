@@ -113,7 +113,7 @@
             <td>{{procedure.filingCondition.howToFile}}</td>
           </tr>
           <tr>
-            <td class='label'>Entregar en:</td>
+            <td class='label'>Correo electrónico:</td>
             <td *ngIf="procedure.filingCondition.howToFileAddress !== 'No aplicable'">
               <a href="mailto:{{procedure.filingCondition.howToFileAddress}}">{{procedure.filingCondition.howToFileAddress}}</a>
             </td>
@@ -145,7 +145,7 @@
         </thead>
         <tbody *ngIf="isInitialTermsVisible">
           <tr>
-            <td class='label'>Plazo legal:</td>
+            <td class='label'>Plazo de resolución:</td>
             <td>{{procedure.filingCondition.issuanceLegalTerm}} {{procedure.filingCondition.issuanceLegalTermUnit}}</td>
           </tr>
           <tr>
