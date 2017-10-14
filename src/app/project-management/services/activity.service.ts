@@ -14,6 +14,8 @@ import { CoreService } from '../../core';
 import { ClosedTask, Task, TaskRef } from '../data-types/task';
 import { Activity, ProjectRef, ResourceRef } from '../data-types/project';
 
+import { ActivityRef } from '../data-types/activity';
+
 @Injectable()
 export class ActivityService {
 
@@ -48,10 +50,10 @@ export class ActivityService {
 
   }
 
-  public getActivities(projectId: string): Promise<Task[]> {
+  public getActivities(projectId: string): Promise<ActivityRef[]> {
     const path = `v1/project-management/projects/${projectId}/activities`;
                  
-    return this.core.http.get<Task[]>(path)
+    return this.core.http.get<ActivityRef[]>(path)
                          .toPromise();
 
   }

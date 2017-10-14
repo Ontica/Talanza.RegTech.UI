@@ -8,6 +8,7 @@
 import { Component, Input }  from '@angular/core';
 
 import { ProjectRef } from '../data-types/project';
+import { ActivityRef } from '../data-types/activity';
 import { ActivityService } from '../services/activity.service';
 
 @Component ({
@@ -21,15 +22,17 @@ export class ActivityListGridComponent {
 
   public isTaskEditorVisible = false;
   public isVisibleProcedureInfo = false;
-  public taskList: any = [];
+  public taskList: ActivityRef[] = [];//any = [];
   public selectedTask:any;
-  public procedureUID: string = "";
+  public procedureUID: string = '';
+  public expanOrCollapseIcon = 'fa fa-minus-circle';
 
   private _project: ProjectRef;
   @Input()
    set project(project: ProjectRef) {     
-     this._project = project;     
+     this._project = project;        
      this.refreshData();
+   
    }
    get project(): ProjectRef {
     return this._project;
@@ -91,6 +94,40 @@ export class ActivityListGridComponent {
     this.isVisibleProcedureInfo = false;
   }
 
+  public expandOrCollapse(parentUID: string): void {      
+   let index = this.taskList.findIndex((e) => e.parent.uid === parentUID) - 1;   
+  
+   if (this.taskList[index].visible === 'collapse') {     
+    this.taskList[index].visible = 'expand';   
+    this.changeExpandOrCollapseIcon('visible');
+    this.changeVisibility(parentUID, 'visible')
+   } else {
+    this.taskList[index].visible = 'collapse';    
+    this.changeExpandOrCollapseIcon('collapse');
+    this.changeVisibility(parentUID, 'none');
+   }  
+
+  }
+
+  private changeExpandOrCollapseIcon(changeVisibility: string) {
+    if (changeVisibility === 'collapse') {
+      this.expanOrCollapseIcon = 'fa fa-plus-circle';
+    } else {
+      this.expanOrCollapseIcon = 'fa fa-minus-circle';
+    }
+  }
+
+  private changeVisibility(parentUID, visibibility: string): void {
+    this.taskList.forEach((e)=>{ 
+      if (e.parent.uid === parentUID) {
+        if (e.type === 'ObjectType.ProjectObject.Summary') {                    
+          this.changeVisibility(e.uid, visibibility);               
+        } 
+        e.visible = visibibility;          
+      }
+    });
+  }
+
   private getTaskName(task) {
     return task.name;
   }
@@ -98,7 +135,9 @@ export class ActivityListGridComponent {
   private refreshData() {
     this.activitiyService.getActivities(this.project.uid)
      .then((data) => {
-       this.taskList = data;       
+       this.taskList = data; 
+       this.taskList.forEach(function(e) { if (e.type ==='ObjectType.ProjectObject.Summary'){ e.visible = 'expand'} else {e.visible ='visible'} });
+       console.log(this.taskList);      
      });
   }
 
