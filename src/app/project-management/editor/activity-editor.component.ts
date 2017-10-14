@@ -21,8 +21,6 @@ export class ActivityEditorComponent {
   @HostBinding('style.display') public display = 'block';
   @HostBinding('style.position') public position = 'absolute';
 
-  public isCloseTaskEditorVisible = false;
-
   private _task: any;
   @Input()
   set task(task: any) {
@@ -34,8 +32,14 @@ export class ActivityEditorComponent {
 
   @Output() public onCloseEvent = new EventEmitter();
 
+  public selectedTask: string = 'generalInfo';  
+
   public constructor() { }
- 
+  
+  public setSelectedTask(selectedTask: string): void {
+    this.selectedTask = selectedTask;  
+  }
+
   public cancel(): void {
     this.onClose();
   }
@@ -43,17 +47,14 @@ export class ActivityEditorComponent {
   public onClose(): void {
     this.onCloseEvent.emit();
   }
+ 
 
-  public onCloseTask(): void {
-    this.isCloseTaskEditorVisible  = true;
-  }
-
-  public onCloseTaskEditorIsClosed(): void {
+  public onCloseTaskEditor(): void {
     this.onClose();
   }
 
-  public onShowCloseTaskEditor(): void {
-    this. isCloseTaskEditorVisible = true;
+  public onShowCloseTaskEditor(): void {  
+   this.selectedTask = 'closeTask';
   }
 
 }

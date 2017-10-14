@@ -5,10 +5,13 @@
     <div class="subtitle"><b>{{task.project.name}}</b>
     </div>
   </div>
-  <div *ngIf="isCloseTaskEditorVisible">
-    <task-close [task]="task" (onCloseEvent)="onCloseTaskEditorIsClosed()"></task-close>
+
+  <div class="tab">
+    <button class="tab-links left-position" [disabled]="isDisabled" [class.selected]="selectedTask==='generalInfo'" (click)="setSelectedTask('generalInfo')">Información general</button>
+    <button class="tab-links left-position" [disabled]="isDisabled" [class.selected]="selectedTask==='requirements'" (click)="setSelectedTask('requirements')">Requisitos y notas</button>
   </div>
-  <div *ngIf="!isCloseTaskEditorVisible">
-    <task-update [task]="task" (onCloseEvent)="onCloseTaskEditorIsClosed()" (onCloseTaskEditorVisible)="onShowCloseTaskEditor()"></task-update>
+
+  <div class="form-frame" [ngSwitch]="selectedTask">
+    <task-update *ngSwitchCase="'generalInfo'" [task]="task" (onCloseEvent)="onCloseTaskEditor()" (onCloseTaskEditorVisible)="onShowCloseTaskEditor()"></task-update>
+    <task-close *ngSwitchCase="'closeTask'" [task]="task" (onCloseEvent)="onCloseTaskEditor()"></task-close>
   </div>
-</div>
