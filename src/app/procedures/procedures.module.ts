@@ -26,6 +26,8 @@ import { AddRequirementListTabComponent } from './editor/tabs/add-requirement-li
 import { RequirementTabComponent } from './editor/tabs/requirement-tab.component';
 import { RequirementGridComponent } from './editor/requirement-grid.component';
 
+import { ProcedureViewerComponent } from './viewer/procedure-viewer.component';
+
 import { ProceduresRoutingModule } from './procedures-routing.module';
 
 /**
@@ -37,7 +39,8 @@ import { ProceduresRoutingModule } from './procedures-routing.module';
   declarations: [ProceduresMainPageComponent, ProcedureFilterComponent, ProcedureEditorComponent,
                  GeneralInfoTabComponent, RequirementsTabComponent, FilingConditionsTabComponent,
                  FilingFeeTabComponent, StatusTabComponent, AddRequirementTabComponent,
-                 AddRequirementListTabComponent, RequirementTabComponent,  RequirementGridComponent],
+                 AddRequirementListTabComponent, RequirementTabComponent,  RequirementGridComponent,
+                 ProcedureViewerComponent],
   exports: [ProceduresMainPageComponent]
 })
 export class ProceduresModule { }
