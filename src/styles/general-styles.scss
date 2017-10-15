@@ -160,3 +160,17 @@ select:disabled {
 button:disabled {
   @include disabled-element();
 }
+
+.main-icon a {
+  color: $primary-icon-color;
+  font-size: $primary-icon-size;
+  padding-right: 6pt;
+}
+
+.main-icon a {
+  color: $primary-icon-color;
+}
+
+.main-icon a:hover {
+  color: $selected-item-text-color;
+}
