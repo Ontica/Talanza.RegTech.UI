@@ -10,7 +10,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
-import { ContractsModule } from '../contracts/contracts.module';
+import { ProceduresModule } from '../procedures/procedures.module';
 
 import { ActivityListGridComponent } from './activity-list/activity-list-grid.component';
 
@@ -34,7 +34,7 @@ import { ActivityInfoComponent } from './create-activity/activity-info.component
  */
 
 @NgModule({
-  imports: [ProjectManagementRoutingModule, SharedModule, CommonModule, FormsModule, ContractsModule],
+  imports: [ProjectManagementRoutingModule, SharedModule, CommonModule, FormsModule, ProceduresModule],
   declarations: [ActivityListGridComponent, 
                  ActivityEditorComponent, ActivityCloseComponent,
                  ProjectsMainPageComponent, GanttComponent,
@@ -42,6 +42,6 @@ import { ActivityInfoComponent } from './create-activity/activity-info.component
                  ActivityWorklistComponent, ActivityInfoComponent,
                  ActivityUpdateComponent],                 
   exports: [ActivityListGridComponent,
-            ProjectsMainPageComponent, GanttComponent,]
+            ProjectsMainPageComponent, GanttComponent]
 })
 export class ProjectManagementModule { }

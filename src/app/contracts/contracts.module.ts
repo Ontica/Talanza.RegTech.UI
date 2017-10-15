@@ -10,6 +10,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
+import { ProceduresModule } from '../procedures/procedures.module';
 
 import { ContractsRoutingModule } from './contracts-routing.module';
 
@@ -18,18 +19,15 @@ import { ContractViewComponent } from './main-page/contract-view.component';
 import { ContractsFiltersComponent } from './main-page/contracts-filters.component';
 import { ContractsClauseSelectorComponent } from './editor/contracts-clause-selector.component';
 import { ContractsSelectedClauseComponent } from './editor/contracts-selected-clause.component';
-import  { ContractsSelectedProcedureComponent } from './editor/contract-selected-procedure.component';
 
-import { SafeHtmlPipe } from './editor/contract-selected-procedure.component';
 /**
  * Do not specify providers for modules that might be imported by a lazy loaded module.
  */
 
 @NgModule({
-  imports: [ContractsRoutingModule, SharedModule, CommonModule, FormsModule],
+  imports: [ContractsRoutingModule, SharedModule, CommonModule, FormsModule, ProceduresModule],
   declarations: [ContractsMainPageComponent, ContractsClauseSelectorComponent, 
-                 ContractsSelectedClauseComponent, ContractsSelectedProcedureComponent,
-                 ContractsFiltersComponent, SafeHtmlPipe],
-  exports: [ContractsSelectedProcedureComponent]
+                 ContractsSelectedClauseComponent, ContractsFiltersComponent],
+  exports: []
 })
 export class ContractsModule { }

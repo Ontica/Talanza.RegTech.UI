@@ -6,10 +6,10 @@ import {
 
 import { BrowserModule, DomSanitizer, SafeResourceUrl } from '@angular/platform-browser'
 
-import { ProcedureService } from '../../procedures/services/procedure.service';
+import { ProcedureService } from '../../services/procedure.service';
 
-import { Process } from '../../process/data-types/process';
-import { ProcessService } from '../../process/services/process.service';
+import { Process } from '../../../process/data-types/process';
+import { ProcessService } from '../../../process/services/process.service';
 
 @Pipe({ name: 'safeHtml'})
 export class SafeHtmlPipe implements PipeTransform  {
@@ -20,13 +20,13 @@ export class SafeHtmlPipe implements PipeTransform  {
 }
 
 @Component({
-  selector:'selected-procedure',
-  templateUrl:'./contracts-selected-procedure.component.html',
-  styleUrls:['./contracts-selected-procedure.component.scss'],
+  selector:'pv-general-info',
+  templateUrl:'./pv-general-info.component.html',
+  styleUrls:['./pv-general-info.component.scss'],
   providers:[ ProcedureService, ProcessService]
 })
 
-export class ContractsSelectedProcedureComponent implements OnInit{
+export class PVGeneralInfoComponent implements OnInit{
   @HostBinding('style.display') public display = 'block';
   @HostBinding('style.position') public position = 'absolute';
 
