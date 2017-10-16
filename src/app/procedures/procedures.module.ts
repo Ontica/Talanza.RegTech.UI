@@ -29,6 +29,8 @@ import { ProcedureViewerComponent } from './viewer/procedure-viewer.component';
 import { PVGeneralInfoComponent } from './viewer/sections/pv-general-info.component';
 import { PVRequirementsComponent } from './viewer/sections/pv-requirements.component';
 
+import { PERequirementsComponent } from './editor/sections/pe-requirements.component';
+
 import { SafeHtmlPipe } from './viewer/sections/pv-general-info.component';
 
 import { ProceduresRoutingModule } from './procedures-routing.module';
@@ -44,7 +46,8 @@ import { ProceduresRoutingModule } from './procedures-routing.module';
                  FilingFeeTabComponent, StatusTabComponent, AddRequirementTabComponent,
                  AddRequirementListTabComponent, RequirementTabComponent,  RequirementGridComponent,
                  SafeHtmlPipe,
-                 ProcedureViewerComponent, PVGeneralInfoComponent, PVRequirementsComponent],
-  exports: [ProceduresMainPageComponent, ProcedureViewerComponent]
+                 ProcedureViewerComponent, PVGeneralInfoComponent, PVRequirementsComponent,
+                 PERequirementsComponent],
+  exports: [ProceduresMainPageComponent, ProcedureViewerComponent, PERequirementsComponent]
 })
 export class ProceduresModule { }
