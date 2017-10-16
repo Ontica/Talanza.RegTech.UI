@@ -2,18 +2,25 @@
 @import "../../../styles/form";
 :host {
   position: relative;
-  top: 145px;
+  top: 120px;
   left: 20%;
 }
 
 .editor-container {
-  height: calc(100vh - 180px);
+  height: calc(100vh - 160px);
   width: 720px;
 }
 
 .form-frame {
-  height: calc(100% - 100px);
+  height: calc(100% - 130px);
   overflow-y: scroll;
   overflow-x: hidden;
   max-width: 600pt;
+}
+
+.title {
+  color: #3a3a3a;
+  font-size: 10pt;
+  font-weight: 600;
+  padding: 10pt;
 }
