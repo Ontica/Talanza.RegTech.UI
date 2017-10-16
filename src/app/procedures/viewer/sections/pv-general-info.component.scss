@@ -13,13 +13,6 @@ table {
   padding: 5pt;
 }
 
-.title {
-  color: #3a3a3a;
-  font-size: 12pt;
-  font-weight: 600;
-  padding: 18pt;
-}
-
 .sub-header {
   font-weight: 600;
   padding: 5pt;
@@ -31,44 +24,4 @@ table td.label {
   width: 260px;
   font-size: 10pt;
   white-space: nowrap;
-}
-
-
-/*
-:host {
-  position: relative;
-  top: 120px;
-  left: 20%;
-}
-
-.editor-container {
-  height: calc(100vh - 200px);
-  width: 720px;
-}
-
-.form-frame {
-  height: calc(100% - 80px);
-  overflow-y: scroll;
-  overflow-x: hidden;
-  max-width: 600pt;
-}
-
-.iframe-container {
-  height: 350px; //calc(100vh - 200px);
-  overflow: auto;
-  //z-index: -1;
-}
-*/
-
-.iframe-modeler {
-  border: 0;
-  height: 1580px;
-  position: relative;
-  width: 100%;
-  background-color: $light-yellow;
-}
-
-.readonly-modeler {
-  pointer-events: none;
-  //z-index: -1;
 }
