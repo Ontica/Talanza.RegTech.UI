@@ -1,70 +1,64 @@
-<div class="editor-container editor-container-style">
-  <div>
-    <div class="close-button right-position" (click)="close()">&times;</div>
-  </div>
-  <div class="title">{{procedure.name}}</div>
-  <div class="form-frame">
-    <div>
-      <table>
-        <thead>
-          <th colspan="2" class="header text-align-left ">Información general del trámite
-            <span class="right" (click)="onDisplayGeneralInfo()"><i class="fa fa-plus-circle " aria-hidden="true "></i></span>
-          </th>
-        </thead>
-        <tbody *ngIf="isVisibleGeneralInfo ">
-          <!--
+<div>
+  <table>
+    <thead>
+      <th colspan="2" class="header text-align-left ">Información general del trámite
+        <span class="right" (click)="onDisplayGeneralInfo()"><i class="fa fa-plus-circle " aria-hidden="true "></i></span>
+      </th>
+    </thead>
+    <tbody *ngIf="isVisibleGeneralInfo ">
+      <!--
             <tr>
               <td class='label'>Regulación:</td>
               <td>{{procedure.legalInfo.regulationMode}}</td>
             </tr>
             !-->
-          <tr>
-            <td class='label'>Homoclave COFEMER:</td>
-            <td>{{procedure.code}}</td>
-          </tr>
-          <tr>
-            <td class='label'>Tema:</td>
-            <td>{{procedure.theme}}</td>
-          </tr>
-          <tr>
-            <td class='label'>Página web dependencia:</td>
-            <td><a (click)="openExternalWindow(procedure.officialUrl)">{{procedure.officialUrl}}</a></td>
-          </tr>
-          <tr>
-            <td class='label'>Página web COFEMER:</td>
-            <td><a (click)="openExternalWindow(procedure.regulationUrl)">{{procedure.regulationUrl}}</a></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <br>
-    <div>
-      <table>
-        <thead>
-          <th colspan="2" class="header text-align-left ">Obligación y fundamento legal
-            <span class="right" (click)="onDisplayGeneralInfo()"><i class="fa fa-plus-circle " aria-hidden="true "></i></span>
-          </th>
-        </thead>
-        <tbody>
-          <tr>
-            <td class='label'>Obligación:</td>
-            <td>{{procedure.legalInfo.obligation}}</td>
-          </tr>
-          <tr>
-            <td class='label'>Fundamento legal:</td>
-            <td>
-              <div [innerHTML]="procedure.legalInfo.legalBasis | safeHtml "></div>
-            </td>
-          </tr>
-          <tr>
-            <td class='label'>Observaciones:</td>
-            <td>{{procedure.notes}}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <br>
-    <!--
+      <tr>
+        <td class='label'>Homoclave COFEMER:</td>
+        <td>{{procedure.code}}</td>
+      </tr>
+      <tr>
+        <td class='label'>Tema:</td>
+        <td>{{procedure.theme}}</td>
+      </tr>
+      <tr>
+        <td class='label'>Página web dependencia:</td>
+        <td><a (click)="openExternalWindow(procedure.officialUrl)">{{procedure.officialUrl}}</a></td>
+      </tr>
+      <tr>
+        <td class='label'>Página web COFEMER:</td>
+        <td><a (click)="openExternalWindow(procedure.regulationUrl)">{{procedure.regulationUrl}}</a></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<br>
+<div>
+  <table>
+    <thead>
+      <th colspan="2" class="header text-align-left ">Obligación y fundamento legal
+        <span class="right" (click)="onDisplayGeneralInfo()"><i class="fa fa-plus-circle " aria-hidden="true "></i></span>
+      </th>
+    </thead>
+    <tbody>
+      <tr>
+        <td class='label'>Obligación:</td>
+        <td>{{procedure.legalInfo.obligation}}</td>
+      </tr>
+      <tr>
+        <td class='label'>Fundamento legal:</td>
+        <td>
+          <div [innerHTML]="procedure.legalInfo.legalBasis | safeHtml "></div>
+        </td>
+      </tr>
+      <tr>
+        <td class='label'>Observaciones:</td>
+        <td>{{procedure.notes}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<br>
+<!--
       <div>
         <table>
           <thead>
@@ -86,148 +80,146 @@
       </div>    
       <br>
       !-->
-    <div>
-      <table>
-        <thead>
-          <th colspan="2" class="header text-align-left ">Condiciones de inicio y forma y plazos de entrega<span class="right " (click)="onDisplayInitialTerms() ">
+<div>
+  <table>
+    <thead>
+      <th colspan="2" class="header text-align-left ">Condiciones de inicio y forma y plazos de entrega<span class="right " (click)="onDisplayInitialTerms() ">
               <i class="fa fa-plus-circle " aria-hidden="true "></i></span>
-          </th>
-        </thead>
-        <tbody *ngIf="isInitialTermsVisible">
-          <tr>
-            <td colspan="2" class="sub-header text-align-left">Condiciones de inicio</td>
-          </tr>
-          <tr>
-            <td class='label'>¿Cuándo se realiza?:</td>
-            <td>{{procedure.filingCondition.startsWhen}} {{procedure.filingCondition.startsWhenTrigger}}</td>
-          </tr>
-          <tr>
-            <td class='label'>Observaciones sobre<br/>las condiciones de inicio:</td>
-            <td>{{procedure.filingCondition.startsWhenNotes}}</td>
-          </tr>
-          <tr>
-            <td colspan="2" class="sub-header text-align-left">Forma de entrega</td>
-          </tr>
-          <tr>
-            <td class='label'>Forma de entrega:</td>
-            <td>{{procedure.filingCondition.howToFile}}</td>
-          </tr>
-          <tr>
-            <td class='label'>Correo electrónico:</td>
-            <td *ngIf="procedure.filingCondition.howToFileAddress !== 'No aplicable'">
-              <a href="mailto:{{procedure.filingCondition.howToFileAddress}}">{{procedure.filingCondition.howToFileAddress}}</a>
-            </td>
-            <td *ngIf="procedure.filingCondition.howToFileAddress === 'No aplicable'">
-              {{procedure.filingCondition.howToFileAddress}}
-            </td>
-          </tr>
-          <tr>
-            <td colspan="2" class="sub-header text-align-left">Plazo máximo de entrega</td>
-          </tr>
-          <tr>
-            <td class='label'>Plazo máximo de entrega:</td>
-            <td>{{procedure.filingCondition.maxFilingTerm}} {{procedure.filingCondition.maxFilingTermUnit}}</td>
-          </tr>
-          <tr>
-            <td class='label'>Observaciones sobre<br/>el plazo máximo:</td>
-            <td>{{procedure.filingCondition.maxFilingTermNotes}}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <br>
-    <div>
-      <table>
-        <thead>
-          <th colspan="2" class="header text-align-left ">Plazo de resolución y prórrogas<span class="right " (click)="onDisplayInitialTerms() ">
+      </th>
+    </thead>
+    <tbody *ngIf="isInitialTermsVisible">
+      <tr>
+        <td colspan="2" class="sub-header text-align-left">Condiciones de inicio</td>
+      </tr>
+      <tr>
+        <td class='label'>¿Cuándo se realiza?:</td>
+        <td>{{procedure.filingCondition.startsWhen}} {{procedure.filingCondition.startsWhenTrigger}}</td>
+      </tr>
+      <tr>
+        <td class='label'>Observaciones sobre<br/>las condiciones de inicio:</td>
+        <td>{{procedure.filingCondition.startsWhenNotes}}</td>
+      </tr>
+      <tr>
+        <td colspan="2" class="sub-header text-align-left">Forma de entrega</td>
+      </tr>
+      <tr>
+        <td class='label'>Forma de entrega:</td>
+        <td>{{procedure.filingCondition.howToFile}}</td>
+      </tr>
+      <tr>
+        <td class='label'>Correo electrónico:</td>
+        <td *ngIf="procedure.filingCondition.howToFileAddress !== 'No aplicable'">
+          <a href="mailto:{{procedure.filingCondition.howToFileAddress}}">{{procedure.filingCondition.howToFileAddress}}</a>
+        </td>
+        <td *ngIf="procedure.filingCondition.howToFileAddress === 'No aplicable'">
+          {{procedure.filingCondition.howToFileAddress}}
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2" class="sub-header text-align-left">Plazo máximo de entrega</td>
+      </tr>
+      <tr>
+        <td class='label'>Plazo máximo de entrega:</td>
+        <td>{{procedure.filingCondition.maxFilingTerm}} {{procedure.filingCondition.maxFilingTermUnit}}</td>
+      </tr>
+      <tr>
+        <td class='label'>Observaciones sobre<br/>el plazo máximo:</td>
+        <td>{{procedure.filingCondition.maxFilingTermNotes}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<br>
+<div>
+  <table>
+    <thead>
+      <th colspan="2" class="header text-align-left ">Plazo de resolución y prórrogas<span class="right " (click)="onDisplayInitialTerms() ">
                 <i class="fa fa-plus-circle " aria-hidden="true "></i></span>
-          </th>
-        </thead>
-        <tbody *ngIf="isInitialTermsVisible">
-          <tr>
-            <td class='label'>Plazo de resolución:</td>
-            <td>{{procedure.filingCondition.issuanceLegalTerm}} {{procedure.filingCondition.issuanceLegalTermUnit}}</td>
-          </tr>
-          <tr>
-            <td class='label'>Ficta:</td>
-            <td>{{procedure.filingCondition.ficta}}</td>
-          </tr>
-          <tr>
-            <td class='label'>Observaciones sobre<br/>el plazo de resolución:</td>
-            <td>{{procedure.filingCondition.issuanceLegalTermNotes}}</td>
-          </tr>
-          <tr>
-            <td class='label'>Observaciones sobre<br/>prórrogas:</td>
-            <td>{{procedure.filingCondition.deferralsTermNotes}}</td>
-          </tr>
-          <tr>
-        </tbody>
-      </table>
-    </div>
-    <br>
-    <div>
-      <table>
-        <thead>
-          <th colspan="2" class="header text-align-left ">Pago de derechos<span class="right " (click)="onDisplayPaymentInfo() "><i class="fa fa-plus-circle " aria-hidden="true "></i></span></th>
-        </thead>
-        <tbody *ngIf="isPaymentInfoVisible ">
-          <tr>
-            <td class='label'>Tipo de pago:</td>
-            <td>{{procedure.filingFee.filingFeeType}}</td>
-          </tr>
-          <tr>
-            <td class='label'>Importe:</td>
-            <td>{{procedure.filingFee.feeAmount}}</td>
-          </tr>
-          <tr>
-            <td class='label'>Fundamento legal:</td>
-            <td>{{procedure.filingFee.legalBasis}}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <br>
-    <div>
-      <table>
-        <thead>
-          <th colspan="2" class="header text-align-left ">Información de contacto<span class="right " (click)="onDisplayAuthorityInfo() "><i class="fa fa-plus-circle " aria-hidden="true "></i></span></th>
-        </thead>
-        <tbody *ngIf="isAuthorityInfoVisible">
-          <tr>
-            <td class='label'>Dependencia:</td>
-            <td>{{procedure.entityName}}</td>
-          </tr>
-          <tr>
-            <td class='label'>Autoridad:</td>
-            <td>{{procedure.authorityName}}</td>
-          </tr>
-          <tr>
-            <td class='label'>Cargo:</td>
-            <td>{{procedure.authorityTitle}}</td>
-          </tr>
-          <tr>
-            <td class='label'>Contacto:</td>
-            <td>{{procedure.authorityContact}}</td>
-          </tr>
-          <!-- <tr>
+      </th>
+    </thead>
+    <tbody *ngIf="isInitialTermsVisible">
+      <tr>
+        <td class='label'>Plazo de resolución:</td>
+        <td>{{procedure.filingCondition.issuanceLegalTerm}} {{procedure.filingCondition.issuanceLegalTermUnit}}</td>
+      </tr>
+      <tr>
+        <td class='label'>Ficta:</td>
+        <td>{{procedure.filingCondition.ficta}}</td>
+      </tr>
+      <tr>
+        <td class='label'>Observaciones sobre<br/>el plazo de resolución:</td>
+        <td>{{procedure.filingCondition.issuanceLegalTermNotes}}</td>
+      </tr>
+      <tr>
+        <td class='label'>Observaciones sobre<br/>prórrogas:</td>
+        <td>{{procedure.filingCondition.deferralsTermNotes}}</td>
+      </tr>
+      <tr>
+    </tbody>
+  </table>
+</div>
+<br>
+<div>
+  <table>
+    <thead>
+      <th colspan="2" class="header text-align-left ">Pago de derechos<span class="right " (click)="onDisplayPaymentInfo() "><i class="fa fa-plus-circle " aria-hidden="true "></i></span></th>
+    </thead>
+    <tbody *ngIf="isPaymentInfoVisible ">
+      <tr>
+        <td class='label'>Tipo de pago:</td>
+        <td>{{procedure.filingFee.filingFeeType}}</td>
+      </tr>
+      <tr>
+        <td class='label'>Importe:</td>
+        <td>{{procedure.filingFee.feeAmount}}</td>
+      </tr>
+      <tr>
+        <td class='label'>Fundamento legal:</td>
+        <td>{{procedure.filingFee.legalBasis}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<br>
+<div>
+  <table>
+    <thead>
+      <th colspan="2" class="header text-align-left ">Información de contacto<span class="right " (click)="onDisplayAuthorityInfo() "><i class="fa fa-plus-circle " aria-hidden="true "></i></span></th>
+    </thead>
+    <tbody *ngIf="isAuthorityInfoVisible">
+      <tr>
+        <td class='label'>Dependencia:</td>
+        <td>{{procedure.entityName}}</td>
+      </tr>
+      <tr>
+        <td class='label'>Autoridad:</td>
+        <td>{{procedure.authorityName}}</td>
+      </tr>
+      <tr>
+        <td class='label'>Cargo:</td>
+        <td>{{procedure.authorityTitle}}</td>
+      </tr>
+      <tr>
+        <td class='label'>Contacto:</td>
+        <td>{{procedure.authorityContact}}</td>
+      </tr>
+      <!-- <tr>
                     <td colspan="2 "><img src="../../assets/img/mapa.png " width="100% " alt="mapita " />
         
                     </td>
                   </tr>-->
-        </tbody>
-      </table>
-    </div>
-    <div>
-      <br>
-      <br>
-      <br>
-    </div>
-    <!--
+    </tbody>
+  </table>
+</div>
+<div>
+  <br>
+  <br>
+  <br>
+</div>
+<!--
       <div>
         <div class="iframe-container">
           <iframe id="modeler" #modeler class="iframe-modeler" scrolling="no" [class.readonly-modeler]="!editionMode" [src]="url"></iframe>
         </div>
       </div>
     -->
-  </div>
-</div>

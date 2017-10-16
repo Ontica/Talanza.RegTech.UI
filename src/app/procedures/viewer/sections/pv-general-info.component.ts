@@ -1,6 +1,6 @@
 
 import {
-  ChangeDetectorRef, Component, ElementRef, EventEmitter, HostBinding,
+  ChangeDetectorRef, Component, ElementRef, EventEmitter,
   Input, Output, Pipe, PipeTransform, Renderer2, ViewChild, OnInit
 } from '@angular/core';
 
@@ -27,9 +27,7 @@ export class SafeHtmlPipe implements PipeTransform  {
 })
 
 export class PVGeneralInfoComponent implements OnInit{
-  @HostBinding('style.display') public display = 'block';
-  @HostBinding('style.position') public position = 'absolute';
-
+  
   @ViewChild('modeler') public el: ElementRef;
 
   public isVisibleGeneralInfo = true;

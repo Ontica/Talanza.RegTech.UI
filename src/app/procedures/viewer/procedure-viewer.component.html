@@ -8,11 +8,8 @@
     <button class="tab-links left-position" [disabled]="isDisabled" [class.selected]="selectedTask==='generalInfo'" (click)="setSelectedTask('generalInfo')">Información general</button>
     <button class="tab-links left-position" [disabled]="isDisabled" [class.selected]="selectedTask==='requirements'" (click)="setSelectedTask('requirements')">Requisitos y notas</button>
   </div>
-
+  <br>
   <div class="form-frame" [ngSwitch]="selectedTask">
-    <!--
-    <task-update *ngSwitchCase="'generalInfo'" [task]="task" (onCloseEvent)="onCloseTaskEditor()" (onCloseTaskEditorVisible)="onShowCloseTaskEditor()"></task-update>
-    <task-close *ngSwitchCase="'closeTask'" [task]="task" (onCloseEvent)="onCloseTaskEditor()"></task-close>
-    -->
+    <pv-general-info *ngSwitchCase="'generalInfo'" [procedureUID]="procedureUID" (onCloseEvent)="closeProcedureEditorWindow()"></pv-general-info>
   </div>
 </div>

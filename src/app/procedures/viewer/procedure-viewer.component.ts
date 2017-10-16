@@ -22,8 +22,18 @@ export class ProcedureViewerComponent {
 
   @Output() public onCloseEvent = new EventEmitter();
 
+  public selectedTask: string = 'generalInfo'; 
+
   public onClose(): void {
     this.onCloseEvent.emit();
+  }
+
+  public setSelectedTask(selectedTask: string): void {
+    this.selectedTask = selectedTask;  
+  }
+
+  public onCloseTaskEditor(): void {
+    this.onClose();
   }
 
 }

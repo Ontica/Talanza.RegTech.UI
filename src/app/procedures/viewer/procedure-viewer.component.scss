@@ -2,16 +2,18 @@
 @import "../../../styles/form";
 :host {
   position: relative;
-  top: 3%;
+  top: 145px;
   left: 20%;
 }
 
 .editor-container {
-  height: 600px;
+  height: calc(100vh - 180px);
   width: 720px;
 }
 
 .form-frame {
-  height: 430px;
-  overflow-y: auto;
+  height: calc(100% - 100px);
+  overflow-y: scroll;
+  overflow-x: hidden;
+  max-width: 600pt;
 }

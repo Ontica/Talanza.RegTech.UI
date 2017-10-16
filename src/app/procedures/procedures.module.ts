@@ -44,6 +44,6 @@ import { ProceduresRoutingModule } from './procedures-routing.module';
                  AddRequirementListTabComponent, RequirementTabComponent,  RequirementGridComponent,
                  SafeHtmlPipe,
                  ProcedureViewerComponent, PVGeneralInfoComponent],
-  exports: [ProceduresMainPageComponent, PVGeneralInfoComponent]
+  exports: [ProceduresMainPageComponent, ProcedureViewerComponent]
 })
 export class ProceduresModule { }

@@ -38,5 +38,5 @@
 </div>
 
 <div *ngIf="showProcedureEditorWindow " class="popup ">
-  <pv-general-info [procedureUID]="selectedProcedureUID" (onCloseEvent)="closeProcedureEditorWindow()"></pv-general-info>
+  <procedure-viewer [procedureUID]="selectedProcedureUID" (onCloseEvent)="closeProcedureEditorWindow()"></procedure-viewer>
 </div>
