@@ -48,3 +48,17 @@ export class Procedure {
   }
 
 }
+
+export interface Requirement {  
+  uid: string,
+  name: string,
+  type: string,
+  appliesTo: string,
+  copies: string,
+  conditions: string,
+  notes: string,
+  observations: string, 
+  sourceUrl: string,
+  sampleUrl: string,
+  instructionsUrl: string
+}

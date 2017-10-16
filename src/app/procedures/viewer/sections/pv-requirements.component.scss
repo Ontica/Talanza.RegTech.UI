@@ -1,0 +1,17 @@
+@import "../../../../styles/form";
+@import "../../../../styles/grid";
+.title {
+  padding-top: 12pt;
+  padding-bottom: 4pt;
+  font-size: 10pt;
+  font-weight: 600;
+}
+
+.title-text {
+  color: $form-title-color;
+  border-bottom: $form-title-border;
+}
+
+table.grid tbody {
+  height: 250px;
+}
