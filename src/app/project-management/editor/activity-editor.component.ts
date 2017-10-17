@@ -12,7 +12,7 @@ import { Component, EventEmitter, HostBinding, Input,
 import { TaskRef } from '../data-types/task';
 
 @Component({
-  selector: 'task-form-editor',
+  selector: 'activity-editor',
   templateUrl: './activity-editor.component.html',
   styleUrls: ['./activity-editor.component.scss'],  
 })
@@ -46,8 +46,7 @@ export class ActivityEditorComponent {
 
   public onClose(): void {
     this.onCloseEvent.emit();
-  }
- 
+  } 
 
   public onCloseTaskEditor(): void {
     this.onClose();

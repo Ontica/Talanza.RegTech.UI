@@ -64,7 +64,7 @@
   </table>
 </div>
 <div *ngIf="isTaskEditorVisible" class="popup">
-  <task-form-editor [task]="selectedTask" (onCloseEvent)="onCloseTaskEditorWindow()"></task-form-editor>
+  <activity-editor [task]="selectedTask" (onCloseEvent)="onCloseTaskEditorWindow()"></activity-editor>
 </div>
 
 <div *ngIf="isVisibleProcedureInfo" class="popup ">
