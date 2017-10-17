@@ -39,11 +39,14 @@ export class ContractsClauseSelectorComponent {
   }
  
   @Output() selectedClause = new EventEmitter<ContractClause>();
+
+  public currentClause: ContractClause;
  
   constructor(private core: CoreService,
     private contractService: ContractsService) { }
  
   public onClickSelectClause(selectedClause: ContractClause): void {         
+    this.currentClause = selectedClause;
     this.selectedClause.emit(selectedClause);
   } 
 
