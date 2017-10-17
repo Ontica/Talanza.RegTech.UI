@@ -5,6 +5,9 @@
   padding-bottom: 4pt;
   font-size: 10pt;
   font-weight: 600;
+  width: 90%;
+  margin-left: 15pt;
+  margin-top: 0pt;
 }
 
 .title-text {
@@ -12,6 +15,9 @@
   border-bottom: $form-title-border;
 }
 
-table.grid tbody {
-  height: 250px;
+table.grid {
+  width: 90%;
+  font-size: 10pt;
+  margin-left: 15pt;
+  font-size: 10pt;
 }
