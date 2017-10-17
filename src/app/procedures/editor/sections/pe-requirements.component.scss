@@ -1,21 +1,5 @@
-@import "../../../../styles/form";
-@import "../../../../styles/grid";
-.title {
-  padding-top: 12pt;
-  padding-bottom: 4pt;
-  font-size: 10pt;
-  font-weight: 600;
-  width: 90%;
-  margin-left: 15pt;
-  margin-top: 0pt;
-}
-
-.title-text {
-  color: $form-title-color;
-  border-bottom: $form-title-border;
-}
-
-table.grid {
+@import "../../../../styles/table";
+table.table {
   width: 90%;
   font-size: 10pt;
   margin-left: 15pt;
