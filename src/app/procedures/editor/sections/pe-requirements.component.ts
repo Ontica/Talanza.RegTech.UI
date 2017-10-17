@@ -53,6 +53,18 @@ export class PERequirementsComponent {
 
   private loadOutputDocuments(): void {
     this.outputDocuments =  this.procedure.requirements.filter((x) => x.type === 'OutputDocument');  
-  }  
+  } 
+  
+  private onAttach(): void {
+    const msg = "Por el momento no es posible adjuntar archivos.";                
+
+    alert(msg);
+  }
+
+  private onAssign(): void {
+    const msg = "Por el momento no es posible asignar tareas";                
+    
+    alert(msg);
+  }
 
 }

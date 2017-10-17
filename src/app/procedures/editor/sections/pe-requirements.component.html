@@ -44,35 +44,38 @@
       <td style="width:15%">{{inputDocument.copies}}</td>
       <td style="width:14%"><a *ngIf="inputDocument.sourceUrl !== ''" (click)="openExternalWindow(inputDocument.sourceUrl)">Formato</a> <br>
         <a *ngIf="inputDocument.sampleUrl !== ''" (click)="openExternalWindow(inputDocument.sampleUrl)">Ejemplo</a></td>
-      <td style="width:10%"><span class="left"><i class="fa fa-paperclip fa-2x" aria-hidden="true"></i></span>
+      <td style="width:10%"><button (click)="onAttch()">Adjuntar</button><br>
+        <button (click)="onAssign()">Asignar</button>
       </td>
     </tr>
-    <tr *ngIf="inputDocuments.length === 0">
-      <td colspan="4"><b>No se entregan documentos a la autoridad</b></td>
+    <tr *ngIf=" inputDocuments.length===0 ">
+      <td colspan="4 "><b>No se entregan documentos a la autoridad</b></td>
     </tr>
   </tbody>
 </table>
-<p class="title title-text">Documentos expedidos por la autoridad</p>
-<table class="grid">
+<p class="title title-text ">Documentos expedidos por la autoridad</p>
+<table class="grid ">
   <thead>
     <tr>
-      <th style="width:3%"></th>
-      <th style="width:50%">Nombre</th>
-      <th style="width:27%">Ejemplo</th>
-      <th style="width:20%">Adjuntar</th>
+      <th style="width:3% "></th>
+      <th style="width:50% ">Nombre</th>
+      <th style="width:27% ">Ejemplo</th>
+      <th style="width:20% ">Adjuntar</th>
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let outputDocument of outputDocuments">
-      <td style="width:3%"><input type="checkbox"></td>
-      <td style="width:40%">{{outputDocument.name}}</td>
-      <td style="width:14%">
-        <a *ngIf="inputDocument.sourceUrl !== ''" (click)="openExternalWindow(inputDocument.sourceUrl)">Formato</a> <br>
-        <a *ngIf="inputDocument.sampleUrl !== ''" (click)="openExternalWindow(inputDocument.sampleUrl)">Ejemplo</a></td>
-      <td style="width:10%"><span class="left"><i class="fa fa-paperclip fa-2x" aria-hidden="true"></i></span></td>
+    <tr *ngFor="let outputDocument of outputDocuments ">
+      <td style="width:3% "><input type="checkbox "></td>
+      <td style="width:40% ">{{outputDocument.name}}</td>
+      <td style="width:14% ">
+        <a *ngIf="inputDocument.sourceUrl !=='' " (click)="openExternalWindow(inputDocument.sourceUrl) ">Formato</a> <br>
+        <a *ngIf="inputDocument.sampleUrl !=='' " (click)="openExternalWindow(inputDocument.sampleUrl) ">Ejemplo</a></td>
+      <td style="width:10% "><button (click)="onAttch() ">Adjuntar</button><br>
+        <button (click)="onAssign() ">Asignar</button>
+      </td>
     </tr>
-    <tr *ngIf="outputDocuments.length === 0">
-      <td colspan="4"><b>No hay documentos expidos por la autoridad</b></td>
+    <tr *ngIf="outputDocuments.length===0 ">
+      <td colspan="4 "><b>No hay documentos expidos por la autoridad</b></td>
     </tr>
   </tbody>
 </table>
