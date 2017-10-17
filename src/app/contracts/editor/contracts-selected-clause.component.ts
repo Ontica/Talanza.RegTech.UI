@@ -20,7 +20,7 @@
    templateUrl: './contracts-selected-clause.component.html',
    styleUrls:['./contracts-selected-clause.component.scss'],
    providers: [ContractsService],
-   encapsulation: ViewEncapsulation.None,
+   encapsulation: ViewEncapsulation.Native,
  })
 
  export class ContractsSelectedClauseComponent {

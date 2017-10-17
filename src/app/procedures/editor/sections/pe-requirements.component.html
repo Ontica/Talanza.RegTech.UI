@@ -1,81 +1,81 @@
-<p class="title title-text">Condiciones</p>
+<br>
 <table class="grid">
   <thead>
     <tr>
       <th style="width:3%"></th>
-      <th style="width:50%">Nombre</th>
+      <th style="width:60%">Requisitos del trámite</th>
       <th style="width:18%">Aplica a</th>
-      <th style="width:15%">Copias</th>
-      <th style="width:14%">Ejemplo</th>
+      <th style="width:15%">Presentar</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let condition of conditions">
       <td style="width:3%"><input type="checkbox"></td>
-      <td style="width:50%">{{condition.name}}</td>
-      <td style="width:18%">{{condition.appliesTo}}</td>
-      <td style="width:15%">{{condition.copies}}</td>
-      <td style="width:14%"><a *ngIf="condition.sourceUrl !== ''" (click)="openExternalWindow(condition.sourceUrl)">Formato</a><br>
+      <td style="width:60%">
+        {{condition.name}}<br>
         <a *ngIf="condition.sampleUrl !== ''" (click)="openExternalWindow(condition.sampleUrl)">Ejemplo</a>
       </td>
+      <td style="width:18%">{{condition.appliesTo}}</td>
+      <td style="width:15%">{{condition.copies}}</td>
     </tr>
     <tr *ngIf="conditions.length === 0">
-      <td colspan="4"><b>No hay condiciones iniciales</b></td>
+      <td colspan="5"><i>El trámite no tiene requisitos</i></td>
     </tr>
   </tbody>
 </table>
-<p class="title title-text">Documentos de entrega</p>
+<br><br>
 <table class="grid">
   <thead>
     <tr>
       <th style="width:3%"></th>
-      <th style="width:46%">Nombre</th>
+      <th style="width:56%">Lista de documentos a entregar</th>
       <th style="width:14%">Aplica a</th>
-      <th style="width:13%">Copias</th>
-      <th style="width:12%">Ejemplo</th>
-      <th style="width:12%">Operaciones</th>
+      <th style="width:13%">Entregar</th>
+      <th style="width:12%">Adjuntar / Asignar</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let inputDocument of inputDocuments">
       <td style="width:3%"><input type="checkbox"></td>
-      <td style="width:46%">{{inputDocument.name}}</td>
+      <td style="width:56%">{{inputDocument.name}}<br>
+        <a *ngIf="inputDocument.sourceUrl !== ''" (click)="openExternalWindow(inputDocument.sourceUrl)"><u>Obtener formato</u></a> &nbsp; &nbsp;
+        <a *ngIf="inputDocument.sampleUrl !== ''" (click)="openExternalWindow(inputDocument.sampleUrl)"><u>Ejemplo</u></a>
+      </td>
       <td style="width:14%">{{inputDocument.appliesTo}}</td>
       <td style="width:13%">{{inputDocument.copies}}</td>
-      <td style="width:12%"><a *ngIf="inputDocument.sourceUrl !== ''" (click)="openExternalWindow(inputDocument.sourceUrl)">Formato</a> <br>
-        <a *ngIf="inputDocument.sampleUrl !== ''" (click)="openExternalWindow(inputDocument.sampleUrl)">Ejemplo</a></td>
-      <td style="width:12%"><button class="btn" (click)="onAttch()"><i class="fa fa-file-text" aria-hidden="true"></i></button>
-        <button class="btn" (click)="onAssign()"><i class="fa fa-user" aria-hidden="true"></i></button>
+      <td class="menu-icon" style="width:12%">
+        <i class="fa fa-upload" (click)="onAttch()" aria-hidden="true" title="Adjuntar documento"></i> &nbsp; &nbsp;
+        <i class="fa fa-user" (click)="onAssign()" aria-hidden="true" title="Asignar tarea"></i>
       </td>
     </tr>
-    <tr *ngIf=" inputDocuments.length===0 ">
-      <td colspan="4 "><b>No se entregan documentos a la autoridad</b></td>
+    <tr *ngIf="inputDocuments.length === 0">
+      <td colspan="5"><i>No se entregan documentos a la autoridad</i></td>
     </tr>
   </tbody>
 </table>
-<p class="title title-text ">Documentos expedidos por la autoridad</p>
-<table class="grid ">
+<br><br>
+<table class="grid">
   <thead>
     <tr>
-      <th style="width:3% "></th>
-      <th style="width:50% ">Nombre</th>
-      <th style="width:27% ">Ejemplo</th>
-      <th style="width:20% ">Adjuntar</th>
+      <th style="width:3%"></th>
+      <th style="width:50%">Documentos que expide la dependencia</th>
+      <th style="width:27%">Ejemplo</th>
+      <th style="width:20%">Adjuntar</th>
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let outputDocument of outputDocuments ">
-      <td style="width:3% "><input type="checkbox "></td>
-      <td style="width:50% ">{{outputDocument.name}}</td>
-      <td style="width:27% ">
+    <tr *ngFor="let outputDocument of outputDocuments">
+      <td style="width:3%"><input type="checkbox "></td>
+      <td style="width:50%">{{outputDocument.name}}</td>
+      <td style="width:27%">
         <a *ngIf="outputDocument.sourceUrl !=='' " (click)="openExternalWindow(outputDocument.sourceUrl) ">Formato</a> <br>
         <a *ngIf="outputDocument.sampleUrl !=='' " (click)="openExternalWindow(outputDocument.sampleUrl) ">Ejemplo</a></td>
-      <td style="width:20% "><button (click)="onAttch() ">Adjuntar</button><br>
-        <button (click)="onAssign() ">Asignar</button>
+      <td class="menu-icon" style="width:20%">
+        <i class="fa fa-upload" (click)="onAttch()" aria-hidden="true" title="Adjuntar documento"></i>
       </td>
     </tr>
     <tr *ngIf="outputDocuments.length===0 ">
-      <td colspan="4 "><b>No hay documentos expidos por la autoridad</b></td>
+      <td colspan="4"><i>La dependencia no expide documentos en este trámite</i></td>
     </tr>
   </tbody>
 </table>

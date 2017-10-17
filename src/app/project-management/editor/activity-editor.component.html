@@ -1,15 +1,13 @@
 <div class="editor-container editor-container-style">
   <div class="header">
     <div class="close-button right-position" (click)="onClose()">&times;</div>
-    <div class="title">{{task.name}} </div>
-    <div class="subtitle"><b>{{task.project.name}}</b>
-    </div>
+    <div class="title">{{task.name}}</div>
   </div>
 
   <div class="tab">
     <button class="tab-links left-position" [disabled]="isDisabled" [class.selected]="selectedTask==='generalInfo'" (click)="setSelectedTask('generalInfo')">Información general</button>
     <ng-container *ngIf="task.procedure.uid !== 'Undefined'">
-      <button class="tab-links left-position" [disabled]="isDisabled" [class.selected]="selectedTask==='requirements'" (click)="setSelectedTask('requirements')">Requisitos</button>
+      <button class="tab-links left-position" [disabled]="isDisabled" [class.selected]="selectedTask==='requirements'" (click)="setSelectedTask('requirements')">Requisitos y documentos</button>
     </ng-container>
   </div>
 

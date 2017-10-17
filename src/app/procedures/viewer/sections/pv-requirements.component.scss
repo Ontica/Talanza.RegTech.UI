@@ -1,18 +1,14 @@
 @import "../../../../styles/form";
 @import "../../../../styles/grid";
-.title {
+.sub-header {
+  color: $form-title-color;
+  font-size: 9pt;
   padding-top: 12pt;
-  padding-bottom: 4pt;
-  font-size: 10pt;
+  padding-bottom: 2pt;
   font-weight: 600;
   width: 90%;
   margin-left: 15pt;
   margin-top: 0pt;
-}
-
-.title-text {
-  color: $form-title-color;
-  border-bottom: $form-title-border;
 }
 
 table.grid {

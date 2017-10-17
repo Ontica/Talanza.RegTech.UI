@@ -62,13 +62,13 @@ export class PERequirementsComponent {
   private onAttach(): void {
     const msg = "Por el momento no es posible adjuntar archivos.";                
 
-    alert(msg);
+    // alert(msg);
   }
 
   private onAssign(): void {
     const msg = "Por el momento no es posible asignar tareas";                
     
-    alert(msg);
+    // alert(msg);
   }
 
 }

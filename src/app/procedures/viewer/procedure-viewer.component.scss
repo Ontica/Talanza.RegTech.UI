@@ -8,19 +8,28 @@
 
 .editor-container {
   height: calc(100vh - 160px);
-  width: 720px;
+  width: 800px;
 }
 
 .form-frame {
-  height: calc(100% - 130px);
+  height: calc(100% - 140px);
   overflow-y: scroll;
   overflow-x: hidden;
-  max-width: 600pt;
+  max-width: 800px;
+  margin-left: 20px;
 }
 
 .title {
   color: #3a3a3a;
   font-size: 10pt;
   font-weight: 600;
-  padding: 10pt;
+  padding: 6pt;
+  min-height: 30pt;
+  max-height: 48pt;
+  width: 80%;
+}
+
+.tab {
+  margin-left: 20px;
+  width: 760px;
 }
