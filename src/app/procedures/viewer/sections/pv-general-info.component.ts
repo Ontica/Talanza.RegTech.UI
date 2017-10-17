@@ -62,7 +62,7 @@ export class PVGeneralInfoComponent implements OnInit {
 
   private loadProcedure(): void {
      this.procedureService.getProcedure(this.procedureUID).then((procedure) => {
-       console.log(procedure);
+      
      this.procedure = procedure;
     });
   }
