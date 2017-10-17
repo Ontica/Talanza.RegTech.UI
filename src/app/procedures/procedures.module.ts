@@ -43,7 +43,8 @@ import { ProceduresRoutingModule } from './procedures-routing.module';
 								 GeneralInfoTabComponent, RequirementsTabComponent, FilingConditionsTabComponent,
 								 FilingFeeTabComponent, StatusTabComponent, AddRequirementTabComponent,
 								 AddRequirementListTabComponent, RequirementTabComponent,  RequirementGridComponent,
-								 ProcedureViewerComponent, PVGeneralInfoComponent, PVRequirementsComponent],
-	exports: [ProceduresMainPageComponent, ProcedureViewerComponent]
+								 ProcedureViewerComponent, PVGeneralInfoComponent, PVRequirementsComponent,
+								PERequirementsComponent],
+	exports: [ProceduresMainPageComponent, ProcedureViewerComponent, PERequirementsComponent]
 })
 export class ProceduresModule { }
