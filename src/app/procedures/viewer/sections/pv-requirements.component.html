@@ -13,8 +13,8 @@
       <td style="width:50%">{{condition.name}}</td>
       <td style="width:21%">{{condition.appliesTo}}</td>
       <td style="width:15%">{{condition.copies}}</td>
-      <td style="width:14%"><a *ngIf="inputDocument.sourceUrl !== ''" (click)="openExternalWindow(inputDocument.sourceUrl)">Formato</a><br>
-        <a *ngIf="inputDocument.sampleUrl !== ''" (click)="openExternalWindow(inputDocument.sampleUrl)">Ejemplo</a>
+      <td style="width:14%"><a *ngIf="condition.sourceUrl !== ''" (click)="openExternalWindow(condition.sourceUrl)">Formato</a><br>
+        <a *ngIf="condition.sampleUrl !== ''" (click)="openExternalWindow(condition.sampleUrl)">Ejemplo</a>
       </td>
     </tr>
     <tr *ngIf="conditions.length === 0">
@@ -58,8 +58,8 @@
     <tr *ngFor="let outputDocument of outputDocuments">
       <td style="width:60%">{{outputDocument.name}}</td>
       <td style="width:40%">
-        <a *ngIf="inputDocument.sourceUrl !== ''" (click)="openExternalWindow(inputDocument.sourceUrl)">Formato</a> <br>
-        <a *ngIf="inputDocument.sampleUrl !== ''" (click)="openExternalWindow(inputDocument.sampleUrl)">Ejemplo</a></td>
+        <a *ngIf="outputDocument.sourceUrl !== ''" (click)="openExternalWindow(outputDocument.sourceUrl)">Formato</a> <br>
+        <a *ngIf="outputDocument.sampleUrl !== ''" (click)="openExternalWindow(outputDocument.sampleUrl)">Ejemplo</a></td>
     </tr>
     <tr *ngIf="outputDocuments.length === 0">
       <td colspan="4"><b>No hay documentos expidos por la autoridad</b></td>
