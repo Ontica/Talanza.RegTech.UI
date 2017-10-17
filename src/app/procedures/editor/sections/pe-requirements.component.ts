@@ -37,6 +37,10 @@ export class PERequirementsComponent {
     this.loadOutputDocuments();
    }
 
+  public openExternalWindow(url:string): void {
+    window.open(url, '_blank', 'location=yes,height=570,width=620,scrollbars=yes,status=yes');
+  }
+
   private async loadProcedure() {
     await this.procedureService.getProcedure(this.procedureUID).then((procedure) => {     
       this.procedure = procedure;          

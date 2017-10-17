@@ -3,20 +3,20 @@
   <thead>
     <tr>
       <th style="width:3%"></th>
-      <th style="width:40%">Nombre</th>
+      <th style="width:50%">Nombre</th>
       <th style="width:18%">Aplica a</th>
       <th style="width:15%">Copias</th>
-      <th style="width:24%">Ejemplo</th>
+      <th style="width:14%">Ejemplo</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let condition of conditions">
       <td style="width:3%"><input type="checkbox"></td>
-      <td style="width:40%">{{condition.name}}</td>
+      <td style="width:50%">{{condition.name}}</td>
       <td style="width:18%">{{condition.appliesTo}}</td>
       <td style="width:15%">{{condition.copies}}</td>
-      <td style="width:24%"><a *ngIf="inputDocument.sourceUrl !== ''" (click)="openExternalWindow(inputDocument.sourceUrl)">Formato</a><br>
-        <a *ngIf="inputDocument.sampleUrl !== ''" (click)="openExternalWindow(inputDocument.sampleUrl)">Ejemplo</a>
+      <td style="width:14%"><a *ngIf="condition.sourceUrl !== ''" (click)="openExternalWindow(condition.sourceUrl)">Formato</a><br>
+        <a *ngIf="condition.sampleUrl !== ''" (click)="openExternalWindow(condition.sampleUrl)">Ejemplo</a>
       </td>
     </tr>
     <tr *ngIf="conditions.length === 0">
@@ -29,23 +29,23 @@
   <thead>
     <tr>
       <th style="width:3%"></th>
-      <th style="width:40%">Nombre</th>
-      <th style="width:18%">Aplica a</th>
-      <th style="width:15%">Copias</th>
-      <th style="width:14%">Ejemplo</th>
-      <th style="width:10%">Adjuntar</th>
+      <th style="width:46%">Nombre</th>
+      <th style="width:14%">Aplica a</th>
+      <th style="width:13%">Copias</th>
+      <th style="width:12%">Ejemplo</th>
+      <th style="width:12%">Operaciones</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let inputDocument of inputDocuments">
       <td style="width:3%"><input type="checkbox"></td>
-      <td style="width:40%">{{inputDocument.name}}</td>
-      <td style="width:18%">{{inputDocument.appliesTo}}</td>
-      <td style="width:15%">{{inputDocument.copies}}</td>
-      <td style="width:14%"><a *ngIf="inputDocument.sourceUrl !== ''" (click)="openExternalWindow(inputDocument.sourceUrl)">Formato</a> <br>
+      <td style="width:46%">{{inputDocument.name}}</td>
+      <td style="width:14%">{{inputDocument.appliesTo}}</td>
+      <td style="width:13%">{{inputDocument.copies}}</td>
+      <td style="width:12%"><a *ngIf="inputDocument.sourceUrl !== ''" (click)="openExternalWindow(inputDocument.sourceUrl)">Formato</a> <br>
         <a *ngIf="inputDocument.sampleUrl !== ''" (click)="openExternalWindow(inputDocument.sampleUrl)">Ejemplo</a></td>
-      <td style="width:10%"><button (click)="onAttch()">Adjuntar</button><br>
-        <button (click)="onAssign()">Asignar</button>
+      <td style="width:12%"><button class="btn" (click)="onAttch()"><i class="fa fa-file-text" aria-hidden="true"></i></button>
+        <button class="btn" (click)="onAssign()"><i class="fa fa-user" aria-hidden="true"></i></button>
       </td>
     </tr>
     <tr *ngIf=" inputDocuments.length===0 ">
@@ -66,11 +66,11 @@
   <tbody>
     <tr *ngFor="let outputDocument of outputDocuments ">
       <td style="width:3% "><input type="checkbox "></td>
-      <td style="width:40% ">{{outputDocument.name}}</td>
-      <td style="width:14% ">
-        <a *ngIf="inputDocument.sourceUrl !=='' " (click)="openExternalWindow(inputDocument.sourceUrl) ">Formato</a> <br>
-        <a *ngIf="inputDocument.sampleUrl !=='' " (click)="openExternalWindow(inputDocument.sampleUrl) ">Ejemplo</a></td>
-      <td style="width:10% "><button (click)="onAttch() ">Adjuntar</button><br>
+      <td style="width:50% ">{{outputDocument.name}}</td>
+      <td style="width:27% ">
+        <a *ngIf="outputDocument.sourceUrl !=='' " (click)="openExternalWindow(outputDocument.sourceUrl) ">Formato</a> <br>
+        <a *ngIf="outputDocument.sampleUrl !=='' " (click)="openExternalWindow(outputDocument.sampleUrl) ">Ejemplo</a></td>
+      <td style="width:20% "><button (click)="onAttch() ">Adjuntar</button><br>
         <button (click)="onAssign() ">Asignar</button>
       </td>
     </tr>
