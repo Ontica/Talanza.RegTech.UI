@@ -14,7 +14,6 @@ import { ProcedureService } from '../../services/procedure.service';
 export class PERequirementsComponent {
 
   public procedure: any;
-  public requirementList: Requirement[] = [];
   public conditions: Requirement[] = [];
   public inputDocuments: Requirement[] = [];
   public outputDocuments: Requirement[] = [];
@@ -23,7 +22,7 @@ export class PERequirementsComponent {
   @Input() 
   set procedureUID(procedureUID: string) {
     this._procedureUID = procedureUID;
-    this.loadProcedure();
+    this.loadRequirements();
   }
   get procedureUID(): string {
     return this._procedureUID;
@@ -31,14 +30,29 @@ export class PERequirementsComponent {
 
   constructor(private procedureService: ProcedureService) { }
 
-  private loadProcedure(): void {
-    this.procedureService.getProcedure(this.procedureUID).then((procedure) => {      
-    this.procedure = procedure;
-    this.requirementList = this.procedure.requirements;
-    this.conditions = this.requirementList.filter((x) => x.type === 'Condition');
-    this.inputDocuments = this.requirementList.filter((x) => x.type === 'InputDocument');
-    this.outputDocuments = this.requirementList.filter((x) => x.type === 'OutputDocument');    
-   });
- }  
+  private async loadRequirements(){
+    await this.loadProcedure();
+    this.loadConditions();
+    this.loadInputDocuments();
+    this.loadOutputDocuments();
+   }
+
+  private async loadProcedure() {
+    await this.procedureService.getProcedure(this.procedureUID).then((procedure) => {     
+      this.procedure = procedure;          
+    });
+  }
+  
+  private loadConditions(): void {
+    this.conditions =  this.procedure.requirements.filter((x) => x.type === 'Condition');
+  }
+
+  private loadInputDocuments(): void {
+    this.inputDocuments =  this.procedure.requirements.filter((x) => x.type === 'InputDocument');
+  }
+
+  private loadOutputDocuments(): void {
+    this.outputDocuments =  this.procedure.requirements.filter((x) => x.type === 'OutputDocument');  
+  }  
 
 }
