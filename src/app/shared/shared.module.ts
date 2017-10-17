@@ -15,13 +15,16 @@ import { MainLayoutComponent } from './main-layout/main-layout.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { NoContentComponent } from './no-content/no-content.component';
 
+import { SafeHtmlPipe } from './pipes/safe-html.pipe';
+
+
 /**
  * Do not specify providers for modules that might be imported by a lazy loaded module.
  */
 
 @NgModule({
   imports: [RouterModule, CommonModule],
-  declarations: [MainLayoutComponent, NavbarComponent, NoContentComponent],
-  exports: [MainLayoutComponent, NoContentComponent]
+  declarations: [MainLayoutComponent, NavbarComponent, NoContentComponent, SafeHtmlPipe],
+  exports: [MainLayoutComponent, NoContentComponent, SafeHtmlPipe]
 })
 export class SharedModule { }

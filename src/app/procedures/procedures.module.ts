@@ -31,8 +31,6 @@ import { PVRequirementsComponent } from './viewer/sections/pv-requirements.compo
 
 import { PERequirementsComponent } from './editor/sections/pe-requirements.component';
 
-import { SafeHtmlPipe } from './viewer/sections/pv-general-info.component';
-
 import { ProceduresRoutingModule } from './procedures-routing.module';
 
 /**
@@ -40,14 +38,12 @@ import { ProceduresRoutingModule } from './procedures-routing.module';
  */
 
 @NgModule({
-  imports: [ProceduresRoutingModule, SharedModule, CommonModule, FormsModule],
-  declarations: [ProceduresMainPageComponent, ProcedureFilterComponent, ProcedureEditorComponent,
-                 GeneralInfoTabComponent, RequirementsTabComponent, FilingConditionsTabComponent,
-                 FilingFeeTabComponent, StatusTabComponent, AddRequirementTabComponent,
-                 AddRequirementListTabComponent, RequirementTabComponent,  RequirementGridComponent,
-                 SafeHtmlPipe,
-                 ProcedureViewerComponent, PVGeneralInfoComponent, PVRequirementsComponent,
-                 PERequirementsComponent],
-  exports: [ProceduresMainPageComponent, ProcedureViewerComponent, PERequirementsComponent]
+	imports: [ProceduresRoutingModule, SharedModule, CommonModule, FormsModule],
+	declarations: [ProceduresMainPageComponent, ProcedureFilterComponent, ProcedureEditorComponent,
+								 GeneralInfoTabComponent, RequirementsTabComponent, FilingConditionsTabComponent,
+								 FilingFeeTabComponent, StatusTabComponent, AddRequirementTabComponent,
+								 AddRequirementListTabComponent, RequirementTabComponent,  RequirementGridComponent,
+								 ProcedureViewerComponent, PVGeneralInfoComponent, PVRequirementsComponent],
+	exports: [ProceduresMainPageComponent, ProcedureViewerComponent]
 })
 export class ProceduresModule { }

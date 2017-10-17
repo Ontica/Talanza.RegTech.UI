@@ -1,30 +1,16 @@
-
-import {
-  ChangeDetectorRef, Component, ElementRef,
-  Input, Pipe, PipeTransform, Renderer2, ViewChild, OnInit
-} from '@angular/core';
-
-import { BrowserModule, DomSanitizer, SafeResourceUrl } from '@angular/platform-browser'
+import { Component, ElementRef, Input, ViewChild, OnInit } from '@angular/core';
 
 import { ProcedureService } from '../../services/procedure.service';
 
-@Pipe({ name: 'safeHtml'})
-export class SafeHtmlPipe implements PipeTransform  {
-  constructor(private sanitized: DomSanitizer) {}
-  transform(value) {
-    return this.sanitized.bypassSecurityTrustHtml(value);
-  }
-}
-
 @Component({
-  selector:'pv-general-info',
-  templateUrl:'./pv-general-info.component.html',
-  styleUrls:['./pv-general-info.component.scss'],
-  providers:[ ProcedureService]
+  selector: 'pv-general-info',
+  templateUrl: './pv-general-info.component.html',
+  styleUrls: ['./pv-general-info.component.scss'],
+  providers: [ ProcedureService ]
 })
 
-export class PVGeneralInfoComponent implements OnInit{
-  
+export class PVGeneralInfoComponent implements OnInit {
+
   @ViewChild('modeler') public el: ElementRef;
 
   public isVisibleGeneralInfo = true;
@@ -32,23 +18,23 @@ export class PVGeneralInfoComponent implements OnInit{
   public isPaymentInfoVisible = true;
   public isAuthorityInfoVisible = true;
 
-  public url: SafeResourceUrl;
   public editionMode = false;
 
   public procedure: any;
 
   private _procedureUID: string = "";
+
   @Input()
   set procedureUID(procedureUID: string) {
     this._procedureUID = procedureUID;
     this.loadProcedure();
   }
+
   get procedureUID(): string {
     return this._procedureUID;
   }
 
-  constructor(private procedureService: ProcedureService,
-              private sanitizer: DomSanitizer) { }
+  constructor(private procedureService: ProcedureService) { }
 
   ngOnInit() {
 
@@ -73,12 +59,12 @@ export class PVGeneralInfoComponent implements OnInit{
   public openExternalWindow(url:string): void {
     window.open(url, '_blank', 'location=yes,height=570,width=620,scrollbars=yes,status=yes');
   }
- 
+
   private loadProcedure(): void {
      this.procedureService.getProcedure(this.procedureUID).then((procedure) => {
        console.log(procedure);
      this.procedure = procedure;
     });
-  }  
+  }
 
 }
