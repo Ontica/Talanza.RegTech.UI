@@ -13,7 +13,8 @@
 
  import { ContractsService } from '../services/contracts.service';
 
- import { ContractClause, EmptyContractClause, RelatedProcedure } from '../data-types/contract';
+ import { Contract, ContractClause, ContractClauseRef,
+          EmptyContractClause, RelatedProcedure } from '../data-types/contract';
 
  @Component({
    selector:'selected-clause',
@@ -25,29 +26,19 @@
 
  export class ContractsSelectedClauseComponent {
 
-  public isProcedruesTablesVisible = !false;
-  public relatedProcedures: RelatedProcedure[];
   public procedureUID = "";
   public isVisibleProcedureInfo = false;
-
-  private  _clause: ContractClause = EmptyContractClause();
-  @Input()
-  set clause(clause: ContractClause) {
-    this._clause = clause;
-    this.loadClause();
-    this.setClauseInfoContainerWidth();
-  }
-  get clause(): ContractClause {
-    return this._clause;
-  }
-
   public clauseInfoWidth = '100%';
 
-  constructor(private core: CoreService,
-    private contractService: ContractsService) { }
+  public clause: ContractClause = EmptyContractClause();
 
-  public onDisplayProcedruesList(): void {
-    this.isProcedruesTablesVisible = !this.isProcedruesTablesVisible;
+  constructor(private core: CoreService, private contractService: ContractsService) { }
+
+  @Input()
+  set clauseRef(clauseRef: ContractClauseRef) {
+    if (clauseRef && clauseRef.uid != '') {
+      this.loadClause(clauseRef);
+    }
   }
 
   public onSelectedProcedure(procedureUID: string): void {
@@ -59,16 +50,22 @@
     this.isVisibleProcedureInfo = false;
   }
 
-  private loadClause(): void {
-    this.relatedProcedures = this.clause.relatedProcedures;
+  private loadClause(clauseRef: ContractClauseRef): void {
+    const errMsg = 'Ocurrió un problema al intentar leer la cláusula.';
+
+    this.contractService.getClause(clauseRef.contractUID, clauseRef.uid)
+                        .toPromise()
+                        .then((x) => { this.clause = x;
+                                       this.setClauseInfoContainerWidth();
+                                     })
+                        .catch((e) => this.core.http.showAndThrow(e, errMsg));
   }
 
   private setClauseInfoContainerWidth(): void {
-    if (this.relatedProcedures.length === 0) {
+    if (this.clause.relatedProcedures.length === 0) {
       this.clauseInfoWidth = '100%';
     } else {
       this.clauseInfoWidth = '50%';
     }
   }
-
  }

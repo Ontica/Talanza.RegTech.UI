@@ -8,7 +8,7 @@
 
 import { Component, HostListener, OnInit } from '@angular/core';
 
-import { ContractClause } from '../data-types/contract';
+import { ContractClause, ContractClauseRef } from '../data-types/contract';
 
 
 @Component({
@@ -20,48 +20,49 @@ import { ContractClause } from '../data-types/contract';
 export class ContractsMainPageComponent implements OnInit {
 
   public isVisibleLeftPanel = true;
-  
+
   public centerPanelWidth = '80%';
   public leftResizeWidth = 3
   public leftPanelWidth = '';
- 
+
   private isResizeDiv = false;
   private centerPanelPreviousWidth = '';
 
-  private clause: ContractClause;
-  private clauses: ContractClause[] = [];
+  private clausesList: ContractClauseRef[] = [];
+  private clause: ContractClauseRef;
+
   public isSelectedClause = false;
 
   ngOnInit() {
-    this.leftPanelWidth = 'calc(20% - '+ this.leftResizeWidth +'px)';    
+    this.leftPanelWidth = 'calc(20% - '+ this.leftResizeWidth +'px)';
   }
 
   public onResize(event: MouseEvent): void {
     this.isResizeDiv = true;
-   
+
     event.preventDefault();
     event.stopPropagation();
   }
 
-  @HostListener('document:mousemove', ['$event'])
-  onCornerMove(event: MouseEvent) {
+  // @HostListener('document:mousemove', ['$event'])
+  // onCornerMove(event: MouseEvent) {
 
-    if (!this.isResizeDiv) {
-      return;
-    }
+  //   if (!this.isResizeDiv) {
+  //     return;
+  //   }
 
-    this.leftPanelWidth= event.clientX + 'px';
-    this.centerPanelWidth = 'calc(100% - ' + (event.clientX + this.leftResizeWidth) + 'px)';  
-  }
+  //   this.leftPanelWidth= event.clientX + 'px';
+  //   this.centerPanelWidth = 'calc(100% - ' + (event.clientX + this.leftResizeWidth) + 'px)';
+  // }
 
-  @HostListener('document:mouseup', ['$event'])
-  onCornerRelease(event: MouseEvent) {
+  // @HostListener('document:mouseup', ['$event'])
+  // onCornerRelease(event: MouseEvent) {
 
-    if (this.isResizeDiv) {
-      this.isResizeDiv = false;
-    }
+  //   if (this.isResizeDiv) {
+  //     this.isResizeDiv = false;
+  //   }
 
-  }
+  // }
 
   public onHideLeftPanel(): void {
     this.isVisibleLeftPanel = !this.isVisibleLeftPanel;
@@ -71,17 +72,18 @@ export class ContractsMainPageComponent implements OnInit {
       this.centerPanelWidth = 'calc(100% - '+ this.leftResizeWidth +'px)';
     } else {
       this.centerPanelWidth = this.centerPanelPreviousWidth;
-    }   
+    }
 
   }
 
-  public onSelectedClause(selectedClause: ContractClause ): void {
-    this.isSelectedClause = true;   
-    this.clause = selectedClause;  
+  public onSelectedClauseRef(clauseRef: ContractClauseRef): void {
+    this.isSelectedClause = true;
+
+    this.clause = clauseRef;
   }
 
-  public onLoadClauses(clauses: ContractClause[]): void {
-    this.clauses = clauses;
+  public onChangeClausesList(clausesList: ContractClauseRef[]): void {
+    this.clausesList = clausesList;
   }
-  
+
 }

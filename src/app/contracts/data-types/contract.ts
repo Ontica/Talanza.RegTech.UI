@@ -10,7 +10,7 @@ export interface Contract {
   uid: string;
   name: string;
   url: string;
-  clauses?: ContractClause[];
+  clausesList?: ContractClauseRef[];
 }
 
 interface ContractRef {
@@ -19,16 +19,20 @@ interface ContractRef {
   url: string;
 }
 
-export interface ContractClause {
-  uid: string;  
-  contractUID:string;
+export interface ContractClauseRef {
+  uid: string;
+  section: string;
   clauseNo: string;
   title: string;
+  contractUID: string;
+}
+
+export interface ContractClause extends ContractClauseRef {
   text: string;
+  hypertext: string;
   sourcePageNo: number;
   notes: string;
-  status: string;
-  section: string;
+  status: string;  
   relatedProcedures: RelatedProcedure[];
 }
 
@@ -51,17 +55,19 @@ interface ProcedureRef {
 }
 
 export function EmptyContract() {
+
   const empty: Contract = {
     uid: '',
     name: '',
     url: '',
-    clauses: []
+    clausesList: []
   };
 
   return empty;
 }
 
 export function EmptyContractRef() {
+
   const empty: ContractRef = {
     uid: '',
     name: '',
@@ -72,17 +78,19 @@ export function EmptyContractRef() {
 }
 
 export function EmptyContractClause() {
+
   const empty: ContractClause = {
-    uid: '',    
-    contractUID: '',
+    uid: '', 
     clauseNo: '',
     notes: '',
     relatedProcedures: [],
     sourcePageNo: 0,
     status: '',
     text: '',
+    hypertext: '',
     title: '',
-    section:''
+    section: '',
+    contractUID: ''
   };
 
   return empty;

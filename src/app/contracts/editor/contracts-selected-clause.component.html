@@ -7,14 +7,14 @@
     </div>
     <div class="right-panel">
       <div>
-        <table class="grid" *ngIf="relatedProcedures.length !== 0" style='max-width:600pt;'>
+        <table class="grid" *ngIf="clause.relatedProcedures.length !== 0" style='max-width:600pt;'>
           <thead>
             <tr>
               <th>Trámite / Homoclave / Dependencia</th>
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let relatedProcedure of relatedProcedures">
+            <tr *ngFor="let relatedProcedure of clause.relatedProcedures">
               <td>
                 <a (click)="onSelectedProcedure(relatedProcedure.procedure.uid)">{{relatedProcedure.procedure.name}}</a><br>
                 <span *ngIf="relatedProcedure.procedure.code != 'No disponible'">{{relatedProcedure.procedure.code}}<br></span>

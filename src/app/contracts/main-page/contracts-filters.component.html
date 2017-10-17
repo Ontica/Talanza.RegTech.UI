@@ -1,0 +1,27 @@
+<table class="grid-search-table">
+  <tr>
+    <td>Contrato:</td>
+    <td>
+      <select #contract class="select-box" style="width:210px;" (change)="onChangeContract(contract.value)">
+                 <option value="">( Seleccionar un contrato )</option>
+                 <option *ngFor="let contract of contractsList" [value]="contract.uid">{{contract.name}}</option>
+              </select>
+    </td>
+    <td>Sección:</td>
+    <td>
+      <select #section class="select-box" [(ngModel)]="selectedSection" style="width:210px;" (change)="onChangeSection(section.value)">
+        <option value="">( Seleccionar una sección )</option>
+        <option *ngFor="let section of sections" [value]="section">{{section}}</option>
+
+      </select>
+    </td>
+    <td>Buscar:</td>
+    <td>
+      <input style="width:364px;" type="search " class="text-box " [(ngModel)]="keywords" (keyup.enter)="onSearch()">
+      <button class="btn" (click)="onSearch()"><i class="fa fa-search" aria-hidden="true"></i></button>
+    </td>
+    <td>
+
+    </td>
+  </tr>
+</table>
