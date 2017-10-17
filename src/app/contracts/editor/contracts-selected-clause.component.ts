@@ -6,24 +6,25 @@
  *
  */
 
- import { Component, Input } from '@angular/core';
+ import { Component, Input, ViewEncapsulation } from '@angular/core';
 
  import { Assertion } from 'empiria';
  import { CoreService } from '../../core';
- 
+
  import { ContractsService } from '../services/contracts.service';
- 
+
  import { ContractClause, EmptyContractClause, RelatedProcedure } from '../data-types/contract';
-  
+
  @Component({
    selector:'selected-clause',
    templateUrl: './contracts-selected-clause.component.html',
    styleUrls:['./contracts-selected-clause.component.scss'],
-   providers: [ContractsService]
+   providers: [ContractsService],
+   encapsulation: ViewEncapsulation.None,
  })
 
  export class ContractsSelectedClauseComponent {
-  
+
   public isProcedruesTablesVisible = !false;
   public relatedProcedures: RelatedProcedure[];
   public procedureUID = "";
@@ -31,10 +32,10 @@
 
   private  _clause: ContractClause = EmptyContractClause();
   @Input()
-  set clause(clause: ContractClause) {    
-    this._clause = clause;        
-    this.loadClause(); 
-    this.setClauseInfoContainerWidth(); 
+  set clause(clause: ContractClause) {
+    this._clause = clause;
+    this.loadClause();
+    this.setClauseInfoContainerWidth();
   }
   get clause(): ContractClause {
     return this._clause;
@@ -44,14 +45,14 @@
 
   constructor(private core: CoreService,
     private contractService: ContractsService) { }
-  
-  public onDisplayProcedruesList(): void {   
+
+  public onDisplayProcedruesList(): void {
     this.isProcedruesTablesVisible = !this.isProcedruesTablesVisible;
   }
 
   public onSelectedProcedure(procedureUID: string): void {
     this.isVisibleProcedureInfo = true;
-    this.procedureUID = procedureUID;   
+    this.procedureUID = procedureUID;
   }
 
   public onCloseProcedureInfoModal(): void {
@@ -59,7 +60,7 @@
   }
 
   private loadClause(): void {
-    this.relatedProcedures = this.clause.relatedProcedures;    
+    this.relatedProcedures = this.clause.relatedProcedures;
   }
 
   private setClauseInfoContainerWidth(): void {

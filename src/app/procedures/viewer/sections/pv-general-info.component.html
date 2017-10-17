@@ -47,12 +47,14 @@
       <tr>
         <td class='label'>Fundamento legal:</td>
         <td>
-          <div [innerHTML]="procedure.legalInfo.legalBasis | safeHtml "></div>
+          <div [innerHTML]="procedure.hypertext.legalBasis | safeHtml "></div>
         </td>
       </tr>
       <tr>
         <td class='label'>Observaciones:</td>
-        <td>{{procedure.notes}}</td>
+        <td>
+          <div [innerHTML]="procedure.hypertext.notes | safeHtml "></div>
+        </td>
       </tr>
     </tbody>
   </table>
@@ -124,7 +126,9 @@
       </tr>
       <tr>
         <td class='label'>Observaciones sobre<br/>el plazo máximo:</td>
-        <td>{{procedure.filingCondition.maxFilingTermNotes}}</td>
+        <td>
+          <div [innerHTML]="procedure.hypertext.maxFilingTermNotes | safeHtml "></div>
+        </td>
       </tr>
     </tbody>
   </table>
@@ -152,7 +156,9 @@
       </tr>
       <tr>
         <td class='label'>Observaciones sobre<br/>prórrogas:</td>
-        <td>{{procedure.filingCondition.deferralsTermNotes}}</td>
+        <td>
+          <div [innerHTML]="procedure.hypertext.deferralsTermNotes | safeHtml "></div>
+        </td>
       </tr>
       <tr>
     </tbody>

@@ -26,7 +26,7 @@ export class ProcedureViewerComponent {
 
   @Output() public onCloseEvent = new EventEmitter();
 
-  public selectedTask: string = 'generalInfo'; 
+  public selectedTask: string = 'generalInfo';
   public procedure: any;
 
   public constructor(private procedureService: ProcedureService) { }
@@ -36,7 +36,7 @@ export class ProcedureViewerComponent {
   }
 
   public setSelectedTask(selectedTask: string): void {
-    this.selectedTask = selectedTask;  
+    this.selectedTask = selectedTask;
   }
 
   public onCloseTaskEditor(): void {
@@ -45,7 +45,7 @@ export class ProcedureViewerComponent {
 
   private loadProcedure(): void {
     const errMsg = 'Ocurrió un problema al intentar guardar.';
-    
+
     this.procedureService.getProcedure(this.procedureUID)
                          .then((procedure) => this.procedure = procedure)
                          .catch((e) => this.exceptionHandler(e,errMsg));

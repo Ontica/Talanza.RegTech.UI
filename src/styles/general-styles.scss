@@ -174,3 +174,8 @@ button:disabled {
 .main-icon a:hover {
   color: $selected-item-text-color;
 }
+
+.term-definition {
+  border-bottom: 1px dashed $blue;
+  cursor: pointer;
+}

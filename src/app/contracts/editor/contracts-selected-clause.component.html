@@ -2,8 +2,7 @@
   <div class="clause-title"> &nbsp; &nbsp;{{clause.clauseNo}} {{clause.title}}</div>
   <div class="main-container">
     <div class="left-panel" [style.width]="clauseInfoWidth">
-      <div class="clause-definition">
-        {{clause.text}}
+      <div class="clause-definition" [innerHTML]="clause.hypertext | safeHtml ">
       </div>
     </div>
     <div class="right-panel">
