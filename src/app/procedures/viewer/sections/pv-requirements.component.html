@@ -19,13 +19,13 @@
 <br><br>
 <table class="table">
   <tr>
-    <th style="width:60%">Documentos a entregar</th>
-    <th style="width:20%">Aplica a</th>
-    <th style="width:15%">Entregar</th>
+    <td style="width:60%">Documentos a entregar</td>
+    <td style="width:20%">Aplica a</td>
+    <td style="width:15%">Entregar</td>
   </tr>
   <tr *ngFor="let inputDocument of inputDocuments">
     <td>{{inputDocument.name}}<br>
-      <a *ngIf="inputDocument.sourceUrl !== ''" (click)="openExternalWindow(inputDocument.sourceUrl)"><u>Obtener Formato</u></a> <br>
+      <a *ngIf="inputDocument.sourceUrl !== ''" (click)="openExternalWindow(inputDocument.sourceUrl)"><br><u>Obtener Formato</u></a> <br>
       <a *ngIf="inputDocument.sampleUrl !== ''" (click)="openExternalWindow(inputDocument.sampleUrl)"><u>Ejemplo</u></a>
     </td>
     <td>{{inputDocument.appliesTo}}</td>
@@ -38,7 +38,7 @@
 <br><br>
 <table class="table">
   <tr>
-    <th style="width:95%">Documentos que expide la dependencia</th>
+    <td style="width:95%">Documentos que expide la dependencia</td>
   </tr>
   <tr *ngFor="let outputDocument of outputDocuments">
     <td>{{outputDocument.name}}<br>

@@ -29,27 +29,27 @@ export class ActivityListGridComponent {
 
   private _project: ProjectRef;
   @Input()
-   set project(project: ProjectRef) {     
-     this._project = project;        
+   set project(project: ProjectRef) {
+     this._project = project;
      this.refreshData();
-   
+
    }
    get project(): ProjectRef {
     return this._project;
    }
 
    private _refresh: boolean;
-   @Input() 
+   @Input()
     set refresh(refresh: boolean) {
       if (refresh) {
         this.refreshData();
-      }      
+      }
       this._refresh = refresh;
     }
-    
+
 
   constructor (private activitiyService: ActivityService) { }
-  
+
   public onCloseTaskEditorWindow(): void {
     this.isTaskEditorVisible = false;
     this.refreshData();
@@ -64,7 +64,7 @@ export class ActivityListGridComponent {
     this.selectedTask = selectedTask;
     this.isTaskEditorVisible = true;
   }
-  
+
   public setSummaryCSSClass(level: number) : string {
     switch (level) {
       case -1:
@@ -85,27 +85,27 @@ export class ActivityListGridComponent {
 
   }
 
-  public onShowProcedureInfo(procedureUID: string): void {      
+  public onShowProcedureInfo(procedureUID: string): void {
     this.procedureUID = procedureUID;
-    this.isVisibleProcedureInfo = true;  
+    this.isVisibleProcedureInfo = true;
   }
 
   public onCloseProcedureInfoWindow(): void {
     this.isVisibleProcedureInfo = false;
   }
 
-  public expandOrCollapse(parentUID: string): void {      
-   let index = this.taskList.findIndex((e) => e.parent.uid === parentUID) - 1;   
-  
-   if (this.taskList[index].visible === 'collapse') {     
-    this.taskList[index].visible = 'expand';   
+  public expandOrCollapse(parentUID: string): void {
+   let index = this.taskList.findIndex((e) => e.parent.uid === parentUID) - 1;
+
+   if (this.taskList[index].visible === 'collapse') {
+    this.taskList[index].visible = 'expand';
     this.changeExpandOrCollapseIcon('visible');
     this.changeVisibility(parentUID, 'visible')
    } else {
-    this.taskList[index].visible = 'collapse';    
+    this.taskList[index].visible = 'collapse';
     this.changeExpandOrCollapseIcon('collapse');
     this.changeVisibility(parentUID, 'none');
-   }  
+   }
 
   }
 
@@ -118,12 +118,12 @@ export class ActivityListGridComponent {
   }
 
   private changeVisibility(parentUID, visibibility: string): void {
-    this.taskList.forEach((e)=>{ 
+    this.taskList.forEach((e)=>{
       if (e.parent.uid === parentUID) {
-        if (e.type === 'ObjectType.ProjectObject.Summary') {                    
-          this.changeVisibility(e.uid, visibibility);               
-        } 
-        e.visible = visibibility;          
+        if (e.type === 'ObjectType.ProjectObject.Summary') {
+          this.changeVisibility(e.uid, visibibility);
+        }
+        e.visible = visibibility;
       }
     });
   }
@@ -135,8 +135,8 @@ export class ActivityListGridComponent {
   private refreshData() {
     this.activitiyService.getActivities(this.project.uid)
      .then((data) => {
-       this.taskList = data; 
-       this.taskList.forEach(function(e) { if (e.type ==='ObjectType.ProjectObject.Summary'){ e.visible = 'expand'} else {e.visible ='visible'} });         
+       this.taskList = data;
+       this.taskList.forEach(function(e) { if (e.type ==='ObjectType.ProjectObject.Summary'){ e.visible = 'expand'} else {e.visible ='visible'} });
      });
   }
 

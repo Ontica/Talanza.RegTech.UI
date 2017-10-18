@@ -31,7 +31,7 @@
   <tr *ngFor="let inputDocument of inputDocuments">
     <td><input type="checkbox"></td>
     <td>{{inputDocument.name}}<br>
-      <a *ngIf="inputDocument.sourceUrl !== ''" (click)="openExternalWindow(inputDocument.sourceUrl)"><u>Obtener formato</u></a> &nbsp; &nbsp;
+      <a *ngIf="inputDocument.sourceUrl !== ''" (click)="openExternalWindow(inputDocument.sourceUrl)"><br><u>Obtener formato</u></a> &nbsp; &nbsp;
       <a *ngIf="inputDocument.sampleUrl !== ''" (click)="openExternalWindow(inputDocument.sampleUrl)"><u>Ejemplo</u></a>
     </td>
     <td>{{inputDocument.appliesTo}}</td>
