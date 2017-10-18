@@ -136,7 +136,7 @@ export class ActivityListGridComponent {
     this.activitiyService.getActivities(this.project.uid)
      .then((data) => {
        this.taskList = data;
-       this.taskList.forEach(function(e) { if (e.type ==='ObjectType.ProjectObject.Summary'){ e.visible = 'expand'} else {e.visible ='visible'} });
+       this.taskList.forEach(function(e) { if (e.type ==='ObjectType.ProjectObject.Summary'){ e.visible = 'collapse'} else {e.visible ='none'} });
      });
   }
 
