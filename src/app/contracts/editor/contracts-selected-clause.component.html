@@ -2,24 +2,23 @@
   <div class="clause-title"> &nbsp; &nbsp;{{clause.clauseNo}} {{clause.title}}</div>
   <div class="main-container">
     <div class="left-panel" [style.width]="clauseInfoWidth">
-      <div class="clause-definition">
-        {{clause.text}}
+      <div class="clause-definition" [innerHTML]="clause.hypertext | safeHtml ">
       </div>
     </div>
     <div class="right-panel">
       <div>
-        <table class="grid" *ngIf="relatedProcedures.length !== 0" style='max-width:600pt;'>
+        <table class="grid" *ngIf="clause.relatedProcedures.length !== 0" style='max-width:600pt;'>
           <thead>
             <tr>
-              <th>Trámite / Homoclave / Dependencia </th>
+              <th>Trámite / Homoclave / Dependencia</th>
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let relatedProcedure of relatedProcedures">
+            <tr *ngFor="let relatedProcedure of clause.relatedProcedures">
               <td>
                 <a (click)="onSelectedProcedure(relatedProcedure.procedure.uid)">{{relatedProcedure.procedure.name}}</a><br>
-                <u>{{relatedProcedure.procedure.code}}</u> <br>
-                <strong>{{relatedProcedure.procedure.entity}}</strong>
+                <span *ngIf="relatedProcedure.procedure.code != 'No disponible'">{{relatedProcedure.procedure.code}}<br></span>
+                <span>{{relatedProcedure.procedure.entity}}</span>
               </td>
             </tr>
           </tbody>
@@ -29,6 +28,6 @@
     </div>
   </div>
   <div class="procedure-info" *ngIf="isVisibleProcedureInfo">
-    <selected-procedure [procedureUID]="procedureUID" (onCloseEvent)="onCloseProcedureInfoModal()"></selected-procedure>
+    <procedure-viewer [procedureUID]="procedureUID" (onCloseEvent)="onCloseProcedureInfoModal()"></procedure-viewer>
   </div>
 </div>

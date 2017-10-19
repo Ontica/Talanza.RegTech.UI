@@ -1,0 +1,16 @@
+<div class="editor-container editor-container-style">
+  <div class="header">
+    <div class="close-button right-position" (click)="onClose()">&times;</div>
+    <div class="title">{{procedure.name}} </div>
+  </div>
+
+  <div class="tab">
+    <button class="tab-links left-position" [disabled]="isDisabled" [class.selected]="selectedTask==='generalInfo'" (click)="setSelectedTask('generalInfo')">Información general</button>
+    <button class="tab-links left-position" [disabled]="isDisabled" [class.selected]="selectedTask==='requirements'" (click)="setSelectedTask('requirements')">Requisitos</button>
+  </div>
+  <br>
+  <div class="form-frame" [ngSwitch]="selectedTask">
+    <pv-general-info *ngSwitchCase="'generalInfo'" [procedureUID]="procedureUID"></pv-general-info>
+    <pv-requirements *ngSwitchCase="'requirements'" [procedureUID]="procedureUID"></pv-requirements>
+  </div>
+</div>

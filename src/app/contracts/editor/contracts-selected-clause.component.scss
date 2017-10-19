@@ -11,7 +11,7 @@
 .left-panel {
   display: inline-block;
   vertical-align: top;
-  padding-right: 70pt;
+  padding-right: 40pt;
 }
 
 .right-panel {
@@ -26,16 +26,15 @@
   text-align: justify;
   font-size: 11pt;
   max-width: 600pt;
-  //width: 100%;
 }
 
 .procedure-info {
   display: inline-block;
-  width: 80%;
+  width: 90%;
 }
 
 table.grid td:nth-child(1), table.grid th:nth-child(1) {
-  width: 70%;
+  width: 90%;
 }
 
 table.grid tbody tr {

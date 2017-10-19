@@ -2,21 +2,28 @@
 @import "../../../styles/form";
 :host {
   position: relative;
-  top: 160px;
+  top: 120px;
   left: 20%;
 }
 
 .editor-container {
-  height: 700px;
-  width: 760px;
+  height: calc(100vh - 160px);
+  width: 800px;
 }
 
 .form-frame {
   height: calc(100% - 140px);
-  overflow-y: auto;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  max-width: 800px;
+  margin-left: 20px;
 }
 
 .title {
+  color: #3a3a3a;
+  font-size: 10pt;
+  font-weight: 600;
+  padding: 6pt;
   min-height: 30pt;
   max-height: 48pt;
   width: 80%;
@@ -24,5 +31,5 @@
 
 .tab {
   margin-left: 20px;
-  width: 700px;
+  width: 760px;
 }

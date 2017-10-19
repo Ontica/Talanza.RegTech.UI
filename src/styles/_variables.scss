@@ -49,27 +49,32 @@ $secondary-text-color: $white !default;
 $selected-item-text-color: $orange;
 $link-color: $blue;
 //
-//editor-window
+// icons
+//
+$primary-icon-color: SteelBlue;
+$primary-icon-size: 16pt;
+//
+// editor-window
 //
 $editor-window-border: 1px solid #ccc;
 $editor-window-background-color: $light-yellow;
 //
-//tabs
+// tabs
 //
 $tab-border: 1px solid #ccc;
-$tab-backgorund-color: #f1f1f1;
+$tab-background-color: #f1f1f1;
 $tab-hover: #ddd;
 $tab-selected: $orange;
 $tab-font-size: 10px;
 $tab-selected-background-color: $secondary-color;
 //
-//close-button
+// close-button
 //
 $close-button-color: $black;
 $close-button-font-size: 28px;
 $close-button-hover: $black;
 //
-//tab-form
+// tab-form
 //
 $form-color: #6a6a6a;
 $form-title-border: 1px dotted $gray;
@@ -97,7 +102,7 @@ $button-height: 28px;
 $control-font: 8pt Arial, Helvetica;
 $control-small-font: 6pt Arial, Helvetica;
 //
-//grid
+// grid
 //
 $grid-border: none;
 $grid-even-background-color: #fffffd;

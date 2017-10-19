@@ -14,9 +14,11 @@ import { ActivityService } from '../services/activity.service';
 import { EmptyProjectRef, PersonRef, ProjectRef, ResourceRef } from '../data-types/project';
 
 export class Filter {
-  ResponsibleUId: string;
-  ResourceUId: string;
- 
+  contractUID: string;
+  projectUID: string;
+  stage: string;
+  labels: string;
+  responsibleUID: string;
 }
 
 @Component({
@@ -35,7 +37,7 @@ export class ProjectsMainPageComponent implements OnInit {
   public ganttConfig = 'ganttWeeks';
   public selectedView = 'tasksList';
   public selectedScale = 'quarters';
-  public resourcesList: ResourceRef[] = [];
+  public labelsList: ResourceRef[] = [];
   public responsiblesList: PersonRef[] = [];
   public orderBy = '';
   public keywords = '';
@@ -48,50 +50,48 @@ export class ProjectsMainPageComponent implements OnInit {
 
   public ngOnInit() {
     this.loadProjectList();
-
   }
 
   public onCloseAddActivityEditorWindow(): void {
-    this.isAddActivityEditorWindowVisible = false;    
+    this.isAddActivityEditorWindowVisible = false;
     this.showGanttGraph();
     this.isRefreshWorkList = true;
+  }
+
+  public onChangeContractList(contractUID: string): void {
+    this.filter.contractUID = contractUID;
   }
 
   public onChangeProjectList(projectUID: string): void {
     if (projectUID === '') {
       this.selectedProject = EmptyProjectRef();
       this.hideGanttGraph();
-      this.resourcesList = [];
+      this.labelsList = [];
       return;
     }
 
     this.selectedProject = this.projectsList.find((x) => x.uid === projectUID);
-    
-    this.showGanttGraph(); 
 
-    this.loadCombos();    
+    this.showGanttGraph();
+
+    this.loadCombos();
   }
 
-  public onClickAddActivity(): void {       
+  public onClickAddActivity(): void {
     if (this.selectedProject.uid === '') {
       alert("Requiero se seleccione el proyecto al cual se le agregará la actividad.");
       return;
     }
     this.hideGanttGraph();
     this.isAddActivityEditorWindowVisible = true;
-    
   }
 
-  public onChangeOrderBy(orderBy: string): void {  
+  public onChangeOrderBy(orderBy: string): void {
     this.orderBy = orderBy;
   }
 
-  public onChangeResource(resourceUID: string): void {
-   if (resourceUID === "") {
-     return;
-   }
-
-   this.filter.ResourceUId = resourceUID;
+  public onChangeLabelsList(labels: string): void {
+    this.filter.labels = labels;
   }
 
   public onChangeResponsible(responsibleUID: string): void {
@@ -99,13 +99,12 @@ export class ProjectsMainPageComponent implements OnInit {
       return;
     }
 
-    this.filter.ResponsibleUId = responsibleUID;
+    this.filter.responsibleUID = responsibleUID;
   }
 
-  public onSearch(): void {   
-     this.search();
+  public onSearch(): void {
+    this.search();
   }
-
 
   private loadProjectList(): void {
     const errMsg = 'Ocurrió un problema al intentar leer la lista de proyectos.';
@@ -115,18 +114,19 @@ export class ProjectsMainPageComponent implements OnInit {
                        .then((x) => this.projectsList = x)
                        .catch((e) => this.exceptionHandler(e, errMsg));
   }
-  
-  private loadResources(): void {
-    const errMsg = 'Ocurrió un problema al intentar leer la lista de recursos.';
+
+
+  private loadLabelsList(): void {
+    const errMsg = 'Ocurrió un problema al intentar leer la lista de etiquetas.';
 
     this.projectService.getResourcesList(this.selectedProject.uid)
-                        .toPromise()
-                        .then((x) => this.resourcesList = x)
-                        .catch((e) => this.exceptionHandler(e, errMsg));
+                       .toPromise()
+                       .then((x) => this.labelsList = x)
+                       .catch((e) => this.exceptionHandler(e, errMsg));
 
   }
 
-  private loadResponsibles(): void {
+  private loadResponsiblesList(): void {
     const errMsg = 'Ocurrió un problema al intentar leer la lista de responsables.';
 
     this.projectService.getResponsiblesList(this.selectedProject.uid)
@@ -154,8 +154,8 @@ export class ProjectsMainPageComponent implements OnInit {
   }
 
   private loadCombos(): void  {
-    this.loadResources();
-    this.loadResponsibles();
+    this.loadLabelsList();
+    this.loadResponsiblesList();
   }
 
   private exceptionHandler(error: any, defaultMsg: string): void {
@@ -167,6 +167,10 @@ export class ProjectsMainPageComponent implements OnInit {
       errMsg += defaultMsg + '\n\n' + 'Error desconocido.';
     }
     alert(errMsg);
+  }
+
+  private cleanFilter(): void {
+
   }
 
 }

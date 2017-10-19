@@ -1,8 +1,8 @@
 <div class="main-container">
-  <contract-filters (clauses)="onLoadClauses($event)"></contract-filters>
+  <contract-filters (clauses)="onChangeClausesList($event)"></contract-filters>
   <div class="left-panel" *ngIf="isVisibleLeftPanel" [ngStyle]="{'width' : leftPanelWidth }">
     <div class="clauses-container">
-      <contract-clause-selector [clauses]="clauses" (selectedClause)="onSelectedClause($event)"></contract-clause-selector>
+      <contract-clause-selector [clauses]="clausesList" (selectedClause)="onSelectedClauseRef($event)"></contract-clause-selector>
     </div>
   </div>
   <div class="left-resize" *ngIf="!isHideLeftPanel" (mousedown)='onResize($event)' [style.width.px]="leftResizeWidth"></div>
@@ -10,7 +10,7 @@
     <!--<div class="right"><i class="fa fa-arrows-alt full-window-button" aria-hidden="true" (click)="onHideLeftPanel()"></i></div> !-->
     <div class="clause-info-container">
       <div *ngIf="isSelectedClause">
-        <selected-clause [clause]="clause"></selected-clause>
+        <selected-clause [clauseRef]="clause"></selected-clause>
       </div>
     </div>
   </div>

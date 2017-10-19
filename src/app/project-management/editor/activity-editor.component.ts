@@ -12,7 +12,7 @@ import { Component, EventEmitter, HostBinding, Input,
 import { TaskRef } from '../data-types/task';
 
 @Component({
-  selector: 'task-form-editor',
+  selector: 'activity-editor',
   templateUrl: './activity-editor.component.html',
   styleUrls: ['./activity-editor.component.scss'],  
 })
@@ -20,8 +20,6 @@ import { TaskRef } from '../data-types/task';
 export class ActivityEditorComponent {
   @HostBinding('style.display') public display = 'block';
   @HostBinding('style.position') public position = 'absolute';
-
-  public isCloseTaskEditorVisible = false;
 
   private _task: any;
   @Input()
@@ -34,26 +32,28 @@ export class ActivityEditorComponent {
 
   @Output() public onCloseEvent = new EventEmitter();
 
+  public selectedTask: string = 'generalInfo';  
+
   public constructor() { }
- 
+  
+  public setSelectedTask(selectedTask: string): void {
+    this.selectedTask = selectedTask;  
+  }
+
   public cancel(): void {
     this.onClose();
   }
 
   public onClose(): void {
     this.onCloseEvent.emit();
-  }
+  } 
 
-  public onCloseTask(): void {
-    this.isCloseTaskEditorVisible  = true;
-  }
-
-  public onCloseTaskEditorIsClosed(): void {
+  public onCloseTaskEditor(): void {
     this.onClose();
   }
 
-  public onShowCloseTaskEditor(): void {
-    this. isCloseTaskEditorVisible = true;
+  public onShowCloseTaskEditor(): void {  
+   this.selectedTask = 'closeTask';
   }
 
 }

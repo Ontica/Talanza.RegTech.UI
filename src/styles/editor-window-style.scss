@@ -45,16 +45,17 @@
  
  .tab {
    overflow: hidden;
-   border: $tab-border;
-   background-color: $tab-backgorund-color;
+   border-bottom: 2px solid $secondary-color;
+   background-color: $tab-background-color;
+   height: 28pt;
  }
  
  button.tab-links {
-   background-color: $tab-backgorund-color;
-   border: none;
+   background-color: $tab-background-color;
    outline: none;
+   border: 0;
    cursor: pointer;
-   padding: 14px 16px;
+   padding: 10px 16px;
    transition: 0.3s;
    font-size: 8pt;
    font-weight: 500;

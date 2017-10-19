@@ -13,7 +13,7 @@ import { CoreService } from '../../core';
 
 import { ContractsService } from '../services/contracts.service';
 
-import { ContractClause, EmptyContractClause } from '../data-types/contract';
+import { ContractClauseRef, EmptyContractClause } from '../data-types/contract';
 
  @Component({
     selector: 'contract-clause-selector',
@@ -21,33 +21,37 @@ import { ContractClause, EmptyContractClause } from '../data-types/contract';
                 <li *ngFor="let clause of clauses">
                   <a [class.selected]="clause === currentClause" (click)="onClickSelectClause(clause)">{{clause.clauseNo}} {{clause.title}}</a>
                 </li>
-               </ul> `,    
-   styleUrls: ['./contracts-clause.selector.component.scss'],            
+               </ul> `,
+   styleUrls: ['./contracts-clause.selector.component.scss'],
     providers: [ContractsService]
 })
 
 export class ContractsClauseSelectorComponent {
 
-  private _clauses: ContractClause[] = [];
-  @Input() 
-  set clauses(clauses: ContractClause[]) {
+  private _clauses: ContractClauseRef[] = [];
+
+  @Input()
+  set clauses(clauses: ContractClauseRef[]) {
     this._clauses = clauses;
     this.emitSelectedClause(EmptyContractClause());
   }
-  get clauses(): ContractClause[] {
+
+  get clauses(): ContractClauseRef[] {
     return this._clauses;
   }
- 
-  @Output() selectedClause = new EventEmitter<ContractClause>();
- 
-  constructor(private core: CoreService,
-    private contractService: ContractsService) { }
- 
-  public onClickSelectClause(selectedClause: ContractClause): void {         
-    this.selectedClause.emit(selectedClause);
-  } 
 
-  private emitSelectedClause(selectedClause: ContractClause): void {
+  @Output() selectedClause = new EventEmitter<ContractClauseRef>();
+
+  public currentClause: ContractClauseRef;
+
+  constructor(private core: CoreService, private contractService: ContractsService) { }
+
+  public onClickSelectClause(selectedClause: ContractClauseRef): void {
+    this.currentClause = selectedClause;
+    this.selectedClause.emit(selectedClause);
+  }
+
+  private emitSelectedClause(selectedClause: ContractClauseRef): void {
     this.selectedClause.emit(selectedClause);
   }
 

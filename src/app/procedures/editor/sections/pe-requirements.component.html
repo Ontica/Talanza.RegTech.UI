@@ -1,0 +1,69 @@
+<br>
+<table class="table">
+  <tr>
+    <td style="width:3%"></td>
+    <td style="width:60%">Requisitos del trámite</td>
+    <td style="width:18%">Aplica a</td>
+    <td style="width:15%">Presentar</td>
+  </tr>
+  <tr *ngFor="let condition of conditions">
+    <td><input type="checkbox"></td>
+    <td>
+      {{condition.name}}<br>
+      <a *ngIf="condition.sampleUrl !== ''" (click)="openExternalWindow(condition.sampleUrl)">Ejemplo</a>
+    </td>
+    <td>{{condition.appliesTo}}</td>
+    <td>{{condition.copies}}</td>
+  </tr>
+  <tr *ngIf="conditions.length === 0">
+    <td colspan="5"><i>El trámite no tiene requisitos.</i></td>
+  </tr>
+</table>
+<br><br>
+<table class="table">
+  <tr>
+    <td style="width:3%"></td>
+    <td style="width:56%">Lista de documentos a entregar</td>
+    <td style="width:14%">Aplica a</td>
+    <td style="width:13%">Entregar</td>
+    <td style="width:12%">Adjuntar / Asignar</td>
+  </tr>
+  <tr *ngFor="let inputDocument of inputDocuments">
+    <td><input type="checkbox"></td>
+    <td>{{inputDocument.name}}<br>
+      <a *ngIf="inputDocument.sourceUrl !== ''" (click)="openExternalWindow(inputDocument.sourceUrl)"><br><u>Obtener formato</u></a> &nbsp; &nbsp;
+      <a *ngIf="inputDocument.sampleUrl !== ''" (click)="openExternalWindow(inputDocument.sampleUrl)"><u>Ejemplo</u></a>
+    </td>
+    <td>{{inputDocument.appliesTo}}</td>
+    <td>{{inputDocument.copies}}</td>
+    <td class="menu-icon">
+      <i class="fa fa-upload" (click)="onAttch()" aria-hidden="true" title="Adjuntar documento"></i> &nbsp; &nbsp;
+      <i class="fa fa-user" (click)="onAssign()" aria-hidden="true" title="Asignar tarea"></i>
+    </td>
+  </tr>
+  <tr *ngIf="inputDocuments.length === 0">
+    <td colspan="5"><i>No se entregan documentos a la autoridad.</i></td>
+  </tr>
+</table>
+<br><br>
+<table class="table">
+  <tr>
+    <td style="width:3%"></td>
+    <td style="width:50%">Documentos que expide la dependencia</td>
+    <td style="width:27%">Ejemplo</td>
+    <td style="width:20%">Adjuntar</td>
+  </tr>
+  <tr *ngFor="let outputDocument of outputDocuments">
+    <td><input type="checkbox "></td>
+    <td>{{outputDocument.name}}</td>
+    <td>
+      <a *ngIf="outputDocument.sourceUrl !=='' " (click)="openExternalWindow(outputDocument.sourceUrl) ">Formato</a> <br>
+      <a *ngIf="outputDocument.sampleUrl !=='' " (click)="openExternalWindow(outputDocument.sampleUrl) ">Ejemplo</a></td>
+    <td class="menu-icon">
+      <i class="fa fa-upload" (click)="onAttch()" aria-hidden="true" title="Adjuntar documento"></i>
+    </td>
+  </tr>
+  <tr *ngIf="outputDocuments.length===0 ">
+    <td colspan="4"><i>La dependencia no expide documentos en este trámite.</i></td>
+  </tr>
+</table>

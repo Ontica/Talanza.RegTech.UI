@@ -1,0 +1,57 @@
+<table class="table">
+  <tr>
+    <td style="width:60%">Requisitos del trámite</td>
+    <td style="width:20%">Aplica a</td>
+    <td style="width:15%">Presentar</td>
+  </tr>
+  <tr *ngFor="let condition of conditions">
+    <td>{{condition.name}}<br>
+      <a *ngIf="condition.sourceUrl !== ''" (click)="openExternalWindow(condition.sourceUrl)"><u>Obtener Formato</u></a><br>
+      <a *ngIf="condition.sampleUrl !== ''" (click)="openExternalWindow(condition.sampleUrl)"><u>Ejemplo</u></a>
+    </td>
+    <td>{{condition.appliesTo}}</td>
+    <td>{{condition.copies}}</td>
+  </tr>
+  <tr *ngIf="conditions.length === 0">
+    <td colspan="3"><i>No aplica</i></td>
+  </tr>
+</table>
+<br><br>
+<table class="table">
+  <tr>
+    <td style="width:60%">Documentos a entregar</td>
+    <td style="width:20%">Aplica a</td>
+    <td style="width:15%">Entregar</td>
+  </tr>
+  <tr *ngFor="let inputDocument of inputDocuments">
+    <td>{{inputDocument.name}}<br>
+      <a *ngIf="inputDocument.sourceUrl !== ''" (click)="openExternalWindow(inputDocument.sourceUrl)"><br><u>Obtener Formato</u></a> <br>
+      <a *ngIf="inputDocument.sampleUrl !== ''" (click)="openExternalWindow(inputDocument.sampleUrl)"><u>Ejemplo</u></a>
+    </td>
+    <td>{{inputDocument.appliesTo}}</td>
+    <td>{{inputDocument.copies}}</td>
+  </tr>
+  <tr *ngIf="inputDocuments.length === 0">
+    <td colspan="3"><i>No aplica</i></td>
+  </tr>
+</table>
+<br><br>
+<table class="table">
+  <tr>
+    <td style="width:95%">Documentos que expide la dependencia</td>
+  </tr>
+  <tr *ngFor="let outputDocument of outputDocuments">
+    <td>{{outputDocument.name}}<br>
+      <a *ngIf="outputDocument.sourceUrl !== ''" (click)="openExternalWindow(outputDocument.sourceUrl)">Formato</a> <br>
+      <a *ngIf="outputDocument.sampleUrl !== ''" (click)="openExternalWindow(outputDocument.sampleUrl)">Ejemplo</a>
+    </td>
+  </tr>
+  <tr *ngIf="outputDocuments.length === 0">
+    <td><i>No aplica</i></td>
+  </tr>
+</table>
+<div>
+  <br>
+  <br>
+  <br>
+</div>

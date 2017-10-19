@@ -7,11 +7,11 @@
 }
 
 .editor-container {
-  height: 600px; //750px;
+  height: calc(100% - 140px);
   width: 720px;
 }
 
 .form-frame {
-  height: 430px;
+  height: calc(100% - 140px);
   overflow-y: auto;
 }

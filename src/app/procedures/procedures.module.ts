@@ -10,7 +10,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule }   from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
-import { ContractsModule } from '../contracts/contracts.module';
 
 import { ProcedureFilterComponent } from './main-page/procedures-filter.component';
 import { ProceduresMainPageComponent } from './main-page/procedures-main-page.component';
@@ -26,6 +25,12 @@ import { AddRequirementListTabComponent } from './editor/tabs/add-requirement-li
 import { RequirementTabComponent } from './editor/tabs/requirement-tab.component';
 import { RequirementGridComponent } from './editor/requirement-grid.component';
 
+import { ProcedureViewerComponent } from './viewer/procedure-viewer.component';
+import { PVGeneralInfoComponent } from './viewer/sections/pv-general-info.component';
+import { PVRequirementsComponent } from './viewer/sections/pv-requirements.component';
+
+import { PERequirementsComponent } from './editor/sections/pe-requirements.component';
+
 import { ProceduresRoutingModule } from './procedures-routing.module';
 
 /**
@@ -33,11 +38,13 @@ import { ProceduresRoutingModule } from './procedures-routing.module';
  */
 
 @NgModule({
-  imports: [ProceduresRoutingModule, SharedModule, CommonModule, FormsModule, ContractsModule],
-  declarations: [ProceduresMainPageComponent, ProcedureFilterComponent, ProcedureEditorComponent,
-                 GeneralInfoTabComponent, RequirementsTabComponent, FilingConditionsTabComponent,
-                 FilingFeeTabComponent, StatusTabComponent, AddRequirementTabComponent,
-                 AddRequirementListTabComponent, RequirementTabComponent,  RequirementGridComponent],
-  exports: [ProceduresMainPageComponent]
+	imports: [ProceduresRoutingModule, SharedModule, CommonModule, FormsModule],
+	declarations: [ProceduresMainPageComponent, ProcedureFilterComponent, ProcedureEditorComponent,
+								 GeneralInfoTabComponent, RequirementsTabComponent, FilingConditionsTabComponent,
+								 FilingFeeTabComponent, StatusTabComponent, AddRequirementTabComponent,
+								 AddRequirementListTabComponent, RequirementTabComponent,  RequirementGridComponent,
+								 ProcedureViewerComponent, PVGeneralInfoComponent, PVRequirementsComponent,
+								PERequirementsComponent],
+	exports: [ProceduresMainPageComponent, ProcedureViewerComponent, PERequirementsComponent]
 })
 export class ProceduresModule { }

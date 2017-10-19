@@ -1,0 +1,33 @@
+@import "general-styles";
+.table {
+  border: $grid-border;
+  border-collapse: collapse;
+  margin: 3px 10px 3px 3px;
+  width: 100%;
+  text-align: left;
+  min-width: 510px;
+}
+
+table.table tr td {
+  vertical-align: top;
+}
+
+table.table tr:nth-child(2n+2) {
+  background-color: $grid-odd-background-color;
+}
+
+table.table tr:nth-child(2n+3) {
+  background-color: $grid-even-background-color;
+}
+
+table.table tr:first-child {
+  background-color: $text-title;
+  color: white;
+}
+
+table.table tr:first-child td {
+  font-weight: normal;
+  font-size: 9pt;
+  color: white;
+  padding: 4pt;
+}

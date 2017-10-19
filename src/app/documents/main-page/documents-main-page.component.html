@@ -2,441 +2,60 @@
   <tr>
     <td>Tipo de documento:</td>
     <td>
-      <select #contract class="select-box" style="width:210px;" (change)="onChangeContract(contract.value)">
+      <select class="select-box" style="width:210px;" (change)="onChangeFilter()" [(ngModel)]="filter.type">
          <option value="">( Todos )</option>
-         <option value="Leyes">Leyes</option>
-         <option value="Reglamentos">Reglamentos</option>
-         <option value="Lineamientos">Lineamientos</option>
-         <option value="DAGs">DAGs</option>
-         <option value="Acuerdos">Acuerdos</option>
-         <option value="Formatos">Formatos</option>
+         <option value="Acuerdo">Acuerdos</option>
+         <option value="DACG">DACGs</option>
+         <option value="DT">Disposiciones técnicas</option>
+         <option value="Formato">Formatos</option>
+         <option value="Ley">Leyes</option>
+         <option value="Lineamiento">Lineamientos</option>
+         <option value="Reglamento">Reglamentos</option>
       </select>
     </td>
     <td>Buscar:</td>
     <td>
-      <input style="width:364px;" type="search " class="text-box ">
+      <input type="search" class="text-box" style="width:364px;" (keyup.enter)="onChangeFilter()" [(ngModel)]="filter.keywords">
     </td>
     <td>
-      <button class="btn" style="width:55px;" (click)="search()">Buscar</button>
+      <button class="btn" style="width:55px;" (click)="onChangeFilter()">Buscar</button>
     </td>
+    <td><a (click)="onResetFilter()">Limpiar filtros</a></td>
   </tr>
 </table>
 <table class="grid">
   <thead>
     <tr>
-      <th style="width:30%">Acrónimo</th>
-      <th style="width:10%">Liga</th>
-      <th style="width:60%">Nombre</th>
+      <th style="width:20pt"></th>
+      <th style="width:40%;min-width:350pt">Nombre</th>
+      <th style="width:140pt">Acrónimo / Tipo</th>
+      <th style="width:50%"></th>
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <td style="width:30%">DACSASEARESEEH</td>
-      <td style="width:10%">
-        <a (click)="openExternalWindow('https://www.dropbox.com/s/ni4tj48bpvodlx9/DAGS%20incidentes%20y%20accidentes.pdf?dl=0')">
-          Ver
-        </a>
+    <tr *ngFor="let document of documentsList">
+      <td class="main-icon">
+        <a (click)="openExternalWindow(document.url)"><i class="fa fa-book" aria-hidden="true"></i></a>
       </td>
-      <td style="width:60%">Disposiciones Administrativas de carácter general que establecen los Lineamientos en materia de Seguridad Industrial, Seguridad Operativa y Protección al Medio Ambiente para realizar las actividades de Reconocimiento y Exploración Superficial, Exploración
-        y Extracción de Hidrocarburos</td>
-    </tr>
-    <tr>
-      <td style="width:30%">DACG Incidentes y Accidentes
+      <td style="width:40%;min-width:350pt;padding-right:50pt">
+        <a (click)="openExternalWindow(document.url)">{{document.name}}</a>
       </td>
-      <td style="width:10%">
-        <a (click)="openExternalWindow('https://www.dropbox.com/s/f4m8m5cp14yvjc7/Dags%20reconocimiento%20y%20exploraci%C3%B3n%20superficial.pdf?dl=0')">
-             Ver</a></td>
-      <td style="width:60%">DISPOSICIONES administrativas decarácter general que establecen los Lineamientos para Informar la ocurrencia de incidentes y accidentes a la Agencia Nacional de Seguridad Industrial y de Protección al Medio Ambiente del Sector Hidrocarburos</td>
-    </tr>
-    <tr>
-      <td style="width:30%">DACS Permisos petróleo y gas
+      <td style="width:140pt">
+        {{document.code}}<br> {{document.type}}
       </td>
-      <td style="width:10%">
-        <a (click)="openExternalWindow('https://www.dropbox.com/s/9239kb7sewh1fb0/DACS%20Permisos%20Petroleo%20y%20Gas.pdf?dl=0')">
-          Ver
-        </a></td>
-      <td style="width:60%">Disposiciones Administrativas de carácter general que establecen los formatos y especificaciones de los requisitos a que se refieren los artículos 50, 51 y 121 de la Ley de Hidrocarburos para el otorgamiento de permisos en materia de tratamiento
-        y refinación de petróleo, así como de procesamiento de gas natural</td>
-    </tr>
-    <tr>
-      <td style="width:30%">DSASISOPAH</td>
-      <td style="width:10%">
-        <a (click)="openExternalWindow('https://www.dropbox.com/s/f61fwmbjilakici/Lineamientos%20Sistema%20de%20Administraci%C3%B3n.pdf?dl=0')">
-          Ver
-        </a></td>
-      <td style="width:60%">Disposiciones Administrativas de carácter general que establecen los Lineamientos para la conformación, implementación y autorización de los Sistemas de Administración de Seguridad Industrial, Seguridad Operativa y Protección al Medio Ambiente aplicables
-        a las actividades del sector hidrocarburos que se indican</td>
-    </tr>
-    <tr>
-      <td style="width:30%">DTAGNA</td>
-      <td style="width:10%">
-        <a (click)="openExternalWindow('https://www.dropbox.com/s/j1xlrrs4wncq88w/Disposiciones%20T%C3%A9cnicas%20Aprovechamiento%20GNA.pdf?dl=0')">
-          Ver
-        </a></td>
-      <td style="width:60%">Disposiciones Técnicas para el aprovechamiento del gas natural asociado, en la exploración y extracción de hidrocarburos</td>
-    </tr>
-    <tr>
-      <td style="width:30%">LAN</td>
-      <td style="width:10%">
-        <a (click)="openExternalWindow('http://www.diputados.gob.mx/LeyesBiblio/pdf/16_240316.pdf')">
-          Ver
-        </a></td>
-      <td style="width:60%">Ley de Aguas Nacionales</td>
-    </tr>
-    <tr>
-      <td style="width:30%">LASEA</td>
-      <td style="width:10%">
-        <a (click)="openExternalWindow('http://www.diputados.gob.mx/LeyesBiblio/pdf/LANSI_110814.pdf')">
-          Ver
-        </a></td>
-      <td style="width:60%">Ley de la Agencia Nacional de Seguridad Industrial y de Protección al Medio Ambiente del Sector Hidrocarburos</td>
-    </tr>
-    <tr>
-      <td style="width:30%">LFD</td>
-      <td style="width:10%">
-        <a (click)="openExternalWindow('http://www.diputados.gob.mx/LeyesBiblio/ref/lfd.htm')">
-          Ver
-        </a></td>
-      <td style="width:60%">Ley Federal de Derechos</td>
-    </tr>
-    <tr>
-      <td style="width:30%">LFPA</td>
-      <td style="width:10%">
-        <a (click)="openExternalWindow('http://www.diputados.gob.mx/LeyesBiblio/pdf/112_020517.pdf')">
-          Ver
-        </a></td>
-      <td style="width:60%">Ley Federal de Procedimiento Administrativo</td>
-    </tr>
-    <tr>
-      <td style="width:30%">LGDFS</td>
-      <td style="width:10%">
-        <a (click)="openExternalWindow('http://www.diputados.gob.mx/LeyesBiblio/pdf/259_240117.pdf')">
-          Ver       
-        </a></td>
-      <td style="width:60%">Ley General de Desarrollo Forestal Sustentable</td>
-    </tr>
-    <tr>
-      <td style="width:30%">LGEEPA</td>
-      <td style="width:10%">
-        <a (click)="openExternalWindow('http://www.diputados.gob.mx/LeyesBiblio/pdf/148_240117.pdf')">
-          Ver       
-          </a></td>
-      <td style="width:60%">Ley General del Equilibrio Ecológico y la Protección al Ambiente </td>
-    </tr>
-    <tr>
-      <td style="width:30%">LGPGIR</td>
-      <td style="width:10%">
-        <a (click)="openExternalWindow('http://www.diputados.gob.mx/LeyesBiblio/pdf/263_220515.pdf')">
-          Ver         
-        </a></td>
-      <td style="width:60%">Ley General para la Prevención y Gestión Integral de los Residuos </td>
-    </tr>
-    <tr>
-      <td style="width:30%">LH</td>
-      <td style="width:10%">
-        <a (click)="openExternalWindow('http://www.diputados.gob.mx/LeyesBiblio/pdf/LHidro_151116.pdf')">
-          Ver   
-        </a></td>
-      <td style="width:60%">Ley de Hidrocarburos</td>
-    </tr>
-    <tr>
-      <td style="width:30%">LIF 2016</td>
-      <td style="width:10%">
-        <a (click)="openExternalWindow('http://www.dof.gob.mx/nota_detalle.php?codigo=5415876&fecha=18/11/2015')">
-          Ver        
-        </a></td>
-      <td style="width:60%">Ley de Ingresos de la Federación para el Ejercicio Fiscal 2016</td>
-    </tr>
-    <tr>
-      <td style="width:30%">LIF 2017</td>
-      <td style="width:10%">
-        <a (click)="openExternalWindow('http://www.diputados.gob.mx/LeyesBiblio/pdf/LIF_2017.pdf')">
-          Ver     
-        </a></td>
-      <td style="width:60%">Ley de Ingresos de la Federación para el Ejercicio Fiscal 2017</td>
-    </tr>
-    <tr>
-      <td style="width:30%">LISH</td>
-      <td style="width:10%">
-        <a (click)="openExternalWindow('http://www.diputados.gob.mx/LeyesBiblio/pdf/LIH_060117.pdf')">
-          Ver  
-          </a></td>
-      <td style="width:60%">Ley de Ingresos sobre Hidrocarburos</td>
-    </tr>
-    <tr>
-      <td style="width:30%">LPP</td>
-      <td style="width:10%">
-        <a (click)="openExternalWindow('https://www.dropbox.com/s/suc3cp657fhof11/Lineamientos%20Perforaci%C3%B3n%20Pozos.pdf?dl=0')">
-          Ver
-            </a></td>
-      <td style="width:60%">Lineamientos de Perforación de Pozos</td>
-    </tr>
-    <tr>
-      <td style="width:30%">LPP - Anexo 1</td>
-      <td style="width:10%">
-        <a (click)="openExternalWindow('https://www.dropbox.com/s/uubrmgt5albmwau/Lineamientos%20Perforaci%C3%B3n%20Pozos_Anexo%20I.pdf?dl=0')">
-          Ver
-        </a></td>
-      <td style="width:60%">Lineamientos de Perforación de Pozos</td>
-    </tr>
-    <tr>
-      <td style="width:30%">LPP - Anexo 2</td>
-      <td style="width:10%">
-        <a (click)="openExternalWindow('https://www.dropbox.com/s/n4ja27upnv7ybfd/Lineamientos%20Perforaci%C3%B3n%20Pozos_Anexo%20II.pdf?dl=0')">
-          Ver
-        </a></td>
-      <td style="width:60%">Lineamientos de Perforación de Pozos</td>
-    </tr>
-    <tr>
-      <td style="width:30%">LPP - Anexo 3</td>
-      <td style="width:10%">
-        <a (click)="openExternalWindow('https://www.dropbox.com/s/amc98ewrede99o1/Lineamientos%20Perforaci%C3%B3n%20Pozos_Anexo%20III.pdf?dl=0')">
-          Ver
-        </a></td>
-      <td style="width:60%">Lineamientos de Perforación de Pozos</td>
-    </tr>
-    <tr>
-      <td style="width:30%">LPP - Anexo 4</td>
-      <td style="width:10%">
-        <a (click)="openExternalWindow('https://www.dropbox.com/s/hpjhdoh76fv7kn5/Lineamientos%20Perforaci%C3%B3n%20Pozos_Anexo%20IV.pdf?dl=0')">
-          Ver
-        </a></td>
-      <td style="width:60%">Lineamientos de Perforación de Pozos</td>
-    </tr>
-    <tr>
-      <td style="width:30%">LPP - Anexo 5</td>
-      <td style="width:10%">
-        <a (click)="openExternalWindow('https://www.dropbox.com/s/iw2whsl97oa5qr5/Lineamientos%20Perforaci%C3%B3n%20Pozos_Anexo%20V.pdf?dl=0')">
-          Ver
-        </a></td>
-      <td style="width:60%">Lineamientos de Perforación de Pozos</td>
-    </tr>
-    <tr>
-      <td style="width:30%">LCCRNIRCR</td>
-      <td style="width:10%">
-        <a (click)="openExternalWindow('https://www.dropbox.com/s/pctvmymu8nize4r/Lineamientos%20de%20cuantificaci%C3%B3n%20de%20reservas.pdf?dl=0')">
-          Ver
-        </a>
-      </td>
-      <td style="width:60%">Lineamientos que regulan el procedimiento de cuantificación y certificación de reservas de la Nación y el informe de los recursos contingentes relacionados</td>
-    </tr>
-    <tr>
-      <td style="width:30%">LCCRNIRCR - Anexos 1 y 2</td>
-      <td style="width:10%">
-        <a (click)="openExternalWindow('https://www.dropbox.com/s/7hmzmixk1ggd8yx/Lineamientos%20de%20cuantificaci%C3%B3n%20de%20reservas_Anexos%20I%20y%20II.pdf?dl=0')">
-          Ver
-        </a></td>
-      <td style="width:60%">Lineamientos que regulan el procedimiento de cuantificación y certificación de reservas de la Nación y el informe de los recursos contingentes relacionados, publicados el 13 de agosto de 2015</td>
-    </tr>
-    <tr>
-      <td style="width:30%">Lineamientos de Planes</td>
-      <td style="width:10%">
-        <a (click)="openExternalWindow('https://www.dropbox.com/s/ht7y1g9hv1y7aqs/Lineamientos%20planes%20exploraci%C3%B3n%20y%20desarrollo.pdf?dl=0')">
-          Ver
-        </a></td>
-      <td style="width:60%">Lineamientos que regulan el procedimiento para la presentación, aprobación y supervisión del cumplimiento de los planes de exploración y de desarrollo para la extracción de hidrocarburos , así como sus modificaciones</td>
-    </tr>
-    <tr>
-      <td style="width:30%">Lineamientos de Planes - Anexo 1</td>
-      <td style="width:10%">
-        <a (click)="openExternalWindow('https://www.dropbox.com/s/dzgh2em60dprgz3/Lineamientos%20planes%20exploraci%C3%B3n%20y%20desarrollo_Anexo%20I.pdf?dl=0')">
-          Ver
-          </a></td>
-      <td style="width:60%">LINEAMIENTOS que regulan el procedimiento para la presentación, aprobación y supervisión del cumplimiento de los planes de exploración y de desarrollo para la extracción de hidrocarburos, así como sus modificaciones</td>
-    </tr>
-    <tr>
-      <td style="width:30%">Lineamientos de Planes - Anexo 2</td>
-      <td style="width:10%">
-        <a (click)="openExternalWindow('https://www.dropbox.com/s/jt0ks0m3w2kcr1p/Lineamientos%20planes%20exploraci%C3%B3n%20y%20desarrollo_Anexo%20II.pdf?dl=0')">
-              Ver
-        </a></td>
-      <td style="width:60%">LINEAMIENTOS que regulan el procedimiento para la presentación, aprobación y supervisión del cumplimiento de los planes de exploración y de desarrollo para la extracción de hidrocarburos, así como sus modificaciones</td>
-    </tr>
-    <tr>
-      <td style="width:30%">Lineamientos de Planes - Anexo 3</td>
-      <td style="width:10%">
-        <a (click)="openExternalWindow('https://www.dropbox.com/s/fiyek1r6vk2lt3m/Lineamientos%20planes%20exploraci%C3%B3n%20y%20desarrollo_Anexo%20III.pdf?dl=0')">
-          Ver
-        </a></td>
-      <td style="width:60%">LINEAMIENTOS que regulan el procedimiento para la presentación, aprobación y supervisión del cumplimiento de los planes de exploración y de desarrollo para la extracción de hidrocarburos, así como sus modificaciones</td>
-    </tr>
-    <tr>
-      <td style="width:30%">Lineamientos de Planes - Anexo 4</td>
-      <td style="width:10%">
-        <a (click)="openExternalWindow('https://www.dropbox.com/s/c6ftn4yyzrt1mn8/Lineamientos%20planes%20exploraci%C3%B3n%20y%20desarrollo_Anexo%20IV.pdf?dl=0')">
-          Ver
-        </a></td>
-      <td style="width:60%">LINEAMIENTOS que regulan el procedimiento para la presentación, aprobación y supervisión del cumplimiento de los planes de exploración y de desarrollo para la extracción de hidrocarburos, así como sus modificaciones</td>
-    </tr>
-    <tr>
-      <td style="width:30%">Lineamientos de Planes - Anexo 5</td>
-      <td style="width:10%">
-        <a (click)="openExternalWindow('https://www.dropbox.com/s/n8dn1pxl4ta99ao/Lineamientos%20planes%20exploraci%C3%B3n%20y%20desarrollo_Anexo%20V.pdf?dl=0')">
-          Ver
-        </a></td>
-      <td style="width:60%">LINEAMIENTOS que regulan el procedimiento para la presentación, aprobación y supervisión del cumplimiento de los planes de exploración y de desarrollo para la extracción de hidrocarburos, así como sus modificaciones</td>
-    </tr>
-    <tr>
-      <td style="width:30%">Lineamientos de Planes - Anexo 6</td>
-      <td style="width:10%">
-        <a (click)="openExternalWindow('https://www.dropbox.com/s/jytf7z7185yz2oj/Lineamientos%20planes%20exploraci%C3%B3n%20y%20desarrollo_Anexo%20VI.pdf?dl=0')">
-          Ver
-          </a></td>
-      <td style="width:60%">LINEAMIENTOS que regulan el procedimiento para la presentación, aprobación y supervisión del cumplimiento de los planes de exploración y de desarrollo para la extracción de hidrocarburos, así como sus modificaciones</td>
-    </tr>
-    <tr>
-      <td style="width:30%">Lineamientos de Planes - Anexo 7</td>
-      <td style="width:10%">
-        <a (click)="openExternalWindow('https://www.dropbox.com/s/aj9wc3oigfrpaa0/Lineamientos%20planes%20exploraci%C3%B3n%20y%20desarrollo_Anexo%20VII.pdf?dl=0')">
-          Ver
-        </a></td>
-      <td style="width:60%">LINEAMIENTOS que regulan el procedimiento para la presentación, aprobación y supervisión del cumplimiento de los planes de exploración y de desarrollo para la extracción de hidrocarburos, así como sus modificaciones</td>
-    </tr>
-    <tr>
-      <td style="width:30%">LTMMH</td>
-      <td style="width:10%">
-        <a (click)="openExternalWindow('https://www.dropbox.com/s/33y536y3t7h0q4m/LT%20medici%C3%B3n%20de%20hidrocarburos.pdf?dl=0')">
-          Ver
-        </a></td>
-      <td style="width:60%">Lineamientos técnicos en materia de medición de hidrocarburos</td>
-    </tr>
-    <tr>
-      <td style="width:30%">LUICNIH</td>
-      <td style="width:10%">
-        <a (click)="openExternalWindow('https://www.dropbox.com/s/o2a1ux1avr3b78s/Lineamientos%20para%20el%20uso%20de%20la%20informacion%20CNIH.pdf?dl=0')">
-          Ver
-        </a></td>
-      <td style="width:60%">Lineamientos para el uso de la información contenida en el Centro Nacional de Información de Hidrocarburos.</td>
-    </tr>
-    <tr>
-      <td style="width:30%">RATTLH</td>
-      <td style="width:10%">
-        <a (click)="openExternalWindow('http://www.diputados.gob.mx/LeyesBiblio/regley/Reg_T3_LHidro.pdf')">
-          Ver
-        </a></td>
-      <td style="width:60%">Reglamento de las Actividades a que se refiere el Título Tercero de la Ley de Hidrocarburos</td>
-    </tr>
-    <tr>
-      <td style="width:30%">RIASEA</td>
-      <td style="width:10%">
-        <a (click)="openExternalWindow('http://www.diputados.gob.mx/LeyesBiblio/regla/n408.pdf')">
-          Ver
-        </a></td>
-      <td style="width:60%">Reglamento Interior de la Agencia Nacional de Seguridad Industrial y de Protección al Medio Ambiente del Sector Hidrocarburos</td>
-    </tr>
-    <tr>
-      <td style="width:30%">RLGPGIR</td>
-      <td style="width:10%">
-        <a (click)="openExternalWindow('http://www.diputados.gob.mx/LeyesBiblio/regley/Reg_LGEEPA_MEIA_311014.pdf')">
-          Ver
-        </a></td>
-      <td style="width:60%">Reglamento de la Ley General para la Prevención y Gestión Integral de los Residuos</td>
-    </tr>
-    <tr>
-      <td style="width:30%">RLGEEPA Atmósfera</td>
-      <td style="width:10%">
-        <a (click)="openExternalWindow('http://www.diputados.gob.mx/LeyesBiblio/regley/Reg_LGEEPA_MPCCA_311014.pdf')">Ver</a></td>
-      <td style="width:60%">Ley General del Equilibrio Ecológico y la Protección al Ambiente en Materia de Prevención y Control de la Contaminación de la Atmósfera</td>
-    </tr>
-    <tr>
-      <td style="width:30%">RLH</td>
-      <td style="width:10%">
-        <a (click)="openExternalWindow('http://www.diputados.gob.mx/LeyesBiblio/regley/Reg_LHidro.pdf')">Ver</a></td>
-      <td style="width:60%">Reglamento de la Ley de Hidrocarburos</td>
-    </tr>
-    <tr>
-      <td style="width:30%">RLGEEPAEIA</td>
-      <td style="width:10%">
-        <a (click)="openExternalWindow('http://www.diputados.gob.mx/LeyesBiblio/regley/Reg_LGEEPA_MEIA_311014.pdf')">
-          Ver
-        </a></td>
-      <td style="width:60%">REGLAMENTO DE LA LEY GENERAL DEL EQUILIBRIO ECOLÓGICO Y LA PROTECCIÓNvAL AMBIENTE EN MATERIA DE EVALUACIÓN DEL IMPACTO AMBIENTAL</td>
-    </tr>
-    <tr>
-      <td style="width:30%">RLGDFS</td>
-      <td style="width:10%">
-        <a (click)="openExternalWindow('http://www.diputados.gob.mx/LeyesBiblio/regley/Reg_LGDFS_311014.pdf')">
-          Ver
-        </a></td>
-      <td style="width:60%">Reglamento de la Ley General de Desarrollo Forestal Sustentable</td>
-    </tr>
-    <tr>
-      <td style="width:30%">Disposiciones administrativas de carácter general sobre la Evaluación de Impacto Social en el Sector Energético.
-      </td>
-      <td style="width:10%">
-        <a (click)="openExternalWindow('https://www.dropbox.com/s/dp9a16y46zjjh8v/Disposiciones%20administrativas%20de%20car%C3%A1cter%20general%20sobre%20la%20Evaluaci%C3%B3n%20de%20Impacto%20Social%20en%20el%20sector%20energ%C3%A9tico%20%28Noviembre%202016%29.pdf?dl=0')">
-          Ver
-        </a></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td style="width:30%">Inscripción de los Contratos en el Registro del Fiduciario</td>
-      <td style="width:10%">
-        <a (click)="openExternalWindow('https://www.dropbox.com/s/yyms22l8epx7kgl/Inscripci%C3%B3n%20de%20Contratos%20en%20el%20Registro%20del%20Fiduciario.pdf?dl=0')">
-          Ver
-        </a></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td style="width:30%">Acuerdo por el que se da a conocer el formato para notificar a la Secretaría de Energía del inicio de las negociaciones para el uso, goce, afectación o, en su caso, adquisición de los terrenos, bienes o derechos necesarios para realizar diversas
-        actividades previstas en la Ley de Hidrocarburos.</td>
-      <td style="width:10%">
-        <a (click)="openExternalWindow('https://www.dropbox.com/s/5w2ozjfu2uwgfec/ACUERDO%20por%20el%20que%20se%20da%20a%20conocer%20el%20formato%20para%20notificar%20a%20la%20Secretar%C3%ADa%20de%20Energ%C3%ADa%20del%20inicio%20de%20las%20negociaciones%20para%20el%20uso%2C%20goce%2C%20afectaci%C3%B3n.html?dl=0')">
-          Ver
-      </a></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td style="width:30%">Lineamientos que regulan el proceso de mediación sobre el uso y ocupación superficial en materia de hidrocarburos</td>
-      <td style="width:10%">
-        <a (click)="openExternalWindow('https://www.dropbox.com/s/5ijyotter3x30qv/Lineamientos%20que%20regulan%20el%20proceso%20de%20mediaci%C3%B3n.html?dl=0')">
-          Ver
-        </a></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td style="width:30%">Disposiciones Administrativas de carácter general que establecen las reglas para el requerimiento mínimo de seguros a los Regulados que lleven a cabo obras o actividades de exploración y extracción de hidrocarburos, tratamiento y refinación de petróleo
-        y procesamiento de gas natural</td>
-      <td style="width:10%">
-        <a (click)="openExternalWindow('https://www.dropbox.com/s/76qj9bykqkangmh/Disposiciones%20de%20seguros.html?dl=0')">
-          Ver
-        </a></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td style="width:30%">Acuerdo por el que se establecen las disposiciones para que los asignatarios, contratistas y permisionarios proporcionen información sobre contenido nacional en las actividades que realicen en la industria de hidrocarburos, y Acuerdo por el que
-        se establece la metodología para la medición del contenido nacional en Asignaciones y Contratos para la Exploración y Extracción de Hidrocarburos, así como para los permisos de la Industria de Hidrocarburos
-      </td>
-      <td style="width:10%">
-        <a (click)="openExternalWindow('https://www.dropbox.com/s/93jvlrs7ndhtgx6/Acuerdo%20Contenido%20Nacional.pdf?dl=0')">
-          Ver
-        </a></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td style="width:30%">Acuerdo por el que se establece la clasificación y codificación de Hidrocarburos y Petrolíferos cuya importación y exportación está sujeta a Permiso Previo por parte de la Secretaría de Energía
-      </td>
-      <td style="width:10%">
-        <a (click)="openExternalWindow('http://www.dof.gob.mx/nota_detalle.php?codigo=5377567&fecha=29/12/2014')">
-          Ver
-          </a></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td style="width:30%">Ley de Comercio Exterior</td>
-      <td style="width:10%">
-        <a (click)="openExternalWindow('http://www.diputados.gob.mx/LeyesBiblio/pdf/28.pdf')">
-          Ver
-        </a></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td style="width:30%">Reglamento para el aprovechamiento del derecho de vía de las carreteras federales y zonas aledañas</td>
-      <td style="width:10%">
-        <a (click)="openExternalWindow('http://www.sct.gob.mx/fileadmin/DireccionesGrales/DGCC/PDF/REGLAMENTO_APROVECHAMIENTO__DERECHO_DE_VIA.pdf')">
-          Ver
-      </a></td>
-      <td></td>
+      <td style="width:50%"></td>
     </tr>
   </tbody>
 </table>
+
+<div class="grid-footer">
+  <table class="grid-footer-style">
+    <tr>
+      <td class="grid-footer-items" style="width:30%">{{documentsList.length}} documentos encontrados</td>
+      <td class="grid-footer-items text-align-center">
+
+      </td>
+      <td class="grid-footer-items text-align-right ">Página 1 de 1</td>
+    </tr>
+  </table>
+</div>
