@@ -1,0 +1,24 @@
+<div>
+  <div>
+    <input id="country" type="text" [(ngModel)]=query (keyup)=filter() (click)="onClick()">
+  </div>
+  <div *ngIf="filteredList.length > 0 && (!isHideControl)" class="suggestions-div">
+    <ng-container>
+      <ul *ngFor="let item of filteredList">
+        <li *ngIf="item.value" class="sugesstion-selected">
+          <input type="checkbox" name="married" [checked]="item.value" (change)="$event.target.checked? onSelectItem(item) : onUnselectItem(item)">{{item.name}}
+        </li>
+      </ul>
+      <ul *ngFor="let item of filteredList">
+        <li *ngIf="!item.value">
+          <input type="checkbox" name="married" [checked]="item.value" (change)="$event.target.checked? onSelectItem(item) : onUnselectItem(item)">{{item.name}}
+        </li>
+      </ul>
+    </ng-container>
+  </div>
+  <div *ngIf="isAddFlag" class="suggestions-div">
+    <span class="small-font"> No se encontrarón elementos</span> <br>
+    <hr>
+    <button (click)="addItem()">Agregar </button>
+  </div>
+</div>

@@ -1,0 +1,33 @@
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  font-size: small;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+li:hover {
+  color: #607D8B;
+  background-color: #DDD;
+}
+
+.suggestions-div {
+  position: absolute;
+  z-index: 2;
+  width: 200px;
+  background: white;
+  height: 100px;
+  overflow: auto;
+}
+
+.sugesstion-selected {
+  background-color: red;
+  color: white;
+}
+
+.small-font {
+  font-size: small;
+}
