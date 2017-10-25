@@ -26,8 +26,20 @@
         </select>
     </td>
     <td class="text-align-right">
-
-
+    </td>
+  </tr>
+</table>
+<table class="form">
+  <tr>
+    <td class="form-title form-title-text" colspan="3">Etiquetas</td>
+  </tr>
+  <tr>
+    <td>Etiquetas:</td>
+    <td>
+      <autocomplete-control [tags]="tags" (selected)="onSelectedTags($event)"></autocomplete-control>
+    </td>
+    <td>
+      <chips [items]="selectedTags"></chips>
     </td>
   </tr>
 </table>
@@ -43,7 +55,6 @@
     </td>
     <td class="text-align-right">Fecha legal: &nbsp; <b>{{task.dueDate | date: 'dd-MMM-yyyy'}}</b></td>
   </tr>
-
 </table>
 <div class="form-footer">
   <table class="form">
@@ -62,4 +73,5 @@
       </td>
     </tr>
   </table>
+
 </div>

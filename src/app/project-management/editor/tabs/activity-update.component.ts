@@ -35,13 +35,16 @@ export class ActivityUpdateComponent implements OnInit {
 
   public calendar: any
 
-  public _task: any;
+  public tags: any;
+  public selectedTags: any;
 
+  public _task: any;
   @Input()
   set task(task: any) {
     this._task = task;
     this.loadSelectedTask();
     this.loadLists();
+    
   }
   get task(): any {
     return this._task;
@@ -54,7 +57,8 @@ export class ActivityUpdateComponent implements OnInit {
                      private projectService: ProjectService) { }
 
   ngOnInit() {
-    this.loadCalendar();
+    this.loadCalendar();   
+    this.loadTags();
   }
 
   public cancel(): void {
@@ -79,6 +83,10 @@ export class ActivityUpdateComponent implements OnInit {
 
   public onReopenTask(): void {
     alert('Por el momento no es posible reabrir tareas una vez que han sido cerradas, pero el administrador del sistema puede hacerlo.');
+  }
+
+  public onSelectedTags(selectedTags: any): void {
+    this.selectedTags = selectedTags;
   }
 
   private loadLists(): void {
@@ -143,4 +151,8 @@ export class ActivityUpdateComponent implements OnInit {
     this.selectedTask.targetDate = this.calendar.getDate();
   }
 
+  private loadTags(): void {
+    this.activityService.getTags().toPromise()
+                                  .then((x) => {this.tags = x;})
+  }
 }
