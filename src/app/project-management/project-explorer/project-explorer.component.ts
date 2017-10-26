@@ -12,13 +12,13 @@ import { ActivityRef } from '../data-types/activity';
 import { ActivityService } from '../services/activity.service';
 
 @Component ({
-  selector: 'activity-list-grid',
-  templateUrl: './activity-list-grid.component.html',
-  styleUrls: ['./activity-list-grid.component.scss'],
+  selector: 'project-explorer',
+  templateUrl: './project-explorer.component.html',
+  styleUrls: ['./project-explorer.component.scss'],
   providers: [ActivityService]
 })
 
-export class ActivityListGridComponent {
+export class ProjectExplorerComponent {
 
   public isTaskEditorVisible = false;
   public isVisibleProcedureInfo = false;

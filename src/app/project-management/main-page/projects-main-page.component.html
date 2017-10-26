@@ -62,7 +62,8 @@
     <td>Vista:</td>
     <td>
       <select style="width:146px" class="select-box" [(ngModel)]="selectedView">
-        <option value="tasksList">Lista de tareas</option>
+        <option value="work-list">Bandeja de tareas</option>
+        <option value="project-explorer">Etapas / actividades</option>
         <option value="gantt">Gantt</option>
         <option value="kanban">Kanban</option>
         <option value="calendar">Calendario</option>
@@ -86,10 +87,10 @@
 
 <div *ngIf="isGanttGraphVisible">
   <div [ngSwitch]="selectedView">
-    <activity-list-grid [project]="selectedProject" [refresh]="isRefreshWorkList" *ngSwitchCase="'tasksList'"></activity-list-grid>
-    <!--
-    <worklists-main-page [project]="selectedProject" *ngSwitchCase="'kanban'"></worklists-main-page>-->
-    <gantt [project]="selectedProject" [config]="selectedScale" *ngSwitchDefault></gantt>
+    <project-explorer [project]="selectedProject" [refresh]="isRefreshWorkList" *ngSwitchCase="'work-list'"></project-explorer>
+    <project-explorer [project]="selectedProject" [refresh]="isRefreshWorkList" *ngSwitchCase="'activity-tree'"></project-explorer>
+    <gantt [project]="selectedProject" [config]="selectedScale" *ngSwitchCase="'gantt'"></gantt>
+    <project-explorer [project]="selectedProject" [refresh]="isRefreshWorkList" *ngSwitchDefault></project-explorer>
   </div>
   <!--<gantt [project]="selectedProject " [config]="ganttConfig"></gantt>-->
 </div>

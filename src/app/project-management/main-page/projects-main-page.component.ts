@@ -34,9 +34,11 @@ export class ProjectsMainPageComponent implements OnInit {
   public isGanttGraphVisible = false;
   public projectsList: ProjectRef[] = [];
   public selectedProject: ProjectRef = EmptyProjectRef();
+
+  public selectedView = 'project-explorer';
   public ganttConfig = 'ganttWeeks';
-  public selectedView = 'tasksList';
   public selectedScale = 'quarters';
+
   public labelsList: any;
   public responsiblesList: PersonRef[] = [];
   public orderBy = '';
