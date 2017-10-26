@@ -37,7 +37,7 @@ export class ProjectsMainPageComponent implements OnInit {
   public ganttConfig = 'ganttWeeks';
   public selectedView = 'tasksList';
   public selectedScale = 'quarters';
-  public labelsList: ResourceRef[] = [];
+  public labelsList: any;
   public responsiblesList: PersonRef[] = [];
   public orderBy = '';
   public keywords = '';
@@ -50,6 +50,7 @@ export class ProjectsMainPageComponent implements OnInit {
 
   public ngOnInit() {
     this.loadProjectList();
+    this.loadTags();
   }
 
   public onCloseAddActivityEditorWindow(): void {
@@ -171,6 +172,15 @@ export class ProjectsMainPageComponent implements OnInit {
 
   private cleanFilter(): void {
 
+  }
+
+  private loadTags(): void {
+    const errMsg = 'Ocurrió un problema al intentar leer la lista de etiquetas.';
+
+    this.activityService.getTags()
+                        .toPromise()
+                        .then((x) => this.labelsList = x)
+                        .catch((e) => this.exceptionHandler(e, errMsg));
   }
 
 }

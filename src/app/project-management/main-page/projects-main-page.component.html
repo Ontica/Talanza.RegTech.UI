@@ -40,10 +40,7 @@
     </td>
     <td>Etiqueta:</td>
     <td>
-      <select #labels class="select-box" style="width:160px" (change)="onChangeLabelsList(labels.value)">
-        <option value="">( No filtrar )</option>
-        <option *ngFor="let label of labelsList" [value]="label.name">{{label.name}}</option>
-      </select>
+      <autocomplete-control [tags]="labelsList" [isWritable]="false" (selected)="onSelectedTags($event)"></autocomplete-control>
     </td>
     <td>Responsable:</td>
     <td>
