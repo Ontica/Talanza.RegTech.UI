@@ -152,7 +152,12 @@ export class ActivityUpdateComponent implements OnInit {
   }
 
   private loadTags(): void {
-    this.activityService.getTags().toPromise()
-                                  .then((x) => {this.tags = x;})
+    const errMsg = 'Ocurrió un problema al intentar leer la lista de etiquetas.';
+
+    this.activityService.getTags()
+                        .toPromise()
+                        .then((x) => {this.tags = x;})
+                        .catch((e) => this.exceptionHandler(e, errMsg));
   }
+  
 }
