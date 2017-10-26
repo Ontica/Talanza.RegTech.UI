@@ -16,7 +16,7 @@
       </ul>
     </ng-container>
   </div>
-  <div *ngIf="isAddFlag" class="suggestions-div">
+  <div *ngIf="isAddFlag && isWritable" class="suggestions-div">
     <span class="small-font"> No se encontrarón elementos</span> <br>
     <hr>
     <button (click)="addItem()">Agregar </button>

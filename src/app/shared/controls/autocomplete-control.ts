@@ -31,6 +31,8 @@ export class AutocompleteControl {
   get tags(): any {
     return this._tags;
   }
+
+  @Input() isWritable: boolean = true;
   
   @Output() public selected = new EventEmitter<string[]>();
 
