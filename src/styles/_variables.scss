@@ -1,6 +1,7 @@
 //
 // Colors
 //
+$ambar: #ff7e00 !default;
 $black: #1a1a1a !default;
 $gray: #909090!default;
 $brown: #604020 !default;
@@ -107,3 +108,10 @@ $control-small-font: 6pt Arial, Helvetica;
 $grid-border: none;
 $grid-even-background-color: #fffffd;
 $grid-odd-background-color: #eef7fa;
+//
+// rag-status
+//
+$rag-status-ambar: $ambar;
+$rag-status-green: $green;
+$rag-status-orange:$orange;
+$rag-status-red: $red;
