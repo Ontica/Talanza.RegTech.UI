@@ -6,9 +6,11 @@
 
   <div class="tab">
     <button class="tab-links left-position" [disabled]="isDisabled" [class.selected]="selectedTask==='generalInfo'" (click)="setSelectedTask('generalInfo')">Información general</button>
+    <button class="tab-links left-position" [disabled]="isDisabled" [class.selected]="selectedTask==='closeTask'" (click)="setSelectedTask('closeTask')"><span [innerHTML]="concluededTaskLabel"> </span></button>
     <ng-container *ngIf="task.procedure.uid !== 'Undefined'">
       <button class="tab-links left-position" [disabled]="isDisabled" [class.selected]="selectedTask==='requirements'" (click)="setSelectedTask('requirements')">Requisitos y documentos</button>
     </ng-container>
+
   </div>
 
   <div class="form-frame" [ngSwitch]="selectedTask">

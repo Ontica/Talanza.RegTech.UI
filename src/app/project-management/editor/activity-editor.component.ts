@@ -25,6 +25,8 @@ export class ActivityEditorComponent {
   @Input()
   set task(task: any) {
     this._task = task;
+    console.log(task);
+    this.setConcludedTaskLabel();
   }
   get task(): any {
     return this._task;
@@ -33,6 +35,7 @@ export class ActivityEditorComponent {
   @Output() public onCloseEvent = new EventEmitter();
 
   public selectedTask: string = 'generalInfo';  
+  public concluededTaskLabel = '';
 
   public constructor() { }
   
@@ -54,6 +57,15 @@ export class ActivityEditorComponent {
 
   public onShowCloseTaskEditor(): void {  
    this.selectedTask = 'closeTask';
+  }
+
+  private setConcludedTaskLabel(): void {
+    if (this.task.stage === 'Done') {
+      this.concluededTaskLabel = '<i class="fa fa-check-circle" aria-hidden="true"></i> Tarea concluida';
+    } else {
+      this.concluededTaskLabel = 'Concluir tarea';
+    }
+
   }
 
 }
