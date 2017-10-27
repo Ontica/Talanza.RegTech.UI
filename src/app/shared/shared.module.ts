@@ -19,6 +19,7 @@ import { SafeHtmlPipe } from './pipes/safe-html.pipe';
 
 import { AutocompleteControl } from './controls/autocomplete-control';
 import { Chips } from './controls/chips';
+import { RAGControl } from './controls/rag.control';
 
 /**
  * Do not specify providers for modules that might be imported by a lazy loaded module.
@@ -27,7 +28,8 @@ import { Chips } from './controls/chips';
 @NgModule({
   imports: [RouterModule, CommonModule, FormsModule],
   declarations: [MainLayoutComponent, NavbarComponent, NoContentComponent, SafeHtmlPipe,
-                 AutocompleteControl, Chips],
-  exports: [MainLayoutComponent, NoContentComponent, SafeHtmlPipe, AutocompleteControl, Chips]
+                 AutocompleteControl, Chips, RAGControl],
+  exports: [MainLayoutComponent, NoContentComponent, SafeHtmlPipe, AutocompleteControl, Chips,
+            RAGControl]
 })
 export class SharedModule { }
