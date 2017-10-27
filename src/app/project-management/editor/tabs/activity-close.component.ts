@@ -60,6 +60,10 @@ export class ActivityCloseComponent implements OnInit{
     this.onCloseEvent.emit();
   }
 
+  public onReopenTask(): void {
+    alert('Por el momento no es posible reabrir tareas una vez que han sido cerradas, pero el administrador del sistema puede hacerlo.');
+  }
+
   private loadCalendars(): void {
     this.createCalendars();
     this.setCalendarsDateFormat();

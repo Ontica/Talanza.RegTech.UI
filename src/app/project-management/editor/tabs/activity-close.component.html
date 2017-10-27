@@ -28,18 +28,37 @@
       <td>Fecha legal: &nbsp; <b>{{task.dueDate | date: 'dd-MMM-yyyy'}}</b></td>
     </tr>
   </table>
+  <br><br>
+  <table *ngIf="_task.stage === 'Done'" class="form">
+    <tr>
+      <td class="form-title form-title-text" colspan="2">Tarea concluida</td>
+    </tr>
+    <tr>
+      <td>
+        <i class="fa fa-check-circle fa-5x check-circle-color" aria-hidden="true"> </i>
+      </td>
+      <td style="vertical-align: middle"><span class="close-label-message;">La tarea ha sido concluida...</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>Si es necesario reabrir esta tarea presiona el bóton "Reabrir esta tarea"</td>
+    </tr>
+  </table>
 
   <div class="form-footer">
     <table class="form">
       <tr>
-        <td class="text-align-center ">
+        <td>
           <button class="btn" (click)="cancel() ">Cancelar</button>
         </td>
-
-        <td class="text-align-right ">
+        <td *ngIf="task.stage === 'Done'" class="text-align-right">
+          <button class="btn-warning" (click)="onReopenTask()">Reabrir esta tarea</button>
+        </td>
+        <td *ngIf="task.stage !== 'Done'" class="text-align-right">
           <button class="btn-action" (click)="onCloseTask()">Concluir la tarea</button>
         </td>
       </tr>
     </table>
   </div>
+
 </div>
