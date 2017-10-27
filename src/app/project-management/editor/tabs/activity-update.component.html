@@ -59,16 +59,10 @@
 <div class="form-footer">
   <table class="form">
     <tr>
-      <td style='width:33%'>
+      <td>
         <button class="btn" (click)="cancel()">Cancelar</button>
       </td>
-      <td *ngIf="_task.stage !== 'Done'" class="text-align-center" style='width:33%'>
-        <button class="btn-warning" (click)="onCloseTask()">Concluir la tarea</button>
-      </td>
-      <td *ngIf="_task.stage === 'Done'" class="text-align-center" style='width:33%'>
-        <button class="btn-warning" (click)="onReopenTask()">Reabrir esta tarea</button>
-      </td>
-      <td *ngIf="_task.stage !== 'Done'" class="text-align-right" style='width:33%'>
+      <td *ngIf="_task.stage !== 'Done'" class="text-align-right">
         <button class="btn-action" (click)="onUpdateTask()">Guardar los cambios</button>
       </td>
     </tr>

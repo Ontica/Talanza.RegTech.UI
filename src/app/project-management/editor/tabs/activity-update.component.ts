@@ -51,7 +51,6 @@ export class ActivityUpdateComponent implements OnInit {
   }
 
   @Output() public onCloseEvent = new EventEmitter();
-  @Output() public onCloseTaskEditorVisible = new EventEmitter();
 
   public constructor(private activityService: ActivityService,
                      private projectService: ProjectService) { }
@@ -75,15 +74,7 @@ export class ActivityUpdateComponent implements OnInit {
     alert("La tarea se actualizo correctamente");
     this.onClose();
 
-  }
-
-  public onCloseTask(): void {
-    this.onCloseTaskEditorVisible.emit();
-  }
-
-  public onReopenTask(): void {
-    alert('Por el momento no es posible reabrir tareas una vez que han sido cerradas, pero el administrador del sistema puede hacerlo.');
-  }
+  }  
 
   public onSelectedTags(selectedTags: any): void {
     this.selectedTags = selectedTags;
@@ -113,7 +104,6 @@ export class ActivityUpdateComponent implements OnInit {
       .then((x) => this.responsiblesList = x)
       .catch((e) => this.exceptionHandler(e, errMsg));
   }
-
 
   private async updateTask() {
     const errMsg = 'Ocurrió un problema al intentar actualizar la actividad.';
