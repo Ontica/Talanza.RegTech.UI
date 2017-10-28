@@ -7,5 +7,12 @@ import { Component, Input } from '@angular/core';
 })
 
 export class Chips {
+
   @Input() items: any;
+
+  public deleteItem(item: string): void {   
+    let index =  this.items.findIndex((x) => x.name === item);    
+    this.items.splice(index, 1);    
+  }
+  
 }

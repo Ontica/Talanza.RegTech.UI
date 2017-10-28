@@ -1,3 +1,8 @@
 <ul *ngFor="let item of items">
-  <li><span class="badge">{{item.name}}</span></li>
+  <li>
+    <span class="badge">
+      {{item.name}}
+      <a (click)="deleteItem(item.name)"><i class="fa fa-times-circle" aria-hidden="true"></i></a>
+    </span>
+  </li>
 </ul>
