@@ -13,7 +13,6 @@ import {
 export class AutocompleteControl {
 
   public filteredList = [];
-  public selectedItems = [];
   public items : any[] = [];
 
   public query = "";
@@ -58,12 +57,11 @@ export class AutocompleteControl {
   public addItem(): void {
     //save to api
     let newItem : Object = {
-      name: this.query, value: true
+      name: this.query, selected: true
     }
     this.items.push(newItem);
-    this.AddSelectedItem(newItem);   
-    this.selected.emit(this.selectedItems);
-   
+    this.selected.emit(this.items.filter(item => item.selected === true));
+      
     this.isAddFlag = false;
   }
 
@@ -82,38 +80,27 @@ export class AutocompleteControl {
   }
 
   public onSelectItem(selectedItem: any): void {
-    this.updateItem(selectedItem.name, true);
-    this.AddSelectedItem(selectedItem);   
-    this.selected.emit(this.selectedItems);
+    this.updateItem(selectedItem.name, true);   
+    this.selected.emit(this.items.filter(item => item.selected === true));
   }
 
   public onUnselectItem(selectedItem: any): void {
-    this.updateItem(selectedItem.name, false);
-    this.deleteSelectedItem(selectedItem);    
-    this.selected.emit(this.selectedItems);
-  }
-
-  private deleteSelectedItem(selectedItem: any): void {
-    let index = this.selectedItems.findIndex((x) => x.name === selectedItem.name);
-    this.selectedItems.splice(index, 1);
-  }
-
-  private AddSelectedItem(selectedItem: any): void {
-    this.selectedItems.push(selectedItem);
+    this.updateItem(selectedItem.name, false);   
+    this.selected.emit(this.items.filter(item => item.selected === true));
   }
 
   private loadItems(): void {    
     this.items = [];    
     this.tags.forEach((obj, i) => {         
-         obj.value = false;
+         obj.selected = false;
          this.items[i] = obj;
     });   
     
   }
 
-  private updateItem(selectedItemName: string, value: boolean): void {
+  private updateItem(selectedItemName: string, selected: boolean): void {
     let index = this.items.findIndex((x) => x.name === selectedItemName);
-    this.items[index].value = value;
+    this.items[index].selected = selected;
   }
 
   public onClick(): void {

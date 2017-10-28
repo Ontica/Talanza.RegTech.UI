@@ -12,7 +12,7 @@ export class Chips {
 
   public deleteItem(item: string): void {   
     let index =  this.items.findIndex((x) => x.name === item);    
-    this.items.splice(index, 1);    
+    this.items[index].selected = false; 
   }
   
 }

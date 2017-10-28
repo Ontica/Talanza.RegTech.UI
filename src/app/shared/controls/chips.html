@@ -1,5 +1,5 @@
 <ul *ngFor="let item of items">
-  <li>
+  <li *ngIf="item.selected">
     <span class="badge">
       {{item.name}}
       <a (click)="deleteItem(item.name)"><i class="fa fa-times-circle" aria-hidden="true"></i></a>

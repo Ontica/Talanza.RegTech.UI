@@ -5,13 +5,13 @@
   <div *ngIf="filteredList.length > 0 && (!isHideControl)" class="suggestions-div">
     <ng-container>
       <ul *ngFor="let item of filteredList">
-        <li *ngIf="item.value" class="sugesstion-selected">
-          <input type="checkbox" name="married" [checked]="item.value" (change)="$event.target.checked? onSelectItem(item) : onUnselectItem(item)">{{item.name}}
+        <li *ngIf="item.selected" class="sugesstion-selected">
+          <input type="checkbox" name="married" [checked]="item.selected" (change)="$event.target.checked? onSelectItem(item) : onUnselectItem(item)">{{item.name}}
         </li>
       </ul>
       <ul *ngFor="let item of filteredList">
-        <li *ngIf="!item.value">
-          <input type="checkbox" name="married" [checked]="item.value" (change)="$event.target.checked? onSelectItem(item) : onUnselectItem(item)">{{item.name}}
+        <li *ngIf="!item.selected">
+          <input type="checkbox" name="married" [checked]="item.selected" (change)="$event.target.checked? onSelectItem(item) : onUnselectItem(item)">{{item.name}}
         </li>
       </ul>
     </ng-container>
