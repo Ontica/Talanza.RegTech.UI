@@ -36,7 +36,7 @@ export class ActivityUpdateComponent implements OnInit {
   public calendar: any
 
   public tags: any;
-  public selectedTags: any;
+  public selectedTags: any[] = [];
 
   public _task: any;
   @Input()
@@ -70,8 +70,11 @@ export class ActivityUpdateComponent implements OnInit {
 
   public async onUpdateTask() {    
     this.setDateCalendar();
+    this.setSelectedTags();   
+
     await this.updateTask();
     alert("La tarea se actualizo correctamente");
+    
     this.onClose();
 
   }  
@@ -94,6 +97,7 @@ export class ActivityUpdateComponent implements OnInit {
     this.selectedTask.requestedTime = this.task.startDate;
     this.selectedTask.startDate = this.task.startDate;
     this.selectedTask.progress = this.task.progress;
+    this.selectedTask.ragStatus = this.task.ragStatus;
   }
 
   private loadResponsiblesList(): void {
@@ -148,6 +152,10 @@ export class ActivityUpdateComponent implements OnInit {
                         .toPromise()
                         .then((x) => {this.tags = x;})
                         .catch((e) => this.exceptionHandler(e, errMsg));
+  }
+
+  private setSelectedTags(): void {
+     this.selectedTask.tags = this.selectedTags.filter(x => x.selected === true); 
   }
   
 }

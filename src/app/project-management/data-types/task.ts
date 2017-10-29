@@ -8,8 +8,9 @@ export interface TaskRef {
   ragStatus: string,
   requestedByUID: string,
   requestedTime: Date,
-  responsibleUID: string
-  progress: number;
+  responsibleUID: string,
+  progress: number,
+  tags: string[]
   }
 
   export function EmptyTask() {
@@ -23,7 +24,8 @@ export interface TaskRef {
       requestedByUID: '',
       requestedTime: new Date(),
       responsibleUID:'',
-      progress: 0
+      progress: 0,
+      tags: []
     }
 
     return empty;
