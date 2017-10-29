@@ -13,7 +13,7 @@
 </table>
 <table class="form">
   <tr>
-    <td class="form-title form-title-text" colspan="3">Responsable de la tarea y porcentaje de progreso</td>
+    <td class="form-title form-title-text" colspan="4">Responsable de la tarea y RAG status</td>
   </tr>
   <tr>
     <td>Responsable:</td>
@@ -25,7 +25,15 @@
                   [value]="responsible.uid">{{responsible.name}}</option>
         </select>
     </td>
+    <td>RAG status:</td>
     <td class="text-align-right">
+      <select class="select-box" [(ngModel)]="selectedTask.ragStatus">
+        <option value="">( Seleccionar )</option> 
+        <option value="Green">Verde</option>
+        <option value="Ambar">Ambar</option>       
+        <option value="Orange">Naranja</option>
+        <option value="Red">Red</option>
+      </select>
     </td>
   </tr>
 </table>
@@ -67,5 +75,4 @@
       </td>
     </tr>
   </table>
-
 </div>

@@ -5,6 +5,7 @@ export interface TaskRef {
   resourceUID: string,
   startDate: Date,
   targetDate: Date,
+  ragStatus: string,
   requestedByUID: string,
   requestedTime: Date,
   responsibleUID: string
@@ -18,6 +19,7 @@ export interface TaskRef {
       resourceUID: '',
       startDate: new Date(),
       targetDate: new Date(),
+      ragStatus: '',
       requestedByUID: '',
       requestedTime: new Date(),
       responsibleUID:'',
