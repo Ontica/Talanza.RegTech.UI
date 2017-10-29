@@ -40,7 +40,7 @@
     </td>
     <td>Etiqueta:</td>
     <td>
-      <autocomplete-control [tags]="labelsList" [isWritable]="false" (selected)="onSelectedTags($event)"></autocomplete-control>
+      <autocomplete-control [tags]="labelsList" [isWritable]="false" [config]="{valueField: 'name'}" (selected)="onSelectedTags($event)"></autocomplete-control>
     </td>
     <td>Responsable:</td>
     <td>

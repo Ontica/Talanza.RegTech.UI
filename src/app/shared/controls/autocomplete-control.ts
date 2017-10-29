@@ -32,6 +32,8 @@ export class AutocompleteControl {
   }
 
   @Input() isWritable: boolean = true;
+
+  @Input() config: object =  { valueField: 'name' }
   
   @Output() public selected = new EventEmitter<string[]>();
 

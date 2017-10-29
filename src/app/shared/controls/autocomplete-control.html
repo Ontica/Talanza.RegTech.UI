@@ -6,12 +6,12 @@
     <ng-container>
       <ul *ngFor="let item of filteredList">
         <li *ngIf="item.selected" class="sugesstion-selected">
-          <input type="checkbox" name="married" [checked]="item.selected" (change)="$event.target.checked? onSelectItem(item) : onUnselectItem(item)">{{item.name}}
+          <input type="checkbox" name="married" [checked]="item.selected" (change)="$event.target.checked? onSelectItem(item) : onUnselectItem(item)">{{item[config.valueField]}}
         </li>
       </ul>
       <ul *ngFor="let item of filteredList">
         <li *ngIf="!item.selected">
-          <input type="checkbox" name="married" [checked]="item.selected" (change)="$event.target.checked? onSelectItem(item) : onUnselectItem(item)">{{item.name}}
+          <input type="checkbox" name="married" [checked]="item.selected" (change)="$event.target.checked? onSelectItem(item) : onUnselectItem(item)">{{item[config.valueField]}}
         </li>
       </ul>
     </ng-container>

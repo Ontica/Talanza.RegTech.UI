@@ -36,7 +36,7 @@
   <tr>
     <td>Etiquetas:</td>
     <td>
-      <autocomplete-control [tags]="tags" (selected)="onSelectedTags($event)"></autocomplete-control>
+      <autocomplete-control [tags]="tags" [config]="{valueField: 'name'}" (selected)="onSelectedTags($event)"></autocomplete-control>
     </td>
     <td>
       <chips [items]="selectedTags"></chips>
@@ -45,7 +45,7 @@
 </table>
 <table class="form">
   <tr>
-    <td class="form-title form-title-text" colspan="3">Fecha objetivo y fecha legal</td>
+    <td class="form-title form-title-text" colspan="3">Fecha objetivo y fecha máxima de entrega</td>
   </tr>
   <tr>
     <td>Fecha objetivo:</td>
@@ -53,7 +53,7 @@
       <input type="text" id="calendar" class="text-box" style="width:100px" [ngModel]="selectedTask.targetDate | date: 'dd-MM-yyyy'" (target)="selectedTask=$value">
       <button id="calendarButton">..</button>
     </td>
-    <td class="text-align-right">Fecha legal: &nbsp; <b>{{task.dueDate | date: 'dd-MMM-yyyy'}}</b></td>
+    <td class="text-align-right">Fecha máxima de entrega: &nbsp; <b>{{task.dueDate | date: 'dd-MMM-yyyy'}}</b></td>
   </tr>
 </table>
 <div class="form-footer">
