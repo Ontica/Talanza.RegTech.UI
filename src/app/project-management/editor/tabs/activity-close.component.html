@@ -23,8 +23,8 @@
     </tr>
     <tr>
       <td>Fecha de término:</td>
-      <td><input type="text" id="dueDateCalendar" class="text-box" style="width:100px" [ngModel]="endDate | date: 'dd-MM-yyyy'" (target)="endDate=$value">
-        <button id="dueDateButton">..</button></td>
+      <td><input type="text" id="dueDateCalendar" class="text-box" [disabled]="isTaskClosed" style="width:100px" [ngModel]="endDate | date: 'dd-MM-yyyy'" (target)="endDate=$value">
+        <button id="dueDateButton" class="btn" [disabled]="isTaskClosed">..</button></td>
       <td>Fecha legal: &nbsp; <b>{{task.dueDate | date: 'dd-MMM-yyyy'}}</b></td>
     </tr>
   </table>

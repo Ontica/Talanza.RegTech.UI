@@ -16,6 +16,7 @@ declare var dhtmlXCalendarObject: any;
 export class ActivityCloseComponent implements OnInit{
 
   public endDate: Date = undefined;
+  public isTaskClosed: boolean = false;
 
   private closedTask = EmptyClosedTask();
   private dueDateCalendar: any;
@@ -25,6 +26,7 @@ export class ActivityCloseComponent implements OnInit{
   @Input()
   set task(task: any) {
     this._task = task;
+    this.setIsTaskClosed();
   }
   get task(): any {
     return this._task;
@@ -111,6 +113,14 @@ export class ActivityCloseComponent implements OnInit{
       errMsg += defaultMsg + '\n\n' + 'Error desconocido.';
     }
     alert(errMsg);
+  }
+
+  private setIsTaskClosed(): void {
+    if (this.task.stage === 'Done') {
+      this.isTaskClosed = true;
+    } else {
+      this.isTaskClosed = false;
+    }
   }
 
 }
