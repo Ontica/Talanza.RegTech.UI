@@ -37,6 +37,7 @@ export class ActivityUpdateComponent implements OnInit {
 
   public tags: any;
   public selectedTags: any[] = [];
+  public isTaskClosed = false;
 
   public _task: any;
   @Input()
@@ -44,6 +45,7 @@ export class ActivityUpdateComponent implements OnInit {
     this._task = task;
     this.loadSelectedTask();
     this.loadLists();
+    this.setIsTaskClosed();
     
   }
   get task(): any {
@@ -158,4 +160,12 @@ export class ActivityUpdateComponent implements OnInit {
      this.selectedTask.tags = this.selectedTags.filter(x => x.selected === true); 
   }
   
+  private setIsTaskClosed(): void {
+    if (this.task.stage === 'Done') {
+      this.isTaskClosed = true;
+    } else {
+      this.isTaskClosed = false;
+    }
+  }
+
 }
