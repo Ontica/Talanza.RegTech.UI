@@ -11,7 +11,7 @@ import {
   Output, OnInit
 } from '@angular/core';
 
-import { TaskRef, EmptyTask } from '../../data-types/task';
+import { TaskRef, EmptyTask, Tag } from '../../data-types/task';
 
 import { PersonRef } from '../../data-types/project';
 
@@ -19,6 +19,8 @@ import { ActivityService } from '../../services/activity.service';
 import { ProjectService } from '../../services/project.service';
 
 declare var dhtmlXCalendarObject: any;
+
+
 
 @Component({
   selector: 'task-update',
@@ -35,18 +37,15 @@ export class ActivityUpdateComponent implements OnInit {
 
   public calendar: any
 
-  public tags: any;
-  public selectedTags: any[] = [];
+  public tags: Tag[] = [];
+  public selectedTags: Tag[] = [];
   public isTaskClosed = false;
 
   public _task: any;
   @Input()
   set task(task: any) {
     this._task = task;
-    this.loadSelectedTask();
-    this.loadLists();
-    this.setIsTaskClosed();
-    
+    this.loadInitialValues();  
   }
   get task(): any {
     return this._task;
@@ -58,8 +57,8 @@ export class ActivityUpdateComponent implements OnInit {
                      private projectService: ProjectService) { }
 
   ngOnInit() {
-    this.loadCalendar();   
-    this.loadTags();
+    this.loadCalendar();  
+    
   }
 
   public cancel(): void {
@@ -73,13 +72,21 @@ export class ActivityUpdateComponent implements OnInit {
   public async onUpdateTask() {    
     this.setDateCalendar();
     this.setSelectedTags();   
-
+  
     await this.updateTask();
     alert("La tarea se actualizo correctamente");
     
     this.onClose();
 
   }  
+
+  public async loadInitialValues() {
+    await this.loadSelectedTask();
+    await this.loadTags();
+    this.loadSelectedTags();
+    this.loadLists();
+    this.setIsTaskClosed();
+  }
 
   public onSelectedTags(selectedTags: any): void {
     this.selectedTags = selectedTags;
@@ -90,6 +97,7 @@ export class ActivityUpdateComponent implements OnInit {
   }
 
   private loadSelectedTask(): void {
+   
     this.selectedTask.name = this.task.name;
     this.selectedTask.notes = this.task.notes;
     this.selectedTask.requestedByUID = this.task.requestedBy.uid;
@@ -100,6 +108,7 @@ export class ActivityUpdateComponent implements OnInit {
     this.selectedTask.startDate = this.task.startDate;
     this.selectedTask.progress = this.task.progress;
     this.selectedTask.ragStatus = this.task.ragStatus;
+    this.selectedTask.tags = this.task.tags;
   }
 
   private loadResponsiblesList(): void {
@@ -147,19 +156,36 @@ export class ActivityUpdateComponent implements OnInit {
     this.selectedTask.targetDate = this.calendar.getDate();
   }
 
-  private loadTags(): void {
+  private async loadTags() {
     const errMsg = 'Ocurrió un problema al intentar leer la lista de etiquetas.';
 
-    this.activityService.getTags()
+   await this.activityService.getTags()
                         .toPromise()
-                        .then((x) => {this.tags = x;})
+                        .then((x) => {
+                          this.tags = x;
+                          this.tags.forEach((x) => {         
+                               x.selected = false;                            
+                           });
+                        })
                         .catch((e) => this.exceptionHandler(e, errMsg));
   }
 
   private setSelectedTags(): void {
-     this.selectedTask.tags = this.selectedTags.filter(x => x.selected === true); 
+     this.selectedTask.tags = this.selectedTags.filter(x => x.selected === true).map(x => x.name);
+  }                                            
+
+  private loadSelectedTags(): void {
+  this.selectedTask.tags.forEach(x => {
+    this.selectedTag(x);
+  });
+
+  this.selectedTags = this.tags.filter(x => x.selected === true);  
   }
   
+  private selectedTag(tag: string): void {    
+    let index = this.tags.findIndex((x) => x.name === tag);    
+     this.tags[index].selected = true;
+  }
   private setIsTaskClosed(): void {
     if (this.task.stage === 'Done') {
       this.isTaskClosed = true;

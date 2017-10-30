@@ -56,3 +56,9 @@ export interface TaskRef {
     parent: number;
     type: string;
 }
+
+ export interface Tag {
+  color: string,
+  name: string,
+  selected: boolean;
+}

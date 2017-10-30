@@ -93,8 +93,7 @@ export class AutocompleteControl {
 
   private loadItems(): void {    
     this.items = [];    
-    this.tags.forEach((obj, i) => {         
-         obj.selected = false;
+    this.tags.forEach((obj, i) => {              
          this.items[i] = obj;
     });   
     
