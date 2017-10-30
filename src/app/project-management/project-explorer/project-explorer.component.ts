@@ -51,8 +51,7 @@ export class ProjectExplorerComponent {
   constructor (private activitiyService: ActivityService) { }
 
   public onCloseTaskEditorWindow(): void {
-    this.isTaskEditorVisible = false;
-    this.refreshData();
+    this.isTaskEditorVisible = false;    
   }
 
   public onClickAddActivity():void {
@@ -93,6 +92,11 @@ export class ProjectExplorerComponent {
   public onCloseProcedureInfoWindow(): void {
     this.isVisibleProcedureInfo = false;
   }
+
+  public onUpdateActivity(activity: ActivityRef): void {
+     let index = this.taskList.findIndex(x => x.uid === activity.uid);
+     this.taskList[index] = activity;
+   }
 
   public expandOrCollapse(parentUID: string): void {
    let index = this.taskList.findIndex((e) => e.parent.uid === parentUID) - 1;

@@ -11,6 +11,8 @@ import { Component, EventEmitter, HostBinding, Input,
 
 import { TaskRef } from '../data-types/task';
 
+import { ActivityRef } from '../data-types/activity';
+
 @Component({
   selector: 'activity-editor',
   templateUrl: './activity-editor.component.html',
@@ -21,18 +23,19 @@ export class ActivityEditorComponent {
   @HostBinding('style.display') public display = 'block';
   @HostBinding('style.position') public position = 'absolute';
 
-  private _task: any;
+  private _task: ActivityRef;
   @Input()
-  set task(task: any) {
+  set task(task: ActivityRef) {
     this._task = task;
-    console.log(task);
+   
     this.setConcludedTaskLabel();
   }
-  get task(): any {
+  get task(): ActivityRef {
     return this._task;
   }
 
   @Output() public onCloseEvent = new EventEmitter();
+  @Output() public onUpdateActivity = new EventEmitter<ActivityRef>();
 
   public selectedTask: string = 'generalInfo';  
   public concluededTaskLabel = '';
@@ -51,12 +54,9 @@ export class ActivityEditorComponent {
     this.onCloseEvent.emit();
   } 
 
-  public onCloseTaskEditor(): void {
+  public updateActivity(acitivity: ActivityRef): void {    
+    this.onUpdateActivity.emit(acitivity);
     this.onClose();
-  }
-
-  public onShowCloseTaskEditor(): void {  
-   this.selectedTask = 'closeTask';
   }
 
   private setConcludedTaskLabel(): void {

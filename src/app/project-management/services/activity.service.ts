@@ -59,11 +59,11 @@ export class ActivityService {
   }
 
   public updateActivity(projectUID: string, activityUID: string, task: TaskRef):
-    Observable<TaskRef> {
+    Observable<ActivityRef> {
     const path = `v1/project-management/projects/${projectUID}/activities/${activityUID}`;
 
 
-    return this.core.http.put<TaskRef>(path, task);
+    return this.core.http.put<ActivityRef>(path, task);
   }
 
   public closeActivity(projectUID: string, activityUID: string, closeTask: ClosedTask): Observable<any[]> {

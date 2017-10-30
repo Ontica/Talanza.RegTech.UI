@@ -14,6 +14,7 @@ import {
 import { TaskRef, EmptyTask, Tag } from '../../data-types/task';
 
 import { PersonRef } from '../../data-types/project';
+import { ActivityRef } from '../../data-types/activity';
 
 import { ActivityService } from '../../services/activity.service';
 import { ProjectService } from '../../services/project.service';
@@ -41,17 +42,18 @@ export class ActivityUpdateComponent implements OnInit {
   public selectedTags: Tag[] = [];
   public isTaskClosed = false;
 
-  public _task: any;
+  public _task: ActivityRef;
   @Input()
-  set task(task: any) {
+  set task(task: ActivityRef) {
     this._task = task;
     this.loadInitialValues();  
   }
-  get task(): any {
+  get task(): ActivityRef {
     return this._task;
   }
 
   @Output() public onCloseEvent = new EventEmitter();
+  @Output() public onUpdateActivity = new EventEmitter<ActivityRef>();
 
   public constructor(private activityService: ActivityService,
                      private projectService: ProjectService) { }
@@ -74,10 +76,7 @@ export class ActivityUpdateComponent implements OnInit {
     this.setSelectedTags();   
   
     await this.updateTask();
-    alert("La tarea se actualizo correctamente");
     
-    this.onClose();
-
   }  
 
   public async loadInitialValues() {
@@ -124,8 +123,11 @@ export class ActivityUpdateComponent implements OnInit {
     const errMsg = 'Ocurrió un problema al intentar actualizar la actividad.';
 
     await this.activityService.updateActivity(this.task.project.uid, this.task.uid, this.selectedTask)
-      .toPromise()
-      .catch((e) => this.exceptionHandler(e, errMsg));
+      .toPromise().then((x) => { 
+                                 this.onUpdateActivity.emit(x); 
+                                 this.onClose();
+                               })
+                  .catch((e) => this.exceptionHandler(e, errMsg));
   }
 
   private exceptionHandler(error: any, defaultMsg: string): void {

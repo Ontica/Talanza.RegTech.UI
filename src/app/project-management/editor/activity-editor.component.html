@@ -13,8 +13,8 @@
   </div>
 
   <div class="form-frame" [ngSwitch]="selectedTask">
-    <task-update *ngSwitchCase="'generalInfo'" [task]="task" (onCloseEvent)="onCloseTaskEditor()" (onCloseTaskEditorVisible)="onShowCloseTaskEditor()"></task-update>
-    <task-close *ngSwitchCase="'closeTask'" [task]="task" (onCloseEvent)="onCloseTaskEditor()"></task-close>
+    <task-update *ngSwitchCase="'generalInfo'" [task]="task" (onUpdateActivity)="updateActivity($event)" (onCloseEvent)="onClose()"></task-update>
+    <task-close *ngSwitchCase="'closeTask'" [task]="task" (onCloseEvent)="onClose()"></task-close>
     <pe-requirements *ngSwitchCase="'requirements'" [procedureUID]="task.procedure.uid"></pe-requirements>
   </div>
 </div>
