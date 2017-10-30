@@ -78,5 +78,11 @@ export class ActivityService {
     return this.core.http.get<any[]>(path);
   }
 
+  public getActivitiesAsWorkList(): Observable<ActivityRef[]> {
+    const path = `v1/project-management/projects/activities/as-work-list`;
+
+    return this.core.http.get<any>(path)
+  }
+
 }
 

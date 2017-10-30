@@ -29,6 +29,8 @@ import { ActivityDescriptionComponent } from './create-activity/activity-descrip
 import { ActivityWorklistComponent } from './create-activity/activity-worklist.component';
 import { ActivityInfoComponent } from './create-activity/activity-info.component';
 
+import { WorkListComponent } from './work-list/work-list.component';
+
 /**
  * Do not specify providers for modules that might be imported by a lazy loaded module.
  */
@@ -40,7 +42,7 @@ import { ActivityInfoComponent } from './create-activity/activity-info.component
                  ProjectsMainPageComponent, GanttComponent,
                  ActivityAddComponent,ActivitySelectorComponent, ActivityDescriptionComponent,
                  ActivityWorklistComponent, ActivityInfoComponent,
-                 ActivityUpdateComponent],
+                 ActivityUpdateComponent, WorkListComponent],
   exports: [ProjectExplorerComponent,
             ProjectsMainPageComponent, GanttComponent]
 })
