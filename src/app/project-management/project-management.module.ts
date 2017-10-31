@@ -31,6 +31,8 @@ import { ActivityInfoComponent } from './create-activity/activity-info.component
 
 import { WorkListComponent } from './work-list/work-list.component';
 
+import { ProjectsFilterComponent } from './main-page/projects-filter.component';
+
 /**
  * Do not specify providers for modules that might be imported by a lazy loaded module.
  */
@@ -42,7 +44,7 @@ import { WorkListComponent } from './work-list/work-list.component';
                  ProjectsMainPageComponent, GanttComponent,
                  ActivityAddComponent,ActivitySelectorComponent, ActivityDescriptionComponent,
                  ActivityWorklistComponent, ActivityInfoComponent,
-                 ActivityUpdateComponent, WorkListComponent],
+                 ActivityUpdateComponent, WorkListComponent, ProjectsFilterComponent ],
   exports: [ProjectExplorerComponent,
             ProjectsMainPageComponent, GanttComponent]
 })

@@ -13,6 +13,7 @@ import { CoreService } from '../../core';
 
 import { ClosedTask, Task, TaskRef } from '../data-types/task';
 import { Activity, ProjectRef, ResourceRef } from '../data-types/project';
+import { ActivityFilter } from '../data-types/activity-filter';
 
 import { ActivityRef } from '../data-types/activity';
 
@@ -78,8 +79,17 @@ export class ActivityService {
     return this.core.http.get<any[]>(path);
   }
 
-  public getActivitiesAsWorkList(): Observable<ActivityRef[]> {
-    const path = `v1/project-management/projects/activities/as-work-list`;
+  public getActivitiesAsWorkList(filter?: ActivityFilter): Observable<ActivityRef[]> {    
+
+    let filterAsString = '';
+
+    if (filter instanceof ActivityFilter) {
+      filterAsString = '?' + filter.toString();   
+    } 
+
+    const path = `v1/project-management/projects/activities/as-work-list${filterAsString}`;
+    console.log(path);
+    
 
     return this.core.http.get<any>(path)
   }

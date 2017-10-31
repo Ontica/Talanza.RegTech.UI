@@ -9,6 +9,8 @@ import { Component, Input }  from '@angular/core';
 
 import { ProjectRef } from '../data-types/project';
 import { ActivityRef } from '../data-types/activity';
+import { ActivityFilter } from '../data-types/activity-filter';
+
 import { ActivityService } from '../services/activity.service';
 
 @Component ({
@@ -26,17 +28,9 @@ export class ProjectExplorerComponent {
   public selectedTask:any;
   public procedureUID: string = '';
   public expanOrCollapseIcon = 'fa fa-minus-circle';
+  public projectUID: string = '';
 
   private _project: ProjectRef;
-  @Input()
-   set project(project: ProjectRef) {
-     this._project = project;
-     this.refreshData();
-
-   }
-   get project(): ProjectRef {
-    return this._project;
-   }
 
    private _refresh: boolean;
    @Input()
@@ -45,6 +39,19 @@ export class ProjectExplorerComponent {
         this.refreshData();
       }
       this._refresh = refresh;
+    }
+
+    private _filter: ActivityFilter;
+    @Input() 
+    set filter(filter: ActivityFilter) {
+      this._filter = filter;   
+      
+      this.projectUID = filter.project;
+      
+      this.refreshData();
+    }
+    get filter(): ActivityFilter {
+      return this._filter;
     }
 
 
@@ -137,7 +144,7 @@ export class ProjectExplorerComponent {
   }
 
   private refreshData() {
-    this.activitiyService.getActivities(this.project.uid)
+    this.activitiyService.getActivities(this.projectUID)
      .then((data) => {
        this.taskList = data;
        this.taskList.forEach(function(e) { if (e.type ==='ObjectType.ProjectObject.Summary'){ e.visible = 'collapse'} else {e.visible ='none'} });

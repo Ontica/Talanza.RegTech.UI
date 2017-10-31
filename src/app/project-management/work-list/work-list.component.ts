@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 import { ActivityRef } from '../data-types/activity';
+import { ActivityFilter } from '../data-types/activity-filter';
+
 import { ActivityService } from '../services/activity.service';
 
 @Component({
@@ -18,10 +20,21 @@ export class WorkListComponent implements OnInit {
   public selectedTask: ActivityRef;
   public procedureUID: string = '';
 
+  private _filter: ActivityFilter;
+  @Input() 
+  set filter(filter: ActivityFilter) {
+    this._filter = filter;   
+   
+    this.loadActivityList();
+  }
+  get filter(): ActivityFilter {
+    return this._filter;
+  }
+
   constructor (private activityService: ActivityService) { }
 
   ngOnInit() {
-    this.getActivities();
+  
   }
 
   public onCloseTaskEditorWindow(): void {
@@ -47,15 +60,15 @@ export class WorkListComponent implements OnInit {
     this.taskList[index] = activity;
   }
 
-  private async getActivities() {
-    const errMsg = 'Ocurrió un problema al intentar leer la lista de actividades.';
+  private loadActivityList(): void {
+    const errMsg = 'Ocurrió un problema al intentar buscar la lista de actividades.';
+   
 
-    await this.activityService.getActivitiesAsWorkList()
-      .toPromise().then((x) => { 
-                                 this.taskList = x;
-                                 console.log(x);
-                               })
-                  .catch((e) => this.exceptionHandler(e, errMsg));
+    this.activityService.getActivitiesAsWorkList(this.filter)
+                        .toPromise()
+                        .then((x) => { this.taskList = x; })
+                        .catch((e) => this.exceptionHandler(e, errMsg));
+                       
   }
 
   private exceptionHandler(error: any, defaultMsg: string): void {
