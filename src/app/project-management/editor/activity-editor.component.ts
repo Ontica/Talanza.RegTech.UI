@@ -54,8 +54,8 @@ export class ActivityEditorComponent {
     this.onCloseEvent.emit();
   } 
 
-  public updateActivity(acitivity: ActivityRef): void {    
-    this.onUpdateActivity.emit(acitivity);
+  public updateActivity(activity: ActivityRef): void {       
+    this.onUpdateActivity.emit(activity);
     this.onClose();
   }
 

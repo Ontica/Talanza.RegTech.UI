@@ -67,10 +67,10 @@ export class ActivityService {
     return this.core.http.put<ActivityRef>(path, task);
   }
 
-  public closeActivity(projectUID: string, activityUID: string, closeTask: ClosedTask): Observable<any[]> {
+  public closeActivity(projectUID: string, activityUID: string, closeTask: ClosedTask): Observable<ActivityRef> {
     const path = `v1/project-management/projects/${projectUID}/activities/${activityUID}/close`;
 
-    return this.core.http.post<any[]>(path, closeTask);
+    return this.core.http.post<ActivityRef>(path, closeTask);
   }
 
   public getTags(): Observable<any[]> {

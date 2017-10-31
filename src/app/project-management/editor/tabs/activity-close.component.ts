@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output, ElementRef, Renderer2, ViewChild } from '@angular/core';
 
 import { ClosedTask, EmptyClosedTask } from '../../data-types/task';
+import { ActivityRef } from '../../data-types/activity';
 
 import { ActivityService } from '../../services/activity.service';
 
@@ -32,7 +33,9 @@ export class ActivityCloseComponent implements OnInit {
     return this._task;
   }
 
-  @Output() public onCloseEvent = new EventEmitter();
+  @Output()  onCloseEvent = new EventEmitter();
+  @Output()  onCloseActivity = new EventEmitter<ActivityRef>();
+
   @ViewChild('dueDateCalendar') el: ElementRef;
 
   constructor(private activityService: ActivityService, private rd: Renderer2) { }
@@ -51,8 +54,6 @@ export class ActivityCloseComponent implements OnInit {
     this.closedTask.requestedByUID = this.task.requestedBy.uid;
 
     await this.closeTask();
-
-    this.onClose();
   }
 
   public cancel(): void {
@@ -114,7 +115,9 @@ export class ActivityCloseComponent implements OnInit {
 
     this.activityService.closeActivity(this.task.project.uid, this.task.uid, this.closedTask)
       .toPromise()
-      .then()
+      .then(x => { this.onCloseActivity.emit(x); 
+                   this.onClose(); 
+                 })
       .catch((e) => this.exceptionHandler(e, errMsg));
   }
 
