@@ -72,7 +72,10 @@ export class ActivityUpdateComponent implements OnInit {
   }
 
   public async onUpdateTask() {    
-    this.setDateCalendar();
+    //this.setDateCalendar();
+    if (!this.validateTargetDate()) {
+      return;
+    }
     this.setSelectedTags();   
   
     await this.updateTask();
@@ -89,6 +92,14 @@ export class ActivityUpdateComponent implements OnInit {
 
   public onSelectedTags(selectedTags: any): void {
     this.selectedTags = selectedTags;
+  }    
+  
+  public parseDate(dateString: string): Date {
+      if (dateString) {
+          return new Date(dateString);
+      } else {
+          return null;
+      }
   }
 
   private loadLists(): void {
@@ -99,10 +110,10 @@ export class ActivityUpdateComponent implements OnInit {
    
     this.selectedTask.name = this.task.name;
     this.selectedTask.notes = this.task.notes;
-    this.selectedTask.requestedByUID = this.task.requestedBy.uid;
+    this.selectedTask.requestedByUID = this.task.requestedBy.uid;    
     this.selectedTask.responsibleUID = this.task.responsible.uid;
     this.selectedTask.resourceUID = this.task.resource.uid;
-    this.selectedTask.targetDate = this.task.targetDate;
+    this.selectedTask.targetDate =  this.task.targetDate;
     this.selectedTask.requestedTime = this.task.startDate;
     this.selectedTask.startDate = this.task.startDate;
     this.selectedTask.progress = this.task.progress;
@@ -188,6 +199,7 @@ export class ActivityUpdateComponent implements OnInit {
     let index = this.tags.findIndex((x) => x.name === tag);    
      this.tags[index].selected = true;
   }
+
   private setIsTaskClosed(): void {
     if (this.task.stage === 'Done') {
       this.isTaskClosed = true;
@@ -195,5 +207,26 @@ export class ActivityUpdateComponent implements OnInit {
       this.isTaskClosed = false;
     }
   }
+
+  private validateTargetDate(): boolean {
+    
+        //this.setDateCalendar();   
+        //this.endDate = new Date(this.el.nativeElement.value);
+        //this.endDate.setHours(0,0,0,0);  
+        let targetDate = new Date(this.selectedTask.targetDate);
+        let dueDate = new Date(this.task.dueDate);
+        let today = new Date();  
+            
+        if (targetDate > today) {
+          alert("La fecha objetivo no puede ser posterior al día de hoy");
+          return false;
+        }
+        if (targetDate > dueDate) {
+          alert("La fecha objetivo de la actividad no puede ser posterior a la fecha máxima de entrega.");
+          return false;
+        }
+    
+        return true;
+      }
 
 }
