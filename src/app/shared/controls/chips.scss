@@ -1,0 +1,20 @@
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  float: left;
+}
+
+.badge {
+  display: block;
+  background-color: #607D8B;
+  border-radius: 4px;
+  color: white;
+  font-size: small;
+  margin: .1em;
+  border-radius: 4px;
+  padding: 0 0.5em 0 0.5em;
+}

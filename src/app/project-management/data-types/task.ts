@@ -5,10 +5,12 @@ export interface TaskRef {
   resourceUID: string,
   startDate: Date,
   targetDate: Date,
+  ragStatus: string,
   requestedByUID: string,
   requestedTime: Date,
-  responsibleUID: string
-  progress: number;
+  responsibleUID: string,
+  progress: number,
+  tags: string[]
   }
 
   export function EmptyTask() {
@@ -18,10 +20,12 @@ export interface TaskRef {
       resourceUID: '',
       startDate: new Date(),
       targetDate: new Date(),
+      ragStatus: '',
       requestedByUID: '',
       requestedTime: new Date(),
       responsibleUID:'',
-      progress: 0
+      progress: 0,
+      tags: []
     }
 
     return empty;
@@ -51,4 +55,10 @@ export interface TaskRef {
     duration: number;
     parent: number;
     type: string;
+}
+
+ export interface Tag {
+  color: string,
+  name: string,
+  selected: boolean;
 }

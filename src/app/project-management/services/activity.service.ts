@@ -13,6 +13,7 @@ import { CoreService } from '../../core';
 
 import { ClosedTask, Task, TaskRef } from '../data-types/task';
 import { Activity, ProjectRef, ResourceRef } from '../data-types/project';
+import { ActivityFilter } from '../data-types/activity-filter';
 
 import { ActivityRef } from '../data-types/activity';
 
@@ -20,57 +21,78 @@ import { ActivityRef } from '../data-types/activity';
 export class ActivityService {
 
   public constructor(private core: CoreService) { }
- 
-  public addManualActivity(projectUID:string, activity:Activity): Observable<any[]> {
+
+  public addManualActivity(projectUID: string, activity: Activity): Observable<any[]> {
     const path = `v1/project-management/projects/${projectUID}/activities`;
 
     return this.core.http.post<any[]>(path, activity);
   }
 
-  public getActivity(itemId: number): Observable<any> {    
+  public getActivity(itemId: number): Observable<any> {
     const path = `v1/project-management/activities/${itemId}`;
 
     return this.core.http.get<any>(path);
-  }  
+  }
 
   public searchActivities(projectUID: string, filter: object,
-                          orderBy: string, keywords: string): Observable<Task[]> {
-  
+    orderBy: string, keywords: string): Observable<Task[]> {
+
     const path = `v1/project-management/projects/${projectUID}/activities?filter=${filter}
                           &orderBy=${orderBy}&keywords=${keywords}`;
 
-    return this.core.http.get<Task[]>(path);                      
+    return this.core.http.get<Task[]>(path);
   }
 
   public getActivitiesListAsGantt(projectId: string): Promise<Task[]> {
-    const path = `v1/project-management/projects/${projectId}/activities/as-gantt`;    
+    const path = `v1/project-management/projects/${projectId}/activities/as-gantt`;
 
     return this.core.http.get<Task[]>(path)
-                         .toPromise();
+      .toPromise();
 
   }
 
   public getActivities(projectId: string): Promise<ActivityRef[]> {
     const path = `v1/project-management/projects/${projectId}/activities`;
-                 
+
     return this.core.http.get<ActivityRef[]>(path)
-                         .toPromise();
+      .toPromise();
 
   }
 
-  public updateActivity(projectUID:string, activityUID: string, task: TaskRef): 
-  Observable<TaskRef> {
-  const path = `v1/project-management/projects/${projectUID}/activities/${activityUID}`;
+  public updateActivity(projectUID: string, activityUID: string, task: TaskRef):
+    Observable<ActivityRef> {
+    const path = `v1/project-management/projects/${projectUID}/activities/${activityUID}`;
 
 
-  return this.core.http.put<TaskRef>(path,task);
-}
+    return this.core.http.put<ActivityRef>(path, task);
+  }
 
-public closeActivity(projectUID:string, activityUID:string, closeTask: ClosedTask): Observable<any[]> {
-  const path = `v1/project-management/projects/${projectUID}/activities/${activityUID}/close`;
-                
-  return this.core.http.post<any[]>(path, closeTask);
-}
+  public closeActivity(projectUID: string, activityUID: string, closeTask: ClosedTask): Observable<ActivityRef> {
+    const path = `v1/project-management/projects/${projectUID}/activities/${activityUID}/close`;
+
+    return this.core.http.post<ActivityRef>(path, closeTask);
+  }
+
+  public getTags(): Observable<any[]> {
+    const path = `v1/project-management/tags`;
+
+    return this.core.http.get<any[]>(path);
+  }
+
+  public getActivitiesAsWorkList(filter?: ActivityFilter): Observable<ActivityRef[]> {    
+
+    let filterAsString = '';
+
+    if (filter instanceof ActivityFilter) {
+      filterAsString = '?' + filter.toString();   
+    } 
+
+    const path = `v1/project-management/projects/activities/as-work-list${filterAsString}`;
+    console.log(path);
+    
+
+    return this.core.http.get<any>(path)
+  }
 
 }
 

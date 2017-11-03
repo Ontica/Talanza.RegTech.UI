@@ -1,98 +1,10 @@
-<table class="grid-search-table">
-  <tr>
-    <td>Contrato:</td>
-    <td>
-      <select #contract class="select-box" style="width:160px;" (change)="onChangeContractList(contract.value)">
-        <option value="">( Todos )</option>
-        <option value="Ronda 2.1 Bloque 11">Ronda 2.1 Bloque 11</option>
-      </select>
-    </td>
-    <td>Etapa:</td>
-    <td>
-      <select #stage class="select-box" style="width:160px" (change)="onChangeStage(stage.value)">
-        <option value="">( No filtrar )</option>
-        <option value="Transición">Transición</option>
-        <option value="Evaluación">Evaluación</option>
-        <option value="Exploración">Exploración</option>
-        <option value="Desarrollo">Desarrollo</option>
-        <option value="Producción">Producción</option>
-        <option value="Abandono">Abandono</option>
-        <option value="Transversales">Transversales</option>
-      </select>
-    </td>
-    <td>Buscar:</td>
-    <td colspan="3">
-      <input type="search" class="text-box" style="width:344px" (keyup.enter)="onSearch()">
-      <button class="btn" style="width:55px;" (click)="onSearch()">Buscar</button>
-    </td>
-    <td colspan="2">
-      <button type="button" class="btn-warning align-center" style="width:185px" (click)="onClickAddActivity()">+ Agregar actividad o evento</button>
-    </td>
-    <td colspan="4"><a (click)="cleanFilter()">Limpiar filtros</a></td>
-  </tr>
-  <tr>
-    <td>Proyecto:</td>
-    <td>
-      <select #project class="select-box" style="width:160px;" (change)="onChangeProjectList(project.value)">
-        <option value="">( Todos )</option>
-        <option *ngFor="let project of projectsList"[value]="project.uid">{{project.name}}</option>
-      </select>
-    </td>
-    <td>Etiqueta:</td>
-    <td>
-      <select #labels class="select-box" style="width:160px" (change)="onChangeLabelsList(labels.value)">
-        <option value="">( No filtrar )</option>
-        <option *ngFor="let label of labelsList" [value]="label.name">{{label.name}}</option>
-      </select>
-    </td>
-    <td>Responsable:</td>
-    <td>
-      <select style="width:180px" class="select-box" #responsible (change)="onChangeResponsible(responsible.value)">
-        <option value="">( Todos ) </option>
-        <option *ngFor="let responsible of responsiblesList" [value]="responsible.uid">{{responsible.name}}</option>
-      </select>
-    </td>
-    <td>Ordenar por:</td>
-    <td>
-      <select style="width:136px" class="select-box" #orderBy (change)="onChangeOrderBy(orderBy.value)">
-        <option value="Default">( No ordenar )</option>
-        <option value="DueDate">Fecha Máx de Entrega</option>
-        <option value="TargetDate">Fecha Objetivo</option>
-        <option value="Responsible">Responsable</option>
-        <option value="Activity">Nombre de la tarea</option>
-      </select>
-    </td>
-    <td>Vista:</td>
-    <td>
-      <select style="width:146px" class="select-box" [(ngModel)]="selectedView">
-        <option value="tasksList">Lista de tareas</option>
-        <option value="gantt">Gantt</option>
-        <option value="kanban">Kanban</option>
-        <option value="calendar">Calendario</option>
-      </select>
-    </td>
-    <td>Escala:</td>
-    <td>
-      <select style="width:98px" class="select-box" [(ngModel)]="selectedScale">
-        <option value="quarters">Trimestral</option>
-        <option value="months">Mensual</option>
-        <option value="weeks">Semanal</option>
-      </select>
-    </td>
-  </tr>
+<projects-filter (onChangeFilter)="onChangeFilter($event)" (onChangeDisplayFilter)="onChangeDislpayFilter($event)" (onAddActivity)="setAddActivityVisible($event)" (onRefreshWorkList)="isRefreshWorkList=$event"></projects-filter>
 
-</table>
-<div *ngIf="isAddActivityEditorWindowVisible" class="popup">
-  <activity-add [project]="selectedProject" [parentId]="null" [topUbication]="10" (onCloseEvent)="onCloseAddActivityEditorWindow()"></activity-add>
-</div>
-
-
-<div *ngIf="isGanttGraphVisible">
+<div *ngIf="!isAddActivityVisible">
   <div [ngSwitch]="selectedView">
-    <activity-list-grid [project]="selectedProject" [refresh]="isRefreshWorkList" *ngSwitchCase="'tasksList'"></activity-list-grid>
-    <!--
-    <worklists-main-page [project]="selectedProject" *ngSwitchCase="'kanban'"></worklists-main-page>-->
-    <gantt [project]="selectedProject" [config]="selectedScale" *ngSwitchDefault></gantt>
+    <work-list [filter]="filter" *ngSwitchCase="'work-list'"></work-list>
+    <project-explorer [filter]="filter" [refresh]="isRefreshWorkList" *ngSwitchCase="'activity-tree'"></project-explorer>
+    <gantt [filter]="filter" [config]="selectedScale" *ngSwitchCase="'gantt'"></gantt>
+    <project-explorer [filter]="filter" [refresh]="isRefreshWorkList" *ngSwitchDefault></project-explorer>
   </div>
-  <!--<gantt [project]="selectedProject " [config]="ganttConfig"></gantt>-->
 </div>

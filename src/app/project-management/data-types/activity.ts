@@ -23,10 +23,12 @@ export interface ActivityRef {
   estimatedDuration : string,
   id : number,
   name : string,
+  notes: string,
   parent : Parent,
   procedure : Procedure  
   progress : number,0
   project : KeyValue, 
+  ragStatus: string,
   requestedBy : KeyValue,
   resource : KeyValue, 
   responsible : KeyValue,
@@ -34,6 +36,7 @@ export interface ActivityRef {
   startDate : Date,  
   targetDate : Date,
   type : string,  
-  uid : string,  
+  uid : string,
+  tags: string[],  
   visible : string
 }

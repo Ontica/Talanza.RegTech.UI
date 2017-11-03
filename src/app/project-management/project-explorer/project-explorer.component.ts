@@ -9,16 +9,18 @@ import { Component, Input }  from '@angular/core';
 
 import { ProjectRef } from '../data-types/project';
 import { ActivityRef } from '../data-types/activity';
+import { ActivityFilter } from '../data-types/activity-filter';
+
 import { ActivityService } from '../services/activity.service';
 
 @Component ({
-  selector: 'activity-list-grid',
-  templateUrl: './activity-list-grid.component.html',
-  styleUrls: ['./activity-list-grid.component.scss'],
+  selector: 'project-explorer',
+  templateUrl: './project-explorer.component.html',
+  styleUrls: ['./project-explorer.component.scss'],
   providers: [ActivityService]
 })
 
-export class ActivityListGridComponent {
+export class ProjectExplorerComponent {
 
   public isTaskEditorVisible = false;
   public isVisibleProcedureInfo = false;
@@ -26,17 +28,9 @@ export class ActivityListGridComponent {
   public selectedTask:any;
   public procedureUID: string = '';
   public expanOrCollapseIcon = 'fa fa-minus-circle';
+  public projectUID: string = '';
 
   private _project: ProjectRef;
-  @Input()
-   set project(project: ProjectRef) {
-     this._project = project;
-     this.refreshData();
-
-   }
-   get project(): ProjectRef {
-    return this._project;
-   }
 
    private _refresh: boolean;
    @Input()
@@ -47,12 +41,24 @@ export class ActivityListGridComponent {
       this._refresh = refresh;
     }
 
+    private _filter: ActivityFilter;
+    @Input() 
+    set filter(filter: ActivityFilter) {
+      this._filter = filter;   
+      
+      this.projectUID = filter.project;
+      
+      this.refreshData();
+    }
+    get filter(): ActivityFilter {
+      return this._filter;
+    }
+
 
   constructor (private activitiyService: ActivityService) { }
 
   public onCloseTaskEditorWindow(): void {
-    this.isTaskEditorVisible = false;
-    this.refreshData();
+    this.isTaskEditorVisible = false;    
   }
 
   public onClickAddActivity():void {
@@ -94,6 +100,11 @@ export class ActivityListGridComponent {
     this.isVisibleProcedureInfo = false;
   }
 
+  public onUpdateActivity(activity: ActivityRef): void {
+     let index = this.taskList.findIndex(x => x.uid === activity.uid);
+     this.taskList[index] = activity;
+   }
+
   public expandOrCollapse(parentUID: string): void {
    let index = this.taskList.findIndex((e) => e.parent.uid === parentUID) - 1;
 
@@ -133,7 +144,7 @@ export class ActivityListGridComponent {
   }
 
   private refreshData() {
-    this.activitiyService.getActivities(this.project.uid)
+    this.activitiyService.getActivities(this.projectUID)
      .then((data) => {
        this.taskList = data;
        this.taskList.forEach(function(e) { if (e.type ==='ObjectType.ProjectObject.Summary'){ e.visible = 'collapse'} else {e.visible ='none'} });

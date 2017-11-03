@@ -5,6 +5,7 @@ import { } from "@types/dhtmlxgantt";
 
 import { ActivityService } from '../services/activity.service';
 import { ProjectRef } from '../data-types/project';
+import { ActivityFilter } from '../data-types/activity-filter';
 
 @Component({
   selector: "gantt",
@@ -31,14 +32,18 @@ import { ProjectRef } from '../data-types/project';
 
 export class GanttComponent implements OnChanges {
   @ViewChild("gantt_here") ganttContainer: ElementRef;
-  private _project: ProjectRef;
-  @Input() 
-   set project(project: ProjectRef) {
-     this._project = project;
-     this.refreshData();
+
+   private _filter: ActivityFilter;
+   @Input() 
+   set filter(filter: ActivityFilter) {
+     this._filter = filter;  
+
+    this.projectUID = filter.project;
+
+    this.refreshData();
    }
-   get project(): ProjectRef {
-    return this._project;
+   get filter(): ActivityFilter {
+     return this._filter;
    }
 
   //@Input() public project: ProjectRef;
@@ -49,6 +54,7 @@ export class GanttComponent implements OnChanges {
   public isStartActivityEditorWindowVisible = false;
   public parentId: number = -1;
   public activityId: number = -1;
+  public projectUID: string = '';
 
   constructor(private activityService: ActivityService) { }
 
@@ -132,7 +138,7 @@ export class GanttComponent implements OnChanges {
   }
 
   private refreshData() {    
-     this.activityService.getActivitiesListAsGantt(this.project.uid)
+     this.activityService.getActivitiesListAsGantt(this.projectUID)
       .then((data) => {        
         gantt.clearAll();
         gantt.parse({ data });

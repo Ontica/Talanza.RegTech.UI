@@ -1,0 +1,27 @@
+@import "../../../styles/grid";
+table.grid tbody {
+  height: calc(100vh - 260px);
+}
+
+table.grid tbody tr {
+  height: auto;
+  display: block;
+  overflow: hidden;
+}
+
+.no-summary td {
+  padding-top: 12px;
+  min-height: 48pt;
+  height: auto;
+  padding-left: 30pt;
+}
+
+.tag {
+  background-color: $red;
+  border-radius: 4px;
+  color: $white;
+  font-size: small;
+  margin: .1em;
+  border-radius: 4px;
+  padding: 0 0.5em 0 0.5em;
+}

@@ -9,11 +9,12 @@
     <ng-container *ngIf="task.procedure.uid !== 'Undefined'">
       <button class="tab-links left-position" [disabled]="isDisabled" [class.selected]="selectedTask==='requirements'" (click)="setSelectedTask('requirements')">Requisitos y documentos</button>
     </ng-container>
+    <button class="tab-links left-position" [disabled]="isDisabled" [class.selected]="selectedTask==='closeTask'" (click)="setSelectedTask('closeTask')"><span [innerHTML]="concluededTaskLabel"> </span></button>
   </div>
 
   <div class="form-frame" [ngSwitch]="selectedTask">
-    <task-update *ngSwitchCase="'generalInfo'" [task]="task" (onCloseEvent)="onCloseTaskEditor()" (onCloseTaskEditorVisible)="onShowCloseTaskEditor()"></task-update>
-    <task-close *ngSwitchCase="'closeTask'" [task]="task" (onCloseEvent)="onCloseTaskEditor()"></task-close>
+    <task-update *ngSwitchCase="'generalInfo'" [task]="task" (onUpdateActivity)="updateActivity($event)" (onCloseEvent)="onClose()"></task-update>
+    <task-close *ngSwitchCase="'closeTask'" [task]="task" (onCloseActivity)="updateActivity($event)" (onCloseEvent)="onClose()"></task-close>
     <pe-requirements *ngSwitchCase="'requirements'" [procedureUID]="task.procedure.uid"></pe-requirements>
   </div>
 </div>
