@@ -3,12 +3,6 @@ table.grid tbody {
   height: calc(100vh - 260px);
 }
 
-table.grid tbody tr {
-  height: auto;
-  display: block;
-  overflow: hidden;
-}
-
 .no-summary td {
   padding-top: 12px;
   min-height: 48pt;
