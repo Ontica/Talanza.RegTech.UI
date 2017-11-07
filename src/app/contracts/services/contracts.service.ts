@@ -11,7 +11,8 @@ import { Observable } from 'rxjs/Observable';
 
 import { CoreService } from '../../core';
 
-import { Contract, ContractClause, EmptyContractClause, RelatedProcedure } from '../data-types/contract';
+import { Contract, ContractClause, EmptyContractClause, 
+         RelatedProcedure, Obligation } from '../data-types/contract';
 
 export enum ContractServiceErr {
   GET_CLAUSE_ERR =
@@ -80,6 +81,12 @@ export class ContractsService {
 
     return this.core.http
                     .post<RelatedProcedure>(path, relatedProcedure);
+  }
+
+  public getObligations(contractUID: string, clauseUID: string): Observable<Obligation> {
+    const path =`v1/contracts/${contractUID}/clauses/${clauseUID}/rules`;
+
+    return this.core.http.get<Obligation>(path);
   }
 
 }
