@@ -45,7 +45,7 @@ import { ProjectsFilterComponent } from './main-page/projects-filter.component';
                  ActivityAddComponent,ActivitySelectorComponent, ActivityDescriptionComponent,
                  ActivityWorklistComponent, ActivityInfoComponent,
                  ActivityUpdateComponent, WorkListComponent, ProjectsFilterComponent ],
-  exports: [ProjectExplorerComponent,
+  exports: [ProjectExplorerComponent, ActivityEditorComponent,
             ProjectsMainPageComponent, GanttComponent]
 })
 export class ProjectManagementModule { }

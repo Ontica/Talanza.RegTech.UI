@@ -1,0 +1,12 @@
+<inbox-filter (onChangeFilter)="onChangeFilter($event)" (onChangeDisplayFilter)="onChangeDislpayFilter($event)" (onAddActivity)="setAddActivityVisible($event)" (onRefreshWorkList)="isRefreshWorkList=$event"></inbox-filter>
+<work-list [filter]="filter"></work-list>
+<!--
+<div *ngIf="!isAddActivityVisible">
+  <div [ngSwitch]="selectedView">
+   
+    <project-explorer [filter]="filter" [refresh]="isRefreshWorkList" *ngSwitchCase="'activity-tree'"></project-explorer>
+    <gantt [filter]="filter" [config]="selectedScale" *ngSwitchCase="'gantt'"></gantt>
+    <project-explorer [filter]="filter" [refresh]="isRefreshWorkList" *ngSwitchDefault></project-explorer>
+  </div>
+</div>
+-->
