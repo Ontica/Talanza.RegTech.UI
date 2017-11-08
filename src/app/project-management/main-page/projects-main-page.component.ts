@@ -29,7 +29,7 @@ export class ProjectsMainPageComponent implements OnInit {
 
   public selectedProject: ProjectRef = EmptyProjectRef();
 
-  public selectedView = 'work-list';
+  public selectedView = '';
   public ganttConfig = 'ganttWeeks';
   public selectedScale = 'quarters';
  

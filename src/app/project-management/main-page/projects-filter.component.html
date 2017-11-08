@@ -3,7 +3,7 @@
     <td>Contrato:</td>
     <td>
       <select #contract class="select-box" style="width:160px;" [(ngModel)]="filter.contract">
-        <option value="">( Todos )</option>
+        <option value="">( Seleccionar )</option>
         <option value="567">Ronda 2.1 Bloque 11</option>
       </select>
     </td>
@@ -34,7 +34,7 @@
     <td>Proyecto:</td>
     <td>
       <select #project class="select-box" style="width:160px;" (change)="onChangeProjectList(project.value)" [(ngModel)]="filter.project">
-        <option value="">( Todos )</option>
+        <option value="">( Seleccionar )</option>
         <option *ngFor="let project of projectsList"[value]="project.uid">{{project.name}}</option>
       </select>
     </td>
@@ -61,8 +61,7 @@
     </td>
     <td>Vista:</td>
     <td>
-      <select style="width:146px " class="select-box " (change)="changeDislpayFilter() " [(ngModel)]="displayFilter.selectedView">
-        <option value="work-list">Bandeja de tareas</option>
+      <select style="width:146px " class="select-box " (change)="changeDislpayFilter() " [(ngModel)]="displayFilter.selectedView">     
         <option value="project-explorer">Etapas / actividades</option>
         <option value="gantt">Gantt</option>
         <option value="kanban">Kanban</option>

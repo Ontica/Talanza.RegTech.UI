@@ -50,7 +50,7 @@ export class ProjectsFilterComponent implements OnInit {
   public constructor(private projectService: ProjectService, private activityService: ActivityService) { }
 
   public ngOnInit() {
-    this.displayFilter.selectedView = 'work-list';
+    this.displayFilter.selectedView = 'project-explorer';
     this.displayFilter.ganttConfig = 'ganttWeeks';
     this.displayFilter.selectedScale = 'quarters';
     this.loadProjectList();
