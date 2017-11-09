@@ -1,18 +1,18 @@
 export interface InboxRef {
   description: string,
-  extensionData: ExtensionData,  
-  externalUID: string,  
-  from: UidName, 
+  extensionData: ExtensionData,
+  externalUID: string,
+  from: UidName,
   received: Date,
   status: string,
-  title: string,  
-  to: UidName,  
+  title: string,
+  to: UidName,
   type: string,
-  uid: string  
+  uid: string
 }
 
 interface ExtensionData {
-  dueDate: Date,  
+  dueDate: Date,
   ragStatus: string,
   stage:string,
   tags: string[]

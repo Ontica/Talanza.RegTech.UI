@@ -8,9 +8,8 @@
 
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
-import { EmptyProjectRef, PersonRef, 
-         ProjectRef, ResourceRef } from '../../project-management/data-types/project';
-import { ActivityFilter } from '../../project-management/data-types/activity-filter';
+import { EmptyProjectRef, PersonRef, ProjectRef } from '../../project-management/data-types/project';
+import { InboxFilter } from '../data-types/inbox-filter';
 
 import { ProjectService } from '../../project-management/services/project.service';
 import { ActivityService } from '../../project-management/services/activity.service';
@@ -34,25 +33,15 @@ export class InboxFilterComponent implements OnInit {
  
   public keywords = '';
 
-  public filter: ActivityFilter = new ActivityFilter();
+  public filter: InboxFilter = new InboxFilter();
  
-  @Output() onChangeFilter = new EventEmitter<ActivityFilter>();
+  @Output() onChangeFilter = new EventEmitter<InboxFilter>();
  
-  @Output() onAddActivity = new EventEmitter<boolean>();
-  @Output() onRefreshWorkList =  new EventEmitter<boolean>();
-
   public constructor(private projectService: ProjectService, private activityService: ActivityService) { }
 
   public ngOnInit() {    
     this.loadProjectList();
     this.loadTags();
-  }
-
-  public onCloseAddActivityEditorWindow(): void {
-    this.isAddActivityEditorWindowVisible = false;
-    this.onAddActivity.emit(false);
-   
-    this.onRefreshWorkList.emit(true);
   }
 
   public onChangeProjectList(projectUID: string): void {
@@ -71,7 +60,6 @@ export class InboxFilterComponent implements OnInit {
   }
 
   public onChangeSelectedTags(tags: any[]) {
-
     this.filter.tags = tags.map(x => x.name);
     this.changeFilter();   
   }
@@ -83,14 +71,8 @@ export class InboxFilterComponent implements OnInit {
     this.onChangeFilter.emit(this.filter);
   }
 
-  public onClickAddActivity(): void {
-    if (this.selectedProject.uid === '') {
-      alert("Requiero se seleccione el proyecto al cual se le agregará la actividad.");
-      return;
-    }
-    this.onAddActivity.emit(true);
-  
-    this.isAddActivityEditorWindowVisible = true;
+  public onClickAdd(): void {
+    alert('Esta tarea se encuentra en desarrollo ' + '\n\n' + 'Lamentamos las molestias ');   
   }
 
   public onSearch(): void {     

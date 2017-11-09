@@ -1,76 +1,47 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
-import { ActivityRef } from '../../project-management/data-types/activity';
-import { ActivityFilter } from '../../project-management/data-types/activity-filter';
+import { InboxRef } from '../data-types/inbox';
+import { InboxFilter } from '../data-types/inbox-filter';
 
-import { ActivityService } from '../../project-management/services/activity.service';
+import { InboxService } from '../services/inbox.service';
 
 @Component({
   selector: 'work-list',
   templateUrl: './work-list.component.html',
   styleUrls: ['./work-list.component.scss'],
-  providers: [ActivityService]
+  providers: [InboxService]
 })
 
-export class WorkListComponent implements OnInit {
+export class WorkListComponent {
 
-  public taskList: ActivityRef[] = [];
-  public isTaskEditorVisible = false;
-  public isVisibleProcedureInfo = false;
-  public selectedTask: ActivityRef;
+  public taskList: InboxRef[] = [];
+
+  public selectedTask: InboxRef;
   public procedureUID: string = '';
 
-  private _filter: ActivityFilter;
+  private _filter: InboxFilter;
   @Input() 
-  set filter(filter: ActivityFilter) {
+  set filter(filter: InboxFilter) {
     this._filter = filter;   
-   
-    this.loadActivityList();
+
+    this.loadInboxes();    
   }
-  get filter(): ActivityFilter {
+  get filter(): InboxFilter {
     return this._filter;
   }
 
-  constructor (private activityService: ActivityService) { }
+  constructor (private inboxService: InboxService) { }
 
-  ngOnInit() {
+  private loadInboxes(): void {
+    const errMsg = 'Ocurrió un problema al intentar buscar la lista de elementos en el inbox.';
+
+    this.inboxService.getInboxItems(this.filter)
+                      .toPromise()
+                      .then((x) => { this.taskList = x; } )
+                      .catch((e) => this.exceptionHandler(e, errMsg));
+    
+  }
   
-  }
-
-  public onCloseTaskEditorWindow(): void {
-    this.isTaskEditorVisible = false;    
-  }
- 
-  public onShowTaskEditor(selectedTask: any): void {
-    this.selectedTask = selectedTask;
-    this.isTaskEditorVisible = true;
-  }
-
-  public onShowProcedureInfo(procedureUID: string): void {
-    this.procedureUID = procedureUID;
-    this.isVisibleProcedureInfo = true;
-  }
-
-  public onCloseProcedureInfoWindow(): void {
-    this.isVisibleProcedureInfo = false;
-  }
-
-  public onUpdateActivity(activity: ActivityRef): void {
-    let index = this.taskList.findIndex(x => x.uid === activity.uid);
-    this.taskList[index] = activity;
-  }
-
-  private loadActivityList(): void {
-    const errMsg = 'Ocurrió un problema al intentar buscar la lista de actividades.';
-   
-
-    this.activityService.getActivitiesAsWorkList(this.filter)
-                        .toPromise()
-                        .then((x) => { this.taskList = x; })
-                        .catch((e) => this.exceptionHandler(e, errMsg));
-                       
-  }
-
   private exceptionHandler(error: any, defaultMsg: string): void {
     let errMsg = 'Tengo un problema.\n\n';
 

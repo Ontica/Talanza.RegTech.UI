@@ -6,10 +6,9 @@
  *
  */
 
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
-import { EmptyProjectRef, PersonRef, ProjectRef, ResourceRef } from '../../project-management/data-types/project';
-import { ActivityFilter } from '../../project-management/data-types/activity-filter';
+import { InboxFilter } from '../data-types/inbox-filter';
 import { ActivityRef } from '../../project-management/data-types/activity';
 
 import { ProjectService } from '../../project-management/services/project.service';
@@ -23,40 +22,14 @@ import { ActivityService } from '../../project-management/services/activity.serv
   providers: [ProjectService, ActivityService]
 })
 
-export class InboxMainPageComponent implements OnInit {
-  
-  public isAddActivityVisible = false;
-n
-  public selectedProject: ProjectRef = EmptyProjectRef();
-
-  public selectedView = 'work-list';
-  public ganttConfig = 'ganttWeeks';
-  public selectedScale = 'quarters';
+export class InboxMainPageComponent  {
  
-  public taskList: ActivityRef[] = [];
-
-  public isRefreshWorkList = false;
-
-  public filter: ActivityFilter = new ActivityFilter();
+  public filter: InboxFilter = new InboxFilter();
   
   public constructor(private projectService: ProjectService, private activityService: ActivityService) { }
 
-  public ngOnInit() {
-   
-  }
-
-
-  public  onChangeFilter(receivedFilter: ActivityFilter) {    
+  public  onChangeFilter(receivedFilter: InboxFilter) {    
     this.filter = receivedFilter;     
-  }
-  
-  public onChangeDislpayFilter(displayFilter: any): void {
-    this.selectedView = displayFilter.selectedView;
-    this.selectedScale = displayFilter.selectedScale;   
-  }
-
- public setAddActivityVisible(isAddActivityVisible: boolean): void {  
-   this.isAddActivityVisible = isAddActivityVisible;
- }
-   
+  }  
+ 
 }
