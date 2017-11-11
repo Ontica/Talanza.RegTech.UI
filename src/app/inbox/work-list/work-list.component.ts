@@ -14,11 +14,10 @@ import { InboxService } from '../services/inbox.service';
 
 export class WorkListComponent {
 
-  public taskList: InboxRef[] = [];
-
-  public selectedTask: InboxRef;
-  public procedureUID: string = '';
-
+  public inboxList: InboxRef[] = [];
+  public selectedItem: InboxRef;
+  public isEditorWindow = false;
+  
   private _filter: InboxFilter;
   @Input() 
   set filter(filter: InboxFilter) {
@@ -32,12 +31,21 @@ export class WorkListComponent {
 
   constructor (private inboxService: InboxService) { }
 
+  public closeInboxEditorWindow(): void {
+    this.isEditorWindow = false;
+  }
+
+  public openInboxEditorWindow(selectedItem: any): void {
+    this.selectedItem = selectedItem;
+    this.isEditorWindow = true;
+  }
+
   private loadInboxes(): void {
     const errMsg = 'Ocurrió un problema al intentar buscar la lista de elementos en el inbox.';
 
     this.inboxService.getInboxItems(this.filter)
                       .toPromise()
-                      .then((x) => { this.taskList = x; } )
+                      .then((x) => { this.inboxList = x; } )
                       .catch((e) => this.exceptionHandler(e, errMsg));
     
   }

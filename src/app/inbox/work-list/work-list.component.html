@@ -9,19 +9,19 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let task of taskList">
+    <tr *ngFor="let inbox of inboxList">
       <td style="width:30%">
-        {{task.title}}
+        <a (click)="openInboxEditorWindow(inbox)">{{inbox.title}}</a>
       </td>
       <td style="width:15%;">
-        Fecha Máxima: &nbsp;{{task.extensionData.dueDate | date: 'dd/MMM/yyyy'}}
+        Fecha Máxima: &nbsp;{{inbox.extensionData.dueDate | date: 'dd/MMM/yyyy'}}
       </td>
       <td style="width:8%;" class="text-align-center">
-        <rag-control [status]="task.extensionData.ragStatus"></rag-control>
+        <rag-control [status]="inbox.extensionData.ragStatus"></rag-control>
       </td>
-      <td style="width:15%;">{{task.to.name}} </td>
+      <td style="width:15%;">{{inbox.to.name}} </td>
       <td style="width:20%">
-        <ng-container *ngFor="let tag of task.extensionData.tags">
+        <ng-container *ngFor="let tag of inbox.extensionData.tags">
           <span class="tag">{{tag}}</span>
         </ng-container>
       </td>
@@ -31,11 +31,14 @@
 <div class="grid-footer">
   <table class="grid-footer-style">
     <tr>
-      <td class="grid-footer-items" style="width:30%">{{taskList.length}} tareas encontradas</td>
+      <td class="grid-footer-items" style="width:30%">{{inboxList.length}} tareas encontradas</td>
       <td class="grid-footer-items text-align-center">
 
       </td>
       <td class="grid-footer-items text-align-right ">Página 1 de 1</td>
     </tr>
   </table>
+</div>
+<div *ngIf="isEditorWindow">
+  <inbox-editor [inboxItem]="selectedItem" (onCloseEvent)="closeInboxEditorWindow()"></inbox-editor>
 </div>
