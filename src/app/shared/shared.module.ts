@@ -21,6 +21,8 @@ import { AutocompleteControl } from './controls/autocomplete-control';
 import { Chips } from './controls/chips';
 import { RAGControl } from './controls/rag.control';
 
+import { NavBarService } from './navbar/navbar.service';
+
 /**
  * Do not specify providers for modules that might be imported by a lazy loaded module.
  */
@@ -30,6 +32,7 @@ import { RAGControl } from './controls/rag.control';
   declarations: [MainLayoutComponent, NavbarComponent, NoContentComponent, SafeHtmlPipe,
                  AutocompleteControl, Chips, RAGControl],
   exports: [MainLayoutComponent, NoContentComponent, SafeHtmlPipe, AutocompleteControl, Chips,
-            RAGControl]
+            RAGControl],
+  providers:[NavBarService]
 })
 export class SharedModule { }

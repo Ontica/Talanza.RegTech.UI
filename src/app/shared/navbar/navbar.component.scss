@@ -30,8 +30,8 @@
 }
 
 .selected a {
-  color: white;
-  text-decoration: none;
+  font-weight: 600;
+  border-bottom: 2px solid $blue;
 }
 
 .first-li {
