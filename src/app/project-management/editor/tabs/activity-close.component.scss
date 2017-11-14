@@ -1,4 +1,5 @@
 @import "../../../../styles/form";
+@import "../../../../styles/table";
 .check-circle-color {
   color: $rag-status-green;
 }
@@ -6,4 +7,23 @@
 .close-label-message {
   color: $rag-status-green;
   font-size: medium;
+}
+
+table.table {
+  width: 90%;
+  font-size: 10pt;
+  margin-left: 15pt;
+  font-size: 10pt;
+}
+
+.working-activity-color {
+  color: $orange;
+}
+
+.stop-activity-color {
+  color: $red;
+}
+
+table {
+  width: 90%;
 }
