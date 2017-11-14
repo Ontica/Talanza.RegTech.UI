@@ -88,11 +88,7 @@ export class ActivityCloseComponent implements OnInit {
 
   }
 
-  private validateDueDate(): boolean {
-
-    //this.setDateCalendar();   
-    //this.endDate = new Date(this.el.nativeElement.value);
-    //this.endDate.setHours(0,0,0,0);  
+  private validateDueDate(): boolean {    
     let dueDate = new Date(this.task.dueDate);
     let today = new Date();
 
@@ -100,10 +96,6 @@ export class ActivityCloseComponent implements OnInit {
 
     if (this.endDate > today) {
       alert("La fecha de termino no puede ser posterior al día de hoy");
-      return false;
-    }
-    if (this.endDate > dueDate) {
-      alert("La fecha de término de la actividad no puede ser posterior a la fecha legal.");
       return false;
     }
 
@@ -136,7 +128,7 @@ export class ActivityCloseComponent implements OnInit {
     if (this.task.stage === 'Done') {
       this.isTaskClosed = true;
     } else {
-      this.isTaskClosed = false;
+      this.isTaskClosed = false;      
     }
   }
 

@@ -36,6 +36,7 @@
       </select>
     </td>
   </tr>
+
 </table>
 <table class="form">
   <tr>
@@ -43,10 +44,11 @@
   </tr>
   <tr>
     <td>Etiquetas:</td>
-    <td style='width:200px'>
-      <autocomplete-control [tags]="tags" [config]="{valueField: 'name'}" (selected)="onSelectedTags($event)"></autocomplete-control>
-    </td>
     <td>
+      <autocomplete-control style='width:200px' [tags]="tags" [config]="{valueField: 'name'}" (selected)="onSelectedTags($event)"></autocomplete-control>
+    </td>
+
+    <td style="width:300px">
       <chips [items]="selectedTags"></chips>
     </td>
   </tr>
@@ -58,7 +60,7 @@
   <tr>
     <td>Fecha objetivo:</td>
     <td>
-      <input type="date" class="text-box" [disabled]="isTaskClosed" #myDate [value]="selectedTask.targetDate | date:'yyyy-MM-dd'" (input)="selectedTask.targetDate=parseDate($event.target.value)" style="width:100px" /> </td>
+      <input type="date" class="text-box" [disabled]="isTaskClosed" #myDate [value]="selectedTask.targetDate | date:'yyyy-MM-dd'" (input)="selectedTask.targetDate=parseDate($event.target.value)" /> </td>
     <!--<input type="date"  data-date-format="dd-mm-yyyy" [ngModel]="selectedTask.targetDate | date: 'dd-MM-yyyy'"> </td>
     <!--
     <td style="width:70% ">
