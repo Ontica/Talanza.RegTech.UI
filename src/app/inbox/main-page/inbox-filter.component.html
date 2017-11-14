@@ -2,18 +2,19 @@
   <tr>
     <td>Estado:</td>
     <td>
-      <select #contract class="select-box" style="width:160px;" [(ngModel)]="filter.contract">
+      <select #contract class="select-box" style="width:160px;" [(ngModel)]="filter.inbox">
         <option value="">( Todos )</option>
-        <option value="567">Bandjea de entrada</option>
+        <option value="567">Bandeja de entrada</option>
+        <option value="567">Bandeja de salida</option>
       </select>
     </td>
     <td>Tipo:</td>
     <td>
       <select #stage class="select-box" style="width:160px" (change)="changeFilter()" [(ngModel)]="filter.type">
         <option value="">( No filtrar )</option>
-        <option value="Transición">Actividad</option>
-        <option value="Evaluación">Recordatorio</option>
-        <option value="Exploración">Tarea</option>         
+        <option value="Activity">Actividad</option>
+        <option value="Reminder">Recordatorio</option>
+        <option value="Task">Tarea</option>         
       </select>
     </td>
     <td>Buscar:</td>

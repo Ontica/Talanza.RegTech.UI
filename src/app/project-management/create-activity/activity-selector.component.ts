@@ -17,10 +17,10 @@ import { ProcessModelsService } from '../services/process-models.service'
   template: `      
      <table class="form">
       <tr>
-      <td>¿De qué tipo es el elemento que se desea agregar?</td>
+      <td>¿De qué tipo es la actividad que se desea agregar?</td>
       <td class="text-align-right"><select class="select-box" style="width:200px" #elementType (change)="onChangeElementType(elementType.value)">
             <option value="">( Seleccionar )</option>
-            <option value="event">Evento</option>
+            <option value="event">Actividad no programable</option>
             <option value="manual">Actividad manual</option>
           </select>
       </td>
@@ -28,7 +28,18 @@ import { ProcessModelsService } from '../services/process-models.service'
      </table>  
      <table class="form" *ngIf="selectedElementType !== 'manual'">
      <tr>
-       <td>Buscar un tipo <br>de evento:</td>
+     <td>Categoría:</td>
+     <td><select class="select-box" (change)="onChangeActivityType(activityType.value)">
+         <option value="">( Todas )</option>
+         <option value="event">Eventos o situaciones de riesgo</option>
+         <option value="event">Medición</option>
+         <option value="event">Perforación de pozos</option>
+         <option value="manual">Urgentes</option>
+       </select>
+     </td> 
+    </tr>
+     <tr>
+       <td>Actividades no programables:</td>
        <td><select class="select-box" #activityType (change)="onChangeActivityType(activityType.value)">
            <option value="">( Todas )</option>
            <option *ngFor="let processModel of processModels" [value]="processModel.uid">

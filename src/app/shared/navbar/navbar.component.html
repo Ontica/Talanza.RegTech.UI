@@ -1,7 +1,7 @@
 <div class="nav-bar">
   <ul>
     <li [class.selected]="selectedOption ==='inbox'"><a [routerLink]="['/inbox/search']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{exact:true}" (click)="setSelectedStyle('inbox')">Inbox</a></li>
-    <li [class.selected]="selectedOption ==='projects'"><a [routerLink]="['/projects/search']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{exact:true}" (click)="setSelectedStyle('projects')">Proyectos</a></li>
+    <li [class.selected]="selectedOption ==='projects'"><a [routerLink]="['/projects/search']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{exact:true}" (click)="setSelectedStyle('projects')">Administración del cumplimiento</a></li>
     <li [class.selected]="selectedOption ==='library'"><a [routerLink]="['/documents/search']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{exact:true}" (click)="setSelectedStyle('library')">Biblioteca</a></li>
     <li [class.selected]="selectedOption ==='contracts'"><a [routerLink]="['/contracts/search']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{exact:true}" (click)="setSelectedStyle('contracts')">Contratos</a></li>
     <li [class.selected]="selectedOption ==='procedures'"><a [routerLink]="['/procedures/search']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{exact:true}" (click)="setSelectedStyle('procedures')">Trámites</a></li>
