@@ -5,8 +5,6 @@ import { ActivityRef } from '../../data-types/activity';
 
 import { ActivityService } from '../../services/activity.service';
 
-declare var dhtmlXCalendarObject: any;
-
 @Component({
   selector: 'task-close',
   templateUrl: './activity-close.component.html',
@@ -20,8 +18,6 @@ export class ActivityCloseComponent implements OnInit {
   public isTaskClosed: boolean = false;
 
   private closedTask = EmptyClosedTask();
-  private dueDateCalendar: any;
-  private eventDateCalendar: any;
 
   private _task: any;
   @Input()
@@ -41,7 +37,7 @@ export class ActivityCloseComponent implements OnInit {
   constructor(private activityService: ActivityService, private rd: Renderer2) { }
 
   ngOnInit() {
-    this.loadCalendars();
+  
   }
 
   public async onCloseTask() {
@@ -66,26 +62,6 @@ export class ActivityCloseComponent implements OnInit {
 
   public onReopenTask(): void {
     alert('Por el momento no es posible reabrir tareas una vez que han sido cerradas, pero el administrador del sistema puede hacerlo.');
-  }
-
-  private loadCalendars(): void {
-    this.createCalendars();
-    this.setCalendarsDateFormat();
-  }
-
-  private createCalendars(): void {
-    this.dueDateCalendar = new dhtmlXCalendarObject({ input: "dueDateCalendar", button: "dueDateButton" });
-  }
-
-  private setCalendarsDateFormat(): void {
-    this.dueDateCalendar.setDateFormat("%d-%m-%Y");
-  }
-
-  private setDateCalendar(): void {
-    this.dueDateCalendar.setDateFormat("%d-%m-%Y");
-    this.endDate = this.dueDateCalendar.getDate();
-
-
   }
 
   private validateDueDate(): boolean {    
