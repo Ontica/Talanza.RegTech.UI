@@ -45,8 +45,7 @@ export class ProjectsMainPageComponent implements OnInit {
    
   }
 
-
-  public  onChangeFilter(receivedFilter: ActivityFilter) {    
+  public onChangeFilter(receivedFilter: ActivityFilter) {    
     this.filter = receivedFilter;     
   }
   

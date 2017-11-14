@@ -30,8 +30,7 @@
 }
 
 .selected a {
-  font-weight: 600;
-  border-bottom: 2px solid $blue;
+  border-bottom: 1px solid $selected-item-text-color;
 }
 
 .first-li {

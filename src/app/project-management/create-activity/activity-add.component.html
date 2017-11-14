@@ -1,13 +1,13 @@
 <div class="editor-container editor-container-style">
   <div class="header">
     <div class="close-button right-position" (click)="onClose()">&times;</div>
-    <div class="title">Agregar una actividad o tarea al proyecto</div>
+    <div class="title">Agregar una actividad o evento al proyecto</div>
     <div class="subtitle"><b>{{project.name}}</b></div>
   </div>
   <div>
     <table class="form">
       <tr>
-        <td class="form-title form-title-text">1) Seleccionar el tipo de actividad o tarea que se desea agregar</td>
+        <td class="form-title form-title-text">1) Seleccionar el tipo de actividad o evento que se desea agregar</td>
       </tr>
     </table>
     <activity-selector (onSelectedElementType)="setElementType($event)" (onSelectedProcessModel)="loadProcessModel($event)"></activity-selector>
@@ -16,7 +16,7 @@
     <div *ngIf="elementType !== 'manual'">
       <table class="form">
         <tr>
-          <td class="form-title form-title-text">2) Información sobre la actividad seleccionada</td>
+          <td class="form-title form-title-text">2) Información sobre la actividad o evento seleccionado</td>
         </tr>
       </table>
       <activity-description [processModel]="processModel"></activity-description>
@@ -24,7 +24,7 @@
     <div *ngIf="elementType !== 'manual'">
       <table class="form">
         <tr>
-          <td class="form-title form-title-text">3) Subactividades o subtareas de la actividad</td>
+          <td class="form-title form-title-text">3) Subactividades o subtareas asociadas a la actividad o evento seleccionado</td>
         </tr>
         <tr>
           <activity-worklist [processModel]="processModel"></activity-worklist>

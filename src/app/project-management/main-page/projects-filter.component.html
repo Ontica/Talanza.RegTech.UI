@@ -56,7 +56,7 @@
         <option value="DueDate">Fecha Máx de Entrega</option>
         <option value="TargetDate">Fecha Objetivo</option>
         <option value="Responsible">Responsable</option>
-        <option value="Activity">Nombre de la tarea</option>
+        <option value="ActivityName">Nombre de la tarea</option>
       </select>
     </td>
     <td>Vista:</td>
@@ -80,5 +80,5 @@
 
 </table>
 <div *ngIf="isAddActivityEditorWindowVisible " class="popup ">
-  <activity-add [project]="selectedProject " [parentId]="null " [topUbication]="10 " (onCloseEvent)="onCloseAddActivityEditorWindow() "></activity-add>
+  <activity-add [project]="selectedProject " [parentId]="null" [topUbication]="10" (onCloseEvent)="onCloseAddActivityEditorWindow() "></activity-add>
 </div>
