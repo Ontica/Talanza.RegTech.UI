@@ -143,8 +143,8 @@ export class ProjectExplorerComponent {
     return task.name;
   }
 
-  private refreshData() {
-    this.activitiyService.getActivities(this.projectUID)
+  private async refreshData() {
+    await this.activitiyService.getActivities(this.projectUID)
      .then((data) => {
        this.taskList = data;
        this.taskList.forEach(function(e) { if (e.type ==='ObjectType.ProjectObject.Summary'){ e.visible = 'collapse'} else {e.visible ='none'} });

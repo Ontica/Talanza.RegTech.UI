@@ -16,7 +16,7 @@ li:hover {
 
 .suggestions-div {
   position: absolute;
-  height: 100px;
+  min-height: 100px;
   overflow: auto;
   @include input-settings;
   width: 200px;
@@ -24,7 +24,7 @@ li:hover {
 }
 
 .sugesstion-selected {
-  background-color: $red;
+  background-color: rgb(71, 80, 151);
   color: $white;
 }
 

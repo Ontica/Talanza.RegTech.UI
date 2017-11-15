@@ -1,10 +1,10 @@
 <table class="grid-search-table">
   <tr>
-    <td>Estado:</td>
+    <td>Ver:</td>
     <td>
-      <select #contract class="select-box" style="width:160px;" [(ngModel)]="filter.inbox">
-        <option value="">( Todos )</option>
-        <option value="567">Bandeja de entrada</option>
+      <select #contract class="select-box" style="width:160px;">
+        <option value="all">( Todos )</option>
+        <option value="">Bandeja de entrada</option>
         <option value="567">Bandeja de salida</option>
       </select>
     </td>
@@ -23,9 +23,10 @@
       <button class="btn" style="width:55px;" (click)="onSearch()">Buscar</button>
     </td>
     <td>
+      <!--
       <button type="button" class="btn-warning align-center" style="width:185px" (click)="onClickAdd()">+ Agregar</button>
+      !-->
     </td>
-
   </tr>
   <tr>
     <td>Proyecto:</td>
@@ -53,7 +54,7 @@
         <option value="DueDate">Fecha Máx de Entrega</option>
         <option value="TargetDate">Fecha Objetivo</option>
         <option value="Responsible">Responsable</option>
-        <option value="Activity">Nombre de la tarea</option>
+        <option value="ActivityName">Nombre de la tarea</option>
       </select>
     </td>
     <td><a (click)="cleanFilter()">Limpiar filtros</a></td>

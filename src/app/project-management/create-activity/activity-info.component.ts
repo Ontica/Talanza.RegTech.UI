@@ -211,19 +211,19 @@ export class ActivityInfoComponent implements OnInit {
   }
 
 
-  private addManualActivity(): void {
+  private async addManualActivity() {
     const errMsg = 'Ocurrió un problema al intentar crear la actividad.';
 
-    this.activityService.addManualActivity(this.project.uid, this.activity)
+    await this.activityService.addManualActivity(this.project.uid, this.activity)
                         .toPromise()
                         .then()
                         .catch((e) => this.exceptionHandler(e, errMsg));
   }
 
-  private addProcessModel(): void {
+  private async addProcessModel() {
     const errMsg = 'Ocurrió un problema al intentar guardar.';
 
-    this.processModelsService.addProcessModel(this.project.uid,this.processModelUID,this.activity)
+    await this.processModelsService.addProcessModel(this.project.uid,this.processModelUID,this.activity)
                         .toPromise()
                         .then()
                         .catch((e) => this.exceptionHandler(e, errMsg));

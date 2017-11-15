@@ -29,7 +29,7 @@ import { ProcessModelsService } from '../services/process-models.service'
      <table class="form" *ngIf="selectedElementType !== 'manual'">
      <tr>
      <td>Categoría:</td>
-     <td><select class="select-box" (change)="onChangeActivityType(activityType.value)">
+     <td><select class="select-box">
          <option value="">( Todas )</option>
          <option value="event">Eventos o situaciones de riesgo</option>
          <option value="event">Medición</option>
