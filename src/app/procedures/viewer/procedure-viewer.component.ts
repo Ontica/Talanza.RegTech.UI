@@ -14,6 +14,8 @@ export class ProcedureViewerComponent {
   @HostBinding('style.display') public display = 'block';
   @HostBinding('style.position') public position = 'absolute';
 
+  @Input() config: object =  { isAddActivity: true }
+
   private _procedureUID: string = '';
   @Input()
   set procedureUID(procedureUID: string) {

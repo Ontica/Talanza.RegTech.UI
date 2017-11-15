@@ -74,5 +74,5 @@
 </div>
 
 <div *ngIf="isVisibleProcedureInfo" class="popup ">
-  <procedure-viewer [procedureUID]="procedureUID" (onCloseEvent)="onCloseProcedureInfoWindow()"></procedure-viewer>
+  <procedure-viewer [procedureUID]="procedureUID" [config]="{isAddActivity: false}" (onCloseEvent)="onCloseProcedureInfoWindow()"></procedure-viewer>
 </div>
