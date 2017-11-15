@@ -3,6 +3,7 @@
   <div class="left-panel" *ngIf="isVisibleLeftPanel" [ngStyle]="{'width' : leftPanelWidth }">
     <div class="clauses-container">
       <contract-clause-selector [clauses]="clausesList" (selectedClause)="onSelectedClauseRef($event)"></contract-clause-selector>
+      <br /><br /><br /><br />
     </div>
   </div>
   <div class="left-resize" *ngIf="!isHideLeftPanel" (mousedown)='onResize($event)' [style.width.px]="leftResizeWidth"></div>

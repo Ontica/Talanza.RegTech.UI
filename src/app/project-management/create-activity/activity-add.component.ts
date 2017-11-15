@@ -37,7 +37,7 @@ export class ActivityAddComponent implements OnInit {
     this.top = (this.topUbication || '-30') +'%' ;    
   }
   
-  public setElementType(elementType: string): void {    
+  public setElementType(elementType: string): void {
     this.elementType = elementType;          
     this.validateIsEvent();
   }

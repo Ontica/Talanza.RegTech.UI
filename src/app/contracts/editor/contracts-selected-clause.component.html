@@ -16,8 +16,9 @@
           <tbody>
             <tr *ngFor="let rule of rules">
               <td>
-                <span><b>Nombre: </b>{{rule.name}}</span><br/>
-                <span><b>Descripción:</b>{{rule.description}}</span>
+                <i class="fa fa-caret-right" aria-hidden="true"></i>
+                <a>{{rule.name}}</a><br/>
+                <span>{{rule.description}}</span>
               </td>
             </tr>
           </tbody>
