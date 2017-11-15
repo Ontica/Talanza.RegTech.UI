@@ -216,11 +216,8 @@ export class ActivityUpdateComponent implements OnInit {
         let targetDate = new Date(this.selectedTask.targetDate);
         let dueDate = new Date(this.task.dueDate);
         let today = new Date();  
-            
-        if (targetDate > today) {
-          alert("La fecha objetivo no puede ser posterior al día de hoy");
-          return false;
-        }
+           
+      
         if (targetDate > dueDate) {
           alert("La fecha objetivo de la actividad no puede ser posterior a la fecha máxima de entrega.");
           return false;
