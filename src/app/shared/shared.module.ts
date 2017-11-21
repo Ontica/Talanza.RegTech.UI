@@ -20,6 +20,7 @@ import { SafeHtmlPipe } from './pipes/safe-html.pipe';
 import { AutocompleteControl } from './controls/autocomplete-control';
 import { Chips } from './controls/chips';
 import { RAGControl } from './controls/rag.control';
+import { CalendarControl } from './controls/calendar-control';
 
 import { NavBarService } from './navbar/navbar.service';
 
@@ -30,9 +31,9 @@ import { NavBarService } from './navbar/navbar.service';
 @NgModule({
   imports: [RouterModule, CommonModule, FormsModule],
   declarations: [MainLayoutComponent, NavbarComponent, NoContentComponent, SafeHtmlPipe,
-                 AutocompleteControl, Chips, RAGControl],
+                 AutocompleteControl, Chips, RAGControl, CalendarControl],
   exports: [MainLayoutComponent, NoContentComponent, SafeHtmlPipe, AutocompleteControl, Chips,
-            RAGControl],
+            RAGControl, CalendarControl],
   providers:[NavBarService]
 })
 export class SharedModule { }
