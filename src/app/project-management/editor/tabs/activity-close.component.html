@@ -44,7 +44,7 @@
           <b>{{_task.endDate  | date: 'dd-MMM-yyyy'}}</b>
         </ng-container>
         <ng-template #elseBlock>
-          <input type="date" style="width:140px" class="text-box" [disabled]="isTaskClosed" [(ngModel)]="endDate">
+          <calendar-control (onSelectedDate)="endDate=$event"></calendar-control>
         </ng-template>
       </td>
 

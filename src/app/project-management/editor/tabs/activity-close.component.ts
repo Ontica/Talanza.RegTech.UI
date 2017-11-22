@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output, ElementRef, Renderer2, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input,Output } from '@angular/core';
 
 import { ClosedTask, EmptyClosedTask } from '../../data-types/task';
 import { ActivityRef } from '../../data-types/activity';
@@ -12,10 +12,12 @@ import { ActivityService } from '../../services/activity.service';
   providers: [ActivityService]
 })
 
-export class ActivityCloseComponent implements OnInit {
+export class ActivityCloseComponent {
 
   public endDate: Date = undefined;
   public isTaskClosed: boolean = false;
+
+  public calendar: any
 
   private closedTask = EmptyClosedTask();
 
@@ -32,13 +34,7 @@ export class ActivityCloseComponent implements OnInit {
   @Output()  onCloseEvent = new EventEmitter();
   @Output()  onCloseActivity = new EventEmitter<ActivityRef>();
 
-  @ViewChild('dueDateCalendar') el: ElementRef;
-
-  constructor(private activityService: ActivityService, private rd: Renderer2) { }
-
-  ngOnInit() {
-  
-  }
+  constructor(private activityService: ActivityService) { }
 
   public async onCloseTask() {
 
