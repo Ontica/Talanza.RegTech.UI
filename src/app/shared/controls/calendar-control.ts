@@ -1,4 +1,5 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output,
+        AfterViewInit } from '@angular/core';
 
 declare var dhtmlXCalendarObject: any;
 
@@ -8,30 +9,47 @@ interface calendearSettings {
   hideTime: boolean;
   showWeekNumber: boolean;
   showVacation: boolean;
+  date: Date;
 }
 
 @Component ({
   selector: 'calendar-control',
   templateUrl:'./calendar-control.html',  
+  styleUrls: ['./calendar-control.scss']  
 })
 
-export class CalendarControl  implements OnInit{
+export class CalendarControl  implements AfterViewInit {
   public calendar: any;
 
   @Input() config: calendearSettings = { disableWeekends: false, showHolidays: false, hideTime: false,
-                                         showWeekNumber: false, showVacation: false }
+                                         showWeekNumber: false, showVacation: false, date: undefined  }
 
   @Output() public onSelectedDate = new EventEmitter<Date>();
 
   public date = '';
+  public inputId = 'calendarInput';
+  public buttonId = 'calendarButton';
+     
+  constructor() {    
+    this.setControlId();      
+  }
 
-  ngOnInit() {
-    this.setCalendarLanguage();
-    this.createCalendar();
-    this.setSettings();
+  ngAfterViewInit() {       
+      this.setCalendarLanguage();
+     
+      this.createCalendar();
+      this.setInitialDate(); 
+      this.setSettings();
+   
+      this.setSelectedDate();  
+  } 
 
-    this.setSelectedDate();
-  
+  private setInitialDate(): void {
+        
+    if (this.config.date !== undefined) {
+      this.cal_isDate(this.config.date);   
+      this.calendar.setDate(this.config.date);
+    }
   }
 
   private setSelectedDate(): void {
@@ -41,8 +59,9 @@ export class CalendarControl  implements OnInit{
   }
 
   private createCalendar(): void {
+    
     this.calendar = new dhtmlXCalendarObject(
-      { input: "calendarText", button: "calendarButton" });           
+      { input: this.inputId , button: this.buttonId});           
   }
 
   private setSettings(): void {
@@ -93,8 +112,7 @@ export class CalendarControl  implements OnInit{
     this.setHoliday('19-03-2018');
     this.setHoliday('01-05-2018');
     this.setHoliday('20-11-2018');
-    this.setHoliday('25-12-2018'); 
-  
+    this.setHoliday('25-12-2018');   
   }
   
   
@@ -200,7 +218,7 @@ export class CalendarControl  implements OnInit{
     if (dateParts.length != 3) {
       return false;
     }
-
+    
     if (!(1 <= Number(dateParts[0]) && Number(dateParts[0]) <= 31)) {
       return false;
     }
@@ -231,15 +249,37 @@ export class CalendarControl  implements OnInit{
 
   }
 
-  public onBlurMethod(): void {
-    if (this.cal_isDate(this.date)) {
-      this.onSelectedDate.emit(new Date(this.date));
+  public onBlurMethod(): void {   
+   
+    if (this.cal_isDate(this.date)) {     
+      
+      this.calendar.setDate(new Date(this.getDateInNumericFormat()));         
+     
+      this.onSelectedDate.emit(this.calendar.getDate());
     } else {
       alert("La fecha debe de tener cualquier de los siguientes formatos: \n" +
             " DD/MM/YY \n" +
             " DD-MM-YY \n" +
             " DD.MM.YY \n");
     }
+  }
+
+  private setControlId(): void {
+    let idNumber = this.getRandomNumber(1,1000000);
+    this.inputId = 'ci' + idNumber;
+    this.buttonId = 'bi' + idNumber;
+  }
+  
+  private getRandomNumber(from: number, to: number): number {
+    return Math.floor((Math.random() * to) + from);    
+  }
+
+  private getDateInNumericFormat(): string {
+    let dateParts = String(this.date).split("/");
+  
+    let months = new Array("ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "oct", "nov", "dic");
+    let index = months.findIndex((x) => x === dateParts[1].toLowerCase())  +1;
+    return dateParts[2] + "/" + index + "/" + dateParts[0];
   }
 
 }

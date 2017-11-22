@@ -1,2 +1,2 @@
-<input type="text" id="calendarText" [(ngModel)]="date" (blur)="onBlurMethod()">
-<button id="calendarButton">..</button>
+<input type="text" maxlength="11" class="text-box" [attr.id]="inputId" [(ngModel)]="date" (blur)="onBlurMethod()" style="width:80px">
+<i [attr.id]="buttonId" class="fa fa-calendar fa-lg calendar-color" aria-hidden="true"></i>
