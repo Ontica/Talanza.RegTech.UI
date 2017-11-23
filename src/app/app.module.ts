@@ -34,6 +34,7 @@ import { CoreModule } from './core/core.module';
 import { SecurityUIModule } from './security-ui/security-ui.module';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { DocumentsModule } from './documents/documents.module';
+import { InboxModule } from './inbox/inbox.module';
 import { ProcessModule } from './process/process.module';
 import { ContractsModule } from './contracts/contracts.module';
 
@@ -82,6 +83,7 @@ type StoreType = {
     SecurityUIModule,
     DashboardModule,
     DocumentsModule,
+    InboxModule,
     ProcessModule,   
     ProjectManagementModule,
     SharedModule,

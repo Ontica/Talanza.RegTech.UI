@@ -7,6 +7,25 @@
     </div>
     <div class="right-panel">
       <div>
+        <table class="grid" *ngIf="rules.length !== 0" style='max-width:600pt;'>
+          <thead>
+            <tr>
+              <th>Obligaciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let rule of rules">
+              <td>
+                <i class="fa fa-caret-right" aria-hidden="true"></i>
+                <a>{{rule.name}}</a><br/>
+                <span>{{rule.description}}</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <br />
+      </div>
+      <div>
         <table class="grid" *ngIf="clause.relatedProcedures.length !== 0" style='max-width:600pt;'>
           <thead>
             <tr>

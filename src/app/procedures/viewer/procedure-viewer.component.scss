@@ -7,13 +7,13 @@
 }
 
 .editor-container {
-  height: calc(100vh - 160px);
+  height: calc(100vh - 100px);
   width: 800px;
 }
 
 .form-frame {
   height: calc(100% - 140px);
-  overflow-y: scroll;
+  overflow-y: auto;
   overflow-x: hidden;
   max-width: 800px;
   margin-left: 20px;

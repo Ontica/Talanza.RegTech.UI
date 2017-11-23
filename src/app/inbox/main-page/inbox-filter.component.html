@@ -1,0 +1,62 @@
+<table class="grid-search-table">
+  <tr>
+    <td>Ver:</td>
+    <td>
+      <select #contract class="select-box" style="width:160px;">
+        <option value="all">( Todos )</option>
+        <option value="">Bandeja de entrada</option>
+        <option value="567">Bandeja de salida</option>
+      </select>
+    </td>
+    <td>Tipo:</td>
+    <td>
+      <select #stage class="select-box" style="width:160px" (change)="changeFilter()" [(ngModel)]="filter.type">
+        <option value="">( No filtrar )</option>
+        <option value="Activity">Actividad</option>
+        <option value="Reminder">Recordatorio</option>
+        <option value="Task">Tarea</option>         
+      </select>
+    </td>
+    <td>Buscar:</td>
+    <td colspan="3">
+      <input type="search" class="text-box" style="width:344px" [(ngModel)]="keywords" (keyup.enter)="onSearch()">
+      <button class="btn" style="width:55px;" (click)="onSearch()">Buscar</button>
+    </td>
+    <td>
+      <!--
+      <button type="button" class="btn-warning align-center" style="width:185px" (click)="onClickAdd()">+ Agregar</button>
+      !-->
+    </td>
+  </tr>
+  <tr>
+    <td>Proyecto:</td>
+    <td>
+      <select #project class="select-box" style="width:160px;" (change)="onChangeProjectList(project.value)" [(ngModel)]="filter.project">
+        <option value="">( Todos )</option>
+        <option *ngFor="let project of projectsList"[value]="project.uid">{{project.name}}</option>
+      </select>
+    </td>
+    <td>Etiqueta:</td>
+    <td>
+      <autocomplete-control [tags]="labelsList" [isWritable]="false" [config]="{valueField: 'name'}" (selected)="onChangeSelectedTags($event)"></autocomplete-control>
+    </td>
+    <td>Responsable:</td>
+    <td>
+      <select style="width:180px" class="select-box" #responsible (change)="changeFilter() " [(ngModel)]="filter.responsible ">
+        <option value="">( Todos ) </option>
+        <option *ngFor="let responsible of responsiblesList " [value]="responsible.uid ">{{responsible.name}}</option>
+      </select>
+    </td>
+    <td>Ordenar por:</td>
+    <td>
+      <select style="width:136px " class="select-box " #orderBy (change)="changeFilter()" [(ngModel)]="filter.orderBy">
+        <option value="">( No ordenar )</option>
+        <option value="DueDate">Fecha Máx de Entrega</option>
+        <option value="TargetDate">Fecha Objetivo</option>
+        <option value="Responsible">Responsable</option>
+        <option value="ActivityName">Nombre de la tarea</option>
+      </select>
+    </td>
+    <td><a (click)="cleanFilter()">Limpiar filtros</a></td>
+  </tr>
+</table>

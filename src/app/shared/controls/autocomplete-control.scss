@@ -1,31 +1,31 @@
+@import "../../../styles/general-styles";
 ul {
   list-style-type: none;
   padding: 0;
 }
 
 li {
-  font-size: small;
   margin-top: 0;
   margin-bottom: 0;
 }
 
 li:hover {
-  color: #607D8B;
-  background-color: #DDD;
+  color: $white;
+  background-color: #1E90FF;
 }
 
 .suggestions-div {
   position: absolute;
-  z-index: 2;
-  width: 200px;
-  background: white;
-  height: 100px;
+  min-height: 100px;
   overflow: auto;
+  @include input-settings;
+  width: 200px;
+  z-index: 2;
 }
 
 .sugesstion-selected {
-  background-color: red;
-  color: white;
+  background-color: rgb(71, 80, 151);
+  color: $white;
 }
 
 .small-font {

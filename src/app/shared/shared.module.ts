@@ -20,6 +20,9 @@ import { SafeHtmlPipe } from './pipes/safe-html.pipe';
 import { AutocompleteControl } from './controls/autocomplete-control';
 import { Chips } from './controls/chips';
 import { RAGControl } from './controls/rag.control';
+import { CalendarControl } from './controls/calendar-control';
+
+import { NavBarService } from './navbar/navbar.service';
 
 /**
  * Do not specify providers for modules that might be imported by a lazy loaded module.
@@ -28,8 +31,9 @@ import { RAGControl } from './controls/rag.control';
 @NgModule({
   imports: [RouterModule, CommonModule, FormsModule],
   declarations: [MainLayoutComponent, NavbarComponent, NoContentComponent, SafeHtmlPipe,
-                 AutocompleteControl, Chips, RAGControl],
+                 AutocompleteControl, Chips, RAGControl, CalendarControl],
   exports: [MainLayoutComponent, NoContentComponent, SafeHtmlPipe, AutocompleteControl, Chips,
-            RAGControl]
+            RAGControl, CalendarControl],
+  providers:[NavBarService]
 })
 export class SharedModule { }

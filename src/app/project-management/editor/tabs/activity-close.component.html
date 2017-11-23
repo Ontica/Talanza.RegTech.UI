@@ -1,63 +1,84 @@
 <div class="editor-container editor-container-style">
-
-  <table class="form">
+  <!--<table class="form">
     <tr>
-      <td class="form-title form-title-text" colspan="2">Información general</td>
-    </tr>
-    <tr>
-      <td>Nombre:</td>
-      <td>{{task.name}}</td>
-    </tr>
-    <tr>
-      <td>Observaciones:</td>
-      <td>{{task.notes}}</td>
-    </tr>
-    <tr>
-      <td>Responsable:</td>
-      <td>{{task.responsible.name}}</td>
+      <td class="form-title form-title-text">Depencias</td>
     </tr>
   </table>
+  <table class="table">
+    <tr>
+      <td style="width:5%"></td>
+      <td style="width:65%">Nombre</td>
+      <td style="width:30%">Fecha Termino / Objetivo</td>
+    </tr>
+    <tr>
+      <td><i class="fa fa-check-circle check-circle-color " aria-hidden="true "> </i></td>
+      <td>
+        firma del contrato
+      </td>
+      <td>Concluida:<b>23 Noviembre 2014</b></td>
+    </tr>
+    <tr>
+      <td><i class="fa fa-user-circle working-activity-color" aria-hidden="true "> </i></td>
+      <td>
+        plan de perforación
+      </td>
+      <td>Asignada el: <b>16 Enero 2015</b><br> Asignado a: <b>Marian del Olmo</b><br> Objetivo:
+        <b>23 Marzo 2015</b></td>
+    </tr>
+    <tr>
+      <td><i class="fa fa-stop-circle stop-activity-color" aria-hidden="true "> </i></td>
+      <td>
+        reporte de producción
+      </td>
+      <td>Objetivo:<b>4 Enero 2015</b></td>
+    </tr>
+  </table>-->
   <table class="form">
     <tr>
       <td class="form-title form-title-text" colspan="3">Fecha de término</td>
     </tr>
     <tr>
       <td>Fecha de término:</td>
-      <td><input type="date" class="text-box" [disabled]="isTaskClosed" [(ngModel)]="endDate"></td>
-      <!--
-      <td><input type="text" #dueDateCalendar id="dueDateCalendar" class="text-box" [disabled]="isTaskClosed" style="width:100px">
-        <button id="dueDateButton" class="btn" [disabled]="isTaskClosed">..</button></td>-->
+      <td>
+        <ng-container *ngIf="_task.stage === 'Done'; else elseBlock">
+          <b>{{_task.endDate  | date: 'dd-MMM-yyyy'}}</b>
+        </ng-container>
+        <ng-template #elseBlock>
+          <calendar-control (onSelectedDate)="endDate=$event"></calendar-control>
+        </ng-template>
+      </td>
+
       <td>Fecha legal: &nbsp; <b>{{task.dueDate | date: 'dd-MMM-yyyy'}}</b></td>
     </tr>
   </table>
   <br><br>
-  <table *ngIf="_task.stage === 'Done'" class="form">
+  <table *ngIf="_task.stage==='Done' " class="form ">
     <tr>
-      <td class="form-title form-title-text" colspan="2">Tarea concluida</td>
+      <td class="form-title form-title-text " colspan="2 ">Tarea concluida</td>
     </tr>
     <tr>
       <td>
-        <i class="fa fa-check-circle fa-5x check-circle-color" aria-hidden="true"> </i>
+        <i class="fa fa-check-circle fa-5x check-circle-color " aria-hidden="true "> </i>
       </td>
-      <td style="vertical-align: middle"><span class="close-label-message;">La tarea ha sido concluida...</span></td>
+      <td style="vertical-align: middle "><span class="close-label-message; ">La tarea ha sido concluida...</span></td>
     </tr>
     <tr>
       <td></td>
-      <td>Si es necesario reabrir esta tarea presiona el bóton "Reabrir esta tarea"</td>
+      <td>Si es necesario reabrir esta tarea presiona el bóton "Reabrir esta tarea "</td>
     </tr>
   </table>
 
-  <div class="form-footer">
-    <table class="form">
+  <div class="form-footer ">
+    <table class="form ">
       <tr>
         <td>
-          <button class="btn" (click)="cancel() ">Cancelar</button>
+          <button class="btn " (click)="cancel() ">Cancelar</button>
         </td>
-        <td *ngIf="task.stage === 'Done'" class="text-align-right">
-          <button class="btn-warning" (click)="onReopenTask()">Reabrir esta tarea</button>
+        <td *ngIf="task.stage==='Done' " class="text-align-right ">
+          <button class="btn-warning " (click)="onReopenTask() ">Reabrir esta tarea</button>
         </td>
-        <td *ngIf="task.stage !== 'Done'" class="text-align-right">
-          <button class="btn-action" (click)="onCloseTask()">Concluir la tarea</button>
+        <td *ngIf="task.stage !=='Done' " class="text-align-right ">
+          <button class="btn-action " (click)="onCloseTask() ">Concluir la tarea</button>
         </td>
       </tr>
     </table>

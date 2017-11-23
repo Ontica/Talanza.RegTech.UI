@@ -1,11 +1,9 @@
-import { Component, EventEmitter, Input, OnInit, Output, ElementRef, Renderer2, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input,Output } from '@angular/core';
 
 import { ClosedTask, EmptyClosedTask } from '../../data-types/task';
 import { ActivityRef } from '../../data-types/activity';
 
 import { ActivityService } from '../../services/activity.service';
-
-declare var dhtmlXCalendarObject: any;
 
 @Component({
   selector: 'task-close',
@@ -14,14 +12,14 @@ declare var dhtmlXCalendarObject: any;
   providers: [ActivityService]
 })
 
-export class ActivityCloseComponent implements OnInit {
+export class ActivityCloseComponent {
 
   public endDate: Date = undefined;
   public isTaskClosed: boolean = false;
 
+  public calendar: any
+
   private closedTask = EmptyClosedTask();
-  private dueDateCalendar: any;
-  private eventDateCalendar: any;
 
   private _task: any;
   @Input()
@@ -36,13 +34,7 @@ export class ActivityCloseComponent implements OnInit {
   @Output()  onCloseEvent = new EventEmitter();
   @Output()  onCloseActivity = new EventEmitter<ActivityRef>();
 
-  @ViewChild('dueDateCalendar') el: ElementRef;
-
-  constructor(private activityService: ActivityService, private rd: Renderer2) { }
-
-  ngOnInit() {
-    this.loadCalendars();
-  }
+  constructor(private activityService: ActivityService) { }
 
   public async onCloseTask() {
 
@@ -68,31 +60,7 @@ export class ActivityCloseComponent implements OnInit {
     alert('Por el momento no es posible reabrir tareas una vez que han sido cerradas, pero el administrador del sistema puede hacerlo.');
   }
 
-  private loadCalendars(): void {
-    this.createCalendars();
-    this.setCalendarsDateFormat();
-  }
-
-  private createCalendars(): void {
-    this.dueDateCalendar = new dhtmlXCalendarObject({ input: "dueDateCalendar", button: "dueDateButton" });
-  }
-
-  private setCalendarsDateFormat(): void {
-    this.dueDateCalendar.setDateFormat("%d-%m-%Y");
-  }
-
-  private setDateCalendar(): void {
-    this.dueDateCalendar.setDateFormat("%d-%m-%Y");
-    this.endDate = this.dueDateCalendar.getDate();
-
-
-  }
-
-  private validateDueDate(): boolean {
-
-    //this.setDateCalendar();   
-    //this.endDate = new Date(this.el.nativeElement.value);
-    //this.endDate.setHours(0,0,0,0);  
+  private validateDueDate(): boolean {    
     let dueDate = new Date(this.task.dueDate);
     let today = new Date();
 
@@ -100,10 +68,6 @@ export class ActivityCloseComponent implements OnInit {
 
     if (this.endDate > today) {
       alert("La fecha de termino no puede ser posterior al día de hoy");
-      return false;
-    }
-    if (this.endDate > dueDate) {
-      alert("La fecha de término de la actividad no puede ser posterior a la fecha legal.");
       return false;
     }
 
@@ -136,7 +100,7 @@ export class ActivityCloseComponent implements OnInit {
     if (this.task.stage === 'Done') {
       this.isTaskClosed = true;
     } else {
-      this.isTaskClosed = false;
+      this.isTaskClosed = false;      
     }
   }
 

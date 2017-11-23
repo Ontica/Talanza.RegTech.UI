@@ -29,8 +29,6 @@ import { ActivityDescriptionComponent } from './create-activity/activity-descrip
 import { ActivityWorklistComponent } from './create-activity/activity-worklist.component';
 import { ActivityInfoComponent } from './create-activity/activity-info.component';
 
-import { WorkListComponent } from './work-list/work-list.component';
-
 import { ProjectsFilterComponent } from './main-page/projects-filter.component';
 
 /**
@@ -44,8 +42,8 @@ import { ProjectsFilterComponent } from './main-page/projects-filter.component';
                  ProjectsMainPageComponent, GanttComponent,
                  ActivityAddComponent,ActivitySelectorComponent, ActivityDescriptionComponent,
                  ActivityWorklistComponent, ActivityInfoComponent,
-                 ActivityUpdateComponent, WorkListComponent, ProjectsFilterComponent ],
-  exports: [ProjectExplorerComponent,
+                 ActivityUpdateComponent, ProjectsFilterComponent ],
+  exports: [ProjectExplorerComponent, ActivityEditorComponent,
             ProjectsMainPageComponent, GanttComponent]
 })
 export class ProjectManagementModule { }

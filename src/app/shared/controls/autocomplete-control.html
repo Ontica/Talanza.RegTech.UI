@@ -1,6 +1,6 @@
 <div>
   <div>
-    <input id="country" type="text" [(ngModel)]=query (keyup)=filter() (click)="onClick()">
+    <input id="country" type="text" class="text-box" [(ngModel)]=query (keyup)=filter() (click)="onClick()">
   </div>
   <div *ngIf="filteredList.length > 0 && (!isHideControl)" class="suggestions-div">
     <ng-container>

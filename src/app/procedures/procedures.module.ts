@@ -10,7 +10,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule }   from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
-
+ 
 import { ProcedureFilterComponent } from './main-page/procedures-filter.component';
 import { ProceduresMainPageComponent } from './main-page/procedures-main-page.component';
 
@@ -28,6 +28,7 @@ import { RequirementGridComponent } from './editor/requirement-grid.component';
 import { ProcedureViewerComponent } from './viewer/procedure-viewer.component';
 import { PVGeneralInfoComponent } from './viewer/sections/pv-general-info.component';
 import { PVRequirementsComponent } from './viewer/sections/pv-requirements.component';
+import { AddActivityComponent } from '../project-management/editor/tabs/add-activity.component';
 
 import { PERequirementsComponent } from './editor/sections/pe-requirements.component';
 
@@ -44,7 +45,7 @@ import { ProceduresRoutingModule } from './procedures-routing.module';
 								 FilingFeeTabComponent, StatusTabComponent, AddRequirementTabComponent,
 								 AddRequirementListTabComponent, RequirementTabComponent,  RequirementGridComponent,
 								 ProcedureViewerComponent, PVGeneralInfoComponent, PVRequirementsComponent,
-								PERequirementsComponent],
+								PERequirementsComponent, AddActivityComponent],
 	exports: [ProceduresMainPageComponent, ProcedureViewerComponent, PERequirementsComponent]
 })
 export class ProceduresModule { }

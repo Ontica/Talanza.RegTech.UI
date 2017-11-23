@@ -2,7 +2,6 @@
 
 <div *ngIf="!isAddActivityVisible">
   <div [ngSwitch]="selectedView">
-    <work-list [filter]="filter" *ngSwitchCase="'work-list'"></work-list>
     <project-explorer [filter]="filter" [refresh]="isRefreshWorkList" *ngSwitchCase="'activity-tree'"></project-explorer>
     <gantt [filter]="filter" [config]="selectedScale" *ngSwitchCase="'gantt'"></gantt>
     <project-explorer [filter]="filter" [refresh]="isRefreshWorkList" *ngSwitchDefault></project-explorer>
