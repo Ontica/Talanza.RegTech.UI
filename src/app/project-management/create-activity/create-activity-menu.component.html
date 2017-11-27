@@ -4,9 +4,13 @@
     <div class="title">Agregar una actividad o evento al proyecto</div>
     <div class="subtitle"><b>{{project.name}}</b></div>
   </div>
-  <div class="center">
-    <button><i class="fa fa-hand-paper-o fa-2x" aria-hidden="true"></i><br>Actividad manual</button>
+
+  <div class="center" *ngIf="selectedOperation === ''">
+    <button (click)="addManualTask()"><i class="fa fa-hand-paper-o fa-2x" aria-hidden="true"></i><br>Actividad manual</button>
     <button><i class="fa fa-pencil fa-2x" aria-hidden="true"></i><br>Actividad no programada</button>
 
+  </div>
+  <div [ngSwitch]="selectedOperation">
+    <task-update *ngSwitchCase="'addManual'" [task]="task" (onUpdateActivity)="updateActivity($event)" (onCloseEvent)="onClose()"></task-update>
   </div>
 </div>
