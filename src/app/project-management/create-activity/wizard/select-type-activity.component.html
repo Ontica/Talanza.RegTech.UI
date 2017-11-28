@@ -1,0 +1,27 @@
+<div class="search">
+  <label>Actividad no programables</label>
+  <input type="text" style="width:200px" class="text-box" [(ngModel)]="query" (keyup)="filter()">
+  <i class="fa fa-search  search-icon" aria-hidden="true" (click)="setAllEvents()"></i>
+</div>
+<br>
+<table class="grid">
+  <thead>
+    <tr>
+      <th style="width:10% ">Seleccionar</th>
+      <th style="width:90% ">Documentos que expide la dependencia</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let processModel of filteredList ">
+      <td style="width:10% "><i class="fa fa-check select-icon" aria-hidden="true" (click)="onSelectEvent(processModel)"></i></td>
+      <td style="width:90% "><a (click)="onShowDescription(processModel)"> {{processModel.name}}</a><br>
+        <ng-container *ngIf="processModel.uid === selectedProcessModelUID">
+          <span>{{description}}</span>
+        </ng-container>
+      </td>
+    </tr>
+    <tr *ngIf="filteredList.length===0 ">
+      <td colspan="2"><i>No econtré eventos relacionados con la busqueda.</i></td>
+    </tr>
+  </tbody>
+</table>

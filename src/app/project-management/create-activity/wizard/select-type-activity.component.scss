@@ -1,0 +1,29 @@
+@import "../../../../styles/grid";
+table.grid {
+  margin-left: 15pt;
+  width: 90%;
+}
+
+table.grid tbody {
+  height: 300px;
+}
+
+.select-icon {
+  color: $primary-icon-color;
+  cursor: pointer;
+  font-size: 12pt;
+}
+
+.search-icon {
+  color: $red;
+  cursor: pointer;
+  font-size: 12pt;
+  margin-left: -10px;
+}
+
+.search {
+  font-size: 10pt;
+  margin-left: 15pt;
+  text-align: center;
+  width: 90%;
+}
