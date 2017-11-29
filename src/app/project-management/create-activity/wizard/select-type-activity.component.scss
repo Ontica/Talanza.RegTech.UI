@@ -9,7 +9,13 @@ table.grid tbody {
 }
 
 .select-icon {
-  color: $primary-icon-color;
+  color: $blue;
+  cursor: pointer;
+  font-size: 12pt;
+}
+
+.no-select-icon {
+  color: #EDEDED;
   cursor: pointer;
   font-size: 12pt;
 }
@@ -26,4 +32,9 @@ table.grid tbody {
   margin-left: 15pt;
   text-align: center;
   width: 90%;
+}
+
+.selected-row-border {
+  border-top: thin solid $blue;
+  border-bottom: thin solid $blue;
 }

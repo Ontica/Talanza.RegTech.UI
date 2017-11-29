@@ -1,4 +1,11 @@
-import { Component, OnInit }  from '@angular/core';
+/**
+ * @license
+ * Copyright (c) 2017 La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
+ *
+ * See LICENSE.txt in the project root for complete license information.
+ *
+ */
+import { Component, EventEmitter, OnInit, Output }  from '@angular/core';
 
 import { ProcessModel, EmptyProcessModel } from '../../data-types/project'; 
 
@@ -20,6 +27,8 @@ export class SelectTypeActivityComponet implements OnInit {
   public description = '';
   public isDescriptionVisible = false;
 
+  @Output() onSelectProcessModel = new EventEmitter<ProcessModel>();
+
   constructor (private processModelsService: ProcessModelsService){}
 
   ngOnInit() {
@@ -36,28 +45,17 @@ export class SelectTypeActivityComponet implements OnInit {
       this.filteredList = [];
     }
   }
-
-  public onShowDescription(processModel: ProcessModel): void {
-    
-    this.selectedProcessModelUID = processModel.uid;
-
-   if (this.isDescriptionVisible === false) {
-    this.description = "la descripcion del evento: " + processModel.name;
-    this.isDescriptionVisible = true;
-   } else {
-     this.description = '';
-     this.isDescriptionVisible = false;
-   }
-   
-  }
-
+  
   public setAllEvents(): void {
     this.loadEvents();
     this.filteredList = this.processModels;
   }
 
   public onSelectEvent(processModel: ProcessModel): void {
+    this.selectedProcessModelUID = processModel.uid;
+    
     console.log(processModel);
+    this.onSelectProcessModel.emit(processModel);
   }
 
   private loadEvents(): void {
