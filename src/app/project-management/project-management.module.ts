@@ -31,6 +31,8 @@ import { ActivityInfoComponent } from './create-activity/activity-info.component
 
 import { CreateActivityMenuComponent } from './create-activity/create-activity-menu.component';
 import { SelectTypeActivityComponet } from './create-activity/wizard/select-type-activity.component';
+import { WorklistActivityComponent } from './create-activity/wizard/worklist-activity.component';
+import { CreateActivityWizard } from './create-activity/wizard/create-activity.wizard';
 
 import { ProjectsFilterComponent } from './main-page/projects-filter.component';
 
@@ -46,7 +48,8 @@ import { ProjectsFilterComponent } from './main-page/projects-filter.component';
                  ActivityAddComponent,ActivitySelectorComponent, ActivityDescriptionComponent,
                  ActivityWorklistComponent, ActivityInfoComponent,
                  ActivityUpdateComponent, ProjectsFilterComponent,
-                 CreateActivityMenuComponent, SelectTypeActivityComponet ],
+                 CreateActivityMenuComponent, SelectTypeActivityComponet, WorklistActivityComponent,
+                 CreateActivityWizard ],
   exports: [ProjectExplorerComponent, ActivityEditorComponent,
             ProjectsMainPageComponent, GanttComponent]
 })

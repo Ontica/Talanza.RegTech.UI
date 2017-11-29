@@ -33,4 +33,8 @@ export class CreateActivityMenuComponent {
     this.selectedOperation = 'addManual';
   }
 
+  public addEvent(): void { 
+    this.selectedOperation = 'addEvent';
+  }
+
 }

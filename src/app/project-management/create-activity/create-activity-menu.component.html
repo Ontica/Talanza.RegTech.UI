@@ -7,10 +7,11 @@
 
   <div class="center" *ngIf="selectedOperation === ''">
     <button (click)="addManualTask()"><i class="fa fa-hand-paper-o fa-2x" aria-hidden="true"></i><br>Actividad manual</button>
-    <button><i class="fa fa-pencil fa-2x" aria-hidden="true"></i><br>Actividad no programada</button>
+    <button (click)="addEvent()"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i><br>Actividad no programada</button>
 
   </div>
   <div [ngSwitch]="selectedOperation">
     <task-update *ngSwitchCase="'addManual'" [task]="task" (onUpdateActivity)="updateActivity($event)" (onCloseEvent)="onClose()"></task-update>
+    <create-activity-wizard *ngSwitchCase="'addEvent'"></create-activity-wizard>
   </div>
 </div>
