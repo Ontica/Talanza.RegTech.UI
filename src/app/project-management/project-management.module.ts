@@ -23,11 +23,7 @@ import { ActivityUpdateComponent } from './editor/tabs/activity-update.component
 import { ProjectsMainPageComponent } from './main-page/projects-main-page.component';
 import { GanttComponent } from './gantt/gantt.component';
 
-import { ActivityAddComponent } from './create-activity/activity-add.component';
-import { ActivitySelectorComponent } from './create-activity/activity-selector.component';
-import { ActivityDescriptionComponent } from './create-activity/activity-description.component';
 import { ActivityWorklistComponent } from './create-activity/activity-worklist.component';
-import { ActivityInfoComponent } from './create-activity/activity-info.component';
 
 import { CreateActivityMenuComponent } from './create-activity/create-activity-menu.component';
 import { SelectTypeActivityComponet } from './create-activity/wizard/select-type-activity.component';
@@ -44,9 +40,8 @@ import { ProjectsFilterComponent } from './main-page/projects-filter.component';
   imports: [ProjectManagementRoutingModule, SharedModule, CommonModule, FormsModule, ProceduresModule],
   declarations: [ProjectExplorerComponent,
                  ActivityEditorComponent, ActivityCloseComponent,
-                 ProjectsMainPageComponent, GanttComponent,
-                 ActivityAddComponent,ActivitySelectorComponent, ActivityDescriptionComponent,
-                 ActivityWorklistComponent, ActivityInfoComponent,
+                 ProjectsMainPageComponent, GanttComponent,             
+                 ActivityWorklistComponent, 
                  ActivityUpdateComponent, ProjectsFilterComponent,
                  CreateActivityMenuComponent, SelectTypeActivityComponet, WorklistActivityComponent,
                  CreateActivityWizard ],
