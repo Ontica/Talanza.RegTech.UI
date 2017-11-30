@@ -1,14 +1,13 @@
 <div class="editor-container editor-container-style">
   <div class="header">
     <div class="close-button right-position" (click)="onClose()">&times;</div>
-    <div class="title">Agregar una actividad o evento al proyecto</div>
+    <div class="title">Agregar obligaciones o actividades al proyecto</div>
     <div class="subtitle"><b>{{project.name}}</b></div>
   </div>
-
   <div class="center" *ngIf="selectedOperation === ''">
-    <button (click)="addManualTask()"><i class="fa fa-hand-paper-o fa-2x" aria-hidden="true"></i><br>Actividad manual</button>
-    <button (click)="addEvent()"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i><br>Actividad no programada</button>
-
+    <br><br>¿Qué se desea agregar al proyecto?<br><br>
+    <button (click)="addEvent()"><br>Obligación contractual</button> &nbsp; &nbsp; &nbsp; &nbsp;
+    <button (click)="addManualTask()"><br>Actividad manual</button>
   </div>
   <div [ngSwitch]="selectedOperation">
     <task-update *ngSwitchCase="'addManual'" [task]="task" (onUpdateActivity)="updateActivity($event)" (onCloseEvent)="onClose()"></task-update>

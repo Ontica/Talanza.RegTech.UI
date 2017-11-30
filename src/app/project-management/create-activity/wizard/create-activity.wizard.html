@@ -1,6 +1,6 @@
 <div style="background-color: #EDEDED">
-  <div class="pointer pointer-text" [ngClass]="step === 1 ? 'pointer-selected': 'pointer-noselected' ">Paso 1 <br>Búsqueda</div>
-  <div class="pointer pointer-text " style="margin-left:20px; " [ngClass]="step === 2 ? 'pointer-selected': 'pointer-noselected' ">Paso 2 <br>Agregar</div>
+  <div class="pointer pointer-text" [ngClass]="step === 1 ? 'pointer-selected': 'pointer-noselected' ">Paso 1 <br>Búsqueda de obligaciones</div>
+  <div class="pointer pointer-text " style="margin-left:20px; " [ngClass]="step === 2 ? 'pointer-selected': 'pointer-noselected' ">Paso 2 <br>Agregar al proyecto</div>
 </div>
 <br>
 <div [ngSwitch]="step ">
@@ -15,7 +15,7 @@
       <td class="text-align-right ">
         <button class="btn " style="margin-right:70px " (click)="onBack() ">Anterior</button>
         <ng-container *ngIf="step===2 ">
-          <button class="btn " (click)="onAdd() ">Agregar</button>
+          <button class="btn " (click)="onAdd() ">Agregar al proyecto</button>
         </ng-container>
         <ng-container *ngIf="step !==2 ">
           <button class="btn " (click)="onNext() ">Siguiente</button>
