@@ -1,19 +1,24 @@
-<div [ngSwitch]="step">
-  <select-type-activity *ngSwitchCase="1" (onSelectProcessModel)="onSelectProcessModel($event)"></select-type-activity>
-  <worklist-activity *ngSwitchCase="2" [processModel]="processModel" [project]="project" [onAdd]="isAdd" (onCloseEvent)="onClose()"></worklist-activity>
+<div style="background-color: #EDEDED">
+  <div class="pointer pointer-text" [ngClass]="step === 1 ? 'pointer-selected': 'pointer-noselected' ">Paso 1 <br>Búsqueda</div>
+  <div class="pointer pointer-text " style="margin-left:20px; " [ngClass]="step === 2 ? 'pointer-selected': 'pointer-noselected' ">Paso 2 <br>Agregar</div>
+</div>
+<br>
+<div [ngSwitch]="step ">
+  <select-type-activity *ngSwitchCase="1 " (onSelectProcessModel)="onSelectProcessModel($event) "></select-type-activity>
+  <worklist-activity *ngSwitchCase="2 " [processModel]="processModel " [project]="project " [onAdd]="isAdd " (onCloseEvent)="onClose() "></worklist-activity>
 </div>
 
-<div class="form-footer border-top">
-  <table class="form">
+<div class="form-footer border-top ">
+  <table class="form ">
     <tr>
       <td></td>
       <td class="text-align-right ">
-        <button class="btn" style="margin-right:70px" (click)="onBack()">Anterior</button>
-        <ng-container *ngIf="step === 2">
-          <button class="btn" (click)="onAdd()">Agregar</button>
+        <button class="btn " style="margin-right:70px " (click)="onBack() ">Anterior</button>
+        <ng-container *ngIf="step===2 ">
+          <button class="btn " (click)="onAdd() ">Agregar</button>
         </ng-container>
-        <ng-container *ngIf="step !== 2">
-          <button class="btn" (click)="onNext()">Siguiente</button>
+        <ng-container *ngIf="step !==2 ">
+          <button class="btn " (click)="onNext() ">Siguiente</button>
         </ng-container>
       </td>
     </tr>
