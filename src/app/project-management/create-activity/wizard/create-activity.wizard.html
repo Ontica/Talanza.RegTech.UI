@@ -1,6 +1,6 @@
 <div [ngSwitch]="step">
   <select-type-activity *ngSwitchCase="1" (onSelectProcessModel)="onSelectProcessModel($event)"></select-type-activity>
-  <worklist-activity *ngSwitchCase="2" [processModel]="processModel"></worklist-activity>
+  <worklist-activity *ngSwitchCase="2" [processModel]="processModel" [project]="project" [onAdd]="isAdd" (onCloseEvent)="onClose()"></worklist-activity>
 </div>
 
 <div class="form-footer border-top">
@@ -9,8 +9,12 @@
       <td></td>
       <td class="text-align-right ">
         <button class="btn" style="margin-right:70px" (click)="onBack()">Anterior</button>
-
-        <button class="btn" (click)="onNext()">Siguiente</button>
+        <ng-container *ngIf="step === 2">
+          <button class="btn" (click)="onAdd()">Agregar</button>
+        </ng-container>
+        <ng-container *ngIf="step !== 2">
+          <button class="btn" (click)="onNext()">Siguiente</button>
+        </ng-container>
       </td>
     </tr>
   </table>

@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
-import { ProcessModel, EmptyProcessModel } from '../../data-types/project'; 
+import { ProcessModel, EmptyProcessModel, ProjectRef } from '../../data-types/project'; 
 
 @Component({
   selector:'create-activity-wizard',
@@ -10,8 +10,12 @@ import { ProcessModel, EmptyProcessModel } from '../../data-types/project';
 
 export class CreateActivityWizard  {
   
-  public step = 1;
+  @Input() public project: ProjectRef;
 
+  @Output() public onCloseEvent = new EventEmitter();
+
+  public step = 1;
+  public isAdd = false;
   public processModel: ProcessModel;
 
   public onSelectProcessModel(processModel: ProcessModel): void {
@@ -20,18 +24,25 @@ export class CreateActivityWizard  {
 
   public onNext(): void {
     if (!this.processModel ) {
-      alert("No has seleccionado una actividad o evento");
+      alert("No has seleccionado una actividad o evento");    
     } else {      
-      this.step = 2;
-    }
+      this.step = 2;   
+    }   
+  }
+
+  public onAdd():void {
+    this.isAdd = true;
   }
 
   public onBack(): void {
     if (this.step > 1) {
       this.processModel = null;
       this.step--;      
-    }
-    
+    }    
+  }
+
+  public onClose(): void {
+    this.onCloseEvent.emit();
   }
 
 }

@@ -1,0 +1,18 @@
+<div class="container">
+  <table class="form">
+    <tr>
+      <td class="form-title form-title-text">{{processModel.name}}</td>
+    </tr>
+    <tr>
+      <td>{{processModel.notes}}</td>
+    </tr>
+  </table>
+  <table class="form">
+    <tr>
+      <td class="form-title form-title-text">Subactividades o subtareas asociadas a la actividad o evento</td>
+    </tr>
+    <tr>
+      <activity-worklist [processModel]="processModel"></activity-worklist>
+    </tr>
+  </table>
+</div>
