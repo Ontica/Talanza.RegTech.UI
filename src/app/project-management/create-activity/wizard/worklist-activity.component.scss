@@ -1,6 +1,11 @@
 @import "../../../../styles/editor-window-style";
 @import "../../../../styles/form";
+@import "../../../../styles/grid";
 table.form {
   margin-left: 15pt;
   width: 90%;
+}
+
+table.grid tbody {
+  height: 200px;
 }
