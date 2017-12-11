@@ -58,15 +58,16 @@ export interface Rule {
   uid: string,
   name: string,
   description: string,
-  workflowObjectUID: string
+  workflowObjectUID: string,
+  procedures: ProcedureRef[]
 }
 
 export interface Obligation {
   uid: string,  
   clauseNo: string,  
   contractUID: string,  
-  rules: Rule[],  
-  section: string,  
+  rules: Rule[],
+  section: string,
   title: string
 }
 

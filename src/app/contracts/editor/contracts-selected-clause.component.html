@@ -5,26 +5,44 @@
       <div class="clause-definition" [innerHTML]="clause.hypertext | safeHtml ">
       </div>
     </div>
-    <div class="right-panel">
+    <div class="right-panel" *ngIf="rules.length !== 0">
       <div>
-        <table class="grid" *ngIf="rules.length !== 0" style='max-width:600pt;'>
+        <span class="clause-subtitle">
+          Obligaciones
+        </span>
+        <span class="right marked-text">
+          + Agregar a un proyecto regulatorio
+        </span>
+      </div>
+      <div *ngFor="let rule of rules">
+        <table class="grid" style='max-width:600pt;'>
           <thead>
             <tr>
-              <th>Obligaciones</th>
+              <th>
+                <input type="checkbox"> {{rule.name}}
+              </th>
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let rule of rules">
+            <tr>
               <td>
-                <i class="fa fa-caret-right" aria-hidden="true"></i>
-                <a>{{rule.name}}</a><br/>
-                <span>{{rule.description}}</span>
+                <span>{{rule.description}}</span><br/><br/>
+                <span class='marked-text' *ngIf="rule.procedures.length !== 0">+ Trámites de la obligación</span>
+              </td>
+            </tr>
+            <tr *ngFor="let procedure of rule.procedures">
+              <td style='margin-left:10px'>
+                <input type="checkbox">
+                <a (click)="onSelectedProcedure(procedure.uid)">{{procedure.name}}</a><br>
+                <span *ngIf="procedure.code !== 'No disponible'">{{procedure.code}}</span>
+                <span *ngIf="procedure.code === 'No disponible'">{{procedure.entity}}</span>
               </td>
             </tr>
           </tbody>
         </table>
         <br />
       </div>
+      <!--
       <div>
         <table class="grid" *ngIf="clause.relatedProcedures.length !== 0" style='max-width:600pt;'>
           <thead>
@@ -44,6 +62,7 @@
         </table>
         <br /><br /><br /><br />
       </div>
+      !-->
     </div>
   </div>
   <div class="procedure-info" *ngIf="isVisibleProcedureInfo">
