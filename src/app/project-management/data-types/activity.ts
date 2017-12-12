@@ -26,7 +26,7 @@ export interface ActivityRef {
   notes: string,
   parent : Parent,
   procedure : Procedure  
-  progress : number,0
+  progress : number,
   project : KeyValue, 
   ragStatus: string,
   requestedBy : KeyValue,
@@ -39,4 +39,64 @@ export interface ActivityRef {
   uid : string,
   tags: string[],  
   visible : string
+}
+
+export function EmpityParent () {
+  const parent: Parent= {
+    id: -1,
+    uid: '',
+    type: '', 
+    name: ''
+  }
+
+  return parent;
+}
+
+export function EmpityProcedure() {
+  const procedure: Procedure = {
+    uid : '',
+    name : '',
+    code : '',
+    entity: ''
+  }
+  
+  return procedure;
+}
+
+export function EmpityKeyValue() {
+  const keyValue: KeyValue = {
+    uid: '',
+    name: ''
+  }
+
+  return keyValue;
+}
+
+export function EmpityActivityRef() {
+  const activity: ActivityRef = {
+    dueDate : '',
+    endDate : new Date(),
+    estimatedDuration : '',
+    id : 0,
+    name : '',
+    notes: '',
+    parent : EmpityParent(),
+    procedure : EmpityProcedure(),  
+    progress : 0,
+    project : EmpityKeyValue(), 
+    ragStatus: '',
+    requestedBy : EmpityKeyValue(),
+    resource : EmpityKeyValue(), 
+    responsible : EmpityKeyValue(),
+    stage : '',
+    startDate : new Date(),  
+    targetDate : new Date(),
+    type : '',  
+    uid : '',
+    tags: [],  
+    visible : ''
+  }
+  
+  
+  return activity;  
 }

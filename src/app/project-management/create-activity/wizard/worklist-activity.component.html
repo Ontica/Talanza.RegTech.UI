@@ -1,0 +1,33 @@
+<div class="container">
+  <table class="form">
+    <tr>
+      <td class="form-title form-title-text">{{processModel.name}}</td>
+    </tr>
+    <tr>
+      <td>{{processModel.notes}}</td>
+    </tr>
+  </table>
+  <table class="form">
+    <tr>
+      <td class="form-title form-title-text">Subactividades o subtareas asociadas a la actividad o evento</td>
+    </tr>
+    <tr>
+      <table class="grid">
+        <thead>
+          <tr>
+            <th style="width:5%">#</th>
+            <th style="width:60%">Lista de tareas y subactividades asociadas</th>
+            <th style="width:35%">Autoridad</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let step of  processModel.steps">
+            <td style="width:5%">{{step.stepNo}}</td>
+            <td style="width:60%"><a>{{step.name}}</a></td>
+            <td style="width:35%">{{step.involvedParty}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </tr>
+  </table>
+</div>

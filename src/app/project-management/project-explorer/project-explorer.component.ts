@@ -29,6 +29,9 @@ export class ProjectExplorerComponent {
   public procedureUID: string = '';
   public expanOrCollapseIcon = 'fa fa-minus-circle';
   public projectUID: string = '';
+  public isDrag = false;
+
+  public dragIndex = 0;
 
   private _project: ProjectRef;
 
@@ -149,6 +152,60 @@ export class ProjectExplorerComponent {
        this.taskList = data;
        this.taskList.forEach(function(e) { if (e.type ==='ObjectType.ProjectObject.Summary'){ e.visible = 'collapse'} else {e.visible ='none'} });
      });
+  }
+
+  public allowDrop(ev: any): void {
+    if (!this.isDrag) {
+      return;
+    }
+    ev.preventDefault();
+  }
+
+  public drag(ev:any, data: any): void { 
+    ev.dataTransfer.setData("data", JSON.stringify(data));    
+  }
+
+  public drop(ev:any, task:any): void {  
+    ev.preventDefault();
+    this.isDrag = false;
+
+    var data = ev.dataTransfer.getData("data"); 
+    
+    this.move(JSON.parse(data), task);      
+  }
+
+  public enableDrag(): void {
+    this.isDrag = true;    
+  }
+
+  private move(source: any, target:any): void {
+    let sourceIndex = this.taskList.findIndex((x) => x.uid === source.uid);
+    this.taskList.splice(sourceIndex,1);
+
+    source.parent.id = target.parent.id;
+
+    let targetIndex = this.taskList.findIndex((x) => x.uid === target.uid); 
+    this.taskList.splice(targetIndex,0,source);  
+    
+    this.dragIndex = targetIndex;
+    this.moveItem(source.id, targetIndex);
+  }
+
+  private moveItem(sourceId: number, index:number): void {
+    let childs = this.taskList.filter((x) => x.parent.id === sourceId);
+   
+    childs.forEach((child)=> {            
+      let childIndex = this.taskList.findIndex((x) => x.id === child.id);     
+      
+      if (this.dragIndex < childIndex) {
+        this.dragIndex++; 
+      }
+
+      this.taskList.splice(childIndex, 1);
+      this.taskList.splice(this.dragIndex,0,child);      
+      
+      this.moveItem(child.id,this.dragIndex);
+    } );
   }
 
 }

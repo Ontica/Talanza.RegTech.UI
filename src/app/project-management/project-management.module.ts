@@ -23,11 +23,10 @@ import { ActivityUpdateComponent } from './editor/tabs/activity-update.component
 import { ProjectsMainPageComponent } from './main-page/projects-main-page.component';
 import { GanttComponent } from './gantt/gantt.component';
 
-import { ActivityAddComponent } from './create-activity/activity-add.component';
-import { ActivitySelectorComponent } from './create-activity/activity-selector.component';
-import { ActivityDescriptionComponent } from './create-activity/activity-description.component';
-import { ActivityWorklistComponent } from './create-activity/activity-worklist.component';
-import { ActivityInfoComponent } from './create-activity/activity-info.component';
+import { CreateActivityMenuComponent } from './create-activity/create-activity-menu.component';
+import { SelectTypeActivityComponet } from './create-activity/wizard/select-type-activity.component';
+import { WorklistActivityComponent } from './create-activity/wizard/worklist-activity.component';
+import { CreateActivityWizard } from './create-activity/wizard/create-activity.wizard';
 
 import { ProjectsFilterComponent } from './main-page/projects-filter.component';
 
@@ -40,9 +39,9 @@ import { ProjectsFilterComponent } from './main-page/projects-filter.component';
   declarations: [ProjectExplorerComponent,
                  ActivityEditorComponent, ActivityCloseComponent,
                  ProjectsMainPageComponent, GanttComponent,
-                 ActivityAddComponent,ActivitySelectorComponent, ActivityDescriptionComponent,
-                 ActivityWorklistComponent, ActivityInfoComponent,
-                 ActivityUpdateComponent, ProjectsFilterComponent ],
+                 ActivityUpdateComponent, ProjectsFilterComponent,
+                 CreateActivityMenuComponent, SelectTypeActivityComponet, WorklistActivityComponent,
+                 CreateActivityWizard ],
   exports: [ProjectExplorerComponent, ActivityEditorComponent,
             ProjectsMainPageComponent, GanttComponent]
 })

@@ -1,0 +1,27 @@
+<div class="search">
+  <label>Buscar obligaciones contractuales: </label>
+  <input type="text" style="width:240px" class="text-box" [(ngModel)]="query" (keyup)="filter()">
+  <i class="fa fa-search  search-icon" aria-hidden="true" (click)="setAllEvents()"></i>
+</div>
+<br>
+<table class="grid">
+  <thead>
+    <tr>
+      <th style="width:10% ">Seleccionar</th>
+      <th style="width:90% ">Obligaciones encontradas</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let processModel of filteredList " [ngClass]="processModel.uid===selectedProcessModelUID ?  'selected-row-border' : ''">
+      <td style="width:10% ">
+
+        <i [ngClass]="processModel.uid===selectedProcessModelUID ?  'fa fa-check select-icon' : 'fa fa-circle no-select-icon'" (click)="onSelectEvent(processModel) "></i>
+        <td style="width:90% "><a (click)="onSelectEvent(processModel) "> {{processModel.name}}</a><br>
+          <span><i>{{processModel.name}}</i></span>
+        </td>
+    </tr>
+    <tr *ngIf="filteredList.length===0 ">
+      <td colspan="2 "><i>No encontré obligaciones relacionadas con la búsqueda proporcionada.</i></td>
+    </tr>
+  </tbody>
+</table>

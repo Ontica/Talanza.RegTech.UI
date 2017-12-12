@@ -33,11 +33,19 @@ export class ActivityUpdateComponent {
   public selectedTags: Tag[] = [];
   public isTaskClosed = false;
 
+  public isNewTask = false;
+
   public _task: ActivityRef;
   @Input()
   set task(task: ActivityRef) {
     this._task = task;
-    this.loadInitialValues();
+    this.loadInitialValues();  
+    if (task.uid === '') {
+      this.isNewTask = true;
+    } else {      
+      this.isNewTask = false;
+      this.loadActivityInitialValues();
+    }      
   }
   get task(): ActivityRef {
     return this._task;
@@ -62,17 +70,24 @@ export class ActivityUpdateComponent {
       return;
     }
     this.setSelectedTags();
-
-    await this.updateTask();
-
+    if (this.isNewTask) {
+      await this.addTask();
+    } else {
+      await this.updateTask();
+    }
   }
 
-  public async loadInitialValues() {
-    await this.loadSelectedTask();
+  public async loadInitialValues() {  
+    await this.loadTags();
+    this.loadLists();
+  }
+
+  public async loadActivityInitialValues() {
+    this.loadSelectedTask();
     await this.loadTags();
     this.loadSelectedTags();
-    this.loadLists();
     this.setIsTaskClosed();
+    this.loadLists();
   }
 
   public onSelectedTags(selectedTags: any): void {
@@ -129,6 +144,12 @@ export class ActivityUpdateComponent {
         this.onClose();
       })
       .catch((e) => this.exceptionHandler(e, errMsg));
+  }
+
+  private async addTask() {
+    const errMsg = 'Ocurrió un problema al intentar actualizar la actividad.';
+
+      alert("la tarea fue agregada con exito");
   }
 
   private exceptionHandler(error: any, defaultMsg: string): void {

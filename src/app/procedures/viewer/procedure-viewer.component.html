@@ -8,7 +8,7 @@
     <button class="tab-links left-position" [disabled]="isDisabled" [class.selected]="selectedTask==='generalInfo'" (click)="setSelectedTask('generalInfo')">Información general</button>
     <button class="tab-links left-position" [disabled]="isDisabled" [class.selected]="selectedTask==='requirements'" (click)="setSelectedTask('requirements')">Requisitos</button>
     <span *ngIf="config.isAddActivity">
-     <button class="tab-links left-position" [disabled]="isDisabled" [class.selected]="selectedTask==='addActivity'" (click)="setSelectedTask('addActivity')">Agregar Actividad</button>
+     <button class="tab-links left-position" [disabled]="isDisabled" [class.selected]="selectedTask==='addActivity'" (click)="setSelectedTask('addActivity')">Agregar a un proyecto</button>
     </span>
   </div>
   <br>

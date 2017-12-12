@@ -2,21 +2,17 @@
 @import "../../../styles/form";
 :host {
   position: relative;
-  //top: -30%;
   left: 20%;
 }
 
 .editor-container {
-  height: 650px;
+  height: 600px;
   width: 720px;
 }
 
-.form-frame {
-  height: 430px;
-  overflow-y: auto;
-}
-
-.form {
-  width: 640px;
-  overflow-y: auto;
+.center {
+  margin: auto;
+  width: 60%;
+  padding: 10px;
+  text-align: center;
 }
