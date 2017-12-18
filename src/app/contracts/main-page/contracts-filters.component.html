@@ -3,9 +3,9 @@
     <td>Contrato:</td>
     <td>
       <select #contract class="select-box" style="width:210px;" (change)="onChangeContract(contract.value)">
-                 <option value="">( Seleccionar un contrato )</option>
-                 <option *ngFor="let contract of contractsList" [value]="contract.uid">{{contract.name}}</option>
-              </select>
+        <option value="">( Seleccionar un contrato )</option>
+        <option *ngFor="let contract of contractsList" [value]="contract.uid">{{contract.name}}</option>
+      </select>
     </td>
     <td>Sección:</td>
     <td>

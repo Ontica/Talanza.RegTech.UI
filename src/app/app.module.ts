@@ -33,12 +33,13 @@ import { AppState, InternalStateType } from './app.service';
 import { CoreModule } from './core/core.module';
 import { SecurityUIModule } from './security-ui/security-ui.module';
 import { DashboardModule } from './dashboard/dashboard.module';
-import { DocumentsModule } from './documents/documents.module';
-import { InboxModule } from './inbox/inbox.module';
-import { ProcessModule } from './process/process.module';
-import { ContractsModule } from './contracts/contracts.module';
 
+import { ObligationsModule } from './obligations/obligations.module';
+import { ContractsModule } from './contracts/contracts.module';
+import { DocumentsModule } from './documents/documents.module';
+import { ProcessModule } from './process/process.module';
 import { ProjectManagementModule } from './project-management/project-management.module';
+import { InboxModule } from './inbox/inbox.module';
 import { SharedModule } from './shared/shared.module';
 
 /*
@@ -79,13 +80,14 @@ type StoreType = {
    */
   imports: [
     CoreModule,
-    ContractsModule,
     SecurityUIModule,
     DashboardModule,
+    ObligationsModule,    
+    ContractsModule,
     DocumentsModule,
-    InboxModule,
-    ProcessModule,   
+    ProcessModule,
     ProjectManagementModule,
+    InboxModule,
     SharedModule,
     BrowserModule,
     FormsModule,
