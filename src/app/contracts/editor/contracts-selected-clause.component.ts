@@ -21,7 +21,7 @@
    templateUrl: './contracts-selected-clause.component.html',
    styleUrls:['./contracts-selected-clause.component.scss'],
    providers: [ContractsService],
-   encapsulation: ViewEncapsulation.Native,
+   encapsulation: ViewEncapsulation.None,
  })
 
  export class ContractsSelectedClauseComponent {
@@ -37,7 +37,7 @@
   constructor(private core: CoreService, private contractService: ContractsService) { }
 
   @Input()
-  set clauseRef(clauseRef: ContractClauseRef) {
+  set clauseRef(clauseRef: ContractClauseRef) {    
     if (clauseRef && clauseRef.uid != '') {
      this.loadGridValues(clauseRef);
     }

@@ -2,13 +2,12 @@
   <div class="clause-title"> &nbsp; &nbsp;{{clause.clauseNo}} {{clause.title}}</div>
   <div class="main-container">
     <div class="left-panel" [style.width]="clauseInfoWidth">
-      <div class="clause-definition" [innerHTML]="clause.hypertext | safeHtml ">
-      </div>
+      <clause-definition [clause]="clause"></clause-definition>
     </div>
     <div class="right-panel" *ngIf="rules.length !== 0">
       <div>
         <span class="clause-subtitle">
-          Obligaciones
+            <i class="fa fa-file-text-o" aria-hidden="true"></i> Obligaciones
         </span>
         <span class="right marked-text">
           + Agregar a un proyecto regulatorio
