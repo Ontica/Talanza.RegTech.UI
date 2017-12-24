@@ -19,6 +19,7 @@ import { ContractViewComponent } from './main-page/contract-view.component';
 import { ContractsFiltersComponent } from './main-page/contracts-filters.component';
 import { ContractsClauseSelectorComponent } from './editor/contracts-clause-selector.component';
 import { ContractsSelectedClauseComponent } from './editor/contracts-selected-clause.component';
+import { ClauseDefinitionComponent } from './editor/clause-definition.component';
 
 /**
  * Do not specify providers for modules that might be imported by a lazy loaded module.
@@ -27,7 +28,8 @@ import { ContractsSelectedClauseComponent } from './editor/contracts-selected-cl
 @NgModule({
   imports: [ContractsRoutingModule, SharedModule, CommonModule, FormsModule, ProceduresModule],
   declarations: [ContractsMainPageComponent, ContractsClauseSelectorComponent, 
-                 ContractsSelectedClauseComponent, ContractsFiltersComponent],
+                 ContractsSelectedClauseComponent, ContractsFiltersComponent,
+                 ClauseDefinitionComponent],
   exports: []
 })
 export class ContractsModule { }
