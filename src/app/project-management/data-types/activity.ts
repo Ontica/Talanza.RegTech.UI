@@ -38,7 +38,8 @@ export interface ActivityRef {
   type : string,  
   uid : string,
   tags: string[],  
-  visible : string
+  visible : string;
+  isCollapsed: boolean;
 }
 
 export function EmpityParent () {
@@ -94,7 +95,8 @@ export function EmpityActivityRef() {
     type : '',  
     uid : '',
     tags: [],  
-    visible : ''
+    visible : '',
+    isCollapsed : false
   }
   
   

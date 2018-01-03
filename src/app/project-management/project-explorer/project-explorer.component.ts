@@ -112,23 +112,15 @@ export class ProjectExplorerComponent {
    let index = this.taskList.findIndex((e) => e.parent.uid === parentUID) - 1;
 
    if (this.taskList[index].visible === 'collapse') {
-    this.taskList[index].visible = 'expand';
-    this.changeExpandOrCollapseIcon('visible');
-    this.changeVisibility(parentUID, 'visible')
+    this.taskList[index].visible = 'expand';  
+    this.changeVisibility(parentUID, 'visible');
+    this.displayExpandOrCollapse(parentUID);
    } else {
-    this.taskList[index].visible = 'collapse';
-    this.changeExpandOrCollapseIcon('collapse');
-    this.changeVisibility(parentUID, 'none');
+    this.taskList[index].visible = 'collapse';  
+    this.saveExpandOrCollapse(parentUID);
+    this.changeVisibility(parentUID, 'none');  
    }
 
-  }
-
-  private changeExpandOrCollapseIcon(changeVisibility: string) {
-    if (changeVisibility === 'collapse') {
-      this.expanOrCollapseIcon = 'fa fa-plus-circle';
-    } else {
-      this.expanOrCollapseIcon = 'fa fa-minus-circle';
-    }
   }
 
   private changeVisibility(parentUID, visibibility: string): void {
@@ -142,6 +134,43 @@ export class ProjectExplorerComponent {
     });
   }
 
+  private saveExpandOrCollapse(parentUID): void {
+    this.taskList.forEach((e) => {
+      if (e.parent.uid === parentUID) {
+
+        if (e.type === 'ObjectType.ProjectObject.Summary') {
+
+          if (e.visible === 'collapse') {
+            e.isCollapsed = true;         
+          } else {
+            e.isCollapsed = false;
+          }
+
+          this.saveExpandOrCollapse(e.uid);
+        }
+
+      }
+    });
+  }
+
+  private displayExpandOrCollapse(parentUID): void {
+    this.taskList.forEach((e) => {
+      if (e.parent.uid === parentUID) {
+
+        if (e.type === 'ObjectType.ProjectObject.Summary') {
+          
+          if (e.isCollapsed === true) {    
+            e.visible = 'collapse'       
+            this.changeVisibility(e.uid, 'none');                      
+          } 
+          this.displayExpandOrCollapse(e.uid);
+          
+        }
+        
+      }
+    });
+  }
+
   private getTaskName(task) {
     return task.name;
   }
@@ -150,7 +179,7 @@ export class ProjectExplorerComponent {
     await this.activitiyService.getActivities(this.projectUID)
      .then((data) => {
        this.taskList = data;
-       this.taskList.forEach(function(e) { if (e.type ==='ObjectType.ProjectObject.Summary'){ e.visible = 'collapse'} else {e.visible ='none'} });
+       this.taskList.forEach(function(e) { if (e.type ==='ObjectType.ProjectObject.Summary'){ e.visible = 'collapse';} else {e.visible ='none';} });
      });
   }
 
