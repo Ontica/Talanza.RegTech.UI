@@ -9,6 +9,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
 
 import { NewLayoutRoutingModule } from './new-layout-routing.module';
@@ -20,7 +21,7 @@ import { NewLayoutComponent } from './main-page/new-layout.component';
  */
 
 @NgModule({
-  imports: [NewLayoutRoutingModule, SharedModule, CommonModule, FormsModule],
+  imports: [NewLayoutRoutingModule, SharedModule, CommonModule, FormsModule, RouterModule],
   declarations: [NewLayoutComponent],
   exports: [NewLayoutComponent]
 })

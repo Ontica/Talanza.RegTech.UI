@@ -16,33 +16,33 @@
                                         <i class="fa fa-home fa-2x" aria-hidden="true"></i><br>
                                         <label>Home</label>
                                     </a>
-                                </li>
+                                </li>                                
                                 <li [class.selected]="selectedOption === 'homeWorks'">
-                                    <a href="#" (click)="setSelectedStyle('homeWorks')">
+                                    <a [routerLink]="['/projects/search']" [routerLinkActive]="['router-link-active']"  [routerLinkActiveOptions]="{exact:true}" (click)="setSelectedStyle('homeWorks')">
                                         <i class="fa fa-list fa-2x" aria-hidden="true"></i><br>
                                         <label>Tareas</label>
                                     </a>
                                 </li>
                                 <li [class.selected]="selectedOption === 'documents'">
-                                    <a href="#" (click)="setSelectedStyle('documents')">
+                                    <a [routerLink]="['/procedures/search']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{exact:true}" (click)="setSelectedStyle('documents')">
                                         <i class="fa fa-file-text-o fa-2x" aria-hidden="true"></i><br>
                                         <label>Documentos y reportes</label>
                                     </a>
                                 </li>
                                 <li [class.selected]="selectedOption === 'contracts'">
-                                    <a href="#" (click)="setSelectedStyle('contracts')">
+                                    <a [routerLink]="['/contracts/search']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{exact:true}" (click)="setSelectedStyle('contracts')">
                                         <i class="fa fa-bookmark fa-2x" aria-hidden="true"></i><br>
                                         <label>Contratos y obligaciones</label>
                                     </a>
                                 </li>
                                 <li [class.selected]="selectedOption === 'library'">
-                                    <a href="#" (click)="setSelectedStyle('library')">
+                                    <a [routerLink]="['/documents/search']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{exact:true}" (click)="setSelectedStyle('library')">
                                         <i class="fa fa-graduation-cap aria- fa-2x" aria-hidden="true"></i><br>
                                         <label>Red de conocimiento</label>
                                     </a>
                                 </li>
                                 <li [class.selected]="selectedOption === 'helpDesk'">
-                                    <a href="#" (click)="setSelectedStyle('helpDesk')">
+                                    <a [routerLink]="['/process/editor']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{exact:true}" (click)="setSelectedStyle('helpDesk')">
                                         <i class="fa fa-comments-o fa-2x" aria-hidden="true"></i><br>
                                         <label>Help desk</label>
                                     </a>
@@ -55,10 +55,7 @@
             <div class="small-11 columns">
                 <div class="row right-panel">
                     <div class="small-8 columns">
-                        <div class="title">
-                            Home
-                            <small>Todos los proyectos</small>
-                        </div>
+                            Home<br> Todos los proyectos                      
                     </div>
                     <div class="small-4 columns">
                         <span style="float:right;">Hola, Mónica Rodríguez
@@ -68,13 +65,10 @@
                 </div>
                 <div class="row content-panel">
                     <div class="small-12 columns">
-
+                            
                     </div>
                 </div>
             </div>
         </div>
-
-
     </div>
-
 </div>
