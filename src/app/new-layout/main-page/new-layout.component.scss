@@ -1,0 +1,84 @@
+@import "../../../styles/variables";
+//
+// Main layout scss
+//
+.fullWidth {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: initial;
+}
+
+.left-panel {
+  background-color: $red;
+  height: 87vh;
+}
+
+.vertical-menu { 
+  height: 100vh;
+}
+
+.vertical-menu a {    
+  display: block;
+  height: 12.5%;
+  text-decoration: none; 
+}
+
+.vertical-menu a:hover span label {
+  color: $blue;
+  border-bottom: 2px solid $blue;  
+}
+
+.vertical-menu a:hover  i {
+  color: $gray;
+}
+
+.icon-menu {
+  color: $white;
+}
+
+.icon-label {
+  color: $white;
+  font-size: 12px;
+  font-family: $font-family;
+  height: $font-weight-base;
+}
+
+.selected label {
+  color: $orange;
+  font-weight: 800;
+  border-bottom: 1px solid $orange;
+  z-index: 200;
+}
+
+.selected  i {
+  color: $orange;
+}
+
+.logo {
+  padding-top:30px;  
+}
+
+.right-panel {
+  height:6vh;
+  border-bottom: 2px solid $red;
+}
+
+.content-panel {
+  height:94vh;
+}
+
+.title {
+  color: $text-title;
+  font-size: $font-size-title;
+  font-weight: $font-weight-title;
+  min-width: 360px;
+  padding-top: 2px;
+  width: 50%;
+  small {
+    color: $text-hint;
+    display: block;
+    font-size: $font-size-hint;
+    font-weight: $font-weight-hint;
+  }
+}

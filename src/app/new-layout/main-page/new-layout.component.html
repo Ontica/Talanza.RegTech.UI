@@ -1,0 +1,81 @@
+<div class="row fullWidth">
+    <div class="small-12 large-12 columns">
+        <div class="row">
+            <div class="small-1 columns left-panel">
+                <div>
+                    <div class="small-12 columns">
+                        <div class="vertical-menu">
+                            
+                            <a href="#" class="logo"><img class="logo" src="./assets/img/customer-logo.png" alt="COVAR Energy Consulting" /></a>
+                            <a href="#" (click)="setSelectedStyle('home')">
+                                <span [class.selected]="selectedOption === 'home'">
+                                    <i class="fa fa-home fa-2x icon-menu" aria-hidden="true"></i>
+                                    <br>
+                                    <label class="icon-label">Home</label>
+                                </span>
+                            </a>
+                            <a href="#" (click)="setSelectedStyle('homeWorks')">
+                                <span [class.selected]="selectedOption === 'homeWorks'">
+                                    <i class="fa fa-list fa-2x icon-menu" aria-hidden="true"></i>
+                                    <br>
+                                    <label class="icon-label">Tareas</label>
+                                </span>
+                            </a>                            
+                            <a href="#" (click)="setSelectedStyle('documents')">
+                                <span [class.selected]="selectedOption === 'documents'">
+                                    <i class="fa fa-file-text-o fa-2x icon-menu" aria-hidden="true"></i>
+                                    <br>
+                                    <label class="icon-label">Doctos y reportes</label>
+                                </span>
+                            </a>
+                            <a href="#" (click)="setSelectedStyle('contracts')">
+                                <span [class.selected]="selectedOption === 'contracts'">
+                                    <i class="fa fa-bookmark fa-2x icon-menu" aria-hidden="true"></i>
+                                    <br>
+                                    <label class="icon-label">Contratos y obligaciones</label>
+                                </span>
+                            </a>
+                            <a href="#" (click)="setSelectedStyle('library')">
+                                <span [class.selected]="selectedOption === 'library'">
+                                    <i class="fa fa-graduation-cap aria- fa-2x icon-menu" aria-hidden="true"></i>
+                                    <br>
+                                    <label class="icon-label">Red de conocimiento</label>
+                                </span>
+                            </a>
+                            <a href="#" (click)="setSelectedStyle('helpDesk')">
+                                <span [class.selected]="selectedOption === 'helpDesk'">
+                                    <i class="fa fa-comments-o fa-2x icon-menu" aria-hidden="true"></i>
+                                    <br>
+                                    <label class="icon-label">Help desk</label>
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="small-11 columns" >
+                <div class="row right-panel" >
+                    <div class="small-8 columns" >
+                            <div class="title">                                    
+                                    Home
+                                    <small>Todos los proyectos</small>
+                                  </div>                       
+                    </div>
+                    <div class="small-4 columns">
+                        <span style="float:right;">Hola, Mónica Rodríguez
+                            <i class="fa fa-cog" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                </div>
+                <div class="row content-panel">
+                    <div class="small-12 columns">
+                      
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+</div>

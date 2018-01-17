@@ -41,7 +41,7 @@ import { ProcessModule } from './process/process.module';
 import { ProjectManagementModule } from './project-management/project-management.module';
 import { InboxModule } from './inbox/inbox.module';
 import { SharedModule } from './shared/shared.module';
-import { StartPageModule } from './start-page/start-page.module';
+import { NewLayoutModule } from './new-layout/new-layout.module';
 
 /*
  * Import the top level component and its routing module
@@ -90,7 +90,7 @@ type StoreType = {
     ProjectManagementModule,
     InboxModule,
     SharedModule,
-    StartPageModule,
+    NewLayoutModule,
     BrowserModule,
     FormsModule,
     AppRoutingModule
