@@ -9,35 +9,37 @@
   max-width: initial;
 }
 
-.left-panel {
-  background-color: $red;
-  height: 87vh;
-}
-
-.vertical-menu { 
+.nav-bar ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 10pt;
   height: 100vh;
 }
 
-.vertical-menu a {    
+.nav-bar li {
   display: block;
   height: 12.5%;
+}
+
+.nav-bar i {
+  color: $white;
+}
+
+.nav-bar a {
   text-decoration: none; 
 }
 
-.vertical-menu a:hover span label {
+.nav-bar a:hover  label {
   color: $blue;
   border-bottom: 2px solid $blue;  
 }
 
-.vertical-menu a:hover  i {
+.nav-bar a:hover  i {
   color: $gray;
 }
 
-.icon-menu {
-  color: $white;
-}
-
-.icon-label {
+.nav-bar label {
   color: $white;
   font-size: 12px;
   font-family: $font-family;
@@ -57,6 +59,11 @@
 
 .logo {
   padding-top:30px;  
+}
+
+.left-panel {
+  background-color: $red;
+  height: 87vh;
 }
 
 .right-panel {
