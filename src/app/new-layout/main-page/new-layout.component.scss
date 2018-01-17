@@ -1,13 +1,4 @@
 @import "../../../styles/variables";
-//
-// Main layout scss
-//
-.fullWidth {
-  width: 100%;
-  margin-left: auto;
-  margin-right: auto;
-  max-width: initial;
-}
 
 .nav-bar ul {
   list-style: none;
@@ -61,31 +52,65 @@
   padding-top:30px;  
 }
 
+
+.configuration-bar {
+  font-size: $font-size-command;
+  font-weight: $font-weight-command;
+  width: 180px;
+}
+
+.container {
+  display: flex;    
+  background-color: DodgerBlue;
+  flex-direction: inline-flex;
+  padding: 0;
+  margin:0;
+}
+
+.flex-container > div { 
+ 
+  font-size: 30px;
+}
+
 .left-panel {
   background-color: $red;
-  height: 87vh;
+  text-align: center;
+  height: 100vh;
+  width: 5vw;
 }
 
 .right-panel {
-  height:6vh;
+  background-color: $white;
+  width: 95vw;
+}
+
+.header-container {  
+  height: 7vh;
+  top: 0;
   border-bottom: 2px solid $red;
-}
+  display:flex;
+ }
 
-.content-panel {
-  height:94vh;
-}
-
-.title {
-  color: $text-title;
-  font-size: $font-size-title;
-  font-weight: $font-weight-title;
-  min-width: 360px;
-  padding-top: 2px;
-  width: 50%;
-  small {
-    color: $text-hint;
-    display: block;
-    font-size: $font-size-hint;
-    font-weight: $font-weight-hint;
+ .content {  
+  display: flex;
+  flex-direction: column;
+  padding: 8px;
+  height: 100vh;
   }
-}
+
+  .title {
+    color: $text-title;
+    font-size: $font-size-title;
+    font-weight: $font-weight-title;
+    min-width: 360px;
+    padding-top: 2px;
+    padding-left: 10px;
+    width: 50%;
+    small {
+      color: $text-hint;
+      display: block;
+      font-size: $font-size-hint;
+      font-weight: $font-weight-hint;
+    }
+  }
+  

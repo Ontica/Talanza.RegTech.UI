@@ -1,74 +1,75 @@
-<div class="row fullWidth">
-    <div class="small-12 large-12 columns">
-        <div class="row">
-            <div class="small-1 columns left-panel">
-                <div>
-                    <div class="small-12 columns">
-                        <div class="nav-bar">
-                            <ul>
-                                <li>
-                                    <a href="#" class="logo">
-                                        <img class="logo" src="./assets/img/customer-logo.png" alt="COVAR Energy Consulting"/>
-                                    </a>
-                                </li>
-                                <li [class.selected]="selectedOption === 'home'">
-                                    <a href="#" (click)="setSelectedStyle('home')">
-                                        <i class="fa fa-home fa-2x" aria-hidden="true"></i><br>
-                                        <label>Home</label>
-                                    </a>
-                                </li>                                
-                                <li [class.selected]="selectedOption === 'homeWorks'">
-                                    <a [routerLink]="['/projects/search']" [routerLinkActive]="['router-link-active']"  [routerLinkActiveOptions]="{exact:true}" (click)="setSelectedStyle('homeWorks')">
-                                        <i class="fa fa-list fa-2x" aria-hidden="true"></i><br>
-                                        <label>Tareas</label>
-                                    </a>
-                                </li>
-                                <li [class.selected]="selectedOption === 'documents'">
-                                    <a [routerLink]="['/procedures/search']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{exact:true}" (click)="setSelectedStyle('documents')">
-                                        <i class="fa fa-file-text-o fa-2x" aria-hidden="true"></i><br>
-                                        <label>Documentos y reportes</label>
-                                    </a>
-                                </li>
-                                <li [class.selected]="selectedOption === 'contracts'">
-                                    <a [routerLink]="['/contracts/search']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{exact:true}" (click)="setSelectedStyle('contracts')">
-                                        <i class="fa fa-bookmark fa-2x" aria-hidden="true"></i><br>
-                                        <label>Contratos y obligaciones</label>
-                                    </a>
-                                </li>
-                                <li [class.selected]="selectedOption === 'library'">
-                                    <a [routerLink]="['/documents/search']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{exact:true}" (click)="setSelectedStyle('library')">
-                                        <i class="fa fa-graduation-cap aria- fa-2x" aria-hidden="true"></i><br>
-                                        <label>Red de conocimiento</label>
-                                    </a>
-                                </li>
-                                <li [class.selected]="selectedOption === 'helpDesk'">
-                                    <a [routerLink]="['/process/editor']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{exact:true}" (click)="setSelectedStyle('helpDesk')">
-                                        <i class="fa fa-comments-o fa-2x" aria-hidden="true"></i><br>
-                                        <label>Help desk</label>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="small-11 columns">
-                <div class="row right-panel">
-                    <div class="small-8 columns">
-                            Home<br> Todos los proyectos                      
-                    </div>
-                    <div class="small-4 columns">
-                        <span style="float:right;">Hola, Mónica Rodríguez
-                            <i class="fa fa-cog" aria-hidden="true"></i>
-                        </span>
-                    </div>
-                </div>
-                <div class="row content-panel">
-                    <div class="small-12 columns">
-                            
-                    </div>
-                </div>
-            </div>
+<div class="container">
+    <div class="left-panel">
+        <div class="nav-bar">
+            <ul>
+                <li>
+                    <a href="#" class="logo">
+                        <img class="logo" src="./assets/img/customer-logo.png" alt="COVAR Energy Consulting" />
+                    </a>
+                </li>
+                <li [class.selected]="selectedOption === 'home'">
+                    <a href="#" (click)="setSelectedStyle('home')">
+                        <i class="fa fa-home fa-2x" aria-hidden="true"></i>
+                        <br>
+                        <label>Home</label>
+                    </a>
+                </li>
+                <li [class.selected]="selectedOption === 'homeWorks'">
+                    <a [routerLink]="['/projects/search']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{exact:true}"
+                        (click)="setSelectedStyle('homeWorks')">
+                        <i class="fa fa-list fa-2x" aria-hidden="true"></i>
+                        <br>
+                        <label>Tareas</label>
+                    </a>
+                </li>
+                <li [class.selected]="selectedOption === 'documents'">
+                    <a [routerLink]="['/procedures/search']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{exact:true}"
+                        (click)="setSelectedStyle('documents')">
+                        <i class="fa fa-file-text-o fa-2x" aria-hidden="true"></i>
+                        <br>
+                        <label>Documentos y reportes</label>
+                    </a>
+                </li>
+                <li [class.selected]="selectedOption === 'contracts'">
+                    <a [routerLink]="['/contracts/search']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{exact:true}"
+                        (click)="setSelectedStyle('contracts')">
+                        <i class="fa fa-bookmark fa-2x" aria-hidden="true"></i>
+                        <br>
+                        <label>Contratos y obligaciones</label>
+                    </a>
+                </li>
+                <li [class.selected]="selectedOption === 'library'">
+                    <a [routerLink]="['/documents/search']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{exact:true}"
+                        (click)="setSelectedStyle('library')">
+                        <i class="fa fa-graduation-cap aria- fa-2x" aria-hidden="true"></i>
+                        <br>
+                        <label>Red de conocimiento</label>
+                    </a>
+                </li>
+                <li [class.selected]="selectedOption === 'helpDesk'">
+                    <a [routerLink]="['/process/editor']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{exact:true}"
+                        (click)="setSelectedStyle('helpDesk')">
+                        <i class="fa fa-comments-o fa-2x" aria-hidden="true"></i>
+                        <br>
+                        <label>Help desk</label>
+                    </a>
+                </li>
+            </ul>
         </div>
     </div>
+    <div class="right-panel">
+        <div class="header-container">
+            <div class="title">
+                Home
+                <br>
+                <small>Todos los proyectos</small>
+            </div>
+            <div class="configuration-bar pull-right">
+                Hola, Mónica Rodríguez
+                <i class="fa fa-cog" aria-hidden="true"></i>
+            </div>
+        </div>
+        <div class="content">3</div>
+    </div>
+
 </div>
