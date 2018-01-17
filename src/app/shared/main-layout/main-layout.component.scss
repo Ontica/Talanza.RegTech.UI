@@ -4,26 +4,39 @@
 //
 .body {
   display: flex;
-  flex-direction: column;
+  flex-direction: inline-flex; //column;
   height: 100vh;
   overflow: hidden;
 }
 
-.header-container {
-  display: inline-flex;
-  flex-wrap: nowrap;
-  top: 0;
-  div {
-    margin: 8px;
-  }
+.left-panel {
+  background-color: $red;
+  text-align: center;
+  height: 100vh;
+  width: 5vw;
 }
 
-.content {
+.right-panel {
+  background-color: $white;
+  width: 95vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.header-container {  
+  height: 6%;
+  top: 0;
+  border-bottom: 2px solid $red;
+  display:flex;
+ }
+
+ .content {  
   display: flex;
   flex-direction: column;
   padding: 8px;
-  height: 100vh;
-}
+  height: 94%;
+  overflow: hidden;
+  }
 
 //
 // Header-container inner items
@@ -52,4 +65,56 @@
   font-size: $font-size-command;
   font-weight: $font-weight-command;
   width: 180px;
+}
+
+//
+// navigation bar
+//
+
+.nav-bar ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 10pt;
+  height: 100vh;
+}
+
+.nav-bar li {
+  display: block;
+  height: 12.5%;
+}
+
+.nav-bar i {
+  color: $white;
+}
+
+.nav-bar a {
+  text-decoration: none; 
+}
+
+.nav-bar a:hover  label {
+  color: $blue;
+  border-bottom: 2px solid $blue;  
+}
+
+.nav-bar a:hover  i {
+  color: $gray;
+}
+
+.nav-bar label {
+  color: $white;
+  font-size: 12px;
+  font-family: $font-family;
+  height: $font-weight-base;
+}
+
+.selected label {
+  color: $orange;
+  font-weight: 800;
+  border-bottom: 1px solid $orange;
+  z-index: 200;
+}
+
+.selected  i {
+  color: $orange;
 }
