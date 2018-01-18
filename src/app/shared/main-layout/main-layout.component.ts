@@ -28,12 +28,6 @@ export class MainLayoutComponent {
     const principal = session.getPrincipal();
 
     this.userName = principal.identity.fullname;
-  }
-
-  public selectedOption: string = 'home';
-  
-  public setSelectedStyle(option: string): void {  
-    this.selectedOption =    option;   
-  }
+  }  
 
 }

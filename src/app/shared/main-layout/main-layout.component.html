@@ -1,61 +1,6 @@
 <div class="body">
   <div class="left-panel">
-      <div class="nav-bar">
-          <ul>
-              <li>
-                  <a href="#" class="logo">
-                      <img class="logo" src="./assets/img/customer-logo.png" alt="COVAR Energy Consulting" />
-                  </a>
-              </li>
-              <li [class.selected]="selectedOption === 'home'">
-                  <a href="#" (click)="setSelectedStyle('home')">
-                      <i class="fa fa-home fa-2x" aria-hidden="true"></i>
-                      <br>
-                      <label>Home</label>
-                  </a>
-              </li>
-              <li [class.selected]="selectedOption === 'homeWorks'">
-                  <a [routerLink]="['/projects/search']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{exact:true}"
-                      (click)="setSelectedStyle('homeWorks')">
-                      <i class="fa fa-list fa-2x" aria-hidden="true"></i>
-                      <br>
-                      <label>Tareas</label>
-                  </a>
-              </li>
-              <li [class.selected]="selectedOption === 'documents'">
-                  <a [routerLink]="['/procedures/search']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{exact:true}"
-                      (click)="setSelectedStyle('documents')">
-                      <i class="fa fa-file-text-o fa-2x" aria-hidden="true"></i>
-                      <br>
-                      <label>Documentos y reportes</label>
-                  </a>
-              </li>
-              <li [class.selected]="selectedOption === 'contracts'">
-                  <a [routerLink]="['/contracts/search']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{exact:true}"
-                      (click)="setSelectedStyle('contracts')">
-                      <i class="fa fa-bookmark fa-2x" aria-hidden="true"></i>
-                      <br>
-                      <label>Contratos y obligaciones</label>
-                  </a>
-              </li>
-              <li [class.selected]="selectedOption === 'library'">
-                  <a [routerLink]="['/documents/search']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{exact:true}"
-                      (click)="setSelectedStyle('library')">
-                      <i class="fa fa-graduation-cap aria- fa-2x" aria-hidden="true"></i>
-                      <br>
-                      <label>Red de conocimiento</label>
-                  </a>
-              </li>
-              <li [class.selected]="selectedOption === 'helpDesk'">
-                  <a [routerLink]="['/process/editor']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{exact:true}"
-                      (click)="setSelectedStyle('helpDesk')">
-                      <i class="fa fa-comments-o fa-2x" aria-hidden="true"></i>
-                      <br>
-                      <label>Help desk</label>
-                  </a>
-              </li>
-          </ul>
-      </div>
+     <navbar></navbar>
   </div>
   <div class="right-panel">
       <div class="header-container">
