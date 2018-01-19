@@ -8,6 +8,7 @@
             {{title}}
               <br>
               <small>{{breadcrumb}}</small>
+              <select-control [items]="projects" (onSelectedItem)="onChangeProject($event)"></select-control>
           </div>
           <div class="configuration-bar pull-right">
               Hola, {{userName}}
