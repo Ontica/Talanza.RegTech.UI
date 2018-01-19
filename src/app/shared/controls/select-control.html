@@ -1,0 +1,18 @@
+<div class="container">    
+  <div>
+    <div class="selected-div" (click)="onClick()"><span>{{selectedItem[config.valueField]}}</span><i  style="float: right" class="fa fa-caret-down" aria-hidden="true"></i></div>
+  </div>
+  <div class="items-div" *ngIf="isHideControl">
+     <ul *ngFor="let item of items">
+       <li (click)="onSelectItem(item)" *ngIf="item === selectedItem">
+         <i class="fa fa-check-square" aria-hidden="true" (click)="onClick()"></i>&nbsp;&nbsp;&nbsp;{{item[config.valueField]}}
+         <hr>
+       </li>        
+     </ul>
+     <ul *ngFor="let item of items">
+       <li (click)="onSelectItem(item)"  *ngIf="item !== selectedItem">
+        &nbsp;&nbsp;&nbsp;{{item[config.valueField]}}
+       </li> 
+     </ul>
+  </div>  
+</div>
