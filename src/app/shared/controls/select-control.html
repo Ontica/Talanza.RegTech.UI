@@ -2,16 +2,11 @@
   <div>
     <div class="selected-div" (click)="onClick()"><span>{{selectedItem[config.valueField]}}</span><i  style="float: right" class="fa fa-caret-down" aria-hidden="true"></i></div>
   </div>
-  <div class="items-div" *ngIf="isHideControl">
+  <div class="items-div" *ngIf="isHideControl">    
      <ul *ngFor="let item of items">
-       <li (click)="onSelectItem(item)" *ngIf="item === selectedItem">
-         <i class="fa fa-check-square" aria-hidden="true" (click)="onClick()"></i>&nbsp;&nbsp;&nbsp;{{item[config.valueField]}}
-         <hr>
-       </li>        
-     </ul>
-     <ul *ngFor="let item of items">
-       <li (click)="onSelectItem(item)"  *ngIf="item !== selectedItem">
-        &nbsp;&nbsp;&nbsp;{{item[config.valueField]}}
+       <li [ngClass]="setItemCSSClass(item.level)" (click)="onSelectItem(item)">
+          <i *ngIf="item.level === 3" class="fa fa-circle" aria-hidden="true"></i>
+         {{item[config.valueField]}}
        </li> 
      </ul>
   </div>  

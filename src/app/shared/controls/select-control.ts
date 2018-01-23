@@ -42,7 +42,8 @@ export class SelectControl {
 
     public onSelectItem(item: any): void {
         this.selectedItem = item;
-        this.onSelectedItem.emit(this.selectedItem);        
+        this.isHideControl = !this.isHideControl;
+        this.onSelectedItem.emit(this.selectedItem);                
     }
 
     public handleClick(event): void {
@@ -58,7 +59,28 @@ export class SelectControl {
             this.isHideControl = false;
          // this.isHideControl = true;
         }
-      }
+    }
+
+    public setItemCSSClass(level: number): string {       
+        switch (level) {
+            case 0:
+              return 'item-level0';
+      
+            case 1:
+              return 'item-level1';
+      
+            case 2:
+              return 'item-level2';
+      
+            case 3:
+              return 'item-level3';
+      
+            default:
+              return 'item-level3';
+        } 
+     
+          
+    }
 
     private setSelectedItem(item: any): void {
         this.selectedItem = item;
