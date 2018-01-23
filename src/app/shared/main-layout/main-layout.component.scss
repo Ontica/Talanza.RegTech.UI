@@ -9,14 +9,14 @@
   overflow: hidden;
 }
 
-.left-panel {
+.main-layout-left-panel {
   background-color: $red;
   text-align: center;
   height: 100vh;
   width: 5vw;
 }
 
-.right-panel {
+.main-layout-right-panel {
   background-color: $white;
   width: 95vw;
   height: 100vh;
@@ -30,7 +30,7 @@
   display:flex;
  }
 
- .content {  
+ .main-layout-content {  
   display: flex;
   flex-direction: column;
   padding: 8px;
@@ -38,13 +38,11 @@
   overflow: hidden;
   }
 
+/*  
 //
 // Header-container inner items
 //
-.logo {
-  height: 60px;
-  margin-right: 14px;
-}
+*/
 
 .title {
   color: $text-title;

@@ -1,8 +1,8 @@
 <div class="body">
-  <div class="left-panel">
+  <div class="main-layout-left-panel">
      <navbar></navbar>
   </div>
-  <div class="right-panel">
+  <div class="main-layout-right-panel">
       <div class="header-container">
           <div class="title">            
               <select-control [items]="projects" (onSelectedItem)="onChangeProject($event)"></select-control>
@@ -12,9 +12,8 @@
               <i class="fa fa-cog" aria-hidden="true"></i>
           </div>
       </div>
-      <div class="content">
+      <div class="main-layout-content">
         <router-outlet></router-outlet>
       </div>
   </div>
-
 </div>
