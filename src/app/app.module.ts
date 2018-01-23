@@ -41,6 +41,7 @@ import { ProcessModule } from './process/process.module';
 import { ProjectManagementModule } from './project-management/project-management.module';
 import { InboxModule } from './inbox/inbox.module';
 import { SharedModule } from './shared/shared.module';
+import { HomeModule } from './home/home.module';
 
 /*
  * Import the top level component and its routing module
@@ -53,6 +54,7 @@ import '../styles/styles.scss';
 
 // Define global exception handler provider
 import { ExceptionHandler } from './core/general/exception-handler';
+import { HomeComponent } from 'src/app/dashboard/home/home.component';
 
 const EXCEPTION_HANDLER_PROVIDER =  { provide: ErrorHandler, useClass: ExceptionHandler };
 
@@ -87,6 +89,7 @@ type StoreType = {
     DocumentsModule,
     ProcessModule,
     ProjectManagementModule,
+    HomeModule,
     InboxModule,
     SharedModule,    
     BrowserModule,

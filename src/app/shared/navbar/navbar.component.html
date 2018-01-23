@@ -4,7 +4,8 @@
           <a href="#" class="logo"><img class="logo" src="./assets/img/customer-logo.png" alt="COVAR Energy Consulting" /></a>
       </li>
       <li [class.selected]="selectedOption === 'home'">
-          <a href="#" (click)="setSelectedStyle('home')"><i class="fa fa-home fa-2x" aria-hidden="true"></i><br><label>Home</label></a>
+          <a [routerLink]="['/home/search']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{exact:true}"
+           (click)="setSelectedStyle('home')"><i class="fa fa-home fa-2x" aria-hidden="true"></i><br><label>Home</label></a>
       </li>
       <li [class.selected]="selectedOption === 'homeWorks'">
           <a [routerLink]="['/projects/search']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{exact:true}"

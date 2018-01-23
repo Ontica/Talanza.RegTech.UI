@@ -1,0 +1,210 @@
+div {
+    float: left;
+    margin: 0px;
+    outline: none;
+    padding: 0;
+    vertical-align: top;
+  }
+
+  ul {
+    list-style: none;
+}
+  
+.home-main-container {
+    height: 85vh;
+    min-height: 30%;
+    width: 100%;    
+  }
+
+  .home-left-container {
+    background-color:  #f8f8f8;
+    border: 0px solid #9b1b1f;
+    display: inline-block;
+    height: 100%;
+    width:80%;
+    margin-right: 10px;
+  }
+  
+  .home-right-container {
+    background-color:#f8f8f8;
+    border: 0px solid #9b1b1f;
+    display: inline-block;
+    height: 100%;
+    width: 19%;    
+  }
+  
+  .search-container {    
+    display: inline-block;
+    height: 70%;
+    width: 100%;
+  }
+
+  .footer-contaner {        
+    height: 30%;
+    width: 100%;
+  }
+
+  .binnacle-container {    
+    height: 100%;
+    width: 49%;
+    margin-right: 10px;
+    margin-top: 10px;
+  }
+  
+  .chat-container {     
+    height: 100%;
+    width: 49%;
+    margin-left: 10px;
+    margin-top: 10px;
+    float: right;
+    
+  }
+
+  .chat-box {
+    overflow-y:scroll;
+    height: 90%;
+    width: 100%;
+    border: 2px solid rgb(58, 4, 4);    
+  }
+  
+  .project-status-container {   
+    height: 30%;
+    width: 100%;      
+  }
+
+  .todo-list-container {     
+      height:  39%;
+      width: 100%;
+      margin-top: 8px;   
+  }
+
+  .news-tips-container {    
+    height: 30%;
+    width: 100%;
+    margin-top: 8px;   
+}
+
+//search container internal styles
+
+.header
+{
+    height:10%;
+    max-height: 30px;
+    background-color: orange;
+    font-weight: bolder;
+    width: 100%;
+}
+
+.search {
+    padding-left: 40px;
+    padding-top: 20px;
+}
+.content {
+    border: 2px solid rgb(58, 4, 4);
+    overflow-y: scroll;
+    width: 100%;
+    height: 95%;
+}
+.search-icon {    
+    color: #a1a1a1;
+    padding-top: 15px;
+    padding-left:0;
+    font-size:25px;
+    font-weight: 100;
+    
+}
+
+.search input {
+    width: 450px;
+    height: 30px;
+    border: 2px solid  #d4d4d4;
+    border-radius: 4px;
+    transition: 0.2s ease-out;
+    color: #a1a1a1;
+}
+
+.content ul li {
+    padding-bottom: 30px;
+    font-weight: 100; 
+}
+
+//binnacle-container internal styles
+.to-do-list {
+    overflow-y: scroll;
+    height: 90%;
+    width: 100%;
+    border: 2px solid rgb(58, 4, 4);
+    margin-right: 10px;
+}
+.to-do-list ul {
+    padding-left: 50px;
+}
+
+.to-do-list ul li {    
+    padding-bottom: 10px;
+    font-weight: 100;
+}
+
+//chat-container internal styles
+
+.left-message {
+    padding-left: 10px;
+}
+
+.right-message {
+    float: right;
+}
+//project-container internal styles
+
+.projects-box-content {
+    height: 90%;
+    width: 100%;
+    border: 2px solid rgb(58, 4, 4);
+    text-align: center;
+    overflow-y:auto;
+}
+
+.projects-status-label {
+    color: green;
+    font-size: 20pt;    
+}
+
+
+
+//todo-list-container internal styles
+
+.to-do-box-content {
+    border: 2px solid rgb(58, 4, 4);
+    overflow-y: scroll;
+    padding-left: 40px;
+    padding-top:20px;
+    width:100%;
+    height: 90%;
+}
+.amber-status, .amber-status a {
+    color: orangered;
+}
+
+.green-status, .green-status a {
+    color: forestgreen;
+}
+
+.to-do-box-date-label {
+    color: gray;
+}
+
+.add-task-icon {
+    color: orange;
+    font-size: 40px;
+    float: right;    
+}
+
+//news-tips-container internal sytles
+
+.news-box-content {    
+    border: 2px solid rgb(58, 4, 4);
+    overflow-y:scroll;
+    padding-left: 15px;   
+    width:100%;
+    height:90%;   
+}
