@@ -4,10 +4,7 @@
   </div>
   <div class="right-panel">
       <div class="header-container">
-          <div class="title">
-            {{title}}
-              <br>
-              <small>{{breadcrumb}}</small>
+          <div class="title">            
               <select-control [items]="projects" (onSelectedItem)="onChangeProject($event)"></select-control>
           </div>
           <div class="configuration-bar pull-right">

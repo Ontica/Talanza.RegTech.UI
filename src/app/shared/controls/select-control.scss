@@ -1,7 +1,9 @@
 @import "../../../styles/general-styles";
 .container {
-  margin-left:4px;
-  width:200px;
+  margin-left:20px;
+  min-width: 360px;
+  padding-top: 7px;
+  width: 50%;  
 }
 ul {
   list-style-type: none;
@@ -23,12 +25,15 @@ li:hover {
   min-height: 100px;
   overflow: auto;
   @include input-settings;
-  width: 200px;
+  width: 260px;
   z-index: 2;
   border-radius: 5px;
   -moz-box-shadow: inset -3px -3px $control-border;
   -webkit-box-shadow: inset -3px -3px $control-border;
   box-shadow: inset -3px -3px $control-border;
+  i {
+    font-size: 6pt;
+  }
 }
 
 .selected-div {
@@ -55,4 +60,21 @@ li:hover {
 .item-level3 {    
   font-weight: 400;
   padding-left: 25pt;
+}
+
+.title {
+  color: $text-title;
+  font-size: $font-size-title;
+  font-weight: $font-weight-title;  
+  
+  small {
+    color: $text-hint;
+    display: block;
+    font-size: $font-size-hint;
+    font-weight: $font-weight-hint;
+  }
+  span {
+    border-bottom: 1px solid $orange; 
+  }
+  
 }
