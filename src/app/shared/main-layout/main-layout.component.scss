@@ -23,20 +23,21 @@
   overflow: hidden;
 }
 
-.header-container {  
+.header-container {
   height: 10%;
   top: 0;
-  border-bottom: 2px solid $red;
-  display:flex;
- }
+  border-bottom: 1px solid $red;
+  display: flex;
+}
 
- .main-layout-content {  
+.main-layout-content {
   display: flex;
   flex-direction: column;
   padding: 8px;
   height: 90%;
   overflow: hidden;
-  }
+}
+
 
 /*  
 //

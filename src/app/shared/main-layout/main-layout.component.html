@@ -1,19 +1,19 @@
 <div class="body">
   <div class="main-layout-left-panel">
-     <navbar></navbar>
+    <navbar></navbar>
   </div>
   <div class="main-layout-right-panel">
-      <div class="header-container">
-          <div class="title">            
-              <select-control [items]="projects" (onSelectedItem)="onChangeProject($event)"></select-control>
-          </div>
-          <div class="configuration-bar pull-right">
-              Hola, {{userName}}
-              <i class="fa fa-cog" aria-hidden="true"></i>
-          </div>
+    <div class="header-container">
+      <div class="title">
+        <select-control [items]="projects" (onSelectedItem)="onChangeProject($event)"></select-control>
       </div>
-      <div class="main-layout-content">
-        <router-outlet></router-outlet>
+      <div class="configuration-bar pull-right">
+        {{userName}}
+        <i class="fa fa-cog" aria-hidden="true"></i>
       </div>
+    </div>
+    <div class="main-layout-content">
+      <router-outlet></router-outlet>
+    </div>
   </div>
 </div>

@@ -18,7 +18,8 @@ import { NavBarService } from './navbar.service';
 })
 
 export class NavbarComponent implements OnInit {
-  public selectedOption: string = '';
+  
+  public selectedOption: string = 'home';
 
   constructor(private navbarService: NavBarService) {}
 

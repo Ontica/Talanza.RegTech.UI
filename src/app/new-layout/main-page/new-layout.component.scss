@@ -1,5 +1,4 @@
 @import "../../../styles/variables";
-
 .nav-bar ul {
   list-style: none;
   margin: 0;
@@ -18,15 +17,14 @@
 }
 
 .nav-bar a {
-  text-decoration: none; 
+  text-decoration: none;
 }
 
-.nav-bar a:hover  label {
-  color: $blue;
-  border-bottom: 2px solid $blue;  
+.nav-bar a:hover label {
+  color: $orange;
 }
 
-.nav-bar a:hover  i {
+.nav-bar a:hover i {
   color: $gray;
 }
 
@@ -39,19 +37,16 @@
 
 .selected label {
   color: $orange;
-  font-weight: 800;
-  border-bottom: 1px solid $orange;
   z-index: 200;
 }
 
-.selected  i {
+.selected i {
   color: $orange;
 }
 
 .logo {
-  padding-top:30px;  
+  padding-top: 60px;
 }
-
 
 .configuration-bar {
   font-size: $font-size-command;
@@ -60,15 +55,14 @@
 }
 
 .container {
-  display: flex;    
+  display: flex;
   background-color: DodgerBlue;
   flex-direction: inline-flex;
   padding: 0;
-  margin:0;
+  margin: 0;
 }
 
-.flex-container > div { 
- 
+.flex-container>div {
   font-size: 30px;
 }
 
@@ -84,33 +78,32 @@
   width: 95vw;
 }
 
-.header-container {  
+.header-container {
   height: 7vh;
   top: 0;
   border-bottom: 2px solid $red;
-  display:flex;
- }
+  display: flex;
+}
 
- .content {  
+.content {
   display: flex;
   flex-direction: column;
   padding: 8px;
   height: 100vh;
-  }
+}
 
-  .title {
-    color: $text-title;
-    font-size: $font-size-title;
-    font-weight: $font-weight-title;
-    min-width: 360px;
-    padding-top: 2px;
-    padding-left: 10px;
-    width: 50%;
-    small {
-      color: $text-hint;
-      display: block;
-      font-size: $font-size-hint;
-      font-weight: $font-weight-hint;
-    }
+.title {
+  color: $text-title;
+  font-size: $font-size-title;
+  font-weight: $font-weight-title;
+  min-width: 360px;
+  padding-top: 2px;
+  padding-left: 10px;
+  width: 50%;
+  small {
+    color: $text-hint;
+    display: block;
+    font-size: $font-size-hint;
+    font-weight: $font-weight-hint;
   }
-  
+}

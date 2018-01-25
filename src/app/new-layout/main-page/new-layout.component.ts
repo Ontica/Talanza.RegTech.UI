@@ -7,10 +7,11 @@ import { Component } from '@angular/core';
 })
 
 export class NewLayoutComponent {
+  
   public selectedOption: string = 'home';
   
   public setSelectedStyle(option: string): void {  
-    this.selectedOption =    option;   
+    this.selectedOption = option;   
   }
   
 }

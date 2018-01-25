@@ -2,7 +2,6 @@
 //
 // Navigation bar
 //
-
 .nav-bar ul {
   list-style: none;
   margin: 0;
@@ -13,7 +12,7 @@
 
 .nav-bar li {
   display: block;
-  height: 12.5%;
+  padding-bottom: 40pt;
 }
 
 .nav-bar i {
@@ -21,16 +20,17 @@
 }
 
 .nav-bar a {
-  text-decoration: none; 
+  text-decoration: none;
 }
 
-.nav-bar a:hover  label {
+.nav-bar a:hover label {
   color: $orange;
-  border-bottom: 2px solid $orange;  
+  border-bottom: 1px solid $orange;
+  cursor: pointer;
 }
 
-.nav-bar a:hover  i {
-  color: $orange;//$blue;
+.nav-bar a:hover i {
+  color: $orange;
 }
 
 .nav-bar label {
@@ -41,12 +41,14 @@
 }
 
 .selected label {
-  color: $blue;// $orange;
-  font-weight: 800;
-  border-bottom: 1px solid  $blue; //$orange;
+  color: $orange;
   z-index: 200;
 }
 
-.selected  i {
-  color: $blue;//$orange;
+.selected i {
+  color: $orange;
+}
+
+.logo {
+  padding-top: 10pt;
 }
