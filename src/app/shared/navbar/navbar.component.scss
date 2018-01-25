@@ -25,12 +25,12 @@
 }
 
 .nav-bar a:hover  label {
-  color: $blue;
-  border-bottom: 2px solid $blue;  
+  color: $orange;
+  border-bottom: 2px solid $orange;  
 }
 
 .nav-bar a:hover  i {
-  color: $gray;
+  color: $orange;//$blue;
 }
 
 .nav-bar label {
@@ -41,12 +41,12 @@
 }
 
 .selected label {
-  color: $orange;
+  color: $blue;// $orange;
   font-weight: 800;
-  border-bottom: 1px solid $orange;
+  border-bottom: 1px solid  $blue; //$orange;
   z-index: 200;
 }
 
 .selected  i {
-  color: $orange;
+  color: $blue;//$orange;
 }
