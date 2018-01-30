@@ -16,6 +16,7 @@ import { HomeRoutingModule } from './home-routing.module';
 import { HomeMainPageComponent } from './main-page/home-main-page.component';
 
 import { ContainerComponent } from './parts/container.component';
+import { BinnaclePartComponent } from './parts/binnacle-part.component';
 
 /**
  * Do not specify providers for modules that might be imported by a lazy loaded module.
@@ -23,7 +24,7 @@ import { ContainerComponent } from './parts/container.component';
 
 @NgModule({
   imports: [HomeRoutingModule, SharedModule, CommonModule, FormsModule],
-  declarations: [HomeMainPageComponent, ContainerComponent],
+  declarations: [HomeMainPageComponent, ContainerComponent, BinnaclePartComponent],
   exports: [HomeMainPageComponent]
 })
 export class HomeModule { }

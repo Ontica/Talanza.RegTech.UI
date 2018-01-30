@@ -1,0 +1,18 @@
+@import "../../../styles/variables";
+
+.binnacle-list  {
+    list-style: none;
+    padding-left: 40px;
+    padding-bottom: 6px;   
+  }
+  
+.binnacle-list li {
+    font-size: 10pt;
+    padding-bottom: 6px;
+    a {
+      text-decoration: none;
+      font-weight: bold;
+      font-family: $font-family;
+      color: $blue;      
+    }
+  }

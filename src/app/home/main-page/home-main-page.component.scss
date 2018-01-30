@@ -79,11 +79,7 @@ li {
   width: 100%;
 }
 
-.todo-list-container {
-  height: 39%;
-  width: 100%;
-  margin-top: 8px;
-}
+
 
 .news-tips-container {
   height: 30%;
@@ -144,24 +140,6 @@ li {
 
 .content ul li {
   padding-bottom: 30px;
-  font-weight: 100;
-}
-
-//binnacle-container internal styles
-.to-do-list {
-  overflow-y: scroll;
-  height: 90%;
-  width: 100%;
-  border: 1px solid $gray;
-  margin-right: 10px;
-}
-
-.to-do-list ul {
-  padding-left: 50px;
-}
-
-.to-do-list ul li {
-  padding-bottom: 10px;
   font-weight: 100;
 }
 
