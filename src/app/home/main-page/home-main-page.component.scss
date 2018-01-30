@@ -67,19 +67,10 @@ li {
   float: right;
 }
 
-.chat-box {
-  overflow-y: scroll;
-  height: 90%;
-  width: 100%;
-  border: 1px solid $gray;
-}
-
 .project-status-container {
   height: 30%;
   width: 100%;
 }
-
-
 
 .news-tips-container {
   height: 30%;
@@ -143,23 +134,7 @@ li {
   font-weight: 100;
 }
 
-//chat-container internal styles
-.chat-box {
-  font-family: $font-family;
-  color: $blue;
-  font-weight: 500;
-  font-size: 10pt;
-  padding: 10pt;
-}
 
-.left-message {
-  padding-left: 10px;
-}
-
-.right-message {
-  float: right;
-  padding-right: 10px;
-}
 
 //project-container internal styles
 .projects-box-content {

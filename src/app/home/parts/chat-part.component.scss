@@ -1,0 +1,30 @@
+@import "../../../styles/variables";
+
+//local vars
+$local-green: forestgreen;
+
+.chat-part-content {
+    font-family: $font-family;
+    color: $blue;
+    font-weight: 500;
+    font-size: 10pt;
+    padding: 10pt;
+  }
+  
+  .left-message {
+    padding-left: 10px;
+  }
+  
+  .right-message {
+    float: right;
+    padding-right: 10px;
+  }
+  
+  .green-status {
+    color: $local-green;   
+  }
+  
+  .red-status {
+    color: $red;
+  }
+  
