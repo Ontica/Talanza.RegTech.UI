@@ -15,6 +15,7 @@ import { HomeRoutingModule } from './home-routing.module';
 
 import { HomeMainPageComponent } from './main-page/home-main-page.component';
 
+import { ContainerComponent } from './parts/container.component';
 
 /**
  * Do not specify providers for modules that might be imported by a lazy loaded module.
@@ -22,7 +23,7 @@ import { HomeMainPageComponent } from './main-page/home-main-page.component';
 
 @NgModule({
   imports: [HomeRoutingModule, SharedModule, CommonModule, FormsModule],
-  declarations: [HomeMainPageComponent],
+  declarations: [HomeMainPageComponent, ContainerComponent],
   exports: [HomeMainPageComponent]
 })
 export class HomeModule { }

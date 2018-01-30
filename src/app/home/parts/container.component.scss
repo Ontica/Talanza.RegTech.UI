@@ -1,0 +1,36 @@
+@import "../../../styles/variables";
+
+div {
+  padding: 0;
+  margin: 0px;
+  float: left;    
+  vertical-align: top;
+  outline: none;  
+}
+
+.container-title {
+  height: 10%;
+  max-height: 30px;
+  font-size: 10pt;
+  padding-top: 3px;
+  padding-left: 6px;    
+  width: 100%;    
+  background-color: $orange;
+  color: $blue;
+  font-weight: $font-weight-title;
+  font-family: $font-family;    
+}
+  
+.cotainer-title-icons {
+  padding-right: 3px;    
+  float: right;
+}
+
+.container-body {  
+  height: 90%;
+  width: 100%;
+  margin-right: 10px;
+  border: 1px solid $gray;    
+  overflow-y: scroll;
+}
+    
