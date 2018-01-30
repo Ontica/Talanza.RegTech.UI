@@ -1,0 +1,53 @@
+@import "../../../styles/variables";
+
+  .search-part-content {
+    padding-left: 40px;
+    padding-top: 20px;
+    width: 100%;
+    height: 100%;
+  }
+
+  ul {
+    list-style: none;
+  }
+  
+  li {
+    font-size: 10pt;
+    a {
+      text-decoration: none;
+      font-family: $font-family;
+      color: $blue;
+      font-weight: bold;
+    }
+  }
+   
+  .search-icon {
+    color: $blue;
+    padding-top: 15px;
+    padding-left: 0;
+    font-size: 25px;
+    font-weight: 100;
+  }
+  
+  .horizontal-results-list li {
+    float: left;
+  }
+  
+  .search-part-content input {
+    background-color: $font-weight-title;
+    color: $control-color;
+    font: $control-font;
+    font-weight: normal;
+    width: 450px;
+    height: 30px;
+    border: 1px solid $blue;
+    border-radius: 4px;
+    transition: 0.2s ease-out;
+  }
+  
+  .search-part-option ul li {
+    padding-bottom: 30px;
+    font-weight: 100;
+  }
+  
+  

@@ -21,6 +21,7 @@ import { ChatPartComponent } from './parts/chat-part.component';
 import { ProjectsStatusPartComponent } from './parts/projects-status-part.component';
 import { TodoListPartComponent } from './parts/todo-list-part.component';
 import { NewsPartComponent } from './parts/news-part.component';
+import { SearchPartComponent } from './parts/search-part.component';
 
 /**
  * Do not specify providers for modules that might be imported by a lazy loaded module.
@@ -30,7 +31,7 @@ import { NewsPartComponent } from './parts/news-part.component';
   imports: [HomeRoutingModule, SharedModule, CommonModule, FormsModule],
   declarations: [HomeMainPageComponent, ContainerComponent, BinnaclePartComponent,
                  ChatPartComponent, ProjectsStatusPartComponent, TodoListPartComponent,
-                 NewsPartComponent],
+                 NewsPartComponent, SearchPartComponent],
   exports: [HomeMainPageComponent]
 })
 export class HomeModule { }
