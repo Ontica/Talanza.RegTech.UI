@@ -1,26 +1,26 @@
 <div class="home-main-container">
   <div class="home-left-container">
     <div class="search-container">
-      <search-part></search-part>
+      <load-dynamic-component [name]="'SearchPartComponent'"></load-dynamic-component>      
     </div>
     <div class="footer-contaner">
-      <div class="binnacle-container">
-          <binnacle-part></binnacle-part>
+      <div class="binnacle-container">          
+          <load-dynamic-component [name]="'BinnaclePartComponent'"></load-dynamic-component>
       </div>
       <div class="chat-container">
-        <chat-part></chat-part>
+        <load-dynamic-component [name]="'ChatPartComponent'"></load-dynamic-component>        
       </div>
     </div>
   </div>
   <div class="home-right-container">
     <div class="project-status-container">
-      <projects-status-part></projects-status-part>
+      <load-dynamic-component [name]="'ProjectsStatusPartComponent'"></load-dynamic-component>      
     </div>
     <div class="todo-list-container">
-      <todo-list-part></todo-list-part>
+      <load-dynamic-component [name]="'TodoListPartComponent'"></load-dynamic-component>      
     </div>
     <div class="news-tips-container">
-     <news-part></news-part>
+      <load-dynamic-component [name]="'NewsPartComponent'"></load-dynamic-component>     
     </div>
   </div>
 </div>
