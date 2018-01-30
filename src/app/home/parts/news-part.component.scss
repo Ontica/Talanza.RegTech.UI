@@ -1,0 +1,23 @@
+@import "../../../styles/variables";
+
+.news-part-content {   
+    width: 100%;
+    height: 100%;
+  }
+  
+.news-part-content ul {
+    list-style: none;
+}
+
+.news-part-content li {
+    padding-bottom: 5px;
+    font-size: 10pt;
+    a {
+      text-decoration: none;
+      font-family: $font-family;
+      color: $blue;
+      font-weight: bold;
+    }
+}
+ 
+ 

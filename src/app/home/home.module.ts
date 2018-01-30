@@ -20,6 +20,7 @@ import { BinnaclePartComponent } from './parts/binnacle-part.component';
 import { ChatPartComponent } from './parts/chat-part.component';
 import { ProjectsStatusPartComponent } from './parts/projects-status-part.component';
 import { TodoListPartComponent } from './parts/todo-list-part.component';
+import { NewsPartComponent } from './parts/news-part.component';
 
 /**
  * Do not specify providers for modules that might be imported by a lazy loaded module.
@@ -28,7 +29,8 @@ import { TodoListPartComponent } from './parts/todo-list-part.component';
 @NgModule({
   imports: [HomeRoutingModule, SharedModule, CommonModule, FormsModule],
   declarations: [HomeMainPageComponent, ContainerComponent, BinnaclePartComponent,
-                 ChatPartComponent, ProjectsStatusPartComponent, TodoListPartComponent],
+                 ChatPartComponent, ProjectsStatusPartComponent, TodoListPartComponent,
+                 NewsPartComponent],
   exports: [HomeMainPageComponent]
 })
 export class HomeModule { }
