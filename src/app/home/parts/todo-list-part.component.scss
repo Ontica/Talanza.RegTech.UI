@@ -1,0 +1,38 @@
+@import "../../../styles/variables";
+
+$local-green: forestgreen;
+
+.todo-list-part-content {    
+    padding: 5pt;
+    width: 100%;
+    height: 90%;
+    a {
+      font-family: $font-family;
+      font-weight: 400;
+      font-size: 10pt;
+    }
+}
+
+.amber-status  a {
+    color: orangered;    
+}
+
+.green-status a {
+    color: $local-green;   
+}
+  
+
+.todo-list-part-date {
+    color: $gray;
+    font-family: $font-family;
+    font-weight: 400;
+    font-size: 10pt;
+}
+  
+.add-task-icon {
+    color: $orange;  
+    float: right;
+    font-size: 40px;
+}
+
+  
