@@ -11,6 +11,7 @@ import { Component, Input } from '@angular/core';
 @Component({
     selector:'container',
     template:`
+    <div class="container">
       <div class="container-title">{{title}}
         <div class="cotainer-title-icons">
           <i class="fa fa-expand" aria-hidden="true"></i>
@@ -19,7 +20,8 @@ import { Component, Input } from '@angular/core';
       </div>
       <div class="container-body">
         <ng-content></ng-content>
-      </div>   
+      </div>
+    </div>   
      `,
     styleUrls: ['./container.component.scss']    
 })
