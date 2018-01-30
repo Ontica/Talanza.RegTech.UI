@@ -1,0 +1,20 @@
+@import "../../../styles/variables";
+
+//local vars
+$local-green: forestgreen;
+
+.projects-status-part-content { 
+    text-align: center;
+    overflow-y: auto;
+  }
+
+.green-status {
+  color: $local-green;   
+}
+
+.projects-status-label {
+  font-family: $font-family;
+  color: $local-green;
+  font-size: 20pt;
+  font-weight: 500;
+}

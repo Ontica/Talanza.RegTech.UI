@@ -18,6 +18,7 @@ import { HomeMainPageComponent } from './main-page/home-main-page.component';
 import { ContainerComponent } from './parts/container.component';
 import { BinnaclePartComponent } from './parts/binnacle-part.component';
 import { ChatPartComponent } from './parts/chat-part.component';
+import { ProjectsStatusPartComponent } from './parts/projects-status-part.component';
 
 /**
  * Do not specify providers for modules that might be imported by a lazy loaded module.
@@ -26,7 +27,7 @@ import { ChatPartComponent } from './parts/chat-part.component';
 @NgModule({
   imports: [HomeRoutingModule, SharedModule, CommonModule, FormsModule],
   declarations: [HomeMainPageComponent, ContainerComponent, BinnaclePartComponent,
-                 ChatPartComponent],
+                 ChatPartComponent, ProjectsStatusPartComponent],
   exports: [HomeMainPageComponent]
 })
 export class HomeModule { }

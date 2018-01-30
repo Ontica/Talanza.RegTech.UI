@@ -70,6 +70,7 @@ li {
 .project-status-container {
   height: 30%;
   width: 100%;
+  margin-bottom: 20px;
 }
 
 .news-tips-container {
@@ -134,23 +135,6 @@ li {
   font-weight: 100;
 }
 
-
-
-//project-container internal styles
-.projects-box-content {
-  height: 90%;
-  width: 100%;
-  border: 1px solid $gray;
-  text-align: center;
-  overflow-y: auto;
-}
-
-.projects-status-label {
-  font-family: $font-family;
-  color: $local-green;
-  font-size: 20pt;
-  font-weight: 500;
-}
 
 //todo-list-container internal styles
 .to-do-box-content {
