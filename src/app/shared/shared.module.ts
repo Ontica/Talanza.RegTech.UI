@@ -23,7 +23,10 @@ import { RAGControl } from './controls/rag.control';
 import { CalendarControl } from './controls/calendar-control';
 import { SelectControl } from './controls/select-control';
 
+import { ProjectSelectorControl } from './controls/project-selector-control';
+
 import { NavBarService } from './navbar/navbar.service';
+import { ProjectSelectorService } from './controls/project-selector.service';
 
 /**
  * Do not specify providers for modules that might be imported by a lazy loaded module.
@@ -32,9 +35,10 @@ import { NavBarService } from './navbar/navbar.service';
 @NgModule({
   imports: [RouterModule, CommonModule, FormsModule],
   declarations: [MainLayoutComponent, NavbarComponent, NoContentComponent, SafeHtmlPipe,
-                 AutocompleteControl, Chips, RAGControl, CalendarControl, SelectControl],
+                 AutocompleteControl, Chips, RAGControl, CalendarControl, SelectControl,
+                ProjectSelectorControl],
   exports: [MainLayoutComponent, NoContentComponent, SafeHtmlPipe, AutocompleteControl, Chips,
             RAGControl, CalendarControl, SelectControl],
-  providers:[NavBarService]
+  providers:[NavBarService, ProjectSelectorService]
 })
 export class SharedModule { }

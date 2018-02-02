@@ -4,8 +4,8 @@
   </div>
   <div class="main-layout-right-panel">
     <div class="header-container">
-      <div class="title">
-        <select-control [items]="projects" (onSelectedItem)="onChangeProject($event)"></select-control>
+      <div class="title">       
+        <project-selector></project-selector>
       </div>
       <div class="configuration-bar pull-right">
         {{userName}}
