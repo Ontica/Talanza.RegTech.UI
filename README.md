@@ -2,9 +2,9 @@
 
 ### What is Empiria Steps?
 
-Empiria Steps is [Ontica's](http://www.ontica.org/) workflow automation solution.
+Empiria Steps is [Ontica's](http://www.ontica.org/) workflow automation and project management solution.
 
-This repo corresponds to the front-end main system custom-tailored for [Covar Energy Consulting](http://www.covarenergy.com).
+This repo corresponds to the front-end system custom-tailored for [Covar Energy Consulting](http://www.covarenergy.com).
 
 ### Quick start
 **Make sure you have Node version >= 6.0 and NPM >= 3**
@@ -75,15 +75,15 @@ angular2-webpack-starter/
  │   └──assets/                    * static assets are served here
  │       ├──icon/                  * our list of icons from www.favicon-generator.org
  │       ├──service-worker.js      * ignore this. Web App service worker that's not complete yet
- │       └──robots.txt             * for search engines to crawl your website
- │
+ │       ├──robots.txt             * for search engines to crawl your website
+ │       └──humans.txt             * for humans to know who the developers are
  │
  │
  ├──tslint.json                    * typescript lint config
  ├──typedoc.json                   * typescript documentation generator
  ├──tsconfig.json                  * typescript config used outside webpack
  ├──tsconfig.webpack.json          * config that webpack uses for typescript
- ├──package.json                   * what npm uses to manage it's dependencies
+ ├──package.json                   * what npm uses to manage its dependencies
  └──webpack.config.js              * webpack main configuration file
 
 ```
@@ -102,6 +102,7 @@ Once you have those, you should install these globals with `npm install --global
 * `karma` (`npm install --global karma-cli`)
 * `protractor` (`npm install --global protractor`)
 * `typescript` (`npm install --global typescript`)
+* `tslint` (`npm install --global tslint@4.5.1`)
 
 ## Installing
 * `fork` this repo
@@ -191,6 +192,8 @@ The following are some things that will make AoT compile fail.
 - Don’t use functions in your providers, routes or declarations, export a function and then reference that function name
 - @Inputs, @Outputs, View or Content Child(ren), Hostbindings, and any field you use from the template or annotate for Angular should be public
 
+For more detailed guide on AoT's Do's and Don'ts refer to https://github.com/rangle/angular-2-aot-sandbox
+
 # External Stylesheets
 Any stylesheets (Sass or CSS) placed in the `src/styles` directory and imported into your project will automatically be compiled into an external `.css` and embedded in your production builds.
 
@@ -204,11 +207,24 @@ For example to use Bootstrap as an external stylesheet:
 > To take full advantage of TypeScript with autocomplete you would have to install it globally and use an editor with the correct TypeScript plugins.
 
 ## Use latest TypeScript compiler
-TypeScript 2.1.x includes everything you need. Make sure to upgrade, even if you installed TypeScript previously.
+TypeScript 2.7.x includes everything you need. Make sure to upgrade, even if you installed TypeScript previously.
 
 ```
 npm install --global typescript
 ```
+
+## Use a TypeScript-aware editor
+We have good experience using these editors:
+
+* [Visual Studio Code](https://code.visualstudio.com/)
+* [Webstorm 10](https://www.jetbrains.com/webstorm/download/)
+* [Atom](https://atom.io/) with [TypeScript plugin](https://atom.io/packages/atom-typescript)
+* [Sublime Text](http://www.sublimetext.com/3) with [Typescript-Sublime-Plugin](https://github.com/Microsoft/Typescript-Sublime-plugin#installation)
+
+### Visual Studio Code + Debugger for Chrome
+> Install [Debugger for Chrome](https://marketplace.visualstudio.com/items?itemName=msjsdiag.debugger-for-chrome) and see docs for instructions to launch Chrome
+
+The included `.vscode` automatically connects to the webpack development server on port `3000`.
 
 # Types
 > When you include a module that doesn't include Type Definitions inside of the module you can include external Type Definitions with @types
@@ -265,4 +281,4 @@ For third-party components, please read [ThirdPartyNotices](https://github.com/O
 
 # Copyright
 
-Copyright © 2017. La Vía Óntica SC, Ontica LLC and contributors.
+Copyright © 2017-2018. La Vía Óntica SC, Ontica LLC and contributors.

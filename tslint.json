@@ -2,12 +2,17 @@
   "extends": [
     "tslint:recommended"
   ],
+  "linterOptions": {
+    "exclude": [
+      "src/*.d.ts"
+    ]
+  },
   "rulesDirectory": [
     "node_modules/codelyzer"
   ],
   "rules": {
     // Custom
-    "trailing-comma": [false, { "multiline": "always", "singleline": "never" }],
+    "trailing-comma": [false, {"multiline": "always", "singleline": "never"}],
     "interface-name": [false, "always-prefix"],
     // Angular 2
     "component-class-suffix": true,
@@ -21,6 +26,7 @@
     "no-forward-ref": true,
     "no-input-rename": true,
     "no-output-rename": true,
+    "only-arrow-functions": false,
     "pipe-naming": [true, "camelCase", "my"],
     "templates-use-public": true,
     "use-host-property-decorator": true,
@@ -36,16 +42,8 @@
     ],
     "max-line-length": [
       true,
-      110
+      100
     ],
-    "one-line": [true,
-      "check-open-brace",
-      "check-catch",
-      "check-else",
-      "check-whitespace"
-    ],
-    "curly": true,
-    "member-ordering": false,
     "no-string-literal": false,
     "no-use-before-declare": true,
     "object-literal-sort-keys": false,

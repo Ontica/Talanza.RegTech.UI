@@ -15,13 +15,13 @@ Ontica, S.C. received such components are set forth below.
 Ontica reserves all rights not expressly granted herein, whether by
 implication, estoppel or otherwise.
 
-============================== angular2-seed ==============================
+============================== angular-starter ==============================
 
-https://github.com/AngularClass/angular-starter
+https://github.com/gdi2290/angular-starter
 
 The MIT License (MIT)
 
-Copyright (c) 2015-2017 AngularClass LLC
+Copyright (c) 2015-2017 PatrickJS, Tipe Inc
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -68,3 +68,4 @@ PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS 
 LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE
 OR OTHER DEALINGS IN THE SOFTWARE.
+
