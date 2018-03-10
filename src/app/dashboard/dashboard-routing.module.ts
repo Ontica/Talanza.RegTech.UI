@@ -11,8 +11,6 @@ import { RouterModule } from '@angular/router';
 
 import { MainLayoutComponent } from '../shared';
 
-import { HomeComponent } from './home/home.component';
-
 import { SecurityGuardService } from '../core';
 
 @NgModule({
@@ -21,8 +19,7 @@ import { SecurityGuardService } from '../core';
       path: '', redirectTo: 'smoke-tests', pathMatch: 'full'
     },
     {
-      path: '', component: MainLayoutComponent, canActivate: [SecurityGuardService],
-      children: [{ path: 'smoke-tests', component: HomeComponent }]
+      path: '', component: MainLayoutComponent, canActivate: [SecurityGuardService]
     }
   ])],
   exports: [RouterModule]

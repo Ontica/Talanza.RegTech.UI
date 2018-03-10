@@ -22,6 +22,7 @@ import { ActivityUpdateComponent } from './editor/tabs/activity-update.component
 
 import { ProjectsMainPageComponent } from './main-page/projects-main-page.component';
 import { GanttComponent } from './gantt/gantt.component';
+import { ViewerComponent } from './gantt/viewer.component';
 
 import { CreateActivityMenuComponent } from './create-activity/create-activity-menu.component';
 import { SelectTypeActivityComponet } from './create-activity/wizard/select-type-activity.component';
@@ -38,7 +39,7 @@ import { ProjectsFilterComponent } from './main-page/projects-filter.component';
   imports: [ProjectManagementRoutingModule, SharedModule, CommonModule, FormsModule, ProceduresModule],
   declarations: [ProjectExplorerComponent,
                  ActivityEditorComponent, ActivityCloseComponent,
-                 ProjectsMainPageComponent, GanttComponent,
+                 ProjectsMainPageComponent, GanttComponent, ViewerComponent,
                  ActivityUpdateComponent, ProjectsFilterComponent,
                  CreateActivityMenuComponent, SelectTypeActivityComponet, WorklistActivityComponent,
                  CreateActivityWizard ],

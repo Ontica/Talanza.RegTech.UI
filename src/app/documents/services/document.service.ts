@@ -8,7 +8,7 @@
 
 import { Injectable } from '@angular/core';
 
-import { CoreService } from '../../core';
+import { CoreService } from '../../core/core.service';
 
 import { Document, DocumentFilter } from '../data-types/document';
 

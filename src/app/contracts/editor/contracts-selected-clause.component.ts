@@ -9,7 +9,7 @@
  import { Component, Input, ViewEncapsulation } from '@angular/core';
 
  import { Assertion } from 'empiria';
- import { CoreService } from '../../core';
+ import { CoreService } from '../../core/core.service';
 
  import { ContractsService } from '../services/contracts.service';
 

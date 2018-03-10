@@ -18,7 +18,6 @@ import { BrowserModule, DomSanitizer, SafeResourceUrl } from '@angular/platform-
 `,
   styleUrls: ['./viewer.component.scss']
 })
-
 export class ViewerComponent {
 
   @HostBinding('style.display') public display = 'block';

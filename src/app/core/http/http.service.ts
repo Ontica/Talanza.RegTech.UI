@@ -7,8 +7,10 @@
  */
 
 import { Injectable } from '@angular/core';
+
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/mergeMap';
+import 'rxjs/add/observable/of'
 
 import { Assertion } from 'empiria';
 import { Exception } from '../general/exception';

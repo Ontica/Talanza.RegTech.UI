@@ -9,7 +9,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
-import { CoreService } from '../../core';
+import { CoreService } from '../../core/core.service';
 
 import { Task } from '../data-types/task';
 import { ProjectRef, ResourceRef, PersonRef } from '../data-types/project';

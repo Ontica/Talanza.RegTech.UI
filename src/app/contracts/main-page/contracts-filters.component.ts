@@ -8,7 +8,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 import { Assertion } from 'empiria';
-import { CoreService } from '../../core';
+import { CoreService } from '../../core/core.service';
 
 import { ContractsService } from '../services/contracts.service';
 
@@ -16,7 +16,7 @@ import { Contract, EmptyContract, ContractClauseRef } from '../data-types/contra
 
 @Component({
   selector: 'contract-filters',
-  templateUrl: '/contracts-filters.component.html',
+  templateUrl: './contracts-filters.component.html',
   styleUrls: ['./contracts-filters.component.scss'],
   providers: [ContractsService]
 

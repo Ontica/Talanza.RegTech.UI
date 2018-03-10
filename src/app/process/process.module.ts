@@ -13,8 +13,9 @@ import { SharedModule } from '../shared/shared.module';
 
 import { ProcessRoutingModule } from './process-routing.module';
 
+import { ProcessActivityAssociationComponent } from './editor/process-activity-association.component';
 import { ProcessEditorComponent } from './editor/process-editor.component';
-import { SaveProcessDialogComponent } from  './editor/save-process-dialog.component';
+import { SaveProcessDialogComponent } from './editor/save-process-dialog.component';
 
 import { ProceduresModule } from '../procedures/procedures.module';
 
@@ -23,8 +24,13 @@ import { ProceduresModule } from '../procedures/procedures.module';
  */
 
 @NgModule({
-  imports: [ProcessRoutingModule, SharedModule, CommonModule, ProceduresModule],
-  declarations: [ProcessEditorComponent, SaveProcessDialogComponent],
+  imports: [ProcessRoutingModule,
+            SharedModule,
+            CommonModule,
+            ProceduresModule],
+  declarations: [ProcessActivityAssociationComponent,
+                 ProcessEditorComponent,
+                 SaveProcessDialogComponent],
   exports: []
 })
 export class ProcessModule { }

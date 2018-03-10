@@ -22,9 +22,10 @@ export class UserLoginComponent implements OnInit {
   public password = '';
 
   constructor(private router: Router,
-              private authenticationService: AuthenticationService) { }
+    private authenticationService: AuthenticationService) { }
 
   public async authenticate() {
+
     if (!this.validateForm()) {
       return;
     }
@@ -37,11 +38,16 @@ export class UserLoginComponent implements OnInit {
     } catch (exception) {
       alert(exception);
     }
+
   }
 
   public async ngOnInit() {
     await this.authenticationService.logout()
                                     .then((x) => this.reloadPage(x));
+  }
+
+  public onClickResetCredentials() {
+    throw new Error('User reset credentials functionality no already defined...');
   }
 
   // region Private methods
@@ -62,10 +68,6 @@ export class UserLoginComponent implements OnInit {
       return false;
     }
     return true;
-  }
-
-  private onClickResetCredentials() {
-    throw new Error('User reset credentials functionality no already defined...');
   }
 
 }

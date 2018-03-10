@@ -9,7 +9,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
-import { CoreService } from '../../core';
+import { CoreService } from '../../core/core.service';
 
 
 import { InboxRef } from '../data-types/inbox';

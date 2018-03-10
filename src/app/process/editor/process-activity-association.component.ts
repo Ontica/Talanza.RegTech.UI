@@ -13,7 +13,6 @@ import { Component, EventEmitter, HostBinding, Output }  from '@angular/core';
   templateUrl: './process-activity-association.component.html',
   styleUrls: ['./process-activity-association.component.scss']
 })
-
 export class ProcessActivityAssociationComponent {
 
   @Output() public onCancelEvent = new EventEmitter();

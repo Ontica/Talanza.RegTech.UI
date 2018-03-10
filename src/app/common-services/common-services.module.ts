@@ -17,6 +17,6 @@ import { CataloguesService } from './services/catalogues.service';
 
 @NgModule({
   imports: [CommonModule],
-  exports: [CataloguesService]
+  providers: [CataloguesService]
 })
 export class CommonServicesModule { }
