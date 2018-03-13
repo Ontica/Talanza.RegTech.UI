@@ -27,17 +27,17 @@ export class ProcedureFilter {
     let filter = '';
 
     if ((this.entityUID !== '')) {
-      filter = this.addFilterConnector(filter) + "AuthEntityUID='" + this.entityUID + "'";
+      filter = this.addFilterConnector(filter) + "AuthEntity.ContactUID='" + this.entityUID + "'";
     }
+
     if ((this.officeUID !== '')) {
-      filter = this.addFilterConnector(filter) + "AuthOfficeUID='" + this.officeUID + "'";
+      filter = this.addFilterConnector(filter) + "AuthOffice.ContactUID='" + this.officeUID + "'";
     }
+
     if ((this.theme !== '')) {
       filter = this.addFilterConnector(filter) + "theme='" + this.theme + "'";
     }
-    // if ((this.filter.stage !== '')) {
-    //   filter = this.addFilterConnector(filter) + "stage='" + this.filter.stage + "'";
-    // }
+
     return filter;
   }
 

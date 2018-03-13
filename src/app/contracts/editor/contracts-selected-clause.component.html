@@ -10,16 +10,13 @@
         <span class="clause-subtitle">
           Obligaciones
         </span>
-        <span class="right marked-text">
-          + Agregar a un proyecto regulatorio
-        </span>
       </div>
       <div *ngFor="let rule of rules">
         <table class="grid" style='max-width:600pt;'>
           <thead>
             <tr>
               <th>
-                <input type="checkbox"> {{rule.name}}
+                {{rule.name}}
               </th>
             </tr>
           </thead>
@@ -27,13 +24,13 @@
             <tr>
               <td>
                 <span>{{rule.description}}</span><br/><br/>
-                <span class='marked-text' *ngIf="rule.procedures.length !== 0">+ Trámites de la obligación</span>
+                <span class='clause-subtitle' *ngIf="rule.procedures.length !== 0">Trámites involucrados</span>
               </td>
             </tr>
             <tr *ngFor="let procedure of rule.procedures">
-              <td style='margin-left:10px'>
-                <input type="checkbox">
-                <a (click)="onSelectedProcedure(procedure.uid)">{{procedure.name}}</a><br>
+              <td style='margin-left:12pt'>
+                <a (click)="onSelectedProcedure(procedure.uid)">» {{procedure.shortName}}</a><br>
+                <span *ngIf="procedure.modality.length !== 0">Modalidad: {{procedure.modality}}<br/></span>
                 <span *ngIf="procedure.code !== 'No disponible'">{{procedure.code}}</span>
                 <span *ngIf="procedure.code === 'No disponible'">{{procedure.entity}}</span>
               </td>
@@ -42,27 +39,6 @@
         </table>
         <br />
       </div>
-      <!--
-      <div>
-        <table class="grid" *ngIf="clause.relatedProcedures.length !== 0" style='max-width:600pt;'>
-          <thead>
-            <tr>
-              <th>Trámite / Homoclave / Dependencia</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let relatedProcedure of clause.relatedProcedures">
-              <td>
-                <a (click)="onSelectedProcedure(relatedProcedure.procedure.uid)">{{relatedProcedure.procedure.name}}</a><br>
-                <span *ngIf="relatedProcedure.procedure.code != 'No disponible'">{{relatedProcedure.procedure.code}}<br></span>
-                <span>{{relatedProcedure.procedure.entity}}</span>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        <br /><br /><br /><br />
-      </div>
-      !-->
     </div>
   </div>
   <div class="procedure-info" *ngIf="isVisibleProcedureInfo">

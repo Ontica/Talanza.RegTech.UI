@@ -3,20 +3,20 @@
   <thead>
     <tr>
       <th style="width:20pt"></th>
-      <th style='width:40%'>Trámite / Homoclave</th>
+      <th style='width:40%'>Trámite / Modalidad / Homoclave</th>
       <th style='width:100px'>Dependencia</th>
       <th style='width:12%'>Tema</th>
       <th style='width:40%'></th>
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let procedure of procedures">
+    <tr *ngFor="let procedure of procedures" class="grid-items">
       <td class="main-icon">
         <a (click)="onOpenProcedureEditorWindow(procedure.uid)"><i class="fa fa-university" aria-hidden="true"></i></a>
       </td>
       <td style='width:40%'>
-        <a (click)="onOpenProcedureEditorWindow(procedure.uid)">{{procedure.name}}</a>
-        <br/> {{procedure.code}}
+        <a (click)="onOpenProcedureEditorWindow(procedure.uid)">{{procedure.shortName}}</a>
+        <br/><span *ngIf="procedure.modality.length !== 0">Modalidad: {{procedure.modality}} | </span>{{procedure.code}}
       </td>
       <td style='width:100px'>{{procedure.entity}}</td>
       <td style='width:12%'>{{procedure.theme}}</td>

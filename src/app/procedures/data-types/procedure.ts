@@ -16,6 +16,7 @@ export class Procedure {
   public uid: string;
   public code: string;
   public shortName: string;
+  public modality: string;
   public name: string;
   public officialUrl: string;
   public regulationUrl: string;

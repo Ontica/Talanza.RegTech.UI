@@ -1,6 +1,7 @@
 import { Component, EventEmitter, HostBinding,
          Input, Output } from '@angular/core';
 
+import { Procedure } from '../data-types/procedure';
 import { ProcedureService } from '../services/procedure.service';
 
 @Component({
@@ -17,11 +18,13 @@ export class ProcedureViewerComponent {
   @Input() config: object =  { isAddActivity: true }
 
   private _procedureUID: string = '';
+
   @Input()
   set procedureUID(procedureUID: string) {
     this._procedureUID = procedureUID;
     this.loadProcedure();
   }
+
   get procedureUID(): string {
     return this._procedureUID;
   }
@@ -29,7 +32,7 @@ export class ProcedureViewerComponent {
   @Output() public onCloseEvent = new EventEmitter();
 
   public selectedTask: string = 'generalInfo';
-  public procedure: any;
+  public procedure: Procedure;
 
   public constructor(private procedureService: ProcedureService) { }
 

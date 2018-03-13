@@ -6,15 +6,21 @@
       </th>
     </thead>
     <tbody *ngIf="isVisibleGeneralInfo ">
-      <!--
-            <tr>
-              <td class='label'>Regulación:</td>
-              <td>{{procedure.legalInfo.regulationMode}}</td>
-            </tr>
-            !-->
+      <tr>
+        <td class='label'>Nombre oficial:</td>
+        <td>{{procedure.name}}</td>
+      </tr>
       <tr>
         <td class='label'>Homoclave COFEMER:</td>
         <td>{{procedure.code}}</td>
+      </tr>
+      <tr>
+        <td class='label'>Nombre corto:</td>
+        <td><b>{{procedure.shortName}}</b></td>
+      </tr>
+      <tr>
+        <td class='label'>Modalidad:</td>
+        <td><b>{{procedure.modality}}</b></td>
       </tr>
       <tr>
         <td class='label'>Tema:</td>
@@ -209,11 +215,6 @@
         <td class='label'>Contacto:</td>
         <td>{{procedure.authorityContact}}</td>
       </tr>
-      <!-- <tr>
-                    <td colspan="2 "><img src="../../assets/img/mapa.png " width="100% " alt="mapita " />
-        
-                    </td>
-                  </tr>-->
     </tbody>
   </table>
 </div>
