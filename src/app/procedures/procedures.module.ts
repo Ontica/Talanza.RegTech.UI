@@ -10,6 +10,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule }   from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
+import { ControlsModule } from '../controls/controls.module';
  
 import { ProcedureFilterComponent } from './main-page/procedures-filter.component';
 import { ProceduresMainPageComponent } from './main-page/procedures-main-page.component';
@@ -39,7 +40,7 @@ import { ProceduresRoutingModule } from './procedures-routing.module';
  */
 
 @NgModule({
-	imports: [ProceduresRoutingModule, SharedModule, CommonModule, FormsModule],
+	imports: [ProceduresRoutingModule, SharedModule, CommonModule, FormsModule, ControlsModule],
 	declarations: [ProceduresMainPageComponent, ProcedureFilterComponent, ProcedureEditorComponent,
 								 GeneralInfoTabComponent, RequirementsTabComponent, FilingConditionsTabComponent,
 								 FilingFeeTabComponent, StatusTabComponent, AddRequirementTabComponent,

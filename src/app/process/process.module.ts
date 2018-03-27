@@ -10,6 +10,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { SharedModule } from '../shared/shared.module';
+import { ControlsModule } from '../controls/controls.module';
 
 import { ProcessRoutingModule } from './process-routing.module';
 
@@ -27,7 +28,8 @@ import { ProceduresModule } from '../procedures/procedures.module';
   imports: [ProcessRoutingModule,
             SharedModule,
             CommonModule,
-            ProceduresModule],
+            ProceduresModule,
+            ControlsModule],
   declarations: [ProcessActivityAssociationComponent,
                  ProcessEditorComponent,
                  SaveProcessDialogComponent],

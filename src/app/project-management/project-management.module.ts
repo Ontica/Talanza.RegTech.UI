@@ -11,6 +11,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
 import { ProceduresModule } from '../procedures/procedures.module';
+import { ControlsModule } from '../controls/controls.module';
 
 import { ProjectExplorerComponent } from './project-explorer/project-explorer.component';
 
@@ -36,7 +37,8 @@ import { ProjectsFilterComponent } from './main-page/projects-filter.component';
  */
 
 @NgModule({
-  imports: [ProjectManagementRoutingModule, SharedModule, CommonModule, FormsModule, ProceduresModule],
+  imports: [ProjectManagementRoutingModule, SharedModule, CommonModule, FormsModule, 
+            ProceduresModule, ControlsModule],
   declarations: [ProjectExplorerComponent,
                  ActivityEditorComponent, ActivityCloseComponent,
                  ProjectsMainPageComponent, GanttComponent, ViewerComponent,

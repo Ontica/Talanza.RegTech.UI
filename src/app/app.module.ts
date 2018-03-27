@@ -26,11 +26,13 @@ import { DashboardModule } from './dashboard/dashboard.module';
 
 import { ObligationsModule } from './obligations/obligations.module';
 import { ContractsModule } from './contracts/contracts.module';
+import { ControlsModule } from './controls/controls.module';
 import { DocumentsModule } from './documents/documents.module';
 import { ProcessModule } from './process/process.module';
 import { ProjectManagementModule } from './project-management/project-management.module';
 import { InboxModule } from './inbox/inbox.module';
 import { SharedModule } from './shared/shared.module';
+
 
 // App is our top level component
 import { AppComponent } from './app.component';
@@ -78,11 +80,12 @@ type StoreType = {
     DashboardModule,
     ObligationsModule,    
     ContractsModule,
+    ControlsModule,
     DocumentsModule,
     ProcessModule,
     ProjectManagementModule,
     InboxModule,
-    SharedModule,
+    SharedModule,    
     BrowserModule,
     FormsModule,
     AppRoutingModule

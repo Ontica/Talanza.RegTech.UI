@@ -11,7 +11,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
 import { ProceduresModule } from '../procedures/procedures.module';
-
+import { ControlsModule } from '../controls/controls.module';
+ 
 import { ContractsRoutingModule } from './contracts-routing.module';
 
 import { ContractsMainPageComponent } from './main-page/contracts-main-page.component';
@@ -25,7 +26,8 @@ import { ContractsSelectedClauseComponent } from './editor/contracts-selected-cl
  */
 
 @NgModule({
-  imports: [ContractsRoutingModule, SharedModule, CommonModule, FormsModule, ProceduresModule],
+  imports: [ContractsRoutingModule, SharedModule, CommonModule, FormsModule,
+            ProceduresModule, ControlsModule],
   declarations: [ContractsMainPageComponent, ContractsClauseSelectorComponent, 
                  ContractsSelectedClauseComponent, ContractsFiltersComponent],
   exports: []

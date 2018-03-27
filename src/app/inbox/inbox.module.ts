@@ -10,6 +10,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
+import { ControlsModule } from '../controls/controls.module';
 
 import { InboxRoutingModule } from './inbox-routing.module';
 
@@ -26,7 +27,7 @@ import { TaskEditorComponent } from './editor/tabs/task-editor/task-editor.compo
  */
 
 @NgModule({
-  imports: [InboxRoutingModule, SharedModule, CommonModule, FormsModule],
+  imports: [InboxRoutingModule, SharedModule, CommonModule, FormsModule, ControlsModule],
   declarations: [InboxMainPageComponent, InboxFilterComponent, WorkListComponent,
                  TaskEditorComponent, InboxEditorComponent ],
   exports: [InboxMainPageComponent]

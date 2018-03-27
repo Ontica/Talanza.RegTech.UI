@@ -10,17 +10,11 @@ import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+
 import { MainLayoutComponent } from './main-layout/main-layout.component';
 
 import { NavbarComponent } from './navbar/navbar.component';
 import { NoContentComponent } from './no-content/no-content.component';
-
-import { SafeHtmlPipe } from './pipes/safe-html.pipe';
-
-import { AutocompleteControl } from './controls/autocomplete-control';
-import { Chips } from './controls/chips';
-import { RAGControl } from './controls/rag.control';
-import { CalendarControl } from './controls/calendar-control';
 
 import { NavBarService } from './navbar/navbar.service';
 
@@ -30,10 +24,8 @@ import { NavBarService } from './navbar/navbar.service';
 
 @NgModule({
   imports: [RouterModule, CommonModule, FormsModule],
-  declarations: [MainLayoutComponent, NavbarComponent, NoContentComponent, SafeHtmlPipe,
-                 AutocompleteControl, Chips, RAGControl, CalendarControl],
-  exports: [MainLayoutComponent, NoContentComponent, SafeHtmlPipe, AutocompleteControl, Chips,
-            RAGControl, CalendarControl],
+  declarations: [MainLayoutComponent, NavbarComponent, NoContentComponent],
+  exports: [MainLayoutComponent, NoContentComponent],
   providers:[NavBarService]
 })
 export class SharedModule { }

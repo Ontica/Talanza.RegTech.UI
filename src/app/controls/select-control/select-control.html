@@ -1,0 +1,14 @@
+<div class="container">      
+  <div class="title" (click)="onClick()">
+    <span>{{selectedItem[config.valueField]}} &nbsp;&nbsp;&nbsp;<i class="fa fa-caret-down" aria-hidden="true"></i></span>
+    <!--<i  style="float: right" class="fa fa-caret-down" aria-hidden="true"></i>-->
+  </div>
+  <div class="items-div" *ngIf="isHideControl">    
+     <ul *ngFor="let item of items">
+       <li [ngClass]="setItemCSSClass(item.level)" (click)="onSelectItem(item)">
+          <i *ngIf="item.level === 3" class="fa fa-circle" aria-hidden="true"></i>
+         {{item[config.valueField]}}
+       </li> 
+     </ul>
+  </div>  
+</div>

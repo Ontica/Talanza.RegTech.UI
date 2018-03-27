@@ -40,7 +40,7 @@ export class SelectControl {
         return this._selectedUID;
     }
 
-    @Input() config: any = { valueField: 'name' }
+    @Input() config: object = { valueField: 'name' }
 
     @Output() public onSelectedItem = new EventEmitter<string>();
 
