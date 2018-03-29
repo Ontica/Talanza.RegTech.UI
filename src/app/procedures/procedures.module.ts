@@ -33,6 +33,9 @@ import { AddActivityComponent } from '../project-management/editor/tabs/add-acti
 
 import { PERequirementsComponent } from './editor/sections/pe-requirements.component';
 
+import { ProceduresTableViewComponent } from './views/procedures-table-view.component';
+import { ProcedureInfoComponent } from './viewer/procedure-info.component';
+
 import { ProceduresRoutingModule } from './procedures-routing.module';
 
 /**
@@ -40,13 +43,15 @@ import { ProceduresRoutingModule } from './procedures-routing.module';
  */
 
 @NgModule({
-	imports: [ProceduresRoutingModule, SharedModule, CommonModule, FormsModule, ControlsModule],
+	imports: [ProceduresRoutingModule,  CommonModule, FormsModule, ControlsModule],
 	declarations: [ProceduresMainPageComponent, ProcedureFilterComponent, ProcedureEditorComponent,
 								 GeneralInfoTabComponent, RequirementsTabComponent, FilingConditionsTabComponent,
 								 FilingFeeTabComponent, StatusTabComponent, AddRequirementTabComponent,
 								 AddRequirementListTabComponent, RequirementTabComponent,  RequirementGridComponent,
 								 ProcedureViewerComponent, PVGeneralInfoComponent, PVRequirementsComponent,
-								PERequirementsComponent, AddActivityComponent],
-	exports: [ProceduresMainPageComponent, ProcedureViewerComponent, PERequirementsComponent]
+								 PERequirementsComponent, AddActivityComponent, ProceduresTableViewComponent,
+								 ProcedureInfoComponent],
+	exports: [ProceduresMainPageComponent, ProcedureViewerComponent, PERequirementsComponent, ProceduresTableViewComponent,
+			  ProcedureInfoComponent]
 })
 export class ProceduresModule { }

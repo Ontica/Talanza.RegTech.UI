@@ -1,0 +1,27 @@
+<table class="grid" *ngIf="procedures.length > 0">
+    <thead>
+        <tr>
+            <th style="width:20pt"></th>
+            <th style='width:40%'>Trámite / Homoclave</th>
+            <th style='width:100px'>Dependencia</th>
+            <th style='width:12%'>Tema</th>
+            <th style='width:40%'></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let procedure of procedures" [class.selected-row]="selectedProcedureUID === procedure.uid">
+            <td class="main-icon">
+                <a (click)="selectProcedure(procedure.uid)">
+                    <i class="fa fa-university" aria-hidden="true"></i>
+                </a>
+            </td>
+            <td style='width:40%'>
+                <a (click)="selectProcedure(procedure.uid)">{{procedure.name}}</a>
+                <br/> {{procedure.code}}
+            </td>
+            <td style='width:100px'>{{procedure.entity}}</td>
+            <td style='width:12%'>{{procedure.theme}}</td>
+            <th style='width:40%'></th>
+        </tr>
+    </tbody>
+</table>

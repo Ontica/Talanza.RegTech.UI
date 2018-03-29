@@ -7,6 +7,8 @@
  */
 
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { Location } from '@angular/common'; 
 
 import { SessionService } from '../../core';
 
@@ -21,13 +23,28 @@ export class MainLayoutComponent {
   public title = 'Administración y control del cumplimiento regulatorio';
   public breadcrumb = '';
 
+  public isGlobalSearchVisible = false;
+  public keywords = '';
+
   // public title = 'Administración y control del cumplimiento regulatorio';
   // Cajón de arena para jugar
 
-  public constructor(private session: SessionService) {
+  public constructor(private session: SessionService,
+                     private router: Router,
+                     private location: Location) {
     const principal = session.getPrincipal();
 
     this.userName = principal.identity.fullname;
+  }
+
+  public globalSearch(keywords: string): void {  
+    this.isGlobalSearchVisible = true;     
+   
+    this.keywords = keywords;   
+  }
+
+  public hideGlobalSearch(): void {    
+    this.isGlobalSearchVisible = false; 
   }
 
 }

@@ -1,0 +1,21 @@
+@import "../../../styles/general-styles";
+.search-control {   
+    min-width: 180px;
+    max-width: 300px;
+    position: relative;  
+}
+
+.search-control input {       
+    padding-right: 10px;            
+    border-radius: 8px;
+    transition: 0.2s ease-out;    
+    padding-left: 17px;
+}
+
+.input-icon {
+    position: absolute;
+    left: 3px;
+    top: calc(50% - 0.5em);
+    color: $blue;
+  }
+ 

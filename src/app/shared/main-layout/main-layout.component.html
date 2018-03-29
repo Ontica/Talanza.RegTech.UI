@@ -8,15 +8,19 @@
       {{title}}
       <small>{{breadcrumb}}</small>
     </div>
-    <div class="configuration-bar pull-right">
-      {{userName}}
+    <div class="configuration-bar pull-right">      
+      <search-control (onSearch)="globalSearch($event)"></search-control>    
     </div>
   </div>
-
-  <navbar></navbar>
-
+  
   <div class="content">
-    <router-outlet></router-outlet>
+    <div [hidden]="isGlobalSearchVisible">
+      <navbar></navbar>
+      <router-outlet></router-outlet>
+    </div>
+    <div [hidden]="!isGlobalSearchVisible">     
+      <global-search [keywords]="keywords" (onClose)="hideGlobalSearch()"></global-search>    
+    </div>    
   </div>
 
 </div>

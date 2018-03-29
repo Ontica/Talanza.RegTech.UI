@@ -17,7 +17,9 @@ import { Chips } from './chips/chips';
 import { RAGControl } from './rag/rag.control';
 import { CalendarControl } from './calendar/calendar-control';
 import { SelectControl } from './select-control/select-control';
-
+import { SearchControl } from './search/search.control';
+import { NavBarControl } from './nav-bar/nav-bar.control';
+ 
 import { SafeHtmlPipe } from './pipes/safe-html/safe-html.pipe';
 
 /**
@@ -27,8 +29,8 @@ import { SafeHtmlPipe } from './pipes/safe-html/safe-html.pipe';
 @NgModule({
   imports: [RouterModule, CommonModule, FormsModule],
   declarations: [AutocompleteControl, Chips, RAGControl, CalendarControl, SelectControl,
-                 SafeHtmlPipe],
+                 SafeHtmlPipe, SearchControl, NavBarControl],
   exports: [AutocompleteControl, Chips, SafeHtmlPipe,
-            RAGControl, CalendarControl, SelectControl] 
+            RAGControl, CalendarControl, SelectControl, SearchControl, NavBarControl] 
 })
 export class ControlsModule { }
