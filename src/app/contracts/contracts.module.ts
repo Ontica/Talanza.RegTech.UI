@@ -9,7 +9,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { SharedModule } from '../shared/shared.module';
 import { ProceduresModule } from '../procedures/procedures.module';
 import { ControlsModule } from '../controls/controls.module';
  
@@ -20,16 +19,21 @@ import { ContractViewComponent } from './main-page/contract-view.component';
 import { ContractsFiltersComponent } from './main-page/contracts-filters.component';
 import { ContractsClauseSelectorComponent } from './editor/contracts-clause-selector.component';
 import { ContractsSelectedClauseComponent } from './editor/contracts-selected-clause.component';
+import { ContractClausesTableViewComponent } from './views/contract-clauses-table-view.component';
+import { ClauseDefinitionComponent } from './clauses/clause-definition.component';
+import { ClauseObligationsComponent } from './clauses/clause-obligations.component';
 
 /**
  * Do not specify providers for modules that might be imported by a lazy loaded module.
  */
 
 @NgModule({
-  imports: [ContractsRoutingModule, SharedModule, CommonModule, FormsModule,
+  imports: [ContractsRoutingModule, CommonModule, FormsModule,
             ProceduresModule, ControlsModule],
   declarations: [ContractsMainPageComponent, ContractsClauseSelectorComponent, 
-                 ContractsSelectedClauseComponent, ContractsFiltersComponent],
-  exports: []
+                 ContractsSelectedClauseComponent, ContractsFiltersComponent,
+                 ContractClausesTableViewComponent, ClauseDefinitionComponent,
+                 ClauseObligationsComponent],
+  exports: [ContractClausesTableViewComponent, ClauseDefinitionComponent, ClauseObligationsComponent]
 })
 export class ContractsModule { }

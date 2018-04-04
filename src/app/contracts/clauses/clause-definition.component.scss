@@ -1,0 +1,16 @@
+@import "../../../styles/grid";
+
+.clause-title {
+  font-size: 14pt;
+  color: $blue;
+  font-weight: 600;
+  padding: 6pt;
+  line-height: 22pt;
+}
+
+.clause-definition {
+  padding: 2px;
+  text-align: justify;
+  font-size: 11pt;
+  max-width: 600pt;
+}

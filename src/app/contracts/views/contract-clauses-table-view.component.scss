@@ -1,0 +1,21 @@
+@import "../../../styles/grid";
+table.grid tbody {
+  height: calc(100vh - 300px);
+}
+
+.grid-footer-style {
+  margin: 3px 10px 3px 3px;
+  width: 99%;
+}
+
+.grid-footer-items {
+  width: 33%;
+}
+
+.selected-row {
+  border-bottom: 2px solid $blue;
+  border-top: 2px solid $blue;
+  z-index:1000;
+  font-weight: 600;
+}
+

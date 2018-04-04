@@ -1,17 +1,20 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output,  ViewEncapsulation  } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
+import { CoreService } from '../../core/core.service';
+import { ContractsService } from '../../contracts/services/contracts.service';
 import { ProcedureService } from '../../procedures/services/procedure.service';
 
 import { SmallProcedureInterface } from '../../procedures/data-types/small-procedure.interface';
 import { ProcedureFilter } from '../../procedures/data-types/procedure-filter';
 import { NavBarConfig } from '../../controls/nav-bar/nav-bar.control';
+import { ContractClauseRef } from '../../contracts/data-types/contract';
 
 @Component({
     selector: 'global-search',
     templateUrl: './gs-main-page.component.html',
     styleUrls: ['./gs-main-page.component.scss'],
-
+   
 })
 
 export class GlobalSearchMainPageComponent {   
@@ -23,7 +26,9 @@ export class GlobalSearchMainPageComponent {
 
     public masterContainer = 'centered-container';  
     public isDetailsContainerVisible = false;
-
+    
+    public clauses: ContractClauseRef[] = [];
+    public clause: ContractClauseRef;
     
     private _keywords = '';    
     @Input()
@@ -38,7 +43,8 @@ export class GlobalSearchMainPageComponent {
 
     @Output() public onClose = new EventEmitter();
     
-    constructor(private route: ActivatedRoute, private procedureService: ProcedureService) {
+    constructor(private route: ActivatedRoute, private procedureService: ProcedureService,
+                private contractService: ContractsService,private core: CoreService) {
         this.route.params.subscribe(params => {
             this.keywords = params['keywords'];
              this.main();     
@@ -64,16 +70,24 @@ export class GlobalSearchMainPageComponent {
         this.onClose.emit();
     }
 
+    public setSelectedClause(clause: ContractClauseRef): void {          
+        this.clause = clause;
+        this.masterContainer = 'block-container';
+        this.isDetailsContainerVisible = true;          
+       
+    }
 
     private async main() {  
         this.closeDetailsContainer();      
         await this.loadProcedures(); 
+        await this.loadContractClauses();
         this.fillNavBar();         
     }  
 
     private fillNavBar(): void {
         this.navBarConfig = [];
         this.navBarConfig.push({ name:'procedures', displayText:'Trámites (' + this.procedures.length.toString() +')'});
+        this.navBarConfig.push({ name:'contracts', displayText:'Contratos (' + this.clauses.length.toString() +')'});
     }
 
     private cleanSelectedOption(): void {
@@ -87,6 +101,17 @@ export class GlobalSearchMainPageComponent {
        await this.procedureService.getProceduresList(filter)
                          .then((procedures) =>{this.procedures = procedures;});
     }  
+
+    private async loadContractClauses() {
+        const errMsg = 'Ocurrió un problema al intentar leer la lista de cl�usulas para el contrato.' ;
+
+        const contractUID = 'R24It1Rw9m4AaPm1'; //Contrato: 2.4 Individual
+       
+        await this.contractService.searchClauses(contractUID, this.keywords)
+            .toPromise()
+            .then((x) => this.clauses = x)
+            .catch((e) => this.core.http.showAndThrow(e, errMsg));
+    }
 
      
 }

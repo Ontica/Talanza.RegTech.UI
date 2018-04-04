@@ -1,0 +1,43 @@
+<div *ngIf="rules.length > 0">
+  <span class="clause-subtitle">
+    Obligaciones
+  </span>
+
+  <div *ngFor="let rule of rules">
+    <table class="grid" style='max-width:600pt;'>
+      <thead>
+        <tr>
+          <th>
+            {{rule.name}}
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <span>{{rule.description}}</span>
+            <br/>
+            <br/>
+            <span class='clause-subtitle' *ngIf="rule.procedures.length !== 0">Trámites involucrados</span>
+          </td>
+        </tr>
+        <tr *ngFor="let procedure of rule.procedures">
+          <td style='margin-left:12pt'>
+            <a (click)="onSelectedProcedure(procedure.uid)">» {{procedure.shortName}}</a>
+            <br>
+            <span *ngIf="procedure.modality.length !== 0">Modalidad: {{procedure.modality}}
+              <br/>
+            </span>
+            <span *ngIf="procedure.code !== 'No disponible'">{{procedure.code}}</span>
+            <span *ngIf="procedure.code === 'No disponible'">{{procedure.entity}}</span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <br />
+  </div>
+
+  <div class="procedure-info" *ngIf="isVisibleProcedureInfo">
+    <procedure-viewer [procedureUID]="procedureUID" (onCloseEvent)="onCloseProcedureInfoModal()"></procedure-viewer>
+  </div>
+</div>

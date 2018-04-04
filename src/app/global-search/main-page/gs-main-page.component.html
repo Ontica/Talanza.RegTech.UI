@@ -1,20 +1,26 @@
 <div class="title-bar">
-    Resultados de la busqueda "{{keywords}}" <i class="fa fa-times-circle close-global-search-icon" (click)="closeGlobalSearch()"></i>
+    Resultados de la búsqueda "{{keywords}}" <i class="fa fa-times-circle close-global-search-icon" (click)="closeGlobalSearch()"></i>
 </div>
 <div  class="nav-bar">       
   <nav-bar [options]="navBarConfig" (onSelect)="selectOption($event)"></nav-bar> 
 </div> 
 <div class="gs-container">
+       
   <div [class]="masterContainer">
       <div [ngSwitch]="selectedOption">  
          <procedures-table-view  *ngSwitchCase="'procedures'" [procedures]="procedures" (onSelectProcedure)="selectProcedure($event)"></procedures-table-view>         
+         <contract-clauses-table *ngSwitchCase="'contracts'" [clauses]="clauses" (onSelectClause)="setSelectedClause($event)"></contract-clauses-table>
       </div> 
    
   </div>
-  <div *ngIf="isDetailsContainerVisible" class="block-container right">
+ <div *ngIf="isDetailsContainerVisible" class="block-container right">
       <div><i class="fa fa-times close-icon" (click)="closeDetailsContainer()"></i></div>
       <div [ngSwitch]="selectedOption">
           <procedure-info *ngSwitchCase="'procedures'" [procedureUID]="selectedProcedureUID"></procedure-info>
+          <div *ngSwitchCase="'contracts'">
+                <clause-definition [clauseRef]="clause"></clause-definition><br>
+                <clause-obligations [clauseRef]="clause"></clause-obligations>             
+          </div>
       </div>      
   </div>
 </div>

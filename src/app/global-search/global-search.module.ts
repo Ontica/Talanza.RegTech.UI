@@ -12,14 +12,14 @@ import { FormsModule }   from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
 import { ProceduresModule } from '../procedures/procedures.module';
 import { ControlsModule } from '../controls/controls.module';
+import { ContractsModule }  from '../contracts/contracts.module';
 
 import { GlobalSearchRoutingModule } from './global-search-routing.module';
+
 import { GlobalSearchMainPageComponent } from './main-page/gs-main-page.component';
 
 import { ProcedureService } from  '../procedures/services/procedure.service';
 import { ContractsService } from '../contracts/services/contracts.service';
-
-import { ContractsModule }  from '../contracts/contracts.module';
 
 
 /**
@@ -27,7 +27,8 @@ import { ContractsModule }  from '../contracts/contracts.module';
  */
 
 @NgModule({
-	imports: [GlobalSearchRoutingModule, CommonModule, FormsModule, ProceduresModule, ControlsModule],
+	imports: [GlobalSearchRoutingModule, CommonModule, FormsModule, ProceduresModule,
+		 ControlsModule, ContractsModule],
 	declarations: [GlobalSearchMainPageComponent],
 	exports: [GlobalSearchMainPageComponent],
 	providers:[ProcedureService, ContractsService]
