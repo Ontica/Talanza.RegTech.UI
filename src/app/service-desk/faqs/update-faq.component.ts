@@ -48,19 +48,15 @@ export class UpdateFAQComponent  {
     private validate(): boolean {
 
         if (this.faq.question === '') {
-            alert('Uts!!!, la pregunta se encuentra en blanco...');
-            return false;
-        }
-        if (this.faq.answer === '') {
-            alert('Uts!!!, la respuesta se encuentra en blanco...');
+            alert('Requiero el texto de la pregunta.');
             return false;
         }
         if (this.faq.accessMode === '') {
-            alert('Uts!!!, No has seleccionado la visibilidad');
+            alert('Requiero se seleccione de la lista la visibilidad que tendrá la pregunta dentro de la base de conocimiento.');
             return false;
         }
         if (this.faq.status === '') {
-            alert('Uts!!!, No has seleccionado el status');
+            alert('Para llevar un buen control, necesito se proporcione el estado de la pregunta.');
             return false;
         }
 
@@ -69,9 +65,7 @@ export class UpdateFAQComponent  {
 
     private updateFAQ(): void {      
         this.faqService.updateFAQ(this.faq)
-                        .subscribe((x) => { alert("!Se actualizo la faq!");
-                        this.onClose.emit();});
-                                    
+                        .subscribe((x) => this.onClose.emit());
     }
 
     private close(): void {       

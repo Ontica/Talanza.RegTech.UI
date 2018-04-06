@@ -4,6 +4,7 @@
 $ambar: #ebd1a5 !default;
 $black: #1a1a1a !default;
 $gray: #909090!default;
+$light-gray: #cdcdcd!default;
 $brown: #604020 !default;
 $blue: #204060 !default;
 $lime: #8CBF26 !default;
@@ -15,17 +16,17 @@ $purple: #A700AE !default;
 $red:#9b1b1f !default;
 $red-dark: #d04f4f !default;
 $teal: #25a1c5 !default;
-$white: #f8f8f8 !default;
+$white: #fefefe !default;
 $light-white: white;
 $silver: #909090;
 //
 // Typography
 //
 $font-family:-apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol" !default;
-$font-size-root: 10px !default;
+$font-size-root: 10pt !default;
 $font-size-base: 1.0rem !default;
 $font-weight-base: 200 !default;
-$text-color: $black !default;
+$text-color: $blue !default;
 //
 $font-size-title: $font-size-base * 1.25;
 $font-weight-title: 500;
@@ -85,13 +86,15 @@ $form-title-color:$gray;
 //
 // html controls
 //
-$control-font: 8pt Tahoma, Arial, Helvetica;
-$control-small-font: 6pt Tahoma, Arial, Helvetica;
+
+$control-font: 9.5pt 'Segoe UI', Helvetica, Arial, sans-serif !default;
+$control-small-font: 8.5pt 'Segoe UI', Helvetica, Arial, sans-serif !default;
+
 $cancel-color: $red;
 $action-color: $blue;
 $warning-color: $orange;
 $control-border: 1px solid #d0d0d0;
-$control-background-color: #f0f0f0;
+$control-background-color: #fafafa;
 $control-color: $text-title;
 $control-width: 99%;
 $control-disabled-color: $text-title;
@@ -100,8 +103,11 @@ $control-height: 25px;
 $button-background-color: #dadada;
 $button-border: 0px solid #cecece;
 $button-height: 28px;
-$control-font: 8pt Arial, Helvetica;
-$control-small-font: 6pt Arial, Helvetica;
+
+$selected-control-background-color: #fffff0;
+$selected-control-color: $text-title;
+$selected-control-border: 1px solid #c9c9c9;
+
 //
 // grid
 //

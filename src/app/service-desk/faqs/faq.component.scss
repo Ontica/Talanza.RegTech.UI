@@ -2,29 +2,35 @@
 @import "../../../styles/grid";
 .faq-container{
     width: 100%;
+    padding: 8pt 24pt 24pt 24pt;
 }
 
-.text-align-center {
-  text-align: center
-}
-
-.faq {
-    background-color: $orange;
-    color:black;
+.faq {    
     font-weight: 600;
+    line-height: 22pt;    
     padding: 6pt;
-    line-height: 22pt;
+}
+
+.question {
+  text-align: justify;
+  max-width: 600pt;  
+  display: inline-block;
+  font-style: italic;
+  font-weight: 500;
+  margin-bottom: 8pt;
 }
 
 .answer {
-    padding: 2px;
     text-align: justify;
-    font-size: 11pt;
     max-width: 600pt;  
     display: inline-block;
 }
 
-
-
-
-
+.section-text {
+  color: brown;
+  font-size: 10pt;
+  border-bottom: 1pt dashed brown;
+  text-align: justify;
+  max-width: 600pt;  
+  display: inline-block;
+}

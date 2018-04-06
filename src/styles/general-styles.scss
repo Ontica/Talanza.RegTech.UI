@@ -63,9 +63,13 @@ button.btn-warning {
   font: $control-font;
   font-weight: normal;
   margin: 2px 8px 2px 0;
-  padding: 4px 2px 2px;
+  padding: 2px 2px 2px 6px;
   vertical-align: middle;
   width: $control-width;
+
+  border-radius: 2px;
+  transition: 0.3s ease-out;
+  height: $control-height;
 }
 
 @mixin disabled-element {
@@ -75,12 +79,10 @@ button.btn-warning {
 
 select.select-box {
   @include input-settings;
-  height: $control-height;
 }
 
 select.select-warning {
   @include input-settings;
-  height: $control-height;
   background-color: $warning-color;
 }
 
@@ -94,7 +96,39 @@ input.search-box {
 
 input.text-box {
   @include input-settings;
-  height: $control-height;
+}
+
+input:focus {
+  outline: none;
+  color: $selected-control-color;
+  background-color: $selected-control-background-color;
+  border: $selected-control-border;
+}
+
+select:focus {
+  outline: none;
+  color: $selected-control-color;
+  background-color: $selected-control-background-color;
+  border: $selected-control-border;
+}
+
+textarea:focus {
+  outline: none;
+  color: $selected-control-color;
+  background-color: $selected-control-background-color;
+  border: $selected-control-border;
+}
+
+.input-icon {
+  position: absolute;
+  left: 8px;
+  top: calc(50% - 0.5em);
+  color: $light-gray;
+  font-weight: 200;
+}
+
+input.input-text-with-icon {
+  padding-left: 26px;
 }
 
 .text-area {

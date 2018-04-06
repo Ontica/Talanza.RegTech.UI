@@ -1,20 +1,33 @@
 <div class="faq-container">
-    <div class="text-align-center">    
+    <div>
         <div class="faq">
            <span  style="float:right;"><a (click)="openEditFAQWndow()">Editar</a></span>
+        </div>        
+    </div>
+
+    <div>
+        <div class="question">
             {{faq.question}}
         </div>        
     </div>
-    
-    <div class="text-align-center">
+    <div>
         <div class="answer">
-            {{faq.answer}}            
+            {{faq.answer}} 
         </div>        
     </div>
     <br><br>
-  
-    <div class="text-align-center">
-        <div class="answer">            
+
+    
+    <span class='section-text'>Referencias:</span>
+    <div>
+        <div class="answer">     
+
+        </div>
+    </div>
+
+    <span class='section-text'>Comentarios:</span>
+    <div>
+        <div class="answer">     
             {{faq.comments}}            
         </div>
     </div>

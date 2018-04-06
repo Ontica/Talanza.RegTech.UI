@@ -22,7 +22,7 @@ export enum FAQsServiceErr {
   POST_ADDFAQ_ERR =
         '[POST_ADDFAQ_ERR] Ocurrió un problema al guardar la FAQ.',      
   PUT_FAQ_ERR =
-        '[PUT_FAQ_ERR] Ocurrió un problema al actulizar la FAQ.',      
+        '[PUT_FAQ_ERR] Ocurrió un problema al actualizar la FAQ.',      
 }
 
 

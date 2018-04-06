@@ -2,42 +2,39 @@
 @import "../../../styles/form";
 
 .container {
-    height: calc(100vh - 130px);
-    width:100%;    
-    display: inline-block;
-    min-width: 900px;
+  height: calc(100vh - 130px);
+  width:100%;
+  display: inline-block;
+  min-width: 900px;
 }
 
 .left-panel {
-    display: inline-block;    
-    width: 35%; 
-    height: 100%;  
-    overflow-x: hidden;   
-    min-width: 300px;
-    border: 1px solid black;
+  display: inline-block;
+  width: 35%;
+  height: 100%;
+  overflow-x: hidden;
+  min-width: 300px;
 }
 
 .right-panel {
-    display: inline-block;       
-    width: 65%; 
-    height: 100%;  
-    overflow-x: hidden;     
-    min-width: 500px;
-    border: 1px solid black;
+  display: inline-block;
+  width: 65%;
+  height: 100%;
+  overflow-x: hidden;
+  min-width: 500px;
 }
 
 .right {
-    float: right;
+  float: right;
 }
 
-.tab {   
-    width: 100%;
+.tab {
+  width: 100%;
+  color: orange;
+  border-radius: 8px;
+  margin-top: 4pt;
 }
 
 .tab-links {
-    width: 50%;
+  width: 50%
 }
-
-
-
-

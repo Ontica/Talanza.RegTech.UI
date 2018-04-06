@@ -1,48 +1,57 @@
 @import "../../../styles/form";
 
-.right {
-    float: right;
-}
-
 .search-bar {
-    width:100%;
-    margin-right: 150px;
-    min-width: 300px;
+  width:100%;
+  margin-right: 150px;
+  min-width: 300px;
+  padding: 8pt;
+  margin-bottom: 8pt;
+  border-bottom: 1px dotted $gray;
+  font-size: 10pt;
 }
 
 .search-control {
-    width:300px;
-    display: inline-block; 
-}
-
-.title {
-    color: $blue;
-    font-weight: 400;
+  width:450px;
+  display: inline-block;
 }
 
 .filters-bar {
-    width:100%;
-    border-top: 2px dotted $gray;
-    border-bottom: 2px dotted $gray;
+  font-size: 10pt;
+  width:100%;
 }
 
 .selected-filter{
-    font-weight: 600;
+
+}
+
+.title {
+  color: brown;
+  font-weight: 500;
+  font-size: 10pt;
 }
 
 ul {
-    list-style-type: none;
+  list-style-type: none;
+}
+
+li {
+  margin-top: 5px;
+  font-size: 10pt;
+  padding-bottom: 6pt;
 }
 
 li a {
-    color: $red;
-    font-weight: 400;
+  font-weight: 400;
+  font-size: 10pt;
+  padding-bottom: 6pt;
 }
 
-.selected-ticket  a {
-    font-weight: 600; 
+.selected a {
+  font-weight: 600;
+  font-size: 10pt;
 }
 
 .ticket-info {
-    color: $gray;
+  color: $gray;
+  font-size: 10pt;
 }

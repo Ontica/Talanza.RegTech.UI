@@ -1,27 +1,13 @@
 @import "../../../styles/general-styles";
 .search-control {   
-    min-width: 180px;
-    max-width: 300px;
-    position: relative;  
+  min-width: 180px;
+  max-width: 300px;
+  position: relative;
 }
 
 .search-control input {       
-    padding-right: 10px;            
-    border-radius: 8px;
-    transition: 0.2s ease-out;    
-    padding-left: 17px;
+  padding-right: 18px;
+  border-radius: 8px;
+  transition: 0.5s ease-out;
+  height: 32px;
 }
-
-input:focus {       
-    outline: none;
-}
-
-.input-icon {
-    position: absolute;
-    left: 3px;
-    top: calc(50% - 0.5em);
-    color: $blue;
-}
-
-
- 
