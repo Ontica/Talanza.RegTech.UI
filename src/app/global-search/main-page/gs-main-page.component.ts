@@ -105,7 +105,7 @@ export class GlobalSearchMainPageComponent {
     private async loadContractClauses() {
         const errMsg = 'Ocurrió un problema al intentar leer la lista de cl�usulas para el contrato.' ;
 
-        const contractUID = 'R24It1Rw9m4AaPm1'; //Contrato: 2.4 Individual
+        const contractUID = 'R24Kmag356L21'; //Contrato: 2.4 Individual
        
         await this.contractService.searchClauses(contractUID, this.keywords)
             .toPromise()

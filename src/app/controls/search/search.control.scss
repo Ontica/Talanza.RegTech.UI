@@ -12,10 +12,16 @@
     padding-left: 17px;
 }
 
+input:focus {       
+    outline: none;
+}
+
 .input-icon {
     position: absolute;
     left: 3px;
     top: calc(50% - 0.5em);
     color: $blue;
-  }
+}
+
+
  

@@ -19,7 +19,8 @@ import { CalendarControl } from './calendar/calendar-control';
 import { SelectControl } from './select-control/select-control';
 import { SearchControl } from './search/search.control';
 import { NavBarControl } from './nav-bar/nav-bar.control';
- 
+import { ModalWindow } from './modal-window/modal-window';
+
 import { SafeHtmlPipe } from './pipes/safe-html/safe-html.pipe';
 
 /**
@@ -29,8 +30,9 @@ import { SafeHtmlPipe } from './pipes/safe-html/safe-html.pipe';
 @NgModule({
   imports: [RouterModule, CommonModule, FormsModule],
   declarations: [AutocompleteControl, Chips, RAGControl, CalendarControl, SelectControl,
-                 SafeHtmlPipe, SearchControl, NavBarControl],
+                 SafeHtmlPipe, SearchControl, NavBarControl, ModalWindow],
   exports: [AutocompleteControl, Chips, SafeHtmlPipe,
-            RAGControl, CalendarControl, SelectControl, SearchControl, NavBarControl] 
+            RAGControl, CalendarControl, SelectControl, SearchControl, NavBarControl,
+            ModalWindow] 
 })
 export class ControlsModule { }

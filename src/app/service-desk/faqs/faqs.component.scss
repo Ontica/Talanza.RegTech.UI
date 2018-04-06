@@ -1,0 +1,52 @@
+@import "../../../styles/form";
+
+.right {
+    float: right;
+}
+
+.search-bar {
+    width:100%;
+    margin-right: 150px;
+    min-width: 300px;
+}
+
+.search-control {
+    width:300px;
+    display: inline-block; 
+}
+
+.filters-bar {
+    width:100%;
+    border-top: 2px dotted $gray;
+    border-bottom: 2px dotted $gray;
+}
+
+.selected-filter{
+    font-weight: 600;
+}
+
+.title {
+    color: $blue;
+    font-weight: 600;
+}
+
+ul {
+    list-style-type: none;
+}
+
+li {
+    margin-top: 5px;
+}
+
+li a {
+    color: $red;
+    font-weight: 400;
+}
+
+.selected a {
+    font-weight: 600; 
+}
+
+.ticket-info {
+    color: $gray;
+}

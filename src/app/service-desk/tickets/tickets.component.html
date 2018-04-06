@@ -1,0 +1,37 @@
+<div class="search-bar">
+        <div class="search-control">
+            <search-control (onSearch)="search($event)"></search-control>
+        </div>            
+        <a class="right">Agregar ticket</a>
+</div>
+<div class="filters-bar">
+    <a [class.selected-filter]="filter === 'all'" (click)="onFilterBy('all')">Todos ({{ticketsOpened.length + ticketsClosed.length }})</a> | 
+    <a [class.selected-filter]="filter === 'opened'" (click)="onFilterBy('opened')">Abiertos ({{ticketsOpened.length}})</a> | 
+    <a [class.selected-filter]="filter === 'closed'" (click)="onFilterBy('closed')">Cerrados ({{ticketsClosed.length}})</a>
+</div>
+<div class="open-tickets" *ngIf="filter !== 'closed'">
+    <span class="title" *ngIf="ticketsOpened.length > 0">Tickets abiertos</span>
+    <ul>
+        <ng-container *ngFor="let ticketOpened of ticketsOpened">
+            <li [class.selected-ticket]="ticketOpened.uid === selectedTicketUid">
+                <a (click)="onSelectTicket(ticketOpened.uid)">{{ticketOpened.typeName}} {{ticketOpened.controlNo}}</a>
+                <br>
+                <span class="ticket-title">{{ticketOpened.title}}</span><br>
+                <span class="ticket-info">{{ticketOpened.requestedTime | date: 'dd-MM-yyyy' }} | {{ticketOpened.assigedToId}} </span>
+            </li>
+        </ng-container>
+    </ul>
+</div>
+<div class="close-tickets" *ngIf="filter !== 'opened'">
+    <span class="title" *ngIf="ticketsClosed.length > 0">Tickets cerrados</span>
+    <ul>
+        <ng-container *ngFor="let ticketClosed of ticketsClosed">
+            <li [class.selected-ticket]="ticketClosed.uid === selectedTicketUid">
+                <a (click)="onSelectTicket(ticketClosed.uid)">{{ticketClosed.typeName}} {{ticketClosed.controlNo}}</a>
+                <br>
+                <span class="ticket-title">{{ticketClosed.title}}</span><br>
+                <span class="ticket-info">{{ticketClosed.requestedTime | date: 'dd-MM-yyyy'}} | {{ticketClosed.assigedToId}} </span>
+            </li>
+        </ng-container>
+    </ul>
+</div>

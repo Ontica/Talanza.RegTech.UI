@@ -1,0 +1,25 @@
+<div class="faq-container">
+    <div class="text-align-center">    
+        <div class="faq">
+           <span  style="float:right;"><a (click)="openEditFAQWndow()">Editar</a></span>
+            {{faq.question}}
+        </div>        
+    </div>
+    
+    <div class="text-align-center">
+        <div class="answer">
+            {{faq.answer}}            
+        </div>        
+    </div>
+    <br><br>
+  
+    <div class="text-align-center">
+        <div class="answer">            
+            {{faq.comments}}            
+        </div>
+    </div>
+
+</div>
+<div *ngIf="isOpenEditFAQWndow">
+    <add-faq-menu [faq]="faq" [operation]="'Update'" (onClose)="closeUpdateFAQWindow()"></add-faq-menu>
+</div>

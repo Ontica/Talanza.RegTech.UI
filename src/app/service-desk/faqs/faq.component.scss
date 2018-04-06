@@ -1,0 +1,30 @@
+
+@import "../../../styles/grid";
+.faq-container{
+    width: 100%;
+}
+
+.text-align-center {
+  text-align: center
+}
+
+.faq {
+    background-color: $orange;
+    color:black;
+    font-weight: 600;
+    padding: 6pt;
+    line-height: 22pt;
+}
+
+.answer {
+    padding: 2px;
+    text-align: justify;
+    font-size: 11pt;
+    max-width: 600pt;  
+    display: inline-block;
+}
+
+
+
+
+

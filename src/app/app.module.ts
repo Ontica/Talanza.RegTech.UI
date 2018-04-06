@@ -33,6 +33,7 @@ import { ProjectManagementModule } from './project-management/project-management
 import { InboxModule } from './inbox/inbox.module';
 import { SharedModule } from './shared/shared.module';
 import { GlobalSearchModule } from './global-search/global-search.module';
+import { ServiceDeskModule } from './service-desk/service-desk.module';
 
 
 // App is our top level component
@@ -86,6 +87,7 @@ type StoreType = {
     ProcessModule,
     ProjectManagementModule,
     InboxModule,
+    ServiceDeskModule,
     SharedModule,  
     GlobalSearchModule,  
     BrowserModule,

@@ -1,0 +1,34 @@
+<div class="search-bar">
+    <div class="search-control">
+        <search-control (onSearch)="search($event)"></search-control>
+    </div>
+    <a class="right" (click)="onAddFAQ(selectedTask)">Agregar FAQ</a>
+</div>
+<div class="filters-bar">
+    <a [class.selected-filter]="filter === 'all'" (click)="onFilterBy('all')">Todos ({{faqs.length }})</a> |
+    <a [class.selected-filter]="filter === 'active'" (click)="onFilterBy('active')">Activas ({{activeFaqs.length}})</a> |
+    <a [class.selected-filter]="filter === 'pending'" (click)="onFilterBy('pending')">Pendientes ({{pendingFaqs.length}})</a>
+</div>
+<div *ngIf="filter !== 'pending'">
+    <span class="title" *ngIf="activeFaqs.length > 0">Preguntas</span>
+    <ul>
+        <ng-container *ngFor="let faq of activeFaqs">
+            <li [class.selected]="faq.uid === selectedFaqUID">
+                <a (click)="onClickSelectFaq(faq.uid)">{{faq.question}}</a>
+            </li>
+        </ng-container>
+    </ul>
+</div>
+<div *ngIf="filter !== 'active'">
+    <span class="title" *ngIf="pendingFaqs.length > 0">Pendintes</span>
+    <ul>
+        <ng-container *ngFor="let faq of pendingFaqs">
+            <li [class.selected]="faq.uid === selectedFaqUID">
+                <a (click)="onClickSelectFaq(faq.uid)">{{faq.question}}</a>
+            </li>
+        </ng-container>
+    </ul>
+</div>
+<div *ngIf="isOpenAddFAQWindow">
+    <add-faq-menu [operation]="'Add'" (onClose)="closeAddFAQWindow()"></add-faq-menu>
+</div>

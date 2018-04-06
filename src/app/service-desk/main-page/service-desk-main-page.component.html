@@ -1,0 +1,22 @@
+<div class="container">
+    <div class="left-panel">
+        <div class="tab">
+            <button class="tab-links left-position" [disabled]="isDisabled" [class.selected]="selectedTask==='ticket'" (click)="setSelectedTask('ticket')">Tickets</button>
+            <button class="tab-links left-position" [disabled]="isDisabled" [class.selected]="selectedTask==='FAQ'" (click)="setSelectedTask('FAQ')">FAQs</button>
+        </div>             
+        <div class="content" [ngSwitch]="selectedTask">
+            <faqs *ngSwitchCase="'FAQ'"  (onSelectedFAQ)="setSelectedFAQ($event)"></faqs>
+            <tickets *ngSwitchCase="'ticket'"></tickets>
+        </div>      
+    </div>
+
+    <div class="right-panel right">
+        <div class="content" [ngSwitch]="selectedTask">
+            <div *ngIf="isDisplayFaq">
+                    <faq  *ngSwitchCase="'FAQ'" [faqUID]="FAQUid"></faq>    
+            </div>
+                  
+        </div>             
+    </div>
+
+</div>
