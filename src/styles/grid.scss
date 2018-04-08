@@ -75,3 +75,10 @@ table.grid tbody tr:nth-child(even) {
 .main-icon td {
   width: 24pt;
 }
+
+.selected-row {
+  border-bottom: 2px solid $blue;
+  border-top: 2px solid $blue;
+  z-index:1000;
+  font-weight: 600;
+}
