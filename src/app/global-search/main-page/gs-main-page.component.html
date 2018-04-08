@@ -10,7 +10,8 @@
       <div [ngSwitch]="selectedOption">  
          <procedures-table-view  *ngSwitchCase="'procedures'" [procedures]="procedures" (onSelectProcedure)="selectProcedure($event)"></procedures-table-view>         
          <contract-clauses-table *ngSwitchCase="'contracts'" [clauses]="clauses" (onSelectClause)="setSelectedClause($event)"></contract-clauses-table>
-      </div> 
+         <documents-table-view *ngSwitchCase="'documents'" [documentsList]="documents" (onSelectDocument)="setSelectedDocument($event)"></documents-table-view>
+      </div>       
    
   </div>
  <div *ngIf="isDetailsContainerVisible" class="block-container right">
@@ -21,8 +22,9 @@
                 <clause-definition [clauseRef]="clause"></clause-definition><br>
                 <clause-obligations [clauseRef]="clause"></clause-obligations>             
           </div>
+          <div *ngSwitchCase="'documents'" class="pdf-control" >
+            <pdf-viewer [documentURI]="documentURI"></pdf-viewer>
+          </div>         
       </div>      
   </div>
 </div>
-
-

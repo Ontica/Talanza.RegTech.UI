@@ -1,0 +1,24 @@
+<table class="grid">
+    <thead>
+      <tr>
+        <th style="width:20pt"></th>
+        <th style="width:40%;min-width:350pt">Nombre</th>
+        <th style="width:140pt">Acrónimo / Tipo</th>
+        <th style="width:50%"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let document of documentsList" [class.selected-row]="selectedDocumentUID === document.uid">
+        <td class="main-icon">
+          <a (click)="setSelectedDocument(document)"><i class="fa fa-book" aria-hidden="true"></i></a>
+        </td>
+        <td style="width:40%;min-width:350pt;padding-right:50pt">
+          <a (click)="setSelectedDocument(document)">{{document.name}}</a>
+        </td>
+        <td style="width:140pt">
+          {{document.code}}<br> {{document.type}}
+        </td>
+        <td style="width:50%"></td>
+      </tr>
+    </tbody>
+  </table>

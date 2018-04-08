@@ -4,17 +4,20 @@ import { ActivatedRoute } from '@angular/router';
 import { CoreService } from '../../core/core.service';
 import { ContractsService } from '../../contracts/services/contracts.service';
 import { ProcedureService } from '../../procedures/services/procedure.service';
+import { DocumentService } from '../../documents/services/document.service';
 
 import { SmallProcedureInterface } from '../../procedures/data-types/small-procedure.interface';
 import { ProcedureFilter } from '../../procedures/data-types/procedure-filter';
 import { NavBarConfig } from '../../controls/nav-bar/nav-bar.control';
 import { ContractClauseRef } from '../../contracts/data-types/contract';
+import { Document, DocumentFilter } from '../../documents/data-types/document';
+
 
 @Component({
     selector: 'global-search',
     templateUrl: './gs-main-page.component.html',
-    styleUrls: ['./gs-main-page.component.scss'],
-   
+    styleUrls: ['./gs-main-page.component.scss']
+    
 })
 
 export class GlobalSearchMainPageComponent {   
@@ -29,6 +32,9 @@ export class GlobalSearchMainPageComponent {
     
     public clauses: ContractClauseRef[] = [];
     public clause: ContractClauseRef;
+
+    public documents: Document[] = [];
+    public documentURI ="https://steps-testing.azurewebsites.net/documents-library/documentos/AFINUGOABOD.pdf";
     
     private _keywords = '';    
     @Input()
@@ -44,7 +50,8 @@ export class GlobalSearchMainPageComponent {
     @Output() public onClose = new EventEmitter();
     
     constructor(private route: ActivatedRoute, private procedureService: ProcedureService,
-                private contractService: ContractsService,private core: CoreService) {
+                private contractService: ContractsService,private core: CoreService,
+                private documentService: DocumentService) {
         this.route.params.subscribe(params => {
             this.keywords = params['keywords'];
              this.main();     
@@ -52,13 +59,31 @@ export class GlobalSearchMainPageComponent {
     }  
 
     public selectOption(option: string) {        
-        this.selectedOption = option;    
+        this.selectedOption = option;  
+        
+        this.closeDetailsContainer();
+    }    
+
+    public closeGlobalSearch(): void {        
+        this.onClose.emit();
     }
 
     public selectProcedure(procedureUID: string): void {  
-        this.selectedProcedureUID = procedureUID;      
-        this.masterContainer = 'block-container';
-        this.isDetailsContainerVisible = true;
+        this.selectedProcedureUID = procedureUID; 
+
+        this.showDetailsContainer();        
+    }
+
+    public setSelectedClause(clause: ContractClauseRef): void {          
+        this.clause = clause;
+
+        this.showDetailsContainer();      
+    }
+
+    public setSelectedDocument(document: Document): void {
+        this.documentURI = document.url;
+
+        this.showDetailsContainer();           
     }
 
     public closeDetailsContainer(): void {      
@@ -66,21 +91,18 @@ export class GlobalSearchMainPageComponent {
         this.isDetailsContainerVisible = false;        
     }
 
-    public closeGlobalSearch(): void {        
-        this.onClose.emit();
-    }
-
-    public setSelectedClause(clause: ContractClauseRef): void {          
-        this.clause = clause;
+    private showDetailsContainer(): void {
         this.masterContainer = 'block-container';
-        this.isDetailsContainerVisible = true;          
-       
+        this.isDetailsContainerVisible = true;   
     }
 
     private async main() {  
-        this.closeDetailsContainer();      
+        this.closeDetailsContainer();  
+
         await this.loadProcedures(); 
         await this.loadContractClauses();
+        await this.loadDocuments();
+        
         this.fillNavBar();         
     }  
 
@@ -88,11 +110,12 @@ export class GlobalSearchMainPageComponent {
         this.navBarConfig = [];
         this.navBarConfig.push({ name:'procedures', displayText:'Trámites (' + this.procedures.length.toString() +')'});
         this.navBarConfig.push({ name:'contracts', displayText:'Contratos (' + this.clauses.length.toString() +')'});
+        this.navBarConfig.push({ name:'documents', displayText:'Documentos (' + this.documents.length.toString() +')'});
     }
 
     private cleanSelectedOption(): void {
         this.selectedOption = '';
-    }
+    }  
 
     private async loadProcedures() {
         let filter: ProcedureFilter = new ProcedureFilter(); 
@@ -112,6 +135,16 @@ export class GlobalSearchMainPageComponent {
             .then((x) => this.clauses = x)
             .catch((e) => this.core.http.showAndThrow(e, errMsg));
     }
+
+    private async loadDocuments() {
+
+        let filter = new DocumentFilter();   
+        filter.type = '';     
+        filter.keywords = this.keywords;    
+
+        await this.documentService.getDocuments(filter)
+                            .then((documents) => this.documents = documents);
+      }
 
      
 }

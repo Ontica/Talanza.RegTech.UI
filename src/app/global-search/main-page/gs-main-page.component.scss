@@ -54,3 +54,9 @@
   cursor: pointer;
 }
 
+.pdf-control {
+    height: calc(100vh - 210px); 
+    width:100%; 
+    overflow-y:hidden;
+}
+
