@@ -21,7 +21,9 @@ import { SearchControl } from './search/search.control';
 import { NavBarControl } from './nav-bar/nav-bar.control';
 import { ModalWindow } from './modal-window/modal-window';
 
+
 import { SafeHtmlPipe } from './pipes/safe-html/safe-html.pipe';
+import { SafeUrlPipe } from './pipes/safe-url/safe-url.pipe';
 
 /**
  * Do not specify providers for modules that might be imported by a lazy loaded module.
@@ -30,8 +32,8 @@ import { SafeHtmlPipe } from './pipes/safe-html/safe-html.pipe';
 @NgModule({
   imports: [RouterModule, CommonModule, FormsModule],
   declarations: [AutocompleteControl, Chips, RAGControl, CalendarControl, SelectControl,
-                 SafeHtmlPipe, SearchControl, NavBarControl, ModalWindow],
-  exports: [AutocompleteControl, Chips, SafeHtmlPipe,
+                 SafeHtmlPipe, SearchControl, NavBarControl, ModalWindow, SafeUrlPipe],
+  exports: [AutocompleteControl, Chips, SafeHtmlPipe, SafeUrlPipe, 
             RAGControl, CalendarControl, SelectControl, SearchControl, NavBarControl,
             ModalWindow] 
 })
