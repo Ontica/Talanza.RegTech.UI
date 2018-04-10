@@ -16,7 +16,7 @@ import {
     public selectedItem: string;
     public elementRef: any;
 
-    public items: string[] = ['AgregarFAQ'];
+    public items: string[] = ['FAQ'];
     
     public selectedUID: string;
 
