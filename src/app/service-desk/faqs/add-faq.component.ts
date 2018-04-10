@@ -23,7 +23,7 @@ export class AddFAQComponent  {
   
     public faq = EmptyFaq();
 
-    @Output() public onClose = new EventEmitter();
+    @Output() public onAddFaq = new EventEmitter();
 
     constructor(private faqService: FAQService) {}   
     
@@ -63,14 +63,14 @@ export class AddFAQComponent  {
     private addFAQ(): void {      
         this.faqService.addFAQ(this.faq)
                         .subscribe((x) => { alert("!Se agregó la pregunta!");
-                        this.onClose.emit();});
+                        this.onAddFaq.emit();});
                                     
     }
 
-    private close(): void {       
-        this.onClose.emit();
+    private cancel(): void {        
+        this.onAddFaq.emit();
     }
-
+    
     private cleanFAQ(): void {
         this.faq = EmptyFaq();
     }

@@ -9,12 +9,11 @@ import { Faq } from '../data-types/faq';
 })
 
 export class AddFAQModalWindowComponent {
-
-    public selectedTask: string = 'faq';
+  
     
     @Output() public onClose = new EventEmitter();
 
-    public close(): void {        
+    public close(): void {           
         this.onClose.emit();
     }
     
