@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Input, Output,  ViewEncapsulation  } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
+import 'rxjs/add/operator/toPromise';
+
 import { CoreService } from '../../core/core.service';
 import { ContractsService } from '../../contracts/services/contracts.service';
 import { ProcedureService } from '../../procedures/services/procedure.service';
@@ -160,9 +162,12 @@ export class GlobalSearchMainPageComponent {
                             .then((documents) => this.documents = documents);
     }
 
-      private loadFaqs(): void {
-        this.faqService.getFAQs(this.keywords)
-            .subscribe((FAQs) => { this.FAQs = FAQs;   });
+      private async loadFaqs() {
+       
+        await this.faqService.getFAQs(this.keywords)
+                             .map((FAQs) => { this.FAQs = FAQs; })
+                             .toPromise();
+           
     } 
     
 
