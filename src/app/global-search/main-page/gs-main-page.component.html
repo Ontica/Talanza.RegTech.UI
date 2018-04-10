@@ -11,6 +11,7 @@
          <procedures-table-view  *ngSwitchCase="'procedures'" [procedures]="procedures" (onSelectProcedure)="selectProcedure($event)"></procedures-table-view>         
          <contract-clauses-table *ngSwitchCase="'contracts'" [clauses]="clauses" (onSelectClause)="setSelectedClause($event)"></contract-clauses-table>
          <documents-table-view *ngSwitchCase="'documents'" [documentsList]="documents" (onSelectDocument)="setSelectedDocument($event)"></documents-table-view>
+         <faqs-table-view *ngSwitchCase="'FAQs'" [FAQs]="FAQs" (onSelectFAQ)="setSelectedFAQ($event)"></faqs-table-view>
       </div>       
    
   </div>
@@ -24,7 +25,8 @@
           </div>
           <div *ngSwitchCase="'documents'" class="pdf-control" >
             <pdf-viewer [documentURI]="documentURI"></pdf-viewer>
-          </div>         
+          </div>  
+          <faq *ngSwitchCase="'FAQs'" [faqUID]="FAQUid"></faq>       
       </div>      
   </div>
 </div>

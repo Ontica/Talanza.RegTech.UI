@@ -11,6 +11,12 @@ import { Component, Input } from '@angular/core';
 import { Faq } from '../data-types/faq';
 import { FAQService } from '../services/faq.service';
 
+const OPERATIONS: string[] = [
+     'Agregar FAQ',
+     
+   
+]
+  
 
 @Component({
     selector:'faq',
@@ -19,7 +25,7 @@ import { FAQService } from '../services/faq.service';
     providers:[FAQService]
 })
 
-export class FAQComponent  {
+export class FAQComponent {
 
     private _faqUID: string = '';
     @Input() 
@@ -33,17 +39,18 @@ export class FAQComponent  {
     }
 
     public faq: Faq;
-    public isOpenEditFAQWndow = false;
-    public isEditable = false;
-  
-    constructor(private faqService: FAQService) {}       
+    public isOpenFAQEditor= false;
+    public operations = OPERATIONS;
 
-    public openEditFAQWndow(): void {
-        this.isOpenEditFAQWndow = true;
-    } 
+    constructor(private faqService: FAQService) {}     
 
-    public closeUpdateFAQWindow(): void {
-        this.isOpenEditFAQWndow = false; 
+    public onOpenFAQEditor(): void {
+        this.isOpenFAQEditor = true;
+    }
+
+    public onEditedFAQ(): void {
+        this.isOpenFAQEditor = false;
+
         this.loadFaq(); 
     }
 
@@ -51,4 +58,10 @@ export class FAQComponent  {
        this.faqService.getFAQ(this.faqUID)
             .subscribe((faq) => { this.faq = faq;});
     }
+
+    public onChangeOperation(operation: string): void {
+       
+    }
+
+   
 }

@@ -5,19 +5,21 @@ import { CoreService } from '../../core/core.service';
 import { ContractsService } from '../../contracts/services/contracts.service';
 import { ProcedureService } from '../../procedures/services/procedure.service';
 import { DocumentService } from '../../documents/services/document.service';
+import { FAQService } from '../../service-desk/services/faq.service';
+
 
 import { SmallProcedureInterface } from '../../procedures/data-types/small-procedure.interface';
 import { ProcedureFilter } from '../../procedures/data-types/procedure-filter';
 import { NavBarConfig } from '../../controls/nav-bar/nav-bar.control';
 import { ContractClauseRef } from '../../contracts/data-types/contract';
 import { Document, DocumentFilter } from '../../documents/data-types/document';
+import { Faq } from '../../service-desk/data-types/faq';
 
 
 @Component({
     selector: 'global-search',
     templateUrl: './gs-main-page.component.html',
-    styleUrls: ['./gs-main-page.component.scss']
-    
+    styleUrls: ['./gs-main-page.component.scss']   
 })
 
 export class GlobalSearchMainPageComponent {   
@@ -34,7 +36,10 @@ export class GlobalSearchMainPageComponent {
     public clause: ContractClauseRef;
 
     public documents: Document[] = [];
-    public documentURI ="https://steps-testing.azurewebsites.net/documents-library/documentos/AFINUGOABOD.pdf";
+    public documentURI = '';
+
+    public FAQs: Faq[] = [];
+    public FAQUid = '' ;
     
     private _keywords = '';    
     @Input()
@@ -50,8 +55,8 @@ export class GlobalSearchMainPageComponent {
     @Output() public onClose = new EventEmitter();
     
     constructor(private route: ActivatedRoute, private procedureService: ProcedureService,
-                private contractService: ContractsService,private core: CoreService,
-                private documentService: DocumentService) {
+                private contractService: ContractsService, private core: CoreService,
+                private documentService: DocumentService, private faqService: FAQService ) {
         this.route.params.subscribe(params => {
             this.keywords = params['keywords'];
              this.main();     
@@ -86,6 +91,13 @@ export class GlobalSearchMainPageComponent {
         this.showDetailsContainer();           
     }
 
+    public setSelectedFAQ(FAQUid: string): void {        
+        this.FAQUid = FAQUid;
+
+        this.showDetailsContainer(); 
+        
+    }
+
     public closeDetailsContainer(): void {      
         this.masterContainer = 'centered-container';
         this.isDetailsContainerVisible = false;        
@@ -102,6 +114,7 @@ export class GlobalSearchMainPageComponent {
         await this.loadProcedures(); 
         await this.loadContractClauses();
         await this.loadDocuments();
+        await this.loadFaqs();
         
         this.fillNavBar();         
     }  
@@ -111,6 +124,7 @@ export class GlobalSearchMainPageComponent {
         this.navBarConfig.push({ name:'procedures', displayText:'Trámites (' + this.procedures.length.toString() +')'});
         this.navBarConfig.push({ name:'contracts', displayText:'Contratos (' + this.clauses.length.toString() +')'});
         this.navBarConfig.push({ name:'documents', displayText:'Documentos (' + this.documents.length.toString() +')'});
+        this.navBarConfig.push({ name:'FAQs', displayText:'FAQs (' + this.FAQs.length.toString() +')'});
     }
 
     private cleanSelectedOption(): void {
@@ -144,7 +158,13 @@ export class GlobalSearchMainPageComponent {
 
         await this.documentService.getDocuments(filter)
                             .then((documents) => this.documents = documents);
-      }
+    }
+
+      private loadFaqs(): void {
+        this.faqService.getFAQs(this.keywords)
+            .subscribe((FAQs) => { this.FAQs = FAQs;   });
+    } 
+    
 
      
 }

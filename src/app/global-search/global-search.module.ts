@@ -14,14 +14,17 @@ import { ProceduresModule } from '../procedures/procedures.module';
 import { ControlsModule } from '../controls/controls.module';
 import { ContractsModule }  from '../contracts/contracts.module';
 import { DocumentsModule } from '../documents/documents.module';
+import { ServiceDeskModule } from '../service-desk/service-desk.module'
 
 import { GlobalSearchRoutingModule } from './global-search-routing.module';
 
 import { GlobalSearchMainPageComponent } from './main-page/gs-main-page.component';
 
+
 import { ProcedureService } from  '../procedures/services/procedure.service';
 import { ContractsService } from '../contracts/services/contracts.service';
 import { DocumentService } from '../documents/services/document.service';
+import { FAQService } from '../service-desk/services/faq.service';
 
 
 /**
@@ -30,9 +33,9 @@ import { DocumentService } from '../documents/services/document.service';
 
 @NgModule({
 	imports: [GlobalSearchRoutingModule, CommonModule, FormsModule, ProceduresModule,
-		      ControlsModule, ContractsModule, DocumentsModule],
+		      ControlsModule, ContractsModule, DocumentsModule, ServiceDeskModule],
 	declarations: [GlobalSearchMainPageComponent],
 	exports: [GlobalSearchMainPageComponent],
-	providers:[ProcedureService, ContractsService, DocumentService]
+	providers:[ProcedureService, ContractsService, DocumentService, FAQService]
 })
 export class GlobalSearchModule { }

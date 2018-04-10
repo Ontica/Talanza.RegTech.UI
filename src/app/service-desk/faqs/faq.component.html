@@ -1,27 +1,26 @@
-<div class="faq-container">
+<div *ngIf="!isOpenFAQEditor" class="faq-container">
     <div>
         <div class="faq">
-           <span  style="float:right;"><a (click)="openEditFAQWndow()">Editar</a></span>
+           <span  style="float:right;"><a (click)="onOpenFAQEditor()">Editar</a></span>
         </div>        
     </div>
 
     <div>
         <div class="question">
             {{faq.question}}
-        </div>        
+        </div>             
     </div>
-    <div>
-        <div class="answer">
+    <div  class="answer">
+        <div>            
             {{faq.answer}} 
-        </div>        
+        </div>                
     </div>
     <br><br>
-
-    
+   
     <span class='section-text'>Referencias:</span>
     <div>
         <div class="answer">     
-
+           
         </div>
     </div>
 
@@ -33,6 +32,6 @@
     </div>
 
 </div>
-<div *ngIf="isOpenEditFAQWndow">
-    <add-faq-menu [faq]="faq" [operation]="'Update'" (onClose)="closeUpdateFAQWindow()"></add-faq-menu>
+<div *ngIf="isOpenFAQEditor">    
+    <update-faq [faq]="faq" (onClose)="onEditedFAQ()"></update-faq>     
 </div>

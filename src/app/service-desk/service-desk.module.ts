@@ -21,6 +21,8 @@ import { AddFAQComponent } from './faqs/add-faq.component';
 import { AddFAQMenuComponent } from './faqs/add-faq-menu.component';
 import { UpdateFAQComponent } from './faqs/update-faq.component';
 
+import { FAQsTableViewComponent } from './faqs/views/faqs-table-view.component';
+
 /**
  * Do not specify providers for modules that might be imported by a lazy loaded module.
  */
@@ -28,7 +30,9 @@ import { UpdateFAQComponent } from './faqs/update-faq.component';
 @NgModule({
   imports: [ServiceDeskRoutingModule, CommonModule, FormsModule, ControlsModule],
   declarations: [ServiceDeskMainPageComponent, TicketsComponent, FAQsComponent,
-                 FAQComponent, AddFAQComponent, AddFAQMenuComponent, UpdateFAQComponent],
-  exports: [ServiceDeskMainPageComponent, AddFAQComponent]
+                 FAQComponent, AddFAQComponent, AddFAQMenuComponent, UpdateFAQComponent,
+                 FAQsTableViewComponent],
+  exports: [ServiceDeskMainPageComponent, AddFAQComponent, FAQsTableViewComponent,
+             FAQComponent, AddFAQMenuComponent]
 })
 export class ServiceDeskModule { }
