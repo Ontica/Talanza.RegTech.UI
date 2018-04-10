@@ -1,0 +1,14 @@
+<i class="fa fa-plus-circle" aria-hidden="true" (click)="onClick()"></i>  
+<div class="container">  
+  <div class="items-div" *ngIf="isHideControl">    
+     <ul *ngFor="let item of items">
+       <li  (click)="onSelectItem(item)">          
+         {{item}}
+       </li> 
+     </ul>
+  </div>  
+</div>
+
+<div [ngSwitch]="selectedItem">
+    <add-faq-modal-window *ngSwitchCase="'AgregarFAQ'"  (onClose)="selectedItem=''"></add-faq-modal-window>
+</div>
