@@ -18,7 +18,7 @@ import { TicketsComponent } from './tickets/tickets.component';
 import { FAQsComponent } from './faqs/faqs.component';
 import { FAQComponent } from './faqs/faq.component';
 import { AddFAQComponent } from './faqs/add-faq.component';
-import { AddFAQMenuComponent } from './faqs/add-faq-menu.component';
+import { AddFAQModalWindowComponent } from './faqs/add-faq-modal.window.component';
 import { UpdateFAQComponent } from './faqs/update-faq.component';
 
 import { FAQsTableViewComponent } from './faqs/views/faqs-table-view.component';
@@ -30,9 +30,9 @@ import { FAQsTableViewComponent } from './faqs/views/faqs-table-view.component';
 @NgModule({
   imports: [ServiceDeskRoutingModule, CommonModule, FormsModule, ControlsModule],
   declarations: [ServiceDeskMainPageComponent, TicketsComponent, FAQsComponent,
-                 FAQComponent, AddFAQComponent, AddFAQMenuComponent, UpdateFAQComponent,
+                 FAQComponent, AddFAQComponent, AddFAQModalWindowComponent, UpdateFAQComponent,
                  FAQsTableViewComponent],
   exports: [ServiceDeskMainPageComponent, AddFAQComponent, FAQsTableViewComponent,
-             FAQComponent, AddFAQMenuComponent]
+             FAQComponent, AddFAQModalWindowComponent]
 })
 export class ServiceDeskModule { }
