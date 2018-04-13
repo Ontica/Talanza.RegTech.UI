@@ -13,9 +13,10 @@
 
   <div class="right-panel right">
     <div class="content" [ngSwitch]="selectedTask">
-      <div *ngIf="isDisplayFaq">
+      <meeting-report></meeting-report>
+      <!--<div *ngIf="isDisplayFaq">
         <faq *ngSwitchCase="'FAQ'" [faqUID]="FAQUid"></faq>
-      </div>
+      </div>-->
 
     </div>
   </div>

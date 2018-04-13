@@ -1,25 +1,24 @@
-import {
-    Component, ElementRef, EventEmitter,  Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter,
+         Input, Output } from '@angular/core';
     
   @Component({
-    selector: 'global-add',
+    selector: 'select-list',
     host: {
       '(document:click)': 'handleClick($event)'
     },
-    templateUrl: './global-add.component.html',
-    styleUrls: ['./global-add.component.scss']
+    templateUrl: './select-list.control.html',
+    styleUrls: ['./select-list.control.scss']
   })
   
-  export class GlobalAddComponent {
+  export class SelectListControl {
   
     public isHideControl = false;
-    public selectedItem: string;
+    
     public elementRef: any;
 
-    public items: string[] = ['FAQ', 'Ticket'];
+    @Input() items: string[];
+    @Output() selectedItem =  new EventEmitter<string>();
     
-    public selectedUID: string;
-
     constructor(myElement: ElementRef) {
         this.elementRef = myElement;
     }
@@ -29,8 +28,7 @@ import {
     }
 
     public onSelectItem(item: any): void {
-        this.selectedItem = item;
-
+        this.selectedItem.emit(item);
 
         this.isHideControl = !this.isHideControl;        
     }
@@ -49,10 +47,9 @@ import {
             // this.isHideControl = true;
         }
     }    
-
+/*
     private setSelectedItem(item: string): void {
         this.selectedItem = item;
     }
-
+*/
 }
-  

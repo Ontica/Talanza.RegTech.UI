@@ -1,0 +1,44 @@
+<table class="form">
+    <tr>
+        <td class="form-title form-title-text" colspan="6">Meeting Data</td>
+    </tr>
+    <tr>
+        <td>Name:</td>
+        <td colspan="5"><input type="text" class="text-box" [(ngModel)]="ticket.title"></td>        
+    </tr>
+    <tr>        
+        <td>Date:</td>        
+        <td>
+            <calendar-control  (onSelectedDate)="ticket.date=$event"></calendar-control>
+        </td>
+        <td >Start:</td>                                                       
+        <td><input style="width:120px" type="text" class="text-box" [(ngModel)]="ticket.startTime"></td>
+        <td><span>End:</span> </td>
+        <td class="text-align-right"><input style="width:120px" type="text" class="text-box" [(ngModel)]="ticket.endTime"></td>        
+    </tr>
+    <tr>
+        <td>Location:</td>
+        <td><select  class="select-box" [(ngModel)]="ticket.location">
+                <option value="">( Locations )</option>
+                <option value=">Vía telefónica">Vía telefónica</option>
+                <option value="Oficinas Shell MEX">Oficinas Shell MEX</option>
+                <option value="Oficinas Shell USA">Oficinas Shell USA</option>
+                <option value="Parque Hundido">Parque Hundido</option>
+                <option value="Oficina Covar">Oficina Covar</option>
+            </select>
+        </td>
+        
+    </tr>
+</table>
+<table class="form">    
+    <tr>
+        <td class="form-title form-title-text">Objective</td>
+    </tr>
+    <tr>
+        <td><textarea class="text-area" rows="5" cols="25" [(ngModel)]="ticket.description"></textarea></td>
+    </tr>    
+</table>
+<br><br>
+<div class="form text-align-right">    
+    <button type="buton" class="btn-warning" (click)="addMeetingData()">Add Meeting data</button>
+</div>

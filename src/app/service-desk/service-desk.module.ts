@@ -21,9 +21,16 @@ import { AddFAQComponent } from './faqs/add-faq.component';
 import { AddFAQModalWindowComponent } from './faqs/add-faq-modal.window.component';
 import { UpdateFAQComponent } from './faqs/update-faq.component';
 
+import { MeetingReportComponent } from './tickets/meeting-report/meeting-report.component';
+import { MeetingDataComponent } from './tickets/meeting-report/meeting-data.component';
+import { AssistiansComponent } from './tickets/meeting-report/assistians.component';
+import { SubjectComponent } from './tickets/meeting-report/subjects.component';
+import { RecomendationsComponent } from './tickets/meeting-report/recomendations.component';
+import { AddTicketModalWindowComponent } from './tickets/meeting-report/add-ticket-modal.window.component';
+
 import { FAQsTableViewComponent } from './faqs/views/faqs-table-view.component';
 
-/**
+/** 
  * Do not specify providers for modules that might be imported by a lazy loaded module.
  */
 
@@ -31,8 +38,9 @@ import { FAQsTableViewComponent } from './faqs/views/faqs-table-view.component';
   imports: [ServiceDeskRoutingModule, CommonModule, FormsModule, ControlsModule],
   declarations: [ServiceDeskMainPageComponent, TicketsComponent, FAQsComponent,
                  FAQComponent, AddFAQComponent, AddFAQModalWindowComponent, UpdateFAQComponent,
-                 FAQsTableViewComponent],
+                 FAQsTableViewComponent, MeetingReportComponent, MeetingDataComponent, AssistiansComponent,
+                 SubjectComponent, RecomendationsComponent, AddTicketModalWindowComponent],
   exports: [ServiceDeskMainPageComponent, AddFAQComponent, FAQsTableViewComponent,
-             FAQComponent, AddFAQModalWindowComponent]
+             FAQComponent, AddFAQModalWindowComponent, AddTicketModalWindowComponent]
 })
 export class ServiceDeskModule { }

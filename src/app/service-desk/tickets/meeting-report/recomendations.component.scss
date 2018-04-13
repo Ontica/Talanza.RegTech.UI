@@ -1,0 +1,15 @@
+@import "../../../../styles/general-styles";
+@import "../../../../styles/editor-window-style";
+.form {
+    width: 640px;
+    overflow-y: auto;
+}
+
+.form textarea { 
+    height: 100%;  
+}
+
+ol {
+    margin-top:0;
+    margin-bottom: 0;
+}

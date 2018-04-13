@@ -1,0 +1,21 @@
+<table class="form">
+    <tr>
+        <td colspan="5" class="form-title form-title-text" >3. Assistants</td>
+    </tr>
+    <tr *ngIf="assistiants.length > 0">
+        <td colspan="5">
+            <ol>
+                <li *ngFor="let assistiant of assistiants;">{{assistiant}}</li>
+            </ol>                     
+        </td>
+    </tr>
+    <tr>        
+        <td>Name:</td>        
+        <td>
+            <input type="text"  class="text-box" style="width:300px;" [(ngModel)]="assistiant">
+        </td>
+        <td>email:</td>
+        <td><input type="text" class="text-box" style="width:200px"></td>        
+        <td><button type="button" class="btn-warning" (click)="addAssistant()" >Add</button></td>
+    </tr>            
+</table>

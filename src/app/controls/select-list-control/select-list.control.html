@@ -1,0 +1,9 @@
+<div class="container">  
+    <div class="items-div" *ngIf="isHideControl">    
+       <ul *ngFor="let item of items">
+         <li  (click)="onSelectItem(item)">          
+           {{item}}
+         </li> 
+       </ul>
+    </div>  
+</div>
