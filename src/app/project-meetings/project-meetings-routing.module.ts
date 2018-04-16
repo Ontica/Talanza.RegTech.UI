@@ -13,14 +13,14 @@ import { SecurityGuardService } from '../core';
 
 import { MainLayoutComponent } from '../shared';
 
-import { MeetingReportComponent } from './main-page/meeting-report.component';
+import { ProjectMeetingComponent } from './main-page/project-meeting.component';
 
 @NgModule({
     imports: [
         RouterModule.forChild([
             {
                 path:'project-meetings', component:MainLayoutComponent , canActivate: [SecurityGuardService],
-                children: [{path: 'search', component: MeetingReportComponent }]
+                children: [{path: 'search', component: ProjectMeetingComponent }]
             }
         ])],
    exports: [RouterModule]     

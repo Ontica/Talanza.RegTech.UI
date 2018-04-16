@@ -9,12 +9,12 @@ import  { Component } from '@angular/core';
 
 
 @Component({
-    selector:'meeting-report',
-    templateUrl: './meeting-report.component.html',
-    styleUrls: ['./meeting-report.component.scss']
+    selector:'project-meeting',
+    templateUrl: './project-meeting.component.html',
+    styleUrls: ['./project-meeting.component.scss']
 })
 
-export class MeetingReportComponent {  
+export class ProjectMeetingComponent {  
     
     public selectedTask = "meetingData";
 

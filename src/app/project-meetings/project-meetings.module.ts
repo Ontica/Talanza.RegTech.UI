@@ -13,7 +13,7 @@ import { ControlsModule } from '../controls/controls.module';
 
 import { ProjectMeetingsRoutingModule } from './project-meetings-routing.module';
 
-import { MeetingReportComponent } from './main-page/meeting-report.component';
+import { ProjectMeetingComponent } from './main-page/project-meeting.component';
 
 import { MeetingDataComponent } from './parts/meeting-data.component';
 import { AssistiansComponent } from './parts/assistians.component';
@@ -27,8 +27,8 @@ import { AddTicketModalWindowComponent } from './views/add-ticket-modal.window.c
 
 @NgModule({
   imports: [ProjectMeetingsRoutingModule, CommonModule, FormsModule, ControlsModule],
-  declarations: [MeetingReportComponent, MeetingDataComponent, AssistiansComponent,
+  declarations: [ProjectMeetingComponent, MeetingDataComponent, AssistiansComponent,
     SubjectComponent, RecomendationsComponent, AddTicketModalWindowComponent],
-  exports: [MeetingReportComponent, AddTicketModalWindowComponent]
+  exports: [ProjectMeetingComponent, AddTicketModalWindowComponent]
 })
 export class ProjectMeetingsModule { }
