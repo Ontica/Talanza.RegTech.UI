@@ -19,7 +19,9 @@ import { MeetingDataComponent } from './parts/meeting-data.component';
 import { AssistiansComponent } from './parts/assistians.component';
 import { SubjectComponent } from './parts/subjects.component';
 import { RecomendationsComponent } from './parts/recomendations.component';
+import { AgreementsComponent } from './parts/agreements.component';
 import { AddTicketModalWindowComponent } from './views/add-ticket-modal.window.component';
+
 
 /** 
  * Do not specify providers for modules that might be imported by a lazy loaded module.
@@ -28,7 +30,8 @@ import { AddTicketModalWindowComponent } from './views/add-ticket-modal.window.c
 @NgModule({
   imports: [ProjectMeetingsRoutingModule, CommonModule, FormsModule, ControlsModule],
   declarations: [ProjectMeetingComponent, MeetingDataComponent, AssistiansComponent,
-    SubjectComponent, RecomendationsComponent, AddTicketModalWindowComponent],
+                 SubjectComponent, RecomendationsComponent, AddTicketModalWindowComponent, 
+                 AgreementsComponent],
   exports: [ProjectMeetingComponent, AddTicketModalWindowComponent]
 })
 export class ProjectMeetingsModule { }

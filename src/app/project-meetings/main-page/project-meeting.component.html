@@ -20,33 +20,7 @@
             <recomendations></recomendations>                          
             </div>
             <div *ngSwitchCase="'agreements'">
-                <table class="form">
-                        <tr>
-                            <td colspan="4" class="form-title form-title-text">Acuerdos</td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                        </tr>
-                        <tr>       
-                            <td colspan="4"><textarea class="text-area" rows="3" cols="25"></textarea></td>
-                        </tr>
-                        <tr>
-                            <td>Responables:</td>
-                            <td><select  class="select-box" style="width:360px">
-                                    <option value="">( Responsables )</option>
-                                    <option value="34234">Juan Manuel Gonzales</option>
-                                    <option value="34w4">José Luis Cardenas López</option>				
-                                </select>
-                            </td>
-                            <td>Deadline:</td>
-                            <td>
-                                <calendar-control  (onSelectedDate)="setSelectedDate($event)"></calendar-control>
-                            </td>
-                        </tr>    
-                        <tr>
-                            <td colspan="4" class="text-align-right"><button type="buton" class="btn-warning" (click)="addAgreement()">Agregar</button></td>
-                        </tr>    
-                    </table>
+                <agreements></agreements>
             </div>
 
 
