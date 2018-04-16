@@ -4,8 +4,7 @@
     </div>
    
     <div class="tab">
-          <button class="tab-links left-position" [disabled]="isDisabled" [class.selected]="selectedTask==='meetingData'" (click)="setSelectedTask('meetingData')">Informacion general</button>
-          <button class="tab-links left-position" [disabled]="isDisabled" [class.selected]="selectedTask==='subjects'" (click)="setSelectedTask('subjects')">Subjects</button>
+          <button class="tab-links left-position" [disabled]="isDisabled" [class.selected]="selectedTask==='meetingData'" (click)="setSelectedTask('meetingData')">Informacion general</button>         
           <button class="tab-links left-position" [disabled]="isDisabled" [class.selected]="selectedTask==='recomendations'" (click)="setSelectedTask('recomendations')">Recomendaciones</button>
           <button class="tab-links left-position" [disabled]="isDisabled" [class.selected]="selectedTask==='agreements'" (click)="setSelectedTask('agreements')">Acuerdos</button>
         <!--  <span *ngIf="config.isAddActivity">
@@ -15,18 +14,12 @@
         <br>
         <div class="form-frame" [ngSwitch]="selectedTask">
             <div *ngSwitchCase="'meetingData'">
-                <meeting-data></meeting-data>
-                       
-                        
+                <meeting-data></meeting-data>                      
+            </div>           
+            <div *ngSwitchCase="'recomendations'">
+            <recomendations></recomendations>                          
             </div>
-         <div *ngSwitchCase="'subjects'">
-                                   
-         </div>
-        <div *ngSwitchCase="'recomendations'">
-            <recomendations></recomendations>                             
-                        
-         </div>
-         <div *ngSwitchCase="'agreements'">
+            <div *ngSwitchCase="'agreements'">
                 <table class="form">
                         <tr>
                             <td colspan="4" class="form-title form-title-text">Acuerdos</td>
@@ -54,7 +47,7 @@
                             <td colspan="4" class="text-align-right"><button type="buton" class="btn-warning" (click)="addAgreement()">Agregar</button></td>
                         </tr>    
                     </table>
-         </div>
+            </div>
 
 
         </div>
