@@ -1,6 +1,6 @@
 <table class="form">
     <tr>
-        <td colspan="5" class="form-title form-title-text" >3. Assistants</td>
+        <td colspan="5" class="form-title form-title-text" >Participantes</td>
     </tr>
     <tr *ngIf="assistiants.length > 0">
         <td colspan="5">
@@ -10,12 +10,12 @@
         </td>
     </tr>
     <tr>        
-        <td>Name:</td>        
+        <td>Nombre:</td>        
         <td>
             <input type="text"  class="text-box" style="width:250px;" [(ngModel)]="assistiant">
         </td>
-        <td>email:</td>
+        <td>Correo:</td>
         <td><input type="text" class="text-box" style="width:200px"></td>        
-        <td><button type="button" class="btn-warning" (click)="addAssistant()" >Add</button></td>
+        <td><button type="button" class="btn-warning" (click)="addAssistant()" >Agragar</button></td>
     </tr>            
 </table>

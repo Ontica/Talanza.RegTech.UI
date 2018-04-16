@@ -4,10 +4,10 @@
     </div>
    
     <div class="tab">
-          <button class="tab-links left-position" [disabled]="isDisabled" [class.selected]="selectedTask==='meetingData'" (click)="setSelectedTask('meetingData')">Meeting data</button>
+          <button class="tab-links left-position" [disabled]="isDisabled" [class.selected]="selectedTask==='meetingData'" (click)="setSelectedTask('meetingData')">Informacion general</button>
           <button class="tab-links left-position" [disabled]="isDisabled" [class.selected]="selectedTask==='subjects'" (click)="setSelectedTask('subjects')">Subjects</button>
-          <button class="tab-links left-position" [disabled]="isDisabled" [class.selected]="selectedTask==='recomendations'" (click)="setSelectedTask('recomendations')">Recomendations</button>
-          <button class="tab-links left-position" [disabled]="isDisabled" [class.selected]="selectedTask==='agreements'" (click)="setSelectedTask('agreements')">Agreements</button>
+          <button class="tab-links left-position" [disabled]="isDisabled" [class.selected]="selectedTask==='recomendations'" (click)="setSelectedTask('recomendations')">Recomendaciones</button>
+          <button class="tab-links left-position" [disabled]="isDisabled" [class.selected]="selectedTask==='agreements'" (click)="setSelectedTask('agreements')">Acuerdos</button>
         <!--  <span *ngIf="config.isAddActivity">
           <button class="tab-links left-position" [disabled]="isDisabled" [class.selected]="selectedTask==='addActivity'" (click)="setSelectedTask('addActivity')">Agregar a un proyecto</button>
     </span>-->
@@ -29,7 +29,7 @@
          <div *ngSwitchCase="'agreements'">
                 <table class="form">
                         <tr>
-                            <td colspan="4" class="form-title form-title-text">6. Agreements</td>
+                            <td colspan="4" class="form-title form-title-text">Acuerdos</td>
                         </tr>
                         <tr>
                             <td></td>
@@ -38,9 +38,9 @@
                             <td colspan="4"><textarea class="text-area" rows="3" cols="25"></textarea></td>
                         </tr>
                         <tr>
-                            <td>Responsibles:</td>
+                            <td>Responables:</td>
                             <td><select  class="select-box" style="width:360px">
-                                    <option value="">( Responsible )</option>
+                                    <option value="">( Responsables )</option>
                                     <option value="34234">Juan Manuel Gonzales</option>
                                     <option value="34w4">José Luis Cardenas López</option>				
                                 </select>
@@ -51,7 +51,7 @@
                             </td>
                         </tr>    
                         <tr>
-                            <td colspan="4" class="text-align-right"><button type="buton" class="btn-warning" (click)="addAgreement()">Add Agreement</button></td>
+                            <td colspan="4" class="text-align-right"><button type="buton" class="btn-warning" (click)="addAgreement()">Agregar</button></td>
                         </tr>    
                     </table>
          </div>
