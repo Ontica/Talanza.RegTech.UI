@@ -20,6 +20,7 @@ import { TicketService } from '../../services/ticket.service';
 export class MeetingDataComponent {
     
     public ticket = EmptyTicket();
+    public isMeetingData = false;
 
     constructor(private ticketService: TicketService) {}
 
@@ -27,8 +28,10 @@ export class MeetingDataComponent {
         if (!this.validate()) {
             return;
         }
+
         await this.saveMeetingData();
-        alert("hola");
+        
+        this.isMeetingData = true;
         
     }
 
@@ -42,7 +45,7 @@ export class MeetingDataComponent {
     
     private async saveMeetingData() {
       await  this.ticketService.addTicket(this.ticket)
-                          .subscribe((x) => { console.log(x)});           
+                          .subscribe((x) => {  this.isMeetingData = true; });           
     }      
 
 }
