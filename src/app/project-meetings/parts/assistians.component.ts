@@ -7,8 +7,8 @@
  */
 
 import { Component } from '@angular/core';
-import { Ticket, EmptyTicket } from '../../data-types/ticket';
-import { TicketService } from '../../services/ticket.service';
+import { Ticket, EmptyTicket } from '../data-types/ticket';
+import { TicketService } from '../services/ticket.service';
 
 
  @Component({

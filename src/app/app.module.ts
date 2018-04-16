@@ -34,7 +34,7 @@ import { InboxModule } from './inbox/inbox.module';
 import { SharedModule } from './shared/shared.module';
 import { GlobalSearchModule } from './global-search/global-search.module';
 import { ServiceDeskModule } from './service-desk/service-desk.module';
-
+import { ProjectMeetingsModule } from './project-meetings/project-meetings.module';
 
 // App is our top level component
 import { AppComponent } from './app.component';
@@ -85,6 +85,7 @@ type StoreType = {
     ControlsModule,
     DocumentsModule,
     ProcessModule,
+    ProjectManagementModule,
     ProjectManagementModule,
     InboxModule,
     ServiceDeskModule,
