@@ -14,6 +14,8 @@ export class ServiceDeskMainPageComponent {
    
     public FAQUid = '';
 
+    public selectedTicketUID = '';
+
     public setSelectedTask(selectedTask: string): void {
         this.selectedTask = selectedTask; 
         this.FAQUid = '';

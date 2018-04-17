@@ -5,7 +5,7 @@
  * See LICENSE.txt in the project root for complete license information.
  *
  */
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 import { Ticket, EmptyTicket } from '../data-types/ticket';
 import { TicketService } from '../services/ticket.service';
@@ -21,6 +21,22 @@ export class MeetingDataComponent {
     
     public ticket = EmptyTicket();
     public isMeetingData = false;
+
+    private _ticketUID: string = "";
+    @Input() 
+    set ticketUID(ticketUID: string) {
+        this._ticketUID = ticketUID;       
+       if ((ticketUID === '') || (ticketUID === undefined) || (!ticketUID)) {
+            return;
+       }
+       this.loadTicket();
+       
+    }
+    get ticketUID(): string {
+        return this._ticketUID;
+    }
+
+    @Output() onLoadProjectMeeting = new EventEmitter<Ticket>();
 
     constructor(private ticketService: TicketService) {}
 
@@ -45,7 +61,16 @@ export class MeetingDataComponent {
     
     private async saveMeetingData() {
       await  this.ticketService.addTicket(this.ticket)
-                          .subscribe((x) => {  this.isMeetingData = true; });           
-    }      
+                          .subscribe((x) => {  this.isMeetingData = true;
+                                               this.onLoadProjectMeeting.emit(x); 
+                                            });           
+    }
+    
+    private async loadTicket() {
+        this.ticketService.getTicket(this.ticketUID)
+                          .subscribe((x)=> { this.ticket = x;
+                                             this.onLoadProjectMeeting.emit(x);
+                                           });
+    }
 
 }

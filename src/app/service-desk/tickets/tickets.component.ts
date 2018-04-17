@@ -43,7 +43,8 @@ export class TicketsComponent implements OnInit  {
     }
 
     public onSelectTicket(uid:string): void {
-        this.selectedTicketUid = uid;
+       this.selectedTicketUid = uid;        
+       
        this.onSelectedTicket.emit(uid);
     }
 

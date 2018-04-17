@@ -7,13 +7,13 @@
     </div>
     <div class="content" [ngSwitch]="selectedTask">
       <faqs *ngSwitchCase="'FAQ'" (onSelectedFAQ)="setSelectedFAQ($event)"></faqs>
-      <tickets *ngSwitchCase="'ticket'"></tickets>
+      <tickets *ngSwitchCase="'ticket'" (onSelectedTicket)="selectedTicketUID=$event"></tickets>
     </div>
   </div>
 
   <div class="right-panel right">
     <div class="content" [ngSwitch]="selectedTask">
-      <project-meeting></project-meeting>
+      <project-meeting [ticketUID]="selectedTicketUID"></project-meeting>
       <!--<div *ngIf="isDisplayFaq">
         <faq *ngSwitchCase="'FAQ'" [faqUID]="FAQUid"></faq>
       </div>-->

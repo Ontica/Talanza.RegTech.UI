@@ -45,7 +45,7 @@ export class TicketService {
     
     }
     
-    public getTicket(ticketUID): Observable<Ticket> {
+    public getTicket(ticketUID: string): Observable<Ticket> {
       let path = `v1/help-desk/tickets/${ticketUID}`;     
           
       return this.core.http
