@@ -7,38 +7,39 @@
  */
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
-import { Ticket, EmptyTicket } from '../data-types/ticket';
-import { TicketService } from '../services/ticket.service';
+import { Meeting, EmptyMeeting } from '../data-types/meeting';
+import { ProjectMeetingService } from '../services/project-meeting.service';
 
 @Component({
     selector: 'meeting-data',
     templateUrl: './meeting-data.component.html',
     styleUrls: ['./meeting-data.component.scss'],
-    providers:[TicketService]
+    providers:[ProjectMeetingService]
 })
 
 export class MeetingDataComponent {
     
-    public ticket = EmptyTicket();
+    public meeting = EmptyMeeting();
     public isMeetingData = false;
 
-    private _ticketUID: string = "";
+
+    private _meetingUID: string = "";
     @Input() 
-    set ticketUID(ticketUID: string) {
-        this._ticketUID = ticketUID;       
-       if ((ticketUID === '') || (ticketUID === undefined) || (!ticketUID)) {
+    set meetingUID(meetingUID: string) {
+        this._meetingUID = meetingUID;       
+       if ((meetingUID === '') || (meetingUID === undefined) || (!meetingUID)) {
             return;
        }
-       this.loadTicket();
+       this.loadMeeting();
        
     }
-    get ticketUID(): string {
-        return this._ticketUID;
+    get meetingUID(): string {
+        return this._meetingUID;
     }
 
-    @Output() onLoadProjectMeeting = new EventEmitter<Ticket>();
+    @Output() onLoadProjectMeeting = new EventEmitter<Meeting>();
 
-    constructor(private ticketService: TicketService) {}
+    constructor(private projectMeetingService: ProjectMeetingService) {}
 
     public async addMeetingData() {
         if (!this.validate()) {
@@ -49,10 +50,10 @@ export class MeetingDataComponent {
         
         this.isMeetingData = true;
         
-    }
+    }    
 
     private validate(): boolean {
-        if (this.ticket.title === '') {
+        if (this.meeting.title === '') {
             alert("El nombre de la reunión se encuentra en blanco");
             return false;
         }
@@ -60,15 +61,15 @@ export class MeetingDataComponent {
     }
     
     private async saveMeetingData() {
-      await  this.ticketService.addTicket(this.ticket)
+      await  this.projectMeetingService.addMeeting(this.meeting)
                           .subscribe((x) => {  this.isMeetingData = true;
                                                this.onLoadProjectMeeting.emit(x); 
                                             });           
     }
     
-    private async loadTicket() {
-        this.ticketService.getTicket(this.ticketUID)
-                          .subscribe((x)=> { this.ticket = x;
+    private async loadMeeting() {
+        this.projectMeetingService.getMeeting(this.meetingUID)
+                          .subscribe((x)=> { this.meeting = x;
                                              this.onLoadProjectMeeting.emit(x);
                                            });
     }

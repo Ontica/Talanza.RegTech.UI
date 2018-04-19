@@ -20,13 +20,13 @@ export class ProjectMeetingComponent {
     public selectedTask = "meetingData";
     public title = 'Agregar Reunión';
 
-    private _ticketUID: string = "";
+    private _meetingUID: string = "";
     @Input() 
-    set ticketUID(ticketUID: string) {       
-        this._ticketUID = ticketUID;        
+    set meetingUID(meetingUID: string) {       
+        this._meetingUID = meetingUID;        
     }
-    get ticketUID(): string {
-        return this._ticketUID;
+    get meetingUID(): string {
+        return this._meetingUID;
     }
 
     public setSelectedTask(selectedTask: string): void {
