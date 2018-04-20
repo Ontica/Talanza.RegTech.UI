@@ -21,10 +21,10 @@
         </td>                
     </tr>   
     <tr>
-        <td>Cliente:</td>
+        <td>Proyecto:</td>
         <td colspan="2"><select  class="select-box">
-                <option value="">( Cliente )</option>
-                <option value="shell">Shell</option>               
+                <option value="">( Proyectos )</option>                
+                <option *ngFor="let project of projects" [value]="project.uid">{{project.name}}</option>           
             </select>
         </td>
         <td ></td>

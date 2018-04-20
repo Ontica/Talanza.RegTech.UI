@@ -5,23 +5,27 @@
  * See LICENSE.txt in the project root for complete license information.
  *
  */
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
 
 import { Meeting, EmptyMeeting } from '../data-types/meeting';
 import { ProjectMeetingService } from '../services/project-meeting.service';
+
+
+import { ProjectService } from '../../project-management/services/project.service';
 
 @Component({
     selector: 'meeting-data',
     templateUrl: './meeting-data.component.html',
     styleUrls: ['./meeting-data.component.scss'],
-    providers:[ProjectMeetingService]
+    providers:[ProjectMeetingService, ProjectMeetingService]
 })
 
-export class MeetingDataComponent {
+export class MeetingDataComponent implements OnInit {
     
     public meeting = EmptyMeeting();
     public isMeetingData = false;
-   
+    
+    public projects: any[] = [];
 
     private _meetingUID: string = "";
     @Input() 
@@ -30,6 +34,7 @@ export class MeetingDataComponent {
        if ((meetingUID === '') || (meetingUID === undefined) || (!meetingUID)) {
             return;
        }
+       
        this.loadMeeting();
        
     }
@@ -39,8 +44,12 @@ export class MeetingDataComponent {
 
     @Output() onLoadProjectMeeting = new EventEmitter<Meeting>();
 
-    constructor(private projectMeetingService: ProjectMeetingService) {}
-
+    constructor(private projectMeetingService: ProjectMeetingService, 
+                private projectService: ProjectService) {}
+    
+    ngOnInit() {
+        this.loadProjectsList();
+    }
     public async doOperation() {
         if (!this.validate()) {
             return;
@@ -87,9 +96,15 @@ export class MeetingDataComponent {
         this.projectMeetingService.updateMeeting(this.meeting)
                           .subscribe((x)=> {
                                              this.onLoadProjectMeeting.emit(x);
-                           });
-                    
+                           });                    
+    }
 
+    private loadProjectsList() {
+      const error = 'Ocurrió un problema al leer la lista de proyectos.';
+      
+       this.projectService.getProjectList()
+                .subscribe((x) => { this.projects =x;}  ,
+                            () => { alert(error);});
     }
 
 }
