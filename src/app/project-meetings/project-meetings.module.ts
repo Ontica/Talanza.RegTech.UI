@@ -22,6 +22,8 @@ import { RecomendationsComponent } from './parts/recomendations.component';
 import { AgreementsComponent } from './parts/agreements.component';
 import { AddTicketModalWindowComponent } from './views/add-ticket-modal.window.component';
 
+import { MeetingsComponent } from './views/project-meetings.component';
+import { MeetingComponent } from  './views/meeting.component';
 
 /** 
  * Do not specify providers for modules that might be imported by a lazy loaded module.
@@ -31,7 +33,8 @@ import { AddTicketModalWindowComponent } from './views/add-ticket-modal.window.c
   imports: [ProjectMeetingsRoutingModule, CommonModule, FormsModule, ControlsModule],
   declarations: [ProjectMeetingComponent, MeetingDataComponent, AssistiansComponent,
                  SubjectComponent, RecomendationsComponent, AddTicketModalWindowComponent, 
-                 AgreementsComponent],
-  exports: [ProjectMeetingComponent, AddTicketModalWindowComponent]
+                 AgreementsComponent, MeetingsComponent, MeetingComponent],
+  exports: [ProjectMeetingComponent, AddTicketModalWindowComponent, MeetingsComponent,
+            MeetingComponent]
 })
 export class ProjectMeetingsModule { }
