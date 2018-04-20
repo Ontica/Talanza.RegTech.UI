@@ -15,9 +15,7 @@ table td:last-child {
   width: 100%;
 }
 
-button.btn {
-  background-color: $button-background-color;
-  color: $text-color;
+@mixin input-button-settings {
   font-size: $font-size-hint;
   border: $button-border;
   height: $button-height;
@@ -26,31 +24,36 @@ button.btn {
   height: 28px;
 }
 
-button.btn-cancel {
-  background-color: $cancel-color;
-  color: background-color;
-}
-
 button.btn-action {
+  @include  input-button-settings;
   background-color: $action-color;
   color: $white;
   font: $control-font;
   font-weight: normal;
-  font-size: 10pt;
-  height: 28px;
   border: 1px solid #cecece;
-  padding: 4pt;
+ 
 }
 
+button.btn {
+  @include  input-button-settings;
+  background-color: $button-background-color;
+  color: $text-color;  
+}
+
+button.btn-cancel {
+  @include input-button-settings;
+  background-color: $cancel-color;
+  color: $white;
+}
+
+
 button.btn-warning {
+  @include input-button-settings;
   background-color: $warning-color;
   color: $control-color;
   font: $control-font;
-  font-weight: normal;
-  font-size: 10pt;
-  height: 28px;
+  font-weight: normal;  
   border: 1px solid #cecece;
-  padding: 4pt;
 }
 
 @mixin input-settings {
