@@ -49,8 +49,11 @@
         <td><textarea class="text-area" rows="5" cols="25" [(ngModel)]="meeting.description"></textarea></td>
     </tr>    
 </table>  
-<div class="form text-align-right">    
-    <button type="buton" class="btn-warning" (click)="addMeetingData()">Crear reunión</button>
+<div class="form text-align-right">
+    <span style="padding-right: 40px;">
+        <button type="button" class="btn-cancel" (click)="cancel()">Canelar</button>  
+    </span>  
+    <button type="buton" class="btn-warning" (click)="doOperation()">Guardar cambios</button>
 </div>
 <ng-container *ngIf="isMeetingData"> 
     <assistians></assistians>

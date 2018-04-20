@@ -31,10 +31,10 @@ export class MeetingComponent {
 
     constructor(private projectMeetingService: ProjectMeetingService) {}
 
-    public closeEditMeetingWindow(): void {
-        this.isOpenEditMeetingWindow = true;
-
-        this.openMeeting();
+    public closeEditMeetingWindow(meeting: Meeting): void {
+        this.isOpenEditMeetingWindow = false;
+        
+        this.meeting = meeting;
     }
 
     private setMeetingStatus(): void {

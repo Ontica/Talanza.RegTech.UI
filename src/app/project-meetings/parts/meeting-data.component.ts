@@ -21,7 +21,7 @@ export class MeetingDataComponent {
     
     public meeting = EmptyMeeting();
     public isMeetingData = false;
-
+   
 
     private _meetingUID: string = "";
     @Input() 
@@ -41,16 +41,26 @@ export class MeetingDataComponent {
 
     constructor(private projectMeetingService: ProjectMeetingService) {}
 
-    public async addMeetingData() {
+    public async doOperation() {
         if (!this.validate()) {
             return;
         }
 
-        await this.saveMeetingData();
+        if (this.meetingUID === '') {
+            await this.saveMeetingData();
+        } else {
+            this.updateMeeting();
+        }
+        
         
         this.isMeetingData = true;
         
-    }    
+    }
+    
+    public cancel() {
+        this.loadMeeting();
+        this.onLoadProjectMeeting.emit(this.meeting); 
+    }
 
     private validate(): boolean {
         if (this.meeting.title === '') {
@@ -62,16 +72,24 @@ export class MeetingDataComponent {
     
     private async saveMeetingData() {
       await  this.projectMeetingService.addMeeting(this.meeting)
-                          .subscribe((x) => {  this.isMeetingData = true;
-                                               this.onLoadProjectMeeting.emit(x); 
+                          .subscribe((x) => {  this.onLoadProjectMeeting.emit(x);
+                                               this.isMeetingData = true;                                                
                                             });           
     }
     
     private async loadMeeting() {
         this.projectMeetingService.getMeeting(this.meetingUID)
                           .subscribe((x)=> { this.meeting = x;
+                          });
+    }
+
+    private updateMeeting() {       
+        this.projectMeetingService.updateMeeting(this.meeting)
+                          .subscribe((x)=> {
                                              this.onLoadProjectMeeting.emit(x);
-                                           });
+                           });
+                    
+
     }
 
 }
