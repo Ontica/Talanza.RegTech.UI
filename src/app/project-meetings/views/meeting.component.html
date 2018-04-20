@@ -1,0 +1,61 @@
+
+<div class="header text-align-left">
+    {{meeting.title}}
+</div>
+<div class="meeting-body">
+    <div class="meeting-general-info-data" *ngIf="!isOpenEditMeetingWindow">
+        <table>
+            <tr *ngIf="meeting.status === 'Opened'">
+                <td colspan="5">Información general</td>
+                <td><button class="right btn" (click)="isOpenEditMeetingWindow = true">Editar información general</button></td>
+            </tr>
+            <tr  *ngIf="meeting.status === 'Closed'">
+                <td colspan="6">Información general</td>            
+            </tr>
+            <tr>
+                <td class='label'>Nombre:</td>
+                <td colspan="5">{{meeting.title}}</td>
+            </tr>
+            <tr>        
+                <td class='label'>Fecha:</td>        
+                <td>{{meeting.date}}</td>
+                <td class='label'>Hora Inicio:</td>                                                       
+                <td>{{meeting.startTime}}</td>        
+                <td class='label'>Hora Termino:</td>
+                <td>{{meeting.endTime}}</td>                
+            </tr>
+            <tr>
+                <td class='label'>Projecto:</td>
+                <td >Shell</td>
+                <td class='label'>Ubicación:</td>
+                <td colspan="3">{{meeting.location}}</td>            
+            </tr>
+            <tr>
+                <td class='label'>status:</td>
+                <td colspan="5">{{meetingStatus}}</td>
+            </tr>
+        </table>
+        <table>    
+            <tr>
+                <td class="label">Objetivo:</td>        
+            </tr>     
+            <tr>
+                <td>{{meeting.description}}</td>
+            </tr>
+        </table> 
+    </div>
+    <div class="meeting-general-info-edit" *ngIf="isOpenEditMeetingWindow">
+        <meeting-data (onLoadProjectMeeting)="closeEditMeetingWindow()" [meetingUID]="meetingUID"></meeting-data>
+    </div>
+</div>
+
+<br>
+<div class="footer">
+    <span *ngIf="meeting.status === 'Opened'">
+        <button class="btn"  (click)="closeMeeting()">Cerrar la  reunion</button>      
+    </span>
+    <span  *ngIf="meeting.status === 'Closed'">
+        <button class="btn"  (click)="openMeeting()">Abrir la  reunion</button>                
+    </span>  
+    <button class="btn-cancel">Eliminar reunión</button>         
+</div>
