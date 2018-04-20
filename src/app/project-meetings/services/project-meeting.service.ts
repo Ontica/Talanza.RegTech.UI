@@ -73,11 +73,21 @@ export class ProjectMeetingService {
                  .catch((e) => this.core.http.showAndReturn(e, MeetingServiceErr.GET_MEETING_ERR, null)) 
     }
 
-    public addMeeting(ticket: Meeting) {
+    public addMeeting(meeting: Meeting) {
       let path = `v1/project-management/meetings`;  
 
       return this.core.http
-                      .post<any>(path, ticket)
+                      .post<any>(path, meeting)
+                      .catch((e) => 
+                              this.core.http.showAndReturn(e,MeetingServiceErr.POST_MEETING_ERR, null));
+    }
+
+    public updateMeeting(meeting: Meeting) {
+      
+     let path = `v1/project-management/meetings/${meeting.uid}`;  
+
+      return this.core.http
+                      .put<any>(path, meeting)
                       .catch((e) => 
                               this.core.http.showAndReturn(e,MeetingServiceErr.POST_MEETING_ERR, null));
     }
