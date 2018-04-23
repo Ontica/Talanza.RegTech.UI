@@ -2,7 +2,7 @@
   <div class="search-control">
     <search-control (onSearch)="search($event)"></search-control>
   </div>
-  <a class="right" (click)="isOpenAddMeetingWindow = true">+ Agregar reunión</a>
+  <a class="right" (click)="addMeeting()">+ Agregar reunión</a>
   <div class="filters-bar">
     <a [class.selected-filter]="filter === 'all'" (click)="onFilterBy('all')">Todos ({{openedMeetings.length + closedMeetings.length }})</a> |
     <a [class.selected-filter]="filter === 'opened'" (click)="onFilterBy('opened')">Abiertos ({{openedMeetings.length}})</a> |
@@ -38,6 +38,6 @@
     </ng-container>
   </ul>
 </div>
-<div *ngIf="isOpenAddMeetingWindow">
-<add-tickt-modal-window (onCloseTicket)="isOpenAddMeetingWindow = false"></add-tickt-modal-window>
+<div *ngIf="isOpenAddMeetingWindow">    
+<add-tickt-modal-window (onCloseTicket)="isOpenAddMeetingWindow = false" (onChageMeeting)="loadMeetings()"></add-tickt-modal-window>
 </div>

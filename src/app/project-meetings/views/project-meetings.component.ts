@@ -32,7 +32,19 @@ export class MeetingsComponent implements OnInit  {
     
     public isOpenAddMeetingWindow = false;
     
+    private _refresh: Meeting;;
+    @Input() 
+    set refresh(refresh: Meeting) {
+        this._refresh = refresh;        
+          this.loadOpenedMeetings();   
+          this.loadClosedMeetings();        
+    }
+    get refresh(): Meeting {
+        return this._refresh;
+    }
+
     @Output() public onSelectedMeeting = new EventEmitter<string>();
+    @Output() public onAddMeeting = new EventEmitter();
 
     constructor(private projectMeetingService: ProjectMeetingService) {}
 
@@ -53,6 +65,11 @@ export class MeetingsComponent implements OnInit  {
     public search(keywords: string): void {
         this.keywords = keywords; 
         this.loadMeetings();       
+    }
+
+    public addMeeting(): void {
+        //this.isOpenAddMeetingWindow = true;
+        this.onAddMeeting.emit();
     }
 
     private async loadMeetings() {
