@@ -51,10 +51,11 @@ export class MeetingDataComponent implements OnInit {
         this.loadProjectsList();
     }
     public async doOperation() {
+      
         if (!this.validate()) {
             return;
-        }       
-
+        }
+       
         if (this.meetingUID === '') {
             await this.saveMeetingData();
         } else {
@@ -87,6 +88,30 @@ export class MeetingDataComponent implements OnInit {
         return false;
     }
 
+    private validateMeetingDate(): boolean {
+        let today = new Date();
+        let meetingDate = new Date(this.meeting.date);
+       
+        if (meetingDate > today) {
+            alert("La fecha de termino no puede ser posterior al día de hoy");
+            return false;
+        } 
+
+        return false;
+    }
+
+    private validateIfEndTimeIsLessThanStartTime(): boolean {        
+        let startTime = new Date('01 01 2021 ' +   this.meeting.startTime);
+        let endTime = new Date('01 01 2021 ' +   this.meeting.endTime);
+
+        if (endTime.getTime() < startTime.getTime()) {
+         alert("La hora de término no pude ser anteriro que la hora de inicio");
+         return false;
+        }
+        
+        return true;
+    }
+
     private validate(): boolean {
         if (this.meeting.title === '') {
             alert("El nombre de la reunión se encuentra en blanco");
@@ -99,7 +124,13 @@ export class MeetingDataComponent implements OnInit {
         if (!this.validateTime(this.meeting.endTime)) {
             alert("La hora de término no tiene un formato valido hh:mm.");
             return false;
-        } 
+        }
+        if (!this.validateMeetingDate()) {
+            return false;
+        }
+        if (!this.validateIfEndTimeIsLessThanStartTime()) {
+            return false;
+        }
 
         return true;
     }
