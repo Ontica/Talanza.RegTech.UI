@@ -16,6 +16,10 @@ export class ServiceDeskMainPageComponent {
 
     public selectedTicketUID = '';
 
+    public meetingUpdated: any;
+
+    public onAddMeeting = false;
+
     public setSelectedTask(selectedTask: string): void {
         this.selectedTask = selectedTask; 
         this.FAQUid = '';
@@ -32,8 +36,22 @@ export class ServiceDeskMainPageComponent {
         
     }
 
-    
+    public notifyMeetingWasUpdate(meeting: any): void {        
+        this.meetingUpdated = meeting;
+        
+    }
 
-    
+    public addMeeting(): void {
+        this.selectedTicketUID = '';
+        this.onAddMeeting = true;
+    }
+
+    public selectedMeeting(meetingUID: string): void {
+        this.selectedTicketUID = meetingUID;
+        this.onAddMeeting = false;
+    }
+
+
+        
     
 }

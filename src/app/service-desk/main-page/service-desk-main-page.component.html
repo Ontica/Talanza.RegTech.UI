@@ -7,16 +7,21 @@
     </div>
     <div class="content" [ngSwitch]="selectedTask">
       <faqs *ngSwitchCase="'FAQ'" (onSelectedFAQ)="setSelectedFAQ($event)"></faqs>
-      <meetings *ngSwitchCase="'ticket'" (onSelectedMeeting)="selectedTicketUID=$event"></meetings>
+      <meetings *ngSwitchCase="'ticket'" [refresh]="meetingUpdated" 
+         (onAddMeeting)="addMeeting()"   (onSelectedMeeting)="selectedMeeting($event)"></meetings>
     </div>
   </div>
 
-  <div class="right-panel right">
-    <div class="content" [ngSwitch]="selectedTask">
+  <div class="right-panel right">      
+   <div class="content" [ngSwitch]="selectedTask">
      <div *ngSwitchCase="'ticket'">
        <ng-container *ngIf="selectedTicketUID !== ''">
-          <meeting [meetingUID]="selectedTicketUID"></meeting>
+          <meeting [meetingUID]="selectedTicketUID" (onUpdateMeeting)="notifyMeetingWasUpdate($event)"></meeting>
        </ng-container>
+       <div  style="padding-left:50px;"*ngIf="onAddMeeting">
+          <project-meeting (onChageMeeting)="notifyMeetingWasUpdate($event)"></project-meeting>
+       </div>
+       
      </div>
       
       <div *ngIf="isDisplayFaq">
