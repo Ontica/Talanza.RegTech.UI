@@ -22,8 +22,10 @@ export interface Project {
 
 export interface Participant {
     uid: string,
-    shortName: string
+    shortName: string,
+    email: string
 }
+
 export interface Topic {
     uid: string,
     name: string
@@ -46,7 +48,7 @@ export function EmptyMeeting() {
         controlNo: '',
         title: '',
         description: '',
-        project: null,
+        project: EmptyProject(),
         date: new Date,
         startTime: '',
         endTime: '',
@@ -60,6 +62,26 @@ export function EmptyMeeting() {
 
     return empty;   
 }
+
+export function EmptyProject() {
+    const empty: Project = {
+        uid: '',
+        name: ''
+    }
+
+    return empty;
+}
+
+export function EmptyParticipant() {
+    const empty: Participant = {
+        uid: '',
+        shortName: '',
+        email: ''
+    }
+
+    return empty;
+}
+
     
     
     

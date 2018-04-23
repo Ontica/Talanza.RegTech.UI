@@ -7,7 +7,7 @@
  */
 import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
 
-import { Meeting, EmptyMeeting } from '../data-types/meeting';
+import { Meeting, EmptyMeeting, Project } from '../data-types/meeting';
 import { ProjectMeetingService } from '../services/project-meeting.service';
 
 
@@ -17,7 +17,7 @@ import { ProjectService } from '../../project-management/services/project.servic
     selector: 'meeting-data',
     templateUrl: './meeting-data.component.html',
     styleUrls: ['./meeting-data.component.scss'],
-    providers:[ProjectMeetingService, ProjectMeetingService]
+    providers:[ProjectMeetingService, ProjectService]
 })
 
 export class MeetingDataComponent implements OnInit {
@@ -25,8 +25,8 @@ export class MeetingDataComponent implements OnInit {
     public meeting = EmptyMeeting();
     public isMeetingData = false;
     
-    public projects: any[] = [];
-
+    public projects: Project[] = [];
+   
     private _meetingUID: string = "";
     @Input() 
     set meetingUID(meetingUID: string) {
@@ -53,7 +53,7 @@ export class MeetingDataComponent implements OnInit {
     public async doOperation() {
         if (!this.validate()) {
             return;
-        }
+        }    
 
         if (this.meetingUID === '') {
             await this.saveMeetingData();
@@ -69,6 +69,10 @@ export class MeetingDataComponent implements OnInit {
     public cancel() {
         this.loadMeeting();
         this.onLoadProjectMeeting.emit(this.meeting); 
+    }
+
+    public onChangeProject(project: any): void {
+        
     }
 
     private validate(): boolean {
@@ -88,7 +92,8 @@ export class MeetingDataComponent implements OnInit {
     
     private async loadMeeting() {
         this.projectMeetingService.getMeeting(this.meetingUID)
-                          .subscribe((x)=> { this.meeting = x;
+                          .subscribe((x)=> {                      
+                              this.meeting = x;                              
                           });
     }
 
@@ -103,7 +108,7 @@ export class MeetingDataComponent implements OnInit {
       const error = 'Ocurrió un problema al leer la lista de proyectos.';
       
        this.projectService.getProjectList()
-                .subscribe((x) => { this.projects =x;}  ,
+                .subscribe((x) => { this.projects =x; }  ,
                             () => { alert(error);});
     }
 

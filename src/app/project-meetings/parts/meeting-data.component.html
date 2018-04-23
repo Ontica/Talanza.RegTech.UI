@@ -9,7 +9,7 @@
     <tr>        
         <td>Fecha:</td>        
         <td>
-            <calendar-control  (onSelectedDate)="meeting.date=$event"></calendar-control>
+            <calendar-control (onSelectedDate)="meeting.date=$event"></calendar-control>
         </td>
         <td>Inicio:</td>                                                       
         <td>
@@ -22,7 +22,7 @@
     </tr>   
     <tr>
         <td>Proyecto:</td>
-        <td colspan="2"><select  class="select-box">
+        <td colspan="2"><select #project  class="select-box" (change)="onChangeProject(project.value)">
                 <option value="">( Proyectos )</option>                
                 <option *ngFor="let project of projects" [value]="project.uid">{{project.name}}</option>           
             </select>
