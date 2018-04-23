@@ -5,8 +5,10 @@
  * See LICENSE.txt in the project root for complete license information.
  *
  */
-import  { Component, Input } from '@angular/core';
-import { MeetingReport } from '../data-types/ticket';
+import  { Component, EventEmitter, Input, Output } from '@angular/core';
+
+import { Meeting } from '../data-types/meeting';
+import { EventManager } from '@angular/platform-browser';
 
 
 @Component({
@@ -29,12 +31,15 @@ export class ProjectMeetingComponent {
         return this._meetingUID;
     }
 
+    @Output() onChageMeeting = new EventEmitter<Meeting>();
+
     public setSelectedTask(selectedTask: string): void {
         this.selectedTask = selectedTask;
     }
 
-    public loadProjectMeeting(projectMeeting: any): void {
+    public loadProjectMeeting(projectMeeting: Meeting): void {
         this.title = projectMeeting.title;
+        this.onChageMeeting.emit(projectMeeting);
     }
          
     
