@@ -15,14 +15,14 @@
         <td>
             <input style="width:40px;" type="text" class="text-box" maxlength="5" size="5" [(ngModel)]="meeting.startTime">
         </td>        
-        <td>Termino:</td>
+        <td>Término:</td>
         <td>
             <input style="width:40px" type="text" class="text-box" maxlength="5" size="5" [(ngModel)]="meeting.endTime">
         </td>                
     </tr>   
     <tr>
         <td>Proyecto:</td>
-        <td colspan="2"><select #project  class="select-box" (change)="onChangeProject(project.value)">
+        <td colspan="2"><select #project  class="select-box" (change)="onChangeProject(project.value)" [ngModel]="meeting.project.uid" >
                 <option value="">( Proyectos )</option>                
                 <option *ngFor="let project of projects" [value]="project.uid">{{project.name}}</option>           
             </select>
@@ -56,6 +56,6 @@
     <button type="buton" class="btn-warning" (click)="doOperation()">Guardar cambios</button>
 </div>
 <ng-container *ngIf="isMeetingData"> 
-    <assistians></assistians>
+    <assistians [meetingUID]="meetingUID"></assistians>
     <subjects></subjects>              
 </ng-container>

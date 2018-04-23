@@ -53,17 +53,16 @@ export class MeetingDataComponent implements OnInit {
     public async doOperation() {
         if (!this.validate()) {
             return;
-        }    
+        }       
 
         if (this.meetingUID === '') {
             await this.saveMeetingData();
         } else {
             this.updateMeeting();
-        }
-        
+        }        
         
         this.isMeetingData = true;
-        
+
     }
     
     public cancel() {
@@ -71,8 +70,21 @@ export class MeetingDataComponent implements OnInit {
         this.onLoadProjectMeeting.emit(this.meeting); 
     }
 
-    public onChangeProject(project: any): void {
-        
+    public onChangeProject(projectUId: string): void {
+        if (projectUId === '') {           
+            return;
+        }          
+
+        let index = this.projects.findIndex((x) => x.uid === projectUId);        
+        this.meeting.project = this.projects[index];         
+    }
+
+    private validateTime(time: string): boolean {
+       let regexp = new RegExp('^([01]?[0-9]|2[0-3]):[0-5][0-9]$');
+       if(regexp.test(time)) {
+          return true;
+       }        
+        return false;
     }
 
     private validate(): boolean {
@@ -80,13 +92,23 @@ export class MeetingDataComponent implements OnInit {
             alert("El nombre de la reunión se encuentra en blanco");
             return false;
         }
+        if (!this.validateTime(this.meeting.startTime)) {
+            alert("La hora de inicio no tiene un formato valido hh:mm.");
+            return false;
+        } 
+        if (!this.validateTime(this.meeting.endTime)) {
+            alert("La hora de término no tiene un formato valido hh:mm.");
+            return false;
+        } 
+
         return true;
     }
     
     private async saveMeetingData() {
       await  this.projectMeetingService.addMeeting(this.meeting)
                           .subscribe((x) => {  this.onLoadProjectMeeting.emit(x);
-                                               this.isMeetingData = true;                                                
+                                               this.isMeetingData = true; 
+                                               this.meetingUID = x.uid;                                               
                                             });           
     }
     
