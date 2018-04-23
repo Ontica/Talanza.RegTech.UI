@@ -1,4 +1,4 @@
-
+<div *ngIf="meeting.uid">
 <div class="header-bar text-align-left">
     {{meeting.title}}
 </div>
@@ -27,7 +27,7 @@
                 <td>{{meeting.endTime}}</td>      
             </tr>
             <tr>
-                <td class='label'>Projecto:</td>
+                <td class='label'>Proyecto:</td>
                 <td >Shell</td>
                 <td class='label'>Ubicación:</td>
                 <td>{{meeting.location}}</td>            
@@ -66,10 +66,13 @@
 <br>
 <div class="footer">
     <span *ngIf="meeting.status === 'Opened'">
-        <button class="btn"  (click)="closeMeeting()">Cerrar la  reunion</button>      
+        <button class="btn"  (click)="closeMeeting()">Cerrar la  reunion</button>
+        <span style="padding-left: 100px;">
+                <button class="btn-cancel" (click)="deleteMeeting()">Eliminar reunión</button> 
+        </span>    
     </span>
-    <span style="padding-right: 100px;" *ngIf="meeting.status === 'Closed'">
+    <span  *ngIf="meeting.status === 'Closed'">
         <button class="btn"  (click)="openMeeting()">Abrir la  reunion</button>                
-    </span>  
-    <button class="btn-cancel">Eliminar reunión</button>         
+    </span>   
+</div>
 </div>

@@ -63,20 +63,25 @@ export class MeetingComponent {
         this.projectMeetingService.closeMeeting(this.meeting.uid)
                                   .subscribe((x)=> {
                                         this.loadMeeting();   
-                                        this.isEditableMeetingParticipants = true;                               
+                                        this.isEditableMeetingParticipants = true;  
+                                        this.onUpdateMeeting.emit(this.meeting);                              
                                     })
     }
 
     private openMeeting(): void {
         this.projectMeetingService.openMeeting(this.meeting.uid)
                                   .subscribe((x)=> {
-                                      this.loadMeeting();                                      
+                                      this.loadMeeting(); 
+                                      this.onUpdateMeeting.emit(this.meeting);                                     
                                     })
     }
 
     private deleteMeeting(): void {
         this.projectMeetingService.deleteMeeting(this.meeting.uid)
-                                  .subscribe((x)=>{});
+                                  .subscribe((x)=>{
+                                      this.meeting = x; console.log(this.meeting);
+                                      this.onUpdateMeeting.emit(this.meeting); 
+                                      });
     }
 
 }
