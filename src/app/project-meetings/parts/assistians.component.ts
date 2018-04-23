@@ -33,6 +33,10 @@ import { ProjectMeetingService } from '../services/project-meeting.service';
     private _meetingUID = '';
     @Input()  
     set meetingUID(meetingUID: string) {
+        if (meetingUID === '') {
+            return;
+        }
+
         this._meetingUID = meetingUID;
 
         this.loadInitialValues();
