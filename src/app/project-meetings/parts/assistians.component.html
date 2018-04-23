@@ -1,21 +1,43 @@
+<div>Participantes</div>
+<table class="grid" >
+    <thead>
+        <tr>                
+            <th style='width:47%'>Nombre</th>            
+            <th style='width:47%'>Correo</th>
+            <th style="width:20pt"></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let participant of  participants">
+            <td style='width:47%'>{{participant.shortName}}</td>
+            <td style='width:47%'>{{participant.email}}</td>
+            <td style="width:20pt"><a *ngIf="!isReadOnly" class="delete-button"  (click)="onDeleteParticipantFromMeeting(participant.uid)"><i class="fa fa-trash"></i></a></td>                  
+        </tr>
+        <tr *ngIf="participants.length === 0">
+            <td colspan="3">La reunión no tiene participantes</td>
+        </tr>
+    </tbody>   
+</table>
+<div *ngIf="!isReadOnly">
 <table class="form">
     <tr>
-        <td colspan="5" class="form-title form-title-text" >Participantes</td>
-    </tr>
-    <tr *ngIf="assistiants.length > 0">
-        <td colspan="5">
-            <ol>
-                <li *ngFor="let assistiant of assistiants;">{{assistiant}}</li>
-            </ol>                     
+        <td><select  class="select-box" #selected (change)="onSelectedParticipant(selected.value)" [ngModel]="selectedParticipantUID" style="width:250px;">
+                <option value="">( Participantes disponibles )</option>
+                <option *ngFor="let participantAviable of participantsAviable" [value]="participantAviable.uid">{{participantAviable.shortName}}</option>
+                <option value=""></option>
+                <option value="addParticipant">Agregar participante</option>                           
+            </select>
         </td>
-    </tr>
-    <tr>        
-        <td>Nombre:</td>        
-        <td>
-            <input type="text"  class="text-box" style="width:250px;" [(ngModel)]="assistiant">
-        </td>
-        <td>Correo:</td>
-        <td><input type="text" class="text-box" style="width:200px"></td>        
-        <td><button type="button" class="btn-warning" (click)="addAssistant()" >Agragar</button></td>
-    </tr>            
+       <td><button class="btn-action" (click)="addParticipantToMeeting()">Agregar a la reunión</button></td>
+</tr>
 </table>
+<table *ngIf="isAddParticipantEditorVisible">
+    <tr>
+        <td>Nombre:</td>
+        <td><input type="text" class="text-box" style="width:250px;" [(ngModel)]="newParticipant.shortName"></td>
+        <td>Correo:</td>
+        <td><input type="text" class="text-box" style="width:200px" [(ngModel)]="newParticipant.email"></td>        
+        <td><button type="button" class="btn-warning" (click)="addParticipant()" >Agragar</button></td>
+    </tr>
+</table>
+</div>

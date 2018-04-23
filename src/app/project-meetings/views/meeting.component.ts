@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output  } from '@angular/core';
 
-import { Meeting } from '../data-types/meeting';
+import { Meeting, EmptyMeeting, Participant } from '../data-types/meeting';
 
 import { ProjectMeetingService } from '../services/project-meeting.service';
 
@@ -24,10 +24,14 @@ export class MeetingComponent {
         return this._meetingUID;
     }
 
-    public meeting: Meeting;
+    @Output() onUpdateMeeting = new EventEmitter<Meeting>();
+
+    public meeting: Meeting = EmptyMeeting();
     public meetingStatus = '';
 
     public isOpenEditMeetingWindow = false;
+
+    public isEditableMeetingParticipants = true;
 
     constructor(private projectMeetingService: ProjectMeetingService) {}
 
@@ -35,6 +39,8 @@ export class MeetingComponent {
         this.isOpenEditMeetingWindow = false;
         
         this.meeting = meeting;
+        
+        this.onUpdateMeeting.emit(this.meeting);
     }
 
     private setMeetingStatus(): void {
@@ -48,7 +54,7 @@ export class MeetingComponent {
     private loadMeeting() {
         this.projectMeetingService.getMeeting(this.meetingUID)
                           .subscribe((meeting)=> { 
-                              this.meeting = meeting; 
+                              this.meeting = meeting;                              
                               this.setMeetingStatus();                        
                             });
     }    
@@ -56,7 +62,8 @@ export class MeetingComponent {
     private closeMeeting(): void {
         this.projectMeetingService.closeMeeting(this.meeting.uid)
                                   .subscribe((x)=> {
-                                        this.loadMeeting();                                     
+                                        this.loadMeeting();   
+                                        this.isEditableMeetingParticipants = true;                               
                                     })
     }
 

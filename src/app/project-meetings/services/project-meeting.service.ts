@@ -9,10 +9,11 @@
  
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
+import { of } from 'rxjs/observable/of';
 
 import { CoreService } from '../../core/core.service';
 
-import { Meeting } from '../data-types/meeting';
+import { Meeting, Participant } from '../data-types/meeting';
 
 export enum MeetingServiceErr {
   GET_MEETING_OPENEND_ERR =
@@ -23,13 +24,17 @@ export enum MeetingServiceErr {
         '[GET_MEETINGS_ERR] Ocurrió un problema al leer la lista de meetings.',      
   GET_MEETING_ERR =
         '[GET_MEETING_ERR] Ocurrió un problema al leer la meeting.', 
+  GET_PARTICIPANTS_AVIABLE =
+        '[GET_PARTICIPANTS_AVIABLE] Ocurrió un problema al leer la lista de participantes disponibles del meeting.', 
   POST_CLOSE_MEETING_ERR =
         '[POST_CLOSE_MEETING_ERR] Ocurrió un problema al cerrar la meeting.',
   POST_OPEN_MEETING_ERR =
         '[POST_OPEN_MEETING_ERR] Ocurrió un problema al abrir la meeting.', 
+  POST_ADD_PARTICIPANT_MEETING_ERR = 
+        '[POST_ADD_PARTICIPANT_MEETING_ERR] Ocurrió un problema al guardar un participante en la meeting.', 
   DELETE_MEETING_ERR =
         '[DELETE_MEETING_ERR] Ocurrió un problema al eliminar la meeting.',      
-  
+        
 }
 
 @Injectable()
@@ -119,5 +124,35 @@ export class ProjectMeetingService {
                               this.core.http.showAndReturn(e,MeetingServiceErr.DELETE_MEETING_ERR, null));
     }
 
+    public getParticipantAvailable(meetingUID: string): Observable<Participant[]> {        
+      let path = `v1/project-management/meetings/${meetingUID}/participants/available`;
+
+      return this.core.http
+            .get<Participant[]>(path)
+            .catch((e) => 
+              this.core.http.showAndReturn(e,MeetingServiceErr.GET_PARTICIPANTS_AVIABLE, null));
+    }  
+    
+    public addParticipantToMeeting(meetingUID: string, participantUID: string) {
+      let path = `v1/project-management/meetings/${meetingUID}/participants`;
+
+      const body = {
+            participantUID: participantUID
+         }
+
+      return this.core.http
+            .post<any>(path,body)
+                      .catch((e) => 
+                              this.core.http.showAndReturn(e,MeetingServiceErr.POST_ADD_PARTICIPANT_MEETING_ERR, null));
+    }
+
+    public deleteParticipantFromMeeting(meetingUID: string, participantUID) {
+      let path = `v1/project-management/meetings/${meetingUID}/participants/${participantUID}`;
+
+      return this.core.http
+            .delete<any>(path)            
+            .catch((e) => 
+              this.core.http.showAndReturn(e,MeetingServiceErr.GET_PARTICIPANTS_AVIABLE, null));
+    }
 
 }

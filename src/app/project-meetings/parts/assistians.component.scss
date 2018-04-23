@@ -1,11 +1,14 @@
-@import "../../../styles/general-styles";
-@import "../../../styles/editor-window-style";
-ol {
-    margin-top:0;
-    margin-bottom: 0;
+@import "../../../styles/grid";
+
+table.grid {
+    width: 400px;
+}
+
+.delete-button i {
+    color: $cancel-color;
 }
 
 .form {
-    width: 100%;
+    width: 90%;
     overflow-y: auto;
 }
