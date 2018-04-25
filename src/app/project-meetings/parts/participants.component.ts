@@ -13,17 +13,14 @@ import { ProjectMeetingService } from '../services/project-meeting.service';
 
 
  @Component({
-     selector:'assistians',
-     templateUrl:'./assistians.component.html',
-     styleUrls: ['./assistians.component.scss'],
+     selector:'participants',
+     templateUrl:'./participants.component.html',
+     styleUrls: ['./participants.component.scss'],
      providers: [ProjectMeetingService] 
  })
 
- export class AssistiansComponent  {
-    
-    public assistiants: string[] = [];  
-    public assistiant = "";
-
+ export class ParticipantsComponent  {
+ 
     public participantsAviable: Participant[] = [];    
     public participants: Participant[] = [];
     public selectedParticipantUID:  string = "";

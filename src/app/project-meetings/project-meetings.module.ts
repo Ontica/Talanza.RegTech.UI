@@ -16,7 +16,7 @@ import { ProjectMeetingsRoutingModule } from './project-meetings-routing.module'
 import { ProjectMeetingComponent } from './main-page/project-meeting.component';
 
 import { MeetingDataComponent } from './parts/meeting-data.component';
-import { AssistiansComponent } from './parts/assistians.component';
+import { ParticipantsComponent } from './parts/participants.component';
 import { SubjectComponent } from './parts/subjects.component';
 import { RecomendationsComponent } from './parts/recomendations.component';
 import { AgreementsComponent } from './parts/agreements.component';
@@ -31,7 +31,7 @@ import { MeetingComponent } from  './views/meeting.component';
 
 @NgModule({
   imports: [ProjectMeetingsRoutingModule, CommonModule, FormsModule, ControlsModule],
-  declarations: [ProjectMeetingComponent, MeetingDataComponent, AssistiansComponent,
+  declarations: [ProjectMeetingComponent, MeetingDataComponent, ParticipantsComponent,
                  SubjectComponent, RecomendationsComponent, AddTicketModalWindowComponent, 
                  AgreementsComponent, MeetingsComponent, MeetingComponent],
   exports: [ProjectMeetingComponent, AddTicketModalWindowComponent, MeetingsComponent,

@@ -53,7 +53,7 @@
        
     <table>
             <tr>
-                <td><assistians [meetingUID]="meetingUID" [isReadOnly]="isEditableMeetingParticipants"></assistians></td>
+                <td><participants [meetingUID]="meetingUID" [isReadOnly]="isEditableMeetingParticipants"></participants></td>
                 <td *ngIf="meeting.status === 'Opened'">
                     <button class="right btn" *ngIf="isEditableMeetingParticipants" (click)="isEditableMeetingParticipants = false">Editar participantes</button>
                     <button class="right btn" *ngIf="!isEditableMeetingParticipants" (click)="isEditableMeetingParticipants = true">Cancelar</button>
