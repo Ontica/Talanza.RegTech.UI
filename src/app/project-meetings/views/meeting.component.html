@@ -47,7 +47,7 @@
         </table> 
     </div>
     <div class="meeting-general-info-edit" *ngIf="isOpenEditMeetingWindow">
-        <meeting-data (onLoadProjectMeeting)="closeEditMeetingWindow($event)" [meetingUID]="meetingUID"></meeting-data>
+        <meeting-root (onLoadProjectMeeting)="closeEditMeetingWindow($event)" [meetingUID]="meetingUID"></meeting-root>
     </div>
     <br>
        

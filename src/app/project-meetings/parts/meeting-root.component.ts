@@ -14,13 +14,13 @@ import { ProjectMeetingService } from '../services/project-meeting.service';
 import { ProjectService } from '../../project-management/services/project.service';
 
 @Component({
-    selector: 'meeting-data',
-    templateUrl: './meeting-data.component.html',
-    styleUrls: ['./meeting-data.component.scss'],
+    selector: 'meeting-root',
+    templateUrl: './meeting-root.component.html',
+    styleUrls: ['./meeting-root.component.scss'],
     providers:[ProjectMeetingService, ProjectService]
 })
 
-export class MeetingDataComponent implements OnInit {
+export class MeetingRootComponent implements OnInit {
     
     public meeting = EmptyMeeting();
     public isMeetingData = false;
