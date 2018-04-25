@@ -42,7 +42,7 @@ export class MeetingRootComponent implements OnInit {
         return this._meetingUID;
     }
 
-    @Output() onLoadProjectMeeting = new EventEmitter<Meeting>();
+    @Output() onUpdateMeeting = new EventEmitter<Meeting>();
 
     constructor(private projectMeetingService: ProjectMeetingService, 
                 private projectService: ProjectService) {}
@@ -55,8 +55,8 @@ export class MeetingRootComponent implements OnInit {
         if (!this.validate()) {
             return;
         }
-       
-        if (this.meetingUID === '') {
+      
+        if (this.meetingUID === '') {           
             await this.saveMeetingData();
         } else {
             this.updateMeeting();
@@ -68,7 +68,7 @@ export class MeetingRootComponent implements OnInit {
     
     public cancel() {
         this.loadMeeting();
-        this.onLoadProjectMeeting.emit(this.meeting); 
+        this.onUpdateMeeting.emit(this.meeting); 
     }
 
     public onChangeProject(projectUId: string): void {
@@ -97,7 +97,7 @@ export class MeetingRootComponent implements OnInit {
             return false;
         } 
 
-        return false;
+        return true;
     }
 
     private validateIfEndTimeIsLessThanStartTime(): boolean {        
@@ -137,9 +137,9 @@ export class MeetingRootComponent implements OnInit {
     
     private async saveMeetingData() {
       await  this.projectMeetingService.addMeeting(this.meeting)
-                          .subscribe((x) => {  this.onLoadProjectMeeting.emit(x);
+                          .subscribe((x) => {  this.onUpdateMeeting.emit(x);
                                                this.isMeetingData = true; 
-                                               this.meetingUID = x.uid;                                               
+                                               this.meetingUID = x.uid;                                                 
                                             });           
     }
     
@@ -153,7 +153,7 @@ export class MeetingRootComponent implements OnInit {
     private updateMeeting() {       
         this.projectMeetingService.updateMeeting(this.meeting)
                           .subscribe((x)=> {
-                                             this.onLoadProjectMeeting.emit(x);
+                                             this.onUpdateMeeting.emit(x);
                            });                    
     }
 

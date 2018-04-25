@@ -9,8 +9,8 @@
     <tr>        
         <td>Fecha:</td>        
         <td>
-            <calendar-control 
-             [config]="{ date:meeting.date | date: 'dd-MM-yyyy'}"></calendar-control>
+            <calendar-control (onSelectedDate)="meeting.date=$event"
+            [config]="{ date:meeting.date | date: 'dd-MM-yyyy'}"></calendar-control>
         </td>
         <td>Inicio:</td>                                                       
         <td>
