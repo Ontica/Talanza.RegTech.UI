@@ -9,7 +9,8 @@
     <tr>        
         <td>Fecha:</td>        
         <td>
-            <calendar-control (onSelectedDate)="meeting.date=$event"></calendar-control>
+            <calendar-control 
+             [config]="{ date:meeting.date | date: 'dd-MM-yyyy'}"></calendar-control>
         </td>
         <td>Inicio:</td>                                                       
         <td>
@@ -51,7 +52,7 @@
 </table>  
 <div class="form text-align-right">
     <span style="padding-right: 40px;">
-        <button type="button" class="btn-cancel" (click)="cancel()">Canelar</button>  
+        <button type="button" class="btn" (click)="cancel()">Canelar</button>  
     </span>  
     <button type="buton" class="btn-warning" (click)="doOperation()">Guardar cambios</button>
 </div>
