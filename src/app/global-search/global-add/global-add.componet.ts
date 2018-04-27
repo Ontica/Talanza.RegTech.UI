@@ -16,7 +16,7 @@ import {
     public selectedItem: string;
     public elementRef: any;
 
-    public items: string[] = ['FAQ', 'Ticket'];
+    public items: string[] = ['FAQ', 'Reunión'];
     
     public selectedUID: string;
 

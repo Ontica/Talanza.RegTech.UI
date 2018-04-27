@@ -31,16 +31,17 @@ export class ProjectMeetingComponent {
         return this._meetingUID;
     }
 
-    @Output() onChageMeeting = new EventEmitter<Meeting>();
+    @Output() onUpdateMeeting = new EventEmitter<Meeting>();
 
     public setSelectedTask(selectedTask: string): void {
         this.selectedTask = selectedTask;
     }
 
-    public loadProjectMeeting(projectMeeting: Meeting): void {
+    public updateMeetingData(projectMeeting: Meeting): void {
         this.title = projectMeeting.title;
-        this.onChageMeeting.emit(projectMeeting);
+
+        this.onUpdateMeeting.emit(projectMeeting);
     }
-         
+            
     
 }

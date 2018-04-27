@@ -15,12 +15,12 @@ import { ProjectMeetingsRoutingModule } from './project-meetings-routing.module'
 
 import { ProjectMeetingComponent } from './main-page/project-meeting.component';
 
-import { MeetingDataComponent } from './parts/meeting-data.component';
-import { AssistiansComponent } from './parts/assistians.component';
+import { MeetingRootComponent } from './parts/meeting-root.component';
+import { ParticipantsComponent } from './parts/participants.component';
 import { SubjectComponent } from './parts/subjects.component';
 import { RecomendationsComponent } from './parts/recomendations.component';
 import { AgreementsComponent } from './parts/agreements.component';
-import { AddTicketModalWindowComponent } from './views/add-ticket-modal.window.component';
+import { AddMeetingModalWindowComponent } from './views/add-meeting-modal.window.component';
 
 import { MeetingsComponent } from './views/project-meetings.component';
 import { MeetingComponent } from  './views/meeting.component';
@@ -31,10 +31,10 @@ import { MeetingComponent } from  './views/meeting.component';
 
 @NgModule({
   imports: [ProjectMeetingsRoutingModule, CommonModule, FormsModule, ControlsModule],
-  declarations: [ProjectMeetingComponent, MeetingDataComponent, AssistiansComponent,
-                 SubjectComponent, RecomendationsComponent, AddTicketModalWindowComponent, 
+  declarations: [ProjectMeetingComponent, MeetingRootComponent, ParticipantsComponent,
+                 SubjectComponent, RecomendationsComponent, AddMeetingModalWindowComponent, 
                  AgreementsComponent, MeetingsComponent, MeetingComponent],
-  exports: [ProjectMeetingComponent, AddTicketModalWindowComponent, MeetingsComponent,
+  exports: [ProjectMeetingComponent, AddMeetingModalWindowComponent, MeetingsComponent,
             MeetingComponent]
 })
 export class ProjectMeetingsModule { }

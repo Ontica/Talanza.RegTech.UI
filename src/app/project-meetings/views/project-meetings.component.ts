@@ -32,15 +32,15 @@ export class MeetingsComponent implements OnInit  {
     
     public isOpenAddMeetingWindow = false;
     
-    private _refresh: Meeting;;
+    private _updatedMeeting: Meeting;;
     @Input() 
-    set refresh(refresh: Meeting) {
-        this._refresh = refresh;        
+    set updatedMeeting(updatedMeeting: Meeting) {
+        this._updatedMeeting = updatedMeeting;        
           this.loadOpenedMeetings();   
           this.loadClosedMeetings();        
     }
-    get refresh(): Meeting {
-        return this._refresh;
+    get updatedMeeting(): Meeting {
+        return this._updatedMeeting;
     }
 
     @Output() public onSelectedMeeting = new EventEmitter<string>();

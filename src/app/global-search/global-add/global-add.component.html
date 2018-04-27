@@ -11,5 +11,5 @@
 
 <div [ngSwitch]="selectedItem">
     <add-faq-modal-window *ngSwitchCase="'FAQ'"  (onClose)="selectedItem=''"></add-faq-modal-window>
-    <add-tickt-modal-window *ngSwitchCase="'Ticket'" (onCloseTicket)="selectedItem=''"> </add-tickt-modal-window>
+    <add-meeting-modal-window *ngSwitchCase="'Ticket'" (onCloseTicket)="selectedItem=''"> </add-meeting-modal-window>
 </div>

@@ -39,5 +39,5 @@
   </ul>
 </div>
 <div *ngIf="isOpenAddMeetingWindow">    
-<add-tickt-modal-window (onCloseTicket)="isOpenAddMeetingWindow = false" (onChageMeeting)="loadMeetings()"></add-tickt-modal-window>
+<add-meeting-modal-window (onCloseTicket)="isOpenAddMeetingWindow = false" (onChageMeeting)="loadMeetings()"></add-meeting-modal-window>
 </div>

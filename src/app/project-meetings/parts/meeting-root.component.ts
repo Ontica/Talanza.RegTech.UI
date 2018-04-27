@@ -14,13 +14,13 @@ import { ProjectMeetingService } from '../services/project-meeting.service';
 import { ProjectService } from '../../project-management/services/project.service';
 
 @Component({
-    selector: 'meeting-data',
-    templateUrl: './meeting-data.component.html',
-    styleUrls: ['./meeting-data.component.scss'],
+    selector: 'meeting-root',
+    templateUrl: './meeting-root.component.html',
+    styleUrls: ['./meeting-root.component.scss'],
     providers:[ProjectMeetingService, ProjectService]
 })
 
-export class MeetingDataComponent implements OnInit {
+export class MeetingRootComponent implements OnInit {
     
     public meeting = EmptyMeeting();
     public isMeetingData = false;
@@ -42,7 +42,7 @@ export class MeetingDataComponent implements OnInit {
         return this._meetingUID;
     }
 
-    @Output() onLoadProjectMeeting = new EventEmitter<Meeting>();
+    @Output() onUpdateMeeting = new EventEmitter<Meeting>();
 
     constructor(private projectMeetingService: ProjectMeetingService, 
                 private projectService: ProjectService) {}
@@ -51,11 +51,12 @@ export class MeetingDataComponent implements OnInit {
         this.loadProjectsList();
     }
     public async doOperation() {
+      
         if (!this.validate()) {
             return;
-        }       
-
-        if (this.meetingUID === '') {
+        }
+      
+        if (this.meetingUID === '') {           
             await this.saveMeetingData();
         } else {
             this.updateMeeting();
@@ -67,7 +68,7 @@ export class MeetingDataComponent implements OnInit {
     
     public cancel() {
         this.loadMeeting();
-        this.onLoadProjectMeeting.emit(this.meeting); 
+        this.onUpdateMeeting.emit(this.meeting); 
     }
 
     public onChangeProject(projectUId: string): void {
@@ -87,6 +88,30 @@ export class MeetingDataComponent implements OnInit {
         return false;
     }
 
+    private validateMeetingDate(): boolean {
+        let today = new Date();
+        let meetingDate = new Date(this.meeting.date);
+       
+        if (meetingDate > today) {
+            alert("La fecha de termino no puede ser posterior al día de hoy");
+            return false;
+        } 
+
+        return true;
+    }
+
+    private validateIfEndTimeIsLessThanStartTime(): boolean {        
+        let startTime = new Date('01 01 2021 ' +   this.meeting.startTime);
+        let endTime = new Date('01 01 2021 ' +   this.meeting.endTime);
+
+        if (endTime.getTime() < startTime.getTime()) {
+         alert("La hora de término no pude ser anteriro que la hora de inicio");
+         return false;
+        }
+        
+        return true;
+    }
+
     private validate(): boolean {
         if (this.meeting.title === '') {
             alert("El nombre de la reunión se encuentra en blanco");
@@ -99,16 +124,22 @@ export class MeetingDataComponent implements OnInit {
         if (!this.validateTime(this.meeting.endTime)) {
             alert("La hora de término no tiene un formato valido hh:mm.");
             return false;
-        } 
+        }
+        if (!this.validateMeetingDate()) {
+            return false;
+        }
+        if (!this.validateIfEndTimeIsLessThanStartTime()) {
+            return false;
+        }
 
         return true;
     }
     
     private async saveMeetingData() {
       await  this.projectMeetingService.addMeeting(this.meeting)
-                          .subscribe((x) => {  this.onLoadProjectMeeting.emit(x);
+                          .subscribe((x) => {  this.onUpdateMeeting.emit(x);
                                                this.isMeetingData = true; 
-                                               this.meetingUID = x.uid;                                               
+                                               this.meetingUID = x.uid;                                                 
                                             });           
     }
     
@@ -122,7 +153,7 @@ export class MeetingDataComponent implements OnInit {
     private updateMeeting() {       
         this.projectMeetingService.updateMeeting(this.meeting)
                           .subscribe((x)=> {
-                                             this.onLoadProjectMeeting.emit(x);
+                                             this.onUpdateMeeting.emit(x);
                            });                    
     }
 

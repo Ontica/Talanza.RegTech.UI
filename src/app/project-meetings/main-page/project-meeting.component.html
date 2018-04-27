@@ -14,7 +14,7 @@
         <br>
         <div class="form-frame" [ngSwitch]="selectedTask">
             <div *ngSwitchCase="'meetingData'">
-                <meeting-data [meetingUID]="meetingUID" (onLoadProjectMeeting)="loadProjectMeeting($event)"></meeting-data>                      
+                <meeting-root [meetingUID]="meetingUID" (onUpdateMeeting)="updateMeetingData($event)"></meeting-root>                      
             </div>           
             <div *ngSwitchCase="'recomendations'">
             <recomendations></recomendations>                          

@@ -7,7 +7,7 @@
     </div>
     <div class="content" [ngSwitch]="selectedTask">
       <faqs *ngSwitchCase="'FAQ'" (onSelectedFAQ)="setSelectedFAQ($event)"></faqs>
-      <meetings *ngSwitchCase="'ticket'" [refresh]="meetingUpdated" 
+      <meetings *ngSwitchCase="'ticket'" [updatedMeeting]="meetingUpdated" 
          (onAddMeeting)="addMeeting()"   (onSelectedMeeting)="selectedMeeting($event)"></meetings>
     </div>
   </div>
@@ -19,7 +19,7 @@
           <meeting [meetingUID]="selectedTicketUID" (onUpdateMeeting)="notifyMeetingWasUpdate($event)"></meeting>
        </ng-container>
        <div  style="padding-left:50px;"*ngIf="onAddMeeting">
-          <project-meeting (onChageMeeting)="notifyMeetingWasUpdate($event)"></project-meeting>
+          <project-meeting (onUpdateMeeting)="notifyMeetingWasUpdate($event)" ></project-meeting>
        </div>
        
      </div>

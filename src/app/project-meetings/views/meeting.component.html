@@ -47,16 +47,16 @@
         </table> 
     </div>
     <div class="meeting-general-info-edit" *ngIf="isOpenEditMeetingWindow">
-        <meeting-data (onLoadProjectMeeting)="closeEditMeetingWindow($event)" [meetingUID]="meetingUID"></meeting-data>
+        <meeting-root (onUpdateMeeting)="closeEditMeetingWindow($event)" [meetingUID]="meetingUID"></meeting-root>
     </div>
     <br>
        
     <table>
             <tr>
-                <td><assistians [meetingUID]="meetingUID" [isReadOnly]="isEditableMeetingParticipants"></assistians></td>
+                <td><participants [meetingUID]="meetingUID" [isReadOnly]="isEditableMeetingParticipants"></participants></td>
                 <td *ngIf="meeting.status === 'Opened'">
                     <button class="right btn" *ngIf="isEditableMeetingParticipants" (click)="isEditableMeetingParticipants = false">Editar participantes</button>
-                    <button class="right btn-cancel" *ngIf="!isEditableMeetingParticipants" (click)="isEditableMeetingParticipants = true">Cancelar</button>
+                    <button class="right btn" *ngIf="!isEditableMeetingParticipants" (click)="isEditableMeetingParticipants = true">Cancelar</button>
                 </td>
             </tr>
     </table>    
@@ -66,13 +66,13 @@
 <br>
 <div class="footer">
     <span *ngIf="meeting.status === 'Opened'">
-        <button class="btn"  (click)="closeMeeting()">Cerrar la  reunion</button>
+        <button class="btn-warning"  (click)="closeMeeting()">Cerrar la  reunion</button>
         <span style="padding-left: 100px;">
-                <button class="btn-cancel" (click)="deleteMeeting()">Eliminar reunión</button> 
+                <button class="btn" (click)="deleteMeeting()">Eliminar reunión</button> 
         </span>    
     </span>
     <span  *ngIf="meeting.status === 'Closed'">
-        <button class="btn"  (click)="openMeeting()">Abrir la  reunion</button>                
+        <button class="btn-warning"  (click)="openMeeting()">Abrir la  reunion</button>                
     </span>   
 </div>
 </div>
