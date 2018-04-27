@@ -10,22 +10,23 @@ import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { ControlsModule } from '../controls/controls.module';
+import { GlobalSearchModule } from '../global-search/global-search.module';
 
 import { MainLayoutComponent } from './main-layout/main-layout.component';
 
 import { NavbarComponent } from './navbar/navbar.component';
 import { NoContentComponent } from './no-content/no-content.component';
 
-import { NavBarService } from './navbar/navbar.service';
 
 /**
  * Do not specify providers for modules that might be imported by a lazy loaded module.
  */
 
 @NgModule({
-  imports: [RouterModule, CommonModule, FormsModule],
+  imports: [RouterModule, CommonModule, FormsModule, ControlsModule, GlobalSearchModule],
   declarations: [MainLayoutComponent, NavbarComponent, NoContentComponent],
   exports: [MainLayoutComponent, NoContentComponent],
-  providers:[NavBarService]
+  providers:[]
 })
 export class SharedModule { }

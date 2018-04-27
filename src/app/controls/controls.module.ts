@@ -17,8 +17,13 @@ import { Chips } from './chips/chips';
 import { RAGControl } from './rag/rag.control';
 import { CalendarControl } from './calendar/calendar-control';
 import { SelectControl } from './select-control/select-control';
+import { SearchControl } from './search/search.control';
+import { NavBarControl } from './nav-bar/nav-bar.control';
+import { ModalWindow } from './modal-window/modal-window';
+import { PdfViewer } from './pdf-viewer/pdf-viewer';
 
 import { SafeHtmlPipe } from './pipes/safe-html/safe-html.pipe';
+import { SafeUrlPipe } from './pipes/safe-url/safe-url.pipe';
 
 /**
  * Do not specify providers for modules that might be imported by a lazy loaded module.
@@ -27,8 +32,10 @@ import { SafeHtmlPipe } from './pipes/safe-html/safe-html.pipe';
 @NgModule({
   imports: [RouterModule, CommonModule, FormsModule],
   declarations: [AutocompleteControl, Chips, RAGControl, CalendarControl, SelectControl,
-                 SafeHtmlPipe],
-  exports: [AutocompleteControl, Chips, SafeHtmlPipe,
-            RAGControl, CalendarControl, SelectControl] 
+                 SafeHtmlPipe, SearchControl, NavBarControl, ModalWindow, SafeUrlPipe,
+                 PdfViewer],
+  exports: [AutocompleteControl, Chips, SafeHtmlPipe, SafeUrlPipe, PdfViewer,
+            RAGControl, CalendarControl, SelectControl, SearchControl, NavBarControl,
+            ModalWindow] 
 })
 export class ControlsModule { }

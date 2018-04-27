@@ -256,12 +256,7 @@ export class CalendarControl  implements AfterViewInit {
       this.calendar.setDate(new Date(this.getDateInNumericFormat()));         
      
       this.onSelectedDate.emit(this.calendar.getDate());
-    } else {
-      alert("La fecha debe de tener cualquier de los siguientes formatos: \n" +
-            " DD/MM/YY \n" +
-            " DD-MM-YY \n" +
-            " DD.MM.YY \n");
-    }
+    } 
   }
 
   private setControlId(): void {

@@ -1,0 +1,11 @@
+@import "../../../styles/form";
+
+.form {
+  padding-top: 0;
+  width: 640px;
+  overflow-y: auto;
+}
+
+.form textarea { 
+  height: 100%;  
+}

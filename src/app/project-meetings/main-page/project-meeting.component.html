@@ -1,0 +1,29 @@
+<div class="editor-container editor-container-style">
+    <div class="header">        
+        <div class="title">{{title}}</div>
+    </div>
+   
+    <div class="tab">
+          <button class="tab-links left-position" [disabled]="isDisabled" [class.selected]="selectedTask==='meetingData'" (click)="setSelectedTask('meetingData')">Informacion general</button>         
+          <button class="tab-links left-position" [disabled]="isDisabled" [class.selected]="selectedTask==='recomendations'" (click)="setSelectedTask('recomendations')">Recomendaciones</button>
+          <button class="tab-links left-position" [disabled]="isDisabled" [class.selected]="selectedTask==='agreements'" (click)="setSelectedTask('agreements')">Acuerdos</button>
+        <!--  <span *ngIf="config.isAddActivity">
+          <button class="tab-links left-position" [disabled]="isDisabled" [class.selected]="selectedTask==='addActivity'" (click)="setSelectedTask('addActivity')">Agregar a un proyecto</button>
+    </span>-->
+        </div>
+        <br>
+        <div class="form-frame" [ngSwitch]="selectedTask">
+            <div *ngSwitchCase="'meetingData'">
+                <meeting-root [meetingUID]="meetingUID" (onUpdateMeeting)="updateMeetingData($event)"></meeting-root>                      
+            </div>           
+            <div *ngSwitchCase="'recomendations'">
+            <recomendations></recomendations>                          
+            </div>
+            <div *ngSwitchCase="'agreements'">
+                <agreements></agreements>
+            </div>
+
+
+        </div>
+</div>
+      

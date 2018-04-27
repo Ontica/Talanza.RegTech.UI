@@ -1,0 +1,40 @@
+@import "../../../styles/editor-window-style";
+@import "../../../styles/form";
+
+.container {
+  height: calc(100vh - 130px);
+  width:100%;
+  display: inline-block;
+  min-width: 900px;
+}
+
+.left-panel {
+  display: inline-block;
+  width: 35%;
+  height: 100%;
+  overflow-x: hidden;
+  min-width: 300px;
+}
+
+.right-panel {
+  display: inline-block;
+  width: 65%;
+  height: 100%;
+  overflow-x: hidden;
+  min-width: 500px;
+}
+
+.right {
+  float: right;
+}
+
+.tab {
+  width: 100%;
+  color: orange;
+  border-radius: 8px;
+  margin-top: 4pt;
+}
+
+.tab-links {
+  width: 50%
+}

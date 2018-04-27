@@ -54,7 +54,7 @@ export class SelectTypeActivityComponet implements OnInit {
   public onSelectEvent(processModel: ProcessModel): void {
     this.selectedProcessModelUID = processModel.uid;
     
-    console.log(processModel);
+    
     this.onSelectProcessModel.emit(processModel);
   }
 

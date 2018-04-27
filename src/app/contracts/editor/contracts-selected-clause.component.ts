@@ -73,8 +73,7 @@
     
         this.contractService.getObligations(clauseRef.contractUID, clauseRef.uid)
                             .toPromise()
-                            .then((x) => { console.log(x);
-                                           this.rules = x .rules; 
+                            .then((x) => { this.rules = x .rules; 
                                            this.setClauseInfoContainerWidth();
                                          })
                             .catch((e) => this.core.http.showAndThrow(e, errMsg));

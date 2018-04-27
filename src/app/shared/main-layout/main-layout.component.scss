@@ -39,17 +39,18 @@
   font-weight: $font-weight-title;
   min-width: 360px;
   padding-top: 7px;
-  width: 50%;
+  width: 40%;
   small {
     color: $text-hint;
     display: block;
     font-size: $font-size-hint;
     font-weight: $font-weight-hint;
   }
+  
 }
 
-.configuration-bar {
+.search-bar { 
   font-size: $font-size-command;
   font-weight: $font-weight-command;
-  width: 180px;
+  width: 300px;
 }

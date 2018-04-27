@@ -1,0 +1,14 @@
+@import "../../../styles/grid";
+
+table.grid {
+    width: 400px;
+}
+
+.delete-button i {
+    color: $gray
+}
+
+.form {
+    width: 90%;
+    overflow-y: auto;
+}

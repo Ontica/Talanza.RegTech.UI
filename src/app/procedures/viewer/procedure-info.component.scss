@@ -1,0 +1,30 @@
+@import "../../../styles/editor-window-style";
+@import "../../../styles/form";
+
+.editor-container {
+  height: calc(100vh - 220px);
+  width: 100%;
+}
+
+.form-frame {
+  height: calc(100vh - 290px);
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-width: 800px;
+  margin-left: 20px;
+}
+
+.title {
+  color: #3a3a3a;
+  font-size: 10pt;
+  font-weight: 600;
+  padding: 6pt;
+  min-height: 30pt;
+  max-height: 48pt;
+  width: 80%;
+}
+
+.tab {
+  margin-left: 20px;
+  width: 760px;
+}

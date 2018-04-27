@@ -15,9 +15,7 @@ table td:last-child {
   width: 100%;
 }
 
-button.btn {
-  background-color: $button-background-color;
-  color: $text-color;
+@mixin input-button-settings {
   font-size: $font-size-hint;
   border: $button-border;
   height: $button-height;
@@ -26,31 +24,36 @@ button.btn {
   height: 28px;
 }
 
-button.btn-cancel {
-  background-color: $cancel-color;
-  color: background-color;
-}
-
 button.btn-action {
+  @include  input-button-settings;
   background-color: $action-color;
   color: $white;
   font: $control-font;
   font-weight: normal;
-  font-size: 10pt;
-  height: 28px;
   border: 1px solid #cecece;
-  padding: 4pt;
+ 
 }
 
+button.btn {
+  @include  input-button-settings;
+  background-color: $button-background-color;
+  color: $text-color;  
+}
+
+button.btn-cancel {
+  @include input-button-settings;
+  background-color: $cancel-color;
+  color: $white;
+}
+
+
 button.btn-warning {
+  @include input-button-settings;
   background-color: $warning-color;
   color: $control-color;
   font: $control-font;
-  font-weight: normal;
-  font-size: 10pt;
-  height: 28px;
+  font-weight: normal;  
   border: 1px solid #cecece;
-  padding: 4pt;
 }
 
 @mixin input-settings {
@@ -63,9 +66,13 @@ button.btn-warning {
   font: $control-font;
   font-weight: normal;
   margin: 2px 8px 2px 0;
-  padding: 4px 2px 2px;
+  padding: 2px 2px 2px 6px;
   vertical-align: middle;
   width: $control-width;
+
+  border-radius: 2px;
+  transition: 0.3s ease-out;
+  height: $control-height;
 }
 
 @mixin disabled-element {
@@ -75,12 +82,10 @@ button.btn-warning {
 
 select.select-box {
   @include input-settings;
-  height: $control-height;
 }
 
 select.select-warning {
   @include input-settings;
-  height: $control-height;
   background-color: $warning-color;
 }
 
@@ -94,7 +99,41 @@ input.search-box {
 
 input.text-box {
   @include input-settings;
-  height: $control-height;
+}
+
+input:focus {
+  outline: none;
+  color: $selected-control-color;
+  background-color: $selected-control-background-color;
+  border: $selected-control-border;
+}
+
+select:focus {
+  outline: none;
+  color: $selected-control-color;
+  background-color: $selected-control-background-color;
+  border: $selected-control-border;
+}
+
+textarea:focus {
+  outline: none;
+  color: $selected-control-color;
+  background-color: $selected-control-background-color;
+  border: $selected-control-border;  
+  border-radius: 10px;
+  box-shadow: inset 0 0 2px $selected-control-border;
+}
+
+.input-icon {
+  position: absolute;
+  left: 8px;
+  top: calc(50% - 0.5em);
+  color: $light-gray;
+  font-weight: 200;
+}
+
+input.input-text-with-icon {
+  padding-left: 26px;
 }
 
 .text-area {

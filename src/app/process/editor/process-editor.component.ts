@@ -125,7 +125,7 @@ export class ProcessEditorComponent implements OnInit {
 
   public onChangeSelectedProcess(uid: string): void {
     this.processUID = uid;
-    console.log(this.processUID);
+   
     this.refreshDiagram();
   }
 

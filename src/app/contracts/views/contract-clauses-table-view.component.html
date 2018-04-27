@@ -1,0 +1,21 @@
+<table class="grid" *ngIf="clauses.length > 0">
+    <thead>
+        <tr>
+            <th style="width:20pt"></th>
+            <th style='width:90%'>Cláusula / Sección</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let clause of clauses" [class.selected-row]="selectedClause.uid === clause.uid">
+            <td style="width:20pt" class="main-icon">
+                <a (click)="selectClause(clause)">
+                    <i class="fa fa-university" aria-hidden="true"></i>
+                </a>
+            </td>
+            <td style='width:90%'>
+                <a (click)="selectClause(clause)">{{clause.clauseNo}} {{clause.title}}</a>
+                <br/> {{clause.section}}
+            </td>
+        </tr>
+    </tbody>
+</table>

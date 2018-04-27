@@ -6,28 +6,15 @@
  *
  */
 
-import { Component, OnInit } from '@angular/core';
-
-import { NavBarService } from './navbar.service';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'navbar',
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.scss'],
-
+  styleUrls: ['./navbar.component.scss']
 })
 
-export class NavbarComponent implements OnInit {
-  public selectedOption: string = '';
-
-  constructor(private navbarService: NavBarService) {}
-
-  ngOnInit() {   
-    this.selectedOption = this.navbarService.selectedOption;
-  }
-
-  public setSelectedStyle(option: string): void {  
-    this.navbarService.selectedOption = option;      
-  }
+export class NavbarComponent {
+   
 
 }

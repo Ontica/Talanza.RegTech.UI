@@ -1,0 +1,78 @@
+<div *ngIf="meeting.uid">
+<div class="header-bar text-align-left">
+    {{meeting.title}}
+</div>
+<div class="meeting-body">
+    <div class="meeting-general-info-data" *ngIf="!isOpenEditMeetingWindow">
+        <table>
+            <tr *ngIf="meeting.status === 'Opened'">
+                <td colspan="3">Información general</td>
+                <td><button class="right btn" (click)="isOpenEditMeetingWindow = true">Editar información general</button></td>
+            </tr>
+            <tr  *ngIf="meeting.status === 'Closed'">
+                <td colspan="4">Información general</td>            
+            </tr>
+            <tr>
+                <td class='label'>Nombre:</td>
+                <td colspan="3">{{meeting.title}}</td>
+            </tr>
+            <tr>       
+                <td class='label'>Fecha:</td>        
+               <td colspan="3">{{meeting.date  | date: 'dd-MM-yyyy'}}</td>                          
+            </tr>
+            <tr>
+                <td class='label'>Hora Inicio:</td>                                                       
+                <td>{{meeting.startTime}}</td>        
+                <td class='label'>Hora Termino:</td>
+                <td>{{meeting.endTime}}</td>      
+            </tr>
+            <tr>
+                <td class='label'>Proyecto:</td>
+                <td >Shell</td>
+                <td class='label'>Ubicación:</td>
+                <td>{{meeting.location}}</td>            
+            </tr>
+            <tr>
+                <td class='label'>status:</td>
+                <td colspan="3">{{meetingStatus}}</td>
+            </tr>
+        </table>
+        <table>    
+            <tr>
+                <td class="label">Objetivo:</td>        
+            </tr>     
+            <tr>
+                <td>{{meeting.description}}</td>
+            </tr>
+        </table> 
+    </div>
+    <div class="meeting-general-info-edit" *ngIf="isOpenEditMeetingWindow">
+        <meeting-root (onUpdateMeeting)="closeEditMeetingWindow($event)" [meetingUID]="meetingUID"></meeting-root>
+    </div>
+    <br>
+       
+    <table>
+            <tr>
+                <td><participants [meetingUID]="meetingUID" [isReadOnly]="isEditableMeetingParticipants"></participants></td>
+                <td *ngIf="meeting.status === 'Opened'">
+                    <button class="right btn" *ngIf="isEditableMeetingParticipants" (click)="isEditableMeetingParticipants = false">Editar participantes</button>
+                    <button class="right btn" *ngIf="!isEditableMeetingParticipants" (click)="isEditableMeetingParticipants = true">Cancelar</button>
+                </td>
+            </tr>
+    </table>    
+    
+</div>
+
+<br>
+<div class="footer">
+    <span *ngIf="meeting.status === 'Opened'">
+        <button class="btn-warning"  (click)="closeMeeting()">Cerrar la  reunion</button>
+        <span style="padding-left: 100px;">
+                <button class="btn" (click)="deleteMeeting()">Eliminar reunión</button> 
+        </span>    
+    </span>
+    <span  *ngIf="meeting.status === 'Closed'">
+        <button class="btn-warning"  (click)="openMeeting()">Abrir la  reunion</button>                
+    </span>   
+</div>
+</div>

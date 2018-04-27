@@ -2,3 +2,10 @@
 table.grid tbody {
   height: calc(100vh - 245px);
 }
+
+.selected-row {
+  border-bottom: 2px solid $blue;
+  border-top: 2px solid $blue;
+  z-index:1000;
+  font-weight: 600;
+}

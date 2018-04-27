@@ -1,0 +1,42 @@
+@import "../../../styles/general-styles";
+@import "../../../styles/editor-window-style";
+
+@import "../../../styles/grid";
+table {
+  width: 90%;
+  border-collapse: collapse;
+  font-size: 10pt;
+ // margin-left: 15pt;
+}
+
+.header-bar {
+  padding: 5pt;
+  margin-top: 8px; 
+  background-color: $blue;
+  color: $white;
+  border-radius: 10px;  
+  margin-left: 10px;
+}
+
+.header {
+  border-bottom: 1px dotted $gray;
+}
+
+table td.label {
+  color: #6a6a6a;
+  max-width: 260px;
+  width: 260px;
+  font-size: 10pt;
+  white-space: nowrap;
+}
+
+.meeting-body {
+  height: calc(100vh - 240px);
+  overflow-y: auto;
+}
+
+.footer {
+  border-top: 1px solid $blue;
+  padding-top: 4px;
+}
+

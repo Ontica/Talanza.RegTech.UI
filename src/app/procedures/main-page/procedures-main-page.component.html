@@ -16,7 +16,8 @@
       </td>
       <td style='width:40%'>
         <a (click)="onOpenProcedureEditorWindow(procedure.uid)">{{procedure.shortName}}</a>
-        <br/><span *ngIf="procedure.modality.length !== 0">Modalidad: {{procedure.modality}} | </span>{{procedure.code}}
+        <br/>
+        <span *ngIf="procedure.modality.length !== 0">Modalidad: {{procedure.modality}} | </span>{{procedure.code}}
       </td>
       <td style='width:100px'>{{procedure.entity}}</td>
       <td style='width:12%'>{{procedure.theme}}</td>

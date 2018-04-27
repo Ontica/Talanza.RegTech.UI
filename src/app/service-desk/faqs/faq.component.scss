@@ -1,0 +1,36 @@
+
+@import "../../../styles/grid";
+.faq-container{
+    width: 100%;
+    padding: 8pt 24pt 24pt 24pt;
+}
+
+.faq {    
+    font-weight: 600;
+    line-height: 22pt;    
+    padding: 6pt;
+}
+
+.question {
+  text-align: justify;
+  max-width: 600pt;  
+  display: inline-block;
+  font-style: italic;
+  font-weight: 500;
+  margin-bottom: 8pt;
+}
+
+.answer {
+    text-align: justify;
+    max-width: 600pt;  
+    display: inline-block;
+}
+
+.section-text {
+  color: brown;
+  font-size: 10pt;
+  border-bottom: 1pt dashed brown;
+  text-align: justify;
+  max-width: 600pt;  
+  display: inline-block;
+}

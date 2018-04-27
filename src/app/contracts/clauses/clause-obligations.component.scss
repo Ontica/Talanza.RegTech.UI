@@ -1,0 +1,25 @@
+@import "../../../styles/grid";
+.clause-subtitle {
+  font-size: 10pt;
+  color: $blue;
+  font-weight: 500;
+}
+
+table.grid td:nth-child(1), table.grid th:nth-child(1) {
+  width: 90%;
+}
+
+table.grid tbody tr {
+  height: auto;
+  display: block;
+  overflow: inline;
+}
+
+table.grid td {
+  padding: 8pt;
+}
+
+.procedure-info {
+  display: inline-block;
+  width: 90%;
+}
