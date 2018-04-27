@@ -30,6 +30,5 @@ export class ProceduresTableViewComponent {
     this.selectedProcedureUID = procedureUID;
     this.onSelectProcedure.emit(procedureUID);
   }
-
- 
+   
 }

@@ -2,10 +2,10 @@
     <thead>
         <tr>
             <th style="width:20pt"></th>
-            <th style='width:40%'>Trámite / Homoclave</th>
+            <th style='width:60%'>Trámite / Homoclave</th>
             <th style='width:100px'>Dependencia</th>
             <th style='width:12%'>Tema</th>
-            <th style='width:40%'></th>
+            <th style='width:10%'></th>
         </tr>
     </thead>
     <tbody>
@@ -15,13 +15,14 @@
                     <i class="fa fa-university" aria-hidden="true"></i>
                 </a>
             </td>
-            <td style='width:40%'>
+            <td style='width:60%'>
                 <a (click)="selectProcedure(procedure.uid)">{{procedure.name}}</a>
-                <br/> {{procedure.code}}
+                <br/>
+                <span *ngIf="procedure.modality.length !== 0">Modalidad: {{procedure.modality}} | </span>{{procedure.code}}
             </td>
             <td style='width:100px'>{{procedure.entity}}</td>
             <td style='width:12%'>{{procedure.theme}}</td>
-            <th style='width:40%'></th>
+            <th style='width:10%'></th>
         </tr>
     </tbody>
 </table>

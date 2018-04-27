@@ -3,11 +3,14 @@
     <li><a [routerLink]="['/inbox/search']" [routerLinkActive]="['selected']" [routerLinkActiveOptions]="{exact:true}">Inbox</a></li>
     <li><a [routerLink]="['/projects/search']" [routerLinkActive]="['selected']" [routerLinkActiveOptions]="{exact:true}">Administración del cumplimiento</a></li>
     <li><a [routerLink]="['/contracts/search']" [routerLinkActive]="['selected']" [routerLinkActiveOptions]="{exact:true}">Contratos</a></li>
-    <!--    <li [class.selected]="selectedOption === 'obligations'"><a [routerLink]="['/obligations/search']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{exact:true}" (click)="setSelectedStyle('obligations')">Obligaciones</a></li>
-!-->
+    <!--
+      <li [class.selected]="selectedOption === 'obligations'"><a [routerLink]="['/obligations/search']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{exact:true}" (click)="setSelectedStyle('obligations')">Obligaciones</a></li>
+    !-->
     <li><a [routerLink]="['/procedures/search']" [routerLinkActive]="['selected']" [routerLinkActiveOptions]="{exact:true}">Trámites</a></li>
     <li><a [routerLink]="['/process/editor']" [routerLinkActive]="['selected']" [routerLinkActiveOptions]="{exact:true}">Procesos</a></li>
     <li><a [routerLink]="['/documents/search']" [routerLinkActive]="['selected']" [routerLinkActiveOptions]="{exact:true}">Biblioteca</a></li>
+    <!--
     <li><a [routerLink]="['/service-desk/search']" [routerLinkActive]="['selected']" [routerLinkActiveOptions]="{exact:true}">Service desk</a></li>
+    !-->
   </ul>
 </div>

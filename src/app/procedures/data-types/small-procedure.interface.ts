@@ -9,6 +9,7 @@
 export interface SmallProcedureInterface {
   uid: string;
   name: string;
+  modality: string;
   url: string;
   stage: string;
   category: string;

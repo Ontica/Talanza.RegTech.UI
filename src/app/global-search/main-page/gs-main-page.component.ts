@@ -110,8 +110,12 @@ export class GlobalSearchMainPageComponent {
         this.isDetailsContainerVisible = true;   
     }
 
-    private async main() {  
+    private async main() {
         this.closeDetailsContainer();  
+
+        if (!this.keywords) {
+          return;
+        }
 
         await this.loadProcedures(); 
         await this.loadContractClauses();
@@ -126,7 +130,7 @@ export class GlobalSearchMainPageComponent {
         this.navBarConfig.push({ name:'procedures', displayText:'Trámites (' + this.procedures.length.toString() +')'});
         this.navBarConfig.push({ name:'contracts', displayText:'Contratos (' + this.clauses.length.toString() +')'});
         this.navBarConfig.push({ name:'documents', displayText:'Documentos (' + this.documents.length.toString() +')'});
-        this.navBarConfig.push({ name:'FAQs', displayText:'FAQs (' + this.FAQs.length.toString() +')'});
+        this.navBarConfig.push({ name:'FAQs', displayText:'Q&A (' + this.FAQs.length.toString() +')'});
     }
 
     private cleanSelectedOption(): void {
@@ -142,7 +146,7 @@ export class GlobalSearchMainPageComponent {
     }  
 
     private async loadContractClauses() {
-        const errMsg = 'Ocurrió un problema al intentar leer la lista de cl�usulas para el contrato.' ;
+        const errMsg = 'Ocurrió un problema al intentar leer la lista de cláusulas para el contrato.' ;
 
         const contractUID = 'R24Kmag356L21'; //Contrato: 2.4 Individual
        
@@ -162,14 +166,11 @@ export class GlobalSearchMainPageComponent {
                             .then((documents) => this.documents = documents);
     }
 
-      private async loadFaqs() {
+    private async loadFaqs() {
        
-        await this.faqService.getFAQs(this.keywords)
-                             .map((FAQs) => { this.FAQs = FAQs; })
-                             .toPromise();
-           
-    } 
-    
-
-     
+      await this.faqService.getFAQs(this.keywords)
+                           .map((FAQs) => { this.FAQs = FAQs; })
+                           .toPromise();
+         
+  }
 }
