@@ -88,9 +88,7 @@ export class ActivityService {
     } 
 
     const path = `v1/project-management/projects/activities/as-work-list${filterAsString}`;
-    console.log(path);
-    
-
+   
     return this.core.http.get<any>(path)
   }
 

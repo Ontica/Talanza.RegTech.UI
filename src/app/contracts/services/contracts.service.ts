@@ -52,9 +52,7 @@ export class ContractsService {
   }
 
   public getClause(contractUID: string, clauseUID: string): Observable<ContractClause> {    
-    const path = `v1/contracts/${contractUID}/clauses/${clauseUID}`;
-
-    console.log("called", path);
+    const path = `v1/contracts/${contractUID}/clauses/${clauseUID}`; 
 
     return this.core.http
                     .get<ContractClause>(path)
