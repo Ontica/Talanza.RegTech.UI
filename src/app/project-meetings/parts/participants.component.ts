@@ -8,6 +8,8 @@
 
 import { Component, Input } from '@angular/core';
 
+import { Validate } from 'empiria';
+
 import { Participant, EmptyParticipant } from '../data-types/meeting';
 import { ProjectMeetingService } from '../services/project-meeting.service';
 
@@ -30,13 +32,11 @@ import { ProjectMeetingService } from '../services/project-meeting.service';
     private _meetingUID = '';
     @Input()  
     set meetingUID(meetingUID: string) {
-        if (meetingUID === '') {
-            return;
-        }
+        if (Validate.hasValue(meetingUID)) {
+            this._meetingUID = meetingUID;
 
-        this._meetingUID = meetingUID;
-
-        this.loadInitialValues();
+            this.loadInitialValues();
+        }      
     }
     get meetingUID(): string {
         return this._meetingUID;

@@ -21,8 +21,11 @@ export class PVRequirementsComponent {
   private _procedureUID: string = '';
   @Input() 
   set procedureUID(procedureUID: string) {
-    this._procedureUID = procedureUID;
-    this.loadRequirements();
+    if (procedureUID) {
+      this._procedureUID = procedureUID;
+      
+      this.loadRequirements();
+    }    
   }
   get procedureUID(): string {
     return this._procedureUID;

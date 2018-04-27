@@ -6,6 +6,7 @@
  *
  */
 import { Component, EventEmitter, Output } from '@angular/core';
+import { emit } from 'cluster';
 
 @Component({
     selector:'search-control',
@@ -20,7 +21,9 @@ export class SearchControl {
     public keywords = "";
 
     public search(): void {
-       this.onSearch.emit(this.keywords);
+        if (this.keywords) {
+            this.onSearch.emit(this.keywords);           
+        }      
     }
    
 }

@@ -8,6 +8,8 @@
 
 import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
 
+import { Validate } from 'empiria';
+
 import { Meeting } from '../data-types/meeting';
 import { ProjectMeetingService } from '../services/project-meeting.service';
 ;
@@ -35,9 +37,12 @@ export class MeetingsComponent implements OnInit  {
     private _updatedMeeting: Meeting;;
     @Input() 
     set updatedMeeting(updatedMeeting: Meeting) {
-        this._updatedMeeting = updatedMeeting;        
-          this.loadOpenedMeetings();   
-          this.loadClosedMeetings();        
+        if (Validate.hasValue(updatedMeeting)) {
+            this._updatedMeeting = updatedMeeting;  
+                  
+            this.loadOpenedMeetings();   
+            this.loadClosedMeetings(); 
+        }              
     }
     get updatedMeeting(): Meeting {
         return this._updatedMeeting;

@@ -7,6 +7,8 @@
  */
 import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
 
+import { Validate } from 'empiria';
+
 import { Meeting, EmptyMeeting, Project } from '../data-types/meeting';
 import { ProjectMeetingService } from '../services/project-meeting.service';
 
@@ -31,12 +33,10 @@ export class MeetingRootComponent implements OnInit {
     @Input() 
     set meetingUID(meetingUID: string) {
         this._meetingUID = meetingUID;       
-       if ((meetingUID === '') || (meetingUID === undefined) || (!meetingUID)) {
-            return;
-       }
-       
-       this.loadMeeting();
-       
+        
+        if (Validate.hasValue(meetingUID)) {
+            this.loadMeeting();
+        }      
     }
     get meetingUID(): string {
         return this._meetingUID;

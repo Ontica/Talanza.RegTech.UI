@@ -10,6 +10,8 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common'; 
 
+import { Validate } from 'empiria';
+
 import { SessionService } from '../../core';
 
 @Component({
@@ -24,7 +26,7 @@ export class MainLayoutComponent {
   public breadcrumb = '';
 
   public isGlobalSearchVisible = false;
-  public keywords = '';
+  public keywords: string = '';
 
   // public title = 'Administración y control del cumplimiento regulatorio';
   // Cajón de arena para jugar
@@ -36,11 +38,14 @@ export class MainLayoutComponent {
 
     this.userName = principal.identity.fullname;
   }
+  
+  public globalSearch(keywords: string): void {                
+    if (keywords) {
+      this.keywords = keywords; 
 
-  public globalSearch(keywords: string): void {  
-    this.isGlobalSearchVisible = true;     
-   
-    this.keywords = keywords;   
+      this.isGlobalSearchVisible = true;   
+    } 
+    
   }
 
   public hideGlobalSearch(): void {    

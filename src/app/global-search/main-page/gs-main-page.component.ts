@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Input, Output,  ViewEncapsulation  } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
+import { Validate, Assertion } from 'empiria';
+
 import 'rxjs/add/operator/toPromise';
 
 import { CoreService } from '../../core/core.service';
@@ -43,12 +45,14 @@ export class GlobalSearchMainPageComponent {
     public FAQs: Faq[] = [];
     public FAQUid = '' ;
     
-    private _keywords = '';    
+    private _keywords: string = '';    
     @Input()
     set keywords(keywords: string) {        
-        this._keywords = keywords;
-        
-        this.main();
+        if (keywords) {
+            this._keywords = keywords;
+
+            this.main();
+        } 
     }
     get keywords(): string {
         return this._keywords;
@@ -76,9 +80,12 @@ export class GlobalSearchMainPageComponent {
     }
 
     public selectProcedure(procedureUID: string): void {  
-        this.selectedProcedureUID = procedureUID; 
 
-        this.showDetailsContainer();        
+        if (procedureUID) {
+            this.selectedProcedureUID = procedureUID; 
+
+            this.showDetailsContainer(); 
+        }             
     }
 
     public setSelectedClause(clause: ContractClauseRef): void {          

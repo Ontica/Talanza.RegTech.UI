@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Input, Output  } from '@angular/core';
 
+import { Validate } from 'empiria';
+
 import { Meeting, EmptyMeeting, Participant } from '../data-types/meeting';
 
 import { ProjectMeetingService } from '../services/project-meeting.service';
@@ -15,10 +17,12 @@ export class MeetingComponent {
 
     private _meetingUID: string = '';
     @Input() 
-    set meetingUID(meetingUID: string) {
-        this._meetingUID = meetingUID;
-
-        this.loadMeeting();
+    set meetingUID(meetingUID: string) {     
+        if (Validate.hasValue(meetingUID)) {            
+            this._meetingUID = meetingUID;
+            
+            this.loadMeeting(); 
+        }             
     }
     get meetingUID(): string {
         return this._meetingUID;
@@ -79,9 +83,9 @@ export class MeetingComponent {
     private deleteMeeting(): void {
         this.projectMeetingService.deleteMeeting(this.meeting.uid)
                                   .subscribe((x)=>{
-                                      this.meeting = x; console.log(this.meeting);
+                                      this.meeting = x; 
                                       this.onUpdateMeeting.emit(this.meeting); 
-                                      });
+                                   });
     }
 
 }

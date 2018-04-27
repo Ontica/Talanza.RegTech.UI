@@ -21,10 +21,12 @@ export class ProcedureViewerComponent {
 
   @Input()
   set procedureUID(procedureUID: string) {
-    this._procedureUID = procedureUID;
-    this.loadProcedure();
-  }
+    if (procedureUID) {
+      this._procedureUID = procedureUID;
 
+      this.loadProcedure();
+    }    
+  }
   get procedureUID(): string {
     return this._procedureUID;
   }
