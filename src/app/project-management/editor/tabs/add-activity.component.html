@@ -4,11 +4,15 @@
   </tr>
   <tr>
     <td>Nombre:</td>
-    <td> <input type="text" class="text-box" [(ngModel)]="selectedTask.name"></td>
+    <td>
+      <input type="text" class="text-box" [(ngModel)]="selectedTask.name">
+    </td>
   </tr>
   <tr>
     <td>Observaciones:</td>
-    <td><textarea class="text-area" rows="5" cols="25" [(ngModel)]="selectedTask.notes"></textarea></td>
+    <td>
+      <textarea class="text-area" rows="5" cols="25" [(ngModel)]="selectedTask.notes"></textarea>
+    </td>
   </tr>
 </table>
 <table class="form">
@@ -19,20 +23,20 @@
     <td>Responsable:</td>
     <td>
       <select class="select-box" style="width:340px" [(ngModel)]="selectedTask.responsibleUID">
-          <option value="">( Seleccionar )</option>
-          <option value="Undefined">No asignado</option>
-          <option value="001">Leticia Vázquez</option>
-          <option value="002">Ramón Corona</option>
-          <option value="003">Sandra Macías</option>
-        </select>
+        <option value="">( Seleccionar )</option>
+        <option value="Empty">No asignado</option>
+        <option value="001">Leticia Vázquez</option>
+        <option value="002">Ramón Corona</option>
+        <option value="003">Sandra Macías</option>
+      </select>
     </td>
     <td>RAG status:</td>
     <td class="text-align-right">
       <select class="select-box" [(ngModel)]="selectedTask.ragStatus">
-        <option value="">( Seleccionar )</option> 
+        <option value="">( Seleccionar )</option>
+        <option value="NoColor">Ninguno</option>
         <option value="Green">Verde</option>
-        <option value="Ambar">Ambar</option>       
-        <option value="Orange">Naranja</option>
+        <option value="Ambar">Amarillo</option>
         <option value="Red">Rojo</option>
       </select>
     </td>
@@ -61,7 +65,8 @@
   <tr>
     <td>Fecha objetivo:</td>
     <td>
-      <input type="date" class="text-box" style="width:200px" #myDate [value]="selectedTask.targetDate | date:'yyyy-MM-dd'" (input)="selectedTask.targetDate=parseDate($event.target.value)" /> </td>
+      <input type="date" class="text-box" style="width:200px" #myDate [value]="selectedTask.targetDate | date:'yyyy-MM-dd'" (input)="selectedTask.targetDate=parseDate($event.target.value)"
+      /> </td>
     <!--  <td class="text-align-right ">Fecha máxima de entrega: &nbsp; <b>{{task.dueDate | date: 'dd-MMM-yyyy'}}</b></td>-->
   </tr>
 </table>

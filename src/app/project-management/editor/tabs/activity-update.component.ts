@@ -6,7 +6,7 @@
 *
 */
 
-import {  Component, EventEmitter, HostBinding, Input, Output } from '@angular/core';
+import { Component, EventEmitter, HostBinding, Input, Output } from '@angular/core';
 
 import { TaskRef, EmptyTask, Tag } from '../../data-types/task';
 
@@ -39,13 +39,13 @@ export class ActivityUpdateComponent {
   @Input()
   set task(task: ActivityRef) {
     this._task = task;
-    this.loadInitialValues();  
+    this.loadInitialValues();
     if (task.uid === '') {
       this.isNewTask = true;
-    } else {      
+    } else {
       this.isNewTask = false;
       this.loadActivityInitialValues();
-    }      
+    }
   }
   get task(): ActivityRef {
     return this._task;
@@ -56,7 +56,7 @@ export class ActivityUpdateComponent {
 
   public constructor(private activityService: ActivityService,
     private projectService: ProjectService) { }
-  
+
   public cancel(): void {
     this.onClose();
   }
@@ -77,7 +77,7 @@ export class ActivityUpdateComponent {
     }
   }
 
-  public async loadInitialValues() {  
+  public async loadInitialValues() {
     await this.loadTags();
     this.loadLists();
   }
@@ -102,7 +102,7 @@ export class ActivityUpdateComponent {
     }
   }
 
-  public setSelectedDate(date: string): void {    
+  public setSelectedDate(date: string): void {
     let aux = this.parseDate(date);
     this.selectedTask.targetDate = aux;
   }
@@ -115,13 +115,10 @@ export class ActivityUpdateComponent {
 
     this.selectedTask.name = this.task.name;
     this.selectedTask.notes = this.task.notes;
-    this.selectedTask.requestedByUID = this.task.requestedBy.uid;
     this.selectedTask.responsibleUID = this.task.responsible.uid;
-    this.selectedTask.resourceUID = this.task.resource.uid;
     this.selectedTask.targetDate = this.task.targetDate;
     this.selectedTask.requestedTime = this.task.startDate;
     this.selectedTask.startDate = this.task.startDate;
-    this.selectedTask.progress = this.task.progress;
     this.selectedTask.ragStatus = this.task.ragStatus;
     this.selectedTask.tags = this.task.tags;
   }
@@ -149,7 +146,7 @@ export class ActivityUpdateComponent {
   private async addTask() {
     const errMsg = 'Ocurrió un problema al intentar actualizar la actividad.';
 
-      alert("la tarea fue agregada con exito");
+    alert("la tarea fue agregada con exito");
   }
 
   private exceptionHandler(error: any, defaultMsg: string): void {

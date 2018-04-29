@@ -4,7 +4,7 @@
     <td>
       <select #contract class="select-box" style="width:160px;" [(ngModel)]="filter.contract">
         <option value="">( Seleccionar )</option>
-        <option value="567">Ronda 2.1 Bloque 11</option>
+        <option value="576">Ronda 2.4</option>
       </select>
     </td>
     <td>Etapa:</td>
@@ -28,14 +28,16 @@
     <td colspan="2">
       <button type="button" class="btn-warning align-center" style="width:185px" (click)="onClickAddActivity()">+ Agregar obligaciones</button>
     </td>
-    <td colspan="4"><a (click)="cleanFilter()">Limpiar filtros</a></td>
+    <td colspan="4">
+      <a (click)="cleanFilter()">Limpiar filtros</a>
+    </td>
   </tr>
   <tr>
     <td>Proyecto:</td>
     <td>
       <select #project class="select-box" style="width:160px;" (change)="onChangeProjectList(project.value)" [(ngModel)]="filter.project">
         <option value="">( Seleccionar )</option>
-        <option *ngFor="let project of projectsList"[value]="project.uid">{{project.name}}</option>
+        <option *ngFor="let project of projectsList" [value]="project.uid">{{project.name}}</option>
       </select>
     </td>
     <td>Etiqueta:</td>
@@ -61,7 +63,7 @@
     </td>
     <td>Vista:</td>
     <td>
-      <select style="width:146px " class="select-box " (change)="changeDislpayFilter() " [(ngModel)]="displayFilter.selectedView">     
+      <select style="width:146px " class="select-box " (change)="changeDislpayFilter() " [(ngModel)]="displayFilter.selectedView">
         <option value="project-explorer">Etapas / actividades</option>
         <option value="gantt">Gantt</option>
         <option value="kanban">Kanban</option>

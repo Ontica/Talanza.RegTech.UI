@@ -37,24 +37,21 @@ export class ProjectService {
   }
 
   public getRequestersList(projectUID: string): Observable<PersonRef[]> {
-    const path ='v1/project-management/projects/'+ projectUID +'/requesters';
+    const path = `v1/project-management/projects/${projectUID}/requesters`;
 
     return this.core.http.get<PersonRef[]>(path);
   }
 
   public getResponsiblesList(projectUID: string): Observable<PersonRef[]> {
-    const path ='v1/project-management/projects/'+ projectUID +'/responsibles';
+    const path = `v1/project-management/projects/${projectUID}/responsibles`;
 
     return this.core.http.get<PersonRef[]>(path);
   }
 
   public getTaskManagers(projectUID: string): Observable<PersonRef[]> {
-    const path = 'v1/project-management/projects/'+ projectUID + '/task-managers';
+    const path = `v1/project-management/projects/${projectUID}/task-managers`;
 
     return this.core.http.get<PersonRef[]>(path);
-  }   
-
-  
+  }
 
 }
-

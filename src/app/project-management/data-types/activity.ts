@@ -1,14 +1,14 @@
 export interface Parent {
   id: number,
   uid: string,
-  type: string, 
+  type: string,
   name: string
-}               
+}
 
 export interface Procedure {
-  uid : string,
-  name : string,
-  code : string,
+  uid: string,
+  name: string,
+  code: string,
   entity: string
 }
 
@@ -18,52 +18,50 @@ export interface KeyValue {
 }
 
 export interface ActivityRef {
-  dueDate : string,
-  endDate : Date,
-  estimatedDuration : string,
-  id : number,
-  name : string,
+  uid: string,
+  type: string,
+  name: string,
   notes: string,
-  parent : Parent,
-  procedure : Procedure  
-  progress : number,
-  project : KeyValue, 
+  project: KeyValue,
+  responsible: KeyValue,
+  parent: Parent,
+  estimatedDuration: string,
+  startDate: Date,
+  targetDate: Date,
+  endDate: Date,
+  dueDate: Date,
+  tags: string[],
+  position: number,
   ragStatus: string,
-  requestedBy : KeyValue,
-  resource : KeyValue, 
-  responsible : KeyValue,
-  stage : string,
-  startDate : Date,  
-  targetDate : Date,
-  type : string,  
-  uid : string,
-  tags: string[],  
-  visible : string
+  stage: string,
+  status: string,
+
+  visible: string
 }
 
-export function EmpityParent () {
-  const parent: Parent= {
+export function EmptyParent() {
+  const parent: Parent = {
     id: -1,
     uid: '',
-    type: '', 
+    type: '',
     name: ''
   }
 
   return parent;
 }
 
-export function EmpityProcedure() {
+export function EmptyProcedure() {
   const procedure: Procedure = {
-    uid : '',
-    name : '',
-    code : '',
+    uid: '',
+    name: '',
+    code: '',
     entity: ''
   }
-  
+
   return procedure;
 }
 
-export function EmpityKeyValue() {
+export function EmptyKeyValue() {
   const keyValue: KeyValue = {
     uid: '',
     name: ''
@@ -72,31 +70,27 @@ export function EmpityKeyValue() {
   return keyValue;
 }
 
-export function EmpityActivityRef() {
+export function EmptyActivityRef() {
   const activity: ActivityRef = {
-    dueDate : '',
-    endDate : new Date(),
-    estimatedDuration : '',
-    id : 0,
-    name : '',
+    uid: '',
+    type: '',
+    name: '',
     notes: '',
-    parent : EmpityParent(),
-    procedure : EmpityProcedure(),  
-    progress : 0,
-    project : EmpityKeyValue(), 
+    project: EmptyKeyValue(),
+    responsible: EmptyKeyValue(),
+    parent: EmptyParent(),
+    estimatedDuration: '',
+    startDate: new Date(),
+    targetDate: new Date(),
+    endDate: new Date(),
+    dueDate: new Date(),
+    tags: [],
+    position: 0,
     ragStatus: '',
-    requestedBy : EmpityKeyValue(),
-    resource : EmpityKeyValue(), 
-    responsible : EmpityKeyValue(),
-    stage : '',
-    startDate : new Date(),  
-    targetDate : new Date(),
-    type : '',  
-    uid : '',
-    tags: [],  
-    visible : ''
+    stage: '',
+    status: '',
+    visible: ''
   }
-  
-  
-  return activity;  
+
+  return activity;
 }

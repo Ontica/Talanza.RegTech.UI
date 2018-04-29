@@ -1,9 +1,9 @@
 import { Component, EventEmitter, HostBinding, Input, Output } from '@angular/core';
 
-import { ProjectRef } from '../data-types/project'; 
-import { EmpityActivityRef } from '../data-types/activity';
+import { ProjectRef } from '../data-types/project';
+import { EmptyActivityRef } from '../data-types/activity';
 
-@Component ({
+@Component({
   selector: 'create-activity-menu',
   templateUrl: './create-activity-menu.component.html',
   styleUrls: ['./create-activity-menu.component.scss']
@@ -14,11 +14,11 @@ export class CreateActivityMenuComponent {
   @HostBinding('style.position') public position = 'absolute';
 
   @Output() public onCloseEvent = new EventEmitter();
-  
+
   @Input() public project: ProjectRef;
 
   public selectedOperation = '';
-  public task = EmpityActivityRef(); 
+  public task = EmptyActivityRef();
 
   public onClose(): void {
     this.onCloseEvent.emit();
@@ -28,12 +28,12 @@ export class CreateActivityMenuComponent {
     this.onClose();
   }
 
-  public addManualTask(): void {    
+  public addManualTask(): void {
     this.task.project.uid = this.project.uid;
     this.selectedOperation = 'addManual';
   }
 
-  public addEvent(): void { 
+  public addEvent(): void {
     this.selectedOperation = 'addEvent';
   }
 

@@ -1,13 +1,3 @@
-<!--<div class="editor-container editor-container-style">
-  <div class="tab">
-    <button class="tab-links left-position" [disabled]="isDisabled" [class.selected]="selectedTask==='planned'" (click)="setSelectedTask('planned')">Planeadas</button>
-    <button class="tab-links left-position" [disabled]="isDisabled" [class.selected]="selectedTask==='next'" (click)="setSelectedTask('next')">Siguientes</button>
-    <button class="tab-links left-position" [disabled]="isDisabled" [class.selected]="selectedTask==='inProcess'" (click)="setSelectedTask('inProcess')">En proceso</button>
-    <button class="tab-links left-position" [disabled]="isDisabled" [class.selected]="selectedTask==='finished'" (click)="setSelectedTask('finished')">Terminados</button>
-    <button class="tab-links left-position" [disabled]="isDisabled" [class.selected]="selectedTask==='toRecive'" (click)="setSelectedTask('toRecive')">Por recibir</button>
-    <button class="tab-links left-position" [disabled]="isDisabled" [class.selected]="selectedTask==='allTasks'" (click)="setSelectedTask('alTasks')">Todas las tareas</button>
-  </div>
-</div>-->
 <table class="grid">
   <thead>
     <tr>
@@ -22,21 +12,26 @@
   <tbody>
     <ng-container *ngFor="let task of taskList">
       <ng-container *ngIf="task.visible !== 'none'">
-        <tr [ngSwitch]="task.type" [ngClass]="setSummaryCSSClass(task.level || -1)" draggable="isDrag" (dragover)="allowDrop($event)" (dragstart)="drag($event, task)" (drop)="drop($event, task)">
+        <tr [ngSwitch]="task.type" [ngClass]="setSummaryCSSClass(task.level || -1)" draggable="isDrag" (dragover)="allowDrop($event)"
+          (dragstart)="drag($event, task)" (drop)="drop($event, task)">
 
-          <ng-template [ngSwitchCase]=" 'ObjectType.ProjectObject.Summary' ">
-            <td style="width:3% "><i class="fa fa-arrows drag-icon " aria-hidden="true " (mousedown)="enableDrag() "></i></td>
+          <ng-template [ngSwitchCase]=" 'ObjectType.ProjectItem.Summary' ">
+            <td style="width:3% ">
+              <i class="fa fa-arrows drag-icon " aria-hidden="true " (mousedown)="enableDrag() "></i>
+            </td>
             <td style="width:97% " colspan="5 " id=" ">
-              <a (click)="expandOrCollapse(task.uid) "><i class="summary-icon " [ngClass]="task.visible==='collapse' ? 'fa fa-plus-circle' : 'fa fa-minus-circle' " aria-hidden="true "></i>{{task.name}}</a> </td>
+              <a (click)="expandOrCollapse(task.uid) ">
+                <i class="summary-icon " [ngClass]="task.visible==='collapse' ? 'fa fa-plus-circle' : 'fa fa-minus-circle' " aria-hidden="true "></i>{{task.name}}</a>
+            </td>
           </ng-template>
 
-          <ng-template [ngSwitchCase]=" 'ObjectType.ProjectObject.Activity' ">
-            <td style="width:2% "><i class="fa fa-arrows drag-icon " aria-hidden="true " (mousedown)="enableDrag() "></i></td>
+          <ng-template [ngSwitchCase]=" 'ObjectType.ProjectItem.Activity' ">
+            <td style="width:2% ">
+              <i class="fa fa-arrows drag-icon " aria-hidden="true " (mousedown)="enableDrag() "></i>
+            </td>
             <td style="width:30% ">
-              <a (click)="onShowTaskEditor(task) ">{{task.name}}</a><br />
-              <i *ngIf="task.procedure.uid !=='Undefined' ">
-              <a (click)="onShowProcedureInfo(task.procedure.uid) ">Trámite {{task.procedure.entity}}</a>
-            </i>
+              <a (click)="onShowTaskEditor(task) ">{{task.name}}</a>
+              <br />
             </td>
             <td *ngIf="task.stage !=='Done' " style="width:15% ">
               Objetivo: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {{task.targetDate | date: 'dd/MMM/yyyy'}}
@@ -73,9 +68,6 @@
   </table>
 </div>
 <div *ngIf="isTaskEditorVisible " class="popup ">
-  <activity-editor [task]="selectedTask " (onUpdateActivity)="onUpdateActivity($event) " (onCloseEvent)="onCloseTaskEditorWindow() "></activity-editor>
-</div>
-
-<div *ngIf="isVisibleProcedureInfo " class="popup ">
-  <procedure-viewer [procedureUID]="procedureUID " [config]="{isAddActivity: false} " (onCloseEvent)="onCloseProcedureInfoWindow() "></procedure-viewer>
+  <activity-editor [task]="selectedTask " (onUpdateActivity)="onUpdateActivity($event) " (onCloseEvent)="onCloseTaskEditorWindow() ">
+  </activity-editor>
 </div>

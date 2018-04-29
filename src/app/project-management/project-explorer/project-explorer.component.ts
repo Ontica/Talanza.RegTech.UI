@@ -5,7 +5,7 @@
  * See LICENSE.txt in the project root for complete license information.
  *
  */
-import { Component, Input }  from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 import { ProjectRef } from '../data-types/project';
 import { ActivityRef } from '../data-types/activity';
@@ -13,7 +13,7 @@ import { ActivityFilter } from '../data-types/activity-filter';
 
 import { ActivityService } from '../services/activity.service';
 
-@Component ({
+@Component({
   selector: 'project-explorer',
   templateUrl: './project-explorer.component.html',
   styleUrls: ['./project-explorer.component.scss'],
@@ -23,48 +23,46 @@ import { ActivityService } from '../services/activity.service';
 export class ProjectExplorerComponent {
 
   public isTaskEditorVisible = false;
-  public isVisibleProcedureInfo = false;
-  public taskList: ActivityRef[] = [];//any = [];
-  public selectedTask:any;
-  public procedureUID: string = '';
+  public taskList: ActivityRef[] = [];
+  public selectedTask: any;
   public expanOrCollapseIcon = 'fa fa-minus-circle';
   public projectUID: string = '';
-  public isDrag = false;
 
+  public isDrag = false;
   public dragIndex = 0;
 
   private _project: ProjectRef;
 
-   private _refresh: boolean;
-   @Input()
-    set refresh(refresh: boolean) {
-      if (refresh) {
-        this.refreshData();
-      }
-      this._refresh = refresh;
-    }
-
-    private _filter: ActivityFilter;
-    @Input() 
-    set filter(filter: ActivityFilter) {
-      this._filter = filter;   
-      
-      this.projectUID = filter.project;
-      
+  private _refresh: boolean;
+  @Input()
+  set refresh(refresh: boolean) {
+    if (refresh) {
       this.refreshData();
     }
-    get filter(): ActivityFilter {
-      return this._filter;
-    }
-
-
-  constructor (private activitiyService: ActivityService) { }
-
-  public onCloseTaskEditorWindow(): void {
-    this.isTaskEditorVisible = false;    
+    this._refresh = refresh;
   }
 
-  public onClickAddActivity():void {
+  private _filter: ActivityFilter;
+  @Input()
+  set filter(filter: ActivityFilter) {
+    this._filter = filter;
+
+    this.projectUID = filter.project;
+
+    this.refreshData();
+  }
+  get filter(): ActivityFilter {
+    return this._filter;
+  }
+
+
+  constructor(private activityService: ActivityService) { }
+
+  public onCloseTaskEditorWindow(): void {
+    this.isTaskEditorVisible = false;
+  }
+
+  public onClickAddActivity(): void {
     alert("Esta operación se encuentra en desarrollo...");
 
   }
@@ -74,7 +72,7 @@ export class ProjectExplorerComponent {
     this.isTaskEditorVisible = true;
   }
 
-  public setSummaryCSSClass(level: number) : string {
+  public setSummaryCSSClass(level: number): string {
     switch (level) {
       case -1:
         return 'no-summary';
@@ -94,32 +92,24 @@ export class ProjectExplorerComponent {
 
   }
 
-  public onShowProcedureInfo(procedureUID: string): void {
-    this.procedureUID = procedureUID;
-    this.isVisibleProcedureInfo = true;
-  }
-
-  public onCloseProcedureInfoWindow(): void {
-    this.isVisibleProcedureInfo = false;
-  }
 
   public onUpdateActivity(activity: ActivityRef): void {
-     let index = this.taskList.findIndex(x => x.uid === activity.uid);
-     this.taskList[index] = activity;
-   }
+    let index = this.taskList.findIndex(x => x.uid === activity.uid);
+    this.taskList[index] = activity;
+  }
 
   public expandOrCollapse(parentUID: string): void {
-   let index = this.taskList.findIndex((e) => e.parent.uid === parentUID) - 1;
+    let index = this.taskList.findIndex((e) => e.parent.uid === parentUID) - 1;
 
-   if (this.taskList[index].visible === 'collapse') {
-    this.taskList[index].visible = 'expand';
-    this.changeExpandOrCollapseIcon('visible');
-    this.changeVisibility(parentUID, 'visible')
-   } else {
-    this.taskList[index].visible = 'collapse';
-    this.changeExpandOrCollapseIcon('collapse');
-    this.changeVisibility(parentUID, 'none');
-   }
+    if (this.taskList[index].visible === 'collapse') {
+      this.taskList[index].visible = 'expand';
+      this.changeExpandOrCollapseIcon('visible');
+      this.changeVisibility(parentUID, 'visible')
+    } else {
+      this.taskList[index].visible = 'collapse';
+      this.changeExpandOrCollapseIcon('collapse');
+      this.changeVisibility(parentUID, 'none');
+    }
 
   }
 
@@ -132,9 +122,9 @@ export class ProjectExplorerComponent {
   }
 
   private changeVisibility(parentUID, visibibility: string): void {
-    this.taskList.forEach((e)=>{
+    this.taskList.forEach((e) => {
       if (e.parent.uid === parentUID) {
-        if (e.type === 'ObjectType.ProjectObject.Summary') {
+        if (e.type === 'ObjectType.ProjectItem.Summary') {
           this.changeVisibility(e.uid, visibibility);
         }
         e.visible = visibibility;
@@ -147,11 +137,22 @@ export class ProjectExplorerComponent {
   }
 
   private async refreshData() {
-    await this.activitiyService.getActivities(this.projectUID)
-     .then((data) => {
-       this.taskList = data;
-       this.taskList.forEach(function(e) { if (e.type ==='ObjectType.ProjectObject.Summary'){ e.visible = 'collapse'} else {e.visible ='none'} });
-     });
+    await this.activityService.getActivities(this.projectUID)
+      .then((data) => {
+        this.taskList = data;
+        this.taskList.forEach(function (e) {
+          if (e.type === 'ObjectType.ProjectItem.Summary') {
+            e.visible = 'collapse'
+
+          } else if (e.type === 'ObjectType.ProjectItem.Activity' &&
+            e.parent.uid === 'Empty') {
+            e.visible = 'visible'
+
+          } else {
+            e.visible = 'none'
+          }
+        });
+      });
   }
 
   public allowDrop(ev: any): void {
@@ -161,51 +162,51 @@ export class ProjectExplorerComponent {
     ev.preventDefault();
   }
 
-  public drag(ev:any, data: any): void { 
-    ev.dataTransfer.setData("data", JSON.stringify(data));    
+  public drag(ev: any, data: any): void {
+    ev.dataTransfer.setData("data", JSON.stringify(data));
   }
 
-  public drop(ev:any, task:any): void {  
+  public drop(ev: any, task: any): void {
     ev.preventDefault();
     this.isDrag = false;
 
-    var data = ev.dataTransfer.getData("data"); 
-    
-    this.move(JSON.parse(data), task);      
+    var data = ev.dataTransfer.getData("data");
+
+    this.move(JSON.parse(data), task);
   }
 
   public enableDrag(): void {
-    this.isDrag = true;    
+    this.isDrag = true;
   }
 
-  private move(source: any, target:any): void {
-    let sourceIndex = this.taskList.findIndex((x) => x.uid === source.uid);
-    this.taskList.splice(sourceIndex,1);
+  private move(source: any, target: any): void {
+    // let sourceIndex = this.taskList.findIndex((x) => x.uid === source.uid);
+    // this.taskList.splice(sourceIndex,1);
 
-    source.parent.id = target.parent.id;
+    // source.parent.id = target.parent.id;
 
-    let targetIndex = this.taskList.findIndex((x) => x.uid === target.uid); 
-    this.taskList.splice(targetIndex,0,source);  
-    
-    this.dragIndex = targetIndex;
-    this.moveItem(source.id, targetIndex);
+    // let targetIndex = this.taskList.findIndex((x) => x.uid === target.uid); 
+    // this.taskList.splice(targetIndex,0,source);  
+
+    // this.dragIndex = targetIndex;
+    // this.moveItem(source.id, targetIndex);
   }
 
-  private moveItem(sourceId: number, index:number): void {
-    let childs = this.taskList.filter((x) => x.parent.id === sourceId);
-   
-    childs.forEach((child)=> {            
-      let childIndex = this.taskList.findIndex((x) => x.id === child.id);     
-      
-      if (this.dragIndex < childIndex) {
-        this.dragIndex++; 
-      }
+  private moveItem(sourceId: number, index: number): void {
+    // let childs = this.taskList.filter((x) => x.parent.id === sourceId);
 
-      this.taskList.splice(childIndex, 1);
-      this.taskList.splice(this.dragIndex,0,child);      
-      
-      this.moveItem(child.id,this.dragIndex);
-    } );
+    // childs.forEach((child)=> {            
+    //   let childIndex = this.taskList.findIndex((x) => x.id === child.id);     
+
+    //   if (this.dragIndex < childIndex) {
+    //     this.dragIndex++; 
+    //   }
+
+    //   this.taskList.splice(childIndex, 1);
+    //   this.taskList.splice(this.dragIndex,0,child);      
+
+    //   this.moveItem(child.id,this.dragIndex);
+    // } );
   }
 
 }
