@@ -45,7 +45,7 @@ export class ActivityService {
   }
 
   public getActivitiesListAsGantt(projectUID: string): Promise<Task[]> {
-    const path = `v1/project-management/projects/${projectUID}/activities/as-gantt`;
+    const path = `v1/project-management/projects/${projectUID}/as-gantt`;
 
     return this.core.http.get<Task[]>(path)
       .toPromise();
@@ -53,7 +53,7 @@ export class ActivityService {
   }
 
   public getActivities(projectUID: string): Promise<ActivityRef[]> {
-    const path = `v1/project-management/projects/${projectUID}/activities`;
+    const path = `v1/project-management/projects/${projectUID}/as-tree`;
 
     return this.core.http.get<ActivityRef[]>(path)
       .toPromise();
@@ -89,7 +89,7 @@ export class ActivityService {
       filterAsString = '?' + filter.toString();
     }
 
-    const path = `v1/project-management/projects/activities/as-work-list${filterAsString}`;
+    const path = `v1/project-management/projects/as-work-list${filterAsString}`;
 
     return this.core.http.get<any>(path)
   }
