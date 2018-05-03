@@ -151,6 +151,6 @@ export class ActivityService {
       return this.core.http.delete<any>(path)
                             .catch((e) => 
                               this.core.http.showAndReturn(e, ActivityServiceErr.GET_ACTIVITIES_AS_WORKLIST_ERR, null));
-    }
+  }
 
 }

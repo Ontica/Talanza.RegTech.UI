@@ -28,7 +28,7 @@ export class ActivityListComponent {
     private _filter : ActivityFilter = new ActivityFilter();
     @Input() 
     set filter(filter: ActivityFilter) {
-        if (filter) {
+        if ((filter)) {
             this._filter = filter;
             
             this.refreshData();
@@ -95,6 +95,15 @@ export class ActivityListComponent {
       
     }
 
+    public deleteTask(taskUID: string): void {
+      if (!taskUID) {       
+        return;
+      }  
+
+      this.activityService.deleteActivity(this.filter.project, taskUID)
+          .subscribe((x) => { this.refreshData();});
+    }
+
     public expandOrCollapse(parentUID: string): void {
         let index = this.taskList.findIndex((e) => e.parent.uid === parentUID) - 1;
     
@@ -150,6 +159,9 @@ export class ActivityListComponent {
       }
     
     private async refreshData() {
+      if (this.filter.project === ''){
+        return;
+      }
         await this.activityService.getActivities(this.filter.project)
           .then((data) => {
             this.taskList = data;

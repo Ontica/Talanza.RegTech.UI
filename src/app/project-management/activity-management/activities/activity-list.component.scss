@@ -98,4 +98,11 @@
     min-height: 48pt;
     height: auto;
     padding-left: 30pt;
-  }
+}
+
+.delete-icon-container {
+    margin-left:30px;
+}
+.delete-icon {
+    color: $red;
+}
