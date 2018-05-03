@@ -3,8 +3,8 @@
 <div *ngIf="!isAddActivityVisible">
   <div [ngSwitch]="selectedView">
     <project-explorer [filter]="filter" [refresh]="isRefreshWorkList" *ngSwitchCase="'activity-tree'"></project-explorer>
-    <gantt [filter]="filter" [config]="selectedScale" *ngSwitchCase="'gantt'"></gantt>
-    <project-explorer [filter]="filter" [refresh]="isRefreshWorkList" *ngSwitchDefault></project-explorer>
-    <activity-management [filter]="filter" *ngSwitchCase="'task'" ></activity-management>
+    <gantt [filter]="filter" [config]="selectedScale" *ngSwitchCase="'gantt'"></gantt>   
+    <activity-management [filter]="filter" *ngSwitchCase="'task'" ></activity-management> 
+    <activity-management [filter]="filter" *ngSwitchDefault ></activity-management>
   </div>
 </div>

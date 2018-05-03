@@ -1,4 +1,4 @@
-<div class="task-list-container">  
+<div class="task-list-container" *ngIf="filter.project !== ''">  
   <div class="task-list-header">
    <button class="btn-warning" (click)="onShowAddIntialTaskEditor()">Nueva</button> Tareas 
   </div> 
