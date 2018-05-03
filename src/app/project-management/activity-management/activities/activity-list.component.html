@@ -1,0 +1,53 @@
+<div class="task-list-container">  
+  <div class="task-list-header">
+   <button class="btn-warning" (click)="onShowAddIntialTaskEditor()">Nueva</button> Tareas 
+  </div> 
+  <div class="task-list">
+    <div class="add-task" *ngIf="isAddInitialTask">
+      <div>
+        <label>Tarea inicial:</label>
+        <input style="width:80%" type="text" class="text-box" #taskName>
+        <button class="btn-warning" (click)="addNewTask(0, taskName.value)">Agregar</button>
+        <button class="btn" (click)="hideAddIntialTaskEditor()">Cancelar</button>             
+      </div>
+    </div>
+
+    <div class="task-container" *ngFor="let task of taskList">
+      <div *ngIf="task.visible !== 'none'">  
+        <div [ngSwitch]="task.type" [ngClass]="setSummaryCSSClass(task.level || -1)"
+                [class.selected-row]= "selectedTaskUID === task.uid"> 
+          <div *ngSwitchCase=" 'ObjectType.ProjectItem.Summary' ">
+              <div class="row-options"></div>
+              <div class="task" >
+                  <a (click)="expandOrCollapse(task.uid) ">
+                      <i class="summary-icon "
+                       [ngClass]="task.visible==='collapse' ? 'fa fa-plus-circle' : 'fa fa-minus-circle' " aria-hidden="true ">
+                      </i>{{task.name}}
+                  </a>             
+              </div>              
+          </div>
+          
+          <div *ngSwitchCase=" 'ObjectType.ProjectItem.Activity' ">          
+            <div class="row-options"></div>
+            <div class="task" ><a (click)="onSelectTask(task)">{{task.name}}</a></div>
+            <div class="task-options" >                   
+              <a (click)="onShowAddTaskEditor(task.uid)"><i [ngClass]="isAddTask=== false ? 'fa fa-plus-circle' : 'fa fa-minus-circle' " aria-hidden="true "></i></a>       
+            </div>           
+          </div>         
+
+        </div>
+
+        <div class="add-task-editor" *ngIf="selectedTaskUID === task.uid">
+          <div  *ngIf="isAddTask">
+            <label>Nueva tarea:</label>
+            <input style="width:80%" type="text" class="text-box" #taskName>
+            <button class="btn-warning" (click)="addNewTask(task.position, taskName.value)">Agregar</button>            
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>  
+  
+</div>

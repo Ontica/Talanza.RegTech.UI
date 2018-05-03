@@ -28,6 +28,13 @@ export class ActivityService {
     return this.core.http.post<any[]>(path, activity);
   }
 
+  public addActivity(projectUID: string, activity:{name: string, position: number}): Observable<any> {
+                              
+    const path = `v1/project-management/projects/${projectUID}/activities`;
+
+    return this.core.http.post<any>(path, activity);
+  }
+
   public getActivity(itemId: number): Observable<any> {
     const path = `v1/project-management/activities/${itemId}`;
 

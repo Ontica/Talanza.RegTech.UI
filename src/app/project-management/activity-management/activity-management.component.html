@@ -1,0 +1,12 @@
+<div class="gs-container">
+  <div [class]="masterContainer">
+    <div style="height: 97%">
+      <activity-list [filter]="filter" (onSelectedTask)="displayTaskEditor($event)"></activity-list>
+    </div>
+  </div>
+  <div *ngIf="isDetailsContainerVisible" class="block-container right">
+    <div>
+
+    </div>
+  </div>
+</div>
