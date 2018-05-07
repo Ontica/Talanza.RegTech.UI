@@ -32,11 +32,21 @@
 
 .close-icon {    
     float: right;
-    color: $black;
+    color: $white;
+    text-align: center;
 }
 
 .close-icon:hover {    
   cursor: pointer;
 }
 
+.header {
+    background-color: $text-title;
+    color: white;
+    height: 28px;
+    margin: 3px 10px 3px 3px;
+}
 
+.header-title {
+   padding-left: 30px;
+}

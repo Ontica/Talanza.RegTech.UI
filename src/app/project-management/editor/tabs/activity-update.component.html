@@ -78,6 +78,7 @@
     </ng-container>
   </tr>
 </table>
+
 <div class="form-footer ">
   <table class="form ">
     <tr>
@@ -85,7 +86,7 @@
         <button class="btn " (click)="cancel() ">Cancelar</button>
       </td>
       <td *ngIf="_task.stage !=='Done' " class="text-align-right ">
-        <button class="btn-action " (click)="onUpdateTask() ">Guardar</button>
+       <!-- <button class="btn-action " (click)="onUpdateTask() ">Guardar</button>-->
       </td>
     </tr>
   </table>

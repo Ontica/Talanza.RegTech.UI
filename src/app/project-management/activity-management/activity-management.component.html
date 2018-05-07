@@ -5,8 +5,18 @@
     </div>
   </div>
   <div *ngIf="isDetailsContainerVisible" class="block-container right">
+    <div class="header">
+        <div><i class="fa fa-times close-icon" (click)="closeDetailsContainer()"></i></div>
+          <span class=".header-title">{{selectedTask.name}} </span>
+          
+    </div> 
     <div>
-
+     
+    </div>
+    <div>
+      <task-update  [task]="selectedTask" 
+      (onUpdateActivity)="updateActivity($event)"
+       (onCloseEvent)="closeDetailsContainer()"></task-update>
     </div>
   </div>
 </div>

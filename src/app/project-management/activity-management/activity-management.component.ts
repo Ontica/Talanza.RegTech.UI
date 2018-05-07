@@ -31,8 +31,8 @@ export class ActivityManagementComponent {
     public displayTaskEditor(task: ActivityRef): void {        
         if (task) {            
             this.selectedTask = task;
-
-            //this.showDetailsContainer();
+           
+            this.showDetailsContainer();
         }
     }
 
