@@ -24,6 +24,9 @@ export class ActivityListComponent {
     public selectedTaskUID = '';
 
     public isAddInitialTask = false;
+
+    public isDrag = false;
+    public dragIndex = 0;
     
     private _filter : ActivityFilter = new ActivityFilter();
     @Input() 
@@ -164,6 +167,7 @@ export class ActivityListComponent {
       }
         await this.activityService.getActivities(this.filter.project)
           .then((data) => {
+            
             this.taskList = data;
             
             this.taskList.forEach(function (e) {
@@ -179,6 +183,62 @@ export class ActivityListComponent {
               }
             });
         });
-     }  
-   
+    }
+    
+    public allowDrop(ev: any): void {
+      if (!this.isDrag) {
+        return;
+      }
+      ev.preventDefault();
+    }
+  
+    public drag(ev: any, data: any): void {
+      ev.dataTransfer.setData("data", JSON.stringify(data));
+    }
+  
+    public drop(ev: any, task: ActivityRef): void {
+      ev.preventDefault();
+      this.isDrag = false;
+  
+      var data = ev.dataTransfer.getData("data");
+  
+      this.moveActivity(JSON.parse(data), task);
+    }
+  
+    public enableDrag(): void {
+      this.isDrag = true;
+    }
+  
+    private moveActivity(source: ActivityRef, target: ActivityRef): void {
+      
+      let position: number = 0;
+
+      if (target.position > source.position) {
+        position = target.position + 1;  
+      } else {
+        position = target.position;
+      }                   
+      
+      this.activityService.moveActivity(source.project.uid, source.uid, position )
+        .subscribe((x) => {
+          this.reloadActivities();           
+      });       
+      
+    }
+
+    private reloadActivities(): void {
+
+      this.activityService.getActivities(this.filter.project)
+      .then((data) => {           
+        let taskList = data;            
+        taskList.forEach((e) => {
+            let index = this.taskList.findIndex((x) => x.uid === e.uid);
+            e.visible = this.taskList[index].visible;   
+        });
+       this.taskList = taskList; 
+    });
+
+  }
+  
+      
 }

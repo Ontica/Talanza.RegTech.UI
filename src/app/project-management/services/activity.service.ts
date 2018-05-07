@@ -53,7 +53,7 @@ export class ActivityService {
                             this.core.http.showAndReturn(e, ActivityServiceErr.POST_ADD_MANUAL_ACTIVITY_ERR, null));
   }
 
-  public addActivity(projectUID: string, activity:{name: string, position: number}): Observable<any> {
+  public addActivity(projectUID: string, activity:{name: string, position: number} ): Observable<any> {
                               
     const path = `v1/project-management/projects/${projectUID}/activities`;
 
@@ -104,6 +104,7 @@ export class ActivityService {
 
   public updateActivity(projectUID: string,
                         activityUID: string, task: TaskRef): Observable<ActivityRef> {
+                              
     const path = `v1/project-management/projects/${projectUID}/activities/${activityUID}`;
 
 
@@ -152,5 +153,20 @@ export class ActivityService {
                             .catch((e) => 
                               this.core.http.showAndReturn(e, ActivityServiceErr.GET_ACTIVITIES_AS_WORKLIST_ERR, null));
   }
+
+  public moveActivity(projectUID: string,
+      activityUID: string, position: number): Observable<ActivityRef> {
+            
+      const path = `v1/project-management/projects/${projectUID}/activities/${activityUID}`;
+      const body = {
+            position: position
+      }
+
+      return this.core.http.put<ActivityRef>(path, body)
+       .catch((e) => 
+          this.core.http.showAndReturn(e, ActivityServiceErr.PUT_UPDATE_ACTIVITY_ERR, null));
+ }
+
+ 
 
 }

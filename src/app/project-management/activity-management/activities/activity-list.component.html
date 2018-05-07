@@ -15,9 +15,13 @@
     <div class="task-container" *ngFor="let task of taskList">
       <div *ngIf="task.visible !== 'none'">  
         <div [ngSwitch]="task.type" [ngClass]="setSummaryCSSClass(task.level || -1)"
-                [class.selected-row]= "selectedTaskUID === task.uid"> 
+                [class.selected-row]= "selectedTaskUID === task.uid"
+                draggable="isDrag" (dragover)="allowDrop($event)"
+                (dragstart)="drag($event, task)" (drop)="drop($event, task)"> 
           <div *ngSwitchCase=" 'ObjectType.ProjectItem.Summary' ">
-              <div class="row-options"></div>
+              <div class="row-options">
+                <i class="fa fa-arrows drag-icon " aria-hidden="true " (mousedown)="enableDrag() "></i>
+              </div>
               <div class="task" >
                   <a (click)="expandOrCollapse(task.uid) ">
                       <i class="summary-icon "
@@ -28,7 +32,9 @@
           </div>
           
           <div *ngSwitchCase=" 'ObjectType.ProjectItem.Activity' ">          
-            <div class="row-options"></div>
+            <div class="row-options">
+              <i class="fa fa-arrows drag-icon " aria-hidden="true " (mousedown)="enableDrag() "></i>
+            </div>
             <div class="task" ><a (click)="onSelectTask(task)">{{task.name}}</a></div>
             <div class="task-options" >                   
               <a (click)="onShowAddTaskEditor(task.uid)"><i [ngClass]="isAddTask=== false ? 'fa fa-plus-circle' : 'fa fa-minus-circle' " aria-hidden="true "></i></a>       
