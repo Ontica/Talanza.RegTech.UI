@@ -53,11 +53,22 @@ export class ActivityService {
                             this.core.http.showAndReturn(e, ActivityServiceErr.POST_ADD_MANUAL_ACTIVITY_ERR, null));
   }
 
-  public addActivity(projectUID: string, activity:{name: string, position: number} ): Observable<any> {
+  public addActivity(projectUID: string, activity: {name: string, position?: number, parentUID?: string} ) : Observable<any> {
                               
     const path = `v1/project-management/projects/${projectUID}/activities`;
+    
+    let newActivity: object = null;
 
-    return this.core.http.post<any>(path, activity)
+    if (activity.parentUID) {
+      newActivity = {
+            name: activity.name,
+            parentUID: activity.parentUID
+      }
+    } else {
+      newActivity = activity;      
+    }    
+    
+    return this.core.http.post<any>(path, newActivity)
                          .catch((e) => 
                             this.core.http.showAndReturn(e, ActivityServiceErr.POST_ADD_MINIMAL_ACTIVITY_ERR, null));
   }
@@ -154,19 +165,32 @@ export class ActivityService {
                               this.core.http.showAndReturn(e, ActivityServiceErr.GET_ACTIVITIES_AS_WORKLIST_ERR, null));
   }
 
-  public moveActivity(projectUID: string,
-      activityUID: string, position: number): Observable<ActivityRef> {
+  public setNewPositionToActivity(projectUID: string, activityUID: string, position: number): Observable<ActivityRef> {
             
-      const path = `v1/project-management/projects/${projectUID}/activities/${activityUID}`;
+      const path = `v1/project-management/projects/${projectUID}/activities/${activityUID}`;     
+
       const body = {
-            position: position
-      }
+          position: position
+      }          
 
       return this.core.http.put<ActivityRef>(path, body)
        .catch((e) => 
           this.core.http.showAndReturn(e, ActivityServiceErr.PUT_UPDATE_ACTIVITY_ERR, null));
- }
+  }
+ 
+  public setNewParentToActivity(projectUID: string, activityUID: string,  parentUID: string): Observable<ActivityRef> {
+    
+    const path = `v1/project-management/projects/${projectUID}/activities/${activityUID}`;     
+    
+    const body = {
+          parentUID: parentUID        
+    }    
 
+    return this.core.http.put<ActivityRef>(path, body)
+       .catch((e) => 
+          this.core.http.showAndReturn(e, ActivityServiceErr.PUT_UPDATE_ACTIVITY_ERR, null));
+  }
+ 
  
 
 }

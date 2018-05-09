@@ -26,8 +26,7 @@ export class ActivityListComponent {
     public isAddInitialTask = false;
 
     public isDrag = false;
-    public dragIndex = 0;
-    
+        
     private _filter : ActivityFilter = new ActivityFilter();
     @Input() 
     set filter(filter: ActivityFilter) {
@@ -48,7 +47,7 @@ export class ActivityListComponent {
 
     public onSelectTask(task: ActivityRef): void {
         this.selectedTaskUID = task.uid;
-
+        
         this.onSelectedTask.emit(task);
     }
 
@@ -73,20 +72,22 @@ export class ActivityListComponent {
     public hideAddIntialTaskEditor(): void {
       this.isAddInitialTask= false;
     }
+    
 
    
-    public addNewTask(PreviousActivityPosition: number, taskName: string): void {
+    public addNewTask(parentTask: ActivityRef, taskName: string ): void {
       if (!taskName) {        
         return;
       }
 
-      let position = PreviousActivityPosition + 1;
+      let position = parentTask.position + 1;
       
       let newActivity = {
         name: taskName,
-        position: position,        
+        position: position,
+        parentUID: parentTask.uid        
       }
-      
+        
       this.hideAddTaskEditor();
         
       this.activityService.addActivity(this.filter.project, newActivity)
@@ -97,7 +98,7 @@ export class ActivityListComponent {
       
       
     }
-
+    
     public deleteTask(taskUID: string): void {
       if (!taskUID) {       
         return;
@@ -169,7 +170,7 @@ export class ActivityListComponent {
           .then((data) => {
             
             this.taskList = data;
-            
+           
             this.taskList.forEach(function (e) {
               if (e.type === 'ObjectType.ProjectItem.Summary') {
                 e.visible = 'collapse'
@@ -178,8 +179,8 @@ export class ActivityListComponent {
                 e.parent.uid === 'Empty') {
                 e.visible = 'visible'
     
-              } else {
-                e.visible = 'none'
+                } else {
+                e.visible = 'visible'; //'none'
               }
             });
         });
@@ -189,52 +190,77 @@ export class ActivityListComponent {
       if (!this.isDrag) {
         return;
       }
+      
       ev.preventDefault();
     }
   
-    public drag(ev: any, data: any): void {
-      ev.dataTransfer.setData("data", JSON.stringify(data));
+    public drag(ev: any, data: any): void {      
+      ev.dataTransfer.setData("data", JSON.stringify(data));      
     }
-  
-    public drop(ev: any, task: ActivityRef): void {
-      ev.preventDefault();
-      this.isDrag = false;
-  
-      var data = ev.dataTransfer.getData("data");
-  
-      this.moveActivity(JSON.parse(data), task);
-    }
-  
+
     public enableDrag(): void {
       this.isDrag = true;
     }
-  
-    private moveActivity(source: ActivityRef, target: ActivityRef): void {
-      
-      let position: number = 0;
 
-      if (target.position > source.position) {
-        position = target.position + 1;  
-      } else {
-        position = target.position;
-      }                   
+    public getSourceActivity(ev:any): ActivityRef {      
+      ev.preventDefault();
+
+      this.isDrag = false;
+  
+      let activity = JSON.parse(ev.dataTransfer.getData("data"));
+     
+      return activity;
+    }
+   
+    public moveActivityUp(ev:any, targetPosition: number): void {
       
-      this.activityService.moveActivity(source.project.uid, source.uid, position )
+      let sourceActivity = this.getSourceActivity(ev);  
+             
+      this.setNewPositionToActivity(sourceActivity, targetPosition);
+    }
+
+    public moveActivityDown(ev:any, targetPosition: number): void {
+      
+      let sourceActivity = this.getSourceActivity(ev);
+
+      let position = targetPosition + 1;  
+        
+      this.setNewPositionToActivity(sourceActivity, position);
+    }  
+    
+    public setActicityAsDaughter(ev:any, parentUID: string): void {
+      let sourceActivity = this.getSourceActivity(ev);
+
+      this.setNewParentToActivity(sourceActivity, parentUID);
+    }     
+
+    private setNewPositionToActivity(sourceActivity: ActivityRef, position: number): void {              
+      
+      this.activityService.setNewPositionToActivity(sourceActivity.project.uid, sourceActivity.uid, position)
         .subscribe((x) => {
-          this.reloadActivities();           
-      });       
+          this.reloadActivities();             
+      });
+    }
+
+    private setNewParentToActivity(sourceActivity: ActivityRef, parentUID: string): void { 
       
+      this.activityService.setNewParentToActivity(sourceActivity.project.uid, sourceActivity.uid, parentUID )
+        .subscribe((x) => {
+          this.reloadActivities();                  
+       });
     }
 
     private reloadActivities(): void {
 
       this.activityService.getActivities(this.filter.project)
-      .then((data) => {           
+      .then((data) => {   
         let taskList = data;            
+          
         taskList.forEach((e) => {
             let index = this.taskList.findIndex((x) => x.uid === e.uid);
             e.visible = this.taskList[index].visible;   
         });
+
        this.taskList = taskList; 
     });
 

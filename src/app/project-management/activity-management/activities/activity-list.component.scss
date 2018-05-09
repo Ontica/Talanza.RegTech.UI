@@ -30,13 +30,18 @@
    
 }
 
-.task-container:hover{  
+.task-container:hover {  
     border-top: solid 1px grey;
     border-bottom:solid 1px grey; 
     z-index:1000;
-    cursor: pointer;   
+    cursor: pointer;       
  }
 
+ .task-container:hover  i.drag-icon{
+    color: $gray;
+ }
+
+ 
  .task-container:nth-child(odd) {
     background-color: $grid-odd-background-color;
   }
@@ -71,8 +76,9 @@
   border-bottom: 2px solid $blue;
   border-top: 2px solid $blue;
   z-index:1000;
-  font-weight: 600;
+  font-weight: 600;    
 }
+
 
 .summary-level1 {   
     font-weight: 600;
@@ -119,12 +125,18 @@
   
   i.drag-icon {
     color: #f1f1f1;
-    font-size: 6pt;
+    font-size: 10pt;
     cursor: move;
   }
   
-  i.drag-icon:hover {
-    color: $blue;
-    cursor: move;
+  .row-top {
+    height:10px;     
+    border-bottom: 1px solid gray;
   }
 
+  .row-buttom {
+    height:10px; 
+    border-bottom: 1px solid gray;
+  }
+  
+  
