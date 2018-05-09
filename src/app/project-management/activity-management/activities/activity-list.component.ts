@@ -24,6 +24,7 @@ export class ActivityListComponent {
     public selectedTaskUID = '';
 
     public isAddInitialTask = false;
+    public isAddBrotherTask = false;
 
     public isDrag = false;
         
@@ -62,18 +63,43 @@ export class ActivityListComponent {
     public hideAddTaskEditor(): void {
       this.isAddTask = false;  
     }
-    
-    public onShowAddIntialTaskEditor(): void {
-      this.hideAddTaskEditor();
 
-      this.isAddInitialTask = true;
+    public hideAddTaskInPositionEditor(): void {
+      this.isAddBrotherTask = false;
+    }
+    
+    public onShowAddIntialTaskEditor(): void { 
+      if (this.selectedTaskUID === '') {
+        this.isAddInitialTask = true;
+      } else {
+        this.isAddBrotherTask = true;      
+      }
+      
+      this.hideAddTaskEditor();      
     }
 
     public hideAddIntialTaskEditor(): void {
       this.isAddInitialTask= false;
     }
-    
+        
+    public addNewTaskInPosition(position: number, taskName:string) {
+      if (!taskName) {        
+        return;
+      }
 
+      position = position + 1;
+
+      let newActivity = {
+        name: taskName,
+        position: position
+      }
+
+      this.activityService.addActivity(this.filter.project, newActivity)
+      .subscribe((x) => { this.hideAddIntialTaskEditor();                        
+                          this.isAddBrotherTask = false;
+                          this.refreshData();
+                        }); 
+    }
    
     public addNewTask(parentTask: ActivityRef, taskName: string ): void {
       if (!taskName) {        
@@ -91,8 +117,7 @@ export class ActivityListComponent {
       this.hideAddTaskEditor();
         
       this.activityService.addActivity(this.filter.project, newActivity)
-          .subscribe((x) => { this.hideAddIntialTaskEditor();
-                              this.hideAddTaskEditor();
+          .subscribe((x) => { this.hideAddTaskEditor();
                               this.refreshData();
                             }); 
       

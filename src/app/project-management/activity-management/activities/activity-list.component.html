@@ -3,11 +3,11 @@
    <button class="btn-warning" (click)="onShowAddIntialTaskEditor()">Nueva</button> Tareas 
   </div> 
   <div class="task-list">
-    <div class="add-task" *ngIf="isAddInitialTask">
+    <div class="add-task" *ngIf="(isAddInitialTask && selectedTaskUID === '')">
       <div>
         <label>Tarea inicial:</label>
         <input style="width:80%" type="text" class="text-box" #taskName>
-        <button class="btn-warning" (click)="addNewTask(0, taskName.value)">Agregar</button>
+        <button class="btn-warning" (click)="addNewTaskInPosition(0,taskName.value)">Agregar</button>
         <button class="btn" (click)="hideAddIntialTaskEditor()">Cancelar</button>             
       </div>
     </div>
@@ -41,7 +41,7 @@
             <div class="row-options">
               <i class="fa fa-arrows drag-icon " aria-hidden="true " (mousedown)="enableDrag() "></i>
             </div>
-            <div class="task" ><a (click)="onSelectTask(task)">{{task.name}}</a> Position:{{task.position}} Papa:{{task.parent.name}} </div>
+            <div class="task" ><a (click)="onSelectTask(task)">{{task.name}}</a></div>
             <div class="task-options" >                                
               <a (click)="onShowAddTaskEditor(task.uid)"><i [ngClass]="isAddTask=== false ? 'fa fa-plus-circle' : 'fa fa-minus-circle' " aria-hidden="true "></i></a>       
               <span class="delete-icon-container"><a (click)="deleteTask(task.uid)"><i class="fa fa-trash delete-icon"></i></a></span>
@@ -53,9 +53,15 @@
         
         <div class="add-task-editor" *ngIf="selectedTaskUID === task.uid">
           <div  *ngIf="isAddTask">
-            <label>Nueva tarea:</label>
+            <label>Tarea hija:</label>
             <input style="width:80%" type="text" class="text-box" #taskName (keyup.enter)="addNewTask(task, taskName.value)">
             <button class="btn-warning" (click)="addNewTask(task, taskName.value)">Agregar</button>            
+          </div>
+          <div  *ngIf="isAddBrotherTask">
+            <label>Nueva tarea:</label>
+            <input style="width:70%" type="text" class="text-box" #taskName (keyup.enter)="addNewTaskInPosition(task.position, taskName.value)">
+            <button class="btn-warning" (click)="addNewTaskInPosition(task.position, taskName.value)">Agregar</button>            
+            <button class="btn" (click)="hideAddTaskInPositionEditor()">Cancelar</button> 
           </div>
         </div>
 
