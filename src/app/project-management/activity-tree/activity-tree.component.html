@@ -1,75 +1,93 @@
 <div class="task-list-container" *ngIf="filter.project !== ''">
+
   <div class="task-list-header">
-    <button class="btn-warning" (click)="onShowAddIntialTaskEditor()">Nueva</button> Tareas
+    <button class="btn-warning" (click)="showInitialActivityInlineEditor()">Nueva</button>
+    Proyecto: {{filter.project}}
   </div>
+  
   <div class="task-list">
-    <div class="add-task" *ngIf="(isAddInitialTask && selectedTaskUID === '')">
+    <div *ngIf="(addFirstActivityEditorVisible && !hasSelectedActivities)" class="add-task">
       <div>
         <label>Tarea inicial:</label>
-        <input style="width:80%" type="text" class="text-box" #taskName>
-        <button class="btn-warning" (click)="addNewTaskInPosition(0,taskName.value)">Agregar</button>
-        <button class="btn" (click)="hideAddIntialTaskEditor()">Cancelar</button>
+        <input #txtActivityName type="text" 
+               class="text-box" style="width:80%">
+        <button class="btn-warning" (click)="insertActivity(txtActivityName.value)">Agregar</button>
+        <button class="btn" (click)="hideInlineEditors()">Cancelar</button>
       </div>
     </div>
 
-    <div class="task-container" *ngFor="let task of taskList">
-      <div *ngIf="task.visible !== 'none'">
-        <div class="row-top" draggable="isDrag" (dragover)="allowDrop($event)" (drop)="moveActivityUp($event, task.position)">
+    <!-- Drop area for the first position -->
+    <div class="activity-drop-by-position-area"
+        draggable="isDrag"
+        (dragover)="allowDrop($event)"
+        (drop)="moveActivity($event, 0)">
+    </div>
 
-        </div>
-        <div [ngSwitch]="task.type" [ngClass]="setSummaryCSSClass(task.level || -1)" [class.selected-row]="selectedTaskUID === task.uid"
-          draggable="isDrag" (dragover)="allowDrop($event)" (dragstart)="drag($event, task)" (drop)="setActicityAsDaughter($event, task.uid)">
+    <div class="task-row" *ngFor="let activity of taskList">
 
-          <div *ngSwitchCase="'ObjectType.ProjectItem.Summary'">
-            <div class="row-options">
-              <i class="fa fa-arrows drag-icon" aria-hidden="true" (mousedown)="enableDrag()"></i>
-            </div>
-            <div class="task">
-              <a (click)="expandOrCollapse(task.uid)">
-                <i class="summary-icon" [ngClass]="task.visible==='collapse' ? 'fa fa-plus-circle' : 'fa fa-minus-circle'" aria-hidden="true">
-                </i>{{task.name}}
+      <div [class.selected-row]="isActivitySelected(activity)"
+            draggable="isDrag"
+            (dragover)="allowDrop($event)"
+            (dragstart)="drag($event, activity)"
+            (drop)="moveActivityAsChildOf($event, activity.uid)">
+          <div class="row-options">
+            <i class="fa fa-arrows drag-icon" aria-hidden="true" (mousedown)="startDrag()"></i>
+          </div>
+
+          <div class="task">            
+            <a [ngClass]="activityNameClass(activity.level)"
+               [style.padding-left.pt]="activity.level * 10"
+               (click)="selectActivity(activity)">{{activity.name}}
+            </a>
+          </div>
+
+          <div class="task-options">
+
+            <a (click)="toggleAddChildEditor(activity)">
+              <i [ngClass]="addChildEditorVisible && isActivitySelected(activity) ? 'fa fa-minus-circle' : 'fa fa-plus-circle'" aria-hidden="true"></i>
+            </a>
+
+            <span class="delete-icon-container">
+              <a (click)="deleteTask(activity.uid)">
+                <i class="fa fa-trash delete-icon"></i>
               </a>
-            </div>
+            </span>
+
           </div>
 
-          <div *ngSwitchCase="'ObjectType.ProjectItem.Activity'">
+      </div>
 
-            <div class="row-options">
-              <i class="fa fa-arrows drag-icon" aria-hidden="true" (mousedown)="enableDrag()"></i>
-            </div>
-            <div class="task">
-              <a (click)="onSelectTask(task)">{{task.name}}</a>
-            </div>
-            <div class="task-options">
-              <a (click)="onShowAddTaskEditor(task.uid)">
-                <i [ngClass]="isAddTask === false ? 'fa fa-plus-circle' : 'fa fa-minus-circle'" aria-hidden="true"></i>
-              </a>
-              <span class="delete-icon-container">
-                <a (click)="deleteTask(task.uid)">
-                  <i class="fa fa-trash delete-icon"></i>
-                </a>
-              </span>
-            </div>
-          </div>
+      <div class="activity-drop-by-position-area"
+            draggable="isDrag"
+            (dragover)="allowDrop($event)"
+            (drop)="moveActivity($event, activity.position)">
+      </div>
 
+      <div class="add-task-editor" *ngIf="isActivitySelected(activity)">
+        
+        <div *ngIf="addChildEditorVisible">
+          <label>Tarea hija:</label>
+          <input #txtActivityName type="text"
+                 class="text-box" style="width:80%"
+                 (keyup.enter)="createChildActivity(txtActivityName.value, activity)">
+          <button class="btn-warning" (click)="createChildActivity(activity, txtActivityName.value)">Agregar</button>
+          <button class="btn" (click)="hideInlineEditors()">Cancelar</button>          
         </div>
-        <div class="row-buttom" draggable="isDrag" (dragover)="allowDrop($event)" (drop)="moveActivityDown($event, task.position)"></div>
 
-        <div class="add-task-editor" *ngIf="selectedTaskUID === task.uid">
-          <div *ngIf="isAddTask">
-            <label>Tarea hija:</label>
-            <input style="width:80%" type="text" class="text-box" #taskName (keyup.enter)="addNewTask(task, taskName.value)">
-            <button class="btn-warning" (click)="addNewTask(task, taskName.value)">Agregar</button>
-          </div>
-          <div *ngIf="isAddBrotherTask">
-            <label>Nueva tarea:</label>
-            <input style="width:70%" type="text" class="text-box" #taskName (keyup.enter)="addNewTaskInPosition(task.position, taskName.value)">
-            <button class="btn-warning" (click)="addNewTaskInPosition(task.position, taskName.value)">Agregar</button>
-            <button class="btn" (click)="hideAddTaskInPositionEditor()">Cancelar</button>
-          </div>
+        <div *ngIf="insertActivityEditorVisible">
+
+          <label>Nueva tarea:</label>
+          <input #txtActivityName type="text"
+                 class="text-box" style="width:70%"
+                 (keyup.enter)="insertActivity(txtActivityName.value, activity.position)">
+
+          <button class="btn-warning" (click)="insertActivity(txtActivityName.value, activity.position)">Agregar</button>
+          <button class="btn" (click)="hideInlineEditors()">Cancelar</button>
+          
         </div>
 
       </div>
+
     </div>
 
   </div>

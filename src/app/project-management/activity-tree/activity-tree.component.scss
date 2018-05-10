@@ -23,47 +23,46 @@
     overflow-x: hidden;
 }
 
-.task-container {
-    width:100%;
-    height: auto;
-    float: left;
-
+.task-row {
+  width: 100%;
+  height: 32px;
+  float: left;
 }
 
-.task-container:hover {
+.task-row:hover {
     border-top: solid 1px grey;
     border-bottom:solid 1px grey;
     z-index:1000;
     cursor: pointer;
  }
 
- .task-container:hover  i.drag-icon{
+ .task-row:hover  i.drag-icon{
     color: $gray;
  }
 
 
- .task-container:nth-child(odd) {
+ .task-row:nth-child(odd) {
     background-color: $grid-odd-background-color;
   }
 
-.task-container:nth-child(even) {
+.task-row:nth-child(even) {
     background-color: $grid-even-background-color;
   }
 
  .row-options {
-     width: 5%;
+     width: 30px;
      display: inline-block;
      vertical-align: top;
  }
 
 .task {
-    width: 80%;
+    width: 90%;
     display: inline-block;
 }
 
 .task-options {
+    width: 70px;
     vertical-align: top;
-    width: 10%;
     display: inline-block;
 }
 
@@ -80,35 +79,23 @@
 }
 
 
-.summary-level1 {
-    font-weight: 600;
-    font-size: 11pt;
-    height: 28pt;
-  }
+.activity-name-level-1 {
+  font-weight: 600;
+  font-size: 11pt;
+}
 
-.summary-level2 {
-    font-size: 10pt;
-    font-weight: 600;
-    height: 26pt;
-    padding-left: 15pt;
-  }
+.activity-name-level-2 {
+  font-size: 10pt;
+  font-weight: 600;
+}
 
-.summary-level3 {
-    font-size: 9pt;
-    height: 24pt;
-    font-weight: 600;
-    padding-left: 25pt;
-  }
-
-.no-summary {
-    padding-top: 12px;
-    min-height: 48pt;
-    height: auto;
-    padding-left: 30pt;
+.activity-name-level-3 {
+  font-size: 9pt;
+  font-weight: 600;
 }
 
 .delete-icon-container {
-    margin-left:30px;
+    margin-left: 30px;
 }
 .delete-icon {
     color: $red;
@@ -129,10 +116,7 @@
     cursor: move;
   }
 
-  .row-top {
-    height:10px;
-  }
-
-  .row-buttom {
-    height:10px;
+  .activity-drop-by-position-area {
+    height: 16px;
+    background-color: red;
   }

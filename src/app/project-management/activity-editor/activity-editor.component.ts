@@ -8,10 +8,12 @@
 
 import { Component, EventEmitter, HostBinding, Input, Output } from '@angular/core';
 
+import { Activity } from '../data-types/activity';
+
 import { TaskRef, EmptyTask, Tag } from '../data-types/task';
 
 import { PersonRef } from '../data-types/project';
-import { Activity } from '../data-types/activity';
+
 
 import { ActivityService } from '../services/activity.service';
 import { ProjectService } from '../services/project.service';

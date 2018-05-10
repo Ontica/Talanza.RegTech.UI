@@ -11,27 +11,25 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Activity, EmptyActivity } from '../data-types/activity';
 import { ActivityFilter } from '../data-types/activity-filter';
 
+import { ActivityTreeService } from '../services/activity.tree.service';
 import { ActivityService } from '../services/activity.service';
-
 
 @Component({
   selector: 'activity-tree',
   templateUrl: './activity-tree.component.html',
   styleUrls: ['./activity-tree.component.scss'],
-  providers: [ActivityService]
+  providers: [ActivityTreeService, ActivityService]
 })
-
 export class ActivityTreeComponent {
 
-  public isAddTask = false;
   public taskList: Activity[] = [];
-
-  public expanOrCollapseIcon = 'fa fa-minus-circle';
+  public selectedActivity: Activity = EmptyActivity();
 
   public selectedTaskUID = '';
 
-  public isAddInitialTask = false;
-  public isAddBrotherTask = false;
+  public addChildEditorVisible = false;
+  public addFirstActivityEditorVisible = false;
+  public insertActivityEditorVisible = false;
 
   public isDrag = false;
 
@@ -51,86 +49,105 @@ export class ActivityTreeComponent {
 
   @Output() public onSelectActivity = new EventEmitter<Activity>();
 
-  constructor(private activityService: ActivityService) { }
+  constructor(private activityTreeService: ActivityTreeService, 
+              private activityService: ActivityService) { }
 
-  public onSelectTask(task: Activity): void {
-    this.selectedTaskUID = task.uid;
 
-    this.onSelectActivity.emit(task);
+  public get hasSelectedActivities() {
+    return this.selectedTaskUID !== '';
   }
 
-  public onShowAddTaskEditor(taskUID: string): void {
-    this.hideAddIntialTaskEditor();
-
-    this.selectedTaskUID = taskUID;
-
-    this.isAddTask = !this.isAddTask;
+  public isActivitySelected(activity: Activity) {
+    return (activity.uid === this.selectedActivity.uid);
   }
 
-  public hideAddTaskEditor(): void {
-    this.isAddTask = false;
+  public selectActivity(activity: Activity): void {
+    this.selectedActivity = activity;
+
+    this.onSelectActivity.emit(activity);
+
+    this.selectedTaskUID = activity.uid;
   }
 
-  public hideAddTaskInPositionEditor(): void {
-    this.isAddBrotherTask = false;
+  public hideInlineEditors() {
+    this.addChildEditorVisible = false;
+    this.addFirstActivityEditorVisible = false;
+    this.insertActivityEditorVisible = false;  
   }
 
-  public onShowAddIntialTaskEditor(): void {
+  public toggleAddChildEditor(activity: Activity): void {
+    this.selectedTaskUID = activity.uid;
+
+    const newState = !this.addChildEditorVisible;
+
+    this.hideInlineEditors();
+
+    this.addChildEditorVisible = newState;
+  }
+
+  public showInitialActivityInlineEditor(): void {
+    this.hideInlineEditors();
+
     if (this.selectedTaskUID === '') {
-      this.isAddInitialTask = true;
+      this.addFirstActivityEditorVisible = true;
     } else {
-      this.isAddBrotherTask = true;
+      this.insertActivityEditorVisible = true;
     }
-
-    this.hideAddTaskEditor();
   }
 
-  public hideAddIntialTaskEditor(): void {
-    this.isAddInitialTask = false;
-  }
-
-  public addNewTaskInPosition(position: number, taskName: string) {
-    if (!taskName) {
+  public insertActivity(name: string, position?: number) {
+    if (!name) {
       return;
     }
+    if (position) {
+      position = position + 1;
+    } else {
+      position = 1;
+    }
 
-    position = position + 1;
-
-    let newActivity = {
-      name: taskName,
+    const activity = {
+      name: name,
       position: position
-    }
+    };
 
-    this.activityService.addActivity(this.filter.project, newActivity)
-      .subscribe((x) => {
-        this.hideAddIntialTaskEditor();
-        this.isAddBrotherTask = false;
-        this.refreshData();
-      });
+    this.activityTreeService.insertActivity(this.filter.project, activity)
+                             .subscribe((x) => {
+                                this.hideInlineEditors();
+                                this.refreshData();
+                             });
   }
 
-  public addNewTask(parentTask: Activity, taskName: string): void {
-    if (!taskName) {
+  public createChildActivity(name: string, parent: Activity): void {
+    if (!name) {
       return;
     }
 
-    let position = parentTask.position + 1;
+    const child = {
+      name: name,
+      parent: parent
+    };
 
-    let newActivity = {
-      name: taskName,
-      position: position,
-      parentUID: parentTask.uid
-    }
+    this.activityTreeService.createChild(this.filter.project, child)
+                            .subscribe((x) => {
+                                      this.hideInlineEditors();
+                                      this.refreshData();
+                            });
+  }
 
-    this.hideAddTaskEditor();
+  public moveActivity(ev: any, position: number): void {
 
-    this.activityService.addActivity(this.filter.project, newActivity)
-      .subscribe((x) => {
-        this.hideAddTaskEditor();
-        this.refreshData();
-      });
+    let sourceActivity = this.getSourceActivity(ev);    
+
+    position++;
+
+    this.setNewPositionToActivity(sourceActivity, position);
+  }
 
 
+  public moveActivityAsChildOf(ev: any, parentUID: string): void {
+    let sourceActivity = this.getSourceActivity(ev);
+
+    this.setNewParentToActivity(sourceActivity, parentUID);
   }
 
   public deleteTask(taskUID: string): void {
@@ -142,56 +159,19 @@ export class ActivityTreeComponent {
       .subscribe((x) => { this.refreshData(); });
   }
 
-  public expandOrCollapse(parentUID: string): void {
-    let index = this.taskList.findIndex((e) => e.parent.uid === parentUID) - 1;
-
-    if (this.taskList[index].visible === 'collapse') {
-      this.taskList[index].visible = 'expand';
-      this.changeExpandOrCollapseIcon('visible');
-      this.changeVisibility(parentUID, 'visible')
-    } else {
-      this.taskList[index].visible = 'collapse';
-      this.changeExpandOrCollapseIcon('collapse');
-      this.changeVisibility(parentUID, 'none');
-    }
-
-  }
-
-  private changeExpandOrCollapseIcon(changeVisibility: string) {
-    if (changeVisibility === 'collapse') {
-      this.expanOrCollapseIcon = 'fa fa-plus-circle';
-    } else {
-      this.expanOrCollapseIcon = 'fa fa-minus-circle';
-    }
-  }
-
-  private changeVisibility(parentUID, visibibility: string): void {
-    this.taskList.forEach((e) => {
-      if (e.parent.uid === parentUID) {
-        if (e.type === 'ObjectType.ProjectItem.Summary') {
-          this.changeVisibility(e.uid, visibibility);
-        }
-        e.visible = visibibility;
-      }
-    });
-  }
-
-  public setSummaryCSSClass(level: number): string {
+  public activityNameClass(level: number): string {
     switch (level) {
-      case -1:
-        return 'no-summary';
-
       case 1:
-        return 'summary-level1';
+        return 'activity-name-level-1';
 
       case 2:
-        return 'summary-level2';
+        return 'activity-name-level-2';
 
       case 3:
-        return 'summary-level3';
+        return 'activity-name-level-3';
 
       default:
-        return 'summary-level3';
+        return 'activity-name-level-3';
     }
 
   }
@@ -232,7 +212,7 @@ export class ActivityTreeComponent {
     ev.dataTransfer.setData("data", JSON.stringify(data));
   }
 
-  public enableDrag(): void {
+  public startDrag(): void {
     this.isDrag = true;
   }
 
@@ -244,28 +224,6 @@ export class ActivityTreeComponent {
     let activity = JSON.parse(ev.dataTransfer.getData("data"));
 
     return activity;
-  }
-
-  public moveActivityUp(ev: any, targetPosition: number): void {
-
-    let sourceActivity = this.getSourceActivity(ev);
-
-    this.setNewPositionToActivity(sourceActivity, targetPosition);
-  }
-
-  public moveActivityDown(ev: any, targetPosition: number): void {
-
-    let sourceActivity = this.getSourceActivity(ev);
-
-    let position = targetPosition + 1;
-
-    this.setNewPositionToActivity(sourceActivity, position);
-  }
-
-  public setActicityAsDaughter(ev: any, parentUID: string): void {
-    let sourceActivity = this.getSourceActivity(ev);
-
-    this.setNewParentToActivity(sourceActivity, parentUID);
   }
 
   private setNewPositionToActivity(sourceActivity: Activity, position: number): void {
@@ -299,6 +257,5 @@ export class ActivityTreeComponent {
       });
 
   }
-
 
 }

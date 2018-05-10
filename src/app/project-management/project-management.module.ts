@@ -23,7 +23,7 @@ import { ActivityTreeComponent } from './activity-tree/activity-tree.component';
 import { GanttComponent } from './gantt/gantt.component';
 import { GanttViewerComponent } from './gantt/gantt-viewer.component';
 
-import { ActivityEditorComponent } from './editor/activity-editor.component';
+import { ActivityEditorComponent } from './activity-editor/activity-editor.component';
 
 
 // Old version components
