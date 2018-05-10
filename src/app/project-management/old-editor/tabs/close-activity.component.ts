@@ -1,4 +1,12 @@
-import { Component, EventEmitter, Input,Output } from '@angular/core';
+/**
+* @license
+* Copyright (c) 2017-2018 La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
+*
+* See LICENSE.txt in the project root for complete license information.
+*
+*/
+
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 import { ClosedTask, EmptyClosedTask } from '../../data-types/task';
 import { Activity } from '../../data-types/activity';
@@ -6,13 +14,13 @@ import { Activity } from '../../data-types/activity';
 import { ActivityService } from '../../services/activity.service';
 
 @Component({
-  selector: 'task-close',
-  templateUrl: './activity-close.component.html',
-  styleUrls: ['./activity-close.component.scss'],
+  selector: 'close-activity',
+  templateUrl: './close-activity.component.html',
+  styleUrls: ['./close-activity.component.scss'],
   providers: [ActivityService]
 })
 
-export class ActivityCloseComponent {
+export class CloseActivityComponent {
 
   public endDate: Date = undefined;
   public isTaskClosed: boolean = false;
@@ -60,14 +68,14 @@ export class ActivityCloseComponent {
     alert('Por el momento no es posible reabrir tareas una vez que han sido cerradas, pero el administrador del sistema puede hacerlo.');
   }
 
-  private validateDueDate(): boolean {    
+  private validateDueDate(): boolean {
     let dueDate = new Date(this.activity.dueDate);
     let today = new Date();
 
     this.endDate = new Date(this.endDate);
 
     if (this.endDate > today) {
-      alert("La fecha de termino no puede ser posterior al día de hoy");
+      alert("La fecha de termino no puede ser posterior al día de hoy.");
       return false;
     }
 
@@ -79,9 +87,10 @@ export class ActivityCloseComponent {
 
     this.activityService.closeActivity(this.activity.project.uid, this.activity.uid, this.closedTask)
       .toPromise()
-      .then(x => { this.onCloseActivity.emit(x); 
-                   this.onClose(); 
-                 })
+      .then(x => {
+        this.onCloseActivity.emit(x);
+        this.onClose();
+      })
       .catch((e) => this.exceptionHandler(e, errMsg));
   }
 
@@ -100,7 +109,7 @@ export class ActivityCloseComponent {
     if (this.activity.stage === 'Done') {
       this.isTaskClosed = true;
     } else {
-      this.isTaskClosed = false;      
+      this.isTaskClosed = false;
     }
   }
 

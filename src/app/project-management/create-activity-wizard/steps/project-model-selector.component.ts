@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright (c) 2017 La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
+ * Copyright (c) 2017-2018 La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
  *
  * See LICENSE.txt in the project root for complete license information.
  *
@@ -14,13 +14,13 @@ import { EmptyActivity } from '../../data-types/activity';
 import { ProcessModelsService } from '../../services/process-models.service';
 
 @Component({
-  selector: 'worklist-activity',
-  templateUrl: './worklist-activity.component.html',
-  styleUrls: ['./worklist-activity.component.scss'],
+  selector: 'project-model-selector',
+  templateUrl: './project-model-selector.component.html',
+  styleUrls: ['./project-model-selector.component.scss'],
   providers:[ProcessModelsService]
 })
 
-export class WorklistActivityComponent {
+export class ProjectModelSelectorComponent {
 
   @Input() public processModel: ProcessModel;
 

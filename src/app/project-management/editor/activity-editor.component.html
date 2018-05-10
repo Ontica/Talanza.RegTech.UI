@@ -1,43 +1,93 @@
-<div class="editor-container editor-container-style">
+<table class="form">
+  <tr>
+    <td class="form-title form-title-text" colspan="2">Información general de la tarea o actividad</td>
+  </tr>
+  <tr>
+    <td>Nombre:</td>
+    <td>
+      <input type="text" [disabled]="isTaskClosed" class="text-box" [(ngModel)]="selectedTask.name">
+    </td>
+  </tr>
+  <tr>
+    <td>Observaciones:</td>
+    <td>
+      <textarea [disabled]="isTaskClosed" class="text-area" rows="5" cols="25" [(ngModel)]="selectedTask.notes"></textarea>
+    </td>
+  </tr>
+</table>
+<table class="form">
+  <tr>
+    <td class="form-title form-title-text" colspan="4">Responsable de la tarea y RAG status</td>
+  </tr>
+  <tr>
+    <td>Responsable:</td>
+    <td>
+      <select class="select-box" [disabled]="isTaskClosed" style="width:340px" [(ngModel)]="selectedTask.responsibleUID">
+        <option value="">( Seleccionar )</option>
+        <option value="Empty">No asignado</option>
+        <option *ngFor="let responsible of responsiblesList" [value]="responsible.uid">{{responsible.name}}</option>
+      </select>
+    </td>
+    <td>RAG status:</td>
+    <td class="text-align-right">
+      <select class="select-box" [disabled]="isTaskClosed" [(ngModel)]="selectedTask.ragStatus">
+        <option value="">( Seleccionar )</option>
+        <option value="Green">Verde</option>
+        <option value="Ambar">Ambar</option>
+        <option value="Orange">Naranja</option>
+        <option value="Red">Rojo</option>
+      </select>
+    </td>
+  </tr>
 
-  <div class="header">
-    <div class="close-button right-position" (click)="onClose()">&times;</div>
-    <div class="title">{{task.name}}</div>
-  </div>
+</table>
+<table class="form">
+  <tr>
+    <td class="form-title form-title-text" colspan="3">Etiquetas</td>
+  </tr>
+  <tr>
+    <td>Etiquetas:</td>
+    <td>
+      <autocomplete-control style='width:200px' [tags]="tags" [config]="{valueField: 'name'}" (selected)="onSelectedTags($event)"></autocomplete-control>
+    </td>
 
-  <div class="tab">
+    <td style="width:300px">
+      <chips [items]="selectedTags"></chips>
+    </td>
+  </tr>
+</table>
+<table class="form">
+  <tr>
+    <td class="form-title form-title-text" colspan="3">Fecha objetivo y fecha máxima de entrega</td>
+  </tr>
+  <tr>
+    <td>Fecha objetivo:</td>
+    <td>
+      <calendar-control [config]="{date:selectedTask.targetDate | date: 'dd-MM-yyyy'}" (onSelectedDate)="setSelectedDate($event)"></calendar-control>
+    </td>
+    <ng-container *ngIf="isNewTask">
+      <td class="text-align-right ">Fecha máxima de entrega: &nbsp;
+        <calendar-control (onSelectedDate)="selectedTask.startDate=$event"></calendar-control>
+      </td>
 
-    <button class="tab-links left-position" [disabled]="isDisabled"
-            [class.selected]="selectedTab==='generalInfo'"
-            (click)="selectTab('generalInfo')">Información general</button>
-
-    <ng-container *ngIf="task.procedure.uid !== 'Empty'">
-      <button class="tab-links left-position" [disabled]="isDisabled"
-              [class.selected]="selectedTab==='requirements'" 
-              (click)="selectTab('requirements')">Requisitos y documentos</button>
     </ng-container>
+    <ng-container *ngIf="!isNewTask">
+      <td class="text-align-right ">Fecha máxima de entrega: &nbsp;
+        <b>{{activity.dueDate | date: 'dd-MMM-yyyy'}}</b>
+      </td>
+    </ng-container>
+  </tr>
+</table>
 
-    <button class="tab-links left-position" [disabled]="isDisabled"
-            [class.selected]="selectedTab==='closeTask'"
-            (click)="selectTab('closeActivity')">
-            <span [innerHTML]="closeActivityLabel"> </span>
-    </button>
-
-  </div>
-
-  <div [ngSwitch]="selectedTab" class="form-frame">
-
-    <task-update *ngSwitchCase="'generalInfo'"
-                 [activity]="activity"
-                 (onUpdateActivity)="updateActivity($event)"
-                 (onCloseEvent)="onClose()"></task-update>
-
-    <task-close *ngSwitchCase="'closeActivity'"
-                [activity]="activity"
-                (onCloseActivity)="updateActivity($event)"
-                (onCloseEvent)="onClose()"></task-close>
-
-    <pe-requirements *ngSwitchCase="'requirements'"
-                     [procedureUID]="task.procedure.uid"></pe-requirements>
-  </div>
+<div class="form-footer">
+  <table class="form">
+    <tr>
+      <td>
+        <button class="btn " (click)="cancel() ">Cancelar</button>
+      </td>
+      <td *ngIf="activity.stage !=='Done'" class="text-align-right ">
+       <!-- <button class="btn-action " (click)="onUpdateTask() ">Guardar</button>-->
+      </td>
+    </tr>
+  </table>
 </div>

@@ -25,8 +25,8 @@ import { ActivityFilter, ViewConfig } from '../data-types/activity-filter';
                   -->
                 </div>
                 <div *ngIf="isActivityEditorWindowVisible" class="popup">                
-                  <!--<activity-editor [project]="project" [activityId]="activityId" (onCloseEvent)="onCloseActivityEditorWindow()">
-                  </activity-editor>-->
+                  <!--<old-activity-editor [project]="project" [activityId]="activityId" (onCloseEvent)="onCloseActivityEditorWindow()">
+                  </old-activity-editor>-->
                 </div>
                 `,
   providers: [ActivityService]

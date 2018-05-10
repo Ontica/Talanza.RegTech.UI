@@ -1,14 +1,47 @@
-<projects-filter (onChangeFilter)="onChangeFilter($event)" 
-                 (onChangeView)="onChangeView($event)"                 
-                 (onRefreshWorkList)="isRefreshWorkList=$event">
+<projects-filter (onChangeFilter)="onChangeFilter($event)"
+                 (onChangeView)="onChangeView($event)">
 </projects-filter>
 
-<div [ngSwitch]="viewConfig.viewType">
+<div class="gs-container">
 
-  <activity-management *ngSwitchCase="'activity-tree'" [filter]="filter" ></activity-management>     
+  <div [ngSwitch]="viewConfig.viewType" [class]="masterContainerClass">
 
-  <gantt *ngSwitchCase="'gantt'" [filter]="filter" [config]="viewConfig"></gantt>   
+    <div style="height: 97%">
 
-  <project-explorer *ngSwitchCase="'old-version'" [filter]="filter" [refresh]="isRefreshWorkList" ></project-explorer>
+      <activity-tree *ngSwitchCase="'activity-tree'"
+                    [filter]="filter"
+                    (onSelectActivity)="showEditor($event)">
+      </activity-tree>
+
+      <gantt *ngSwitchCase="'gantt'"
+             [filter]="filter"
+             [config]="viewConfig">
+      </gantt>
+
+      <old-project-tree *ngSwitchCase="'old-version'"
+                        [filter]="filter">
+      </old-project-tree>
+
+    </div>
+
+  </div>
+
+  <div *ngIf="displayEditor" class="block-container right">
+    <div class="header">
+      <div>
+        <i class="fa fa-times close-icon" (click)="closeEditor()"></i>
+      </div>
+      <span class=".header-title">{{selectedActivity.name}}</span>
+    </div>
+    <div>
+
+    </div>
+    <div>
+      <activity-editor [activity]="selectedActivity"
+                       (onUpdateActivity)="updateActivity($event)"
+                       (onCloseEvent)="closeEditor()">
+      </activity-editor>
+    </div>
+  </div>
 
 </div>

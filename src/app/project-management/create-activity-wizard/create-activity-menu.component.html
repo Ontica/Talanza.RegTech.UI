@@ -14,16 +14,16 @@
 
   <div [ngSwitch]="selectedOperation">
 
-    <task-update *ngSwitchCase="'addManual'"
+    <activity-editor *ngSwitchCase="'addManual'"
                  [activity]="task"
                  (onUpdateActivity)="updateActivity($event)"
                  (onCloseEvent)="onClose()">
-    </task-update>
+    </activity-editor>
 
-    <create-activity-wizard *ngSwitchCase="'addEvent'"
+    <create-activity-wizard-controller *ngSwitchCase="'addEvent'"
                   [project]="project"
                   (onCloseEvent)="onClose()">
-    </create-activity-wizard>
+    </create-activity-wizard-controller>
     
   </div>
 

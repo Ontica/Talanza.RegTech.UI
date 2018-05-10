@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright (c) 2017 La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
+ * Copyright (c) 2017-2018 La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
  *
  * See LICENSE.txt in the project root for complete license information.
  *
@@ -8,10 +8,10 @@
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule }   from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
 import { ControlsModule } from '../controls/controls.module';
- 
+
 import { ProcedureFilterComponent } from './main-page/procedures-filter.component';
 import { ProceduresMainPageComponent } from './main-page/procedures-main-page.component';
 
@@ -29,7 +29,6 @@ import { RequirementGridComponent } from './editor/requirement-grid.component';
 import { ProcedureViewerComponent } from './viewer/procedure-viewer.component';
 import { PVGeneralInfoComponent } from './viewer/sections/pv-general-info.component';
 import { PVRequirementsComponent } from './viewer/sections/pv-requirements.component';
-import { AddActivityComponent } from '../project-management/editor/tabs/add-activity.component';
 
 import { PERequirementsComponent } from './editor/sections/pe-requirements.component';
 
@@ -43,15 +42,15 @@ import { ProceduresRoutingModule } from './procedures-routing.module';
  */
 
 @NgModule({
-	imports: [ProceduresRoutingModule,  CommonModule, FormsModule, ControlsModule],
-	declarations: [ProceduresMainPageComponent, ProcedureFilterComponent, ProcedureEditorComponent,
-								 GeneralInfoTabComponent, RequirementsTabComponent, FilingConditionsTabComponent,
-								 FilingFeeTabComponent, StatusTabComponent, AddRequirementTabComponent,
-								 AddRequirementListTabComponent, RequirementTabComponent,  RequirementGridComponent,
-								 ProcedureViewerComponent, PVGeneralInfoComponent, PVRequirementsComponent,
-								 PERequirementsComponent, AddActivityComponent, ProceduresTableViewComponent,
-								 ProcedureInfoComponent],
-	exports: [ProceduresMainPageComponent, ProcedureViewerComponent, PERequirementsComponent, ProceduresTableViewComponent,
-			  ProcedureInfoComponent]
+  imports: [ProceduresRoutingModule, CommonModule, FormsModule, ControlsModule],
+  declarations: [ProceduresMainPageComponent, ProcedureFilterComponent, ProcedureEditorComponent,
+    GeneralInfoTabComponent, RequirementsTabComponent, FilingConditionsTabComponent,
+    FilingFeeTabComponent, StatusTabComponent, AddRequirementTabComponent,
+    AddRequirementListTabComponent, RequirementTabComponent, RequirementGridComponent,
+    ProcedureViewerComponent, PVGeneralInfoComponent, PVRequirementsComponent,
+    PERequirementsComponent, ProceduresTableViewComponent,
+    ProcedureInfoComponent],
+  exports: [ProceduresMainPageComponent, ProcedureViewerComponent, PERequirementsComponent, ProceduresTableViewComponent,
+    ProcedureInfoComponent]
 })
 export class ProceduresModule { }

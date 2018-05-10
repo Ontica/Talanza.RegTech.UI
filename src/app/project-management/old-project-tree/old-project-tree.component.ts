@@ -14,13 +14,13 @@ import { ActivityFilter } from '../data-types/activity-filter';
 import { ActivityService } from '../services/activity.service';
 
 @Component({
-  selector: 'project-explorer',
-  templateUrl: './project-explorer.component.html',
-  styleUrls: ['./project-explorer.component.scss'],
+  selector: 'old-project-tree',
+  templateUrl: './old-project-tree.component.html',
+  styleUrls: ['./old-project-tree.component.scss'],
   providers: [ActivityService]
 })
 
-export class ProjectExplorerComponent {
+export class OldProjectTreeComponent {
 
   public isTaskEditorVisible = false;
   public taskList: Activity[] = [];

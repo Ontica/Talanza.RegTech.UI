@@ -1,28 +1,15 @@
 @import "../../../styles/editor-window-style";
 @import "../../../styles/form";
-:host {
-  position: relative;
-  top: 160px;
-  left: 20%;
-}
-
-.editor-container {
-  height: 700px;
-  width: 760px;
-}
-
 .form-frame {
-  height: calc(100% - 140px);
+  height: 430px;
   overflow-y: auto;
 }
 
-.title {
-  min-height: 30pt;
-  max-height: 48pt;
-  width: 80%;
+.form {
+  width: 640px;
+  overflow-y: auto;
 }
 
-.tab {
-  margin-left: 20px;
-  width: 700px;
+.form-footer {
+  width: 660px;
 }

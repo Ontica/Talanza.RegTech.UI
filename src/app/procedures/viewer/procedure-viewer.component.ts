@@ -1,3 +1,11 @@
+/**
+ * @license
+ * Copyright (c) 2017-2018 La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
+ *
+ * See LICENSE.txt in the project root for complete license information.
+ *
+ */
+
 import { Component, EventEmitter, HostBinding,
          Input, Output } from '@angular/core';
 
@@ -12,10 +20,9 @@ import { ProcedureService } from '../services/procedure.service';
 })
 
 export class ProcedureViewerComponent {
+
   @HostBinding('style.display') public display = 'block';
   @HostBinding('style.position') public position = 'absolute';
-
-  @Input() config: object =  { isAddActivity: true }
 
   private _procedureUID: string = '';
 
@@ -33,7 +40,7 @@ export class ProcedureViewerComponent {
 
   @Output() public onCloseEvent = new EventEmitter();
 
-  public selectedTask: string = 'generalInfo';
+  public selectedTab: string = 'generalInfo';
   public procedure: Procedure;
 
   public constructor(private procedureService: ProcedureService) { }
@@ -42,12 +49,8 @@ export class ProcedureViewerComponent {
     this.onCloseEvent.emit();
   }
 
-  public setSelectedTask(selectedTask: string): void {
-    this.selectedTask = selectedTask;
-  }
-
-  public onCloseTaskEditor(): void {
-    this.onClose();
+  public selectTab(tab: string): void {
+    this.selectedTab = tab;
   }
 
   private loadProcedure(): void {

@@ -4,21 +4,21 @@ import { BrowserModule, DomSanitizer, SafeResourceUrl } from '@angular/platform-
 @Component({
   selector: 'viewer',
   template: `
-  <div class="editor-container editor-container-style">
-  <div class="header">
-    <div class="close-button right-position" (click)="onClose()">&times;</div>
-    <div class="title">Agregar actividad al proyecto: <b></b></div>
-    <div class="subtitle">Proyecto el dorado </div>
-  </div>
-  <div class="iframe-container">
-    <!--<iframe #modeler   class="iframe"  [src]=" url "></iframe>-->
-    <embed src="https://www.gob.mx/asea" width=100% height=100% />
-  </div>
-  </div>
-`,
-  styleUrls: ['./viewer.component.scss']
+    <div class="editor-container editor-container-style">
+    <div class="header">
+      <div class="close-button right-position" (click)="onClose()">&times;</div>
+      <div class="title">Agregar actividad al proyecto: <b></b></div>
+      <div class="subtitle">Proyecto el dorado </div>
+    </div>
+    <div class="iframe-container">
+      <!--<iframe #modeler   class="iframe"  [src]=" url "></iframe>-->
+      <embed src="https://www.gob.mx/asea" width=100% height=100% />
+    </div>
+    </div>
+  `,
+  styleUrls: ['./gantt-viewer.component.scss']
 })
-export class ViewerComponent {
+export class GanttViewerComponent {
 
   @HostBinding('style.display') public display = 'block';
   @HostBinding('style.position') public position = 'absolute';

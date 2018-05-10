@@ -1,3 +1,11 @@
+/**
+* @license
+* Copyright (c) 2017-2018 La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
+*
+* See LICENSE.txt in the project root for complete license information.
+*
+*/
+
 import { Component, EventEmitter, Output, OnInit } from '@angular/core';
 
 import { TaskRef, EmptyTask, Tag } from '../../data-types/task';

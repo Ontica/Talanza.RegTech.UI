@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright (c) 2017 La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
+ * Copyright (c) 2017-2018 La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
  *
  * See LICENSE.txt in the project root for complete license information.
  *
@@ -12,13 +12,13 @@ import { ProcessModel, EmptyProcessModel } from '../../data-types/project';
 import { ProcessModelsService } from '../../services/process-models.service'
 
 @Component({
-  selector:'select-type-activity',
-  templateUrl: './select-type-activity.component.html',
-  styleUrls: ['./select-type-activity.component.scss'],
+  selector:'activity-type-selector',
+  templateUrl: './activity-type-selector.component.html',
+  styleUrls: ['./activity-type-selector.component.scss'],
   providers:[ProcessModelsService]
 })
 
-export class SelectTypeActivityComponet implements OnInit {
+export class ActivityTypeSelectorComponent implements OnInit {
 
   public processModels: ProcessModel[];
   public filteredList: ProcessModel[];

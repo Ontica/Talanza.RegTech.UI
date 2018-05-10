@@ -4,8 +4,16 @@
 </div>
 <br>
 <div [ngSwitch]="step ">
-  <select-type-activity *ngSwitchCase="1 " (onSelectProcessModel)="onSelectProcessModel($event) "></select-type-activity>
-  <worklist-activity *ngSwitchCase="2 " [processModel]="processModel " [project]="project " [onAdd]="isAdd " (onCloseEvent)="onClose() "></worklist-activity>
+  <activity-type-selector *ngSwitchCase="1"
+                        (onSelectProcessModel)="onSelectProcessModel($event) ">
+  </activity-type-selector>
+
+  <project-model-selector *ngSwitchCase="2"
+                          [processModel]="processModel"
+                          [project]="project"
+                          [onAdd]="isAdd"
+                          (onCloseEvent)="onClose() ">
+  </project-model-selector>
 </div>
 
 <div class="form-footer border-top ">

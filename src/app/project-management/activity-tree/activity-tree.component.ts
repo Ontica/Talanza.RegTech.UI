@@ -49,14 +49,14 @@ export class ActivityTreeComponent {
     return this._filter;
   }
 
-  @Output() public onSelectedTask = new EventEmitter<Activity>();
+  @Output() public onSelectActivity = new EventEmitter<Activity>();
 
   constructor(private activityService: ActivityService) { }
 
   public onSelectTask(task: Activity): void {
     this.selectedTaskUID = task.uid;
 
-    this.onSelectedTask.emit(task);
+    this.onSelectActivity.emit(task);
   }
 
   public onShowAddTaskEditor(taskUID: string): void {

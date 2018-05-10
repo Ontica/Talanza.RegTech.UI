@@ -10,7 +10,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { EmptyProjectRef, PersonRef, ProjectRef, ResourceRef } from '../data-types/project';
 import { ActivityFilter, ViewConfig, DefaultViewConfig } from '../data-types/activity-filter';
-import { Activity } from '../data-types/activity';
+import { Activity, EmptyActivity } from '../data-types/activity';
 
 import { ProjectService } from '../services/project.service';
 import { ActivityService } from '../services/activity.service';
@@ -23,18 +23,22 @@ import { ActivityService } from '../services/activity.service';
   providers: [ProjectService, ActivityService]
 })
 
-export class ProjectsMainPageComponent {  
+export class ProjectsMainPageComponent {
 
   public viewConfig: ViewConfig = DefaultViewConfig();
   public filter: ActivityFilter = new ActivityFilter();
 
   public selectedProject: ProjectRef = EmptyProjectRef();
-  public taskList: Activity[] = [];  
+  public taskList: Activity[] = [];
+  public selectedActivity = EmptyActivity();
 
-  public isRefreshWorkList = false;
+  public masterContainerClass = 'centered-container';
+  public displayEditor = false;
 
   public constructor(private projectService: ProjectService,
-                     private activityService: ActivityService) {}
+                     private activityService: ActivityService) {
+
+  }
 
 
   public onChangeFilter(receivedFilter: ActivityFilter) {
@@ -44,6 +48,22 @@ export class ProjectsMainPageComponent {
 
   public onChangeView(viewConfig: ViewConfig): void {
     this.viewConfig = viewConfig;
+  }
+
+  public showEditor(activity: Activity): void {
+    if (activity) {
+      this.selectedActivity = activity;
+
+      this.masterContainerClass = 'block-container';
+
+      this.displayEditor = true;
+    }
+  }
+
+  public closeEditor(): void {
+    this.masterContainerClass = 'centered-container';
+
+    this.displayEditor = false;
   }
 
 }
