@@ -17,7 +17,7 @@ export interface KeyValue {
   name: string
 }
 
-export interface ActivityRef {
+export interface Activity {
   uid: string,
   type: string,
   name: string,
@@ -45,33 +45,23 @@ export function EmptyParent() {
     uid: '',
     type: '',
     name: ''
-  }
+  };
 
   return parent;
 }
 
-export function EmptyProcedure() {
-  const procedure: Procedure = {
-    uid: '',
-    name: '',
-    code: '',
-    entity: ''
-  }
-
-  return procedure;
-}
 
 export function EmptyKeyValue() {
   const keyValue: KeyValue = {
     uid: '',
     name: ''
-  }
+  };
 
   return keyValue;
 }
 
-export function EmptyActivityRef() {
-  const activity: ActivityRef = {
+export function EmptyActivity() {
+  const activity: Activity = {
     uid: '',
     type: '',
     name: '',
@@ -89,8 +79,9 @@ export function EmptyActivityRef() {
     ragStatus: '',
     stage: '',
     status: '',
+    
     visible: ''
-  }
+  };
 
   return activity;
 }

@@ -6,44 +6,47 @@
 *
 */
 
-import { Component, EventEmitter, HostBinding, Input,
-         Output } from '@angular/core';
+import {
+  Component, EventEmitter, HostBinding, Input,
+  Output
+} from '@angular/core';
 
 import { TaskRef } from '../data-types/task';
 
-import { ActivityRef } from '../data-types/activity';
+import { Activity } from '../data-types/activity';
 
 @Component({
   selector: 'activity-editor',
   templateUrl: './activity-editor.component.html',
-  styleUrls: ['./activity-editor.component.scss'],  
+  styleUrls: ['./activity-editor.component.scss'],
 })
 
 export class ActivityEditorComponent {
+
   @HostBinding('style.display') public display = 'block';
   @HostBinding('style.position') public position = 'absolute';
 
-  private _task: ActivityRef;
+  private _activity: Activity;
   @Input()
-  set task(task: ActivityRef) {
-    this._task = task;
-   
-    this.setConcludedTaskLabel();
+  set activity(activity: Activity) {
+    this._activity = activity;
+
+    this.setCloseActivityLabel();
   }
-  get task(): ActivityRef {
-    return this._task;
+  get activity(): Activity {
+    return this._activity;
   }
 
   @Output() public onCloseEvent = new EventEmitter();
-  @Output() public onUpdateActivity = new EventEmitter<ActivityRef>();
+  @Output() public onUpdateActivity = new EventEmitter<Activity>();
 
-  public selectedTask: string = 'generalInfo';  
-  public concluededTaskLabel = '';
+  public selectedTab: string = 'generalInfo';
+  public closeActivityLabel = '';
 
   public constructor() { }
-  
-  public setSelectedTask(selectedTask: string): void {
-    this.selectedTask = selectedTask;  
+
+  public selectTab(tab: string): void {
+    this.selectedTab = tab;
   }
 
   public cancel(): void {
@@ -52,18 +55,20 @@ export class ActivityEditorComponent {
 
   public onClose(): void {
     this.onCloseEvent.emit();
-  } 
+  }
 
-  public updateActivity(activity: ActivityRef): void {       
+  public updateActivity(activity: Activity): void {
     this.onUpdateActivity.emit(activity);
+
     this.onClose();
   }
 
-  private setConcludedTaskLabel(): void {
-    if (this.task.stage === 'Done') {
-      this.concluededTaskLabel = '<i class="fa fa-check-circle" aria-hidden="true"></i> Tarea concluida';
+  private setCloseActivityLabel(): void {
+    if (this.activity.stage === 'Done') {
+      this.closeActivityLabel = '<i class="fa fa-check-circle" aria-hidden="true"></i> Tarea concluida';
+
     } else {
-      this.concluededTaskLabel = 'Concluir tarea';
+      this.closeActivityLabel = 'Concluir tarea';
     }
 
   }

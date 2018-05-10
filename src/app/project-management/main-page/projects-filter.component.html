@@ -26,10 +26,10 @@
       <button class="btn" style="width:55px;" (click)="onSearch()">Buscar</button>
     </td>
     <td colspan="2">
-      <button type="button" class="btn-warning align-center" style="width:185px" (click)="onClickAddActivity()">+ Agregar obligaciones</button>
+      <a (click)="cleanFilter()">Limpiar filtros</a>
     </td>
     <td colspan="4">
-      <a (click)="cleanFilter()">Limpiar filtros</a>
+      &nbsp;
     </td>
   </tr>
   <tr>
@@ -42,18 +42,22 @@
     </td>
     <td>Etiqueta:</td>
     <td>
-      <autocomplete-control [tags]="labelsList" [isWritable]="false" [config]="{valueField: 'name'}" (selected)="onChangeSelectedTags($event)"></autocomplete-control>
+      <autocomplete-control [tags]="labelsList"
+                            [isWritable]="false"
+                            [config]="{valueField: 'name'}"
+                            (selected)="onChangeSelectedTags($event)">
+      </autocomplete-control>
     </td>
     <td>Responsable:</td>
     <td>
-      <select style="width:180px" class="select-box" #responsible (change)="changeFilter() " [(ngModel)]="filter.responsible ">
+      <select class="select-box" style="width:180px" #responsible (change)="changeFilter()" [(ngModel)]="filter.responsible">
         <option value="">( Todos ) </option>
-        <option *ngFor="let responsible of responsiblesList " [value]="responsible.uid ">{{responsible.name}}</option>
+        <option *ngFor="let responsible of responsiblesList " [value]="responsible.uid">{{responsible.name}}</option>
       </select>
     </td>
     <td>Ordenar por:</td>
     <td>
-      <select style="width:136px " class="select-box " #orderBy (change)="changeFilter()" [(ngModel)]="filter.orderBy">
+      <select class="select-box" style="width:136px" (change)="changeFilter()" [(ngModel)]="filter.orderBy" >
         <option value="">( No ordenar )</option>
         <option value="DueDate">Fecha Máx de Entrega</option>
         <option value="TargetDate">Fecha Objetivo</option>
@@ -63,25 +67,22 @@
     </td>
     <td>Vista:</td>
     <td>
-      <select style="width:146px " class="select-box " (change)="changeDislpayFilter() " [(ngModel)]="displayFilter.selectedView">
-        <option value="project-explorer">Etapas / actividades</option>
-        <option value="task">Lista tareas</option>
+      <select class="select-box" style="width:146px" (change)="changeView()" [(ngModel)]="viewConfig.viewType">
+        <option value="activity-tree">Actividades</option>
+        <option value="tasks-list">Lista de tareas</option>
         <option value="gantt">Gantt</option>
         <option value="kanban">Kanban</option>
         <option value="calendar">Calendario</option>
+        <option value="old-version">Versión anterior</option>
       </select>
     </td>
     <td>Escala:</td>
     <td>
-      <select style="width:98px " class="select-box " (change)="changeDislpayFilter() " [(ngModel)]="displayFilter.selectedScale ">
+      <select class="select-box" style="width:98px" (change)="changeView()" [(ngModel)]="viewConfig.timeScaleUnit">
         <option value="quarters">Trimestral</option>
         <option value="months">Mensual</option>
         <option value="weeks">Semanal</option>
       </select>
     </td>
   </tr>
-
 </table>
-<div *ngIf="isAddActivityEditorWindowVisible " class="popup ">
-  <create-activity-menu [project]="selectedProject " (onCloseEvent)="onCloseAddActivityEditorWindow()"></create-activity-menu>
-</div>

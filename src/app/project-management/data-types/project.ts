@@ -34,22 +34,6 @@ export interface PersonRef {
   name: string;
   shortName: string;
 }
-
-export interface Activity {
-   completionProgress: number,
-   estimatedStart: Date,
-   estimatedEnd: Date,
-   estimatedDuration: string,
-   name: string,
-   notes: string,
-   parentId: number,
-   resourceUID: string,   
-   responsibleUID:string,
-   requestedTime: Date,
-   requestedByUID:string
-   isMilestone: boolean,
-   createSubproject: boolean,
-}
  
 export interface TaskRef {
    completionProgress: number,
@@ -76,26 +60,6 @@ export function EmptyProjectRef() {
   return empty;
 }
 
-export function EmptyActivity() {
-  const empty: Activity = {   
-   completionProgress: 0,
-   estimatedStart: new Date(),
-   estimatedEnd: new Date(),
-   estimatedDuration: '',
-   name: '',
-   notes: '',
-   parentId: -1,
-   resourceUID: '',   
-   responsibleUID: '',
-   requestedTime: new Date(),
-   requestedByUID: '',
-   isMilestone: false,
-   createSubproject: false
-  }
-
-  return empty;
-}
-
 export function EmptyProcessModel() {
   const empty: ProcessModel = {
     uid: '',
@@ -106,4 +70,3 @@ export function EmptyProcessModel() {
 
   return empty;
 }
-

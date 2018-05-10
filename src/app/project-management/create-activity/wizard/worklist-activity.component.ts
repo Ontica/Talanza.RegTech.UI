@@ -7,9 +7,9 @@
  */
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
-import { ProcessModel } from '../../data-types/project';
+import { ProjectRef, ProcessModel} from '../../data-types/project';
 
-import { EmptyActivity, ProjectRef } from '../../data-types/project';
+import { EmptyActivity } from '../../data-types/activity';
 
 import { ProcessModelsService } from '../../services/process-models.service';
 

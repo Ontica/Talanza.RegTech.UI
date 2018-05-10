@@ -11,7 +11,7 @@ import { Component, EventEmitter, HostBinding, Input, Output } from '@angular/co
 import { TaskRef, EmptyTask, Tag } from '../../data-types/task';
 
 import { PersonRef } from '../../data-types/project';
-import { ActivityRef } from '../../data-types/activity';
+import { Activity } from '../../data-types/activity';
 
 import { ActivityService } from '../../services/activity.service';
 import { ProjectService } from '../../services/project.service';
@@ -35,27 +35,33 @@ export class ActivityUpdateComponent {
 
   public isNewTask = false;
 
-  public _task: ActivityRef;
+  public _task: Activity;
   @Input()
-  set task(task: ActivityRef) {
+  set activity(task: Activity) {
     this._task = task;
+
     this.loadInitialValues();
+
     if (task.uid === '') {
       this.isNewTask = true;
+    
     } else {
       this.isNewTask = false;
       this.loadActivityInitialValues();
     }
   }
-  get task(): ActivityRef {
+
+  get activity(): Activity {
     return this._task;
   }
 
   @Output() public onCloseEvent = new EventEmitter();
-  @Output() public onUpdateActivity = new EventEmitter<ActivityRef>();
+  @Output() public onUpdateActivity = new EventEmitter<Activity>();
 
   public constructor(private activityService: ActivityService,
-    private projectService: ProjectService) { }
+                     private projectService: ProjectService) {
+
+  }
 
   public cancel(): void {
     this.onClose();
@@ -69,7 +75,9 @@ export class ActivityUpdateComponent {
     if (!this.validateTargetDate()) {
       return;
     }
+
     this.setSelectedTags();
+
     if (this.isNewTask) {
       await this.addTask();
     } else {
@@ -79,14 +87,19 @@ export class ActivityUpdateComponent {
 
   public async loadInitialValues() {
     await this.loadTags();
+
     this.loadLists();
   }
 
   public async loadActivityInitialValues() {
     this.loadSelectedTask();
+
     await this.loadTags();
+
     this.loadSelectedTags();
+
     this.setIsTaskClosed();
+
     this.loadLists();
   }
 
@@ -103,8 +116,7 @@ export class ActivityUpdateComponent {
   }
 
   public setSelectedDate(date: string): void {
-    let aux = this.parseDate(date);
-    this.selectedTask.targetDate = aux;
+    this.selectedTask.targetDate = this.parseDate(date);
   }
 
   private loadLists(): void {
@@ -113,20 +125,20 @@ export class ActivityUpdateComponent {
 
   private loadSelectedTask(): void {
 
-    this.selectedTask.name = this.task.name;
-    this.selectedTask.notes = this.task.notes;
-    this.selectedTask.responsibleUID = this.task.responsible.uid;
-    this.selectedTask.targetDate = this.task.targetDate;
-    this.selectedTask.requestedTime = this.task.startDate;
-    this.selectedTask.startDate = this.task.startDate;
-    this.selectedTask.ragStatus = this.task.ragStatus;
-    this.selectedTask.tags = this.task.tags;
+    this.selectedTask.name = this.activity.name;
+    this.selectedTask.notes = this.activity.notes;
+    this.selectedTask.responsibleUID = this.activity.responsible.uid;
+    this.selectedTask.targetDate = this.activity.targetDate;
+    this.selectedTask.requestedTime = this.activity.startDate;
+    this.selectedTask.startDate = this.activity.startDate;
+    this.selectedTask.ragStatus = this.activity.ragStatus;
+    this.selectedTask.tags = this.activity.tags;
   }
 
   private loadResponsiblesList(): void {
     const errMsg = 'Ocurrió un problema al intentar leer la lista de responsables.';
 
-    this.projectService.getResponsiblesList(this.task.project.uid)
+    this.projectService.getResponsiblesList(this.activity.project.uid)
       .toPromise()
       .then((x) => this.responsiblesList = x)
       .catch((e) => this.exceptionHandler(e, errMsg));
@@ -135,7 +147,7 @@ export class ActivityUpdateComponent {
   private async updateTask() {
     const errMsg = 'Ocurrió un problema al intentar actualizar la actividad.';
 
-    await this.activityService.updateActivity(this.task.project.uid, this.task.uid, this.selectedTask)
+    await this.activityService.updateActivity(this.activity.project.uid, this.activity.uid, this.selectedTask)
       .toPromise().then((x) => {
         this.onUpdateActivity.emit(x);
         this.onClose();
@@ -175,10 +187,11 @@ export class ActivityUpdateComponent {
   }
 
   private setSelectedTags(): void {
-    this.selectedTask.tags = this.selectedTags.filter(x => x.selected === true).map(x => x.name);
+    this.selectedTask.tags = this.selectedTags.filter(x => x.selected === true)
+                                              .map(x => x.name);
   }
 
-  private loadSelectedTags(): void {
+  private loadSelectedTags(): void {    
     this.selectedTask.tags.forEach(x => {
       this.selectedTag(x);
     });
@@ -188,11 +201,12 @@ export class ActivityUpdateComponent {
 
   private selectedTag(tag: string): void {
     let index = this.tags.findIndex((x) => x.name === tag);
+
     this.tags[index].selected = true;
   }
 
   private setIsTaskClosed(): void {
-    if (this.task.stage === 'Done') {
+    if (this.activity.stage === 'Done') {
       this.isTaskClosed = true;
     } else {
       this.isTaskClosed = false;
@@ -201,7 +215,7 @@ export class ActivityUpdateComponent {
 
   private validateTargetDate(): boolean {
     let targetDate = new Date(this.selectedTask.targetDate);
-    let dueDate = new Date(this.task.dueDate);
+    let dueDate = new Date(this.activity.dueDate);
     let today = new Date();
 
 

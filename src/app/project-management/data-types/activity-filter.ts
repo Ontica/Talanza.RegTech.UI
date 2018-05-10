@@ -1,3 +1,25 @@
+/**
+ * @license
+ * Copyright (c) 2017-2018 La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
+ *
+ * See LICENSE.txt in the project root for complete license information.
+ *
+ */
+
+export class ViewConfig {
+  viewType: string;
+  ganttConfig: string;
+  timeScaleUnit: string;
+}
+
+export function DefaultViewConfig(): ViewConfig {
+  return {
+    viewType: 'activity-tree',
+    ganttConfig: 'ganttWeeks',
+    timeScaleUnit: 'quarters',
+  };
+}
+
 export class ActivityFilter {
   public contract: string;
   public project: string;
@@ -7,12 +29,12 @@ export class ActivityFilter {
   public keywords: string;
   public orderBy: string;
 
-  constructor()  {
+  constructor() {
     this.clean();
   }
 
   public clean(): void {
-    this.contract= '';
+    this.contract = '';
     this.project = '';
     this.stage = '';
     this.tags = [];
@@ -31,10 +53,10 @@ export class ActivityFilter {
     clone.responsible = this.responsible;
     clone.keywords = this.keywords;
     clone.orderBy = this.orderBy;
-    
+
     return clone;
   }
-  
+
   public toString(): string {
     let filter = '';
 
@@ -47,8 +69,8 @@ export class ActivityFilter {
     if ((this.stage !== '')) {
       filter = this.addFilterConnector(filter) + "stage=" + this.stage;
     }
-    if ((this.tags.length !== 0)) {     
-      this.tags.forEach((x) => { 
+    if ((this.tags.length !== 0)) {
+      this.tags.forEach((x) => {
         filter = this.addFilterConnector(filter) + "tag=" + x;
       })
     }
@@ -63,13 +85,12 @@ export class ActivityFilter {
     }
     return filter;
   }
- 
+
   private addFilterConnector(filter: string): string {
     if (filter !== '') {
       filter += '&';
     }
     return filter;
   }
-
 
 }

@@ -9,7 +9,7 @@
 import { Component } from '@angular/core';
 
 import { InboxFilter } from '../data-types/inbox-filter';
-import { ActivityRef } from '../../project-management/data-types/activity';
+import { Activity } from '../../project-management/data-types/activity';
 
 import { ProjectService } from '../../project-management/services/project.service';
 import { ActivityService } from '../../project-management/services/activity.service';

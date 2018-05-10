@@ -31,7 +31,7 @@ import { WorklistActivityComponent } from './create-activity/wizard/worklist-act
 import { CreateActivityWizard } from './create-activity/wizard/create-activity.wizard';
 
 import { ActivityManagementComponent } from './activity-management/activity-management.component';
-import { ActivityListComponent } from './activity-management/activities/activity-list.component';
+import { ActivityTreeComponent } from './activity-tree/activity-tree.component';
 
 import { ProjectsFilterComponent } from './main-page/projects-filter.component';
 
@@ -47,7 +47,7 @@ import { ProjectsFilterComponent } from './main-page/projects-filter.component';
                  ProjectsMainPageComponent, GanttComponent, ViewerComponent,
                  ActivityUpdateComponent, ProjectsFilterComponent,
                  CreateActivityMenuComponent, SelectTypeActivityComponet, WorklistActivityComponent,
-                 CreateActivityWizard, ActivityManagementComponent, ActivityListComponent ],
+                 CreateActivityWizard, ActivityManagementComponent, ActivityTreeComponent],
   exports: [ProjectExplorerComponent, ActivityEditorComponent,
             ProjectsMainPageComponent, GanttComponent]
 })

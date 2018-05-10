@@ -1,6 +1,13 @@
+/**
+ * @license
+ * Copyright (c) 2017-2018 La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
+ *
+ * See LICENSE.txt in the project root for complete license information.
+ *
+ */
 import { Component, Input } from '@angular/core';
 
-import { ActivityRef, EmptyActivityRef } from '../data-types/activity'; 
+import { Activity, EmptyActivity } from '../data-types/activity'; 
 import { ActivityFilter } from '../data-types/activity-filter';
 
 @Component({
@@ -15,7 +22,7 @@ export class ActivityManagementComponent {
     
     public isDetailsContainerVisible = false;
     
-    public selectedTask = EmptyActivityRef();
+    public selectedTask = EmptyActivity();
    
     private _filter : ActivityFilter = new ActivityFilter();
     @Input() 
@@ -28,7 +35,7 @@ export class ActivityManagementComponent {
         return this._filter;
     }
 
-    public displayTaskEditor(task: ActivityRef): void {        
+    public displayTaskEditor(task: Activity): void {        
         if (task) {            
             this.selectedTask = task;
            
@@ -46,5 +53,4 @@ export class ActivityManagementComponent {
         this.isDetailsContainerVisible = true;   
     }
 
-    p
 }

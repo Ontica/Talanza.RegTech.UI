@@ -12,7 +12,7 @@ import { Observable } from 'rxjs/Observable';
 import { CoreService } from '../../core/core.service';
 
 import { ProcessModel } from '../data-types/project';
-import { Activity } from '../data-types/project';
+import { Activity } from '../data-types/activity';
 
 export enum ProjectServiceErr {
   GET_ACTIVITIES_ERR =

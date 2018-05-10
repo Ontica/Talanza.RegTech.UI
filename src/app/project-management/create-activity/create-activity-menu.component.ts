@@ -1,7 +1,7 @@
 import { Component, EventEmitter, HostBinding, Input, Output } from '@angular/core';
 
 import { ProjectRef } from '../data-types/project';
-import { EmptyActivityRef } from '../data-types/activity';
+import { EmptyActivity } from '../data-types/activity';
 
 @Component({
   selector: 'create-activity-menu',
@@ -18,7 +18,7 @@ export class CreateActivityMenuComponent {
   @Input() public project: ProjectRef;
 
   public selectedOperation = '';
-  public task = EmptyActivityRef();
+  public task = EmptyActivity();
 
   public onClose(): void {
     this.onCloseEvent.emit();

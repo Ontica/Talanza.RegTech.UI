@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright (c) 2017 La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
+ * Copyright (c) 2017-2018 La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
  *
  * See LICENSE.txt in the project root for complete license information.
  *
@@ -9,8 +9,8 @@
 import { Component, OnInit } from '@angular/core';
 
 import { EmptyProjectRef, PersonRef, ProjectRef, ResourceRef } from '../data-types/project';
-import { ActivityFilter } from '../data-types/activity-filter';
-import { ActivityRef } from '../data-types/activity';
+import { ActivityFilter, ViewConfig, DefaultViewConfig } from '../data-types/activity-filter';
+import { Activity } from '../data-types/activity';
 
 import { ProjectService } from '../services/project.service';
 import { ActivityService } from '../services/activity.service';
@@ -23,39 +23,27 @@ import { ActivityService } from '../services/activity.service';
   providers: [ProjectService, ActivityService]
 })
 
-export class ProjectsMainPageComponent implements OnInit {
-  
-  public isAddActivityVisible = false;
+export class ProjectsMainPageComponent {  
+
+  public viewConfig: ViewConfig = DefaultViewConfig();
+  public filter: ActivityFilter = new ActivityFilter();
 
   public selectedProject: ProjectRef = EmptyProjectRef();
-
-  public selectedView = '';
-  public ganttConfig = 'ganttWeeks';
-  public selectedScale = 'quarters';
- 
-  public taskList: ActivityRef[] = [];
+  public taskList: Activity[] = [];  
 
   public isRefreshWorkList = false;
 
-  public filter: ActivityFilter = new ActivityFilter();
-  
-  public constructor(private projectService: ProjectService, private activityService: ActivityService) { }
+  public constructor(private projectService: ProjectService,
+                     private activityService: ActivityService) {}
 
-  public ngOnInit() {
-   
+
+  public onChangeFilter(receivedFilter: ActivityFilter) {
+    this.filter = receivedFilter;
   }
 
-  public onChangeFilter(receivedFilter: ActivityFilter) {    
-    this.filter = receivedFilter;     
-  }
-  
-  public onChangeDislpayFilter(displayFilter: any): void {
-    this.selectedView = displayFilter.selectedView;
-    this.selectedScale = displayFilter.selectedScale;   
+
+  public onChangeView(viewConfig: ViewConfig): void {
+    this.viewConfig = viewConfig;
   }
 
- public setAddActivityVisible(isAddActivityVisible: boolean): void {  
-   this.isAddActivityVisible = isAddActivityVisible;
- }
-   
 }

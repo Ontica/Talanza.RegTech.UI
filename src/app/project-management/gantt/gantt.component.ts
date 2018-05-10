@@ -5,7 +5,7 @@ import { } from "@types/dhtmlxgantt";
 
 import { ActivityService } from '../services/activity.service';
 import { ProjectRef } from '../data-types/project';
-import { ActivityFilter } from '../data-types/activity-filter';
+import { ActivityFilter, ViewConfig } from '../data-types/activity-filter';
 
 @Component({
   selector: "gantt",
@@ -48,8 +48,7 @@ export class GanttComponent implements OnChanges {
      return this._filter;
    }
 
-  //@Input() public project: ProjectRef;
-  @Input() public config: string;
+  @Input() public config: ViewConfig;
 
   public isActivityAddEditorWindowVisible = false;
   public isActivityEditorWindowVisible = false;
@@ -123,7 +122,7 @@ export class GanttComponent implements OnChanges {
   }
 
   private setScaleUnit() {
-    switch (this.config) {
+    switch (this.config.timeScaleUnit) {
       case 'weeks':
         gantt.config.scale_unit = 'week';
         return;

@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input,Output } from '@angular/core';
 
 import { ClosedTask, EmptyClosedTask } from '../../data-types/task';
-import { ActivityRef } from '../../data-types/activity';
+import { Activity } from '../../data-types/activity';
 
 import { ActivityService } from '../../services/activity.service';
 
@@ -23,16 +23,16 @@ export class ActivityCloseComponent {
 
   private _task: any;
   @Input()
-  set task(task: any) {
+  set activity(task: any) {
     this._task = task;
     this.setIsTaskClosed();
   }
-  get task(): any {
+  get activity(): any {
     return this._task;
   }
 
-  @Output()  onCloseEvent = new EventEmitter();
-  @Output()  onCloseActivity = new EventEmitter<ActivityRef>();
+  @Output() onCloseEvent = new EventEmitter();
+  @Output() onCloseActivity = new EventEmitter<Activity>();
 
   constructor(private activityService: ActivityService) { }
 
@@ -43,7 +43,7 @@ export class ActivityCloseComponent {
     }
 
     this.closedTask.endDate = this.endDate;
-    this.closedTask.requestedByUID = this.task.requestedBy.uid;
+    this.closedTask.requestedByUID = this.activity.requestedBy.uid;
 
     await this.closeTask();
   }
@@ -61,7 +61,7 @@ export class ActivityCloseComponent {
   }
 
   private validateDueDate(): boolean {    
-    let dueDate = new Date(this.task.dueDate);
+    let dueDate = new Date(this.activity.dueDate);
     let today = new Date();
 
     this.endDate = new Date(this.endDate);
@@ -77,7 +77,7 @@ export class ActivityCloseComponent {
   private closeTask(): void {
     const errMsg = 'Ocurrió un problema al intentar crear la actividad.';
 
-    this.activityService.closeActivity(this.task.project.uid, this.task.uid, this.closedTask)
+    this.activityService.closeActivity(this.activity.project.uid, this.activity.uid, this.closedTask)
       .toPromise()
       .then(x => { this.onCloseActivity.emit(x); 
                    this.onClose(); 
@@ -97,7 +97,7 @@ export class ActivityCloseComponent {
   }
 
   private setIsTaskClosed(): void {
-    if (this.task.stage === 'Done') {
+    if (this.activity.stage === 'Done') {
       this.isTaskClosed = true;
     } else {
       this.isTaskClosed = false;      

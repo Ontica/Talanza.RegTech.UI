@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright (c) 2017 La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
+ * Copyright (c) 2017-2018 La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
  *
  * See LICENSE.txt in the project root for complete license information.
  *
@@ -8,7 +8,7 @@
 import { Component, Input } from '@angular/core';
 
 import { ProjectRef } from '../data-types/project';
-import { ActivityRef } from '../data-types/activity';
+import { Activity } from '../data-types/activity';
 import { ActivityFilter } from '../data-types/activity-filter';
 
 import { ActivityService } from '../services/activity.service';
@@ -23,7 +23,7 @@ import { ActivityService } from '../services/activity.service';
 export class ProjectExplorerComponent {
 
   public isTaskEditorVisible = false;
-  public taskList: ActivityRef[] = [];
+  public taskList: Activity[] = [];
   public selectedTask: any;
   public expanOrCollapseIcon = 'fa fa-minus-circle';
   public projectUID: string = '';
@@ -93,7 +93,7 @@ export class ProjectExplorerComponent {
   }
 
 
-  public onUpdateActivity(activity: ActivityRef): void {
+  public onUpdateActivity(activity: Activity): void {
     let index = this.taskList.findIndex(x => x.uid === activity.uid);
     this.taskList[index] = activity;
   }

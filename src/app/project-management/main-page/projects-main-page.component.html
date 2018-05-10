@@ -1,10 +1,14 @@
-<projects-filter (onChangeFilter)="onChangeFilter($event)" (onChangeDisplayFilter)="onChangeDislpayFilter($event)" (onAddActivity)="setAddActivityVisible($event)" (onRefreshWorkList)="isRefreshWorkList=$event"></projects-filter>
+<projects-filter (onChangeFilter)="onChangeFilter($event)" 
+                 (onChangeView)="onChangeView($event)"                 
+                 (onRefreshWorkList)="isRefreshWorkList=$event">
+</projects-filter>
 
-<div *ngIf="!isAddActivityVisible">
-  <div [ngSwitch]="selectedView">
-    <project-explorer [filter]="filter" [refresh]="isRefreshWorkList" *ngSwitchCase="'activity-tree'"></project-explorer>
-    <gantt [filter]="filter" [config]="selectedScale" *ngSwitchCase="'gantt'"></gantt>   
-    <activity-management [filter]="filter" *ngSwitchCase="'task'" ></activity-management> 
-    <activity-management [filter]="filter" *ngSwitchDefault ></activity-management>
-  </div>
+<div [ngSwitch]="viewConfig.viewType">
+
+  <activity-management *ngSwitchCase="'activity-tree'" [filter]="filter" ></activity-management>     
+
+  <gantt *ngSwitchCase="'gantt'" [filter]="filter" [config]="viewConfig"></gantt>   
+
+  <project-explorer *ngSwitchCase="'old-version'" [filter]="filter" [refresh]="isRefreshWorkList" ></project-explorer>
+
 </div>

@@ -12,10 +12,8 @@ import { Observable } from 'rxjs/Observable';
 import { CoreService } from '../../core/core.service';
 
 import { ClosedTask, Task, TaskRef } from '../data-types/task';
-import { Activity, ProjectRef, ResourceRef } from '../data-types/project';
 import { ActivityFilter } from '../data-types/activity-filter';
-
-import { ActivityRef } from '../data-types/activity';
+import { Activity } from '../data-types/activity';
 
 export enum ActivityServiceErr {
   POST_ADD_MANUAL_ACTIVITY_ERR =
@@ -44,14 +42,6 @@ export enum ActivityServiceErr {
 export class ActivityService {
 
   public constructor(private core: CoreService) { }
-
-  public addManualActivity(projectUID: string, activity: Activity): Observable<any[]> {
-    const path = `v1/project-management/projects/${projectUID}/activities`;
-
-    return this.core.http.post<any[]>(path, activity)
-                        .catch((e) => 
-                            this.core.http.showAndReturn(e, ActivityServiceErr.POST_ADD_MANUAL_ACTIVITY_ERR, null));
-  }
 
   public addActivity(projectUID: string, activity: {name: string, position?: number, parentUID?: string} ) : Observable<any> {
                               
@@ -103,10 +93,10 @@ export class ActivityService {
 
   }
 
-  public getActivities(projectUID: string): Promise<ActivityRef[]> {
+  public getActivities(projectUID: string): Promise<Activity[]> {
     const path = `v1/project-management/projects/${projectUID}/as-tree`;
 
-    return this.core.http.get<ActivityRef[]>(path)
+    return this.core.http.get<Activity[]>(path)
                           .catch((e) => 
                             this.core.http.showAndReturn(e, ActivityServiceErr.GET_ACTIVITIES_ERR , null))
                           .toPromise();
@@ -114,21 +104,21 @@ export class ActivityService {
   }
 
   public updateActivity(projectUID: string,
-                        activityUID: string, task: TaskRef): Observable<ActivityRef> {
+                        activityUID: string, task: TaskRef): Observable<Activity> {
                               
     const path = `v1/project-management/projects/${projectUID}/activities/${activityUID}`;
 
 
-    return this.core.http.put<ActivityRef>(path, task)
+    return this.core.http.put<Activity>(path, task)
                          .catch((e) => 
                             this.core.http.showAndReturn(e, ActivityServiceErr.PUT_UPDATE_ACTIVITY_ERR, null));
   }
 
   public closeActivity(projectUID: string,
-                      activityUID: string, closeTask: ClosedTask): Observable<ActivityRef> {
+                      activityUID: string, closeTask: ClosedTask): Observable<Activity> {
     const path = `v1/project-management/projects/${projectUID}/activities/${activityUID}/close`;
 
-    return this.core.http.post<ActivityRef>(path, closeTask)
+    return this.core.http.post<Activity>(path, closeTask)
                          .catch((e) => 
                             this.core.http.showAndReturn(e, ActivityServiceErr.POST_CLOSE_ACTIVITY_ERR, null));
   }
@@ -141,7 +131,7 @@ export class ActivityService {
                             this.core.http.showAndReturn(e, ActivityServiceErr.GET_TAGS_ERR, null));
   }
 
-  public getActivitiesAsWorkList(filter?: ActivityFilter): Observable<ActivityRef[]> {
+  public getActivitiesAsWorkList(filter?: ActivityFilter): Observable<Activity[]> {
 
     let filterAsString = '';
 
@@ -165,7 +155,7 @@ export class ActivityService {
                               this.core.http.showAndReturn(e, ActivityServiceErr.GET_ACTIVITIES_AS_WORKLIST_ERR, null));
   }
 
-  public setNewPositionToActivity(projectUID: string, activityUID: string, position: number): Observable<ActivityRef> {
+  public setNewPositionToActivity(projectUID: string, activityUID: string, position: number): Observable<Activity> {
             
       const path = `v1/project-management/projects/${projectUID}/activities/${activityUID}`;     
 
@@ -173,12 +163,12 @@ export class ActivityService {
           position: position
       }          
 
-      return this.core.http.put<ActivityRef>(path, body)
+      return this.core.http.put<Activity>(path, body)
        .catch((e) => 
           this.core.http.showAndReturn(e, ActivityServiceErr.PUT_UPDATE_ACTIVITY_ERR, null));
   }
  
-  public setNewParentToActivity(projectUID: string, activityUID: string,  parentUID: string): Observable<ActivityRef> {
+  public setNewParentToActivity(projectUID: string, activityUID: string,  parentUID: string): Observable<Activity> {
     
     const path = `v1/project-management/projects/${projectUID}/activities/${activityUID}`;     
     
@@ -186,7 +176,7 @@ export class ActivityService {
           parentUID: parentUID        
     }    
 
-    return this.core.http.put<ActivityRef>(path, body)
+    return this.core.http.put<Activity>(path, body)
        .catch((e) => 
           this.core.http.showAndReturn(e, ActivityServiceErr.PUT_UPDATE_ACTIVITY_ERR, null));
   }

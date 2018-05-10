@@ -1,22 +1,43 @@
 <div class="editor-container editor-container-style">
+
   <div class="header">
     <div class="close-button right-position" (click)="onClose()">&times;</div>
     <div class="title">{{task.name}}</div>
   </div>
 
   <div class="tab">
-    <button class="tab-links left-position" [disabled]="isDisabled" [class.selected]="selectedTask==='generalInfo'" (click)="setSelectedTask('generalInfo')">Información general</button>
+
+    <button class="tab-links left-position" [disabled]="isDisabled"
+            [class.selected]="selectedTab==='generalInfo'"
+            (click)="selectTab('generalInfo')">Información general</button>
+
     <ng-container *ngIf="task.procedure.uid !== 'Empty'">
-      <button class="tab-links left-position" [disabled]="isDisabled" [class.selected]="selectedTask==='requirements'" (click)="setSelectedTask('requirements')">Requisitos y documentos</button>
+      <button class="tab-links left-position" [disabled]="isDisabled"
+              [class.selected]="selectedTab==='requirements'" 
+              (click)="selectTab('requirements')">Requisitos y documentos</button>
     </ng-container>
-    <button class="tab-links left-position" [disabled]="isDisabled" [class.selected]="selectedTask==='closeTask'" (click)="setSelectedTask('closeTask')">
-      <span [innerHTML]="concluededTaskLabel"> </span>
+
+    <button class="tab-links left-position" [disabled]="isDisabled"
+            [class.selected]="selectedTab==='closeTask'"
+            (click)="selectTab('closeActivity')">
+            <span [innerHTML]="closeActivityLabel"> </span>
     </button>
+
   </div>
 
-  <div class="form-frame" [ngSwitch]="selectedTask">
-    <task-update *ngSwitchCase="'generalInfo'" [task]="task" (onUpdateActivity)="updateActivity($event)" (onCloseEvent)="onClose()"></task-update>
-    <task-close *ngSwitchCase="'closeTask'" [task]="task" (onCloseActivity)="updateActivity($event)" (onCloseEvent)="onClose()"></task-close>
-    <pe-requirements *ngSwitchCase="'requirements'" [procedureUID]="task.procedure.uid"></pe-requirements>
+  <div [ngSwitch]="selectedTab" class="form-frame">
+
+    <task-update *ngSwitchCase="'generalInfo'"
+                 [activity]="activity"
+                 (onUpdateActivity)="updateActivity($event)"
+                 (onCloseEvent)="onClose()"></task-update>
+
+    <task-close *ngSwitchCase="'closeActivity'"
+                [activity]="activity"
+                (onCloseActivity)="updateActivity($event)"
+                (onCloseEvent)="onClose()"></task-close>
+
+    <pe-requirements *ngSwitchCase="'requirements'"
+                     [procedureUID]="task.procedure.uid"></pe-requirements>
   </div>
 </div>

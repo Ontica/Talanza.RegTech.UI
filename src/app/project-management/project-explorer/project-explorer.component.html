@@ -68,6 +68,6 @@
   </table>
 </div>
 <div *ngIf="isTaskEditorVisible " class="popup ">
-  <activity-editor [task]="selectedTask " (onUpdateActivity)="onUpdateActivity($event) " (onCloseEvent)="onCloseTaskEditorWindow() ">
+  <activity-editor [activity]="selectedTask " (onUpdateActivity)="onUpdateActivity($event) " (onCloseEvent)="onCloseTaskEditorWindow() ">
   </activity-editor>
 </div>

@@ -1,22 +1,23 @@
 <div class="gs-container">
   <div [class]="masterContainer">
     <div style="height: 97%">
-      <activity-list [filter]="filter" (onSelectedTask)="displayTaskEditor($event)"></activity-list>
+      <activity-tree [filter]="filter" (onSelectedTask)="displayTaskEditor($event)"></activity-tree>
     </div>
   </div>
   <div *ngIf="isDetailsContainerVisible" class="block-container right">
     <div class="header">
-        <div><i class="fa fa-times close-icon" (click)="closeDetailsContainer()"></i></div>
-          <span class=".header-title">{{selectedTask.name}} </span>
-          
-    </div> 
-    <div>
-     
+      <div>
+        <i class="fa fa-times close-icon" (click)="closeDetailsContainer()"></i>
+      </div>
+      <span class=".header-title">{{selectedTask.name}}</span>
     </div>
     <div>
-      <task-update  [task]="selectedTask" 
+
+    </div>
+    <div>
+      <task-update [activity]="selectedTask" 
       (onUpdateActivity)="updateActivity($event)"
-       (onCloseEvent)="closeDetailsContainer()"></task-update>
+      (onCloseEvent)="closeDetailsContainer()"></task-update>
     </div>
   </div>
 </div>
