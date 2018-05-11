@@ -22,16 +22,14 @@ import { ActivityService } from '../services/activity.service';
 })
 export class ActivityTreeComponent {
 
-  public taskList: Activity[] = [];
+  public activityTree: Activity[] = [];
   public selectedActivity: Activity = EmptyActivity();
-
-  public selectedTaskUID = '';
 
   public addChildEditorVisible = false;
   public addFirstActivityEditorVisible = false;
   public insertActivityEditorVisible = false;
 
-  public isDrag = false;
+  public dragging = false;
 
   private _filter: ActivityFilter = new ActivityFilter();
   @Input()
@@ -54,20 +52,23 @@ export class ActivityTreeComponent {
 
 
   public get hasSelectedActivities() {
-    return this.selectedTaskUID !== '';
+    return (this.selectedActivity.uid !== '');
   }
+
 
   public isActivitySelected(activity: Activity) {
     return (activity.uid === this.selectedActivity.uid);
   }
 
-  public selectActivity(activity: Activity): void {
+
+  public selectActivity(activity: Activity, emitEvent: boolean = false): void {
     this.selectedActivity = activity;
 
-    this.onSelectActivity.emit(activity);
-
-    this.selectedTaskUID = activity.uid;
+    if (emitEvent) {
+      this.onSelectActivity.emit(activity);
+    }
   }
+  
 
   public hideInlineEditors() {
     this.addChildEditorVisible = false;
@@ -75,8 +76,9 @@ export class ActivityTreeComponent {
     this.insertActivityEditorVisible = false;  
   }
 
+
   public toggleAddChildEditor(activity: Activity): void {
-    this.selectedTaskUID = activity.uid;
+    this.selectActivity(activity);    
 
     const newState = !this.addChildEditorVisible;
 
@@ -85,70 +87,74 @@ export class ActivityTreeComponent {
     this.addChildEditorVisible = newState;
   }
 
+  
   public showInitialActivityInlineEditor(): void {
     this.hideInlineEditors();
 
-    if (this.selectedTaskUID === '') {
-      this.addFirstActivityEditorVisible = true;
-    } else {
+    if (this.hasSelectedActivities) {
       this.insertActivityEditorVisible = true;
+    } else {
+      this.addFirstActivityEditorVisible = true;
     }
   }
+
 
   public insertActivity(name: string, position?: number) {
     if (!name) {
       return;
     }
-    if (position) {
-      position = position + 1;
-    } else {
-      position = 1;
-    }
 
     const activity = {
       name: name,
-      position: position
+      position: position ? position + 1 : 1
     };
 
     this.activityTreeService.insertActivity(this.filter.project, activity)
-                             .subscribe((x) => {
+                            .then( () => {
                                 this.hideInlineEditors();
                                 this.refreshData();
-                             });
+                            });
   }
+
 
   public createChildActivity(name: string, parent: Activity): void {
     if (!name) {
       return;
     }
 
-    const child = {
+    const newActivity = {
       name: name,
       parent: parent
     };
 
-    this.activityTreeService.createChild(this.filter.project, child)
-                            .subscribe((x) => {
-                                      this.hideInlineEditors();
-                                      this.refreshData();
+    this.activityTreeService.insertAsChild(this.filter.project, newActivity)
+                            .then( () =>  {
+                              this.hideInlineEditors();
+                              this.refreshData();
                             });
   }
 
-  public moveActivity(ev: any, position: number): void {
 
-    let sourceActivity = this.getSourceActivity(ev);    
+  public moveActivity(event: any, newPosition: number): void {
 
-    position++;
+    let activity = this.getSourceActivity(event);
 
-    this.setNewPositionToActivity(sourceActivity, position);
+    newPosition++;
+ 
+    this.activityTreeService.moveActivity(activity, newPosition)                            
+                            .then( (x) => this.refreshActivityTree() );
   }
 
 
-  public moveActivityAsChildOf(ev: any, parentUID: string): void {
-    let sourceActivity = this.getSourceActivity(ev);
+  public moveActivityAsChildOf(event: any, newParent: Activity): void {
+    let activity = this.getSourceActivity(event);
 
-    this.setNewParentToActivity(sourceActivity, parentUID);
+    this.activityTreeService.changeParent(activity, newParent)
+                            .then( () => this.refreshActivityTree() );
+
+    
   }
+
 
   public deleteTask(taskUID: string): void {
     if (!taskUID) {
@@ -158,6 +164,7 @@ export class ActivityTreeComponent {
     this.activityService.deleteActivity(this.filter.project, taskUID)
       .subscribe((x) => { this.refreshData(); });
   }
+
 
   public activityNameClass(level: number): string {
     switch (level) {
@@ -183,9 +190,9 @@ export class ActivityTreeComponent {
     await this.activityService.getActivities(this.filter.project)
       .then((data) => {
 
-        this.taskList = data;
+        this.activityTree = data;
 
-        this.taskList.forEach(function (e) {
+        this.activityTree.forEach(function (e) {
           if (e.type === 'ObjectType.ProjectItem.Summary') {
             e.visible = 'collapse'
 
@@ -201,7 +208,7 @@ export class ActivityTreeComponent {
   }
 
   public allowDrop(ev: any): void {
-    if (!this.isDrag) {
+    if (!this.dragging) {
       return;
     }
 
@@ -213,49 +220,22 @@ export class ActivityTreeComponent {
   }
 
   public startDrag(): void {
-    this.isDrag = true;
+    this.dragging = true;
   }
 
   public getSourceActivity(ev: any): Activity {
     ev.preventDefault();
 
-    this.isDrag = false;
+    this.dragging = false;
 
     let activity = JSON.parse(ev.dataTransfer.getData("data"));
 
     return activity;
   }
 
-  private setNewPositionToActivity(sourceActivity: Activity, position: number): void {
-
-    this.activityService.setNewPositionToActivity(sourceActivity.project.uid, sourceActivity.uid, position)
-      .subscribe((x) => {
-        this.reloadActivities();
-      });
-  }
-
-  private setNewParentToActivity(sourceActivity: Activity, parentUID: string): void {
-
-    this.activityService.setNewParentToActivity(sourceActivity.project.uid, sourceActivity.uid, parentUID)
-      .subscribe((x) => {
-        this.reloadActivities();
-      });
-  }
-
-  private reloadActivities(): void {
-
+  private refreshActivityTree(): void {
     this.activityService.getActivities(this.filter.project)
-      .then((data) => {
-        let taskList = data;
-
-        taskList.forEach((e) => {
-          let index = this.taskList.findIndex((x) => x.uid === e.uid);
-          e.visible = this.taskList[index].visible;
-        });
-
-        this.taskList = taskList;
-      });
-
+                        .then( (x) => this.activityTree = x );
   }
 
 }

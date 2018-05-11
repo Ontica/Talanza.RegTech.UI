@@ -137,32 +137,4 @@ export class ActivityService {
         this.core.http.showAndReturn(e, Errors.GET_ACTIVITIES_AS_WORKLIST_ERR, null));
   }
 
-  public setNewPositionToActivity(projectUID: string, activityUID: string, position: number): Observable<Activity> {
-
-    const path = `v1/project-management/projects/${projectUID}/activities/${activityUID}`;
-
-    const body = {
-      position: position
-    }
-
-    return this.core.http.put<Activity>(path, body)
-      .catch((e) =>
-        this.core.http.showAndReturn(e, Errors.PUT_UPDATE_ACTIVITY_ERR, null));
-  }
-
-  public setNewParentToActivity(projectUID: string, activityUID: string, parentUID: string): Observable<Activity> {
-
-    const path = `v1/project-management/projects/${projectUID}/activities/${activityUID}`;
-
-    const body = {
-      parentUID: parentUID
-    }
-
-    return this.core.http.put<Activity>(path, body)
-      .catch((e) =>
-        this.core.http.showAndReturn(e, Errors.PUT_UPDATE_ACTIVITY_ERR, null));
-  }
-
-
-
 }

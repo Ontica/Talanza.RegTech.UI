@@ -4,47 +4,56 @@
     <button class="btn-warning" (click)="showInitialActivityInlineEditor()">Nueva</button>
     Proyecto: {{filter.project}}
   </div>
-  
+
   <div class="task-list">
+
     <div *ngIf="(addFirstActivityEditorVisible && !hasSelectedActivities)" class="add-task">
       <div>
         <label>Tarea inicial:</label>
-        <input #txtActivityName type="text" 
-               class="text-box" style="width:80%">
-        <button class="btn-warning" (click)="insertActivity(txtActivityName.value)">Agregar</button>
+        <input #txtActivityName type="text"
+               class="text-box" style="width:80%"
+               (keyup.esc)="hideInlineEditors()"
+               (keyup.enter)="insertActivity(txtActivityName.value)">
         <button class="btn" (click)="hideInlineEditors()">Cancelar</button>
       </div>
     </div>
 
     <!-- Drop area for the first position -->
     <div class="activity-drop-by-position-area"
-        draggable="isDrag"
+        draggable="dragging"
         (dragover)="allowDrop($event)"
         (drop)="moveActivity($event, 0)">
     </div>
 
-    <div class="task-row" *ngFor="let activity of taskList">
+    <div class="task-row" *ngFor="let activity of activityTree">
 
       <div [class.selected-row]="isActivitySelected(activity)"
-            draggable="isDrag"
+            draggable="dragging"
             (dragover)="allowDrop($event)"
             (dragstart)="drag($event, activity)"
-            (drop)="moveActivityAsChildOf($event, activity.uid)">
+            (drop)="moveActivity($event, activity.position)">
+
           <div class="row-options">
             <i class="fa fa-arrows drag-icon" aria-hidden="true" (mousedown)="startDrag()"></i>
           </div>
 
-          <div class="task">            
+          <div class="task"
+            draggable="dragging"
+            (dragover)="allowDrop($event)"
+            (dragstart)="drag($event, activity)"
+            (drop)="moveActivityAsChildOf($event, activity)">
+
             <a [ngClass]="activityNameClass(activity.level)"
                [style.padding-left.pt]="activity.level * 10"
-               (click)="selectActivity(activity)">{{activity.name}}
-            </a>
+               (click)="selectActivity(activity, true)">{{activity.name}}</a>
+
           </div>
 
           <div class="task-options">
 
             <a (click)="toggleAddChildEditor(activity)">
-              <i [ngClass]="addChildEditorVisible && isActivitySelected(activity) ? 'fa fa-minus-circle' : 'fa fa-plus-circle'" aria-hidden="true"></i>
+              <i [ngClass]="addChildEditorVisible && isActivitySelected(activity) ? 'fa fa-minus-circle' : 'fa fa-plus-circle'"
+                           aria-hidden="true"></i>
             </a>
 
             <span class="delete-icon-container">
@@ -58,32 +67,29 @@
       </div>
 
       <div class="activity-drop-by-position-area"
-            draggable="isDrag"
+            draggable="dragging"
             (dragover)="allowDrop($event)"
             (drop)="moveActivity($event, activity.position)">
       </div>
 
-      <div class="add-task-editor" *ngIf="isActivitySelected(activity)">
-        
+      <div *ngIf="isActivitySelected(activity)" class="add-task-editor">
+
         <div *ngIf="addChildEditorVisible">
           <label>Tarea hija:</label>
           <input #txtActivityName type="text"
                  class="text-box" style="width:80%"
+                 (keyup.esc)="hideInlineEditors()"
                  (keyup.enter)="createChildActivity(txtActivityName.value, activity)">
-          <button class="btn-warning" (click)="createChildActivity(activity, txtActivityName.value)">Agregar</button>
-          <button class="btn" (click)="hideInlineEditors()">Cancelar</button>          
+          <button class="btn" (click)="hideInlineEditors()">Cancelar</button>
         </div>
 
         <div *ngIf="insertActivityEditorVisible">
-
           <label>Nueva tarea:</label>
           <input #txtActivityName type="text"
                  class="text-box" style="width:70%"
+                 (keyup.esc)="hideInlineEditors()"
                  (keyup.enter)="insertActivity(txtActivityName.value, activity.position)">
-
-          <button class="btn-warning" (click)="insertActivity(txtActivityName.value, activity.position)">Agregar</button>
           <button class="btn" (click)="hideInlineEditors()">Cancelar</button>
-          
         </div>
 
       </div>

@@ -9,18 +9,24 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
-import { CoreService } from '../../core/core.service';
 import { Assertion } from 'empiria';
+import { CoreService } from '../../core/core.service';
 
 import { Activity } from '../data-types/activity';
 
 enum Errors {
-  
+
   CREATE_CHILD_ERR =
   '[CREATE_CHILD_ERR] Ocurrió un problema al agregar la actividad como hija de otra actividad.',
 
   INSERT_ACTIVITY_ERR =
   '[INSERT_ACTIVITY_ERR] Ocurrió un problema al agregar la actividad en la lista.',
+
+  CHANGE_PARENT =
+  '[CHANGE_PARENT] Ocurrió un problema al cambiar el padre de la actividad.',
+
+  MOVE_ACTIVITY =
+  '[MOVE_ACTIVITY] Ocurrió un problema al mover la actividad de posición.',
 
 }
 
@@ -29,34 +35,70 @@ export class ActivityTreeService {
 
   public constructor(private core: CoreService) { }
 
-  public createChild(projectUID: string,
-                     activity: { name: string, parent: Activity }): Observable<any> {
+  public insertActivity(projectUID: string,
+                        newActivity: { name: string, position: number }): Promise<Activity> {
+    Assertion.assertValue(projectUID, "projectUID");
+    Assertion.assertValue(newActivity, "activity");
+    Assertion.assertValue(newActivity.name, "activity.name");
+    Assertion.assert(newActivity.position > 0, "activity position must be greater than zero.");
+
+    const path = `v1/project-management/projects/${projectUID}/activities`;
+
+    return this.core.http.post<Activity>(path, newActivity)
+                         .catch((e) => this.core.http.showAndReturn(e, Errors.INSERT_ACTIVITY_ERR, null))
+                         .toPromise();
+  }
+
+
+  public insertAsChild(projectUID: string,
+                       newActivity: { name: string, parent: Activity }): Promise<Activity> {
 
     Assertion.assertValue(projectUID, "projectUID");
-    Assertion.assertValue(activity, "activity");
-    Assertion.assertValue(activity.name, "activity.name");
+    Assertion.assertValue(newActivity, "activity");
+    Assertion.assertValue(newActivity.name, "activity.name");
     Assertion.assertValue(parent, "activity.parent");
 
     const path = `v1/project-management/projects/${projectUID}/activities`;
 
-    return this.core.http.post<any>(path, { name, parentUID : activity.parent.uid } )
-    .catch((e) =>
-    this.core.http.showAndReturn(e, Errors.CREATE_CHILD_ERR, null));
-}
+    const body = {
+      name: newActivity.name,
+      parentUID: newActivity.parent.uid
+    };
 
-  public insertActivity(projectUID: string,
-                        activity: { name: string, position: number }): Observable<any> {
+    return this.core.http.post<Activity>(path, body)
+                         .catch((e) => this.core.http.showAndReturn(e, Errors.CREATE_CHILD_ERR, null))
+                         .toPromise();
+  }
 
-    Assertion.assertValue(projectUID, "projectUID");
+  public changeParent(activity: Activity, newParent: Activity): Promise<Activity> {
     Assertion.assertValue(activity, "activity");
-    Assertion.assertValue(activity.name, "activity.name");
-    Assertion.assert(activity.position > 0, "activity position must be greater than zero.");
-    
-    const path = `v1/project-management/projects/${projectUID}/activities`;
+    Assertion.assertValue(newParent, "newParent");
 
-    return this.core.http.post<any>(path, activity)
-                         .catch((e) => this.core.http.showAndReturn(e, Errors.INSERT_ACTIVITY_ERR, null));
+    const path = `v1/project-management/projects/${activity.project.uid}/activities/${activity.uid}`;
+
+    const body = {
+      parentUID: newParent.uid
+    };
+
+    return this.core.http.put<Activity>(path, body)
+                         .catch((e) => this.core.http.showAndReturn(e, Errors.CHANGE_PARENT, null))
+                         .toPromise();
+  }
+
+
+  public moveActivity(activity: Activity, newPosition: number): Promise<Activity> {
+    Assertion.assertValue(activity, "activity");
+    Assertion.assert(newPosition > 0, "newPosition must be greater than zero.");
+
+    const path = `v1/project-management/projects/${activity.project.uid}/activities/${activity.uid}`;
+
+    const body = {
+      position: newPosition
+    };
+
+    return this.core.http.put<Activity>(path, body)
+                         .catch((e) => this.core.http.showAndReturn(e, Errors.MOVE_ACTIVITY, null))
+                         .toPromise();
   }
 
 } // class ActivityTreeService
-

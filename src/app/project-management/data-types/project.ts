@@ -1,7 +1,7 @@
 export interface ProjectRef {
   uid: string;
   name: string;
-  }
+}
 
  export interface ProcessModel {
    uid: string;
