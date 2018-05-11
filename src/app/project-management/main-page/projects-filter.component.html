@@ -2,22 +2,16 @@
   <tr>
     <td>Contrato:</td>
     <td>
-      <select #contract class="select-box" style="width:160px;" [(ngModel)]="filter.contract">
+      <select #contract class="select-box" style="width:160px;" (change)="onChangeContract(contract.value)" >
         <option value="">( Seleccionar )</option>
-        <option value="576">Ronda 2.4</option>
+        <option *ngFor="let contract of contracts" [value]="contract.uid">{{contract.name}}</option>       
       </select>
     </td>
     <td>Etapa:</td>
     <td>
-      <select #stage class="select-box" style="width:160px" (change)="changeFilter()" [(ngModel)]="filter.stage">
+      <select #stage class="select-box" style="width:160px" (change)="onChangeStage(stage.value)">
         <option value="">( No filtrar )</option>
-        <option value="Transición">Transición</option>
-        <option value="Evaluación">Evaluación</option>
-        <option value="Exploración">Exploración</option>
-        <option value="Desarrollo">Desarrollo</option>
-        <option value="Producción">Producción</option>
-        <option value="Abandono">Abandono</option>
-        <option value="Transversales">Transversales</option>
+        <option *ngFor="let stage of stages" [value]="stage.uid">{{stage.name}}</option>        
       </select>
     </td>
     <td>Buscar:</td>
@@ -35,7 +29,7 @@
   <tr>
     <td>Proyecto:</td>
     <td>
-      <select #project class="select-box" style="width:160px;" (change)="onChangeProjectList(project.value)" [(ngModel)]="filter.project">
+      <select #project class="select-box" style="width:160px;" (change)="onChangeProjectList(project.value)">
         <option value="">( Seleccionar )</option>
         <option *ngFor="let project of projectsList" [value]="project.uid">{{project.name}}</option>
       </select>
@@ -50,7 +44,7 @@
     </td>
     <td>Responsable:</td>
     <td>
-      <select class="select-box" style="width:180px" #responsible (change)="changeFilter()" [(ngModel)]="filter.responsible">
+      <select class="select-box" style="width:180px" #responsible (change)="changeFilter()" >
         <option value="">( Todos ) </option>
         <option *ngFor="let responsible of responsiblesList " [value]="responsible.uid">{{responsible.name}}</option>
       </select>

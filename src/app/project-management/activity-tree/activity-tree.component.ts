@@ -109,7 +109,7 @@ export class ActivityTreeComponent {
       position: position ? position + 1 : 1
     };
 
-    this.activityTreeService.insertActivity(this.filter.project, activity)
+    this.activityTreeService.insertActivity(this.filter.project.uid, activity)
                             .then( () => {
                                 this.hideInlineEditors();
                                 this.refreshData();
@@ -127,7 +127,7 @@ export class ActivityTreeComponent {
       parent: parent
     };
 
-    this.activityTreeService.insertAsChild(this.filter.project, newActivity)
+    this.activityTreeService.insertAsChild(this.filter.project.uid, newActivity)
                             .then( () =>  {
                               this.hideInlineEditors();
                               this.refreshData();
@@ -161,7 +161,7 @@ export class ActivityTreeComponent {
       return;
     }
 
-    this.activityService.deleteActivity(this.filter.project, taskUID)
+    this.activityService.deleteActivity(this.filter.project.uid, taskUID)
       .subscribe((x) => { this.refreshData(); });
   }
 
@@ -184,10 +184,10 @@ export class ActivityTreeComponent {
   }
 
   private async refreshData() {
-    if (this.filter.project === '') {
+    if (this.filter.project.uid === '') {
       return;
     }
-    await this.activityService.getActivities(this.filter.project)
+    await this.activityService.getActivities(this.filter.project.uid)
       .then((data) => {
 
         this.activityTree = data;
@@ -234,7 +234,7 @@ export class ActivityTreeComponent {
   }
 
   private refreshActivityTree(): void {
-    this.activityService.getActivities(this.filter.project)
+    this.activityService.getActivities(this.filter.project.uid)
                         .then( (x) => this.activityTree = x );
   }
 

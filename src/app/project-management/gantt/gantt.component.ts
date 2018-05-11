@@ -40,7 +40,7 @@ export class GanttComponent implements OnChanges {
    set filter(filter: ActivityFilter) {
      this._filter = filter;  
 
-    this.projectUID = filter.project;
+    this.projectUID = filter.project.uid;
 
     this.refreshData();
    }

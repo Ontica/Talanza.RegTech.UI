@@ -6,6 +6,10 @@
  *
  */
 
+ import { ProjectRef, EmptyProjectRef, PersonRef,
+          EmptyContact, Contract, EmptyContract,
+          Stage, EmptyStage } from '../data-types/project';
+
 export class ViewConfig {
   viewType: string;
   ganttConfig: string;
@@ -21,11 +25,11 @@ export function DefaultViewConfig(): ViewConfig {
 }
 
 export class ActivityFilter {
-  public contract: string;
-  public project: string;
-  public stage: string;
+  public contract: Contract;
+  public project: ProjectRef;
+  public stage: Stage;
   public tags: string[];
-  public responsible: string;
+  public responsible: PersonRef;
   public keywords: string;
   public orderBy: string;
 
@@ -34,11 +38,11 @@ export class ActivityFilter {
   }
 
   public clean(): void {
-    this.contract = '';
-    this.project = '';
-    this.stage = '';
+    this.contract = EmptyContract();
+    this.project = EmptyProjectRef();
+    this.stage = EmptyStage();
     this.tags = [];
-    this.responsible = '';
+    this.responsible = EmptyContact();
     this.keywords = '';
     this.orderBy = '';
   }
@@ -60,13 +64,13 @@ export class ActivityFilter {
   public toString(): string {
     let filter = '';
 
-    if ((this.contract !== '')) {
+    if ((this.contract.uid !== '')) {
       filter = this.addFilterConnector(filter) + "contract=" + this.contract;
     }
-    if ((this.project !== '')) {
+    if ((this.project.uid !== '')) {
       filter = this.addFilterConnector(filter) + "project=" + this.project;
     }
-    if ((this.stage !== '')) {
+    if ((this.stage.uid !== '')) {
       filter = this.addFilterConnector(filter) + "stage=" + this.stage;
     }
     if ((this.tags.length !== 0)) {
@@ -74,7 +78,7 @@ export class ActivityFilter {
         filter = this.addFilterConnector(filter) + "tag=" + x;
       })
     }
-    if (this.responsible !== '') {
+    if (this.responsible.uid !== '') {
       filter = this.addFilterConnector(filter) + "responsible=" + this.responsible;
     }
     if (this.keywords !== '') {

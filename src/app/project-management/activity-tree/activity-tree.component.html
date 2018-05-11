@@ -2,7 +2,7 @@
 
   <div class="task-list-header">
     <button class="btn-warning" (click)="showInitialActivityInlineEditor()">Nueva</button>
-    Proyecto: {{filter.project}}
+    <span *ngIf="filter.project.name">Proyecto: {{filter.project.name}}</span>
   </div>
 
   <div class="task-list">

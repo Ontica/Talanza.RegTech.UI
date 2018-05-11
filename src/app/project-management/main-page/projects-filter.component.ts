@@ -8,7 +8,8 @@
 
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
-import { EmptyProjectRef, PersonRef, ProjectRef, ResourceRef } from '../data-types/project';
+import { EmptyProjectRef, PersonRef, ProjectRef, ResourceRef,
+         Contract, Stage } from '../data-types/project';
 import { ActivityFilter, ViewConfig, DefaultViewConfig } from '../data-types/activity-filter';
 
 import { ProjectService } from '../services/project.service';
@@ -28,6 +29,9 @@ export class ProjectsFilterComponent implements OnInit {
   public labelsList: any;
   public keywords = '';
 
+  public contracts: Contract[] = [];
+  public stages: Stage[] = [];
+
   public selectedProject: ProjectRef = EmptyProjectRef();
 
   public filter: ActivityFilter = new ActivityFilter();
@@ -40,7 +44,9 @@ export class ProjectsFilterComponent implements OnInit {
                      private activityService: ActivityService) { }
 
   public ngOnInit() {
+    this.loadContracts();
     this.loadProjectList();
+    this.loadStages();
     this.loadTags();
     this.changeView();
   }
@@ -57,6 +63,8 @@ export class ProjectsFilterComponent implements OnInit {
 
     this.selectedProject = this.projectsList.find((x) => x.uid === projectUID);
 
+    this.filter.project =  this.selectedProject;
+
     this.loadCombos();
 
     this.changeFilter();
@@ -70,7 +78,43 @@ export class ProjectsFilterComponent implements OnInit {
   }
 
 
-  public changeFilter(): void {
+  public onChangeContract(contractUID: string): void {
+    if (contractUID === '') {
+      return;
+    }
+
+    let selectedContract = this.contracts.find((x) => x.uid === contractUID);
+    
+    this.filter.contract = selectedContract;   
+  }
+
+
+  public onChangeStage(stageUID: string): void {
+    if (stageUID === '') {
+      return;
+    }
+
+    let selectedStage = this.stages.find((x) => x.uid === stageUID);
+    
+    this.filter.stage = selectedStage;   
+         
+    this.changeFilter();
+  }
+
+  public onChangeResponsible(responsibleUID: string): void {
+    if (responsibleUID === '') {
+      return;
+    }
+
+    let selectedResponsive = this.responsiblesList.find((x) => x.uid === responsibleUID);
+    
+    this.filter.responsible = selectedResponsive;   
+         
+    this.changeFilter();
+  }
+
+
+  public changeFilter(): void {    
     this.filter = this.filter.clone();
 
     this.onChangeFilter.emit(this.filter);
@@ -102,6 +146,25 @@ export class ProjectsFilterComponent implements OnInit {
       .toPromise()
       .then((x) => this.projectsList = x)
       .catch((e) => this.exceptionHandler(e, errMsg));
+  }
+
+
+  private loadContracts(): void {
+    const errMsg = 'Ocurrió un problema al intentar leer la lista de contratos.';
+    
+    this.projectService.getContracts()
+      .toPromise()
+      .then((x) => this.contracts = x)
+      .catch((e) => this.exceptionHandler(e, errMsg));    
+  }
+
+  private loadStages(): void {
+    const errMsg = 'Ocurrió un problema al intentar leer la lista de etapas.';
+
+    this.projectService.getStages()
+      .toPromise()
+      .then((x) => this.stages = x)
+      .catch((e) => this.exceptionHandler(e, errMsg));    
   }
 
 

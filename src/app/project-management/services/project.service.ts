@@ -7,12 +7,13 @@
  */
 
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import { Observable} from 'rxjs/Observable';
+import { of } from 'rxjs/observable/of';
 
 import { CoreService } from '../../core/core.service';
 
 import { Task } from '../data-types/task';
-import { ProjectRef, ResourceRef, PersonRef } from '../data-types/project';
+import { ProjectRef, ResourceRef, PersonRef, Contract, Stage } from '../data-types/project';
 
 export enum ProjectServiceErr {
   GET_ACTIVITIES_ERR =
@@ -54,4 +55,28 @@ export class ProjectService {
     return this.core.http.get<PersonRef[]>(path);
   }
 
+  public getContracts(): Observable<Contract[]> {
+
+    const CONTRACTS: Contract[] = [ { uid:'576', name:'Ronda 2.4' },
+                                    { uid:'458', name:'Ronda 2.5' }];
+    
+    return of(CONTRACTS);  
+  }
+
+  public getStages(): Observable<Stage[]> {
+    
+    const STAGES: Stage[] = [
+      { uid:'Transición', name:'Transición' },
+      { uid:'Evaluación', name:'Evaluación' },
+      { uid:'Exploración', name:'Exploración' },
+      { uid:'Desarrollo', name:'Desarrollo' },
+      { uid:'Producción', name:'Producción' },
+      { uid:'Abandono', name:'Abandono' },
+      { uid:'Transversales', name:'Transversales' }
+    ];
+
+    return of(STAGES);
+  }
+
 }
+

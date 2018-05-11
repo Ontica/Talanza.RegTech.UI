@@ -1,3 +1,8 @@
+export interface Contract {
+  uid: string;
+  name: string;
+}
+
 export interface ProjectRef {
   uid: string;
   name: string;
@@ -20,6 +25,11 @@ export interface ProjectRef {
    stepNo: string;
    name: string;
    involvedParty: string;
+ }
+
+ export interface Stage {
+   uid: string,
+   name: string
  }
 
 export interface ResourceRef {
@@ -70,3 +80,32 @@ export function EmptyProcessModel() {
 
   return empty;
 }
+
+export function EmptyContact() {
+  const empty:  PersonRef = {
+    uid: '',
+    name: '',
+    shortName: ''
+  }
+
+  return empty;
+}
+
+export function EmptyContract() {
+  const empty: Contract = {
+    uid: '',
+    name: ''
+  }
+
+  return empty;
+}
+
+export function EmptyStage() {
+  const empty: Stage = {
+    uid: '',
+    name: ''
+  }
+
+  return empty;
+}
+
