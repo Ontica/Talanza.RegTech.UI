@@ -1,6 +1,6 @@
 @import "../../../styles/variables";
 
-.gs-container {
+.container {
   height: calc(100vh - 210px);
   width: 100%;
   display: inline-block;
@@ -9,7 +9,7 @@
 .centered-container {
   margin-left: 10%;
   margin-right: 10%;
-  width: 80%;
+  width: 90%;
   height: 100%;
   overflow-y: hidden;
 }

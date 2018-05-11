@@ -16,6 +16,9 @@ import { Activity } from '../data-types/activity';
 
 enum Errors {
 
+  GET_ACTIVITIES_TREE =
+  '[GET_ACTIVITIES_TREE] Ocurrió un problema al leer el árbol de actividades del proyecto.',
+
   CREATE_CHILD_ERR =
   '[CREATE_CHILD_ERR] Ocurrió un problema al agregar la actividad como hija de otra actividad.',
 
@@ -28,12 +31,23 @@ enum Errors {
   MOVE_ACTIVITY =
   '[MOVE_ACTIVITY] Ocurrió un problema al mover la actividad de posición.',
 
+  DELETE_ACTIVITY =
+  '[DELETE_ACTIVITY] Ocurrió un problema al intentar eliminar la actividad.',
+
 }
 
 @Injectable()
 export class ActivityTreeService {
 
   public constructor(private core: CoreService) { }
+
+  public getActivitiesTree(projectUID: string): Observable<Activity[]> {
+    const path = `v1/project-management/projects/${projectUID}/as-tree`;
+
+    return this.core.http.get<Activity[]>(path)
+                        .catch((e) => this.core.http.showAndReturn(e, Errors.GET_ACTIVITIES_TREE, null));
+  }
+
 
   public insertActivity(projectUID: string,
                         newActivity: { name: string, position: number }): Promise<Activity> {
@@ -70,6 +84,7 @@ export class ActivityTreeService {
                          .toPromise();
   }
 
+
   public changeParent(activity: Activity, newParent: Activity): Promise<Activity> {
     Assertion.assertValue(activity, "activity");
     Assertion.assertValue(newParent, "newParent");
@@ -98,6 +113,17 @@ export class ActivityTreeService {
 
     return this.core.http.put<Activity>(path, body)
                          .catch((e) => this.core.http.showAndReturn(e, Errors.MOVE_ACTIVITY, null))
+                         .toPromise();
+  }
+
+
+  public deleteActivity(projectUID: string, activity: Activity): Promise<any> {
+    Assertion.assertValue(activity, "activity");
+
+    const path = `v1/project-management/projects/${projectUID}/activities/${activity.uid}`;
+
+    return this.core.http.delete<any>(path)
+                         .catch((e) => this.core.http.showAndReturn(e, Errors.DELETE_ACTIVITY, null))
                          .toPromise();
   }
 

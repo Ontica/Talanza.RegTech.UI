@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright (c) 2017 La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
+ * Copyright (c) 2017-2018 La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
  *
  * See LICENSE.txt in the project root for complete license information.
  *
@@ -57,10 +57,9 @@ export class ProjectService {
 
   public getContracts(): Observable<Contract[]> {
 
-    const CONTRACTS: Contract[] = [ { uid:'576', name:'Ronda 2.4' },
-                                    { uid:'458', name:'Ronda 2.5' }];
+    const CONTRACTS: Contract[] = [ { uid:'576', name:'Ronda 2.4' } ];
     
-    return of(CONTRACTS);  
+    return of(CONTRACTS);
   }
 
   public getStages(): Observable<Stage[]> {
@@ -79,4 +78,3 @@ export class ProjectService {
   }
 
 }
-

@@ -14,23 +14,26 @@
   <% if (webpackConfig.htmlElements.headTags) { %>
     <!-- Configured Head Tags  -->
     <%= webpackConfig.htmlElements.headTags %>
-      <% } %>
+  <% } %>
 
 
-        <%= htmlWebpackPlugin.files.webpackManifest %>
+  <%= htmlWebpackPlugin.files.webpackManifest %>
 
-          <% if (htmlWebpackPlugin.options.metadata.isDevServer && htmlWebpackPlugin.options.metadata.HMR !== true) { %>
-            <!-- Webpack Dev Server reload -->
-            <script src="/webpack-dev-server.js"></script>
-            <% } %>
+  <% if (htmlWebpackPlugin.options.metadata.isDevServer && htmlWebpackPlugin.options.metadata.HMR !== true) { %>
+    <!-- Webpack Dev Server reload -->
+    <script src="/webpack-dev-server.js"></script>
+  <% } %>
 
-              <!-- CSS will be injected by webpack here -->
-              <!-- Preload link tags will be injected by webpack here-->
-              <script src="https://use.fontawesome.com/520493470d.js"></script>
+  <!-- CSS will be injected by webpack here -->
+  <!-- Preload link tags will be injected by webpack here-->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
+        integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
+        crossorigin="anonymous">
 
-              <link rel="stylesheet" href="./assets/dhtmlx.css" type="text/css">
-              <script src="./assets/dhtmlx.js" type="text/javascript"></script>
-            <!--  <link rel="stylesheet" href="./assets/foundation.css" type="text/css">-->
+  <link rel="stylesheet" href="./assets/dhtmlx.css" type="text/css">
+
+  <script src="./assets/dhtmlx.js" type="text/javascript"></script>
+
 </head>
 
 <body>

@@ -1,92 +1,63 @@
-<div class="task-list-container" *ngIf="filter.project !== ''">
+<div class="activity-tree-container" *ngIf="filter.project.uid !== ''">
 
-  <div class="task-list-header">
+  <div class="activity-tree-header">
     <button class="btn-warning" (click)="showInitialActivityInlineEditor()">Nueva</button>
     <span *ngIf="filter.project.name">Proyecto: {{filter.project.name}}</span>
   </div>
 
-  <div class="task-list">
+  <div class="activity-tree-body">
 
-    <div *ngIf="(addFirstActivityEditorVisible && !hasSelectedActivities)" class="add-task">
-      <div>
-        <label>Tarea inicial:</label>
+    <div *ngIf="(addFirstActivityEditorVisible && !hasSelectedActivities)" class="activity-inline-editor">
         <input #txtActivityName type="text"
                class="text-box" style="width:80%"
                (keyup.esc)="hideInlineEditors()"
-               (keyup.enter)="insertActivity(txtActivityName.value)">
+               (keyup.enter)="insertActivity(txtActivityName.value)"
+               placeholder= "Nombre de la actividad">
         <button class="btn" (click)="hideInlineEditors()">Cancelar</button>
-      </div>
     </div>
 
-    <!-- Drop area for the first position -->
-    <div class="activity-drop-by-position-area"
-        draggable="dragging"
-        (dragover)="allowDrop($event)"
-        (drop)="moveActivity($event, 0)">
-    </div>
+    <div *ngFor="let activity of activityTree" class="activity-row" (click)="selectActivity(activity)">
 
-    <div class="task-row" *ngFor="let activity of activityTree">
-
-      <div [class.selected-row]="isActivitySelected(activity)"
+      <div [class.selected-activity]="isActivitySelected(activity)"
             draggable="dragging"
             (dragover)="allowDrop($event)"
             (dragstart)="drag($event, activity)"
             (drop)="moveActivity($event, activity.position)">
 
-          <div class="row-options">
-            <i class="fa fa-arrows drag-icon" aria-hidden="true" (mousedown)="startDrag()"></i>
+          <div class="activity-position-controls">
+            <i class="fa fa-align-justify ghost-icon grabbable" aria-hidden="true" (mousedown)="startDrag(activity)"></i>
           </div>
 
-          <div class="task"
-            draggable="dragging"
-            (dragover)="allowDrop($event)"
-            (dragstart)="drag($event, activity)"
-            (drop)="moveActivityAsChildOf($event, activity)">
+          <div class="activity-name">
 
-            <a [ngClass]="activityNameClass(activity.level)"
-               [style.padding-left.pt]="activity.level * 10"
+            <div draggable="dragging"
+              (dragover)="allowDrop($event)"
+              (dragstart)="drag($event, activity)"
+              (drop)="moveActivityAsChildOf($event, activity)">
+
+              <a [ngClass]="activityNameClass(activity.level)"
+               [style.padding-left.pt]="activity.level * 14"
                (click)="selectActivity(activity, true)">{{activity.name}}</a>
 
+            </div>
+
           </div>
 
-          <div class="task-options">
-
-            <a (click)="toggleAddChildEditor(activity)">
-              <i [ngClass]="addChildEditorVisible && isActivitySelected(activity) ? 'fa fa-minus-circle' : 'fa fa-plus-circle'"
-                           aria-hidden="true"></i>
+          <div class="activity-menu">
+            <a (click)="displayMenu(activity)">
+              <i class="fa fa-ellipsis-v ghost-icon"></i>
             </a>
-
-            <span class="delete-icon-container">
-              <a (click)="deleteTask(activity.uid)">
-                <i class="fa fa-trash delete-icon"></i>
-              </a>
-            </span>
-
           </div>
 
       </div>
 
-      <div class="activity-drop-by-position-area"
-            draggable="dragging"
-            (dragover)="allowDrop($event)"
-            (drop)="moveActivity($event, activity.position)">
-      </div>
-
-      <div *ngIf="isActivitySelected(activity)" class="add-task-editor">
-
-        <div *ngIf="addChildEditorVisible">
-          <label>Tarea hija:</label>
-          <input #txtActivityName type="text"
-                 class="text-box" style="width:80%"
-                 (keyup.esc)="hideInlineEditors()"
-                 (keyup.enter)="createChildActivity(txtActivityName.value, activity)">
-          <button class="btn" (click)="hideInlineEditors()">Cancelar</button>
-        </div>
+      <div *ngIf="isActivitySelected(activity)" class="activity-inline-editor">
 
         <div *ngIf="insertActivityEditorVisible">
-          <label>Nueva tarea:</label>
           <input #txtActivityName type="text"
-                 class="text-box" style="width:70%"
+                 class="text-box" style="width:80%"
+                 [style.margin-left.pt]="activity.level * 14"
+                 placeholder= "Nombre de la actividad"
                  (keyup.esc)="hideInlineEditors()"
                  (keyup.enter)="insertActivity(txtActivityName.value, activity.position)">
           <button class="btn" (click)="hideInlineEditors()">Cancelar</button>
@@ -94,6 +65,13 @@
 
       </div>
 
+    </div>
+
+    <!-- Drop area for the last position -->
+    <div class="activity-row"
+        draggable="dragging"
+        (dragover)="allowDrop($event)"
+        (drop)="moveActivity($event, activityTree.length + 1)">
     </div>
 
   </div>

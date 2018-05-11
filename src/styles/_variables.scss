@@ -4,7 +4,7 @@
 $ambar: #ebd1a5 !default;
 $black: #1a1a1a !default;
 $gray: #909090!default;
-$light-gray: #cdcdcd!default;
+$light-gray: #dcdcdc!default;
 $brown: #604020 !default;
 $blue: #204060 !default;
 $lime: #8CBF26 !default;
@@ -14,7 +14,7 @@ $light-yellow: #fffffb !default;
 $pink: #E671B8 !default;
 $purple: #A700AE !default;
 $red:#9b1b1f !default;
-$red-dark: #d04f4f !default;
+$red-ligth: #d04f4f !default;
 $teal: #25a1c5 !default;
 $white: #fefefe !default;
 $light-white: white;
@@ -114,6 +114,9 @@ $selected-control-border: 1px solid #c9c9c9;
 $grid-border: none;
 $grid-even-background-color: #fffffd;
 $grid-odd-background-color: #eef7fa;
+$grid-selected-background-color: #f6fff6;
+$grid-hover-background-color: #f6f6f6;
+
 //
 // rag-status
 //

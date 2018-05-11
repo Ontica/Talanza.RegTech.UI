@@ -128,13 +128,4 @@ export class ActivityService {
         this.core.http.showAndReturn(e, Errors.GET_ACTIVITIES_AS_WORKLIST_ERR, null));
   }
 
-  public deleteActivity(projectUID: string, activityUID: string): Observable<any> {
-
-    const path = `v1/project-management/projects/${projectUID}/activities/${activityUID}`;
-
-    return this.core.http.delete<any>(path)
-      .catch((e) =>
-        this.core.http.showAndReturn(e, Errors.GET_ACTIVITIES_AS_WORKLIST_ERR, null));
-  }
-
 }
