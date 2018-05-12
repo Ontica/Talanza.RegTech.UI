@@ -30,7 +30,6 @@ export class ActivityTreeComponent {
   public addFirstActivityEditorVisible = false;
   public insertActivityEditorVisible = false;
 
-  public dragging = false;
 
   private _filter: ActivityFilter = new ActivityFilter();
   @Input()
@@ -145,10 +144,6 @@ export class ActivityTreeComponent {
   }
 
   public allowDrop(ev: any): void {
-    if (!this.dragging) {
-      return;
-    }
-
     ev.preventDefault();
   }
 
@@ -161,17 +156,13 @@ export class ActivityTreeComponent {
   public startDrag(activity: Activity): void {
     this.hideInlineEditors();
 
-    this.selectActivity(activity);
-
-    this.dragging = true;
+    this.selectActivity(activity);   
   }
 
 
   private getSourceActivity(ev: any): Activity {
     ev.preventDefault();
-
-    this.dragging = false;
-
+   
     let activity = JSON.parse(ev.dataTransfer.getData("data"));
 
     return activity;
@@ -190,8 +181,7 @@ export class ActivityTreeComponent {
     this.selectedActivity = EmptyActivity();
 
     this.addFirstActivityEditorVisible = false;
-    this.insertActivityEditorVisible = false;
-    this.dragging = false;
+    this.insertActivityEditorVisible = false;    
   }
 
 }

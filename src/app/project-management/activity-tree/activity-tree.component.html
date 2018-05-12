@@ -19,20 +19,18 @@
     <div *ngFor="let activity of activityTree" class="activity-row" (click)="selectActivity(activity)">
 
       <div [class.selected-activity]="isActivitySelected(activity)"
-            draggable="dragging"
+            draggable="true"
             (dragover)="allowDrop($event)"
             (dragstart)="drag($event, activity)"
             (drop)="moveActivity($event, activity.position)">
 
           <div class="activity-position-controls">
-            <i class="fa fa-align-justify ghost-icon grabbable" aria-hidden="true" (mousedown)="startDrag(activity)"></i>
+            <i class="fa fa-align-justify ghost-icon grabbable" aria-hidden="true" (click)="startDrag(activity)"></i>
           </div>
 
           <div class="activity-name">
-
-            <div draggable="dragging"
-              (dragover)="allowDrop($event)"
-              (dragstart)="drag($event, activity)"
+           
+            <div (dragover)="allowDrop($event)"
               (drop)="moveActivityAsChildOf($event, activity)">
 
               <a [ngClass]="activityNameClass(activity.level)"
@@ -40,7 +38,6 @@
                (click)="selectActivity(activity, true)">{{activity.name}}</a>
 
             </div>
-
           </div>
 
           <div class="activity-menu">
@@ -66,10 +63,8 @@
       </div>
 
     </div>
-
-    <!-- Drop area for the last position -->
-    <div class="activity-row"
-        draggable="dragging"
+  
+    <div class="activity-row"        
         (dragover)="allowDrop($event)"
         (drop)="moveActivity($event, activityTree.length + 1)">
     </div>
