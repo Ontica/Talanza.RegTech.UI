@@ -5,9 +5,12 @@
  * See LICENSE.txt in the project root for complete license information.
  *
  */
+
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
-import { ProcessModel, EmptyProcessModel, ProjectRef } from '../../data-types/project';
+import { Identifiable } from '../../../core/core-data-types';
+
+import { Project, ProcessModel } from '../../data-types/project';
 
 @Component({
   selector: 'create-activity-wizard-controller',
@@ -17,7 +20,7 @@ import { ProcessModel, EmptyProcessModel, ProjectRef } from '../../data-types/pr
 
 export class CreateActivityWizardController {
 
-  @Input() public project: ProjectRef;
+  @Input() public project: Project;
 
   @Output() public onCloseEvent = new EventEmitter();
 
@@ -31,7 +34,7 @@ export class CreateActivityWizardController {
 
   public onNext(): void {
     if (!this.processModel) {
-      alert("No has seleccionado una actividad o evento");
+      alert("No se ha seleccionado una actividad o evento.");
     } else {
       this.step = 2;
     }

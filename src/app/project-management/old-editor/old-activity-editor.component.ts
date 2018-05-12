@@ -11,7 +11,7 @@ import {
   Output
 } from '@angular/core';
 
-import { TaskRef } from '../data-types/task';
+import { UpdateActivityCommand } from '../data-types/task';
 
 import { Activity } from '../data-types/activity';
 

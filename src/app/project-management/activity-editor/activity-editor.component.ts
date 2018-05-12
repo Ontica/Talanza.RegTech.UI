@@ -8,12 +8,12 @@
 
 import { Component, EventEmitter, HostBinding, Input, Output } from '@angular/core';
 
+import { Assertion } from 'empiria';
+
+import { Contact, ColoredTag } from '../../core/core-data-types';
+
 import { Activity } from '../data-types/activity';
-
-import { TaskRef, EmptyTask, Tag } from '../data-types/task';
-
-import { PersonRef } from '../data-types/project';
-
+import { UpdateActivityCommand } from '../data-types/commands';
 
 import { ActivityService } from '../services/activity.service';
 import { ProjectService } from '../services/project.service';
@@ -27,32 +27,27 @@ import { ProjectService } from '../services/project.service';
 
 export class ActivityEditorComponent {
 
-  public selectedTask: TaskRef = EmptyTask();
+  public selectedTask = new UpdateActivityCommand();
 
-  public responsiblesList: PersonRef[] = [];
+  public responsiblesList: Contact[] = [];
+  public tags: ColoredTag[] = [];
+  public selectedTags: ColoredTag[] = [];
 
-  public tags: Tag[] = [];
-  public selectedTags: Tag[] = [];
-  public isTaskClosed = false;
-
-  public isNewTask = false;
-
+  public isClosed = false;
+  
   public _activity: Activity;
   @Input()
   set activity(activity: Activity) {
+
     this._activity = activity;
 
+    this.loadSelectedTask();
+
     this.loadInitialValues();
+    this.loadActivityInitialValues();
 
-    if (activity.uid === '') {
-      this.isNewTask = true;
-
-    } else {
-      this.isNewTask = false;
-      this.loadActivityInitialValues();
-    }
   }
-    get activity(): Activity {
+  get activity(): Activity {
     return this._activity;
   }
 
@@ -60,9 +55,7 @@ export class ActivityEditorComponent {
   @Output() public onUpdateActivity = new EventEmitter<Activity>();
 
   public constructor(private activityService: ActivityService,
-    private projectService: ProjectService) {
-
-  }
+                     private projectService: ProjectService) { }
 
   public cancel(): void {
     this.onClose();
@@ -72,36 +65,30 @@ export class ActivityEditorComponent {
     this.onCloseEvent.emit();
   }
 
-  public async onUpdateTask() {
+  public onUpdateTask() {
     if (!this.validateTargetDate()) {
       return;
     }
 
     this.setSelectedTags();
 
-    if (this.isNewTask) {
-      await this.addTask();
-    } else {
-      await this.updateTask();
-    }
+    this.updateTask();
   }
 
-  public async loadInitialValues() {
-    await this.loadTags();
+  public loadInitialValues() {
+    this.loadTags();
 
-    this.loadLists();
+    this.loadResponsiblesList();
   }
 
   public async loadActivityInitialValues() {
-    this.loadSelectedTask();
-
     await this.loadTags();
 
     this.loadSelectedTags();
 
     this.setIsTaskClosed();
 
-    this.loadLists();
+    this.loadResponsiblesList();
   }
 
   public onSelectedTags(selectedTags: any): void {
@@ -120,9 +107,6 @@ export class ActivityEditorComponent {
     this.selectedTask.targetDate = this.parseDate(date);
   }
 
-  private loadLists(): void {
-    this.loadResponsiblesList();
-  }
 
   private loadSelectedTask(): void {
 
@@ -147,6 +131,8 @@ export class ActivityEditorComponent {
   }
 
   private async updateTask() {
+    Assertion.assertValue(this.selectedTask, "this.selectedTask");
+
     const errMsg = 'Ocurrió un problema al intentar actualizar la actividad.';
 
     await this.activityService.updateActivity(this.activity.project.uid, this.activity.uid, this.selectedTask)
@@ -157,22 +143,6 @@ export class ActivityEditorComponent {
       .catch((e) => this.exceptionHandler(e, errMsg));
   }
 
-  private async addTask() {
-    const errMsg = 'Ocurrió un problema al intentar actualizar la actividad.';
-
-    alert("la tarea fue agregada con exito");
-  }
-
-  private exceptionHandler(error: any, defaultMsg: string): void {
-    let errMsg = 'Tengo un problema.\n\n';
-
-    if (typeof (error) === typeof (Error)) {
-      errMsg += defaultMsg + '\n\n' + (<Error>error).message;
-    } else {
-      errMsg += defaultMsg + '\n\n' + 'Error desconocido.';
-    }
-    alert(errMsg);
-  }
 
   private async loadTags() {
     const errMsg = 'Ocurrió un problema al intentar leer la lista de etiquetas.';
@@ -209,9 +179,9 @@ export class ActivityEditorComponent {
 
   private setIsTaskClosed(): void {
     if (this.activity.stage === 'Done') {
-      this.isTaskClosed = true;
+      this.isClosed = true;
     } else {
-      this.isTaskClosed = false;
+      this.isClosed = false;
     }
   }
 
@@ -227,6 +197,18 @@ export class ActivityEditorComponent {
     }
 
     return true;
+  }
+
+  
+  private exceptionHandler(error: any, defaultMsg: string): void {
+    let errMsg = 'Tengo un problema.\n\n';
+
+    if (typeof (error) === typeof (Error)) {
+      errMsg += defaultMsg + '\n\n' + (<Error>error).message;
+    } else {
+      errMsg += defaultMsg + '\n\n' + 'Error desconocido.';
+    }
+    alert(errMsg);
   }
 
 }

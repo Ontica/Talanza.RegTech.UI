@@ -8,11 +8,14 @@
 
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
-import { EmptyProjectRef, PersonRef, ProjectRef } from '../../project-management/data-types/project';
+import { Empty, Contact } from '../../core/core-data-types';
+
+import { Project } from '../../project-management/data-types/project';
 import { InboxFilter } from '../data-types/inbox-filter';
 
 import { ProjectService } from '../../project-management/services/project.service';
 import { ActivityService } from '../../project-management/services/activity.service';
+
 
 @Component({
   selector: 'inbox-filter',
@@ -25,11 +28,11 @@ export class InboxFilterComponent implements OnInit {
 
   public isAddActivityEditorWindowVisible = false;
 
-  public projectsList: ProjectRef[] = [];
-  public selectedProject: ProjectRef = EmptyProjectRef();
+  public projectsList: Project[] = [];
+  public selectedProject: Project = Empty;
   
   public labelsList: any;
-  public responsiblesList: PersonRef[] = [];
+  public responsiblesList: Contact[] = [];
  
   public keywords = '';
 
@@ -46,7 +49,7 @@ export class InboxFilterComponent implements OnInit {
 
   public onChangeProjectList(projectUID: string): void {
     if (projectUID === '') {
-      this.selectedProject = EmptyProjectRef();
+      this.selectedProject = Empty;
      
       this.labelsList = [];
 

@@ -7,9 +7,9 @@
  */
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
-import { ProjectRef, ProcessModel} from '../../data-types/project';
+import { Project, ProcessModel } from '../../data-types/project';
 
-import { EmptyActivity } from '../../data-types/activity';
+import { Activity_Empty } from '../../data-types/activity';
 
 import { ProcessModelsService } from '../../services/process-models.service';
 
@@ -24,32 +24,32 @@ export class ProjectModelSelectorComponent {
 
   @Input() public processModel: ProcessModel;
 
-  @Input() public project: ProjectRef;
+  @Input() public project: Project;
 
   private _onAdd = false;
   @Input()
   set onAdd(isAdd: boolean) {
     this._onAdd = isAdd;
     if (isAdd) {
-      this.addProcessModel();      
-    }    
+      this.addProcessModel();
+    }
   }
 
   @Output() public onCloseEvent = new EventEmitter();
 
-  private activity = EmptyActivity();
+  private activity = Activity_Empty;
 
   public constructor(private processModelsService: ProcessModelsService) { }
 
-  
+
   private async addProcessModel() {
     const errMsg = 'Ocurrió un problema al intentar guardar.';
-      
+
     await this.processModelsService.addProcessModel(this.project.uid,this.processModel.uid,this.activity)
                         .toPromise()
                         .then((x) => this.onCloseEvent.emit())
                         .catch((e) => this.exceptionHandler(e, errMsg));
-                        
+
   }
 
   private exceptionHandler(error: any, defaultMsg: string): void {
@@ -62,5 +62,5 @@ export class ProjectModelSelectorComponent {
     }
     alert(errMsg);
   }
-  
+
 }

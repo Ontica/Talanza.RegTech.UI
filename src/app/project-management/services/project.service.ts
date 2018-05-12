@@ -12,8 +12,9 @@ import { of } from 'rxjs/observable/of';
 
 import { CoreService } from '../../core/core.service';
 
-import { Task } from '../data-types/task';
-import { ProjectRef, ResourceRef, PersonRef, Contract, Stage } from '../data-types/project';
+import { Contact } from '../../core/core-data-types';
+
+import { Project, Resource, Contract, Stage } from '../data-types/project';
 
 export enum ProjectServiceErr {
   GET_ACTIVITIES_ERR =
@@ -31,39 +32,39 @@ export class ProjectService {
     return this.core.http.get<any[]>(path);
   }
 
-  public getResourcesList(projectUID: string): Observable<ResourceRef[]> {
+  public getResourcesList(projectUID: string): Observable<Resource[]> {
     const path = `v1/project-management/projects/${projectUID}/resources`;
 
-    return this.core.http.get<ResourceRef[]>(path);
+    return this.core.http.get<Resource[]>(path);
   }
 
-  public getRequestersList(projectUID: string): Observable<PersonRef[]> {
+  public getRequestersList(projectUID: string): Observable<Contact[]> {
     const path = `v1/project-management/projects/${projectUID}/requesters`;
 
-    return this.core.http.get<PersonRef[]>(path);
+    return this.core.http.get<Contact[]>(path);
   }
 
-  public getResponsiblesList(projectUID: string): Observable<PersonRef[]> {
+  public getResponsiblesList(projectUID: string): Observable<Contact[]> {
     const path = `v1/project-management/projects/${projectUID}/responsibles`;
 
-    return this.core.http.get<PersonRef[]>(path);
+    return this.core.http.get<Contact[]>(path);
   }
 
-  public getTaskManagers(projectUID: string): Observable<PersonRef[]> {
+  public getTaskManagers(projectUID: string): Observable<Contact[]> {
     const path = `v1/project-management/projects/${projectUID}/task-managers`;
 
-    return this.core.http.get<PersonRef[]>(path);
+    return this.core.http.get<Contact[]>(path);
   }
 
   public getContracts(): Observable<Contract[]> {
 
     const CONTRACTS: Contract[] = [ { uid:'576', name:'Ronda 2.4' } ];
-    
+
     return of(CONTRACTS);
   }
 
   public getStages(): Observable<Stage[]> {
-    
+
     const STAGES: Stage[] = [
       { uid:'Transición', name:'Transición' },
       { uid:'Evaluación', name:'Evaluación' },

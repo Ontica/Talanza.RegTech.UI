@@ -8,13 +8,14 @@
 
 import { Component, OnInit } from '@angular/core';
 
-import { EmptyProjectRef, PersonRef, ProjectRef, ResourceRef } from '../data-types/project';
+import { Empty } from '../../core/core-data-types';
+
+import { Project } from '../data-types/project';
 import { ActivityFilter, ViewConfig, DefaultViewConfig } from '../data-types/activity-filter';
-import { Activity, EmptyActivity } from '../data-types/activity';
+import { Activity, Activity_Empty } from '../data-types/activity';
 
 import { ProjectService } from '../services/project.service';
 import { ActivityService } from '../services/activity.service';
-
 
 @Component({
   selector: 'projects-main-page',
@@ -28,9 +29,9 @@ export class ProjectsMainPageComponent {
   public viewConfig: ViewConfig = DefaultViewConfig();
   public filter: ActivityFilter = new ActivityFilter();
 
-  public selectedProject: ProjectRef = EmptyProjectRef();
+  public selectedProject: Project = Empty;
   public taskList: Activity[] = [];
-  public selectedActivity = EmptyActivity();
+  public selectedActivity = Activity_Empty;
 
   public masterContainerClass = 'centered-container';
   public displayEditor = false;

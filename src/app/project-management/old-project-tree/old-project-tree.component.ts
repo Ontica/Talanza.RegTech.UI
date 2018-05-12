@@ -7,7 +7,7 @@
  */
 import { Component, Input } from '@angular/core';
 
-import { ProjectRef } from '../data-types/project';
+import { Project } from '../data-types/project';
 import { Activity } from '../data-types/activity';
 import { ActivityFilter } from '../data-types/activity-filter';
 
@@ -31,7 +31,7 @@ export class OldProjectTreeComponent {
   public isDrag = false;
   public dragIndex = 0;
 
-  private _project: ProjectRef;
+  private _project: Project;
 
   private _refresh: boolean;
   @Input()

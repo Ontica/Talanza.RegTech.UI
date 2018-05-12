@@ -1,111 +1,41 @@
-export interface Contract {
-  uid: string;
-  name: string;
+/**
+ * @license
+ * Copyright (c) 2017-2018 La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
+ *
+ * See LICENSE.txt in the project root for complete license information.
+ *
+ */
+
+import { Identifiable } from '../../core/core-data-types';
+
+export interface Contract extends Identifiable {
+
 }
 
-export interface ProjectRef {
-  uid: string;
-  name: string;
+export interface Project extends Identifiable {
+
 }
 
- export interface ProcessModel {
-   uid: string;
-   name: string;
-   notes: string;
-   links: Link[];
- } 
-
- export interface Link {
-   name: string;
-   link: string;
- }
-
- export interface Step {
-   uid: string;
-   stepNo: string;
-   name: string;
-   involvedParty: string;
- }
-
- export interface Stage {
-   uid: string,
-   name: string
- }
-
-export interface ResourceRef {
-  uid:string;
-  name: string;  
+export interface ProcessModel extends Identifiable {
   notes: string;
-  type: string; 
+  links: Link[];
 }
 
-export interface PersonRef {
-  uid: string;
+export interface Link {
   name: string;
-  shortName: string;
-}
- 
-export interface TaskRef {
-   completionProgress: number,
-   estimatedStart: Date,
-   estimatedEnd: Date,
-   estimatedDuration: string,
-   name: string,
-   notes: string,
-   parentId: number,
-   resourceUID: string,   
-   responsibleUID:string,
-   requestedTime: Date,
-   requestedByUID:string,
-   projectUID: string,
-   type:string
+  link: string;
 }
 
-export function EmptyProjectRef() {
-  const empty: ProjectRef = {
-    uid: '',
-    name: ''
-  }
-
-  return empty;
+export interface Step extends Identifiable {
+  stepNo: string;
+  involvedParty: string;
 }
 
-export function EmptyProcessModel() {
-  const empty: ProcessModel = {
-    uid: '',
-    name: '',
-    notes: '',
-    links: []
-  }
+export interface Stage extends Identifiable {
 
-  return empty;
 }
 
-export function EmptyContact() {
-  const empty:  PersonRef = {
-    uid: '',
-    name: '',
-    shortName: ''
-  }
-
-  return empty;
+export interface Resource extends Identifiable {
+  type: string;
+  notes: string;
 }
-
-export function EmptyContract() {
-  const empty: Contract = {
-    uid: '',
-    name: ''
-  }
-
-  return empty;
-}
-
-export function EmptyStage() {
-  const empty: Stage = {
-    uid: '',
-    name: ''
-  }
-
-  return empty;
-}
-

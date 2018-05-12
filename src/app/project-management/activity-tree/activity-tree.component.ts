@@ -10,7 +10,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 import { Assertion } from 'empiria';
 
-import { Activity, EmptyActivity } from '../data-types/activity';
+import { Activity, Activity_Empty } from '../data-types/activity';
 import { ActivityFilter } from '../data-types/activity-filter';
 
 import { ActivityTreeService } from '../services/activity.tree.service';
@@ -25,7 +25,7 @@ import { ActivityService } from '../services/activity.service';
 export class ActivityTreeComponent {
 
   public activityTree: Activity[] = [];
-  public selectedActivity: Activity = EmptyActivity();
+  public selectedActivity: Activity = Activity_Empty;
 
   public addFirstActivityEditorVisible = false;
   public insertActivityEditorVisible = false;
@@ -178,7 +178,7 @@ export class ActivityTreeComponent {
 
   private initialize() {
     this.activityTree = [];
-    this.selectedActivity = EmptyActivity();
+    this.selectedActivity = Activity_Empty;
 
     this.addFirstActivityEditorVisible = false;
     this.insertActivityEditorVisible = false;    

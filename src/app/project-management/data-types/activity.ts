@@ -1,30 +1,24 @@
-export interface Parent {
-  id: number,
-  uid: string,
+/**
+ * @license
+ * Copyright (c) 2017-2018 La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
+ *
+ * See LICENSE.txt in the project root for complete license information.
+ *
+ */
+
+import { Contact, Empty, Identifiable } from '../../core/core-data-types';
+import { Project } from './project';
+
+export interface Parent extends Identifiable {
+  type: string
+}
+
+export interface Activity extends Identifiable {
   type: string,
-  name: string
-}
-
-export interface Procedure {
-  uid: string,
-  name: string,
-  code: string,
-  entity: string
-}
-
-export interface KeyValue {
-  uid: string,
-  name: string
-}
-
-export interface Activity {
-  uid: string,
-  type: string,
-  name: string,
   notes: string,
-  project: KeyValue,
-  responsible: KeyValue,
-  parent: Parent,
+  project: Project,
+  responsible: Contact,
+  parent: Parent | Identifiable,
   estimatedDuration: string,
   startDate: Date,
   targetDate: Date,
@@ -39,49 +33,24 @@ export interface Activity {
   visible: string
 }
 
-export function EmptyParent() {
-  const parent: Parent = {
-    id: -1,
-    uid: '',
-    type: '',
-    name: ''
-  };
+export const Activity_Empty: Activity = {
+  uid: '',
+  type: '',
+  name: '',
+  notes: '',
+  project: Empty,
+  responsible: Empty,
+  parent: Empty,
+  estimatedDuration: '',
+  startDate: new Date(),
+  targetDate: new Date(),
+  endDate: new Date(),
+  dueDate: new Date(),
+  tags: [],
+  position: 0,
+  ragStatus: '',
+  stage: '',
+  status: '',
 
-  return parent;
-}
-
-
-export function EmptyKeyValue() {
-  const keyValue: KeyValue = {
-    uid: '',
-    name: ''
-  };
-
-  return keyValue;
-}
-
-export function EmptyActivity() {
-  const activity: Activity = {
-    uid: '',
-    type: '',
-    name: '',
-    notes: '',
-    project: EmptyKeyValue(),
-    responsible: EmptyKeyValue(),
-    parent: EmptyParent(),
-    estimatedDuration: '',
-    startDate: new Date(),
-    targetDate: new Date(),
-    endDate: new Date(),
-    dueDate: new Date(),
-    tags: [],
-    position: 0,
-    ragStatus: '',
-    stage: '',
-    status: '',
-    
-    visible: ''
-  };
-
-  return activity;
+  visible: '',
 }

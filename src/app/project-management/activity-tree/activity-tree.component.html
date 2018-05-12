@@ -1,13 +1,13 @@
-<div class="activity-tree-container" *ngIf="filter.project.uid !== ''">
+<div *ngIf="filter.project.uid !== ''" class="activity-tree-container">
 
   <div class="activity-tree-header">
     <button class="btn-warning" (click)="showInitialActivityInlineEditor()">Nueva</button>
-    <span *ngIf="filter.project.name">Proyecto: {{filter.project.name}}</span>
+    <span>Proyecto: {{filter.project.name}}</span>
   </div>
 
   <div class="activity-tree-body">
 
-    <div *ngIf="(addFirstActivityEditorVisible && !hasSelectedActivities)" class="activity-inline-editor">
+    <div *ngIf="addFirstActivityEditorVisible" class="activity-inline-editor">
         <input #txtActivityName type="text"
                class="text-box" style="width:80%"
                (keyup.esc)="hideInlineEditors()"
@@ -16,7 +16,9 @@
         <button class="btn" (click)="hideInlineEditors()">Cancelar</button>
     </div>
 
-    <div *ngFor="let activity of activityTree" class="activity-row" (click)="selectActivity(activity)">
+    <div *ngFor="let activity of activityTree"
+         class="activity-row"
+         (click)="selectActivity(activity)">
 
       <div [class.selected-activity]="isActivitySelected(activity)"
             draggable="true"
@@ -31,13 +33,14 @@
           <div class="activity-name">
            
             <div (dragover)="allowDrop($event)"
-              (drop)="moveActivityAsChildOf($event, activity)">
+                 (drop)="moveActivityAsChildOf($event, activity)">
 
               <a [ngClass]="activityNameClass(activity.level)"
                [style.padding-left.pt]="activity.level * 14"
                (click)="selectActivity(activity, true)">{{activity.name}}</a>
 
             </div>
+
           </div>
 
           <div class="activity-menu">
@@ -62,9 +65,9 @@
 
       </div>
 
-    </div>
+    </div>  <!--ngFor="let activity of activityTree" -->
   
-    <div class="activity-row"        
+    <div class="activity-row"
         (dragover)="allowDrop($event)"
         (drop)="moveActivity($event, activityTree.length + 1)">
     </div>

@@ -1,52 +1,44 @@
+/**
+ * @license
+ * Copyright (c) 2017-2018 La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
+ *
+ * See LICENSE.txt in the project root for complete license information.
+ *
+ */
+
 import { Component, ElementRef, Input, OnChanges, ViewChild } from "@angular/core";
 
 import "dhtmlx-gantt";
 import { } from "@types/dhtmlxgantt";
 
-import { ActivityService } from '../services/activity.service';
-import { ProjectRef } from '../data-types/project';
+import { Project } from '../data-types/project';
 import { ActivityFilter, ViewConfig } from '../data-types/activity-filter';
+
+import { GanttService } from './gantt.service';
 
 @Component({
   selector: "gantt",
-  styles: [
-    `
-        :host{
-            display: block;
-            height: 600px;
-            position: relative;
-            width: 100%;
-        }
-    `],
-  template: `<div #gantt_here style='width: 100%; height: 100%;'></div>
-                <div *ngIf="isActivityAddEditorWindowVisible" class="popup">
-                  <!--
-                    <activity-add [project]="project" [parentId]="parentId" (onCloseEvent)="onCloseActivityAddEditorWindow()"></activity-add>
-                  -->
-                </div>
-                <div *ngIf="isActivityEditorWindowVisible" class="popup">                
-                  <!--<old-activity-editor [project]="project" [activityId]="activityId" (onCloseEvent)="onCloseActivityEditorWindow()">
-                  </old-activity-editor>-->
-                </div>
-                `,
-  providers: [ActivityService]
+  templateUrl: './gantt.component.html',
+  styleUrls: ['./gantt.component.scss'],
+  providers: [GanttService]
 })
 
 export class GanttComponent implements OnChanges {
+
   @ViewChild("gantt_here") ganttContainer: ElementRef;
 
-   private _filter: ActivityFilter;
-   @Input() 
-   set filter(filter: ActivityFilter) {
-     this._filter = filter;  
+  private _filter: ActivityFilter;
+  @Input()
+  set filter(filter: ActivityFilter) {
+    this._filter = filter;
 
     this.projectUID = filter.project.uid;
 
     this.refreshData();
-   }
-   get filter(): ActivityFilter {
-     return this._filter;
-   }
+  }
+  get filter(): ActivityFilter {
+    return this._filter;
+  }
 
   @Input() public config: ViewConfig;
 
@@ -57,7 +49,7 @@ export class GanttComponent implements OnChanges {
   public activityId: number = -1;
   public projectUID: string = '';
 
-  constructor(private activityService: ActivityService) { }
+  constructor(private ganttService: GanttService) { }
 
   ngOnChanges() {
 
@@ -71,9 +63,9 @@ export class GanttComponent implements OnChanges {
   }
 
   public onCloseActivityAddEditorWindow() {
-    this.isActivityAddEditorWindowVisible = false;      
+    this.isActivityAddEditorWindowVisible = false;
     this.refreshData();
-  
+
   }
 
   public onCloseActivityEditorWindow(): void {
@@ -87,7 +79,7 @@ export class GanttComponent implements OnChanges {
   private attachEvents() {
     gantt.attachEvent("onTaskCreated", (id, item) => {
       this.parentId = id.parent || -1;
-      this.activityId = -1;      
+      this.activityId = -1;
       this.isActivityAddEditorWindowVisible = true;
     });
 
@@ -98,12 +90,12 @@ export class GanttComponent implements OnChanges {
     });
 
     gantt.attachEvent("onAfterTaskDrag", function (id, mode, e) {
-      let modes = gantt.config.drag_mode;    
+      let modes = gantt.config.drag_mode;
       if (mode === modes.resize) {
         var modifiedTask = gantt.getTask(id);
-        //alert("movio la tarea" + id);       
-        //alert("fecha de inicio: " + modifiedTask.start_date);        
-        //alert("Fecha de termino: " + modifiedTask.end_date);       
+        //alert("movio la tarea" + id);
+        //alert("fecha de inicio: " + modifiedTask.start_date);
+        //alert("Fecha de termino: " + modifiedTask.end_date);
       }
     });
 
@@ -138,9 +130,9 @@ export class GanttComponent implements OnChanges {
     }
   }
 
-  private refreshData() {    
-     this.activityService.getActivitiesListAsGantt(this.projectUID)
-      .then((data) => {        
+  private refreshData() {
+    this.ganttService.getActivitiesTree(this.projectUID)
+      .then((data) => {
         gantt.clearAll();
         gantt.parse({ data });
       });

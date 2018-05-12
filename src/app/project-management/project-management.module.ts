@@ -21,7 +21,6 @@ import { ProjectsFilterComponent } from './main-page/projects-filter.component';
 import { ActivityTreeComponent } from './activity-tree/activity-tree.component';
 
 import { GanttComponent } from './gantt/gantt.component';
-import { GanttViewerComponent } from './gantt/gantt-viewer.component';
 
 import { ActivityEditorComponent } from './activity-editor/activity-editor.component';
 
@@ -42,21 +41,25 @@ import { CloseActivityComponent } from './old-editor/tabs/close-activity.compone
  * Do not specify providers for modules that might be imported by a lazy loaded module.
  */
 @NgModule({
-  imports: [ProjectManagementRoutingModule, SharedModule, CommonModule, FormsModule, 
+  imports: [ProjectManagementRoutingModule, SharedModule, CommonModule, FormsModule,
             ProceduresModule, ControlsModule],
-            
-  declarations: [ProjectsMainPageComponent, 
+
+  declarations: [ProjectsMainPageComponent,
                  ProjectsFilterComponent,
                  ActivityTreeComponent,
                  GanttComponent,
-                 GanttViewerComponent,
-                 ActivityEditorComponent,                 
-                 
-                 CreateActivityMenuComponent, ActivityTypeSelectorComponent, ProjectModelSelectorComponent,
-                 CreateActivityWizardController, OldProjectTreeComponent, 
-                 OldActivityEditorComponent, CloseActivityComponent],
+                 ActivityEditorComponent,
 
-  exports: [ProjectsMainPageComponent, GanttComponent, 
+                 CreateActivityMenuComponent,
+                 ActivityTypeSelectorComponent,
+                 ProjectModelSelectorComponent,
+
+                 CreateActivityWizardController,
+                 OldProjectTreeComponent,
+                 OldActivityEditorComponent,
+                 CloseActivityComponent],
+
+  exports: [ProjectsMainPageComponent, GanttComponent,
             OldProjectTreeComponent, OldActivityEditorComponent ]
 })
 export class ProjectManagementModule { }

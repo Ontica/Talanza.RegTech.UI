@@ -6,15 +6,17 @@
  *
  */
 
- import { ProjectRef, EmptyProjectRef, PersonRef,
-          EmptyContact, Contract, EmptyContract,
-          Stage, EmptyStage } from '../data-types/project';
+import { Contact, Empty, isEmpty } from '../../core/core-data-types';
+
+import { Contract, Project, Stage } from '../data-types/project';
+
 
 export class ViewConfig {
   viewType: string;
   ganttConfig: string;
   timeScaleUnit: string;
 }
+
 
 export function DefaultViewConfig(): ViewConfig {
   return {
@@ -24,12 +26,14 @@ export function DefaultViewConfig(): ViewConfig {
   };
 }
 
+
 export class ActivityFilter {
+
   public contract: Contract;
-  public project: ProjectRef;
+  public project: Project;
   public stage: Stage;
   public tags: string[];
-  public responsible: PersonRef;
+  public responsible: Contact;
   public keywords: string;
   public orderBy: string;
 
@@ -38,11 +42,11 @@ export class ActivityFilter {
   }
 
   public clean(): void {
-    this.contract = EmptyContract();
-    this.project = EmptyProjectRef();
-    this.stage = EmptyStage();
+    this.contract = Empty;
+    this.project = Empty;
+    this.stage = Empty;
     this.tags = [];
-    this.responsible = EmptyContact();
+    this.responsible = Empty;
     this.keywords = '';
     this.orderBy = '';
   }
@@ -64,13 +68,13 @@ export class ActivityFilter {
   public toString(): string {
     let filter = '';
 
-    if ((this.contract.uid !== '')) {
+    if (!isEmpty(this.contract)) {
       filter = this.addFilterConnector(filter) + "contract=" + this.contract;
     }
-    if ((this.project.uid !== '')) {
+    if (!isEmpty(this.project)) {
       filter = this.addFilterConnector(filter) + "project=" + this.project;
     }
-    if ((this.stage.uid !== '')) {
+    if (!isEmpty(this.stage)) {
       filter = this.addFilterConnector(filter) + "stage=" + this.stage;
     }
     if ((this.tags.length !== 0)) {
@@ -78,7 +82,7 @@ export class ActivityFilter {
         filter = this.addFilterConnector(filter) + "tag=" + x;
       })
     }
-    if (this.responsible.uid !== '') {
+    if (!isEmpty(this.responsible)) {
       filter = this.addFilterConnector(filter) + "responsible=" + this.responsible;
     }
     if (this.keywords !== '') {
@@ -97,4 +101,4 @@ export class ActivityFilter {
     return filter;
   }
 
-}
+} // class ActivityFilter

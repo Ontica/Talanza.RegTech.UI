@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright (c) 2017 La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
+ * Copyright (c) 2017-2018 La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
  *
  * See LICENSE.txt in the project root for complete license information.
  *
@@ -11,7 +11,7 @@ import { Observable } from 'rxjs/Observable';
 
 import { CoreService } from '../../core/core.service';
 
-import { ClosedTask, Task, TaskRef } from '../data-types/task';
+import { CloseActivityCommand, UpdateActivityCommand } from '../data-types/commands';
 import { ActivityFilter } from '../data-types/activity-filter';
 import { Activity } from '../data-types/activity';
 import { Assertion } from 'empiria';
@@ -45,35 +45,27 @@ export class ActivityService {
 
   public constructor(private core: CoreService) { }
 
-  public getActivity(itemId: number): Observable<any> {
+
+  public getActivity(itemId: number): Observable<Activity> {
     const path = `v1/project-management/activities/${itemId}`;
 
-    return this.core.http.get<any>(path)
+    return this.core.http.get<Activity>(path)
       .catch((e) =>
         this.core.http.showAndReturn(e, Errors.GET_ACTIVITY_ERR, null));
   }
 
+
   public searchActivities(projectUID: string, filter: object,
-    orderBy: string, keywords: string): Observable<Task[]> {
+                          orderBy: string, keywords: string): Observable<Activity[]> {
 
     const path = `v1/project-management/projects/${projectUID}/activities?filter=${filter}
                                                                           &orderBy=${orderBy}
                                                                           &keywords=${keywords}`;
 
-    return this.core.http.get<Task[]>(path)
-      .catch((e) =>
-        this.core.http.showAndReturn(e, Errors.GET_SEARCH_ACTIVITIES_ERR, null));
+    return this.core.http.get<Activity[]>(path)
+                         .catch((e) => this.core.http.showAndReturn(e, Errors.GET_SEARCH_ACTIVITIES_ERR, null));
   }
 
-  public getActivitiesListAsGantt(projectUID: string): Promise<Task[]> {
-    const path = `v1/project-management/projects/${projectUID}/as-gantt`;
-
-    return this.core.http.get<Task[]>(path)
-      .catch((e) =>
-        this.core.http.showAndReturn(e, Errors.GET_ACTIVITIES_LIST_AS_GANTT_ERR, null))
-      .toPromise();
-
-  }
 
   public getActivities(projectUID: string): Promise<Activity[]> {
     const path = `v1/project-management/projects/${projectUID}/as-tree`;
@@ -85,8 +77,9 @@ export class ActivityService {
 
   }
 
+
   public updateActivity(projectUID: string,
-    activityUID: string, task: TaskRef): Observable<Activity> {
+                        activityUID: string, task: UpdateActivityCommand): Observable<Activity> {
 
     const path = `v1/project-management/projects/${projectUID}/activities/${activityUID}`;
 
@@ -96,14 +89,15 @@ export class ActivityService {
         this.core.http.showAndReturn(e, Errors.PUT_UPDATE_ACTIVITY_ERR, null));
   }
 
+
   public closeActivity(projectUID: string,
-    activityUID: string, closeTask: ClosedTask): Observable<Activity> {
+                       activityUID: string, closeTask: CloseActivityCommand): Observable<Activity> {
     const path = `v1/project-management/projects/${projectUID}/activities/${activityUID}/close`;
 
     return this.core.http.post<Activity>(path, closeTask)
-      .catch((e) =>
-        this.core.http.showAndReturn(e, Errors.POST_CLOSE_ACTIVITY_ERR, null));
+                         .catch((e) => this.core.http.showAndThrow(e, Errors.POST_CLOSE_ACTIVITY_ERR));
   }
+
 
   public getTags(): Observable<any[]> {
     const path = `v1/project-management/tags`;
@@ -112,6 +106,7 @@ export class ActivityService {
       .catch((e) =>
         this.core.http.showAndReturn(e, Errors.GET_TAGS_ERR, null));
   }
+
 
   public getActivitiesAsWorkList(filter?: ActivityFilter): Observable<Activity[]> {
 
@@ -123,7 +118,7 @@ export class ActivityService {
 
     const path = `v1/project-management/projects/as-work-list${filterAsString}`;
 
-    return this.core.http.get<any>(path)
+    return this.core.http.get<Activity>(path)
       .catch((e) =>
         this.core.http.showAndReturn(e, Errors.GET_ACTIVITIES_AS_WORKLIST_ERR, null));
   }

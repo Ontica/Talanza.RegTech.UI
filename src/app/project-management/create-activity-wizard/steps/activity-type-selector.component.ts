@@ -5,17 +5,17 @@
  * See LICENSE.txt in the project root for complete license information.
  *
  */
-import { Component, EventEmitter, OnInit, Output }  from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
-import { ProcessModel, EmptyProcessModel } from '../../data-types/project'; 
+import { ProcessModel } from '../../data-types/project';
 
 import { ProcessModelsService } from '../../services/process-models.service'
 
 @Component({
-  selector:'activity-type-selector',
+  selector: 'activity-type-selector',
   templateUrl: './activity-type-selector.component.html',
   styleUrls: ['./activity-type-selector.component.scss'],
-  providers:[ProcessModelsService]
+  providers: [ProcessModelsService]
 })
 
 export class ActivityTypeSelectorComponent implements OnInit {
@@ -29,43 +29,48 @@ export class ActivityTypeSelectorComponent implements OnInit {
 
   @Output() onSelectProcessModel = new EventEmitter<ProcessModel>();
 
-  constructor (private processModelsService: ProcessModelsService){}
+  constructor(private processModelsService: ProcessModelsService) { }
 
   ngOnInit() {
     this.loadEvents();
   }
+
 
   public filter(): void {
     if (this.query !== "") {
       this.filteredList = this.processModels.filter(function (el) {
         return el.name.toLowerCase().indexOf(this.query.toLowerCase()) > -1;
       }.bind(this));
-     
+
     } else {
       this.filteredList = [];
     }
   }
-  
+
+
   public setAllEvents(): void {
     this.loadEvents();
     this.filteredList = this.processModels;
   }
 
+
   public onSelectEvent(processModel: ProcessModel): void {
     this.selectedProcessModelUID = processModel.uid;
-    
-    
+
+
     this.onSelectProcessModel.emit(processModel);
   }
 
+
   private loadEvents(): void {
-    const errMsg = 'Ocurrio un prolema al intentar leer la listas de evntos';
+    const errMsg = 'Ocurrió un problema al intentar leer la lista de eventos.';
 
     this.processModelsService.getEvents()
-                        .toPromise()
-                        .then((x) => this.processModels = x)
-                        .catch((e) => this.exceptionHandler(e, errMsg));
-  }  
+                             .toPromise()
+                             .then((x) => this.processModels = x)
+                             .catch((e) => this.exceptionHandler(e, errMsg));
+  }
+
 
   private exceptionHandler(error: any, defaultMsg: string): void {
     let errMsg = 'Tengo un problema.\n\n';
@@ -77,6 +82,5 @@ export class ActivityTypeSelectorComponent implements OnInit {
     }
     alert(errMsg);
   }
-  
-  
+
 }

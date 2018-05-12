@@ -8,8 +8,10 @@
 
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
-import { ClosedTask, EmptyClosedTask } from '../../data-types/task';
+import { Assertion } from 'empiria';
+
 import { Activity } from '../../data-types/activity';
+import { CloseActivityCommand } from '../../data-types/commands';
 
 import { ActivityService } from '../../services/activity.service';
 
@@ -27,7 +29,7 @@ export class CloseActivityComponent {
 
   public calendar: any
 
-  private closedTask = EmptyClosedTask();
+  private closeCommand: CloseActivityCommand;
 
   private _task: any;
   @Input()
@@ -44,16 +46,16 @@ export class CloseActivityComponent {
 
   constructor(private activityService: ActivityService) { }
 
-  public async onCloseTask() {
+  public onCloseTask() {
 
     if (!this.validateDueDate()) {
       return;
     }
 
-    this.closedTask.endDate = this.endDate;
-    this.closedTask.requestedByUID = this.activity.requestedBy.uid;
+    this.closeCommand.endDate = this.endDate;
+    this.closeCommand.requestedByUID = this.activity.requestedBy.uid;
 
-    await this.closeTask();
+    this.closeTask();
   }
 
   public cancel(): void {
@@ -83,9 +85,11 @@ export class CloseActivityComponent {
   }
 
   private closeTask(): void {
-    const errMsg = 'Ocurrió un problema al intentar crear la actividad.';
+    Assertion.assertValue(this.closeCommand, "this.closeCommand");
 
-    this.activityService.closeActivity(this.activity.project.uid, this.activity.uid, this.closedTask)
+    const errMsg = 'Ocurrió un problema al intentar cerrar la actividad.';
+
+    this.activityService.closeActivity(this.activity.project.uid, this.activity.uid, this.closeCommand)
       .toPromise()
       .then(x => {
         this.onCloseActivity.emit(x);
