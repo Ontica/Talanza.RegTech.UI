@@ -106,25 +106,6 @@ export class ActivityTreeComponent {
                             });
   }
 
-
-  public moveActivity(event: any, newPosition: number): void {
-    let activity = this.getSourceActivity(event);
-
-    this.activityTreeService.moveActivity(activity, newPosition)
-                            .then( () => this.loadActivitiesTree() );
-  }
-
-
-  public moveActivityAsChildOf(event: any, newParent: Activity): void {
-    let activity = this.getSourceActivity(event);
-
-    this.activityTreeService.changeParent(activity, newParent)
-                            .then( () => this.loadActivitiesTree() );
-
-
-  }
-
-
   public deleteActivity(activity: Activity): void {
     if (!activity) {
       return;
@@ -143,31 +124,6 @@ export class ActivityTreeComponent {
     }
   }
 
-  public allowDrop(ev: any): void {
-    ev.preventDefault();
-  }
-
-
-  public drag(ev: any, data: any): void {
-    ev.dataTransfer.setData("data", JSON.stringify(data));
-  }
-
-
-  public startDrag(activity: Activity): void {
-    this.hideInlineEditors();
-
-    this.selectActivity(activity);   
-  }
-
-
-  private getSourceActivity(ev: any): Activity {
-    ev.preventDefault();
-   
-    let activity = JSON.parse(ev.dataTransfer.getData("data"));
-
-    return activity;
-  }
-
   private loadActivitiesTree() {
     Assertion.assertValue(this.filter.project, "this.filter.project");
 
@@ -181,7 +137,55 @@ export class ActivityTreeComponent {
     this.selectedActivity = Activity_Empty;
 
     this.addFirstActivityEditorVisible = false;
-    this.insertActivityEditorVisible = false;    
+    this.insertActivityEditorVisible = false;
+  }
+
+
+  // Drag & drop methods
+
+  public allowDrop(event: DragEvent): void {
+    event.preventDefault();
+  }
+
+
+  public drag(event: DragEvent, data: any): void {
+    event.dataTransfer.setData("data", JSON.stringify(data));
+  }
+
+
+  public startDrag(activity: Activity): void {
+    this.hideInlineEditors();
+
+    this.selectActivity(activity);
+  }
+
+
+  private getDraggedActivity(event: DragEvent): Activity {
+    event.preventDefault();
+
+    let activity = JSON.parse(event.dataTransfer.getData("data"));
+
+    return activity;
+  }
+
+
+  public moveActivity(event: DragEvent, newPosition: number): void {
+    let activity = this.getDraggedActivity(event);
+
+    event.stopPropagation();
+
+    this.activityTreeService.moveActivity(activity, newPosition)
+                            .then( () => this.loadActivitiesTree() );
+  }
+
+
+  public moveActivityAsChildOf(event: DragEvent, newParent: Activity): void {
+    let activity = this.getDraggedActivity(event);
+
+    event.stopPropagation();
+
+    this.activityTreeService.changeParent(activity, newParent)
+                            .then( () => this.loadActivitiesTree() );
   }
 
 }
