@@ -16,44 +16,87 @@ table td:last-child {
 }
 
 @mixin input-button-settings {
-  font-size: $font-size-hint;
+  font: $control-font;
+  border-radius: 6px;
   border: $button-border;
   height: $button-height;
   white-space: nowrap;
   padding: 4pt;
-  height: 28px;
 }
+
+.circled {
+  border-radius: 50% !important;
+  height: 2.0em !important;
+  width: 2.0em !important;
+  font-size: 1.25em !important;
+  box-shadow: 1px 2px 2px #bbb;
+}
+
+button:focus {
+  outline: 0;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+button.btn {
+  @include input-button-settings;
+  background-color: $button-color;
+  border: $control-border;
+  color: $text-color;
+}
+
+button.btn:hover {
+  background-color: $button-selected-color;
+  color: $dark-blue;
+  transition: 0.3s ease-out;
+}
+
+button.btn-primary {
+  @include  input-button-settings;
+  background-color: $primary-color;
+  color: $white;
+}
+
+button.btn-primary:hover {
+  background-color: $primary-selected-color;
+  transition: 0.3s ease-out;
+}
+
 
 button.btn-action {
   @include  input-button-settings;
   background-color: $action-color;
   color: $white;
-  font: $control-font;
-  font-weight: normal;
-  border: 1px solid #cecece;
- 
 }
 
-button.btn {
-  @include  input-button-settings;
-  background-color: $button-background-color;
-  color: $text-color;  
+button.btn-action:hover {
+  background-color: $action-selected-color;
+  transition: 0.3s ease-out;
 }
 
 button.btn-cancel {
   @include input-button-settings;
   background-color: $cancel-color;
-  color: $white;
+  color: $control-color;
+  border: 1px solid #cecece;
 }
 
+button.btn-cancel:hover {
+  background-color: $cancel-selected-color;
+  transition: 0.3s ease-out;
+}
 
 button.btn-warning {
   @include input-button-settings;
   background-color: $warning-color;
-  color: $control-color;
-  font: $control-font;
-  font-weight: normal;  
-  border: 1px solid #cecece;
+  color: $white;
+}
+
+button.btn-warning:hover {
+  background-color: $warning-selected-color;
+  transition: 0.3s ease-out;
 }
 
 @mixin input-settings {
@@ -68,11 +111,13 @@ button.btn-warning {
   margin: 2px 8px 2px 0;
   padding: 2px 2px 2px 6px;
   vertical-align: middle;
+
+  height: $control-height;
   width: $control-width;
 
   border-radius: 2px;
   transition: 0.3s ease-out;
-  height: $control-height;
+
 }
 
 @mixin disabled-element {
@@ -119,21 +164,16 @@ textarea:focus {
   outline: none;
   color: $selected-control-color;
   background-color: $selected-control-background-color;
-  border: $selected-control-border;  
+  border: $selected-control-border;
   border-radius: 10px;
   box-shadow: inset 0 0 2px $selected-control-border;
 }
 
 .input-icon {
   position: absolute;
-  left: 8px;
-  top: calc(50% - 0.5em);
-  color: $light-gray;
-  font-weight: 200;
-}
-
-input.input-text-with-icon {
-  padding-left: 26px;
+  right: 14px;
+  top: calc(50% - 0.4em);
+  color: $gray;
 }
 
 .text-area {
@@ -220,11 +260,18 @@ button:disabled {
 }
 
 .tag {
-  background-color: rgb(124, 68, 161);
-  border-radius: 4px;
+  background-color: $purple;
+  border-radius: 8px;
   color: white;
-  font-size: small;
-  margin: .3em;
-  border-radius: 4px;
-  padding: 0 0.5em 0 0.5em;
+  padding: 4px 4px 4px 8px;
+}
+
+.tag i {
+  padding-left: 4px;
+  color: white;
+  padding-right: 4px;
+}
+
+.tag i:hover {
+  color: $orange;
 }

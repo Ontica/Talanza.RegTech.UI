@@ -1,19 +1,24 @@
 <div *ngIf="filter.project.uid !== ''" class="activity-tree-container">
 
   <div class="activity-tree-header">
-    <button class="btn-warning" (click)="showInitialActivityInlineEditor()">Nueva</button>
-    <span>Proyecto: {{filter.project.name}}</span>
+    <div class="title">
+      {{filter.project.name}}
+    </div>
+    <button type="button" class="btn-primary circled right" style="top:-20px;right:24px;position:relative;z-index:100;"
+            (click)="showInitialActivityInlineEditor()"><i class="fa fa-plus"></i></button>
   </div>
 
   <div class="activity-tree-body">
 
-    <div *ngIf="addFirstActivityEditorVisible" class="activity-inline-editor">
+    <div *ngIf="addFirstActivityEditorVisible" class="activity-inline-editor"
+          style="margin-left:32pt;">
+
         <input #txtActivityName type="text"
-               class="text-box" style="width:80%"
+               class="text-box inline-editor-text-box"
                (keyup.esc)="hideInlineEditors()"
                (keyup.enter)="insertActivity(txtActivityName.value)"
                placeholder= "Nombre de la actividad">
-        <button class="btn" (click)="hideInlineEditors()">Cancelar</button>
+        <button class="btn right" (click)="hideInlineEditors()">Cancelar</button>
     </div>
 
     <div *ngFor="let activity of activityTree"
@@ -30,13 +35,13 @@
             <i class="fa fa-align-justify ghost-icon grabbable" aria-hidden="true" (click)="startDrag(activity)"></i>
           </div>
 
-          <div class="activity-name">
-           
+          <div class="activity-name"
+               [style.padding-left.pt]="activity.level * 14">
+
             <div (dragover)="allowDrop($event)"
                  (drop)="moveActivityAsChildOf($event, activity)">
 
               <a [ngClass]="activityNameClass(activity.level)"
-               [style.padding-left.pt]="activity.level * 14"
                (click)="selectActivity(activity, true)">{{activity.name}}</a>
 
             </div>
@@ -55,18 +60,18 @@
 
         <div *ngIf="insertActivityEditorVisible">
           <input #txtActivityName type="text"
-                 class="text-box" style="width:80%"
-                 [style.margin-left.pt]="activity.level * 14"
+                 class="text-box inline-editor-text-box"
+                 [style.margin-left.pt]="activity.level * 14 + 20"
                  placeholder= "Nombre de la actividad"
                  (keyup.esc)="hideInlineEditors()"
                  (keyup.enter)="insertActivity(txtActivityName.value, activity.position)">
-          <button class="btn" (click)="hideInlineEditors()">Cancelar</button>
+          <button class="btn right" (click)="hideInlineEditors()">Cancelar</button>
         </div>
 
       </div>
 
     </div>  <!--ngFor="let activity of activityTree" -->
-  
+
     <div class="activity-row"
         (dragover)="allowDrop($event)"
         (drop)="moveActivity($event, activityTree.length + 1)">

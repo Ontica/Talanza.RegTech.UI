@@ -77,8 +77,8 @@ table.grid tbody tr:nth-child(even) {
 }
 
 .selected-row {
-  border-bottom: 2px solid $blue;
-  border-top: 2px solid $blue;
+  border-bottom: 2px solid $dark-blue;
+  border-top: 2px solid $dark-blue;
   z-index:1000;
   font-weight: 600;
 }

@@ -1,4 +1,9 @@
 @import "../../../styles/general-styles";
-.calendar-color {
-  color: $blue;
+
+.calendar-icon {
+  color: $gray;
+}
+
+.calendar-icon:hover {
+  color: $dark-blue;
 }

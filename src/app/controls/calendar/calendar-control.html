@@ -1,4 +1,5 @@
 <div style="width:110px"> 
-    <input type="text" maxlength="11" class="text-box" [attr.id]="inputId" [(ngModel)]="date" (blur)="onBlurMethod()" style="width:80px">
-    <a><i [attr.id]="buttonId" class="fa fa-calendar fa-lg calendar-color" aria-hidden="true"></i></a>
+    <input type="text" class="text-box" style="width:80px" maxlength="11"
+     [attr.id]="inputId" [(ngModel)]="date" (blur)="onblur()">
+    <a><i [attr.id]="buttonId" class="fa fa-calendar fa-lg calendar-icon" aria-hidden="true"></i></a>
 </div>
