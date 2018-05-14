@@ -1,19 +1,19 @@
 <div class="title-bar">
     Resultados de la búsqueda "{{keywords}}" <i class="fa fa-times-circle close-global-search-icon" (click)="closeGlobalSearch()"></i>
 </div>
-<div  class="nav-bar">       
-  <nav-bar [options]="navBarConfig" (onSelect)="selectOption($event)"></nav-bar> 
-</div> 
+<div  class="nav-bar">
+  <nav-bar [options]="navBarConfig" (onSelect)="selectOption($event)"></nav-bar>
+</div>
 <div class="gs-container">
-       
+
   <div [class]="masterContainer">
-      <div [ngSwitch]="selectedOption">  
-         <procedures-table-view  *ngSwitchCase="'procedures'" [procedures]="procedures" (onSelectProcedure)="selectProcedure($event)"></procedures-table-view>         
+      <div [ngSwitch]="selectedOption">
+         <procedures-table-view  *ngSwitchCase="'procedures'" [procedures]="procedures" (onSelectProcedure)="selectProcedure($event)"></procedures-table-view>
          <contract-clauses-table *ngSwitchCase="'contracts'" [clauses]="clauses" (onSelectClause)="setSelectedClause($event)"></contract-clauses-table>
          <documents-table-view *ngSwitchCase="'documents'" [documentsList]="documents" (onSelectDocument)="setSelectedDocument($event)"></documents-table-view>
          <faqs-table-view *ngSwitchCase="'FAQs'" [FAQs]="FAQs" (onSelectFAQ)="setSelectedFAQ($event)"></faqs-table-view>
-      </div>       
-   
+      </div>
+
   </div>
  <div *ngIf="isDetailsContainerVisible" class="block-container right">
       <div><i class="fa fa-times close-icon" (click)="closeDetailsContainer()"></i></div>
@@ -21,12 +21,12 @@
           <procedure-info *ngSwitchCase="'procedures'" [procedureUID]="selectedProcedureUID"></procedure-info>
           <div *ngSwitchCase="'contracts'">
                 <clause-definition [clauseRef]="clause"></clause-definition><br>
-                <clause-obligations [clauseRef]="clause"></clause-obligations>             
+                <clause-obligations [clauseRef]="clause"></clause-obligations>
           </div>
           <div *ngSwitchCase="'documents'" class="pdf-control" >
             <pdf-viewer [documentURI]="documentURI"></pdf-viewer>
-          </div>  
-          <faq *ngSwitchCase="'FAQs'" [faqUID]="FAQUid"></faq>       
-      </div>      
+          </div>
+          <faq *ngSwitchCase="'FAQs'" [faqUID]="FAQUid"></faq>
+      </div>
   </div>
 </div>

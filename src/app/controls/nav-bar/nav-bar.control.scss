@@ -2,13 +2,13 @@
 //
 // Navigation bar
 //
-.nav-bar {   
-    height:48px;    
-    background-color:$white;   
+.nav-bar {
+    height:48px;
+    background-color:$white;
     display: flex;
     justify-content: center;
 }
-  
+
 .nav-bar ul {
     display: flex;
     list-style: none;
@@ -19,25 +19,25 @@
     font-family: $font-family;
 
 }
-  
+
 .nav-bar li {
     padding: 5px 14px;
 }
-  
+
 .nav-bar a, a:visited {
-    color: $red;
+    color: $dark-red;
     display: block;
     text-decoration: none;
 }
-  
+
 .nav-bar a:hover {
-    color: $red;
-    border-bottom: 2px solid $blue;
+    color: $dark-red;
+    border-bottom: 2px solid $dark-blue;
     cursor: pointer;
 }
-  
+
 .selected a {
     font-weight: 900;
-    color: $red;
-    border-bottom: 2px solid $red;
+    color: $dark-red;
+    border-bottom: 2px solid $dark-red;
 }

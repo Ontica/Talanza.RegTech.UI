@@ -17,8 +17,8 @@ table.association tr {
 
 table.association tr:first-child {
   border-bottom: 1px solid $black;
-  background-color: $red; // #9b1b1f;
-  color: $white; // white;
+  background-color: $dark-red;
+  color: $white;
 }
 
 table.association tr:nth-child(6) {

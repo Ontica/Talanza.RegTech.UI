@@ -3,18 +3,23 @@
 //
 $ambar: #ebd1a5 !default;
 $black: #1a1a1a !default;
+$dark-gray: #606060!default;
 $gray: #909090!default;
-$light-gray: #dcdcdc!default;
+$light-gray: #e8e8e8 !default;
 $brown: #604020 !default;
-$blue: #204060 !default;
+$dark-blue: #104070 !default;
+$blue: #16599c !default;
+$light-blue: #6ba1ff !default;
 $lime: #8CBF26 !default;
 $green: #17c457 !default;
-$orange: #f0bf68 !default;
+$orange: #ffca99 !default;
+$light-orange: #ffe5cc !default;
 $light-yellow: #fffffb !default;
 $pink: #E671B8 !default;
 $purple: #A700AE !default;
-$red:#9b1b1f !default;
-$red-ligth: #d04f4f !default;
+$dark-red:#9b1b1f !default;
+$red:#d04f4f !default;
+$light-red: #e49a9a !default;
 $teal: #25a1c5 !default;
 $white: #fefefe !default;
 $light-white: white;
@@ -26,18 +31,18 @@ $font-family:-apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans
 $font-size-root: 10pt !default;
 $font-size-base: 1.0rem !default;
 $font-weight-base: 200 !default;
-$text-color: $blue !default;
+$text-color: $dark-blue !default;
 //
 $font-size-title: $font-size-base * 1.25;
 $font-weight-title: 500;
-$text-title: $blue !default;
+$text-title: $dark-blue !default;
 //
 $font-size-command: $font-size-base * 0.85;
 $font-weight-command: 300;
 //
 $font-size-hint: $font-size-base * 0.75;
 $font-weight-hint: 150;
-$text-hint: $red !default;
+$text-hint: $dark-red !default;
 //
 $text-bold: lighten($text-color, 3%);
 $text-muted: $gray !default;
@@ -46,14 +51,15 @@ $text-italic: italic;
 // Elements colors
 //
 $background-color: $white !default;
-$secondary-color: $red !default;
+$secondary-color: $dark-red !default;
 $secondary-text-color: $white !default;
 $selected-item-text-color: $orange;
-$link-color: $blue;
+
+$link-color: $dark-blue;
 //
 // icons
 //
-$primary-icon-color: SteelBlue;
+$primary-icon-color: $light-blue;
 $primary-icon-size: 16pt;
 //
 // editor-window
@@ -90,21 +96,33 @@ $form-title-color:$gray;
 $control-font: 9.5pt 'Segoe UI', Helvetica, Arial, sans-serif !default;
 $control-small-font: 8.5pt 'Segoe UI', Helvetica, Arial, sans-serif !default;
 
-$cancel-color: $red;
-$action-color: $blue;
-$warning-color: $orange;
+$primary-color: #ff9900;
+$primary-selected-color: #e67300;
+
+$action-color: $light-blue;
+$action-selected-color: $blue;
+
+$warning-color: $light-red;
+$warning-selected-color: $red;
+
+$cancel-color: $light-orange;
+$cancel-selected-color: $orange;
+
 $control-border: 1px solid #d0d0d0;
 $control-background-color: #fafafa;
 $control-color: $text-title;
 $control-width: 99%;
 $control-disabled-color: $text-title;
 $control-disabled-background: #e6e6e6;
-$control-height: 25px;
-$button-background-color: #dadada;
+$control-height: 26px;
+
+$button-color: #f8f8f8;
+$button-selected-color: #e6e6e6;
+
 $button-border: 0px solid #cecece;
 $button-height: 28px;
 
-$selected-control-background-color: #fffff0;
+$selected-control-background-color: #fffffa;
 $selected-control-color: $text-title;
 $selected-control-border: 1px solid #c9c9c9;
 
@@ -114,7 +132,7 @@ $selected-control-border: 1px solid #c9c9c9;
 $grid-border: none;
 $grid-even-background-color: #fffffd;
 $grid-odd-background-color: #eef7fa;
-$grid-selected-background-color: #f6fff6;
+$grid-selected-background-color: #f6faff;
 $grid-hover-background-color: #f6f6f6;
 
 //

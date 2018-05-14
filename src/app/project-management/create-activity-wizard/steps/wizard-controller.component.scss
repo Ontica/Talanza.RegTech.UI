@@ -37,12 +37,12 @@
 }
 
 .pointer-selected {
-  background: $blue;
+  background: $dark-blue;
   color: $white;
 }
 
 .pointer-selected:before {
-  border-left: 20px solid $blue;
+  border-left: 20px solid $dark-blue;
 }
 
 .pointer-noselected {

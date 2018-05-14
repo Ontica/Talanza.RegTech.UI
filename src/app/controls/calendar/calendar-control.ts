@@ -14,8 +14,8 @@ interface calendearSettings {
 
 @Component ({
   selector: 'calendar-control',
-  templateUrl:'./calendar-control.html',  
-  styleUrls: ['./calendar-control.scss']  
+  templateUrl:'./calendar-control.html',
+  styleUrls: ['./calendar-control.scss']
 })
 
 export class CalendarControl  implements AfterViewInit {
@@ -29,25 +29,25 @@ export class CalendarControl  implements AfterViewInit {
   public date = '';
   public inputId = 'calendarInput';
   public buttonId = 'calendarButton';
-     
-  constructor() {    
-    this.setControlId();      
+
+  constructor() {
+    this.setControlId();
   }
 
-  ngAfterViewInit() {       
+  ngAfterViewInit() {
       this.setCalendarLanguage();
-     
+
       this.createCalendar();
-      this.setInitialDate(); 
+      this.setInitialDate();
       this.setSettings();
-   
-      this.setSelectedDate();  
-  } 
+
+      this.setSelectedDate();
+  }
 
   private setInitialDate(): void {
-        
+
     if (this.config.date !== undefined) {
-      this.cal_isDate(this.config.date);   
+      this.cal_isDate(this.config.date);
       this.calendar.setDate(this.config.date);
     }
   }
@@ -55,13 +55,13 @@ export class CalendarControl  implements AfterViewInit {
   private setSelectedDate(): void {
     this.calendar.attachEvent("onClick", (date)=> {
       this.onSelectedDate.emit(date);
-     }); 
+     });
   }
 
   private createCalendar(): void {
-    
+
     this.calendar = new dhtmlXCalendarObject(
-      { input: this.inputId , button: this.buttonId});           
+      { input: this.inputId , button: this.buttonId});
   }
 
   private setSettings(): void {
@@ -106,16 +106,16 @@ export class CalendarControl  implements AfterViewInit {
 
   private setHolidays(): void {
     this.calendar.setHolidays("27-11-2017");
-    this.setHoliday('25-12-2017');    
+    this.setHoliday('25-12-2017');
     this.setHoliday('01-01-2018');
     this.setHoliday('05-02-2018');
     this.setHoliday('19-03-2018');
     this.setHoliday('01-05-2018');
     this.setHoliday('20-11-2018');
-    this.setHoliday('25-12-2018');   
+    this.setHoliday('25-12-2018');
   }
-  
-  
+
+
   private setCalendarLanguage(): void {
     // add once, make sure dhtmlxcalendar.js is loaded
     dhtmlXCalendarObject.prototype.langData["sp"] = {
@@ -160,8 +160,8 @@ export class CalendarControl  implements AfterViewInit {
     }
     return true;
   }
-  
-  public cal_formatAsDate(oSource) {   
+
+  public cal_formatAsDate(oSource) {
     this.date = '';
     if (oSource === "") {
       return;
@@ -173,7 +173,7 @@ export class CalendarControl  implements AfterViewInit {
     temp = temp.replace(regex, "/");
 
     var dateParts = temp.split("/");
-         
+
     if (dateParts.length != 3) {
       return;
     }
@@ -186,9 +186,9 @@ export class CalendarControl  implements AfterViewInit {
     if (Number(dateParts[0]) < 10) {
       dateParts[0] = "0" + Number(dateParts[0]);
     }
-    if (Number(dateParts[2]) < 100) {      
-      dateParts[2] = (Number(dateParts[2]) + 2000).toString();      
-    } 
+    if (Number(dateParts[2]) < 100) {
+      dateParts[2] = (Number(dateParts[2]) + 2000).toString();
+    }
     if (Number(dateParts[2]) > 2099) {
       return;
     }
@@ -199,26 +199,26 @@ export class CalendarControl  implements AfterViewInit {
       var months = new Array("Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic");
       dateParts[1] = months[Number(dateParts[1]) - 1];
     } else {
-      
+
     }
 
     this.date = dateParts[0] + "/" + dateParts[1] + "/" + dateParts[2];
-   
+
     return;
   }
 
   public cal_isDate(oSource): boolean {
     this.cal_formatAsDate(oSource);
 
-    if (this.date === '') {  
+    if (this.date === '') {
       return false;
-    } 
+    }
 
     var dateParts = String(this.date).split("/");
     if (dateParts.length != 3) {
       return false;
     }
-    
+
     if (!(1 <= Number(dateParts[0]) && Number(dateParts[0]) <= 31)) {
       return false;
     }
@@ -249,14 +249,13 @@ export class CalendarControl  implements AfterViewInit {
 
   }
 
-  public onBlurMethod(): void {   
-   
-    if (this.cal_isDate(this.date)) {     
-      
-      this.calendar.setDate(new Date(this.getDateInNumericFormat()));         
-     
+  public onblur(): void {
+    if (this.cal_isDate(this.date)) {
+
+      this.calendar.setDate(new Date(this.getDateInNumericFormat()));
+
       this.onSelectedDate.emit(this.calendar.getDate());
-    } 
+    }
   }
 
   private setControlId(): void {
@@ -264,14 +263,14 @@ export class CalendarControl  implements AfterViewInit {
     this.inputId = 'ci' + idNumber;
     this.buttonId = 'bi' + idNumber;
   }
-  
+
   private getRandomNumber(from: number, to: number): number {
-    return Math.floor((Math.random() * to) + from);    
+    return Math.floor((Math.random() * to) + from);
   }
 
   private getDateInNumericFormat(): string {
     let dateParts = String(this.date).split("/");
-  
+
     let months = new Array("ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "oct", "nov", "dic");
     let index = months.findIndex((x) => x === dateParts[1].toLowerCase())  +1;
     return dateParts[2] + "/" + index + "/" + dateParts[0];

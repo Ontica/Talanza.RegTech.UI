@@ -9,7 +9,7 @@ table.grid tbody {
 }
 
 .select-icon {
-  color: $blue;
+  color: $dark-blue;
   cursor: pointer;
   font-size: 12pt;
 }
@@ -21,7 +21,7 @@ table.grid tbody {
 }
 
 .search-icon {
-  color: $red;
+  color: $dark-red;
   cursor: pointer;
   font-size: 12pt;
   margin-left: -10px;
@@ -35,6 +35,6 @@ table.grid tbody {
 }
 
 .selected-row-border {
-  border-top: thin solid $blue;
-  border-bottom: thin solid $blue;
+  border-top: thin solid $dark-blue;
+  border-bottom: thin solid $dark-blue;
 }

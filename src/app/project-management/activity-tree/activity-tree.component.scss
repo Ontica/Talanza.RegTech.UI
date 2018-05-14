@@ -12,14 +12,23 @@
 .activity-tree-header {
   background-color: $text-title;
   color: white;
-  height: 28px;
+  height: 32px;
+}
+
+.title {
+  font: $control-font;
+  font-size: 10.5pt;
+  padding: 6pt;
+  vertical-align: -webkit-baseline-middle;
+  width: 100%;
+  float: left;
 }
 
 .activity-tree-body {
-  width: 100%;
   height: 98%;
-  overflow-y: auto;
+  width: 100%;
   overflow-x: hidden;
+  overflow-y: auto;
 }
 
 .activity-row {
@@ -58,13 +67,19 @@ i.ghost-icon {
 }
 
 .activity-row:hover i.ghost-icon {
-  color: $blue;
+  color: $dark-blue;
 }
 
 .activity-name {
   display: inline-block;
   vertical-align: -webkit-baseline-middle;
-  width: calc(100% - 50px);
+  margin-right: 12pt;
+  width: calc(100% - 70px);
+}
+
+.activity-name a:hover {
+  color: $dark-blue;
+  text-decoration: underline;
 }
 
 .activity-name-level-1 {
@@ -98,8 +113,13 @@ i.ghost-icon {
 }
 
 .activity-inline-editor {
-  display: block;
   height: auto;
+  vertical-align: -webkit-baseline-middle;
+}
+
+input.inline-editor-text-box {
+  height: 32px;
+  width: calc(100% - 140px);
 }
 
 .grabbable {
