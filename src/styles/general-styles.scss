@@ -176,6 +176,11 @@ textarea:focus {
   color: $gray;
 }
 
+.input-icon:hover {
+  color: $blue;
+  cursor: pointer;
+}
+
 .text-area {
   @include input-settings;
   resize: none;

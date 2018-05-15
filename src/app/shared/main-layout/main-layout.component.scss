@@ -14,14 +14,13 @@
   flex-wrap: nowrap;
   top: 0;
   div {
-    margin: 8px;
+      margin: 8px;
   }
 }
 
 .content {
   display: flex;
   flex-direction: column;
-  padding: 8px;
   height: 100vh;
 }
 
@@ -46,11 +45,11 @@
     font-size: $font-size-hint;
     font-weight: $font-weight-hint;
   }
-  
 }
 
-.search-bar { 
+.search-bar {
   font-size: $font-size-command;
   font-weight: $font-weight-command;
+  padding-top: 6px;
   width: 300px;
 }
