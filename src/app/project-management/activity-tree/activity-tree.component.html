@@ -4,7 +4,7 @@
     <div class="title">
       {{filter.project.name}}
     </div>
-    <button type="button" class="btn-primary circled right" style="top:-20px;right:24px;position:relative;z-index:100;"
+    <button type="button" class="btn-primary circled right title-add-icon"
             (click)="showInitialActivityInlineEditor()"><i class="fa fa-plus"></i></button>
   </div>
 
@@ -18,31 +18,35 @@
                (keyup.esc)="hideInlineEditors()"
                (keyup.enter)="insertActivity(txtActivityName.value)"
                placeholder= "Nombre de la actividad">
-        <button class="btn right" (click)="hideInlineEditors()">Cancelar</button>
+        <button class="btn" (click)="hideInlineEditors()">Cancelar</button>
     </div>
 
     <div *ngFor="let activity of activityTree"
          class="activity-row"
-         (click)="selectActivity(activity)">
+         (click)="selectActivity(activity)"
+         [class.dragover-activity-row]="dragZoneItem === activity">
 
       <div [class.selected-activity]="isActivitySelected(activity)"
-            draggable="true"
-            (dragover)="allowDrop($event)"
-            (dragstart)="drag($event, activity)"
+            (dragover)="allowDrop($event, activity);"
+            (dragleave)="setDragZoneItem(null)"
             (drop)="moveActivity($event, activity.position)">
 
-          <div class="activity-position-controls">
-            <i class="fa fa-align-justify ghost-icon grabbable" aria-hidden="true" (click)="startDrag(activity)"></i>
+          <div class="activity-position-controls"
+               draggable="true"
+               (dragstart)="startDrag($event, activity)">
+            <i class="fa fa-align-justify ghost-icon grabbable" aria-hidden="true"></i>
           </div>
 
           <div class="activity-name"
                [style.padding-left.pt]="activity.level * 14">
 
-            <div (dragover)="allowDrop($event)"
+            <div (dragover)="allowDrop($event, activity.name)"
+                 (dragleave)="setDragZoneItem(null)"
                  (drop)="moveActivityAsChildOf($event, activity)">
 
               <a [ngClass]="activityNameClass(activity.level)"
-               (click)="selectActivity(activity, true)">{{activity.name}}</a>
+                 [class.dragover-activity-name]="dragZoneItem === activity.name"
+                 (click)="selectActivity(activity, true)">{{activity.name}}</a>
 
             </div>
 
@@ -65,7 +69,7 @@
                  placeholder= "Nombre de la actividad"
                  (keyup.esc)="hideInlineEditors()"
                  (keyup.enter)="insertActivity(txtActivityName.value, activity.position)">
-          <button class="btn right" (click)="hideInlineEditors()">Cancelar</button>
+          <button class="btn" (click)="hideInlineEditors()">Cancelar</button>
         </div>
 
       </div>
@@ -73,7 +77,9 @@
     </div>  <!--ngFor="let activity of activityTree" -->
 
     <div class="activity-row"
-        (dragover)="allowDrop($event)"
+        [class.dragover-activity-row]="dragZoneItem === this"
+        (dragover)="allowDrop($event, this)"
+        (dragleave)="setDragZoneItem(null)"
         (drop)="moveActivity($event, activityTree.length + 1)">
     </div>
 

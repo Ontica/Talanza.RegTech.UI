@@ -96,7 +96,6 @@ export class ActivityTreeService {
     };
 
     return this.core.http.put<Activity>(path, body)
-                         .catch((e) => this.core.http.showAndReturn(e, Errors.CHANGE_PARENT, null))
                          .toPromise();
   }
 
@@ -112,12 +111,11 @@ export class ActivityTreeService {
     };
 
     return this.core.http.put<Activity>(path, body)
-                         .catch((e) => this.core.http.showAndReturn(e, Errors.MOVE_ACTIVITY, null))
                          .toPromise();
   }
 
 
-  public deleteActivity(projectUID: string, activity: Activity): Promise<any> {
+  public deleteActivity(projectUID: string, activity: Activity): Promise<void> {
     Assertion.assertValue(activity, "activity");
 
     const path = `v1/project-management/projects/${projectUID}/activities/${activity.uid}`;
