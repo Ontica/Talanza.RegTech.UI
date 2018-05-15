@@ -1,27 +1,26 @@
 @import "../../../styles/general-styles";
 
 .activity-tree-container {
-  width: 98%;
   height: 100%;
   border: $grid-border;
   border-collapse: collapse;
-  margin: 3px 10px 3px 3px;
   text-align: left;
+  width: auto;
 }
 
 .activity-tree-header {
   background-color: $text-title;
   color: white;
-  height: 32px;
+  min-height: 34px;
+  padding: 6pt;
+  border-bottom: 1px solid $light-blue;
+  border-radius: 5px;
 }
 
 .title {
   position: absolute;
   font: $control-font;
   font-size: 10.5pt;
-  padding: 6pt;
-  vertical-align: -webkit-baseline-middle;
-  width: 100%;
   float: left;
 }
 
@@ -34,7 +33,7 @@
 
 
 .activity-tree-body {
-  height: 98%;
+  height: calc(100% - 44px);
   width: 100%;
   overflow-x: hidden;
   overflow-y: auto;
@@ -47,6 +46,7 @@
   float: left;
   min-height: 38px;
   width: 100%;
+  margin: 4px;
 }
 
 
@@ -69,9 +69,9 @@
 }
 
 .activity-menu {
+  float: right;
   margin-right: 8px;
   vertical-align: -webkit-baseline-middle;
-  float: right;
 }
 
 i.ghost-icon {

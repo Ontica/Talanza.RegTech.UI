@@ -1,5 +1,6 @@
-@import "../../../styles/editor-window-style";
+@import "../../../styles/general-styles";
 @import "../../../styles/form";
+
 .form-frame {
   height: 430px;
   overflow-y: auto;
@@ -12,4 +13,32 @@
 
 .form-footer {
   width: 660px;
+}
+
+.header {
+  background-color: $dark-blue;
+  color: $white;
+  min-height: 34px;
+  padding: 6pt;
+  width: 100%;
+  border-bottom: 1px solid $light-blue;
+  border-radius: 5px;
+}
+
+.title {
+  display: inline-block;
+  color: $white;
+  font: $control-font;
+  font-size: 10.5pt;
+  width: calc(100% - 56px);
+}
+
+.header-options {
+  float: right;
+  vertical-align: -webkit-baseline-middle;
+}
+
+i.close-icon {
+  color: $white;
+  cursor: pointer;
 }

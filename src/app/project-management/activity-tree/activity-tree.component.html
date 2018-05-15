@@ -17,7 +17,7 @@
                class="text-box inline-editor-text-box"
                (keyup.esc)="hideInlineEditors()"
                (keyup.enter)="insertActivity(txtActivityName.value)"
-               placeholder= "Nombre de la actividad">
+               placeholder= "Agregar una actividad">
         <button class="btn" (click)="hideInlineEditors()">Cancelar</button>
     </div>
 
@@ -66,7 +66,7 @@
           <input #txtActivityName type="text"
                  class="text-box inline-editor-text-box"
                  [style.margin-left.pt]="activity.level * 14 + 20"
-                 placeholder= "Nombre de la actividad"
+                 placeholder= "Agregar una actividad"
                  (keyup.esc)="hideInlineEditors()"
                  (keyup.enter)="insertActivity(txtActivityName.value, activity.position)">
           <button class="btn" (click)="hideInlineEditors()">Cancelar</button>

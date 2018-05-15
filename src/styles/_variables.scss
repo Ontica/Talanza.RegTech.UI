@@ -13,7 +13,7 @@ $light-blue: #6ba1ff !default;
 $lime: #8CBF26 !default;
 $green: #17c457 !default;
 $orange: #ffca99 !default;
-$light-orange: #ffe5cc !default;
+$light-orange: #fff2e6 !default;
 $light-yellow: #fffffb !default;
 $pink: #E671B8 !default;
 $purple: #A700AE !default;
@@ -132,7 +132,7 @@ $selected-control-border: 1px solid #c9c9c9;
 $grid-border: none;
 $grid-even-background-color: #fffffd;
 $grid-odd-background-color: #eef7fa;
-$grid-selected-background-color: #f6faff;
+$grid-selected-background-color: $light-orange;
 $grid-hover-background-color: #f6f6f6;
 
 //

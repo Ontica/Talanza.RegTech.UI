@@ -1,3 +1,13 @@
+<div class="header">
+  <div class="title">
+    {{selectedTask.name}}
+  </div>
+  <div class="header-options">
+    <i class="fa fa-times close-icon" aria-hidden="true" (click)="cancel()"></i>
+  </div>
+</div>
+
+
 <table class="form">
   <tr>
     <td class="form-title form-title-text" colspan="2">Información general de la tarea o actividad</td>
@@ -22,7 +32,7 @@
   <tr>
     <td>Responsable:</td>
     <td>
-      <select class="select-box" style="width:340px" 
+      <select class="select-box" style="width:340px"
               [disabled]="isClosed" [(ngModel)]="selectedTask.responsibleUID">
         <option value="">( Seleccionar )</option>
         <option value="Empty">No asignado</option>
