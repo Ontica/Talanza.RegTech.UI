@@ -1,0 +1,9 @@
+<div class="dropdown">   
+  <div class="dropdown-content"  *ngIf="dropdownMenuItemsVisible">
+      <ul  *ngFor="let item of items">
+          <li  (click)="selectItem(item)">          
+            {{item.name}}
+          </li> 
+        </ul>
+  </div>
+</div>

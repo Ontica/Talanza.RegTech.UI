@@ -21,6 +21,7 @@ import { SearchControl } from './search/search.control';
 import { NavBarControl } from './nav-bar/nav-bar.control';
 import { ModalWindow } from './modal-window/modal-window';
 import { PdfViewer } from './pdf-viewer/pdf-viewer';
+import { DropdownMenuControl } from './dropdown-menu-control/dropdown-menu.control';
 
 import { SafeHtmlPipe } from './pipes/safe-html/safe-html.pipe';
 import { SafeUrlPipe } from './pipes/safe-url/safe-url.pipe';
@@ -33,9 +34,9 @@ import { SafeUrlPipe } from './pipes/safe-url/safe-url.pipe';
   imports: [RouterModule, CommonModule, FormsModule],
   declarations: [AutocompleteControl, Chips, RAGControl, CalendarControl, SelectControl,
                  SafeHtmlPipe, SearchControl, NavBarControl, ModalWindow, SafeUrlPipe,
-                 PdfViewer],
+                 PdfViewer, DropdownMenuControl],
   exports: [AutocompleteControl, Chips, SafeHtmlPipe, SafeUrlPipe, PdfViewer,
             RAGControl, CalendarControl, SelectControl, SearchControl, NavBarControl,
-            ModalWindow] 
+            ModalWindow, DropdownMenuControl] 
 })
 export class ControlsModule { }
