@@ -62,7 +62,7 @@ export class GlobalSearchMainPageComponent {
     
     constructor(private route: ActivatedRoute, private procedureService: ProcedureService,
                 private contractService: ContractsService, private core: CoreService,
-                private documentService: DocumentService, private faqService: FAQService ) {
+                private documentService: DocumentService, private faqService: FAQService) {
         this.route.params.subscribe(params => {
             this.keywords = params['keywords'];
              this.main();     
@@ -148,8 +148,15 @@ export class GlobalSearchMainPageComponent {
         let filter: ProcedureFilter = new ProcedureFilter(); 
         filter.keywords = this.keywords;
 
+        this.core.spinner.show();
+
        await this.procedureService.getProceduresList(filter)
-                         .then((procedures) =>{this.procedures = procedures;});
+                         .then((procedures) => {                             
+                             this.procedures = procedures;
+                             this.core.spinner.hide();
+                            })
+                          .catch(() => this.core.spinner.hide());
+                               
     }  
 
     private async loadContractClauses() {
@@ -157,27 +164,42 @@ export class GlobalSearchMainPageComponent {
 
         const contractUID = 'R24Kmag356L21'; //Contrato: 2.4 Individual
        
+        this.core.spinner.show();
+
         await this.contractService.searchClauses(contractUID, this.keywords)
             .toPromise()
-            .then((x) => this.clauses = x)
-            .catch((e) => this.core.http.showAndThrow(e, errMsg));
+            .then((x) => { this.clauses = x;
+                           this.core.spinner.hide()})                
+            .catch((e) => { this.core.spinner.hide();
+                            this.core.http.showAndThrow(e, errMsg) });
     }
 
     private async loadDocuments() {
 
         let filter = new DocumentFilter();   
         filter.type = '';     
-        filter.keywords = this.keywords;    
+        filter.keywords = this.keywords;  
+        
+        this.core.spinner.show();
 
         await this.documentService.getDocuments(filter)
-                            .then((documents) => this.documents = documents);
+                            .then((documents) => { this.core.spinner.hide();
+                                this.documents = documents; })
+                            .catch(() => this.core.spinner.hide());
     }
 
     private async loadFaqs() {
        
+      this.core.spinner.show();        
+
       await this.faqService.getFAQs(this.keywords)
-                           .map((FAQs) => { this.FAQs = FAQs; })
-                           .toPromise();
+                           .subscribe((FAQs) => { this.core.spinner.hide();
+                                                  this.FAQs = FAQs;},
+                                 () => {},
+                                 () => { this.core.spinner.hide();});
+                                
+                           
+                           
          
   }
 }

@@ -1,1 +1,5 @@
-<div class="spinner" [class.spinner-hidden]="!visible"> </div>
+<div class="ghost-container" *ngIf="visible">    
+    <div class="spinner-container" >
+        <i class="fa fa-spinner fa-pulse fa-5x"></i>       
+    </div>  
+</div>

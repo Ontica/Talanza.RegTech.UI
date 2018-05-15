@@ -19,7 +19,7 @@ export class SpinnerService {
     return this._spinnerSubject.asObservable();
   }
 
-  public show() {
+  public show() {    
     this._spinnerSubject.next(<SpinnerState> { show: true });
   }
 
