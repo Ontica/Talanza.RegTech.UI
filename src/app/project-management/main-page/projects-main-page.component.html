@@ -1,12 +1,10 @@
 <projects-filter (onChangeFilter)="onChangeFilter($event)"
-                 (onChangeView)="onChangeView($event)">
+  (onChangeView)="onChangeView($event)">
 </projects-filter>
 
 <div class="container">
 
   <div [ngSwitch]="viewConfig.viewType" [class]="masterContainerClass">
-
-    <div style="height: 97%">
 
       <activity-tree *ngSwitchCase="'activity-tree'"
                     [filter]="filter"
@@ -22,26 +20,13 @@
                         [filter]="filter">
       </old-project-tree>
 
-    </div>
-
   </div>
 
   <div *ngIf="displayEditor" class="block-container right">
-    <div class="header">
-      <div>
-        <i class="fa fa-times close-icon" (click)="closeEditor()"></i>
-      </div>
-      <span class=".header-title">{{selectedActivity.name}}</span>
-    </div>
-    <div>
-
-    </div>
-    <div>
       <activity-editor [activity]="selectedActivity"
                        (onUpdateActivity)="updateActivity($event)"
                        (onCloseEvent)="closeEditor()">
       </activity-editor>
-    </div>
   </div>
 
 </div>
