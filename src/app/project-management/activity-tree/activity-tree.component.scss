@@ -16,6 +16,7 @@
 }
 
 .title {
+  position: absolute;
   font: $control-font;
   font-size: 10.5pt;
   padding: 6pt;
@@ -24,12 +25,21 @@
   float: left;
 }
 
+.title-add-icon {
+  position: relative;
+  top: 10px;
+  right: 24px;
+  z-index: 10;
+}
+
+
 .activity-tree-body {
   height: 98%;
   width: 100%;
   overflow-x: hidden;
   overflow-y: auto;
 }
+
 
 .activity-row {
   background-color: $grid-even-background-color;
@@ -39,9 +49,11 @@
   width: 100%;
 }
 
+
 .activity-row:hover {
   background-color: $grid-hover-background-color;
 }
+
 
 .selected-activity {
   background-color: $grid-selected-background-color;
@@ -57,9 +69,9 @@
 }
 
 .activity-menu {
-  display: inline-block;
   margin-right: 8px;
   vertical-align: -webkit-baseline-middle;
+  float: right;
 }
 
 i.ghost-icon {
@@ -74,7 +86,7 @@ i.ghost-icon {
   display: inline-block;
   vertical-align: -webkit-baseline-middle;
   margin-right: 12pt;
-  width: calc(100% - 70px);
+  max-width: calc(100% - 70px);
 }
 
 .activity-name a:hover {
@@ -119,7 +131,7 @@ i.ghost-icon {
 
 input.inline-editor-text-box {
   height: 32px;
-  width: calc(100% - 140px);
+  width: calc(70% - 140px);
 }
 
 .grabbable {
@@ -135,4 +147,12 @@ input.inline-editor-text-box {
   user-select: none;
   -khtml-user-drag: element;
   -webkit-user-drag: element;
+}
+
+.dragover-activity-row {
+  border-top: 1px solid $dark-blue;
+}
+
+.dragover-activity-name {
+  border: 1px dotted $dark-blue;
 }

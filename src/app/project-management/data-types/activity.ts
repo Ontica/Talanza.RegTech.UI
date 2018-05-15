@@ -26,6 +26,7 @@ export interface Activity extends Identifiable {
   dueDate: Date,
   tags: string[],
   position: number,
+  level: number;
   ragStatus: string,
   stage: string,
   status: string,
@@ -48,6 +49,7 @@ export const Activity_Empty: Activity = {
   dueDate: new Date(),
   tags: [],
   position: 0,
+  level: 0,
   ragStatus: '',
   stage: '',
   status: '',

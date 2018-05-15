@@ -26,18 +26,20 @@ export class ActivityTreeComponent {
 
   public activityTree: Activity[] = [];
   public selectedActivity: Activity = Activity_Empty;
+  public dragZoneItem = null;
 
   public addFirstActivityEditorVisible = false;
   public insertActivityEditorVisible = false;
 
-
   private _filter: ActivityFilter = new ActivityFilter();
+
+
   @Input()
   set filter(filter: ActivityFilter) {
 
     this.initialize();
 
-    if ((filter && filter.project &&  filter.project.uid)) {
+    if ((filter && filter.project && filter.project.uid)) {
       this._filter = filter;
 
       this.loadActivitiesTree();
@@ -50,7 +52,7 @@ export class ActivityTreeComponent {
   @Output() public onSelectActivity = new EventEmitter<Activity>();
 
   constructor(private activityTreeService: ActivityTreeService,
-              private activityService: ActivityService) { }
+    private activityService: ActivityService) { }
 
 
   public get hasSelectedActivities() {
@@ -94,16 +96,26 @@ export class ActivityTreeComponent {
       return;
     }
 
+    // ToDo: Avoid send the request multiple times.
+    //       Use a spinner and block the command
+    //       Use a command processor (as a front controller)?
+    //       For now this.hideInlineEditors() avoids multiple calls
+
+    this.showSpinner();
+
+    this.hideInlineEditors();
+
     const activity = {
       name: name,
       position: position ? position + 1 : 1
     };
 
     this.activityTreeService.insertActivity(this.filter.project.uid, activity)
-                            .then( () => {
-                                this.hideInlineEditors();
-                                this.loadActivitiesTree();
-                            });
+      .then((x) => {
+        this.loadActivitiesTree();
+        this.hideSpinner();
+        this.selectActivity(x);
+      });
   }
 
   public deleteActivity(activity: Activity): void {
@@ -112,7 +124,7 @@ export class ActivityTreeComponent {
     }
 
     this.activityTreeService.deleteActivity(this.filter.project.uid, activity)
-                            .then( () => this.loadActivitiesTree() );
+      .then(() => this.loadActivitiesTree());
   }
 
 
@@ -128,7 +140,7 @@ export class ActivityTreeComponent {
     Assertion.assertValue(this.filter.project, "this.filter.project");
 
     this.activityTreeService.getActivitiesTree(this.filter.project.uid)
-                            .subscribe( (x) => this.activityTree = x );
+                            .subscribe((x) => this.activityTree = x);
   }
 
 
@@ -143,49 +155,73 @@ export class ActivityTreeComponent {
 
   // Drag & drop methods
 
-  public allowDrop(event: DragEvent): void {
+  public allowDrop(event: DragEvent, dragZoneItem: any): void {
+    this.configureDragEventBehaviour(event);
+
+    this.setDragZoneItem(dragZoneItem);
+  }
+
+  private configureDragEventBehaviour(event: DragEvent): any {
+    event.stopPropagation();
     event.preventDefault();
   }
 
-
-  public drag(event: DragEvent, data: any): void {
-    event.dataTransfer.setData("data", JSON.stringify(data));
+  public setDragZoneItem(dragZoneItem: any) {
+    this.dragZoneItem = dragZoneItem;
   }
 
-
-  public startDrag(activity: Activity): void {
+  public startDrag(event: DragEvent, activity: Activity): void {
     this.hideInlineEditors();
 
     this.selectActivity(activity);
+
+    event.srcElement.parentElement.classList.add("dragged");
+
+    event.dataTransfer.dropEffect = "move";
+
+    event.dataTransfer.setData("activity", JSON.stringify(activity));
   }
 
 
   private getDraggedActivity(event: DragEvent): Activity {
-    event.preventDefault();
+    this.configureDragEventBehaviour(event);
 
-    let activity = JSON.parse(event.dataTransfer.getData("data"));
+    let activity = JSON.parse(event.dataTransfer.getData("activity"));
 
     return activity;
   }
 
-
   public moveActivity(event: DragEvent, newPosition: number): void {
     let activity = this.getDraggedActivity(event);
 
-    event.stopPropagation();
+    this.configureDragEventBehaviour(event);
+    this.setDragZoneItem(null);
 
     this.activityTreeService.moveActivity(activity, newPosition)
-                            .then( () => this.loadActivitiesTree() );
+                            .then(() => this.loadActivitiesTree())
+                            .catch(response => console.log(response.error.message));
   }
 
 
   public moveActivityAsChildOf(event: DragEvent, newParent: Activity): void {
     let activity = this.getDraggedActivity(event);
 
-    event.stopPropagation();
+    this.configureDragEventBehaviour(event);
+    this.setDragZoneItem(null);
 
     this.activityTreeService.changeParent(activity, newParent)
-                            .then( () => this.loadActivitiesTree() );
+                            .then(() => this.loadActivitiesTree())
+                            .catch(response => console.log(response.error.message));
+  }
+
+  // Spinner component calls
+
+  private showSpinner() {
+    // ToDo: call spinner component
+  }
+
+  private hideSpinner() {
+    // ToDo: call spinner component
   }
 
 }
