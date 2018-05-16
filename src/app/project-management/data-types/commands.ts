@@ -10,14 +10,15 @@ export class UpdateActivityCommand {
 
   public name = '';
   public notes = '';
-  public resourceUID = '';
-  public startDate = new Date();
-  public targetDate = new Date();
   public ragStatus = '';
-  public requestedByUID = '';
-  public requestedTime = new Date();
-  public responsibleUID = '';
   public tags: string[] = []
+
+  public startDate: Date;
+  public targetDate: Date;
+  public dueDate: Date;
+
+  // ToDo: assign command?
+  public responsibleUID = 'Empty';
 
 }
 

@@ -24,46 +24,46 @@ export enum ProjectServiceErr {
 @Injectable()
 export class ProjectService {
 
-  public constructor(private core: CoreService) { }
+  constructor(private core: CoreService) { }
 
-  public getProjectList(): Observable<any[]> {
-    const path = 'v1/project-management/projects';
 
-    return this.core.http.get<any[]>(path);
-  }
-
-  public getResourcesList(projectUID: string): Observable<Resource[]> {
-    const path = `v1/project-management/projects/${projectUID}/resources`;
-
-    return this.core.http.get<Resource[]>(path);
-  }
-
-  public getRequestersList(projectUID: string): Observable<Contact[]> {
-    const path = `v1/project-management/projects/${projectUID}/requesters`;
-
-    return this.core.http.get<Contact[]>(path);
-  }
-
-  public getResponsiblesList(projectUID: string): Observable<Contact[]> {
-    const path = `v1/project-management/projects/${projectUID}/responsibles`;
-
-    return this.core.http.get<Contact[]>(path);
-  }
-
-  public getTaskManagers(projectUID: string): Observable<Contact[]> {
-    const path = `v1/project-management/projects/${projectUID}/task-managers`;
-
-    return this.core.http.get<Contact[]>(path);
-  }
-
-  public getContracts(): Observable<Contract[]> {
+  getContracts(): Observable<Contract[]> {
 
     const CONTRACTS: Contract[] = [ { uid:'576', name:'Ronda 2.4' } ];
 
     return of(CONTRACTS);
   }
 
-  public getStages(): Observable<Stage[]> {
+
+  getProjectList(): Observable<Project[]> {
+    const path = 'v1/project-management/projects';
+
+    return this.core.http.get<Project[]>(path);
+  }
+
+
+  getRequestersList(projectUID: string): Observable<Contact[]> {
+    const path = `v1/project-management/projects/${projectUID}/requesters`;
+
+    return this.core.http.get<Contact[]>(path);
+  }
+
+
+  getResourcesList(projectUID: string): Observable<Resource[]> {
+    const path = `v1/project-management/projects/${projectUID}/resources`;
+
+    return this.core.http.get<Resource[]>(path);
+  }
+
+
+  getResponsiblesList(projectUID: string): Observable<Contact[]> {
+    const path = `v1/project-management/projects/${projectUID}/responsibles`;
+
+    return this.core.http.get<Contact[]>(path);
+  }
+
+
+  getStages(): Observable<Stage[]> {
 
     const STAGES: Stage[] = [
       { uid:'Transición', name:'Transición' },
@@ -76,6 +76,20 @@ export class ProjectService {
     ];
 
     return of(STAGES);
+  }
+
+
+  getTags(): Observable<any[]> {
+    const path = `v1/project-management/tags`;
+
+    return this.core.http.get<any[]>(path);
+  }
+
+
+  getTaskManagers(projectUID: string): Observable<Contact[]> {
+    const path = `v1/project-management/projects/${projectUID}/task-managers`;
+
+    return this.core.http.get<Contact[]>(path);
   }
 
 }

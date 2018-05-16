@@ -34,8 +34,7 @@ enum Errors {
 
   POST_CLOSE_ACTIVITY_ERR =
   '[POST_CLOSE_ACTIVITY_ERR] Ocurrió un problema al cerrar la actividad.',
-  GET_TAGS_ERR =
-  '[GET_TAGS_ERR] Ocurrió un problema al leer la lista de etiquetas.',
+
   GET_ACTIVITIES_AS_WORKLIST_ERR =
   '[GET_ACTIVITIES_AS_WORKLIST_ERR] Ocurrió un problema al leer la lista de actividades como lista de trabajo.',
 }
@@ -44,16 +43,6 @@ enum Errors {
 export class ActivityService {
 
   public constructor(private core: CoreService) { }
-
-
-  public getActivity(itemId: number): Observable<Activity> {
-    const path = `v1/project-management/activities/${itemId}`;
-
-    return this.core.http.get<Activity>(path)
-      .catch((e) =>
-        this.core.http.showAndReturn(e, Errors.GET_ACTIVITY_ERR, null));
-  }
-
 
   public searchActivities(projectUID: string, filter: object,
                           orderBy: string, keywords: string): Observable<Activity[]> {
@@ -78,15 +67,14 @@ export class ActivityService {
   }
 
 
-  public updateActivity(projectUID: string,
-                        activityUID: string, task: UpdateActivityCommand): Observable<Activity> {
 
-    const path = `v1/project-management/projects/${projectUID}/activities/${activityUID}`;
+  public updateActivity(activity: Activity): Observable<Activity> {
+    const path = `v1/project-management/projects/${activity.project.uid}/activities/${activity.uid}`;
 
+    const updateCommand = this.buildUpdateCommand(activity);
 
-    return this.core.http.put<Activity>(path, task)
-      .catch((e) =>
-        this.core.http.showAndReturn(e, Errors.PUT_UPDATE_ACTIVITY_ERR, null));
+    return this.core.http.put<Activity>(path, updateCommand)
+                         .catch(e => this.core.http.showAndReturn(e, Errors.PUT_UPDATE_ACTIVITY_ERR, null));
   }
 
 
@@ -95,21 +83,11 @@ export class ActivityService {
     const path = `v1/project-management/projects/${projectUID}/activities/${activityUID}/close`;
 
     return this.core.http.post<Activity>(path, closeTask)
-                         .catch((e) => this.core.http.showAndThrow(e, Errors.POST_CLOSE_ACTIVITY_ERR));
+                         .catch(e => this.core.http.showAndThrow(e, Errors.POST_CLOSE_ACTIVITY_ERR));
   }
 
 
-  public getTags(): Observable<any[]> {
-    const path = `v1/project-management/tags`;
-
-    return this.core.http.get<any[]>(path)
-      .catch((e) =>
-        this.core.http.showAndReturn(e, Errors.GET_TAGS_ERR, null));
-  }
-
-
-  public getActivitiesAsWorkList(filter?: ActivityFilter): Observable<Activity[]> {
-
+  getActivitiesAsWorkList(filter?: ActivityFilter): Observable<Activity[]> {
     let filterAsString = '';
 
     if (filter instanceof ActivityFilter) {
@@ -121,6 +99,22 @@ export class ActivityService {
     return this.core.http.get<Activity>(path)
       .catch((e) =>
         this.core.http.showAndReturn(e, Errors.GET_ACTIVITIES_AS_WORKLIST_ERR, null));
+  }
+
+  // private methods
+
+  private buildUpdateCommand(activity: Activity): UpdateActivityCommand {
+    const command = new UpdateActivityCommand();
+
+    command.name = activity.name;
+    command.notes = activity.notes;
+    command.responsibleUID = activity.responsible.uid;
+    command.targetDate = activity.targetDate;
+    command.startDate = activity.startDate;
+    command.ragStatus = activity.ragStatus;
+    command.tags = activity.tags;
+
+    return command;
   }
 
 }

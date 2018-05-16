@@ -1,9 +1,9 @@
 <div class="header">
   <div class="title">
-    {{selectedTask.name}}
+    {{activity.name}}
   </div>
   <div class="header-options">
-    <i class="fa fa-times close-icon" aria-hidden="true" (click)="cancel()"></i>
+    <i class="fa fa-times close-icon" aria-hidden="true" (click)="onClose()"></i>
   </div>
 </div>
 
@@ -15,13 +15,13 @@
   <tr>
     <td>Nombre:</td>
     <td>
-      <input type="text" [disabled]="isClosed" class="text-box" [(ngModel)]="selectedTask.name">
+      <input type="text" class="text-box" [(ngModel)]="activity.name">
     </td>
   </tr>
   <tr>
     <td>Observaciones:</td>
     <td>
-      <textarea [disabled]="isClosed" class="text-area" rows="5" cols="25" [(ngModel)]="selectedTask.notes"></textarea>
+      <textarea class="text-area" rows="5" cols="25" [(ngModel)]="activity.notes"></textarea>
     </td>
   </tr>
 </table>
@@ -33,19 +33,17 @@
     <td>Responsable:</td>
     <td>
       <select class="select-box" style="width:340px"
-              [disabled]="isClosed" [(ngModel)]="selectedTask.responsibleUID">
-        <option value="">( Seleccionar )</option>
+              [(ngModel)]="activity.responsible.uid">
         <option value="Empty">No asignado</option>
-        <option *ngFor="let responsible of responsiblesList" [value]="responsible.uid">{{responsible.name}}</option>
+        <option *ngFor="let responsible of responsibles" [value]="responsible.uid">{{responsible.name}}</option>
       </select>
     </td>
     <td>RAG status:</td>
     <td class="text-align-right">
-      <select class="select-box" [disabled]="isClosed" [(ngModel)]="selectedTask.ragStatus">
-        <option value="">( Seleccionar )</option>
+      <select class="select-box" [(ngModel)]="activity.ragStatus">
+        <option value="NoColor">( Seleccionar )</option>
         <option value="Green">Verde</option>
         <option value="Ambar">Ambar</option>
-        <option value="Orange">Naranja</option>
         <option value="Red">Rojo</option>
       </select>
     </td>
@@ -79,13 +77,14 @@
   <tr>
     <td>Fecha objetivo:</td>
     <td>
-      <calendar-control [config]="{date:selectedTask.targetDate | date: 'dd-MM-yyyy'}"
-                        (onSelectedDate)="setSelectedDate($event)"></calendar-control>
+      <calendar-control [config]="{ date: activity.targetDate }"
+                        (onSelectedDate)="activity.targetDate = parseDate($event)"></calendar-control>
     </td>
     <td style="width:100%">&nbsp;</td>
     <td>Fecha máxima de entrega:</td>
     <td class="text-align-right">
-      <calendar-control (onSelectedDate)="selectedTask.startDate=$event"></calendar-control>
+      <calendar-control [config]="{ date: activity.dueDate }"
+                                  (onSelectedDate)="activity.dueDate = parseDate($event)"></calendar-control>
     </td>
   </tr>
 </table>
@@ -94,10 +93,10 @@
   <table class="form">
     <tr>
       <td>
-        <button class="btn" (click)="cancel() ">Cancelar</button>
+        <button class="btn" (click)="onClose() ">Cancelar</button>
       </td>
       <td *ngIf="activity.stage !=='Done'" class="text-align-right ">
-       <!-- <button class="btn-action " (click)="onUpdateTask() ">Guardar</button>-->
+       <button class="btn-action" (click)="onSave() ">Guardar cambios</button>
       </td>
     </tr>
   </table>

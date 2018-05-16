@@ -13,7 +13,6 @@ import { Assertion } from 'empiria';
 import { Contact, ColoredTag } from '../../core/core-data-types';
 
 import { Activity } from '../data-types/activity';
-import { UpdateActivityCommand } from '../data-types/commands';
 
 import { ActivityService } from '../services/activity.service';
 import { ProjectService } from '../services/project.service';
@@ -27,75 +26,55 @@ import { ProjectService } from '../services/project.service';
 
 export class ActivityEditorComponent {
 
-  public selectedTask = new UpdateActivityCommand();
+  responsibles: Contact[] = [];
+  tags: ColoredTag[] = [];
+  selectedTags: ColoredTag[] = [];
 
-  public responsiblesList: Contact[] = [];
-  public tags: ColoredTag[] = [];
-  public selectedTags: ColoredTag[] = [];
-
-  public isClosed = false;
-  
-  public _activity: Activity;
+  private _activity: Activity;
   @Input()
   set activity(activity: Activity) {
-
     this._activity = activity;
 
-    this.loadSelectedTask();
-
-    this.loadInitialValues();
-    this.loadActivityInitialValues();
-
+    this.initialize();
   }
   get activity(): Activity {
     return this._activity;
   }
 
-  @Output() public onCloseEvent = new EventEmitter();
-  @Output() public onUpdateActivity = new EventEmitter<Activity>();
+  @Output() onCloseEvent = new EventEmitter();
+  @Output() onUpdateActivity = new EventEmitter<Activity>();
 
-  public constructor(private activityService: ActivityService,
-                     private projectService: ProjectService) { }
+  constructor(private activityService: ActivityService,
+              private projectService: ProjectService) { }
 
-  public cancel(): void {
-    this.onClose();
-  }
 
-  public onClose(): void {
+  onCancel(): void {
     this.onCloseEvent.emit();
   }
 
-  public onUpdateTask() {
+
+  onClose(): void {
+    this.onCloseEvent.emit();
+  }
+
+
+  onSave(): void {
     if (!this.validateTargetDate()) {
       return;
     }
 
     this.setSelectedTags();
 
-    this.updateTask();
+    this.updateActivity();
   }
 
-  public loadInitialValues() {
-    this.loadTags();
 
-    this.loadResponsiblesList();
-  }
-
-  public async loadActivityInitialValues() {
-    await this.loadTags();
-
-    this.loadSelectedTags();
-
-    this.setIsTaskClosed();
-
-    this.loadResponsiblesList();
-  }
-
-  public onSelectedTags(selectedTags: any): void {
+  onSelectedTags(selectedTags: any): void {
     this.selectedTags = selectedTags;
   }
 
-  public parseDate(dateString: string): Date {
+
+  parseDate(dateString: string): Date {
     if (dateString) {
       return new Date(dateString);
     } else {
@@ -103,93 +82,69 @@ export class ActivityEditorComponent {
     }
   }
 
-  public setSelectedDate(date: string): void {
-    this.selectedTask.targetDate = this.parseDate(date);
+  // private methods
+
+  private initialize() {
+    this.loadTags();
+
+    this.loadResponsiblesList();
+
+    if (this.activity) {
+      this.loadTags();
+
+      this.loadSelectedTags();
+
+      this.loadResponsiblesList();
+    }
   }
 
-
-  private loadSelectedTask(): void {
-
-    this.selectedTask.name = this.activity.name;
-    this.selectedTask.notes = this.activity.notes;
-    this.selectedTask.responsibleUID = this.activity.responsible.uid;
-    this.selectedTask.targetDate = this.activity.targetDate;
-    this.selectedTask.requestedTime = this.activity.startDate;
-    this.selectedTask.startDate = this.activity.startDate;
-    this.selectedTask.ragStatus = this.activity.ragStatus;
-    this.selectedTask.tags = this.activity.tags;
-    
-  }
 
   private loadResponsiblesList(): void {
-    const errMsg = 'Ocurrió un problema al intentar leer la lista de responsables.';
-
     this.projectService.getResponsiblesList(this.activity.project.uid)
-      .toPromise()
-      .then((x) => this.responsiblesList = x)
-      .catch((e) => this.exceptionHandler(e, errMsg));
+                       .subscribe( x => this.responsibles = x );
   }
 
-  private async updateTask() {
-    Assertion.assertValue(this.selectedTask, "this.selectedTask");
-
-    const errMsg = 'Ocurrió un problema al intentar actualizar la actividad.';
-
-    await this.activityService.updateActivity(this.activity.project.uid, this.activity.uid, this.selectedTask)
-      .toPromise().then((x) => {
-        this.onUpdateActivity.emit(x);
-        this.onClose(); 
-      })
-      .catch((e) => this.exceptionHandler(e, errMsg));
-  }
-
-
-  private async loadTags() {
-    const errMsg = 'Ocurrió un problema al intentar leer la lista de etiquetas.';
-
-    await this.activityService.getTags()
-      .toPromise()
-      .then((x) => {
-        this.tags = x;
-        this.tags.forEach((x) => {
-          x.selected = false;
-        });
-      })
-      .catch((e) => this.exceptionHandler(e, errMsg));
-  }
-
-  private setSelectedTags(): void {
-    this.selectedTask.tags = this.selectedTags.filter(x => x.selected === true)
-      .map(x => x.name);
-  }
 
   private loadSelectedTags(): void {
-    this.selectedTask.tags.forEach(x => {
-      this.selectedTag(x);
-    });
+    this.activity.tags.forEach( x => this.selectTag(x) );
 
     this.selectedTags = this.tags.filter(x => x.selected === true);
   }
 
-  private selectedTag(tag: string): void {
-    let index = this.tags.findIndex((x) => x.name === tag);
 
-    this.tags[index].selected = true;
+  private loadTags() {
+    this.projectService.getTags()
+                       .subscribe( x => {
+                         this.tags = x;
+                         this.tags.forEach( x => x.selected = false);
+                       });
   }
 
-  private setIsTaskClosed(): void {
-    if (this.activity.stage === 'Done') {
-      this.isClosed = true;
-    } else {
-      this.isClosed = false;
+
+  private setSelectedTags(): void {
+    this.activity.tags = this.selectedTags.filter( x => x.selected === true )
+                                          .map( x => x.name );
+  }
+
+
+  private selectTag(tag: string): void {
+    const index = this.tags.findIndex( x => x.name === tag );
+
+    if (index !== -1) {
+      this.tags[index].selected = true;
     }
   }
 
-  private validateTargetDate(): boolean {
-    let targetDate = new Date(this.selectedTask.targetDate);
-    let dueDate = new Date(this.activity.dueDate);
-    let today = new Date();
 
+  private updateActivity() {
+    this.activityService.updateActivity(this.activity)
+                        .subscribe( x => this.onUpdateActivity.emit(x) );
+  }
+
+
+  private validateTargetDate(): boolean {
+    const targetDate = this.activity.targetDate;
+    const dueDate = this.activity.dueDate;
 
     if (targetDate > dueDate) {
       alert("La fecha objetivo de la actividad no puede ser posterior a la fecha máxima de entrega.");
@@ -197,18 +152,6 @@ export class ActivityEditorComponent {
     }
 
     return true;
-  }
-
-  
-  private exceptionHandler(error: any, defaultMsg: string): void {
-    let errMsg = 'Tengo un problema.\n\n';
-
-    if (typeof (error) === typeof (Error)) {
-      errMsg += defaultMsg + '\n\n' + (<Error>error).message;
-    } else {
-      errMsg += defaultMsg + '\n\n' + 'Error desconocido.';
-    }
-    alert(errMsg);
   }
 
 }
