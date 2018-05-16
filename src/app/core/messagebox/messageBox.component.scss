@@ -1,0 +1,63 @@
+@import "../../../styles/general-styles";
+@import "../../../styles/editor-window-style";
+
+:host {
+  position: relative;
+  top: 0%;
+  left: 0%;
+}
+
+
+.ghost-container {
+  height: 100vh;
+  width:100vw;
+  background-color: rgba(0,0,0,0.7);
+ }
+
+
+.container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background-color: $white;
+  transform: translate(-50%, -50%);
+  width: 600px;
+ }
+
+
+.header {
+  vertical-align: middle;
+}
+
+
+.title {
+  font: $control-font;
+  color: $text-color;
+  font-size: $font-size-title;
+  font-weight: $font-weight-hint;
+  min-height: 30pt;
+  max-height: 48pt;
+  width: 80%;
+ }
+
+
+.line-division {
+  height: 2px;
+  background-color: $blue;
+}
+
+
+.message {
+  padding-left: 10px;
+  font: $control-font;
+  font-size: $font-size-title;
+  height: auto;
+  overflow-y: auto;
+}
+
+
+.accept-button {
+  margin-right: 10px;
+  margin-bottom: 5px;
+  float: right;
+}

@@ -1,0 +1,11 @@
+<div class="ghost-container" *ngIf="visible">
+  <div class="container" >
+      <div class="header">
+          <div class="close-button right-position" (click)="close()">&times;</div>
+          <div class="title">{{ title }} </div>
+      </div>
+      <div class="line-division"></div>
+      <p class="message">{{message}}</p>
+        <button type="button" class="btn-action accept-button"  (click)="close()">Aceptar</button>
+  </div>
+</div>

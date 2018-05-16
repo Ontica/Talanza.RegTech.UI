@@ -22,7 +22,9 @@
       <router-outlet></router-outlet>
     </div>
     <div *ngIf="isGlobalSearchVisible">
+        <messagebox></messagebox>
         <toh-spinner></toh-spinner>
+
         <global-search [keywords]="keywords" (onClose)="hideGlobalSearch()"></global-search>
     </div>
 

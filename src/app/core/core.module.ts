@@ -28,6 +28,9 @@ import { LoggerService } from './general/logger.service';
 import { SpinnerComponent } from './spinner/spinner.component';
 import { SpinnerService } from './spinner/spinner.service';
 
+import { MessageBoxComponent } from './messagebox/messageBox.component';
+import { MessageBoxService} from './messagebox/messageBox.service';
+
 import { SecurityDataService } from './security/security-data.service';
 import { AuthenticationService } from './security/authentication.service';
 import { SecurityGuardService } from './security/security-guard.service';
@@ -37,13 +40,13 @@ import { throwIfAlreadyLoaded } from './module-import-guard';
   imports: [
     CommonModule, HttpClientModule
   ],
-  exports: [SpinnerComponent],
-  declarations: [SpinnerComponent],
+  exports: [SpinnerComponent, MessageBoxComponent],
+  declarations: [SpinnerComponent, MessageBoxComponent],
   providers: [CoreService, ExceptionHandler, SessionService,
               ApplicationSettingsService, LoggerService,
               SecurityDataService, AuthenticationService,
               SecurityGuardService, HttpHandler, HttpService, DirectoryService,
-              SpinnerService,
+              SpinnerService, MessageBoxService,
               { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true}
             ]
 })
