@@ -71,6 +71,8 @@
 .activity-menu {
   float: right;
   margin-right: 8px;
+  margin-top: 12px;
+  width: 60px;
   vertical-align: -webkit-baseline-middle;
 }
 
@@ -86,7 +88,7 @@ i.ghost-icon {
   display: inline-block;
   vertical-align: -webkit-baseline-middle;
   margin-right: 12pt;
-  max-width: calc(100% - 70px);
+  max-width: calc(100% - 120px);
 }
 
 .activity-name a:hover {

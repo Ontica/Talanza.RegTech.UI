@@ -27,7 +27,7 @@
 </table>
 <table class="form">
   <tr>
-    <td class="form-title form-title-text" colspan="4">Responsable de la tarea y RAG status</td>
+    <td class="form-title form-title-text" colspan="4">Responsable y estado de la tarea</td>
   </tr>
   <tr>
     <td>Responsable:</td>
@@ -41,9 +41,9 @@
     <td>Estado:</td>
     <td class="text-align-right">
       <select class="select-box" [(ngModel)]="activity.ragStatus">
-        <option value="NoColor">( Seleccionar )</option>
+        <option value="NoColor">Sin color</option>
         <option value="Green">Verde</option>
-        <option value="Ambar">Ambar</option>
+        <option value="Amber">Ambar</option>
         <option value="Red">Rojo</option>
       </select>
     </td>

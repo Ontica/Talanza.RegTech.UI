@@ -21,7 +21,7 @@
         Fecha Objetivo: &nbsp;{{inbox.extensionData.targetDate | date: 'dd/MMM/yyyy'}}<br> Fecha Máxima: &nbsp;{{inbox.extensionData.dueDate | date: 'dd/MMM/yyyy'}}
       </td>
       <td style="width:8%;" class="text-align-center">
-        <rag-control [status]="inbox.extensionData.ragStatus"></rag-control>
+        <rag-status-control [status]="inbox.extensionData.ragStatus"></rag-status-control>
       </td>
       <td style="width:15%;">{{inbox.to.name}}</td>
       <td style="width:15%">

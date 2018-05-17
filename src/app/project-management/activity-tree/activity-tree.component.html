@@ -53,9 +53,9 @@
           </div>
 
           <div class="activity-menu">
-            <a (click)="displayMenu(activity)">
-              <i class="fa fa-ellipsis-v ghost-icon"></i>
-            </a>
+            <rag-status-control [status]="activity.ragStatus"
+                         (change)="activity.ragStatus= $event">
+            </rag-status-control>
           </div>
 
       </div>

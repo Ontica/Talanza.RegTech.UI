@@ -41,7 +41,7 @@
               Concluida el: {{task.endDate | date: 'dd/MMM/yyyy'}}
             </td>
             <td style="width:8% " class="text-align-center ">
-              <rag-control [status]="task.ragStatus "></rag-control>
+              <rag-status-control [status]="task.ragStatus"></rag-status-control>
             </td>
             <td style="width:15% ">{{task.responsible.name}} </td>
             <td style="width:28% ">

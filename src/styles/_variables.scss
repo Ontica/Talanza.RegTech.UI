@@ -1,7 +1,6 @@
 //
 // Colors
 //
-$ambar: #ebd1a5 !default;
 $black: #1a1a1a !default;
 $dark-gray: #606060!default;
 $gray: #909090!default;
@@ -10,20 +9,17 @@ $brown: #604020 !default;
 $dark-blue: #104070 !default;
 $blue: #16599c !default;
 $light-blue: #6ba1ff !default;
-$lime: #8CBF26 !default;
 $green: #17c457 !default;
+$dark-orange: #e68a00 !default;
 $orange: #ffca99 !default;
 $light-orange: #fff2e6 !default;
-$light-yellow: #fffffb !default;
-$pink: #E671B8 !default;
 $purple: #A700AE !default;
 $dark-red:#9b1b1f !default;
 $red:#d04f4f !default;
 $light-red: #e49a9a !default;
-$teal: #25a1c5 !default;
 $white: #fefefe !default;
 $light-white: white;
-$silver: #909090;
+
 //
 // Typography
 //
@@ -65,7 +61,7 @@ $primary-icon-size: 16pt;
 // editor-window
 //
 $editor-window-border: 1px solid #ccc;
-$editor-window-background-color: $light-yellow;
+$editor-window-background-color: $white;
 //
 // tabs
 //
@@ -134,11 +130,3 @@ $grid-even-background-color: #fffffd;
 $grid-odd-background-color: #eef7fa;
 $grid-selected-background-color: $light-orange;
 $grid-hover-background-color: #f6f6f6;
-
-//
-// rag-status
-//
-$rag-status-ambar: $ambar;
-$rag-status-green: $green;
-$rag-status-orange:$orange;
-$rag-status-red: $red;

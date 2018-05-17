@@ -14,7 +14,7 @@ import { FormsModule } from '@angular/forms';
 import { AutocompleteControl } from  './autocomplete/autocomplete-control';
 
 import { Chips } from './chips/chips';
-import { RAGControl } from './rag/rag.control';
+import { RagStatusControl } from './rag-status/rag-status.control';
 import { CalendarControl } from './calendar/calendar-control';
 import { SelectControl } from './select-control/select-control';
 import { SearchControl } from './search/search.control';
@@ -32,11 +32,11 @@ import { SafeUrlPipe } from './pipes/safe-url/safe-url.pipe';
 
 @NgModule({
   imports: [RouterModule, CommonModule, FormsModule],
-  declarations: [AutocompleteControl, Chips, RAGControl, CalendarControl, SelectControl,
+  declarations: [AutocompleteControl, Chips, RagStatusControl, CalendarControl, SelectControl,
                  SafeHtmlPipe, SearchControl, NavBarControl, ModalWindow, SafeUrlPipe,
                  PdfViewer, DropdownMenuControl],
   exports: [AutocompleteControl, Chips, SafeHtmlPipe, SafeUrlPipe, PdfViewer,
-            RAGControl, CalendarControl, SelectControl, SearchControl, NavBarControl,
-            ModalWindow, DropdownMenuControl] 
+            RagStatusControl, CalendarControl, SelectControl, SearchControl, NavBarControl,
+            ModalWindow, DropdownMenuControl]
 })
 export class ControlsModule { }
