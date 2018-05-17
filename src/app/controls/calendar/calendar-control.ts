@@ -1,82 +1,150 @@
 import { Component, EventEmitter, Input, Output,
-        AfterViewInit } from '@angular/core';
+        AfterViewInit, ChangeDetectionStrategy, OnInit, OnChanges} from '@angular/core';
+import { DataResolver } from '../../app.resolver';
 
 declare var dhtmlXCalendarObject: any;
 
-interface calendearSettings {
-  disableWeekends: boolean;
-  showHolidays: boolean;
-  hideTime: boolean;
-  showWeekNumber: boolean;
-  showVacation: boolean;
-  date: Date;
+export interface CalendarSettings {
+  hideWeekendDays?: boolean;
+  showHolidays?: boolean;
+  hideTime?: boolean;
+  showWeekNumber?: boolean;
+  showVacation?: boolean;
+}
+
+const defaults : CalendarSettings = {
+  hideWeekendDays : false,
+  showHolidays : true,
+  hideTime: true,
+  showWeekNumber: false,
+  showVacation: false
 }
 
 @Component ({
   selector: 'calendar-control',
   templateUrl:'./calendar-control.html',
-  styleUrls: ['./calendar-control.scss']
+  styleUrls: ['./calendar-control.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 
-export class CalendarControl  implements AfterViewInit {
-  public calendar: any;
+export class CalendarControl implements AfterViewInit, OnInit, OnChanges {
 
-  @Input() config: calendearSettings = { disableWeekends: false, showHolidays: false, hideTime: false,
-                                         showWeekNumber: false, showVacation: false, date: undefined  }
+  @Input()
+  get date(): Date { return this._date };
+  set date(value: Date) {
+    if (value) {
+      this._date = (typeof value === 'string') ? new Date(value) : value;
+    } else {
+      this._date = undefined;
+    }
+    this.refreshCalendarDate();
+  };
+  private _date: Date;
+
+  @Input()
+  get config(): CalendarSettings { return this._config };
+  set config(value: CalendarSettings) { this._config = value };
+  private _config = defaults;
 
   @Output() public onSelectedDate = new EventEmitter<Date>();
 
-  public date = '';
-  public inputId = 'calendarInput';
-  public buttonId = 'calendarButton';
+  formattedDate = '';
 
-  constructor() {
+  inputId = 'calendarInput';
+  buttonId = 'calendarButton';
+
+  private calendar: any;
+
+  constructor() { }
+
+  private initialize() {
     this.setControlId();
   }
 
-  ngAfterViewInit() {
-      this.setCalendarLanguage();
-
-      this.createCalendar();
-      this.setInitialDate();
-      this.setSettings();
-
-      this.setSelectedDate();
+  ngOnInit() {
+    this.initialize();
   }
 
-  private setInitialDate(): void {
+  ngOnChanges() {
+    console.log("ngOnChanges called");
+  }
 
-    if (this.config.date !== undefined) {
-      this.cal_isDate(this.config.date);
-      this.calendar.setDate(this.config.date);
+
+  ngAfterViewInit() {
+    console.log("ngAfterViewInit called");
+
+    this.createCalendar();
+    this.setSettings();
+    this.attachEvents();
+  }
+
+  public onblur(): void {
+
+    if (this.formattedDate.length === 0) {
+      this.onSelectedDate.emit(null);
+
+    } else if (this.isDate(this.formattedDate)) {
+      const newDate = this.tryFormat(this.formattedDate);
+
+      this.calendar.setDate(this.toDate(newDate));
+
+      this.onSelectedDate.emit(this.calendar.getDate());
+
+    } else {
+      console.log('Not a date', this.formattedDate);
     }
   }
 
-  private setSelectedDate(): void {
-    this.calendar.attachEvent("onClick", (date)=> {
-      this.onSelectedDate.emit(date);
-     });
+  private refreshCalendarDate() {
+    if (this.date) {
+      this.formattedDate = this.format(this.date);
+    } else {
+      this.formattedDate = '';
+    }
+
+    if (this.calendar && this.date) {
+      this.calendar.setDate(this.date);
+    } else if (this.calendar) {
+      this.calendar.setDate(new Date());
+    }
   }
 
-  private createCalendar(): void {
-
-    this.calendar = new dhtmlXCalendarObject(
-      { input: this.inputId , button: this.buttonId});
+  private attachEvents() {
+    this.calendar.attachEvent("onClick",
+                              date => {
+                                console.log("onClick triggered", date);
+                                this.formattedDate = this.format(date);
+                                this.onSelectedDate.emit(date)
+                              });
   }
+
+
+  private createCalendar() {
+    this.addLanguage("sp");
+
+    this.calendar = new dhtmlXCalendarObject( { button: this.buttonId} );   // input: this.inputId
+
+    this.calendar.loadUserLanguage("sp");
+  }
+
 
   private setSettings(): void {
-    if (this.config.disableWeekends) {
-      this.disbleWeekend();
+    if (this.config.hideWeekendDays) {
+      this.calendar.disableDays("week", [6, 7]);
     }
+
     if (this.config.showHolidays) {
       this.setHolidays();
     }
+
     if (this.config.hideTime) {
-      this.hideTime();
+      this.calendar.hideTime();
     }
+
     if (this.config.showWeekNumber) {
-      this.showWeekNumber();
+      this.calendar.showWeekNumbers();
     }
+
     if (this.config.showVacation) {
       this.disableRangeDays('15-12-2017', '02-01-2018');
     }
@@ -84,28 +152,18 @@ export class CalendarControl  implements AfterViewInit {
     this.calendar.setDateFormat("%d-%M-%y");
   }
 
-  private hideTime(): void {
-    this.calendar.hideTime();//ocultar la hora
-  }
 
-  private showWeekNumber(): void {
-    this.calendar.showWeekNumbers();//mostrar numero de semana
-  }
-
-  private disbleWeekend():void {
-    this.calendar.disableDays("week", [6, 7]); //desabiliatar los fines de semana
-  }
-
-  private setHoliday(holyday: string): void {
+  private setHoliday(holyday: string) {
     this.calendar.setHolidays(holyday);
   }
 
-  private disableRangeDays(from:string, to:string):void {
+
+  private disableRangeDays(from:string, to:string) {
     this.calendar.setInsensitiveRange(from, to);
   }
 
-  private setHolidays(): void {
-    this.calendar.setHolidays("27-11-2017");
+
+  private setHolidays() {
     this.setHoliday('25-12-2017');
     this.setHoliday('01-01-2018');
     this.setHoliday('05-02-2018');
@@ -116,9 +174,12 @@ export class CalendarControl  implements AfterViewInit {
   }
 
 
-  private setCalendarLanguage(): void {
+  private addLanguage(language: string) {
     // add once, make sure dhtmlxcalendar.js is loaded
-    dhtmlXCalendarObject.prototype.langData["sp"] = {
+
+    dhtmlXCalendarObject.prototype.lang = language;
+
+    dhtmlXCalendarObject.prototype.langData[language] = {
       // date format
       dateformat: "%d-%m-%Y",
       // full names of months
@@ -133,7 +194,7 @@ export class CalendarControl  implements AfterViewInit {
       ],
       // full names of days
       daysFNames: [
-        "Lunes", "Martes", "Miercoles", "Jueves",
+        "Lunes", "Martes", "Miércoles", "Jueves",
         "Viernes", "Sábado", "Domingo"
       ],
       // short names of days
@@ -147,26 +208,34 @@ export class CalendarControl  implements AfterViewInit {
       weekname: "s"
     };
 
-    // init calendar
-    var myCalenda = new dhtmlXCalendarObject("input");
-    myCalenda.loadUserLanguage("sp");
-
-    dhtmlXCalendarObject.prototype.lang = "sp";
   }
 
-  public isNumericValue(value: string): boolean {
+
+  private isNumericValue(value: string): boolean {
     if (isNaN(Number(value))) {
       return false;
     }
     return true;
   }
 
-  public cal_formatAsDate(oSource) {
-    this.date = '';
-    if (oSource === "") {
-      return;
+
+  private format(date: Date): string {
+    const dmyFormatted = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
+
+    const value = this.tryFormat(dmyFormatted);
+
+    console.log("value in format", value);
+
+    return value;
+  }
+
+
+  private tryFormat(dateString: string): string {
+    if (!dateString || dateString.length === 0) {
+      return null;
     }
-    var temp = String(oSource).toLowerCase();
+
+    var temp = String(dateString).toLowerCase();
     var regex = /-/g;
     temp = temp.replace(regex, "/");
     regex = /[.]/g;
@@ -175,46 +244,53 @@ export class CalendarControl  implements AfterViewInit {
     var dateParts = temp.split("/");
 
     if (dateParts.length != 3) {
-      return;
+      return null;
     }
+
     if (!this.isNumericValue(dateParts[0]) || !this.isNumericValue(dateParts[2])) {
-      return;
+      return null;
     }
-     if (!(1 <= Number(dateParts[0]) && Number(dateParts[0]) <= 31)) {
-      return;
+
+    if (!(1 <= +dateParts[0] && +dateParts[0] <= 31)) {
+      return null;
     }
-    if (Number(dateParts[0]) < 10) {
-      dateParts[0] = "0" + Number(dateParts[0]);
+
+    if (+dateParts[0] < 10) {
+      dateParts[0] = "0" + +dateParts[0];
     }
-    if (Number(dateParts[2]) < 100) {
-      dateParts[2] = (Number(dateParts[2]) + 2000).toString();
+    if (+dateParts[2] < 100) {
+      dateParts[2] = (+dateParts[2] + 2000).toString();
     }
-    if (Number(dateParts[2]) > 2099) {
-      return;
+    if (+dateParts[2] > 2099) {
+      return null;
     }
     if (this.isNumericValue(dateParts[1])) {
-      if (!(1 <= Number(dateParts[1]) && Number(dateParts[1]) <= 12)) {
-        return;
-      }
-      var months = new Array("Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic");
-      dateParts[1] = months[Number(dateParts[1]) - 1];
-    } else {
 
+      if (!(1 <= +dateParts[1] && +dateParts[1] <= 12)) {
+        return null;
+      }
+
+      const months = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
+
+      dateParts[1] = months[+dateParts[1] - 1];
+
+    } else {
+      // no-op
     }
 
-    this.date = dateParts[0] + "/" + dateParts[1] + "/" + dateParts[2];
-
-    return;
+    return dateParts[0] + "/" + dateParts[1] + "/" + dateParts[2];
   }
 
-  public cal_isDate(oSource): boolean {
-    this.cal_formatAsDate(oSource);
 
-    if (this.date === '') {
+  private isDate(dateString: string): boolean {
+    const formatted = this.tryFormat(dateString);
+
+    if (!formatted) {
       return false;
     }
 
-    var dateParts = String(this.date).split("/");
+    var dateParts = formatted.split("/");
+
     if (dateParts.length != 3) {
       return false;
     }
@@ -222,41 +298,36 @@ export class CalendarControl  implements AfterViewInit {
     if (!(1 <= Number(dateParts[0]) && Number(dateParts[0]) <= 31)) {
       return false;
     }
+
     switch (dateParts[1].toLowerCase()) {
       case "feb":
-        if (Number(dateParts[0]) > 29) {
+        if (+dateParts[0] > 29) {
           return false;
         }
-        if (Number(dateParts[0]) == 29) { // check leap year
-          if ((Number(dateParts[2]) % 4) != 0) {
+        if (+dateParts[0] == 29) { // check leap year
+          if ((+dateParts[2] % 4) != 0) {
             return false;
-          } else if (((Number(dateParts[2]) % 100) == 0) && ((+dateParts[2] % 400) != 0)) {
+          } else if (( (+dateParts[2] % 100) == 0) && ((+dateParts[2] % 400) != 0)) {
             return false;
           }
         }
         break;
+
       case "abr": case "jun": case "sep": case "nov":
         if (+dateParts[0] == 31) {
           return false;
         }
         break;
+
       case "ene": case "mar": case "may": case "jul": case "ago": case "oct": case "dic":
         break;
+
       default:
         return false;
     }
     return true;
-
   }
 
-  public onblur(): void {
-    if (this.cal_isDate(this.date)) {
-
-      this.calendar.setDate(new Date(this.getDateInNumericFormat()));
-
-      this.onSelectedDate.emit(this.calendar.getDate());
-    }
-  }
 
   private setControlId(): void {
     let idNumber = this.getRandomNumber(1,1000000);
@@ -264,16 +335,21 @@ export class CalendarControl  implements AfterViewInit {
     this.buttonId = 'bi' + idNumber;
   }
 
+
   private getRandomNumber(from: number, to: number): number {
     return Math.floor((Math.random() * to) + from);
   }
 
-  private getDateInNumericFormat(): string {
-    let dateParts = String(this.date).split("/");
 
-    let months = new Array("ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "oct", "nov", "dic");
-    let index = months.findIndex((x) => x === dateParts[1].toLowerCase())  +1;
-    return dateParts[2] + "/" + index + "/" + dateParts[0];
+  private toDate(dateString: string): Date {
+    let dateParts = dateString.split("/");
+
+    const months = ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'];
+
+    const month = months.findIndex( x => x === dateParts[1].toLowerCase() );
+
+    return new Date(+dateParts[2], month, +dateParts[0], 0, 0, 0, 0);
+
   }
 
 }

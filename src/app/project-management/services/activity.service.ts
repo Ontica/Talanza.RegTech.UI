@@ -109,8 +109,9 @@ export class ActivityService {
     command.name = activity.name;
     command.notes = activity.notes;
     command.responsibleUID = activity.responsible.uid;
+   // command.startDate = activity.startDate;
     command.targetDate = activity.targetDate;
-    command.startDate = activity.startDate;
+    command.dueDate = activity.dueDate;
     command.ragStatus = activity.ragStatus;
     command.tags = activity.tags;
 

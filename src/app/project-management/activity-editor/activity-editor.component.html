@@ -38,7 +38,7 @@
         <option *ngFor="let responsible of responsibles" [value]="responsible.uid">{{responsible.name}}</option>
       </select>
     </td>
-    <td>RAG status:</td>
+    <td>Estado:</td>
     <td class="text-align-right">
       <select class="select-box" [(ngModel)]="activity.ragStatus">
         <option value="NoColor">( Seleccionar )</option>
@@ -77,14 +77,16 @@
   <tr>
     <td>Fecha objetivo:</td>
     <td>
-      <calendar-control [config]="{ date: activity.targetDate }"
-                        (onSelectedDate)="activity.targetDate = parseDate($event)"></calendar-control>
+      <calendar-control [date]="activity.targetDate"
+                        (onSelectedDate)="activity.targetDate = $event">
+      </calendar-control>
     </td>
     <td style="width:100%">&nbsp;</td>
     <td>Fecha máxima de entrega:</td>
     <td class="text-align-right">
-      <calendar-control [config]="{ date: activity.dueDate }"
-                                  (onSelectedDate)="activity.dueDate = parseDate($event)"></calendar-control>
+      <calendar-control [date]="activity.dueDate"
+                        (onSelectedDate)="activity.dueDate = $event">
+      </calendar-control>
     </td>
   </tr>
 </table>
@@ -95,7 +97,7 @@
       <td>
         <button class="btn" (click)="onClose() ">Cancelar</button>
       </td>
-      <td *ngIf="activity.stage !=='Done'" class="text-align-right ">
+      <td class="text-align-right">
        <button class="btn-action" (click)="onSave() ">Guardar cambios</button>
       </td>
     </tr>

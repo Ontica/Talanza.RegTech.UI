@@ -10,7 +10,9 @@
           <b>{{_task.endDate  | date: 'dd-MMM-yyyy'}}</b>
         </ng-container>
         <ng-template #elseBlock>
-          <calendar-control (onSelectedDate)="endDate=$event"></calendar-control>
+          <calendar-control [date]="endDate"
+                            (onSelectedDate)="endDate=$event">
+          </calendar-control>
         </ng-template>
       </td>
 
