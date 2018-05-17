@@ -1,5 +1,5 @@
-<projects-filter (onChangeFilter)="onChangeFilter($event)"
-  (onChangeView)="onChangeView($event)">
+<projects-filter (onChangeFilter)="onFilterChanged($event)"
+  (onChangeView)="onViewChanged($event)">
 </projects-filter>
 
 <div class="container">
@@ -24,8 +24,8 @@
 
   <div *ngIf="displayEditor" class="block-container right">
       <activity-editor [activity]="selectedActivity"
-                       (onUpdateActivity)="updateActivity($event)"
-                       (onCloseEvent)="closeEditor()">
+                       (update)="onActivityUpdated($event)"
+                       (close)="onEditorClosed()">
       </activity-editor>
   </div>
 

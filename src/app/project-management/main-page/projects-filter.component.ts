@@ -188,10 +188,10 @@ export class ProjectsFilterComponent implements OnInit {
   private loadTags(): void {
     const errMsg = 'Ocurrió un problema al intentar leer la lista de etiquetas.';
 
-    this.activityService.getTags()
-      .toPromise()
-      .then((x) => this.labelsList = x)
-      .catch((e) => this.exceptionHandler(e, errMsg));
+    this.projectService.getTags()
+        .toPromise()
+        .then((x) => this.labelsList = x)
+        .catch((e) => this.exceptionHandler(e, errMsg));
   }
 
 

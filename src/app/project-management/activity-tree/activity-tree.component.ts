@@ -24,16 +24,14 @@ import { ActivityService } from '../services/activity.service';
 })
 export class ActivityTreeComponent {
 
-  public activityTree: Activity[] = [];
-  public selectedActivity: Activity = Activity_Empty;
-  public dragZoneItem = null;
+  activityTree: Activity[] = [];
+  selectedActivity: Activity = Activity_Empty;
+  dragZoneItem = null;
 
-  public addFirstActivityEditorVisible = false;
-  public insertActivityEditorVisible = false;
+  addFirstActivityEditorVisible = false;
+  insertActivityEditorVisible = false;
 
   private _filter: ActivityFilter = new ActivityFilter();
-
-
   @Input()
   set filter(filter: ActivityFilter) {
 
@@ -45,53 +43,41 @@ export class ActivityTreeComponent {
       this.loadActivitiesTree();
     }
   }
+
   get filter(): ActivityFilter {
     return this._filter;
   }
 
-  @Output() public onSelectActivity = new EventEmitter<Activity>();
+  @Output() onSelectActivity = new EventEmitter<Activity>();
 
   constructor(private activityTreeService: ActivityTreeService,
-    private activityService: ActivityService) { }
+              private activityService: ActivityService) { }
 
 
-  public get hasSelectedActivities() {
+  activityNameClass(level: number): string {
+    if (1 <= level && level <= 6) {
+      return `activity-name-level-${level}`;
+    } else {
+      return 'activity-name-level-6';
+    }
+  }
+
+
+  deleteActivity(activity: Activity): void {
+    if (!activity) {
+      return;
+    }
+
+    this.activityTreeService.deleteActivity(this.filter.project.uid, activity)
+                            .then( () => this.loadActivitiesTree() );
+  }
+
+  get hasSelectedActivities() {
     return (this.selectedActivity.uid !== '');
   }
 
 
-  public isActivitySelected(activity: Activity) {
-    return (activity.uid === this.selectedActivity.uid);
-  }
-
-
-  public selectActivity(activity: Activity, emitEvent: boolean = false): void {
-    this.selectedActivity = activity;
-
-    if (emitEvent) {
-      this.onSelectActivity.emit(activity);
-    }
-  }
-
-
-  public hideInlineEditors() {
-    this.addFirstActivityEditorVisible = false;
-    this.insertActivityEditorVisible = false;
-  }
-
-
-  public showInitialActivityInlineEditor(): void {
-    this.hideInlineEditors();
-
-    if (this.hasSelectedActivities) {
-      this.insertActivityEditorVisible = true;
-    } else {
-      this.addFirstActivityEditorVisible = true;
-    }
-  }
-
-
-  public insertActivity(name: string, position?: number) {
+  insertActivity(name: string, position?: number) {
     if (!name) {
       return;
     }
@@ -118,59 +104,52 @@ export class ActivityTreeComponent {
       });
   }
 
-  public deleteActivity(activity: Activity): void {
-    if (!activity) {
-      return;
-    }
 
-    this.activityTreeService.deleteActivity(this.filter.project.uid, activity)
-      .then(() => this.loadActivitiesTree());
-  }
-
-
-  public activityNameClass(level: number): string {
-    if (1 <= level && level <= 6) {
-      return `activity-name-level-${level}`;
-    } else {
-      return 'activity-name-level-6';
-    }
-  }
-
-  private loadActivitiesTree() {
-    Assertion.assertValue(this.filter.project, "this.filter.project");
-
-    this.activityTreeService.getActivitiesTree(this.filter.project.uid)
-                            .subscribe((x) => this.activityTree = x);
-  }
-
-
-  private initialize() {
-    this.activityTree = [];
-    this.selectedActivity = Activity_Empty;
-
+  hideInlineEditors() {
     this.addFirstActivityEditorVisible = false;
     this.insertActivityEditorVisible = false;
   }
 
 
+  isActivitySelected(activity: Activity): boolean {
+    return (activity.uid === this.selectedActivity.uid);
+  }
+
+
+  selectActivity(activity: Activity, emitEvent: boolean = false): void {
+    this.selectedActivity = activity;
+
+    if (emitEvent) {
+      this.onSelectActivity.emit(activity);
+    }
+  }
+
+
+  showInitialActivityInlineEditor(): void {
+    this.hideInlineEditors();
+
+    if (this.hasSelectedActivities) {
+      this.insertActivityEditorVisible = true;
+    } else {
+      this.addFirstActivityEditorVisible = true;
+    }
+  }
+
   // Drag & drop methods
 
-  public allowDrop(event: DragEvent, dragZoneItem: any): void {
+  allowDrop(event: DragEvent, dragZoneItem: any): void {
     this.configureDragEventBehaviour(event);
 
     this.setDragZoneItem(dragZoneItem);
   }
 
-  private configureDragEventBehaviour(event: DragEvent): any {
-    event.stopPropagation();
-    event.preventDefault();
-  }
 
-  public setDragZoneItem(dragZoneItem: any) {
+  setDragZoneItem(dragZoneItem: any) {
     this.dragZoneItem = dragZoneItem;
   }
 
-  public startDrag(event: DragEvent, activity: Activity): void {
+
+  startDrag(event: DragEvent, activity: Activity): void {
     this.hideInlineEditors();
 
     this.selectActivity(activity);
@@ -183,6 +162,45 @@ export class ActivityTreeComponent {
   }
 
 
+  moveActivity(event: DragEvent, newPosition: number): void {
+    let activity = this.getDraggedActivity(event);
+
+    this.configureDragEventBehaviour(event);
+    this.setDragZoneItem(null);
+
+    this.activityTreeService.moveActivity(activity, newPosition)
+                            .then( () => this.loadActivitiesTree() )
+                            .catch( response => console.log(response.error.message) );
+  }
+
+  moveActivityAsChildOf(event: DragEvent, newParent: Activity): void {
+    let activity = this.getDraggedActivity(event);
+
+    this.configureDragEventBehaviour(event);
+    this.setDragZoneItem(null);
+
+    this.activityTreeService.changeParent(activity, newParent)
+                            .then( () => this.loadActivitiesTree() )
+                            .catch( response => console.log(response.error.message) );
+  }
+
+  // private methods
+
+  private configureDragEventBehaviour(event: DragEvent): any {
+    event.stopPropagation();
+    event.preventDefault();
+  }
+
+
+  private initialize() {
+    this.activityTree = [];
+    this.selectedActivity = Activity_Empty;
+
+    this.addFirstActivityEditorVisible = false;
+    this.insertActivityEditorVisible = false;
+  }
+
+
   private getDraggedActivity(event: DragEvent): Activity {
     this.configureDragEventBehaviour(event);
 
@@ -191,36 +209,21 @@ export class ActivityTreeComponent {
     return activity;
   }
 
-  public moveActivity(event: DragEvent, newPosition: number): void {
-    let activity = this.getDraggedActivity(event);
 
-    this.configureDragEventBehaviour(event);
-    this.setDragZoneItem(null);
-
-    this.activityTreeService.moveActivity(activity, newPosition)
-                            .then(() => this.loadActivitiesTree())
-                            .catch(response => console.log(response.error.message));
-  }
-
-
-  public moveActivityAsChildOf(event: DragEvent, newParent: Activity): void {
-    let activity = this.getDraggedActivity(event);
-
-    this.configureDragEventBehaviour(event);
-    this.setDragZoneItem(null);
-
-    this.activityTreeService.changeParent(activity, newParent)
-                            .then(() => this.loadActivitiesTree())
-                            .catch(response => console.log(response.error.message));
-  }
-
-  // Spinner component calls
-
-  private showSpinner() {
+  private hideSpinner() {
     // ToDo: call spinner component
   }
 
-  private hideSpinner() {
+
+  private loadActivitiesTree() {
+    Assertion.assertValue(this.filter.project, "this.filter.project");
+
+    this.activityTreeService.getActivitiesTree(this.filter.project.uid)
+                            .subscribe( x => this.activityTree = x );
+  }
+
+
+  private showSpinner() {
     // ToDo: call spinner component
   }
 

@@ -26,39 +26,37 @@ import { ProjectService } from '../services/project.service';
 
 export class ActivityEditorComponent {
 
-  responsibles: Contact[] = [];
-  tags: ColoredTag[] = [];
-  selectedTags: ColoredTag[] = [];
+  @Output() close = new EventEmitter();
+  @Output() update = new EventEmitter<Activity>();
 
-  private _activity: Activity;
   @Input()
+  get activity(): Activity { return this._activity; }
   set activity(activity: Activity) {
     this._activity = activity;
 
     this.initialize();
   }
-  get activity(): Activity {
-    return this._activity;
-  }
+  private _activity: Activity;
 
-  @Output() onCloseEvent = new EventEmitter();
-  @Output() onUpdateActivity = new EventEmitter<Activity>();
+  responsibles: Contact[] = [];
+  tags: ColoredTag[] = [];
+  selectedTags: ColoredTag[] = [];
 
   constructor(private activityService: ActivityService,
               private projectService: ProjectService) { }
 
 
-  onCancel(): void {
-    this.onCloseEvent.emit();
+  onCancel() {
+    this.close.emit();
   }
 
 
-  onClose(): void {
-    this.onCloseEvent.emit();
+  onClose() {
+    this.close.emit();
   }
 
 
-  onSave(): void {
+  onSave() {
     if (!this.validateTargetDate()) {
       return;
     }
@@ -69,17 +67,8 @@ export class ActivityEditorComponent {
   }
 
 
-  onSelectedTags(selectedTags: any): void {
+  onSelectedTags(selectedTags: any) {
     this.selectedTags = selectedTags;
-  }
-
-
-  parseDate(dateString: string): Date {
-    if (dateString) {
-      return new Date(dateString);
-    } else {
-      return null;
-    }
   }
 
   // private methods
@@ -87,19 +76,15 @@ export class ActivityEditorComponent {
   private initialize() {
     this.loadTags();
 
-    this.loadResponsiblesList();
+    this.loadResponsibles();
 
     if (this.activity) {
-      this.loadTags();
-
       this.loadSelectedTags();
-
-      this.loadResponsiblesList();
     }
   }
 
 
-  private loadResponsiblesList(): void {
+  private loadResponsibles(): void {
     this.projectService.getResponsiblesList(this.activity.project.uid)
                        .subscribe( x => this.responsibles = x );
   }
@@ -138,7 +123,10 @@ export class ActivityEditorComponent {
 
   private updateActivity() {
     this.activityService.updateActivity(this.activity)
-                        .subscribe( x => this.onUpdateActivity.emit(x) );
+                        .subscribe( x => {
+                          this.activity = x;
+                          this.update.emit(x);
+                        });
   }
 
 
@@ -146,8 +134,12 @@ export class ActivityEditorComponent {
     const targetDate = this.activity.targetDate;
     const dueDate = this.activity.dueDate;
 
+    if (!targetDate || !dueDate) {
+      return true;
+    }
+
     if (targetDate > dueDate) {
-      alert("La fecha objetivo de la actividad no puede ser posterior a la fecha máxima de entrega.");
+      alert(`La fecha objetivo de la actividad no puede ser posterior a la fecha máxima de entrega.`);
       return false;
     }
 

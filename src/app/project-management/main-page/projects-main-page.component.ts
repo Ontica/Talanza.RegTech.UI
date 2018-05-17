@@ -42,16 +42,25 @@ export class ProjectsMainPageComponent {
   }
 
 
-  public onChangeFilter(receivedFilter: ActivityFilter) {
+  onActivityUpdated(activity: Activity) {
+
+  }
+
+  onEditorClosed() {
+    this.masterContainerClass = 'centered-container';
+
+    this.displayEditor = false;
+  }
+
+  onFilterChanged(receivedFilter: ActivityFilter) {
     this.filter = receivedFilter;
   }
 
-
-  public onChangeView(viewConfig: ViewConfig): void {
+  onViewChanged(viewConfig: ViewConfig) {
     this.viewConfig = viewConfig;
   }
 
-  public showEditor(activity: Activity): void {
+  showEditor(activity: Activity) {
     if (activity) {
       this.selectedActivity = activity;
 
@@ -59,12 +68,6 @@ export class ProjectsMainPageComponent {
 
       this.displayEditor = true;
     }
-  }
-
-  public closeEditor(): void {
-    this.masterContainerClass = 'centered-container';
-
-    this.displayEditor = false;
   }
 
 }
