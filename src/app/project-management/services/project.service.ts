@@ -1,9 +1,8 @@
 /**
  * @license
- * Copyright (c) 2017-2018 La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
+ * Copyright (c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
  *
  * See LICENSE.txt in the project root for complete license information.
- *
  */
 
 import { Injectable } from '@angular/core';
@@ -14,12 +13,21 @@ import { CoreService } from '../../core/core.service';
 
 import { Contact } from '../../core/core-data-types';
 
-import { Project, Resource, Contract, Stage } from '../data-types/project';
+import {
+  Contract,
+  Project,
+  Resource,
+  Stage
+} from '../data-types';
 
-export enum ProjectServiceErr {
+
+enum ProjectServiceErr {
+
   GET_ACTIVITIES_ERR =
   '[GET_ACTIVITIES_ERR] No pude leer la lista de actividades del proyecto.',
+
 }
+
 
 @Injectable()
 export class ProjectService {

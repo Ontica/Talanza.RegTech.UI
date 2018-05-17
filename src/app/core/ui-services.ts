@@ -5,11 +5,7 @@
  * See LICENSE.txt in the project root for complete license information.
  */
 
-export class GanttTask {
-  id: number;
-  start_date: string;
-  text: string;
-  duration: number;
-  parent: number;
-  type: string;
-}
+
+export { MessageBoxService } from './messagebox/messageBox.service';
+
+export { SpinnerService, SpinnerState } from './spinner/spinner.service';

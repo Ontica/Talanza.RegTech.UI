@@ -1,8 +1,17 @@
+/**
+ * @license
+ * Copyright (c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
+ *
+ * See LICENSE.txt in the project root for complete license information.
+ */
+
 import { Component, EventEmitter, Input, Output,
         AfterViewInit, ChangeDetectionStrategy, OnInit, OnChanges} from '@angular/core';
 import { DataResolver } from '../../app.resolver';
 
+
 declare var dhtmlXCalendarObject: any;
+
 
 export interface CalendarSettings {
   hideWeekendDays?: boolean;
@@ -12,6 +21,7 @@ export interface CalendarSettings {
   showVacation?: boolean;
 }
 
+
 const defaults : CalendarSettings = {
   hideWeekendDays : false,
   showHolidays : true,
@@ -20,14 +30,16 @@ const defaults : CalendarSettings = {
   showVacation: false
 }
 
+
 @Component ({
   selector: 'calendar-control',
   templateUrl:'./calendar-control.html',
   styleUrls: ['./calendar-control.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-
 export class CalendarControl implements AfterViewInit, OnInit, OnChanges {
+
+  @Output() onSelectedDate = new EventEmitter<Date>();
 
   @Input()
   get date(): Date { return this._date };
@@ -41,12 +53,13 @@ export class CalendarControl implements AfterViewInit, OnInit, OnChanges {
   };
   private _date: Date;
 
+
   @Input()
   get config(): CalendarSettings { return this._config };
-  set config(value: CalendarSettings) { this._config = value };
+  set config(value: CalendarSettings) {
+    this._config = value
+  };
   private _config = defaults;
-
-  @Output() public onSelectedDate = new EventEmitter<Date>();
 
   formattedDate = '';
 
@@ -78,7 +91,7 @@ export class CalendarControl implements AfterViewInit, OnInit, OnChanges {
     this.attachEvents();
   }
 
-  public onblur(): void {
+  onblur() {
 
     if (this.formattedDate.length === 0) {
       this.onSelectedDate.emit(null);

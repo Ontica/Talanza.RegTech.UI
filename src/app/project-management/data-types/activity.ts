@@ -1,17 +1,23 @@
 /**
  * @license
- * Copyright (c) 2017-2018 La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
+ * Copyright (c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
  *
  * See LICENSE.txt in the project root for complete license information.
- *
  */
 
-import { Contact, Empty, Identifiable } from '../../core/core-data-types';
+import {
+  Contact,
+  Empty,
+  Identifiable
+} from '../../core/core-data-types';
+
 import { Project } from './project';
+
 
 export interface Parent extends Identifiable {
   type: string
 }
+
 
 export interface Activity extends Identifiable {
   type: string,
@@ -33,6 +39,7 @@ export interface Activity extends Identifiable {
 
   visible: string
 }
+
 
 export const Activity_Empty: Activity = {
   uid: '',

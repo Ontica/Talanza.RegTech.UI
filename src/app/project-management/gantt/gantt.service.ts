@@ -1,9 +1,8 @@
 /**
  * @license
- * Copyright (c) 2017-2018 La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
+ * Copyright (c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
  *
  * See LICENSE.txt in the project root for complete license information.
- *
  */
 
 import { Injectable } from '@angular/core';
@@ -26,9 +25,9 @@ enum Errors {
 @Injectable()
 export class GanttService {
 
-  public constructor(private core: CoreService) { }
+  constructor(private core: CoreService) { }
 
-  public getActivitiesTree(projectUID: string): Promise<GanttTask[]> {
+  getActivitiesTree(projectUID: string): Promise<GanttTask[]> {
     const path = `v1/project-management/projects/${projectUID}/as-gantt`;
 
     return this.core.http.get<GanttTask[]>(path)

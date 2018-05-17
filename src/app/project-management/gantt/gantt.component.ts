@@ -1,9 +1,8 @@
 /**
  * @license
- * Copyright (c) 2017-2018 La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
+ * Copyright (c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
  *
  * See LICENSE.txt in the project root for complete license information.
- *
  */
 
 import { Component, ElementRef, Input, OnChanges, ViewChild } from "@angular/core";
@@ -11,10 +10,14 @@ import { Component, ElementRef, Input, OnChanges, ViewChild } from "@angular/cor
 import "dhtmlx-gantt";
 import { } from "@types/dhtmlxgantt";
 
-import { Project } from '../data-types/project';
-import { ActivityFilter, ViewConfig } from '../data-types/activity-filter';
+import {
+  ActivityFilter,
+  Project,
+  ViewConfig
+} from '../data-types';
 
 import { GanttService } from './gantt.service';
+
 
 @Component({
   selector: "gantt",
@@ -22,13 +25,15 @@ import { GanttService } from './gantt.service';
   styleUrls: ['./gantt.component.scss'],
   providers: [GanttService]
 })
-
 export class GanttComponent implements OnChanges {
 
   @ViewChild("gantt_here") ganttContainer: ElementRef;
 
-  private _filter: ActivityFilter;
+  @Input() config: ViewConfig;
+
   @Input()
+  get filter(): ActivityFilter { return this._filter; }
+
   set filter(filter: ActivityFilter) {
     this._filter = filter;
 
@@ -36,18 +41,15 @@ export class GanttComponent implements OnChanges {
 
     this.refreshData();
   }
-  get filter(): ActivityFilter {
-    return this._filter;
-  }
+  private _filter: ActivityFilter;
 
-  @Input() public config: ViewConfig;
 
-  public isActivityAddEditorWindowVisible = false;
-  public isActivityEditorWindowVisible = false;
-  public isStartActivityEditorWindowVisible = false;
-  public parentId: number = -1;
-  public activityId: number = -1;
-  public projectUID: string = '';
+  isActivityAddEditorWindowVisible = false;
+  isActivityEditorWindowVisible = false;
+  isStartActivityEditorWindowVisible = false;
+  parentId = -1;
+  activityId = -1;
+  projectUID = '';
 
   constructor(private ganttService: GanttService) { }
 
@@ -62,13 +64,13 @@ export class GanttComponent implements OnChanges {
     this.refreshData();
   }
 
-  public onCloseActivityAddEditorWindow() {
+  onCloseActivityAddEditorWindow() {
     this.isActivityAddEditorWindowVisible = false;
     this.refreshData();
 
   }
 
-  public onCloseActivityEditorWindow(): void {
+  onCloseActivityEditorWindow() {
     this.isActivityEditorWindowVisible = false;
     this.refreshData();
   }
@@ -93,13 +95,12 @@ export class GanttComponent implements OnChanges {
       let modes = gantt.config.drag_mode;
       if (mode === modes.resize) {
         var modifiedTask = gantt.getTask(id);
-        //alert("movio la tarea" + id);
-        //alert("fecha de inicio: " + modifiedTask.start_date);
-        //alert("Fecha de termino: " + modifiedTask.end_date);
+        // ToDo: ??
       }
     });
 
   }
+
 
   private initConfig() {
     gantt.config.xml_date = "%Y-%m-%d %H:%i";
@@ -112,6 +113,16 @@ export class GanttComponent implements OnChanges {
 
     this.setScaleUnit();
   }
+
+
+  private refreshData() {
+    this.ganttService.getActivitiesTree(this.projectUID)
+                      .then( data => {
+                        gantt.clearAll();
+                        gantt.parse({ data });
+                      });
+  }
+
 
   private setScaleUnit() {
     switch (this.config.timeScaleUnit) {
@@ -128,14 +139,6 @@ export class GanttComponent implements OnChanges {
         gantt.config.scale_unit = 'month';
         return;
     }
-  }
-
-  private refreshData() {
-    this.ganttService.getActivitiesTree(this.projectUID)
-      .then((data) => {
-        gantt.clearAll();
-        gantt.parse({ data });
-      });
   }
 
 }

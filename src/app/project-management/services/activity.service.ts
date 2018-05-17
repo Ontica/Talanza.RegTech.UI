@@ -1,20 +1,24 @@
 /**
  * @license
- * Copyright (c) 2017-2018 La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
+ * Copyright (c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
  *
  * See LICENSE.txt in the project root for complete license information.
- *
  */
 
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
+import { Assertion } from 'empiria';
+
 import { CoreService } from '../../core/core.service';
 
-import { CloseActivityCommand, UpdateActivityCommand } from '../data-types/commands';
-import { ActivityFilter } from '../data-types/activity-filter';
-import { Activity } from '../data-types/activity';
-import { Assertion } from 'empiria';
+import {
+  Activity,
+  ActivityFilter,
+  CloseActivityCommand,
+  UpdateActivityCommand
+} from '../data-types';
+
 
 enum Errors {
 
@@ -39,13 +43,14 @@ enum Errors {
   '[GET_ACTIVITIES_AS_WORKLIST_ERR] Ocurrió un problema al leer la lista de actividades como lista de trabajo.',
 }
 
+
 @Injectable()
 export class ActivityService {
 
-  public constructor(private core: CoreService) { }
+  constructor(private core: CoreService) { }
 
-  public searchActivities(projectUID: string, filter: object,
-                          orderBy: string, keywords: string): Observable<Activity[]> {
+  searchActivities(projectUID: string, filter: object,
+                   orderBy: string, keywords: string): Observable<Activity[]> {
 
     const path = `v1/project-management/projects/${projectUID}/activities?filter=${filter}
                                                                           &orderBy=${orderBy}
@@ -56,7 +61,7 @@ export class ActivityService {
   }
 
 
-  public getActivities(projectUID: string): Promise<Activity[]> {
+  getActivities(projectUID: string): Promise<Activity[]> {
     const path = `v1/project-management/projects/${projectUID}/as-tree`;
 
     return this.core.http.get<Activity[]>(path)
@@ -67,8 +72,7 @@ export class ActivityService {
   }
 
 
-
-  public updateActivity(activity: Activity): Observable<Activity> {
+  updateActivity(activity: Activity): Observable<Activity> {
     const path = `v1/project-management/projects/${activity.project.uid}/activities/${activity.uid}`;
 
     const updateCommand = this.buildUpdateCommand(activity);
@@ -78,8 +82,8 @@ export class ActivityService {
   }
 
 
-  public closeActivity(projectUID: string,
-                       activityUID: string, closeTask: CloseActivityCommand): Observable<Activity> {
+  closeActivity(projectUID: string,
+                activityUID: string, closeTask: CloseActivityCommand): Observable<Activity> {
     const path = `v1/project-management/projects/${projectUID}/activities/${activityUID}/close`;
 
     return this.core.http.post<Activity>(path, closeTask)

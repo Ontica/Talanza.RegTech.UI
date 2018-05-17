@@ -1,40 +1,47 @@
+/**
+ * @license
+ * Copyright (c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
+ *
+ * See LICENSE.txt in the project root for complete license information.
+ */
+
 import { Component, EventEmitter, HostBinding, Input, Output } from '@angular/core';
 
-import { Project } from '../data-types/project';
-import { Activity_Empty } from '../data-types/activity';
+import { Activity_Empty, Project } from '../data-types';
+
 
 @Component({
-	selector: 'create-activity-menu',
-	templateUrl: './create-activity-menu.component.html',
-	styleUrls: ['./create-activity-menu.component.scss']
+  selector: 'create-activity-menu',
+  templateUrl: './create-activity-menu.component.html',
+  styleUrls: ['./create-activity-menu.component.scss']
 })
-
 export class CreateActivityMenuComponent {
-	@HostBinding('style.display') public display = 'block';
-	@HostBinding('style.position') public position = 'absolute';
 
-	@Output() public onCloseEvent = new EventEmitter();
+  @HostBinding('style.display')  display  = 'block';
+  @HostBinding('style.position') position = 'absolute';
 
-	@Input() public project: Project;
+  @Output() onCloseEvent = new EventEmitter();
 
-	public selectedOperation = '';
-	public task = Activity_Empty;
+  @Input() project: Project;
 
-	public onClose(): void {
-		this.onCloseEvent.emit();
-	}
+  selectedOperation = '';
+  task = Activity_Empty;
 
-	public onClickCancel(): void {
-		this.onClose();
-	}
+  onClose() {
+    this.onCloseEvent.emit();
+  }
 
-	public addManualTask(): void {
-		this.task.project = this.project;
-		this.selectedOperation = 'addManual';
-	}
+  onClickCancel() {
+    this.onClose();
+  }
 
-	public addEvent(): void {
-		this.selectedOperation = 'addEvent';
-	}
+  addEvent() {
+    this.selectedOperation = 'addEvent';
+  }
+
+  addManualTask() {
+    this.task.project = this.project;
+    this.selectedOperation = 'addManual';
+  }
 
 }

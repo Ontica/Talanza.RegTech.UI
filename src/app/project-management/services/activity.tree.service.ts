@@ -1,18 +1,19 @@
 /**
  * @license
- * Copyright (c) 2017-2018 La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
+ * Copyright (c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
  *
  * See LICENSE.txt in the project root for complete license information.
- *
  */
 
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
 import { Assertion } from 'empiria';
+
 import { CoreService } from '../../core/core.service';
 
-import { Activity } from '../data-types/activity';
+import { Activity } from '../data-types';
+
 
 enum Errors {
 
@@ -36,21 +37,23 @@ enum Errors {
 
 }
 
+
 @Injectable()
 export class ActivityTreeService {
 
-  public constructor(private core: CoreService) { }
+  constructor(private core: CoreService) { }
 
-  public getActivitiesTree(projectUID: string): Observable<Activity[]> {
+  getActivitiesTree(projectUID: string): Observable<Activity[]> {
     const path = `v1/project-management/projects/${projectUID}/as-tree`;
 
     return this.core.http.get<Activity[]>(path)
-                        .catch((e) => this.core.http.showAndReturn(e, Errors.GET_ACTIVITIES_TREE, null));
+                         .catch((e) => this.core.http.showAndReturn(e, Errors.GET_ACTIVITIES_TREE, null));
   }
 
 
-  public insertActivity(projectUID: string,
-                        newActivity: { name: string, position: number }): Promise<Activity> {
+  insertActivity(projectUID: string,
+                 newActivity: { name: string, position: number }): Promise<Activity> {
+
     Assertion.assertValue(projectUID, "projectUID");
     Assertion.assertValue(newActivity, "activity");
     Assertion.assertValue(newActivity.name, "activity.name");
@@ -64,8 +67,8 @@ export class ActivityTreeService {
   }
 
 
-  public insertAsChild(projectUID: string,
-                       newActivity: { name: string, parent: Activity }): Promise<Activity> {
+  insertAsChild(projectUID: string,
+                newActivity: { name: string, parent: Activity }): Promise<Activity> {
 
     Assertion.assertValue(projectUID, "projectUID");
     Assertion.assertValue(newActivity, "activity");
@@ -85,7 +88,7 @@ export class ActivityTreeService {
   }
 
 
-  public changeParent(activity: Activity, newParent: Activity): Promise<Activity> {
+  changeParent(activity: Activity, newParent: Activity): Promise<Activity> {
     Assertion.assertValue(activity, "activity");
     Assertion.assertValue(newParent, "newParent");
 
@@ -100,7 +103,7 @@ export class ActivityTreeService {
   }
 
 
-  public moveActivity(activity: Activity, newPosition: number): Promise<Activity> {
+  moveActivity(activity: Activity, newPosition: number): Promise<Activity> {
     Assertion.assertValue(activity, "activity");
     Assertion.assert(newPosition > 0, "newPosition must be greater than zero.");
 
@@ -115,7 +118,7 @@ export class ActivityTreeService {
   }
 
 
-  public deleteActivity(projectUID: string, activity: Activity): Promise<void> {
+  deleteActivity(projectUID: string, activity: Activity): Promise<void> {
     Assertion.assertValue(activity, "activity");
 
     const path = `v1/project-management/projects/${projectUID}/activities/${activity.uid}`;

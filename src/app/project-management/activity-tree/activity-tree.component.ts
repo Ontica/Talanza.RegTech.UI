@@ -1,26 +1,27 @@
 /**
  * @license
- * Copyright (c) 2017-2018 La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
+ * Copyright (c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
  *
  * See LICENSE.txt in the project root for complete license information.
- *
  */
 
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 import { Assertion } from 'empiria';
 
-import { Activity, Activity_Empty } from '../data-types/activity';
-import { ActivityFilter } from '../data-types/activity-filter';
+import { ActivityService, ActivityTreeService } from '../services';
 
-import { ActivityTreeService } from '../services/activity.tree.service';
-import { ActivityService } from '../services/activity.service';
+import {
+  Activity,
+  Activity_Empty,
+  ActivityFilter
+} from '../data-types';
+
 
 @Component({
   selector: 'activity-tree',
   templateUrl: './activity-tree.component.html',
   styleUrls: ['./activity-tree.component.scss'],
-  providers: [ActivityTreeService, ActivityService]
 })
 export class ActivityTreeComponent {
 
@@ -63,7 +64,7 @@ export class ActivityTreeComponent {
   }
 
 
-  deleteActivity(activity: Activity): void {
+  deleteActivity(activity: Activity) {
     if (!activity) {
       return;
     }
@@ -116,7 +117,7 @@ export class ActivityTreeComponent {
   }
 
 
-  selectActivity(activity: Activity, emitEvent: boolean = false): void {
+  selectActivity(activity: Activity, emitEvent: boolean = false) {
     this.selectedActivity = activity;
 
     if (emitEvent) {
@@ -125,7 +126,7 @@ export class ActivityTreeComponent {
   }
 
 
-  showInitialActivityInlineEditor(): void {
+  showInitialActivityInlineEditor() {
     this.hideInlineEditors();
 
     if (this.hasSelectedActivities) {
@@ -137,7 +138,7 @@ export class ActivityTreeComponent {
 
   // Drag & drop methods
 
-  allowDrop(event: DragEvent, dragZoneItem: any): void {
+  allowDrop(event: DragEvent, dragZoneItem: any) {
     this.configureDragEventBehaviour(event);
 
     this.setDragZoneItem(dragZoneItem);
@@ -149,7 +150,7 @@ export class ActivityTreeComponent {
   }
 
 
-  startDrag(event: DragEvent, activity: Activity): void {
+  startDrag(event: DragEvent, activity: Activity) {
     this.hideInlineEditors();
 
     this.selectActivity(activity);
@@ -162,7 +163,7 @@ export class ActivityTreeComponent {
   }
 
 
-  moveActivity(event: DragEvent, newPosition: number): void {
+  moveActivity(event: DragEvent, newPosition: number) {
     let activity = this.getDraggedActivity(event);
 
     this.configureDragEventBehaviour(event);
@@ -173,7 +174,7 @@ export class ActivityTreeComponent {
                             .catch( response => console.log(response.error.message) );
   }
 
-  moveActivityAsChildOf(event: DragEvent, newParent: Activity): void {
+  moveActivityAsChildOf(event: DragEvent, newParent: Activity) {
     let activity = this.getDraggedActivity(event);
 
     this.configureDragEventBehaviour(event);

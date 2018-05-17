@@ -1,56 +1,57 @@
 /**
  * @license
- * Copyright (c) 2017 La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
+ * Copyright (c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
  *
  * See LICENSE.txt in the project root for complete license information.
- *
  */
 
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 import { Empty, Contact } from '../../core/core-data-types';
 
-import { Project } from '../../project-management/data-types/project';
+import { Project } from '../../project-management/data-types';
+
 import { InboxFilter } from '../data-types/inbox-filter';
 
-import { ProjectService } from '../../project-management/services/project.service';
-import { ActivityService } from '../../project-management/services/activity.service';
+import { ActivityService, ProjectService } from '../../project-management/services';
 
 
 @Component({
   selector: 'inbox-filter',
   templateUrl: './inbox-filter.component.html',
-  styleUrls: ['./inbox-filter.component.scss'],
-  providers: [ProjectService, ActivityService]
+  styleUrls: ['./inbox-filter.component.scss']
 })
-
 export class InboxFilterComponent implements OnInit {
 
-  public isAddActivityEditorWindowVisible = false;
-
-  public projectsList: Project[] = [];
-  public selectedProject: Project = Empty;
-  
-  public labelsList: any;
-  public responsiblesList: Contact[] = [];
- 
-  public keywords = '';
-
-  public filter: InboxFilter = new InboxFilter();
- 
   @Output() onChangeFilter = new EventEmitter<InboxFilter>();
- 
-  public constructor(private projectService: ProjectService, private activityService: ActivityService) { }
 
-  public ngOnInit() {    
+
+  isAddActivityEditorWindowVisible = false;
+
+  projectsList: Project[] = [];
+  selectedProject: Project = Empty;
+
+  labelsList: any;
+  responsiblesList: Contact[] = [];
+
+  keywords = '';
+
+  filter: InboxFilter = new InboxFilter();
+
+
+  constructor(private projectService: ProjectService,
+              private activityService: ActivityService) { }
+
+
+  ngOnInit() {
     this.loadProjectList();
     this.loadTags();
   }
 
-  public onChangeProjectList(projectUID: string): void {
+  onChangeProjectList(projectUID: string) {
     if (projectUID === '') {
       this.selectedProject = Empty;
-     
+
       this.labelsList = [];
 
       return;
@@ -62,72 +63,58 @@ export class InboxFilterComponent implements OnInit {
     this.changeFilter();
   }
 
-  public onChangeSelectedTags(tags: any[]) {
+  onChangeSelectedTags(tags: any[]) {
     this.filter.tags = tags.map(x => x.name);
-    this.changeFilter();   
+    this.changeFilter();
   }
 
-  public changeFilter(): void {
+  changeFilter() {
 
     this.filter = this.filter.clone();
 
     this.onChangeFilter.emit(this.filter);
   }
 
-  public onClickAdd(): void {
-    alert('Esta tarea se encuentra en desarrollo ' + '\n\n' + 'Lamentamos las molestias ');   
+  onClickAdd() {
+    alert('Esta tarea se encuentra en desarrollo ' + '\n\n' + 'Lamentamos las molestias ');
   }
 
-  public onSearch(): void {     
+  onSearch() {
     this.filter.keywords = this.keywords;
     this.changeFilter();
   }
 
-  public cleanFilter(): void {
+  cleanFilter() {
     this.filter.clean();
     this.loadTags();
   }
 
-  private loadProjectList(): void {
+  private loadProjectList() {
     const errMsg = 'Ocurrió un problema al intentar leer la lista de proyectos.';
 
     this.projectService.getProjectList()
       .toPromise()
       .then((x) => this.projectsList = x)
-      .catch((e) => this.exceptionHandler(e, errMsg));
   }
 
-  private loadResponsiblesList(): void {
+  private loadResponsiblesList() {
     const errMsg = 'Ocurrió un problema al intentar leer la lista de responsables.';
 
     this.projectService.getResponsiblesList(this.selectedProject.uid)
       .toPromise()
       .then((x) => this.responsiblesList = x)
-      .catch((e) => this.exceptionHandler(e, errMsg));
   }
 
-  private loadCombos(): void {
+  private loadCombos() {
     this.loadResponsiblesList();
   }
 
-  private loadTags(): void {
+  private loadTags() {
     const errMsg = 'Ocurrió un problema al intentar leer la lista de etiquetas.';
 
-    this.activityService.getTags()
+    this.projectService.getTags()
       .toPromise()
       .then((x) => this.labelsList = x)
-      .catch((e) => this.exceptionHandler(e, errMsg));
-  }
-
-  private exceptionHandler(error: any, defaultMsg: string): void {
-    let errMsg = 'Tengo un problema.\n\n';
-
-    if (typeof (error) === typeof (Error)) {
-      errMsg += defaultMsg + '\n\n' + (<Error>error).message;
-    } else {
-      errMsg += defaultMsg + '\n\n' + 'Error desconocido.';
-    }
-    alert(errMsg);
   }
 
 }

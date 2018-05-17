@@ -5,11 +5,10 @@
  * See LICENSE.txt in the project root for complete license information.
  */
 
-export class GanttTask {
-  id: number;
-  start_date: string;
-  text: string;
-  duration: number;
-  parent: number;
-  type: string;
-}
+export * from './activity.service';
+
+export * from './activity.tree.service';
+
+export * from './process-models.service';
+
+export * from './project.service';

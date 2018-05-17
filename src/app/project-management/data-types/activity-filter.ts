@@ -1,47 +1,40 @@
 /**
  * @license
- * Copyright (c) 2017-2018 La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
+ * Copyright (c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
  *
  * See LICENSE.txt in the project root for complete license information.
- *
  */
 
-import { Contact, Empty, isEmpty } from '../../core/core-data-types';
+import {
+  Contact,
+  Empty,
+  isEmpty
+} from '../../core/core-data-types';
 
-import { Contract, Project, Stage } from '../data-types/project';
-
-
-export class ViewConfig {
-  viewType: string;
-  ganttConfig: string;
-  timeScaleUnit: string;
-}
-
-
-export function DefaultViewConfig(): ViewConfig {
-  return {
-    viewType: 'activity-tree',
-    ganttConfig: 'ganttWeeks',
-    timeScaleUnit: 'quarters',
-  };
-}
+import {
+  Contract,
+  Project,
+  Stage
+} from '../data-types/project';
 
 
 export class ActivityFilter {
 
-  public contract: Contract;
-  public project: Project;
-  public stage: Stage;
-  public tags: string[];
-  public responsible: Contact;
-  public keywords: string;
-  public orderBy: string;
+  contract: Contract;
+  project: Project;
+  stage: Stage;
+  tags: string[];
+  responsible: Contact;
+  keywords: string;
+  orderBy: string;
+
 
   constructor() {
     this.clean();
   }
 
-  public clean(): void {
+
+  clean() {
     this.contract = Empty;
     this.project = Empty;
     this.stage = Empty;
@@ -51,7 +44,8 @@ export class ActivityFilter {
     this.orderBy = '';
   }
 
-  public clone(): ActivityFilter {
+
+  clone(): ActivityFilter {
     let clone = new ActivityFilter();
 
     clone.contract = this.contract;
@@ -65,7 +59,8 @@ export class ActivityFilter {
     return clone;
   }
 
-  public toString(): string {
+
+  toString(): string {
     let filter = '';
 
     if (!isEmpty(this.contract)) {
@@ -94,6 +89,9 @@ export class ActivityFilter {
     return filter;
   }
 
+
+  // private methods
+
   private addFilterConnector(filter: string): string {
     if (filter !== '') {
       filter += '&';
@@ -102,3 +100,19 @@ export class ActivityFilter {
   }
 
 } // class ActivityFilter
+
+
+export function DefaultViewConfig(): ViewConfig {
+  return {
+    viewType: 'activity-tree',
+    ganttConfig: 'ganttWeeks',
+    timeScaleUnit: 'quarters',
+  };
+}
+
+
+export class ViewConfig {
+  viewType: string;
+  ganttConfig: string;
+  timeScaleUnit: string;
+}

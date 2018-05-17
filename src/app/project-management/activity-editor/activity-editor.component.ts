@@ -1,29 +1,30 @@
 /**
-* @license
-* Copyright (c) 2017-2018 La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
-*
-* See LICENSE.txt in the project root for complete license information.
-*
-*/
+ * @license
+ * Copyright (c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
+ *
+ * See LICENSE.txt in the project root for complete license information.
+ */
 
 import { Component, EventEmitter, HostBinding, Input, Output } from '@angular/core';
 
 import { Assertion } from 'empiria';
-
 import { Contact, ColoredTag } from '../../core/core-data-types';
 
-import { Activity } from '../data-types/activity';
+import { MessageBoxService, SpinnerService } from '../../core/ui-services';
 
-import { ActivityService } from '../services/activity.service';
-import { ProjectService } from '../services/project.service';
+import { Activity } from '../data-types';
+
+import {
+  ActivityService,
+  ProjectService
+} from '../services';
+
 
 @Component({
   selector: 'activity-editor',
   templateUrl: './activity-editor.component.html',
-  styleUrls: ['./activity-editor.component.scss'],
-  providers: [ActivityService, ProjectService]
+  styleUrls: ['./activity-editor.component.scss']
 })
-
 export class ActivityEditorComponent {
 
   @Output() close = new EventEmitter();
@@ -42,7 +43,9 @@ export class ActivityEditorComponent {
   tags: ColoredTag[] = [];
   selectedTags: ColoredTag[] = [];
 
-  constructor(private activityService: ActivityService,
+  constructor(private spinner: SpinnerService,
+              private messageBox: MessageBoxService,
+              private activityService: ActivityService,
               private projectService: ProjectService) { }
 
 
@@ -84,13 +87,13 @@ export class ActivityEditorComponent {
   }
 
 
-  private loadResponsibles(): void {
+  private loadResponsibles() {
     this.projectService.getResponsiblesList(this.activity.project.uid)
                        .subscribe( x => this.responsibles = x );
   }
 
 
-  private loadSelectedTags(): void {
+  private loadSelectedTags() {
     this.activity.tags.forEach( x => this.selectTag(x) );
 
     this.selectedTags = this.tags.filter(x => x.selected === true);
@@ -106,13 +109,13 @@ export class ActivityEditorComponent {
   }
 
 
-  private setSelectedTags(): void {
+  private setSelectedTags() {
     this.activity.tags = this.selectedTags.filter( x => x.selected === true )
                                           .map( x => x.name );
   }
 
 
-  private selectTag(tag: string): void {
+  private selectTag(tag: string) {
     const index = this.tags.findIndex( x => x.name === tag );
 
     if (index !== -1) {
@@ -122,11 +125,17 @@ export class ActivityEditorComponent {
 
 
   private updateActivity() {
+    this.spinner.show();
+
     this.activityService.updateActivity(this.activity)
-                        .subscribe( x => {
-                          this.activity = x;
-                          this.update.emit(x);
-                        });
+                        .subscribe(
+                          x => {
+                            this.activity = x;
+                            this.update.emit(x);
+                          },
+                          err => this.messageBox.show(err, 'Error'),
+                          () => this.spinner.hide()
+                        );
   }
 
 
@@ -139,7 +148,8 @@ export class ActivityEditorComponent {
     }
 
     if (targetDate > dueDate) {
-      alert(`La fecha objetivo de la actividad no puede ser posterior a la fecha máxima de entrega.`);
+      this.messageBox.show("La fecha objetivo de la actividad no puede ser posterior a la fecha máxima de entrega.",
+                           "Validación");
       return false;
     }
 

@@ -1,51 +1,53 @@
 /**
  * @license
- * Copyright (c) 2017-2018 La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
+ * Copyright (c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
  *
  * See LICENSE.txt in the project root for complete license information.
- *
  */
 
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 import { Empty, Contact } from '../../core/core-data-types';
 
-import { Contract, Project, Resource, Stage } from '../data-types/project';
-import { ActivityFilter, ViewConfig, DefaultViewConfig } from '../data-types/activity-filter';
+import { ActivityService, ProjectService } from '../services';
 
-import { ProjectService } from '../services/project.service';
-import { ActivityService } from '../services/activity.service';
+import { ActivityFilter,
+         Contract,
+         DefaultViewConfig,
+         Project,
+         Resource,
+         Stage,
+         ViewConfig
+} from '../data-types';
 
 
 @Component({
   selector: 'projects-filter',
   templateUrl: './projects-filter.component.html',
-  styleUrls: ['./projects-filter.component.scss'],
-  providers: [ProjectService, ActivityService]
+  styleUrls: ['./projects-filter.component.scss']
 })
-
 export class ProjectsFilterComponent implements OnInit {
 
-  public projectsList: Project[] = [];
-  public responsiblesList: Contact[] = [];
-  public labelsList: any;
-  public keywords = '';
-
-  public contracts: Contract[] = [];
-  public stages: Stage[] = [];
-
-  public selectedProject: Project = Empty;
-
-  public filter: ActivityFilter = new ActivityFilter();
-  public viewConfig: ViewConfig = DefaultViewConfig();
-
   @Output() onChangeFilter = new EventEmitter<ActivityFilter>();
-  @Output() onChangeView = new EventEmitter<ViewConfig>();
+  @Output() onChangeView   = new EventEmitter<ViewConfig>();
 
-  public constructor(private projectService: ProjectService,
-                     private activityService: ActivityService) { }
+  projectsList: Project[] = [];
+  responsiblesList: Contact[] = [];
+  labelsList: any;
+  keywords = '';
 
-  public ngOnInit() {
+  contracts: Contract[] = [];
+  stages: Stage[] = [];
+
+  selectedProject: Project = Empty;
+
+  filter: ActivityFilter = new ActivityFilter();
+  viewConfig: ViewConfig = DefaultViewConfig();
+
+  constructor(private projectService: ProjectService,
+              private activityService: ActivityService) { }
+
+  ngOnInit() {
     this.loadContracts();
     this.loadProjectList();
     this.loadStages();
@@ -54,7 +56,7 @@ export class ProjectsFilterComponent implements OnInit {
   }
 
 
-  public onChangeProjectList(projectUID: string): void {
+  onChangeProjectList(projectUID: string) {
     if (projectUID === '') {
       this.selectedProject = Empty;
 
@@ -73,14 +75,14 @@ export class ProjectsFilterComponent implements OnInit {
   }
 
 
-  public onChangeSelectedTags(tags: any[]) {
+  onChangeSelectedTags(tags: any[]) {
     this.filter.tags = tags.map(x => x.name);
 
     this.changeFilter();
   }
 
 
-  public onChangeContract(contractUID: string): void {
+  onChangeContract(contractUID: string) {
     if (contractUID === '') {
       return;
     }
@@ -91,7 +93,7 @@ export class ProjectsFilterComponent implements OnInit {
   }
 
 
-  public onChangeStage(stageUID: string): void {
+  onChangeStage(stageUID: string) {
     if (stageUID === '') {
       return;
     }
@@ -103,7 +105,8 @@ export class ProjectsFilterComponent implements OnInit {
     this.changeFilter();
   }
 
-  public onChangeResponsible(responsibleUID: string): void {
+
+  onChangeResponsible(responsibleUID: string) {
     if (responsibleUID === '') {
       return;
     }
@@ -116,94 +119,79 @@ export class ProjectsFilterComponent implements OnInit {
   }
 
 
-  public changeFilter(): void {
+  changeFilter() {
     this.filter = this.filter.clone();
 
     this.onChangeFilter.emit(this.filter);
   }
 
 
-  public changeView(): void {
+  changeView() {
     this.onChangeView.emit(this.viewConfig);
   }
 
 
-  public onSearch(): void {
+  onSearch() {
     this.filter.keywords = this.keywords;
     this.changeFilter();
   }
 
 
-  public cleanFilter(): void {
+  cleanFilter() {
     this.filter.clean();
 
     this.loadTags();
   }
 
+  // private methods
 
-  private loadProjectList(): void {
+  private loadProjectList() {
     const errMsg = 'Ocurrió un problema al intentar leer la lista de proyectos.';
 
     this.projectService.getProjectList()
       .toPromise()
-      .then((x) => this.projectsList = x)
-      .catch((e) => this.exceptionHandler(e, errMsg));
+      .then( x  => this.projectsList = x)
   }
 
 
-  private loadContracts(): void {
+  private loadContracts() {
     const errMsg = 'Ocurrió un problema al intentar leer la lista de contratos.';
 
     this.projectService.getContracts()
       .toPromise()
-      .then((x) => this.contracts = x)
-      .catch((e) => this.exceptionHandler(e, errMsg));
+      .then( x => this.contracts = x )
   }
 
-  private loadStages(): void {
+
+  private loadStages() {
     const errMsg = 'Ocurrió un problema al intentar leer la lista de etapas.';
 
     this.projectService.getStages()
       .toPromise()
-      .then((x) => this.stages = x)
-      .catch((e) => this.exceptionHandler(e, errMsg));
+      .then( x => this.stages = x )
   }
 
 
-  private loadResponsiblesList(): void {
+  private loadResponsiblesList() {
     const errMsg = 'Ocurrió un problema al intentar leer la lista de responsables.';
 
     this.projectService.getResponsiblesList(this.selectedProject.uid)
       .toPromise()
-      .then((x) => this.responsiblesList = x)
-      .catch((e) => this.exceptionHandler(e, errMsg));
+      .then( x => this.responsiblesList = x )
   }
 
 
-  private loadCombos(): void {
+  private loadCombos() {
     this.loadResponsiblesList();
   }
 
 
-  private loadTags(): void {
+  private loadTags() {
     const errMsg = 'Ocurrió un problema al intentar leer la lista de etiquetas.';
 
     this.projectService.getTags()
         .toPromise()
-        .then((x) => this.labelsList = x)
-        .catch((e) => this.exceptionHandler(e, errMsg));
-  }
-
-
-  private exceptionHandler(error: any, defaultMsg: string): void {
-    let errMsg = 'Tengo un problema.\n\n';
-
-    if (typeof(error) === typeof(Error)) {
-      errMsg += defaultMsg + '\n\n' + (<Error>error).message;
-    } else {
-      errMsg += defaultMsg + '\n\n' + 'Error desconocido.';
-    }
-    alert(errMsg);
+        .then( x => this.labelsList = x )
   }
 
 }
