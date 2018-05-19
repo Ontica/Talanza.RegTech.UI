@@ -1,9 +1,8 @@
 /**
  * @license
- * Copyright (c) 2017 La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
+ * Copyright (c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
  *
  * See LICENSE.txt in the project root for complete license information.
- *
  */
 
 import { Injectable } from '@angular/core';
@@ -20,6 +19,7 @@ import { DirectoryService } from './directory.service';
 import { HttpHandler } from './http-handler';
 
 import { HttpClientOptions, HttpMethod } from './common-types';
+import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
 
 @Injectable()
 export class HttpService {
@@ -37,6 +37,7 @@ export class HttpService {
                          });
   }
 
+
   public post<T>(path: string, body: any, options?: HttpClientOptions): Observable<T> {
     Assertion.assertValue(path, 'path');
 
@@ -52,6 +53,15 @@ export class HttpService {
     return this.directory.getService(path, HttpMethod.PUT)
                          .mergeMap((service) => {
                             return this.httpHandler.put<T>(path, body, options, service);
+                         });
+  }
+
+  public patch<T>(path: string, body: any, options?: HttpClientOptions): Observable<T> {
+    Assertion.assertValue(path, 'path');
+
+    return this.directory.getService(path, HttpMethod.PATCH)
+                         .mergeMap((service) => {
+                            return this.httpHandler.patch<T>(path, body, options, service);
                          });
   }
 
@@ -72,7 +82,7 @@ export class HttpService {
     return Observable.of<T>(returnValue);
   }
 
-  public showAndThrow(error: any, defaultMessage?: string) {
+  public showAndThrow(error: any, defaultMessage?: string) : ErrorObservable {
     const exception = Exception.convertTo(error, defaultMessage);
 
     exception.show();
