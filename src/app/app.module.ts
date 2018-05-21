@@ -51,6 +51,7 @@ const EXCEPTION_HANDLER_PROVIDER =  { provide: ErrorHandler, useClass: Exception
 // Temporarily main SCSS file injection
 import '../styles/styles.scss';
 
+
 // Application wide providers
 const APP_PROVIDERS = [
   ...APP_RESOLVER_PROVIDERS,
@@ -58,43 +59,38 @@ const APP_PROVIDERS = [
   EXCEPTION_HANDLER_PROVIDER
 ];
 
+
 type StoreType = {
   state: InternalStateType,
   restoreInputValues: () => void,
   disposeOldHosts: () => void
 };
 
-/**
- * `AppModule` is the main entry point into Angular2's bootstraping process
- */
+
 @NgModule({
   bootstrap: [ AppComponent ],
   declarations: [ AppComponent ],
-  /**
-   * Import Angular's modules.
-   */
+
   imports: [
-    AppRoutingModule,
-    BrowserModule,
+    CoreModule,
+    SecurityUIModule,
+    DashboardModule,
+    ObligationsModule,
     ContractsModule,
     ControlsModule,
-    CoreModule,
-    DashboardModule,
     DocumentsModule,
-    FormsModule,
-    GlobalSearchModule,
-    InboxModule,
-    ObligationsModule,
     ProcessModule,
     ProjectManagementModule,
-    ReactiveFormsModule,
-    SecurityUIModule,
+    InboxModule,
     ServiceDeskModule,
-    SharedModule
+    SharedModule,
+    GlobalSearchModule,
+    BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
+    AppRoutingModule
   ],
-  /**
-   * Expose our Services and Providers into Angular's dependency injection.
-   */
+
   providers: [
     environment.ENV_PROVIDERS,
     APP_PROVIDERS
