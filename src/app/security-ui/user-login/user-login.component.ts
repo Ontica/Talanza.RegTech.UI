@@ -6,10 +6,15 @@
  *
  */
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+
 import { Router } from '@angular/router';
 
 import { AuthenticationService } from '../../core';
+import { SpinnerService } from '../../core/ui-services';
+
 
 @Component({
   selector: 'user-login',
@@ -18,56 +23,88 @@ import { AuthenticationService } from '../../core';
 })
 export class UserLoginComponent implements OnInit {
 
-  public userID = '';
-  public password = '';
+  form = new FormGroup({
+    userID: new FormControl('', Validators.required),
+    password: new FormControl('', Validators.required)
+  });
 
-  constructor(private router: Router,
-    private authenticationService: AuthenticationService) { }
+  processing = false;
+  submitted = false;
+  exceptionMsg = '';
 
-  public async authenticate() {
+  constructor(
+    private authenticationService: AuthenticationService,
+    private router: Router,
+    private spinnerService: SpinnerService
+  ) {}
 
-    if (!this.validateForm()) {
+
+  get userID() {
+    return this.form.get('userID');
+  }
+
+
+  get password() {
+    return this.form.get('password');
+  }
+
+
+  get showExceptionMsg() {
+    return this.submitted &&
+           (this.form.invalid || this.exceptionMsg.length !== 0);
+  }
+
+
+  ngOnInit() {
+    this.authenticationService.logout()
+                              .then( (x: Boolean) => this.reloadPage(x) );
+  }
+
+
+  onSubmit() {
+    if (this.processing) {
       return;
     }
 
-    try {
-      await this.authenticationService.login(this.userID, this.password);
+    this.startProcessing(true);
 
-      this.router.navigate(['/projects/search']);
+    if (!this.form.valid) {
+      this.exceptionMsg = `Para ingresar requiero se proporcione
+                           el nombre de usuario y la contraseña.`;
 
-    } catch (exception) {
-      alert(exception);
+      this.startProcessing(false);
+      return;
     }
 
+    this.authenticationService.login(this.form.value.userID, this.form.value.password)
+                              .then( () => this.router.navigate(['/projects/search']) )
+                              .catch( x => {
+                                this.exceptionMsg = x;
+                                this.startProcessing(false);
+                              });
   }
 
-  public async ngOnInit() {
-    await this.authenticationService.logout()
-                                    .then((x) => this.reloadPage(x));
-  }
 
-  public onClickResetCredentials() {
-    throw new Error('User reset credentials functionality no already defined...');
-  }
+  // private methods
 
-  // region Private methods
-
-  private reloadPage(mustReload): void {
+  private reloadPage(mustReload) {
     if (mustReload) {
       window.location.reload();
     }
   }
 
-  private validateForm(): boolean {
-    if (this.userID.length === 0) {
-      alert('Requiero el nombre del usuario.');
-      return false;
+
+  private startProcessing(flag: boolean) {
+    if (flag) {
+      this.spinnerService.show();
+      this.exceptionMsg = '';
+      this.submitted = true;
+      this.processing = true;
+    } else {
+      this.spinnerService.hide();
+      this.processing = false;
+      this.form.markAsUntouched();
     }
-    if (this.password.length === 0) {
-      alert('Para ingresar al sistema requiero la contraseña.');
-      return false;
-    }
-    return true;
   }
 
 }

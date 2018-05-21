@@ -1,24 +1,34 @@
 /**
  * @license
- * Copyright (c) 2017 La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
+ * Copyright (c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
  *
  * See LICENSE.txt in the project root for complete license information.
- *
  */
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
 
-import { UserLoginComponent } from './user-login/user-login.component';
+import { CoreModule } from '../core/core.module';
 import { SecurityUIRoutingModule } from './security-ui-routing.module';
+import { UserLoginComponent } from './user-login/user-login.component';
+
 
 /**
  * Do not specify providers for modules that might be imported by a lazy loaded module.
  */
-
 @NgModule({
-  imports: [SecurityUIRoutingModule, CommonModule],
+
+  imports: [
+    CommonModule,
+    CoreModule,
+    ReactiveFormsModule,
+    SecurityUIRoutingModule
+  ],
+
   declarations: [UserLoginComponent],
+
   exports: [UserLoginComponent]
+
 })
 export class SecurityUIModule { }

@@ -66,10 +66,9 @@ export class AuthenticationService {
 
   private handleAuthenticationError(error): Promise<never> {
     if (error.status === 401) {
-      return Promise.reject(new Error('No reconozco las credenciales proporcionadas. ' +
-                                      `${error.status} ${error.statusText}`));
+      return Promise.reject(new Error('No reconozco las credenciales de acceso proporcionadas.'));
     } else {
-      return Promise.reject(new Error('Tuve un problema al intentar leer información del servidor. ' +
+      return Promise.reject(new Error('Tengo un problema para ingresar al sistema:' +
                                       `${error.status} ${error.statusText} ${error.message}`));
     }
   }

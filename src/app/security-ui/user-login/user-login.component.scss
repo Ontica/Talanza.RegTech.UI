@@ -1,8 +1,9 @@
 @import "../../../styles/general-styles";
+@import "../../../styles/form";
 //
 // User login scss
 //
-#outer {
+.outer {
   align-items: center;
   display: flex;
   height: 100vh;
@@ -11,7 +12,7 @@
   color: $text-title;
 }
 
-#login-div {
+.login-div {
   display: flex;
   height: 300px;
   width: 400px;
@@ -49,6 +50,10 @@
   padding-top: 12px;
 }
 
+.authentication-section-form input {
+  margin-bottom: 16px;
+}
+
 .authentication-section-footer {
   margin-left: 20px;
   margin-top: 20px;
@@ -58,11 +63,11 @@
 label {
   font-size: 10pt;
   font-weight: 500;
+  padding-top: 12px;
 }
 
 .hint {
   font-size: 10pt;
-  line-height: 4px;
 }
 
 input:-webkit-autofill {

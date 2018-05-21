@@ -1,15 +1,15 @@
 /**
  * @license
- * Copyright (c) 2017-2018 La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
+ * Copyright (c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
  *
  * See LICENSE.txt in the project root for complete license information.
- *
  */
 
 import { NgModule } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 /*
@@ -17,24 +17,21 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
  */
 import { environment } from 'environments/environment';
 
-/*
- * Empiria Steps Application Modules
- */
 import { CoreModule } from './core/core.module';
-import { SecurityUIModule } from './security-ui/security-ui.module';
-import { DashboardModule } from './dashboard/dashboard.module';
 
-import { ObligationsModule } from './obligations/obligations.module';
 import { ContractsModule } from './contracts/contracts.module';
 import { ControlsModule } from './controls/controls.module';
 import { DocumentsModule } from './documents/documents.module';
+import { DashboardModule } from './dashboard/dashboard.module';
 import { ProcessModule } from './process/process.module';
-import { ProjectManagementModule } from './project-management/project-management.module';
-import { InboxModule } from './inbox/inbox.module';
-import { SharedModule } from './shared/shared.module';
 import { GlobalSearchModule } from './global-search/global-search.module';
-import { ServiceDeskModule } from './service-desk/service-desk.module';
+import { InboxModule } from './inbox/inbox.module';
+import { ObligationsModule } from './obligations/obligations.module';
+import { ProjectManagementModule } from './project-management/project-management.module';
 import { ProjectMeetingsModule } from './project-meetings/project-meetings.module';
+import { SecurityUIModule } from './security-ui/security-ui.module';
+import { ServiceDeskModule } from './service-desk/service-desk.module';
+import { SharedModule } from './shared/shared.module';
 
 // App is our top level component
 import { AppComponent } from './app.component';
@@ -77,23 +74,23 @@ type StoreType = {
    * Import Angular's modules.
    */
   imports: [
-    CoreModule,
-    SecurityUIModule,
-    DashboardModule,
-    ObligationsModule,    
+    AppRoutingModule,
+    BrowserModule,
     ContractsModule,
     ControlsModule,
+    CoreModule,
+    DashboardModule,
     DocumentsModule,
+    FormsModule,
+    GlobalSearchModule,
+    InboxModule,
+    ObligationsModule,
     ProcessModule,
     ProjectManagementModule,
-    ProjectManagementModule,
-    InboxModule,
+    ReactiveFormsModule,
+    SecurityUIModule,
     ServiceDeskModule,
-    SharedModule,  
-    GlobalSearchModule,  
-    BrowserModule,
-    FormsModule,
-    AppRoutingModule
+    SharedModule
   ],
   /**
    * Expose our Services and Providers into Angular's dependency injection.
