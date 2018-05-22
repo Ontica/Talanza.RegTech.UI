@@ -22,10 +22,11 @@ export class SpinnerComponent implements OnDestroy, OnInit {
   @HostBinding('style.position') public position = 'absolute';
 
   private spinnerStateChanged: Subscription;
+
   visible = false;
 
   constructor(private spinnerService: SpinnerService) {
-
+    // console.log("spinner ctrt called: ", spinnerService.id);
   }
 
   ngOnInit() {

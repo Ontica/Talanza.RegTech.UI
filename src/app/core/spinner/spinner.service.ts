@@ -9,6 +9,8 @@ import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
 
+import { Displayable } from '../ui-data-types';
+
 
 export interface SpinnerState {
   show: boolean;
@@ -16,9 +18,11 @@ export interface SpinnerState {
 
 
 @Injectable()
-export class SpinnerService {
+export class SpinnerService implements Displayable {
 
   private _spinnerSubject = new Subject<SpinnerState>();
+
+  public id = Math.random();
 
   constructor() {
     // no-op
