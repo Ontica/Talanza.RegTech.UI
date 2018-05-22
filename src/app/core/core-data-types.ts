@@ -1,10 +1,10 @@
 /**
  * @license
- * Copyright (c) 2017-2018 La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
+ * Copyright (c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
  *
  * See LICENSE.txt in the project root for complete license information.
- *
  */
+
 
 export interface Identifiable {
   readonly uid: string;
@@ -16,6 +16,7 @@ export const Empty: Identifiable = {
   uid: '',
   name: 'No determinado',
 }
+
 
 export function isEmpty(instance: Identifiable): boolean {
   return (!instance || !instance.uid ||
@@ -37,14 +38,4 @@ export const KeyValue_Empty: KeyValue = {
 
 export interface Contact extends Identifiable {
 
-}
-
-
-export interface ISelectable {
-  selected: boolean;
-}
-
-export interface ColoredTag extends ISelectable {
-  name: string,
-  color: string,
 }

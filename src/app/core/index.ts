@@ -18,4 +18,3 @@ export { LoggerService } from './general/logger.service';
 export { AuthenticationService } from './security/authentication.service';
 export { SecurityGuardService } from './security/security-guard.service';
 
-export { SpinnerService, SpinnerState } from './spinner/spinner.service';
