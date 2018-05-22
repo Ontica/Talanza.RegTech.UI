@@ -17,7 +17,8 @@
         <span class="hint">Ingresar el nombre de usuario y la contraseña registrada:</span>
       </div>
 
-      <form [class.submitted]="submitted" [formGroup]="form" (ngSubmit)="onSubmit()">
+      <form [class.submitted]="submitted" [formGroup]="form" (ngSubmit)="onSubmit()"
+            (keydown)="keyboardHandler($event)">
 
         <div class="authentication-section-form">
 
@@ -34,11 +35,9 @@
           <div *ngIf="showExceptionMsg"
                 class="inline-error">{{exceptionMsg}}</div>
 
-          <button type="submit" class="btn-action" style="width:84px">Ingresar</button>
-
+          <button type="submit" class="btn-action" style="width:84px" (click)="setCommand('authenticate')">Ingresar</button>
 
           <spinner></spinner>
-
 
         </div>
 

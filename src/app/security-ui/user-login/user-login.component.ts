@@ -1,57 +1,47 @@
 /**
  * @license
- * Copyright (c) 2017 La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
+ * Copyright (c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
  *
  * See LICENSE.txt in the project root for complete license information.
- *
  */
 
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { Router } from '@angular/router';
 
-import { AuthenticationService } from '../../core';
-import { SpinnerService } from '../../core/ui-services';
+import { AuthenticationService, CoreService } from '../../core';
+
+import { AbstractForm, SpinnerService } from '../../core/ui-services';
+
+
+enum FormMessages {
+
+  IncompleteLoginData =
+    'Para ingresar requiero se proporcione el nombre de usuario y la contraseña.',
+
+}
 
 
 @Component({
   selector: 'user-login',
   templateUrl: './user-login.component.html',
-  styleUrls: ['./user-login.component.scss']
+  styleUrls: ['./user-login.component.scss'],
 })
-export class UserLoginComponent implements OnInit {
+export class UserLoginComponent extends AbstractForm implements OnInit {
 
-  form = new FormGroup({
-    userID: new FormControl('', Validators.required),
-    password: new FormControl('', Validators.required)
-  });
+  constructor(private authenticationService: AuthenticationService,
+              private router: Router,
+              private spinnerService: SpinnerService) {
+    super();
 
-  processing = false;
-  submitted = false;
-  exceptionMsg = '';
-
-  constructor(
-    private authenticationService: AuthenticationService,
-    private router: Router,
-    private spinnerService: SpinnerService
-  ) {}
-
-
-  get userID() {
-    return this.form.get('userID');
+    this.setSpinner(spinnerService);    // remove after resolve core module injection issue
   }
 
 
-  get password() {
-    return this.form.get('password');
-  }
-
-
-  get showExceptionMsg() {
-    return this.submitted &&
-           (this.form.invalid || this.exceptionMsg.length !== 0);
+  get Msg(): typeof FormMessages {
+    return FormMessages;
   }
 
 
@@ -61,49 +51,55 @@ export class UserLoginComponent implements OnInit {
   }
 
 
-  onSubmit() {
-    if (this.processing) {
-      return;
-    }
+  // abstract methods implementation
 
-    this.startProcessing(true);
+  protected createFormGroup(): FormGroup {
 
-    if (!this.form.valid) {
-      this.exceptionMsg = `Para ingresar requiero se proporcione
-                           el nombre de usuario y la contraseña.`;
+    return new FormGroup({
 
-      this.startProcessing(false);
-      return;
-    }
+      userID: new FormControl('', Validators.required),
 
-    this.authenticationService.login(this.form.value.userID, this.form.value.password)
-                              .then( () => this.router.navigate(['/projects/search']) )
-                              .catch( x => {
-                                this.exceptionMsg = x;
-                                this.startProcessing(false);
-                              });
+      password: new FormControl('', Validators.required)
+
+    });
+
   }
 
 
+  protected execute(): Promise<any> {
+
+    switch(this.command.name) {
+
+      case 'authenticate':
+        return this.authenticate();
+
+      default:
+        throw new Error(`Command '${this.command.name}' doesn't have a command handler.`);
+    }
+  }
+
+
+  protected validate(): Promise<any> {
+    if (!this.valid) {
+
+      this.addException(FormMessages.IncompleteLoginData);
+    }
+
+    return Promise.resolve();
+  }
+
   // private methods
+
+  private authenticate(): Promise<boolean> {
+    return this.authenticationService.login(this.form.value.userID, this.form.value.password)
+                                     .then( () => this.router.navigate(['/projects/search']));
+
+  }
+
 
   private reloadPage(mustReload) {
     if (mustReload) {
       window.location.reload();
-    }
-  }
-
-
-  private startProcessing(flag: boolean) {
-    if (flag) {
-      this.spinnerService.show();
-      this.exceptionMsg = '';
-      this.submitted = true;
-      this.processing = true;
-    } else {
-      this.spinnerService.hide();
-      this.processing = false;
-      this.form.markAsUntouched();
     }
   }
 
