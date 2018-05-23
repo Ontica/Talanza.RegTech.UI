@@ -15,8 +15,11 @@
       <p class="message"
          [innerHTML]="message | html"></p>
 
+      <button *ngIf="confirmWindow" type="button" class="btn accept-button"
+              (click)="close()">Cancelar</button>
       <button type="button" class="btn-action accept-button"
-              (click)="close()">Aceptar</button>
+              (click)="accept()">Aceptar</button>
+
 
   </div>
 

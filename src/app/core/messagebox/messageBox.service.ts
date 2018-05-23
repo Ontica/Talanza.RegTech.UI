@@ -3,10 +3,12 @@ import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
 import { Exception } from '..';
 
+
 export interface MessageBox {
   title: string;
   message: string;
   show: boolean;
+  confirmWindow: boolean;
 }
 
 @Injectable()
@@ -14,13 +16,21 @@ export class MessageBoxService {
 
   private _messageBoxSubject = new Subject<MessageBox>();
 
+  private _confirmresult = new Subject<boolean>();
+
   constructor() {
     // no-op
   }
 
-
-  public get messageBoxState(): Observable<MessageBox> {
+  get messageBoxState(): Observable<MessageBox> {
     return this._messageBoxSubject.asObservable();
+  }
+
+  set confirmResult(result: boolean) {
+
+    this._confirmresult.next(result);
+    this._confirmresult.complete();
+
   }
 
 
@@ -52,8 +62,17 @@ export class MessageBoxService {
       displayTitle = title || '';
     }
 
-    this._messageBoxSubject.next({ show: true, title: displayTitle, message: displayMsg });
+    this._messageBoxSubject.next({ show: true, title: displayTitle, message: displayMsg, confirmWindow: false });
 
   }
+
+  public confirm(message: string, title:string): Observable<boolean> {
+    this._messageBoxSubject.next(<MessageBox> {show: true, title: title, message: message, confirmWindow: true });
+
+    this._confirmresult = new Subject<boolean>();
+
+    return this._confirmresult.asObservable();
+  }
+
 
 }

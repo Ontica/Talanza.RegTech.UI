@@ -17,6 +17,7 @@ export class MessageBoxComponent implements OnDestroy, OnInit {
   public visible = false;
   public message: string = '';
   public title: string = '';
+  public confirmWindow: boolean = false;
   private messageBoxChanged: Subscription;
 
 
@@ -32,15 +33,36 @@ export class MessageBoxComponent implements OnDestroy, OnInit {
         this.visible = state.show;
         this.message = state.message;
         this.title = state.title;
+        this.confirmWindow = state.confirmWindow;
       });
+
   }
 
   public ngOnDestroy() {
     this.messageBoxChanged.unsubscribe();
   }
 
+  public accept(): void {
+    this.confirm(true);
+
+    this.hide();
+  }
+
   public close(): void {
+    this.confirm(false);
+
+    this.hide();
+  }
+
+  private confirm(option: boolean): void {
+    if (this.confirmWindow) {
+      this.messageBoxService.confirmResult = option;
+    }
+  }
+
+  private hide(): void {
     this.visible = false;
   }
+
 
 }
