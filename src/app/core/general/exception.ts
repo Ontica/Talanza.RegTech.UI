@@ -18,7 +18,7 @@ export class Exception extends Error {
   constructor(message: string, innerError?: Error) {
     super(Exception.extractErrorMessage(message));
 
-    // This line is because a Typecript to ECMA5 issue: https://goo.gl/jtiFyy
+    // This line is because a Typescript to ECMA5 issue: https://goo.gl/jtiFyy
     Object.setPrototypeOf(this, Exception.prototype);
 
     this.innerError = innerError;

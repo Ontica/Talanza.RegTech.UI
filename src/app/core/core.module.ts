@@ -19,6 +19,9 @@ import { SessionService } from './general/session.service';
 import { ApplicationSettingsService } from './general/application-settings.service';
 import { DirectoryService } from './http/directory.service';
 
+
+import { HtmlPipe } from './pipes/html.pipe';
+
 import { HttpHandler } from './http/http-handler';
 import { HttpService } from './http/http.service';
 import { HttpErrorInterceptor } from './http/http-error-interceptor';
@@ -37,11 +40,15 @@ import { SecurityGuardService } from './security/security-guard.service';
 import { throwIfAlreadyLoaded } from './module-import-guard';
 
 @NgModule({
+
   imports: [
     CommonModule, HttpClientModule
   ],
-  exports: [SpinnerComponent, MessageBoxComponent],
-  declarations: [SpinnerComponent, MessageBoxComponent],
+
+  declarations: [HtmlPipe, MessageBoxComponent, SpinnerComponent],
+
+  exports: [HtmlPipe, MessageBoxComponent, SpinnerComponent],
+
   providers: [CoreService, ExceptionHandler, SessionService,
               ApplicationSettingsService, LoggerService,
               SecurityDataService, AuthenticationService,
@@ -53,7 +60,10 @@ import { throwIfAlreadyLoaded } from './module-import-guard';
 export class CoreModule {
 
   constructor( @Optional() @SkipSelf() parentModule: CoreModule) {
+    console.log("CoreModule cntrcor");
+
     throwIfAlreadyLoaded(parentModule, 'CoreModule');
+
   }
 
 }
