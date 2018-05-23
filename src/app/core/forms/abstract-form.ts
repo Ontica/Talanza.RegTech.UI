@@ -10,7 +10,10 @@ import { ReflectiveInjector } from '@angular/core';
 import { AbstractControl, FormGroup } from '@angular/forms';
 
 import { Assertion } from 'empiria';
-import { CoreService } from '../core.service';
+
+import { Exception } from '../index';
+import { CoreService } from '../core-service';
+
 import { Displayable, SpinnerService }  from '../ui-services';
 
 export interface Command {
@@ -45,6 +48,7 @@ export abstract class AbstractForm {
   private spinner: Displayable;
 
   private currentCommand: Command = { name: ''};
+  private disabledFlag = false;
   private submittedFlag = false;
   private processing = false;
 
@@ -54,7 +58,6 @@ export abstract class AbstractForm {
     this.form = this.createFormGroup();
   }
 
-
   /// properties
 
   get command(): Command {
@@ -62,8 +65,23 @@ export abstract class AbstractForm {
   }
 
 
+  get disabled(): boolean {
+    return this.disabledFlag;
+  }
+
+
+  get enabled(): boolean {
+    return !this.disabledFlag;
+  }
+
+
   get exceptionMsg(): string {
     return this.exceptionsArray.join("<br />");
+  }
+
+
+  get invalid(): boolean {
+    return !this.valid;
   }
 
 
@@ -73,27 +91,52 @@ export abstract class AbstractForm {
 
 
   get showExceptionMsg(): boolean {
-    return this.submitted &&
-           (this.form.invalid || this.exceptionsArray.length !== 0);
+    return this.submitted && (this.invalid);
   }
 
 
   get valid(): boolean {
-    return this.form.valid;
+    return this.form.valid && (this.exceptionsArray.length === 0);
   }
 
 
   /// public methods
 
-  protected addException(exception: Error | string): void {
+  protected addException(exception: Exception |Error | string): void {
 
     if (typeof exception === 'string') {
       this.exceptionsArray.push(exception as string);
 
-    } else {
+    } else if (exception instanceof Exception) {
+      this.exceptionsArray.push(`${(exception as Exception).message}:<br><br>
+                                 ${(exception as Exception).innerError.message}`);
+
+    } else if (exception instanceof Error) {
       this.exceptionsArray.push((exception as Error).message);
 
+    } else {
+      this.exceptionsArray.push(exception);
     }
+
+  }
+
+
+  protected cleanExceptions() {
+    this.exceptionsArray = [];
+  }
+
+
+  disable(opts?: { onlySelf?: boolean, emitEvent?: boolean }): void {
+    this.disabledFlag = true;
+
+    this.form.disable(opts);
+  }
+
+
+  enable(opts?: { onlySelf?: boolean, emitEvent?: boolean }): void {
+    this.disabledFlag = false;
+
+    this.form.enable(opts);
   }
 
 
@@ -142,6 +185,11 @@ export abstract class AbstractForm {
   }
 
 
+  set(path: string | (string | number)[], value: any) {
+    this.form.get(path).setValue(value);
+  }
+
+
   protected setCommand(command: Command | string): void {
     Assertion.assertValue(command, 'command');
 
@@ -162,12 +210,16 @@ export abstract class AbstractForm {
   }
 
 
+  value(path: string | (string | number)[]): any {
+    return this.get(path).value;
+  }
+
   // private methods
 
   private afterValidate(): void {
     try {
 
-      if (this.form.valid) {
+      if (this.valid) {
         this.invokeExecute();
 
         return;
@@ -210,10 +262,14 @@ export abstract class AbstractForm {
     const injector = ReflectiveInjector.fromResolvedProviders(providers);
 
     this.spinner = injector.get(SpinnerService) as SpinnerService;
+
+    console.log("setDefaultSpinner ");
   }
 
 
   private startProcessing(flag: boolean) {
+    console.log("startProcessing " + flag);
+
     if (!this.spinner) {
       this.setDefaultSpinner();
     }
