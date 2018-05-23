@@ -6,7 +6,7 @@
   width: 15px;
   text-align: center;
   cursor: pointer;
-  opacity: 0.7;
+  opacity: 0.6;
 }
 
 .circle:hover {
@@ -30,5 +30,5 @@
 }
 
 .no-color:hover {
-  background-color: $light-gray;
+  border: 1pt solid $gray;
 }

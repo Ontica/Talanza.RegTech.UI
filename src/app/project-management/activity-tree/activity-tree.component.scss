@@ -9,19 +9,26 @@
 }
 
 .activity-tree-header {
-  background-color: $text-title;
-  color: white;
-  min-height: 34px;
-  padding: 6pt;
-  border-bottom: 1px solid $light-blue;
-  border-radius: 5px;
+  background-color: transparent;
+  color: $text-title;
+  min-height: 56px;
+  padding: 4pt;
+  border-bottom: 4px solid $dark-red;
+  //border-radius: 5px;
 }
 
 .title {
   position: absolute;
   font: $control-font;
-  font-size: 10.5pt;
+  font-size: 14pt;
+  font-weight: 600;
   float: left;
+}
+
+.hint {
+  color: $gray;
+  font-size: 8pt;
+  font-weight: 400;
 }
 
 .title-add-icon {
@@ -89,6 +96,7 @@ i.ghost-icon {
   vertical-align: -webkit-baseline-middle;
   margin-right: 12pt;
   max-width: calc(100% - 120px);
+  font-weight:400;
 }
 
 .activity-name a:hover {
@@ -97,32 +105,31 @@ i.ghost-icon {
 }
 
 .activity-name-level-1 {
-  font-size: 10.5pt;
-  font-weight: 600;
+  font-size: 10pt;
+  font-weight: 500;
 }
 
 .activity-name-level-2 {
-  font-size: 10.5pt;
+  font-size: 10pt;
   font-weight: 400;
 }
 
 .activity-name-level-3 {
   font-size: 9.5pt;
-  font-weight: 600;
 }
 
 .activity-name-level-4 {
-  font-size: 9.5pt;
-  font-weight: 400;
-}
-
-.activity-name-level-5 {
-  font-size: 8.5pt;
+  font-size: 9.0pt;
   font-weight: 600;
 }
 
+.activity-name-level-5 {
+  font-size: 9pt;
+  font-weight: 500;
+}
+
 .activity-name-level-6 {
-  font-size: 8.5pt;
+  font-size: 9pt;
   font-weight: 400;
 }
 

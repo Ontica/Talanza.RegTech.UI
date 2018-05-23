@@ -1,4 +1,6 @@
 @import "variables";
+
+
 table {
   border: none;
   font-size: 10pt;
@@ -20,8 +22,9 @@ table td:last-child {
   border-radius: 6px;
   border: $button-border;
   height: $button-height;
-  white-space: nowrap;
+  min-width: 88px;
   padding: 4pt;
+  white-space: nowrap;
 }
 
 .circled {
@@ -64,7 +67,6 @@ button.btn-primary:hover {
   transition: 0.3s ease-out;
 }
 
-
 button.btn-action {
   @include  input-button-settings;
   background-color: $action-color;
@@ -99,6 +101,10 @@ button.btn-warning:hover {
   transition: 0.3s ease-out;
 }
 
+button.btn-margin-right {
+  margin-right: 32px;
+}
+
 @mixin input-settings {
   background-color: $control-background-color;
   border-top: $control-border;
@@ -123,6 +129,10 @@ button.btn-warning:hover {
 @mixin disabled-element {
   color: $control-disabled-color;
   background: $control-disabled-background;
+}
+
+fieldset {
+  border: none;
 }
 
 select.select-box {
@@ -182,8 +192,25 @@ textarea:focus {
 }
 
 .text-area {
-  @include input-settings;
-  resize: none;
+  background-color: $control-background-color;
+  border-top: $control-border;
+  border-bottom: $control-border;
+  border-left: $control-border;
+  border-right: $control-border;
+  color: $control-color;
+  font: $control-font;
+  font-weight: normal;
+  margin: 2px 8px 2px 0;
+  padding: 2px 2px 2px 6px;
+  vertical-align: middle;
+
+  min-height: $control-height;
+  width: $control-width;
+
+  border-radius: 2px;
+  transition: 0.3s ease-out;
+
+  resize: vertical;
 }
 
 .text-align-left {
@@ -219,6 +246,11 @@ a {
 a:hover {
   color: $selected-item-text-color;
   cursor: pointer;
+}
+
+.disabled {
+  pointer-events: none;
+  cursor: default;
 }
 
 .popup {

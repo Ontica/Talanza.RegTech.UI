@@ -4,8 +4,8 @@
 //
 .nav-bar {
   height: 32px;
-  background-color: $secondary-color;
-  border-bottom: 1px solid $gray;
+  background-color: $dark-blue;
+  border-bottom: 1px solid $light-gray;
 }
 
 .nav-bar ul {
@@ -22,17 +22,17 @@
 }
 
 .nav-bar a, a:visited {
-  color: white;
+  color: $white;
   display: block;
   text-decoration: none;
 }
 
 .nav-bar a:hover {
-  border-bottom: 2px solid $selected-item-text-color;
+  border-bottom: 2px solid $white;
 }
 
 .selected {
-  border-bottom: 1px solid $selected-item-text-color;
+  border-bottom: 1px solid $white;
 }
 
 .first-li {

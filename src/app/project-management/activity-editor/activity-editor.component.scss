@@ -16,20 +16,18 @@
 }
 
 .header {
-  background-color: $dark-blue;
-  color: $white;
-  min-height: 34px;
-  padding: 6pt;
+  background-color: transparent;
+  color: $text-title;
+  min-height: 56px;
+  padding: 4pt;
   width: 100%;
-  border-bottom: 1px solid $light-blue;
-  border-radius: 5px;
+  border-bottom: 4px solid $light-gray;
 }
 
 .title {
   display: inline-block;
-  color: $white;
   font: $control-font;
-  font-size: 10.5pt;
+  font-size: 12pt;
   width: calc(100% - 56px);
 }
 
@@ -39,6 +37,13 @@
 }
 
 i.close-icon {
-  color: $white;
   cursor: pointer;
+}
+
+.hint {
+  position: relative;
+  color: $gray;
+  font-size: 8pt;
+  font-weight: 400;
+  bottom: 0pt;
 }

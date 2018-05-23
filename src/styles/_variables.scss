@@ -6,6 +6,7 @@ $dark-gray: #606060!default;
 $gray: #909090!default;
 $light-gray: #e8e8e8 !default;
 $brown: #604020 !default;
+$light-brown: #d9b38c !default;
 $dark-blue: #104070 !default;
 $blue: #16599c !default;
 $light-blue: #6ba1ff !default;
@@ -46,6 +47,7 @@ $text-italic: italic;
 //
 // Elements colors
 //
+
 $background-color: $white !default;
 $secondary-color: $dark-red !default;
 $secondary-text-color: $white !default;
@@ -104,13 +106,13 @@ $warning-selected-color: $red;
 $cancel-color: $light-orange;
 $cancel-selected-color: $orange;
 
-$control-border: 1px solid #d0d0d0;
-$control-background-color: #fafafa;
+$control-border: 1px solid #dfdfdf;
+$control-background-color: #fcfcfc;
 $control-color: $text-title;
 $control-width: 99%;
 $control-disabled-color: $text-title;
-$control-disabled-background: #e6e6e6;
-$control-height: 26px;
+$control-disabled-background: #f4f4f4;
+$control-height: 28px;
 
 $button-color: #f8f8f8;
 $button-selected-color: #e6e6e6;
@@ -128,5 +130,5 @@ $selected-control-border: 1px solid #c9c9c9;
 $grid-border: none;
 $grid-even-background-color: #fffffd;
 $grid-odd-background-color: #eef7fa;
-$grid-selected-background-color: $light-orange;
+$grid-selected-background-color: #f0f8ff;
 $grid-hover-background-color: #f6f6f6;
