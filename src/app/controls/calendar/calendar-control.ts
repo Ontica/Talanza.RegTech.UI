@@ -5,10 +5,10 @@
  * See LICENSE.txt in the project root for complete license information.
  */
 
-import { Component, EventEmitter, Input, Output,
-        AfterViewInit, ChangeDetectionStrategy, OnInit, OnChanges} from '@angular/core';
-import { DataResolver } from '../../app.resolver';
+import { AfterViewInit, ChangeDetectionStrategy, Component,
+         EventEmitter, Input, OnChanges, Output, forwardRef} from '@angular/core';
 
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 declare var dhtmlXCalendarObject: any;
 
@@ -35,9 +35,11 @@ const defaults : CalendarSettings = {
   selector: 'calendar-control',
   templateUrl:'./calendar-control.html',
   styleUrls: ['./calendar-control.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [
+    { provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => CalendarControl), multi: true },
+  ]
 })
-export class CalendarControl implements AfterViewInit, OnInit, OnChanges {
+export class CalendarControl implements AfterViewInit, ControlValueAccessor, OnChanges {
 
   @Output() onSelectedDate = new EventEmitter<Date>();
 
@@ -63,38 +65,39 @@ export class CalendarControl implements AfterViewInit, OnInit, OnChanges {
 
   formattedDate = '';
 
+  disabled = false;
+
   inputId = 'calendarInput';
   buttonId = 'calendarButton';
 
   private calendar: any;
 
-  constructor() { }
+  propagateChange = (_: any) => {};
+  //propagateTouch = (_: any) => {};
 
-  private initialize() {
+  constructor() {
+    console.log("calendar constructor() called");
     this.setControlId();
   }
 
-  ngOnInit() {
-    this.initialize();
-  }
-
   ngOnChanges() {
-    console.log("ngOnChanges called");
+    console.log("calendar ngOnChanges called");
   }
 
 
   ngAfterViewInit() {
-    console.log("ngAfterViewInit called");
-
     this.createCalendar();
     this.setSettings();
     this.attachEvents();
+    console.log("calendar ngAfterViewInit called");
   }
 
   onblur() {
 
     if (this.formattedDate.length === 0) {
       this.onSelectedDate.emit(null);
+
+      this.propagateChange(null);
 
     } else if (this.isDate(this.formattedDate)) {
       const newDate = this.tryFormat(this.formattedDate);
@@ -103,10 +106,50 @@ export class CalendarControl implements AfterViewInit, OnInit, OnChanges {
 
       this.onSelectedDate.emit(this.calendar.getDate());
 
+      this.propagateChange(this.calendar.getDate());
+
     } else {
       console.log('Not a date', this.formattedDate);
     }
+
   }
+
+  // implement ControlValueAccessor
+
+
+  registerOnChange(fn: any): void {
+    this.propagateChange = fn;
+  }
+
+
+  registerOnTouched(fn: any): void {
+    //this.propagateTouch = fn;
+  }
+
+
+  setDisabledState?(isDisabled: boolean): void {
+    console.log("setDisabledState", isDisabled);
+
+    this.disabled = isDisabled;
+
+    if (this.disabled) {
+      this.calendar.hide();
+    } else {
+      this.calendar.show();
+    }
+  }
+
+
+  writeValue(obj: any): void {
+    if (obj) {
+      this._date = (typeof obj === 'string') ? new Date(obj) : obj;
+    } else {
+      this._date = undefined;
+    }
+    this.refreshCalendarDate();
+  }
+
+  // private methods
 
   private refreshCalendarDate() {
     if (this.date) {
@@ -125,9 +168,9 @@ export class CalendarControl implements AfterViewInit, OnInit, OnChanges {
   private attachEvents() {
     this.calendar.attachEvent("onClick",
                               date => {
-                                console.log("onClick triggered", date);
                                 this.formattedDate = this.format(date);
-                                this.onSelectedDate.emit(date)
+                                this.onSelectedDate.emit(date);
+                                this.propagateChange(date);
                               });
   }
 
@@ -135,7 +178,7 @@ export class CalendarControl implements AfterViewInit, OnInit, OnChanges {
   private createCalendar() {
     this.addLanguage("sp");
 
-    this.calendar = new dhtmlXCalendarObject( { button: this.buttonId} );   // input: this.inputId
+    this.calendar = new dhtmlXCalendarObject( { button: this.buttonId} );   // input: this.inputId { button: this.buttonId}
 
     this.calendar.loadUserLanguage("sp");
   }
@@ -235,11 +278,7 @@ export class CalendarControl implements AfterViewInit, OnInit, OnChanges {
   private format(date: Date): string {
     const dmyFormatted = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
 
-    const value = this.tryFormat(dmyFormatted);
-
-    console.log("value in format", value);
-
-    return value;
+    return this.tryFormat(dmyFormatted);
   }
 
 
@@ -344,6 +383,7 @@ export class CalendarControl implements AfterViewInit, OnInit, OnChanges {
 
   private setControlId(): void {
     let idNumber = this.getRandomNumber(1,1000000);
+
     this.inputId = 'ci' + idNumber;
     this.buttonId = 'bi' + idNumber;
   }

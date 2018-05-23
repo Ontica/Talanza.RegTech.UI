@@ -1,5 +1,10 @@
 <div style="width:110px">
     <input type="text" class="text-box" style="width:90px" maxlength="11"
-     [attr.id]="inputId" [(ngModel)]="formattedDate" (blur)="onblur()">
-    <a><i [attr.id]="buttonId" class="fa fa-calendar fa-lg calendar-icon" aria-hidden="true"></i></a>
+     [attr.id]="inputId" [disabled]="disabled"
+     [(ngModel)]="formattedDate" (blur)="onblur()">
+
+    <a [class.disabled]="disabled">
+      <i [attr.id]="buttonId" class="fa fa-calendar fa-lg calendar-icon" aria-hidden="true"></i>
+    </a>
+
 </div>
