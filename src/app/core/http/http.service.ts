@@ -90,4 +90,10 @@ export class HttpService {
     return Observable.throw(exception);
   }
 
+  public throw(error: any, defaultMessage?: string) : ErrorObservable {
+    const exception = Exception.convertTo(error, defaultMessage);
+
+    return Observable.throw(exception);
+  }
+
 }
