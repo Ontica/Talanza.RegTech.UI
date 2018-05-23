@@ -5,10 +5,10 @@
  * See LICENSE.txt in the project root for complete license information.
  */
 
-
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
 import { ProceduresModule } from '../procedures/procedures.module';
 import { ControlsModule } from '../controls/controls.module';
@@ -49,12 +49,14 @@ import {
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
 
     ControlsModule,
     SharedModule,
     ProceduresModule,
     ProjectManagementRoutingModule
   ],
+
 
   declarations: [
     ActivityEditorComponent,
@@ -75,12 +77,14 @@ import {
     ProjectModelSelectorComponent
   ],
 
+
   providers: [
     ActivityService,
     ActivityTreeService,
     ProcessModelsService,
     ProjectService
   ],
+
 
   exports: [
     GanttComponent,

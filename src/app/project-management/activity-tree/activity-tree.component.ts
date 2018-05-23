@@ -64,15 +64,6 @@ export class ActivityTreeComponent {
   }
 
 
-  deleteActivity(activity: Activity) {
-    if (!activity) {
-      return;
-    }
-
-    this.activityTreeService.deleteActivity(this.filter.project.uid, activity)
-                            .then( () => this.loadActivitiesTree() );
-  }
-
   get hasSelectedActivities() {
     return (this.selectedActivity.uid !== '');
   }

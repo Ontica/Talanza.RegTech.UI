@@ -3,9 +3,10 @@
   <div class="activity-tree-header">
     <div class="title">
       {{filter.project.name}}
+      <div class="hint">Proyecto regulatorio</div>
     </div>
-    <button type="button" class="btn-primary circled right title-add-icon"
-            (click)="showInitialActivityInlineEditor()"><i class="fa fa-plus"></i></button>
+    <button type="button" class="btn-action right"
+            (click)="showInitialActivityInlineEditor()"><i class="fa fa-plus"></i> Agregar actividad</button>
   </div>
 
   <div class="activity-tree-body">
@@ -46,7 +47,7 @@
 
               <a [ngClass]="activityNameClass(activity.level)"
                  [class.dragover-activity-name]="dragZoneItem === activity.name"
-                 (click)="selectActivity(activity, true)">{{activity.name}}</a>
+                 (click)="selectActivity(activity, true)">{{activity.name}} / {{activity.responsible.name}}</a>
 
             </div>
 
