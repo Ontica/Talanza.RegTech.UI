@@ -32,9 +32,6 @@ enum Errors {
   MOVE_ACTIVITY =
   '[MOVE_ACTIVITY] Ocurrió un problema al mover la actividad de posición.',
 
-  DELETE_ACTIVITY =
-  '[DELETE_ACTIVITY] Ocurrió un problema al intentar eliminar la actividad.',
-
 }
 
 
@@ -114,17 +111,6 @@ export class ActivityTreeService {
     };
 
     return this.core.http.put<Activity>(path, body)
-                         .toPromise();
-  }
-
-
-  deleteActivity(projectUID: string, activity: Activity): Promise<void> {
-    Assertion.assertValue(activity, "activity");
-
-    const path = `v1/project-management/projects/${projectUID}/activities/${activity.uid}`;
-
-    return this.core.http.delete<any>(path)
-                         .catch((e) => this.core.http.showAndReturn(e, Errors.DELETE_ACTIVITY, null))
                          .toPromise();
   }
 

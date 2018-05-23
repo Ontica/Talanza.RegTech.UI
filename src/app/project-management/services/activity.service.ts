@@ -12,24 +12,23 @@ import { Assertion } from 'empiria';
 
 import { CoreService } from '../../core/core.service';
 
-import {
-  Activity,
-  ActivityFilter,
-  CloseActivityCommand,
-  UpdateActivityCommand
-} from '../data-types';
+import { Activity, ActivityFilter, CloseActivityCommand } from '../data-types';
 
 
 enum Errors {
 
   GET_ACTIVITY_ERR =
   '[GET_ACTIVITY_ERR] Ocurrió un problema al leer la actividad.',
+
   GET_SEARCH_ACTIVITIES_ERR =
   '[GET_SEARCH_ACTIVITIES_ERR] Ocurrió un problema en la busqueda de actividades.',
-  GET_ACTIVITIES_LIST_AS_GANTT_ERR =
-  '[GET_ACTIVITIES_LIST_AS_GANTT_ERR] Ocurrió un problema al leer la lista de actividades como gantt.',
+
   GET_ACTIVITIES_ERR =
   '[GET_ACTIVITIES_ERR] Ocurrió un problema al leer la lista de actividades.',
+
+  PATCH_ACTIVITY =
+  '[PATCH_ACTIVITY] Ocurrió un problema al actualizar la actividad.',
+
   PUT_UPDATE_ACTIVITY_ERR =
   '[PUT_UPDATE_ACTIVITY_ERR] Ocurrió un problema al actualizar la actividad.',
 
@@ -41,6 +40,9 @@ enum Errors {
 
   GET_ACTIVITIES_AS_WORKLIST_ERR =
   '[GET_ACTIVITIES_AS_WORKLIST_ERR] Ocurrió un problema al leer la lista de actividades como lista de trabajo.',
+
+  DELETE_ACTIVITY =
+  '[DELETE_ACTIVITY] Ocurrió un problema al intentar eliminar la actividad.',
 }
 
 
@@ -72,13 +74,21 @@ export class ActivityService {
   }
 
 
-  updateActivity(activity: Activity): Observable<Activity> {
+  deleteActivity(activity: Activity): Promise<void> {
+    Assertion.assertValue(activity, "activity");
+
     const path = `v1/project-management/projects/${activity.project.uid}/activities/${activity.uid}`;
 
-    const updateCommand = this.buildUpdateCommand(activity);
+    return this.core.http.delete<any>(path)
+                         .catch((e) => this.core.http.throw(e, Errors.DELETE_ACTIVITY))
+                         .toPromise();
+  }
 
-    return this.core.http.put<Activity>(path, updateCommand)
-                         .catch(e => this.core.http.showAndReturn(e, Errors.PUT_UPDATE_ACTIVITY_ERR, null));
+  updateActivity(activity: Activity, updateData: Partial<Activity>): Observable<Activity> {
+    const path = `v1/project-management/projects/${activity.project.uid}/activities/${activity.uid}`;
+
+    return this.core.http.patch<Activity>(path, updateData)
+                         .catch(e => this.core.http.showAndThrow(e, Errors.PUT_UPDATE_ACTIVITY_ERR));
   }
 
 
@@ -106,20 +116,5 @@ export class ActivityService {
   }
 
   // private methods
-
-  private buildUpdateCommand(activity: Activity): UpdateActivityCommand {
-    const command = new UpdateActivityCommand();
-
-    command.name = activity.name;
-    command.notes = activity.notes;
-    command.responsibleUID = activity.responsible.uid;
-   // command.startDate = activity.startDate;
-    command.targetDate = activity.targetDate;
-    command.dueDate = activity.dueDate;
-    command.ragStatus = activity.ragStatus;
-    command.tags = activity.tags;
-
-    return command;
-  }
 
 }
