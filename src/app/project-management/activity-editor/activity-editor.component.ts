@@ -13,7 +13,9 @@ import { FormBuilder, FormControl,
 
 import { Assertion } from 'empiria';
 
-import { Contact } from '../../core/core-data-types';
+import { DateStringLibrary } from '../../core/data-types';
+
+import { Contact } from '../../core/data-types';
 import { ColoredTag } from '../../core/ui-data-types';
 
 import { AbstractForm, MessageBoxService, SpinnerService } from '../../core/ui-services';
@@ -104,7 +106,7 @@ export class ActivityEditorComponent extends AbstractForm implements OnInit, OnC
 
     return new FormGroup({
 
-      name: new FormControl(Validators.required),
+      name: new FormControl('', Validators.required),
 
       notes: new FormControl(),
 
@@ -124,15 +126,16 @@ export class ActivityEditorComponent extends AbstractForm implements OnInit, OnC
 
     switch(this.command.name) {
 
-      case 'update':
-        return this.updateActivity();
-
       case 'delete':
         return this.deleteActivity();
+
+      case 'update':
+        return this.updateActivity();
 
       default:
         throw new Error(`Command '${this.command.name}' doesn't have a command handler.`);
     }
+
   }
 
 
@@ -210,13 +213,11 @@ export class ActivityEditorComponent extends AbstractForm implements OnInit, OnC
     const targetDate = this.value('targetDate');
     const dueDate = this.value('dueDate');
 
-    console.log("targetDate", targetDate, "dueDate", dueDate);
-
     if (!targetDate || !dueDate) {
       return;
     }
 
-    if (targetDate > dueDate) {
+    if (DateStringLibrary.compareDateParts(targetDate, dueDate) > 0) {
       this.addException(FormMessages.TargetDateIsGreaterThanDueDate);
       this.get('targetDate').markAsDirty();
     }
