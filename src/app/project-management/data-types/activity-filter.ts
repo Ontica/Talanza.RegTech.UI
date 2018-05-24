@@ -9,7 +9,7 @@ import {
   Contact,
   Empty,
   isEmpty
-} from '../../core/core-data-types';
+} from '../../core/data-types';
 
 import {
   Contract,

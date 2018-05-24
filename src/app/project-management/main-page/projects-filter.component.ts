@@ -7,17 +7,18 @@
 
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
-import { Empty, Contact } from '../../core/core-data-types';
+import { Empty, Contact } from '../../core/data-types';
 
 import { ActivityService, ProjectService } from '../services';
 
-import { ActivityFilter,
-         Contract,
-         DefaultViewConfig,
-         Project,
-         Resource,
-         Stage,
-         ViewConfig
+import {
+  ActivityFilter,
+  Contract,
+  DefaultViewConfig,
+  Project,
+  Resource,
+  Stage,
+  ViewConfig
 } from '../data-types';
 
 

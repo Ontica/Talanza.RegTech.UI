@@ -11,7 +11,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 
 import { Assertion } from 'empiria';
-import { KeyValue } from '../core-data-types';
+import { KeyValue } from '../../core/data-types';
 
 import 'rxjs/add/operator/toPromise';
 

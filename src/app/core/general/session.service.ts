@@ -13,7 +13,7 @@ import { Assertion } from 'empiria';
 import { ApplicationSettingsService } from './application-settings.service';
 import { ApplicationSettings } from './application-settings';
 import { Principal } from '../security/principal';
-import { KeyValue } from '../core-data-types';
+import { KeyValue } from '../data-types';
 
 @Injectable()
 export class SessionService {

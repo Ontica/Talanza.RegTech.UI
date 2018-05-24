@@ -5,7 +5,7 @@
  * See LICENSE.txt in the project root for complete license information.
  */
 
-import { Identifiable } from '../../core/core-data-types';
+import { Identifiable } from '../../core/data-types';
 
 
 export interface Contract extends Identifiable {

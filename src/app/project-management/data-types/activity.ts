@@ -5,11 +5,9 @@
  * See LICENSE.txt in the project root for complete license information.
  */
 
-import {
-  Contact,
-  Empty,
-  Identifiable
-} from '../../core/core-data-types';
+import { DateString } from '../../core/data-types';
+
+import { Contact, Empty, Identifiable } from '../../core/data-types';
 
 import { Project } from './project';
 
@@ -26,10 +24,10 @@ export interface Activity extends Identifiable {
   responsible: Contact,
   parent: Parent | Identifiable,
   estimatedDuration: string,
-  startDate: Date,
-  targetDate: Date,
-  endDate: Date,
-  dueDate: Date,
+  startDate: DateString,
+  targetDate: DateString,
+  endDate: DateString,
+  dueDate: DateString,
   tags: string[],
   position: number,
   level: number;
@@ -50,10 +48,10 @@ export const Activity_Empty: Activity = {
   responsible: Empty,
   parent: Empty,
   estimatedDuration: '',
-  startDate: new Date(),
-  targetDate: new Date(),
-  endDate: new Date(),
-  dueDate: new Date(),
+  startDate: '',
+  targetDate: '',
+  endDate: '',
+  dueDate: '',
   tags: [],
   position: 0,
   level: 0,

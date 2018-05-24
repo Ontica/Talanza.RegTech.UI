@@ -10,7 +10,7 @@ import { Injectable } from '@angular/core';
 
 import { CoreService } from '../../core';
 
-import { KeyValue } from '../../core/core-data-types';
+import { KeyValue } from '../../core/data-types';
 
 @Injectable()
 export class CataloguesService {

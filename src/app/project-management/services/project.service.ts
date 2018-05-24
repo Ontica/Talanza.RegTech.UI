@@ -11,7 +11,7 @@ import { of } from 'rxjs/observable/of';
 
 import { CoreService } from '../../core/core.service';
 
-import { Contact } from '../../core/core-data-types';
+import { Contact } from '../../core/data-types';
 
 import {
   Contract,

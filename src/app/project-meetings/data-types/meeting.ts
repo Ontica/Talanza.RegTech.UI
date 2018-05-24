@@ -1,4 +1,4 @@
-import { Identifiable, Empty } from '../../core/core-data-types';
+import { Identifiable, Empty } from '../../core/data-types';
 
 export interface Meeting {
   uid: string,

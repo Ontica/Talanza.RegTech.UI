@@ -7,7 +7,7 @@
 
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
-import { Empty, Contact } from '../../core/core-data-types';
+import { Empty, Contact } from '../../core/data-types';
 
 import { Project } from '../../project-management/data-types';
 

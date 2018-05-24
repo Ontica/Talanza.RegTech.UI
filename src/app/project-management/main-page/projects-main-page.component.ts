@@ -7,7 +7,7 @@
 
 import { Component, OnInit } from '@angular/core';
 
-import { Empty } from '../../core/core-data-types';
+import { Empty } from '../../core/data-types';
 
 import { ActivityService, ProjectService } from '../services';
 
@@ -24,8 +24,7 @@ import {
 @Component({
   selector: 'projects-main-page',
   templateUrl: './projects-main-page.component.html',
-  styleUrls: ['./projects-main-page.component.scss'],
-  providers: [ProjectService, ActivityService]
+  styleUrls: ['./projects-main-page.component.scss']
 })
 export class ProjectsMainPageComponent {
 

@@ -8,7 +8,7 @@
 
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
-import { Identifiable } from '../../../core/core-data-types';
+import { Identifiable } from '../../../core/data-types';
 
 import { Project, ProcessModel } from '../../data-types/project';
 
