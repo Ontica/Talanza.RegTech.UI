@@ -26,5 +26,5 @@ export const DEFAULT_SETTINGS : CalendarSettings = {
   hideTime: true,
   showWeekNumber: false,
   showVacation: false,
-  returnType: 'date'
+  returnType: 'string'
 }
