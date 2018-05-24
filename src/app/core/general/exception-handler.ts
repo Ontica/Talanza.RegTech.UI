@@ -14,16 +14,28 @@ export class ExceptionHandler extends ErrorHandler {
 
   private trace: any[] = [];
 
+  private verbose = false;
+
   constructor(private injector: Injector) {
     super();
   }
 
   public handleError(error: any): void {
     // do real error handling like logging them to a central log server
-    if (error instanceof Exception) {
-      console.log(`GLOBAL exception handler: [${error.code}] ${error.message}`);
+
+    if (this.verbose) {
+      console.log('Global Exception handler:', error);
+
+    } else if (error instanceof Exception) {
+      console.log(`Global Exception handler: [${error.code}] ${error.message},
+                   from ${error.innerError.message}`);
+
+    } else if (error instanceof Error) {
+      console.log(`Global Exception handler: ${error.message}`);
+
     } else {
-      console.log(`GLOBAL exception handler: ${error.message}`);
+      console.log('Global Exception handler:', error);
+
     }
 
     // if (this.trace.length != 0) {
