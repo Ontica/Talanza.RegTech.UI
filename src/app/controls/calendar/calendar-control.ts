@@ -10,25 +10,14 @@ import { AfterViewInit, ChangeDetectionStrategy, Component,
 
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
-declare var dhtmlXCalendarObject: any;
+import { DateString, DateStringLibrary } from '../../core/data-types';
+
+import { CalendarSettings, DEFAULT_SETTINGS } from './calendar.settings';
+
+import { CalendarWrapper } from './dhtmlX-calendar-wrapper';
 
 
-export interface CalendarSettings {
-  hideWeekendDays?: boolean;
-  showHolidays?: boolean;
-  hideTime?: boolean;
-  showWeekNumber?: boolean;
-  showVacation?: boolean;
-}
-
-
-const defaults : CalendarSettings = {
-  hideWeekendDays : false,
-  showHolidays : true,
-  hideTime: true,
-  showWeekNumber: false,
-  showVacation: false
-}
+let _uniqueIdCounter = 0;
 
 
 @Component ({
@@ -41,19 +30,7 @@ const defaults : CalendarSettings = {
 })
 export class CalendarControl implements AfterViewInit, ControlValueAccessor, OnChanges {
 
-  @Output() onSelectedDate = new EventEmitter<Date>();
-
-  @Input()
-  get date(): Date { return this._date };
-  set date(value: Date) {
-    if (value) {
-      this._date = (typeof value === 'string') ? new Date(value) : value;
-    } else {
-      this._date = undefined;
-    }
-    this.refreshCalendarDate();
-  };
-  private _date: Date;
+  @Output() change = new EventEmitter<DateString>();
 
 
   @Input()
@@ -61,58 +38,79 @@ export class CalendarControl implements AfterViewInit, ControlValueAccessor, OnC
   set config(value: CalendarSettings) {
     this._config = value
   };
-  private _config = defaults;
+  private _config = DEFAULT_SETTINGS;
 
-  formattedDate = '';
+
+  @Input()
+  get date(): DateString { return this._date };
+  set date(value: DateString) {
+    this._date = DateStringLibrary.tryParseDateValue(value);
+
+    this.refreshCalendarDate();
+  };
+  private _date: DateString;
+
+
+  displayedDateString = '';
 
   disabled = false;
 
-  inputId = 'calendarInput';
-  buttonId = 'calendarButton';
+  private calendar: CalendarWrapper;
 
-  private calendar: any;
+  inputId = `calendar-input-${_uniqueIdCounter++}`;
+  buttonId = `calendar-button-${_uniqueIdCounter}`;
 
   propagateChange = (_: any) => {};
   //propagateTouch = (_: any) => {};
 
   constructor() {
-    console.log("calendar constructor() called");
-    this.setControlId();
+
   }
 
   ngOnChanges() {
-    console.log("calendar ngOnChanges called");
+    console.log("calendar ngOnChanges called", this.date);
+
+    this.refreshCalendarDate();
   }
 
 
   ngAfterViewInit() {
     this.createCalendar();
-    this.setSettings();
     this.attachEvents();
+    this.hideOrShowCalendar();
     console.log("calendar ngAfterViewInit called");
   }
 
+
   onblur() {
+    if (this.displayedDateString.length === 0) {
 
-    if (this.formattedDate.length === 0) {
-      this.onSelectedDate.emit(null);
+      this.calendar.setDate(new Date());
 
-      this.propagateChange(null);
+      this.propagateDateChange(null);
 
-    } else if (this.isDate(this.formattedDate)) {
-      const newDate = this.tryFormat(this.formattedDate);
+    } else if (DateStringLibrary.isDate(this.displayedDateString)) {
+      const newFormattedDate = DateStringLibrary.tryFormat(this.displayedDateString);
 
-      this.calendar.setDate(this.toDate(newDate));
+      this.displayedDateString = newFormattedDate;
 
-      this.onSelectedDate.emit(this.calendar.getDate());
+      this.calendar.setDate(DateStringLibrary.tryParseDate(newFormattedDate,
+                                                           this.config.language));
 
-      this.propagateChange(this.calendar.getDate());
+      this.propagateDateChange(this.calendar.getDate());
 
     } else {
-      console.log('Not a date', this.formattedDate);
+
+      this.displayedDateString = '';
+
+      this.calendar.setDate(new Date());
+
+      console.log('Invalid date', this.displayedDateString);
+
     }
 
   }
+
 
   // implement ControlValueAccessor
 
@@ -128,17 +126,14 @@ export class CalendarControl implements AfterViewInit, ControlValueAccessor, OnC
 
 
   setDisabledState?(isDisabled: boolean): void {
-    console.log("setDisabledState", isDisabled);
+    if (this.disabled === isDisabled) {
+      return;
+    }
 
     this.disabled = isDisabled;
 
-    if (this.disabled) {
-      this.calendar.hide();
-    } else {
-      this.calendar.show();
-    }
+    this.hideOrShowCalendar();
   }
-
 
   writeValue(obj: any): void {
     if (obj) {
@@ -149,13 +144,59 @@ export class CalendarControl implements AfterViewInit, ControlValueAccessor, OnC
     this.refreshCalendarDate();
   }
 
+
   // private methods
+
+  private attachEvents() {
+    this.calendar.attachEvent("onClick",
+                              date => {
+                                this.displayedDateString = DateStringLibrary.formatDMY(date);
+                                this.propagateDateChange(date);
+                              });
+  }
+
+
+  private createCalendar() {
+    this.calendar = new CalendarWrapper(this.config, this.buttonId);
+  }
+
+
+  private hideOrShowCalendar() {
+    if (!this.calendar) {
+      return;
+    }
+    this.calendar.protectDisplay(this.disabled, this.buttonId);
+  }
+
+
+  private propagateDateChange(value: Date) {
+    let valueToEmit: DateString;
+
+    if (!value) {
+      valueToEmit = null;
+
+    } else if (this.config.returnType === 'string' && this.config.hideTime) {
+      valueToEmit = DateStringLibrary.datePart(value);
+
+    } else if (this.config.returnType === 'string' && !this.config.hideTime) {
+      valueToEmit = DateStringLibrary.dateTimePart(value);
+
+    } else if (this.config.returnType === 'date') {
+      valueToEmit = value;
+
+    }
+
+    this.change.emit(valueToEmit);
+    this.propagateChange(valueToEmit);
+
+  }
+
 
   private refreshCalendarDate() {
     if (this.date) {
-      this.formattedDate = this.format(this.date);
+      this.displayedDateString = DateStringLibrary.formatDMY(this.date);
     } else {
-      this.formattedDate = '';
+      this.displayedDateString = '';
     }
 
     if (this.calendar && this.date) {
@@ -163,246 +204,6 @@ export class CalendarControl implements AfterViewInit, ControlValueAccessor, OnC
     } else if (this.calendar) {
       this.calendar.setDate(new Date());
     }
-  }
-
-  private attachEvents() {
-    this.calendar.attachEvent("onClick",
-                              date => {
-                                this.formattedDate = this.format(date);
-                                this.onSelectedDate.emit(date);
-                                this.propagateChange(date);
-                              });
-  }
-
-
-  private createCalendar() {
-    this.addLanguage("sp");
-
-    this.calendar = new dhtmlXCalendarObject( { button: this.buttonId} );   // input: this.inputId { button: this.buttonId}
-
-    this.calendar.loadUserLanguage("sp");
-  }
-
-
-  private setSettings(): void {
-    if (this.config.hideWeekendDays) {
-      this.calendar.disableDays("week", [6, 7]);
-    }
-
-    if (this.config.showHolidays) {
-      this.setHolidays();
-    }
-
-    if (this.config.hideTime) {
-      this.calendar.hideTime();
-    }
-
-    if (this.config.showWeekNumber) {
-      this.calendar.showWeekNumbers();
-    }
-
-    if (this.config.showVacation) {
-      this.disableRangeDays('15-12-2017', '02-01-2018');
-    }
-
-    this.calendar.setDateFormat("%d-%M-%y");
-  }
-
-
-  private setHoliday(holyday: string) {
-    this.calendar.setHolidays(holyday);
-  }
-
-
-  private disableRangeDays(from:string, to:string) {
-    this.calendar.setInsensitiveRange(from, to);
-  }
-
-
-  private setHolidays() {
-    this.setHoliday('25-12-2017');
-    this.setHoliday('01-01-2018');
-    this.setHoliday('05-02-2018');
-    this.setHoliday('19-03-2018');
-    this.setHoliday('01-05-2018');
-    this.setHoliday('20-11-2018');
-    this.setHoliday('25-12-2018');
-  }
-
-
-  private addLanguage(language: string) {
-    // add once, make sure dhtmlxcalendar.js is loaded
-
-    dhtmlXCalendarObject.prototype.lang = language;
-
-    dhtmlXCalendarObject.prototype.langData[language] = {
-      // date format
-      dateformat: "%d-%m-%Y",
-      // full names of months
-      monthesFNames: [
-        "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio",
-        "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
-      ],
-      // short names of months
-      monthesSNames: [
-        "Ene", "Feb", "Mar", "Abr", "May", "Jun",
-        "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"
-      ],
-      // full names of days
-      daysFNames: [
-        "Lunes", "Martes", "Miércoles", "Jueves",
-        "Viernes", "Sábado", "Domingo"
-      ],
-      // short names of days
-      daysSNames: [
-        "Do", "Lu", "Ma", "Mi",
-        "Ju", "Vi", "Sa"
-      ],
-      // starting day of a week. Number from 1(Monday) to 7(Sunday)
-      weekstart: 7,
-      // the title of the week number column
-      weekname: "s"
-    };
-
-  }
-
-
-  private isNumericValue(value: string): boolean {
-    if (isNaN(Number(value))) {
-      return false;
-    }
-    return true;
-  }
-
-
-  private format(date: Date): string {
-    const dmyFormatted = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
-
-    return this.tryFormat(dmyFormatted);
-  }
-
-
-  private tryFormat(dateString: string): string {
-    if (!dateString || dateString.length === 0) {
-      return null;
-    }
-
-    var temp = String(dateString).toLowerCase();
-    var regex = /-/g;
-    temp = temp.replace(regex, "/");
-    regex = /[.]/g;
-    temp = temp.replace(regex, "/");
-
-    var dateParts = temp.split("/");
-
-    if (dateParts.length != 3) {
-      return null;
-    }
-
-    if (!this.isNumericValue(dateParts[0]) || !this.isNumericValue(dateParts[2])) {
-      return null;
-    }
-
-    if (!(1 <= +dateParts[0] && +dateParts[0] <= 31)) {
-      return null;
-    }
-
-    if (+dateParts[0] < 10) {
-      dateParts[0] = "0" + +dateParts[0];
-    }
-    if (+dateParts[2] < 100) {
-      dateParts[2] = (+dateParts[2] + 2000).toString();
-    }
-    if (+dateParts[2] > 2099) {
-      return null;
-    }
-    if (this.isNumericValue(dateParts[1])) {
-
-      if (!(1 <= +dateParts[1] && +dateParts[1] <= 12)) {
-        return null;
-      }
-
-      const months = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
-
-      dateParts[1] = months[+dateParts[1] - 1];
-
-    } else {
-      // no-op
-    }
-
-    return dateParts[0] + "/" + dateParts[1] + "/" + dateParts[2];
-  }
-
-
-  private isDate(dateString: string): boolean {
-    const formatted = this.tryFormat(dateString);
-
-    if (!formatted) {
-      return false;
-    }
-
-    var dateParts = formatted.split("/");
-
-    if (dateParts.length != 3) {
-      return false;
-    }
-
-    if (!(1 <= Number(dateParts[0]) && Number(dateParts[0]) <= 31)) {
-      return false;
-    }
-
-    switch (dateParts[1].toLowerCase()) {
-      case "feb":
-        if (+dateParts[0] > 29) {
-          return false;
-        }
-        if (+dateParts[0] == 29) { // check leap year
-          if ((+dateParts[2] % 4) != 0) {
-            return false;
-          } else if (( (+dateParts[2] % 100) == 0) && ((+dateParts[2] % 400) != 0)) {
-            return false;
-          }
-        }
-        break;
-
-      case "abr": case "jun": case "sep": case "nov":
-        if (+dateParts[0] == 31) {
-          return false;
-        }
-        break;
-
-      case "ene": case "mar": case "may": case "jul": case "ago": case "oct": case "dic":
-        break;
-
-      default:
-        return false;
-    }
-    return true;
-  }
-
-
-  private setControlId(): void {
-    let idNumber = this.getRandomNumber(1,1000000);
-
-    this.inputId = 'ci' + idNumber;
-    this.buttonId = 'bi' + idNumber;
-  }
-
-
-  private getRandomNumber(from: number, to: number): number {
-    return Math.floor((Math.random() * to) + from);
-  }
-
-
-  private toDate(dateString: string): Date {
-    let dateParts = dateString.split("/");
-
-    const months = ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'];
-
-    const month = months.findIndex( x => x === dateParts[1].toLowerCase() );
-
-    return new Date(+dateParts[2], month, +dateParts[0], 0, 0, 0, 0);
-
   }
 
 }

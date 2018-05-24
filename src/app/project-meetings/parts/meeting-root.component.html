@@ -10,7 +10,7 @@
         <td>Fecha:</td>
         <td>
             <calendar-control [date]="meeting.date"
-                              (onSelectedDate)="meeting.date=$event">
+                              (change)="meeting.date=$event">
             </calendar-control>
         </td>
         <td>Inicio:</td>
