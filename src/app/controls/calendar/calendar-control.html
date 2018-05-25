@@ -1,10 +1,14 @@
 <div style="width:110px">
-    <input type="text" class="text-box" style="width:90px" maxlength="11"
-     [attr.id]="inputId" [disabled]="disabled"
-     [(ngModel)]="displayedDateString" (blur)="onblur()">
+
+    <input type="text" class="text-box" style="width:90px"
+           autocomplete="off" maxlength="11"
+           [attr.id]="inputId" [disabled]="disabled"
+           [(ngModel)]="displayedDateString"
+           (blur)="onblur()">
 
     <a [class.disabled]="disabled">
-      <i [attr.id]="buttonId" class="fa fa-calendar fa-lg calendar-icon" aria-hidden="true"></i>
+      <i class="fa fa-calendar fa-lg calendar-icon" aria-hidden="true"
+         [attr.id]="buttonId"></i>
     </a>
 
 </div>
