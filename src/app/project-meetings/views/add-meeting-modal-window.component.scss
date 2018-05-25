@@ -1,14 +1,12 @@
 @import "../../../styles/editor-window-style";
-@import "../../../styles/form";
+@import "../../../styles/former-form-style";
 
 .form-frame {
-    height: calc(100% - 80px);
-    overflow-y: auto;
-    overflow-x: hidden;
-    max-width: 800px;
-    margin-left: 20px;
-    margin-right: 20px;
-    margin-bottom: 20px;
-  }  
- 
-  
+  height: calc(100% - 80px);
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-width: 800px;
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-bottom: 20px;
+}

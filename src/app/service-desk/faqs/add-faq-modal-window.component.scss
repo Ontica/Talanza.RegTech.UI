@@ -1,5 +1,5 @@
 @import "../../../styles/editor-window-style";
-@import "../../../styles/form";
+@import "../../../styles/former-form-style";
 
 .editor {
     height: calc(100vh - 100px);
@@ -12,11 +12,10 @@
     overflow-x: hidden;
     max-width: 700px;
     margin-left: 20px;
-  }  
-  
+  }
+
 .tab {
     margin-left: 20px;
     margin-right: 20px;
-   
+
   }
-  

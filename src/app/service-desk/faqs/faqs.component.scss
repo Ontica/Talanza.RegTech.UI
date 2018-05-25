@@ -1,4 +1,4 @@
-@import "../../../styles/form";
+@import "../../../styles/former-form-style";
 
 .right {
     float: right;
@@ -10,9 +10,9 @@
     margin-right: 150px;
     min-width: 300px;
     padding: 8pt;
-    margin-bottom: 8pt;    
-    border-bottom: 1px dotted $gray;    
-    font-size: 10pt;    
+    margin-bottom: 8pt;
+    border-bottom: 1px dotted $gray;
+    font-size: 10pt;
 }
 
 .search-control {
@@ -42,21 +42,21 @@ ul {
 li {
     margin-top: 5px;
     font-size: 10pt;
-    padding-bottom: 6pt;  
+    padding-bottom: 6pt;
 }
 
 li a {
     font-weight: 400;
     font-size: 10pt;
-    padding-bottom: 6pt;    
+    padding-bottom: 6pt;
 }
 
 .selected a {
-    font-weight: 600; 
+    font-weight: 600;
     font-size: 10pt;
 }
 
 .ticket-info {
     color: $gray;
-    font-size: 10pt;    
+    font-size: 10pt;
 }
