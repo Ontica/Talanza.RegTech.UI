@@ -35,7 +35,6 @@ export class ProjectsMainPageComponent {
   taskList: Activity[] = [];
   selectedActivity = Activity_Empty;
 
-  masterContainerClass = 'centered-container';
   displayEditor = false;
 
   constructor(private projectService: ProjectService,
@@ -43,14 +42,11 @@ export class ProjectsMainPageComponent {
 
   }
 
-
   onActivityUpdated(activity: Activity) {
 
   }
 
   onEditorClosed() {
-    this.masterContainerClass = 'centered-container';
-
     this.displayEditor = false;
   }
 
@@ -65,8 +61,6 @@ export class ProjectsMainPageComponent {
   showEditor(activity: Activity) {
     if (activity) {
       this.selectedActivity = activity;
-
-      this.masterContainerClass = 'block-container';
 
       this.displayEditor = true;
     }

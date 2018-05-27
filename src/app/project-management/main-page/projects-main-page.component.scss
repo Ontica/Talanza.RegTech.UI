@@ -1,24 +1,36 @@
 @import "../../../styles/general-styles";
 
-.container {
-  display: inline-block;
-  height: calc(100vh - 210px);
-  width: 100%;
+:host {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0; right: 0; bottom: 0; left: 0;
 }
 
-.centered-container {
-  height: 100%;
-  margin-left: 20%;
-  margin-right: 20%;
-  overflow: hidden;
-  width: 60%;
-}
+.explorer {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
 
-.block-container {
-  display: inline-block;
-  margin-left: 10px;
-  margin-right: 10px;
-  width: calc(50% - 20px);
-  height: 100%;
-  overflow: hidden;
+  min-width: calc(266px + 660px + 10px * 4);
+
+  flex: 1;            // 1 1 0
+  border: 2pt solid blue;
+ }
+
+.explorer-panel {
+  margin: 0px 10px;
+  border: 1px solid red;
+
+  &.primary {
+    flex: auto;       // 1 1 auto;
+    max-width: 945px;
+    min-width: 266px;
+  }
+
+  &.secondary {
+    flex: none;       // 0 0 auto
+    width: 660px;
+  }
+
 }

@@ -1,32 +1,32 @@
 <projects-filter (onChangeFilter)="onFilterChanged($event)"
-  (onChangeView)="onViewChanged($event)">
+                 (onChangeView)="onViewChanged($event)">
 </projects-filter>
 
-<div class="container">
+<div class="explorer">
 
-  <div [ngSwitch]="viewConfig.viewType" [class]="masterContainerClass">
+  <div [ngSwitch]="viewConfig.viewType" class="explorer-panel primary">
 
-      <activity-tree *ngSwitchCase="'activity-tree'"
+    <activity-tree *ngSwitchCase="'activity-tree'"
                     [filter]="filter"
                     (onSelectActivity)="showEditor($event)">
-      </activity-tree>
+    </activity-tree>
 
-      <gantt *ngSwitchCase="'gantt'"
-             [filter]="filter"
-             [config]="viewConfig">
-      </gantt>
+    <gantt *ngSwitchCase="'gantt'"
+            [filter]="filter"
+            [config]="viewConfig">
+    </gantt>
 
-      <old-project-tree *ngSwitchCase="'old-version'"
-                        [filter]="filter">
-      </old-project-tree>
+    <old-project-tree *ngSwitchCase="'old-version'"
+                      [filter]="filter">
+    </old-project-tree>
 
   </div>
 
-  <div *ngIf="displayEditor" class="block-container right">
-      <activity-editor [activity]="selectedActivity"
-                       (update)="onActivityUpdated($event)"
-                       (close)="onEditorClosed()">
-      </activity-editor>
+  <div *ngIf="displayEditor" class="explorer-panel secondary">
+    <activity-editor [activity]="selectedActivity"
+                      (update)="onActivityUpdated($event)"
+                      (close)="onEditorClosed()">
+    </activity-editor>
   </div>
 
 </div>
