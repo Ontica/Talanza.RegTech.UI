@@ -1,39 +1,56 @@
-<div class="body">
 
-  <div class="header-container">
+<div class="main-layout">
 
-    <div>
-      <img class="logo" src="./assets/img/customer-logo.png" alt="COVAR Energy Consulting" />
-    </div>
+  <!-- <div class="top-bar"></div> -->
 
-    <div class="title">
-      {{title}}
-      <small>{{breadcrumb}}</small>
-    </div>
+  <div class="central-container">
 
-    <div class="search-bar">
-      <search-control (onSearch)="globalSearch($event)"></search-control>
-    </div>
+    <!-- <div class="side-bar"></div> -->
 
-  </div>
+    <div class="main-column">
 
-  <div class="content">
+      <div class="header">
 
-    <div [hidden]="isGlobalSearchVisible">
-      <navbar></navbar>
-      <router-outlet></router-outlet>
-    </div>
+        <div>
+          <img class="logo" src="./assets/img/customer-logo.png" alt="COVAR Energy Consulting" />
+        </div>
 
-    <div *ngIf="isGlobalSearchVisible">
+        <div class="title">
+          {{title}}
+          <div class="breadcrumb">{{breadcrumb}}</div>
+        </div>
+
+        <div class="search-control-container">
+          <search-control (onSearch)="search($event)"></search-control>
+        </div>
+
+      </div>
+
+      <navbar [hidden]="isGlobalSearchPageVisible"></navbar>
+
+      <div class="content">
+
+        <div class="workarea" [hidden]="isGlobalSearchPageVisible">
+          <router-outlet></router-outlet>
+        </div>
+
+        <div *ngIf="isGlobalSearchPageVisible">
+          <global-search [keywords]="keywords" (onClose)="closeGlobalSearchPage()"></global-search>
+        </div>
+
+      </div>
 
 
-        <global-search [keywords]="keywords" (onClose)="hideGlobalSearch()"></global-search>
-    </div>
 
-    <spinner></spinner>
+    </div>  <!--main-column !-->
 
-    <messagebox></messagebox>
+    <!-- <div class="aside-bar"></div> -->
 
-  </div>
+  </div>  <!--central-container-->
+
+  <!-- <footer class="footer"></footer> -->
+
+   <spinner></spinner>
+   <messagebox></messagebox>
 
 </div>

@@ -38,8 +38,8 @@ $font-size-command: $font-size-base * 0.85;
 $font-weight-command: 300;
 //
 $font-size-hint: $font-size-base * 0.75;
-$font-weight-hint: 150;
-$text-hint: $dark-red !default;
+$font-weight-hint: 300;
+$text-hint: $dark-gray !default;
 //
 $text-bold: lighten($text-color, 3%);
 $text-muted: $gray !default;

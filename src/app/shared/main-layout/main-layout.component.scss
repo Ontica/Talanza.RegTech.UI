@@ -1,55 +1,110 @@
 @import "../../../styles/variables";
-//
-// Main layout scss
-//
-.body {
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-  overflow: hidden;
-}
 
-.header-container {
-  display: inline-flex;
-  flex-wrap: nowrap;
-  top: 0;
-  div {
-      margin: 8px;
+$margin-size: 8px;
+
+.main-layout {
+  display:flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+
+  /*
+  .top-bar {
+    display: none;
+    background-color: $light-red;
+    color: $dark-blue;
+    padding: $margin-size;
   }
+  */
+
+  .central-container {
+    display: flex;
+    flex-flow: row nowrap;
+    flex: 1;
+    align-items: stretch;
+
+    /*
+    .side-bar {
+      display: none;
+      background-color: $black;
+      color: $white;
+      width: 200px;
+    }
+    */
+
+    .main-column {
+      display: flex;
+      flex-direction: column;
+
+      flex: 1;
+      padding-bottom: $margin-size;
+    }
+
+    /*
+    .aside-bar {
+      display: none;
+      height: 100%;
+      width: 200px;
+    }
+    */
+
+  }
+
+  /*
+  .footer {
+    display: none;
+    height: 40px;
+
+    padding: $margin-size;
+    background-color: $background-color;
+    border-top: 1px inset $light-gray;
+  }
+  */
+
+}  // main layout
+
+// main-column items
+
+.header {
+  display: flex;
+  flex-flow: row nowrap;
+  min-height: 78px;
+  overflow: visible;
+
+  > div {
+    margin: $margin-size;
+  }
+
+  .logo {
+    height: 60px;
+    margin-right: 14px;
+  }
+
+  .title {
+    color: $dark-red;
+    font-size: $font-size-title;
+    font-weight: $font-weight-title;
+    min-width: 260px;
+    padding-top: 7px;
+    width: 50%;
+
+    .breadcrumb {
+      color: $text-hint;
+      font-size: $font-size-hint;
+      font-weight: $font-weight-hint;
+    }
+
+  }
+
+  .search-control-container {
+    padding-top: 7px;
+    width: 300px;
+  }
+
 }
 
 .content {
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-}
-
-//
-// Header-container inner items
-//
-.logo {
-  height: 60px;
-  margin-right: 14px;
-}
-
-.title {
-  color: $dark-red;
-  font-size: $font-size-title;
-  font-weight: $font-weight-title;
-  min-width: 360px;
-  padding-top: 7px;
-  width: 40%;
-  small {
-    color: $text-hint;
-    display: block;
-    font-size: $font-size-hint;
-    font-weight: $font-weight-hint;
-  }
-}
-
-.search-bar {
-  font-size: $font-size-command;
-  font-weight: $font-weight-command;
-  padding-top: 6px;
-  width: 300px;
+  flex: 1;
+  position: relative;
+  margin: 0px $margin-size;
 }

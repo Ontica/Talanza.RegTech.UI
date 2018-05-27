@@ -6,12 +6,7 @@
  */
 
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { Location } from '@angular/common';
 
-import { Validate } from 'empiria';
-
-import { SessionService } from '../../core';
 
 @Component({
   selector: 'main-layout',
@@ -20,33 +15,25 @@ import { SessionService } from '../../core';
 })
 export class MainLayoutComponent {
 
-  public userName = 'UserName || et al';
-  public title = 'Administración del cumplimiento regulatorio';
-  public breadcrumb = '';
+  userName = 'UserName || et al';
+  title = 'Administración del cumplimiento regulatorio';
+  breadcrumb = '';
 
-  public isGlobalSearchVisible = false;
-  public keywords: string = '';
+  isGlobalSearchPageVisible = false;
+  keywords: string = '';
 
 
-  constructor(private session: SessionService,
-              private router: Router,
-              private location: Location) {
-
-    const principal = session.getPrincipal();
-
-    this.userName = principal.identity.fullname;
+  closeGlobalSearchPage() {
+    this.isGlobalSearchPageVisible = false;
   }
 
-  globalSearch(keywords: string) {
+
+  search(keywords: string) {
     if (keywords) {
       this.keywords = keywords;
 
-      this.isGlobalSearchVisible = true;
+      this.isGlobalSearchPageVisible = true;
     }
-  }
-
-  hideGlobalSearch() {
-    this.isGlobalSearchVisible = false;
   }
 
 }

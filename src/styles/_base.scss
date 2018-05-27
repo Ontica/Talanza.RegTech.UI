@@ -2,10 +2,16 @@
 //
 // Base HTML elements configuration
 //
-html, body, div {
-  border: 0;
+
+* {
   margin: 0;
   padding: 0;
+  border: 0;
+  box-sizing: border-box;
+}
+
+*:before, *:after {
+  box-sizing: inherit;
 }
 
 html, body {
@@ -22,19 +28,4 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow: hidden;
-}
-
-
-/* Box-sizing border-box */
-
-*, *:before, *:after {
-  box-sizing: border-box;
-}
-
-
-/* Flexbox classes */
-
-.pull-right {
-  text-align: right;
-  flex-grow: 1;
 }
