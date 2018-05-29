@@ -1,36 +1,33 @@
-@import "../../../styles/general-styles";
+@import "../../../styles/explorer";
+
+$primary-panel-min-width: 266px;
+$secondary-panel-min-width: 480px;
+$gap-width: 20px;
 
 :host {
-  display: flex;
-  flex-direction: column;
-  position: absolute;
-  top: 0; right: 0; bottom: 0; left: 0;
+  @include explorer-host;
 }
 
 .explorer {
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: center;
+  @include explorer-defaults;
 
-  min-width: calc(266px + 660px + 10px * 4);
+  min-width: calc($primary-panel-min-width + $secondary-panel-min-width + $gap-width);
 
-  flex: 1;            // 1 1 0
-  border: 2pt solid blue;
  }
 
 .explorer-panel {
-  margin: 0px 10px;
-  border: 1px solid red;
 
   &.primary {
-    flex: auto;       // 1 1 auto;
-    max-width: 945px;
-    min-width: 266px;
+    flex: 1 3 640px;
+    max-width: 845px;
+    min-width: $primary-panel-min-width;
   }
 
   &.secondary {
-    flex: none;       // 0 0 auto
-    width: 660px;
+    flex: 1 1 580px;
+    max-width: 680px;
+    min-width: $secondary-panel-min-width;
+    margin-left: $gap-width;
   }
 
 }

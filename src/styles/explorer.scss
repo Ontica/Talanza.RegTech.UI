@@ -1,0 +1,20 @@
+@import "general-styles";
+
+@mixin explorer-host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+}
+
+@mixin explorer-defaults {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+
+  flex: auto;
+}
+
+
+

@@ -2,7 +2,8 @@
                  (onChangeView)="onViewChanged($event)">
 </projects-filter>
 
-<div class="explorer">
+<div class="explorer"
+     [class.remove-min-width]="!displayEditor">
 
   <div [ngSwitch]="viewConfig.viewType" class="explorer-panel primary">
 
@@ -12,7 +13,7 @@
     </activity-tree>
 
     <gantt *ngSwitchCase="'gantt'"
-            [filter]="filter"
+            [filter]="filter"min-width-auto
             [config]="viewConfig">
     </gantt>
 
