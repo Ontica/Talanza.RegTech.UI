@@ -130,10 +130,6 @@ button.btn-margin-right {
   background: $control-disabled-background;
 }
 
-fieldset {
-  border: none;
-}
-
 select.select-box {
   @include input-settings;
 }
@@ -232,6 +228,26 @@ textarea:focus {
   float: right;
 }
 
+.remove-min-width {
+  min-width: 0px;
+}
+
+.hint {
+  color: $gray;
+  font-size: 8pt;
+  font-weight: 400;
+}
+
+.ghost-icon {
+  color: transparent;
+}
+
+.ghost-icon:hover {
+  color: $dark-blue;
+}
+
+
+
 .small-italic-notification {
   font: $control-small-font;
   font-weight: $text-bold;
@@ -245,12 +261,6 @@ a {
 a:hover {
   color: $selected-item-text-color;
   cursor: pointer;
-}
-
-.disabled {
-  pointer-events: none;
-  cursor: default;
-  opacity: 0.7;
 }
 
 .popup {

@@ -1,39 +1,12 @@
 @import "../../../styles/general-styles";
 @import "../../../styles/form";
 
-.form-frame {
-  height: 430px;
-  overflow-y: auto;
-}
-
-.form {
-  width: 640px;
-  overflow-y: auto;
-}
-
-.form-footer {
-  width: 660px;
-}
-
-.header {
-  background-color: transparent;
-  color: $text-title;
-  min-height: 56px;
-  padding: 4pt;
-  width: 100%;
-  border-bottom: 4px solid $light-gray;
-}
-
-.title {
-  display: inline-block;
-  font: $control-font;
-  font-size: 12pt;
-  width: calc(100% - 56px);
-}
 
 .header-options {
-  float: right;
-  vertical-align: -webkit-baseline-middle;
+  flex: none;
+  align-self: flex-start;
+  align-content: flex-end;
+  margin-left: 6px;
 }
 
 i.close-icon {
@@ -41,9 +14,7 @@ i.close-icon {
 }
 
 .hint {
-  position: relative;
   color: $gray;
   font-size: 8pt;
   font-weight: 400;
-  bottom: 0pt;
 }

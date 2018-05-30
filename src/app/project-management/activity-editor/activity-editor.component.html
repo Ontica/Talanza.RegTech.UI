@@ -1,123 +1,130 @@
 
-<div class="header">
-  <div class="title">
-    {{value('name')}}
-    <div class="hint">Actividad: proyecto {{activity.project.name}}</div>
-  </div>
-  <div class="header-options">
-    <i class="fa fa-times close-icon" aria-hidden="true" (click)="onClose()"></i>
-  </div>
-</div>
-
-<form [class.submitted]="submitted" [formGroup]="form" (ngSubmit)="onSubmit()"
+<form class="form-container" autocomplete="off"
+      [class.submitted]="submitted" [formGroup]="form" (ngSubmit)="onSubmit()"
       (keydown)="keyboardHandler($event)">
 
-  <fieldset [disabled]="disabled"> <!-- ToDo: remove this directive when tags control can be disabled -->
-    <table class="form">
-      <tr>
-        <td class="form-title form-title-text" colspan="2">Información general de la tarea o actividad</td>
-      </tr>
-      <tr>
-        <td>Nombre:</td>
-        <td>
-          <input type="text" class="text-box" formControlName="name">
-        </td>
-      </tr>
-      <tr>
-        <td>Observaciones:</td>
-        <td>
-          <textarea class="text-area" rows="5" cols="25" formControlName="notes"></textarea>
-        </td>
-      </tr>
-    </table>
+  <div class="form-header">
 
-    <table class="form">
-      <tr>
-        <td class="form-title form-title-text" colspan="3">Etiquetas</td>
-      </tr>
-      <tr>
-        <td>Etiquetas:</td>
-        <td>
-          <autocomplete-control style='width:200px'
-                                [tags]="tags" [config]="{valueField: 'name'}"
-                                (selected)="onSelectedTags($event)">
-          </autocomplete-control>
-        </td>
+    <div class="form-title">
+      {{value('name')}}
+      <div class="hint">Actividad: proyecto {{activity.project.name}}</div>
+    </div>
+    <div class="header-options">
+      <i class="fa fa-times close-icon" aria-hidden="true" (click)="onClose()"></i>
+    </div>
 
-        <td style="width:300px">
-          <chips [items]="selectedTags"></chips>
-        </td>
-      </tr>
-    </table>
+  </div>
 
-    <table class="form">
-      <tr>
-        <td class="form-title form-title-text" colspan="4">Responsable y estado de la tarea</td>
-      </tr>
-      <tr>
-        <td>Responsable:</td>
-        <td>
-          <select class="select-box" style="width:340px"
-                  formControlName="responsibleUID">
-            <option value="Empty">No asignado</option>
-            <option *ngFor="let responsible of responsibles" [value]="responsible.uid">{{responsible.name}}</option>
-          </select>
-        </td>
-        <td>Estado:</td>
-        <td class="text-align-right">
-          <select class="select-box" formControlName="ragStatus">
-            <option value="NoColor">Sin color</option>
-            <option value="Green">Verde</option>
-            <option value="Amber">Ambar</option>
-            <option value="Red">Rojo</option>
-          </select>
-        </td>
-      </tr>
-    </table>
+  <div class="form-commands"></div>
 
-    <table class="form">
-      <tr>
-        <td class="form-title form-title-text" colspan="5">Fecha objetivo y fecha máxima de entrega</td>
-      </tr>
-      <tr>
-        <td>Fecha objetivo:</td>
-        <td>
-          <calendar-control formControlName="targetDate"></calendar-control>
-        </td>
-        <td style="width:100%">&nbsp;</td>
-        <td>Fecha máxima de entrega:</td>
-        <td class="text-align-right">
-          <calendar-control formControlName="dueDate"></calendar-control>
-        </td>
-      </tr>
-    </table>
+   <div class="form-body">
 
-  </fieldset>
+    <fieldset [disabled]="disabled"> <!-- ToDo: remove this directive when tags control can be disabled -->
 
-  <div *ngIf="showExceptionMsg" class="inline-error">{{exceptionMsg}}</div>
-
-  <div class="form-footer">
-
-    <table class="form">
+      <table class="form-section">
         <tr>
+          <td class="form-section-title" colspan="2">Información general de la tarea o actividad</td>
+        </tr>
+        <tr>
+          <td>Nombre:</td>
           <td>
-            <button *ngIf="!disabled" type="submit" class="btn-warning"
-                    (click)="setCommand('delete')">Eliminar</button>
+            <input type="text" class="text-box" formControlName="name">
           </td>
-          <td class="text-align-right">
-
-            <button *ngIf="!disabled" type="submit" class="btn-action btn-margin-right"
-                    (click)="setCommand('update')">Guardar los cambios</button>
-
-            <button *ngIf="disabled" type="button" class="btn-action right"
-                    (click)="enable()">Editar</button>
-
-            <button *ngIf="!disabled" type="button" class="btn right"
-                    (click)="onReset()">Cancelar edición</button>
-
+        </tr>
+        <tr>
+          <td>Observaciones:</td>
+          <td>
+            <textarea class="text-area" rows="5" cols="25" formControlName="notes"></textarea>
           </td>
         </tr>
       </table>
+
+      <table class="form-section">
+        <tr>
+          <td class="form-section-title" colspan="3">Etiquetas</td>
+        </tr>
+        <tr>
+          <td>Etiquetas:</td>
+          <td style="width:100%">
+            <autocomplete-control style='width:200px'
+                                  [tags]="tags" [config]="{valueField: 'name'}"
+                                  (selected)="onSelectedTags($event)">
+            </autocomplete-control>
+            <br>
+            <chips [items]="selectedTags"></chips>
+          </td>
+        </tr>
+      </table>
+
+      <table class="form-section">
+        <tr>
+          <td class="form-section-title" colspan="4">Responsable y estado de la tarea</td>
+        </tr>
+        <tr>
+          <td>Responsable:</td>
+          <td style="width:100%">
+            <select class="select-box"
+                    formControlName="responsibleUID">
+              <option value="Empty">No asignado</option>
+              <option *ngFor="let responsible of responsibles" [value]="responsible.uid">{{responsible.name}}</option>
+            </select>
+          </td>
+          <td>Estado:</td>
+          <td>
+            <select class="select-box" style="width:130px" formControlName="ragStatus">
+              <option value="NoColor">Sin color</option>
+              <option value="Green">Verde</option>
+              <option value="Amber">Ambar</option>
+              <option value="Red">Rojo</option>
+            </select>
+          </td>
+        </tr>
+      </table>
+
+      <table class="form-section">
+        <tr>
+          <td class="form-section-title" colspan="5">Fecha objetivo y fecha máxima de entrega</td>
+        </tr>
+        <tr>
+          <td>Fecha objetivo:</td>
+          <td>
+            <calendar-control formControlName="targetDate"></calendar-control>
+          </td>
+          <td class="text-align-right"
+              style="width:100%;white-space:normal">Fecha máxima de entrega:</td>
+          <td>
+            <calendar-control formControlName="dueDate"></calendar-control>
+          </td>
+        </tr>
+      </table>
+
+    </fieldset>
+   </div>     <!-- form-body-->
+
+  <div class="form-errors" *ngIf="showExceptionMsg" >{{exceptionMsg}}</div>
+
+  <div class="form-footer">
+
+    <table class="form-section">
+      <tr>
+        <td>
+          <button *ngIf="!disabled" type="submit" class="btn-warning"
+                  (click)="setCommand('delete')">Eliminar</button>
+        </td>
+        <td class="text-align-right">
+
+          <button *ngIf="!disabled" type="submit" class="btn-action btn-margin-right"
+                  (click)="setCommand('update')">Guardar los cambios</button>
+
+          <button *ngIf="disabled" type="button" class="btn-action right"
+                  (click)="enable()">Editar</button>
+
+          <button *ngIf="!disabled" type="button" class="btn right"
+                  (click)="onReset()">Cancelar edición</button>
+
+        </td>
+      </tr>
+    </table>
 
   </div>
 
