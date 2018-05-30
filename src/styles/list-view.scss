@@ -1,0 +1,42 @@
+@import "general-styles";
+
+.list-view-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  width: auto;
+}
+
+.list-view-header {
+  display: flex;
+  flex-flow: row nowrap;
+
+  flex: 0 0 auto;
+  min-height: 56px;
+
+  border-bottom: 4px solid $dark-red;
+  padding: 8px;
+}
+
+.list-view-body {
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.list-view-title {
+  flex: 1 1 auto;
+
+  font: $control-font;
+  font-size: 14pt;
+  font-weight: 600;
+}
+
+.list-view-header-options {
+  flex: none;
+  align-self: flex-start;
+  align-content: flex-end;
+  margin-left: 6px;
+}

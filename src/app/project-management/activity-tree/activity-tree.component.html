@@ -1,15 +1,17 @@
-<div *ngIf="filter.project.uid !== ''" class="activity-tree-container">
+<div *ngIf="filter.project.uid !== ''" class="list-view-container">
 
-  <div class="activity-tree-header">
-    <div class="title">
+  <div class="list-view-header">
+    <div class="list-view-title">
       {{filter.project.name}}
       <div class="hint">Proyecto regulatorio</div>
     </div>
-    <button type="button" class="btn-action right"
-            (click)="showInitialActivityInlineEditor()"><i class="fa fa-plus"></i> Agregar actividad</button>
+    <div class="list-view-header-options">
+      <button type="button" class="btn-action"
+              (click)="showInitialActivityInlineEditor()"><i class="fa fa-plus"></i> Agregar actividad</button>
+    </div>
   </div>
 
-  <div class="activity-tree-body">
+  <div class="list-view-body">
 
     <div *ngIf="addFirstActivityEditorVisible" class="activity-inline-editor"
           style="margin-left:32pt;">

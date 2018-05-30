@@ -1,50 +1,4 @@
-@import "../../../styles/general-styles";
-
-.activity-tree-container {
-  height: 100%;
-  border: $grid-border;
-  border-collapse: collapse;
-  text-align: left;
-  width: auto;
-}
-
-.activity-tree-header {
-  background-color: transparent;
-  color: $text-title;
-  min-height: 56px;
-  padding: 4pt;
-  border-bottom: 4px solid $dark-red;
-  //border-radius: 5px;
-}
-
-.title {
-  position: absolute;
-  font: $control-font;
-  font-size: 14pt;
-  font-weight: 600;
-  float: left;
-}
-
-.hint {
-  color: $gray;
-  font-size: 8pt;
-  font-weight: 400;
-}
-
-.title-add-icon {
-  position: relative;
-  top: 10px;
-  right: 24px;
-  z-index: 10;
-}
-
-
-.activity-tree-body {
-  height: calc(100% - 44px);
-  width: 100%;
-  overflow-x: hidden;
-  overflow-y: auto;
-}
+@import "../../../styles/list-view";
 
 
 .activity-row {
@@ -56,11 +10,9 @@
   margin: 4px;
 }
 
-
 .activity-row:hover {
   background-color: $grid-hover-background-color;
 }
-
 
 .selected-activity {
   background-color: $grid-selected-background-color;
@@ -81,14 +33,6 @@
   margin-top: 12px;
   width: 60px;
   vertical-align: -webkit-baseline-middle;
-}
-
-i.ghost-icon {
-  color: transparent;
-}
-
-.activity-row:hover i.ghost-icon {
-  color: $dark-blue;
 }
 
 .activity-name {
