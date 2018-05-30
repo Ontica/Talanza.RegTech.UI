@@ -12,6 +12,10 @@
 
 .activity-row:hover {
   background-color: $grid-hover-background-color;
+
+  .ghost-icon {
+    color: $dark-blue;
+  }
 }
 
 .selected-activity {

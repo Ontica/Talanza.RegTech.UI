@@ -1,11 +1,13 @@
 @import "general-styles";
 
+
 .list-view-container {
   display: flex;
   flex-direction: column;
   height: 100%;
-
   width: auto;
+
+  @include card;
 }
 
 .list-view-header {
@@ -14,12 +16,15 @@
 
   flex: 0 0 auto;
   min-height: 56px;
-
-  border-bottom: 4px solid $dark-red;
   padding: 8px;
+
+  border-bottom: 6px solid $dark-red;
+
+  @include raised-header;
 }
 
 .list-view-body {
+  margin-top: 4px;
   height: 100%;
   width: 100%;
   overflow-x: hidden;
