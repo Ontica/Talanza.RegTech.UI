@@ -9,12 +9,8 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'navbar',
-  templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.scss']
+  selector: 'main-menu',
+  templateUrl: './main-menu.component.html',
+  styleUrls: ['./main-menu.component.scss']
 })
-
-export class NavbarComponent {
-   
-
-}
+export class MainMenuComponent { }
