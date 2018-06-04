@@ -1,0 +1,71 @@
+// Responsive mixins and classes
+
+$margin-size: 8px;
+
+$medium-max-width: 1024px;
+$small-max-width: 540px;
+
+@mixin small() {
+  @media only screen and (max-width: $small-max-width) {
+      @content;
+  }
+}
+
+@mixin medium() {
+  @media only screen and (max-width: $medium-max-width) {
+      @content;
+  }
+}
+
+
+@mixin small-hide() {
+  @media only screen and (max-width: $small-max-width) {
+    display: none !important;
+  }
+}
+
+
+@mixin medium-hide() {
+  @media only screen and (max-width: $medium-max-width) {
+    display: none !important;
+  }
+}
+
+.small-hide {
+  @include small-hide;
+}
+
+.medium-hide {
+  @include medium-hide;
+}
+
+@mixin row() {
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+
+@mixin column() {
+  display: flex;
+  flex-direction: column;
+}
+
+@mixin expand() {
+  flex: 1;
+}
+
+.row {
+  @include row;
+}
+
+.column {
+  @include column;
+}
+
+.expand {
+  @include expand;
+}
+
+.stretch {
+  align-items: stretch;
+}
