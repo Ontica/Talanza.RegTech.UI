@@ -1,0 +1,16 @@
+<div class="header">
+
+  <div class="title">
+    {{title}}
+    <div class="breadcrumb">{{breadcrumb}}</div>
+  </div>
+
+  <div class="menu-bar">
+
+    <span class="menu" [innerHTML]="mainMenu | safeHtml "></span>
+
+    <span class="menu" [innerHTML]="secondaryMenu | safeHtml "></span>
+
+  </div>
+
+</div>

@@ -1,0 +1,50 @@
+@import "../../../styles/general-styles";
+
+$margin-size: 8px;
+
+.header {
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+
+  min-height: 98px;
+  overflow: visible;
+
+  background: rgb(2,0,36);
+  background: linear-gradient(45deg, rgba(2,0,36,1) 0%,
+                                     rgba(16,64,112,1) 33%,
+                                     rgba(19,68,119,1) 46%,
+                                     rgba(22,89,156,1) 100%);
+
+  > div {
+    margin-bottom: $margin-size;
+    margin-left: 14px;
+  }
+
+}
+
+.title {
+  color: $white;
+  font-size: 18pt;
+  font-weight: 100;
+  min-width: 160px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  color: $white;
+
+  .breadcrumb {
+    color: $gray;
+    font-size: $font-size-hint;
+    font-weight: 400;
+  }
+
+}
+
+.menu-bar {
+  color: $white;
+  font-size: $font-size-hint;
+  font-weight: 400;
+}
+
+.menu {
+  margin-right: 180px;
+}

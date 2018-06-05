@@ -16,8 +16,11 @@ import { GlobalSearchModule } from '../global-search/global-search.module';
 import { CoreModule } from '../core/core.module';
 
 import { MainLayoutComponent } from './main-layout/main-layout.component';
+import { MainMenuComponent } from './main-layout/main-menu/main-menu.component';
 
-import { NavbarComponent } from './navbar/navbar.component';
+import { NavigationHeaderComponent } from './nav-header/nav-header.component';
+
+
 import { NoContentComponent } from './no-content/no-content.component';
 
 
@@ -27,8 +30,8 @@ import { NoContentComponent } from './no-content/no-content.component';
 
 @NgModule({
   imports: [RouterModule, CommonModule, FormsModule, ControlsModule, GlobalSearchModule, CoreModule],
-  declarations: [MainLayoutComponent, NavbarComponent, NoContentComponent],
-  exports: [MainLayoutComponent, NoContentComponent],
+  declarations: [MainLayoutComponent, NavigationHeaderComponent, MainMenuComponent, NoContentComponent],
+  exports: [MainLayoutComponent, NavigationHeaderComponent, NoContentComponent],
 
 })
 export class SharedModule { }
