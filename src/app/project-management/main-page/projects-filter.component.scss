@@ -1,7 +1,10 @@
 @import "../../../styles/grid";
+
+
 .grid-search-table {
-  border-bottom: 1px solid $gray;
-  border-collapse: collapse;
   margin: 3px 10px 3px 3px;
   width: 100%;
+
+  border-bottom: 1px solid $dark-white;
+  border-collapse: collapse;
 }

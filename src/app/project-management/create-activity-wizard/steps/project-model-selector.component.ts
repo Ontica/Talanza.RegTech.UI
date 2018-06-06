@@ -16,8 +16,7 @@ import { ProcessModelsService } from '../../services/process-models.service';
 @Component({
   selector: 'project-model-selector',
   templateUrl: './project-model-selector.component.html',
-  styleUrls: ['./project-model-selector.component.scss'],
-  providers:[ProcessModelsService]
+  styleUrls: ['./project-model-selector.component.scss']
 })
 
 export class ProjectModelSelectorComponent {

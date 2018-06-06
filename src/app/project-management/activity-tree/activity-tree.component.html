@@ -2,8 +2,13 @@
 
   <div class="list-view-header">
     <div class="list-view-title">
-      {{filter.project.name}}
-      <div class="hint">Proyecto regulatorio</div>
+      <!-- Árbol de actividades
+      <div class="hint">Proyecto regulatorio: {{filter.project.name}}</div> -->
+      <search-control (onSearch)="search($event)"></search-control>
+      Ordenar por:
+    </div>
+    <div>
+
     </div>
     <div class="list-view-header-options">
       <button type="button" class="btn-action"

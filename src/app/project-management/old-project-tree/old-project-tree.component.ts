@@ -16,8 +16,7 @@ import { ActivityService } from '../services/activity.service';
 @Component({
   selector: 'old-project-tree',
   templateUrl: './old-project-tree.component.html',
-  styleUrls: ['./old-project-tree.component.scss'],
-  providers: [ActivityService]
+  styleUrls: ['./old-project-tree.component.scss']
 })
 
 export class OldProjectTreeComponent {
@@ -185,8 +184,8 @@ export class OldProjectTreeComponent {
 
     // source.parent.id = target.parent.id;
 
-    // let targetIndex = this.taskList.findIndex((x) => x.uid === target.uid); 
-    // this.taskList.splice(targetIndex,0,source);  
+    // let targetIndex = this.taskList.findIndex((x) => x.uid === target.uid);
+    // this.taskList.splice(targetIndex,0,source);
 
     // this.dragIndex = targetIndex;
     // this.moveItem(source.id, targetIndex);
@@ -195,15 +194,15 @@ export class OldProjectTreeComponent {
   private moveItem(sourceId: number, index: number): void {
     // let childs = this.taskList.filter((x) => x.parent.id === sourceId);
 
-    // childs.forEach((child)=> {            
-    //   let childIndex = this.taskList.findIndex((x) => x.id === child.id);     
+    // childs.forEach((child)=> {
+    //   let childIndex = this.taskList.findIndex((x) => x.id === child.id);
 
     //   if (this.dragIndex < childIndex) {
-    //     this.dragIndex++; 
+    //     this.dragIndex++;
     //   }
 
     //   this.taskList.splice(childIndex, 1);
-    //   this.taskList.splice(this.dragIndex,0,child);      
+    //   this.taskList.splice(this.dragIndex,0,child);
 
     //   this.moveItem(child.id,this.dragIndex);
     // } );

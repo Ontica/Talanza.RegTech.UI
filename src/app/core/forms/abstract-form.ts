@@ -214,6 +214,7 @@ export abstract class AbstractForm {
     return this.get(path).value;
   }
 
+
   // private methods
 
   private afterValidate(): void {
@@ -225,7 +226,7 @@ export abstract class AbstractForm {
         return;
       }
 
-      // form is not valid
+      // invalid form
 
       if (this.exceptionsArray.length === 0) {
         const msg = FormMessages.InvalidFormWithUnregisteredException;
@@ -268,8 +269,6 @@ export abstract class AbstractForm {
 
 
   private startProcessing(flag: boolean) {
-    console.log("startProcessing " + flag);
-
     if (!this.spinner) {
       this.setDefaultSpinner();
     }

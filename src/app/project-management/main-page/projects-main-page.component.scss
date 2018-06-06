@@ -11,6 +11,8 @@ $gap-width: 30px;
 .explorer {
   @include explorer-defaults;
 
+  justify-content: center;
+
   min-width: calc($primary-panel-min-width + $secondary-panel-min-width + $gap-width);
  }
 

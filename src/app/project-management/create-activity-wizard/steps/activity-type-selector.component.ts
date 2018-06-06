@@ -14,8 +14,7 @@ import { ProcessModelsService } from '../../services/process-models.service'
 @Component({
   selector: 'activity-type-selector',
   templateUrl: './activity-type-selector.component.html',
-  styleUrls: ['./activity-type-selector.component.scss'],
-  providers: [ProcessModelsService]
+  styleUrls: ['./activity-type-selector.component.scss']
 })
 
 export class ActivityTypeSelectorComponent implements OnInit {
