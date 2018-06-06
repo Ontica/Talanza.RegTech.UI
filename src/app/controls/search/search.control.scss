@@ -1,14 +1,13 @@
 @import "../../../styles/general-styles";
 
 .search-control {
-  min-width: 180px;
-  max-width: 300px;
+  min-width: 240px;
   position: relative;
 }
 
 .search-control input {
-  border-radius: 8px;
+  border-radius: 6px;
   padding-left: 8px;
   transition: 0.5s ease-out;
-  height: 32px;
+  height: 30px;
 }

@@ -1,110 +1,108 @@
-@import "../../../styles/variables";
-
-$margin-size: 8px;
+@import "../../../styles/general-styles";
 
 .main-layout {
-  display:flex;
-  flex-direction: column;
-  height: 100%;
-  width: 100%;
+  @include column;
 
-  /*
-  .top-bar {
-    display: none;
-    background-color: $light-red;
-    color: $dark-blue;
-    padding: $margin-size;
+  height: 100%;
+
+  margin: 0 calc((100% - 1024px) * 0.125 + 10px);
+
+  @include small() {
+    margin: 0 1px;
   }
-  */
+
+  @include medium() {
+    margin: 0 10px;
+  }
 
   .central-container {
-    display: flex;
-    flex-flow: row nowrap;
+    @include row;
     flex: 1;
-    align-items: stretch;
-
-    /*
-    .side-bar {
-      display: none;
-      background-color: $black;
-      color: $white;
-      width: 200px;
-    }
-    */
 
     .main-column {
-      display: flex;
-      flex-direction: column;
+      @include column;
+      @include expand;
 
-      flex: 1;
       padding-bottom: $margin-size;
+
     }
 
-    /*
-    .aside-bar {
-      display: none;
-      height: 100%;
-      width: 200px;
-    }
-    */
-
   }
-
-  /*
-  .footer {
-    display: none;
-    height: 40px;
-
-    padding: $margin-size;
-    background-color: $background-color;
-    border-top: 1px inset $light-gray;
-  }
-  */
 
 }  // main layout
 
-// main-column items
+.top-bar {
+  display: none;
 
-.header {
-  display: flex;
-  flex-flow: row nowrap;
-  min-height: 78px;
+  color: $dark-blue;
+  padding: $margin-size;
+  height: 45px;
+}
+
+.nav-bar {
+  @include row;
+
+  min-height: 58px;
   overflow: visible;
 
-  > div {
-    margin: $margin-size;
+  justify-content: space-between;
+  align-items: flex-start;
+
+  color: $dark-blue;
+  padding: $margin-size;
+}
+
+
+.side-bar {
+  @include column;
+  display: none;
+
+  background-color: $black;
+  color: $white;
+  width: 200px;
+}
+
+.aside-bar {
+  @include column;
+  display: none;
+
+  height: 100%;
+  width: 200px;
+}
+
+.footer {
+  display: none;
+  height: 40px;
+
+  padding: $margin-size;
+  border-top: 1px inset $light-gray;
+}
+
+
+.search-and-settings {
+  @include row;
+
+  width: auto;
+  align-items: center;
+
+  > * {
+    margin-left: 32px;
   }
+}
 
-  .logo {
-    height: 60px;
-    margin-right: 14px;
-  }
+.logo {
+  @include small-hide;
 
-  .title {
-    color: $dark-red;
-    font-size: $font-size-title;
-    font-weight: $font-weight-title;
-    min-width: 260px;
-    padding-top: 7px;
-    width: 50%;
-
-    .breadcrumb {
-      color: $text-hint;
-      font-size: $font-size-hint;
-      font-weight: $font-weight-hint;
-    }
-
-  }
-
-  .search-control-container {
-    padding-top: 7px;
-    width: 300px;
-  }
-
+  height: 42px;
+  margin-right: 8px;
 }
 
 .content {
-  flex: 1;
+  @include expand;
+
   position: relative;
-  margin: 0px $margin-size;
+  background-color: $white;
+
+  border: 1px solid $dark-white;
+  border-radius: 6px;
 }

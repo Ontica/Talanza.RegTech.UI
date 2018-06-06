@@ -16,8 +16,6 @@ import { Component } from '@angular/core';
 export class MainLayoutComponent {
 
   userName = 'UserName || et al';
-  title = 'Administración del cumplimiento regulatorio';
-  breadcrumb = '';
 
   isGlobalSearchPageVisible = false;
   keywords: string = '';
