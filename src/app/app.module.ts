@@ -19,6 +19,8 @@ import { environment } from 'environments/environment';
 
 import { CoreModule } from './core/core.module';
 
+import { StateModule } from './state/state.module';
+
 import { ContractsModule } from './contracts/contracts.module';
 import { ControlsModule } from './controls/controls.module';
 import { DocumentsModule } from './documents/documents.module';
@@ -73,6 +75,7 @@ type StoreType = {
 
   imports: [
     CoreModule,
+    StateModule,
     SecurityUIModule,
     DashboardModule,
     ObligationsModule,

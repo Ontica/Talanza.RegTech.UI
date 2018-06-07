@@ -4,14 +4,14 @@
     <td>
       <select #contract class="select-box" style="width:160px;" (change)="onChangeContract(contract.value)" >
         <option value="">( Seleccionar )</option>
-        <option *ngFor="let contract of contracts" [value]="contract.uid">{{contract.name}}</option>       
+        <option *ngFor="let contract of contracts" [value]="contract.uid">{{contract.name}}</option>
       </select>
     </td>
     <td>Etapa:</td>
     <td>
       <select #stage class="select-box" style="width:160px" (change)="onChangeStage(stage.value)">
         <option value="">( No filtrar )</option>
-        <option *ngFor="let stage of stages" [value]="stage.uid">{{stage.name}}</option>        
+        <option *ngFor="let stage of stages" [value]="stage.uid">{{stage.name}}</option>
       </select>
     </td>
     <td>Buscar:</td>
@@ -31,7 +31,7 @@
     <td>
       <select #project class="select-box" style="width:160px;" (change)="onChangeProjectList(project.value)">
         <option value="">( Seleccionar )</option>
-        <option *ngFor="let project of projectsList" [value]="project.uid">{{project.name}}</option>
+        <option *ngFor="let project of projectStore.projects | async" [value]="project.uid">{{project.name}}</option>
       </select>
     </td>
     <td>Etiqueta:</td>

@@ -9,17 +9,14 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 import { Empty, Contact } from '../../core/data-types';
 
+
+import { ProjectStore } from '../../state/project.store';
+
 import { ActivityService, ProjectService } from '../services';
 
-import {
-  ActivityFilter,
-  Contract,
-  DefaultViewConfig,
-  Project,
-  Resource,
-  Stage,
-  ViewConfig
-} from '../data-types';
+import { ActivityFilter, Contract,
+         DefaultViewConfig, Project,
+         Resource, Stage, ViewConfig } from '../data-types';
 
 
 @Component({
@@ -32,7 +29,6 @@ export class ProjectsFilterComponent implements OnInit {
   @Output() onChangeFilter = new EventEmitter<ActivityFilter>();
   @Output() onChangeView   = new EventEmitter<ViewConfig>();
 
-  projectsList: Project[] = [];
   responsiblesList: Contact[] = [];
   labelsList: any;
   keywords = '';
@@ -45,12 +41,14 @@ export class ProjectsFilterComponent implements OnInit {
   filter: ActivityFilter = new ActivityFilter();
   viewConfig: ViewConfig = DefaultViewConfig();
 
-  constructor(private projectService: ProjectService,
-              private activityService: ActivityService) { }
+  constructor(
+    private projectStore: ProjectStore,
+    private projectService: ProjectService,
+    private activityService: ActivityService) {
+  }
 
   ngOnInit() {
     this.loadContracts();
-    this.loadProjectList();
     this.loadStages();
     this.loadTags();
     this.changeView();
@@ -66,7 +64,7 @@ export class ProjectsFilterComponent implements OnInit {
       return;
     }
 
-    this.selectedProject = this.projectsList.find((x) => x.uid === projectUID);
+    this.selectedProject = this.projectStore.findById(projectUID);
 
     this.filter.project =  this.selectedProject;
 
@@ -145,15 +143,6 @@ export class ProjectsFilterComponent implements OnInit {
   }
 
   // private methods
-
-  private loadProjectList() {
-    const errMsg = 'Ocurrió un problema al intentar leer la lista de proyectos.';
-
-    this.projectService.getProjectList()
-      .toPromise()
-      .then( x  => this.projectsList = x)
-  }
-
 
   private loadContracts() {
     const errMsg = 'Ocurrió un problema al intentar leer la lista de contratos.';
