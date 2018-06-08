@@ -33,14 +33,6 @@ import { CloseActivityComponent } from './old-editor/tabs/close-activity.compone
 import { OldActivityEditorComponent } from './old-editor/old-activity-editor.component';
 import { OldProjectTreeComponent } from './old-project-tree/old-project-tree.component';
 
-import {
-  ActivityService,
-  ActivityTreeService,
-  ProcessModelsService,
-  ProjectService
-} from './services';
-
-
 /**
  * Do not specify providers for modules that might be imported by a lazy loaded module.
  */
@@ -76,15 +68,6 @@ import {
     OldActivityEditorComponent,
     ProjectModelSelectorComponent
   ],
-
-
-  providers: [
-    ActivityService,
-    ActivityTreeService,
-    ProcessModelsService,
-    ProjectService
-  ],
-
 
   exports: [
     GanttComponent,

@@ -8,9 +8,9 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
-import { CoreService } from '../../core/core.service';
+import { CoreService } from '@app/core/core.service';
 
-import { Activity, ProcessModel } from '../data-types';
+import { Activity, ProcessModel } from '@app/models/project-management';
 
 
 enum ProjectServiceErr {

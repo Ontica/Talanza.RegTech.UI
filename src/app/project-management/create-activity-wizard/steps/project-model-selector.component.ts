@@ -7,11 +7,9 @@
  */
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
-import { Project, ProcessModel } from '../../data-types/project';
+import { Activity_Empty,Project, ProcessModel } from '@app/models/project-management';
 
-import { Activity_Empty } from '../../data-types/activity';
-
-import { ProcessModelsService } from '../../services/process-models.service';
+import { ProcessModelsService } from '@app/services/project-management';
 
 @Component({
   selector: 'project-model-selector',

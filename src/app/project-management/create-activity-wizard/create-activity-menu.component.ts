@@ -7,7 +7,7 @@
 
 import { Component, EventEmitter, HostBinding, Input, Output } from '@angular/core';
 
-import { Activity_Empty, Project } from '../data-types';
+import { Activity_Empty, Project } from '@app/models/project-management';
 
 
 @Component({

@@ -15,4 +15,4 @@ import { ProjectStore } from './project.store';
   imports: [CommonModule],
   providers: [ProjectStore]
 })
-export class StateModule { }
+export class StoreModule { }

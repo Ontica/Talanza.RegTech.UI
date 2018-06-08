@@ -10,13 +10,9 @@ import { Component, ElementRef, Input, OnChanges, ViewChild } from "@angular/cor
 import "dhtmlx-gantt";
 import { } from "@types/dhtmlxgantt";
 
-import {
-  ActivityFilter,
-  Project,
-  ViewConfig
-} from '../data-types';
+import { ActivityFilter, Project, ViewConfig } from '@app/models/project-management';
 
-import { GanttService } from './gantt.service';
+import { GanttService } from '@app/services/project-management';
 
 
 @Component({

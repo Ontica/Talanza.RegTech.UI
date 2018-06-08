@@ -9,9 +9,16 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { List } from 'immutable';
 
-import { Activity, Project } from '../project-management/data-types';
-import { ProjectService } from '../project-management/services';
+import { Activity, Project } from '@app/models/project-management';
+import { ProjectService } from '@app/services/project-management';
 
+class ProjectModel {
+
+  project: Project;
+
+  activities: Activity[];
+
+}
 
 @Injectable()
 export class ProjectStore {
@@ -28,11 +35,13 @@ export class ProjectStore {
     return this._projects.asObservable();
   }
 
+  // activities(project: Project): Observable<List<Activity>> {
+  //   return this._projects.asObservable();
+  // }
 
   findById(projectUID: string): Project {
     return this._projects.value.find((x) => x.uid === projectUID);
   }
-
 
   // private methods
 
@@ -40,10 +49,9 @@ export class ProjectStore {
 
     this.projectService.getProjectList()
         .subscribe(
-            data => {
-              this._projects.next(List(data));
-              console.log('hurray!, data gathering from the server.')
-            },
+            data =>
+              this._projects.next(List(data))
+            ,
             err => console.log('Error reading project data', err)
         );
   }

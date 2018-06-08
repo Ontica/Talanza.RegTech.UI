@@ -7,18 +7,13 @@
 
 import { Component, OnInit } from '@angular/core';
 
-import { Empty } from '../../core/data-types';
+import { Empty } from '@app/core/data-types';
 
-import { ActivityService, ProjectService } from '../services';
+import { ActivityService, ProjectService } from '@app/services/project-management';
 
-import {
-  Activity,
-  Activity_Empty,
-  ActivityFilter,
-  DefaultViewConfig,
-  Project,
-  ViewConfig
-} from '../data-types';
+import { Activity, Activity_Empty,
+         ActivityFilter, DefaultViewConfig,
+         Project, ViewConfig } from '@app/models/project-management';
 
 
 @Component({

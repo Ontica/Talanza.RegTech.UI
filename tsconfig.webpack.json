@@ -16,7 +16,8 @@
     ],
     "baseUrl": "./src",
     "paths": {
-      "@angular/*": ["node_modules/@angular/*"]
+      "@angular/*": ["node_modules/@angular/*"],
+      "@app/*": ["app/*"]
     },
     "typeRoots": [
       "node_modules/@types"

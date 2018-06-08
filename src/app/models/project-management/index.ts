@@ -11,4 +11,10 @@ export * from './activity';
 
 export * from './commands';
 
+export * from './gantt';
+
+export * from './meeting';
+
 export * from './project';
+
+

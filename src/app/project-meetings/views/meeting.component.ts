@@ -2,9 +2,9 @@ import { Component, EventEmitter, Input, Output  } from '@angular/core';
 
 import { Validate } from 'empiria';
 
-import { Meeting, EmptyMeeting, Participant } from '../data-types/meeting';
+import { Meeting, EmptyMeeting, Participant } from '@app/models/project-management';
 
-import { ProjectMeetingService } from '../services/project-meeting.service';
+import { ProjectMeetingService } from '@app/services/project-management';
 
 @Component({
     selector: 'meeting',
@@ -16,13 +16,13 @@ import { ProjectMeetingService } from '../services/project-meeting.service';
 export class MeetingComponent {
 
     private _meetingUID: string = '';
-    @Input() 
-    set meetingUID(meetingUID: string) {     
-        if (Validate.hasValue(meetingUID)) {            
+    @Input()
+    set meetingUID(meetingUID: string) {
+        if (Validate.hasValue(meetingUID)) {
             this._meetingUID = meetingUID;
-            
-            this.loadMeeting(); 
-        }             
+
+            this.loadMeeting();
+        }
     }
     get meetingUID(): string {
         return this._meetingUID;
@@ -41,9 +41,9 @@ export class MeetingComponent {
 
     public closeEditMeetingWindow(meeting: Meeting): void {
         this.isOpenEditMeetingWindow = false;
-        
+
         this.meeting = meeting;
-        
+
         this.onUpdateMeeting.emit(this.meeting);
     }
 
@@ -57,34 +57,34 @@ export class MeetingComponent {
 
     private loadMeeting() {
         this.projectMeetingService.getMeeting(this.meetingUID)
-                          .subscribe((meeting)=> { 
-                              this.meeting = meeting;                              
-                              this.setMeetingStatus();                        
+                          .subscribe((meeting)=> {
+                              this.meeting = meeting;
+                              this.setMeetingStatus();
                             });
-    }    
+    }
 
     private closeMeeting(): void {
         this.projectMeetingService.closeMeeting(this.meeting.uid)
                                   .subscribe((x)=> {
-                                        this.loadMeeting();   
-                                        this.isEditableMeetingParticipants = true;  
-                                        this.onUpdateMeeting.emit(this.meeting);                              
+                                        this.loadMeeting();
+                                        this.isEditableMeetingParticipants = true;
+                                        this.onUpdateMeeting.emit(this.meeting);
                                     })
     }
 
     private openMeeting(): void {
         this.projectMeetingService.openMeeting(this.meeting.uid)
                                   .subscribe((x)=> {
-                                      this.loadMeeting(); 
-                                      this.onUpdateMeeting.emit(this.meeting);                                     
+                                      this.loadMeeting();
+                                      this.onUpdateMeeting.emit(this.meeting);
                                     })
     }
 
     private deleteMeeting(): void {
         this.projectMeetingService.deleteMeeting(this.meeting.uid)
                                   .subscribe((x)=>{
-                                      this.meeting = x; 
-                                      this.onUpdateMeeting.emit(this.meeting); 
+                                      this.meeting = x;
+                                      this.onUpdateMeeting.emit(this.meeting);
                                    });
     }
 

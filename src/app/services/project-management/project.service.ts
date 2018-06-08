@@ -9,17 +9,11 @@ import { Injectable } from '@angular/core';
 import { Observable} from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 
-import { CoreService } from '../../core/core.service';
+import { CoreService } from '@app/core/core.service';
 
-import { Contact } from '../../core/data-types';
+import { Contact } from '@app/core/data-types';
 
-import {
-  Contract,
-  Project,
-  Resource,
-  Stage
-} from '../data-types';
-
+import { Contract, Project, Resource, Stage } from '@app/models/project-management';
 
 enum ProjectServiceErr {
 

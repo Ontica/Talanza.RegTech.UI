@@ -11,9 +11,7 @@ import { Component } from '@angular/core';
 import { InboxFilter } from '../data-types/inbox-filter';
 import { Activity } from '../../project-management/data-types/activity';
 
-import { ProjectService } from '../../project-management/services/project.service';
-import { ActivityService } from '../../project-management/services/activity.service';
-
+import { ActivityService, ProjectService } from '../../services/project-management';
 
 @Component({
   selector: 'inbox-main-page',
@@ -23,13 +21,13 @@ import { ActivityService } from '../../project-management/services/activity.serv
 })
 
 export class InboxMainPageComponent  {
- 
+
   public filter: InboxFilter = new InboxFilter();
-  
+
   public constructor(private projectService: ProjectService, private activityService: ActivityService) { }
 
-  public  onChangeFilter(receivedFilter: InboxFilter) {    
-    this.filter = receivedFilter;     
-  }  
- 
+  public  onChangeFilter(receivedFilter: InboxFilter) {
+    this.filter = receivedFilter;
+  }
+
 }

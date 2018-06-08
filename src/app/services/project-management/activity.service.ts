@@ -10,9 +10,9 @@ import { Observable } from 'rxjs/Observable';
 
 import { Assertion } from 'empiria';
 
-import { CoreService } from '../../core/core.service';
+import { CoreService } from '@app/core/core.service';
 
-import { Activity, ActivityFilter, CloseActivityCommand } from '../data-types';
+import { Activity, ActivityFilter, CloseActivityCommand } from '@app/models/project-management';
 
 
 enum Errors {

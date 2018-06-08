@@ -18,8 +18,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { environment } from 'environments/environment';
 
 import { CoreModule } from './core/core.module';
+import { ServicesModule } from './services/services.module';
 
-import { StateModule } from './state/state.module';
+import { StoreModule } from './store/store.module';
 
 import { ContractsModule } from './contracts/contracts.module';
 import { ControlsModule } from './controls/controls.module';
@@ -75,7 +76,8 @@ type StoreType = {
 
   imports: [
     CoreModule,
-    StateModule,
+    ServicesModule,
+    StoreModule,
     SecurityUIModule,
     DashboardModule,
     ObligationsModule,

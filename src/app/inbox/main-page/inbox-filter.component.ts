@@ -9,11 +9,11 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 import { Empty, Contact } from '../../core/data-types';
 
-import { Project } from '../../project-management/data-types';
+import { Project } from '@app/models/project-management';
 
 import { InboxFilter } from '../data-types/inbox-filter';
 
-import { ActivityService, ProjectService } from '../../project-management/services';
+import { ActivityService, ProjectService } from '@app/services/project-management';
 
 
 @Component({

@@ -7,16 +7,15 @@
 
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
-import { Empty, Contact } from '../../core/data-types';
+import { Empty, Contact } from '@app/core/data-types';
 
+import { ProjectStore } from '@app/store/project.store';
 
-import { ProjectStore } from '../../state/project.store';
-
-import { ActivityService, ProjectService } from '../services';
+import { ActivityService, ProjectService } from '@app/services/project-management';
 
 import { ActivityFilter, Contract,
          DefaultViewConfig, Project,
-         Resource, Stage, ViewConfig } from '../data-types';
+         Resource, Stage, ViewConfig } from '@app/models/project-management';
 
 
 @Component({

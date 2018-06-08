@@ -11,9 +11,7 @@ import {
   Output
 } from '@angular/core';
 
-import { UpdateActivityCommand } from '../data-types/task';
-
-import { Activity } from '../data-types/activity';
+import { Activity } from '@app/models/project-management';
 
 @Component({
   selector: 'old-activity-editor',

@@ -8,9 +8,9 @@
 
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
-import { Identifiable } from '../../../core/data-types';
+import { Identifiable } from '@app/core/data-types';
 
-import { Project, ProcessModel } from '../../data-types/project';
+import { Project, ProcessModel } from '@app/models/project-management';
 
 @Component({
   selector: 'create-activity-wizard-controller',

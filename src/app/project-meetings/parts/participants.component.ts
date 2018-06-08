@@ -10,8 +10,8 @@ import { Component, Input } from '@angular/core';
 
 import { Validate } from 'empiria';
 
-import { Participant, EmptyParticipant } from '../data-types/meeting';
-import { ProjectMeetingService } from '../services/project-meeting.service';
+import { Participant, EmptyParticipant } from '@app/models/project-management';
+import { ProjectMeetingService } from '@app/services/project-management';
 
 
 @Component({

@@ -7,9 +7,9 @@
  */
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
-import { ProcessModel } from '../../data-types/project';
+import { ProcessModel } from '@app/models/project-management';
 
-import { ProcessModelsService } from '../../services/process-models.service'
+import { ProcessModelsService } from '@app/services/project-management'
 
 @Component({
   selector: 'activity-type-selector',

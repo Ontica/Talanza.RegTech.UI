@@ -15,7 +15,7 @@ import {
   Contract,
   Project,
   Stage
-} from '../data-types/project';
+} from './project';
 
 
 export class ActivityFilter {

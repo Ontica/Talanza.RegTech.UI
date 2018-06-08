@@ -13,16 +13,15 @@ import { FormBuilder, FormControl,
 
 import { Assertion } from 'empiria';
 
-import { DateStringLibrary } from '../../core/data-types';
+import { Contact, DateStringLibrary } from '@app/core/data-types';
 
-import { Contact } from '../../core/data-types';
-import { ColoredTag } from '../../core/ui-data-types';
+import { ColoredTag } from '@app/core/ui-data-types';
 
-import { AbstractForm, MessageBoxService, SpinnerService } from '../../core/ui-services';
+import { AbstractForm, MessageBoxService, SpinnerService } from '@app/core/ui-services';
 
-import { Activity, Activity_Empty } from '../data-types';
+import { Activity, Activity_Empty } from '@app/models/project-management';
 
-import { ActivityService, ProjectService } from '../services';
+import { ActivityService, ProjectService } from '@app/services/project-management';
 
 
 enum FormMessages {

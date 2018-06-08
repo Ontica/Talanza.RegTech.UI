@@ -1,5 +1,7 @@
 import { Identifiable, Empty } from '../../core/data-types';
 
+import { Project } from './project';
+
 export interface Meeting {
   uid: string,
   controlNo: string
@@ -15,11 +17,6 @@ export interface Meeting {
   topics: Topic[],
   recommendations: Recommendation[],
   // "agreements": []
-}
-
-export interface Project {
-  uid: string,
-  name: string
 }
 
 export interface Participant extends Identifiable {

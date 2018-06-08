@@ -9,13 +9,9 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 import { Assertion } from 'empiria';
 
-import { ActivityService, ActivityTreeService } from '../services';
+import { ActivityService, ActivityTreeService } from '@app/services/project-management';
 
-import {
-  Activity,
-  Activity_Empty,
-  ActivityFilter
-} from '../data-types';
+import { Activity, Activity_Empty, ActivityFilter } from '@app/models/project-management';
 
 
 @Component({

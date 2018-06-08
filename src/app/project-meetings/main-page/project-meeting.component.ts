@@ -7,7 +7,7 @@
  */
 import  { Component, EventEmitter, Input, Output } from '@angular/core';
 
-import { Meeting } from '../data-types/meeting';
+import { Meeting } from '@app/models/project-management';
 import { EventManager } from '@angular/platform-browser';
 
 
@@ -17,15 +17,15 @@ import { EventManager } from '@angular/platform-browser';
     styleUrls: ['./project-meeting.component.scss']
 })
 
-export class ProjectMeetingComponent {  
-    
+export class ProjectMeetingComponent {
+
     public selectedTask = "meetingData";
     public title = 'Agregar Reunión';
 
     private _meetingUID: string = "";
-    @Input() 
-    set meetingUID(meetingUID: string) {       
-        this._meetingUID = meetingUID;        
+    @Input()
+    set meetingUID(meetingUID: string) {
+        this._meetingUID = meetingUID;
     }
     get meetingUID(): string {
         return this._meetingUID;
@@ -42,6 +42,6 @@ export class ProjectMeetingComponent {
 
         this.onUpdateMeeting.emit(projectMeeting);
     }
-            
-    
+
+
 }

@@ -7,11 +7,9 @@
  */
 import { Component, Input } from '@angular/core';
 
-import { Project } from '../data-types/project';
-import { Activity } from '../data-types/activity';
-import { ActivityFilter } from '../data-types/activity-filter';
+import { Activity, ActivityFilter, Project } from '@app/models/project-management';
 
-import { ActivityService } from '../services/activity.service';
+import { ActivityService } from '@app/services/project-management';
 
 @Component({
   selector: 'old-project-tree',

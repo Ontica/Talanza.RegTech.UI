@@ -10,10 +10,9 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 import { Assertion } from 'empiria';
 
-import { Activity } from '../../data-types/activity';
-import { CloseActivityCommand } from '../../data-types/commands';
+import { Activity, CloseActivityCommand } from '@app/models/project-management';
 
-import { ActivityService } from '../../services/activity.service';
+import { ActivityService } from '@app/services/project-management/activity.service';
 
 @Component({
   selector: 'close-activity',
