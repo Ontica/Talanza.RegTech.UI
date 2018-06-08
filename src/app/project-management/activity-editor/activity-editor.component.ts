@@ -11,17 +11,23 @@ import { Component, EventEmitter, Input,
 import { FormBuilder, FormControl,
          FormGroup, Validators } from '@angular/forms';
 
+import { Observable } from 'rxjs/Observable';
+
 import { Assertion } from 'empiria';
 
 import { Contact, DateStringLibrary } from '@app/core/data-types';
 
 import { ColoredTag } from '@app/core/ui-data-types';
 
+import { ProjectStore } from '@app/store/project.store';
+
 import { AbstractForm, MessageBoxService, SpinnerService } from '@app/core/ui-services';
 
 import { Activity, Activity_Empty } from '@app/models/project-management';
 
-import { ActivityService, ProjectService } from '@app/services/project-management';
+
+import { ProjectService } from '@app/services/project-management';
+import { ObserveOnMessage } from 'rxjs/operators/observeOn';
 
 
 enum FormMessages {
@@ -49,15 +55,14 @@ export class ActivityEditorComponent extends AbstractForm implements OnInit, OnC
 
   form: FormGroup;
 
-  responsibles: Contact[] = [];
+  responsibles: Observable<Contact[]> = Observable.of([]);
   tags: ColoredTag[] = [];
   selectedTags: ColoredTag[] = [];
 
   constructor(spinner: SpinnerService,
               private formBuilder: FormBuilder,
               private messageBox: MessageBoxService,
-              private activityService: ActivityService,
-              private projectService: ProjectService) {
+              private projectStore: ProjectStore) {
     super();
     this.setSpinner(spinner);   // remove after resolve core module injection issue
   }
@@ -129,7 +134,7 @@ export class ActivityEditorComponent extends AbstractForm implements OnInit, OnC
         return this.deleteActivity();
 
       case 'update':
-        return this.updateActivity();
+        return Promise.resolve(this.updateActivity());
 
       default:
         throw new Error(`Command '${this.command.name}' doesn't have a command handler.`);
@@ -151,13 +156,14 @@ export class ActivityEditorComponent extends AbstractForm implements OnInit, OnC
 
   // private methods
 
-  private deleteActivity() {
-    return this.activityService.deleteActivity(this.activity)
-                               .then( () => {
-                                 Object.assign(this.activity, null);
-                                 this.onClose();
-                               })
-                               .catch( e => this.messageBox.show(e) );
+  private deleteActivity(): Promise<void> {
+    return this.projectStore.deleteActivity(this.activity)
+                            .toPromise()
+                            .then( () => {
+                                Object.assign(this.activity, null);
+                                this.onClose();
+                            })
+                            .catch( err => this.messageBox.show(err));
   }
 
 
@@ -199,14 +205,15 @@ export class ActivityEditorComponent extends AbstractForm implements OnInit, OnC
 
     const updateData = this.getUpdateData();
 
-    return this.activityService.updateActivity(this.activity, updateData)
-               .toPromise()
-               .then (x => {
-                  Object.assign(this.activity, x);
-                  // this.update.emit(this.activity);
-                  this.onReset();
-                });
+    return this.projectStore.updateActivity(this.activity, updateData)
+                            .toPromise()
+                            .then( x => {
+                                Object.assign(this.activity, x);
+                                // this.update.emit(this.activity);
+                                this.onReset();
+                              });
   }
+
 
   private validateTargetDate(): void {
     const targetDate = this.value('targetDate');
@@ -226,8 +233,7 @@ export class ActivityEditorComponent extends AbstractForm implements OnInit, OnC
   // these methods must be handled through component input data (architecture concern)
 
   private loadResponsibles() {
-    this.projectService.getResponsiblesList(this.activity.project.uid)
-                       .subscribe( x => this.responsibles = x );
+    this.responsibles = this.projectStore.responsibles(this.activity.project);
   }
 
 
@@ -239,8 +245,8 @@ export class ActivityEditorComponent extends AbstractForm implements OnInit, OnC
 
 
   private loadTags() {
-    this.projectService.getTags()
-                       .subscribe( x => {
+    this.projectStore.tags
+                     .subscribe( x => {
                          this.tags = x;
                          this.tags.forEach( x => x.selected = false);
                        });
@@ -252,9 +258,11 @@ export class ActivityEditorComponent extends AbstractForm implements OnInit, OnC
                             .map( x => x.name );
   }
 
+
   onSelectedTags(selectedTags: any) {
     this.selectedTags = selectedTags;
   }
+
 
   private setActivityTags() {
     this.activity.tags = this.selectedTags.filter( x => x.selected === true )

@@ -8,7 +8,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { ActivityService, ActivityTreeService,
+import { ActivityService,
          GanttService, ProcessModelsService,
          ProjectService, ProjectMeetingService } from './project-management';
 
@@ -23,7 +23,6 @@ import { ActivityService, ActivityTreeService,
 
   providers: [
     ActivityService,
-    ActivityTreeService,
     GanttService,
     ProcessModelsService,
     ProjectMeetingService,

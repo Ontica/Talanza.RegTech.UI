@@ -9,8 +9,6 @@ import { Component, OnInit } from '@angular/core';
 
 import { Empty } from '@app/core/data-types';
 
-import { ActivityService, ProjectService } from '@app/services/project-management';
-
 import { Activity, Activity_Empty,
          ActivityFilter, DefaultViewConfig,
          Project, ViewConfig } from '@app/models/project-management';
@@ -32,26 +30,30 @@ export class ProjectsMainPageComponent {
 
   displayEditor = false;
 
-  constructor(private projectService: ProjectService,
-              private activityService: ActivityService) {
+  constructor() {
 
   }
+
 
   onActivityUpdated(activity: Activity) {
 
   }
 
+
   onEditorClosed() {
     this.displayEditor = false;
   }
+
 
   onFilterChanged(receivedFilter: ActivityFilter) {
     this.filter = receivedFilter;
   }
 
+
   onViewChanged(viewConfig: ViewConfig) {
     this.viewConfig = viewConfig;
   }
+
 
   showEditor(activity: Activity) {
     if (activity) {

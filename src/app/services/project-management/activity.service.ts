@@ -29,9 +29,6 @@ enum Errors {
   PATCH_ACTIVITY =
   '[PATCH_ACTIVITY] Ocurrió un problema al actualizar la actividad.',
 
-  PUT_UPDATE_ACTIVITY_ERR =
-  '[PUT_UPDATE_ACTIVITY_ERR] Ocurrió un problema al actualizar la actividad.',
-
   POST_ADD_MANUAL_ACTIVITY_ERR =
   '[POST_ADD_MANUAL_ACTIVITY_ERR] Ocurrió un problema al guardar la actividad manual.',
 
@@ -41,8 +38,7 @@ enum Errors {
   GET_ACTIVITIES_AS_WORKLIST_ERR =
   '[GET_ACTIVITIES_AS_WORKLIST_ERR] Ocurrió un problema al leer la lista de actividades como lista de trabajo.',
 
-  DELETE_ACTIVITY =
-  '[DELETE_ACTIVITY] Ocurrió un problema al intentar eliminar la actividad.',
+
 }
 
 
@@ -72,25 +68,6 @@ export class ActivityService {
       .toPromise();
 
   }
-
-
-  deleteActivity(activity: Activity): Promise<void> {
-    Assertion.assertValue(activity, "activity");
-
-    const path = `v1/project-management/projects/${activity.project.uid}/activities/${activity.uid}`;
-
-    return this.core.http.delete<any>(path)
-                         .catch((e) => this.core.http.throw(e, Errors.DELETE_ACTIVITY))
-                         .toPromise();
-  }
-
-  updateActivity(activity: Activity, updateData: Partial<Activity>): Observable<Activity> {
-    const path = `v1/project-management/projects/${activity.project.uid}/activities/${activity.uid}`;
-
-    return this.core.http.patch<Activity>(path, updateData)
-                         .catch(e => this.core.http.showAndThrow(e, Errors.PUT_UPDATE_ACTIVITY_ERR));
-  }
-
 
   closeActivity(projectUID: string,
                 activityUID: string, closeTask: CloseActivityCommand): Observable<Activity> {

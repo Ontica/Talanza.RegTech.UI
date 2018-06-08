@@ -6,16 +6,15 @@
  */
 
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
 
 import { Empty, Contact } from '@app/core/data-types';
+import { ColoredTag } from '@app/core/ui-data-types';
 
 import { ProjectStore } from '@app/store/project.store';
 
-import { ActivityService, ProjectService } from '@app/services/project-management';
-
-import { ActivityFilter, Contract,
-         DefaultViewConfig, Project,
-         Resource, Stage, ViewConfig } from '@app/models/project-management';
+import { ActivityFilter, Contract, DefaultViewConfig,
+         Project, Resource, Stage, ViewConfig } from '@app/models/project-management';
 
 
 @Component({
@@ -28,28 +27,19 @@ export class ProjectsFilterComponent implements OnInit {
   @Output() onChangeFilter = new EventEmitter<ActivityFilter>();
   @Output() onChangeView   = new EventEmitter<ViewConfig>();
 
-  responsiblesList: Contact[] = [];
-  labelsList: any;
+  responsiblesList: Observable<Contact[]> = Observable.of([]);
+
   keywords = '';
 
-  contracts: Contract[] = [];
-  stages: Stage[] = [];
 
   selectedProject: Project = Empty;
 
   filter: ActivityFilter = new ActivityFilter();
   viewConfig: ViewConfig = DefaultViewConfig();
 
-  constructor(
-    private projectStore: ProjectStore,
-    private projectService: ProjectService,
-    private activityService: ActivityService) {
-  }
+  constructor(private projectStore: ProjectStore) {}
 
   ngOnInit() {
-    this.loadContracts();
-    this.loadStages();
-    this.loadTags();
     this.changeView();
   }
 
@@ -57,8 +47,6 @@ export class ProjectsFilterComponent implements OnInit {
   onChangeProjectList(projectUID: string) {
     if (projectUID === '') {
       this.selectedProject = Empty;
-
-      this.labelsList = [];
 
       return;
     }
@@ -85,9 +73,10 @@ export class ProjectsFilterComponent implements OnInit {
       return;
     }
 
-    let selectedContract = this.contracts.find((x) => x.uid === contractUID);
-
-    this.filter.contract = selectedContract;
+    this.projectStore.contracts.map(data => {
+      this.filter.contract = data.find(x => x.uid === contractUID),
+      this.changeFilter();
+   });
   }
 
 
@@ -96,11 +85,10 @@ export class ProjectsFilterComponent implements OnInit {
       return;
     }
 
-    let selectedStage = this.stages.find((x) => x.uid === stageUID);
-
-    this.filter.stage = selectedStage;
-
-    this.changeFilter();
+    this.projectStore.stages.map(data => {
+      this.filter.stage = data.find(x => x.uid === stageUID),
+      this.changeFilter();
+   });
   }
 
 
@@ -109,11 +97,10 @@ export class ProjectsFilterComponent implements OnInit {
       return;
     }
 
-    let selectedResponsive = this.responsiblesList.find((x) => x.uid === responsibleUID);
-
-    this.filter.responsible = selectedResponsive;
-
-    this.changeFilter();
+    this.responsiblesList.map(data => {
+      this.filter.responsible = data.find(x => x.uid === responsibleUID),
+      this.changeFilter();
+   });
   }
 
 
@@ -137,50 +124,18 @@ export class ProjectsFilterComponent implements OnInit {
 
   cleanFilter() {
     this.filter.clean();
-
-    this.loadTags();
   }
 
   // private methods
 
-  private loadContracts() {
-    const errMsg = 'Ocurrió un problema al intentar leer la lista de contratos.';
-
-    this.projectService.getContracts()
-      .toPromise()
-      .then( x => this.contracts = x )
-  }
-
-
-  private loadStages() {
-    const errMsg = 'Ocurrió un problema al intentar leer la lista de etapas.';
-
-    this.projectService.getStages()
-      .toPromise()
-      .then( x => this.stages = x )
-  }
-
 
   private loadResponsiblesList() {
-    const errMsg = 'Ocurrió un problema al intentar leer la lista de responsables.';
-
-    this.projectService.getResponsiblesList(this.selectedProject.uid)
-      .toPromise()
-      .then( x => this.responsiblesList = x )
+    this.responsiblesList = this.projectStore.responsibles(this.selectedProject);
   }
 
 
   private loadCombos() {
     this.loadResponsiblesList();
-  }
-
-
-  private loadTags() {
-    const errMsg = 'Ocurrió un problema al intentar leer la lista de etiquetas.';
-
-    this.projectService.getTags()
-        .toPromise()
-        .then( x => this.labelsList = x )
   }
 
 }

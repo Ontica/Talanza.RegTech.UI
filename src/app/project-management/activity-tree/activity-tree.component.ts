@@ -6,13 +6,13 @@
  */
 
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
 
 import { Assertion } from 'empiria';
 
-import { ActivityService, ActivityTreeService } from '@app/services/project-management';
+import { ProjectStore } from '@app/store/project.store';
 
 import { Activity, Activity_Empty, ActivityFilter } from '@app/models/project-management';
-
 
 @Component({
   selector: 'activity-tree',
@@ -21,7 +21,9 @@ import { Activity, Activity_Empty, ActivityFilter } from '@app/models/project-ma
 })
 export class ActivityTreeComponent {
 
+  //activityTree: Observable<Activity[]> = Observable.of([]);
   activityTree: Activity[] = [];
+
   selectedActivity: Activity = Activity_Empty;
   dragZoneItem = null;
 
@@ -37,6 +39,7 @@ export class ActivityTreeComponent {
     if ((filter && filter.project && filter.project.uid)) {
       this._filter = filter;
 
+
       this.loadActivitiesTree();
     }
   }
@@ -47,8 +50,9 @@ export class ActivityTreeComponent {
 
   @Output() onSelectActivity = new EventEmitter<Activity>();
 
-  constructor(private activityTreeService: ActivityTreeService,
-              private activityService: ActivityService) { }
+  constructor(private projectStore: ProjectStore) {
+
+  }
 
 
   activityNameClass(level: number): string {
@@ -84,12 +88,20 @@ export class ActivityTreeComponent {
       position: position ? position + 1 : 1
     };
 
-    this.activityTreeService.insertActivity(this.filter.project.uid, activity)
-      .then((x) => {
-        this.loadActivitiesTree();
-        this.hideSpinner();
-        this.selectActivity(x);
-      });
+    // this.projectStore.insertActivity(this.filter.project, activity)
+    //                  .map( (x) => this.selectActivity(x) )
+    //                  .finally( () => {
+    //                      this.loadActivitiesTree();
+    //                      this.hideSpinner();
+    //                   });
+
+    this.projectStore.insertActivity(this.filter.project, activity)
+                     .toPromise()
+                     .then((x) => {
+                       this.loadActivitiesTree();
+                       this.hideSpinner();
+                       this.selectActivity(x);
+                     });
   }
 
 
@@ -156,10 +168,14 @@ export class ActivityTreeComponent {
     this.configureDragEventBehaviour(event);
     this.setDragZoneItem(null);
 
-    this.activityTreeService.moveActivity(activity, newPosition)
-                            .then( () => this.loadActivitiesTree() )
-                            .catch( response => console.log(response.error.message) );
+    //this.projectStore.moveActivity(activity, newPosition);
+
+    this.projectStore.moveActivity(activity, newPosition)
+                     .toPromise()
+                     .then( () => this.loadActivitiesTree() )
+                     .catch( response => console.log(response.error.message) );
   }
+
 
   moveActivityAsChildOf(event: DragEvent, newParent: Activity) {
     let activity = this.getDraggedActivity(event);
@@ -167,9 +183,12 @@ export class ActivityTreeComponent {
     this.configureDragEventBehaviour(event);
     this.setDragZoneItem(null);
 
-    this.activityTreeService.changeParent(activity, newParent)
-                            .then( () => this.loadActivitiesTree() )
-                            .catch( response => console.log(response.error.message) );
+    //this.projectStore.changeParent(activity, newParent);
+
+    this.projectStore.changeParent(activity, newParent)
+                     .toPromise()
+                     .then( () => this.loadActivitiesTree() )
+                     .catch( response => console.log(response.error.message) );
   }
 
   // private methods
@@ -181,6 +200,7 @@ export class ActivityTreeComponent {
 
 
   private initialize() {
+    //this.activityTree = Observable.of([]);
     this.activityTree = [];
     this.selectedActivity = Activity_Empty;
 
@@ -206,8 +226,10 @@ export class ActivityTreeComponent {
   private loadActivitiesTree() {
     Assertion.assertValue(this.filter.project, "this.filter.project");
 
-    this.activityTreeService.getActivitiesTree(this.filter.project.uid)
-                            .subscribe( x => this.activityTree = x );
+    // this.activityTree = this.projectStore.activities(this.filter.project);
+
+    this.projectStore.activities(this.filter.project)
+                     .subscribe( x => this.activityTree = x );
   }
 
 

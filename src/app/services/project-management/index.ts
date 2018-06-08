@@ -7,8 +7,6 @@
 
 export * from './activity.service';
 
-export * from './activity.tree.service';
-
 export * from './gantt.service';
 
 export * from './process-models.service';

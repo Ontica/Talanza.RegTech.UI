@@ -13,7 +13,7 @@ import { Project } from '@app/models/project-management';
 
 import { InboxFilter } from '../data-types/inbox-filter';
 
-import { ActivityService, ProjectService } from '@app/services/project-management';
+import { ProjectService } from '@app/services/project-management';
 
 
 @Component({
@@ -39,8 +39,7 @@ export class InboxFilterComponent implements OnInit {
   filter: InboxFilter = new InboxFilter();
 
 
-  constructor(private projectService: ProjectService,
-              private activityService: ActivityService) { }
+  constructor(private projectService: ProjectService) { }
 
 
   ngOnInit() {
@@ -100,7 +99,7 @@ export class InboxFilterComponent implements OnInit {
   private loadResponsiblesList() {
     const errMsg = 'Ocurrió un problema al intentar leer la lista de responsables.';
 
-    this.projectService.getResponsiblesList(this.selectedProject.uid)
+    this.projectService.getResponsiblesList(this.selectedProject)
       .toPromise()
       .then((x) => this.responsiblesList = x)
   }
