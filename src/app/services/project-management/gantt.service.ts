@@ -6,9 +6,8 @@
  */
 
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-
-import { Assertion } from 'empiria';
+import { Observable } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 import { CoreService } from '@app/core/core.service';
 
@@ -31,9 +30,10 @@ export class GanttService {
     const path = `v1/project-management/projects/${projectUID}/as-gantt`;
 
     return this.core.http.get<GanttTask[]>(path)
-      .catch((e) =>
-        this.core.http.showAndReturn(e, Errors.GET_GANTT_TREE, null))
-      .toPromise();
+               .pipe(
+                  catchError((e) => this.core.http.showAndReturn(e, Errors.GET_GANTT_TREE, null))
+               )
+               .toPromise();
 
   }
 

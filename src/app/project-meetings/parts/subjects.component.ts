@@ -15,12 +15,12 @@ import { Component } from '@angular/core';
 })
 
 export class SubjectComponent {
-    
+
     public subjects: string[] = [];
     public newSubjectText = "";
 
-    public addSubject(): void {            
-        this.subjects.push(this.newSubjectText);        
-    } 
+    public addSubject(): void {
+        this.subjects.push(this.newSubjectText);
+    }
 
 }

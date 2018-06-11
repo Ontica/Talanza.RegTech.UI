@@ -7,7 +7,7 @@
  */
 
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 
 import { CoreService } from '../../core/core.service';
 
@@ -28,15 +28,15 @@ export class InboxService {
     return this.core.http.get<InboxRef[]>(path);
   }
 
-  public getInboxItems(filter?: InboxFilter): Observable<InboxRef[]> {    
-    
+  public getInboxItems(filter?: InboxFilter): Observable<InboxRef[]> {
+
         let filterAsString = '';
-    
+
         if (filter instanceof InboxFilter) {
-          filterAsString = '?' + filter.toString();   
-        } 
+          filterAsString = '?' + filter.toString();
+        }
         const path = `v1/inboxes/my-inbox${filterAsString}`;
-           
+
         return this.core.http.get<InboxRef[]>(path)
   }
 

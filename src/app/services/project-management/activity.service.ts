@@ -6,9 +6,8 @@
  */
 
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-
-import { Assertion } from 'empiria';
+import { Observable } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 import { CoreService } from '@app/core/core.service';
 
@@ -55,7 +54,9 @@ export class ActivityService {
                                                                           &keywords=${keywords}`;
 
     return this.core.http.get<Activity[]>(path)
-                         .catch((e) => this.core.http.showAndReturn(e, Errors.GET_SEARCH_ACTIVITIES_ERR, null));
+               .pipe(
+                  catchError((e) => this.core.http.showAndReturn(e, Errors.GET_SEARCH_ACTIVITIES_ERR, null))
+               );
   }
 
 
@@ -63,9 +64,10 @@ export class ActivityService {
     const path = `v1/project-management/projects/${projectUID}/as-tree`;
 
     return this.core.http.get<Activity[]>(path)
-      .catch((e) =>
-        this.core.http.showAndReturn(e, Errors.GET_ACTIVITIES_ERR, null))
-      .toPromise();
+               .pipe(
+                  catchError((e) => this.core.http.showAndReturn(e, Errors.GET_ACTIVITIES_ERR, null))
+               )
+               .toPromise();
 
   }
 
@@ -74,7 +76,9 @@ export class ActivityService {
     const path = `v1/project-management/projects/${projectUID}/activities/${activityUID}/close`;
 
     return this.core.http.post<Activity>(path, closeTask)
-                         .catch(e => this.core.http.showAndThrow(e, Errors.POST_CLOSE_ACTIVITY_ERR));
+               .pipe(
+                  catchError(e => this.core.http.showAndThrow(e, Errors.POST_CLOSE_ACTIVITY_ERR))
+               );
   }
 
 
@@ -88,8 +92,9 @@ export class ActivityService {
     const path = `v1/project-management/projects/as-work-list${filterAsString}`;
 
     return this.core.http.get<Activity>(path)
-      .catch((e) =>
-        this.core.http.showAndReturn(e, Errors.GET_ACTIVITIES_AS_WORKLIST_ERR, null));
+               .pipe(
+                  catchError((e) => this.core.http.showAndReturn(e, Errors.GET_ACTIVITIES_AS_WORKLIST_ERR, null))
+               );
   }
 
   // private methods

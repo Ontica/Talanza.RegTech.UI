@@ -6,10 +6,10 @@
  */
 
 import { Injectable } from '@angular/core';
-import { Observable} from 'rxjs/Observable';
-import { of } from 'rxjs/observable/of';
+import { Observable, of } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
-import { Assertion } from 'empiria';
+import { Assertion } from '@app/core';
 
 import { CoreService } from '@app/core/core.service';
 
@@ -120,7 +120,9 @@ export class ProjectService {
     const path = `v1/project-management/projects/${project.uid}/as-tree`;
 
     return this.core.http.get<Activity[]>(path)
-                         .catch((e) => this.core.http.throw(e, Errors.GET_ACTIVITIES_TREE));
+                         .pipe(
+                            catchError((e) => this.core.http.throw(e, Errors.GET_ACTIVITIES_TREE))
+                         );
   }
 
 
@@ -145,7 +147,9 @@ export class ProjectService {
     const path = `v1/project-management/projects/${activity.project.uid}/activities/${activity.uid}`;
 
     return this.core.http.delete<any>(path)
-                         .catch((e) => this.core.http.throw(e, Errors.DELETE_ACTIVITY));
+                         .pipe(
+                            catchError((e) => this.core.http.throw(e, Errors.DELETE_ACTIVITY))
+                         );
   }
 
 
@@ -160,8 +164,9 @@ export class ProjectService {
     const path = `v1/project-management/projects/${project.uid}/activities`;
 
     return this.core.http.post<Activity>(path, newActivity)
-                         .catch((e) => this.core.http.throw(e, Errors.INSERT_ACTIVITY))
-
+                         .pipe(
+                            catchError((e) => this.core.http.throw(e, Errors.INSERT_ACTIVITY))
+                         );
   }
 
 
@@ -176,7 +181,9 @@ export class ProjectService {
     };
 
     return this.core.http.put<Activity>(path, body)
-                         .catch((e) => this.core.http.throw(e, Errors.MOVE_ACTIVITY))
+                         .pipe(
+                            catchError((e) => this.core.http.throw(e, Errors.MOVE_ACTIVITY))
+                         );
   }
 
 
@@ -187,7 +194,10 @@ export class ProjectService {
     const path = `v1/project-management/projects/${activity.project.uid}/activities/${activity.uid}`;
 
     return this.core.http.patch<Activity>(path, updateData)
-                         .catch(e => this.core.http.showAndThrow(e, Errors.UPDATE_ACTIVITY));
+                         .pipe(
+                            catchError(e => this.core.http.showAndThrow(e, Errors.UPDATE_ACTIVITY))
+                         );
+
   }
 
 }

@@ -8,11 +8,9 @@
 
 import { Injectable } from '@angular/core';
 
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/mergeMap';
-import 'rxjs/add/observable/of'
+import { Observable, of } from 'rxjs';
 
-import { Cryptography } from 'empiria';
+import { Cryptography } from '../security/cryptography';
 
 import { HttpHandler } from '../http/http-handler';
 
@@ -43,7 +41,7 @@ export class SecurityDataService {
                            email: 'jrulfo@escritores.com',
                            fullname: '{Nombre del usuario} || settings' };
 
-    return Observable.of<Identity>(fakeIdentity);
+    return of<Identity>(fakeIdentity);
   }
 
   public getPrincipalClaimsList(): Observable<ClaimsList> {
@@ -54,7 +52,7 @@ export class SecurityDataService {
 
     const claims = new ClaimsList(list);
 
-    return Observable.of<ClaimsList>(claims);
+    return of<ClaimsList>(claims);
   }
 
 }

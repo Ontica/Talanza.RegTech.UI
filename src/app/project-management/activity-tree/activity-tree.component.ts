@@ -6,9 +6,9 @@
  */
 
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 
-import { Assertion } from 'empiria';
+import { Assertion } from '@app/core';
 
 import { ProjectStore } from '@app/store/project.store';
 

@@ -8,11 +8,10 @@
 
 import { Injectable } from '@angular/core';
 
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/mergeMap';
-import 'rxjs/add/observable/of'
+import { Observable, of } from 'rxjs';
+import { map } from 'rxjs/operators';
 
-import { Assertion } from 'empiria';
+import { Assertion } from '../general/assertion';
 
 import { HttpHandler } from './http-handler';
 import { Service, HttpMethod } from './common-types';
@@ -31,7 +30,7 @@ export class DirectoryService {
     Assertion.assertValue(servicePathOrUID, 'servicePathOrUID');
 
     if (servicePathOrUID.includes('http://') || servicePathOrUID.includes('https://') ) {
-      return Observable.of<Service>(undefined);
+      return of<Service>(undefined);
     } else {
       return this.getServiceFromList(servicePathOrUID, method);
     }
@@ -51,7 +50,7 @@ export class DirectoryService {
     //                                      service.method.toString() === HttpMethod[method]);
 
     if (servicePathOrUID.includes('/')) {
-      return Observable.of<Service>(undefined);
+      return of<Service>(undefined);
 
     } else if (!servicePathOrUID.includes('/') && method === undefined) {
       condition = (service: Service) => (service.uid === servicePathOrUID);
@@ -64,7 +63,7 @@ export class DirectoryService {
       throw Assertion.assertNoReachThisCode('A findService condition handler is missing in code.');
     }
 
-    return this.servicesList.map((x: Service[]) => {
+    return this.servicesList.pipe(map((x: Service[]) => {
       const filteredServices = x.filter((service) => condition(service));
 
       if (filteredServices.length === 0) {
@@ -78,7 +77,7 @@ export class DirectoryService {
       } else {
         return filteredServices[0];
       }
-    });
+    }));
   }
 
   private getServicesList(): Observable<Service[]> {

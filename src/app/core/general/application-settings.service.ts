@@ -8,12 +8,10 @@
 
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 
-import { Assertion } from 'empiria';
-import { KeyValue } from '../../core/data-types';
-
-import 'rxjs/add/operator/toPromise';
+import { Assertion } from '../general/assertion';
+import { KeyValue } from '../data-types';
 
 @Injectable()
 export class ApplicationSettingsService {

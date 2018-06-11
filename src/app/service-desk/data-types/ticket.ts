@@ -1,5 +1,3 @@
-import { empty } from 'rxjs/Observer';
-
 export interface Ticket {
     uid: string,
     type: string,
@@ -45,7 +43,7 @@ export interface MeetingReport extends Ticket {
     Recomendation: Recommendation
 }
 
-export  function EmptyTicket() {
+export function EmptyTicket() {
     const empty: Ticket = {
         uid: '',
         type: '',
@@ -67,9 +65,3 @@ export  function EmptyTicket() {
     return empty;
 }
 
-
-​​
-​​
-
-
-​

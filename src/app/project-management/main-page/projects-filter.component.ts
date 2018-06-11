@@ -6,7 +6,8 @@
  */
 
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import { Observable, of } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import { Empty, Contact } from '@app/core/data-types';
 import { ColoredTag } from '@app/core/ui-data-types';
@@ -27,7 +28,7 @@ export class ProjectsFilterComponent implements OnInit {
   @Output() onChangeFilter = new EventEmitter<ActivityFilter>();
   @Output() onChangeView   = new EventEmitter<ViewConfig>();
 
-  responsiblesList: Observable<Contact[]> = Observable.of([]);
+  responsiblesList: Observable<Contact[]> = of([]);
 
   keywords = '';
 
@@ -73,10 +74,13 @@ export class ProjectsFilterComponent implements OnInit {
       return;
     }
 
-    this.projectStore.contracts.map(data => {
-      this.filter.contract = data.find(x => x.uid === contractUID),
-      this.changeFilter();
-   });
+    this.projectStore.contracts
+                     .pipe(
+                        map(data => {
+                          this.filter.contract = data.find(x => x.uid === contractUID),
+                          this.changeFilter();
+                        })
+                     );
   }
 
 
@@ -85,10 +89,13 @@ export class ProjectsFilterComponent implements OnInit {
       return;
     }
 
-    this.projectStore.stages.map(data => {
-      this.filter.stage = data.find(x => x.uid === stageUID),
-      this.changeFilter();
-   });
+    this.projectStore.stages
+                     .pipe(
+                        map(data => {
+                          this.filter.stage = data.find(x => x.uid === stageUID),
+                          this.changeFilter();
+                        })
+                     );
   }
 
 
@@ -97,10 +104,12 @@ export class ProjectsFilterComponent implements OnInit {
       return;
     }
 
-    this.responsiblesList.map(data => {
-      this.filter.responsible = data.find(x => x.uid === responsibleUID),
-      this.changeFilter();
-   });
+    this.responsiblesList.pipe(
+                            map(data => {
+                              this.filter.responsible = data.find(x => x.uid === responsibleUID),
+                              this.changeFilter();
+                            })
+                          );
   }
 
 

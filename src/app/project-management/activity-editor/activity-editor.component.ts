@@ -11,23 +11,20 @@ import { Component, EventEmitter, Input,
 import { FormBuilder, FormControl,
          FormGroup, Validators } from '@angular/forms';
 
-import { Observable } from 'rxjs/Observable';
+import { Observable, of } from 'rxjs';
 
-import { Assertion } from 'empiria';
+import { Assertion } from '@app/core';
 
 import { Contact, DateStringLibrary } from '@app/core/data-types';
 
 import { ColoredTag } from '@app/core/ui-data-types';
 
 import { ProjectStore } from '@app/store/project.store';
+import { ProjectService } from '@app/services/project-management';
 
 import { AbstractForm, MessageBoxService, SpinnerService } from '@app/core/ui-services';
 
 import { Activity, Activity_Empty } from '@app/models/project-management';
-
-
-import { ProjectService } from '@app/services/project-management';
-import { ObserveOnMessage } from 'rxjs/operators/observeOn';
 
 
 enum FormMessages {
@@ -55,7 +52,7 @@ export class ActivityEditorComponent extends AbstractForm implements OnInit, OnC
 
   form: FormGroup;
 
-  responsibles: Observable<Contact[]> = Observable.of([]);
+  responsibles: Observable<Contact[]> = of([]);
   tags: ColoredTag[] = [];
   selectedTags: ColoredTag[] = [];
 

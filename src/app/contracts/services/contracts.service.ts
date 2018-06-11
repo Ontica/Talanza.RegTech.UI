@@ -7,11 +7,12 @@
  */
 
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 import { CoreService } from '../../core/core.service';
 
-import { Contract, ContractClause, EmptyContractClause, 
+import { Contract, ContractClause, EmptyContractClause,
          RelatedProcedure, Obligation } from '../data-types/contract';
 
 export enum ContractServiceErr {
@@ -37,48 +38,47 @@ export class ContractsService {
   public getContractClausesList(contractUID: string): Observable<ContractClause[]> {
     const path = `v1/contracts/${contractUID}/clauses`;
 
-    return this.core.http
-                    .get<ContractClause[]>(path)
-                    .catch((e) => this.core.http.showAndThrow(e, ContractServiceErr.GET_CLAUSES_ERR));
+    return this.core.http.get<ContractClause[]>(path)
+               .pipe(
+                  catchError((e) => this.core.http.showAndThrow(e, ContractServiceErr.GET_CLAUSES_ERR))
+               );
   }
 
   public searchClauses(contractUID: string, keywords: string): Observable<ContractClause[]> {
     const path = `v1/contracts/${contractUID}/clauses?keywords=${keywords}`;
 
-    return this.core.http
-                    .get<ContractClause[]>(path)
-                    .catch((e) => this.core.http.showAndReturn(e, ContractServiceErr.SEARCH_CLAUSES_ERR,
-                                                               null));
+    return this.core.http.get<ContractClause[]>(path)
+               .pipe(
+                  catchError((e) => this.core.http.showAndThrow(e, ContractServiceErr.SEARCH_CLAUSES_ERR))
+                );
   }
 
-  public getClause(contractUID: string, clauseUID: string): Observable<ContractClause> {    
-    const path = `v1/contracts/${contractUID}/clauses/${clauseUID}`; 
+  public getClause(contractUID: string, clauseUID: string): Observable<ContractClause> {
+    const path = `v1/contracts/${contractUID}/clauses/${clauseUID}`;
 
-    return this.core.http
-                    .get<ContractClause>(path)
-                    .catch((e) => this.core.http.showAndThrow(e, ContractServiceErr.GET_CLAUSE_ERR));
+    return this.core.http.get<ContractClause>(path)
+               .pipe(
+                  catchError((e) => this.core.http.showAndThrow(e, ContractServiceErr.GET_CLAUSE_ERR))
+               );
   }
 
   public createClause(contractUID: string, clause: ContractClause): Observable<ContractClause> {
     const path = `v1/contracts/${contractUID}/clauses`;
 
-    return this.core.http
-                    .post<ContractClause>(path, clause);
+    return this.core.http.post<ContractClause>(path, clause);
   }
 
   public updateClause(contractUID: string, clause: ContractClause): Observable<ContractClause> {
     const path = `v1/contracts/${contractUID}/clauses/${clause.uid}`;
 
-    return this.core.http
-                    .put<ContractClause>(path, clause);
+    return this.core.http.put<ContractClause>(path, clause);
   }
 
   public addRelatedProcedure(contractUID: string, clauseUID: string,
                              relatedProcedure: RelatedProcedure): Observable<RelatedProcedure> {
     const path = `v1/contracts/${contractUID}/clauses/${clauseUID}/related-procedures`;
 
-    return this.core.http
-                    .post<RelatedProcedure>(path, relatedProcedure);
+    return this.core.http.post<RelatedProcedure>(path, relatedProcedure);
   }
 
   public getObligations(contractUID: string, clauseUID: string): Observable<Obligation> {

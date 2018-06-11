@@ -1,9 +1,7 @@
 import { Component, EventEmitter, Input, Output,  ViewEncapsulation  } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { Validate, Assertion } from 'empiria';
-
-import 'rxjs/add/operator/toPromise';
+import { Assertion, Validate } from '@app/core';
 
 import { CoreService } from '../../core/core.service';
 import { ContractsService } from '../../contracts/services/contracts.service';
@@ -23,19 +21,19 @@ import { Faq } from '../../service-desk/data-types/faq';
 @Component({
     selector: 'global-search',
     templateUrl: './gs-main-page.component.html',
-    styleUrls: ['./gs-main-page.component.scss']   
+    styleUrls: ['./gs-main-page.component.scss']
 })
 
-export class GlobalSearchMainPageComponent {   
- 
+export class GlobalSearchMainPageComponent {
+
     public procedures: SmallProcedureInterface[] = [];
     public selectedProcedureUID = '';
     public navBarConfig: NavBarConfig[] = [];
     public selectedOption = '';
 
-    public masterContainer = 'centered-container';  
+    public masterContainer = 'centered-container';
     public isDetailsContainerVisible = false;
-    
+
     public clauses: ContractClauseRef[] = [];
     public clause: ContractClauseRef;
 
@@ -44,93 +42,93 @@ export class GlobalSearchMainPageComponent {
 
     public FAQs: Faq[] = [];
     public FAQUid = '' ;
-    
-    private _keywords: string = '';    
+
+    private _keywords: string = '';
     @Input()
-    set keywords(keywords: string) {        
+    set keywords(keywords: string) {
         if (keywords) {
             this._keywords = keywords;
 
             this.main();
-        } 
+        }
     }
     get keywords(): string {
         return this._keywords;
     }
 
     @Output() public onClose = new EventEmitter();
-    
+
     constructor(private route: ActivatedRoute, private procedureService: ProcedureService,
                 private contractService: ContractsService, private core: CoreService,
                 private documentService: DocumentService, private faqService: FAQService) {
         this.route.params.subscribe(params => {
             this.keywords = params['keywords'];
-             this.main();     
+             this.main();
          });
-    }  
+    }
 
-    public selectOption(option: string) {        
-        this.selectedOption = option;  
-        
+    public selectOption(option: string) {
+        this.selectedOption = option;
+
         this.closeDetailsContainer();
-    }    
+    }
 
-    public closeGlobalSearch(): void {        
+    public closeGlobalSearch(): void {
         this.onClose.emit();
     }
 
-    public selectProcedure(procedureUID: string): void {  
+    public selectProcedure(procedureUID: string): void {
 
         if (procedureUID) {
-            this.selectedProcedureUID = procedureUID; 
+            this.selectedProcedureUID = procedureUID;
 
-            this.showDetailsContainer(); 
-        }             
+            this.showDetailsContainer();
+        }
     }
 
-    public setSelectedClause(clause: ContractClauseRef): void {          
+    public setSelectedClause(clause: ContractClauseRef): void {
         this.clause = clause;
 
-        this.showDetailsContainer();      
+        this.showDetailsContainer();
     }
 
     public setSelectedDocument(document: Document): void {
         this.documentURI = document.url;
 
-        this.showDetailsContainer();           
+        this.showDetailsContainer();
     }
 
-    public setSelectedFAQ(FAQUid: string): void {        
+    public setSelectedFAQ(FAQUid: string): void {
         this.FAQUid = FAQUid;
 
-        this.showDetailsContainer(); 
-        
+        this.showDetailsContainer();
+
     }
 
-    public closeDetailsContainer(): void {      
+    public closeDetailsContainer(): void {
         this.masterContainer = 'centered-container';
-        this.isDetailsContainerVisible = false;        
+        this.isDetailsContainerVisible = false;
     }
 
     private showDetailsContainer(): void {
         this.masterContainer = 'block-container';
-        this.isDetailsContainerVisible = true;   
+        this.isDetailsContainerVisible = true;
     }
 
     private async main() {
-        this.closeDetailsContainer();  
+        this.closeDetailsContainer();
 
         if (!this.keywords) {
           return;
         }
 
-        await this.loadProcedures(); 
+        await this.loadProcedures();
         await this.loadContractClauses();
         await this.loadDocuments();
         await this.loadFaqs();
-        
-        this.fillNavBar();         
-    }  
+
+        this.fillNavBar();
+    }
 
     private fillNavBar(): void {
         this.navBarConfig = [];
@@ -142,44 +140,44 @@ export class GlobalSearchMainPageComponent {
 
     private cleanSelectedOption(): void {
         this.selectedOption = '';
-    }  
+    }
 
     private async loadProcedures() {
-        let filter: ProcedureFilter = new ProcedureFilter(); 
+        let filter: ProcedureFilter = new ProcedureFilter();
         filter.keywords = this.keywords;
 
         this.core.spinner.show();
 
        await this.procedureService.getProceduresList(filter)
-                         .then((procedures) => {                             
+                         .then((procedures) => {
                              this.procedures = procedures;
                              this.core.spinner.hide();
                             })
                           .catch(() => this.core.spinner.hide());
-                               
-    }  
+
+    }
 
     private async loadContractClauses() {
         const errMsg = 'Ocurrió un problema al intentar leer la lista de cláusulas para el contrato.' ;
 
         const contractUID = 'R24Kmag356L21'; //Contrato: 2.4 Individual
-       
+
         this.core.spinner.show();
 
         await this.contractService.searchClauses(contractUID, this.keywords)
             .toPromise()
             .then((x) => { this.clauses = x;
-                           this.core.spinner.hide()})                
+                           this.core.spinner.hide()})
             .catch((e) => { this.core.spinner.hide();
                             this.core.http.showAndThrow(e, errMsg) });
     }
 
     private async loadDocuments() {
 
-        let filter = new DocumentFilter();   
-        filter.type = '';     
-        filter.keywords = this.keywords;  
-        
+        let filter = new DocumentFilter();
+        filter.type = '';
+        filter.keywords = this.keywords;
+
         this.core.spinner.show();
 
         await this.documentService.getDocuments(filter)
@@ -189,17 +187,17 @@ export class GlobalSearchMainPageComponent {
     }
 
     private async loadFaqs() {
-       
-      this.core.spinner.show();        
+
+      this.core.spinner.show();
 
       await this.faqService.getFAQs(this.keywords)
                            .subscribe((FAQs) => { this.core.spinner.hide();
                                                   this.FAQs = FAQs;},
                                  () => {},
                                  () => { this.core.spinner.hide();});
-                                
-                           
-                           
-         
+
+
+
+
   }
 }

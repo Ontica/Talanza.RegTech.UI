@@ -6,7 +6,7 @@
  */
 
 import { Component, OnDestroy, OnInit, HostBinding } from '@angular/core';
-import { Subscription } from 'rxjs/Subscription';
+import { Subscription } from 'rxjs';
 
 import { SpinnerState, SpinnerService } from './spinner.service';
 
