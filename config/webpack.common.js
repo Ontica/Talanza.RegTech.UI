@@ -1,5 +1,5 @@
 /**
- * @author: @AngularClass
+ * @author: tipe.io
  */
 
 const helpers = require('./helpers');
@@ -10,26 +10,28 @@ const helpers = require('./helpers');
  * problem with copy-webpack-plugin
  */
 const DefinePlugin = require('webpack/lib/DefinePlugin');
-const CommonsChunkPlugin = require('webpack/lib/optimize/CommonsChunkPlugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlElementsPlugin = require('./html-elements-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const InlineManifestWebpackPlugin = require('inline-manifest-webpack-plugin');
+const InlineManifestWebpackPlugin = require('webpack-inline-manifest-plugin');
 const LoaderOptionsPlugin = require('webpack/lib/LoaderOptionsPlugin');
 const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
 const ngcWebpack = require('ngc-webpack');
 
 const buildUtils = require('./build-utils');
 
-
 /**
  * Webpack configuration
  *
- * See: http://webpack.github.io/docs/configuration.html#cli
+ * See: https://webpack.js.org/configuration/
  */
 module.exports = function (options) {
   const isProd = options.env === 'production';
-  const METADATA = Object.assign({}, buildUtils.DEFAULT_METADATA, options.metadata || {});
+  const APP_CONFIG = require(process.env.ANGULAR_CONF_FILE || (isProd ? './config.prod.json' : './config.dev.json'));
+
+  const METADATA = Object.assign({}, buildUtils.DEFAULT_METADATA,options.metadata || {});
+  const GTM_API_KEY = process.env.GTM_API_KEY || APP_CONFIG.gtmKey;
+
   const ngcWebpackConfig = buildUtils.ngcWebpackSetup(isProd, METADATA);
   const supportES2015 = buildUtils.supportES2015(METADATA.tsConfigPath);
 
@@ -48,14 +50,14 @@ module.exports = function (options) {
      * The entry point for the bundle
      * Our Angular.js app
      *
-     * See: http://webpack.github.io/docs/configuration.html#entry
+     * See: https://webpack.js.org/configuration/entry-context/#entry
      */
     entry: entry,
 
     /**
      * Options affecting the resolving of modules.
      *
-     * See: http://webpack.github.io/docs/configuration.html#resolve
+     * See: https://webpack.js.org/configuration/resolve/
      */
     resolve: {
       mainFields: [ ...(supportES2015 ? ['es2015'] : []), 'browser', 'module', 'main' ],
@@ -63,7 +65,7 @@ module.exports = function (options) {
       /**
        * An array of extensions that should be used to resolve modules.
        *
-       * See: http://webpack.github.io/docs/configuration.html#resolve-extensions
+       * See: https://webpack.js.org/configuration/resolve/#resolve-extensions
        */
       extensions: ['.ts', '.js', '.json'],
 
@@ -91,13 +93,13 @@ module.exports = function (options) {
        *
        * BE AWARE that not using lettable operators will probably result in significant payload added to your bundle.
        */
-      alias: buildUtils.rxjsAlias(supportES2015)
+      // alias: buildUtils.rxjsAlias(supportES2015)
     },
 
     /**
      * Options affecting the normal modules.
      *
-     * See: http://webpack.github.io/docs/configuration.html#module
+     * See: https://webpack.js.org/configuration/module/
      */
     module: {
 
@@ -160,7 +162,7 @@ module.exports = function (options) {
     /**
      * Add additional plugins to the compiler.
      *
-     * See: http://webpack.github.io/docs/configuration.html#plugins
+     * See: https://webpack.js.org/configuration/plugins/
      */
     plugins: [
       /**
@@ -170,7 +172,7 @@ module.exports = function (options) {
        *
        * Environment helpers
        *
-       * See: https://webpack.github.io/docs/list-of-plugins.html#defineplugin
+       * See: https://webpack.js.org/plugins/define-plugin/
        */
       // NOTE: when adding more properties make sure you include them in custom-typings.d.ts
       new DefinePlugin({
@@ -179,31 +181,8 @@ module.exports = function (options) {
         'AOT': METADATA.AOT,
         'process.env.ENV': JSON.stringify(METADATA.ENV),
         'process.env.NODE_ENV': JSON.stringify(METADATA.ENV),
-        'process.env.HMR': METADATA.HMR
-      }),
-
-      /**
-       * Plugin: CommonsChunkPlugin
-       * Description: Shares common code between the pages.
-       * It identifies common modules and put them into a commons chunk.
-       *
-       * See: https://webpack.github.io/docs/list-of-plugins.html#commonschunkplugin
-       * See: https://github.com/webpack/docs/wiki/optimization#multi-page-app
-       */
-      new CommonsChunkPlugin({
-        name: 'polyfills',
-        chunks: ['polyfills']
-      }),
-
-      new CommonsChunkPlugin({
-        minChunks: Infinity,
-        name: 'inline'
-      }),
-      new CommonsChunkPlugin({
-        name: 'main',
-        async: 'common',
-        children: true,
-        minChunks: 2
+        'process.env.HMR': METADATA.HMR,
+        // 'FIREBASE_CONFIG': JSON.stringify(APP_CONFIG.firebase),
       }),
 
 
@@ -238,6 +217,7 @@ module.exports = function (options) {
           return entryPoints.indexOf(a.names[0]) - entryPoints.indexOf(b.names[0]);
         },
         metadata: METADATA,
+        gtmKey: GTM_API_KEY,
         inject: 'body',
         xhtml: true,
         minify: isProd ? {
@@ -309,7 +289,7 @@ module.exports = function (options) {
      * Include polyfills or mocks for various node stuff
      * Description: Node configuration
      *
-     * See: https://webpack.github.io/docs/configuration.html#node
+     * See: https://webpack.js.org/configuration/node/
      */
     node: {
       global: true,
@@ -321,4 +301,4 @@ module.exports = function (options) {
     }
 
   };
-}
+};

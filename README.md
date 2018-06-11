@@ -1,10 +1,6 @@
-# Empiria Steps COVAR Edition
+# Empiria Regulatory Compliance Solution COVAR Edition
 
-### What is Empiria Steps?
-
-Empiria Steps is [Ontica's](http://www.ontica.org/) workflow automation and project management solution.
-
-This repo corresponds to the front-end system custom-tailored for [Covar Energy Consulting](http://www.covarenergy.com).
+Angular-based front end Regulatory Compliance Solution for the Mexican Energy Sector, custom-tailored and developed in association with [Covar Energy Consulting](http://www.covarenergy.com).
 
 ### Quick start
 **Make sure you have Node version >= 6.0 and NPM >= 3**
@@ -13,13 +9,10 @@ This repo corresponds to the front-end system custom-tailored for [Covar Energy 
 ```bash
 # clone our repo
 # --depth 1 removes all but one .git commit history
-git clone --depth 1 https://github.com/Ontica/Empiria.Steps.Covar steps.covar
+git clone https://github.com/Ontica/Covar.RCS.FrontEnd
 
 # change directory to our repo
-cd steps.covar
-
-# WINDOWS only. In terminal as administrator
-npm install -g node-pre-gyp
+cd Covar.RCS.FrontEnd
 
 # install the repo with npm
 npm install
@@ -200,7 +193,7 @@ Any stylesheets (Sass or CSS) placed in the `src/styles` directory and imported 
 For example to use Bootstrap as an external stylesheet:
 1) Create a `styles.scss` file (name doesn't matter) in the `src/styles` directory.
 2) `npm install` the version of Boostrap you want.
-3) In `styles.scss` add `@import 'bootstrap/scss/bootstrap.scss';`
+3) In `styles.scss` add `@import '~bootstrap/scss/bootstrap.scss';`
 4) In `src/app/app.module.ts` add underneath the other import statements: `import '../styles/styles.scss';`
 
 # TypeScript

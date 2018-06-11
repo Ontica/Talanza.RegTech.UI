@@ -51,7 +51,7 @@ import { ExceptionHandler } from './core/general/exception-handler';
 const EXCEPTION_HANDLER_PROVIDER =  { provide: ErrorHandler, useClass: ExceptionHandler };
 
 
-// Temporarily main SCSS file injection
+
 import '../styles/styles.scss';
 
 
@@ -62,12 +62,12 @@ const APP_PROVIDERS = [
   EXCEPTION_HANDLER_PROVIDER
 ];
 
+interface StoreType {
+  state: InternalStateType;
+  restoreInputValues: () => void;
+  disposeOldHosts: () => void;
+}
 
-type StoreType = {
-  state: InternalStateType,
-  restoreInputValues: () => void,
-  disposeOldHosts: () => void
-};
 
 
 @NgModule({

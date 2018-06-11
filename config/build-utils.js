@@ -3,9 +3,12 @@ const path = require('path');
 const fs = require('fs');
 const helpers = require('./helpers');
 
+const APP_COMMON_CONFIG = require('./config.common.json');
+
 const DEFAULT_METADATA = {
-  title: 'COVAR Energy Consulting || Sistema para el cumplimiento regulatorio',
-  baseUrl: '/', //    '/sistema/'
+  title: APP_COMMON_CONFIG.title,
+  description: APP_COMMON_CONFIG.description,
+  baseUrl: '/',
   isDevServer: helpers.isWebpackDevServer(),
   HMR: helpers.hasProcessFlag('hot'),
   AOT: process.env.BUILD_AOT || helpers.hasNpmFlag('aot'),
