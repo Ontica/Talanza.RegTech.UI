@@ -7,7 +7,7 @@
  */
 import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
 
-import { Validate } from 'empiria';
+import { Validate } from '@app/core';
 
 import { Meeting, EmptyMeeting, Project } from '@app/models/project-management';
 

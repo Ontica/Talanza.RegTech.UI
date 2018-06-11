@@ -8,7 +8,7 @@
 
 import { Component, Input } from '@angular/core';
 
-import { Validate } from 'empiria';
+import { Validate } from '@app/core';
 
 import { Participant, EmptyParticipant } from '@app/models/project-management';
 import { ProjectMeetingService } from '@app/services/project-management';

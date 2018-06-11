@@ -7,8 +7,8 @@
  */
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
-import { Assertion } from 'empiria';
-import { CoreService } from '../../core/core.service';
+import { Assertion } from '@app/core';
+import { CoreService } from '@app/core/core.service';
 
 import { ContractsService } from '../services/contracts.service';
 

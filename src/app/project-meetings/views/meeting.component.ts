@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output  } from '@angular/core';
 
-import { Validate } from 'empiria';
+import { Validate } from '@app/core';
 
 import { Meeting, EmptyMeeting, Participant } from '@app/models/project-management';
 

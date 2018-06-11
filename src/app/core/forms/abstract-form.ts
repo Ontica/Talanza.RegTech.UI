@@ -9,7 +9,7 @@ import { ReflectiveInjector } from '@angular/core';
 
 import { AbstractControl, FormGroup } from '@angular/forms';
 
-import { Assertion } from 'empiria';
+import { Assertion } from '../general/assertion';
 
 import { Exception } from '../index';
 import { CoreService } from '../core-service';

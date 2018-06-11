@@ -8,8 +8,8 @@
 
 import { Component, Input, ViewEncapsulation } from '@angular/core';
 
-import { Assertion } from 'empiria';
-import { CoreService } from '../../core/core.service';
+import { Assertion } from '@app/core';
+import { CoreService } from '@app/core/core.service';
 
 import { ContractsService } from '../services/contracts.service';
 
@@ -44,6 +44,6 @@ export class ClauseDefinitionComponent {
                        .toPromise()
                        .then((x) => this.clause = x)
                        .catch((e) => this.core.http.showAndThrow(e, errMsg));
- } 
+ }
 
 }

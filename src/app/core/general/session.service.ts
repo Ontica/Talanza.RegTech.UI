@@ -8,7 +8,7 @@
 
 import { Injectable } from '@angular/core';
 
-import { Assertion } from 'empiria';
+import { Assertion } from '../general/assertion';
 
 import { ApplicationSettingsService } from './application-settings.service';
 import { ApplicationSettings } from './application-settings';

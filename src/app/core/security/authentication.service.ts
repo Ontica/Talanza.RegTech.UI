@@ -8,10 +8,10 @@
 
 import { Injectable } from '@angular/core';
 
-import { Assertion } from 'empiria';
-
+import { Assertion } from '../general/assertion';
 import { SessionService } from '../general/session.service';
 import { LoggerService } from '../general/logger.service';
+
 import { SecurityDataService } from './security-data.service';
 import { Principal } from './principal';
 import { SessionToken, Identity, ClaimsList } from './security-types';

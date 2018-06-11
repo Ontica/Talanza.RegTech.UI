@@ -8,7 +8,7 @@
 
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
-import { Assertion } from 'empiria';
+import { Assertion } from '@app/core';
 
 import { Activity, CloseActivityCommand } from '@app/models/project-management';
 

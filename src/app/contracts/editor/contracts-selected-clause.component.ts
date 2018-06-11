@@ -8,8 +8,8 @@
 
  import { Component, Input, ViewEncapsulation } from '@angular/core';
 
- import { Assertion } from 'empiria';
- import { CoreService } from '../../core/core.service';
+ import { Assertion } from '@app/core';
+ import { CoreService } from '@app/core/core.service';
 
  import { ContractsService } from '../services/contracts.service';
 
@@ -70,10 +70,10 @@
 
   private loadObligations(clauseRef: ContractClauseRef): void {
     const errMsg = 'Ocurrió un problema al intentar leer la cláusula.';
-    
+
         this.contractService.getObligations(clauseRef.contractUID, clauseRef.uid)
                             .toPromise()
-                            .then((x) => { this.rules = x .rules; 
+                            .then((x) => { this.rules = x .rules;
                                            this.setClauseInfoContainerWidth();
                                          })
                             .catch((e) => this.core.http.showAndThrow(e, errMsg));
