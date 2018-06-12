@@ -7,8 +7,8 @@
 
 import { Injectable } from '@angular/core';
 
-import { Observable, of } from 'rxjs';
-import { mergeMap } from 'rxjs/operators';
+import { Observable, of, throwError } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 
 import { Assertion } from '../general/assertion';
 import { Exception } from '../general/exception';
@@ -30,10 +30,9 @@ export class HttpService {
     Assertion.assertValue(path, 'path');
 
     return this.directory.getService(path, HttpMethod.GET)
-                         .pipe(
-                            mergeMap((service) => {
-                              return this.httpHandler.get<T>(path, options, service);
-                         }));
+      .pipe(
+        switchMap(service => this.httpHandler.get<T>(path, options, service))
+      );
   }
 
 
@@ -41,40 +40,37 @@ export class HttpService {
     Assertion.assertValue(path, 'path');
 
     return this.directory.getService(path, HttpMethod.POST)
-                         .pipe(
-                            mergeMap((service) => {
-                              return this.httpHandler.post<T>(path, body, options, service);
-                         }));
+      .pipe(
+        switchMap(service => this.httpHandler.post<T>(path, body, options, service))
+      );
   }
 
   public put<T>(path: string, body: any, options?: HttpClientOptions): Observable<T> {
     Assertion.assertValue(path, 'path');
 
     return this.directory.getService(path, HttpMethod.PUT)
-                         .pipe(
-                            mergeMap((service) => {
-                              return this.httpHandler.put<T>(path, body, options, service);
-                         }));
+        .pipe(
+          switchMap(service => this.httpHandler.put<T>(path, body, options, service))
+        );
   }
 
   public patch<T>(path: string, body: any, options?: HttpClientOptions): Observable<T> {
     Assertion.assertValue(path, 'path');
 
     return this.directory.getService(path, HttpMethod.PATCH)
-                         .pipe(
-                            mergeMap((service) => {
-                              return this.httpHandler.patch<T>(path, body, options, service);
-                         }));
+      .pipe(
+        switchMap(service => this.httpHandler.patch<T>(path, body, options, service))
+      );
   }
 
   public delete<T>(path: string, options?: HttpClientOptions): Observable<T> {
     Assertion.assertValue(path, 'path');
 
     return this.directory.getService(path, HttpMethod.DELETE)
-                         .pipe(
-                            mergeMap((service) => {
-                              return this.httpHandler.delete<T>(path, options, service);
-                         }));
+      .pipe(
+        switchMap(service =>
+          this.httpHandler.delete<T>(path, options, service))
+      );
   }
 
   public showAndReturn<T>(error: any, defaultMessage?: string, returnValue?: T): Observable<T> {
@@ -90,13 +86,13 @@ export class HttpService {
 
     exception.show();
 
-    return Observable.throw(exception);
+    return throwError(exception);
   }
 
   public throw(error: any, defaultMessage?: string) : Observable<never> {
     const exception = Exception.convertTo(error, defaultMessage);
 
-    return Observable.throw(exception);
+    return throwError(exception);
   }
 
 }
