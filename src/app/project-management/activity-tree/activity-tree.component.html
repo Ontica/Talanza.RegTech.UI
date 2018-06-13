@@ -1,11 +1,9 @@
-<div *ngIf="filter.project.uid !== ''" class="list-view-container">
+<div *ngIf="project.project.uid !== ''" class="list-view-container">
 
   <div class="list-view-header">
     <div class="list-view-title">
-      <!-- Árbol de actividades
-      <div class="hint">Proyecto regulatorio: {{filter.project.name}}</div> -->
-      <search-control (onSearch)="search($event)"></search-control>
-      Ordenar por:
+      Árbol de actividades
+      <div class="hint">Proyecto regulatorio: {{project.project.name}}</div>
     </div>
     <div>
 
@@ -18,20 +16,16 @@
 
   <div class="list-view-body">
 
-    <div *ngIf="addFirstActivityEditorVisible" class="activity-inline-editor"
-          style="margin-left:32pt;">
-
-        <input #txtActivityName type="text"
-               class="text-box inline-editor-text-box"
-               (keyup.esc)="hideInlineEditors()"
-               (keyup.enter)="insertActivity(txtActivityName.value)"
-               placeholder= "Agregar una actividad">
-        <button class="btn" (click)="hideInlineEditors()">Cancelar</button>
+    <div *ngIf="addFirstActivityEditorVisible"
+          style="margin-left:32pt">
+          <activity-inline-editor (insert)="insertActivity($event)"
+                                  (cancel)="hideInlineEditors()">
+          </activity-inline-editor>
     </div>
 
-    <div *ngFor="let activity of activityTree"
+    <div *ngFor="let activity of project.activities"
          class="activity-row"
-         (click)="selectActivity(activity)"
+         (click)="onSelectActivity(activity)"
          [class.dragover-activity-row]="dragZoneItem === activity">
 
       <div [class.selected-activity]="isActivitySelected(activity)"
@@ -54,7 +48,7 @@
 
               <a [ngClass]="activityNameClass(activity.level)"
                  [class.dragover-activity-name]="dragZoneItem === activity.name"
-                 (click)="selectActivity(activity, true)">{{activity.name}} / {{activity.responsible.name}}</a>
+                 (click)="onSelectActivity(activity, true)">{{activity.name}} / {{activity.responsible.name}}</a>
 
             </div>
 
@@ -68,27 +62,20 @@
 
       </div>
 
-      <div *ngIf="isActivitySelected(activity)" class="activity-inline-editor">
-
-        <div *ngIf="insertActivityEditorVisible">
-          <input #txtActivityName type="text"
-                 class="text-box inline-editor-text-box"
-                 [style.margin-left.pt]="activity.level * 14 + 20"
-                 placeholder= "Agregar una actividad"
-                 (keyup.esc)="hideInlineEditors()"
-                 (keyup.enter)="insertActivity(txtActivityName.value, activity.position)">
-          <button class="btn" (click)="hideInlineEditors()">Cancelar</button>
-        </div>
-
+      <div *ngIf="isActivitySelected(activity) && insertActivityEditorVisible"
+            [style.margin-left.pt]="activity.level * 14 + 20">
+        <activity-inline-editor (insert)="insertActivity($event, activity.position)"
+                                (cancel)="hideInlineEditors()">
+        </activity-inline-editor>
       </div>
 
-    </div>  <!--ngFor="let activity of activityTree" -->
+    </div>
 
     <div class="activity-row"
         [class.dragover-activity-row]="dragZoneItem === this"
         (dragover)="allowDrop($event, this)"
         (dragleave)="setDragZoneItem(null)"
-        (drop)="moveActivity($event, activityTree.length + 1)">
+        (drop)="moveActivity($event, project.activities.size + 1)">
     </div>
 
   </div>

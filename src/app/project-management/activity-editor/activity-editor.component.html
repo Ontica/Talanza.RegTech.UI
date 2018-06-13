@@ -51,6 +51,8 @@
                                   (selected)="onSelectedTags($event)">
             </autocomplete-control>
             <br>
+            Parent: {{activity.parent.uid}}<br>
+            Position: {{activity.position}}<br>
             <chips [items]="selectedTags"></chips>
           </td>
         </tr>

@@ -32,7 +32,6 @@ export class ProjectsFilterComponent implements OnInit {
 
   keywords = '';
 
-
   selectedProject: Project = Empty;
 
   filter: ActivityFilter = new ActivityFilter();

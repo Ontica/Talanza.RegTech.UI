@@ -10,12 +10,12 @@
   <div [ngSwitch]="viewConfig.viewType" class="explorer-panel primary">
 
     <activity-tree *ngSwitchCase="'activity-tree'"
-                    [filter]="filter"
-                    (onSelectActivity)="showEditor($event)">
+                    [project]="selectedProject"
+                    (activitySelected)="showEditor($event)">
     </activity-tree>
 
     <gantt *ngSwitchCase="'gantt'"
-            [filter]="filter"min-width-auto
+            [filter]="filter"
             [config]="viewConfig">
     </gantt>
 
@@ -27,8 +27,8 @@
 
   <div *ngIf="displayEditor" class="explorer-panel secondary">
     <activity-editor [activity]="selectedActivity"
-                      (update)="onActivityUpdated($event)"
-                      (close)="onEditorClosed()">
+                     (update)="onActivityUpdated($event)"
+                     (close)="onEditorClosed()">
     </activity-editor>
   </div>
 

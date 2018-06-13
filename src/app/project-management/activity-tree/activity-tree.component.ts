@@ -6,11 +6,8 @@
  */
 
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Observable } from 'rxjs';
 
-import { Assertion } from '@app/core';
-
-import { ProjectStore } from '@app/store/project.store';
+import { ProjectStore, ProjectModel } from '@app/store/project.store';
 
 import { Activity, Activity_Empty, ActivityFilter } from '@app/models/project-management';
 
@@ -21,34 +18,15 @@ import { Activity, Activity_Empty, ActivityFilter } from '@app/models/project-ma
 })
 export class ActivityTreeComponent {
 
-  //activityTree: Observable<Activity[]> = Observable.of([]);
-  activityTree: Activity[] = [];
-
   selectedActivity: Activity = Activity_Empty;
   dragZoneItem = null;
 
   addFirstActivityEditorVisible = false;
   insertActivityEditorVisible = false;
 
-  private _filter: ActivityFilter = new ActivityFilter();
-  @Input()
-  set filter(filter: ActivityFilter) {
+  @Input() project: ProjectModel;
 
-    this.initialize();
-
-    if ((filter && filter.project && filter.project.uid)) {
-      this._filter = filter;
-
-
-      this.loadActivitiesTree();
-    }
-  }
-
-  get filter(): ActivityFilter {
-    return this._filter;
-  }
-
-  @Output() onSelectActivity = new EventEmitter<Activity>();
+  @Output() activitySelected = new EventEmitter<Activity>();
 
   constructor(private projectStore: ProjectStore) {
 
@@ -88,19 +66,10 @@ export class ActivityTreeComponent {
       position: position ? position + 1 : 1
     };
 
-    // this.projectStore.insertActivity(this.filter.project, activity)
-    //                  .map( (x) => this.selectActivity(x) )
-    //                  .finally( () => {
-    //                      this.loadActivitiesTree();
-    //                      this.hideSpinner();
-    //                   });
-
-    this.projectStore.insertActivity(this.filter.project, activity)
-                     .toPromise()
-                     .then((x) => {
-                       this.loadActivitiesTree();
+    this.projectStore.insertActivity(this.project.project, activity)
+                     .then( x => {
                        this.hideSpinner();
-                       this.selectActivity(x);
+                       this.onSelectActivity(x);
                      });
   }
 
@@ -116,11 +85,11 @@ export class ActivityTreeComponent {
   }
 
 
-  selectActivity(activity: Activity, emitEvent: boolean = false) {
+  onSelectActivity(activity: Activity, emitEvent: boolean = false) {
     this.selectedActivity = activity;
 
     if (emitEvent) {
-      this.onSelectActivity.emit(activity);
+      this.activitySelected.emit(activity);
     }
   }
 
@@ -152,7 +121,7 @@ export class ActivityTreeComponent {
   startDrag(event: DragEvent, activity: Activity) {
     this.hideInlineEditors();
 
-    this.selectActivity(activity);
+    this.onSelectActivity(activity);
 
     event.srcElement.parentElement.classList.add("dragged");
 
@@ -168,11 +137,7 @@ export class ActivityTreeComponent {
     this.configureDragEventBehaviour(event);
     this.setDragZoneItem(null);
 
-    //this.projectStore.moveActivity(activity, newPosition);
-
     this.projectStore.moveActivity(activity, newPosition)
-                     .toPromise()
-                     .then( () => this.loadActivitiesTree() )
                      .catch( response => console.log(response.error.message) );
   }
 
@@ -183,11 +148,7 @@ export class ActivityTreeComponent {
     this.configureDragEventBehaviour(event);
     this.setDragZoneItem(null);
 
-    //this.projectStore.changeParent(activity, newParent);
-
     this.projectStore.changeParent(activity, newParent)
-                     .toPromise()
-                     .then( () => this.loadActivitiesTree() )
                      .catch( response => console.log(response.error.message) );
   }
 
@@ -200,8 +161,6 @@ export class ActivityTreeComponent {
 
 
   private initialize() {
-    //this.activityTree = Observable.of([]);
-    this.activityTree = [];
     this.selectedActivity = Activity_Empty;
 
     this.addFirstActivityEditorVisible = false;
@@ -220,16 +179,6 @@ export class ActivityTreeComponent {
 
   private hideSpinner() {
     // ToDo: call spinner component
-  }
-
-
-  private loadActivitiesTree() {
-    Assertion.assertValue(this.filter.project, "this.filter.project");
-
-    // this.activityTree = this.projectStore.activities(this.filter.project);
-
-    this.projectStore.activities(this.filter.project)
-                     .subscribe( x => this.activityTree = x );
   }
 
 

@@ -13,8 +13,11 @@ import { SharedModule } from '../shared/shared.module';
 import { ProceduresModule } from '../procedures/procedures.module';
 import { ControlsModule } from '../controls/controls.module';
 
-import { ActivityEditorComponent } from './activity-editor/activity-editor.component';
 import { ActivityTreeComponent } from './activity-tree/activity-tree.component';
+import { ActivityInlineEditorComponent } from './activity-tree/activity-inline-editor.component';
+import { ActivityEditorComponent } from './activity-editor/activity-editor.component';
+
+
 import { GanttComponent } from './gantt/gantt.component';
 import { ProjectManagementRoutingModule } from './project-management-routing.module';
 import { ProjectsFilterComponent } from './main-page/projects-filter.component';
@@ -52,7 +55,9 @@ import { OldProjectTreeComponent } from './old-project-tree/old-project-tree.com
 
   declarations: [
     ActivityEditorComponent,
+    ActivityInlineEditorComponent,
     ActivityTreeComponent,
+
     GanttComponent,
     ProjectsFilterComponent,
     ProjectsMainPageComponent,

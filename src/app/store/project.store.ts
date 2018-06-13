@@ -6,30 +6,31 @@
  */
 
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { List } from 'immutable';
 
-import { Contact } from '@app/core/data-types';
+import { Contact, Empty } from '@app/core/data-types';
 import { Activity, Contract, Project, Stage } from '@app/models/project-management';
 import { ProjectService } from '@app/services/project-management';
 import { ColoredTag } from '@app/core/ui-services';
 
-class ProjectModel {
+export class ProjectModel {
 
-  project: Project;
-
-  activities: Activity[];
+  project: Project = Empty;
+  activities: List<Activity> = List([]);
 
 }
+
 
 @Injectable()
 export class ProjectStore {
 
-  private _projects: BehaviorSubject<List<Project>> = new BehaviorSubject(List([]));
-  private _activities: BehaviorSubject<List<Activity>> = new BehaviorSubject(List([]));
+  private _selectedProject: BehaviorSubject<ProjectModel> = new BehaviorSubject(new ProjectModel());
 
+  private _projects: BehaviorSubject<List<Project>> = new BehaviorSubject(List([]));
   private _tags: BehaviorSubject<ColoredTag[]> = new BehaviorSubject([]);
   private _stages: BehaviorSubject<List<Stage>> = new BehaviorSubject(List([]));
+
 
   constructor(private projectService: ProjectService) {
     this.loadInitialData();
@@ -38,6 +39,16 @@ export class ProjectStore {
 
   get contracts(): Observable<Contract[]> {
     return this.projectService.getContracts();
+  }
+
+
+  selectedProject(): Observable<ProjectModel> {
+    return this._selectedProject.asObservable();
+  }
+
+
+  selectProject(project: Project) {
+    this.updateSelectedProject(project);
   }
 
 
@@ -56,11 +67,6 @@ export class ProjectStore {
   }
 
 
-  activities(project: Project): Observable<Activity[]> {
-    return this.projectService.getActivitiesTree(project);
-  }
-
-
   responsibles(project: Project): Observable<Contact[]> {
     return this.projectService.getResponsiblesList(project);
   }
@@ -71,29 +77,62 @@ export class ProjectStore {
   }
 
 
-  changeParent(activity: Activity, newParent: Activity): Observable<Activity> {
-    return this.projectService.changeParent(activity, newParent);
+  changeParent(activity: Activity, newParent: Activity): Promise<Activity> {
+    return this.projectService.changeParent(activity, newParent)
+               .toPromise()
+               .then( x => {
+                   this.updateSelectedProject(activity.project);
+                   Object.assign(activity, x);
+
+                   return activity;
+              });
   }
 
 
-  deleteActivity(activity: Activity): Observable<void> {
-    return this.projectService.deleteActivity(activity);
+  deleteActivity(activity: Activity): Promise<void> {
+    return this.projectService.deleteActivity(activity)
+               .toPromise()
+               .then(() => {
+                  this.updateSelectedProject(activity.project);
+                  Object.assign(activity, null);
+               });
   }
 
 
   insertActivity(project: Project,
-                 newActivity: { name: string, position: number }): Observable<Activity> {
-    return this.projectService.insertActivity(project, newActivity);
+                 newActivity: { name: string, position: number }): Promise<Activity> {
+
+    return this.projectService.insertActivity(project, newActivity)
+               .toPromise()
+               .then( x => {
+                  this.updateSelectedProject(project);
+
+                  return x;
+             });
   }
 
 
-  moveActivity(activity: Activity, newPosition: number): Observable<Activity> {
-    return this.projectService.moveActivity(activity, newPosition);
+  moveActivity(activity: Activity, newPosition: number): Promise<Activity> {
+    return this.projectService.moveActivity(activity, newPosition)
+               .toPromise()
+               .then( x => {
+                  this.updateSelectedProject(activity.project);
+                  Object.assign(activity, x);
+
+                  return activity;
+               });
   }
 
 
-  updateActivity(activity: Activity, updateData: Partial<Activity>): Observable<Activity> {
-    return this.projectService.updateActivity(activity, updateData);
+  updateActivity(activity: Activity, updateData: Partial<Activity>): Promise<Activity> {
+    return this.projectService.updateActivity(activity, updateData)
+               .toPromise()
+               .then( x => {
+                  this.updateSelectedProject(activity.project);
+                  Object.assign(activity, x);
+
+                  return activity;
+               });
   }
 
 
@@ -124,6 +163,20 @@ export class ProjectStore {
             ,
             err => console.log('Error reading stages data', err)
         );
+  }
+
+
+  private updateSelectedProject(project: Project) {
+    this.projectService.getActivitiesTree(project).subscribe(
+      data => {
+        const projectModel = new ProjectModel();
+        projectModel.project = project;
+        projectModel.activities = List(data);
+
+        this._selectedProject.next(projectModel);
+      },
+      err => console.log('Error reading project activities', err)
+    );
   }
 
 }

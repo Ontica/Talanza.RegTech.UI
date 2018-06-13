@@ -8,19 +8,16 @@
 import { Component, EventEmitter, Input,
          OnChanges, OnInit, Output} from '@angular/core';
 
-import { FormBuilder, FormControl,
+import { FormControl,
          FormGroup, Validators } from '@angular/forms';
 
 import { Observable, of } from 'rxjs';
-
-import { Assertion } from '@app/core';
 
 import { Contact, DateStringLibrary } from '@app/core/data-types';
 
 import { ColoredTag } from '@app/core/ui-data-types';
 
 import { ProjectStore } from '@app/store/project.store';
-import { ProjectService } from '@app/services/project-management';
 
 import { AbstractForm, MessageBoxService, SpinnerService } from '@app/core/ui-services';
 
@@ -57,7 +54,6 @@ export class ActivityEditorComponent extends AbstractForm implements OnInit, OnC
   selectedTags: ColoredTag[] = [];
 
   constructor(spinner: SpinnerService,
-              private formBuilder: FormBuilder,
               private messageBox: MessageBoxService,
               private projectStore: ProjectStore) {
     super();
@@ -155,12 +151,8 @@ export class ActivityEditorComponent extends AbstractForm implements OnInit, OnC
 
   private deleteActivity(): Promise<void> {
     return this.projectStore.deleteActivity(this.activity)
-                            .toPromise()
-                            .then( () => {
-                                Object.assign(this.activity, null);
-                                this.onClose();
-                            })
-                            .catch( err => this.messageBox.show(err));
+               .then( () => this.onClose() )
+               .catch( err => this.messageBox.show(err) );
   }
 
 
@@ -203,12 +195,8 @@ export class ActivityEditorComponent extends AbstractForm implements OnInit, OnC
     const updateData = this.getUpdateData();
 
     return this.projectStore.updateActivity(this.activity, updateData)
-                            .toPromise()
-                            .then( x => {
-                                Object.assign(this.activity, x);
-                                // this.update.emit(this.activity);
-                                this.onReset();
-                              });
+               .then( () => this.onReset() )
+               .catch( err => this.messageBox.show(err) );
   }
 
 

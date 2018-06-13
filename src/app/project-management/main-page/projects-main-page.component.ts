@@ -6,8 +6,10 @@
  */
 
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { List } from 'immutable';
 
-import { Empty } from '@app/core/data-types';
+import { ProjectStore , ProjectModel } from '@app/store/project.store';
 
 import { Activity, Activity_Empty,
          ActivityFilter, DefaultViewConfig,
@@ -19,21 +21,26 @@ import { Activity, Activity_Empty,
   templateUrl: './projects-main-page.component.html',
   styleUrls: ['./projects-main-page.component.scss']
 })
-export class ProjectsMainPageComponent {
+export class ProjectsMainPageComponent implements OnInit {
+
+  selectedProject: ProjectModel;
+  selectedActivity = Activity_Empty;
 
   viewConfig = DefaultViewConfig();
   filter = new ActivityFilter();
 
-  selectedProject: Project = Empty;
-  taskList: Activity[] = [];
-  selectedActivity = Activity_Empty;
-
   displayEditor = false;
 
-  constructor() {
+  constructor(private store: ProjectStore) {
 
   }
 
+
+  ngOnInit() {
+    this.store.selectedProject().subscribe (
+      x => this.selectedProject = x
+    );
+  }
 
   onActivityUpdated(activity: Activity) {
 
@@ -46,6 +53,8 @@ export class ProjectsMainPageComponent {
 
 
   onFilterChanged(receivedFilter: ActivityFilter) {
+    this.store.selectProject(receivedFilter.project);
+
     this.filter = receivedFilter;
   }
 
