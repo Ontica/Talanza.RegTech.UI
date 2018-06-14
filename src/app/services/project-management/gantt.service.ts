@@ -11,7 +11,7 @@ import { catchError } from 'rxjs/operators';
 
 import { CoreService } from '@app/core/core.service';
 
-import { GanttTask } from '@app/models/project-management';
+import { GanttTask, Project } from '@app/models/project-management';
 
 
 enum Errors {
@@ -26,15 +26,13 @@ export class GanttService {
 
   constructor(private core: CoreService) { }
 
-  getActivitiesTree(projectUID: string): Promise<GanttTask[]> {
-    const path = `v1/project-management/projects/${projectUID}/as-gantt`;
+  getActivitiesTree(project: Project): Observable<GanttTask[]> {
+    const path = `v1/project-management/projects/${project.uid}/as-gantt`;
 
     return this.core.http.get<GanttTask[]>(path)
                .pipe(
-                  catchError((e) => this.core.http.showAndReturn(e, Errors.GET_GANTT_TREE, null))
-               )
-               .toPromise();
-
+                  catchError((e) => this.core.http.showAndThrow(e, Errors.GET_GANTT_TREE))
+               );
   }
 
 }

@@ -5,12 +5,17 @@
  * See LICENSE.txt in the project root for complete license information.
  */
 
-import { Component, ElementRef, Input, OnChanges, ViewChild } from "@angular/core";
+import { Component, ChangeDetectionStrategy,
+         ElementRef, EventEmitter,
+         Input, Output,
+         OnInit, ViewChild } from "@angular/core";
+
+import { ProjectModel, ProjectStore } from '@app/store/project.store';
 
 import "dhtmlx-gantt";
-import { } from "@types/dhtmlxgantt";
+import { } from "dhtmlxgantt";
 
-import { ActivityFilter, Project, ViewConfig } from '@app/models/project-management';
+import { Activity, ViewConfig, GanttTask } from '@app/models/project-management';
 
 import { GanttService } from '@app/services/project-management';
 
@@ -19,122 +24,117 @@ import { GanttService } from '@app/services/project-management';
   selector: "gantt",
   templateUrl: './gantt.component.html',
   styleUrls: ['./gantt.component.scss'],
-  providers: [GanttService]
+  providers: [GanttService],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class GanttComponent implements OnChanges {
-
-  @ViewChild("gantt_here") ganttContainer: ElementRef;
-
-  @Input() config: ViewConfig;
+export class GanttComponent implements OnInit {
 
   @Input()
-  get filter(): ActivityFilter { return this._filter; }
-
-  set filter(filter: ActivityFilter) {
-    this._filter = filter;
-
-    this.projectUID = filter.project.uid;
-
+  get project(): ProjectModel { return this._project };
+  set project(value: ProjectModel) {
+    this._project = value;
     this.refreshData();
+  };
+  private _project;
+
+
+  @Input()
+  get config(): ViewConfig { return this._config };
+  set config(value: ViewConfig) {
+    this._config = value;
+    this.setConfiguration();
+    this.resetGantt();
+  };
+  private _config;
+
+
+  @Input()
+  set reset(value: boolean) {
+     this.resetGantt();
   }
-  private _filter: ActivityFilter;
+
+  @Output() activitySelected = new EventEmitter<Activity>();
+
+  @ViewChild("gantt") ganttContainer: ElementRef;
 
 
-  isActivityAddEditorWindowVisible = false;
-  isActivityEditorWindowVisible = false;
-  isStartActivityEditorWindowVisible = false;
-  parentId = -1;
-  activityId = -1;
-  projectUID = '';
+  private ganttData: GanttTask[] = [];
+  private selectedTask: GanttTask;
+  private innerReset = false;
 
-  constructor(private ganttService: GanttService) { }
+  constructor(private store: ProjectStore,
+              private ganttService: GanttService) { }
 
-  ngOnChanges() {
 
-    this.initConfig();
-
-    gantt.init(this.ganttContainer.nativeElement);
-
+  ngOnInit() {
     this.attachEvents();
 
-    this.refreshData();
-  }
-
-  onCloseActivityAddEditorWindow() {
-    this.isActivityAddEditorWindowVisible = false;
-    this.refreshData();
-
-  }
-
-  onCloseActivityEditorWindow() {
-    this.isActivityEditorWindowVisible = false;
-    this.refreshData();
+    this.resetGantt();
   }
 
 
-  // Private methods
+ // Private methods
 
   private attachEvents() {
-    gantt.attachEvent("onTaskCreated", (id, item) => {
-      this.parentId = id.parent || -1;
-      this.activityId = -1;
-      this.isActivityAddEditorWindowVisible = true;
-    });
 
-    gantt.attachEvent("onTaskDblClick", (id, item) => {
-      this.activityId = id;
-
-      this.isActivityEditorWindowVisible = true;
-    });
-
-    gantt.attachEvent("onAfterTaskDrag", function (id, mode, e) {
-      let modes = gantt.config.drag_mode;
-      if (mode === modes.resize) {
-        var modifiedTask = gantt.getTask(id);
-        // ToDo: ??
+    gantt.attachEvent("onTaskSelected", id => {
+      if (this.innerReset) {
+        this.innerReset = false;
+        return;
       }
+
+      this.selectedTask = this.ganttData.find( x => x.id == id );
+
+      const activity = this.store.getActivity(this.selectedTask.uid);
+
+      return this.activitySelected.emit(activity);
     });
 
   }
-
-
-  private initConfig() {
-    gantt.config.xml_date = "%Y-%m-%d %H:%i";
-    gantt.config.grid_resize = true;
-    gantt.config.keep_grid_width = false;
-    gantt.config.smart_rendering = true;
-    gantt.config.show_progress = true;
-    gantt.config.drag_progress = false;
-    gantt.config.open_tree_initially = true;
-
-    this.setScaleUnit();
-  }
-
 
   private refreshData() {
-    this.ganttService.getActivitiesTree(this.projectUID)
-                      .then( data => {
+    if (this.project.project.uid === '') {
+      return;
+    }
+
+    this.ganttService.getActivitiesTree(this.project.project)
+                     .subscribe( data => {
+                        this.ganttData = data;
                         gantt.clearAll();
                         gantt.parse({ data });
                       });
   }
 
+  private resetGantt() {
+    gantt.init(this.ganttContainer.nativeElement);
 
-  private setScaleUnit() {
-    switch (this.config.timeScaleUnit) {
-      case 'weeks':
-        gantt.config.scale_unit = 'week';
-        return;
-      case 'months':
-        gantt.config.scale_unit = 'month';
-        return;
-      case 'quarters':
-        gantt.config.scale_unit = 'quarter';
-        return;
-      default:
-        gantt.config.scale_unit = 'month';
-        return;
+    if (this.selectedTask) {
+      this.innerReset = true;
+      gantt.selectTask(this.selectedTask.id);
     }
+  }
+
+
+  private setConfiguration() {
+    gantt.config.xml_date = "%Y-%m-%d %H:%i";
+
+    gantt.config.keep_grid_width = false;
+    gantt.config.show_progress = true;
+    gantt.config.drag_progress = false;
+    gantt.config.open_tree_initially = true;
+
+    gantt.config.smart_rendering = true;
+    gantt.config.drag_progress = false;
+    gantt.config.open_tree_initially = true;
+    gantt.config.select_task = true;
+    gantt.config.readonly = true;
+    gantt.config.preserve_scroll = true;
+
+    gantt.config.columns = [
+      {name:"text", label:"Actividad", tree: true, resize: true, width:'480' }
+    ];
+
+    gantt.config.scale_unit = this.config ? this.config.timeScaleUnit : 'quarter';
   }
 
 }

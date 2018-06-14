@@ -1,6 +1,12 @@
-:host{
-  display: block;
-  height: 600px;
-  position: relative;
-  width: 100%;
+
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: auto;
+}
+
+.gantt-container {
+  flex: 1;
+  height: 100%;
 }

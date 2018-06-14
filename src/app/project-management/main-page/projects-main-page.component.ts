@@ -27,9 +27,9 @@ export class ProjectsMainPageComponent implements OnInit {
   selectedActivity = Activity_Empty;
 
   viewConfig = DefaultViewConfig();
-  filter = new ActivityFilter();
 
   displayEditor = false;
+  toggleEditor = false;
 
   constructor(private store: ProjectStore) {
 
@@ -49,13 +49,13 @@ export class ProjectsMainPageComponent implements OnInit {
 
   onEditorClosed() {
     this.displayEditor = false;
+
+    this.toggleEditor = !this.toggleEditor;
   }
 
 
   onFilterChanged(receivedFilter: ActivityFilter) {
     this.store.selectProject(receivedFilter.project);
-
-    this.filter = receivedFilter;
   }
 
 
@@ -68,7 +68,13 @@ export class ProjectsMainPageComponent implements OnInit {
     if (activity) {
       this.selectedActivity = activity;
 
+      const lastValue = this.displayEditor;
+
       this.displayEditor = true;
+
+      if (lastValue !== this.displayEditor) {
+        this.toggleEditor = !this.toggleEditor;
+      }
     }
   }
 

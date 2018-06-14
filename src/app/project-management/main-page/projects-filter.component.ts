@@ -120,7 +120,11 @@ export class ProjectsFilterComponent implements OnInit {
 
 
   changeView() {
-    this.onChangeView.emit(this.viewConfig);
+    const clone = new ViewConfig();
+    clone.timeScaleUnit = this.viewConfig.timeScaleUnit;
+    clone.viewType = this.viewConfig.viewType;
+
+    this.onChangeView.emit(clone);
   }
 
 

@@ -7,7 +7,10 @@
 <div class="explorer"
     [class.remove-min-width]="!displayEditor">
 
-  <div [ngSwitch]="viewConfig.viewType" class="explorer-panel primary">
+  <div [ngSwitch]="viewConfig.viewType"
+       class="explorer-panel"
+       [class.primary]="viewConfig.viewType !== 'gantt'"
+       [class.primary-full]="viewConfig.viewType === 'gantt'">
 
     <activity-tree *ngSwitchCase="'activity-tree'"
                     [project]="selectedProject"
@@ -15,13 +18,12 @@
     </activity-tree>
 
     <gantt *ngSwitchCase="'gantt'"
-            [filter]="filter"
-            [config]="viewConfig">
+            [project]="selectedProject"
+            [config]="viewConfig"
+            [reset]="toggleEditor"
+            (activitySelected)="showEditor($event)">
     </gantt>
 
-    <old-project-tree *ngSwitchCase="'old-version'"
-                      [filter]="filter">
-    </old-project-tree>
 
   </div>
 

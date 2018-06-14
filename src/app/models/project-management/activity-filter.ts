@@ -105,14 +105,12 @@ export class ActivityFilter {
 export function DefaultViewConfig(): ViewConfig {
   return {
     viewType: 'activity-tree',
-    ganttConfig: 'ganttWeeks',
-    timeScaleUnit: 'quarters',
+    timeScaleUnit: 'quarter',
   };
 }
 
 
 export class ViewConfig {
   viewType: string;
-  ganttConfig: string;
   timeScaleUnit: string;
 }

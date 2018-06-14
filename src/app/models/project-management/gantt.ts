@@ -6,10 +6,14 @@
  */
 
 export class GanttTask {
+  uid: string;
   id: number;
-  start_date: string;
-  text: string;
-  duration: number;
-  parent: number;
   type: string;
+  text: string;
+  start_date: string;
+  duration: number;
+  position: number;
+  level: number;
+  ragStatus: string
+  parent: number;
 }

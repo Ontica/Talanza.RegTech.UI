@@ -66,6 +66,10 @@ export class ProjectStore {
     return this._tags.asObservable();
   }
 
+  getActivity(activityUID: string): Activity {
+    return this._selectedProject.value.activities.find( x => x.uid === activityUID);
+  }
+
 
   responsibles(project: Project): Observable<Contact[]> {
     return this.projectService.getResponsiblesList(project);

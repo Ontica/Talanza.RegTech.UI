@@ -67,15 +67,15 @@
         <option value="gantt">Gantt</option>
         <option value="kanban">Kanban</option>
         <option value="calendar">Calendario</option>
-        <option value="old-version">Versión anterior</option>
       </select>
     </td>
     <td>Escala:</td>
     <td>
       <select class="select-box" style="width:98px" (change)="changeView()" [(ngModel)]="viewConfig.timeScaleUnit">
-        <option value="quarters">Trimestral</option>
-        <option value="months">Mensual</option>
-        <option value="weeks">Semanal</option>
+        <option value="year">Anual</option>
+        <option value="quarter">Trimestral</option>
+        <option value="month">Mensual</option>
+        <option value="week">Semanal</option>
       </select>
     </td>
   </tr>
