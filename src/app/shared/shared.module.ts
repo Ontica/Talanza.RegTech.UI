@@ -19,7 +19,7 @@ import { MainLayoutComponent } from './main-layout/main-layout.component';
 import { MainMenuComponent } from './main-layout/main-menu/main-menu.component';
 
 import { NavigationHeaderComponent } from './nav-header/nav-header.component';
-
+import { NavigationMenuComponent } from './nav-menu/nav-menu.component';
 
 import { NoContentComponent } from './no-content/no-content.component';
 
@@ -29,9 +29,29 @@ import { NoContentComponent } from './no-content/no-content.component';
  */
 
 @NgModule({
-  imports: [RouterModule, CommonModule, FormsModule, ControlsModule, GlobalSearchModule, CoreModule],
-  declarations: [MainLayoutComponent, NavigationHeaderComponent, MainMenuComponent, NoContentComponent],
-  exports: [MainLayoutComponent, NavigationHeaderComponent, NoContentComponent],
+
+  imports: [
+    RouterModule,
+    CommonModule,
+    FormsModule,
+    ControlsModule,
+    GlobalSearchModule,
+    CoreModule
+  ],
+
+  declarations: [
+    MainLayoutComponent,
+    NavigationHeaderComponent,
+    NavigationMenuComponent,
+    MainMenuComponent,
+    NoContentComponent
+  ],
+
+  exports: [
+    MainLayoutComponent,
+    NavigationHeaderComponent,
+    NoContentComponent
+  ],
 
 })
 export class SharedModule { }

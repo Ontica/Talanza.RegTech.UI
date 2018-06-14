@@ -7,9 +7,13 @@
 
   <div class="menu-bar">
 
-    <span class="menu" [innerHTML]="mainMenu | safeHtml "></span>
+    <nav-menu class="menu"
+              [items]="mainMenuItems"
+              (select)="onSelectMainMenuItem($event)"></nav-menu>
 
-    <span class="menu" [innerHTML]="secondaryMenu | safeHtml "></span>
+    <nav-menu class="menu"
+              [items]="secondaryMenuItems"
+              (select)="onSelectSecondaryMenuItem($event)"></nav-menu>
 
   </div>
 

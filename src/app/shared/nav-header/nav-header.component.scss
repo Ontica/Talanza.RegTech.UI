@@ -40,9 +40,8 @@ $margin-size: 8px;
 }
 
 .menu-bar {
-  color: $white;
-  font-size: $font-size-hint;
-  font-weight: 400;
+  margin-left: -10px;
+  padding-bottom: 8px;
 }
 
 .menu {
