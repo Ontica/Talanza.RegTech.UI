@@ -32,6 +32,10 @@ export class GanttComponent implements OnInit {
   @Input()
   get project(): ProjectModel { return this._project };
   set project(value: ProjectModel) {
+    if (this.project && this.project.project.uid !== value.project.uid) {
+      this.selectedTask = null;
+    }
+
     this._project = value;
     this.refreshData();
   };
