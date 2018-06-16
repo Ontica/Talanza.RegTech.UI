@@ -1,4 +1,8 @@
-<navigation-header></navigation-header>
+<navigation-header [mainMenuItems]="mainMenuItems"
+                   [secondaryMenuItems]="secondaryMenuItems"
+                   (action)="onAction($event)">
+
+</navigation-header>
 
 <projects-filter (onChangeFilter)="onFilterChanged($event)"
                  (onChangeView)="onViewChanged($event)">

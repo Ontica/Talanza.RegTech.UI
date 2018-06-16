@@ -9,11 +9,11 @@
 
     <nav-menu class="menu"
               [items]="mainMenuItems"
-              (select)="onSelectMainMenuItem($event)"></nav-menu>
+              (click)="onClickMenu($event)"></nav-menu>
 
     <nav-menu class="menu"
               [items]="secondaryMenuItems"
-              (select)="onSelectSecondaryMenuItem($event)"></nav-menu>
+              (click)="onClickMenu($event)"></nav-menu>
 
   </div>
 

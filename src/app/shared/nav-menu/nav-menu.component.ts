@@ -11,14 +11,46 @@ import { Component, EventEmitter,
 
 export class MenuItem {
 
-  readonly uid: string = '';
+  readonly action: string = '';
   readonly text: string = '';
-  readonly enabled: boolean = true;
+  private _disabled: boolean = false;
+  private _selected: boolean = false;
 
-  constructor(text: string, uid?: string, enabled?: boolean) {
+  constructor(text: string, action?: string, disabled?: boolean) {
     this.text = text;
-    this.uid = uid || text;
-    this.enabled = enabled || true;
+    this.action = action || text;
+    this._disabled = disabled || false;
+  }
+
+
+  get disabled(): boolean {
+    return this._disabled;
+  }
+
+
+  get enabled(): boolean {
+    return !this._disabled;
+  }
+
+
+  get selected(): boolean {
+    return this._selected;
+  }
+
+  enable() {
+    this._disabled = false;
+  }
+
+  disable() {
+    this._disabled = true;
+  }
+
+  select() {
+    this._selected = true;
+  }
+
+  unselect() {
+    this._selected = false;
   }
 
 }
@@ -31,20 +63,34 @@ export class MenuItem {
 })
 export class NavigationMenuComponent {
 
-  @Output() select = new EventEmitter<MenuItem>();
+  @Output() click = new EventEmitter<MenuItem>();
 
-  @Input() items: MenuItem;
+  @Input()
+  get items(): MenuItem[] { return this._items };
+  set items(value: MenuItem[]) {
+    this._items = value;
 
-  selectedItem: MenuItem;
+    const selected = value.find(x => x.selected) || this.items[0];
 
+    this.onClick(selected);
+
+  };
+  private _items: MenuItem[];
 
   constructor() { }
 
 
-  onSelectMenuItem(menuItem: MenuItem) {
-     this.selectedItem = menuItem;
+  onClick(menuItem: MenuItem) {
+    this.select(menuItem);
 
-     this.select.emit(menuItem);
+    this.click.emit(menuItem);
+  }
+
+  private select(menuItem: MenuItem) {
+    this.items.filter(x => x.selected )
+              .map(x => x.unselect());
+
+     menuItem.select();
   }
 
 }

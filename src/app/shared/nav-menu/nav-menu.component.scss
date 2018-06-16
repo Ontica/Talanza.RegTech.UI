@@ -28,11 +28,16 @@ a, a:visited {
 }
 
 a:hover {
-  color: $light-orange;
-  border-bottom: 1px solid $light-orange;
+  color: $white;
+  border-bottom: 2px solid $orange;
 }
 
 .selected {
-  border-bottom: 1px solid $orange;
   color: $light-orange;
+  border-bottom: 2px solid $orange;
+}
+
+.disabled {
+  color: $gray;
+  cursor: pointer;
 }
