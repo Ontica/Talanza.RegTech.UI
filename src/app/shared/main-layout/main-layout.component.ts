@@ -6,6 +6,7 @@
  */
 
 import { Component } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 @Component({
@@ -15,22 +16,16 @@ import { Component } from '@angular/core';
 })
 export class MainLayoutComponent {
 
-  userName = 'UserName || et al';
-
-  isGlobalSearchPageVisible = false;
   keywords: string = '';
+  layoutType: string;
 
-
-  closeGlobalSearchPage() {
-    this.isGlobalSearchPageVisible = false;
+  constructor(route: ActivatedRoute, private router: Router) {
+    this.layoutType = route.snapshot.data['layoutType'];
   }
-
 
   search(keywords: string) {
     if (keywords) {
-      this.keywords = keywords;
-
-      this.isGlobalSearchPageVisible = true;
+      this.router.navigate(['/search/main', { keywords: keywords } ]);
     }
   }
 

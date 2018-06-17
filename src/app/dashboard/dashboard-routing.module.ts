@@ -1,9 +1,8 @@
 /**
  * @license
- * Copyright (c) 2017 La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
+ * Copyright (c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
  *
  * See LICENSE.txt in the project root for complete license information.
- *
  */
 
 import { NgModule } from '@angular/core';
@@ -13,13 +12,10 @@ import { MainLayoutComponent } from '../shared';
 
 import { SecurityGuardService } from '../core';
 
+
 @NgModule({
-  imports: [RouterModule.forChild([
-    {
-      path: '', redirectTo: 'smoke-tests', pathMatch: 'full'
-    },
-    {
-      path: '', component: MainLayoutComponent, canActivate: [SecurityGuardService]
+  imports: [RouterModule.forChild([ {
+      path: 'dashboard', component: MainLayoutComponent, canActivate: [SecurityGuardService]
     }
   ])],
   exports: [RouterModule]

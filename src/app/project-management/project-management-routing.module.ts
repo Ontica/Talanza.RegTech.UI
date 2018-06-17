@@ -5,7 +5,6 @@
  * See LICENSE.txt in the project root for complete license information.
  */
 
-
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
@@ -15,12 +14,14 @@ import { MainLayoutComponent } from '../shared';
 
 import { ProjectsMainPageComponent } from './main-page/projects-main-page.component';
 
+
 @NgModule({
   imports: [
     RouterModule.forChild([
       {
-        path: 'projects', component: MainLayoutComponent, canActivate: [SecurityGuardService],
-        children: [{ path: 'search', component: ProjectsMainPageComponent }]
+        path: 'projects', component: MainLayoutComponent,
+        data: {layoutType: 'Projects'}, canActivate: [SecurityGuardService],
+        children: [{ path: 'main', component: ProjectsMainPageComponent }]
       }
     ])],
   exports: [RouterModule]

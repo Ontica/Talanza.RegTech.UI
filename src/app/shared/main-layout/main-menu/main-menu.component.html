@@ -1,16 +1,7 @@
 <div class="nav-bar">
   <ul>
-    <li><a [routerLink]="['/inbox/search']" [routerLinkActive]="['selected']" [routerLinkActiveOptions]="{exact:true}">Mis tareas</a></li>
-    <li><a [routerLink]="['/projects/search']" [routerLinkActive]="['selected']" [routerLinkActiveOptions]="{exact:true}">Proyectos</a></li>
-    <li><a [routerLink]="['/contracts/search']" [routerLinkActive]="['selected']" [routerLinkActiveOptions]="{exact:true}">Contratos</a></li>
-    <!--
-      <li [class.selected]="selectedOption === 'obligations'"><a [routerLink]="['/obligations/search']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{exact:true}" (click)="setSelectedStyle('obligations')">Obligaciones</a></li>
-    !-->
-    <li><a [routerLink]="['/procedures/search']" [routerLinkActive]="['selected']" [routerLinkActiveOptions]="{exact:true}">Trámites</a></li>
-    <li><a [routerLink]="['/process/editor']" [routerLinkActive]="['selected']" [routerLinkActiveOptions]="{exact:true}">Procesos</a></li>
-    <li><a [routerLink]="['/documents/search']" [routerLinkActive]="['selected']" [routerLinkActiveOptions]="{exact:true}">Biblioteca</a></li>
-    <!--
-    <li><a [routerLink]="['/service-desk/search']" [routerLinkActive]="['selected']" [routerLinkActiveOptions]="{exact:true}">Service desk</a></li>
-    !-->
+    <li><a [routerLink]="['/inbox/main']" [routerLinkActive]="['selected']" [routerLinkActiveOptions]="{exact:true}">Inbox</a></li>
+    <li><a [routerLink]="['/projects/main']" [routerLinkActive]="['selected']" [routerLinkActiveOptions]="{exact:true}">Proyectos regulatorios</a></li>
+    <li><a [routerLink]="['/knowledge-base/main']" [routerLinkActive]="['selected']" [routerLinkActiveOptions]="{exact:true}">Base de conocimiento</a></li>
   </ul>
 </div>

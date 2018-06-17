@@ -81,7 +81,6 @@ export class UserLoginComponent extends AbstractForm implements OnInit {
 
   protected validate(): Promise<any> {
     if (!this.valid) {
-
       this.addException(FormMessages.IncompleteLoginData);
     }
 
@@ -92,7 +91,7 @@ export class UserLoginComponent extends AbstractForm implements OnInit {
 
   private authenticate(): Promise<boolean> {
     return this.authenticationService.login(this.form.value.userID, this.form.value.password)
-                                     .then( () => this.router.navigate(['/projects/search']));
+               .then( () => this.router.navigate(['/projects/main']) );
 
   }
 
