@@ -1,9 +1,8 @@
 /**
  * @license
- * Copyright (c) 2017 La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
+ * Copyright (c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
  *
  * See LICENSE.txt in the project root for complete license information.
- *
  */
 
 import { Injectable } from '@angular/core';
@@ -14,55 +13,52 @@ import { LoggerService } from '../general/logger.service';
 
 import { SecurityDataService } from './security-data.service';
 import { Principal } from './principal';
-import { SessionToken, Identity, ClaimsList } from './security-types';
+
 
 @Injectable()
 export class AuthenticationService {
 
   constructor(private session: SessionService,
-              private dataService: SecurityDataService,
+              private securityService: SecurityDataService,
               private logger: LoggerService) {}
 
-  public async login(userID: string, userPassword: string): Promise<void> {
+  public login(userID: string, userPassword: string): Promise<void> {
     Assertion.assertValue(userID, 'userID');
     Assertion.assertValue(userPassword, 'userPassword');
 
-    await this.session.start();
+    const sessionToken = this.securityService.createSession(userID, userPassword)
+                             .toPromise()
+                             .catch((e) => this.handleAuthenticationError(e));
 
-    const sessionToken = await this.dataService.createSession(userID, userPassword)
-                                               .toPromise()
-                                               .catch((e) => this.handleAuthenticationError(e));
+    const identity = this.securityService.getPrincipalIdentity()
+                         .toPromise()
+                         .catch((e) => this.handleAuthenticationError(e));
 
-    const identity = await this.dataService.getPrincipalIdentity()
-                                           .toPromise()
-                                           .catch((e) => this.handleAuthenticationError(e));
+    const claimsList = this.securityService.getPrincipalClaimsList()
+                           .toPromise()
+                           .catch((e) => this.handleAuthenticationError(e));
 
-    const claimsList = await this.dataService.getPrincipalClaimsList()
-                                             .toPromise()
-                                             .catch((e) => this.handleAuthenticationError(e));
+    return Promise.all( [sessionToken, identity, claimsList])
+                  .then( ([sessionToken, identity, claimsList]) => {
+                    const principal = new Principal(sessionToken, identity, claimsList);
 
-    const principal = new Principal(sessionToken, identity, claimsList);
-
-    this.session.setPrincipal(principal);
+                    this.session.setPrincipal(principal);
+                  });
   }
 
-  public async logout(): Promise<boolean> {
+
+  public logout(): Promise<boolean> {
     const principal = this.session.getPrincipal();
 
     if (!principal.isAuthenticated) {
       return Promise.resolve(false);
     }
 
-    try {
-      await this.dataService.closeSession();
-      return Promise.resolve(true);
-    } catch (e) {
-      this.logger.error(e);
-      return Promise.resolve(true);
-    }
+    return this.securityService.closeSession()
+               .then( () => Promise.resolve(true) );
   }
 
-  // Private methods
+  // private methods
 
   private handleAuthenticationError(error): Promise<never> {
     if (error.status === 401) {

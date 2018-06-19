@@ -31,7 +31,7 @@ export class SecurityDataService {
     return this.httpHandler.post<SessionToken>('v2/security/login', body);
   }
 
-  public async closeSession(): Promise<void> {
+  public closeSession(): Promise<void> {
     return this.httpHandler.post<void>('v1/security/logout', undefined)
                            .toPromise();
   }

@@ -10,7 +10,6 @@ describe('ApplicationSettingsService', () => {
   // beforeEach(async () => {
   //   new Http(XHRBackend);
   //   settingsService = new ApplicationSettingsService();
-  //   await settingsService.waitUntilLoaded();
   // });
 
   // it('#get should return key value', (done: DoneFn) => {

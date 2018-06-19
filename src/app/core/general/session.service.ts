@@ -1,9 +1,8 @@
 /**
  * @license
- * Copyright (c) 2017 La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
+ * Copyright (c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
  *
  * See LICENSE.txt in the project root for complete license information.
- *
  */
 
 import { Injectable } from '@angular/core';
@@ -15,6 +14,7 @@ import { ApplicationSettings } from './application-settings';
 import { Principal } from '../security/principal';
 import { KeyValue } from '../data-types';
 
+
 @Injectable()
 export class SessionService {
 
@@ -22,14 +22,11 @@ export class SessionService {
   private principal: Principal = Principal.empty;
   private data: KeyValue[] = [];
 
-  constructor(private appSettingsService: ApplicationSettingsService) { }
+  constructor(private appSettingsService: ApplicationSettingsService) {
+    this.appSettings = this.appSettingsService.getApplicationSettings();
+  }
 
   public getSettings(): ApplicationSettings {
-    Assertion.assertValue(this.appSettings,
-                          'Application settings were not loaded yet. ' +
-                          'Please call SessionService.start() promise to ensure data were ' +
-                          'loaded before using this method.');
-
     return this.appSettings;
   }
 
@@ -65,13 +62,6 @@ export class SessionService {
       this.data[index] = { key, value };
     } else {
       this.data.push( { key, value });
-    }
-  }
-
-  public async start(): Promise<void> {
-    if (!this.appSettings) {
-      await this.appSettingsService.getSettingsArray()
-                                   .then((x) => this.appSettings = new ApplicationSettings(x));
     }
   }
 

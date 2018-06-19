@@ -80,3 +80,4 @@ dll/
 
 # Application related #
 empiria.config.json
+empiria.config.ts
