@@ -6,7 +6,6 @@
  */
 
 import { NgModule } from '@angular/core';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -26,12 +25,13 @@ import { ContractsModule } from './contracts/contracts.module';
 import { ControlsModule } from './controls/controls.module';
 import { DocumentsModule } from './documents/documents.module';
 import { DashboardModule } from './dashboard/dashboard.module';
+import { KnowledgeBaseModule } from '@app/knowledge-base/kb.module';
+
 import { ProcessModule } from './process/process.module';
 import { GlobalSearchModule } from './global-search/global-search.module';
 import { InboxModule } from './inbox/inbox.module';
 import { ObligationsModule } from './obligations/obligations.module';
 import { ProjectManagementModule } from './project-management/project-management.module';
-import { ProjectMeetingsModule } from './project-meetings/project-meetings.module';
 import { SecurityUIModule } from './security-ui/security-ui.module';
 import { ServiceDeskModule } from './service-desk/service-desk.module';
 import { SharedModule } from './shared/shared.module';
@@ -40,9 +40,6 @@ import { SharedModule } from './shared/shared.module';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
-import { APP_RESOLVER_PROVIDERS } from './app.resolver';
-import { AppState, InternalStateType } from './app.service';
-
 
 // Define global exception handler provider
 import { ErrorHandler } from '@angular/core';
@@ -50,24 +47,13 @@ import { ExceptionHandler } from './core/general/exception-handler';
 
 const EXCEPTION_HANDLER_PROVIDER =  { provide: ErrorHandler, useClass: ExceptionHandler };
 
-
-
 import '../styles/styles.scss';
 
 
 // Application wide providers
 const APP_PROVIDERS = [
-  ...APP_RESOLVER_PROVIDERS,
-  AppState,
   EXCEPTION_HANDLER_PROVIDER
 ];
-
-interface StoreType {
-  state: InternalStateType;
-  restoreInputValues: () => void;
-  disposeOldHosts: () => void;
-}
-
 
 
 @NgModule({
@@ -80,6 +66,7 @@ interface StoreType {
     StoreModule,
     SecurityUIModule,
     DashboardModule,
+    KnowledgeBaseModule,
     ObligationsModule,
     ContractsModule,
     ControlsModule,
