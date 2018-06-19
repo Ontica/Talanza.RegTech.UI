@@ -52,7 +52,6 @@
   padding: $margin-size;
 }
 
-
 .side-bar {
   @include column;
   display: none;
@@ -94,7 +93,11 @@
   @include small-hide;
 
   height: 42px;
-  margin-right: 8px;
+}
+
+.main-menu {
+  margin-top: 4px;
+  margin-left: 30px;
 }
 
 .content {

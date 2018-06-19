@@ -13,7 +13,7 @@
 
         <img class="logo" src="./assets/img/customer-logo.png" alt="COVAR Energy Consulting" />
 
-        <main-menu></main-menu>
+        <main-menu class="main-menu"></main-menu>
 
         <div class="search-and-settings">
 
@@ -30,12 +30,12 @@
 
       <div class="content">
 
-        <div class="workarea" [hidden]="isGlobalSearchPageVisible">
-          <router-outlet></router-outlet>
-        </div>
+        <navigation-header [layoutType]="layoutType"
+                           (action)="onAction($event)">
+        </navigation-header>
 
-        <div *ngIf="isGlobalSearchPageVisible">
-          <global-search [keywords]="keywords" (onClose)="closeGlobalSearchPage()"></global-search>
+        <div class="workarea">
+          <router-outlet></router-outlet>
         </div>
 
       </div>
