@@ -6,6 +6,8 @@
  */
 
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+
 import { Observable } from 'rxjs';
 import { List } from 'immutable';
 
@@ -19,9 +21,12 @@ import { MenuItem } from '@app/shared/nav-menu/nav-menu.component';
 
 
 const mainMenu: MenuItem[] = [
-  new MenuItem('Actividades', 'showProjectActivities'),
+  new MenuItem('Tareas', 'showProjectTasks'),
+  new MenuItem('Diseño', 'showProjectActivities'),
+  new MenuItem('Reuniones', 'showProjectMeetings'),
   new MenuItem('Documentos', 'showProjectDocuments'),
-  new MenuItem('Q&A', 'showProjectQ&As'),
+  new MenuItem('KB', 'showProjectKB'),
+  new MenuItem('Dashboard', 'showProjectDashboard'),
 ];
 
 
@@ -34,6 +39,12 @@ const projectActivitiesSecondaryMenu: MenuItem[] = [
 ];
 
 
+const projectMeetingsSecondaryMenu: MenuItem[] = [
+  new MenuItem('Lista', 'showMeetingsList'),
+  new MenuItem('Calendario', 'showMeetingsCalendar'),
+];
+
+
 const projectDocumentsSecondaryMenu: MenuItem[] = [
   new MenuItem('Todos'),
   new MenuItem('En proceso'),
@@ -41,10 +52,13 @@ const projectDocumentsSecondaryMenu: MenuItem[] = [
 ];
 
 
-const projectQASecondaryMenu: MenuItem[] = [
-  new MenuItem('Contestadas'),
-  new MenuItem('Pendientes'),
-  new MenuItem('Todas')
+const projectKBSecondaryMenu: MenuItem[] = [
+  new MenuItem('Todo'),
+  new MenuItem('Q&A'),
+  new MenuItem('Regulaciones', 'showRegulations'),
+  new MenuItem('Procesos'),
+  new MenuItem('Trámites'),
+  new MenuItem('Contratos'),
 ];
 
 @Component({
@@ -66,7 +80,7 @@ export class ProjectsMainPageComponent implements OnInit {
   displayEditor = false;
   toggleEditor = false;
 
-  constructor(private store: ProjectStore) {
+  constructor(private store: ProjectStore, private router: Router) {
 
   }
 
@@ -74,8 +88,6 @@ export class ProjectsMainPageComponent implements OnInit {
   ngOnInit() {
 
     this.mainMenuItems = mainMenu;
-
-    this.secondaryMenuItems = projectActivitiesSecondaryMenu;
 
     this.store.selectedProject().subscribe (
       x => this.selectedProject = x
@@ -90,9 +102,13 @@ export class ProjectsMainPageComponent implements OnInit {
       case 'showProjectDocuments':
         this.secondaryMenuItems = projectDocumentsSecondaryMenu;
         return;
-      case 'showProjectQ&As':
-        this.secondaryMenuItems = projectQASecondaryMenu;
+      case 'showProjectMeetings':
+        this.secondaryMenuItems = projectMeetingsSecondaryMenu;
         return;
+      case 'showProjectKB':
+        this.secondaryMenuItems = projectKBSecondaryMenu;
+        return;
+
       case 'showTree':
         this.viewConfig = this.getViewConfig({ viewType: 'activity-tree' });
         return;
@@ -108,6 +124,12 @@ export class ProjectsMainPageComponent implements OnInit {
       case 'showCalendar':
         this.viewConfig = this.getViewConfig({ viewType: 'calendar' });
         return;
+
+
+      case 'showRegulations':
+        // this.router.navigate(['/documents/search'])
+        return;
+
       default:
         throw new Error(`Unhandled action ${action}.`);
     }

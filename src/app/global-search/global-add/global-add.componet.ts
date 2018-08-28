@@ -1,6 +1,6 @@
 import {
     Component, ElementRef, EventEmitter,  Output } from '@angular/core';
-    
+
   @Component({
     selector: 'global-add',
     host: {
@@ -9,22 +9,22 @@ import {
     templateUrl: './global-add.component.html',
     styleUrls: ['./global-add.component.scss']
   })
-  
+
   export class GlobalAddComponent {
-  
+
     public isHideControl = false;
     public selectedItem: string;
     public elementRef: any;
 
     public items: string[] = ['FAQ', 'Reunión'];
-    
+
     public selectedUID: string;
 
     constructor(myElement: ElementRef) {
         this.elementRef = myElement;
     }
 
-    public onClick(): void {        
+    public onClick(): void {
         this.isHideControl = !this.isHideControl;
     }
 
@@ -32,7 +32,7 @@ import {
         this.selectedItem = item;
 
 
-        this.isHideControl = !this.isHideControl;        
+        this.isHideControl = !this.isHideControl;
     }
 
     public handleClick(event): void {
@@ -48,11 +48,10 @@ import {
             this.isHideControl = false;
             // this.isHideControl = true;
         }
-    }    
+    }
 
     private setSelectedItem(item: string): void {
         this.selectedItem = item;
     }
 
 }
-  

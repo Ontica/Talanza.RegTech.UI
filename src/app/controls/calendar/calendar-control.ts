@@ -68,8 +68,6 @@ export class CalendarControl implements AfterViewInit, ControlValueAccessor, OnC
   }
 
   ngOnChanges() {
-    console.log("calendar ngOnChanges called", this.date);
-
     this.refreshCalendarDate();
   }
 

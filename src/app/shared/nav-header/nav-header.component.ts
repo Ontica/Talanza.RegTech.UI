@@ -24,6 +24,8 @@ export class NavigationHeaderComponent implements OnInit {
 
   @Output() action = new EventEmitter<string>();
 
+  @Input() layoutType: string;
+
   @Input() mainMenuItems: MenuItem[];
 
   @Input() secondaryMenuItems: MenuItem[];

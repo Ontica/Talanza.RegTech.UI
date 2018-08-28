@@ -65,6 +65,8 @@ export class NavigationMenuComponent {
 
   @Output() click = new EventEmitter<MenuItem>();
 
+  @Input() layoutType: string;
+
   @Input()
   get items(): MenuItem[] { return this._items };
   set items(value: MenuItem[]) {
