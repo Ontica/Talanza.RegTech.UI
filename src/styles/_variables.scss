@@ -11,6 +11,7 @@ $dark-blue: #104070 !default;
 $blue: #16599c !default;
 $light-blue: #6ba1ff !default;
 $green: #17c457 !default;
+$light-green: hsl(135, 22%, 93%) !default;
 $dark-orange: #e68a00 !default;
 $orange: #ffca99 !default;
 $light-orange: #fff2e6 !default;
@@ -49,7 +50,7 @@ $text-italic: italic;
 // Elements colors
 //
 
-$background-color: $white !default;
+$background-color: #f7f7f7 !default;
 $secondary-color: $dark-red !default;
 $secondary-text-color: $white !default;
 $selected-item-text-color: $orange;

@@ -13,12 +13,16 @@ export class MenuItem {
 
   readonly action: string = '';
   readonly text: string = '';
+  readonly routerLink: string = '';
+
   private _disabled: boolean = false;
   private _selected: boolean = false;
 
-  constructor(text: string, action?: string, disabled?: boolean) {
+  constructor(text: string, action?: string, routerLink?: string, disabled?: boolean) {
     this.text = text;
     this.action = action || text;
+    this.routerLink = routerLink || '';
+
     this._disabled = disabled || false;
   }
 

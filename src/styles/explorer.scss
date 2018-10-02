@@ -4,7 +4,7 @@
 @mixin workarea-host {
   display: flex;
   flex-direction: column;
-  height: 100%;
+  height: calc(100% - 102px);
   width: 100%;
   position: absolute;
 }

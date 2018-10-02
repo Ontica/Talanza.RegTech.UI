@@ -17,27 +17,29 @@ ul {
 }
 
 li {
-  padding: 0px 10px;
+  padding-right: 24px;
   white-space: nowrap;
 }
 
-a, a:visited {
-  color: $white;
+a, a:visited :not(.selected) {
+  color: $gray;
   font-weight: 400;
   text-decoration: none;
+  text-transform: uppercase;
 }
 
 a:hover {
   color: $white;
-  border-bottom: 2px solid $orange;
+  padding-bottom: 10px;
+}
+
+.disabled, .disabled:hover {
+  color: $dark-gray;
+  cursor: default;
 }
 
 .selected {
-  color: $light-orange;
-  border-bottom: 2px solid $orange;
-}
-
-.disabled {
-  color: $gray;
-  cursor: pointer;
+  color: $white;
+  padding-bottom: 10px;
+  border-bottom: 4px solid $dark-red;
 }
