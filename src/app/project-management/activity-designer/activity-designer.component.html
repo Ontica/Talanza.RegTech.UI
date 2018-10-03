@@ -1,0 +1,220 @@
+<form class="form-container" autocomplete="off" [class.submitted]="submitted" [formGroup]="form" (ngSubmit)="onSubmit()"
+  (keydown)="keyboardHandler($event)">
+
+  <div class="form-header">
+
+    <div class="form-title">
+      {{value('name')}}
+      <div class="hint">Actividad: proyecto {{activity.project.name}}</div>
+    </div>
+    <div class="header-options">
+      <i class="fa fa-times close-icon" aria-hidden="true" (click)="onClose()"></i>
+    </div>
+
+  </div>
+
+  <div class="form-commands"></div>
+
+  <div class="form-body">
+
+    <fieldset [disabled]="disabled">
+      <!-- ToDo: remove this directive when tags control can be disabled -->
+
+      <table class="form-section">
+        <tr>
+          <td class="form-section-title" colspan="2">Información general de la tarea o actividad</td>
+        </tr>
+        <tr>
+          <td>Nombre:</td>
+          <td>
+            <input type="text" class="text-box" formControlName="name">
+          </td>
+        </tr>
+        <tr>
+          <td class="align-top">Descripción:</td>
+          <td>
+            <textarea class="text-area" rows="2" cols="25" formControlName="notes"></textarea>
+          </td>
+        </tr>
+      </table>
+
+      <table class="form-section">
+        <tr>
+          <td class="form-section-title" colspan="4">Configuración del tipo actividad</td>
+        </tr>
+        <tr>
+          <td>Tipo de actividad:</td>
+          <td>
+            <select class="select-box" style="width:180px" formControlName="activityType">
+              <option value="">( Seleccionar )</option>
+              <option value="Procedure">Trámite</option>
+              <option value="Obligation">Obligación</option>
+              <option value="Event">Evento</option>
+              <option value="Internal">Actividad interna</option>
+              <option value="External">Actividad externa</option>
+              <option value="Decision">Decisión</option>
+              <option value="Milestone">Hito</option>
+            </select>
+          </td>
+          <td class="text-align-right" style="width:100%">Forma de<br />ejecución:</td>
+          <td>
+            <select class="select-box" style="width:130px" formControlName="executionMode">
+              <option value="">( Tipo )</option>
+              <option value="Timeline">Línea de tiempo</option>
+              <option value="Eventual">Eventual</option>
+              <option value="Periodic">Periódica</option>
+            </select>
+            <select class="select-box" style="width:90px" formControlName="isMandatory">
+              <option value="">( Forma ) </option>
+              <option value="true">Forzosa</option>
+              <option value="false">Opcional</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="4" style="width:100%">
+            ¿Esta actividad controla las fechas de inicio o término de otras actividades? &nbsp;
+            <select class="select-box" style="width:54px" formControlName="isController">
+              <option value="">( ? )</option>
+              <option value="true">Sí</option>
+              <option value="false">No</option>
+            </select>
+          </td>
+        </tr>
+      </table>
+
+      <table class="form-section">
+        <tr>
+          <td class="form-section-title" colspan="4">Condiciones de ejecución, entrega y duración de la actividad</td>
+        </tr>
+        <tr>
+          <td>Esta actividad<br>debe realizarse:<br /></td>
+          <td>
+            <input type="text" class="text-box" style="width:70px" formControlName="dueOnTerm">
+            <select class="select-box" style="width:130px" formControlName="dueOnTermUnit">
+              <option value="">( Plazo )</option>
+              <option value="BusinessDays">Días hábiles</option>
+              <option value="CalendarDays">Días naturales</option>
+              <option value="Hours">Horas</option>
+              <option value="Months">Meses</option>
+              <option value="Years">Años</option>
+              <option value="Undefined">Indeterminado</option>
+              <option value="NA">No aplica</option>
+            </select>
+          </td>
+          <td colspan="2" style="width:100%">
+            <select class="select-box" style="width:98%" formControlName="dueOnCondition">
+              <option value="">( Condición )</option>
+              <option value="Before">Antes de ...</option>
+              <option value="BeforeStart">Antes de iniciar ...</option>
+              <option value="AfterStart">Después de iniciar ...</option>
+              <option value="During">Durante ...</option>
+              <option value="BeforeFinish">Antes de concluir ...</option>
+              <option value="AfterFinish">Después de concluir ...</option>
+              <option value="After">Después de ...</option>
+              <option value="NA">No aplica</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>&nbsp;</td>
+          <td colspan="3" style="width:100%">
+            <select class="select-box" style="width:100%" formControlName="dueOnController">
+              <option value="">( Actividad )</option>
+              <option value="-1">No aplica</option>
+              <option *ngFor="let controller of dueOnControllers"
+                      [value]="controller.id">{{controller.name}}</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>Tiempo para hacer<br>la actividad (aprox):</td>
+          <td>
+            <input type="text" class="text-box" style="width:70px" formControlName="duration">
+
+            <select class="select-box" style="width:130px" formControlName="durationUnit">
+              <option value="">( Tiempo )</option>
+              <option value="BusinessDays">Días hábiles</option>
+              <option value="CalendarDays">Días naturales</option>
+              <option value="Hours">Horas</option>
+              <option value="Months">Meses</option>
+              <option value="Years">Años</option>
+              <option value="Undefined">Indeterminada</option>
+              <option value="NA">No aplica</option>
+            </select>
+          </td>
+          <td>Periodicidad:</td>
+          <td>
+            <input type="text" class="text-box" formControlName="periodicity">
+          </td>
+        </tr>
+      </table>
+
+      <table class="form-section">
+        <tr>
+          <td class="form-section-title" colspan="2">Entidad reguladora, trámite asociado e información legal</td>
+        </tr>
+        <tr>
+          <td>Entidad:</td>
+          <td>
+            <select class="select-box" style="width:130px"
+                    (change)="onChangeFilter()" formControlName="entity">
+              <option value="">( Seleccionar )</option>
+              <option value="-1">No aplica</option>
+              <option *ngFor="let entity of entities | async" [value]="entity.id">{{entity.shortName}}</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>Trámite <br>asociado:</td>
+          <td style="width:100%">
+            <select class="select-box" style="width:98%" formControlName="procedure">
+              <option value="-1">No está asociada a un trámite</option>
+              <option *ngFor="let procedure of procedures | async" [value]="procedure.id">[{{procedure.code}}]
+                {{procedure.shortName}} {{procedure.modality ? '(Modalidad: ' + procedure.modality + ')' : ''}}</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>Cláusula<br />contractual:</td>
+          <td>
+            <input type="text" class="text-box" formControlName="contractClause">
+          </td>
+        </tr>
+        <tr>
+          <td>Fundamento<br />(regulación):</td>
+          <td>
+            <textarea class="text-area" rows="2" cols="25" formControlName="legalBasis"></textarea>
+          </td>
+        </tr>
+      </table>
+
+    </fieldset>
+
+  </div> <!-- form-body-->
+
+  <div class="form-errors" *ngIf="showExceptionMsg">{{exceptionMsg}}</div>
+
+  <div class="form-footer">
+
+    <table class="form-section">
+      <tr>
+        <td>
+          <button *ngIf="!disabled" type="submit" class="btn-warning" (click)="setCommand('delete')">Eliminar</button>
+        </td>
+        <td class="text-align-right">
+
+          <button *ngIf="!disabled" type="submit" class="btn-action btn-margin-right" (click)="setCommand('update')">Guardar
+            los cambios</button>
+
+          <button *ngIf="disabled" type="button" class="btn-action right" (click)="enable()">Editar</button>
+
+          <button *ngIf="!disabled" type="button" class="btn right" (click)="onReset()">Cancelar edición</button>
+
+        </td>
+      </tr>
+    </table>
+
+  </div>
+
+</form>

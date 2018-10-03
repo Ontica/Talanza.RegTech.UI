@@ -228,6 +228,15 @@ textarea:focus {
   float: right;
 }
 
+.align-top {
+  vertical-align: top !important;
+}
+
+.wrap {
+  word-wrap: break-word;
+  white-space: normal;
+}
+
 .remove-min-width {
   min-width: 0px;
 }

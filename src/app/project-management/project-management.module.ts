@@ -16,6 +16,8 @@ import { ControlsModule } from '../controls/controls.module';
 import { ActivityTreeComponent } from './activity-tree/activity-tree.component';
 import { ActivityInlineEditorComponent } from './activity-tree/activity-inline-editor.component';
 import { ActivityEditorComponent } from './activity-editor/activity-editor.component';
+import { ActivityDesignerComponent } from './activity-designer/activity-designer.component';
+
 
 
 import { GanttComponent } from './gantt/gantt.component';
@@ -54,6 +56,9 @@ import { OldProjectTreeComponent } from './old-project-tree/old-project-tree.com
 
 
   declarations: [
+
+    ActivityDesignerComponent,
+
     ActivityEditorComponent,
     ActivityInlineEditorComponent,
     ActivityTreeComponent,

@@ -1,0 +1,20 @@
+@import "../../../styles/general-styles";
+@import "../../../styles/form";
+
+
+.header-options {
+  flex: none;
+  align-self: flex-start;
+  align-content: flex-end;
+  margin-left: 6px;
+}
+
+i.close-icon {
+  cursor: pointer;
+}
+
+.hint {
+  color: $gray;
+  font-size: 8pt;
+  font-weight: 400;
+}
