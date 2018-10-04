@@ -10,6 +10,7 @@ import { Office } from './office';
 import { Position } from './position';
 
 export class Entity {
+  public id: number;
   public uid: string;
   public name: string;
   public shortName: string;
@@ -17,6 +18,7 @@ export class Entity {
   public positions: Position[];
 
   constructor() {
+    this.id = 0;
     this.uid = '';
     this.name = '';
     this.shortName = '';

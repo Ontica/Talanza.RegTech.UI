@@ -17,6 +17,8 @@ import { Contact } from '@app/core/data-types';
 import { ColoredTag } from '@app/core/ui-services';
 
 import { Activity, Contract, Project, Resource, Stage } from '@app/models/project-management';
+import { Procedure } from '@app/procedures/data-types/procedure';
+import { Entity } from '@app/procedures/data-types/entity';
 
 
 enum Errors {
@@ -83,6 +85,20 @@ export class ProjectService {
     const path = `v1/project-management/projects/${project.uid}/responsibles`;
 
     return this.core.http.get<Contact[]>(path);
+  }
+
+
+  getProceduresList(): Observable<Procedure[]> {
+    const path = `v1/procedures`;
+
+    return this.core.http.get<Procedure[]>(path);
+  }
+
+
+  getEntitiesList(): Observable<Entity[]> {
+    const path = `v1/modeling/entities`;
+
+    return this.core.http.get<Entity[]>(path);
   }
 
 

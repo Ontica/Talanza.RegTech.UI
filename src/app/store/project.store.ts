@@ -13,6 +13,8 @@ import { Contact, Empty } from '@app/core/data-types';
 import { Activity, Contract, Project, Stage } from '@app/models/project-management';
 import { ProjectService } from '@app/services/project-management';
 import { ColoredTag } from '@app/core/ui-services';
+import { Procedure } from '@app/procedures/data-types/procedure';
+import { Entity } from '@app/procedures/data-types/entity';
 
 export class ProjectModel {
 
@@ -70,6 +72,18 @@ export class ProjectStore {
     return this._selectedProject.value.activities.find( x => x.uid === activityUID);
   }
 
+
+  activities(): Activity[] {
+    return this._selectedProject.value.activities.toArray();
+  }
+
+  procedures(): Observable<Procedure[]> {
+    return this.projectService.getProceduresList();
+  }
+
+  entities(): Observable<Entity[]> {
+    return this.projectService.getEntitiesList();
+  }
 
   responsibles(project: Project): Observable<Contact[]> {
     return this.projectService.getResponsiblesList(project);

@@ -13,6 +13,7 @@ import { FilingDocuments } from './filing-documents';
 import { FilingFee } from './filing-fee';
 
 export class Procedure {
+  public id: number;
   public uid: string;
   public code: string;
   public shortName: string;
@@ -31,6 +32,7 @@ export class Procedure {
   public filingFee: FilingFee;
 
   constructor() {
+    this.id = 0;
     this.uid = '';
     this.code = '';
     this.shortName = '';
@@ -48,9 +50,13 @@ export class Procedure {
     this.filingFee = new FilingFee();
   }
 
+  get fullName(): string {
+    return '[' + this.uid + '] ' + this.shortName + this.modality ? '(Modalidad: ' + this.modality + ')' : '';
+  }
+
 }
 
-export interface Requirement {  
+export interface Requirement {
   uid: string,
   name: string,
   type: string,
@@ -58,7 +64,7 @@ export interface Requirement {
   copies: string,
   conditions: string,
   notes: string,
-  observations: string, 
+  observations: string,
   sourceUrl: string,
   sampleUrl: string,
   instructionsUrl: string

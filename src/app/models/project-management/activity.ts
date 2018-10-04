@@ -18,6 +18,7 @@ export interface Parent extends Identifiable {
 
 
 export interface Activity extends Identifiable {
+  id: number;
   type: string,
   notes: string,
   project: Project,
@@ -35,11 +36,14 @@ export interface Activity extends Identifiable {
   stage: string,
   status: string,
 
-  visible: string
+  visible: string,
+
+  config?: any,
 }
 
 
 export const Activity_Empty: Activity = {
+  id: 0,
   uid: '',
   type: '',
   name: '',
@@ -60,4 +64,6 @@ export const Activity_Empty: Activity = {
   status: '',
 
   visible: '',
+
+  config: {}
 }
