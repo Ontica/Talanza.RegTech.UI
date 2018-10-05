@@ -21,6 +21,10 @@ export interface Command {
   pars?: object[];
 }
 
+export interface FormSubmitOptions {
+  skipFormValidation?: boolean;
+}
+
 const enum FormMessages {
 
   CantSetCommandWhileProcessing =
@@ -164,7 +168,7 @@ export abstract class AbstractForm {
   }
 
 
-  protected onSubmit(): void {
+  protected onSubmit(options?: FormSubmitOptions): void {
     try {
 
       if (this.processing) {
@@ -173,8 +177,14 @@ export abstract class AbstractForm {
 
       this.startProcessing(true);
 
-      this.validate()
-          .then( () => this.afterValidate() );
+      if (options && options.skipFormValidation) {
+        this.invokeExecute();
+
+      } else {
+        this.validate()
+            .then( () => this.afterValidate() );
+
+      }
 
     } catch (error) {
       this.addException(error);

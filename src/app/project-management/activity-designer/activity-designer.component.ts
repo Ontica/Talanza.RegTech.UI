@@ -82,6 +82,10 @@ export class ActivityDesignerComponent extends AbstractForm implements OnInit, O
     this.close.emit();
   }
 
+  onDelete() {
+    this.setCommand('delete');
+    this.onSubmit( { skipFormValidation: true } );
+  }
 
   onReset() {
     this.rebuildForm();
