@@ -10,6 +10,8 @@ import { Component, EventEmitter,
 
 import { MenuItem } from '../nav-menu/nav-menu.component';
 
+import { ProjectStore } from '@app/store/project.store';
+import { Project } from '@app/models/project-management';
 
 @Component({
   selector: 'navigation-header',
@@ -18,9 +20,12 @@ import { MenuItem } from '../nav-menu/nav-menu.component';
 })
 export class NavigationHeaderComponent implements OnInit {
 
-  title = 'Salina Area 28';
+  title = 'Seleccionar un proyecto';
 
-  breadcrumb = 'Todos los proyectos » Shell » Ronda 2.4 » Salina Area 28';
+  //breadcrumb = 'Todos los proyectos » Shell » Ronda 2.4 » Salina Area 28';
+  breadcrumb = 'Todos los proyectos';
+
+  selectedProject: Project;
 
   @Output() action = new EventEmitter<string>();
 
@@ -30,7 +35,7 @@ export class NavigationHeaderComponent implements OnInit {
 
   @Input() secondaryMenuItems: MenuItem[];
 
-  constructor() { }
+  constructor(private projectStore: ProjectStore) {}
 
   ngOnInit() {
 
@@ -48,10 +53,23 @@ export class NavigationHeaderComponent implements OnInit {
     //   new MenuItem('Kanban'),
     //   new MenuItem('Calendario')
     // ];
+
+    this.projectStore.selectedProject().subscribe (
+      x => { this.selectedProject = x.project;
+             this.title = this.selectedProject.uid ? this.selectedProject.name : 'Seleccionar un proyecto'; }
+    );
+
   }
 
   onClickMenu(menuItem: MenuItem) {
     this.action.emit(menuItem.action);
+  }
+
+  onSelectProject(projectUID: string) {
+    this.selectedProject = this.projectStore.findById(projectUID);
+
+    this.projectStore.selectProject(this.selectedProject);
+
   }
 
 }

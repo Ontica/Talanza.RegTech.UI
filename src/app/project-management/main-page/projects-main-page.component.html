@@ -1,7 +1,3 @@
-<projects-filter (onChangeFilter)="onFilterChanged($event)"
-                 (onChangeView)="onViewChanged($event)">
-</projects-filter>
-
 <div class="explorer"
     [class.remove-min-width]="!displayEditor">
 
@@ -26,10 +22,14 @@
   </div>
 
   <div *ngIf="displayEditor" class="explorer-panel secondary">
-    <activity-editor [activity]="selectedActivity"
+      <activity-designer [activity]="selectedActivity"
+          (update)="onActivityUpdated($event)"
+          (close)="onEditorClosed()">
+      </activity-designer>
+    <!-- <activity-editor [activity]="selectedActivity"
                      (update)="onActivityUpdated($event)"
                      (close)="onEditorClosed()">
-    </activity-editor>
+    </activity-editor> -->
   </div>
 
 </div>

@@ -2,7 +2,7 @@
 
   <div class="title">
 
-    <div>{{title}} / {{layoutType}}</div>
+    <div>{{title}}</div>
     <div class="breadcrumb">{{breadcrumb}}</div>
 
   </div>
@@ -16,6 +16,11 @@
     <nav-menu class="menu"
               [items]="secondaryMenuItems"
               (click)="onClickMenu($event)"></nav-menu>
+
+    <select #projectCtrl class="select-box" style="width:210px;" (change)="onSelectProject(projectCtrl.value)">
+      <option value="">( Seleccionar proyecto )</option>
+      <option *ngFor="let project of projectStore.projects | async" [value]="project.uid">{{project.name}}</option>
+    </select>
 
   </div>
 
