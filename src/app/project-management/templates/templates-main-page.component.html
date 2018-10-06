@@ -1,0 +1,22 @@
+<div class="explorer"
+     [class.remove-min-width]="!displayEditor">
+
+  <div class="explorer-panel primary">
+
+    <activity-tree [templateDesignerMode]="true"
+                   [project]="selectedTemplate"
+                   (activitySelected)="showEditor($event)">
+    </activity-tree>
+
+  </div>
+
+  <div *ngIf="displayEditor" class="explorer-panel secondary">
+
+      <activity-designer [activity]="selectedActivity"
+                         (update)="onActivityUpdated($event)"
+                         (close)="onEditorClosed()">
+      </activity-designer>
+
+  </div>
+
+</div>
