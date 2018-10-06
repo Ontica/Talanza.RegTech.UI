@@ -5,15 +5,19 @@
  * See LICENSE.txt in the project root for complete license information.
  */
 
-import { Component, EventEmitter, Input,
-         OnChanges, OnInit, Output} from '@angular/core';
+import {
+  Component, EventEmitter, Input,
+  OnChanges, OnInit, Output
+} from '@angular/core';
 
-import { FormControl,
-         FormGroup, Validators } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup, Validators
+} from '@angular/forms';
 
 import { Observable, of } from 'rxjs';
 
-import { ProjectStore } from '@app/store/project.store';
+import { ProjectTemplateStore } from '@app/store/project-template.store';
 
 import { AbstractForm, MessageBoxService, SpinnerService } from '@app/core/ui-services';
 
@@ -22,13 +26,14 @@ import { Procedure } from '@app/procedures/data-types/procedure';
 import { Entity } from '@app/procedures/data-types/entity';
 
 
+
 enum FormMessages {
 
   IncompleteActivityData =
-    "Los campos marcados en rojo son requeridos.",
+  "Los campos marcados en rojo son requeridos.",
 
   UnrecognizedValue =
-    "El campo tiene un valor que no reconozco.",
+  "El campo tiene un valor que no reconozco.",
 
 }
 
@@ -53,7 +58,7 @@ export class ActivityDesignerComponent extends AbstractForm implements OnInit, O
 
   constructor(spinner: SpinnerService,
               private messageBox: MessageBoxService,
-              private projectStore: ProjectStore) {
+              private templateStore: ProjectTemplateStore) {
     super();
     this.setSpinner(spinner);   // remove after resolve core module injection issue
   }
@@ -84,7 +89,7 @@ export class ActivityDesignerComponent extends AbstractForm implements OnInit, O
 
   onDelete() {
     this.setCommand('delete');
-    this.onSubmit( { skipFormValidation: true } );
+    this.onSubmit({ skipFormValidation: true });
   }
 
   onReset() {
@@ -147,7 +152,7 @@ export class ActivityDesignerComponent extends AbstractForm implements OnInit, O
 
   protected execute(): Promise<any> {
 
-    switch(this.command.name) {
+    switch (this.command.name) {
 
       case 'delete':
         return this.deleteActivity();
@@ -176,9 +181,9 @@ export class ActivityDesignerComponent extends AbstractForm implements OnInit, O
   // private methods
 
   private deleteActivity(): Promise<void> {
-    return this.projectStore.deleteActivity(this.activity)
-               .then( () => this.onClose() )
-               .catch( err => this.messageBox.show(err) );
+    return this.templateStore.deleteActivity(this.activity)
+               .then(() => this.onClose())
+               .catch(err => this.messageBox.show(err));
   }
 
 
@@ -193,8 +198,8 @@ export class ActivityDesignerComponent extends AbstractForm implements OnInit, O
 
         activityType: formModel.activityType,
         executionMode: formModel.executionMode,
-        isMandatory: formModel.isMandatory === 'true' ? true: false,
-        isController: formModel.isController === 'true' ? true: false,
+        isMandatory: formModel.isMandatory === 'true' ? true : false,
+        isController: formModel.isController === 'true' ? true : false,
 
         dueOnTerm: formModel.dueOnTerm ? new Number(formModel.dueOnTerm) : '',
         dueOnTermUnit: formModel.dueOnTermUnit,
@@ -251,9 +256,9 @@ export class ActivityDesignerComponent extends AbstractForm implements OnInit, O
 
     const updateData = this.getUpdateData();
 
-    return this.projectStore.updateActivity(this.activity, updateData)
-               .then( () => this.onReset() )
-               .catch( err => this.messageBox.show(err) );
+    return this.templateStore.updateActivity(this.activity, updateData)
+               .then(() => this.onReset())
+               .catch(err => this.messageBox.show(err));
   }
 
   public isPositiveInteger(str) {
@@ -301,18 +306,18 @@ export class ActivityDesignerComponent extends AbstractForm implements OnInit, O
   }
 
   private loadEntities() {
-    this.entities = this.projectStore.entities();
+    this.entities = this.templateStore.entities();
   }
 
   private loadProcedures() {
-    this.procedures = this.projectStore.procedures();
+    this.procedures = this.templateStore.procedures();
   }
 
 
   private loadDueOnControllers() {
     this.dueOnControllers =
-        this.projectStore.activities().filter( (x) => x.config && x.config.isController &&
-                                                      x.uid !== this.activity.uid );
+      this.templateStore.activities().filter((x) => x.config && x.config.isController &&
+                                                    x.uid !== this.activity.uid);
   }
 
 }

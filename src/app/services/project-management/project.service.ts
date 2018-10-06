@@ -65,6 +65,13 @@ export class ProjectService {
   }
 
 
+  getTemplatesList(): Observable<Project[]> {
+    const path = 'v1/project-management/templates';
+
+    return this.core.http.get<Project[]>(path);
+  }
+
+
   getRequestersList(projectUID: string): Observable<Contact[]> {
     const path = `v1/project-management/projects/${projectUID}/requesters`;
 

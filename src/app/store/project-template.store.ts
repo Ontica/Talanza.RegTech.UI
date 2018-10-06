@@ -9,14 +9,13 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { List } from 'immutable';
 
-import { Contact, Empty } from '@app/core/data-types';
-import { Activity, Contract, Project, Stage } from '@app/models/project-management';
+import { Empty } from '@app/core/data-types';
+import { Activity, Project, Stage } from '@app/models/project-management';
 import { ProjectService } from '@app/services/project-management';
-import { ColoredTag } from '@app/core/ui-services';
 import { Procedure } from '@app/procedures/data-types/procedure';
 import { Entity } from '@app/procedures/data-types/entity';
 
-export class ProjectModel {
+export class ProjectTemplateModel {
 
   project: Project = Empty;
   activities: List<Activity> = List([]);
@@ -25,13 +24,12 @@ export class ProjectModel {
 
 
 @Injectable()
-export class ProjectStore {
+export class ProjectTemplateStore {
 
-  private _selectedProject: BehaviorSubject<ProjectModel> = new BehaviorSubject(new ProjectModel());
+  private _selectedTemplate: BehaviorSubject<ProjectTemplateModel> = new BehaviorSubject(new ProjectTemplateModel());
 
-  private _projects: BehaviorSubject<List<Project>> = new BehaviorSubject(List([]));
+  private _templatesList: BehaviorSubject<List<Project>> = new BehaviorSubject(List([]));
 
-  private _tags: BehaviorSubject<ColoredTag[]> = new BehaviorSubject([]);
   private _stages: BehaviorSubject<List<Stage>> = new BehaviorSubject(List([]));
 
 
@@ -40,23 +38,18 @@ export class ProjectStore {
   }
 
 
-  get contracts(): Observable<Contract[]> {
-    return this.projectService.getContracts();
+  selectedTemplate(): Observable<ProjectTemplateModel> {
+    return this._selectedTemplate.asObservable();
   }
 
 
-  selectedProject(): Observable<ProjectModel> {
-    return this._selectedProject.asObservable();
+  selectTemplate(template: Project) {
+    this.updateSelectedTemplate(template);
   }
 
 
-  selectProject(project: Project) {
-    this.updateSelectedProject(project);
-  }
-
-
-  get projects(): Observable<List<Project>> {
-    return this._projects.asObservable();
+  get templates(): Observable<List<Project>> {
+    return this._templatesList.asObservable();
   }
 
 
@@ -65,35 +58,27 @@ export class ProjectStore {
   }
 
 
-  get tags(): Observable<ColoredTag[]> {
-    return this._tags.asObservable();
-  }
-
-
   getActivity(activityUID: string): Activity {
-    return this._selectedProject.value.activities.find( x => x.uid === activityUID);
+    return this._selectedTemplate.value.activities.find( x => x.uid === activityUID);
   }
 
 
   activities(): Activity[] {
-    return this._selectedProject.value.activities.toArray();
+    return this._selectedTemplate.value.activities.toArray();
   }
 
   procedures(): Observable<Procedure[]> {
     return this.projectService.getProceduresList();
   }
 
+
   entities(): Observable<Entity[]> {
     return this.projectService.getEntitiesList();
   }
 
-  responsibles(project: Project): Observable<Contact[]> {
-    return this.projectService.getResponsiblesList(project);
-  }
 
-
-  findById(projectUID: string): Project {
-    return this._projects.value.find((x) => x.uid === projectUID);
+  findById(templateUID: string): Project {
+    return this._templatesList.value.find((x) => x.uid === templateUID);
   }
 
 
@@ -101,7 +86,7 @@ export class ProjectStore {
     return this.projectService.changeParent(activity, newParent)
                .toPromise()
                .then( x => {
-                   this.updateSelectedProject(activity.project);
+                   this.updateSelectedTemplate(activity.project);
                    Object.assign(activity, x);
 
                    return activity;
@@ -113,19 +98,19 @@ export class ProjectStore {
     return this.projectService.deleteActivity(activity)
                .toPromise()
                .then(() => {
-                  this.updateSelectedProject(activity.project);
+                  this.updateSelectedTemplate(activity.project);
                   Object.assign(activity, null);
                });
   }
 
 
-  insertActivity(project: Project,
+  insertActivity(template: Project,
                  newActivity: { name: string, position: number }): Promise<Activity> {
 
-    return this.projectService.insertActivity(project, newActivity)
+    return this.projectService.insertActivity(template, newActivity)
                .toPromise()
                .then( x => {
-                  this.updateSelectedProject(project);
+                  this.updateSelectedTemplate(template);
 
                   return x;
              });
@@ -136,7 +121,7 @@ export class ProjectStore {
     return this.projectService.moveActivity(activity, newPosition)
                .toPromise()
                .then( x => {
-                  this.updateSelectedProject(activity.project);
+                  this.updateSelectedTemplate(activity.project);
                   Object.assign(activity, x);
 
                   return activity;
@@ -148,7 +133,7 @@ export class ProjectStore {
     return this.projectService.updateActivity(activity, updateData)
                .toPromise()
                .then( x => {
-                  this.updateSelectedProject(activity.project);
+                  this.updateSelectedTemplate(activity.project);
                   Object.assign(activity, x);
 
                   return activity;
@@ -160,22 +145,14 @@ export class ProjectStore {
 
   private loadInitialData() {
 
-    this.projectService.getProjectList()
+    this.projectService.getTemplatesList()
         .subscribe(
             data =>
-              this._projects.next(List(data))
+              this._templatesList.next(List(data))
             ,
-            err => console.log('Error reading project data', err)
+            err => console.log('Error reading project template data', err)
         );
 
-
-    this.projectService.getTags()
-        .subscribe(
-            data =>
-              this._tags.next(data)
-            ,
-            err => console.log('Error reading tags data', err)
-        );
 
     this.projectService.getStages()
         .subscribe(
@@ -187,16 +164,16 @@ export class ProjectStore {
   }
 
 
-  private updateSelectedProject(project: Project) {
+  private updateSelectedTemplate(project: Project) {
     this.projectService.getActivitiesTree(project).subscribe(
       data => {
-        const projectModel = new ProjectModel();
-        projectModel.project = project;
-        projectModel.activities = List(data);
+        const templateModel = new ProjectTemplateModel();
+        templateModel.project = project;
+        templateModel.activities = List(data);
 
-        this._selectedProject.next(projectModel);
+        this._selectedTemplate.next(templateModel);
       },
-      err => console.log('Error reading project activities', err)
+      err => console.log('Error reading project template activities', err)
     );
   }
 

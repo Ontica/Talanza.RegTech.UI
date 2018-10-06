@@ -9,10 +9,11 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { ProjectStore } from './project.store';
+import { ProjectTemplateStore } from './project-template.store';
 
 
 @NgModule({
   imports: [CommonModule],
-  providers: [ProjectStore]
+  providers: [ProjectStore, ProjectTemplateStore]
 })
 export class StoreModule { }
