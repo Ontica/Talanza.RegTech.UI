@@ -1,14 +1,18 @@
 <div *ngIf="project.project.uid !== ''" class="list-view-container">
 
   <div class="list-view-header">
-    <div class="list-view-title">
+    <div *ngIf="templateDesignerMode" class="list-view-title">
       Diseño del árbol de actividades
+      <div class="hint">{{project.project.name}}</div>
+    </div>
+    <div *ngIf="!templateDesignerMode" class="list-view-title">
+      Actividades del proyecto
       <div class="hint">Proyecto regulatorio: {{project.project.name}}</div>
     </div>
-    <div>
-
-    </div>
     <div class="list-view-header-options">
+      <button *ngIf="!templateDesignerMode" type="button" class="btn-action"
+              (click)="showInitialActivityInlineEditor()"><i class="fa fa-plus"></i> Agregar evento</button>
+      &nbsp; &nbsp;
       <button type="button" class="btn-action"
               (click)="showInitialActivityInlineEditor()"><i class="fa fa-plus"></i> Agregar actividad</button>
     </div>
@@ -46,22 +50,22 @@
                  (dragleave)="setDragZoneItem(null)"
                  (drop)="moveActivityAsChildOf($event, activity)">
 
-              <a [ngClass]="activityNameClass(activity.level)"
+              <a *ngIf="templateDesignerMode" [ngClass]="activityNameClass(activity.level)"
                  [class.dragover-activity-name]="dragZoneItem === activity.name"
                  (click)="onSelectActivity(activity, true)">{{activity.name}}</a>
 
-              <!-- <a [ngClass]="activityNameClass(activity.level)"
+              <a *ngIf="!templateDesignerMode" [ngClass]="activityNameClass(activity.level)"
                  [class.dragover-activity-name]="dragZoneItem === activity.name"
-                 (click)="onSelectActivity(activity, true)">{{activity.name}} / {{activity.responsible.name}}</a> -->
+                 (click)="onSelectActivity(activity, true)">{{activity.name}} / {{activity.responsible.name}}</a>
 
             </div>
 
           </div>
 
-          <div class="activity-menu">
-            <!-- <rag-status-control [status]="activity.ragStatus"
-                         (change)="activity.ragStatus= $event">
-            </rag-status-control> -->
+          <div *ngIf="!templateDesignerMode" class="activity-menu">
+            <rag-status-control [status]="activity.ragStatus"
+                                (change)="activity.ragStatus= $event">
+            </rag-status-control>
           </div>
 
       </div>

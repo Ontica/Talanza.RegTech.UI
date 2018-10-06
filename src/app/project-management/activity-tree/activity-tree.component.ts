@@ -9,7 +9,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 import { ProjectStore, ProjectModel } from '@app/store/project.store';
 
-import { Activity, Activity_Empty, ActivityFilter } from '@app/models/project-management';
+import { Activity, Activity_Empty } from '@app/models/project-management';
 
 @Component({
   selector: 'activity-tree',
@@ -25,6 +25,7 @@ export class ActivityTreeComponent {
   insertActivityEditorVisible = false;
 
   @Input() project: ProjectModel;
+  @Input() templateDesignerMode: boolean;
 
   @Output() activitySelected = new EventEmitter<Activity>();
 
@@ -157,14 +158,6 @@ export class ActivityTreeComponent {
   private configureDragEventBehaviour(event: DragEvent): any {
     event.stopPropagation();
     event.preventDefault();
-  }
-
-
-  private initialize() {
-    this.selectedActivity = Activity_Empty;
-
-    this.addFirstActivityEditorVisible = false;
-    this.insertActivityEditorVisible = false;
   }
 
 

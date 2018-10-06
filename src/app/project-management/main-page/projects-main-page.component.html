@@ -7,6 +7,7 @@
        [class.primary-full]="viewConfig.viewType === 'gantt'">
 
     <activity-tree *ngSwitchCase="'activity-tree'"
+                    [templateDesignerMode]="false"
                     [project]="selectedProject"
                     (activitySelected)="showEditor($event)">
     </activity-tree>
@@ -22,14 +23,10 @@
   </div>
 
   <div *ngIf="displayEditor" class="explorer-panel secondary">
-      <activity-designer [activity]="selectedActivity"
-          (update)="onActivityUpdated($event)"
-          (close)="onEditorClosed()">
-      </activity-designer>
-    <!-- <activity-editor [activity]="selectedActivity"
+    <activity-editor [activity]="selectedActivity"
                      (update)="onActivityUpdated($event)"
                      (close)="onEditorClosed()">
-    </activity-editor> -->
+    </activity-editor>
   </div>
 
 </div>
