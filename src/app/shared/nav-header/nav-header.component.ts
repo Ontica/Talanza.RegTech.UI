@@ -6,26 +6,30 @@
  */
 
 import { Component, EventEmitter,
-         Input, Output, OnInit } from '@angular/core';
+         Input, Output, OnChanges } from '@angular/core';
 
 import { MenuItem } from '../nav-menu/nav-menu.component';
 
 import { ProjectStore } from '@app/store/project.store';
+import { ProjectTemplateStore } from '@app/store/project-template.store';
+
 import { Project } from '@app/models/project-management';
+
 
 @Component({
   selector: 'navigation-header',
   templateUrl: './nav-header.component.html',
   styleUrls: ['./nav-header.component.scss']
 })
-export class NavigationHeaderComponent implements OnInit {
+export class NavigationHeaderComponent implements OnChanges {
 
   title = 'Seleccionar un proyecto';
 
   //breadcrumb = 'Todos los proyectos » Shell » Ronda 2.4 » Salina Area 28';
-  breadcrumb = 'Todos los proyectos';
+  breadcrumb = '';
 
   selectedProject: Project;
+  selectedTemplate: Project;
 
   @Output() action = new EventEmitter<string>();
 
@@ -35,15 +39,58 @@ export class NavigationHeaderComponent implements OnInit {
 
   @Input() secondaryMenuItems: MenuItem[];
 
-  constructor(private projectStore: ProjectStore) {}
+  constructor(private projectStore: ProjectStore,
+              private templateStore: ProjectTemplateStore) {}
 
-  ngOnInit() {
+
+  ngOnChanges() {
+    this.setLayout();
+  }
+
+
+  onClickMenu(menuItem: MenuItem) {
+    this.action.emit(menuItem.action);
+  }
+
+
+  onSelectProject(projectUID: string) {
+    this.selectedProject = this.projectStore.findById(projectUID);
+
+    this.projectStore.selectProject(this.selectedProject);
+  }
+
+
+  onSelectTemplate(projectUID) {
+    this.selectedTemplate = this.templateStore.findById(projectUID);
+
+    this.templateStore.selectTemplate(this.selectedTemplate);
+  }
+
+
+  private setLayout() {
+    switch (this.layoutType) {
+      case 'Projects':
+        this.setProjectsLayout();
+        return;
+
+      case 'ProjectsTemplates':
+        this.setTemplatesDesignerLayout();
+        return;
+
+      default:
+
+    }
+  }
+
+
+  private setProjectsLayout() {
+
+    this.breadcrumb = 'Todos los proyectos';
 
     this.mainMenuItems =  [
-      new MenuItem('Tareas', undefined, '/inbox/main'),
+      new MenuItem('Bandeja de tareas', undefined, '/inbox/main'),
       new MenuItem('Actividades', undefined, '/projects/main'),
-      new MenuItem('Archivos', undefined, undefined, true),
-      new MenuItem('Regulación', undefined, '/knowledge-base/main'),
+      new MenuItem('Archivos', undefined, undefined, true)
     ];
 
     // this.secondaryMenuItems =  [
@@ -55,20 +102,28 @@ export class NavigationHeaderComponent implements OnInit {
     // ];
 
     this.projectStore.selectedProject().subscribe (
-      x => { this.selectedProject = x.project;
-             this.title = this.selectedProject.uid ? this.selectedProject.name : 'Seleccionar un proyecto'; }
+      next => {
+        this.selectedProject = next.project;
+        this.title = this.selectedProject.uid ? this.selectedProject.name : 'Seleccionar un proyecto';
+      }
     );
 
   }
 
-  onClickMenu(menuItem: MenuItem) {
-    this.action.emit(menuItem.action);
-  }
+  private setTemplatesDesignerLayout() {
 
-  onSelectProject(projectUID: string) {
-    this.selectedProject = this.projectStore.findById(projectUID);
+    this.breadcrumb = 'Todos los patrones';
 
-    this.projectStore.selectProject(this.selectedProject);
+    this.mainMenuItems =  [
+      new MenuItem('Patrones de proyectos', undefined, '/projects-templates/main'),
+    ];
+
+    this.templateStore.selectedTemplate().subscribe (
+      next => {
+        this.selectedTemplate = next.project;
+        this.title = this.selectedTemplate.uid ? this.selectedTemplate.name : 'Seleccionar un patrón';
+      }
+    );
 
   }
 

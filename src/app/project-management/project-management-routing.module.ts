@@ -13,6 +13,7 @@ import { SecurityGuardService } from '../core';
 import { MainLayoutComponent } from '../shared';
 
 import { ProjectsMainPageComponent } from './main-page/projects-main-page.component';
+import { TemplatesMainPageComponent } from './templates/templates-main-page.component';
 
 
 @NgModule({
@@ -20,8 +21,17 @@ import { ProjectsMainPageComponent } from './main-page/projects-main-page.compon
     RouterModule.forChild([
       {
         path: 'projects', component: MainLayoutComponent,
-        data: {layoutType: 'Projects'}, canActivate: [SecurityGuardService],
-        children: [{ path: 'main', component: ProjectsMainPageComponent }]
+        canActivate: [SecurityGuardService], data: { layoutType: 'Projects' },
+        children: [
+          { path: 'main', component: ProjectsMainPageComponent }
+        ]
+      },
+      {
+        path: 'projects-templates', component: MainLayoutComponent,
+        canActivate: [SecurityGuardService], data: { layoutType: 'ProjectsTemplates' },
+        children: [
+          { path: 'main', component: TemplatesMainPageComponent }
+        ]
       }
     ])],
   exports: [RouterModule]

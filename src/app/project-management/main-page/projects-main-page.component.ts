@@ -6,16 +6,12 @@
  */
 
 import { Component, Input, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-
-import { Observable } from 'rxjs';
-import { List } from 'immutable';
 
 import { ProjectStore , ProjectModel } from '@app/store/project.store';
 
 import { Activity, Activity_Empty,
          ActivityFilter, DefaultViewConfig,
-         Project, ViewConfig } from '@app/models/project-management';
+         ViewConfig } from '@app/models/project-management';
 
 import { MenuItem } from '@app/shared/nav-menu/nav-menu.component';
 
@@ -80,7 +76,7 @@ export class ProjectsMainPageComponent implements OnInit {
   displayEditor = false;
   toggleEditor = false;
 
-  constructor(private store: ProjectStore, private router: Router) {
+  constructor(private store: ProjectStore) {
 
   }
 

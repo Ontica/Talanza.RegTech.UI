@@ -17,9 +17,20 @@
               [items]="secondaryMenuItems"
               (click)="onClickMenu($event)"></nav-menu>
 
-    <select #projectCtrl class="select-box" style="width:210px;" (change)="onSelectProject(projectCtrl.value)">
-      <option value="">( Seleccionar proyecto )</option>
-      <option *ngFor="let project of projectStore.projects | async" [value]="project.uid">{{project.name}}</option>
+    <select *ngIf="layoutType === 'Projects'" #cboProjects
+            class="select-box" style="width:260px;"
+            (change)="onSelectProject(cboProjects.value)">
+      <option value="">( Seleccionar un proyecto )</option>
+      <option *ngFor="let project of projectStore.projects | async"
+              [value]="project.uid">{{project.name}}</option>
+    </select>
+
+    <select *ngIf="layoutType === 'ProjectsTemplates'" #cboTemplates
+            class="select-box" style="width:260px;"
+            (change)="onSelectTemplate(cboTemplates.value)">
+      <option value="">( Seleccionar un patrón )</option>
+      <option *ngFor="let template of templateStore.templates | async"
+              [value]="template.uid">{{template.name}}</option>
     </select>
 
   </div>
