@@ -5,13 +5,12 @@
  * See LICENSE.txt in the project root for complete license information.
  */
 
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { ProjectStore , ProjectModel } from '@app/store/project.store';
 
-import { Activity, Activity_Empty,
-         ActivityFilter, DefaultViewConfig,
-         ViewConfig } from '@app/models/project-management';
+import { Activity, Activity_Empty, ActivityOperation,
+         DefaultViewConfig, ViewConfig } from '@app/models/project-management';
 
 import { MenuItem } from '@app/shared/nav-menu/nav-menu.component';
 
@@ -76,19 +75,81 @@ export class ProjectsMainPageComponent implements OnInit {
   displayEditor = false;
   toggleEditor = false;
 
-  constructor(private store: ProjectStore) {
-
-  }
+  constructor(private store: ProjectStore) { }
 
 
   ngOnInit() {
-
     this.mainMenuItems = mainMenu;
 
     this.store.selectedProject().subscribe (
       x => this.selectedProject = x
     );
   }
+
+
+  onActivityUpdated(activity: Activity) {
+
+  }
+
+
+  onActivityTreeEdited(event: ActivityOperation) {
+    switch (event.operation) {
+
+      case 'createActivity':
+
+        this.store.insertActivity(this.selectedProject.project, event.activity)
+                  .then( x => this.selectedActivity = x )
+                  .catch( response => console.log(response.error.message) );
+
+        return;
+
+      case 'moveActivity':
+
+        this.store.moveActivity(event.activity as Activity, event.newPosition)
+                  .catch( response => console.log(response.error.message) );
+
+        return;
+
+      case 'changeParent':
+
+        this.store.changeParent(event.activity as Activity, event.newParent)
+                  .catch( response => console.log(response.error.message) );
+
+        return;
+
+      default:
+
+        console.log('Unhandled operation name', event.operation);
+
+    }
+
+  }
+
+
+  onEditorClosed() {
+    this.displayEditor = false;
+
+    this.toggleEditor = !this.toggleEditor;
+  }
+
+
+  showEditor(activity: Activity) {
+    if (activity) {
+      this.selectedActivity = activity;
+
+      const lastValue = this.displayEditor;
+
+      this.displayEditor = true;
+
+      if (lastValue !== this.displayEditor) {
+        this.toggleEditor = !this.toggleEditor;
+      }
+    }
+  }
+
+
+  // temporal view controller methods
+
 
   onAction(action: string) {
     switch (action) {
@@ -132,44 +193,10 @@ export class ProjectsMainPageComponent implements OnInit {
   }
 
 
-  onActivityUpdated(activity: Activity) {
-
-  }
-
-
-  onEditorClosed() {
-    this.displayEditor = false;
-
-    this.toggleEditor = !this.toggleEditor;
-  }
-
-
-  onFilterChanged(receivedFilter: ActivityFilter) {
-    this.store.selectProject(receivedFilter.project);
-  }
-
-
   onViewChanged(viewConfig: ViewConfig) {
     this.viewConfig = viewConfig;
   }
 
-
-  showEditor(activity: Activity) {
-    if (activity) {
-      this.selectedActivity = activity;
-
-      const lastValue = this.displayEditor;
-
-      this.displayEditor = true;
-
-      if (lastValue !== this.displayEditor) {
-        this.toggleEditor = !this.toggleEditor;
-      }
-    }
-  }
-
-
-  // private methods
 
   private getViewConfig(newData: Partial<ViewConfig>): ViewConfig {
     return Object.assign(this.viewConfig, newData);

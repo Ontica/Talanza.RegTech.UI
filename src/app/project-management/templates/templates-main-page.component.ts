@@ -9,7 +9,8 @@ import { Component, OnInit } from '@angular/core';
 
 import { ProjectTemplateStore, ProjectTemplateModel } from '@app/store/project-template.store';
 
-import { Activity, Activity_Empty } from '@app/models/project-management';
+import { Activity, Activity_Empty, ActivityOperation } from '@app/models/project-management';
+
 
 @Component({
   selector: 'templates-main-page',
@@ -35,16 +36,41 @@ export class TemplatesMainPageComponent implements OnInit {
   }
 
 
-  onAction(action: string) {
-    switch (action) {
+  onActivityUpdated(activity: Activity) {
 
-      default:
-        throw new Error(`Unhandled action ${action}.`);
-    }
   }
 
 
-  onActivityUpdated(activity: Activity) {
+  onActivityTreeEdited(event: ActivityOperation) {
+    switch (event.operation) {
+
+      case 'createActivity':
+
+        this.store.insertActivity(this.selectedTemplate.project, event.activity)
+                  .then( x => this.selectedActivity = x )
+                  .catch( response => console.log(response.error.message) );
+
+        return;
+
+      case 'moveActivity':
+
+        this.store.moveActivity(event.activity as Activity, event.newPosition)
+                  .catch( response => console.log(response.error.message) );
+
+        return;
+
+      case 'changeParent':
+
+        this.store.changeParent(event.activity as Activity, event.newParent)
+                  .catch( response => console.log(response.error.message) );
+
+        return;
+
+      default:
+
+        console.log('Unhandled operation name', event.operation);
+
+    }
 
   }
 

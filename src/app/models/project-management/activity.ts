@@ -67,3 +67,11 @@ export const Activity_Empty: Activity = {
 
   config: {}
 }
+
+
+export interface ActivityOperation {
+  operation: 'createActivity' | 'moveActivity' | 'changeParent',
+  activity: Activity | { name: string, position: number },
+  newPosition?: number,
+  newParent?: Activity
+}

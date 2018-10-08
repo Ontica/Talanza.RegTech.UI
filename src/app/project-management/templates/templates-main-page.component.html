@@ -5,6 +5,7 @@
 
     <activity-tree [templateDesignerMode]="true"
                    [project]="selectedTemplate"
+                   (edited)="onActivityTreeEdited($event)"
                    (activitySelected)="showEditor($event)">
     </activity-tree>
 

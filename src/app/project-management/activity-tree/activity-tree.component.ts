@@ -7,9 +7,9 @@
 
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
-import { ProjectStore, ProjectModel } from '@app/store/project.store';
+import { ProjectModel } from '@app/store/project.store';
 
-import { Activity, Activity_Empty } from '@app/models/project-management';
+import { Activity, Activity_Empty, ActivityOperation } from '@app/models/project-management';
 
 @Component({
   selector: 'activity-tree',
@@ -28,11 +28,9 @@ export class ActivityTreeComponent {
   @Input() templateDesignerMode: boolean;
 
   @Output() activitySelected = new EventEmitter<Activity>();
+  @Output() edited = new EventEmitter<ActivityOperation>();
 
-  constructor(private projectStore: ProjectStore) {
-
-  }
-
+  constructor() { }
 
   activityNameClass(level: number): string {
     if (1 <= level && level <= 6) {
@@ -67,10 +65,8 @@ export class ActivityTreeComponent {
       position: position ? position + 1 : 1
     };
 
-    this.projectStore.insertActivity(this.project.project, activity)
-                     .then( x => {
-                       this.hideSpinner();
-                       this.onSelectActivity(x);
+    this.edited.emit({ operation: 'createActivity',
+                       activity: activity
                      });
   }
 
@@ -138,8 +134,10 @@ export class ActivityTreeComponent {
     this.configureDragEventBehaviour(event);
     this.setDragZoneItem(null);
 
-    this.projectStore.moveActivity(activity, newPosition)
-                     .catch( response => console.log(response.error.message) );
+    this.edited.emit({ operation: 'moveActivity',
+                       activity: activity,
+                       newPosition: newPosition
+                     });
   }
 
 
@@ -149,8 +147,10 @@ export class ActivityTreeComponent {
     this.configureDragEventBehaviour(event);
     this.setDragZoneItem(null);
 
-    this.projectStore.changeParent(activity, newParent)
-                     .catch( response => console.log(response.error.message) );
+    this.edited.emit({ operation: 'changeParent',
+                       activity: activity,
+                       newParent: newParent
+                     });
   }
 
   // private methods

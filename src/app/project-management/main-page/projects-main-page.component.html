@@ -9,6 +9,7 @@
     <activity-tree *ngSwitchCase="'activity-tree'"
                     [templateDesignerMode]="false"
                     [project]="selectedProject"
+                    (edited)="onActivityTreeEdited($event)"
                     (activitySelected)="showEditor($event)">
     </activity-tree>
 
