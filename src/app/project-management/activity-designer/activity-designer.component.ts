@@ -172,7 +172,7 @@ export class ActivityDesignerComponent extends AbstractForm implements OnInit, O
       this.addException(FormMessages.IncompleteActivityData);
     }
 
-    this.validateTargetDate();
+    this.validateFormFields();
 
     return Promise.resolve();
   }
@@ -201,12 +201,12 @@ export class ActivityDesignerComponent extends AbstractForm implements OnInit, O
         isMandatory: formModel.isMandatory === 'true' ? true : false,
         isController: formModel.isController === 'true' ? true : false,
 
-        dueOnTerm: formModel.dueOnTerm ? new Number(formModel.dueOnTerm) : '',
+        dueOnTerm: formModel.dueOnTerm ? Number(formModel.dueOnTerm) : '',
         dueOnTermUnit: formModel.dueOnTermUnit,
         dueOnCondition: formModel.dueOnCondition,
         dueOnController: new Number(formModel.dueOnController),
 
-        duration: formModel.duration ? new Number(formModel.duration) : '',
+        duration: formModel.duration ? Number(formModel.duration) : '',
         durationUnit: formModel.durationUnit,
         periodicity: formModel.periodicity || '',
 
@@ -261,10 +261,10 @@ export class ActivityDesignerComponent extends AbstractForm implements OnInit, O
                .catch(err => this.messageBox.show(err));
   }
 
-  public isPositiveInteger(str) {
-    var n = Math.floor(Number(str));
+  private isPositiveInteger(str: string) {
+    var n = Number(str);
 
-    return n !== Infinity && String(n) === str && n > 0;
+    return n !== Infinity && Number.isInteger(n) && n > 0;
   }
 
   private validateIntegerValue(path: string): void {
@@ -275,12 +275,12 @@ export class ActivityDesignerComponent extends AbstractForm implements OnInit, O
     }
 
     if (!this.isPositiveInteger(value)) {
-      this.addException(FormMessages.UnrecognizedValue);
+      this.addException(FormMessages.UnrecognizedValue + "Value " + value);
       this.get(path).markAsDirty();
     }
   }
 
-  private validateTargetDate(): void {
+  private validateFormFields(): void {
     this.validateIntegerValue('dueOnTerm');
     this.validateIntegerValue('duration');
 
