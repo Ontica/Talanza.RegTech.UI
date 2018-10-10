@@ -5,7 +5,8 @@
  * See LICENSE.txt in the project root for complete license information.
  */
 
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter,
+         Input, OnChanges, Output } from '@angular/core';
 
 import { ProjectModel } from '@app/store/project.store';
 
@@ -16,7 +17,7 @@ import { Activity, Activity_Empty, ActivityOperation } from '@app/models/project
   templateUrl: './activity-tree.component.html',
   styleUrls: ['./activity-tree.component.scss'],
 })
-export class ActivityTreeComponent {
+export class ActivityTreeComponent implements OnChanges {
 
   selectedActivity: Activity = Activity_Empty;
   dragZoneItem = null;
@@ -31,6 +32,14 @@ export class ActivityTreeComponent {
   @Output() edited = new EventEmitter<ActivityOperation>();
 
   constructor() { }
+
+
+  ngOnChanges() {
+    if (this.selectedActivity.project.uid !== this.project.project.uid) {
+      this.selectedActivity = Activity_Empty;
+    }
+  }
+
 
   activityNameClass(level: number): string {
     if (1 <= level && level <= 6) {
@@ -126,7 +135,6 @@ export class ActivityTreeComponent {
 
     event.dataTransfer.setData("activity", JSON.stringify(activity));
   }
-
 
   moveActivity(event: DragEvent, newPosition: number) {
     let activity = this.getDraggedActivity(event);

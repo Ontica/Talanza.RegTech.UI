@@ -29,9 +29,15 @@ export class TemplatesMainPageComponent implements OnInit {
 
 
   ngOnInit() {
-
     this.store.selectedTemplate().subscribe (
-      x => this.selectedTemplate = x
+      x => {
+        if (this.selectedTemplate &&
+            this.selectedTemplate.project.uid !== x.project.uid) {
+          this.selectedActivity = Activity_Empty;
+          this.displayEditor = false;
+        }
+        this.selectedTemplate = x;
+      }
     );
   }
 

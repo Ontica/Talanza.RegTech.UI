@@ -82,7 +82,14 @@ export class ProjectsMainPageComponent implements OnInit {
     this.mainMenuItems = mainMenu;
 
     this.store.selectedProject().subscribe (
-      x => this.selectedProject = x
+      x => {
+        if (this.selectedProject &&
+            this.selectedProject.project.uid !== x.project.uid) {
+          this.selectedActivity = Activity_Empty;
+          this.displayEditor = false;
+        }
+        this.selectedProject = x;
+      }
     );
   }
 
