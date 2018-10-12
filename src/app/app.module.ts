@@ -14,7 +14,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 /*
  * Platform and Environment providers/directives/pipes
  */
-import { environment } from 'environments/environment';
 
 import { CoreModule } from './core/core.module';
 import { ServicesModule } from './services/services.module';
@@ -25,7 +24,7 @@ import { ContractsModule } from './contracts/contracts.module';
 import { ControlsModule } from './controls/controls.module';
 import { DocumentsModule } from './documents/documents.module';
 import { DashboardModule } from './dashboard/dashboard.module';
-import { KnowledgeBaseModule } from '@app/knowledge-base/kb.module';
+import { KnowledgeBaseModule } from './knowledge-base/kb.module';
 
 import { ProcessModule } from './process/process.module';
 import { GlobalSearchModule } from './global-search/global-search.module';
@@ -46,15 +45,6 @@ import { ErrorHandler } from '@angular/core';
 import { ExceptionHandler } from './core/general/exception-handler';
 
 const EXCEPTION_HANDLER_PROVIDER =  { provide: ErrorHandler, useClass: ExceptionHandler };
-
-import '../styles/styles.scss';
-
-
-// Application wide providers
-const APP_PROVIDERS = [
-  EXCEPTION_HANDLER_PROVIDER
-];
-
 
 @NgModule({
   bootstrap: [ AppComponent ],
@@ -83,9 +73,7 @@ const APP_PROVIDERS = [
     AppRoutingModule
   ],
 
-  providers: [
-    environment.ENV_PROVIDERS,
-    APP_PROVIDERS
-  ]
+  providers: [ EXCEPTION_HANDLER_PROVIDER ]
+
 })
 export class AppModule {}

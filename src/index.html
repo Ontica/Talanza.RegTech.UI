@@ -5,34 +5,17 @@
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>
-    <%= htmlWebpackPlugin.options.title %>
-  </title>
-  <meta name="description" content="<%= htmlWebpackPlugin.options.metadata.description %>">
-  <!-- base url -->
-  <base href="<%= htmlWebpackPlugin.options.metadata.baseUrl %>">
-  <% if (webpackConfig.htmlElements.headTags) { %>
-    <!-- Configured Head Tags  -->
-    <%= webpackConfig.htmlElements.headTags %>
-  <% } %>
+  <title>COVAR Energy Consulting || Sistema para el cumplimiento regulatorio</title>
+  <meta name="description" content="Sistema para el cumplimiento regulatorio para proyectos del sector energético.">
+  <base href="/">
 
-
-  <%= htmlWebpackPlugin.files.webpackManifest %>
-
-  <% if (htmlWebpackPlugin.options.metadata.isDevServer && htmlWebpackPlugin.options.metadata.HMR !== true) { %>
-    <!-- Webpack Dev Server reload -->
-    <script src="/webpack-dev-server.js"></script>
-  <% } %>
-
-  <!-- CSS will be injected by webpack here -->
-  <!-- Preload link tags will be injected by webpack here-->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
         integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
         crossorigin="anonymous">
 
-  <link rel="stylesheet" href="./assets/dhtmlx.css" type="text/css">
+  <link rel="stylesheet" href="assets/dhtmlx.css" type="text/css">
 
-  <script src="./assets/dhtmlx.js" type="text/javascript"></script>
+  <script src="assets/dhtmlx.js" type="text/javascript"></script>
 
 </head>
 
@@ -53,8 +36,8 @@
       }
 
     </style>
-    <%= htmlWebpackPlugin.options.title %>
-      <br/><br/> Cargando la aplicación...
+    COVAR Energy Consulting || Sistema para el cumplimiento regulatorio
+    <br/><br/> Cargando la aplicación...
   </app>
 
   <!-- Scripts will be injected by webpack here -->
