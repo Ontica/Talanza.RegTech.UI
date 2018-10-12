@@ -8,10 +8,11 @@
 
 import { Injectable } from '@angular/core';
 
-import { ExceptionHandler, HttpService,
-         LoggerService, SessionService } from './';
-
-import { SpinnerService } from './ui-services';
+import { ExceptionHandler } from './general/exception-handler';
+import { HttpService } from './http/http.service';
+import { LoggerService } from './general/logger.service';
+import { SessionService } from './general/session.service';
+import { SpinnerService } from './spinner/spinner.service';
 
 @Injectable()
 export class CoreService {

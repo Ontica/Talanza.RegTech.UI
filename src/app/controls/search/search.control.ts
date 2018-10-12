@@ -6,7 +6,6 @@
  *
  */
 import { Component, EventEmitter, Output } from '@angular/core';
-import { emit } from 'cluster';
 
 @Component({
   selector: 'search-control',

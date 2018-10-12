@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 
-import { Exception } from '..';
+import { Exception } from '../general/exception';
 
 
 export interface MessageBox {

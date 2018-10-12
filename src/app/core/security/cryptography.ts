@@ -5,13 +5,13 @@
  * See LICENSE.txt in the project root for complete license information.
  */
 
+import * as CryptoJS from 'crypto-js';
 
 export class Cryptography {
 
   public static convertToMd5(value: string): string {
-    var md5 = require('crypto-js/md5');
 
-    return md5(value).toString();
+    return CryptoJS.MD5(value).toString();
   }
 
 } //class Cryptography

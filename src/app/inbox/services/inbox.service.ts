@@ -15,8 +15,6 @@ import { CoreService } from '../../core/core.service';
 import { InboxRef } from '../data-types/inbox';
 import { InboxFilter } from '../data-types/inbox-filter';
 
-import { ActivityRef } from '../data-types/activity';
-
 @Injectable()
 export class InboxService {
 

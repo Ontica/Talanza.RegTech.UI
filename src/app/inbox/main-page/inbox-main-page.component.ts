@@ -9,7 +9,6 @@
 import { Component } from '@angular/core';
 
 import { InboxFilter } from '../data-types/inbox-filter';
-import { Activity } from '../../project-management/data-types/activity';
 
 import { ActivityService, ProjectService } from '../../services/project-management';
 

@@ -6,7 +6,7 @@
  */
 
 import { Injectable } from '@angular/core';
-import { APP_SETTINGS } from '../../../assets/empiria.config'
+import { APP_SETTINGS } from '@assets/empiria.config';
 
 import { ApplicationSettings } from './application-settings';
 

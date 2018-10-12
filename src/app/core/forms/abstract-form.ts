@@ -11,10 +11,10 @@ import { AbstractControl, FormGroup } from '@angular/forms';
 
 import { Assertion } from '../general/assertion';
 
-import { Exception } from '../index';
-import { CoreService } from '../core-service';
+import { Exception } from '../general/exception';
 
-import { Displayable, SpinnerService }  from '../ui-services';
+import { Displayable }  from '../ui-data-types';
+import { SpinnerService }  from '../spinner/spinner.service';
 
 export interface Command {
   name: string;

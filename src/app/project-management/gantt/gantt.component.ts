@@ -13,7 +13,7 @@ import { Component, ChangeDetectionStrategy,
 import { ProjectModel, ProjectStore } from '@app/store/project.store';
 
 import "dhtmlx-gantt";
-import { } from "dhtmlxgantt";
+declare let gantt: any;
 
 import { Activity, ViewConfig, GanttTask } from '@app/models/project-management';
 

@@ -6,7 +6,7 @@
  *
  */
 
-import { NgModule, ModuleWithProviders } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
@@ -23,6 +23,7 @@ import { NavigationMenuComponent } from './nav-menu/nav-menu.component';
 
 import { NoContentComponent } from './no-content/no-content.component';
 
+import { SafeHtmlPipe } from './pipes/safe-html.pipe';
 
 /**
  * Do not specify providers for modules that might be imported by a lazy loaded module.
@@ -44,13 +45,15 @@ import { NoContentComponent } from './no-content/no-content.component';
     NavigationHeaderComponent,
     NavigationMenuComponent,
     MainMenuComponent,
-    NoContentComponent
+    NoContentComponent,
+    SafeHtmlPipe
   ],
 
   exports: [
     MainLayoutComponent,
     NavigationHeaderComponent,
-    NoContentComponent
+    NoContentComponent,
+    SafeHtmlPipe
   ],
 
 })
