@@ -305,8 +305,15 @@ select:disabled {
   @include disabled-element;
 }
 
-button:disabled {
+button:disabled button:hover:disabled {
   @include disabled-element();
+  pointer-events: none;
+  cursor: default;
+  opacity: 0.7;
+}
+
+i.disabled {
+  opacity: 0.25;
 }
 
 .main-icon a {

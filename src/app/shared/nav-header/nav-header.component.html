@@ -26,9 +26,9 @@
     </select>
 
     <select *ngIf="layoutType === 'ProjectsTemplates'" #cboTemplates
-            class="select-box" style="width:260px;"
+            class="select-box" style="width:360px;"
             (change)="onSelectTemplate(cboTemplates.value)">
-      <option value="">( Seleccionar un patrón )</option>
+      <option value="">( Seleccionar un patrón de actividades )</option>
       <option *ngFor="let template of templateStore.templates | async"
               [value]="template.uid">{{template.name}}</option>
     </select>

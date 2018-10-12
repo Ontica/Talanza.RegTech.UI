@@ -10,8 +10,8 @@
       <div class="hint">Proyecto regulatorio: {{project.project.name}}</div>
     </div>
     <div class="list-view-header-options">
-      <button *ngIf="!templateDesignerMode" type="button" class="btn-action"
-              (click)="showInitialActivityInlineEditor()"><i class="fa fa-plus"></i> Agregar evento</button>
+      <button *ngIf="!templateDesignerMode" type="button" class="btn disabled"
+              (click)="showAddEventModalWindow()"><i class="fa fa-plus"></i> Agregar evento</button>
       &nbsp; &nbsp;
       <button type="button" class="btn-action"
               (click)="showInitialActivityInlineEditor()"><i class="fa fa-plus"></i> Agregar actividad</button>
@@ -56,15 +56,21 @@
 
               <a *ngIf="!templateDesignerMode" [ngClass]="activityNameClass(activity.level)"
                  [class.dragover-activity-name]="dragZoneItem === activity.name"
-                 (click)="onSelectActivity(activity, true)">{{activity.name}} / {{activity.responsible.name}}</a>
+                 (click)="onSelectActivity(activity, true)">{{activity.name}}</a>
 
+            </div>
+
+            <div *ngIf="!templateDesignerMode && activity.responsible.uid !== 'Empty'"
+                  class="activity-status">
+              <div class="column expand" style="white-space:nowrap">{{activity.responsible.name}}
+                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</div>
+              <div class="column expand" style="white-space:nowrap">{{activity.dueDate | date:'dd/LLL/yyyy'}}</div>
             </div>
 
           </div>
 
           <div *ngIf="!templateDesignerMode" class="activity-menu">
-            <rag-status-control [status]="activity.ragStatus"
-                                (change)="activity.ragStatus= $event">
+            <rag-status-control [status]="activity.ragStatus">
             </rag-status-control>
           </div>
 

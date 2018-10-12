@@ -19,6 +19,7 @@
 .nav-bar li {
   border-right: 1px solid $light-gray;
   padding: 5px 10px;
+  color: $gray;
   white-space: nowrap;
 }
 
@@ -28,7 +29,7 @@
 
 .nav-bar a, a:visited {
   color: $dark-blue;
-  font-weight: 400;
+  font-weight: 420;
   text-decoration: none;
 }
 

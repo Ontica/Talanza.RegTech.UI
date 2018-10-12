@@ -100,6 +100,10 @@ export class ActivityTreeComponent implements OnChanges {
   }
 
 
+  showAddEventModalWindow() {
+    alert("La funcionalidad para 'Agregar eventos' está próxima a liberarse.");
+  }
+
   showInitialActivityInlineEditor() {
     this.hideInlineEditors();
 

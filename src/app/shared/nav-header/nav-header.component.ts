@@ -14,6 +14,7 @@ import { ProjectStore } from '@app/store/project.store';
 import { ProjectTemplateStore } from '@app/store/project-template.store';
 
 import { Project } from '@app/models/project-management';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 
 @Component({
@@ -78,7 +79,7 @@ export class NavigationHeaderComponent implements OnChanges {
         return;
 
       default:
-
+        this.setDefaultLayout();
     }
   }
 
@@ -88,7 +89,7 @@ export class NavigationHeaderComponent implements OnChanges {
     this.breadcrumb = 'Todos los proyectos';
 
     this.mainMenuItems =  [
-      new MenuItem('Bandeja de tareas', undefined, '/inbox/main'),
+      new MenuItem('Bandeja de tareas', undefined, '/inbox/main', true),
       new MenuItem('Actividades', undefined, '/projects/main'),
       new MenuItem('Archivos', undefined, undefined, true)
     ];
@@ -115,7 +116,7 @@ export class NavigationHeaderComponent implements OnChanges {
     this.breadcrumb = 'Todos los patrones';
 
     this.mainMenuItems =  [
-      new MenuItem('Patrones de proyectos', undefined, '/projects-templates/main'),
+      new MenuItem('Patrones', undefined, '/projects-templates/main'),
     ];
 
     this.templateStore.selectedTemplate().subscribe (
@@ -125,6 +126,12 @@ export class NavigationHeaderComponent implements OnChanges {
       }
     );
 
+  }
+
+  private setDefaultLayout() {
+    this.breadcrumb = '';
+    this.mainMenuItems =  [];
+    this.title = '';
   }
 
 }
