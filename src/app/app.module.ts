@@ -6,19 +6,14 @@
  */
 
 import { NgModule } from '@angular/core';
+
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
-import { ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-
-/*
- * Platform and Environment providers/directives/pipes
- */
 
 import { CoreModule } from './core/core.module';
-import { ServicesModule } from './services/services.module';
-
 import { StoreModule } from './store/store.module';
+import { ServicesModule } from './services/services.module';
 
 import { ContractsModule } from './contracts/contracts.module';
 import { ControlsModule } from './controls/controls.module';
@@ -51,6 +46,10 @@ const EXCEPTION_HANDLER_PROVIDER =  { provide: ErrorHandler, useClass: Exception
   declarations: [ AppComponent ],
 
   imports: [
+
+    BrowserModule,
+    BrowserAnimationsModule,
+
     CoreModule,
     ServicesModule,
     StoreModule,
@@ -67,10 +66,8 @@ const EXCEPTION_HANDLER_PROVIDER =  { provide: ErrorHandler, useClass: Exception
     ServiceDeskModule,
     SharedModule,
     GlobalSearchModule,
-    BrowserModule,
-    FormsModule,
-    ReactiveFormsModule,
-    AppRoutingModule
+
+    AppRoutingModule,
   ],
 
   providers: [ EXCEPTION_HANDLER_PROVIDER ]
