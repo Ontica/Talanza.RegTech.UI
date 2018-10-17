@@ -31,6 +31,15 @@
     "workflow",
     "xpdl"
   ],
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve --open",
+    "build": "ng build",
+    "test": "ng test",
+    "lint": "ng lint",
+    "e2e": "ng e2e",
+    "build.prod": "ng build --prod"
+  },
   "dependencies": {
     "@angular/animations": "^6.1.10",
     "@angular/cdk": "^6.4.7",

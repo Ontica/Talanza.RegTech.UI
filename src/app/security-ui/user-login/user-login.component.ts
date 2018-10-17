@@ -11,7 +11,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { Router } from '@angular/router';
 
-import { AuthenticationService, CoreService } from '../../core';
+import { AuthenticationService } from '../../core';
 
 import { AbstractForm, SpinnerService } from '../../core/ui-services';
 

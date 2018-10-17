@@ -1,13 +1,12 @@
 /**
  * @license
- * Copyright (c) 2017 La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
+ * Copyright (c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
  *
  * See LICENSE.txt in the project root for complete license information.
- *
  */
 
-import { ChangeDetectorRef, Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
-import { BrowserModule, DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 import { Process } from '../data-types/process';
 import { ProcessService } from '../services/process.service';
@@ -125,7 +124,7 @@ export class ProcessEditorComponent implements OnInit {
 
   public onChangeSelectedProcess(uid: string): void {
     this.processUID = uid;
-   
+
     this.refreshDiagram();
   }
 

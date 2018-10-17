@@ -2,16 +2,16 @@
 
   <div class="list-view-header">
     <div *ngIf="templateDesignerMode" class="list-view-title">
-      Diseño del árbol de actividades
+      Árbol de obligaciones
       <div class="hint">{{project.project.name}}</div>
     </div>
     <div *ngIf="!templateDesignerMode" class="list-view-title">
-      Actividades del proyecto
-      <div class="hint">Proyecto regulatorio: {{project.project.name}}</div>
+      Actividades del contrato
+      <div class="hint">Contrato: {{project.project.name}}</div>
     </div>
     <div class="list-view-header-options">
       <button *ngIf="!templateDesignerMode" type="button" class="btn disabled"
-              (click)="showAddEventModalWindow()"><i class="fa fa-plus"></i> Agregar evento</button>
+              (click)="showAddEventModalWindow()"><i class="fa fa-plus"></i> Agregar obligaciones</button>
       &nbsp; &nbsp;
       <button type="button" class="btn-action"
               (click)="showInitialActivityInlineEditor()"><i class="fa fa-plus"></i> Agregar actividad</button>

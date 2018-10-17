@@ -24,7 +24,7 @@ import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 })
 export class NavigationHeaderComponent implements OnChanges {
 
-  title = 'Seleccionar un proyecto';
+  title = 'Seleccionar un contrato';
 
   //breadcrumb = 'Todos los proyectos » Shell » Ronda 2.4 » Salina Area 28';
   breadcrumb = '';
@@ -86,7 +86,7 @@ export class NavigationHeaderComponent implements OnChanges {
 
   private setProjectsLayout() {
 
-    this.breadcrumb = 'Todos los proyectos';
+    this.breadcrumb = 'Todos los contratos';
 
     this.mainMenuItems =  [
       new MenuItem('Bandeja de tareas', undefined, '/inbox/main', true),
@@ -105,7 +105,7 @@ export class NavigationHeaderComponent implements OnChanges {
     this.projectStore.selectedProject().subscribe (
       next => {
         this.selectedProject = next.project;
-        this.title = this.selectedProject.uid ? this.selectedProject.name : 'Seleccionar un proyecto';
+        this.title = this.selectedProject.uid ? this.selectedProject.name : 'Seleccionar un contrato';
       }
     );
 
@@ -113,16 +113,16 @@ export class NavigationHeaderComponent implements OnChanges {
 
   private setTemplatesDesignerLayout() {
 
-    this.breadcrumb = 'Todos los patrones';
+    this.breadcrumb = 'Todos los diseños';
 
     this.mainMenuItems =  [
-      new MenuItem('Patrones', undefined, '/projects-templates/main'),
+      new MenuItem('Diseños', undefined, '/projects-templates/main'),
     ];
 
     this.templateStore.selectedTemplate().subscribe (
       next => {
         this.selectedTemplate = next.project;
-        this.title = this.selectedTemplate.uid ? this.selectedTemplate.name : 'Seleccionar un patrón';
+        this.title = this.selectedTemplate.uid ? this.selectedTemplate.name : 'Seleccionar un diseño';
       }
     );
 

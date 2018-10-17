@@ -54,7 +54,7 @@ import { throwIfAlreadyLoaded } from './module-import-guard';
               SecurityDataService, AuthenticationService,
               SecurityGuardService, HttpHandler, HttpService, DirectoryService,
               SpinnerService, MessageBoxService,
-              { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true}
+              { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true }
             ]
 })
 export class CoreModule {

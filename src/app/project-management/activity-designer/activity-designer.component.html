@@ -5,7 +5,7 @@
 
     <div class="form-title">
       {{value('name')}}
-      <div class="hint">Actividad: proyecto {{activity.project.name}}</div>
+      <div class="hint">Actividad en {{activity.project.name}}</div>
     </div>
     <div class="header-options">
       <i class="fa fa-times close-icon" aria-hidden="true" (click)="onClose()"></i>
@@ -22,7 +22,7 @@
 
       <table class="form-section">
         <tr>
-          <td class="form-section-title" colspan="2">Información general de la tarea o actividad</td>
+          <td class="form-section-title" colspan="2">Información general de la obligación u actividad</td>
         </tr>
         <tr>
           <td>Nombre:</td>
@@ -40,7 +40,7 @@
 
       <table class="form-section">
         <tr>
-          <td class="form-section-title" colspan="4">Configuración del tipo actividad</td>
+          <td class="form-section-title" colspan="4">Configuración del tipo de obligación u actividad</td>
         </tr>
         <tr>
           <td>Tipo de actividad:</td>
@@ -53,7 +53,7 @@
               <option value="Internal">Actividad interna</option>
               <option value="External">Actividad externa</option>
               <option value="Decision">Decisión</option>
-              <option value="Milestone">Hito</option>
+              <!-- <option value="Milestone">Hito</option> -->
             </select>
           </td>
           <td class="text-align-right" style="width:100%">Forma de<br />ejecución:</td>
@@ -73,7 +73,7 @@
         </tr>
         <tr>
           <td colspan="4" style="width:100%">
-            ¿Esta actividad controla las fechas de inicio o término de otras actividades? &nbsp;
+            ¿Esta actividad controla las fechas de inicio o término de otras obligaciones u actividades? &nbsp;
             <select class="select-box" style="width:54px" formControlName="isController">
               <option value="">( ? )</option>
               <option value="true">Sí</option>
@@ -85,7 +85,7 @@
 
       <table class="form-section">
         <tr>
-          <td class="form-section-title" colspan="4">Condiciones de ejecución, entrega y duración de la actividad</td>
+          <td class="form-section-title" colspan="4">Condiciones de ejecución, entrega y duración de la obligación o actividad</td>
         </tr>
         <tr>
           <td>Esta actividad<br>debe realizarse:<br /></td>
@@ -128,7 +128,7 @@
           </td>
         </tr>
         <tr>
-          <td>Tiempo para hacer<br>la actividad (aprox):</td>
+          <td>Tiempo para hacer<br>la obligación o actividad (aprox):</td>
           <td>
             <input type="text" class="text-box" style="width:70px" formControlName="duration">
 
