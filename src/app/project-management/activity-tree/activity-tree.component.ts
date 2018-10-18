@@ -8,9 +8,13 @@
 import { Component, EventEmitter,
          Input, OnChanges, Output } from '@angular/core';
 
+import { MatDialog, MatDialogConfig } from "@angular/material";
+
 import { ProjectModel } from '@app/store/project.store';
 
 import { Activity, Activity_Empty, ActivityOperation } from '@app/models/project-management';
+
+import { AddEventDialogComponent } from '../add-event-dialog/add-event-dialog.component';
 
 @Component({
   selector: 'activity-tree',
@@ -31,7 +35,7 @@ export class ActivityTreeComponent implements OnChanges {
   @Output() activitySelected = new EventEmitter<Activity>();
   @Output() edited = new EventEmitter<ActivityOperation>();
 
-  constructor() { }
+  constructor(private dialog: MatDialog) { }
 
 
   ngOnChanges() {
@@ -100,9 +104,17 @@ export class ActivityTreeComponent implements OnChanges {
   }
 
 
-  showAddEventModalWindow() {
-    alert("La funcionalidad para 'Agregar eventos' está próxima a liberarse.");
+  openAddEventDialog() {
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.height = '400px',
+    dialogConfig.width = '600px',
+
+    this.dialog.open(AddEventDialogComponent, dialogConfig);
   }
+
 
   showInitialActivityInlineEditor() {
     this.hideInlineEditors();

@@ -41,6 +41,8 @@ enum Errors {
   UPDATE_ACTIVITY =
   '[UPDATE_ACTIVITY] Ocurrió un problema al actualizar la actividad.',
 
+  CREATE_FROM_EVENT =
+  '[CREATE_FROM_EVENT] Ocurrió un problema al agregar la obligacion al proyecto.',
 }
 
 
@@ -71,6 +73,11 @@ export class ProjectService {
     return this.core.http.get<Project[]>(path);
   }
 
+  getEventsList(): Observable<Activity[]> {
+    const path = 'v1/project-management/templates/events';
+
+    return this.core.http.get<Activity[]>(path);
+  }
 
   getRequestersList(projectUID: string): Observable<Contact[]> {
     const path = `v1/project-management/projects/${projectUID}/requesters`;
@@ -175,6 +182,18 @@ export class ProjectService {
                          );
   }
 
+
+  createFromEvent(project: Project, data: { eventUID: string, targetDate: Date }) {
+    Assertion.assertValue(project, "project");
+    Assertion.assertValue(data, "data");
+
+    const path = `v1/project-management/projects/${project.uid}/create-from-event`;
+
+    return this.core.http.post<Activity>(path, data)
+                         .pipe(
+                            catchError((e) => this.core.http.throw(e, Errors.CREATE_FROM_EVENT))
+                         );
+  }
 
   insertActivity(project: Project,
                  newActivity: { name: string, position: number }): Observable<Activity> {

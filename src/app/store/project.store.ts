@@ -119,6 +119,16 @@ export class ProjectStore {
   }
 
 
+  createFromEvent(project: Project, data: { eventUID: string, targetDate: Date }) {
+    return this.projectService.createFromEvent(project, data)
+               .toPromise()
+               .then( x => {
+                  this.updateSelectedProject(project);
+               });
+
+  }
+
+
   insertActivity(project: Project,
                  newActivity: { name: string, position: number }): Promise<Activity> {
 

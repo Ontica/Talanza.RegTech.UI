@@ -1,0 +1,30 @@
+<h4 mat-dialog-title>Agregar obligaciones</h4>
+
+<mat-dialog-content [formGroup]="form">
+
+  Evento:
+  <br>
+
+  <select class="select-box" style="width:90%" formControlName="selectedEvent">
+    <option value="">( Eventos )</option>
+    <option *ngFor="let event of events | async"
+            [value]="event.uid">{{event.name}}</option>
+  </select>
+
+  <br/>
+  <br/>
+  Fecha:
+  <br/>
+  <calendar-control formControlName="targetDate"></calendar-control>
+  <br/>
+  <br/>
+  <br/>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-raised-button (click)="close()">Cerrar</button>
+
+  <button mat-raised-button color="primary" [disabled]="!this.form.valid" (click)="save()">Agregar al proyecto</button>
+
+</mat-dialog-actions>
+

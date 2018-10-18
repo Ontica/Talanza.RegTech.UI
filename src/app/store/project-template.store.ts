@@ -52,6 +52,10 @@ export class ProjectTemplateStore {
     return this._templatesList.asObservable();
   }
 
+  events(): Observable<Activity[]> {
+    return this.projectService.getEventsList();
+  }
+
 
   get stages(): Observable<List<Stage>> {
     return this._stages.asObservable();

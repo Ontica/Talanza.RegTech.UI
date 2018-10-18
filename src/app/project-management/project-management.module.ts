@@ -9,7 +9,11 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
+
+import { AngularMaterialModule } from '@app/shared/angular-material.module';
+
 import { SharedModule } from '../shared/shared.module';
+
 import { ProceduresModule } from '../procedures/procedures.module';
 import { ControlsModule } from '../controls/controls.module';
 
@@ -19,7 +23,7 @@ import { ActivityInlineEditorComponent } from './activity-tree/activity-inline-e
 import { ActivityEditorComponent } from './activity-editor/activity-editor.component';
 import { ActivityDesignerComponent } from './activity-designer/activity-designer.component';
 
-
+import { AddEventDialogComponent } from './add-event-dialog/add-event-dialog.component';
 
 import { GanttComponent } from './gantt/gantt.component';
 import { ProjectManagementRoutingModule } from './project-management-routing.module';
@@ -49,6 +53,7 @@ import { OldProjectTreeComponent } from './old-project-tree/old-project-tree.com
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    AngularMaterialModule,
 
     ControlsModule,
     SharedModule,
@@ -64,6 +69,8 @@ import { OldProjectTreeComponent } from './old-project-tree/old-project-tree.com
     ActivityEditorComponent,
     ActivityInlineEditorComponent,
     ActivityTreeComponent,
+
+    AddEventDialogComponent,
 
     GanttComponent,
     ProjectsFilterComponent,
@@ -90,7 +97,9 @@ import { OldProjectTreeComponent } from './old-project-tree/old-project-tree.com
 
     OldActivityEditorComponent,
     OldProjectTreeComponent
-  ]
+  ],
+
+  entryComponents: [AddEventDialogComponent]
 
 })
 export class ProjectManagementModule { }
