@@ -53,6 +53,8 @@ export class ActivityEditorComponent extends AbstractForm implements OnInit, OnC
   tags: ColoredTag[] = [];
   selectedTags: ColoredTag[] = [];
 
+  procedureDialogVisible = false;
+
   constructor(spinner: SpinnerService,
               private messageBox: MessageBoxService,
               private projectStore: ProjectStore) {
@@ -70,9 +72,12 @@ export class ActivityEditorComponent extends AbstractForm implements OnInit, OnC
     if (!this.activity) {
       this.activity = Activity_Empty;
     }
+
     this.loadSelectedTags();
 
     this.onReset();
+
+    this.showProcedureDialog(false);
   }
 
 
@@ -91,6 +96,11 @@ export class ActivityEditorComponent extends AbstractForm implements OnInit, OnC
   onReset() {
     this.rebuildForm();
     this.disable();
+  }
+
+
+  showProcedureDialog(show: boolean) {
+    this.procedureDialogVisible = show;
   }
 
 

@@ -67,7 +67,7 @@
           <td style="width:100%">
             <select class="select-box"
                     formControlName="responsibleUID">
-              <option value="Empty">No asignado</option>
+              <option value="Empty">No asignada</option>
               <option *ngFor="let responsible of responsibles | async"
                       [value]="responsible.uid">{{responsible.name}}</option>
             </select>
@@ -75,7 +75,7 @@
           <td>Estado:</td>
           <td>
             <select class="select-box" style="width:130px" formControlName="ragStatus">
-              <option value="NoColor">Sin color</option>
+              <option value="NoColor">No determinado</option>
               <option value="Green">Verde</option>
               <option value="Amber">Ambar</option>
               <option value="Red">Rojo</option>
@@ -99,6 +99,32 @@
             <calendar-control formControlName="dueDate"></calendar-control>
           </td>
         </tr>
+      </table>
+
+      <table *ngIf="activity.workflowObject.config && +activity.workflowObject.config.procedure !== -1" class="form-section">
+        <tr>
+          <td class="form-section-title" colspan="6">Información regulatoria</td>
+        </tr>
+        <tr *ngIf="activity.workflowObject.config.procedure">
+          <td>Trámite asociado:</td>
+          <td style="width:30%">
+            <a (click)="showProcedureDialog(true)"><i class="fa fa-university" aria-hidden="true"></i></a>
+          </td>
+          <td>Preguntas frecuentes:</td>
+          <td style="width:30%">
+            Ninguna
+          </td>
+          <td>Flujograma:</td>
+          <td style="width:30%">
+            No disponible
+          </td>
+        </tr>
+        <!-- <tr>
+          <td>Diseño regulatorio asociado:</td>
+          <td>
+            <a (click)="showProcedureDialog(true)"><i class="fa fa-bookmark" aria-hidden="true"></i></a>
+          </td>
+        </tr> -->
       </table>
 
     </fieldset>
@@ -132,3 +158,7 @@
   </div>
 
 </form>
+
+<div class="procedure-info" *ngIf="activity.workflowObject && procedureDialogVisible">
+  <procedure-viewer [procedureUID]="activity.workflowObject.config.procedure" (onCloseEvent)="showProcedureDialog(false)"></procedure-viewer>
+</div>

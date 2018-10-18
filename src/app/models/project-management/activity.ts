@@ -39,6 +39,7 @@ export interface Activity extends Identifiable {
   visible: string,
 
   config?: any,
+  workflowObject?: any,
 }
 
 
@@ -65,7 +66,8 @@ export const Activity_Empty: Activity = {
 
   visible: '',
 
-  config: {}
+  config: {},
+  workflowObject: {}
 }
 
 
