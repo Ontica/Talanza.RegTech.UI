@@ -230,8 +230,8 @@ export class ActivityDesignerComponent extends AbstractForm implements OnInit, O
 
       activityType: config.activityType,
       executionMode: config.executionMode,
-      isMandatory: config.isMandatory,
-      isController: config.isController,
+      isMandatory: config.isMandatory ? 'true' : 'false',
+      isController: config.isController ? 'true' : 'false',
 
       dueOnTerm: config.dueOnTerm,
       dueOnTermUnit: config.dueOnTermUnit,

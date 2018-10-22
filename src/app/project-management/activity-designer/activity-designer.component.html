@@ -50,10 +50,11 @@
               <option value="Procedure">Trámite</option>
               <option value="Obligation">Obligación</option>
               <option value="Event">Evento</option>
+              <option value="Milestone">Hito</option>
               <option value="Internal">Actividad interna</option>
               <option value="External">Actividad externa</option>
               <option value="Decision">Decisión</option>
-              <!-- <option value="Milestone">Hito</option> -->
+              <option value="Section">Sección</option>
             </select>
           </td>
           <td class="text-align-right" style="width:100%">Forma de<br />ejecución:</td>
@@ -112,6 +113,7 @@
               <option value="BeforeFinish">Antes de concluir ...</option>
               <option value="AfterFinish">Después de concluir ...</option>
               <option value="After">Después de ...</option>
+              <option value="From">A partir de ...</option>
               <option value="NA">No aplica</option>
             </select>
           </td>
@@ -157,8 +159,7 @@
         <tr>
           <td>Entidad:</td>
           <td>
-            <select class="select-box" style="width:130px"
-                    (change)="onChangeFilter()" formControlName="entity">
+            <select class="select-box" style="width:130px" formControlName="entity">
               <option value="">( Seleccionar )</option>
               <option value="-1">No aplica</option>
               <option *ngFor="let entity of entities | async" [value]="entity.id">{{entity.shortName}}</option>
