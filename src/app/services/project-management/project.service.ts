@@ -183,7 +183,7 @@ export class ProjectService {
   }
 
 
-  createFromEvent(project: Project, data: { eventUID: string, targetDate: Date }) {
+  createFromEvent(project: Project, data: { eventUID: string, eventDate: Date }) {
     Assertion.assertValue(project, "project");
     Assertion.assertValue(data, "data");
 

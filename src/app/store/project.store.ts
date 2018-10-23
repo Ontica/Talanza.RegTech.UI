@@ -119,7 +119,7 @@ export class ProjectStore {
   }
 
 
-  createFromEvent(project: Project, data: { eventUID: string, targetDate: Date }) {
+  createFromEvent(project: Project, data: { eventUID: string, eventDate: Date }) {
     return this.projectService.createFromEvent(project, data)
                .toPromise()
                .then( x => {

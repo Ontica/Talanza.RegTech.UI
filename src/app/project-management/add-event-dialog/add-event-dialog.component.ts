@@ -80,7 +80,7 @@ export class AddEventDialogComponent implements OnInit {
 
       selectedEvent: new FormControl('', Validators.required),
 
-      targetDate: new FormControl('', Validators.required),
+      eventDate: new FormControl('', Validators.required),
 
     });
 
@@ -94,7 +94,8 @@ export class AddEventDialogComponent implements OnInit {
     return {
 
       eventUID: formModel.selectedEvent,
-      targetDate: formModel.targetDate,
+
+      eventDate: formModel.eventDate,
 
     }
   }
