@@ -22,6 +22,8 @@ import { ActivityInlineEditorComponent } from './activity-tree/activity-inline-e
 
 import { ActivityEditorComponent } from './activity-editor/activity-editor.component';
 import { ActivityDesignerComponent } from './activity-designer/activity-designer.component';
+import { ActivityModelFormComponent } from './activity-designer/activity-model-form/activity-model-form.component';
+
 
 import { AddEventDialogComponent } from './add-event-dialog/add-event-dialog.component';
 
@@ -65,6 +67,7 @@ import { OldProjectTreeComponent } from './old-project-tree/old-project-tree.com
   declarations: [
 
     ActivityDesignerComponent,
+    ActivityModelFormComponent,
 
     ActivityEditorComponent,
     ActivityInlineEditorComponent,

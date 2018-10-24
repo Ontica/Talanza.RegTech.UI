@@ -9,7 +9,7 @@ import { NgModule } from '@angular/core';
 
 import { MatButtonModule, MatDatepickerModule,
          MatDialogModule, MatFormFieldModule,
-         MatNativeDateModule } from '@angular/material';
+         MatNativeDateModule, MatTabsModule } from '@angular/material';
 
 @NgModule({
 
@@ -18,14 +18,16 @@ import { MatButtonModule, MatDatepickerModule,
     MatDatepickerModule,
     MatDialogModule,
     MatFormFieldModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatTabsModule
   ],
 
   exports: [
     MatButtonModule,
     MatDatepickerModule,
     MatDialogModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatTabsModule
   ],
 })
 export class AngularMaterialModule { }

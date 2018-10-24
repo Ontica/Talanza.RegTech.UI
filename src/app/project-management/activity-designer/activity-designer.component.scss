@@ -18,3 +18,12 @@ i.close-icon {
   font-size: 8pt;
   font-weight: 400;
 }
+
+.card {
+  height:98%;
+  @include card;
+}
+
+.mat-tab-group {
+  height:calc(100% - 80px);
+}
