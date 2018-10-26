@@ -15,6 +15,8 @@ import { ProjectModel } from '@app/store/project.store';
 import { Activity, Activity_Empty, ActivityOperation } from '@app/models/project-management';
 
 import { AddEventDialogComponent } from '../add-event-dialog/add-event-dialog.component';
+import { MoveActivityDialogComponent } from '../move-activity-dialog/move-activity-dialog.component';
+
 
 @Component({
   selector: 'activity-tree',
@@ -92,6 +94,28 @@ export class ActivityTreeComponent implements OnChanges {
 
   isActivitySelected(activity: Activity): boolean {
     return (activity.uid === this.selectedActivity.uid);
+  }
+
+
+  openCopyOrMoveActivityDialog(activity: Activity) {
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.height = '400px',
+    dialogConfig.width = '600px',
+    dialogConfig.data = activity;
+
+    var dialogRef = this.dialog.open(MoveActivityDialogComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe(
+        result => {
+        if (result) {
+          this.edited.emit(result as ActivityOperation);
+        }
+      }
+    );
+
   }
 
 

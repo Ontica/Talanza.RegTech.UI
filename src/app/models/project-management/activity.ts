@@ -72,8 +72,9 @@ export const Activity_Empty: Activity = {
 
 
 export interface ActivityOperation {
-  operation: 'createActivity' | 'moveActivity' | 'changeParent',
+  operation: 'changeParent' | 'copyToProject' | 'createActivity' | 'moveActivity' | 'moveToProject',
   activity: Activity | { name: string, position: number },
   newPosition?: number,
-  newParent?: Activity
+  newParent?: Activity,
+  targetProjectUID?: string
 }

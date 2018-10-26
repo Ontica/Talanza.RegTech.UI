@@ -23,6 +23,9 @@ import { Entity } from '@app/procedures/data-types/entity';
 
 enum Errors {
 
+  COPY_TO_PROJECT=
+  '[COPY_TO_PROJECT] Ocurrió un problema al intentar copiar la actividad.',
+
   DELETE_ACTIVITY =
   '[DELETE_ACTIVITY] Ocurrió un problema al intentar eliminar la actividad.',
 
@@ -37,6 +40,9 @@ enum Errors {
 
   MOVE_ACTIVITY =
   '[MOVE_ACTIVITY] Ocurrió un problema al intentar mover la actividad.',
+
+  MOVE_TO_PROJECT =
+  '[MOVE_TO_PROJECT] Ocurrió un problema al intentar mover la actividad a otro proyecto.',
 
   UPDATE_ACTIVITY =
   '[UPDATE_ACTIVITY] Ocurrió un problema al actualizar la actividad.',
@@ -170,6 +176,23 @@ export class ProjectService {
   }
 
 
+  copyToProject(targetProjectUID: string, activity: Activity): any {
+    Assertion.assertValue(targetProjectUID, "targetProjectUID");
+    Assertion.assertValue(activity, "activity");
+
+
+    const path = `v1/project-management/projects/${activity.project.uid}/activities/${activity.uid}/copyTo/${targetProjectUID}`;
+
+    const body = {
+
+    };
+
+    return this.core.http.post<Activity>(path, body)
+                         .pipe(
+                            catchError((e) => this.core.http.throw(e, Errors.COPY_TO_PROJECT))
+                         );
+  }
+
 
   deleteActivity(activity: Activity): Observable<void> {
     Assertion.assertValue(activity, "activity");
@@ -225,6 +248,24 @@ export class ProjectService {
     return this.core.http.put<Activity>(path, body)
                          .pipe(
                             catchError((e) => this.core.http.throw(e, Errors.MOVE_ACTIVITY))
+                         );
+  }
+
+
+  moveToProject(targetProjectUID: string, activity: Activity): any {
+    Assertion.assertValue(targetProjectUID, "targetProjectUID");
+    Assertion.assertValue(activity, "activity");
+
+
+    const path = `v1/project-management/projects/${activity.project.uid}/activities/${activity.uid}/moveTo/${targetProjectUID}`;
+
+    const body = {
+
+    };
+
+    return this.core.http.post<Activity>(path, body)
+                         .pipe(
+                            catchError((e) => this.core.http.throw(e, Errors.MOVE_TO_PROJECT))
                          );
   }
 

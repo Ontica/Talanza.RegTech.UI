@@ -11,10 +11,10 @@
     </div>
     <div class="list-view-header-options">
       <button *ngIf="!templateDesignerMode" type="button" class="btn disabled"
-              (click)="openAddEventDialog()"><i class="fa fa-plus"></i> Agregar obligaciones</button>
+              (click)="openAddEventDialog()">Agregar obligaciones</button>
       &nbsp; &nbsp;
       <button type="button" class="btn-action"
-              (click)="showInitialActivityInlineEditor()"><i class="fa fa-plus"></i> Agregar actividad</button>
+              (click)="showInitialActivityInlineEditor()">{{ templateDesignerMode ? 'Agregar obligación' : 'Agregar actividad'}}</button>
     </div>
   </div>
 
@@ -86,6 +86,10 @@
               <div class="column expand" style="white-space:nowrap">F. Máxima: {{activity.dueDate | date:'dd/LLL/yyyy'}}</div>
             </div>
 
+          </div>
+
+          <div *ngIf="templateDesignerMode" class="activity-menu right-align">
+            <i class="fa fa-ellipsis-v ghost-icon" aria-hidden="true" (click)="openCopyOrMoveActivityDialog(activity)"></i>
           </div>
 
           <div *ngIf="!templateDesignerMode" class="activity-menu">

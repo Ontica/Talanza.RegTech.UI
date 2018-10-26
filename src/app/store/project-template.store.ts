@@ -86,6 +86,17 @@ export class ProjectTemplateStore {
   }
 
 
+  copyToProject(targetProjectUID: string, activity: Activity): Promise<Activity> {
+    return this.projectService.copyToProject(targetProjectUID, activity)
+               .toPromise()
+               .then( x => {
+                  this.updateSelectedTemplate(activity.project);
+                  Object.assign(activity, x);
+
+                  return activity;
+               });
+  }
+
   changeParent(activity: Activity, newParent: Activity): Promise<Activity> {
     return this.projectService.changeParent(activity, newParent)
                .toPromise()
@@ -123,6 +134,18 @@ export class ProjectTemplateStore {
 
   moveActivity(activity: Activity, newPosition: number): Promise<Activity> {
     return this.projectService.moveActivity(activity, newPosition)
+               .toPromise()
+               .then( x => {
+                  this.updateSelectedTemplate(activity.project);
+                  Object.assign(activity, x);
+
+                  return activity;
+               });
+  }
+
+
+  moveToProject(targetProjectUID: string, activity: Activity): Promise<Activity> {
+    return this.projectService.moveToProject(targetProjectUID, activity)
                .toPromise()
                .then( x => {
                   this.updateSelectedTemplate(activity.project);

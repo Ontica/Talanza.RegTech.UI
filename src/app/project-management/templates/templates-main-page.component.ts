@@ -50,30 +50,40 @@ export class TemplatesMainPageComponent implements OnInit {
   onActivityTreeEdited(event: ActivityOperation) {
     switch (event.operation) {
 
-      case 'createActivity':
+      case 'copyToProject':
+        this.store.copyToProject(event.targetProjectUID, event.activity as Activity)
+                  .then( () => this.displayEditor = false )
+                  .catch( response => console.log(response.error.message) );
+        return;
 
+
+      case 'createActivity':
         this.store.insertActivity(this.selectedTemplate.project, event.activity)
                   .then( x => this.selectedActivity = x )
                   .catch( response => console.log(response.error.message) );
-
         return;
+
 
       case 'moveActivity':
-
         this.store.moveActivity(event.activity as Activity, event.newPosition)
                   .catch( response => console.log(response.error.message) );
-
         return;
+
+
+      case 'moveToProject':
+        this.store.moveToProject(event.targetProjectUID, event.activity as Activity)
+                  .then( () => this.displayEditor = false )
+                  .catch( response => console.log(response.error.message) );
+        return;
+
 
       case 'changeParent':
-
         this.store.changeParent(event.activity as Activity, event.newParent)
                   .catch( response => console.log(response.error.message) );
-
         return;
 
-      default:
 
+      default:
         console.log('Unhandled operation name', event.operation);
 
     }

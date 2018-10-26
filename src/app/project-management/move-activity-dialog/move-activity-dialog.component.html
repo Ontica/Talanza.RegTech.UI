@@ -1,0 +1,41 @@
+<h4 mat-dialog-title>Copiar o mover actividad</h4>
+<form #form="ngForm">
+
+  <mat-dialog-content>
+
+    Actividad seleccionada:
+    <br>
+    <b>{{selectedActivity.name}}</b>
+    <br><br>
+
+    Copiar o mover esta actividad al proyecto:
+    <select id="targetProject" name="targetProject" [(ngModel)]="targetProjectUID" required
+            class="select-box" style="width:90%">
+      <option value="">( Proyectos )</option>
+      <option *ngFor="let project of templateStore.templates | async" [value]="project.uid">{{project.name}}</option>
+    </select>
+
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+
+  </mat-dialog-content>
+
+  <mat-dialog-actions>
+    <button mat-button (click)="close()">Cerrar</button>
+
+    &nbsp; &nbsp; &nbsp; &nbsp;
+    &nbsp; &nbsp; &nbsp; &nbsp;
+    <button mat-stroked-button color="primary"
+            [disabled]="!form.valid || targetProjectUID === selectedActivity.project.uid"
+            (click)="moveActivity()">Mover</button>
+    &nbsp; &nbsp; &nbsp;
+    <button mat-stroked-button color="primary"
+            [disabled]="!form.valid" (click)="copyActivity()">Copiar</button>
+
+  </mat-dialog-actions>
+
+</form>

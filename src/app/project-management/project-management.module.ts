@@ -26,6 +26,8 @@ import { ActivityModelFormComponent } from './activity-designer/activity-model-f
 
 
 import { AddEventDialogComponent } from './add-event-dialog/add-event-dialog.component';
+import { MoveActivityDialogComponent } from './move-activity-dialog/move-activity-dialog.component';
+
 
 import { GanttComponent } from './gantt/gantt.component';
 import { ProjectManagementRoutingModule } from './project-management-routing.module';
@@ -45,6 +47,7 @@ import { ProjectModelSelectorComponent } from './create-activity-wizard/steps/pr
 import { CloseActivityComponent } from './old-editor/tabs/close-activity.component';
 import { OldActivityEditorComponent } from './old-editor/old-activity-editor.component';
 import { OldProjectTreeComponent } from './old-project-tree/old-project-tree.component';
+
 
 /**
  * Do not specify providers for modules that might be imported by a lazy loaded module.
@@ -74,6 +77,7 @@ import { OldProjectTreeComponent } from './old-project-tree/old-project-tree.com
     ActivityTreeComponent,
 
     AddEventDialogComponent,
+    MoveActivityDialogComponent,
 
     GanttComponent,
     ProjectsFilterComponent,
@@ -102,7 +106,10 @@ import { OldProjectTreeComponent } from './old-project-tree/old-project-tree.com
     OldProjectTreeComponent
   ],
 
-  entryComponents: [AddEventDialogComponent]
+  entryComponents: [
+    AddEventDialogComponent,
+    MoveActivityDialogComponent
+  ]
 
 })
 export class ProjectManagementModule { }
