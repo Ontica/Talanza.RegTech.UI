@@ -1,0 +1,46 @@
+@import "../../../styles/general-styles";
+@import "../../../styles/form";
+
+
+.mat-dialog-container {
+  //padding: 8px !important;
+  margin: 2px;
+}
+
+.mat-dialog-title {
+  // font-family: $font-family;
+  // font-size: $font-size-base;
+  // font-weight: $font-weight-base;
+
+  font: $control-font;
+  color: $dark-blue;
+  font-size: 12pt;
+  font-weight: 600;
+
+  min-height: 26px;
+
+  border-bottom: 1px solid $dark-red;
+}
+
+.mat-dialog-content {
+  font-size: 10pt;
+  color: $dark-blue;
+  font-weight: 400;
+}
+
+.mat-dialog-actions {
+  justify-content: flex-end;
+  vertical-align: bottom;
+  margin-top: 16px;
+
+  button {
+    margin-left: 16px;
+  }
+}
+
+
+button {
+  font: $control-font;
+  line-height: 32px;
+  font-size: 10pt;
+}

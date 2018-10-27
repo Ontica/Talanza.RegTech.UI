@@ -1,0 +1,24 @@
+/**
+ * @license
+ * Copyright (c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
+ *
+ * See LICENSE.txt in the project root for complete license information.
+ */
+
+import { MatDialogConfig } from "@angular/material";
+
+
+export type MessageBoxType = 'Accept' | 'AcceptCancel' | 'DeleteCancel';
+
+
+export interface MessageBoxConfig extends MatDialogConfig {
+
+}
+
+
+export interface MessageBoxData {
+  messageBoxType: MessageBoxType,
+  message: string,
+  title: string,
+  mainButtonText: string
+}
