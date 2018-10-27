@@ -25,7 +25,7 @@ import { Activity, Activity_Empty } from '@app/models/project-management';
 import { Procedure } from '@app/procedures/data-types/procedure';
 import { Entity } from '@app/procedures/data-types/entity';
 
-
+import { MessageBoxService as MsgSrv } from '@app/shared/message-box/message.box.service';
 
 enum FormMessages {
 
@@ -57,6 +57,7 @@ export class ActivityModelFormComponent extends AbstractForm implements OnInit, 
   procedures: Observable<Procedure[]> = of([]);
 
   constructor(spinner: SpinnerService,
+              private messageService: MsgSrv,
               private messageBox: MessageBoxService,
               private templateStore: ProjectTemplateStore) {
     super();
@@ -88,8 +89,18 @@ export class ActivityModelFormComponent extends AbstractForm implements OnInit, 
   }
 
   onDelete() {
-    this.setCommand('delete');
-    this.onSubmit({ skipFormValidation: true });
+    const msg = `Esta operación eliminará la obligación ` +
+                `<strong>${this.activity.name}</strong> de este árbol de diseño de obligaciones.<br/><br/>` +
+                `¿Elimino la obligación de este diseño?`;
+
+    this.messageService.confirm(msg, "Eliminar obligación", 'DeleteCancel', 'Eliminar esta obligación').subscribe(
+      result => {
+        if (result) {
+          this.setCommand('delete');
+          this.onSubmit({ skipFormValidation: true });
+        }
+      }
+    );
   }
 
   onReset() {
