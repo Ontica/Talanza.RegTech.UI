@@ -13,12 +13,12 @@ import { Component, ChangeDetectionStrategy,
 import { ProjectModel, ProjectStore } from '@app/store/project.store';
 
 import "dhtmlx-gantt";
+
 declare let gantt: any;
 
 import { Activity, ViewConfig, GanttTask } from '@app/models/project-management';
 
 import { GanttService } from '@app/services/project-management';
-
 
 @Component({
   selector: "gantt",
@@ -87,11 +87,12 @@ export class GanttComponent implements OnInit {
         return;
       }
 
-      this.selectedTask = this.ganttData.find( x => x.id == id );
+      this.selectedTask = this.ganttData.find( x => x.id === +id );
 
       const activity = this.store.getActivity(this.selectedTask.uid);
 
       return this.activitySelected.emit(activity);
+
     });
 
   }
@@ -101,11 +102,17 @@ export class GanttComponent implements OnInit {
       return;
     }
 
+    const links = [
+      { id:1, source:103271, target:103272, type:"1"},                       //link's id = 1
+      { id:2, source:103272, target:103273, type:"0"},                       //link's id = 2
+      { id:3, source:103273, target:103274, type:"0"}                        //link's id = 3
+    ];
+
     this.ganttService.getActivitiesTree(this.project.project)
                      .subscribe( data => {
                         this.ganttData = data;
                         gantt.clearAll();
-                        gantt.parse({ data });
+                        gantt.parse({ data, links });
                       });
   }
 
@@ -120,9 +127,40 @@ export class GanttComponent implements OnInit {
 
 
   private setConfiguration() {
+
+    gantt.config.layout = {
+      css: "gantt_container",
+      rows:[
+          {
+             cols: [
+              {
+                // the default grid view
+                view: "grid",
+                scrollX:"scrollHor",
+                scrollY:"scrollVer"
+              },
+              { resizer: true, width: 1 },
+              {
+                // the default timeline view
+                view: "timeline",
+                scrollX:"scrollHor",
+                scrollY:"scrollVer"
+              },
+              {
+                view: "scrollbar",
+                id:"scrollVer"
+              }
+          ]},
+          {
+              view: "scrollbar",
+              id:"scrollHor"
+          }
+      ]
+    };
+
     gantt.config.xml_date = "%Y-%m-%d %H:%i";
 
-    gantt.config.keep_grid_width = false;
+    gantt.config.keep_grid_width = true;
     gantt.config.show_progress = true;
     gantt.config.drag_progress = false;
     gantt.config.open_tree_initially = true;
@@ -134,11 +172,9 @@ export class GanttComponent implements OnInit {
     gantt.config.readonly = true;
     gantt.config.preserve_scroll = true;
 
-    gantt.config.columns = [
-      {name:"text", label:"Actividad", tree: true, resize: true, width:'480' }
-    ];
-
     gantt.config.scale_unit = this.config ? this.config.timeScaleUnit : 'quarter';
+    gantt.config.date_scale = "%M %Y";
+
   }
 
 }
