@@ -104,7 +104,7 @@ export class ActivityFilter {
 
 export function DefaultViewConfig(): ViewConfig {
   return {
-    viewType: 'activity-tree',
+    viewType: 'treeView',
     timeScaleUnit: 'quarter',
   };
 }

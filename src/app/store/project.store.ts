@@ -10,7 +10,8 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { List } from 'immutable';
 
 import { Contact, Empty } from '@app/core/data-types';
-import { Activity, Contract, Project, Stage } from '@app/models/project-management';
+import { Activity, Contract, Project, Stage,
+         ViewConfig, DefaultViewConfig } from '@app/models/project-management';
 import { ProjectService } from '@app/services/project-management';
 import { ColoredTag } from '@app/core/ui-services';
 import { Procedure } from '@app/procedures/data-types/procedure';
@@ -28,6 +29,8 @@ export class ProjectModel {
 export class ProjectStore {
 
   private _selectedProject: BehaviorSubject<ProjectModel> = new BehaviorSubject(new ProjectModel());
+
+  private _selectedView: BehaviorSubject<ViewConfig> = new BehaviorSubject(DefaultViewConfig());
 
   private _projects: BehaviorSubject<List<Project>> = new BehaviorSubject(List([]));
 
@@ -50,10 +53,18 @@ export class ProjectStore {
   }
 
 
+  selectedView(): Observable<ViewConfig> {
+    return this._selectedView.asObservable();
+  }
+
+
   selectProject(project: Project) {
     this.updateSelectedProject(project);
   }
 
+  selectView(viewConfig: ViewConfig) {
+    this._selectedView.next(viewConfig);
+  }
 
   get projects(): Observable<List<Project>> {
     return this._projects.asObservable();

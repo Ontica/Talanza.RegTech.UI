@@ -11,10 +11,11 @@ import { Component, EventEmitter,
 import { MenuItem } from '../nav-menu/nav-menu.component';
 
 import { ProjectStore } from '@app/store/project.store';
+import { Project, ViewConfig, DefaultViewConfig } from '@app/models/project-management';
+
 import { ProjectTemplateStore } from '@app/store/project-template.store';
 
-import { Project } from '@app/models/project-management';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+export type ProjectViewType = 'Tree' | 'Gantt' | 'Timeline';
 
 
 @Component({
@@ -31,6 +32,7 @@ export class NavigationHeaderComponent implements OnChanges {
 
   selectedProject: Project;
   selectedTemplate: Project;
+  viewConfig: ViewConfig = DefaultViewConfig();
 
   @Output() action = new EventEmitter<string>();
 
@@ -40,8 +42,8 @@ export class NavigationHeaderComponent implements OnChanges {
 
   @Input() secondaryMenuItems: MenuItem[];
 
-  constructor(private projectStore: ProjectStore,
-              private templateStore: ProjectTemplateStore) {}
+  constructor(protected projectStore: ProjectStore,
+              protected templateStore: ProjectTemplateStore) {}
 
 
   ngOnChanges() {
@@ -51,6 +53,11 @@ export class NavigationHeaderComponent implements OnChanges {
 
   onClickMenu(menuItem: MenuItem) {
     this.action.emit(menuItem.action);
+  }
+
+
+  onChangeView() {
+    this.projectStore.selectView(this.viewConfig);
   }
 
 
@@ -67,6 +74,18 @@ export class NavigationHeaderComponent implements OnChanges {
     this.templateStore.selectTemplate(this.selectedTemplate);
   }
 
+  cleanProjectActivities() {
+      // showYesNo
+      // executeIfYes
+  }
+
+
+  openCreateProjectTemplateDialog() {
+      //open dialog (ask for name)
+  }
+
+
+  // private methods
 
   private setLayout() {
     switch (this.layoutType) {

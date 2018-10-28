@@ -81,7 +81,7 @@ export class ProjectsMainPageComponent implements OnInit {
   ngOnInit() {
     this.mainMenuItems = mainMenu;
 
-    this.store.selectedProject().subscribe (
+    this.store.selectedProject().subscribe(
       x => {
         if (this.selectedProject &&
             this.selectedProject.project.uid !== x.project.uid) {
@@ -90,6 +90,10 @@ export class ProjectsMainPageComponent implements OnInit {
         }
         this.selectedProject = x;
       }
+    );
+
+    this.store.selectedView().subscribe(
+      x => this.viewConfig = x
     );
   }
 

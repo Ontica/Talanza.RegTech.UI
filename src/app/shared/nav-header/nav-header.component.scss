@@ -58,3 +58,18 @@ $margin-size: 8px;
 .menu {
   //margin-left: 16px;
 }
+
+a {
+  font-size: 10pt;
+  color: $gray;
+}
+
+a:hover {
+  color: $white;
+  cursor: pointer;
+}
+
+.label {
+  color: $white;
+  font-size: 10pt;
+}

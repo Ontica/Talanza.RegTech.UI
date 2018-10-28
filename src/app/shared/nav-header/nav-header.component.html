@@ -25,6 +25,30 @@
               [value]="project.uid">{{project.name}}</option>
     </select>
 
+    <span *ngIf="layoutType === 'Projects'">
+      &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+      <span class="label">Ordenar por: </span>
+      <select #cboView
+            class="select-box" style="width:176px;"
+            (change)="onChangeView()" [(ngModel)]="viewConfig.viewType">
+        <option value="treeView">Árbol de actividades</option>
+        <!-- <option value="ganttView">Diagrama Gantt</option> -->
+        <option value="dueDate">Fecha máxima de entrega</option>
+        <option value="targetDate">Fecha objetivo</option>
+        <option value="startDate">Fecha de inicio</option>
+        <option value="responsible">Responsables</option>
+      </select>
+      <!-- Escala:
+      <select class="select-box" style="width:98px"
+            (change)="onChangeView()" [(ngModel)]="viewConfig.timeScaleUnit">
+          <option value="year">Anual</option>
+          <option value="quarter">Trimestral</option>
+          <option value="month">Mensual</option>
+          <option value="week">Semanal</option>
+        </select> -->
+    </span>
+
+
     <select *ngIf="layoutType === 'ProjectsTemplates'" #cboTemplates
             class="select-box" style="width:360px;"
             (change)="onSelectTemplate(cboTemplates.value)">
@@ -32,6 +56,11 @@
       <option *ngFor="let template of templateStore.templates | async"
               [value]="template.uid">{{template.name}}</option>
     </select>
+
+    <!-- <span *ngIf="layoutType === 'ProjectsTemplates'">
+      &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+      <a (click)="openCreateProjectTemplateDialog()">Crear un nuevo diseño</a>
+    </span> -->
 
   </div>
 
