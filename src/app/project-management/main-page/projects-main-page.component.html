@@ -13,12 +13,12 @@
                     (activitySelected)="showEditor($event)">
     </activity-tree>
 
-    <gantt *ngSwitchCase="'ganttView'"
+    <dhtmlx-gantt *ngSwitchCase="'ganttView'"
             [project]="selectedProject"
             [config]="viewConfig"
             [reset]="toggleEditor"
             (activitySelected)="showEditor($event)">
-    </gantt>
+    </dhtmlx-gantt>
 
 
     <activity-timeline *ngSwitchCase="'dueDate'"

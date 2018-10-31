@@ -21,13 +21,13 @@ import { Activity, ViewConfig, GanttTask } from '@app/models/project-management'
 import { GanttService } from '@app/services/project-management';
 
 @Component({
-  selector: "gantt",
-  templateUrl: './gantt.component.html',
-  styleUrls: ['./gantt.component.scss'],
+  selector: "dhtmlx-gantt",
+  templateUrl: './dhtmlx-gantt.component.html',
+  styleUrls: ['./dhtmlx-gantt.component.scss'],
   providers: [GanttService],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class GanttComponent implements OnInit {
+export class DhtmlxGanttComponent implements OnInit {
 
   @Input()
   get project(): ProjectModel { return this._project };

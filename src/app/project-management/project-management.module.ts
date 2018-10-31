@@ -31,30 +31,13 @@ import { ActivityModelFormComponent } from './activity-designer/activity-model-f
 import { AddEventDialogComponent } from './add-event-dialog/add-event-dialog.component';
 import { MoveActivityDialogComponent } from './move-activity-dialog/move-activity-dialog.component';
 
-
-import { GanttComponent } from './gantt/gantt.component';
 import { ProjectManagementRoutingModule } from './project-management-routing.module';
-import { ProjectsFilterComponent } from './main-page/projects-filter.component';
 
 import { ProjectsMainPageComponent } from './main-page/projects-main-page.component';
 import { TemplatesMainPageComponent } from './templates/templates-main-page.component';
 
-// Old version components
+import { DhtmlxGanttComponent } from './dhtmlx-gantt/dhtmlx-gantt.component';
 
-import { ActivityTypeSelectorComponent } from './create-activity-wizard/steps/activity-type-selector.component';
-import { CreateActivityMenuComponent } from './create-activity-wizard/create-activity-menu.component';
-import { CreateActivityWizardController } from './create-activity-wizard/steps/wizard-controller.component';
-import { ProjectModelSelectorComponent } from './create-activity-wizard/steps/project-model-selector.component';
-
-
-import { CloseActivityComponent } from './old-editor/tabs/close-activity.component';
-import { OldActivityEditorComponent } from './old-editor/old-activity-editor.component';
-import { OldProjectTreeComponent } from './old-project-tree/old-project-tree.component';
-
-
-/**
- * Do not specify providers for modules that might be imported by a lazy loaded module.
- */
 @NgModule({
 
   imports: [
@@ -85,31 +68,16 @@ import { OldProjectTreeComponent } from './old-project-tree/old-project-tree.com
     AddEventDialogComponent,
     MoveActivityDialogComponent,
 
-    GanttComponent,
-    ProjectsFilterComponent,
-
     ProjectsMainPageComponent,
     TemplatesMainPageComponent,
 
-    /* Old version components */
-
-    ActivityTypeSelectorComponent,
-    CloseActivityComponent,
-    CreateActivityMenuComponent,
-    CreateActivityWizardController,
-
-    OldProjectTreeComponent,
-    OldActivityEditorComponent,
-    ProjectModelSelectorComponent
+    DhtmlxGanttComponent,
   ],
 
   exports: [
-    GanttComponent,
+    DhtmlxGanttComponent,
     ProjectsMainPageComponent,
-    TemplatesMainPageComponent,
-
-    OldActivityEditorComponent,
-    OldProjectTreeComponent
+    TemplatesMainPageComponent
   ],
 
   entryComponents: [
