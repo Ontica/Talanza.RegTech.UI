@@ -1,10 +1,6 @@
-
-<form class="form-container" autocomplete="off"
-      [class.submitted]="submitted" [formGroup]="form" (ngSubmit)="onSubmit()"
-      (keydown)="keyboardHandler($event)">
+<div class="card">
 
   <div class="form-header">
-
     <div class="form-title">
       {{value('name')}}
       <div class="hint">Actividad en {{activity.project.name}}</div>
@@ -12,152 +8,149 @@
     <div class="header-options">
       <i class="fa fa-times close-icon" aria-hidden="true" (click)="onClose()"></i>
     </div>
-
   </div>
 
-  <div class="form-commands"></div>
+  <div class="form-body">
 
-   <div class="form-body">
+    <form class="form-container" autocomplete="off"
+          [class.submitted]="submitted" [formGroup]="form" (ngSubmit)="onSubmit()"
+          (keydown)="keyboardHandler($event)">
 
-    <fieldset [disabled]="disabled"> <!-- ToDo: remove this directive when tags control can be disabled -->
+      <fieldset>
+
+        <table class="form-section">
+          <tr>
+            <td class="form-section-title" colspan="2">Información general de la obligación o actividad</td>
+          </tr>
+          <tr>
+            <td>Nombre:</td>
+            <td>
+              <input type="text" class="text-box" formControlName="name">
+            </td>
+          </tr>
+          <tr>
+            <td>Observaciones:</td>
+            <td>
+              <textarea class="text-area" rows="5" cols="25" formControlName="notes"></textarea>
+            </td>
+          </tr>
+        </table>
+
+        <!-- <table class="form-section">
+              <tr>
+                <td class="form-section-title" colspan="3">Etiquetas</td>
+              </tr>
+              <tr>
+                <td>Etiquetas:</td>
+                <td style="width:100%">
+                  <autocomplete-control style='width:200px'
+                                        [tags]="tags" [config]="{valueField: 'name'}"
+                                        (selected)="onSelectedTags($event)">
+                  </autocomplete-control>
+                  <br>
+                  Parent: {{activity.parent.uid}}<br>
+                  Position: {{activity.position}}<br>
+                  <chips [items]="selectedTags"></chips>
+                </td>
+              </tr>
+            </table> -->
+
+        <table class="form-section">
+          <tr>
+            <td class="form-section-title" colspan="4">Responsable y estado de la obligación o actividad</td>
+          </tr>
+          <tr>
+            <td>Responsable:</td>
+            <td style="width:100%">
+              <select class="select-box" formControlName="responsibleUID">
+                <option value="Empty">No asignada</option>
+                <option *ngFor="let responsible of responsibles | async" [value]="responsible.uid">{{responsible.name}}</option>
+              </select>
+            </td>
+            <td>Estado:</td>
+            <td>
+              <select class="select-box" style="width:130px" formControlName="ragStatus">
+                <option value="NoColor">No determinado</option>
+                <option value="Green">Verde</option>
+                <option value="Amber">Ambar</option>
+                <option value="Red">Rojo</option>
+              </select>
+            </td>
+          </tr>
+        </table>
+
+        <table class="form-section">
+          <tr>
+            <td class="form-section-title" colspan="5">Fecha objetivo y fecha máxima de entrega</td>
+          </tr>
+          <tr>
+            <td>Fecha objetivo:</td>
+            <td>
+              <calendar-control formControlName="targetDate"></calendar-control>
+            </td>
+            <td class="text-align-right" style="width:100%;white-space:normal">Fecha máxima de entrega:</td>
+            <td>
+              <calendar-control formControlName="dueDate"></calendar-control>
+            </td>
+          </tr>
+        </table>
+
+        <table *ngIf="activity.workflowObject.config && +activity.workflowObject.config.procedure !== -1" class="form-section">
+          <tr>
+            <td class="form-section-title" colspan="6">Información regulatoria</td>
+          </tr>
+          <tr *ngIf="activity.workflowObject.config.procedure">
+            <td>Trámite asociado:</td>
+            <td style="width:30%">
+              <a (click)="showProcedureDialog(true)"><i class="fa fa-university" aria-hidden="true"></i></a>
+            </td>
+            <td>Preguntas frecuentes:</td>
+            <td style="width:30%">
+              Ninguna
+            </td>
+            <td>Flujograma:</td>
+            <td style="width:30%">
+              No disponible
+            </td>
+          </tr>
+          <!-- <tr>
+                <td>Diseño regulatorio asociado:</td>
+                <td>
+                  <a (click)="showProcedureDialog(true)"><i class="fa fa-bookmark" aria-hidden="true"></i></a>
+                </td>
+              </tr> -->
+        </table>
+
+      </fieldset>
+
+    <div class="form-errors" *ngIf="showExceptionMsg">{{exceptionMsg}}</div>
+
+    <div class="form-footer">
 
       <table class="form-section">
         <tr>
-          <td class="form-section-title" colspan="2">Información general de la obligación o actividad</td>
-        </tr>
-        <tr>
-          <td>Nombre:</td>
           <td>
-            <input type="text" class="text-box" formControlName="name">
+            <button *ngIf="!disabled" type="submit" class="btn-warning" (click)="setCommand('delete')">Eliminar</button>
           </td>
-        </tr>
-        <tr>
-          <td>Observaciones:</td>
-          <td>
-            <textarea class="text-area" rows="5" cols="25" formControlName="notes"></textarea>
+          <td class="text-align-right">
+
+            <button *ngIf="!disabled" type="submit" class="btn-action btn-margin-right" (click)="setCommand('update')">Guardar
+              los cambios</button>
+
+            <button *ngIf="disabled" type="button" class="btn-action right" (click)="enable()">Editar</button>
+
+            <button *ngIf="!disabled" type="button" class="btn right" (click)="onReset()">Cancelar edición</button>
+
           </td>
         </tr>
       </table>
 
-      <!-- <table class="form-section">
-        <tr>
-          <td class="form-section-title" colspan="3">Etiquetas</td>
-        </tr>
-        <tr>
-          <td>Etiquetas:</td>
-          <td style="width:100%">
-            <autocomplete-control style='width:200px'
-                                  [tags]="tags" [config]="{valueField: 'name'}"
-                                  (selected)="onSelectedTags($event)">
-            </autocomplete-control>
-            <br>
-            Parent: {{activity.parent.uid}}<br>
-            Position: {{activity.position}}<br>
-            <chips [items]="selectedTags"></chips>
-          </td>
-        </tr>
-      </table> -->
+    </div>
 
-      <table class="form-section">
-        <tr>
-          <td class="form-section-title" colspan="4">Responsable y estado de la obligación o actividad</td>
-        </tr>
-        <tr>
-          <td>Responsable:</td>
-          <td style="width:100%">
-            <select class="select-box"
-                    formControlName="responsibleUID">
-              <option value="Empty">No asignada</option>
-              <option *ngFor="let responsible of responsibles | async"
-                      [value]="responsible.uid">{{responsible.name}}</option>
-            </select>
-          </td>
-          <td>Estado:</td>
-          <td>
-            <select class="select-box" style="width:130px" formControlName="ragStatus">
-              <option value="NoColor">No determinado</option>
-              <option value="Green">Verde</option>
-              <option value="Amber">Ambar</option>
-              <option value="Red">Rojo</option>
-            </select>
-          </td>
-        </tr>
-      </table>
+  </form>
+</div>
 
-      <table class="form-section">
-        <tr>
-          <td class="form-section-title" colspan="5">Fecha objetivo y fecha máxima de entrega</td>
-        </tr>
-        <tr>
-          <td>Fecha objetivo:</td>
-          <td>
-            <calendar-control formControlName="targetDate"></calendar-control>
-          </td>
-          <td class="text-align-right"
-              style="width:100%;white-space:normal">Fecha máxima de entrega:</td>
-          <td>
-            <calendar-control formControlName="dueDate"></calendar-control>
-          </td>
-        </tr>
-      </table>
-
-      <table *ngIf="activity.workflowObject.config && +activity.workflowObject.config.procedure !== -1" class="form-section">
-        <tr>
-          <td class="form-section-title" colspan="6">Información regulatoria</td>
-        </tr>
-        <tr *ngIf="activity.workflowObject.config.procedure">
-          <td>Trámite asociado:</td>
-          <td style="width:30%">
-            <a (click)="showProcedureDialog(true)"><i class="fa fa-university" aria-hidden="true"></i></a>
-          </td>
-          <td>Preguntas frecuentes:</td>
-          <td style="width:30%">
-            Ninguna
-          </td>
-          <td>Flujograma:</td>
-          <td style="width:30%">
-            No disponible
-          </td>
-        </tr>
-        <!-- <tr>
-          <td>Diseño regulatorio asociado:</td>
-          <td>
-            <a (click)="showProcedureDialog(true)"><i class="fa fa-bookmark" aria-hidden="true"></i></a>
-          </td>
-        </tr> -->
-      </table>
-
-    </fieldset>
-   </div>     <!-- form-body-->
-
-  <div class="form-errors" *ngIf="showExceptionMsg" >{{exceptionMsg}}</div>
-
-  <div class="form-footer">
-
-    <table class="form-section">
-      <tr>
-        <td>
-          <button *ngIf="!disabled" type="submit" class="btn-warning"
-                  (click)="setCommand('delete')">Eliminar</button>
-        </td>
-        <td class="text-align-right">
-
-          <button *ngIf="!disabled" type="submit" class="btn-action btn-margin-right"
-                  (click)="setCommand('update')">Guardar los cambios</button>
-
-          <button *ngIf="disabled" type="button" class="btn-action right"
-                  (click)="enable()">Editar</button>
-
-          <button *ngIf="!disabled" type="button" class="btn right"
-                  (click)="onReset()">Cancelar edición</button>
-
-        </td>
-      </tr>
-    </table>
-
-  </div>
-
-</form>
+</div>
 
 <div class="procedure-info" *ngIf="activity.workflowObject && procedureDialogVisible">
   <procedure-viewer [procedureUID]="activity.workflowObject.config.procedure" (onCloseEvent)="showProcedureDialog(false)"></procedure-viewer>

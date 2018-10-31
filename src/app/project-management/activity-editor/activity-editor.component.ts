@@ -73,7 +73,7 @@ export class ActivityEditorComponent extends AbstractForm implements OnInit, OnC
       this.activity = Activity_Empty;
     }
 
-    this.loadSelectedTags();
+    //this.loadSelectedTags();
 
     this.onReset();
 
@@ -82,7 +82,7 @@ export class ActivityEditorComponent extends AbstractForm implements OnInit, OnC
 
 
   ngOnInit() {
-    this.loadTags();
+    //this.loadTags();
 
     this.loadResponsibles();
   }
@@ -172,7 +172,7 @@ export class ActivityEditorComponent extends AbstractForm implements OnInit, OnC
     const data = {
       name: formModel.name,
       notes: formModel.notes,
-      tags: this.getSelectedTags(),
+      //tags: this.getSelectedTags(),
       responsibleUID: formModel.responsibleUID,
       ragStatus: formModel.ragStatus,
 
@@ -195,7 +195,7 @@ export class ActivityEditorComponent extends AbstractForm implements OnInit, OnC
       dueDate: this.activity.dueDate,
     });
 
-    this.setActivityTags();
+    //this.setActivityTags();
     this.cleanExceptions();
   }
 
