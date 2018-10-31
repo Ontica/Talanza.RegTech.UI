@@ -20,6 +20,9 @@ import { ControlsModule } from '../controls/controls.module';
 import { ActivityTreeComponent } from './activity-tree/activity-tree.component';
 import { ActivityInlineEditorComponent } from './activity-tree/activity-inline-editor.component';
 
+import { ActivityTimelineComponent } from './activity-timeline/activity-timeline.component';
+import { GroupActivitiesByPipe } from './activity-timeline/group-activities-by.pipe';
+
 import { ActivityEditorComponent } from './activity-editor/activity-editor.component';
 import { ActivityDesignerComponent } from './activity-designer/activity-designer.component';
 import { ActivityModelFormComponent } from './activity-designer/activity-model-form/activity-model-form.component';
@@ -75,6 +78,9 @@ import { OldProjectTreeComponent } from './old-project-tree/old-project-tree.com
     ActivityEditorComponent,
     ActivityInlineEditorComponent,
     ActivityTreeComponent,
+
+    ActivityTimelineComponent,
+    GroupActivitiesByPipe,
 
     AddEventDialogComponent,
     MoveActivityDialogComponent,

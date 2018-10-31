@@ -1,0 +1,73 @@
+@import "../../../styles/responsive";
+@import "../../../styles/list-view";
+
+.activity-row {
+  background-color: $grid-even-background-color;
+  border-top: 1px $light-gray solid;
+  float: left;
+  min-height: 42px;
+  width: 100%;
+  margin: 4px;
+}
+
+.activity-row:hover {
+  background-color: $grid-hover-background-color;
+
+  .ghost-icon {
+    color: $dark-blue;
+  }
+}
+
+.selected-activity {
+  background-color: $grid-selected-background-color;
+}
+
+.activity-position-controls {
+  display: inline-block;
+  margin-left: 8px;
+  vertical-align: -webkit-baseline-middle;
+}
+
+.activity-container {
+  margin-left: 24pt;
+  padding-left: 8pt;
+  border-left: 3px solid $dark-blue;
+}
+
+.activity-menu {
+  float: right;
+  margin-right: 8px;
+  width: 60px;
+  vertical-align: -webkit-baseline-middle;
+}
+
+.activity-group {
+  display: inline-block;
+  vertical-align: -webkit-baseline-bottom;
+  font-size: 12pt;
+  font-weight: 500;
+  margin-top: 32px;
+  padding-left: 8px;
+}
+
+.activity-name {
+  display: inline-block;
+  vertical-align: -webkit-baseline-middle;
+  margin-right: 12pt;
+  max-width: calc(100% - 120px);
+  font-size: 10pt;
+  font-weight: 400;
+}
+
+.activity-name a:hover {
+  color: $dark-blue;
+  text-decoration: underline;
+}
+
+.activity-status {
+  @include row;
+  align-items: stretch;
+  align-content: space-between;
+  font-size: 8pt;
+  width: calc(100% - 120px);
+}

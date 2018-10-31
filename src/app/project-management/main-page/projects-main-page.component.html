@@ -3,23 +3,47 @@
 
   <div [ngSwitch]="viewConfig.viewType"
        class="explorer-panel"
-       [class.primary]="viewConfig.viewType !== 'gantt'"
-       [class.primary-full]="viewConfig.viewType === 'gantt'">
+       [class.primary]="viewConfig.viewType !== 'Gantt'"
+       [class.primary-full]="viewConfig.viewType === 'Gantt'">
 
-    <activity-tree *ngSwitchCase="'activity-tree'"
+    <activity-tree *ngSwitchCase="'treeView'"
                     [templateDesignerMode]="false"
                     [project]="selectedProject"
                     (edited)="onActivityTreeEdited($event)"
                     (activitySelected)="showEditor($event)">
     </activity-tree>
 
-    <gantt *ngSwitchCase="'gantt'"
+    <gantt *ngSwitchCase="'ganttView'"
             [project]="selectedProject"
             [config]="viewConfig"
             [reset]="toggleEditor"
             (activitySelected)="showEditor($event)">
     </gantt>
 
+
+    <activity-timeline *ngSwitchCase="'dueDate'"
+                        [groupBy]="'dueDate'"
+                        [project]="selectedProject"
+                        (activitySelected)="showEditor($event)">
+    </activity-timeline>
+
+    <activity-timeline *ngSwitchCase="'targetDate'"
+                        [groupBy]="'targetDate'"
+                        [project]="selectedProject"
+                        (activitySelected)="showEditor($event)">
+    </activity-timeline>
+
+    <activity-timeline *ngSwitchCase="'startDate'"
+                        [groupBy]="'startDate'"
+                        [project]="selectedProject"
+                        (activitySelected)="showEditor($event)">
+    </activity-timeline>
+
+    <activity-timeline *ngSwitchCase="'responsible'"
+      [groupBy]="'responsible'"
+      [project]="selectedProject"
+      (activitySelected)="showEditor($event)">
+    </activity-timeline>
 
   </div>
 

@@ -1,0 +1,65 @@
+<div *ngIf="project.project.uid !== ''" class="list-view-container">
+
+  <div class="list-view-header">
+    <div class="list-view-title">
+      {{viewTitle}}
+      <div class="hint">Contrato: {{project.project.name}}</div>
+    </div>
+    <div class="list-view-header-options">
+      <button type="button" class="btn disabled"
+              (click)="openAddEventDialog()">Agregar obligaciones</button>
+    </div>
+  </div>
+
+  <div class="list-view-body">
+
+    <div *ngFor="let group of project.activities | groupActivitiesBy: groupBy ">
+
+      <div class="activity-group">
+        {{group.key}}
+      </div>
+
+      <div *ngFor="let activity of group.value" class="activity-row">
+
+        <div class="activity-container" [class.selected-activity]="isActivitySelected(activity)">
+
+          <div class="activity-name">
+            <a (click)="onSelectActivity(activity, true)">{{activity.name}}</a>
+          </div>
+
+          <div *ngIf="activity.responsible.uid !== 'Empty'" class="activity-status">
+            <div class="column expand" style="white-space:nowrap;min-width:100px;">{{activity.responsible.name}}</div>
+            <div class="column expand" style="white-space:nowrap">
+              &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+            </div>
+            <div class="column expand" style="white-space:nowrap;min-width:80px;">F. Objetivo: {{activity.targetDate | date:'dd/LLL/yyyy'}}</div>
+            <div class="column expand" style="white-space:nowrap">
+              &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+            </div>
+            <div class="column expand" style="white-space:nowrap">F. Máxima: {{activity.dueDate | date:'dd/LLL/yyyy'}}</div>
+          </div>
+
+          <div *ngIf="activity.responsible.uid === 'Empty' && activity.dueDate" class="activity-status">
+            <div class="column expand" style="white-space:nowrap;min-width:100px;">No asignada</div>
+            <div class="column expand" style="white-space:nowrap">
+              &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+            </div>
+            <div class="column expand" style="white-space:nowrap;min-width:80px;">F. Objetivo: {{activity.targetDate | date:'dd/LLL/yyyy'}}</div>
+            <div class="column expand" style="white-space:nowrap">
+              &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+            </div>
+            <div class="column expand" style="white-space:nowrap">F. Máxima: {{activity.dueDate | date:'dd/LLL/yyyy'}}</div>
+          </div>
+
+          <rag-status-control [status]="activity.ragStatus">
+          </rag-status-control>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
