@@ -12,7 +12,9 @@ import { MatDialog, MatDialogConfig } from "@angular/material";
 
 import { MessageBoxComponent } from './message-box.component';
 
-import { MessageBoxType, MessageBoxConfig, MessageBoxData } from './message-box.types';
+import { ConfirmMessageBoxType, MessageBoxConfig, MessageBoxData } from './message-box.types';
+
+import { Exception } from '@app/core/general/exception';
 
 
 @Injectable()
@@ -22,27 +24,21 @@ export class MessageBoxService {
 
 
   confirm(message: string, title: string = "",
-          messageBoxType: MessageBoxType = 'AcceptCancel',
+          messageBoxType: ConfirmMessageBoxType = 'AcceptCancel',
           mainButtonText: string = 'Aceptar',
           config: MessageBoxConfig = undefined): Observable<boolean> {
 
-    const data : MessageBoxData = {
+    const data: MessageBoxData = {
       messageBoxType: messageBoxType || 'AcceptCancel',
       message: message,
       title: title || 'Tengo una pregunta',
       mainButtonText: mainButtonText || 'Aceptar'
     };
 
-    const dialogConfig = this.getDialogConfig(config, data);
+    const _observable = this.openMessageBox(config, data);
 
-    const dialogRef = this.dialog.open(MessageBoxComponent, dialogConfig);
-
-    const _observable = dialogRef.afterClosed();
-
-    _observable.subscribe (
-        result => {
-          console.log(result, "result");
-
+    _observable.subscribe(
+      result => {
         if (result) {
           return of<boolean>(true);
         } else {
@@ -55,10 +51,46 @@ export class MessageBoxService {
   }
 
 
+  show(message: string, title: string = "",
+       config: MessageBoxConfig = undefined): Observable<void> {
+
+    const data: MessageBoxData = {
+      messageBoxType: 'Accept',
+      message: message,
+      title: title,
+      mainButtonText: 'Aceptar'
+    };
+
+    const _observable = this.openMessageBox(config, data);
+
+    _observable.subscribe( () => of<void>() );
+
+    return _observable;
+  }
+
+
+  showError(error: Error | any,
+            config: MessageBoxConfig = undefined): Observable<void> {
+
+    const data: MessageBoxData = {
+      messageBoxType: 'Accept',
+      message: this.getErrorMsg(error),
+      title: 'Tengo un problema',
+      mainButtonText: 'Aceptar'
+    };
+
+    const _observable = this.openMessageBox(config, data);
+
+    _observable.subscribe( () => of<void>() );
+
+    return _observable;
+  }
+
+
   // private methods
 
 
-  private getDialogConfig(config: MessageBoxConfig, messageBoxData: MessageBoxData) : MatDialogConfig<MessageBoxData> {
+  private getDialogConfig(config: MessageBoxConfig, messageBoxData: MessageBoxData): MatDialogConfig<MessageBoxData> {
     if (!config) {
       config = new MatDialogConfig<MessageBoxData>();
     }
@@ -75,6 +107,33 @@ export class MessageBoxService {
     config.data = Object.assign(messageBoxData, config.data);
 
     return config;
+  }
+
+
+  private getErrorMsg(error: Error | Exception | string | any) {
+
+    if (error instanceof Exception) {
+      return (error as Exception).message +
+              "<br/><br/>" +
+             (error as Exception).innerError.message;
+
+    } else if (error instanceof Error) {
+      return (error as Error).message;
+
+    } else {
+      return error;
+
+    }
+
+  }
+
+
+  private openMessageBox(config: MessageBoxConfig, data: MessageBoxData): Observable<any> {
+    const dialogConfig = this.getDialogConfig(config, data);
+
+    const dialogRef = this.dialog.open(MessageBoxComponent, dialogConfig);
+
+    return dialogRef.afterClosed();
   }
 
 }

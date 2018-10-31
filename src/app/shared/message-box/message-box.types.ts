@@ -8,7 +8,7 @@
 import { MatDialogConfig } from "@angular/material";
 
 
-export type MessageBoxType = 'Accept' | 'AcceptCancel' | 'DeleteCancel';
+export type ConfirmMessageBoxType = 'Accept' | 'AcceptCancel' | 'DeleteCancel';
 
 
 export interface MessageBoxConfig extends MatDialogConfig {
@@ -17,7 +17,7 @@ export interface MessageBoxConfig extends MatDialogConfig {
 
 
 export interface MessageBoxData {
-  messageBoxType: MessageBoxType,
+  messageBoxType: 'Accept' | ConfirmMessageBoxType,
   message: string,
   title: string,
   mainButtonText: string
