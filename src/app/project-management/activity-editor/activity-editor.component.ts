@@ -5,32 +5,37 @@
  * See LICENSE.txt in the project root for complete license information.
  */
 
-import { Component, EventEmitter, Input,
-         OnChanges, OnInit, Output} from '@angular/core';
+import {
+  Component, EventEmitter, Input,
+  OnChanges, OnInit, Output
+} from '@angular/core';
 
-import { FormControl,
-         FormGroup, Validators } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup, Validators
+} from '@angular/forms';
 
 import { Observable, of } from 'rxjs';
 
 import { Contact, DateStringLibrary } from '@app/core/data-types';
 
-import { ColoredTag } from '@app/core/ui-data-types';
-
 import { ProjectStore } from '@app/store/project.store';
 
-import { AbstractForm, MessageBoxService, SpinnerService } from '@app/core/ui-services';
-
 import { Activity, Activity_Empty } from '@app/models/project-management';
+
+import { AbstractForm, SpinnerService } from '@app/core/ui-services';
+import { ColoredTag } from '@app/core/ui-data-types';
+
+import { MessageBoxService } from '@app/shared/message-box';
 
 
 enum FormMessages {
 
   IncompleteActivityData =
-    "Los campos marcados en rojo son requeridos.",
+  "Los campos marcados en rojo son requeridos.",
 
   TargetDateIsGreaterThanDueDate =
-    "La fecha objetivo de la actividad no puede ser posterior a la fecha máxima de entrega.",
+  "La fecha objetivo de la actividad no puede ser posterior a la fecha máxima de entrega.",
 
 }
 
@@ -56,8 +61,8 @@ export class ActivityEditorComponent extends AbstractForm implements OnInit, OnC
   procedureDialogVisible = false;
 
   constructor(spinner: SpinnerService,
-              private messageBox: MessageBoxService,
-              private projectStore: ProjectStore) {
+    private messageBox: MessageBoxService,
+    private projectStore: ProjectStore) {
     super();
     this.setSpinner(spinner);   // remove after resolve core module injection issue
   }
@@ -90,6 +95,21 @@ export class ActivityEditorComponent extends AbstractForm implements OnInit, OnC
 
   onClose() {
     this.close.emit();
+  }
+
+
+  onDelete() {
+    const msg = `Esta operación eliminará la actividad ` +
+                `<strong>${this.activity.name}</strong> de este proyecto.<br/><br/>` +
+                `¿Elimino esta actividad?`;
+
+    this.messageBox.confirm(msg, "Eliminar actividad", 'DeleteCancel', 'Eliminar esta actividad').subscribe(
+      result => {
+        if (result) {
+          this.setCommand('delete');
+          this.onSubmit({ skipFormValidation: true });
+        }
+      });
   }
 
 
@@ -131,7 +151,7 @@ export class ActivityEditorComponent extends AbstractForm implements OnInit, OnC
 
   protected execute(): Promise<any> {
 
-    switch(this.command.name) {
+    switch (this.command.name) {
 
       case 'delete':
         return this.deleteActivity();
@@ -159,10 +179,11 @@ export class ActivityEditorComponent extends AbstractForm implements OnInit, OnC
 
   // private methods
 
+
   private deleteActivity(): Promise<void> {
     return this.projectStore.deleteActivity(this.activity)
-               .then( () => this.onClose() )
-               .catch( err => this.messageBox.show(err) );
+      .then(() => this.onClose())
+      .catch(err => this.messageBox.showError(err).toPromise());
   }
 
 
@@ -205,8 +226,8 @@ export class ActivityEditorComponent extends AbstractForm implements OnInit, OnC
     const updateData = this.getUpdateData();
 
     return this.projectStore.updateActivity(this.activity, updateData)
-               .then( () => this.onReset() )
-               .catch( err => this.messageBox.show(err) );
+      .then(() => this.onReset())
+      .catch(err => this.messageBox.showError(err).toPromise());
   }
 
 
@@ -233,7 +254,7 @@ export class ActivityEditorComponent extends AbstractForm implements OnInit, OnC
 
 
   private loadSelectedTags() {
-    this.activity.tags.forEach( x => this.selectTag(x) );
+    this.activity.tags.forEach(x => this.selectTag(x));
 
     this.selectedTags = this.tags.filter(x => x.selected === true);
   }
@@ -241,16 +262,16 @@ export class ActivityEditorComponent extends AbstractForm implements OnInit, OnC
 
   private loadTags() {
     this.projectStore.tags
-                     .subscribe( x => {
-                         this.tags = x;
-                         this.tags.forEach( x => x.selected = false);
-                       });
+      .subscribe(x => {
+        this.tags = x;
+        this.tags.forEach(x => x.selected = false);
+      });
   }
 
 
   private getSelectedTags() {
-    return this.selectedTags.filter( x => x.selected === true )
-                            .map( x => x.name );
+    return this.selectedTags.filter(x => x.selected === true)
+      .map(x => x.name);
   }
 
 
@@ -260,13 +281,13 @@ export class ActivityEditorComponent extends AbstractForm implements OnInit, OnC
 
 
   private setActivityTags() {
-    this.activity.tags = this.selectedTags.filter( x => x.selected === true )
-                                          .map( x => x.name );
+    this.activity.tags = this.selectedTags.filter(x => x.selected === true)
+      .map(x => x.name);
   }
 
 
   private selectTag(tag: string) {
-    const index = this.tags.findIndex( x => x.name === tag );
+    const index = this.tags.findIndex(x => x.name === tag);
 
     if (index !== -1) {
       this.tags[index].selected = true;

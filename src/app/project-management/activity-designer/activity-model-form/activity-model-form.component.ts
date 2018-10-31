@@ -19,13 +19,13 @@ import { Observable, of } from 'rxjs';
 
 import { ProjectTemplateStore } from '@app/store/project-template.store';
 
-import { AbstractForm, MessageBoxService, SpinnerService } from '@app/core/ui-services';
+import { AbstractForm, SpinnerService } from '@app/core/ui-services';
 
 import { Activity, Activity_Empty } from '@app/models/project-management';
 import { Procedure } from '@app/procedures/data-types/procedure';
 import { Entity } from '@app/procedures/data-types/entity';
 
-import { MessageBoxService as MsgSrv } from '@app/shared/message-box/message.box.service';
+import { MessageBoxService } from '@app/shared/message-box';
 
 enum FormMessages {
 
@@ -57,8 +57,7 @@ export class ActivityModelFormComponent extends AbstractForm implements OnInit, 
   procedures: Observable<Procedure[]> = of([]);
 
   constructor(spinner: SpinnerService,
-              private messageService: MsgSrv,
-              private messageBox: MessageBoxService,
+              private messageService: MessageBoxService,
               private templateStore: ProjectTemplateStore) {
     super();
     this.setSpinner(spinner);   // remove after resolve core module injection issue
@@ -194,7 +193,7 @@ export class ActivityModelFormComponent extends AbstractForm implements OnInit, 
   private deleteActivity(): Promise<void> {
     return this.templateStore.deleteActivity(this.activity)
                .then(() => this.delete.emit())
-               .catch(err => this.messageBox.show(err));
+               .catch(err => this.messageService.showError(err).toPromise());
   }
 
 
@@ -269,7 +268,7 @@ export class ActivityModelFormComponent extends AbstractForm implements OnInit, 
 
     return this.templateStore.updateActivity(this.activity, updateData)
                .then(() => this.onReset())
-               .catch(err => this.messageBox.show(err));
+               .catch(err => this.messageService.showError(err).toPromise());
   }
 
   private isPositiveInteger(str: string) {
