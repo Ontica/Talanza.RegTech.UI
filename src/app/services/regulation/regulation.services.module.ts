@@ -7,16 +7,24 @@
 
 import { NgModule } from '@angular/core';
 
+import { CataloguesService } from './catalogues.service';
+import { ContractsService } from './contracts.service';
 import { EntityService } from './entity.service';
+import { DocumentService } from './document.service';
 import { ProcedureService } from './procedure.service';
+import { ProcessService } from './process.service';
 
 
 @NgModule({
 
   providers: [
+    CataloguesService,
+    ContractsService,
+    DocumentService,
     EntityService,
-    ProcedureService
+    ProcedureService,
+    ProcessService
   ],
 
 })
-export class ProcedureServicesModule { }
+export class RegulationServicesModule { }

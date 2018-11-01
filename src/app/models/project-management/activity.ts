@@ -5,16 +5,11 @@
  * See LICENSE.txt in the project root for complete license information.
  */
 
-import { DateString } from '../../core/data-types';
+import { DateString } from '@app/core/data-types';
 
-import { Contact, Empty, Identifiable } from '../../core/data-types';
+import { Contact, Empty, Identifiable } from '@app/core/data-types';
 
 import { Project } from './project';
-
-
-export interface Parent extends Identifiable {
-  type: string
-}
 
 
 export interface Activity extends Identifiable {
@@ -77,4 +72,9 @@ export interface ActivityOperation {
   newPosition?: number,
   newParent?: Activity,
   targetProjectUID?: string
+}
+
+
+export interface Parent extends Identifiable {
+  type: string
 }

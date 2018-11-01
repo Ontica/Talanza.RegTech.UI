@@ -1,7 +1,16 @@
+/**
+ * @license
+ * Copyright (c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
+ *
+ * See LICENSE.txt in the project root for complete license information.
+ */
+
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
-import { Procedure } from '../../../models/procedures/procedure';
-import { ProcedureService } from '../../../services/procedures/procedure.service';
+import { ProcedureService } from '@app/services/regulation';
+
+import { Procedure } from "@app/models/regulation";
+
 
 @Component({
   selector: 'filing-fee-tab',
@@ -9,7 +18,6 @@ import { ProcedureService } from '../../../services/procedures/procedure.service
   styleUrls: ['./filing-fee-tab.component.scss'],
   providers: [ProcedureService]
 })
-
 export class FilingFeeTabComponent implements OnInit {
 
   @Output() public isEditable = new EventEmitter<boolean>();
@@ -39,10 +47,6 @@ export class FilingFeeTabComponent implements OnInit {
   }
 
   public onChangeFilingFeeType(filingFeeType: string) {
-    // if (filingFeeType === 'Trámite gratuito') {
-    //   this.procedure.filingFee.feeAmount = 0;
-    //   this.isFree = true;
-    // }
 
   }
 

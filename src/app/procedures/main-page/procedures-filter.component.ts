@@ -1,21 +1,16 @@
 /**
  * @license
- * Copyright (c) 2017 La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
+ * Copyright (c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
  *
  * See LICENSE.txt in the project root for complete license information.
- *
  */
 
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
-import { SmallProcedureInterface } from '../../models/procedures/small-procedure.interface';
-import { Entity } from '../../models/procedures/entity';
-import { Office } from '../../models/procedures/office';
+import { EntityService, ProcedureService } from '@app/services/regulation';
 
-import { ProcedureService } from '../../services/procedures/procedure.service';
-import { ProcedureFilter } from '../../models/procedures/procedure-filter';
+import { BaseProcedure, Entity, Office, ProcedureFilter } from '@app/models/regulation';
 
-import { EntityService } from '../../services/procedures/entity.service';
 
 @Component({
   selector: 'procedure-filter',
@@ -23,14 +18,14 @@ import { EntityService } from '../../services/procedures/entity.service';
   styleUrls: ['./procedures-filter.component.scss'],
   providers: [ProcedureService, EntityService]
 })
-
 export class ProcedureFilterComponent implements OnInit {
-  public filter: ProcedureFilter = new ProcedureFilter();
+
+  public filter = new ProcedureFilter();
 
   public offices: Office[] = [];
   public entities: Entity[] = [];
 
-  @Output() public onSearch = new EventEmitter<SmallProcedureInterface[]>();
+  @Output() public onSearch = new EventEmitter<BaseProcedure[]>();
   @Output() public onNewProcedure = new EventEmitter<string>();
 
   constructor(private procedureService: ProcedureService, private authorityService: EntityService) { }

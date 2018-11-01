@@ -1,6 +1,15 @@
-import { Component, ElementRef, Input, ViewChild, OnInit } from '@angular/core';
+/**
+ * @license
+ * Copyright (c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
+ *
+ * See LICENSE.txt in the project root for complete license information.
+ */
 
-import { ProcedureService } from '../../../services/procedures/procedure.service';
+import { Component, ElementRef, Input,
+         ViewChild, OnInit } from '@angular/core';
+
+import { ProcedureService } from '@app/services/regulation';
+
 
 @Component({
   selector: 'pv-general-info',
@@ -8,7 +17,6 @@ import { ProcedureService } from '../../../services/procedures/procedure.service
   styleUrls: ['./pv-general-info.component.scss'],
   providers: [ ProcedureService ]
 })
-
 export class PVGeneralInfoComponent implements OnInit {
 
   @ViewChild('modeler') public el: ElementRef;

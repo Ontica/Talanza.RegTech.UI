@@ -5,17 +5,9 @@
  * See LICENSE.txt in the project root for complete license information.
  */
 
-import {
-  Contact,
-  Empty,
-  isEmpty
-} from '../../core/data-types';
+import { Contact, Empty, isEmpty } from '@app/core/data-types';
 
-import {
-  Contract,
-  Project,
-  Stage
-} from './project';
+import { Contract, Project, Stage } from './project';
 
 
 export class ActivityFilter {
@@ -88,7 +80,6 @@ export class ActivityFilter {
     }
     return filter;
   }
-
 
   // private methods
 

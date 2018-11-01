@@ -1,18 +1,17 @@
 /**
  * @license
- * Copyright (c) 2017 La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
+ * Copyright (c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
  *
  * See LICENSE.txt in the project root for complete license information.
- *
  */
+
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 import { Assertion } from '@app/core';
-import { CoreService } from '@app/core/core.service';
 
-import { ContractsService } from '../services/contracts.service';
+import { ContractsService } from '@app/services/regulation';
 
-import { Contract, EmptyContract, ContractClauseRef } from '../data-types/contract';
+import { Contract, EmptyContract, ContractClauseRef } from '@app/models/regulation';
 
 @Component({
   selector: 'contract-filters',
@@ -31,8 +30,7 @@ export class ContractsFiltersComponent implements OnInit {
 
   @Output() clauses = new EventEmitter<ContractClauseRef[]>();
 
-  constructor(private core: CoreService,
-    private contractService: ContractsService) { }
+  constructor(private contractService: ContractsService) { }
 
   ngOnInit() {
     this.setInitialValues();
@@ -78,7 +76,6 @@ export class ContractsFiltersComponent implements OnInit {
 
     let clauses = this.selectedContract.clausesList.filter(item => item.section === this.selectedSection);
 
-    //this.clauses.emit(this.selectedContract.clauses);
     this.clauses.emit(clauses);
   }
 
@@ -95,8 +92,7 @@ export class ContractsFiltersComponent implements OnInit {
 
     this.contractService.getContractList()
                         .toPromise()
-                        .then((x) => this.contractsList = x)
-                        .catch((e) => this.core.http.showAndThrow(e, errMsg));
+                        .then((x) => this.contractsList = x);
   }
 
   private async loadSelectedContractClausesList(keywords: string) {
@@ -104,8 +100,7 @@ export class ContractsFiltersComponent implements OnInit {
 
     await this.contractService.searchClauses(this.selectedContract.uid, keywords)
                               .toPromise()
-                              .then((x) => this.selectedContract.clausesList = x
-    );
+                              .then((x) => this.selectedContract.clausesList = x);
   }
 
 }

@@ -1,19 +1,17 @@
 /**
  * @license
- * Copyright (c) 2017 La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
+ * Copyright (c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
  *
  * See LICENSE.txt in the project root for complete license information.
- *
  */
 
-import {
-  ChangeDetectorRef, Component, EventEmitter, HostBinding,
-  Input, Output, OnInit
-} from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter,
+         HostBinding, Input, Output, OnInit } from '@angular/core';
 
-import { Procedure } from '../../models/procedures/procedure';
+import { ProcedureService } from '@app/services/regulation';
 
-import { ProcedureService } from '../../services/procedures/procedure.service';
+import { Procedure } from "@app/models/regulation";
+
 
 @Component({
   selector: 'procedure-editor',
@@ -21,7 +19,6 @@ import { ProcedureService } from '../../services/procedures/procedure.service';
   styleUrls: ['./procedure-editor.component.scss'],
   providers: [ProcedureService]
 })
-
 export class ProcedureEditorComponent implements OnInit {
   @HostBinding('style.display') public display = 'block';
   @HostBinding('style.position') public position = 'absolute';

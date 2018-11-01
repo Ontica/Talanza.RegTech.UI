@@ -19,10 +19,9 @@ import { ProjectMeetingsModule } from '../project-meetings/project-meetings.modu
 import { ServiceDeskModule } from '../service-desk/service-desk.module';
 
 
-import { ContractsService } from '../contracts/services/contracts.service';
-import { DocumentService } from '../documents/services/document.service';
+import { ContractsService, DocumentService, ProcedureService } from '@app/services/regulation';
+
 import { FAQService } from '../service-desk/services/faq.service';
-import { ProcedureService } from '../services/procedures/procedure.service';
 
 import { GlobalSearchRoutingModule } from './global-search-routing.module';
 

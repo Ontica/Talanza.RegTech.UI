@@ -1,19 +1,17 @@
 /**
  * @license
- * Copyright (c) 2017 La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
+ * Copyright (c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
  *
  * See LICENSE.txt in the project root for complete license information.
- *
  */
 
 import { Component, Input } from '@angular/core';
 
-import { Assertion } from '@app/core';
 import { CoreService } from '@app/core/core.service';
 
-import { ContractsService } from '../services/contracts.service';
+import { ContractsService } from '@app/services/regulation';
 
-import { ContractClauseRef, Rule } from '../data-types/contract';
+import { ContractClauseRef, Rule } from '@app/models/regulation';
 
 @Component({
   selector: 'clause-obligations',

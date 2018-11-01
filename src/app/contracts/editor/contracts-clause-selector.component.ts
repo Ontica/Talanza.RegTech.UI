@@ -1,19 +1,15 @@
 /**
  * @license
- * Copyright (c) 2017 La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
+ * Copyright (c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
  *
  * See LICENSE.txt in the project root for complete license information.
- *
  */
 
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
-import { Assertion } from '@app/core';
-import { CoreService } from '@app/core/core.service';
+import { ContractsService } from '@app/services/regulation';
 
-import { ContractsService } from '../services/contracts.service';
-
-import { ContractClauseRef, EmptyContractClause } from '../data-types/contract';
+import { ContractClauseRef, EmptyContractClause } from '@app/models/regulation';
 
  @Component({
     selector: 'contract-clause-selector',
@@ -44,7 +40,7 @@ export class ContractsClauseSelectorComponent {
 
   public currentClause: ContractClauseRef;
 
-  constructor(private core: CoreService, private contractService: ContractsService) { }
+  constructor(private contractService: ContractsService) { }
 
   public onClickSelectClause(selectedClause: ContractClauseRef): void {
     this.currentClause = selectedClause;

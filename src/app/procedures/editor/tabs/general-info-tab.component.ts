@@ -1,12 +1,16 @@
+/**
+ * @license
+ * Copyright (c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
+ *
+ * See LICENSE.txt in the project root for complete license information.
+ */
+
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
-import { Procedure } from '../../../models/procedures/procedure';
-import { Office } from '../../../models/procedures/office';
-import { Entity } from '../../../models/procedures/entity';
-import { Position } from '../../../models/procedures/position';
+import { EntityService, ProcedureService } from '@app/services/regulation';
 
-import { ProcedureService } from '../../../services/procedures/procedure.service';
-import { EntityService } from '../../../services/procedures/entity.service';
+import { Entity, Office, Position, Procedure } from '@app/models/regulation';
+
 
 @Component({
   selector: 'general-info-tab',
@@ -14,7 +18,6 @@ import { EntityService } from '../../../services/procedures/entity.service';
   styleUrls: ['./general-info-tab.component.scss'],
   providers: [ProcedureService, EntityService]
 })
-
 export class GeneralInfoTabComponent implements OnInit {
 
   @Output() public isEditable = new EventEmitter<boolean>();
@@ -145,14 +148,7 @@ export class GeneralInfoTabComponent implements OnInit {
       alert('El nombre del trámite se encuentra en blanco.');
       return false;
     }
-    // if (this.procedure.legalInfo.regulationStatus === '') {
-    //   alert('Requiero saber la forma en que está regulado el trámite.');
-    //   return false;
-    // }
-    // if (this.procedure.stage === '') {
-    //   alert('Seleccionar una etapa de la lista.');
-    //   return false;
-    // }
+
     if (this.procedure.theme === '') {
       alert('Seleccionar un tema de la lista.');
       return false;

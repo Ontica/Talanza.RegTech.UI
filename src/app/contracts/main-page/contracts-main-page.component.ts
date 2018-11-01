@@ -1,22 +1,19 @@
 /**
  * @license
- * Copyright (c) 2017 La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
+ * Copyright (c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
  *
  * See LICENSE.txt in the project root for complete license information.
- *
  */
 
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
-import { ContractClause, ContractClauseRef } from '../data-types/contract';
-
+import { ContractClauseRef } from '@app/models/regulation';
 
 @Component({
   selector: 'contract-view',
   templateUrl: './contracts-main-page.component.html',
   styleUrls: ['./contracts-main-page.component.scss']
 })
-
 export class ContractsMainPageComponent implements OnInit {
 
   public isVisibleLeftPanel = true;
@@ -43,26 +40,6 @@ export class ContractsMainPageComponent implements OnInit {
     event.preventDefault();
     event.stopPropagation();
   }
-
-  // @HostListener('document:mousemove', ['$event'])
-  // onCornerMove(event: MouseEvent) {
-
-  //   if (!this.isResizeDiv) {
-  //     return;
-  //   }
-
-  //   this.leftPanelWidth= event.clientX + 'px';
-  //   this.centerPanelWidth = 'calc(100% - ' + (event.clientX + this.leftResizeWidth) + 'px)';
-  // }
-
-  // @HostListener('document:mouseup', ['$event'])
-  // onCornerRelease(event: MouseEvent) {
-
-  //   if (this.isResizeDiv) {
-  //     this.isResizeDiv = false;
-  //   }
-
-  // }
 
   public onHideLeftPanel(): void {
     this.isVisibleLeftPanel = !this.isVisibleLeftPanel;

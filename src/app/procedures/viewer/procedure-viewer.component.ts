@@ -1,28 +1,24 @@
 /**
  * @license
- * Copyright (c) 2017-2018 La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
+ * Copyright (c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
  *
  * See LICENSE.txt in the project root for complete license information.
- *
  */
 
-import { Component, EventEmitter, HostBinding,
-         Input, Output } from '@angular/core';
+import { Component, EventEmitter,Input, Output } from '@angular/core';
 
-import { Procedure } from '../../models/procedures/procedure';
-import { ProcedureService } from '../../services/procedures/procedure.service';
+import { ProcedureService } from '@app/services/regulation';
+
+import { Procedure } from "@app/models/regulation";
+
 
 @Component({
-  selector:'procedure-viewer',
+  selector: 'procedure-viewer',
   templateUrl: './procedure-viewer.component.html',
   styleUrls: ['./procedure-viewer.component.scss'],
   providers: [ProcedureService]
 })
-
 export class ProcedureViewerComponent {
-
-  // @HostBinding('style.display') public display = 'block';
-  // @HostBinding('style.position') public position = 'absolute';
 
   private _procedureUID: string = '';
 
@@ -58,18 +54,18 @@ export class ProcedureViewerComponent {
 
     this.procedureService.getProcedure(this.procedureUID)
                          .then((procedure) => this.procedure = procedure)
-                         .catch((e) => this.exceptionHandler(e,errMsg));
- }
-
- private exceptionHandler(error: any, defaultMsg: string): void {
-  let errMsg = 'Tengo un problema.\n\n';
-
-  if (typeof (error) === typeof (Error)) {
-    errMsg += defaultMsg + '\n\n' + (<Error>error).message;
-  } else {
-    errMsg += defaultMsg + '\n\n' + 'Error desconocido.';
+                         .catch((e) => this.exceptionHandler(e, errMsg));
   }
-  alert(errMsg);
-}
+
+  private exceptionHandler(error: any, defaultMsg: string): void {
+    let errMsg = 'Tengo un problema.\n\n';
+
+    if (typeof (error) === typeof (Error)) {
+      errMsg += defaultMsg + '\n\n' + (<Error>error).message;
+    } else {
+      errMsg += defaultMsg + '\n\n' + 'Error desconocido.';
+    }
+    alert(errMsg);
+  }
 
 }

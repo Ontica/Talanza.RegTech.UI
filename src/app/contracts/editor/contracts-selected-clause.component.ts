@@ -1,45 +1,43 @@
 /**
  * @license
- * Copyright (c) 2017 La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
+ * Copyright (c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
  *
  * See LICENSE.txt in the project root for complete license information.
- *
  */
 
- import { Component, Input, ViewEncapsulation } from '@angular/core';
+import { Component, Input, ViewEncapsulation } from '@angular/core';
 
- import { Assertion } from '@app/core';
- import { CoreService } from '@app/core/core.service';
+import { CoreService } from '@app/core/core.service';
 
- import { ContractsService } from '../services/contracts.service';
+import { ContractsService } from '@app/services/regulation';
 
- import { Contract, ContractClause, ContractClauseRef,
-          EmptyContractClause, RelatedProcedure, Rule } from '../data-types/contract';
+import { ContractClause, ContractClauseRef,
+         EmptyContractClause, Rule } from '@app/models/regulation';
 
- @Component({
-   selector:'selected-clause',
-   templateUrl: './contracts-selected-clause.component.html',
-   styleUrls:['./contracts-selected-clause.component.scss'],
-   providers: [ContractsService],
-   encapsulation: ViewEncapsulation.Native,
- })
 
- export class ContractsSelectedClauseComponent {
+@Component({
+  selector: 'selected-clause',
+  templateUrl: './contracts-selected-clause.component.html',
+  styleUrls: ['./contracts-selected-clause.component.scss'],
+  providers: [ContractsService],
+  encapsulation: ViewEncapsulation.Native,
+})
+export class ContractsSelectedClauseComponent {
 
   public procedureUID = "";
   public isVisibleProcedureInfo = false;
   public clauseInfoWidth = '100%';
 
-  public rules: Rule[] =[];
+  public rules: Rule[] = [];
 
   public clause: ContractClause = EmptyContractClause();
 
-  constructor(private core: CoreService, private contractService: ContractsService) { }
+  constructor(private contractService: ContractsService) { }
 
   @Input()
   set clauseRef(clauseRef: ContractClauseRef) {
     if (clauseRef && clauseRef.uid != '') {
-     this.loadGridValues(clauseRef);
+      this.loadGridValues(clauseRef);
     }
   }
 
@@ -61,22 +59,22 @@
     const errMsg = 'Ocurrió un problema al intentar leer la cláusula.';
 
     this.contractService.getClause(clauseRef.contractUID, clauseRef.uid)
-                        .toPromise()
-                        .then((x) => { this.clause = x;
-                                       this.setClauseInfoContainerWidth();
-                                     })
-                        .catch((e) => this.core.http.showAndThrow(e, errMsg));
+      .toPromise()
+      .then((x) => {
+      this.clause = x;
+        this.setClauseInfoContainerWidth();
+      });
   }
 
   private loadObligations(clauseRef: ContractClauseRef): void {
     const errMsg = 'Ocurrió un problema al intentar leer la cláusula.';
 
-        this.contractService.getObligations(clauseRef.contractUID, clauseRef.uid)
-                            .toPromise()
-                            .then((x) => { this.rules = x .rules;
-                                           this.setClauseInfoContainerWidth();
-                                         })
-                            .catch((e) => this.core.http.showAndThrow(e, errMsg));
+    this.contractService.getObligations(clauseRef.contractUID, clauseRef.uid)
+      .toPromise()
+      .then((x) => {
+      this.rules = x.rules;
+        this.setClauseInfoContainerWidth();
+      });
 
   }
 
@@ -94,4 +92,4 @@
 
   }
 
- }
+}

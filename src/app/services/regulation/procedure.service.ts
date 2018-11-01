@@ -1,19 +1,16 @@
 /**
  * @license
- * Copyright (c) 2017 La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
+ * Copyright (c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
  *
  * See LICENSE.txt in the project root for complete license information.
- *
  */
 
 import { Injectable } from '@angular/core';
 
-import { CoreService } from '../../core/core.service';
+import { CoreService } from '@app/core/core.service';
 
-import { Procedure } from '../../models/procedures/procedure';
-import { ProcedureFilter } from '../../models/procedures/procedure-filter';
+import { BaseProcedure, Procedure, ProcedureFilter } from "@app/models/regulation";
 
-import { SmallProcedureInterface } from '../../models/procedures/small-procedure.interface';
 
 @Injectable()
 export class ProcedureService {
@@ -25,7 +22,7 @@ export class ProcedureService {
                          .toPromise();
   }
 
-  public getProceduresList(filter?: ProcedureFilter | string): Promise<SmallProcedureInterface[]> {
+  public getProceduresList(filter?: ProcedureFilter | string): Promise<BaseProcedure[]> {
     let filterAsString = '';
 
     if (filter instanceof ProcedureFilter) {
@@ -46,7 +43,7 @@ export class ProcedureService {
 
     const path = `v1/procedures${filterAsString}`;
 
-    return this.core.http.get<SmallProcedureInterface[]>(path)
+    return this.core.http.get<BaseProcedure[]>(path)
                          .toPromise();
   }
 

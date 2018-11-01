@@ -8,20 +8,18 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { CoreService } from '@app/core';
 import { SharedService } from '@app/shared/services';
 
-import { ContractsService } from '../../contracts/services/contracts.service';
-import { ProcedureService } from '../../services/procedures/procedure.service';
-import { DocumentService } from '../../documents/services/document.service';
+import { ContractsService, DocumentService, ProcedureService } from '@app/services/regulation';
+
 import { FAQService } from '../../service-desk/services/faq.service';
 
-import { SmallProcedureInterface } from '../../models/procedures/small-procedure.interface';
-import { ProcedureFilter } from '../../models/procedures/procedure-filter';
-import { NavBarConfig } from '../../controls/nav-bar/nav-bar.control';
-import { ContractClauseRef } from '../../contracts/data-types/contract';
-import { Document, DocumentFilter } from '../../documents/data-types/document';
+import { BaseProcedure, ContractClauseRef, Document,
+         DocumentFilter, ProcedureFilter } from '@app/models/regulation';
+
 import { Faq } from '../../service-desk/data-types/faq';
+
+import { NavBarConfig } from '../../controls/nav-bar/nav-bar.control';
 
 
 @Component({
@@ -31,7 +29,7 @@ import { Faq } from '../../service-desk/data-types/faq';
 })
 export class GlobalSearchMainPageComponent {
 
-    public procedures: SmallProcedureInterface[] = [];
+    public procedures: BaseProcedure[] = [];
     public selectedProcedureUID = '';
     public navBarConfig: NavBarConfig[] = [];
     public selectedOption = '';
@@ -64,7 +62,6 @@ export class GlobalSearchMainPageComponent {
     @Output() public onClose = new EventEmitter();
 
     constructor(private route: ActivatedRoute,
-                private core: CoreService,
                 private app: SharedService,
                 private procedureService: ProcedureService,
                 private contractService: ContractsService,
@@ -166,7 +163,7 @@ export class GlobalSearchMainPageComponent {
 
 
     private async loadProcedures() {
-        let filter: ProcedureFilter = new ProcedureFilter();
+        let filter = new ProcedureFilter();
         filter.keywords = this.keywords;
 
         this.app.spinner.show();

@@ -1,14 +1,16 @@
 /**
  * @license
- * Copyright (c) 2017 La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
+ * Copyright (c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
  *
  * See LICENSE.txt in the project root for complete license information.
- *
  */
+
 import { Component, Input, EventEmitter, OnInit, Output } from '@angular/core';
 
-import { Procedure } from '../../../models/procedures/procedure';
-import { ProcedureService } from '../../../services/procedures/procedure.service';
+import { ProcedureService } from '@app/services/regulation';
+
+import { Procedure } from "@app/models/regulation";
+
 
 @Component({
   selector: 'requirements-tab',
@@ -16,7 +18,6 @@ import { ProcedureService } from '../../../services/procedures/procedure.service
   styleUrls: ['./requirements-tab.component.scss'],
   providers: [ProcedureService]
 })
-
 export class RequirementsTabComponent implements OnInit {
 
   @Output() public isEditable = new EventEmitter<boolean>();

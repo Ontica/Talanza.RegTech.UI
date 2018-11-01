@@ -1,19 +1,17 @@
 /**
  * @license
- * Copyright (c) 2017 La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
+ * Copyright (c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
  *
  * See LICENSE.txt in the project root for complete license information.
- *
  */
 
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
-import { CoreService } from '../../core/core.service';
+import { CoreService } from '@app/core/core.service';
 
-import { Contract, ContractClause, EmptyContractClause,
-         RelatedProcedure, Obligation } from '../data-types/contract';
+import { Contract, ContractClause, RelatedProcedure, Obligation } from '@app/models/regulation';
 
 export enum ContractServiceErr {
   GET_CLAUSE_ERR =

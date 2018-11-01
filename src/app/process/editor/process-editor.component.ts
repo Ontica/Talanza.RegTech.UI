@@ -8,8 +8,10 @@
 import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
-import { Process } from '../data-types/process';
-import { ProcessService } from '../services/process.service';
+import { ProcessService } from '@app/services/regulation';
+
+import { Process } from '@app/models/regulation';
+
 
 @Component({
   selector: 'process-editor',
@@ -17,7 +19,6 @@ import { ProcessService } from '../services/process.service';
   styleUrls: ['./process-editor.component.scss'],
   providers: [ProcessService]
 })
-
 export class ProcessEditorComponent implements OnInit {
 
   public url: SafeResourceUrl;

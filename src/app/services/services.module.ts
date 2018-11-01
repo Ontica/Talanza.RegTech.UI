@@ -7,25 +7,21 @@
 
 import { NgModule } from '@angular/core';
 
-import { ProcedureServicesModule } from './procedures/procedure.services.module';
-
 import { ProjectManagementServicesModule } from './project-management/project-management-services.module';
 
-import { UtilityServicesModule } from './utility/utility-services.module';
+import { RegulationServicesModule } from './regulation/regulation.services.module';
 
 
 @NgModule({
 
   imports: [
-    ProcedureServicesModule,
     ProjectManagementServicesModule,
-    UtilityServicesModule
+    RegulationServicesModule
   ],
 
   exports: [
-    ProcedureServicesModule,
     ProjectManagementServicesModule,
-    UtilityServicesModule
+    RegulationServicesModule
   ],
 
 })
