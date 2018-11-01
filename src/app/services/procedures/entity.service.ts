@@ -10,10 +10,10 @@ import { Injectable } from '@angular/core';
 
 import { CoreService } from '../../core/core.service';
 
-import { Entity } from '../data-types/entity';
+import { Entity } from '../../models/procedures/entity';
 
 @Injectable()
-export class AuthorityService {
+export class EntityService {
 
   public constructor(private core: CoreService) { }
 

@@ -1,18 +1,18 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
-import { Procedure } from '../../data-types/procedure';
-import { Office } from '../../data-types/office';
-import { Entity } from '../../data-types/entity';
-import { Position } from '../../data-types/position';
+import { Procedure } from '../../../models/procedures/procedure';
+import { Office } from '../../../models/procedures/office';
+import { Entity } from '../../../models/procedures/entity';
+import { Position } from '../../../models/procedures/position';
 
-import { ProcedureService } from '../../services/procedure.service';
-import { AuthorityService } from '../../services/authority.service';
+import { ProcedureService } from '../../../services/procedures/procedure.service';
+import { EntityService } from '../../../services/procedures/entity.service';
 
 @Component({
   selector: 'general-info-tab',
   templateUrl: './general-info-tab.component.html',
   styleUrls: ['./general-info-tab.component.scss'],
-  providers: [ProcedureService, AuthorityService]
+  providers: [ProcedureService, EntityService]
 })
 
 export class GeneralInfoTabComponent implements OnInit {
@@ -28,7 +28,7 @@ export class GeneralInfoTabComponent implements OnInit {
   public isNewProcedure = false;
   public disabled = true;
 
-  constructor(private procedureService: ProcedureService, private authorityService: AuthorityService) { }
+  constructor(private procedureService: ProcedureService, private authorityService: EntityService) { }
 
   public ngOnInit() {
     this.setProcedureStatus();

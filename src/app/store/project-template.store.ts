@@ -12,8 +12,8 @@ import { List } from 'immutable';
 import { Empty } from '@app/core/data-types';
 import { Activity, Project, Stage } from '@app/models/project-management';
 import { ProjectService } from '@app/services/project-management';
-import { Procedure } from '@app/procedures/data-types/procedure';
-import { Entity } from '@app/procedures/data-types/entity';
+import { Procedure } from '@app/models/procedures/procedure';
+import { Entity } from '@app/models/procedures/entity';
 
 export class ProjectTemplateModel {
 

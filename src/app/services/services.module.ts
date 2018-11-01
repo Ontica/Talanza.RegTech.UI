@@ -6,28 +6,26 @@
  */
 
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
-import { ActivityService, GanttService,
-         ProcessModelsService, ProjectService,
-         ProjectMeetingService } from './project-management';
+import { ProcedureServicesModule } from './procedures/procedure.services.module';
 
-import { CataloguesService } from './catalogues.service';
+import { ProjectManagementServicesModule } from './project-management/project-management-services.module';
+
+import { UtilityServicesModule } from './utility/utility-services.module';
 
 
 @NgModule({
 
   imports: [
-    CommonModule,
+    ProcedureServicesModule,
+    ProjectManagementServicesModule,
+    UtilityServicesModule
   ],
 
-  providers: [
-    ActivityService,
-    CataloguesService,
-    GanttService,
-    ProcessModelsService,
-    ProjectMeetingService,
-    ProjectService
+  exports: [
+    ProcedureServicesModule,
+    ProjectManagementServicesModule,
+    UtilityServicesModule
   ],
 
 })

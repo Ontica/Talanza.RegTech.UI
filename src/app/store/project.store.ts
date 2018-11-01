@@ -13,8 +13,8 @@ import { Activity, Contract,
          Project, Stage,
          ViewConfig, DefaultViewConfig } from '@app/models/project-management';
 
-import { Procedure } from '@app/procedures/data-types/procedure';
-import { Entity } from '@app/procedures/data-types/entity';
+import { Procedure } from '@app/models/procedures/procedure';
+import { Entity } from '@app/models/procedures/entity';
 import { Contact, Empty } from '@app/core/data-types';
 
 import { ColoredTag } from '@app/shared/data-types';

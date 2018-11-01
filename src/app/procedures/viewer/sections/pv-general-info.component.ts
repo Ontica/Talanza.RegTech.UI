@@ -1,6 +1,6 @@
 import { Component, ElementRef, Input, ViewChild, OnInit } from '@angular/core';
 
-import { ProcedureService } from '../../services/procedure.service';
+import { ProcedureService } from '../../../services/procedures/procedure.service';
 
 @Component({
   selector: 'pv-general-info',
@@ -62,7 +62,7 @@ export class PVGeneralInfoComponent implements OnInit {
 
   private loadProcedure(): void {
      this.procedureService.getProcedure(this.procedureUID).then((procedure) => {
-      
+
      this.procedure = procedure;
     });
   }

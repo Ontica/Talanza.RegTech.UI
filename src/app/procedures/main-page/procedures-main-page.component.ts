@@ -8,7 +8,7 @@
 
 import { Component } from '@angular/core';
 
-import { SmallProcedureInterface } from '../data-types/small-procedure.interface';
+import { SmallProcedureInterface } from '../../models/procedures/small-procedure.interface';
 
 @Component({
   selector: 'task-procedures-editor',

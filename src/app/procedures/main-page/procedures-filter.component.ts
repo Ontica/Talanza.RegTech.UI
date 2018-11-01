@@ -8,20 +8,20 @@
 
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
-import { SmallProcedureInterface } from '../data-types/small-procedure.interface';
-import { Entity } from '../data-types/entity';
-import { Office } from '../data-types/office';
+import { SmallProcedureInterface } from '../../models/procedures/small-procedure.interface';
+import { Entity } from '../../models/procedures/entity';
+import { Office } from '../../models/procedures/office';
 
-import { ProcedureService } from '../services/procedure.service';
-import { ProcedureFilter } from '../data-types/procedure-filter';
+import { ProcedureService } from '../../services/procedures/procedure.service';
+import { ProcedureFilter } from '../../models/procedures/procedure-filter';
 
-import { AuthorityService } from '../services/authority.service';
+import { EntityService } from '../../services/procedures/entity.service';
 
 @Component({
   selector: 'procedure-filter',
   templateUrl: './procedures-filter.component.html',
   styleUrls: ['./procedures-filter.component.scss'],
-  providers: [ProcedureService, AuthorityService]
+  providers: [ProcedureService, EntityService]
 })
 
 export class ProcedureFilterComponent implements OnInit {
@@ -33,7 +33,7 @@ export class ProcedureFilterComponent implements OnInit {
   @Output() public onSearch = new EventEmitter<SmallProcedureInterface[]>();
   @Output() public onNewProcedure = new EventEmitter<string>();
 
-  constructor(private procedureService: ProcedureService, private authorityService: AuthorityService) { }
+  constructor(private procedureService: ProcedureService, private authorityService: EntityService) { }
 
   public ngOnInit() {
     this.setEntities();

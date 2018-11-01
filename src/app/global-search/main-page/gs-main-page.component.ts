@@ -12,12 +12,12 @@ import { CoreService } from '@app/core';
 import { SharedService } from '@app/shared/services';
 
 import { ContractsService } from '../../contracts/services/contracts.service';
-import { ProcedureService } from '../../procedures/services/procedure.service';
+import { ProcedureService } from '../../services/procedures/procedure.service';
 import { DocumentService } from '../../documents/services/document.service';
 import { FAQService } from '../../service-desk/services/faq.service';
 
-import { SmallProcedureInterface } from '../../procedures/data-types/small-procedure.interface';
-import { ProcedureFilter } from '../../procedures/data-types/procedure-filter';
+import { SmallProcedureInterface } from '../../models/procedures/small-procedure.interface';
+import { ProcedureFilter } from '../../models/procedures/procedure-filter';
 import { NavBarConfig } from '../../controls/nav-bar/nav-bar.control';
 import { ContractClauseRef } from '../../contracts/data-types/contract';
 import { Document, DocumentFilter } from '../../documents/data-types/document';

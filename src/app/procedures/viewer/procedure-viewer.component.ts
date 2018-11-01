@@ -9,8 +9,8 @@
 import { Component, EventEmitter, HostBinding,
          Input, Output } from '@angular/core';
 
-import { Procedure } from '../data-types/procedure';
-import { ProcedureService } from '../services/procedure.service';
+import { Procedure } from '../../models/procedures/procedure';
+import { ProcedureService } from '../../services/procedures/procedure.service';
 
 @Component({
   selector:'procedure-viewer',
@@ -21,8 +21,8 @@ import { ProcedureService } from '../services/procedure.service';
 
 export class ProcedureViewerComponent {
 
-  @HostBinding('style.display') public display = 'block';
-  @HostBinding('style.position') public position = 'absolute';
+  // @HostBinding('style.display') public display = 'block';
+  // @HostBinding('style.position') public position = 'absolute';
 
   private _procedureUID: string = '';
 
@@ -32,7 +32,7 @@ export class ProcedureViewerComponent {
       this._procedureUID = procedureUID;
 
       this.loadProcedure();
-    }    
+    }
   }
   get procedureUID(): string {
     return this._procedureUID;

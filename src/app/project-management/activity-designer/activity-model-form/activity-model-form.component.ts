@@ -15,8 +15,8 @@ import { Observable, of } from 'rxjs';
 import { ProjectTemplateStore } from '@app/store/project-template.store';
 
 import { Activity, Activity_Empty } from '@app/models/project-management';
-import { Entity } from '@app/procedures/data-types/entity';
-import { Procedure } from '@app/procedures/data-types/procedure';
+import { Entity } from '@app/models/procedures/entity';
+import { Procedure } from '@app/models/procedures/procedure';
 
 
 import { AbstractForm, MessageBoxService } from '@app/shared/services';

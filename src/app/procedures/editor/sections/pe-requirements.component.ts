@@ -1,8 +1,8 @@
 import { Component, Input } from '@angular/core';
 
-import { Requirement } from '../../data-types/procedure';
+import { Requirement } from '../../../models/procedures/procedure';
 
-import { ProcedureService } from '../../services/procedure.service';
+import { ProcedureService } from '../../../services/procedures/procedure.service';
 
 @Component({
   selector: 'pe-requirements',
@@ -19,13 +19,13 @@ export class PERequirementsComponent {
   public outputDocuments: Requirement[] = [];
 
   private _procedureUID: string = '';
-  @Input() 
+  @Input()
   set procedureUID(procedureUID: string) {
     if (procedureUID) {
       this._procedureUID = procedureUID;
-      
+
       this.loadRequirements();
-    }    
+    }
   }
   get procedureUID(): string {
     return this._procedureUID;
@@ -45,11 +45,11 @@ export class PERequirementsComponent {
   }
 
   private async loadProcedure() {
-    await this.procedureService.getProcedure(this.procedureUID).then((procedure) => {     
-      this.procedure = procedure;          
+    await this.procedureService.getProcedure(this.procedureUID).then((procedure) => {
+      this.procedure = procedure;
     });
   }
-  
+
   private loadConditions(): void {
     this.conditions =  this.procedure.requirements.filter((x) => x.type === 'Condition');
   }
@@ -59,18 +59,18 @@ export class PERequirementsComponent {
   }
 
   private loadOutputDocuments(): void {
-    this.outputDocuments =  this.procedure.requirements.filter((x) => x.type === 'OutputDocument');  
-  } 
-  
+    this.outputDocuments =  this.procedure.requirements.filter((x) => x.type === 'OutputDocument');
+  }
+
   private onAttach(): void {
-    const msg = "Por el momento no es posible adjuntar archivos.";                
+    const msg = "Por el momento no es posible adjuntar archivos.";
 
     // alert(msg);
   }
 
   private onAssign(): void {
-    const msg = "Por el momento no es posible asignar tareas";                
-    
+    const msg = "Por el momento no es posible asignar tareas";
+
     // alert(msg);
   }
 

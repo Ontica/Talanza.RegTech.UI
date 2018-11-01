@@ -7,8 +7,8 @@
  */
 import { Component, Input, EventEmitter, OnInit, Output } from '@angular/core';
 
-import { Procedure } from '../../data-types/procedure';
-import { ProcedureService } from '../../services/procedure.service';
+import { Procedure } from '../../../models/procedures/procedure';
+import { ProcedureService } from '../../../services/procedures/procedure.service';
 
 @Component({
   selector: 'requirements-tab',

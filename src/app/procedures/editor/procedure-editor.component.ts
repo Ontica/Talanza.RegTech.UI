@@ -11,9 +11,9 @@ import {
   Input, Output, OnInit
 } from '@angular/core';
 
-import { Procedure } from '../data-types/procedure';
+import { Procedure } from '../../models/procedures/procedure';
 
-import { ProcedureService } from '../services/procedure.service';
+import { ProcedureService } from '../../services/procedures/procedure.service';
 
 @Component({
   selector: 'procedure-editor',

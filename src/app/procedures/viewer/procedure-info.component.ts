@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input } from '@angular/core';
 
-import { Procedure } from '../data-types/procedure';
-import { ProcedureService } from '../services/procedure.service';
+import { Procedure } from '../../models/procedures/procedure';
+import { ProcedureService } from '../../services/procedures/procedure.service';
 
 @Component({
     selector: 'procedure-info',
@@ -17,9 +17,9 @@ export class ProcedureInfoComponent {
     set procedureUID(procedureUID: string) {
         if (procedureUID) {
             this._procedureUID = procedureUID;
-            
+
             this.loadProcedure();
-        }       
+        }
     }
 
     get procedureUID(): string {

@@ -1,8 +1,8 @@
 import { Component, Input } from '@angular/core';
 
-import { Requirement } from '../../data-types/procedure';
+import { Requirement } from '../../../models/procedures/procedure';
 
-import { ProcedureService } from '../../services/procedure.service';
+import { ProcedureService } from '../../../services/procedures/procedure.service';
 
 @Component({
   selector: 'pv-requirements',
@@ -13,19 +13,19 @@ import { ProcedureService } from '../../services/procedure.service';
 
 export class PVRequirementsComponent {
 
-  public procedure: any;  
+  public procedure: any;
   public conditions: Requirement[] = [];
   public inputDocuments: Requirement[] = [];
   public outputDocuments: Requirement[] = [];
 
   private _procedureUID: string = '';
-  @Input() 
+  @Input()
   set procedureUID(procedureUID: string) {
     if (procedureUID) {
       this._procedureUID = procedureUID;
-      
+
       this.loadRequirements();
-    }    
+    }
   }
   get procedureUID(): string {
     return this._procedureUID;
@@ -42,14 +42,14 @@ export class PVRequirementsComponent {
     this.loadConditions();
     this.loadInputDocuments();
     this.loadOutputDocuments();
-   }  
+   }
 
   private  async loadProcedure() {
-   await this.procedureService.getProcedure(this.procedureUID).then((procedure) => {     
-      this.procedure = procedure;          
+   await this.procedureService.getProcedure(this.procedureUID).then((procedure) => {
+      this.procedure = procedure;
     });
 
-  }  
+  }
 
   private loadConditions(): void {
     this.conditions =  this.procedure.requirements.filter((x) => x.type === 'Condition');
@@ -60,7 +60,7 @@ export class PVRequirementsComponent {
   }
 
   private loadOutputDocuments(): void {
-    this.outputDocuments =  this.procedure.requirements.filter((x) => x.type === 'OutputDocument');  
+    this.outputDocuments =  this.procedure.requirements.filter((x) => x.type === 'OutputDocument');
   }
 
 

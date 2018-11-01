@@ -10,10 +10,10 @@ import { Injectable } from '@angular/core';
 
 import { CoreService } from '../../core/core.service';
 
-import { Procedure } from '../data-types/procedure';
-import { ProcedureFilter } from '../data-types/procedure-filter';
+import { Procedure } from '../../models/procedures/procedure';
+import { ProcedureFilter } from '../../models/procedures/procedure-filter';
 
-import { SmallProcedureInterface } from '../data-types/small-procedure.interface';
+import { SmallProcedureInterface } from '../../models/procedures/small-procedure.interface';
 
 @Injectable()
 export class ProcedureService {

@@ -14,8 +14,8 @@ import { Assertion, CoreService } from '@app/core';
 import { Activity, Contract, Project, Resource, Stage } from '@app/models/project-management';
 import { Contact } from '@app/core/data-types';
 import { ColoredTag } from '@app/shared/data-types';
-import { Entity } from '@app/procedures/data-types/entity';
-import { Procedure } from '@app/procedures/data-types/procedure';
+import { Entity } from '@app/models/procedures/entity';
+import { Procedure } from '@app/models/procedures/procedure';
 
 enum Errors {
 
