@@ -8,13 +8,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { ActivityService,
-         GanttService, ProcessModelsService,
-         ProjectService, ProjectMeetingService } from './project-management';
+import { ActivityService, GanttService,
+         ProcessModelsService, ProjectService,
+         ProjectMeetingService } from './project-management';
 
-/**
- * Do not specify providers for modules that might be imported by a lazy loaded module.
- */
+import { CataloguesService } from './catalogues.service';
+
+
 @NgModule({
 
   imports: [
@@ -23,6 +23,7 @@ import { ActivityService,
 
   providers: [
     ActivityService,
+    CataloguesService,
     GanttService,
     ProcessModelsService,
     ProjectMeetingService,
