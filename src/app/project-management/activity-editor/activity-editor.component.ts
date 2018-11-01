@@ -23,11 +23,10 @@ import { ProjectStore } from '@app/store/project.store';
 
 import { Activity, Activity_Empty } from '@app/models/project-management';
 
-import { AbstractForm, SpinnerService } from '@app/core/ui-services';
-import { ColoredTag } from '@app/core/ui-data-types';
+import { AbstractForm } from '@app/shared/abstract-form';
 
-import { MessageBoxService } from '@app/shared/message-box';
-
+import { SharedService } from '@app/shared/shared.service';
+import { ColoredTag } from '@app/shared/data-types';
 
 enum FormMessages {
 
@@ -60,11 +59,10 @@ export class ActivityEditorComponent extends AbstractForm implements OnInit, OnC
 
   procedureDialogVisible = false;
 
-  constructor(spinner: SpinnerService,
-    private messageBox: MessageBoxService,
-    private projectStore: ProjectStore) {
+  constructor(private app: SharedService,
+              private projectStore: ProjectStore) {
     super();
-    this.setSpinner(spinner);   // remove after resolve core module injection issue
+    this.setSpinner(app.spinner);   // remove after resolve core module injection issue
   }
 
 
@@ -103,7 +101,7 @@ export class ActivityEditorComponent extends AbstractForm implements OnInit, OnC
                 `<strong>${this.activity.name}</strong> de este proyecto.<br/><br/>` +
                 `¿Elimino esta actividad?`;
 
-    this.messageBox.confirm(msg, "Eliminar actividad", 'DeleteCancel', 'Eliminar esta actividad').subscribe(
+    this.app.messageBox.confirm(msg, "Eliminar actividad", 'DeleteCancel', 'Eliminar esta actividad').subscribe(
       result => {
         if (result) {
           this.setCommand('delete');
@@ -183,7 +181,7 @@ export class ActivityEditorComponent extends AbstractForm implements OnInit, OnC
   private deleteActivity(): Promise<void> {
     return this.projectStore.deleteActivity(this.activity)
       .then(() => this.onClose())
-      .catch(err => this.messageBox.showError(err).toPromise());
+      .catch(err => this.app.messageBox.showError(err).toPromise());
   }
 
 
@@ -227,7 +225,7 @@ export class ActivityEditorComponent extends AbstractForm implements OnInit, OnC
 
     return this.projectStore.updateActivity(this.activity, updateData)
       .then(() => this.onReset())
-      .catch(err => this.messageBox.showError(err).toPromise());
+      .catch(err => this.app.messageBox.showError(err).toPromise());
   }
 
 

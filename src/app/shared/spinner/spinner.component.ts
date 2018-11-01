@@ -26,7 +26,7 @@ export class SpinnerComponent implements OnDestroy, OnInit {
   visible = false;
 
   constructor(private spinnerService: SpinnerService) {
-    // console.log("spinner ctrt called: ", spinnerService.id);
+
   }
 
   ngOnInit() {

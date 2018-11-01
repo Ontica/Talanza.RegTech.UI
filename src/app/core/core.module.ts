@@ -19,21 +19,17 @@ import { ApplicationSettingsService } from './general/application-settings.servi
 import { DirectoryService } from './http/directory.service';
 
 
-import { HtmlPipe } from './pipes/html.pipe';
-
 import { HttpHandler } from './http/http-handler';
 import { HttpService } from './http/http.service';
 import { HttpErrorInterceptor } from './http/http-error-interceptor';
 
 import { LoggerService } from './general/logger.service';
 
-import { SpinnerComponent } from './spinner/spinner.component';
-import { SpinnerService } from './spinner/spinner.service';
-
 import { SecurityDataService } from './security/security-data.service';
 import { AuthenticationService } from './security/authentication.service';
 import { SecurityGuardService } from './security/security-guard.service';
 import { throwIfAlreadyLoaded } from './module-import-guard';
+
 
 @NgModule({
 
@@ -42,15 +38,9 @@ import { throwIfAlreadyLoaded } from './module-import-guard';
     HttpClientModule
   ],
 
-  declarations: [
-    HtmlPipe,
-    SpinnerComponent
-  ],
+  declarations: [ ],
 
-  exports: [
-    HtmlPipe,
-    SpinnerComponent
-  ],
+  exports: [ ],
 
   providers: [
     CoreService,
@@ -64,7 +54,6 @@ import { throwIfAlreadyLoaded } from './module-import-guard';
     HttpHandler,
     HttpService,
     DirectoryService,
-    SpinnerService,
 
     { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true }
 

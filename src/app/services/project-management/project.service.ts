@@ -9,17 +9,13 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
-import { Assertion } from '@app/core';
-
-import { CoreService } from '@app/core/core.service';
-
-import { Contact } from '@app/core/data-types';
-import { ColoredTag } from '@app/core/ui-services';
+import { Assertion, CoreService } from '@app/core';
 
 import { Activity, Contract, Project, Resource, Stage } from '@app/models/project-management';
-import { Procedure } from '@app/procedures/data-types/procedure';
+import { Contact } from '@app/core/data-types';
+import { ColoredTag } from '@app/shared/data-types';
 import { Entity } from '@app/procedures/data-types/entity';
-
+import { Procedure } from '@app/procedures/data-types/procedure';
 
 enum Errors {
 

@@ -6,14 +6,12 @@
  */
 
 import { Component, OnInit } from '@angular/core';
-
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-
 import { Router } from '@angular/router';
 
-import { AuthenticationService } from '../../core';
+import { AuthenticationService } from '@app/core';
 
-import { AbstractForm, SpinnerService } from '../../core/ui-services';
+import { AbstractForm } from '@app/shared/services';
 
 
 enum FormMessages {
@@ -32,11 +30,8 @@ enum FormMessages {
 export class UserLoginComponent extends AbstractForm implements OnInit {
 
   constructor(private authenticationService: AuthenticationService,
-              private router: Router,
-              private spinnerService: SpinnerService) {
+              private router: Router) {
     super();
-
-    this.setSpinner(spinnerService);    // remove after resolve core module injection issue
   }
 
 

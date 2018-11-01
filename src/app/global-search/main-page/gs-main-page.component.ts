@@ -1,14 +1,20 @@
-import { Component, EventEmitter, Input, Output,  ViewEncapsulation  } from '@angular/core';
+/**
+ * @license
+ * Copyright (c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
+ *
+ * See LICENSE.txt in the project root for complete license information.
+ */
+
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { Assertion, Validate } from '@app/core';
+import { CoreService } from '@app/core';
+import { SharedService } from '@app/shared/services';
 
-import { CoreService } from '../../core/core.service';
 import { ContractsService } from '../../contracts/services/contracts.service';
 import { ProcedureService } from '../../procedures/services/procedure.service';
 import { DocumentService } from '../../documents/services/document.service';
 import { FAQService } from '../../service-desk/services/faq.service';
-
 
 import { SmallProcedureInterface } from '../../procedures/data-types/small-procedure.interface';
 import { ProcedureFilter } from '../../procedures/data-types/procedure-filter';
@@ -23,7 +29,6 @@ import { Faq } from '../../service-desk/data-types/faq';
     templateUrl: './gs-main-page.component.html',
     styleUrls: ['./gs-main-page.component.scss']
 })
-
 export class GlobalSearchMainPageComponent {
 
     public procedures: SmallProcedureInterface[] = [];
@@ -58,14 +63,21 @@ export class GlobalSearchMainPageComponent {
 
     @Output() public onClose = new EventEmitter();
 
-    constructor(private route: ActivatedRoute, private procedureService: ProcedureService,
-                private contractService: ContractsService, private core: CoreService,
-                private documentService: DocumentService, private faqService: FAQService) {
-        this.route.params.subscribe(params => {
-            this.keywords = params['keywords'];
-             this.main();
-         });
+    constructor(private route: ActivatedRoute,
+                private core: CoreService,
+                private app: SharedService,
+                private procedureService: ProcedureService,
+                private contractService: ContractsService,
+                private documentService: DocumentService,
+                private faqService: FAQService) {
+
+      this.route.params.subscribe(params => {
+          this.keywords = params['keywords'];
+          this.main();
+      });
+
     }
+
 
     public selectOption(option: string) {
         this.selectedOption = option;
@@ -73,9 +85,11 @@ export class GlobalSearchMainPageComponent {
         this.closeDetailsContainer();
     }
 
+
     public closeGlobalSearch(): void {
         this.onClose.emit();
     }
+
 
     public selectProcedure(procedureUID: string): void {
 
@@ -86,17 +100,20 @@ export class GlobalSearchMainPageComponent {
         }
     }
 
+
     public setSelectedClause(clause: ContractClauseRef): void {
         this.clause = clause;
 
         this.showDetailsContainer();
     }
 
+
     public setSelectedDocument(document: Document): void {
         this.documentURI = document.url;
 
         this.showDetailsContainer();
     }
+
 
     public setSelectedFAQ(FAQUid: string): void {
         this.FAQUid = FAQUid;
@@ -105,15 +122,18 @@ export class GlobalSearchMainPageComponent {
 
     }
 
+
     public closeDetailsContainer(): void {
         this.masterContainer = 'centered-container';
         this.isDetailsContainerVisible = false;
     }
 
+
     private showDetailsContainer(): void {
         this.masterContainer = 'block-container';
         this.isDetailsContainerVisible = true;
     }
+
 
     private async main() {
         this.closeDetailsContainer();
@@ -130,6 +150,7 @@ export class GlobalSearchMainPageComponent {
         this.fillNavBar();
     }
 
+
     private fillNavBar(): void {
         this.navBarConfig = [];
         this.navBarConfig.push({ name:'procedures', displayText:'Trámites (' + this.procedures.length.toString() +')'});
@@ -138,39 +159,44 @@ export class GlobalSearchMainPageComponent {
         this.navBarConfig.push({ name:'FAQs', displayText:'Q&A (' + this.FAQs.length.toString() +')'});
     }
 
+
     private cleanSelectedOption(): void {
         this.selectedOption = '';
     }
+
 
     private async loadProcedures() {
         let filter: ProcedureFilter = new ProcedureFilter();
         filter.keywords = this.keywords;
 
-        this.core.spinner.show();
+        this.app.spinner.show();
 
        await this.procedureService.getProceduresList(filter)
-                         .then((procedures) => {
-                             this.procedures = procedures;
-                             this.core.spinner.hide();
+                         .then( x => {
+                             this.procedures = x;
+                             this.app.spinner.hide();
                             })
-                          .catch(() => this.core.spinner.hide());
+                          .catch( () => this.app.spinner.hide() );
 
     }
+
 
     private async loadContractClauses() {
         const errMsg = 'Ocurrió un problema al intentar leer la lista de cláusulas para el contrato.' ;
 
         const contractUID = 'R24Kmag356L21'; //Contrato: 2.4 Individual
 
-        this.core.spinner.show();
+        this.app.spinner.show();
 
         await this.contractService.searchClauses(contractUID, this.keywords)
-            .toPromise()
-            .then((x) => { this.clauses = x;
-                           this.core.spinner.hide()})
-            .catch((e) => { this.core.spinner.hide();
-                            this.core.http.showAndThrow(e, errMsg) });
+                                  .toPromise()
+                                  .then( x => {
+                                    this.clauses = x;
+                                    this.app.spinner.hide();
+                                  })
+                                  .catch( () => this.app.spinner.hide() );
     }
+
 
     private async loadDocuments() {
 
@@ -178,26 +204,28 @@ export class GlobalSearchMainPageComponent {
         filter.type = '';
         filter.keywords = this.keywords;
 
-        this.core.spinner.show();
+        this.app.spinner.show();
 
         await this.documentService.getDocuments(filter)
-                            .then((documents) => { this.core.spinner.hide();
-                                this.documents = documents; })
-                            .catch(() => this.core.spinner.hide());
+                                  .then( x => {
+                                    this.documents = x;
+                                    this.app.spinner.hide();
+                                   })
+                                  .catch( () => this.app.spinner.hide() );
     }
+
 
     private async loadFaqs() {
 
-      this.core.spinner.show();
+      this.app.spinner.show();
 
       await this.faqService.getFAQs(this.keywords)
-                           .subscribe((FAQs) => { this.core.spinner.hide();
-                                                  this.FAQs = FAQs;},
-                                 () => {},
-                                 () => { this.core.spinner.hide();});
-
-
-
+                           .subscribe( x => {
+                              this.FAQs = x;
+                              this.app.spinner.hide();
+                           },
+                           () => {},
+                           () => this.app.spinner.hide() );
 
   }
 }

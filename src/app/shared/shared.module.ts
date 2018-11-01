@@ -13,7 +13,6 @@ import { FormsModule } from '@angular/forms';
 import { AngularMaterialModule } from './angular-material.module';
 
 import { ControlsModule } from '../controls/controls.module';
-import { GlobalSearchModule } from '../global-search/global-search.module';
 
 import { CoreModule } from '../core/core.module';
 
@@ -24,16 +23,17 @@ import { NavigationHeaderComponent } from './nav-header/nav-header.component';
 import { NavigationMenuComponent } from './nav-menu/nav-menu.component';
 
 import { MessageBoxComponent } from './message-box/message-box.component';
+import { MessageBoxService } from './message-box/message.box.service';
 
 import { NoContentComponent } from './no-content/no-content.component';
 
 import { SafeHtmlPipe } from './pipes/safe-html.pipe';
 
-import { MessageBoxService } from './message-box/message.box.service';
+import { SpinnerComponent } from './spinner/spinner.component';
+import { SpinnerService } from './spinner/spinner.service';
 
-/**
- * Do not specify providers for modules that might be imported by a lazy loaded module.
- */
+import { SharedService } from './shared.service';
+
 
 @NgModule({
 
@@ -44,7 +44,6 @@ import { MessageBoxService } from './message-box/message.box.service';
     AngularMaterialModule,
 
     ControlsModule,
-    GlobalSearchModule,
     CoreModule
   ],
 
@@ -54,10 +53,9 @@ import { MessageBoxService } from './message-box/message.box.service';
     MessageBoxComponent,
     NavigationHeaderComponent,
     NavigationMenuComponent,
-
     NoContentComponent,
-    SafeHtmlPipe
-
+    SafeHtmlPipe,
+    SpinnerComponent,
   ],
 
   exports: [
@@ -65,11 +63,14 @@ import { MessageBoxService } from './message-box/message.box.service';
     MessageBoxComponent,
     NavigationHeaderComponent,
     NoContentComponent,
-    SafeHtmlPipe
+    SafeHtmlPipe,
+    SpinnerComponent
   ],
 
   providers: [
-    MessageBoxService
+    MessageBoxService,
+    SharedService,
+    SpinnerService
   ],
 
   entryComponents: [

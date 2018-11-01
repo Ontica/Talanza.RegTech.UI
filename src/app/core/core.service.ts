@@ -1,9 +1,8 @@
 /**
  * @license
- * Copyright (c) 2017 La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
+ * Copyright (c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
  *
  * See LICENSE.txt in the project root for complete license information.
- *
  */
 
 import { Injectable } from '@angular/core';
@@ -12,7 +11,7 @@ import { ExceptionHandler } from './general/exception-handler';
 import { HttpService } from './http/http.service';
 import { LoggerService } from './general/logger.service';
 import { SessionService } from './general/session.service';
-import { SpinnerService } from './spinner/spinner.service';
+
 
 @Injectable()
 export class CoreService {
@@ -20,8 +19,7 @@ export class CoreService {
   public constructor(private _exceptionHandler: ExceptionHandler,
                      private _session: SessionService,
                      private _http: HttpService,
-                     private _logger: LoggerService,
-                     private _spinner: SpinnerService) {
+                     private _logger: LoggerService) {
   }
 
   public get exceptionHandler(): ExceptionHandler {
@@ -38,10 +36,6 @@ export class CoreService {
 
   public get session(): SessionService {
     return this._session;
-  }
-
-  public get spinner(): SpinnerService {
-    return this._spinner;
   }
 
 }

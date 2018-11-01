@@ -6,24 +6,24 @@
  */
 
 import { ReflectiveInjector } from '@angular/core';
-
 import { AbstractControl, FormGroup } from '@angular/forms';
 
-import { Assertion } from '../general/assertion';
+import { Assertion, Exception } from '@app/core';
 
-import { Exception } from '../general/exception';
+import { Displayable } from './data-types';
+import { SpinnerService } from './spinner/spinner.service';
 
-import { Displayable }  from '../ui-data-types';
-import { SpinnerService }  from '../spinner/spinner.service';
 
 export interface Command {
   name: string;
   pars?: object[];
 }
 
+
 export interface FormSubmitOptions {
   skipFormValidation?: boolean;
 }
+
 
 const enum FormMessages {
 
@@ -34,6 +34,7 @@ const enum FormMessages {
   "Programming error. The form is invalid (form.valid == false) and there are no exception messages registered.",
 
 }
+
 
 export abstract class AbstractForm {
 
@@ -273,8 +274,6 @@ export abstract class AbstractForm {
     const injector = ReflectiveInjector.fromResolvedProviders(providers);
 
     this.spinner = injector.get(SpinnerService) as SpinnerService;
-
-    console.log("setDefaultSpinner ");
   }
 
 

@@ -5,27 +5,22 @@
  * See LICENSE.txt in the project root for complete license information.
  */
 
-import {
-  Component, EventEmitter, Input,
-  OnChanges, OnInit, Output
-} from '@angular/core';
+import { Component, EventEmitter, Input,
+         OnChanges, OnInit, Output } from '@angular/core';
 
-import {
-  FormControl,
-  FormGroup, Validators
-} from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { Observable, of } from 'rxjs';
 
 import { ProjectTemplateStore } from '@app/store/project-template.store';
 
-import { AbstractForm, SpinnerService } from '@app/core/ui-services';
-
 import { Activity, Activity_Empty } from '@app/models/project-management';
-import { Procedure } from '@app/procedures/data-types/procedure';
 import { Entity } from '@app/procedures/data-types/entity';
+import { Procedure } from '@app/procedures/data-types/procedure';
 
-import { MessageBoxService } from '@app/shared/message-box';
+
+import { AbstractForm, MessageBoxService } from '@app/shared/services';
+
 
 enum FormMessages {
 
@@ -56,11 +51,9 @@ export class ActivityModelFormComponent extends AbstractForm implements OnInit, 
   entities: Observable<Entity[]> = of([]);
   procedures: Observable<Procedure[]> = of([]);
 
-  constructor(spinner: SpinnerService,
-              private messageService: MessageBoxService,
+  constructor(private messageService: MessageBoxService,
               private templateStore: ProjectTemplateStore) {
     super();
-    this.setSpinner(spinner);   // remove after resolve core module injection issue
   }
 
 

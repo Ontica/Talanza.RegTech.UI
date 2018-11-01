@@ -9,13 +9,18 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { List } from 'immutable';
 
-import { Contact, Empty } from '@app/core/data-types';
-import { Activity, Contract, Project, Stage,
+import { Activity, Contract,
+         Project, Stage,
          ViewConfig, DefaultViewConfig } from '@app/models/project-management';
-import { ProjectService } from '@app/services/project-management';
-import { ColoredTag } from '@app/core/ui-services';
+
 import { Procedure } from '@app/procedures/data-types/procedure';
 import { Entity } from '@app/procedures/data-types/entity';
+import { Contact, Empty } from '@app/core/data-types';
+
+import { ColoredTag } from '@app/shared/data-types';
+
+import { ProjectService } from '@app/services/project-management';
+
 
 export class ProjectModel {
 
