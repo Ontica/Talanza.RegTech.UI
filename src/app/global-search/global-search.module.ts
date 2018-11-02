@@ -21,7 +21,7 @@ import { ServiceDeskModule } from '../service-desk/service-desk.module';
 
 import { ContractsService, DocumentService, ProcedureService } from '@app/services/regulation';
 
-import { FAQService } from '../service-desk/services/faq.service';
+import { FAQService } from '../services/service-desk';
 
 import { GlobalSearchRoutingModule } from './global-search-routing.module';
 

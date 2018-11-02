@@ -1,67 +1,65 @@
 /**
  * @license
- * Copyright (c) 2017 La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
+ * Copyright (c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
  *
  * See LICENSE.txt in the project root for complete license information.
- *
  */
 
 import { Component, Input } from '@angular/core';
 
-import { Faq } from '../data-types/faq';
-import { FAQService } from '../services/faq.service';
+import { FAQService } from '@app/services/service-desk';
+
+import { Faq } from '@app/models/service-desk';
+
 
 const OPERATIONS: string[] = [
-     'Agregar FAQ',
-     
-   
+  'Agregar FAQ',
 ]
-  
+
 
 @Component({
-    selector:'faq',
-    templateUrl: './faq.component.html',
-    styleUrls: ['./faq.component.scss'],
-    providers:[FAQService]
+  selector: 'faq',
+  templateUrl: './faq.component.html',
+  styleUrls: ['./faq.component.scss'],
+  providers: [FAQService]
 })
-
 export class FAQComponent {
 
-    private _faqUID: string = '';
-    @Input() 
-    set faqUID(faqUID:string) {
-        this._faqUID = faqUID;
-        
-        this.loadFaq();    
-    }
-    get faqUID(): string {
-        return this._faqUID;
-    }
+  private _faqUID: string = '';
+  @Input()
+  set faqUID(faqUID: string) {
+    this._faqUID = faqUID;
 
-    public faq: Faq;
-    public isOpenFAQEditor= false;
-    public operations = OPERATIONS;
+    this.loadFaq();
+  }
+  get faqUID(): string {
+    return this._faqUID;
+  }
 
-    constructor(private faqService: FAQService) {}     
+  public faq: Faq;
+  public isOpenFAQEditor = false;
+  public operations = OPERATIONS;
 
-    public onOpenFAQEditor(): void {
-        this.isOpenFAQEditor = true;
-    }
+  constructor(private faqService: FAQService) { }
 
-    public onEditedFAQ(): void {
-        this.isOpenFAQEditor = false;
+  public onOpenFAQEditor(): void {
+    this.isOpenFAQEditor = true;
+  }
 
-        this.loadFaq(); 
-    }
+  public onEditedFAQ(): void {
+    this.isOpenFAQEditor = false;
 
-    private loadFaq(): void {
-       this.faqService.getFAQ(this.faqUID)
-            .subscribe((faq) => { this.faq = faq;});
-    }
+    this.loadFaq();
+  }
 
-    public onChangeOperation(operation: string): void {
-       
-    }
+  private loadFaq(): void {
+    this.faqService.getFAQ(this.faqUID)
+      .subscribe((faq) => { this.faq = faq; });
+  }
 
-   
+  public onChangeOperation(operation: string): void {
+
+  }
+
+
 }

@@ -1,9 +1,16 @@
+/**
+ * @license
+ * Copyright (c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
+ *
+ * See LICENSE.txt in the project root for complete license information.
+ */
+
 import { Component, Input } from '@angular/core';
 
-import { InboxRef } from '../data-types/inbox';
-import { InboxFilter } from '../data-types/inbox-filter';
+import { InboxService } from '@app/services/inbox';
 
-import { InboxService } from '../services/inbox.service';
+import { InboxFilter, InboxRef } from '@app/models/inbox';
+
 
 @Component({
   selector: 'work-list',
@@ -11,25 +18,24 @@ import { InboxService } from '../services/inbox.service';
   styleUrls: ['./work-list.component.scss'],
   providers: [InboxService]
 })
-
 export class WorkListComponent {
 
   public inboxList: InboxRef[] = [];
   public selectedItem: InboxRef;
   public isEditorWindow = false;
-  
-  private _filter: InboxFilter;
-  @Input() 
-  set filter(filter: InboxFilter) {
-    this._filter = filter;   
 
-    this.loadInboxes();    
+  private _filter: InboxFilter;
+  @Input()
+  set filter(filter: InboxFilter) {
+    this._filter = filter;
+
+    this.loadInboxes();
   }
   get filter(): InboxFilter {
     return this._filter;
   }
 
-  constructor (private inboxService: InboxService) { }
+  constructor(private inboxService: InboxService) { }
 
   public closeInboxEditorWindow(): void {
     this.isEditorWindow = false;
@@ -44,12 +50,12 @@ export class WorkListComponent {
     const errMsg = 'Ocurrió un problema al intentar buscar la lista de elementos en el inbox.';
 
     this.inboxService.getInboxItems(this.filter)
-                      .toPromise()
-                      .then((x) => { this.inboxList = x; } )
-                      .catch((e) => this.exceptionHandler(e, errMsg));
-    
+      .toPromise()
+      .then((x) => { this.inboxList = x; })
+      .catch((e) => this.exceptionHandler(e, errMsg));
+
   }
-  
+
   private exceptionHandler(error: any, defaultMsg: string): void {
     let errMsg = 'Tengo un problema.\n\n';
 

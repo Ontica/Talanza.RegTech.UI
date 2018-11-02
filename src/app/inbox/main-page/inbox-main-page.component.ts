@@ -1,16 +1,16 @@
 /**
  * @license
- * Copyright (c) 2017 La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
+ * Copyright (c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
  *
  * See LICENSE.txt in the project root for complete license information.
- *
  */
 
 import { Component } from '@angular/core';
 
-import { InboxFilter } from '../data-types/inbox-filter';
+import { ActivityService, ProjectService } from '@app/services/project-management';
 
-import { ActivityService, ProjectService } from '../../services/project-management';
+import { InboxFilter } from '@app/models/inbox';
+
 
 @Component({
   selector: 'inbox-main-page',
@@ -18,14 +18,15 @@ import { ActivityService, ProjectService } from '../../services/project-manageme
   styleUrls: ['./inbox-main-page.component.scss'],
   providers: [ProjectService, ActivityService]
 })
+export class InboxMainPageComponent {
 
-export class InboxMainPageComponent  {
+  public filter = new InboxFilter();
 
-  public filter: InboxFilter = new InboxFilter();
+  public constructor(private projectService: ProjectService,
+                     private activityService: ActivityService) { }
 
-  public constructor(private projectService: ProjectService, private activityService: ActivityService) { }
 
-  public  onChangeFilter(receivedFilter: InboxFilter) {
+  public onChangeFilter(receivedFilter: InboxFilter) {
     this.filter = receivedFilter;
   }
 

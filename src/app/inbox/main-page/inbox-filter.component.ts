@@ -7,13 +7,11 @@
 
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
-import { Empty, Contact } from '../../core/data-types';
-
-import { Project } from '@app/models/project-management';
-
-import { InboxFilter } from '../data-types/inbox-filter';
-
 import { ProjectService } from '@app/services/project-management';
+
+import { Empty, Contact } from '@app/models/core';
+import { Project } from '@app/models/project-management';
+import { InboxFilter } from '@app/models/inbox';
 
 
 @Component({
@@ -24,7 +22,6 @@ import { ProjectService } from '@app/services/project-management';
 export class InboxFilterComponent implements OnInit {
 
   @Output() onChangeFilter = new EventEmitter<InboxFilter>();
-
 
   isAddActivityEditorWindowVisible = false;
 
@@ -47,6 +44,7 @@ export class InboxFilterComponent implements OnInit {
     this.loadTags();
   }
 
+
   onChangeProjectList(projectUID: string) {
     if (projectUID === '') {
       this.selectedProject = Empty;
@@ -62,10 +60,12 @@ export class InboxFilterComponent implements OnInit {
     this.changeFilter();
   }
 
+
   onChangeSelectedTags(tags: any[]) {
     this.filter.tags = tags.map(x => x.name);
     this.changeFilter();
   }
+
 
   changeFilter() {
 
@@ -74,19 +74,23 @@ export class InboxFilterComponent implements OnInit {
     this.onChangeFilter.emit(this.filter);
   }
 
+
   onClickAdd() {
-    alert('Esta tarea se encuentra en desarrollo ' + '\n\n' + 'Lamentamos las molestias ');
+    alert('Esta tarea se encuentra en desarrollo.');
   }
+
 
   onSearch() {
     this.filter.keywords = this.keywords;
     this.changeFilter();
   }
 
+
   cleanFilter() {
     this.filter.clean();
     this.loadTags();
   }
+
 
   private loadProjectList() {
     const errMsg = 'Ocurrió un problema al intentar leer la lista de proyectos.';

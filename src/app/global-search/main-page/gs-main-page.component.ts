@@ -11,218 +11,216 @@ import { ActivatedRoute } from '@angular/router';
 import { SharedService } from '@app/shared/services';
 
 import { ContractsService, DocumentService, ProcedureService } from '@app/services/regulation';
-
-import { FAQService } from '../../service-desk/services/faq.service';
+import { FAQService } from '@app/services/service-desk';
 
 import { BaseProcedure, ContractClauseRef, Document,
          DocumentFilter, ProcedureFilter } from '@app/models/regulation';
+import { Faq } from '@app/models/service-desk';
 
-import { Faq } from '../../service-desk/data-types/faq';
-
-import { NavBarConfig } from '../../controls/nav-bar/nav-bar.control';
+import { NavBarConfig } from '@app/controls/nav-bar/nav-bar.control';
 
 
 @Component({
-    selector: 'global-search',
-    templateUrl: './gs-main-page.component.html',
-    styleUrls: ['./gs-main-page.component.scss']
+  selector: 'global-search',
+  templateUrl: './gs-main-page.component.html',
+  styleUrls: ['./gs-main-page.component.scss']
 })
 export class GlobalSearchMainPageComponent {
 
-    public procedures: BaseProcedure[] = [];
-    public selectedProcedureUID = '';
-    public navBarConfig: NavBarConfig[] = [];
-    public selectedOption = '';
+  public procedures: BaseProcedure[] = [];
+  public selectedProcedureUID = '';
+  public navBarConfig: NavBarConfig[] = [];
+  public selectedOption = '';
 
-    public masterContainer = 'centered-container';
-    public isDetailsContainerVisible = false;
+  public masterContainer = 'centered-container';
+  public isDetailsContainerVisible = false;
 
-    public clauses: ContractClauseRef[] = [];
-    public clause: ContractClauseRef;
+  public clauses: ContractClauseRef[] = [];
+  public clause: ContractClauseRef;
 
-    public documents: Document[] = [];
-    public documentURI = '';
+  public documents: Document[] = [];
+  public documentURI = '';
 
-    public FAQs: Faq[] = [];
-    public FAQUid = '' ;
+  public FAQs: Faq[] = [];
+  public FAQUid = '';
 
-    private _keywords: string = '';
-    @Input()
-    set keywords(keywords: string) {
-        if (keywords) {
-            this._keywords = keywords;
+  private _keywords: string = '';
+  @Input()
+  set keywords(keywords: string) {
+    if (keywords) {
+      this._keywords = keywords;
 
-            this.main();
-        }
+      this.main();
     }
-    get keywords(): string {
-        return this._keywords;
+  }
+  get keywords(): string {
+    return this._keywords;
+  }
+
+  @Output() public onClose = new EventEmitter();
+
+  constructor(private route: ActivatedRoute,
+    private app: SharedService,
+    private procedureService: ProcedureService,
+    private contractService: ContractsService,
+    private documentService: DocumentService,
+    private faqService: FAQService) {
+
+    this.route.params.subscribe(params => {
+      this.keywords = params['keywords'];
+      this.main();
+    });
+
+  }
+
+
+  public selectOption(option: string) {
+    this.selectedOption = option;
+
+    this.closeDetailsContainer();
+  }
+
+
+  public closeGlobalSearch(): void {
+    this.onClose.emit();
+  }
+
+
+  public selectProcedure(procedureUID: string): void {
+
+    if (procedureUID) {
+      this.selectedProcedureUID = procedureUID;
+
+      this.showDetailsContainer();
     }
-
-    @Output() public onClose = new EventEmitter();
-
-    constructor(private route: ActivatedRoute,
-                private app: SharedService,
-                private procedureService: ProcedureService,
-                private contractService: ContractsService,
-                private documentService: DocumentService,
-                private faqService: FAQService) {
-
-      this.route.params.subscribe(params => {
-          this.keywords = params['keywords'];
-          this.main();
-      });
-
-    }
+  }
 
 
-    public selectOption(option: string) {
-        this.selectedOption = option;
+  public setSelectedClause(clause: ContractClauseRef): void {
+    this.clause = clause;
 
-        this.closeDetailsContainer();
-    }
-
-
-    public closeGlobalSearch(): void {
-        this.onClose.emit();
-    }
+    this.showDetailsContainer();
+  }
 
 
-    public selectProcedure(procedureUID: string): void {
+  public setSelectedDocument(document: Document): void {
+    this.documentURI = document.url;
 
-        if (procedureUID) {
-            this.selectedProcedureUID = procedureUID;
-
-            this.showDetailsContainer();
-        }
-    }
+    this.showDetailsContainer();
+  }
 
 
-    public setSelectedClause(clause: ContractClauseRef): void {
-        this.clause = clause;
+  public setSelectedFAQ(FAQUid: string): void {
+    this.FAQUid = FAQUid;
 
-        this.showDetailsContainer();
-    }
+    this.showDetailsContainer();
 
-
-    public setSelectedDocument(document: Document): void {
-        this.documentURI = document.url;
-
-        this.showDetailsContainer();
-    }
+  }
 
 
-    public setSelectedFAQ(FAQUid: string): void {
-        this.FAQUid = FAQUid;
-
-        this.showDetailsContainer();
-
-    }
+  public closeDetailsContainer(): void {
+    this.masterContainer = 'centered-container';
+    this.isDetailsContainerVisible = false;
+  }
 
 
-    public closeDetailsContainer(): void {
-        this.masterContainer = 'centered-container';
-        this.isDetailsContainerVisible = false;
-    }
+  private showDetailsContainer(): void {
+    this.masterContainer = 'block-container';
+    this.isDetailsContainerVisible = true;
+  }
 
 
-    private showDetailsContainer(): void {
-        this.masterContainer = 'block-container';
-        this.isDetailsContainerVisible = true;
-    }
+  private async main() {
+    this.closeDetailsContainer();
 
-
-    private async main() {
-        this.closeDetailsContainer();
-
-        if (!this.keywords) {
-          return;
-        }
-
-        await this.loadProcedures();
-        await this.loadContractClauses();
-        await this.loadDocuments();
-        await this.loadFaqs();
-
-        this.fillNavBar();
+    if (!this.keywords) {
+      return;
     }
 
+    await this.loadProcedures();
+    await this.loadContractClauses();
+    await this.loadDocuments();
+    await this.loadFaqs();
 
-    private fillNavBar(): void {
-        this.navBarConfig = [];
-        this.navBarConfig.push({ name:'procedures', displayText:'Trámites (' + this.procedures.length.toString() +')'});
-        this.navBarConfig.push({ name:'contracts', displayText:'Contratos (' + this.clauses.length.toString() +')'});
-        this.navBarConfig.push({ name:'documents', displayText:'Documentos (' + this.documents.length.toString() +')'});
-        this.navBarConfig.push({ name:'FAQs', displayText:'Q&A (' + this.FAQs.length.toString() +')'});
-    }
-
-
-    private cleanSelectedOption(): void {
-        this.selectedOption = '';
-    }
+    this.fillNavBar();
+  }
 
 
-    private async loadProcedures() {
-        let filter = new ProcedureFilter();
-        filter.keywords = this.keywords;
-
-        this.app.spinner.show();
-
-       await this.procedureService.getProceduresList(filter)
-                         .then( x => {
-                             this.procedures = x;
-                             this.app.spinner.hide();
-                            })
-                          .catch( () => this.app.spinner.hide() );
-
-    }
+  private fillNavBar(): void {
+    this.navBarConfig = [];
+    this.navBarConfig.push({ name: 'procedures', displayText: 'Trámites (' + this.procedures.length.toString() + ')' });
+    this.navBarConfig.push({ name: 'contracts', displayText: 'Contratos (' + this.clauses.length.toString() + ')' });
+    this.navBarConfig.push({ name: 'documents', displayText: 'Documentos (' + this.documents.length.toString() + ')' });
+    this.navBarConfig.push({ name: 'FAQs', displayText: 'Q&A (' + this.FAQs.length.toString() + ')' });
+  }
 
 
-    private async loadContractClauses() {
-        const errMsg = 'Ocurrió un problema al intentar leer la lista de cláusulas para el contrato.' ;
-
-        const contractUID = 'R24Kmag356L21'; //Contrato: 2.4 Individual
-
-        this.app.spinner.show();
-
-        await this.contractService.searchClauses(contractUID, this.keywords)
-                                  .toPromise()
-                                  .then( x => {
-                                    this.clauses = x;
-                                    this.app.spinner.hide();
-                                  })
-                                  .catch( () => this.app.spinner.hide() );
-    }
+  private cleanSelectedOption(): void {
+    this.selectedOption = '';
+  }
 
 
-    private async loadDocuments() {
+  private async loadProcedures() {
+    let filter = new ProcedureFilter();
+    filter.keywords = this.keywords;
 
-        let filter = new DocumentFilter();
-        filter.type = '';
-        filter.keywords = this.keywords;
+    this.app.spinner.show();
 
-        this.app.spinner.show();
+    await this.procedureService.getProceduresList(filter)
+      .then(x => {
+        this.procedures = x;
+        this.app.spinner.hide();
+      })
+      .catch(() => this.app.spinner.hide());
 
-        await this.documentService.getDocuments(filter)
-                                  .then( x => {
-                                    this.documents = x;
-                                    this.app.spinner.hide();
-                                   })
-                                  .catch( () => this.app.spinner.hide() );
-    }
+  }
 
 
-    private async loadFaqs() {
+  private async loadContractClauses() {
+    const errMsg = 'Ocurrió un problema al intentar leer la lista de cláusulas para el contrato.';
 
-      this.app.spinner.show();
+    const contractUID = 'R24Kmag356L21'; //Contrato: 2.4 Individual
 
-      await this.faqService.getFAQs(this.keywords)
-                           .subscribe( x => {
-                              this.FAQs = x;
-                              this.app.spinner.hide();
-                           },
-                           () => {},
-                           () => this.app.spinner.hide() );
+    this.app.spinner.show();
+
+    await this.contractService.searchClauses(contractUID, this.keywords)
+      .toPromise()
+      .then(x => {
+        this.clauses = x;
+        this.app.spinner.hide();
+      })
+      .catch(() => this.app.spinner.hide());
+  }
+
+
+  private async loadDocuments() {
+
+    let filter = new DocumentFilter();
+    filter.type = '';
+    filter.keywords = this.keywords;
+
+    this.app.spinner.show();
+
+    await this.documentService.getDocuments(filter)
+      .then(x => {
+        this.documents = x;
+        this.app.spinner.hide();
+      })
+      .catch(() => this.app.spinner.hide());
+  }
+
+
+  private async loadFaqs() {
+
+    this.app.spinner.show();
+
+    await this.faqService.getFAQs(this.keywords)
+      .subscribe(x => {
+        this.FAQs = x;
+        this.app.spinner.hide();
+      },
+        () => { },
+        () => this.app.spinner.hide());
 
   }
 }

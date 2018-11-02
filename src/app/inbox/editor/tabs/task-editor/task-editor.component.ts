@@ -1,29 +1,37 @@
+/**
+ * @license
+ * Copyright (c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
+ *
+ * See LICENSE.txt in the project root for complete license information.
+ */
+
 import { Component, Input } from '@angular/core';
 
-import { InboxRef } from '../../../data-types/inbox';
+import { InboxRef } from '@app/models/inbox';
+
 
 @Component({
-  selector:'task-editor',
+  selector: 'task-editor',
   templateUrl: './task-editor.component.html',
   styleUrls: ['./task-editor.component.scss']
 })
-
 export class TaskEditorComponent {
 
   private _inboxItem: InboxRef;
+
   @Input()
-  set inboxItem(inboxItem: InboxRef) {
-    this._inboxItem = inboxItem;
-  }
   get inboxItem(): InboxRef {
     return this._inboxItem;
   }
+  set inboxItem(inboxItem: InboxRef) {
+    this._inboxItem = inboxItem;
+  }
 
-  public files: File[]=[];
+  public files: File[] = [];
 
-  public getSelectedFile(files: FileList): void {   
+  public getSelectedFile(files: FileList): void {
     this.files.push(files.item(0));
-  
+
   }
 
 }

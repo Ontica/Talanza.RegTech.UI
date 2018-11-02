@@ -1,78 +1,79 @@
 /**
  * @license
- * Copyright (c) 2017 La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
+ * Copyright (c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
  *
  * See LICENSE.txt in the project root for complete license information.
- *
  */
 
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
-import { Faq, EmptyFaq } from '../data-types/faq';
-import { FAQService } from '../services/faq.service';
+import { FAQService } from '@app/services/service-desk';
+
+import { EmptyFaq } from '@app/models/service-desk';
 
 
 @Component({
-    selector:'add-faq',
-    templateUrl: './add-faq.component.html',
-    styleUrls: ['./add-faq.component.scss'],
-    providers:[FAQService]
+  selector: 'add-faq',
+  templateUrl: './add-faq.component.html',
+  styleUrls: ['./add-faq.component.scss'],
+  providers: [FAQService]
 })
+export class AddFAQComponent {
 
-export class AddFAQComponent  { 
-  
-    public faq = EmptyFaq();
+  public faq = EmptyFaq();
 
-    @Output() public onAddFaq = new EventEmitter();
+  @Output() public onAddFaq = new EventEmitter();
 
-    constructor(private faqService: FAQService) {}   
-    
-    public async onSaveFAQ() {
-        if (!this.validate()) {
-            return;
-        }
-        
-        await this.addFAQ(); 
-       
-        this.cleanFAQ();
+  constructor(private faqService: FAQService) { }
 
+
+  public async onSaveFAQ() {
+    if (!this.validate()) {
+      return;
     }
+    await this.addFAQ();
 
-    private validate(): boolean {
+    this.cleanFAQ();
+  }
 
-        if (this.faq.question === '') {
-            alert('Uts!!!, la pregunta se encuentra en blanco...');
-            return false;
-        }
-        if (this.faq.answer === '') {
-            alert('Uts!!!, la respuesta se encuentra en blanco...');
-            return false;
-        }
-        if (this.faq.accessMode === '') {
-            alert('Uts!!!, No has seleccionado la visibilidad');
-            return false;
-        }
-        if (this.faq.status === '') {
-            alert('Uts!!!, No has seleccionado el status');
-            return false;
-        }
 
-        return true;
+  private validate(): boolean {
+    if (this.faq.question === '') {
+      alert('Uts!!!, la pregunta se encuentra en blanco...');
+      return false;
     }
-
-    private addFAQ(): void {      
-        this.faqService.addFAQ(this.faq)
-                        .subscribe((x) => { alert("!Se agregó la pregunta!");
-                        this.onAddFaq.emit();});
-                                    
+    if (this.faq.answer === '') {
+      alert('Uts!!!, la respuesta se encuentra en blanco...');
+      return false;
     }
+    if (this.faq.accessMode === '') {
+      alert('Uts!!!, No has seleccionado la visibilidad');
+      return false;
+    }
+    if (this.faq.status === '') {
+      alert('Uts!!!, No has seleccionado el status');
+      return false;
+    }
+    return true;
+  }
 
-    private cancel(): void {        
+
+  private addFAQ(): void {
+    this.faqService.addFAQ(this.faq)
+      .subscribe((x) => {
+        alert("!Se agregó la pregunta!");
         this.onAddFaq.emit();
-    }
-    
-    private cleanFAQ(): void {
-        this.faq = EmptyFaq();
-    }
-    
+      });
+  }
+
+
+  private cancel(): void {
+    this.onAddFaq.emit();
+  }
+
+
+  private cleanFAQ(): void {
+    this.faq = EmptyFaq();
+  }
+
 }
