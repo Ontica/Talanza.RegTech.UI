@@ -9,7 +9,7 @@ import { Injectable } from '@angular/core';
 
 import { CoreService } from '@app/core';
 
-import { KeyValue } from '@app/core/data-types';
+import { KeyValue } from '@app/models/core';
 
 
 @Injectable()

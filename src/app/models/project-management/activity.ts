@@ -5,9 +5,9 @@
  * See LICENSE.txt in the project root for complete license information.
  */
 
-import { DateString } from '@app/core/data-types';
+import { DateString } from '@app/models/core';
 
-import { Contact, Empty, Identifiable } from '@app/core/data-types';
+import { Contact, Empty, Identifiable } from '@app/models/core';
 
 import { Project } from './project';
 

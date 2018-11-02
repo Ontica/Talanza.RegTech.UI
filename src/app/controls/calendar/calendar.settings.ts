@@ -5,7 +5,7 @@
  * See LICENSE.txt in the project root for complete license information.
  */
 
-import { Language, DEFAULT_LANGUAGE } from '../../core/localization';
+import { Language, DEFAULT_LANGUAGE } from '@app/models/localization';
 
 
 export interface CalendarSettings {

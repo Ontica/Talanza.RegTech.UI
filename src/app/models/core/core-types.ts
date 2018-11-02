@@ -20,22 +20,5 @@ export const Empty: Identifiable = {
 
 export function isEmpty(instance: Identifiable): boolean {
   return (!instance || !instance.uid ||
-    instance.uid === '' || instance.uid === 'Empty');
-}
-
-
-export interface KeyValue {
-  readonly key: string;
-  readonly value: any;
-}
-
-
-export const KeyValue_Empty: KeyValue = {
-  key: 'Empty',
-  value: 'Sin valor',
-}
-
-
-export interface Contact extends Identifiable {
-
+          instance.uid === '' || instance.uid === 'Empty');
 }

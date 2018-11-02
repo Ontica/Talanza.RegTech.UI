@@ -5,7 +5,7 @@
  * See LICENSE.txt in the project root for complete license information.
  */
 
-import { Identifiable, Empty } from '@app/core/data-types';
+import { Identifiable, Empty } from '@app/models/core';
 
 import { Project } from './project';
 

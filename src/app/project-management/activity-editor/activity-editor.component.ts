@@ -17,16 +17,16 @@ import {
 
 import { Observable, of } from 'rxjs';
 
-import { Contact, DateStringLibrary } from '@app/core/data-types';
+import { Contact, DateStringLibrary } from '@app/models/core';
 
 import { ProjectStore } from '@app/store/project.store';
 
 import { Activity, Activity_Empty } from '@app/models/project-management';
+import { ColoredTag } from '@app/models/user-interface';
 
 import { AbstractForm } from '@app/shared/abstract-form';
 
 import { SharedService } from '@app/shared/shared.service';
-import { ColoredTag } from '@app/shared/data-types';
 
 enum FormMessages {
 

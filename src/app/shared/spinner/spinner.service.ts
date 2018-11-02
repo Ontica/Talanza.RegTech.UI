@@ -8,7 +8,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 
-import { Displayable } from '../data-types';
+import { Displayable } from '@app/models/user-interface';
 
 
 export interface SpinnerState {

@@ -10,7 +10,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { Assertion } from '@app/core';
 
 import { Activity } from '@app/models/project-management';
-import { DateString } from '@app/core/data-types';
+import { DateString } from '@app/models/core';
 
 
 const EMPTY_RESPONSIBLE_GROUP = 'Actividades sin asignar';

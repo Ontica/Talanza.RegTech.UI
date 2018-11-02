@@ -6,7 +6,7 @@
  *
  */
 
-import { KeyValue } from '../data-types';
+import { KeyValue } from '../data-types/key-value';
 
 export class ApplicationSettings {
 

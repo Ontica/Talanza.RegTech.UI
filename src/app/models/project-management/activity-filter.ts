@@ -5,7 +5,7 @@
  * See LICENSE.txt in the project root for complete license information.
  */
 
-import { Contact, Empty, isEmpty } from '@app/core/data-types';
+import { Contact, Empty, isEmpty } from '@app/models/core';
 
 import { Contract, Project, Stage } from './project';
 

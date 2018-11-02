@@ -12,7 +12,7 @@ import { Assertion } from '../general/assertion';
 import { ApplicationSettingsService } from './application-settings.service';
 import { ApplicationSettings } from './application-settings';
 import { Principal } from '../security/principal';
-import { KeyValue } from '../data-types';
+import { KeyValue } from '../data-types/key-value';
 
 
 @Injectable()

@@ -11,14 +11,12 @@ import { List } from 'immutable';
 
 import { ProjectService } from '@app/services/project-management';
 
-import { Contact, Empty } from '@app/core/data-types';
+import { Contact, Empty } from '@app/models/core';
 
 import { Activity, Contract, Project,
          Stage, ViewConfig, DefaultViewConfig } from '@app/models/project-management';
-
 import { Entity, Procedure } from "@app/models/regulation";
-
-import { ColoredTag } from '@app/shared/data-types';
+import { ColoredTag } from '@app/models/user-interface';
 
 
 export class ProjectModel {

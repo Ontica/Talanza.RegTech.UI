@@ -5,12 +5,12 @@
  * See LICENSE.txt in the project root for complete license information.
  */
 
-import { AfterViewInit, ChangeDetectionStrategy, Component,
+import { AfterViewInit, Component,
          EventEmitter, Input, OnChanges, Output, forwardRef} from '@angular/core';
 
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
-import { DateString, DateStringLibrary } from '../../core/data-types';
+import { DateString, DateStringLibrary } from '@app/models/core';
 
 import { CalendarSettings, DEFAULT_SETTINGS } from './calendar.settings';
 

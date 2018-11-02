@@ -12,10 +12,10 @@ import { catchError } from 'rxjs/operators';
 import { Assertion, CoreService } from '@app/core';
 
 import { Activity, Contract, Project, Resource, Stage } from '@app/models/project-management';
-import { Contact } from '@app/core/data-types';
-import { Entity, Procedure } from '@app/models/regulation';
 
-import { ColoredTag } from '@app/shared/data-types';
+import { Contact } from '@app/models/core';
+import { Entity, Procedure } from '@app/models/regulation';
+import { ColoredTag } from '@app/models/user-interface';
 
 
 enum Errors {

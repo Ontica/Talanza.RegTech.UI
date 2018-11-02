@@ -13,8 +13,7 @@ import { ProjectService } from '@app/services/project-management';
 
 import { Activity, Project, Stage } from '@app/models/project-management';
 import { Entity, Procedure } from "@app/models/regulation";
-
-import { Empty } from '@app/core/data-types';
+import { Empty } from '@app/models/core';
 
 
 export class ProjectTemplateModel {
