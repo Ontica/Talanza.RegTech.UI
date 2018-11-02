@@ -1,47 +1,48 @@
 /**
  * @license
- * Copyright (c) 2017 La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
+ * Copyright (c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
  *
  * See LICENSE.txt in the project root for complete license information.
- *
  */
-import  { Component, EventEmitter, Input, Output } from '@angular/core';
+
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 import { Meeting } from '@app/models/project-management';
-import { EventManager } from '@angular/platform-browser';
 
 
 @Component({
-    selector:'project-meeting',
-    templateUrl: './project-meeting.component.html',
-    styleUrls: ['./project-meeting.component.scss']
+  selector: 'project-meeting',
+  templateUrl: './project-meeting.component.html',
+  styleUrls: ['./project-meeting.component.scss']
 })
-
 export class ProjectMeetingComponent {
 
-    public selectedTask = "meetingData";
-    public title = 'Agregar Reunión';
+  public selectedTask = "meetingData";
+  public title = 'Agregar Reunión';
 
-    private _meetingUID: string = "";
-    @Input()
-    set meetingUID(meetingUID: string) {
-        this._meetingUID = meetingUID;
-    }
-    get meetingUID(): string {
-        return this._meetingUID;
-    }
+  private _meetingUID: string = "";
 
-    @Output() onUpdateMeeting = new EventEmitter<Meeting>();
+  @Input()
+  set meetingUID(meetingUID: string) {
+    this._meetingUID = meetingUID;
+  }
+  get meetingUID(): string {
+    return this._meetingUID;
+  }
 
-    public setSelectedTask(selectedTask: string): void {
-        this.selectedTask = selectedTask;
-    }
 
-    public updateMeetingData(projectMeeting: Meeting): void {
-        this.title = projectMeeting.title;
+  @Output() onUpdateMeeting = new EventEmitter<Meeting>();
 
-        this.onUpdateMeeting.emit(projectMeeting);
-    }
 
+  public setSelectedTask(selectedTask: string): void {
+    this.selectedTask = selectedTask;
+  }
+
+
+  public updateMeetingData(projectMeeting: Meeting): void {
+    this.title = projectMeeting.title;
+
+    this.onUpdateMeeting.emit(projectMeeting);
+  }
 
 }

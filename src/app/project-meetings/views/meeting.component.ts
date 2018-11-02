@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, Output  } from '@angular/core';
 
 import { Validate } from '@app/core';
 
-import { Meeting, EmptyMeeting, Participant } from '@app/models/project-management';
+import { Meeting, EmptyMeeting } from '@app/models/project-management';
 
 import { ProjectMeetingService } from '@app/services/project-management';
 

@@ -7,7 +7,7 @@
 
 import { Language, DEFAULT_LANGUAGE, LocalizationLibrary } from '@app/models/localization';
 
-import { CalendarSettings, DEFAULT_SETTINGS } from './calendar.settings';
+import { CalendarSettings } from './calendar.settings';
 
 declare var dhtmlXCalendarObject: any;
 
