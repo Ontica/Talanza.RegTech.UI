@@ -1,21 +1,22 @@
 /**
  * @license
- * Copyright (c) 2017 La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
+ * Copyright (c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
  *
  * See LICENSE.txt in the project root for complete license information.
- *
  */
 
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-import { SecurityGuardService } from '../core';
+import { SecurityGuardService } from '@app/core';
 
-import { MainLayoutComponent } from '../shared';
+import { MainLayoutComponent } from '@app/shared';
 
 import { ProceduresMainPageComponent } from '../procedures/main-page/procedures-main-page.component';
 
+
 @NgModule({
+
   imports: [
     RouterModule.forChild([
       {
@@ -23,6 +24,8 @@ import { ProceduresMainPageComponent } from '../procedures/main-page/procedures-
         children: [{ path: 'search', component: ProceduresMainPageComponent }]
       }
     ])],
+
   exports: [RouterModule]
+
 })
 export class ProceduresRoutingModule { }

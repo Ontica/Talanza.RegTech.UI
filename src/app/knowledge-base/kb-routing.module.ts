@@ -8,14 +8,15 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-import { SecurityGuardService } from '../core';
+import { SecurityGuardService } from '@app/core';
 
-import { MainLayoutComponent } from '../shared';
+import { MainLayoutComponent } from '@app/shared';
 
 import { KnowledgeBaseMainComponent } from './main/kb-main.component';
 
 
 @NgModule({
+
   imports: [
     RouterModule.forChild([
       {
@@ -24,6 +25,8 @@ import { KnowledgeBaseMainComponent } from './main/kb-main.component';
         children: [{ path: 'main', component: KnowledgeBaseMainComponent }]
       }
     ])],
+
   exports: [RouterModule]
+
 })
 export class KnowledgeBaseRoutingModule { }

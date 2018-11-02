@@ -8,15 +8,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-import { SecurityGuardService } from '../core';
+import { SecurityGuardService } from '@app/core';
 
-import { MainLayoutComponent } from '../shared';
+import { MainLayoutComponent } from '@app/shared';
 
 import { ProjectsMainPageComponent } from './main-page/projects-main-page.component';
 import { TemplatesMainPageComponent } from './templates/templates-main-page.component';
 
 
 @NgModule({
+
   imports: [
     RouterModule.forChild([
       {
@@ -34,6 +35,8 @@ import { TemplatesMainPageComponent } from './templates/templates-main-page.comp
         ]
       }
     ])],
+
   exports: [RouterModule]
+
 })
 export class ProjectManagementRoutingModule { }

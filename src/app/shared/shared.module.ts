@@ -14,8 +14,6 @@ import { AngularMaterialModule } from './angular-material.module';
 
 import { ControlsModule } from '../controls/controls.module';
 
-import { CoreModule } from '../core/core.module';
-
 import { MainLayoutComponent } from './main-layout/main-layout.component';
 import { MainMenuComponent } from './main-layout/main-menu/main-menu.component';
 
@@ -43,8 +41,7 @@ import { SharedService } from './shared.service';
     FormsModule,
     AngularMaterialModule,
 
-    ControlsModule,
-    CoreModule
+    ControlsModule
   ],
 
   declarations: [

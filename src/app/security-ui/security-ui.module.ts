@@ -9,11 +9,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 
-import { CoreModule } from '../core/core.module';
-
 import { SecurityUIRoutingModule } from './security-ui-routing.module';
 import { UserLoginComponent } from './user-login/user-login.component';
-
 
 
 /**
@@ -23,7 +20,6 @@ import { UserLoginComponent } from './user-login/user-login.component';
 
   imports: [
     CommonModule,
-    CoreModule,
     ReactiveFormsModule,
 
     SecurityUIRoutingModule,

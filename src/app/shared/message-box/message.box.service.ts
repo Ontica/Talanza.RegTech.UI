@@ -8,13 +8,13 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
+import { Exception } from '@app/core';
+
 import { MatDialog, MatDialogConfig } from "@angular/material";
 
 import { MessageBoxComponent } from './message-box.component';
 
 import { ConfirmMessageBoxType, MessageBoxConfig, MessageBoxData } from './message-box.types';
-
-import { Exception } from '@app/core/general/exception';
 
 
 @Injectable()

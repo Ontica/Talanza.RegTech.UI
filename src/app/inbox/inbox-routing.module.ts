@@ -8,9 +8,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-import { SecurityGuardService } from '../core';
+import { SecurityGuardService } from '@app/core';
 
-import { MainLayoutComponent } from '../shared';
+import { MainLayoutComponent } from '@app/shared';
 
 import { InboxMainPageComponent } from './main-page/inbox-main-page.component';
 
@@ -20,7 +20,7 @@ import { InboxMainPageComponent } from './main-page/inbox-main-page.component';
     RouterModule.forChild([
       {
         path: 'inbox', component: MainLayoutComponent,
-        data: {layoutType: 'Inbox'}, canActivate: [SecurityGuardService],
+        data: { layoutType: 'Inbox' }, canActivate: [SecurityGuardService],
         children: [{ path: 'main', component: InboxMainPageComponent }]
       }
     ])],
