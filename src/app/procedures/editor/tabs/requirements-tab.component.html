@@ -6,7 +6,7 @@
       </tr>
       <tr>
         <td class='top'>Descripción de los<br>requisitos de entrega<br>del trámite:</td>
-        <td><textarea [disabled]="disabled" style="width:100%; " class="text-area " rows="8" cols="25 " [(ngModel)]="procedure.filingDocuments.notes"></textarea></td>
+        <td><textarea [disabled]="disabled" style="width:100%; " class="text-area " rows="8" cols="25 " [(ngModel)]="procedure.filingCondition.ficta"></textarea></td>
       </tr>
     </table>
   </div>
@@ -19,10 +19,6 @@
         <td class="top">Vigencia del trámite<br>en caso de emisión:</td>
         <td><textarea [disabled]="disabled" style="width:100%; " class="text-area " rows="2 " cols="25 " [(ngModel)]="procedure.filingCondition.validityTermWhenIssued"></textarea></td>
       </tr>
-      <tr>
-        <td class="top">Entrega simultánea:</td>
-        <td><textarea [disabled]="disabled" style="width:100%; " class="text-area " rows="4 " cols="25 " [(ngModel)]="procedure.filingCondition.simultaneousDelivery"></textarea></td>
-      </tr>
     </table>
   </div>
   <div>
@@ -33,25 +29,6 @@
       <tr>
         <td class='top'>Observaciones<br>generales:</td>
         <td><textarea [disabled]="disabled" style="width:100%; " class="text-area " rows="5 " cols="25 " [(ngModel)]="procedure.notes"></textarea></td>
-      </tr>
-    </table>
-  </div>
-  <div>
-    <table class="form">
-      <tr>
-        <td colspan="4" class="form-title form-title-text">Cláusulas y anexos (provisional)</td>
-      </tr>
-      <tr>
-        <td><b>Ronda 1.3</b> consorcio:</td>
-        <td><textarea [disabled]="disabled" style="width:200px; " class="text-area " rows="2" cols="25 " [(ngModel)]="procedure.legalInfo.ronda13Consorcio"></textarea></td>
-        <td>Ronda 1.3 individual:</td>
-        <td><textarea [disabled]="disabled" style="width:100%; " class="text-area " rows="2" cols="25 " [(ngModel)]="procedure.legalInfo.ronda13Individual"></textarea></td>
-      </tr>
-      <tr>
-        <td><b>Ronda 1.4</b> consorcio:</td>
-        <td><textarea [disabled]="disabled" style="width:200px;" class="text-area " rows="2" cols="25 " [(ngModel)]="procedure.legalInfo.ronda14Consorcio"></textarea></td>
-        <td>Ronda 1.4 individual:</td>
-        <td><textarea [disabled]="disabled" style="width:100%" class="text-area " rows="2" cols="25 " [(ngModel)]="procedure.legalInfo.ronda14Individual"></textarea></td>
       </tr>
     </table>
   </div>

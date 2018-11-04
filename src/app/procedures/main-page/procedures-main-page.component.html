@@ -19,7 +19,7 @@
         <br/>
         <span *ngIf="procedure.modality.length !== 0">Modalidad: {{procedure.modality}} | </span>{{procedure.code}}
       </td>
-      <td style='width:100px'>{{procedure.entity}}</td>
+      <td style='width:100px'>{{procedure.entityName}}</td>
       <td style='width:12%'>{{procedure.theme}}</td>
       <th style='width:40%'></th>
     </tr>
@@ -39,5 +39,5 @@
 </div>
 
 <div *ngIf="showProcedureEditorWindow " class="popup ">
-  <procedure-viewer [procedureUID]="selectedProcedureUID" (onCloseEvent)="closeProcedureEditorWindow()"></procedure-viewer>
+  <procedure-viewer [procedure]="selectedProcedureUID" (onCloseEvent)="closeProcedureEditorWindow()"></procedure-viewer>
 </div>

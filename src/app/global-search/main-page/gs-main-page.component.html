@@ -18,7 +18,7 @@
  <div *ngIf="isDetailsContainerVisible" class="block-container right">
       <div><i class="fa fa-times close-icon" (click)="closeDetailsContainer()"></i></div>
       <div [ngSwitch]="selectedOption">
-          <procedure-info *ngSwitchCase="'procedures'" [procedureUID]="selectedProcedureUID"></procedure-info>
+          <procedure-viewer *ngSwitchCase="'procedures'" [procedure]="selectedProcedureUID"></procedure-viewer>
           <div *ngSwitchCase="'contracts'">
                 <clause-definition [clauseRef]="clause"></clause-definition><br>
                 <clause-obligations [clauseRef]="clause"></clause-obligations>

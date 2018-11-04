@@ -7,35 +7,41 @@ import { Component, EventEmitter, Output } from '@angular/core';
 })
 
 export class AddRequirementTabComponent {
-  @Output() public isCanceled = new EventEmitter<boolean>();
 
-  public isAddRequirement = false;
-  public title = 'Agregar un requisito al trámite';
+  @Output() isCanceled = new EventEmitter<boolean>();
 
-  public cancel(): void {
+  isAddRequirement = false;
+  title = 'Agregar un requisito al trámite';
+
+  cancel(): void {
     this.isCanceled.emit(true);
   }
 
-  public addRequirementToList(): void {
+
+  addRequirementToList(): void {
     this.isAddRequirement = false;
     this.setTitle();
   }
 
-  public cancelRequirementToLit(): void {
+
+  cancelRequirementToLit(): void {
     this.isAddRequirement = false;
     this.setTitle();
   }
 
-  public onGotoURL(url: string): void {
+
+  onGotoURL(url: string): void {
     window.open(url);
   }
 
-  public onChangeRequirement(requirement: string): void {
+
+  onChangeRequirement(requirement: string): void {
     if (requirement === 'Add') {
       this.isAddRequirement = true;
       this.setTitle();
     }
   }
+
 
   private setTitle(): void {
     if (this.isAddRequirement) {
@@ -43,7 +49,6 @@ export class AddRequirementTabComponent {
     } else {
       this.title = 'Agregar un requisito al trámite';
     }
-
   }
 
 }

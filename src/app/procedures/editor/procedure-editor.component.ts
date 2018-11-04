@@ -26,9 +26,9 @@ export class ProcedureEditorComponent implements OnInit {
   @Output() public onCloseEvent = new EventEmitter();
   @Input() public procedureUID: string;
 
-  public selectedTask: string = '';
+  public selectedTask = '';
   public newNameLabel = '';
-  public procedure: Procedure = new Procedure();
+  public procedure: Procedure;
   public isDisabled = false;
   public isNewProcedure = false;
 
@@ -63,7 +63,7 @@ export class ProcedureEditorComponent implements OnInit {
     if (this.procedureUID === '') {
       this.isNewProcedure = true;
       this.isDisabled = true;
-      this.procedure = new Procedure();
+      this.procedure = null;
       return;
     }
     await this.procedureService.getProcedure(this.procedureUID).then((procedure) => {

@@ -42,6 +42,6 @@
     </div>
   </div>
   <div class="procedure-info" *ngIf="isVisibleProcedureInfo">
-    <procedure-viewer [procedureUID]="procedureUID" (onCloseEvent)="onCloseProcedureInfoModal()"></procedure-viewer>
+    <procedure-viewer [procedure]="procedureUID" (onCloseEvent)="onCloseProcedureInfoModal()"></procedure-viewer>
   </div>
 </div>
