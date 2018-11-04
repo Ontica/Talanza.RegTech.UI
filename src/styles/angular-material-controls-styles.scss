@@ -1,0 +1,44 @@
+ // variables
+
+ $primary-font-color: $dark-blue;
+ $secondary-font-color: $dark-gray;
+
+
+//
+// tabs component
+//
+
+.mat-tab-body-wrapper {
+  margin-top: 12px;
+}
+
+
+.mat-tab-label  {
+  height: 42px !important;
+  min-width: 120px !important;
+  padding: 0 20px !important;
+
+  color: $primary-font-color;
+  font-size: 10pt;
+  text-transform: uppercase;
+}
+
+
+.mat-tab-label-active {
+  font-weight: 500 !important;
+  opacity: 1 !important;
+}
+
+
+// secondary tabs component
+
+.secondary-mat-tab-group {
+
+  .mat-tab-label {
+    height: 36px !important;
+
+    color: $secondary-font-color;
+    text-transform: none;
+  }
+
+}

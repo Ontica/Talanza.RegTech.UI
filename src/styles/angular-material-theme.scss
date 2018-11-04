@@ -14,7 +14,7 @@
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue.
 $covar-app-primary: mat-palette($mat-indigo, 700);
-$covar-app-accent:  mat-palette($mat-pink, 600, 300, 900);
+$covar-app-accent:  mat-palette($mat-red, 900, 300, 900);
 
 // $covar-app-primary: mat-palette($mat-indigo);
 // $covar-app-accent:  mat-palette($mat-orange);
