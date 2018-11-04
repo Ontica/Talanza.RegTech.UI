@@ -7,56 +7,40 @@
 
 import { Component, Input } from '@angular/core';
 
-import { ProcedureService } from '@app/services/regulation';
-
-import { Requirement } from '@app/models/regulation';
+import { Requirement, Procedure } from '@app/models/regulation';
 
 
 @Component({
   selector: 'pv-requirements',
   templateUrl: './pv-requirements.component.html',
-  styleUrls: ['./pv-requirements.component.scss'],
-  providers: [ProcedureService]
+  styleUrls: ['./pv-requirements.component.scss']
 })
 export class PVRequirementsComponent {
 
-  public procedure: any;
-  public conditions: Requirement[] = [];
-  public inputDocuments: Requirement[] = [];
-  public outputDocuments: Requirement[] = [];
+  conditions: Requirement[] = [];
+  inputDocuments: Requirement[] = [];
+  outputDocuments: Requirement[] = [];
 
-  private _procedureUID: string = '';
   @Input()
-  set procedureUID(procedureUID: string) {
-    if (procedureUID) {
-      this._procedureUID = procedureUID;
-
-      this.loadRequirements();
-    }
+  get procedure() { return this._procedure; }
+  set procedure(procedure: Procedure) {
+    this._procedure = procedure;
+    this.loadRequirements();
   }
-  get procedureUID(): string {
-    return this._procedureUID;
-  }
+  private _procedure: Procedure;
 
-  constructor(private procedureService: ProcedureService) { }
 
-  public openExternalWindow(url: string): void {
+  openExternalWindow(url: string): void {
     window.open(url, '_blank', 'location=yes,height=570,width=620,scrollbars=yes,status=yes');
   }
 
-  private async loadRequirements() {
-    await this.loadProcedure();
+
+  private loadRequirements() {
     this.loadConditions();
     this.loadInputDocuments();
     this.loadOutputDocuments();
   }
 
-  private async loadProcedure() {
-    await this.procedureService.getProcedure(this.procedureUID).then((procedure) => {
-      this.procedure = procedure;
-    });
-
-  }
 
   private loadConditions(): void {
     this.conditions = this.procedure.requirements.filter((x) => x.type === 'Condition');

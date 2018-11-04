@@ -5,67 +5,39 @@
  * See LICENSE.txt in the project root for complete license information.
  */
 
-import { Component, EventEmitter,Input, Output } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
-import { ProcedureService } from '@app/services/regulation';
+import { Procedure } from '@app/models/regulation';
+import { ProcedureStore } from '@app/store/procedure.store';
 
-import { Procedure } from "@app/models/regulation";
-
+export type Identifier = string | number;
 
 @Component({
   selector: 'procedure-viewer',
-  templateUrl: './procedure-viewer.component.html',
-  styleUrls: ['./procedure-viewer.component.scss'],
-  providers: [ProcedureService]
+  styleUrls: [],
+  templateUrl: './procedure-viewer.component.html'
 })
 export class ProcedureViewerComponent {
 
-  private _procedureUID: string = '';
+  _procedure: Procedure;
 
   @Input()
-  set procedureUID(procedureUID: string) {
-    if (procedureUID) {
-      this._procedureUID = procedureUID;
+  set procedure(value: Procedure | Identifier) {
+    if (!value) {
+      this._procedure = null;
 
-      this.loadProcedure();
-    }
-  }
-  get procedureUID(): string {
-    return this._procedureUID;
-  }
+    } else if (typeof value === 'string') {
+      this._procedure = this.store.getProcedure(value);
 
-  @Output() public onCloseEvent = new EventEmitter();
+    } else if (typeof value === 'number') {
+      this._procedure = this.store.getProcedure(value);
 
-  public selectedTab: string = 'generalInfo';
-  public procedure: Procedure;
-
-  public constructor(private procedureService: ProcedureService) { }
-
-  public onClose(): void {
-    this.onCloseEvent.emit();
-  }
-
-  public selectTab(tab: string): void {
-    this.selectedTab = tab;
-  }
-
-  private loadProcedure(): void {
-    const errMsg = 'Ocurrió un problema al intentar guardar.';
-
-    this.procedureService.getProcedure(this.procedureUID)
-                         .then((procedure) => this.procedure = procedure)
-                         .catch((e) => this.exceptionHandler(e, errMsg));
-  }
-
-  private exceptionHandler(error: any, defaultMsg: string): void {
-    let errMsg = 'Tengo un problema.\n\n';
-
-    if (typeof (error) === typeof (Error)) {
-      errMsg += defaultMsg + '\n\n' + (<Error>error).message;
     } else {
-      errMsg += defaultMsg + '\n\n' + 'Error desconocido.';
+      this._procedure = value;
     }
-    alert(errMsg);
   }
+
+
+  constructor(private store: ProcedureStore) {}
 
 }

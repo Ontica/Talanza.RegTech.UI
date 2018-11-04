@@ -5,74 +5,54 @@
  * See LICENSE.txt in the project root for complete license information.
  */
 
-import { Component, ElementRef, Input,
-         ViewChild, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
-import { ProcedureService } from '@app/services/regulation';
+import { Procedure } from '@app/models/regulation';
 
 
 @Component({
   selector: 'pv-general-info',
   templateUrl: './pv-general-info.component.html',
-  styleUrls: ['./pv-general-info.component.scss'],
-  providers: [ ProcedureService ]
+  styleUrls: ['./pv-general-info.component.scss']
 })
-export class PVGeneralInfoComponent implements OnInit {
+export class PVGeneralInfoComponent {
 
-  @ViewChild('modeler') public el: ElementRef;
-
-  public isVisibleGeneralInfo = true;
-  public isInitialTermsVisible = true;
-  public isPaymentInfoVisible = true;
-  public isAuthorityInfoVisible = true;
-
-  public editionMode = false;
-
-  public procedure: any;
-
-  private _procedureUID: string = "";
+  editionMode = false;
+  isVisibleGeneralInfo = true;
+  isInitialTermsVisible = true;
+  isPaymentInfoVisible = true;
+  isAuthorityInfoVisible = true;
 
   @Input()
-  set procedureUID(procedureUID: string) {
-    this._procedureUID = procedureUID;
-    this.loadProcedure();
+  get procedure() { return this._procedure; }
+  set procedure(procedure: Procedure) {
+    this._procedure = procedure;
   }
+  private _procedure: Procedure;
 
-  get procedureUID(): string {
-    return this._procedureUID;
-  }
 
-  constructor(private procedureService: ProcedureService) { }
-
-  ngOnInit() {
-
-  }
-
-  public onDisplayGeneralInfo(): void {
+  onDisplayGeneralInfo(): void {
     this.isVisibleGeneralInfo = !this.isVisibleGeneralInfo;
   }
 
-  public onDisplayInitialTerms(): void {
+
+  onDisplayInitialTerms(): void {
     this.isInitialTermsVisible = !this.isInitialTermsVisible;
   }
 
-  public onDisplayPaymentInfo(): void {
+
+  onDisplayPaymentInfo(): void {
     this.isPaymentInfoVisible = !this.isPaymentInfoVisible;
   }
 
-  public onDisplayAuthorityInfo(): void {
+
+  onDisplayAuthorityInfo(): void {
     this.isAuthorityInfoVisible = !this.isAuthorityInfoVisible;
   }
 
-  public openExternalWindow(url:string): void {
+
+  openExternalWindow(url:string): void {
     window.open(url, '_blank', 'location=yes,height=570,width=620,scrollbars=yes,status=yes');
-  }
-
-  private loadProcedure(): void {
-     this.procedureService.getProcedure(this.procedureUID).then((procedure) => {
-
-     this.procedure = procedure;
-    });
   }
 
 }

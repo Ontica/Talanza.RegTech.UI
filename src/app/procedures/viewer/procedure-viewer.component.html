@@ -1,36 +1,11 @@
-<div class="editor-container editor-container-style">
-  <div class="header">
-  
-    <div class="close-button right-position" (click)="onClose()">&times;</div>
-  
-    <div class="title">{{procedure.shortName}}</div>
+<mat-tab-group class="secondary-mat-tab-group">
 
-  </div>
+  <mat-tab label="Información general">
+    <pv-general-info [procedure]="_procedure"></pv-general-info>
+  </mat-tab>
 
-  <div class="tab">
+  <mat-tab label="Requisitos">
+    <pv-requirements [procedure]="_procedure"></pv-requirements>
+  </mat-tab>
 
-    <button class="tab-links left-position"
-            [class.selected]="selectedTab==='generalInfo'"
-            [disabled]="isDisabled"
-            (click)="selectTab('generalInfo')">
-            Información general
-    </button>
-    <button class="tab-links left-position"
-            [class.selected] = "selectedTab === 'requirements'"
-            [disabled] = "isDisabled"
-            (click)="selectTab('requirements')">Requisitos
-    </button>
-  </div>
-
-  <br>
-  
-  <div [ngSwitch]="selectedTab" class="form-frame">
-    <pv-general-info *ngSwitchCase="'generalInfo'"
-                     [procedureUID]="procedureUID">
-    </pv-general-info>
-    <pv-requirements *ngSwitchCase="'requirements'"
-                     [procedureUID]="procedureUID">
-    </pv-requirements>
-  </div>
-
-</div>
+</mat-tab-group>
