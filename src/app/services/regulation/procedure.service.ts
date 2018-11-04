@@ -6,6 +6,7 @@
  */
 
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 import { CoreService } from '@app/core/core.service';
 
@@ -17,10 +18,19 @@ export class ProcedureService {
 
   public constructor(private core: CoreService) { }
 
+
   public getProcedure(uid: string): Promise<Procedure> {
     return this.core.http.get<Procedure>(`v1/procedures/${uid}`)
                          .toPromise();
   }
+
+
+  getProcedures(): Observable<Procedure[]> {
+    const path = `v1/procedures`;
+
+    return this.core.http.get<Procedure[]>(path);
+  }
+
 
   public getProceduresList(filter?: ProcedureFilter | string): Promise<BaseProcedure[]> {
     let filterAsString = '';
@@ -47,10 +57,12 @@ export class ProcedureService {
                          .toPromise();
   }
 
+
   public createProcedure(procedure: Procedure): Promise<Procedure> {
     return this.core.http.post<Procedure>('v1/procedures', procedure)
                          .toPromise();
   }
+
 
   public updateProcedure(procedure: Procedure): Promise<Procedure> {
     return this.core.http.put<Procedure>(`v1/procedures/${procedure.uid}`, procedure)

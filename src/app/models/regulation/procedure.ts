@@ -5,166 +5,105 @@
  * See LICENSE.txt in the project root for complete license information.
  */
 
-import { Authority } from './authority';
+import { Identifiable } from '../core';
+
+export interface BaseProcedure extends Identifiable {
+  id: number;
+  shortName: string;
+  modality: string;
+  code: string;
+  theme: string;
+  entityName: string
+}
 
 
-export class FilingCondition {
-  public startsWhen: string;
-  public startsWhenTrigger: string;
-  public startsWhenNotes: string;
+export interface Procedure extends BaseProcedure {
+  projectType: string,
+  executionMode: string;
 
-  public maxFilingTerm: string;
-  public maxFilingTermUnit: string;
-  public maxFilingTermNotes: string;
+  authorityName: string;
+  authorityTitle: string;
+  authorityContact: string;
 
-  public issuanceLegalTerm: string;
-  public issuanceLegalTermUnit: string;
-  public howToFile: string;
-  public howToFileAddress: string;
+  legalInfo: LegalInfo;
+  filingCondition: FilingCondition;
+  filingFee: FilingFee;
+  requirements: Array<any>;
 
-  public deferralsTerm: string;
-  public deferralsTermUnit: string;
-  public deferralsTermNotes: string;
+  officialUrl: string;
+  regulationUrl: string;
+  notes: string;
 
-  public validityTermWhenIssued: string;
-  public validityTermUnitWhenIssued: string;
-  public ficta: string;
+  hypertext: ProcedureHypertext;
+}
 
-  public hasInnerInteraction: string;
 
-  constructor() {
-    this.startsWhen = '';
-    this.startsWhenTrigger = '';
-    this.startsWhenNotes = '';
+export interface FilingCondition {
+  startsWhen: string;
+  startsWhenTrigger: string;
+  startsWhenNotes: string;
 
-    this.maxFilingTerm = '';
-    this.maxFilingTermUnit = '';
-    this.maxFilingTermNotes = '';
+  maxFilingTerm: string;
+  maxFilingTermUnit: string;
+  maxFilingTermNotes: string;
 
-    this.issuanceLegalTerm = '';
-    this.issuanceLegalTermUnit = '';
+  issuanceLegalTerm: string;
+  issuanceLegalTermUnit: string;
+  howToFile: string;
+  howToFileAddress: string;
 
-    this.howToFile = '';
-    this.howToFileAddress = '';
+  deferralsTerm: string;
+  deferralsTermUnit: string;
+  deferralsTermNotes: string;
 
-    this.deferralsTerm = '';
-    this.deferralsTermUnit = '';
-    this.deferralsTermNotes = '';
+  validityTermWhenIssued: string;
+  validityTermUnitWhenIssued: string;
+  ficta: string;
 
-    this.validityTermWhenIssued = '';
-    this.validityTermUnitWhenIssued = '';
-    this.ficta = '';
-
-    this.hasInnerInteraction = '';
-  }
+  hasInnerInteraction: string;
 
 }
 
 
-export class FilingDocuments {
-
-  constructor() {}
+export interface FilingDocuments {
 
 }
 
 
-export class FilingFee {
-  public filingFeeType: string;
-  public feeAmount: string;
-  public legalBasis: string;
-
-  constructor() {
-    this.filingFeeType = '';
-    this.feeAmount = '';
-    this.legalBasis = '';
-  }
-
+export interface FilingFee {
+  filingFeeType: string;
+  feeAmount: string;
+  legalBasis: string;
 }
 
 
-export class LegalInfo {
-  public regulationMode: string;
-  public obligation: string;
-  public legalBasis: string;
-
-  constructor() {
-    this.regulationMode = '';
-    this.obligation = '';
-    this.legalBasis = '';
-  }
-
-}
-
-
-export class Procedure {
-  public id: number;
-  public uid: string;
-  public code: string;
-  public shortName: string;
-  public modality: string;
-  public name: string;
-  public officialUrl: string;
-  public regulationUrl: string;
-  public theme: string;
-  public executionMode: string;
-  public projectType: string;
-  public notes: string;
-  public authority: Authority;
-  public legalInfo: LegalInfo;
-  public filingCondition: FilingCondition;
-  public filingDocuments: FilingDocuments;
-  public filingFee: FilingFee;
-
-  constructor() {
-    this.id = 0;
-    this.uid = '';
-    this.code = '';
-    this.shortName = '';
-    this.name = '';
-    this.officialUrl = '';
-    this.regulationUrl = '';
-    this.theme = '';
-    this.executionMode = '';
-    this.projectType = '';
-    this.notes = '';
-    this.authority = new Authority();
-    this.legalInfo = new LegalInfo();
-    this.filingCondition = new FilingCondition();
-    this.filingDocuments = new FilingDocuments();
-    this.filingFee = new FilingFee();
-  }
-
-  get fullName(): string {
-    return '[' + this.uid + '] ' + this.shortName + this.modality ? '(Modalidad: ' + this.modality + ')' : '';
-  }
-
+export interface LegalInfo {
+  regulationMode: string;
+  obligation: string;
+  legalBasis: string;
 }
 
 
 export class ProcedureFilter {
+  officeUID: string;
+  entityUID: string;
+  theme: string;
+  stage: string;
+  contract: string;
+  keywords: string;
 
-  public officeUID: string;
-  public entityUID: string;
-  public theme: string;
-  public stage: string;
-  public contract: string;
-  public keywords: string;
-
-  constructor() {
-    this.clean();
+  clean() {
+    this.officeUID = "";
+    this.entityUID = "";
+    this.theme = "";
+    this.stage = "";
+    this.contract = "";
+    this.keywords = "";
   }
 
-  public clean(): void {
-    this.officeUID = '';
-    this.entityUID = '';
-    this.theme = '';
-    this.stage = '';
-    this.contract = '';
-    this.keywords = '';
-  }
 
-  public toString(): string {
-    let filter = '';
+  toString() {
+    let filter: string;
 
     if ((this.entityUID !== '')) {
       filter = this.addFilterConnector(filter) + "AuthEntity.ContactUID='" + this.entityUID + "'";
@@ -181,7 +120,8 @@ export class ProcedureFilter {
     return filter;
   }
 
-  private addFilterConnector(filter: string): string {
+
+  private addFilterConnector(filter: string) {
     if (filter !== '') {
       filter += ' AND ';
     }
@@ -191,9 +131,16 @@ export class ProcedureFilter {
 }
 
 
-export interface Requirement {
-  uid: string,
-  name: string,
+
+export interface ProcedureHypertext {
+  legalBasis: string;
+  notes: string;
+  maxFilingTermNotes: string;
+  deferralsTermNotes: string;
+}
+
+
+export interface Requirement extends Identifiable {
   type: string,
   appliesTo: string,
   copies: string,
@@ -203,18 +150,4 @@ export interface Requirement {
   sourceUrl: string,
   sampleUrl: string,
   instructionsUrl: string
-}
-
-
-export interface BaseProcedure {
-  uid: string;
-  name: string;
-  modality: string;
-  url: string;
-  stage: string;
-  category: string;
-  theme: string;
-  entity: string;
-  office: string;
-  status: string;
 }
