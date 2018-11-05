@@ -20,7 +20,6 @@ import { Entity, Procedure } from '@app/models/regulation';
 
 import { AbstractForm, MessageBoxService } from '@app/shared/services';
 
-
 enum FormMessages {
 
   IncompleteActivityData =
@@ -42,7 +41,8 @@ export class ActivityModelFormComponent extends AbstractForm implements OnInit, 
   @Output() delete = new EventEmitter();
   @Output() update = new EventEmitter<Activity>();
 
-  @Input() activity: Activity = Activity_Empty;
+  @Input() activity = Activity_Empty;
+  @Input() readonly = false;
 
   form: FormGroup;
 
@@ -65,7 +65,6 @@ export class ActivityModelFormComponent extends AbstractForm implements OnInit, 
     if (!this.activity) {
       this.activity = Activity_Empty;
     }
-
     this.onReset();
   }
 
@@ -74,10 +73,6 @@ export class ActivityModelFormComponent extends AbstractForm implements OnInit, 
     this.loadCatalogues();
   }
 
-
-  onClose() {
-
-  }
 
   onDelete() {
     const msg = `Esta operación eliminará la obligación ` +

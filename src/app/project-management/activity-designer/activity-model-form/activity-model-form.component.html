@@ -178,7 +178,7 @@
 
   <div class="form-errors" *ngIf="showExceptionMsg">{{exceptionMsg}}</div>
 
-  <div class="form-footer">
+  <div *ngIf="!readonly" class="form-footer">
 
     <table class="form-section">
       <tr>

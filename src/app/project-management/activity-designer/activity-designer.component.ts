@@ -10,6 +10,8 @@ import { Component, EventEmitter,
 
 import { Activity, Activity_Empty } from '@app/models/project-management';
 
+import { CardSettings } from '@app/models/user-interface';
+
 
 @Component({
   selector: 'activity-designer',
@@ -21,8 +23,8 @@ export class ActivityDesignerComponent implements OnChanges {
   @Output() close = new EventEmitter();
   @Output() update = new EventEmitter<Activity>();
 
-  @Input() activity: Activity = Activity_Empty;
-
+  @Input() activity = Activity_Empty;
+  @Input() settings = new CardSettings();
 
   ngOnChanges() {
     if (!this.activity) {

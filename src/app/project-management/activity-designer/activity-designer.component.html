@@ -1,6 +1,6 @@
-<div class="card">
+<div class="card" [class.card-shadow]="!settings.flat">
 
-  <div class="card-header">
+  <div *ngIf="settings.showTitle" class="card-header">
     <div class="card-title">
       {{activity.name}}
       <div class="card-hint">Actividad en {{activity.project.name}}</div>
@@ -13,22 +13,20 @@
   <mat-tab-group color="accent">
 
     <mat-tab label="Obligación">
-        <activity-model-form [activity]="activity"
-                             (delete)="onDeleteActivity()" (update)="onUpdateActivity()"></activity-model-form>
+      <activity-model-form [activity]="activity" [readonly]="settings.readonly"
+                            (delete)="onDeleteActivity()" (update)="onUpdateActivity()"></activity-model-form>
     </mat-tab>
 
     <mat-tab label="Trámite" [disabled]="activity.config.procedure === -1">
-
-        <procedure-viewer [procedure]="activity.config.procedure"></procedure-viewer>
-
-    </mat-tab>
-
-    <mat-tab label="Comentarios / Q&A" disabled>
-      Comments form
+      <procedure-viewer [procedure]="activity.config.procedure"></procedure-viewer>
     </mat-tab>
 
     <mat-tab label="Documentación" disabled>
-      Documentation form
+        Documentation form
+    </mat-tab>
+
+    <mat-tab label="Comentarios Covar" disabled>
+      Comments form
     </mat-tab>
 
   </mat-tab-group>
