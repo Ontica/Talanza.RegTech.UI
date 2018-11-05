@@ -24,6 +24,8 @@ import { ActivityTimelineComponent } from './activity-timeline/activity-timeline
 import { GroupActivitiesByPipe } from './activity-timeline/group-activities-by.pipe';
 
 import { ActivityEditorComponent } from './activity-editor/activity-editor.component';
+import { ActivityFormComponent } from './activity-editor/activity-form/activity-form.component';
+
 import { ActivityDesignerComponent } from './activity-designer/activity-designer.component';
 import { ActivityModelFormComponent } from './activity-designer/activity-model-form/activity-model-form.component';
 
@@ -59,8 +61,10 @@ import { DhtmlxGanttComponent } from './dhtmlx-gantt/dhtmlx-gantt.component';
     ActivityModelFormComponent,
 
     ActivityEditorComponent,
+    ActivityFormComponent,
     ActivityInlineEditorComponent,
     ActivityTreeComponent,
+
 
     ActivityTimelineComponent,
     GroupActivitiesByPipe,

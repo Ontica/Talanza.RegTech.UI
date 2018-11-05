@@ -1,0 +1,88 @@
+<form class="form-container" autocomplete="off" [class.submitted]="submitted" [formGroup]="form" (ngSubmit)="onSubmit()"
+  (keydown)="keyboardHandler($event)">
+
+  <fieldset>
+
+    <table class="form-section">
+      <tr>
+        <td class="form-section-title" colspan="2">Información general de la obligación o actividad</td>
+      </tr>
+      <tr>
+        <td>Nombre:</td>
+        <td>
+          <input type="text" class="text-box" formControlName="name">
+        </td>
+      </tr>
+      <tr>
+        <td>Observaciones:</td>
+        <td>
+          <textarea class="text-area" rows="5" cols="25" formControlName="notes"></textarea>
+        </td>
+      </tr>
+    </table>
+
+    <table class="form-section">
+      <tr>
+        <td class="form-section-title" colspan="4">Responsable y estado de la obligación o actividad</td>
+      </tr>
+      <tr>
+        <td>Responsable:</td>
+        <td style="width:100%">
+          <select class="select-box" formControlName="responsibleUID">
+            <option value="Empty">No asignada</option>
+            <option *ngFor="let responsible of responsibles | async" [value]="responsible.uid">{{responsible.name}}</option>
+          </select>
+        </td>
+        <td>Estado:</td>
+        <td>
+          <select class="select-box" style="width:130px" formControlName="ragStatus">
+            <option value="NoColor">No determinado</option>
+            <option value="Green">Verde</option>
+            <option value="Amber">Ambar</option>
+            <option value="Red">Rojo</option>
+          </select>
+        </td>
+      </tr>
+    </table>
+
+    <table class="form-section">
+      <tr>
+        <td class="form-section-title" colspan="5">Fecha objetivo y fecha máxima de entrega</td>
+      </tr>
+      <tr>
+        <td>Fecha objetivo:</td>
+        <td>
+          <calendar-control formControlName="targetDate"></calendar-control>
+        </td>
+        <td class="text-align-right" style="width:100%;white-space:normal">Fecha máxima de entrega:</td>
+        <td>
+          <calendar-control formControlName="dueDate"></calendar-control>
+        </td>
+      </tr>
+    </table>
+
+  </fieldset>
+
+  <div class="form-errors" *ngIf="showExceptionMsg">{{exceptionMsg}}</div>
+
+  <div class="form-footer">
+    <table class="form-section">
+      <tr>
+        <td>
+          <button *ngIf="!disabled" type="button" class="btn-warning" (click)="onDelete()">Eliminar</button>
+        </td>
+        <td class="text-align-right">
+
+          <button *ngIf="!disabled" type="submit" class="btn-action btn-margin-right" (click)="setCommand('update')">Guardar
+            los cambios</button>
+
+          <button *ngIf="disabled" type="button" class="btn-action right" (click)="enable()">Editar</button>
+
+          <button *ngIf="!disabled" type="button" class="btn right" (click)="onReset()">Cancelar edición</button>
+
+        </td>
+      </tr>
+    </table>
+  </div>
+
+</form>
