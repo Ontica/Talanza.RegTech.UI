@@ -17,8 +17,8 @@
                             (delete)="onDeleteActivity()" (update)="onUpdateActivity()"></activity-model-form>
     </mat-tab>
 
-    <mat-tab label="Trámite" [disabled]="activity.config.procedure === -1">
-      <procedure-viewer [procedure]="activity.config.procedure"></procedure-viewer>
+    <mat-tab label="Trámite" [disabled]="!hasProcedure">
+      <procedure-viewer *ngIf="hasProcedure" [procedure]="procedure | async"></procedure-viewer>
     </mat-tab>
 
     <mat-tab label="Documentación" disabled>
@@ -30,4 +30,5 @@
     </mat-tab>
 
   </mat-tab-group>
+
 </div>

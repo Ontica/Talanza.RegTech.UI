@@ -1,11 +1,11 @@
-<mat-tab-group class="secondary-mat-tab-group">
+<mat-tab-group *ngIf="_procedure | async" class="secondary-mat-tab-group">
 
   <mat-tab label="Información general">
-    <pv-general-info [procedure]="_procedure"></pv-general-info>
+    <pv-general-info [procedure]="_procedure | async"></pv-general-info>
   </mat-tab>
 
   <mat-tab label="Requisitos">
-    <pv-requirements [procedure]="_procedure"></pv-requirements>
+    <pv-requirements [procedure]="_procedure | async"></pv-requirements>
   </mat-tab>
 
 </mat-tab-group>

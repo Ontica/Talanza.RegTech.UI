@@ -105,13 +105,6 @@ export class ProjectService {
   }
 
 
-  getProceduresList(): Observable<Procedure[]> {
-    const path = `v1/procedures`;
-
-    return this.core.http.get<Procedure[]>(path);
-  }
-
-
   getEntitiesList(): Observable<Entity[]> {
     const path = `v1/modeling/entities`;
 

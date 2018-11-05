@@ -19,16 +19,17 @@ export class ProcedureService {
   public constructor(private core: CoreService) { }
 
 
-  public getProcedure(uid: string): Promise<Procedure> {
-    return this.core.http.get<Procedure>(`v1/procedures/${uid}`)
-                         .toPromise();
+  getBaseProcedures(): Observable<BaseProcedure[]> {
+    const path = `v1/procedures`;
+
+    return this.core.http.get<BaseProcedure[]>(path);
   }
 
 
-  getProcedures(): Observable<Procedure[]> {
-    const path = `v1/procedures`;
+  public getProcedure(uid: string | number): Observable<Procedure> {
+    const path = `v1/procedures/${uid}`;
 
-    return this.core.http.get<Procedure[]>(path);
+    return this.core.http.get<Procedure>(path);
   }
 
 

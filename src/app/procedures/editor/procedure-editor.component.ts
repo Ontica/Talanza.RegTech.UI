@@ -66,9 +66,9 @@ export class ProcedureEditorComponent implements OnInit {
       this.procedure = null;
       return;
     }
-    await this.procedureService.getProcedure(this.procedureUID).then((procedure) => {
-      this.procedure = procedure;
-    });
+    await this.procedureService.getProcedure(this.procedureUID)
+      .toPromise()
+      .then(x => this.procedure = x);
   }
 
 }

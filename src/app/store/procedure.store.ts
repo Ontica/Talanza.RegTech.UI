@@ -6,45 +6,58 @@
  */
 
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { List } from 'immutable';
+import { BehaviorSubject, Observable, of } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import { ProcedureService } from '@app/services/regulation';
 
-import { Procedure } from "@app/models/regulation";
+import { BaseProcedure, Procedure } from "@app/models/regulation";
 
 
 @Injectable()
 export class ProcedureStore {
 
-  private _procedures: BehaviorSubject<List<Procedure>> = new BehaviorSubject(List([]));
+  private _baseProcedures: BehaviorSubject<BaseProcedure[]> = new BehaviorSubject([]);
+  private _procedures: Array<Procedure> = [];
 
   constructor(private procedureService: ProcedureService) {
     this.loadInitialData();
   }
 
 
-  procedures(): Observable<List<Procedure>> {
-    return this._procedures.asObservable();
+  baseProcedures(): Observable<BaseProcedure[]> {
+    return this._baseProcedures.asObservable();
   }
 
 
-  getProcedure(procedureUID: string | number): Procedure {
-    return this._procedures.value.find(
+  getProcedure(procedureUID: string | number): Observable<Procedure> {
+    const procedure = this._procedures.find(
       x => x.uid === procedureUID || x.id == procedureUID
     );
+    if (procedure) {
+      return of(procedure);
+    }
+
+    return this.procedureService.getProcedure(procedureUID)
+      .pipe(
+        map(data => {
+          this._procedures.push(data);
+
+          return data;
+        })
+      );
   }
 
 
   // private methods
 
   private loadInitialData() {
-    this.procedureService.getProcedures()
+    this.procedureService.getBaseProcedures()
       .subscribe(
         data =>
-          this._procedures.next(List(data))
+          this._baseProcedures.next(data)
         ,
-        err => console.log('Error reading procedures data', err)
+        err => console.log('Error reading base procedures data', err)
       );
   }
 

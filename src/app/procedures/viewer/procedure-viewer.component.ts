@@ -6,9 +6,11 @@
  */
 
 import { Component, Input } from '@angular/core';
+import { Observable, isObservable, of } from 'rxjs';
 
 import { Procedure } from '@app/models/regulation';
 import { ProcedureStore } from '@app/store/procedure.store';
+
 
 export type Identifier = string | number;
 
@@ -19,21 +21,20 @@ export type Identifier = string | number;
 })
 export class ProcedureViewerComponent {
 
-  _procedure: Procedure;
+  _procedure: Observable<Procedure>;
 
   @Input()
-  set procedure(value: Procedure | Identifier) {
+  set procedure(value: Observable<Procedure> | Procedure | Identifier) {
     if (!value) {
       this._procedure = null;
 
-    } else if (typeof value === 'string') {
+    } else if (typeof value === 'string' || typeof value === 'number') {
       this._procedure = this.store.getProcedure(value);
 
-    } else if (typeof value === 'number') {
-      this._procedure = this.store.getProcedure(value);
-
+    } else if (isObservable(value)) {
+      this._procedure = value as Observable<Procedure>;
     } else {
-      this._procedure = value;
+      this._procedure = of(value);
     }
   }
 

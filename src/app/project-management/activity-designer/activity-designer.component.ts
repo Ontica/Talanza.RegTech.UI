@@ -5,10 +5,14 @@
  * See LICENSE.txt in the project root for complete license information.
  */
 
-import { Component, EventEmitter,
-         Input, OnChanges, Output } from '@angular/core';
+import { Component, EventEmitter, Input,
+         OnChanges, Output } from '@angular/core';
+import { Observable } from 'rxjs';
+
+import { ProcedureStore } from '@app/store/procedure.store';
 
 import { Activity, Activity_Empty } from '@app/models/project-management';
+import { Procedure } from '@app/models/regulation';
 
 import { CardSettings } from '@app/models/user-interface';
 
@@ -20,15 +24,24 @@ import { CardSettings } from '@app/models/user-interface';
 })
 export class ActivityDesignerComponent implements OnChanges {
 
+  procedure: Observable<Procedure> = null;
+
   @Output() close = new EventEmitter();
   @Output() update = new EventEmitter<Activity>();
 
   @Input() activity = Activity_Empty;
   @Input() settings = new CardSettings();
 
+  constructor(private store: ProcedureStore) { }
+
   ngOnChanges() {
     if (!this.activity) {
       this.activity = Activity_Empty;
+      this.procedure = null;
+      return;
+    }
+    if (this.hasProcedure) {
+      this.procedure = this.store.getProcedure(this.activity.config.procedure);
     }
   }
 
@@ -45,6 +58,11 @@ export class ActivityDesignerComponent implements OnChanges {
 
   onUpdateActivity() {
     this.update.emit(this.activity);
+  }
+
+
+  get hasProcedure() {
+    return (this.activity.config && this.activity.config.procedure !== -1);
   }
 
 }

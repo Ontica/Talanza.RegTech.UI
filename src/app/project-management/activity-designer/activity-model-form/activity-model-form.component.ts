@@ -13,12 +13,13 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Observable, of } from 'rxjs';
 
 import { ProjectTemplateStore } from '@app/store/project-template.store';
+import { ProcedureStore } from '@app/store/procedure.store';
 
 import { Activity, Activity_Empty } from '@app/models/project-management';
-import { Entity, Procedure } from '@app/models/regulation';
-
+import { BaseProcedure, Entity } from '@app/models/regulation';
 
 import { AbstractForm, MessageBoxService } from '@app/shared/services';
+
 
 enum FormMessages {
 
@@ -48,10 +49,11 @@ export class ActivityModelFormComponent extends AbstractForm implements OnInit, 
 
   dueOnControllers: Activity[] = [];
   entities: Observable<Entity[]> = of([]);
-  procedures: Observable<Procedure[]> = of([]);
+  procedures: Observable<BaseProcedure[]> = of([]);
 
   constructor(private messageService: MessageBoxService,
-              private templateStore: ProjectTemplateStore) {
+              private templateStore: ProjectTemplateStore,
+              private procedureStore: ProcedureStore ) {
     super();
   }
 
@@ -299,7 +301,7 @@ export class ActivityModelFormComponent extends AbstractForm implements OnInit, 
 
 
   private loadProcedures() {
-    this.procedures = this.templateStore.procedures();
+    this.procedures = this.procedureStore.baseProcedures();
   }
 
 

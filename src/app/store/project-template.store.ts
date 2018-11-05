@@ -12,7 +12,7 @@ import { List } from 'immutable';
 import { ProjectService } from '@app/services/project-management';
 
 import { Activity, Project, Stage } from '@app/models/project-management';
-import { Entity, Procedure } from "@app/models/regulation";
+import { Entity } from "@app/models/regulation";
 import { Empty } from '@app/models/core';
 
 
@@ -71,11 +71,6 @@ export class ProjectTemplateStore {
   activities(): Activity[] {
     return this._selectedTemplate.value.activities.toArray();
   }
-
-  procedures(): Observable<Procedure[]> {
-    return this.projectService.getProceduresList();
-  }
-
 
   entities(): Observable<Entity[]> {
     return this.projectService.getEntitiesList();

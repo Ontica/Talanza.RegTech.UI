@@ -15,7 +15,7 @@ import { Contact, Empty } from '@app/models/core';
 
 import { Activity, Contract, Project,
          Stage, ViewConfig, DefaultViewConfig } from '@app/models/project-management';
-import { Entity, Procedure } from "@app/models/regulation";
+import { Entity } from "@app/models/regulation";
 import { ColoredTag } from '@app/models/user-interface';
 
 
@@ -64,9 +64,11 @@ export class ProjectStore {
     this.updateSelectedProject(project);
   }
 
+
   selectView(viewConfig: ViewConfig) {
     this._selectedView.next(viewConfig);
   }
+
 
   get projects(): Observable<List<Project>> {
     return this._projects.asObservable();
@@ -92,13 +94,11 @@ export class ProjectStore {
     return this._selectedProject.value.activities.toArray();
   }
 
-  procedures(): Observable<Procedure[]> {
-    return this.projectService.getProceduresList();
-  }
 
   entities(): Observable<Entity[]> {
     return this.projectService.getEntitiesList();
   }
+
 
   responsibles(project: Project): Observable<Contact[]> {
     return this.projectService.getResponsiblesList(project);
