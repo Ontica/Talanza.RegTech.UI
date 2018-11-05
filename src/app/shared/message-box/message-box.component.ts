@@ -11,6 +11,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material";
 
 import { MessageBoxData } from './message-box.types';
 
+
 @Component({
   selector: 'message-box',
   templateUrl: './message-box.component.html',
@@ -22,13 +23,11 @@ export class MessageBoxComponent {
 
   constructor(private dialogRef: MatDialogRef<MessageBoxComponent>,
               @Inject(MAT_DIALOG_DATA) data: MessageBoxData) {
-
     this.model = data;
   }
 
-  onClickButton(option: string) {
-    console.log("option", option);
 
+  onClickButton(option: string) {
     if (option === "accept") {
       this.dialogRef.close(true);
     } else if (option === "cancel") {
