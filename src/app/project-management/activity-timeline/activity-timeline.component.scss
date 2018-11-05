@@ -1,5 +1,6 @@
 @import "../../../styles/responsive";
-@import "../../../styles/list-view";
+@import "../../../styles/card";
+
 
 .activity-row {
   background-color: $grid-even-background-color;
@@ -10,6 +11,7 @@
   margin: 4px;
 }
 
+
 .activity-row:hover {
   background-color: $grid-hover-background-color;
 
@@ -18,9 +20,11 @@
   }
 }
 
+
 .selected-activity {
   background-color: $grid-selected-background-color;
 }
+
 
 .activity-position-controls {
   display: inline-block;
@@ -28,11 +32,13 @@
   vertical-align: -webkit-baseline-middle;
 }
 
+
 .activity-container {
   margin-left: 24pt;
   padding-left: 8pt;
   border-left: 3px solid $dark-blue;
 }
+
 
 .activity-menu {
   float: right;
@@ -40,6 +46,7 @@
   width: 60px;
   vertical-align: -webkit-baseline-middle;
 }
+
 
 .activity-group {
   display: inline-block;
@@ -50,6 +57,7 @@
   padding-left: 8px;
 }
 
+
 .activity-name {
   display: inline-block;
   vertical-align: -webkit-baseline-middle;
@@ -59,10 +67,12 @@
   font-weight: 400;
 }
 
+
 .activity-name a:hover {
   color: $dark-blue;
   text-decoration: underline;
 }
+
 
 .activity-status {
   @include row;

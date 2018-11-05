@@ -1,15 +1,15 @@
-<div *ngIf="project.project.uid !== ''" class="list-view-container">
+<div *ngIf="project.project.uid !== ''" class="card">
 
-  <div class="list-view-header">
-    <div *ngIf="templateDesignerMode" class="list-view-title">
+  <div class="card-header card-header-raised">
+    <div *ngIf="templateDesignerMode" class="card-title">
       Árbol de obligaciones
-      <div class="hint">{{project.project.name}}</div>
+      <div class="card-hint">{{project.project.name}}</div>
     </div>
-    <div *ngIf="!templateDesignerMode" class="list-view-title">
+    <div *ngIf="!templateDesignerMode" class="card-title">
       Actividades del contrato
-      <div class="hint">Contrato: {{project.project.name}}</div>
+      <div class="card-hint">Contrato: {{project.project.name}}</div>
     </div>
-    <div class="list-view-header-options">
+    <div class="card-header-options">
       <button *ngIf="!templateDesignerMode" type="button" class="btn disabled"
               (click)="openAddEventDialog()">Agregar obligaciones</button>
       &nbsp; &nbsp;
@@ -18,7 +18,7 @@
     </div>
   </div>
 
-  <div class="list-view-body">
+  <div class="card-body">
 
     <div *ngIf="addFirstActivityEditorVisible"
           style="margin-left:32pt">

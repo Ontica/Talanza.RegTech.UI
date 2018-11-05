@@ -24,9 +24,6 @@ export class ActivityDesignerComponent implements OnChanges {
   @Input() activity: Activity = Activity_Empty;
 
 
-  constructor() { }
-
-
   ngOnChanges() {
     if (!this.activity) {
       this.activity = Activity_Empty;

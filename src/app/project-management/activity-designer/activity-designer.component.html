@@ -1,45 +1,35 @@
 <div class="card">
 
-  <div class="form-header">
-
-    <div class="form-title">
+  <div class="card-header">
+    <div class="card-title">
       {{activity.name}}
-      <div class="hint">Actividad en {{activity.project.name}}</div>
+      <div class="card-hint">Actividad en {{activity.project.name}}</div>
     </div>
-    <div class="header-options">
+    <div class="card-header-options">
       <i class="fa fa-times close-icon" aria-hidden="true" (click)="onClose()"></i>
     </div>
   </div>
 
-  <mat-tab-group>
+  <mat-tab-group color="accent">
 
     <mat-tab label="Obligación">
-      <div class="form-body">
-        <activity-model-form [activity]="activity" (delete)="onDeleteActivity()" (update)="onUpdateActivity()"></activity-model-form>
-      </div>
+        <activity-model-form [activity]="activity"
+                             (delete)="onDeleteActivity()" (update)="onUpdateActivity()"></activity-model-form>
     </mat-tab>
 
-    <mat-tab label="Comentarios" disabled>
+    <mat-tab label="Trámite" [disabled]="activity.config.procedure === -1">
+
+        <procedure-viewer [procedure]="activity.config.procedure"></procedure-viewer>
+
+    </mat-tab>
+
+    <mat-tab label="Comentarios / Q&A" disabled>
       Comments form
-    </mat-tab>
-
-
-    <mat-tab label="Q&A" disabled>
-      Q&A form
     </mat-tab>
 
     <mat-tab label="Documentación" disabled>
       Documentation form
     </mat-tab>
 
-    <mat-tab label="Trámite" [disabled]="activity.config.procedure === -1">
-
-      <div>
-        <procedure-viewer [procedureUID]="activity.config.procedure"></procedure-viewer>
-      </div>
-
-    </mat-tab>
-
   </mat-tab-group>
-
 </div>

@@ -1,5 +1,6 @@
 @import "../../../styles/responsive";
-@import "../../../styles/list-view";
+@import "../../../styles/card";
+
 
 .activity-row {
   background-color: $grid-even-background-color;
@@ -10,6 +11,7 @@
   margin: 4px;
 }
 
+
 .activity-row:hover {
   background-color: $grid-hover-background-color;
 
@@ -18,6 +20,7 @@
   }
 }
 
+
 .selected-activity {
   background-color: $grid-selected-background-color;
   float: left;
@@ -25,11 +28,13 @@
   width: 100%;
 }
 
+
 .activity-position-controls {
   display: inline-block;
   margin-left: 8px;
   vertical-align: -webkit-baseline-middle;
 }
+
 
 .activity-menu {
   float: right;
@@ -39,6 +44,7 @@
   vertical-align: -webkit-baseline-middle;
 }
 
+
 .activity-name {
   display: inline-block;
   vertical-align: -webkit-baseline-middle;
@@ -47,39 +53,47 @@
   font-weight:400;
 }
 
+
 .activity-name a:hover {
   color: $dark-blue;
   text-decoration: underline;
 }
+
 
 .activity-name-level-1 {
   font-size: 10pt;
   font-weight: 500;
 }
 
+
 .activity-name-level-2 {
   font-size: 10pt;
   font-weight: 400;
 }
 
+
 .activity-name-level-3 {
   font-size: 9.5pt;
 }
+
 
 .activity-name-level-4 {
   font-size: 9.0pt;
   font-weight: 600;
 }
 
+
 .activity-name-level-5 {
   font-size: 9pt;
   font-weight: 500;
 }
 
+
 .activity-name-level-6 {
   font-size: 9pt;
   font-weight: 400;
 }
+
 
 .activity-status {
   @include row;
@@ -96,6 +110,7 @@
   cursor: -webkit-grab;
 }
 
+
 [draggable] {
   -moz-user-select: none;
   -khtml-user-select: none;
@@ -105,9 +120,11 @@
   -webkit-user-drag: element;
 }
 
+
 .dragover-activity-row {
   border-top: 1px solid $dark-blue;
 }
+
 
 .dragover-activity-name {
   border: 1px dotted $dark-blue;

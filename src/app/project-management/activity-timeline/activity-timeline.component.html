@@ -1,17 +1,17 @@
-<div *ngIf="project.project.uid !== ''" class="list-view-container">
+<div *ngIf="project.project.uid !== ''" class="card">
 
-  <div class="list-view-header">
-    <div class="list-view-title">
+  <div class="card-header card-header-raised">
+    <div class="card-title">
       {{viewTitle}}
-      <div class="hint">Contrato: {{project.project.name}}</div>
+      <div class="card-hint">Contrato: {{project.project.name}}</div>
     </div>
-    <div class="list-view-header-options">
+    <div class="card-header-options">
       <button type="button" class="btn disabled"
               (click)="openAddEventDialog()">Agregar obligaciones</button>
     </div>
   </div>
 
-  <div class="list-view-body">
+  <div class="card-body">
 
     <div *ngFor="let group of project.activities | groupActivitiesBy: groupBy ">
 

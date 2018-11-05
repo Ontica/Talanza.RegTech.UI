@@ -1,29 +1,21 @@
-@import "../../../styles/general-styles";
-@import "../../../styles/form";
+@import "../../../styles/card";
 
 
-.header-options {
-  flex: none;
-  align-self: flex-start;
-  align-content: flex-end;
-  margin-left: 6px;
-}
+// ::ng-deep .mat-tab-group {
+//   //height:calc(100% - 80px);
+//   height: 100%;
+//   overflow-x: hidden;
+//   overflow-y: auto;
+// }
 
-i.close-icon {
-  cursor: pointer;
-}
+// ::ng-deep .mat-tab-group {
+//   //height:calc(100% - 80px);
+//   // height: 100%;
+//   // overflow-x: hidden;
+//   // overflow-y: auto;
+// }
 
-.hint {
-  color: $gray;
-  font-size: 8pt;
-  font-weight: 400;
-}
-
-.card {
-  height:98%;
-  @include card;
-}
-
-.mat-tab-group {
-  height:calc(100% - 80px);
+ // remove when mat-tab-group is used
+ .card-body {
+  height: calc(100% - 280px);
 }

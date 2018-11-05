@@ -1,16 +1,16 @@
 <div class="card">
 
-  <div class="form-header">
-    <div class="form-title">
+  <div class="card-header">
+    <div class="card-title">
       {{value('name')}}
-      <div class="hint">Actividad en {{activity.project.name}}</div>
+      <div class="card-hint">Actividad en {{activity.project.name}}</div>
     </div>
-    <div class="header-options">
+    <div class="card-header-options">
       <i class="fa fa-times close-icon" aria-hidden="true" (click)="onClose()"></i>
     </div>
   </div>
 
-  <div class="form-body">
+  <div class="card-body">
 
     <form class="form-container" autocomplete="off"
           [class.submitted]="submitted" [formGroup]="form" (ngSubmit)="onSubmit()"
@@ -153,5 +153,5 @@
 </div>
 
 <div class="procedure-info" *ngIf="activity.workflowObject && procedureDialogVisible">
-  <procedure-viewer [procedureUID]="activity.workflowObject.config.procedure" (onCloseEvent)="showProcedureDialog(false)"></procedure-viewer>
+  <procedure-viewer [procedure]="activity.workflowObject.config.procedure"></procedure-viewer>
 </div>

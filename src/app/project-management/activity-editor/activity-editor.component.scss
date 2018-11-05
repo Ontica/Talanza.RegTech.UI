@@ -1,29 +1,8 @@
 @import "../../../styles/general-styles";
 @import "../../../styles/form";
-
-.card {
-  height:98%;
-  @include card;
-}
-
-.header-options {
-  flex: none;
-  align-self: flex-start;
-  align-content: flex-end;
-  margin-left: 6px;
-}
-
-i.close-icon {
-  cursor: pointer;
-}
-
-.hint {
-  color: $gray;
-  font-size: 8pt;
-  font-weight: 400;
-}
+@import "../../../styles/card";
 
  // remove when mat-tab-group is used
-.form-body {
+.card-body {
   height: calc(100% - 80px);
 }
