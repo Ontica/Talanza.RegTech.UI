@@ -2,23 +2,20 @@
   <tr>
     <td class="form-title form-title-text">Pregunta:</td>
   </tr>
-  <tr>         
-    <td> <textarea class="text-area"  rows="4" cols="25" [(ngModel)]="faq.question"></textarea></td>
+  <tr>
+    <td> <textarea class="text-area"  rows="4" cols="25" [(ngModel)]="faq.title"></textarea></td>
   </tr>
   <tr>
     <td class="form-title form-title-text">Respuesta:</td>
   </tr>
-  <tr>          
-    <td><textarea class="text-area" rows="10" cols="25" [(ngModel)]="faq.answer"></textarea></td>
+  <tr>
+    <td><textarea class="text-area" rows="10" cols="25" [(ngModel)]="faq.body"></textarea></td>
   </tr>
   <tr>
     <td class="form-title form-title-text">Notas:</td>
   </tr>
-  <tr>          
-    <td><textarea class="text-area" rows="7" cols="25" [(ngModel)]="faq.comments"></textarea></td>
-  </tr>
 </table>
-<table class="form">        
+<table class="form">
   <tr>
     <td>Visibilidad:</td>
     <td>
@@ -26,19 +23,19 @@
         <option value="">( Seleccionar )</option>
         <option value="Public">Pública</option>
         <option value="Private">Privada</option>
-        <option value="Internal">Interna</option>     
+        <option value="Internal">Interna</option>
       </select>
-    </td>          
+    </td>
     <td class="text-align-right">
       <span> Estado:</span>
       <select class="select-box" style="width:140px" [(ngModel)]="faq.status">
-        <option value="">( Seleccionar )</option> 
-        <option value="Active">Activa</option>    
-        <option value="Pending">Pendiente</option>         
-        <option value="Obsolete">Obsoleta</option>              
+        <option value="">( Seleccionar )</option>
+        <option value="Active">Activa</option>
+        <option value="Pending">Pendiente</option>
+        <option value="Obsolete">Obsoleta</option>
       </select>
     </td>
-  </tr>      
+  </tr>
 </table>
 <hr>
 <table class="form ">

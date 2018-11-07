@@ -7,9 +7,9 @@
 
 import { Component, Input } from '@angular/core';
 
-import { FAQService } from '@app/services/service-desk';
+import { PostingsService } from '@app/services/knowledge-base';
 
-import { Faq } from '@app/models/service-desk';
+import { Posting, BASE_OBJECT_UID } from '@app/models/knowledge-base';
 
 
 const OPERATIONS: string[] = [
@@ -20,8 +20,7 @@ const OPERATIONS: string[] = [
 @Component({
   selector: 'faq',
   templateUrl: './faq.component.html',
-  styleUrls: ['./faq.component.scss'],
-  providers: [FAQService]
+  styleUrls: ['./faq.component.scss']
 })
 export class FAQComponent {
 
@@ -36,11 +35,11 @@ export class FAQComponent {
     return this._faqUID;
   }
 
-  public faq: Faq;
+  public faq: Posting;
   public isOpenFAQEditor = false;
   public operations = OPERATIONS;
 
-  constructor(private faqService: FAQService) { }
+  constructor(private faqService: PostingsService) { }
 
   public onOpenFAQEditor(): void {
     this.isOpenFAQEditor = true;
@@ -53,8 +52,8 @@ export class FAQComponent {
   }
 
   private loadFaq(): void {
-    this.faqService.getFAQ(this.faqUID)
-      .subscribe((faq) => { this.faq = faq; });
+    this.faqService.getPosting(BASE_OBJECT_UID, this.faqUID)
+                   .subscribe((faq) => { this.faq = faq; });
   }
 
   public onChangeOperation(operation: string): void {

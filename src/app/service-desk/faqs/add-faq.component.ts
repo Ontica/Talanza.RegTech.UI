@@ -7,24 +7,23 @@
 
 import { Component, EventEmitter, Output } from '@angular/core';
 
-import { FAQService } from '@app/services/service-desk';
+import { PostingsService } from '@app/services/knowledge-base';
 
-import { EmptyFaq } from '@app/models/service-desk';
+import { EmptyPosting, BASE_OBJECT_UID } from '@app/models/knowledge-base';
 
 
 @Component({
   selector: 'add-faq',
   templateUrl: './add-faq.component.html',
-  styleUrls: ['./add-faq.component.scss'],
-  providers: [FAQService]
+  styleUrls: ['./add-faq.component.scss']
 })
 export class AddFAQComponent {
 
-  public faq = EmptyFaq();
+  public faq = EmptyPosting();
 
   @Output() public onAddFaq = new EventEmitter();
 
-  constructor(private faqService: FAQService) { }
+  constructor(private faqService: PostingsService) { }
 
 
   public async onSaveFAQ() {
@@ -38,11 +37,11 @@ export class AddFAQComponent {
 
 
   private validate(): boolean {
-    if (this.faq.question === '') {
+    if (this.faq.title === '') {
       alert('Uts!!!, la pregunta se encuentra en blanco...');
       return false;
     }
-    if (this.faq.answer === '') {
+    if (this.faq.body === '') {
       alert('Uts!!!, la respuesta se encuentra en blanco...');
       return false;
     }
@@ -59,9 +58,8 @@ export class AddFAQComponent {
 
 
   private addFAQ(): void {
-    this.faqService.addFAQ(this.faq)
+    this.faqService.createPosting(BASE_OBJECT_UID, this.faq)
       .subscribe((x) => {
-        alert("!Se agregó la pregunta!");
         this.onAddFaq.emit();
       });
   }
@@ -73,7 +71,7 @@ export class AddFAQComponent {
 
 
   private cleanFAQ(): void {
-    this.faq = EmptyFaq();
+    this.faq = EmptyPosting();
   }
 
 }

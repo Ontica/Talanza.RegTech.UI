@@ -20,8 +20,7 @@ import { ServiceDeskModule } from '../service-desk/service-desk.module';
 
 
 import { ContractsService, DocumentService, ProcedureService } from '@app/services/regulation';
-
-import { FAQService } from '../services/service-desk';
+import { PostingsService } from '@app/services/knowledge-base';
 
 import { GlobalSearchRoutingModule } from './global-search-routing.module';
 
@@ -58,7 +57,7 @@ import { GlobalAddComponent } from './global-add/global-add.component';
   providers: [
     ContractsService,
     DocumentService,
-    FAQService,
+    PostingsService,
     ProcedureService
   ]
 

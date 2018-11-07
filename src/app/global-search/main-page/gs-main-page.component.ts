@@ -11,11 +11,11 @@ import { ActivatedRoute } from '@angular/router';
 import { SharedService } from '@app/shared/services';
 
 import { ContractsService, DocumentService, ProcedureService } from '@app/services/regulation';
-import { FAQService } from '@app/services/service-desk';
+import { PostingsService } from '@app/services/knowledge-base';
 
 import { BaseProcedure, ContractClauseRef, Document,
          DocumentFilter, ProcedureFilter } from '@app/models/regulation';
-import { Faq } from '@app/models/service-desk';
+import { Posting, BASE_OBJECT_UID } from '@app/models/knowledge-base';
 
 import { NavBarConfig } from '@app/controls/nav-bar/nav-bar.control';
 
@@ -41,7 +41,7 @@ export class GlobalSearchMainPageComponent {
   public documents: Document[] = [];
   public documentURI = '';
 
-  public FAQs: Faq[] = [];
+  public FAQs: Posting[] = [];
   public FAQUid = '';
 
   private _keywords: string = '';
@@ -64,7 +64,7 @@ export class GlobalSearchMainPageComponent {
     private procedureService: ProcedureService,
     private contractService: ContractsService,
     private documentService: DocumentService,
-    private faqService: FAQService) {
+    private faqService: PostingsService) {
 
     this.route.params.subscribe(params => {
       this.keywords = params['keywords'];
@@ -114,7 +114,6 @@ export class GlobalSearchMainPageComponent {
     this.FAQUid = FAQUid;
 
     this.showDetailsContainer();
-
   }
 
 
@@ -179,7 +178,7 @@ export class GlobalSearchMainPageComponent {
   private async loadContractClauses() {
     const errMsg = 'Ocurrió un problema al intentar leer la lista de cláusulas para el contrato.';
 
-    const contractUID = 'R24Kmag356L21'; //Contrato: 2.4 Individual
+    const contractUID = '57993f7c-1390-4103-9f4d-3b98866bf956'; //Contrato: 3.1 Consorcio
 
     this.app.spinner.show();
 
@@ -194,8 +193,8 @@ export class GlobalSearchMainPageComponent {
 
 
   private async loadDocuments() {
-
     let filter = new DocumentFilter();
+
     filter.type = '';
     filter.keywords = this.keywords;
 
@@ -211,16 +210,15 @@ export class GlobalSearchMainPageComponent {
 
 
   private async loadFaqs() {
-
     this.app.spinner.show();
 
-    await this.faqService.getFAQs(this.keywords)
-      .subscribe(x => {
+    await this.faqService.getPostingsList(BASE_OBJECT_UID, this.keywords)
+      .toPromise()
+      .then(x => {
         this.FAQs = x;
         this.app.spinner.hide();
-      },
-        () => { },
-        () => this.app.spinner.hide());
-
+      })
+      .catch(() => this.app.spinner.hide());
   }
+
 }

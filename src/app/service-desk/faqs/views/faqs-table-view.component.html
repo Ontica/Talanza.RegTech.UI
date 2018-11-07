@@ -2,7 +2,7 @@
     <thead>
         <tr>
             <th style="width:20pt"></th>
-            <th style='width:60%'>Pregunta</th>            
+            <th style='width:60%'>Pregunta</th>
             <th style='width:35%'>Fecha / status</th>
         </tr>
     </thead>
@@ -14,12 +14,12 @@
                 </a>
             </td>
             <td style='width:60%'>
-                <a (click)="selectFAQ(faq.uid)">{{faq.question}}</a>
-                <br/> {{faq.accessMode}}               
-            </td>                   
+                <a (click)="selectFAQ(faq.uid)">{{faq.title}}</a>
+                <br/> {{faq.accessMode}}
+            </td>
             <td style='width:35%'>
                 {{faq.date | date: 'dd-MM-yyyy'}}
-                <br/> {{faq.answeredBy}}
+                <br/> {{faq.owner}}
                 <br/> {{faq.status}}
             </td>
         </tr>

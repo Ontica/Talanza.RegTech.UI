@@ -5,6 +5,4 @@
  * See LICENSE.txt in the project root for complete license information.
  */
 
-export * from './faq';
-
 export * from './ticket';

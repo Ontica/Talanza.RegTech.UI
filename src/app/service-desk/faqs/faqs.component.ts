@@ -5,24 +5,23 @@
  * See LICENSE.txt in the project root for complete license information.
  */
 
-import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
+import { Component, EventEmitter, Output, OnInit } from '@angular/core';
 
-import { FAQService } from '@app/services/service-desk';
+import { PostingsService } from '@app/services/knowledge-base';
 
-import { Faq } from '@app/models/service-desk';
+import { Posting } from '@app/models/knowledge-base';
 
 
 @Component({
   selector: 'faqs',
   templateUrl: './faqs.component.html',
-  styleUrls: ['./faqs.component.scss'],
-  providers: [FAQService]
+  styleUrls: ['./faqs.component.scss']
 })
 export class FAQsComponent implements OnInit {
 
-  public faqs: Faq[] = [];
-  public pendingFaqs: Faq[] = [];
-  public activeFaqs: Faq[] = [];
+  public faqs: Posting[] = [];
+  public pendingFaqs: Posting[] = [];
+  public activeFaqs: Posting[] = [];
   public selectedFaqUID = '';
   public isOpenAddFAQWindow = false;
   public filter = 'all';
@@ -31,7 +30,7 @@ export class FAQsComponent implements OnInit {
 
   @Output() public onSelectedFAQ = new EventEmitter<string>();
 
-  constructor(private faqService: FAQService) { }
+  constructor(private faqService: PostingsService) { }
 
   async ngOnInit() {
     await this.loadFaqs();
@@ -66,7 +65,7 @@ export class FAQsComponent implements OnInit {
 
 
   private loadFaqs(): void {
-    this.faqService.getFAQs(this.keywords)
+    this.faqService.getPostingsList(this.keywords)
       .subscribe((faqs) => {
       this.faqs = faqs;
         this.pendingFaqs = faqs.filter((x) => x.status !== "Active");

@@ -7,19 +7,21 @@
 
 import { NgModule } from '@angular/core';
 
+import { KnowledgeBaseServicesModule } from './knowledge-base/knowledge-base.services.module';
 import { ProjectManagementServicesModule } from './project-management/project-management-services.module';
-
 import { RegulationServicesModule } from './regulation/regulation.services.module';
 
 
 @NgModule({
 
   imports: [
+    KnowledgeBaseServicesModule,
     ProjectManagementServicesModule,
     RegulationServicesModule
   ],
 
   exports: [
+    KnowledgeBaseServicesModule,
     ProjectManagementServicesModule,
     RegulationServicesModule
   ],

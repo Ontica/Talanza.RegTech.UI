@@ -1,0 +1,39 @@
+/**
+ * @license
+ * Copyright (c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
+ *
+ * See LICENSE.txt in the project root for complete license information.
+ */
+
+
+export interface Posting {
+  uid: string,
+  objectUID: string,
+  body: string,
+  title?: string,
+  controlNo?: string,
+  tags?: string,
+  date?: Date,
+  accessMode?: string,
+  owner?: string,
+  status?: string
+}
+
+
+export function EmptyPosting(): Posting {
+  return {
+    uid: 'Empty',
+    objectUID: '',
+    body: '',
+    title: '',
+    controlNo: '',
+    tags: '',
+    date: new Date,
+    accessMode: '',
+    owner: '',
+    status: ''
+  };
+}
+
+
+export const BASE_OBJECT_UID = '7111442e-f059-4613-9770-84be3eb939db';

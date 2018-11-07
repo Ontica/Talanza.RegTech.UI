@@ -7,7 +7,7 @@
 
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
-import { Faq } from '@app/models/service-desk';
+import { Posting } from '@app/models/knowledge-base';
 
 
 @Component({
@@ -17,7 +17,7 @@ import { Faq } from '@app/models/service-desk';
 })
 export class FAQsTableViewComponent {
 
-  @Input() FAQs: Faq[] = [];
+  @Input() FAQs: Posting[] = [];
 
   @Output() public onSelectFAQ = new EventEmitter<string>();
 

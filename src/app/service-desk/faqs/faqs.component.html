@@ -16,7 +16,7 @@
     <ul>
         <ng-container *ngFor="let faq of activeFaqs">
             <li [class.selected]="faq.uid === selectedFaqUID">
-                <a (click)="onClickSelectFaq(faq.uid)">{{faq.question}}</a>
+                <a (click)="onClickSelectFaq(faq.uid)">{{faq.title}}</a>
             </li>
         </ng-container>
     </ul>
@@ -26,11 +26,11 @@
     <ul>
         <ng-container *ngFor="let faq of pendingFaqs">
             <li [class.selected]="faq.uid === selectedFaqUID">
-                <a (click)="onClickSelectFaq(faq.uid)">{{faq.question}}</a>
+                <a (click)="onClickSelectFaq(faq.uid)">{{faq.title}}</a>
             </li>
         </ng-container>
     </ul>
 </div>
 <div *ngIf="isOpenAddFAQWindow">
-    <add-faq-modal-window  (onClose)="closeAddFAQWindow()"></add-faq-modal-window>-->
+    <add-faq-modal-window  (onClose)="closeAddFAQWindow()"></add-faq-modal-window>
 </div>

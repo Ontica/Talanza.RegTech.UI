@@ -7,33 +7,32 @@
 
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
-import { FAQService } from '@app/services/service-desk';
+import { PostingsService } from '@app/services/knowledge-base';
 
-import { Faq, EmptyFaq } from '@app/models/service-desk';
+import { Posting, EmptyPosting, BASE_OBJECT_UID } from '@app/models/knowledge-base';
 
 
 @Component({
   selector: 'update-faq',
   templateUrl: './update-faq.component.html',
-  styleUrls: ['./update-faq.component.scss'],
-  providers: [FAQService]
+  styleUrls: ['./update-faq.component.scss']
 })
 export class UpdateFAQComponent {
 
-  private _faq = EmptyFaq();
+  private _faq = EmptyPosting();
 
   @Input()
-  set faq(faq: Faq) {
+  set faq(faq: Posting) {
     this._faq = faq;
   }
-  get faq(): Faq {
+  get faq(): Posting {
     return this._faq;
   }
 
   @Output() public onClose = new EventEmitter();
 
 
-  constructor(private faqService: FAQService) { }
+  constructor(private faqService: PostingsService) { }
 
 
   public async onUpdateFAQ() {
@@ -49,8 +48,12 @@ export class UpdateFAQComponent {
 
   private validate(): boolean {
 
-    if (this.faq.question === '') {
-      alert('Requiero el texto de la pregunta.');
+    if (this.faq.title === '') {
+      alert('Requiero el título de la pregunta.');
+      return false;
+    }
+    if (this.faq.body === '') {
+      alert('Requiero el texto de la respuesta.');
       return false;
     }
     if (this.faq.accessMode === '') {
@@ -67,7 +70,7 @@ export class UpdateFAQComponent {
 
 
   private updateFAQ(): void {
-    this.faqService.updateFAQ(this.faq)
+    this.faqService.updatePosting(BASE_OBJECT_UID, this.faq)
       .subscribe((x) => this.onClose.emit());
   }
 
@@ -78,7 +81,7 @@ export class UpdateFAQComponent {
 
 
   private cleanFAQ(): void {
-    this.faq = EmptyFaq();
+    this.faq = EmptyPosting();
   }
 
 }
