@@ -14,8 +14,9 @@ import { AngularMaterialModule } from '@app/shared/angular-material.module';
 
 import { SharedModule } from '../shared/shared.module';
 
-import { ProceduresModule } from '../procedures/procedures.module';
-import { ControlsModule } from '../controls/controls.module';
+import { ProceduresModule } from '@app/procedures/procedures.module';
+import { ControlsModule } from '@app/controls/controls.module';
+import { KnowledgeBaseModule } from '@app/knowledge-base/knowledge-base.module';
 
 import { ActivityTreeComponent } from './activity-tree/activity-tree.component';
 import { ActivityInlineEditorComponent } from './activity-tree/activity-inline-editor.component';
@@ -39,6 +40,8 @@ import { ProjectsMainPageComponent } from './main-page/projects-main-page.compon
 import { TemplatesMainPageComponent } from './templates/templates-main-page.component';
 
 import { DhtmlxGanttComponent } from './dhtmlx-gantt/dhtmlx-gantt.component';
+import { ActivityTasksComponent } from './activity-tasks/activity-tasks.component';
+
 
 @NgModule({
 
@@ -51,6 +54,8 @@ import { DhtmlxGanttComponent } from './dhtmlx-gantt/dhtmlx-gantt.component';
     ControlsModule,
     SharedModule,
     ProceduresModule,
+    KnowledgeBaseModule,
+
     ProjectManagementRoutingModule
   ],
 
@@ -76,6 +81,8 @@ import { DhtmlxGanttComponent } from './dhtmlx-gantt/dhtmlx-gantt.component';
     TemplatesMainPageComponent,
 
     DhtmlxGanttComponent,
+
+    ActivityTasksComponent,
   ],
 
   exports: [

@@ -5,25 +5,42 @@
  * See LICENSE.txt in the project root for complete license information.
  */
 
-import { DateString } from '@app/models/core';
-
-import { Contact, Empty, Identifiable } from '@app/models/core';
+import { Contact, DateString, Empty,
+         Identifiable, PartitionedType } from '@app/models/core';
 
 import { Project } from './project';
 
 
-export interface Activity extends Identifiable {
+export const ACTIVITY_TYPE_NAME = 'ObjectType.ProjectItem.Activity';
+
+
+export interface Duration {
+  value: number,
+  type: string
+}
+
+
+export const DefaultDuration: Duration = {
+  value: 0,
+  type: 'Unknown',
+}
+
+export interface Activity extends Identifiable, PartitionedType {
   id: number;
-  type: string,
   notes: string,
   project: Project,
   responsible: Contact,
-  parent: Parent | Identifiable,
-  estimatedDuration: string,
+  parent: Identifiable,
+  estimatedDuration: Duration,
+
   startDate: DateString,
   targetDate: DateString,
   endDate: DateString,
   dueDate: DateString,
+
+  warnDays: number,
+  warnType: string,
+
   tags: string[],
   position: number,
   level: number;
@@ -38,7 +55,7 @@ export interface Activity extends Identifiable {
 }
 
 
-export const Activity_Empty: Activity = {
+export const EmptyActivity: Activity = {
   id: 0,
   uid: '',
   type: '',
@@ -47,11 +64,16 @@ export const Activity_Empty: Activity = {
   project: Empty,
   responsible: Empty,
   parent: Empty,
-  estimatedDuration: '',
+
+  estimatedDuration: DefaultDuration,
   startDate: '',
   targetDate: '',
   endDate: '',
   dueDate: '',
+
+  warnDays: 0,
+  warnType: '',
+
   tags: [],
   position: 0,
   level: 0,
@@ -72,9 +94,4 @@ export interface ActivityOperation {
   newPosition?: number,
   newParent?: Activity,
   targetProjectUID?: string
-}
-
-
-export interface Parent extends Identifiable {
-  type: string
 }

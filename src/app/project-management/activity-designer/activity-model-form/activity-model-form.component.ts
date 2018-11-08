@@ -15,7 +15,7 @@ import { Observable, of } from 'rxjs';
 import { ProjectTemplateStore } from '@app/store/project-template.store';
 import { ProcedureStore } from '@app/store/procedure.store';
 
-import { Activity, Activity_Empty } from '@app/models/project-management';
+import { Activity, EmptyActivity } from '@app/models/project-management';
 import { BaseProcedure, Entity } from '@app/models/regulation';
 
 import { AbstractForm, MessageBoxService } from '@app/shared/services';
@@ -42,7 +42,7 @@ export class ActivityModelFormComponent extends AbstractForm implements OnInit, 
   @Output() delete = new EventEmitter();
   @Output() update = new EventEmitter<Activity>();
 
-  @Input() activity = Activity_Empty;
+  @Input() activity = EmptyActivity;
   @Input() readonly = false;
 
   form: FormGroup;
@@ -65,7 +65,7 @@ export class ActivityModelFormComponent extends AbstractForm implements OnInit, 
 
   ngOnChanges() {
     if (!this.activity) {
-      this.activity = Activity_Empty;
+      this.activity = EmptyActivity;
     }
     this.onReset();
   }

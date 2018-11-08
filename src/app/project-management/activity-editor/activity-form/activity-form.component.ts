@@ -13,23 +13,23 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Observable, of } from 'rxjs';
 
 import { ProjectStore } from '@app/store/project.store';
+import { TaskService } from '@app/services/project-management/task.service';
 
-import { Activity, Activity_Empty } from '@app/models/project-management';
-import { Contact, DateStringLibrary } from '@app/models/core';
+import { Activity, EmptyActivity, EmptyTask,
+         Task, TASK_TYPE_NAME } from '@app/models/project-management';
 
+import { Contact, DateStringLibrary, isTypeOf } from '@app/models/core';
 
 import { AbstractForm } from '@app/shared/services';
-
 import { SharedService } from '@app/shared/shared.service';
 
-enum FormMessages {
 
+enum FormMessages {
   IncompleteActivityData =
   "Los campos marcados en rojo son requeridos.",
 
   TargetDateIsGreaterThanDueDate =
   "La fecha objetivo de la actividad no puede ser posterior a la fecha máxima de entrega.",
-
 }
 
 
@@ -43,29 +43,35 @@ export class ActivityFormComponent extends AbstractForm implements OnInit, OnCha
   @Output() delete = new EventEmitter();
   @Output() update = new EventEmitter<Activity>();
 
-  @Input() activity: Activity = Activity_Empty;
+  @Input() activity: Activity = EmptyActivity;
+  @Input() task: Task = EmptyTask;     // ToDo: Just one input for activity or task, not both
 
   form: FormGroup;
 
   responsibles: Observable<Contact[]> = of([]);
 
   constructor(private app: SharedService,
-              private projectStore: ProjectStore) {
+              private projectStore: ProjectStore, private taskStore: TaskService) {
     super();
   }
 
 
   ngOnChanges() {
     if (!this.activity) {
-      this.activity = Activity_Empty;
+      this.activity = EmptyActivity;
     }
 
-    this.onReset();
+    this.resetForm();
   }
 
 
   ngOnInit() {
     this.loadResponsibles();
+  }
+
+
+  onCancelEdition() {
+    this.resetForm();
   }
 
 
@@ -84,9 +90,13 @@ export class ActivityFormComponent extends AbstractForm implements OnInit, OnCha
   }
 
 
-  onReset() {
-    this.rebuildForm();
-    this.disable();
+  onEnd() {
+
+  }
+
+
+  onStart() {
+
   }
 
 
@@ -100,16 +110,21 @@ export class ActivityFormComponent extends AbstractForm implements OnInit, OnCha
     return new FormGroup({
 
       name: new FormControl('', Validators.required),
-
       notes: new FormControl(),
 
-      responsibleUID: new FormControl('', Validators.required),
-
-      ragStatus: new FormControl('', Validators.required),
-
+      startDate: new FormControl(),
       targetDate: new FormControl(),
-
       dueDate: new FormControl(),
+      endDate: new FormControl(),
+
+      durationValue: new FormControl(),
+      durationType: new FormControl(),
+
+      warnDays: new FormControl(),
+      warnType: new FormControl(),
+
+      responsibleUID: new FormControl('', Validators.required),
+      ragStatus: new FormControl('', Validators.required),
 
     });
   }
@@ -144,6 +159,16 @@ export class ActivityFormComponent extends AbstractForm implements OnInit, OnCha
 
 
   private deleteActivity(): Promise<void> {
+
+    if (isTypeOf(this.activity, TASK_TYPE_NAME)) {
+      this.taskStore.deleteTask(this.task)
+      .subscribe(() => {
+        this.resetForm();
+        this.delete.emit();
+      });
+      return Promise.resolve();
+    }
+
     return this.projectStore.deleteActivity(this.activity)
       .then(() => this.delete.emit())
       .catch(err => this.app.messageBox.showError(err).toPromise());
@@ -156,12 +181,22 @@ export class ActivityFormComponent extends AbstractForm implements OnInit, OnCha
     const data = {
       name: formModel.name,
       notes: formModel.notes,
-      responsibleUID: formModel.responsibleUID,
-      ragStatus: formModel.ragStatus,
 
+      startDate: formModel.startDate,
       targetDate: formModel.targetDate,
       dueDate: formModel.dueDate,
+      endDate: formModel.endDate,
 
+      estimatedDuration: {
+        value: formModel.durationValue,
+        type: formModel.durationType
+      },
+
+      warnDays: formModel.warnDays,
+      warnType: formModel.warnType,
+
+      responsibleUID: formModel.responsibleUID,
+      ragStatus: formModel.ragStatus,
     };
 
     return data;
@@ -172,22 +207,48 @@ export class ActivityFormComponent extends AbstractForm implements OnInit, OnCha
     this.form.reset({
       name: this.activity.name,
       notes: this.activity.notes,
-      responsibleUID: this.activity.responsible.uid,
-      ragStatus: this.activity.ragStatus,
+
+      startDate: this.activity.startDate,
       targetDate: this.activity.targetDate,
       dueDate: this.activity.dueDate,
+      endDate: this.activity.endDate,
+
+      durationValue: this.activity.estimatedDuration.value !== 0 ? this.activity.estimatedDuration.value : '',
+      durationType: this.activity.estimatedDuration.type,
+
+      warnDays: this.activity.warnDays !== 0 ? this.activity.warnDays : '',
+      warnType: this.activity.warnType,
+
+      responsibleUID: this.activity.responsible.uid,
+      ragStatus: this.activity.ragStatus,
+
     });
 
     this.cleanExceptions();
   }
 
 
+  private resetForm() {
+    this.rebuildForm();
+    this.disable();
+  }
+
+
   private updateActivity(): Promise<void> {
     const updateData = this.getUpdateData();
 
+    if (isTypeOf(this.activity, TASK_TYPE_NAME)) {
+      this.taskStore.updateTask(this.task, updateData)
+      .subscribe(() => {
+        this.resetForm();
+        this.update.emit();
+      });
+      return Promise.resolve();
+    }
+
     return this.projectStore.updateActivity(this.activity, updateData)
       .then(() => {
-        this.onReset();
+        this.resetForm();
         this.update.emit();
       })
       .catch(err => this.app.messageBox.showError(err).toPromise());
@@ -206,6 +267,8 @@ export class ActivityFormComponent extends AbstractForm implements OnInit, OnCha
       this.addException(FormMessages.TargetDateIsGreaterThanDueDate);
       this.get('targetDate').markAsDirty();
     }
+
+
   }
 
   // these methods must be handled through component input data (architecture concern)

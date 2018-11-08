@@ -23,6 +23,63 @@
 
     <table class="form-section">
       <tr>
+        <td class="form-section-title" colspan="5">Control de fechas</td>
+      </tr>
+      <tr>
+        <td>Fecha objetivo:</td>
+        <td>
+          <calendar-control formControlName="targetDate"></calendar-control>
+        </td>
+        <td class="text-align-right" style="width:100%;white-space:normal">Fecha máxima de entrega:</td>
+        <td>
+          <calendar-control formControlName="dueDate"></calendar-control>
+        </td>
+      </tr>
+      <tr>
+        <td>Duración estimada:</td>
+        <td>
+          <input type="text" class="text-box" style="width:40px" formControlName="durationValue">
+
+          <select class="select-box" style="width:130px" formControlName="durationType">
+            <option value="">( Tiempo )</option>
+            <option value="BusinessDays">Días hábiles</option>
+            <option value="CalendarDays">Días naturales</option>
+            <option value="Hours">Horas</option>
+            <option value="Months">Meses</option>
+            <option value="Years">Años</option>
+            <option value="Unknown">Indeterminada</option>
+            <option value="NA">No aplica</option>
+          </select>
+        </td>
+        <td class="text-align-right">Alertar:</td>
+        <td>
+          <input type="text" class="text-box" style="width:40px" formControlName="warnDays">
+
+          <select class="select-box" style="width:210px" formControlName="warnType">
+            <option value="">( Días )</option>
+            <option value="DaysBeforeTargetDate">Días antes de la fecha objetivo</option>
+            <option value="DaysBeforeDueDate">Días antes de la fecha máxima</option>
+            <option value="DefaultConfig">Configuración predeterminada</option>
+            <option value="NA">No emitir alertas</option>
+          </select>
+        </td>
+      </tr>
+      <tr class="border-top">
+        <td>Iniciada el:</td>
+        <td>
+          <calendar-control formControlName="startDate"></calendar-control>
+          <button mat-button type="button" [disabled]="disabled" (click)="onStart()">Iniciar</button>
+        </td>
+        <td class="text-align-right" style="width:100%;white-space:normal">Cerrada el:</td>
+        <td>
+          <calendar-control formControlName="endDate"></calendar-control>
+          <button mat-button type="button" [disabled]="disabled" (click)="onEnd()">Cerrar</button>
+        </td>
+      </tr>
+    </table>
+
+    <table class="form-section">
+      <tr>
         <td class="form-section-title" colspan="4">Responsable y estado de la obligación o actividad</td>
       </tr>
       <tr>
@@ -45,22 +102,6 @@
       </tr>
     </table>
 
-    <table class="form-section">
-      <tr>
-        <td class="form-section-title" colspan="5">Fecha objetivo y fecha máxima de entrega</td>
-      </tr>
-      <tr>
-        <td>Fecha objetivo:</td>
-        <td>
-          <calendar-control formControlName="targetDate"></calendar-control>
-        </td>
-        <td class="text-align-right" style="width:100%;white-space:normal">Fecha máxima de entrega:</td>
-        <td>
-          <calendar-control formControlName="dueDate"></calendar-control>
-        </td>
-      </tr>
-    </table>
-
   </fieldset>
 
   <div class="form-errors" *ngIf="showExceptionMsg">{{exceptionMsg}}</div>
@@ -69,7 +110,7 @@
     <table class="form-section">
       <tr>
         <td>
-          <button *ngIf="!disabled" type="button" class="btn-warning" (click)="onDelete()">Eliminar</button>
+          <button *ngIf="!disabled && task.uid.length === 0" type="button" class="btn-warning" (click)="onDelete()">Eliminar</button>
         </td>
         <td class="text-align-right">
 
@@ -78,7 +119,7 @@
 
           <button *ngIf="disabled" type="button" class="btn-action right" (click)="enable()">Editar</button>
 
-          <button *ngIf="!disabled" type="button" class="btn right" (click)="onReset()">Cancelar edición</button>
+          <button *ngIf="!disabled" type="button" class="btn right" (click)="onCancelEdition()">Cancelar edición</button>
 
         </td>
       </tr>

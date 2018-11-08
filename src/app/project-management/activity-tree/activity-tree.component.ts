@@ -12,7 +12,7 @@ import { MatDialog, MatDialogConfig } from "@angular/material";
 
 import { ProjectModel } from '@app/store/project.store';
 
-import { Activity, Activity_Empty, ActivityOperation } from '@app/models/project-management';
+import { Activity, EmptyActivity, ActivityOperation } from '@app/models/project-management';
 
 import { AddEventDialogComponent } from '../add-event-dialog/add-event-dialog.component';
 import { MoveActivityDialogComponent } from '../move-activity-dialog/move-activity-dialog.component';
@@ -25,7 +25,7 @@ import { MoveActivityDialogComponent } from '../move-activity-dialog/move-activi
 })
 export class ActivityTreeComponent implements OnChanges {
 
-  selectedActivity: Activity = Activity_Empty;
+  selectedActivity: Activity = EmptyActivity;
   dragZoneItem = null;
 
   addFirstActivityEditorVisible = false;
@@ -42,7 +42,7 @@ export class ActivityTreeComponent implements OnChanges {
 
   ngOnChanges() {
     if (this.selectedActivity.project.uid !== this.project.project.uid) {
-      this.selectedActivity = Activity_Empty;
+      this.selectedActivity = EmptyActivity;
     }
   }
 

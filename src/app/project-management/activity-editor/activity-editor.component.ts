@@ -8,7 +8,7 @@
 import { Component, EventEmitter, Input,
          OnChanges, Output } from '@angular/core';
 
-import { Activity, Activity_Empty } from '@app/models/project-management';
+import { Activity, EmptyActivity } from '@app/models/project-management';
 import { CardSettings } from '@app/models/user-interface';
 
 
@@ -22,13 +22,13 @@ export class ActivityEditorComponent implements OnChanges {
   @Output() close = new EventEmitter();
   @Output() update = new EventEmitter<Activity>();
 
-  @Input() activity: Activity = Activity_Empty;
+  @Input() activity: Activity = EmptyActivity;
 
   readonly childrenSettings = new CardSettings();
 
   ngOnChanges() {
     if (!this.activity) {
-      this.activity = Activity_Empty;
+      this.activity = EmptyActivity;
     }
     this.childrenSettings.showTitle = false;
     this.childrenSettings.readonly = true;

@@ -11,7 +11,7 @@ import { Observable } from 'rxjs';
 
 import { ProcedureStore } from '@app/store/procedure.store';
 
-import { Activity, Activity_Empty } from '@app/models/project-management';
+import { Activity, EmptyActivity } from '@app/models/project-management';
 import { Procedure } from '@app/models/regulation';
 
 import { CardSettings } from '@app/models/user-interface';
@@ -29,14 +29,14 @@ export class ActivityDesignerComponent implements OnChanges {
   @Output() close = new EventEmitter();
   @Output() update = new EventEmitter<Activity>();
 
-  @Input() activity = Activity_Empty;
+  @Input() activity = EmptyActivity;
   @Input() settings = new CardSettings();
 
   constructor(private store: ProcedureStore) { }
 
   ngOnChanges() {
     if (!this.activity) {
-      this.activity = Activity_Empty;
+      this.activity = EmptyActivity;
       this.procedure = null;
       return;
     }

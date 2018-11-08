@@ -11,7 +11,7 @@ import { Component, EventEmitter,
 import { MatDialog, MatDialogConfig } from "@angular/material";
 
 import { ProjectModel } from '@app/store/project.store';
-import { Activity, Activity_Empty } from '@app/models/project-management';
+import { Activity, EmptyActivity } from '@app/models/project-management';
 
 import { AddEventDialogComponent } from '../add-event-dialog/add-event-dialog.component';
 
@@ -26,7 +26,7 @@ import { Assertion } from '@app/core';
 })
 export class ActivityTimelineComponent implements OnChanges {
 
-  selectedActivity: Activity = Activity_Empty;
+  selectedActivity: Activity = EmptyActivity;
 
   @Input() project: ProjectModel;
   @Input() groupBy: GroupByProperty;
@@ -40,7 +40,7 @@ export class ActivityTimelineComponent implements OnChanges {
   ngOnChanges() {
     if (this.project) {
       if (this.selectedActivity.project.uid !== this.project.project.uid) {
-        this.selectedActivity = Activity_Empty;
+        this.selectedActivity = EmptyActivity;
       }
     }
   }

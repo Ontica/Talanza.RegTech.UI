@@ -9,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { ProjectStore , ProjectModel } from '@app/store/project.store';
 
-import { Activity, Activity_Empty, ActivityOperation,
+import { Activity, EmptyActivity, ActivityOperation,
          DefaultViewConfig, ViewConfig } from '@app/models/project-management';
 
 import { MenuItem } from '@app/shared/nav-menu/nav-menu.component';
@@ -68,7 +68,7 @@ export class ProjectsMainPageComponent implements OnInit {
   secondaryMenuItems: MenuItem[];
 
   selectedProject: ProjectModel;
-  selectedActivity = Activity_Empty;
+  selectedActivity = EmptyActivity;
 
   viewConfig = DefaultViewConfig();
 
@@ -85,7 +85,7 @@ export class ProjectsMainPageComponent implements OnInit {
       x => {
         if (this.selectedProject &&
             this.selectedProject.project.uid !== x.project.uid) {
-          this.selectedActivity = Activity_Empty;
+          this.selectedActivity = EmptyActivity;
           this.displayEditor = false;
         }
         this.selectedProject = x;

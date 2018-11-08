@@ -9,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { ProjectTemplateStore, ProjectTemplateModel } from '@app/store/project-template.store';
 
-import { Activity, Activity_Empty, ActivityOperation } from '@app/models/project-management';
+import { Activity, EmptyActivity, ActivityOperation } from '@app/models/project-management';
 
 
 @Component({
@@ -20,7 +20,7 @@ import { Activity, Activity_Empty, ActivityOperation } from '@app/models/project
 export class TemplatesMainPageComponent implements OnInit {
 
   selectedTemplate: ProjectTemplateModel;
-  selectedActivity = Activity_Empty;
+  selectedActivity = EmptyActivity;
 
   displayEditor = false;
   toggleEditor = false;
@@ -33,7 +33,7 @@ export class TemplatesMainPageComponent implements OnInit {
       x => {
         if (this.selectedTemplate &&
             this.selectedTemplate.project.uid !== x.project.uid) {
-          this.selectedActivity = Activity_Empty;
+          this.selectedActivity = EmptyActivity;
           this.displayEditor = false;
         }
         this.selectedTemplate = x;
