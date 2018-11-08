@@ -1,0 +1,17 @@
+<div class="list">
+  <div *ngFor="let task of tasksList" class="posting" #postings>
+    <a (click)="toggleSelectedTask(task)">{{task.name}}</a>
+    <div class="posting-body">
+      Responsable: {{task.responsible.name}}
+    </div>
+  </div>
+
+  <activity-form *ngIf="selectedTask.uid.length !== 0"
+                  (update)="refreshTasksList()" (delete)="refreshTasksList()"
+                  [activity]="selectedTask" [task]="selectedTask"></activity-form>
+
+  <div style="padding:16px" *ngIf="selectedTask.uid.length === 0">
+    <input #txtTaskName type="text" class='text-box inline-editor-text-box' (keyup.esc)='txtTaskName.value = "";'
+      (keyup.enter)='onInsert(txtTaskName.value);txtTaskName.value = "";' placeholder='Agregar una subtarea a esta actividad' />
+  </div>
+</div>

@@ -9,6 +9,8 @@ export * from './activity-filter';
 
 export * from './activity';
 
+export * from './task';
+
 export * from './commands';
 
 export * from './gantt';
@@ -16,5 +18,3 @@ export * from './gantt';
 export * from './meeting';
 
 export * from './project';
-
-

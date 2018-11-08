@@ -17,17 +17,20 @@
                      (delete)="onClose()" (update)="onUpdateActivity()"></activity-form>
     </mat-tab>
 
-    <mat-tab label="Tareas">
+    <mat-tab label="Subtareas">
+      <activity-tasks [activity]="activity"></activity-tasks>
+    </mat-tab>
 
+    <mat-tab label="Documentos" disabled="true">
+
+    </mat-tab>
+
+    <mat-tab label="Anotaciones" disabled="true">
+      <postings-list [target]="activity"></postings-list>
     </mat-tab>
 
     <mat-tab label="Regulación" [disabled]="!activity.workflowObject">
       <activity-designer [activity]="activity.workflowObject" [settings]="childrenSettings"></activity-designer>
-    </mat-tab>
-
-
-    <mat-tab label="Anotaciones">
-
     </mat-tab>
 
 

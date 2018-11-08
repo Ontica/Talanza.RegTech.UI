@@ -12,6 +12,7 @@ import { GanttService } from './gantt.service';
 import { ProcessModelsService } from './process-models.service';
 import { ProjectMeetingService } from './project-meeting.service';
 import { ProjectService } from './project.service';
+import { TaskService } from './task.service';
 
 @NgModule({
 
@@ -20,7 +21,8 @@ import { ProjectService } from './project.service';
     GanttService,
     ProcessModelsService,
     ProjectMeetingService,
-    ProjectService
+    ProjectService,
+    TaskService
   ],
 
 })
