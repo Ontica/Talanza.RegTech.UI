@@ -1,0 +1,8 @@
+<div style="width:80%;padding-left:32px" [formGroup]="form">
+  <input type="text" class='text-box' formControlName="title" placeholder="Pregunta" />
+  <textarea class="text-area" rows="3" cols="20" formControlName="body" placeholder="Texto con la respuesta u observaciones"></textarea>
+  <input type="text" class='text-box' formControlName="fileName" placeholder="Documento asociado (opcional)" />
+  <div>
+    <button mat-stroked-button color="primary" [disabled]="!form.valid" (click)="onSave()">Anexar</button>
+  </div>
+</div>

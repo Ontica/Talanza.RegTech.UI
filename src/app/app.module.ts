@@ -19,7 +19,7 @@ import { ContractsModule } from './contracts/contracts.module';
 import { ControlsModule } from './controls/controls.module';
 import { DocumentsModule } from './documents/documents.module';
 import { DashboardModule } from './dashboard/dashboard.module';
-import { KnowledgeBaseModule } from './knowledge-base/kb.module';
+import { KnowledgeBaseModule } from './knowledge-base/knowledge-base.module';
 
 import { ProcessModule } from './process/process.module';
 import { GlobalSearchModule } from './global-search/global-search.module';
