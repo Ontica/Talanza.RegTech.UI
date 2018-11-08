@@ -5,10 +5,11 @@
  * See LICENSE.txt in the project root for complete license information.
  */
 
+import { PartitionedType, Identifiable } from "../core";
 
-export interface Ticket {
+
+export interface Ticket extends PartitionedType {
   uid: string,
-  type: string,
   typeName: string,
   controlNo: string,
   title: string,
@@ -31,9 +32,8 @@ export interface Participants {
 }
 
 
-export interface Topic {
-  uid: string,
-  name: string
+export interface Topic extends Identifiable {
+
 }
 
 

@@ -18,7 +18,20 @@ export const Empty: Identifiable = {
 }
 
 
+export interface PartitionedType {
+  type: string;
+}
+
+
 export function isEmpty(instance: Identifiable): boolean {
   return (!instance || !instance.uid ||
           instance.uid === '' || instance.uid === 'Empty');
+}
+
+
+export function isTypeOf(instance: PartitionedType, typeName: string) {
+  if (!instance) {
+    return false;
+  }
+  return (instance.type === typeName);
 }

@@ -5,7 +5,8 @@
  * See LICENSE.txt in the project root for complete license information.
  */
 
-import { Identifiable } from '../core';
+import { Identifiable, PartitionedType } from '../core';
+
 
 export interface BaseProcedure extends Identifiable {
   id: number;
@@ -61,7 +62,6 @@ export interface FilingCondition {
   ficta: string;
 
   hasInnerInteraction: string;
-
 }
 
 
@@ -92,6 +92,10 @@ export class ProcedureFilter {
   contract: string;
   keywords: string;
 
+  constructor() {
+    this.clean();
+  }
+
   clean() {
     this.officeUID = "";
     this.entityUID = "";
@@ -103,17 +107,17 @@ export class ProcedureFilter {
 
 
   toString() {
-    let filter: string;
+    let filter = "";
 
-    if ((this.entityUID !== '')) {
+    if (this.entityUID) {
       filter = this.addFilterConnector(filter) + "AuthEntity.ContactUID='" + this.entityUID + "'";
     }
 
-    if ((this.officeUID !== '')) {
+    if (this.officeUID) {
       filter = this.addFilterConnector(filter) + "AuthOffice.ContactUID='" + this.officeUID + "'";
     }
 
-    if ((this.theme !== '')) {
+    if (this.theme) {
       filter = this.addFilterConnector(filter) + "theme='" + this.theme + "'";
     }
 
@@ -140,8 +144,7 @@ export interface ProcedureHypertext {
 }
 
 
-export interface Requirement extends Identifiable {
-  type: string,
+export interface Requirement extends Identifiable, PartitionedType {
   appliesTo: string,
   copies: string,
   conditions: string,

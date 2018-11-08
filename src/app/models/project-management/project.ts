@@ -5,7 +5,7 @@
  * See LICENSE.txt in the project root for complete license information.
  */
 
-import { Identifiable } from '@app/models/core';
+import { Identifiable, PartitionedType } from '@app/models/core';
 
 
 export interface Contract extends Identifiable {
@@ -31,8 +31,7 @@ export interface Project extends Identifiable {
 }
 
 
-export interface Resource extends Identifiable {
-  type: string;
+export interface Resource extends Identifiable, PartitionedType {
   notes: string;
 }
 
