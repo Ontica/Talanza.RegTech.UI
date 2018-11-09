@@ -21,12 +21,12 @@
   color: $primary-font-color;
   font-size: 10pt;
   text-transform: uppercase;
+  opacity: 1 !important;
 }
 
 
 .mat-tab-label-active {
   font-weight: 500 !important;
-  opacity: 1 !important;
 }
 
 

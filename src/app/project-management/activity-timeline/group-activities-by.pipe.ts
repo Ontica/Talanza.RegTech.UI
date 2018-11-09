@@ -23,8 +23,6 @@ export type GroupByProperty = GroupByDateProperty | 'responsible';
 })
 export class GroupActivitiesByPipe implements PipeTransform  {
 
-  constructor() {}
-
   transform(data: Array<Activity>, groupByProperty: GroupByProperty): Array<{key, value}> {
     if (!data) {
       return null;

@@ -18,8 +18,8 @@ import { InboxRef } from '@app/models/inbox';
 })
 export class InboxEditorComponent {
 
-  @HostBinding('style.display') public display = 'block';
-  @HostBinding('style.position') public position = 'absolute';
+  @HostBinding('style.display') display = 'block';
+  @HostBinding('style.position') position = 'absolute';
 
   private _inboxItem: InboxRef;
   @Input()
@@ -32,16 +32,14 @@ export class InboxEditorComponent {
 
   @Output() public onCloseEvent = new EventEmitter();
 
-  public selectedTask: string = 'generalInfo';
-  public concluededTaskLabel = '';
+  selectedTask: string = 'generalInfo';
+  concluededTaskLabel = '';
 
-  public constructor() { }
-
-  public cancel(): void {
+  cancel(): void {
     this.onClose();
   }
 
-  public onClose(): void {
+  onClose(): void {
     this.onCloseEvent.emit();
   }
 

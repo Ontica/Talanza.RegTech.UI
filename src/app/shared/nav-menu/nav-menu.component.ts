@@ -74,6 +74,9 @@ export class NavigationMenuComponent {
   @Input()
   get items(): MenuItem[] { return this._items };
   set items(value: MenuItem[]) {
+    if (!value) {
+      return;
+    }
     this._items = value;
 
     const selected = value.find(x => x.selected) || this.items[0];
@@ -83,16 +86,21 @@ export class NavigationMenuComponent {
   };
   private _items: MenuItem[];
 
-  constructor() { }
-
 
   onClick(menuItem: MenuItem) {
+    if (!menuItem) {
+      return;
+    }
     this.select(menuItem);
 
     this.click.emit(menuItem);
   }
 
+
   private select(menuItem: MenuItem) {
+    if (!menuItem) {
+      return;
+    }
     this.items.filter(x => x.selected )
               .map(x => x.unselect());
 

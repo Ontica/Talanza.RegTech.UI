@@ -1,4 +1,11 @@
 @import "../../../styles/variables";
+@import "../../../styles/card";
+
+
+.card {
+  max-height: 100%;
+}
+
 
 .title-bar {
   height: 32px;
@@ -7,23 +14,26 @@
   text-align: center;
 }
 
+
 .close-global-search-icon  {
   float: right;
   padding-top: 8px;
   padding-right: 8px;
  }
 
+
  .close-global-search-icon:hover {
   font-size: 1.2em;
   cursor: pointer;
  }
 
+
 .gs-container {
-  height: calc(100vh - 170px);
   height: 100%;
-  width:100%;
+  width: 100%;
   display: inline-block;
 }
+
 
 .centered-container {
   margin-left: 15%;
@@ -32,6 +42,7 @@
   height: 100%;
   overflow-x: hidden;
 }
+
 
 .block-container {
   display: inline-block;
@@ -42,22 +53,25 @@
   overflow-x: hidden;
 }
 
+
 .right {
-    float: right;
+  float: right;
 }
+
 
 .close-icon {
   float: right;
   color: $black;
 }
 
+
 .close-icon:hover {
   cursor: pointer;
 }
 
+
 .pdf-control {
   height: calc(100vh - 210px);
   width:100%;
-  overflow-y:hidden;
+  overflow-y: hidden;
 }
-

@@ -11,32 +11,30 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 interface config { uid: string, name: string }
 
 @Component({
-    selector: 'dropdown-menu',
-    templateUrl: './dropdown-menu.control.html',
-    styleUrls: ['./dropdown-menu.control.scss']
+  selector: 'dropdown-menu',
+  templateUrl: './dropdown-menu.control.html',
+  styleUrls: ['./dropdown-menu.control.scss']
 })
 
 export class DropdownMenuControl {
 
-    public dropdownMenuItemsVisible = true;
+  public dropdownMenuItemsVisible = true;
 
-    private _items: config[] = [];
-    @Input()
-    set items(items: config[]) {
-        this._items = items;
-    }
-    get items(): config[] {
-        return this._items;
-    }
+  private _items: config[] = [];
+  @Input()
+  set items(items: config[]) {
+    this._items = items;
+  }
+  get items(): config[] {
+    return this._items;
+  }
 
-    @Output() selectedItem = new EventEmitter<string>();
+  @Output() selectedItem = new EventEmitter<string>();
 
-    constructor() { }
+  public selectItem(item: config): void {
+    this.selectedItem.emit(item.uid);
 
-    public selectItem(item: config): void {
-        this.selectedItem.emit(item.uid);
-
-        this.dropdownMenuItemsVisible = false;
-    }
+    this.dropdownMenuItemsVisible = false;
+  }
 
 }

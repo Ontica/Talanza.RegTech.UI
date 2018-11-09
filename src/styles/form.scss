@@ -69,6 +69,10 @@ table.form-section .form-section-title {
   font: $control-font;
 }
 
+.border-top > td {
+  border-top: 1px solid $light-gray;
+}
+
 .border-bottom {
   border-bottom: $form-border-bottom;
 }
