@@ -99,7 +99,7 @@ export class ProjectService {
   getResponsiblesList(project: Project): Observable<Contact[]> {
     Assertion.assertValue(project, "project");
 
-    const path = `v1/project-management/projects/${project.uid}/responsibles`;
+    const path = `v1/project-management/projects/166871D7-5CD7-40C7-AA47-618DB5E643B8/responsibles`;
 
     return this.core.http.get<Contact[]>(path);
   }

@@ -15,7 +15,8 @@
         <a (click)="onOpenProcedureEditorWindow(procedure.uid)"><i class="fa fa-inbox" aria-hidden="true"></i></a>
       </td>
       <td style="width:30%">
-        <a (click)="openInboxEditorWindow(inbox)">{{inbox.title}}</a>
+        <a (click)="openInboxEditorWindow(inbox)">{{inbox.title}}</a><br>
+        Proyecto: {{inbox.project.name}}
       </td>
       <td style="width:15%;">
         Fecha Objetivo: &nbsp;{{inbox.extensionData.targetDate | date: 'dd/MMM/yyyy'}}<br> Fecha Máxima: &nbsp;{{inbox.extensionData.dueDate | date: 'dd/MMM/yyyy'}}

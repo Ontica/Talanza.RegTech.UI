@@ -21,12 +21,9 @@
       <procedure-viewer *ngIf="hasProcedure" [procedure]="procedure | async"></procedure-viewer>
     </mat-tab>
 
-    <mat-tab label="Documentación" disabled>
-        Documentation form
-    </mat-tab>
 
-    <mat-tab label="Comentarios Covar" disabled>
-      Comments form
+    <mat-tab label="Asesoría Covar">
+      <postings-list [target]="activity" [readonly]="settings.readonly"></postings-list>
     </mat-tab>
 
   </mat-tab-group>

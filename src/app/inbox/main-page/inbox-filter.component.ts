@@ -42,6 +42,7 @@ export class InboxFilterComponent implements OnInit {
   ngOnInit() {
     this.loadProjectList();
     this.loadTags();
+    this.loadResponsiblesList();
   }
 
 
