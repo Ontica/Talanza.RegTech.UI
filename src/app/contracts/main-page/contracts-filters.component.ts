@@ -16,9 +16,7 @@ import { Contract, EmptyContract, ContractClauseRef } from '@app/models/regulati
 @Component({
   selector: 'emp-gov-contract-filters',
   templateUrl: './contracts-filters.component.html',
-  styleUrls: ['./contracts-filters.component.scss'],
-  providers: [ContractsService]
-
+  styleUrls: ['./contracts-filters.component.scss']
 })
 export class ContractsFiltersComponent implements OnInit {
 

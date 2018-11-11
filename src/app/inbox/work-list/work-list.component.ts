@@ -15,8 +15,7 @@ import { InboxFilter, InboxRef } from '@app/models/inbox';
 @Component({
   selector: 'emp-steps-work-list',
   templateUrl: './work-list.component.html',
-  styleUrls: ['./work-list.component.scss'],
-  providers: [InboxService]
+  styleUrls: ['./work-list.component.scss']
 })
 export class WorkListComponent {
 

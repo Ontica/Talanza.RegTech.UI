@@ -16,8 +16,7 @@ import { Procedure } from '@app/models/regulation';
 @Component({
   selector: 'emp-gov-procedure-editor',
   templateUrl: './procedure-editor.component.html',
-  styleUrls: ['./procedure-editor.component.scss'],
-  providers: [ProcedureService]
+  styleUrls: ['./procedure-editor.component.scss']
 })
 export class ProcedureEditorComponent implements OnInit {
   @HostBinding('style.display') display = 'block';
@@ -32,7 +31,8 @@ export class ProcedureEditorComponent implements OnInit {
   isDisabled = false;
   isNewProcedure = false;
 
-  constructor(private ref: ChangeDetectorRef, private procedureService: ProcedureService) { }
+  constructor(private ref: ChangeDetectorRef,
+              private procedureService: ProcedureService) { }
 
   async ngOnInit() {
     await this.setProcedure();
@@ -40,24 +40,29 @@ export class ProcedureEditorComponent implements OnInit {
     this.selectedTask = 'generalInfo';
   }
 
+
   setSelectedTask(selectedTask: string): void {
     this.selectedTask = selectedTask;
     this.ref.detectChanges();
   }
 
+
   onDisabledTabs(disabled: boolean): void {
     this.isDisabled = disabled;
   }
 
+
   onClose(): void {
     this.close.emit();
   }
+
 
   private setNewProcedureTitle(): void {
     if (this.isNewProcedure) {
       this.newNameLabel = 'Nuevo Trámite';
     }
   }
+
 
   private async setProcedure() {
     if (this.procedureUID === '') {

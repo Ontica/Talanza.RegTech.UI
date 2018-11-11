@@ -7,8 +7,6 @@
 
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
-import { ContractsService } from '@app/services/regulation';
-
 import { ContractClauseRef, EmptyContractClause } from '@app/models/regulation';
 
 
@@ -20,8 +18,7 @@ import { ContractClauseRef, EmptyContractClause } from '@app/models/regulation';
                     (click)="onClickSelectClause(clause)">{{clause.clauseNo}} {{clause.title}}</a>
                 </li>
                </ul> `,
-  styleUrls: ['./contracts-clause.selector.component.scss'],
-  providers: [ContractsService]
+  styleUrls: ['./contracts-clause.selector.component.scss']
 })
 
 export class ContractsClauseSelectorComponent {

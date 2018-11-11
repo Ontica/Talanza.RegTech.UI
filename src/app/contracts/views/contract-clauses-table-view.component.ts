@@ -9,16 +9,14 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 import { ContractsService } from '@app/services/regulation';
 
-import {
-  ContractClauseRef, ContractClause,
-  EmptyContractClause
-} from '@app/models/regulation';
+import { ContractClauseRef, ContractClause,
+         EmptyContractClause } from '@app/models/regulation';
+
 
 @Component({
   selector: 'emp-gov-contract-clauses-table',
   templateUrl: './contract-clauses-table-view.component.html',
-  styleUrls: ['./contract-clauses-table-view.component.scss'],
-  providers: [ContractsService]
+  styleUrls: ['./contract-clauses-table-view.component.scss']
 })
 export class ContractClausesTableViewComponent {
 

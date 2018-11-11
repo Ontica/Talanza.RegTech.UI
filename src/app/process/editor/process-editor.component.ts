@@ -16,8 +16,7 @@ import { Process } from '@app/models/regulation';
 @Component({
   selector: 'emp-steps-process-editor',
   templateUrl: './process-editor.component.html',
-  styleUrls: ['./process-editor.component.scss'],
-  providers: [ProcessService]
+  styleUrls: ['./process-editor.component.scss']
 })
 export class ProcessEditorComponent implements OnInit {
 
@@ -50,8 +49,9 @@ export class ProcessEditorComponent implements OnInit {
 
   private processUID = '';
 
-  constructor(private sanitizer: DomSanitizer, private processService: ProcessService,
-                     private ref: ChangeDetectorRef) {
+  constructor(private processService: ProcessService,
+              private sanitizer: DomSanitizer,
+              private ref: ChangeDetectorRef) {
     this.load();
     this.url = this.sanitizer.bypassSecurityTrustResourceUrl('./modeler/process-modeler.html');
   }

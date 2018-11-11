@@ -24,7 +24,6 @@ import { GanttService } from '@app/services/project-management';
   selector: 'emp-steps-dhtmlx-gantt',
   templateUrl: './dhtmlx-gantt.component.html',
   styleUrls: ['./dhtmlx-gantt.component.scss'],
-  providers: [GanttService],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DhtmlxGanttComponent implements OnInit {

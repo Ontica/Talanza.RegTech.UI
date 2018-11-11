@@ -5,7 +5,8 @@
  * See LICENSE.txt in the project root for complete license information.
  */
 
-import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
+import { Component, EventEmitter,
+         Input, Output, OnInit } from '@angular/core';
 
 import { Validate } from '@app/core';
 
@@ -16,8 +17,7 @@ import { ProjectMeetingService } from '@app/services/project-management';
 @Component({
   selector: 'emp-kb-meetings',
   templateUrl: './project-meetings.component.html',
-  styleUrls: ['./project-meetings.component.scss'],
-  providers: [ProjectMeetingService]
+  styleUrls: ['./project-meetings.component.scss']
 })
 export class MeetingsComponent implements OnInit {
 

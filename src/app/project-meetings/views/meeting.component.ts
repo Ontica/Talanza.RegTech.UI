@@ -9,8 +9,7 @@ import { ProjectMeetingService } from '@app/services/project-management';
 @Component({
     selector: 'emp-kb-meeting',
     templateUrl: './meeting.component.html',
-    styleUrls: ['./meeting.component.scss'],
-    providers: [ProjectMeetingService]
+    styleUrls: ['./meeting.component.scss']
 })
 
 export class MeetingComponent {

@@ -6,6 +6,7 @@
  */
 
 import { Component, Input, ViewEncapsulation } from '@angular/core';
+
 import { ContractsService } from '@app/services/regulation';
 
 import {
@@ -18,8 +19,7 @@ import {
   selector: 'emp-gov-selected-clause',
   templateUrl: './contracts-selected-clause.component.html',
   styleUrls: ['./contracts-selected-clause.component.scss'],
-  providers: [ContractsService],
-  encapsulation: ViewEncapsulation.Native,
+  encapsulation: ViewEncapsulation.Native
 })
 export class ContractsSelectedClauseComponent {
 

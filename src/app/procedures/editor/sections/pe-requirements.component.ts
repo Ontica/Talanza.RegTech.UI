@@ -15,8 +15,7 @@ import { Requirement } from '@app/models/regulation';
 @Component({
   selector: 'emp-gov-pe-requirements',
   templateUrl: './pe-requirements.component.html',
-  styleUrls: ['./pe-requirements.component.scss'],
-  providers: [ProcedureService]
+  styleUrls: ['./pe-requirements.component.scss']
 })
 export class PERequirementsComponent {
 
@@ -24,6 +23,7 @@ export class PERequirementsComponent {
   conditions: Requirement[] = [];
   inputDocuments: Requirement[] = [];
   outputDocuments: Requirement[] = [];
+
 
   private _procedureUID = '';
   @Input()
@@ -38,7 +38,14 @@ export class PERequirementsComponent {
     return this._procedureUID;
   }
 
+
   constructor(private procedureService: ProcedureService) { }
+
+
+  openExternalWindow(url: string): void {
+    window.open(url, '_blank', 'location=yes,height=570,width=620,scrollbars=yes,status=yes');
+  }
+
 
   private async loadRequirements() {
     await this.loadProcedure();
@@ -47,9 +54,6 @@ export class PERequirementsComponent {
     this.loadOutputDocuments();
   }
 
-  openExternalWindow(url: string): void {
-    window.open(url, '_blank', 'location=yes,height=570,width=620,scrollbars=yes,status=yes');
-  }
 
   private async loadProcedure() {
     await this.procedureService.getProcedure(this.procedureUID)
@@ -57,23 +61,28 @@ export class PERequirementsComponent {
       .then(x => this.procedure = x);
   }
 
+
   private loadConditions(): void {
     this.conditions = this.procedure.requirements.filter((x) => x.type === 'Condition');
   }
+
 
   private loadInputDocuments(): void {
     this.inputDocuments = this.procedure.requirements.filter((x) => x.type === 'InputDocument');
   }
 
+
   private loadOutputDocuments(): void {
     this.outputDocuments = this.procedure.requirements.filter((x) => x.type === 'OutputDocument');
   }
+
 
   private onAttach(): void {
     const msg = 'Por el momento no es posible adjuntar archivos.';
 
     // alert(msg);
   }
+
 
   private onAssign(): void {
     const msg = 'Por el momento no es posible asignar tareas';

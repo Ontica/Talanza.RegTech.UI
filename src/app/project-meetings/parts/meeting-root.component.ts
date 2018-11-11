@@ -17,8 +17,7 @@ import { Meeting, EmptyMeeting, Project } from '@app/models/project-management';
 @Component({
   selector: 'emp-kb-meeting-root',
   templateUrl: './meeting-root.component.html',
-  styleUrls: ['./meeting-root.component.scss'],
-  providers: [ProjectMeetingService, ProjectService]
+  styleUrls: ['./meeting-root.component.scss']
 })
 export class MeetingRootComponent implements OnInit {
 
@@ -44,7 +43,7 @@ export class MeetingRootComponent implements OnInit {
 
 
   constructor(private projectMeetingService: ProjectMeetingService,
-    private projectService: ProjectService) { }
+              private projectService: ProjectService) { }
 
 
   ngOnInit() {

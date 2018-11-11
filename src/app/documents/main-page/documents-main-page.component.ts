@@ -12,8 +12,7 @@ import { Document, DocumentFilter } from '@app/models/regulation';
 @Component({
   selector: 'emp-gov-documents-main-page',
   templateUrl: './documents-main-page.component.html',
-  styleUrls: ['./documents-main-page.component.scss'],
-  providers: [DocumentService]
+  styleUrls: ['./documents-main-page.component.scss']
 })
 export class DocumentsMainPageComponent implements OnInit {
 
@@ -22,13 +21,16 @@ export class DocumentsMainPageComponent implements OnInit {
 
   constructor(private documentService: DocumentService) { }
 
+
   ngOnInit() {
     this.loadDocumentsList();
   }
 
+
   onChangeFilter() {
     this.loadDocumentsList();
   }
+
 
   onResetFilter() {
     this.filter = new DocumentFilter();
@@ -36,9 +38,11 @@ export class DocumentsMainPageComponent implements OnInit {
     this.loadDocumentsList();
   }
 
+
   openExternalWindow(url: string): void {
     window.open(url, '_blank', 'location=yes,height=570,width=620,scrollbars=yes,status=yes');
   }
+
 
   private loadDocumentsList() {
     this.documentService.getDocuments(this.filter)

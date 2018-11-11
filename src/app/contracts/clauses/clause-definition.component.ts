@@ -7,8 +7,6 @@
 
 import { Component, Input, ViewEncapsulation } from '@angular/core';
 
-import { CoreService } from '@app/core/core.service';
-
 import { ContractsService } from '@app/services/regulation';
 
 import {
@@ -16,14 +14,13 @@ import {
   EmptyContractClause
 } from '@app/models/regulation';
 
+
 @Component({
   selector: 'emp-gov-clause-definition',
   templateUrl: './clause-definition.component.html',
   styleUrls: ['./clause-definition.component.scss'],
-  providers: [ContractsService],
   encapsulation: ViewEncapsulation.Native,
 })
-
 export class ClauseDefinitionComponent {
 
   clause: ContractClause = EmptyContractClause();
@@ -36,6 +33,7 @@ export class ClauseDefinitionComponent {
       this.loadClause(clauseRef);
     }
   }
+
 
   private loadClause(clauseRef: ContractClauseRef): void {
     this.contractService.getClause(clauseRef.contractUID, clauseRef.uid)

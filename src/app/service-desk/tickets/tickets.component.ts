@@ -15,8 +15,7 @@ import { Ticket } from '@app/models/service-desk';
 @Component({
   selector: 'emp-kb-tickets',
   templateUrl: './tickets.component.html',
-  styleUrls: ['./tickets.component.scss'],
-  providers: [TicketService]
+  styleUrls: ['./tickets.component.scss']
 })
 export class TicketsComponent implements OnInit {
 

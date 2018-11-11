@@ -7,8 +7,6 @@
 
 import { Component, Input } from '@angular/core';
 
-import { CoreService } from '@app/core/core.service';
-
 import { ContractsService } from '@app/services/regulation';
 
 import { ContractClauseRef, Rule } from '@app/models/regulation';
@@ -16,8 +14,7 @@ import { ContractClauseRef, Rule } from '@app/models/regulation';
 @Component({
   selector: 'emp-gov-clause-obligations',
   templateUrl: './clause-obligations.component.html',
-  styleUrls: ['./clause-obligations.component.scss'],
-  providers: [ContractsService]
+  styleUrls: ['./clause-obligations.component.scss']
 })
 
 export class ClauseObligationsComponent {
