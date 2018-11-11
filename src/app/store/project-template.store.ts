@@ -12,7 +12,7 @@ import { List } from 'immutable';
 import { ProjectService } from '@app/services/project-management';
 
 import { Activity, Project, Stage } from '@app/models/project-management';
-import { Entity } from "@app/models/regulation";
+import { Entity } from '@app/models/regulation';
 import { Empty } from '@app/models/core';
 
 
@@ -27,11 +27,11 @@ export class ProjectTemplateModel {
 @Injectable()
 export class ProjectTemplateStore {
 
-  private _selectedTemplate: BehaviorSubject<ProjectTemplateModel> = new BehaviorSubject(new ProjectTemplateModel());
+  private _selectedTemplate = new BehaviorSubject(new ProjectTemplateModel());
 
-  private _templatesList: BehaviorSubject<List<Project>> = new BehaviorSubject(List([]));
+  private _templatesList = new BehaviorSubject(List([]));
 
-  private _stages: BehaviorSubject<List<Stage>> = new BehaviorSubject(List([]));
+  private _stages = new BehaviorSubject(List([]));
 
 
   constructor(private projectService: ProjectService) {

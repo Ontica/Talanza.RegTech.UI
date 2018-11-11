@@ -25,11 +25,11 @@ export class DirectoryService {
     this.servicesList = this.getServicesList();
   }
 
-  public getService(servicePathOrUID: string,
-                    method?: HttpMethod): Observable<Service> {
-    Assertion.assertValue(servicePathOrUID, 'servicePathOrUID');
+  getService(servicePathOrUID: string,
+             method?: HttpMethod): Observable<Service> {
+             Assertion.assertValue(servicePathOrUID, 'servicePathOrUID');
 
-    if (servicePathOrUID.includes('http://') || servicePathOrUID.includes('https://') ) {
+    if (servicePathOrUID.includes('http://') || servicePathOrUID.includes('https://')) {
       return of<Service>(undefined);
     } else {
       return this.getServiceFromList(servicePathOrUID, method);
@@ -57,7 +57,7 @@ export class DirectoryService {
 
     } else if (!servicePathOrUID.includes('/') && method !== undefined) {
       condition = (service: Service) => (service.uid === servicePathOrUID &&
-                                         service.method.toString() === HttpMethod[method]);
+        service.method.toString() === HttpMethod[method]);
 
     } else {
       throw Assertion.assertNoReachThisCode('A findService condition handler is missing in code.');
@@ -71,8 +71,8 @@ export class DirectoryService {
 
       } else if (filteredServices.length > 1) {
         Assertion.assert(false,
-                        `There are defined ${filteredServices.length} services that satisfy the ` +
-                        'supplied search condition.');
+          `There are defined ${filteredServices.length} services that satisfy the ` +
+          'supplied search condition.');
 
       } else {
         return filteredServices[0];

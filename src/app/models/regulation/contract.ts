@@ -32,7 +32,7 @@ export interface ContractClause extends ContractClauseRef {
   hypertext: string;
   sourcePageNo: number;
   notes: string;
-  status: string;  
+  status: string;
   relatedProcedures: RelatedProcedure[];
 }
 
@@ -55,20 +55,20 @@ interface ProcedureRef {
 }
 
 export interface Rule {
-  uid: string,
-  name: string,
-  description: string,
-  workflowObjectUID: string,
-  procedures: ProcedureRef[]
+  uid: string;
+  name: string;
+  description: string;
+  workflowObjectUID: string;
+  procedures: ProcedureRef[];
 }
 
 export interface Obligation {
-  uid: string,  
-  clauseNo: string,  
-  contractUID: string,  
-  rules: Rule[],
-  section: string,
-  title: string
+  uid: string;
+  clauseNo: string;
+  contractUID: string;
+  rules: Rule[];
+  section: string;
+  title: string;
 }
 
 export function EmptyContract() {
@@ -97,7 +97,7 @@ export function EmptyContractRef() {
 export function EmptyContractClause() {
 
   const empty: ContractClause = {
-    uid: '', 
+    uid: '',
     clauseNo: '',
     notes: '',
     relatedProcedures: [],

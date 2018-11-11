@@ -5,30 +5,30 @@
  * See LICENSE.txt in the project root for complete license information.
  */
 
-import { PartitionedType, Identifiable } from "../core";
+import { PartitionedType, Identifiable } from '../core';
 
 
 export interface Ticket extends PartitionedType {
-  uid: string,
-  typeName: string,
-  controlNo: string,
-  title: string,
-  description: string,
-  requestedTime: Date,
-  assignedTo: string,
-  resolutionTime: Date,
-  customerName: string,
-  status: string,
-  date: Date,
-  endTime: string
-  location: string
-  startTime: string
+  uid: string;
+  typeName: string;
+  controlNo: string;
+  title: string;
+  description: string;
+  requestedTime: Date;
+  assignedTo: string;
+  resolutionTime: Date;
+  customerName: string;
+  status: string;
+  date: Date;
+  endTime: string;
+  location: string;
+  startTime: string;
 }
 
 
 export interface Participants {
-  uid: string,
-  shortName: string
+  uid: string;
+  shortName: string;
 }
 
 
@@ -38,21 +38,21 @@ export interface Topic extends Identifiable {
 
 
 export interface Recommendation {
-  uid: string,
-  question: string,
-  answer: string,
-  answeredBy: string
-  comments: string,
-  date: Date,
-  accessMode: string,
-  status: string
+  uid: string;
+  question: string;
+  answer: string;
+  answeredBy: string;
+  comments: string;
+  date: Date;
+  accessMode: string;
+  status: string;
 }
 
 
 export interface MeetingReport extends Ticket {
-  participants: Participants,
-  Topic: Topic
-  Recomendation: Recommendation
+  participants: Participants;
+  Topic: Topic;
+  Recomendation: Recommendation;
 }
 
 
@@ -73,7 +73,7 @@ export function EmptyTicket() {
     endTime: '',
     location: '',
     startTime: ''
-  }
+  };
 
   return empty;
 }

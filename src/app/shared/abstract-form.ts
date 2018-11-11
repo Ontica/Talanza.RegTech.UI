@@ -29,36 +29,16 @@ export interface FormSubmitOptions {
 const enum FormMessages {
 
   CantSetCommandWhileProcessing =
-  "Command can't be changed because there is still a pending operation executing.",
+  'Command can\'t be changed because there is still a pending operation executing.',
 
   InvalidFormWithUnregisteredException =
-  "Programming error. The form is invalid (form.valid == false) and there are no exception messages registered.",
+  'Programming error. The form is invalid (form.valid == false) and there are ' +
+  'no exception messages registered.',
 
 }
 
 
 export abstract class AbstractForm {
-
-  /// abstract methods
-
-  protected abstract execute(): Promise<any>;
-
-  protected abstract createFormGroup(): FormGroup;
-
-  protected abstract validate(): Promise<any>;
-
-
-  /// fields and constructor
-
-  protected form : FormGroup;
-  private spinner: Displayable;
-
-  private currentCommand: Command = { name: ''};
-  private disabledFlag = false;
-  private submittedFlag = false;
-  private processing = false;
-
-  private exceptionsArray: string[] = [];
 
   constructor() {
     this.form = this.createFormGroup();
@@ -82,7 +62,7 @@ export abstract class AbstractForm {
 
 
   get exceptionMsg(): string {
-    return this.exceptionsArray.join("<br />");
+    return this.exceptionsArray.join('<br />');
   }
 
 
@@ -104,6 +84,27 @@ export abstract class AbstractForm {
   get valid(): boolean {
     return this.form.valid && (this.exceptionsArray.length === 0);
   }
+
+
+  /// fields and constructor
+
+  protected form: FormGroup;
+  private spinner: Displayable;
+
+  private currentCommand: Command = { name: ''};
+  private disabledFlag = false;
+  private submittedFlag = false;
+  private processing = false;
+
+  private exceptionsArray: string[] = [];
+
+  /// abstract methods
+
+  protected abstract execute(): Promise<any>;
+
+  protected abstract createFormGroup(): FormGroup;
+
+  protected abstract validate(): Promise<any>;
 
 
   /// public methods

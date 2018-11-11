@@ -8,7 +8,7 @@
 import { Component, EventEmitter,
          Input, OnChanges, Output } from '@angular/core';
 
-import { MatDialog, MatDialogConfig } from "@angular/material";
+import { MatDialog, MatDialogConfig } from '@angular/material';
 
 import { ProjectModel } from '@app/store/project.store';
 
@@ -106,7 +106,7 @@ export class ActivityTreeComponent implements OnChanges {
     dialogConfig.width = '600px',
     dialogConfig.data = activity;
 
-    var dialogRef = this.dialog.open(MoveActivityDialogComponent, dialogConfig);
+    const dialogRef = this.dialog.open(MoveActivityDialogComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(
         result => {
@@ -169,15 +169,15 @@ export class ActivityTreeComponent implements OnChanges {
 
     this.onSelectActivity(activity);
 
-    event.srcElement.parentElement.classList.add("dragged");
+    event.srcElement.parentElement.classList.add('dragged');
 
-    event.dataTransfer.dropEffect = "move";
+    event.dataTransfer.dropEffect = 'move';
 
-    event.dataTransfer.setData("activity", JSON.stringify(activity));
+    event.dataTransfer.setData('activity', JSON.stringify(activity));
   }
 
   moveActivity(event: DragEvent, newPosition: number) {
-    let activity = this.getDraggedActivity(event);
+    const activity = this.getDraggedActivity(event);
 
     this.configureDragEventBehaviour(event);
     this.setDragZoneItem(null);
@@ -190,7 +190,7 @@ export class ActivityTreeComponent implements OnChanges {
 
 
   moveActivityAsChildOf(event: DragEvent, newParent: Activity) {
-    let activity = this.getDraggedActivity(event);
+    const activity = this.getDraggedActivity(event);
 
     this.configureDragEventBehaviour(event);
     this.setDragZoneItem(null);
@@ -212,7 +212,7 @@ export class ActivityTreeComponent implements OnChanges {
   private getDraggedActivity(event: DragEvent): Activity {
     this.configureDragEventBehaviour(event);
 
-    let activity = JSON.parse(event.dataTransfer.getData("activity"));
+    const activity = JSON.parse(event.dataTransfer.getData('activity'));
 
     return activity;
   }

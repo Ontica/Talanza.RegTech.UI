@@ -9,153 +9,162 @@
 
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { catchError } from 'rxjs/operators'
+import { catchError } from 'rxjs/operators';
 
 import { CoreService } from '@app/core/core.service';
 
 import { Meeting, Participant } from '@app/models/project-management';
 
 export enum MeetingServiceErr {
-  GET_MEETING_OPENEND_ERR =
-        '[GET_OPENEND_MEETING_ERR] No pude leer las meetings abiertas.',
-  POST_MEETING_ERR =
-        '[POST_MEETING_ERR] Ocurrió un problema al guardar la meeting.',
+  GET_OPENED_MEETINGS_ERR =
+  '[GET_OPENEND_MEETING_ERR] No pude leer las reuniones de trabajo abiertas.',
+  UPDATE_MEETING_ERR =
+  '[UPDATE_MEETING_ERR] Ocurrió un problema al guardar la reunión de trabajo.',
   GET_MEETINGS_ERR =
-        '[GET_MEETINGS_ERR] Ocurrió un problema al leer la lista de meetings.',
+  '[GET_MEETINGS_ERR] Ocurrió un problema al leer la lista de reuniones trabajo.',
   GET_MEETING_ERR =
-        '[GET_MEETING_ERR] Ocurrió un problema al leer la meeting.',
-  GET_PARTICIPANTS_AVIABLE =
-        '[GET_PARTICIPANTS_AVIABLE] Ocurrió un problema al leer la lista de participantes disponibles del meeting.',
-  POST_CLOSE_MEETING_ERR =
-        '[POST_CLOSE_MEETING_ERR] Ocurrió un problema al cerrar la meeting.',
-  POST_OPEN_MEETING_ERR =
-        '[POST_OPEN_MEETING_ERR] Ocurrió un problema al abrir la meeting.',
-  POST_ADD_PARTICIPANT_MEETING_ERR =
-        '[POST_ADD_PARTICIPANT_MEETING_ERR] Ocurrió un problema al guardar un participante en la meeting.',
+  '[GET_MEETING_ERR] Ocurrió un problema al leer la reunión de trabajo.',
+  AVAILABLE_PARTICIPANTS =
+  '[AVAILABLE_PARTICIPANTS] Ocurrió un problema al leer la lista de participantes ' +
+  'disponibles del meeting.',
+  CLOSE_MEETING_ERR =
+  '[CLOSE_MEETING_ERR] Ocurrió un problema al cerrar la reunión de trabajo.',
+  OPEN_MEETING_ERR =
+  '[OPEN_MEETING_ERR] Ocurrió un problema al abrir la reunión de trabajo.',
+  ADD_PARTICIPANT_MEETING_ERR =
+  '[ADD_PARTICIPANT_MEETING_ERR] Ocurrió un problema al agregar el ' +
+  'participante en la reunión de trabajo.',
   DELETE_MEETING_ERR =
-        '[DELETE_MEETING_ERR] Ocurrió un problema al eliminar la meeting.',
+  '[DELETE_MEETING_ERR] Ocurrió un problema al eliminar la reunión de trabajo.',
 
 }
 
 @Injectable()
 export class ProjectMeetingService {
-  constructor(private core:CoreService) {}
 
-  public getOpenedMeetings(keywords?: string): Observable<Meeting[]> {
+  constructor(private core: CoreService) { }
 
+
+  getOpenedMeetings(keywords?: string): Observable<Meeting[]> {
     let path = `v1/project-management/meetings/opened/`;
 
     if (keywords) {
-        path += `?keywords=${keywords}`;
+      path += `?keywords=${keywords}`;
     }
 
     return this.core.http.get<Meeting[]>(path)
-                .pipe(
-                  catchError((e) => this.core.http.showAndReturn(e, MeetingServiceErr.GET_MEETING_OPENEND_ERR, null))
-                );
-
+      .pipe(
+        catchError(e => this.core.http.showAndReturn(e, MeetingServiceErr.GET_OPENED_MEETINGS_ERR, null))
+      );
   }
 
-  public getMeetings(keywords?: string): Observable<Meeting[]> {
 
+  getMeetings(keywords?: string): Observable<Meeting[]> {
     let path = `v1/project-management/meetings/`;
 
     if (keywords) {
-        path += `?keywords=${keywords}`;
+      path += `?keywords=${keywords}`;
     }
 
     return this.core.http.get<Meeting[]>(path)
-                .pipe(
-                  catchError((e) => this.core.http.showAndReturn(e, MeetingServiceErr.GET_MEETINGS_ERR, null))
-                );
+      .pipe(
+        catchError(e => this.core.http.showAndReturn(e, MeetingServiceErr.GET_MEETINGS_ERR, null))
+      );
 
   }
 
-  public getMeeting(meetingUID: string): Observable<Meeting> {
 
-    let path = `v1/project-management/meetings/${meetingUID}`;
+  getMeeting(meetingUID: string): Observable<Meeting> {
+    const path = `v1/project-management/meetings/${meetingUID}`;
 
     return this.core.http.get<Meeting[]>(path)
-                .pipe(
-                  catchError((e) => this.core.http.showAndReturn(e, MeetingServiceErr.GET_MEETING_ERR, null))
-                );
+      .pipe(
+        catchError(e => this.core.http.showAndReturn(e, MeetingServiceErr.GET_MEETING_ERR, null))
+      );
   }
 
-  public addMeeting(meeting: Meeting) {
-    let path = `v1/project-management/meetings`;
+
+  addMeeting(meeting: Meeting) {
+    const path = `v1/project-management/meetings`;
 
     return this.core.http.post<any>(path, meeting)
-                .pipe(
-                  catchError((e) => this.core.http.showAndReturn(e,MeetingServiceErr.POST_MEETING_ERR, null))
-                );
+      .pipe(
+        catchError(e => this.core.http.showAndReturn(e, MeetingServiceErr.UPDATE_MEETING_ERR, null))
+      );
   }
 
-  public updateMeeting(meeting: Meeting) {
 
-    let path = `v1/project-management/meetings/${meeting.uid}`;
+  updateMeeting(meeting: Meeting) {
+    const path = `v1/project-management/meetings/${meeting.uid}`;
 
     return this.core.http.put<any>(path, meeting)
-                .pipe(
-                  catchError((e) => this.core.http.showAndReturn(e,MeetingServiceErr.POST_MEETING_ERR, null))
-                );
+      .pipe(
+        catchError(e => this.core.http.showAndReturn(e, MeetingServiceErr.UPDATE_MEETING_ERR, null))
+      );
   }
 
-  public closeMeeting(meetingUID: string) {
-    let path = `v1/project-management/meetings/${meetingUID}/close`;
 
-    return this.core.http.post<any>(path,'')
-                .pipe(
-                  catchError((e) => this.core.http.showAndReturn(e,MeetingServiceErr.POST_CLOSE_MEETING_ERR, null))
-                );
+  closeMeeting(meetingUID: string) {
+    const path = `v1/project-management/meetings/${meetingUID}/close`;
+
+    return this.core.http.post<any>(path, '')
+      .pipe(
+        catchError(e => this.core.http.showAndReturn(e, MeetingServiceErr.CLOSE_MEETING_ERR, null))
+      );
   }
 
-  public openMeeting(meetingUID: string) {
-    let path = `v1/project-management/meetings/${meetingUID}/open`;
 
-    return this.core.http.post<any>(path,'')
-                .pipe(
-                  catchError((e) => this.core.http.showAndReturn(e,MeetingServiceErr.POST_OPEN_MEETING_ERR, null))
-                );
+  openMeeting(meetingUID: string) {
+    const path = `v1/project-management/meetings/${meetingUID}/open`;
+
+    return this.core.http.post<any>(path, '')
+      .pipe(
+        catchError(e => this.core.http.showAndReturn(e, MeetingServiceErr.OPEN_MEETING_ERR, null))
+      );
   }
 
-  public deleteMeeting(meetingUID: string) {
-    let path = `v1/project-management/meetings/${meetingUID}`;
+
+  deleteMeeting(meetingUID: string) {
+    const path = `v1/project-management/meetings/${meetingUID}`;
 
     return this.core.http.delete<any>(path)
-                .pipe(
-                  catchError((e) => this.core.http.showAndReturn(e,MeetingServiceErr.DELETE_MEETING_ERR, null))
-                );
+      .pipe(
+        catchError(e => this.core.http.showAndReturn(e, MeetingServiceErr.DELETE_MEETING_ERR, null))
+      );
   }
 
-  public getParticipantAvailable(meetingUID: string): Observable<Participant[]> {
-    let path = `v1/project-management/meetings/${meetingUID}/participants/available`;
+
+  getParticipantAvailable(meetingUID: string): Observable<Participant[]> {
+    const path = `v1/project-management/meetings/${meetingUID}/participants/available`;
 
     return this.core.http.get<Participant[]>(path)
-                .pipe(
-                  catchError((e) => this.core.http.showAndReturn(e,MeetingServiceErr.GET_PARTICIPANTS_AVIABLE, null))
-                );
+      .pipe(
+        catchError(e => this.core.http.showAndReturn(e, MeetingServiceErr.AVAILABLE_PARTICIPANTS, null))
+      );
   }
 
-  public addParticipantToMeeting(meetingUID: string, participantUID: string) {
-    let path = `v1/project-management/meetings/${meetingUID}/participants`;
+
+  addParticipantToMeeting(meetingUID: string, participantUID: string) {
+    const path = `v1/project-management/meetings/${meetingUID}/participants`;
 
     const body = {
-          participantUID: participantUID
-        }
+      participantUID: participantUID
+    };
 
-    return this.core.http.post<any>(path,body)
-                .pipe(
-                  catchError((e) => this.core.http.showAndReturn(e,MeetingServiceErr.POST_ADD_PARTICIPANT_MEETING_ERR, null))
-                );
+    return this.core.http.post<any>(path, body)
+      .pipe(
+        catchError(e => this.core.http.showAndReturn(e, MeetingServiceErr.ADD_PARTICIPANT_MEETING_ERR, null))
+      );
   }
 
-  public deleteParticipantFromMeeting(meetingUID: string, participantUID) {
-    let path = `v1/project-management/meetings/${meetingUID}/participants/${participantUID}`;
+
+  deleteParticipantFromMeeting(meetingUID: string, participantUID) {
+    const path = `v1/project-management/meetings/${meetingUID}/participants/${participantUID}`;
 
     return this.core.http.delete<any>(path)
-                .pipe(
-                    catchError((e) => this.core.http.showAndReturn(e,MeetingServiceErr.GET_PARTICIPANTS_AVIABLE, null))
-                );
+      .pipe(
+        catchError(e => this.core.http.showAndReturn(e, MeetingServiceErr.AVAILABLE_PARTICIPANTS, null))
+      );
   }
 
 }

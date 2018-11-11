@@ -6,23 +6,23 @@
  *
  */
 
-import { Component, EventEmitter, HostBinding, Input, Output  } from '@angular/core';
+import { Component, EventEmitter, HostBinding, Input, Output } from '@angular/core';
 
 @Component({
-    selector: 'modal-window',
-    templateUrl: './modal-window.html',
-    styleUrls: ['./modal-window.scss']
+  selector: 'modal-window',
+  templateUrl: './modal-window.html',
+  styleUrls: ['./modal-window.scss']
 })
 
 export class ModalWindow {
-    @HostBinding('style.display') public display = 'block';
-    @HostBinding('style.position') public position = 'absolute';
+  @HostBinding('style.display') display = 'block';
+  @HostBinding('style.position') position = 'absolute';
 
-    @Input() public title = '';
+  @Input() title = '';
 
-    @Output() public onClose= new EventEmitter();
-    
-    public close(): void {
-        this.onClose.emit();
-    }
+  @Output() onClose = new EventEmitter();
+
+  close(): void {
+    this.onClose.emit();
+  }
 }

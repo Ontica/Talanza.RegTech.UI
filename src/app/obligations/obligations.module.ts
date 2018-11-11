@@ -11,7 +11,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
 import { ControlsModule } from '../controls/controls.module';
- 
+
 import { ObligationsFilterComponent } from './main-page/obligations-filter.component';
 import { ObligationsMainPageComponent } from './main-page/obligations-main-page.component';
 
@@ -22,8 +22,8 @@ import { ObligationsRoutingModule } from './obligations-routing.module';
  */
 
 @NgModule({
-	imports: [ObligationsRoutingModule, SharedModule, CommonModule, FormsModule, ControlsModule],
-	declarations: [ObligationsMainPageComponent, ObligationsFilterComponent],
-	exports: []
+  imports: [ObligationsRoutingModule, SharedModule, CommonModule, FormsModule, ControlsModule],
+  declarations: [ObligationsMainPageComponent, ObligationsFilterComponent],
+  exports: []
 })
 export class ObligationsModule { }

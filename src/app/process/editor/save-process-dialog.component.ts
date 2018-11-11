@@ -17,11 +17,11 @@ import { Process } from '@app/models/regulation';
 })
 export class SaveProcessDialogComponent {
 
-  public process: Process = new Process();
-  public alerts: string;
+  process: Process = new Process();
+  alerts: string;
 
-  @Output() public onSetDiagramIdentificationEvent = new EventEmitter<Process>();
-  @Output() public onCancelEvent = new EventEmitter();
+  @Output() onSetDiagramIdentificationEvent = new EventEmitter<Process>();
+  @Output() onCancelEvent = new EventEmitter();
 
   @HostBinding('style.display') private display = 'block';
   @HostBinding('style.position') private position = 'absolute';
@@ -31,7 +31,7 @@ export class SaveProcessDialogComponent {
     this.process.version = '';
   }
 
-  public setDiagramIdentification(): void {
+  setDiagramIdentification(): void {
     if (!this.validate()) {
       return;
     }
@@ -40,7 +40,7 @@ export class SaveProcessDialogComponent {
     this.closePopup();
   }
 
-  public cancel(): void {
+  cancel(): void {
     this.closePopup();
   }
 

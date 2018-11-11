@@ -18,8 +18,8 @@ import { SpinnerState, SpinnerService } from './spinner.service';
 })
 export class SpinnerComponent implements OnDestroy, OnInit {
 
-  @HostBinding('style.display') public display = 'block';
-  @HostBinding('style.position') public position = 'absolute';
+  @HostBinding('style.display') display = 'block';
+  @HostBinding('style.position') position = 'absolute';
 
   private spinnerStateChanged: Subscription;
 

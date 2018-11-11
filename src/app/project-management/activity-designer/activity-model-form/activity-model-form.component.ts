@@ -24,10 +24,10 @@ import { AbstractForm, MessageBoxService } from '@app/shared/services';
 enum FormMessages {
 
   IncompleteActivityData =
-  "Los campos marcados en rojo son requeridos.",
+  'Los campos marcados en rojo son requeridos.',
 
   UnrecognizedValue =
-  "El campo tiene un valor que no reconozco.",
+  'El campo tiene un valor que no reconozco.',
 
 }
 
@@ -53,7 +53,7 @@ export class ActivityModelFormComponent extends AbstractForm implements OnInit, 
 
   constructor(private messageService: MessageBoxService,
               private templateStore: ProjectTemplateStore,
-              private procedureStore: ProcedureStore ) {
+              private procedureStore: ProcedureStore) {
     super();
   }
 
@@ -81,7 +81,8 @@ export class ActivityModelFormComponent extends AbstractForm implements OnInit, 
                 `<strong>${this.activity.name}</strong> de este árbol de diseño de obligaciones.<br/><br/>` +
                 `¿Elimino la obligación de este diseño?`;
 
-    this.messageService.confirm(msg, "Eliminar obligación", 'DeleteCancel', 'Eliminar esta obligación').subscribe(
+    this.messageService.confirm(msg, 'Eliminar obligación',
+                                'DeleteCancel', 'Eliminar esta obligación').subscribe(
       result => {
         if (result) {
           this.setCommand('delete');
@@ -203,14 +204,14 @@ export class ActivityModelFormComponent extends AbstractForm implements OnInit, 
         dueOnTerm: formModel.dueOnTerm ? Number(formModel.dueOnTerm) : '',
         dueOnTermUnit: formModel.dueOnTermUnit,
         dueOnCondition: formModel.dueOnCondition,
-        dueOnController: new Number(formModel.dueOnController),
+        dueOnController: Number(formModel.dueOnController),
 
         duration: formModel.duration ? Number(formModel.duration) : '',
         durationUnit: formModel.durationUnit,
         periodicity: formModel.periodicity || '',
 
-        entity: new Number(formModel.entity),
-        procedure: new Number(formModel.procedure),
+        entity: Number(formModel.entity),
+        procedure: Number(formModel.procedure),
         contractClause: formModel.contractClause || '',
         legalBasis: formModel.legalBasis || '',
       },
@@ -261,7 +262,7 @@ export class ActivityModelFormComponent extends AbstractForm implements OnInit, 
   }
 
   private isPositiveInteger(str: string) {
-    var n = Number(str);
+    const n = Number(str);
 
     return n !== Infinity && Number.isInteger(n) && n > 0;
   }
@@ -275,7 +276,7 @@ export class ActivityModelFormComponent extends AbstractForm implements OnInit, 
     }
 
     if (!this.isPositiveInteger(value)) {
-      this.addException(FormMessages.UnrecognizedValue + "Value " + value);
+      this.addException(FormMessages.UnrecognizedValue + 'Value ' + value);
       this.get(path).markAsDirty();
     }
   }

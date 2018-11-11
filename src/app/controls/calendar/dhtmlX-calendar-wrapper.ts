@@ -28,7 +28,7 @@ export class CalendarWrapper {
   }
 
 
-  public get instance(): any {
+  get instance(): any {
     return this._calendar;
   }
 
@@ -81,7 +81,7 @@ export class CalendarWrapper {
   private getLanguageConfig(lang: Language): any {
     return {
       // date format
-      dateformat: "%m-%d-%Y",
+      dateformat: '%m-%d-%Y',
       // full names of months
       monthesFNames: LocalizationLibrary.monthNames(lang),
       // short names of months
@@ -93,7 +93,7 @@ export class CalendarWrapper {
       // starting day of a week. Number from 1(Monday) to 7(Sunday)
       weekstart: 7,
       // the title of the week number column
-      weekname: "s"
+      weekname: 's'
     };
   }
 
@@ -114,7 +114,7 @@ export class CalendarWrapper {
 
   private setSettings(config: CalendarSettings) {
     if (config.hideWeekendDays) {
-      this._calendar.disableDays("week", [6, 7]);
+      this._calendar.disableDays('week', [6, 7]);
     }
 
     if (config.showHolidays) {
@@ -133,7 +133,7 @@ export class CalendarWrapper {
       this.disableRangeDays('15-12-2017', '02-01-2018');
     }
 
-    this._calendar.setDateFormat("%d-%M-%y");
+    this._calendar.setDateFormat('%d-%M-%y');
   }
 
 }

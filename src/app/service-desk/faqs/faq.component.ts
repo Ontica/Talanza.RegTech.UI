@@ -14,7 +14,7 @@ import { Posting, BASE_OBJECT_UID } from '@app/models/knowledge-base';
 
 const OPERATIONS: string[] = [
   'Agregar FAQ',
-]
+];
 
 
 @Component({
@@ -24,7 +24,7 @@ const OPERATIONS: string[] = [
 })
 export class FAQComponent {
 
-  private _faqUID: string = '';
+  private _faqUID = '';
   @Input()
   set faqUID(faqUID: string) {
     this._faqUID = faqUID;
@@ -35,17 +35,17 @@ export class FAQComponent {
     return this._faqUID;
   }
 
-  public faq: Posting;
-  public isOpenFAQEditor = false;
-  public operations = OPERATIONS;
+  faq: Posting;
+  isOpenFAQEditor = false;
+  operations = OPERATIONS;
 
   constructor(private faqService: PostingsService) { }
 
-  public onOpenFAQEditor(): void {
+  onOpenFAQEditor(): void {
     this.isOpenFAQEditor = true;
   }
 
-  public onEditedFAQ(): void {
+  onEditedFAQ(): void {
     this.isOpenFAQEditor = false;
 
     this.loadFaq();
@@ -56,7 +56,7 @@ export class FAQComponent {
                    .subscribe((faq) => { this.faq = faq; });
   }
 
-  public onChangeOperation(operation: string): void {
+  onChangeOperation(operation: string): void {
 
   }
 

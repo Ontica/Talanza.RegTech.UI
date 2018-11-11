@@ -76,7 +76,7 @@ export class PostingsEditorComponent implements OnInit {
       title: formModel.title,
       body: formModel.body,
       fileName: formModel.fileName
-    }
+    };
   }
 
 

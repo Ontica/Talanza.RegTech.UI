@@ -7,7 +7,7 @@
 
 import { Component } from '@angular/core';
 
-import { BaseProcedure } from "@app/models/regulation";
+import { BaseProcedure } from '@app/models/regulation';
 
 
 @Component({
@@ -17,20 +17,20 @@ import { BaseProcedure } from "@app/models/regulation";
 })
 export class ProceduresMainPageComponent {
 
-  public procedures: BaseProcedure[] = [];
-  public selectedProcedureUID: string;
-  public showProcedureEditorWindow = false;
+  procedures: BaseProcedure[] = [];
+  selectedProcedureUID: string;
+  showProcedureEditorWindow = false;
 
-  public onOpenProcedureEditorWindow(UID: string): void {
+  onOpenProcedureEditorWindow(UID: string): void {
     this.selectedProcedureUID = UID;
     this.showProcedureEditorWindow = true;
   }
 
-  public closeProcedureEditorWindow(): void {
+  closeProcedureEditorWindow(): void {
     this.showProcedureEditorWindow = false;
   }
 
-  public getProcedures(procedures: BaseProcedure[]): void {
+  getProcedures(procedures: BaseProcedure[]): void {
     this.procedures = procedures;
   }
 

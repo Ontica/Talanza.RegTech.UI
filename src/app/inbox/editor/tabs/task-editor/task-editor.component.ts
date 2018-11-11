@@ -27,9 +27,9 @@ export class TaskEditorComponent {
     this._inboxItem = inboxItem;
   }
 
-  public files: File[] = [];
+  files: File[] = [];
 
-  public getSelectedFile(files: FileList): void {
+  getSelectedFile(files: FileList): void {
     this.files.push(files.item(0));
 
   }

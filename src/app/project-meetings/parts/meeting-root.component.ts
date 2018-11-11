@@ -22,12 +22,12 @@ import { Meeting, EmptyMeeting, Project } from '@app/models/project-management';
 })
 export class MeetingRootComponent implements OnInit {
 
-  public meeting = EmptyMeeting();
-  public isMeetingData = false;
+  meeting = EmptyMeeting();
+  isMeetingData = false;
 
-  public projects: Project[] = [];
+  projects: Project[] = [];
 
-  private _meetingUID: string = "";
+  private _meetingUID = '';
   @Input()
   set meetingUID(meetingUID: string) {
     this._meetingUID = meetingUID;
@@ -50,7 +50,7 @@ export class MeetingRootComponent implements OnInit {
   ngOnInit() {
     this.loadProjectsList();
   }
-  public async doOperation() {
+  async doOperation() {
 
     if (!this.validate()) {
       return;
@@ -67,24 +67,24 @@ export class MeetingRootComponent implements OnInit {
   }
 
 
-  public cancel() {
+  cancel() {
     this.loadMeeting();
     this.onUpdateMeeting.emit(this.meeting);
   }
 
 
-  public onChangeProject(projectUId: string): void {
+  onChangeProject(projectUId: string): void {
     if (projectUId === '') {
       return;
     }
 
-    let index = this.projects.findIndex((x) => x.uid === projectUId);
+    const index = this.projects.findIndex((x) => x.uid === projectUId);
     this.meeting.project = this.projects[index];
   }
 
 
   private validateTime(time: string): boolean {
-    let regexp = new RegExp('^([01]?[0-9]|2[0-3]):[0-5][0-9]$');
+    const regexp = new RegExp('^([01]?[0-9]|2[0-3]):[0-5][0-9]$');
     if (regexp.test(time)) {
       return true;
     }
@@ -93,11 +93,11 @@ export class MeetingRootComponent implements OnInit {
 
 
   private validateMeetingDate(): boolean {
-    let today = new Date();
-    let meetingDate = new Date(this.meeting.date);
+    const today = new Date();
+    const meetingDate = new Date(this.meeting.date);
 
     if (meetingDate > today) {
-      alert("La fecha de termino no puede ser posterior al día de hoy");
+      alert('La fecha de termino no puede ser posterior al día de hoy');
       return false;
     }
 
@@ -106,11 +106,11 @@ export class MeetingRootComponent implements OnInit {
 
 
   private validateIfEndTimeIsLessThanStartTime(): boolean {
-    let startTime = new Date('01 01 2021 ' + this.meeting.startTime);
-    let endTime = new Date('01 01 2021 ' + this.meeting.endTime);
+    const startTime = new Date('01 01 2021 ' + this.meeting.startTime);
+    const endTime = new Date('01 01 2021 ' + this.meeting.endTime);
 
     if (endTime.getTime() < startTime.getTime()) {
-      alert("La hora de término no pude ser anteriro que la hora de inicio");
+      alert('La hora de término no pude ser anteriro que la hora de inicio');
       return false;
     }
 
@@ -120,15 +120,15 @@ export class MeetingRootComponent implements OnInit {
 
   private validate(): boolean {
     if (this.meeting.title === '') {
-      alert("El nombre de la reunión se encuentra en blanco");
+      alert('El nombre de la reunión se encuentra en blanco');
       return false;
     }
     if (!this.validateTime(this.meeting.startTime)) {
-      alert("La hora de inicio no tiene un formato valido hh:mm.");
+      alert('La hora de inicio no tiene un formato valido hh:mm.');
       return false;
     }
     if (!this.validateTime(this.meeting.endTime)) {
-      alert("La hora de término no tiene un formato valido hh:mm.");
+      alert('La hora de término no tiene un formato valido hh:mm.');
       return false;
     }
     if (!this.validateMeetingDate()) {

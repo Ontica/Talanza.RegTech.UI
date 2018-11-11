@@ -12,7 +12,7 @@ import {
   FormGroup, Validators
 } from '@angular/forms';
 
-import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material";
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 
 import { Observable, of } from 'rxjs';
 
@@ -44,7 +44,7 @@ export class AddEventDialogComponent implements OnInit {
   ngOnInit() {
 
     this.projectStore.selectedProject().subscribe (
-      x => { this.project = x.project }
+      x => { this.project = x.project; }
     );
 
     this.events = this.templateStore.events();
@@ -97,7 +97,7 @@ export class AddEventDialogComponent implements OnInit {
 
       eventDate: formModel.eventDate,
 
-    }
+    };
   }
 
 }

@@ -15,43 +15,43 @@ export const ACTIVITY_TYPE_NAME = 'ObjectType.ProjectItem.Activity';
 
 
 export interface Duration {
-  value: number,
-  type: string
+  value: number;
+  type: string;
 }
 
 
 export const DefaultDuration: Duration = {
   value: 0,
   type: 'Unknown',
-}
+};
 
 export interface Activity extends Identifiable, PartitionedType {
   id: number;
-  notes: string,
-  project: Project,
-  responsible: Contact,
-  parent: Identifiable,
-  estimatedDuration: Duration,
+  notes: string;
+  project: Project;
+  responsible: Contact;
+  parent: Identifiable;
+  estimatedDuration: Duration;
 
-  startDate: DateString,
-  targetDate: DateString,
-  endDate: DateString,
-  dueDate: DateString,
+  startDate: DateString;
+  targetDate: DateString;
+  endDate: DateString;
+  dueDate: DateString;
 
-  warnDays: number,
-  warnType: string,
+  warnDays: number;
+  warnType: string;
 
-  tags: string[],
-  position: number,
+  tags: string[];
+  position: number;
   level: number;
-  ragStatus: string,
-  stage: string,
-  status: string,
+  ragStatus: string;
+  stage: string;
+  status: string;
 
-  visible: string,
+  visible: string;
 
-  config?: any,
-  workflowObject?: any,
+  config?: any;
+  workflowObject?: any;
 }
 
 
@@ -85,13 +85,13 @@ export const EmptyActivity: Activity = {
 
   config: {},
   workflowObject: {}
-}
+};
 
 
 export interface ActivityOperation {
-  operation: 'changeParent' | 'copyToProject' | 'createActivity' | 'moveActivity' | 'moveToProject',
-  activity: Activity | { name: string, position: number },
-  newPosition?: number,
-  newParent?: Activity,
-  targetProjectUID?: string
+  operation: 'changeParent' | 'copyToProject' | 'createActivity' | 'moveActivity' | 'moveToProject';
+  activity: Activity | { name: string, position: number };
+  newPosition?: number;
+  newParent?: Activity;
+  targetProjectUID?: string;
 }

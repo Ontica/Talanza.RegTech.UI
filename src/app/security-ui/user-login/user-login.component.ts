@@ -63,7 +63,7 @@ export class UserLoginComponent extends AbstractForm implements OnInit {
 
   protected execute(): Promise<any> {
 
-    switch(this.command.name) {
+    switch (this.command.name) {
 
       case 'authenticate':
         return this.authenticate();

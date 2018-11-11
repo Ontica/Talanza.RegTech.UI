@@ -8,7 +8,7 @@
 
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
-import { BaseProcedure } from "@app/models/regulation";
+import { BaseProcedure } from '@app/models/regulation';
 
 
 @Component({
@@ -20,11 +20,11 @@ export class ProceduresTableViewComponent {
 
   @Input() procedures: BaseProcedure[] = [];
 
-  public selectedProcedureUID: string;
+  selectedProcedureUID: string;
 
-  @Output() public onSelectProcedure = new EventEmitter<string>();
+  @Output() onSelectProcedure = new EventEmitter<string>();
 
-  public selectProcedure(procedureUID: string): void {
+  selectProcedure(procedureUID: string): void {
     this.selectedProcedureUID = procedureUID;
     this.onSelectProcedure.emit(procedureUID);
   }

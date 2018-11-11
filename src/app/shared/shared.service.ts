@@ -14,15 +14,15 @@ import { SpinnerService } from './spinner/spinner.service';
 @Injectable()
 export class SharedService {
 
-  public constructor(private _messageBoxService: MessageBoxService,
+  constructor(private _messageBoxService: MessageBoxService,
                      private _spinnerService: SpinnerService) {
   }
 
-  public get messageBox(): MessageBoxService {
+  get messageBox(): MessageBoxService {
     return this._messageBoxService;
   }
 
-  public get spinner(): SpinnerService {
+  get spinner(): SpinnerService {
     return this._spinnerService;
   }
 

@@ -28,7 +28,7 @@ export class GroupActivitiesByPipe implements PipeTransform  {
       return null;
     }
 
-    switch(groupByProperty) {
+    switch (groupByProperty) {
       case 'dueDate':
         return this.groupByYearMonth(data, 'dueDate');
 
@@ -42,7 +42,8 @@ export class GroupActivitiesByPipe implements PipeTransform  {
         return this.groupByResponsible(data);
 
       default:
-        throw Assertion.assertNoReachThisCode(`GroupActivitiesByPipe not implemented for groupBy value '${groupByProperty}'.`);
+        throw Assertion.assertNoReachThisCode(`GroupActivitiesByPipe not implemented for
+                                               groupBy value '${groupByProperty}'.`);
     }
 
   }
@@ -63,7 +64,7 @@ export class GroupActivitiesByPipe implements PipeTransform  {
       }
 
 
-      if(!previous[responsibleName]) {
+      if (!previous[responsibleName]) {
         previous[responsibleName] = [current];
 
       } else {
@@ -86,7 +87,7 @@ export class GroupActivitiesByPipe implements PipeTransform  {
 
       const yearMonth = this.getYearMonthGroupName(current[dateProperty], dateProperty);
 
-      if(!previous[yearMonth]) {
+      if (!previous[yearMonth]) {
         previous[yearMonth] = [current];
 
       } else {
@@ -150,7 +151,7 @@ export class GroupActivitiesByPipe implements PipeTransform  {
   private getYearMonthGroupName(dateValue: DateString, dateProperty: GroupByDateProperty) {
     if (dateValue) {
       return new Date(dateValue).getFullYear() + '-' +
-            (new Date(dateValue).getMonth() + 1).toString().padStart(2, "0");
+            (new Date(dateValue).getMonth() + 1).toString().padStart(2, '0');
 
     } else if (dateProperty === 'dueDate') {
       return 'Sin fecha máxima de entrega';

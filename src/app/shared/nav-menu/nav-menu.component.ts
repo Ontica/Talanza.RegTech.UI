@@ -15,8 +15,8 @@ export class MenuItem {
   readonly text: string = '';
   readonly routerLink: string = '';
 
-  private _disabled: boolean = false;
-  private _selected: boolean = false;
+  private _disabled = false;
+  private _selected = false;
 
   constructor(text: string, action?: string, routerLink?: string, disabled?: boolean) {
     this.text = text;
@@ -72,7 +72,7 @@ export class NavigationMenuComponent {
   @Input() layoutType: string;
 
   @Input()
-  get items(): MenuItem[] { return this._items };
+  get items(): MenuItem[] { return this._items; }
   set items(value: MenuItem[]) {
     if (!value) {
       return;
@@ -83,7 +83,7 @@ export class NavigationMenuComponent {
 
     this.onClick(selected);
 
-  };
+  }
   private _items: MenuItem[];
 
 

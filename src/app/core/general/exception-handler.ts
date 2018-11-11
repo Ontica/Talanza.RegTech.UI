@@ -20,7 +20,7 @@ export class ExceptionHandler extends ErrorHandler {
     super();
   }
 
-  public handleError(error: any): void {
+  handleError(error: any): void {
     // do real error handling like logging them to a central log server
 
     if (this.verbose) {

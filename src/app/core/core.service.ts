@@ -16,25 +16,28 @@ import { SessionService } from './general/session.service';
 @Injectable()
 export class CoreService {
 
-  public constructor(private _exceptionHandler: ExceptionHandler,
-                     private _session: SessionService,
-                     private _http: HttpService,
-                     private _logger: LoggerService) {
-  }
+  constructor(private _exceptionHandler: ExceptionHandler,
+              private _session: SessionService,
+              private _http: HttpService,
+              private _logger: LoggerService) { }
 
-  public get exceptionHandler(): ExceptionHandler {
+
+  get exceptionHandler(): ExceptionHandler {
     return this._exceptionHandler;
   }
 
-  public get http(): HttpService {
+
+  get http(): HttpService {
     return this._http;
   }
 
-  public get logger(): LoggerService {
+
+  get logger(): LoggerService {
     return this._logger;
   }
 
-  public get session(): SessionService {
+
+  get session(): SessionService {
     return this._session;
   }
 

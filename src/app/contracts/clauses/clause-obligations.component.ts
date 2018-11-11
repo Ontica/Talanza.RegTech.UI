@@ -22,36 +22,35 @@ import { ContractClauseRef, Rule } from '@app/models/regulation';
 
 export class ClauseObligationsComponent {
 
-  public procedureUID = "";
-  public isVisibleProcedureInfo = false;
+  procedureUID = '';
+  isVisibleProcedureInfo = false;
 
-  public rules: Rule[] = [];
+  rules: Rule[] = [];
 
-  constructor(private core: CoreService, private contractService: ContractsService) { }
+  constructor(private contractService: ContractsService) { }
 
   @Input()
   set clauseRef(clauseRef: ContractClauseRef) {
-    if (clauseRef && clauseRef.uid != '') {
+    if (clauseRef && clauseRef.uid !== '') {
       this.loadObligations(clauseRef);
     }
   }
 
-  public onSelectedProcedure(procedureUID: string): void {
+
+  onSelectedProcedure(procedureUID: string): void {
     this.isVisibleProcedureInfo = true;
     this.procedureUID = procedureUID;
   }
 
-  public onCloseProcedureInfoModal(): void {
+
+  onCloseProcedureInfoModal(): void {
     this.isVisibleProcedureInfo = false;
   }
 
+
   private loadObligations(clauseRef: ContractClauseRef): void {
-    const errMsg = 'Ocurrió un problema al intentar leer la cláusula.';
-
     this.contractService.getObligations(clauseRef.contractUID, clauseRef.uid).toPromise()
-                        .then((x) => this.rules = x.rules)
-                        .catch((e) => this.core.http.showAndThrow(e, errMsg));
+      .then((x) => this.rules = x.rules);
   }
-
 
 }

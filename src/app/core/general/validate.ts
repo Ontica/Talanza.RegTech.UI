@@ -14,28 +14,28 @@ export class Validate {
       string or an empty object.
     * @param object The object to check its value.
     */
-  public static hasValue(object: any): boolean {
+  static hasValue(object: any): boolean {
     if (object === null || object === undefined || object === {} || object === NaN || object === '') {
       return false;
     }
     return true;
   }
 
-  public static isEmail(value: string): boolean {
+  static isEmail(value: string): boolean {
     if (!this.hasValue(value)) {
       return false;
     }
-    let emailExp: string = '^[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,4})$';
-    let regularExpresion = new RegExp(emailExp);
-    let test = regularExpresion.test(value);
+    const emailExp = '^[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,4})$';
+    const regularExpresion = new RegExp(emailExp);
+    const test = regularExpresion.test(value);
     return test;
   }
 
-  public static isTrue(value: boolean): boolean {
+  static isTrue(value: boolean): boolean {
     return value === true;
   }
 
-  public static notNull(value: any): boolean {
+  static notNull(value: any): boolean {
     if ((value === null) || (value === undefined) || value === NaN || value === {}) {
       return false;
     }

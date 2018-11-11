@@ -19,16 +19,16 @@ import { Posting } from '@app/models/knowledge-base';
 })
 export class FAQsComponent implements OnInit {
 
-  public faqs: Posting[] = [];
-  public pendingFaqs: Posting[] = [];
-  public activeFaqs: Posting[] = [];
-  public selectedFaqUID = '';
-  public isOpenAddFAQWindow = false;
-  public filter = 'all';
+  faqs: Posting[] = [];
+  pendingFaqs: Posting[] = [];
+  activeFaqs: Posting[] = [];
+  selectedFaqUID = '';
+  isOpenAddFAQWindow = false;
+  filter = 'all';
 
-  public keywords = '';
+  keywords = '';
 
-  @Output() public onSelectedFAQ = new EventEmitter<string>();
+  @Output() onSelectedFAQ = new EventEmitter<string>();
 
   constructor(private faqService: PostingsService) { }
 
@@ -37,29 +37,29 @@ export class FAQsComponent implements OnInit {
   }
 
 
-  public onClickSelectFaq(uid: string): void {
+  onClickSelectFaq(uid: string): void {
     this.selectedFaqUID = uid;
     this.onSelectedFAQ.emit(this.selectedFaqUID);
   }
 
 
-  public onAddFAQ(): void {
+  onAddFAQ(): void {
     this.isOpenAddFAQWindow = true;
   }
 
 
-  public search(keywords: string): void {
+  search(keywords: string): void {
     this.keywords = keywords;
     this.loadFaqs();
   }
 
 
-  public onFilterBy(filter: string): void {
+  onFilterBy(filter: string): void {
     this.filter = filter;
   }
 
 
-  public closeAddFAQWindow(): void {
+  closeAddFAQWindow(): void {
     this.isOpenAddFAQWindow = false;
   }
 
@@ -68,8 +68,8 @@ export class FAQsComponent implements OnInit {
     this.faqService.getPostingsList(this.keywords)
       .subscribe((faqs) => {
       this.faqs = faqs;
-        this.pendingFaqs = faqs.filter((x) => x.status !== "Active");
-        this.activeFaqs = faqs.filter((x) => x.status === "Active");
+        this.pendingFaqs = faqs.filter((x) => x.status !== 'Active');
+        this.activeFaqs = faqs.filter((x) => x.status === 'Active');
 
       });
   }

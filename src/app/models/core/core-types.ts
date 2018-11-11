@@ -15,7 +15,7 @@ export interface Identifiable {
 export const Empty: Identifiable = {
   uid: '',
   name: 'No determinado',
-}
+};
 
 
 export interface PartitionedType {

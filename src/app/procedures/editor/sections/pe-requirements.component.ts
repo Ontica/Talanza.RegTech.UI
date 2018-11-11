@@ -20,12 +20,12 @@ import { Requirement } from '@app/models/regulation';
 })
 export class PERequirementsComponent {
 
-  public procedure: any;
-  public conditions: Requirement[] = [];
-  public inputDocuments: Requirement[] = [];
-  public outputDocuments: Requirement[] = [];
+  procedure: any;
+  conditions: Requirement[] = [];
+  inputDocuments: Requirement[] = [];
+  outputDocuments: Requirement[] = [];
 
-  private _procedureUID: string = '';
+  private _procedureUID = '';
   @Input()
   set procedureUID(procedureUID: string) {
     if (procedureUID) {
@@ -47,7 +47,7 @@ export class PERequirementsComponent {
     this.loadOutputDocuments();
   }
 
-  public openExternalWindow(url: string): void {
+  openExternalWindow(url: string): void {
     window.open(url, '_blank', 'location=yes,height=570,width=620,scrollbars=yes,status=yes');
   }
 
@@ -70,13 +70,13 @@ export class PERequirementsComponent {
   }
 
   private onAttach(): void {
-    const msg = "Por el momento no es posible adjuntar archivos.";
+    const msg = 'Por el momento no es posible adjuntar archivos.';
 
     // alert(msg);
   }
 
   private onAssign(): void {
-    const msg = "Por el momento no es posible asignar tareas";
+    const msg = 'Por el momento no es posible asignar tareas';
 
     // alert(msg);
   }

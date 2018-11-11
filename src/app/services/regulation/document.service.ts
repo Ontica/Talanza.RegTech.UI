@@ -15,10 +15,10 @@ import { Document, DocumentFilter } from '@app/models/regulation';
 @Injectable()
 export class DocumentService {
 
-  public constructor(private core: CoreService) { }
+  constructor(private core: CoreService) { }
 
-  public getDocuments(filter: DocumentFilter): Promise<Document[]> {
-    const qs = filter.isEmpty ? "" : "/?" + filter.toQueryString();
+  getDocuments(filter: DocumentFilter): Promise<Document[]> {
+    const qs = filter.isEmpty ? '' : '/?' + filter.toQueryString();
 
     return this.core.http.get<Document[]>(`v1/documents${qs}`)
                          .toPromise();

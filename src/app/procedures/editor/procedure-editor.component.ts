@@ -10,7 +10,7 @@ import { ChangeDetectorRef, Component, EventEmitter,
 
 import { ProcedureService } from '@app/services/regulation';
 
-import { Procedure } from "@app/models/regulation";
+import { Procedure } from '@app/models/regulation';
 
 
 @Component({
@@ -20,36 +20,36 @@ import { Procedure } from "@app/models/regulation";
   providers: [ProcedureService]
 })
 export class ProcedureEditorComponent implements OnInit {
-  @HostBinding('style.display') public display = 'block';
-  @HostBinding('style.position') public position = 'absolute';
+  @HostBinding('style.display') display = 'block';
+  @HostBinding('style.position') position = 'absolute';
 
-  @Output() public onCloseEvent = new EventEmitter();
-  @Input() public procedureUID: string;
+  @Output() onCloseEvent = new EventEmitter();
+  @Input() procedureUID: string;
 
-  public selectedTask = '';
-  public newNameLabel = '';
-  public procedure: Procedure;
-  public isDisabled = false;
-  public isNewProcedure = false;
+  selectedTask = '';
+  newNameLabel = '';
+  procedure: Procedure;
+  isDisabled = false;
+  isNewProcedure = false;
 
   constructor(private ref: ChangeDetectorRef, private procedureService: ProcedureService) { }
 
-  public async ngOnInit() {
+  async ngOnInit() {
     await this.setProcedure();
     this.setNewProcedureTitle();
     this.selectedTask = 'generalInfo';
   }
 
-  public setSelectedTask(selectedTask: string): void {
+  setSelectedTask(selectedTask: string): void {
     this.selectedTask = selectedTask;
     this.ref.detectChanges();
   }
 
-  public onDisabledTabs(disabled: boolean): void {
+  onDisabledTabs(disabled: boolean): void {
     this.isDisabled = disabled;
   }
 
-  public close(): void {
+  close(): void {
     this.onCloseEvent.emit();
   }
 

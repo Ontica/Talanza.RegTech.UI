@@ -7,7 +7,7 @@
 
 import { Component, Inject } from '@angular/core';
 
-import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material";
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 
 import { ProjectTemplateStore } from '@app/store/project-template.store';
 import { Activity, ActivityOperation } from '@app/models/project-management';
@@ -21,7 +21,7 @@ import { Activity, ActivityOperation } from '@app/models/project-management';
 export class MoveActivityDialogComponent {
 
   selectedActivity: Activity;
-  targetProjectUID = "";
+  targetProjectUID = '';
 
   constructor(protected templateStore: ProjectTemplateStore,
               private dialogRef: MatDialogRef<MoveActivityDialogComponent>,
@@ -38,7 +38,7 @@ export class MoveActivityDialogComponent {
 
 
   copyActivity() {
-    const operation : ActivityOperation = {
+    const operation: ActivityOperation = {
       operation: 'copyToProject',
       activity: this.selectedActivity,
       targetProjectUID: this.targetProjectUID
@@ -49,7 +49,7 @@ export class MoveActivityDialogComponent {
 
 
   moveActivity() {
-    const operation : ActivityOperation = {
+    const operation: ActivityOperation = {
       operation: 'moveToProject',
       activity: this.selectedActivity,
       targetProjectUID: this.targetProjectUID

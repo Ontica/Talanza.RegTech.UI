@@ -30,9 +30,9 @@ export class InboxEditorComponent {
     return this._inboxItem;
   }
 
-  @Output() public onCloseEvent = new EventEmitter();
+  @Output() onCloseEvent = new EventEmitter();
 
-  selectedTask: string = 'generalInfo';
+  selectedTask = 'generalInfo';
   concluededTaskLabel = '';
 
   cancel(): void {

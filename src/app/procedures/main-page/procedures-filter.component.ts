@@ -20,35 +20,35 @@ import { BaseProcedure, Entity, Office, ProcedureFilter } from '@app/models/regu
 })
 export class ProcedureFilterComponent implements OnInit {
 
-  public filter = new ProcedureFilter();
+  filter = new ProcedureFilter();
 
-  public offices: Office[] = [];
-  public entities: Entity[] = [];
+  offices: Office[] = [];
+  entities: Entity[] = [];
 
-  @Output() public onSearch = new EventEmitter<BaseProcedure[]>();
-  @Output() public onNewProcedure = new EventEmitter<string>();
+  @Output() onSearch = new EventEmitter<BaseProcedure[]>();
+  @Output() onNewProcedure = new EventEmitter<string>();
 
   constructor(private procedureService: ProcedureService, private authorityService: EntityService) { }
 
-  public ngOnInit() {
+  ngOnInit() {
     this.setEntities();
     this.search();
   }
 
-  public async onChangeFilter() {
+  async onChangeFilter() {
     this.search();
   }
 
-  public newProcedure(): void {
+  newProcedure(): void {
     this.onNewProcedure.emit('');
   }
 
-  public cleanCombos(): void {
+  cleanCombos(): void {
     this.filter.clean();
     this.onSearch.emit([]);
   }
 
-  public search(): void {
+  search(): void {
     this.procedureService.getProceduresList(this.filter)
                          .then((procedures) => this.onSearch.emit(procedures));
   }

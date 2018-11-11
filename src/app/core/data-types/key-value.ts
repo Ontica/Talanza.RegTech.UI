@@ -6,7 +6,7 @@
  */
 
 
- export interface KeyValue {
+export interface KeyValue {
   readonly key: string;
   readonly value: any;
 }
@@ -15,4 +15,4 @@
 export const KeyValue_Empty: KeyValue = {
   key: 'Empty',
   value: 'Sin valor',
-}
+};

@@ -16,14 +16,14 @@ import { Entity } from '@app/models/regulation';
 @Injectable()
 export class EntityService {
 
-  public constructor(private core: CoreService) { }
+  constructor(private core: CoreService) { }
 
-  public getEntity(entityUID: string): Promise<Entity> {
+  getEntity(entityUID: string): Promise<Entity> {
     return this.core.http.get<Entity>('v1/modeling/entities/' + entityUID)
                          .toPromise();
   }
 
-  public getEntities(): Promise<Entity[]> {
+  getEntities(): Promise<Entity[]> {
     return this.core.http.get<Entity[]>('v1/modeling/entities')
                          .toPromise();
   }

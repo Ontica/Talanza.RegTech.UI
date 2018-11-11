@@ -16,11 +16,11 @@ import { ContractClauseRef } from '@app/models/regulation';
 })
 export class ContractsMainPageComponent implements OnInit {
 
-  public isVisibleLeftPanel = true;
+  isVisibleLeftPanel = true;
 
-  public centerPanelWidth = '80%';
-  public leftResizeWidth = 3
-  public leftPanelWidth = '';
+  centerPanelWidth = '80%';
+  leftResizeWidth = 3;
+  leftPanelWidth = '';
 
   private isResizeDiv = false;
   private centerPanelPreviousWidth = '';
@@ -28,38 +28,38 @@ export class ContractsMainPageComponent implements OnInit {
   private clausesList: ContractClauseRef[] = [];
   private clause: ContractClauseRef;
 
-  public isSelectedClause = false;
+  isSelectedClause = false;
 
   ngOnInit() {
-    this.leftPanelWidth = 'calc(20% - '+ this.leftResizeWidth +'px)';
+    this.leftPanelWidth = 'calc(20% - ' + this.leftResizeWidth + 'px)';
   }
 
-  public onResize(event: MouseEvent): void {
+  onResize(event: MouseEvent): void {
     this.isResizeDiv = true;
 
     event.preventDefault();
     event.stopPropagation();
   }
 
-  public onHideLeftPanel(): void {
+  onHideLeftPanel(): void {
     this.isVisibleLeftPanel = !this.isVisibleLeftPanel;
 
     if (!this.isVisibleLeftPanel) {
-      this.centerPanelPreviousWidth  = this.centerPanelWidth;
-      this.centerPanelWidth = 'calc(100% - '+ this.leftResizeWidth +'px)';
+      this.centerPanelPreviousWidth = this.centerPanelWidth;
+      this.centerPanelWidth = 'calc(100% - ' + this.leftResizeWidth + 'px)';
     } else {
       this.centerPanelWidth = this.centerPanelPreviousWidth;
     }
 
   }
 
-  public onSelectedClauseRef(clauseRef: ContractClauseRef): void {
+  onSelectedClauseRef(clauseRef: ContractClauseRef): void {
     this.isSelectedClause = true;
 
     this.clause = clauseRef;
   }
 
-  public onChangeClausesList(clausesList: ContractClauseRef[]): void {
+  onChangeClausesList(clausesList: ContractClauseRef[]): void {
     this.clausesList = clausesList;
   }
 

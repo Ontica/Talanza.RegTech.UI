@@ -6,7 +6,7 @@
  *
  */
 
-import { Component, EventEmitter, HostBinding, Output }  from '@angular/core';
+import { Component, EventEmitter, HostBinding, Output } from '@angular/core';
 
 @Component({
   selector: 'process-activity-association',
@@ -15,12 +15,12 @@ import { Component, EventEmitter, HostBinding, Output }  from '@angular/core';
 })
 export class ProcessActivityAssociationComponent {
 
-  @Output() public onCancelEvent = new EventEmitter();
+  @Output() onCancelEvent = new EventEmitter();
 
   @HostBinding('style.display') private display = 'block';
   @HostBinding('style.position') private position = 'absolute';
 
-  public cancel(): void {
+  cancel(): void {
     this.close();
   }
 

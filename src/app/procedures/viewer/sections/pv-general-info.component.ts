@@ -51,7 +51,7 @@ export class PVGeneralInfoComponent {
   }
 
 
-  openExternalWindow(url:string): void {
+  openExternalWindow(url: string): void {
     window.open(url, '_blank', 'location=yes,height=570,width=620,scrollbars=yes,status=yes');
   }
 

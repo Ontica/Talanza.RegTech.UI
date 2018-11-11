@@ -9,24 +9,27 @@ import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
-import { HttpEvent, HttpInterceptor,
-         HttpErrorResponse,
-         HttpRequest, HttpHandler } from '@angular/common/http';
+import {
+  HttpEvent, HttpInterceptor,
+  HttpErrorResponse,
+  HttpRequest, HttpHandler
+} from '@angular/common/http';
 
 import { HttpException } from '../general/exception';
 
 @Injectable()
 export class HttpErrorInterceptor implements HttpInterceptor {
 
-  public intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(req)
-               .pipe(
-                  catchError((err) => throwError(this.getNormalizedHttpErrorResponse(err, req)))
-               );
+      .pipe(
+        catchError((err) => throwError(this.getNormalizedHttpErrorResponse(err, req)))
+      );
 
   }
 
-  private getNormalizedHttpErrorResponse(sourceErr: any, request: HttpRequest<any>): HttpErrorResponse {
+  private getNormalizedHttpErrorResponse(sourceErr: any,
+                                         request: HttpRequest<any>): HttpErrorResponse {
     if (!(sourceErr instanceof HttpErrorResponse)) {
       return this.getUnknownHttpError(sourceErr, request);
     }
@@ -47,20 +50,21 @@ export class HttpErrorInterceptor implements HttpInterceptor {
   private getInternetDisconnectedError(sourceErr: HttpErrorResponse,
                                        request: HttpRequest<any>): HttpErrorResponse {
     const exception = new HttpException(`[ERR_INTERNET_DISCONNECTED] No hay conexión a Internet.`,
-                                        sourceErr,
-                                        { request, response: sourceErr.error });
+      sourceErr,
+      { request, response: sourceErr.error });
 
     const errorResponseData = this.getDefaultHttpErrorResponseData(sourceErr, request, exception);
 
     return new HttpErrorResponse(errorResponseData);
   }
 
-  private getNormalizedErrorResponse(sourceErr: any, request: HttpRequest<any>): HttpErrorResponse {
+  private getNormalizedErrorResponse(sourceErr: any,
+                                     request: HttpRequest<any>): HttpErrorResponse {
     const exception = new HttpException(
-                            `[${sourceErr.error.data.errorCode}] ${sourceErr.error.data.errorMessage}`,
-                              sourceErr,
-                              { request, response: sourceErr.error }
-                          );
+      `[${sourceErr.error.data.errorCode}] ${sourceErr.error.data.errorMessage}`,
+      sourceErr,
+      { request, response: sourceErr.error }
+    );
 
     const errorResponseData = this.getDefaultHttpErrorResponseData(sourceErr, request, exception);
     errorResponseData.statusText = sourceErr.error.data.statusCode;
@@ -68,12 +72,13 @@ export class HttpErrorInterceptor implements HttpInterceptor {
     return new HttpErrorResponse(errorResponseData);
   }
 
-  private getUnknownHttpError(sourceErr: any, request: HttpRequest<any>): HttpErrorResponse {
+  private getUnknownHttpError(sourceErr: any,
+                              request: HttpRequest<any>): HttpErrorResponse {
     const exception = new HttpException(
-                            `[ERR_CONNECTION_REFUSED] Error desconocido de conexión al servidor.`,
-                              sourceErr,
-                              { request, response: sourceErr.error }
-                          );
+      `[ERR_CONNECTION_REFUSED] Error desconocido de conexión al servidor.`,
+      sourceErr,
+      { request, response: sourceErr.error }
+    );
 
     const errorResponseData = this.getDefaultHttpErrorResponseData(sourceErr, request, exception);
 
@@ -82,7 +87,8 @@ export class HttpErrorInterceptor implements HttpInterceptor {
 
   // Utility methods
 
-  private getDefaultHttpErrorResponseData(sourceErr: any, request: HttpRequest<any>,
+  private getDefaultHttpErrorResponseData(sourceErr: any,
+                                          request: HttpRequest<any>,
                                           exception: HttpException) {
     return {
       error: exception,

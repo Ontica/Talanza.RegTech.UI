@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
-    selector:'add-meeting-modal-window',
+    selector: 'add-meeting-modal-window',
     templateUrl: './add-meeting-modal-window.component.html',
     styleUrls: ['./add-meeting-modal-window.component.scss']
 })
@@ -9,9 +9,9 @@ import { Component, EventEmitter, Output } from '@angular/core';
 export class AddMeetingModalWindowComponent {
 
 
-    @Output() public onCloseTicket = new EventEmitter();
+    @Output() onCloseTicket = new EventEmitter();
 
-    public close(): void {
+    close(): void {
         this.onCloseTicket.emit();
     }
 

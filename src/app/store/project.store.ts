@@ -15,7 +15,7 @@ import { Contact, Empty } from '@app/models/core';
 
 import { Activity, Contract, Project,
          Stage, ViewConfig, DefaultViewConfig } from '@app/models/project-management';
-import { Entity } from "@app/models/regulation";
+import { Entity } from '@app/models/regulation';
 import { ColoredTag } from '@app/models/user-interface';
 
 

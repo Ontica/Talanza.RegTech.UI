@@ -8,7 +8,7 @@
 import { Component, EventEmitter,
          Input, OnChanges, Output } from '@angular/core';
 
-import { MatDialog, MatDialogConfig } from "@angular/material";
+import { MatDialog, MatDialogConfig } from '@angular/material';
 
 import { ProjectModel } from '@app/store/project.store';
 import { Activity, EmptyActivity } from '@app/models/project-management';
@@ -54,16 +54,16 @@ export class ActivityTimelineComponent implements OnChanges {
 
     switch (this.groupBy) {
       case 'dueDate':
-        return "Fecha máxima de entrega";
+        return 'Fecha máxima de entrega';
 
       case 'targetDate':
-        return "Fecha objetivo";
+        return 'Fecha objetivo';
 
       case 'startDate':
-        return "Fecha de inicio";
+        return 'Fecha de inicio';
 
       case 'responsible':
-        return "Responsables";
+        return 'Responsables';
 
       default:
         throw Assertion.assertNoReachThisCode(`Unrecognized groupBy value '${this.groupBy}'.`);

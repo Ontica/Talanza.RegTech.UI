@@ -8,7 +8,7 @@
 
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
-interface config { uid: string, name: string }
+interface config { uid: string; name: string; }
 
 @Component({
   selector: 'dropdown-menu',
@@ -18,7 +18,7 @@ interface config { uid: string, name: string }
 
 export class DropdownMenuControl {
 
-  public dropdownMenuItemsVisible = true;
+  dropdownMenuItemsVisible = true;
 
   private _items: config[] = [];
   @Input()
@@ -31,7 +31,7 @@ export class DropdownMenuControl {
 
   @Output() selectedItem = new EventEmitter<string>();
 
-  public selectItem(item: config): void {
+  selectItem(item: config): void {
     this.selectedItem.emit(item.uid);
 
     this.dropdownMenuItemsVisible = false;

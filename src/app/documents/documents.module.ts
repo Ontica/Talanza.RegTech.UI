@@ -23,6 +23,6 @@ import { DocumentsRoutingModule } from './documents-routing.module';
 @NgModule({
   imports: [DocumentsRoutingModule, CommonModule, FormsModule, ControlsModule],
   declarations: [DocumentsMainPageComponent, DocumentsTableViewComponent],
-  exports: [DocumentsMainPageComponent,DocumentsTableViewComponent]
+  exports: [DocumentsMainPageComponent, DocumentsTableViewComponent]
 })
 export class DocumentsModule { }

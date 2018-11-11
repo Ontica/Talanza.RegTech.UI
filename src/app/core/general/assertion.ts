@@ -6,7 +6,7 @@
  */
 
 import { Exception } from './exception';
-import { Validate } from  './validate';
+import { Validate } from './validate';
 
 
 export class Assertion {
@@ -19,9 +19,9 @@ export class Assertion {
     * @param failMessage The message to throw if the assertion fails.
     * @param parameters Optional strings list to merge into the throwed message.
     */
-  public static assert(condition: boolean, failMessage: string, ...parameters: string[]): void {
+  static assert(condition: boolean, failMessage: string, ...parameters: string[]): void {
     if (!condition) {
-      let msg = this.prototype.mergeParametersIntoString(failMessage, parameters);
+      const msg = this.prototype.mergeParametersIntoString(failMessage, parameters);
 
       throw new Exception(msg);
     }
@@ -31,13 +31,13 @@ export class Assertion {
   /** Throws a noReachThisCode exception. Used to stop the execution
       when the code flow reaches an invalid code line.
     */
-  public static assertNoReachThisCode(failMessage?: string): never {
+  static assertNoReachThisCode(failMessage?: string): never {
     const defaultMsg = 'PROGRAMMING ERROR: The program reached an invalid code flow statement.' +
-                       'Probably it has a loop, if or switch that miss an exit condition or ' +
-                       'there are data with unexpected values. Please report this incident ' +
-                       'immediately to the system administrator or at support @ ontica.org.';
+      'Probably it has a loop, if or switch that miss an exit condition or ' +
+      'there are data with unexpected values. Please report this incident ' +
+      'immediately to the system administrator or at support @ ontica.org.';
 
-    let msg = (failMessage && Validate.hasValue(failMessage)) ? failMessage : defaultMsg;
+    const msg = (failMessage && Validate.hasValue(failMessage)) ? failMessage : defaultMsg;
 
     throw new Exception(msg);
   }
@@ -48,9 +48,9 @@ export class Assertion {
     * @param failMessage The message to throw if the assertion fails.
     * @param parameters Optional strings list to merge into the throwed message.
     */
-  public static assertValue(object: any, failMessage: string, ...parameters: string[]): void {
+  static assertValue(object: any, failMessage: string, ...parameters: string[]): void {
     if (object === null || object === undefined || object === {} || object === NaN || object === '') {
-      let msg = this.prototype.mergeParametersIntoString(failMessage, parameters);
+      const msg = this.prototype.mergeParametersIntoString(failMessage, parameters);
 
       throw new Exception(msg);
     }

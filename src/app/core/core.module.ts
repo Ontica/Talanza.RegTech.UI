@@ -38,9 +38,9 @@ import { throwIfAlreadyLoaded } from './module-import-guard';
     HttpClientModule
   ],
 
-  declarations: [ ],
+  declarations: [],
 
-  exports: [ ],
+  exports: [],
 
   providers: [
     CoreService,
@@ -61,8 +61,8 @@ import { throwIfAlreadyLoaded } from './module-import-guard';
 })
 export class CoreModule {
 
-  constructor( @Optional() @SkipSelf() parentModule: CoreModule) {
-    console.log("CoreModule cntrcor");
+  constructor(@Optional() @SkipSelf() parentModule: CoreModule) {
+    console.log('CoreModule cntrcor');
 
     throwIfAlreadyLoaded(parentModule, 'CoreModule');
 

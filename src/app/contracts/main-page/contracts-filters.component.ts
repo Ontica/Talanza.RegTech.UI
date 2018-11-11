@@ -22,11 +22,11 @@ import { Contract, EmptyContract, ContractClauseRef } from '@app/models/regulati
 })
 export class ContractsFiltersComponent implements OnInit {
 
-  public contractsList: Contract[] = [];
-  public selectedContract: Contract = EmptyContract();
-  public keywords = '';
-  public sections = [];
-  public selectedSection: string  = '';
+  contractsList: Contract[] = [];
+  selectedContract: Contract = EmptyContract();
+  keywords = '';
+  sections = [];
+  selectedSection = '';
 
   @Output() clauses = new EventEmitter<ContractClauseRef[]>();
 
@@ -36,11 +36,11 @@ export class ContractsFiltersComponent implements OnInit {
     this.setInitialValues();
   }
 
-  public async onChangeContract(uid: string) {
+  async onChangeContract(uid: string) {
     if (uid === '') {
       this.selectedContract.clausesList = [];
       this.selectedContract = EmptyContract();
-      this.sections  = [];
+      this.sections = [];
       this.selectedSection = '';
       return;
     }
@@ -55,26 +55,26 @@ export class ContractsFiltersComponent implements OnInit {
     this.onChangeSection(this.selectedSection);
   }
 
-  public onChangeSection(section: string): void {
+  onChangeSection(section: string): void {
     this.selectedSection = section;
     if (this.sections.length === 0) {
       return;
     }
 
-    let clauses = this.selectedContract.clausesList.filter(item => item.section === section);
+    const clauses = this.selectedContract.clausesList.filter(item => item.section === section);
 
     this.clauses.emit(clauses);
   }
 
-  public async onSearch() {
+  async onSearch() {
     if (this.selectedContract.uid === '') {
-      alert("Es necesario seleccionar un contrato de la lista de contrados");
+      alert('Es necesario seleccionar un contrato de la lista de contrados');
       return;
     }
 
     await this.loadSelectedContractClausesList(this.keywords);
 
-    let clauses = this.selectedContract.clausesList.filter(item => item.section === this.selectedSection);
+    const clauses = this.selectedContract.clausesList.filter(item => item.section === this.selectedSection);
 
     this.clauses.emit(clauses);
   }
@@ -88,19 +88,17 @@ export class ContractsFiltersComponent implements OnInit {
   }
 
   private loadContractsList(): void {
-    const errMsg = 'Ocurrió un problema al intentar leer la lista de contratos.';
-
     this.contractService.getContractList()
-                        .toPromise()
-                        .then((x) => this.contractsList = x);
+      .toPromise()
+      .then((x) => this.contractsList = x);
   }
 
   private async loadSelectedContractClausesList(keywords: string) {
     Assertion.assertValue(this.selectedContract, 'this.selectedContract');
 
     await this.contractService.searchClauses(this.selectedContract.uid, keywords)
-                              .toPromise()
-                              .then((x) => this.selectedContract.clausesList = x);
+      .toPromise()
+      .then((x) => this.selectedContract.clausesList = x);
   }
 
 }

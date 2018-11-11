@@ -16,7 +16,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class MainLayoutComponent {
 
-  keywords: string = '';
+  keywords = '';
   layoutType: string;
 
   constructor(route: ActivatedRoute, private router: Router) {

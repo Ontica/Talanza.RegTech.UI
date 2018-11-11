@@ -29,6 +29,6 @@ export class CardSettings {
 // colored tag
 
 export interface ColoredTag extends ISelectable {
-  name: string,
-  color: string,
+  name: string;
+  color: string;
 }

@@ -20,15 +20,15 @@ import { Ticket } from '@app/models/service-desk';
 })
 export class TicketsComponent implements OnInit {
 
-  public ticketsOpened: Ticket[] = [];
-  public ticketsClosed: Ticket[] = [];
+  ticketsOpened: Ticket[] = [];
+  ticketsClosed: Ticket[] = [];
 
-  public selectedTicketUid = '';
-  public filter = 'all';
+  selectedTicketUid = '';
+  filter = 'all';
 
-  public keywords = '';
+  keywords = '';
 
-  @Output() public onSelectedTicket = new EventEmitter<string>();
+  @Output() onSelectedTicket = new EventEmitter<string>();
 
   constructor(private ticketService: TicketService) { }
 
@@ -36,19 +36,19 @@ export class TicketsComponent implements OnInit {
     this.loadTickets();
   }
 
-  public onFilterBy(filter: string): void {
+  onFilterBy(filter: string): void {
     this.filter = filter;
   }
 
 
-  public onSelectTicket(uid: string): void {
+  onSelectTicket(uid: string): void {
     this.selectedTicketUid = uid;
 
     this.onSelectedTicket.emit(uid);
   }
 
 
-  public search(keywords: string): void {
+  search(keywords: string): void {
     this.keywords = keywords;
     this.loadTickets();
   }

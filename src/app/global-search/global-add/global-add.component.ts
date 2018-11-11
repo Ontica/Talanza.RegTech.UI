@@ -18,30 +18,30 @@ import { Component, ElementRef } from '@angular/core';
 })
 export class GlobalAddComponent {
 
-  public isHideControl = false;
-  public selectedItem: string;
-  public elementRef: any;
+  isHideControl = false;
+  selectedItem: string;
+  elementRef: any;
 
-  public items: string[] = ['FAQ', 'Reunión'];
+  items: string[] = ['FAQ', 'Reunión'];
 
-  public selectedUID: string;
+  selectedUID: string;
 
   constructor(myElement: ElementRef) {
     this.elementRef = myElement;
   }
 
-  public onClick(): void {
+  onClick(): void {
     this.isHideControl = !this.isHideControl;
   }
 
-  public onSelectItem(item: any): void {
+  onSelectItem(item: any): void {
     this.selectedItem = item;
 
 
     this.isHideControl = !this.isHideControl;
   }
 
-  public handleClick(event): void {
+  handleClick(event): void {
     let clickedComponent = event.target;
     let inside = false;
     do {

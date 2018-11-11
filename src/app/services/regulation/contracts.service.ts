@@ -25,15 +25,15 @@ export enum ContractServiceErr {
 @Injectable()
 export class ContractsService {
 
-  public constructor(private core: CoreService) { }
+  constructor(private core: CoreService) { }
 
-  public getContractList(): Observable<Contract[]> {
+  getContractList(): Observable<Contract[]> {
     const path = 'v1/contracts';
 
     return this.core.http.get<Contract[]>(path);
   }
 
-  public getContractClausesList(contractUID: string): Observable<ContractClause[]> {
+  getContractClausesList(contractUID: string): Observable<ContractClause[]> {
     const path = `v1/contracts/${contractUID}/clauses`;
 
     return this.core.http.get<ContractClause[]>(path)
@@ -42,7 +42,7 @@ export class ContractsService {
                );
   }
 
-  public searchClauses(contractUID: string, keywords: string): Observable<ContractClause[]> {
+  searchClauses(contractUID: string, keywords: string): Observable<ContractClause[]> {
     const path = `v1/contracts/${contractUID}/clauses?keywords=${keywords}`;
 
     return this.core.http.get<ContractClause[]>(path)
@@ -51,7 +51,7 @@ export class ContractsService {
                 );
   }
 
-  public getClause(contractUID: string, clauseUID: string): Observable<ContractClause> {
+  getClause(contractUID: string, clauseUID: string): Observable<ContractClause> {
     const path = `v1/contracts/${contractUID}/clauses/${clauseUID}`;
 
     return this.core.http.get<ContractClause>(path)
@@ -60,27 +60,27 @@ export class ContractsService {
                );
   }
 
-  public createClause(contractUID: string, clause: ContractClause): Observable<ContractClause> {
+  createClause(contractUID: string, clause: ContractClause): Observable<ContractClause> {
     const path = `v1/contracts/${contractUID}/clauses`;
 
     return this.core.http.post<ContractClause>(path, clause);
   }
 
-  public updateClause(contractUID: string, clause: ContractClause): Observable<ContractClause> {
+  updateClause(contractUID: string, clause: ContractClause): Observable<ContractClause> {
     const path = `v1/contracts/${contractUID}/clauses/${clause.uid}`;
 
     return this.core.http.put<ContractClause>(path, clause);
   }
 
-  public addRelatedProcedure(contractUID: string, clauseUID: string,
+  addRelatedProcedure(contractUID: string, clauseUID: string,
                              relatedProcedure: RelatedProcedure): Observable<RelatedProcedure> {
     const path = `v1/contracts/${contractUID}/clauses/${clauseUID}/related-procedures`;
 
     return this.core.http.post<RelatedProcedure>(path, relatedProcedure);
   }
 
-  public getObligations(contractUID: string, clauseUID: string): Observable<Obligation> {
-    const path =`v1/contracts/${contractUID}/clauses/${clauseUID}/rules`;
+  getObligations(contractUID: string, clauseUID: string): Observable<Obligation> {
+    const path = `v1/contracts/${contractUID}/clauses/${clauseUID}/rules`;
 
     return this.core.http.get<Obligation>(path);
   }

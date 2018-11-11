@@ -14,23 +14,27 @@ export class Principal {
               private _identity: Identity,
               private _claims: ClaimsList) { }
 
-  public static get empty(): Principal {
+  static get empty(): Principal {
     return new Principal(undefined, undefined, undefined);
   }
 
-  public get isAuthenticated(): boolean {
+
+  get isAuthenticated(): boolean {
     return (this._sessionToken && this._identity && this._claims && true);
   }
 
-  public get sessionToken(): SessionToken {
+
+  get sessionToken(): SessionToken {
     return this._sessionToken;
   }
 
-  public get identity(): Identity {
+
+  get identity(): Identity {
     return this._identity;
   }
 
-  public get claims(): ClaimsList {
+
+  get claims(): ClaimsList {
     return this._claims;
   }
 

@@ -20,13 +20,13 @@ import { InboxFilter } from '@app/models/inbox';
 })
 export class InboxMainPageComponent {
 
-  public filter = new InboxFilter();
+  filter = new InboxFilter();
 
-  public constructor(private projectService: ProjectService,
+  constructor(private projectService: ProjectService,
                      private activityService: ActivityService) { }
 
 
-  public onChangeFilter(receivedFilter: InboxFilter) {
+  onChangeFilter(receivedFilter: InboxFilter) {
     this.filter = receivedFilter;
   }
 

@@ -8,23 +8,23 @@ import { Component } from '@angular/core';
 
 export class RequirementTabComponent {
 
-  public isShowGrids = true;
-  public isShowAddRequirementForm = false;
-  public isAddRequirementListForm = false;
+  isShowGrids = true;
+  isShowAddRequirementForm = false;
+  isAddRequirementListForm = false;
 
-  public addRequirement(): void {
+  addRequirement(): void {
     this.isShowAddRequirementForm = true;
     this.isShowGrids = false;
     this.isAddRequirementListForm = false;
   }
 
-  public addRequirementToList(): void {
+  addRequirementToList(): void {
     this.isShowAddRequirementForm = false;
     this.isShowGrids = false;
     this.isAddRequirementListForm = true;
   }
 
-  public onCancelForm(): void {
+  onCancelForm(): void {
     this.isShowAddRequirementForm = false;
     this.isShowGrids = true;
     this.isAddRequirementListForm = false;

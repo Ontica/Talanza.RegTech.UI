@@ -7,17 +7,17 @@
 
 
 export interface Posting {
-  uid: string,
-  objectUID: string,
-  body: string,
-  title?: string,
-  fileName?: string,
-  controlNo?: string,
-  tags?: string,
-  date?: Date,
-  accessMode?: string,
-  owner?: string,
-  status?: string
+  uid: string;
+  objectUID: string;
+  body: string;
+  title?: string;
+  fileName?: string;
+  controlNo?: string;
+  tags?: string;
+  date?: Date;
+  accessMode?: string;
+  owner?: string;
+  status?: string;
 }
 
 

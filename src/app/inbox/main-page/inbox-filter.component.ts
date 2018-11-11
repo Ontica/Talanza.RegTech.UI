@@ -94,31 +94,28 @@ export class InboxFilterComponent implements OnInit {
 
 
   private loadProjectList() {
-    const errMsg = 'Ocurrió un problema al intentar leer la lista de proyectos.';
-
     this.projectService.getProjectList()
       .toPromise()
-      .then((x) => this.projectsList = x)
+      .then((x) => this.projectsList = x);
   }
+
 
   private loadResponsiblesList() {
-    const errMsg = 'Ocurrió un problema al intentar leer la lista de responsables.';
-
     this.projectService.getResponsiblesList(this.selectedProject)
       .toPromise()
-      .then((x) => this.responsiblesList = x)
+      .then((x) => this.responsiblesList = x);
   }
+
 
   private loadCombos() {
     this.loadResponsiblesList();
   }
 
-  private loadTags() {
-    const errMsg = 'Ocurrió un problema al intentar leer la lista de etiquetas.';
 
+  private loadTags() {
     this.projectService.getTags()
       .toPromise()
-      .then((x) => this.labelsList = x)
+      .then((x) => this.labelsList = x);
   }
 
 }

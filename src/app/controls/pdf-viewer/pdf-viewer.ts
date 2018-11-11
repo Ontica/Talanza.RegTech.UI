@@ -15,6 +15,6 @@ import { Component, Input } from '@angular/core';
 
 export class PdfViewer {
 
-  @Input() public documentURI: string = '';
+  @Input() documentURI = '';
 
 }

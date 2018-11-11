@@ -26,7 +26,8 @@ export class HttpService {
               private directory: DirectoryService,
               private exceptionHandler: ExceptionHandler) { }
 
-  public get<T>(path: string, options?: HttpClientOptions): Observable<T> {
+
+  get<T>(path: string, options?: HttpClientOptions): Observable<T> {
     Assertion.assertValue(path, 'path');
 
     return this.directory.getService(path, HttpMethod.GET)
@@ -36,7 +37,7 @@ export class HttpService {
   }
 
 
-  public post<T>(path: string, body: any, options?: HttpClientOptions): Observable<T> {
+  post<T>(path: string, body: any, options?: HttpClientOptions): Observable<T> {
     Assertion.assertValue(path, 'path');
 
     return this.directory.getService(path, HttpMethod.POST)
@@ -45,16 +46,16 @@ export class HttpService {
       );
   }
 
-  public put<T>(path: string, body: any, options?: HttpClientOptions): Observable<T> {
+  put<T>(path: string, body: any, options?: HttpClientOptions): Observable<T> {
     Assertion.assertValue(path, 'path');
 
     return this.directory.getService(path, HttpMethod.PUT)
-        .pipe(
-          switchMap(service => this.httpHandler.put<T>(path, body, options, service))
-        );
+      .pipe(
+        switchMap(service => this.httpHandler.put<T>(path, body, options, service))
+      );
   }
 
-  public patch<T>(path: string, body: any, options?: HttpClientOptions): Observable<T> {
+  patch<T>(path: string, body: any, options?: HttpClientOptions): Observable<T> {
     Assertion.assertValue(path, 'path');
 
     return this.directory.getService(path, HttpMethod.PATCH)
@@ -63,7 +64,7 @@ export class HttpService {
       );
   }
 
-  public delete<T>(path: string, options?: HttpClientOptions): Observable<T> {
+  delete<T>(path: string, options?: HttpClientOptions): Observable<T> {
     Assertion.assertValue(path, 'path');
 
     return this.directory.getService(path, HttpMethod.DELETE)
@@ -73,15 +74,15 @@ export class HttpService {
       );
   }
 
-  public showAndReturn<T>(error: any, defaultMessage?: string, returnValue?: T): Observable<T> {
-    let exception = Exception.convertTo(error, defaultMessage);
+  showAndReturn<T>(error: any, defaultMessage?: string, returnValue?: T): Observable<T> {
+    const exception = Exception.convertTo(error, defaultMessage);
 
     exception.show();
 
     return of<T>(returnValue);
   }
 
-  public showAndThrow(error: any, defaultMessage?: string) : Observable<never> {
+  showAndThrow(error: any, defaultMessage?: string): Observable<never> {
     const exception = Exception.convertTo(error, defaultMessage);
 
     exception.show();
@@ -89,7 +90,7 @@ export class HttpService {
     return throwError(exception);
   }
 
-  public throw(error: any, defaultMessage?: string) : Observable<never> {
+  throw(error: any, defaultMessage?: string): Observable<never> {
     const exception = Exception.convertTo(error, defaultMessage);
 
     return throwError(exception);

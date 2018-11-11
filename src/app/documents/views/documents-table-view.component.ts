@@ -21,9 +21,9 @@ export class DocumentsTableViewComponent {
 
   @Output() onSelectDocument = new EventEmitter<Document>();
 
-  public selectedDocumentUID = '';
+  selectedDocumentUID = '';
 
-  public setSelectedDocument(document: Document): void {
+  setSelectedDocument(document: Document): void {
 
     this.selectedDocumentUID = document.uid;
 

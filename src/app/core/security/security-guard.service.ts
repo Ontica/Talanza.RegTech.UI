@@ -14,9 +14,10 @@ import { SessionService } from '../general/session.service';
 @Injectable()
 export class SecurityGuardService implements CanActivate {
 
-  constructor(private router: Router,private session: SessionService) { }
+  constructor(private router: Router,
+              private session: SessionService) { }
 
-  public canActivate() {
+  canActivate() {
     const principal = this.session.getPrincipal();
 
     if (!principal.isAuthenticated) {

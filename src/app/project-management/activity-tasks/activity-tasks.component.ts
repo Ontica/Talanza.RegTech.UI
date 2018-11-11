@@ -31,7 +31,7 @@ export class ActivityTasksComponent implements OnChanges {
 
 
   ngOnChanges() {
-    //this._displayEditor = (this.tasksList.length === 0);
+    // this._displayEditor = (this.tasksList.length === 0);
     if (!this.activity) {
       return;
     }

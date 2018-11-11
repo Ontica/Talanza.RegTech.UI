@@ -16,16 +16,16 @@ import { InboxFilter, InboxRef } from '@app/models/inbox';
 @Injectable()
 export class InboxService {
 
-  public constructor(private core: CoreService) {}
+  constructor(private core: CoreService) {}
 
-  public getAllInboxItems(): Observable<InboxRef[]> {
+  getAllInboxItems(): Observable<InboxRef[]> {
     const path = `v1/inboxes/my-inbox`;
 
     return this.core.http.get<InboxRef[]>(path);
   }
 
 
-  public getInboxItems(filter?: InboxFilter): Observable<InboxRef[]> {
+  getInboxItems(filter?: InboxFilter): Observable<InboxRef[]> {
     let filterAsString = '';
 
     if (filter instanceof InboxFilter) {
@@ -34,7 +34,7 @@ export class InboxService {
 
     const path = `v1/inboxes/my-inbox${filterAsString}`;
 
-    return this.core.http.get<InboxRef[]>(path)
+    return this.core.http.get<InboxRef[]>(path);
   }
 
 }

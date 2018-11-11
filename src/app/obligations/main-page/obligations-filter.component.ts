@@ -16,9 +16,9 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 export class ObligationsFilterComponent implements OnInit {
 
-  public filter = {};
+  filter = {};
 
-  public ngOnInit() {
+  ngOnInit() {
 
   }
 

@@ -14,12 +14,12 @@ export interface BaseProcedure extends Identifiable {
   modality: string;
   code: string;
   theme: string;
-  entityName: string
+  entityName: string;
 }
 
 
 export interface Procedure extends BaseProcedure {
-  projectType: string,
+  projectType: string;
   executionMode: string;
 
   authorityName: string;
@@ -97,28 +97,28 @@ export class ProcedureFilter {
   }
 
   clean() {
-    this.officeUID = "";
-    this.entityUID = "";
-    this.theme = "";
-    this.stage = "";
-    this.contract = "";
-    this.keywords = "";
+    this.officeUID = '';
+    this.entityUID = '';
+    this.theme = '';
+    this.stage = '';
+    this.contract = '';
+    this.keywords = '';
   }
 
 
   toString() {
-    let filter = "";
+    let filter = '';
 
     if (this.entityUID) {
-      filter = this.addFilterConnector(filter) + "AuthEntity.ContactUID='" + this.entityUID + "'";
+      filter = this.addFilterConnector(filter) + 'AuthEntity.ContactUID=\'' + this.entityUID + '\'';
     }
 
     if (this.officeUID) {
-      filter = this.addFilterConnector(filter) + "AuthOffice.ContactUID='" + this.officeUID + "'";
+      filter = this.addFilterConnector(filter) + 'AuthOffice.ContactUID=\'' + this.officeUID + '\'';
     }
 
     if (this.theme) {
-      filter = this.addFilterConnector(filter) + "theme='" + this.theme + "'";
+      filter = this.addFilterConnector(filter) + 'theme=\'' + this.theme + '\'';
     }
 
     return filter;
@@ -145,12 +145,12 @@ export interface ProcedureHypertext {
 
 
 export interface Requirement extends Identifiable, PartitionedType {
-  appliesTo: string,
-  copies: string,
-  conditions: string,
-  notes: string,
-  observations: string,
-  sourceUrl: string,
-  sampleUrl: string,
-  instructionsUrl: string
+  appliesTo: string;
+  copies: string;
+  conditions: string;
+  notes: string;
+  observations: string;
+  sourceUrl: string;
+  sampleUrl: string;
+  instructionsUrl: string;
 }

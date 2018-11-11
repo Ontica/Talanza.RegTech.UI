@@ -9,8 +9,10 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 import { ContractsService } from '@app/services/regulation';
 
-import { ContractClauseRef, ContractClause,
-         EmptyContractClause } from '@app/models/regulation';
+import {
+  ContractClauseRef, ContractClause,
+  EmptyContractClause
+} from '@app/models/regulation';
 
 @Component({
   selector: 'contract-clauses-table',
@@ -20,22 +22,21 @@ import { ContractClauseRef, ContractClause,
 })
 export class ContractClausesTableViewComponent {
 
-  @Output() public onSelectClause = new EventEmitter<ContractClause>();
+  @Output() onSelectClause = new EventEmitter<ContractClause>();
 
   @Input() clauses: ContractClauseRef[] = [];
-  public selectedClause = EmptyContractClause();
+  selectedClause = EmptyContractClause();
 
   constructor(private contractService: ContractsService) { }
 
-  public selectClause(selectedClause: ContractClause): void {
+
+  selectClause(selectedClause: ContractClause): void {
     this.selectedClause = selectedClause;
     this.loadClause();
   }
 
 
   private loadClause(): void {
-    const errMsg = 'Ocurrió un problema al intentar leer la cláusula.';
-
     this.contractService.getClause(this.selectedClause.contractUID, this.selectedClause.uid)
       .toPromise()
       .then((x) => { this.onSelectClause.emit(x); });

@@ -10,40 +10,40 @@ import { Identifiable, Empty } from '@app/models/core';
 import { Project } from './project';
 
 export interface Meeting {
-  uid: string,
-  controlNo: string
-  title: string,
-  description: string,
-  project: Project,
-  date: Date,
-  startTime: string,
-  endTime: string,
-  location: string,
-  status: string,
-  participants: Participant[],
-  topics: Topic[],
-  recommendations: Recommendation[],
+  uid: string;
+  controlNo: string;
+  title: string;
+  description: string;
+  project: Project;
+  date: Date;
+  startTime: string;
+  endTime: string;
+  location: string;
+  status: string;
+  participants: Participant[];
+  topics: Topic[];
+  recommendations: Recommendation[];
   // "agreements": []
 }
 
 export interface Participant extends Identifiable {
-  email: string
+  email: string;
 }
 
 export interface Topic {
-  uid: string,
-  name: string
+  uid: string;
+  name: string;
 }
 
 export interface Recommendation {
-  uid: string,
-  question: string,
-  answer: string,
-  answeredBy: string
-  comments: string,
-  date: Date,
-  accessMode: string,
-  status: string
+  uid: string;
+  question: string;
+  answer: string;
+  answeredBy: string;
+  comments: string;
+  date: Date;
+  accessMode: string;
+  status: string;
 }
 
 export function EmptyMeeting() {
@@ -62,7 +62,7 @@ export function EmptyMeeting() {
     topics: [],
     recommendations: [],
     // "agreements": []
-  }
+  };
 
   return empty;
 }
@@ -72,7 +72,7 @@ export function EmptyParticipant() {
     uid: '',
     name: '',
     email: ''
-  }
+  };
 
   return empty;
 }

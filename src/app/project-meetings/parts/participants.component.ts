@@ -22,11 +22,11 @@ import { Participant, EmptyParticipant } from '@app/models/project-management';
 })
 export class ParticipantsComponent {
 
-  public participantsAviable: Participant[] = [];
-  public participants: Participant[] = [];
-  public selectedParticipantUID: string = "";
-  public isAddParticipantEditorVisible = false;
-  public newParticipant = EmptyParticipant();
+  participantsAviable: Participant[] = [];
+  participants: Participant[] = [];
+  selectedParticipantUID = '';
+  isAddParticipantEditorVisible = false;
+  newParticipant = EmptyParticipant();
 
   private _meetingUID = '';
   @Input()
@@ -41,7 +41,7 @@ export class ParticipantsComponent {
     return this._meetingUID;
   }
 
-  private _isReadOnly: boolean = false;
+  private _isReadOnly = false;
   @Input()
   set isReadOnly(isReadOnly: boolean) {
     this._isReadOnly = isReadOnly;
@@ -52,7 +52,7 @@ export class ParticipantsComponent {
 
   constructor(private projectMeetingService: ProjectMeetingService) { }
 
-  public onSelectedParticipant(selectedParticipantUID: string): void {
+  onSelectedParticipant(selectedParticipantUID: string): void {
     if (this.selectedParticipantUID === 'addParticipant') {
       this.isAddParticipantEditorVisible = true;
       return;
@@ -64,7 +64,7 @@ export class ParticipantsComponent {
   }
 
 
-  public addParticipantToMeeting(): void {
+  addParticipantToMeeting(): void {
 
     if (this.selectedParticipantUID === '') {
       return;
@@ -78,12 +78,12 @@ export class ParticipantsComponent {
   }
 
 
-  public addParticipant(): void {
+  addParticipant(): void {
     if (!this.validateParticipant()) {
       return;
     }
 
-    this.selectedParticipantUID = ''
+    this.selectedParticipantUID = '';
 
     this.isAddParticipantEditorVisible = false;
   }
@@ -103,7 +103,7 @@ export class ParticipantsComponent {
 
   private loadParticipants(): void {
     this.projectMeetingService.getMeeting(this.meetingUID)
-      .subscribe((x) => { this.participants = x.participants; })
+      .subscribe((x) => { this.participants = x.participants; });
   }
 
 
@@ -112,7 +112,7 @@ export class ParticipantsComponent {
       .subscribe((x) => {
         this.participants = x.participants;
         this.refreshParticipantsAviable();
-      })
+      });
   }
 
 
@@ -124,11 +124,11 @@ export class ParticipantsComponent {
 
   private validateParticipant(): boolean {
     if (this.newParticipant.name === '') {
-      alert("El nombre del participante se encuentra en blanco");
+      alert('El nombre del participante se encuentra en blanco');
       return false;
     }
     if (this.newParticipant.email === '') {
-      alert("El correo elctrónico del participante se encuentra en blanco");
+      alert('El correo elctrónico del participante se encuentra en blanco');
       return false;
     }
 

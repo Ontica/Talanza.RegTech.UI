@@ -10,13 +10,13 @@ import { Observable } from 'rxjs';
 
 import { CoreService } from '@app/core/core.service';
 
-import { BaseProcedure, Procedure, ProcedureFilter } from "@app/models/regulation";
+import { BaseProcedure, Procedure, ProcedureFilter } from '@app/models/regulation';
 
 
 @Injectable()
 export class ProcedureService {
 
-  public constructor(private core: CoreService) { }
+  constructor(private core: CoreService) { }
 
 
   getBaseProcedures(): Observable<BaseProcedure[]> {
@@ -26,22 +26,22 @@ export class ProcedureService {
   }
 
 
-  public getProcedure(uid: string | number): Observable<Procedure> {
+  getProcedure(uid: string | number): Observable<Procedure> {
     const path = `v1/procedures/${uid}`;
 
     return this.core.http.get<Procedure>(path);
   }
 
 
-  public getProceduresList(filter?: ProcedureFilter | string): Promise<BaseProcedure[]> {
+  getProceduresList(filter?: ProcedureFilter | string): Promise<BaseProcedure[]> {
     let filterAsString = '';
 
     if (filter instanceof ProcedureFilter) {
       filterAsString = filter ? '?filter=' + filter.toString() : '';
-      if (filterAsString.length != 0) {
-        filterAsString += "&";
+      if (filterAsString.length !== 0) {
+        filterAsString += '&';
       } else {
-        filterAsString = "?";
+        filterAsString = '?';
       }
       if (filter instanceof ProcedureFilter) {
         filterAsString += 'keywords=' + filter.keywords;
@@ -59,13 +59,13 @@ export class ProcedureService {
   }
 
 
-  public createProcedure(procedure: Procedure): Promise<Procedure> {
+  createProcedure(procedure: Procedure): Promise<Procedure> {
     return this.core.http.post<Procedure>('v1/procedures', procedure)
                          .toPromise();
   }
 
 
-  public updateProcedure(procedure: Procedure): Promise<Procedure> {
+  updateProcedure(procedure: Procedure): Promise<Procedure> {
     return this.core.http.put<Procedure>(`v1/procedures/${procedure.uid}`, procedure)
                          .toPromise();
   }

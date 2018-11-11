@@ -19,12 +19,12 @@ export interface CalendarSettings {
 }
 
 
-export const DEFAULT_SETTINGS : CalendarSettings = {
+export const DEFAULT_SETTINGS: CalendarSettings = {
   language: DEFAULT_LANGUAGE,
-  hideWeekendDays : false,
-  showHolidays : true,
+  hideWeekendDays: false,
+  showHolidays: true,
   hideTime: true,
   showWeekNumber: false,
   showVacation: false,
   returnType: 'string'
-}
+};

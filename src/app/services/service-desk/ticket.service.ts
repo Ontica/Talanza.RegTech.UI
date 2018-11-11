@@ -32,7 +32,7 @@ export class TicketService {
   constructor(private core: CoreService) { }
 
 
-  public getTicketsOpened(keywords?: string): Observable<Ticket[]> {
+  getTicketsOpened(keywords?: string): Observable<Ticket[]> {
     let path = `v1/help-desk/tickets/opened/`;
 
     if (keywords) {
@@ -46,8 +46,8 @@ export class TicketService {
   }
 
 
-  public getTicket(ticketUID): Observable<Ticket> {
-    let path = `v1/help-desk/tickets/${ticketUID}`;
+  getTicket(ticketUID): Observable<Ticket> {
+    const path = `v1/help-desk/tickets/${ticketUID}`;
 
     return this.core.http.get<Ticket[]>(path)
       .pipe(
@@ -56,8 +56,8 @@ export class TicketService {
   }
 
 
-  public addTicket(ticket: Ticket) {
-    let path = `v1/help-desk/tickets`;
+  addTicket(ticket: Ticket) {
+    const path = `v1/help-desk/tickets`;
 
     return this.core.http.post<any>(path, ticket)
       .pipe(
@@ -66,7 +66,7 @@ export class TicketService {
   }
 
 
-  public getTicketsClosed(keywords?: string): Observable<Ticket[]> {
+  getTicketsClosed(keywords?: string): Observable<Ticket[]> {
     let path = `v1/service-desk/tickets/opened/`;
 
     if (keywords) {

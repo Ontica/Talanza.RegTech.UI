@@ -16,21 +16,21 @@ export interface Document {
 
 export class DocumentFilter {
 
-  public type = "";
-  public keywords = "";
+  type = '';
+  keywords = '';
 
-  public get isEmpty(): boolean {
+  get isEmpty(): boolean {
     if (this.type || this.keywords) {
       return false;
     }
     return true;
   }
 
-  public toQueryString(): string {
+  toQueryString(): string {
     if (!this.isEmpty) {
       return `type=${this.type}&keywords=${this.keywords}`;
     } else {
-      return "";
+      return '';
     }
   }
 

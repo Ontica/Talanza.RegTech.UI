@@ -7,7 +7,7 @@
 
 import { Component, Input, OnInit } from '@angular/core';
 
-import { Procedure } from "@app/models/regulation";
+import { Procedure } from '@app/models/regulation';
 
 
 @Component({

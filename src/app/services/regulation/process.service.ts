@@ -15,19 +15,19 @@ import { Process } from '@app/models/regulation';
 @Injectable()
 export class ProcessService {
 
-  public constructor(private core: CoreService) { }
+  constructor(private core: CoreService) { }
 
-  public getProcesses(): Promise<Process[]> {
+  getProcesses(): Promise<Process[]> {
     return this.core.http.get<Process[]>('v1/process-definitions')
                          .toPromise();
   }
 
-  public getProcessDiagram(uid: string): Promise<Process> {
+  getProcessDiagram(uid: string): Promise<Process> {
     return this.core.http.get<Process>('v1/process-definitions/' + uid)
                          .toPromise();
   }
 
-  public saveDiagramChanges(process: Process): Promise<Process> {
+  saveDiagramChanges(process: Process): Promise<Process> {
     const body = {
       xml: process.xml
     };
@@ -36,7 +36,7 @@ export class ProcessService {
                          .toPromise();
   }
 
-  public saveNewDiagram(process: Process): Promise<Process> {
+  saveNewDiagram(process: Process): Promise<Process> {
     const body = {
       name: process.name,
       version: process.version,

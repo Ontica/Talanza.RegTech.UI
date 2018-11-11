@@ -8,11 +8,11 @@
 import { Component, ChangeDetectionStrategy,
          ElementRef, EventEmitter,
          Input, Output,
-         OnInit, ViewChild } from "@angular/core";
+         OnInit, ViewChild } from '@angular/core';
 
 import { ProjectModel, ProjectStore } from '@app/store/project.store';
 
-import "dhtmlx-gantt";
+import 'dhtmlx-gantt';
 
 declare let gantt: any;
 
@@ -21,7 +21,7 @@ import { Activity, ViewConfig, GanttTask } from '@app/models/project-management'
 import { GanttService } from '@app/services/project-management';
 
 @Component({
-  selector: "dhtmlx-gantt",
+  selector: 'dhtmlx-gantt',
   templateUrl: './dhtmlx-gantt.component.html',
   styleUrls: ['./dhtmlx-gantt.component.scss'],
   providers: [GanttService],
@@ -30,7 +30,7 @@ import { GanttService } from '@app/services/project-management';
 export class DhtmlxGanttComponent implements OnInit {
 
   @Input()
-  get project(): ProjectModel { return this._project };
+  get project(): ProjectModel { return this._project; }
   set project(value: ProjectModel) {
     if (this.project && this.project.project.uid !== value.project.uid) {
       this.selectedTask = null;
@@ -38,17 +38,17 @@ export class DhtmlxGanttComponent implements OnInit {
 
     this._project = value;
     this.refreshData();
-  };
+  }
   private _project;
 
 
   @Input()
-  get config(): ViewConfig { return this._config };
+  get config(): ViewConfig { return this._config; }
   set config(value: ViewConfig) {
     this._config = value;
     this.setConfiguration();
     this.resetGantt();
-  };
+  }
   private _config;
 
 
@@ -59,7 +59,7 @@ export class DhtmlxGanttComponent implements OnInit {
 
   @Output() activitySelected = new EventEmitter<Activity>();
 
-  @ViewChild("gantt") ganttContainer: ElementRef;
+  @ViewChild('gantt') ganttContainer: ElementRef;
 
 
   private ganttData: GanttTask[] = [];
@@ -81,7 +81,7 @@ export class DhtmlxGanttComponent implements OnInit {
 
   private attachEvents() {
 
-    gantt.attachEvent("onTaskSelected", id => {
+    gantt.attachEvent('onTaskSelected', id => {
       if (this.innerReset) {
         this.innerReset = false;
         return;
@@ -103,9 +103,9 @@ export class DhtmlxGanttComponent implements OnInit {
     }
 
     const links = [
-      { id:1, source:103271, target:103272, type:"1"},                       //link's id = 1
-      { id:2, source:103272, target:103273, type:"0"},                       //link's id = 2
-      { id:3, source:103273, target:103274, type:"0"}                        //link's id = 3
+      { id: 1, source: 103271, target: 103272, type: '1'},                       // link's id = 1
+      { id: 2, source: 103272, target: 103273, type: '0'},                       // link's id = 2
+      { id: 3, source: 103273, target: 103274, type: '0'}                        // link's id = 3
     ];
 
     this.ganttService.getActivitiesTree(this.project.project)
@@ -129,36 +129,36 @@ export class DhtmlxGanttComponent implements OnInit {
   private setConfiguration() {
 
     gantt.config.layout = {
-      css: "gantt_container",
-      rows:[
+      css: 'gantt_container',
+      rows: [
           {
              cols: [
               {
                 // the default grid view
-                view: "grid",
-                scrollX:"scrollHor",
-                scrollY:"scrollVer"
+                view: 'grid',
+                scrollX: 'scrollHor',
+                scrollY: 'scrollVer'
               },
               { resizer: true, width: 1 },
               {
                 // the default timeline view
-                view: "timeline",
-                scrollX:"scrollHor",
-                scrollY:"scrollVer"
+                view: 'timeline',
+                scrollX: 'scrollHor',
+                scrollY: 'scrollVer'
               },
               {
-                view: "scrollbar",
-                id:"scrollVer"
+                view: 'scrollbar',
+                id: 'scrollVer'
               }
           ]},
           {
-              view: "scrollbar",
-              id:"scrollHor"
+              view: 'scrollbar',
+              id: 'scrollHor'
           }
       ]
     };
 
-    gantt.config.xml_date = "%Y-%m-%d %H:%i";
+    gantt.config.xml_date = '%Y-%m-%d %H:%i';
 
     gantt.config.keep_grid_width = true;
     gantt.config.show_progress = true;
@@ -173,7 +173,7 @@ export class DhtmlxGanttComponent implements OnInit {
     gantt.config.preserve_scroll = true;
 
     gantt.config.scale_unit = this.config ? this.config.timeScaleUnit : 'quarter';
-    gantt.config.date_scale = "%M %Y";
+    gantt.config.date_scale = '%M %Y';
 
   }
 

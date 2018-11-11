@@ -14,12 +14,11 @@ import { Assertion, CoreService } from '@app/core';
 import { Activity, Contract, Project, Resource, Stage } from '@app/models/project-management';
 
 import { Contact } from '@app/models/core';
-import { Entity, Procedure } from '@app/models/regulation';
+import { Entity } from '@app/models/regulation';
 import { ColoredTag } from '@app/models/user-interface';
 
 
 enum Errors {
-
   COPY_TO_PROJECT=
   '[COPY_TO_PROJECT] Ocurrió un problema al intentar copiar la actividad.',
 
@@ -57,7 +56,7 @@ export class ProjectService {
 
   getContracts(): Observable<Contract[]> {
 
-    const CONTRACTS: Contract[] = [ { uid:'576', name:'Ronda 2.4' } ];
+    const CONTRACTS: Contract[] = [ { uid: '576', name: 'Ronda 2.4' } ];
 
     return of(CONTRACTS);
   }
@@ -97,7 +96,7 @@ export class ProjectService {
 
 
   getResponsiblesList(project: Project): Observable<Contact[]> {
-    Assertion.assertValue(project, "project");
+    Assertion.assertValue(project, 'project');
 
     const path = `v1/project-management/projects/166871D7-5CD7-40C7-AA47-618DB5E643B8/responsibles`;
 
@@ -115,13 +114,13 @@ export class ProjectService {
   getStages(): Observable<Stage[]> {
 
     const STAGES: Stage[] = [
-      { uid:'Transición', name:'Transición' },
-      { uid:'Evaluación', name:'Evaluación' },
-      { uid:'Exploración', name:'Exploración' },
-      { uid:'Desarrollo', name:'Desarrollo' },
-      { uid:'Producción', name:'Producción' },
-      { uid:'Abandono', name:'Abandono' },
-      { uid:'Transversales', name:'Transversales' }
+      { uid: 'Transición', name: 'Transición' },
+      { uid: 'Evaluación', name: 'Evaluación' },
+      { uid: 'Exploración', name: 'Exploración' },
+      { uid: 'Desarrollo', name: 'Desarrollo' },
+      { uid: 'Producción', name: 'Producción' },
+      { uid: 'Abandono', name: 'Abandono' },
+      { uid: 'Transversales', name: 'Transversales' }
     ];
 
     return of(STAGES);
@@ -153,8 +152,8 @@ export class ProjectService {
 
 
   changeParent(activity: Activity, newParent: Activity): Observable<Activity> {
-    Assertion.assertValue(activity, "activity");
-    Assertion.assertValue(newParent, "newParent");
+    Assertion.assertValue(activity, 'activity');
+    Assertion.assertValue(newParent, 'newParent');
 
     const path = `v1/project-management/projects/${activity.project.uid}/activities/${activity.uid}`;
 
@@ -167,11 +166,12 @@ export class ProjectService {
 
 
   copyToProject(targetProjectUID: string, activity: Activity): any {
-    Assertion.assertValue(targetProjectUID, "targetProjectUID");
-    Assertion.assertValue(activity, "activity");
+    Assertion.assertValue(targetProjectUID, 'targetProjectUID');
+    Assertion.assertValue(activity, 'activity');
 
 
-    const path = `v1/project-management/projects/${activity.project.uid}/activities/${activity.uid}/copyTo/${targetProjectUID}`;
+    const path = `v1/project-management/projects/${activity.project.uid}/
+                  activities/${activity.uid}/copyTo/${targetProjectUID}`;
 
     const body = {
 
@@ -185,9 +185,10 @@ export class ProjectService {
 
 
   deleteActivity(activity: Activity): Observable<void> {
-    Assertion.assertValue(activity, "activity");
+    Assertion.assertValue(activity, 'activity');
 
-    const path = `v1/project-management/projects/${activity.project.uid}/activities/${activity.uid}`;
+    const path = `v1/project-management/projects/${activity.project.uid}
+                 /activities/${activity.uid}`;
 
     return this.core.http.delete<any>(path)
                          .pipe(
@@ -197,8 +198,8 @@ export class ProjectService {
 
 
   createFromEvent(project: Project, data: { eventUID: string, eventDate: Date }) {
-    Assertion.assertValue(project, "project");
-    Assertion.assertValue(data, "data");
+    Assertion.assertValue(project, 'project');
+    Assertion.assertValue(data, 'data');
 
     const path = `v1/project-management/projects/${project.uid}/create-from-event`;
 
@@ -211,10 +212,10 @@ export class ProjectService {
   insertActivity(project: Project,
                  newActivity: { name: string, position: number }): Observable<Activity> {
 
-    Assertion.assertValue(project, "project");
-    Assertion.assertValue(newActivity, "activity");
-    Assertion.assertValue(newActivity.name, "activity.name");
-    Assertion.assert(newActivity.position > 0, "activity position must be greater than zero.");
+    Assertion.assertValue(project, 'project');
+    Assertion.assertValue(newActivity, 'activity');
+    Assertion.assertValue(newActivity.name, 'activity.name');
+    Assertion.assert(newActivity.position > 0, 'activity position must be greater than zero.');
 
     const path = `v1/project-management/projects/${project.uid}/activities`;
 
@@ -226,8 +227,8 @@ export class ProjectService {
 
 
   moveActivity(activity: Activity, newPosition: number): Observable<Activity> {
-    Assertion.assertValue(activity, "activity");
-    Assertion.assert(newPosition > 0, "newPosition must be greater than zero.");
+    Assertion.assertValue(activity, 'activity');
+    Assertion.assert(newPosition > 0, 'newPosition must be greater than zero.');
 
     const path = `v1/project-management/projects/${activity.project.uid}/activities/${activity.uid}`;
 
@@ -243,11 +244,12 @@ export class ProjectService {
 
 
   moveToProject(targetProjectUID: string, activity: Activity): any {
-    Assertion.assertValue(targetProjectUID, "targetProjectUID");
-    Assertion.assertValue(activity, "activity");
+    Assertion.assertValue(targetProjectUID, 'targetProjectUID');
+    Assertion.assertValue(activity, 'activity');
 
 
-    const path = `v1/project-management/projects/${activity.project.uid}/activities/${activity.uid}/moveTo/${targetProjectUID}`;
+    const path = `v1/project-management/projects/${activity.project.uid}/
+                  activities/${activity.uid}/moveTo/${targetProjectUID}`;
 
     const body = {
 
@@ -261,8 +263,8 @@ export class ProjectService {
 
 
   updateActivity(activity: Activity, updateData: Partial<Activity>): Observable<Activity> {
-    Assertion.assertValue(activity, "activity");
-    Assertion.assertValue(updateData, "updateData");
+    Assertion.assertValue(activity, 'activity');
+    Assertion.assertValue(updateData, 'updateData');
 
     const path = `v1/project-management/projects/${activity.project.uid}/activities/${activity.uid}`;
 

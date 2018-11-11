@@ -24,7 +24,7 @@ import { UpdateFAQComponent } from './faqs/update-faq.component';
 
 import { FAQsTableViewComponent } from './faqs/views/faqs-table-view.component';
 
-/** 
+/**
  * Do not specify providers for modules that might be imported by a lazy loaded module.
  */
 

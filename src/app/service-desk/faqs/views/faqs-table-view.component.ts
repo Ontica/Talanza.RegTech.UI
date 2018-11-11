@@ -19,12 +19,12 @@ export class FAQsTableViewComponent {
 
   @Input() FAQs: Posting[] = [];
 
-  @Output() public onSelectFAQ = new EventEmitter<string>();
+  @Output() onSelectFAQ = new EventEmitter<string>();
 
-  public selectedFAQUID = '';
+  selectedFAQUID = '';
 
 
-  public selectFAQ(uid: string): void {
+  selectFAQ(uid: string): void {
     this.selectedFAQUID = uid;
     this.onSelectFAQ.emit(uid);
   }

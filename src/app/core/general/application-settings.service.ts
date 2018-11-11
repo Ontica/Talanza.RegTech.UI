@@ -22,7 +22,7 @@ export class ApplicationSettingsService {
     this.settings = new ApplicationSettings(data);
   }
 
-  public getApplicationSettings(): ApplicationSettings {
+  getApplicationSettings(): ApplicationSettings {
     return this.settings;
   }
 

@@ -15,29 +15,29 @@ export const TASK_TYPE_NAME = 'ObjectType.ProjectItem.Task';
 
 export interface Task extends Identifiable, PartitionedType {
   id: number;
-  notes: string,
-  activity: Identifiable,
-  project: Identifiable,
+  notes: string;
+  activity: Identifiable;
+  project: Identifiable;
 
-  estimatedDuration: Duration,
-  warnDays: number,
-  warnType: string,
+  estimatedDuration: Duration;
+  warnDays: number;
+  warnType: string;
 
-  startDate: DateString,
-  targetDate: DateString,
-  endDate: DateString,
-  dueDate: DateString,
+  startDate: DateString;
+  targetDate: DateString;
+  endDate: DateString;
+  dueDate: DateString;
 
-  tags: string[],
-  position: number,
+  tags: string[];
+  position: number;
   level: number;
-  ragStatus: string,
-  stage: string,
-  status: string,
+  ragStatus: string;
+  stage: string;
+  status: string;
 
-  responsible: Identifiable,
-  assignedDate: DateString,
-  assignedBy: Identifiable
+  responsible: Identifiable;
+  assignedDate: DateString;
+  assignedBy: Identifiable;
 }
 
 
@@ -69,4 +69,4 @@ export const EmptyTask: Task = {
   responsible: Empty,
   assignedDate: '',
   assignedBy: Empty
-}
+};

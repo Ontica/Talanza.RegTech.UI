@@ -15,10 +15,10 @@ import { Component } from '@angular/core';
 })
 export class RecomendationsComponent {
 
-  public recomendations: string[] = [];
-  public newRecomendation = "";
+  recomendations: string[] = [];
+  newRecomendation = '';
 
-  public addRecomendation(): void {
+  addRecomendation(): void {
     this.recomendations.push(this.newRecomendation);
   }
 

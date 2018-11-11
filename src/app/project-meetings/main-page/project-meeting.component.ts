@@ -17,10 +17,10 @@ import { Meeting } from '@app/models/project-management';
 })
 export class ProjectMeetingComponent {
 
-  public selectedTask = "meetingData";
-  public title = 'Agregar Reunión';
+  selectedTask = 'meetingData';
+  title = 'Agregar Reunión';
 
-  private _meetingUID: string = "";
+  private _meetingUID = '';
 
   @Input()
   set meetingUID(meetingUID: string) {
@@ -34,12 +34,12 @@ export class ProjectMeetingComponent {
   @Output() onUpdateMeeting = new EventEmitter<Meeting>();
 
 
-  public setSelectedTask(selectedTask: string): void {
+  setSelectedTask(selectedTask: string): void {
     this.selectedTask = selectedTask;
   }
 
 
-  public updateMeetingData(projectMeeting: Meeting): void {
+  updateMeetingData(projectMeeting: Meeting): void {
     this.title = projectMeeting.title;
 
     this.onUpdateMeeting.emit(projectMeeting);

@@ -7,7 +7,7 @@
 
 import { Component, Inject } from '@angular/core';
 
-import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material";
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 
 import { MessageBoxData } from './message-box.types';
 
@@ -28,9 +28,9 @@ export class MessageBoxComponent {
 
 
   onClickButton(option: string) {
-    if (option === "accept") {
+    if (option === 'accept') {
       this.dialogRef.close(true);
-    } else if (option === "cancel") {
+    } else if (option === 'cancel') {
       this.dialogRef.close(false);
     } else {
       this.dialogRef.close();

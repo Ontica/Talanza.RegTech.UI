@@ -5,8 +5,10 @@
  * See LICENSE.txt in the project root for complete license information.
  */
 
-import { AfterViewInit, Component,
-         EventEmitter, Input, OnChanges, Output, forwardRef} from '@angular/core';
+import {
+  AfterViewInit, Component,
+  EventEmitter, Input, OnChanges, Output, forwardRef
+} from '@angular/core';
 
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
@@ -20,9 +22,9 @@ import { CalendarWrapper } from './dhtmlX-calendar-wrapper';
 let _uniqueIdCounter = 0;
 
 
-@Component ({
+@Component({
   selector: 'calendar-control',
-  templateUrl:'./calendar-control.html',
+  templateUrl: './calendar-control.html',
   styleUrls: ['./calendar-control.scss'],
   providers: [
     { provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => CalendarControl), multi: true },
@@ -34,20 +36,20 @@ export class CalendarControl implements AfterViewInit, ControlValueAccessor, OnC
 
 
   @Input()
-  get config(): CalendarSettings { return this._config };
+  get config(): CalendarSettings { return this._config; }
   set config(value: CalendarSettings) {
-    this._config = value
-  };
+    this._config = value;
+  }
   private _config = DEFAULT_SETTINGS;
 
 
   @Input()
-  get date(): DateString { return this._date };
+  get date(): DateString { return this._date; }
   set date(value: DateString) {
     this._date = DateStringLibrary.tryParseDateValue(value);
 
     this.refreshCalendarDate();
-  };
+  }
   private _date: DateString;
 
 
@@ -60,8 +62,8 @@ export class CalendarControl implements AfterViewInit, ControlValueAccessor, OnC
   inputId = `calendar-input-${_uniqueIdCounter++}`;
   buttonId = `calendar-button-${_uniqueIdCounter}`;
 
-  propagateChange = (_: any) => {};
-  //propagateTouch = (_: any) => {};
+  propagateChange = (_: any) => { };
+  // propagateTouch = (_: any) => {};
 
   constructor() {
 
@@ -76,7 +78,7 @@ export class CalendarControl implements AfterViewInit, ControlValueAccessor, OnC
     this.createCalendar();
     this.attachEvents();
     this.hideOrShowCalendar();
-    console.log("calendar ngAfterViewInit called");
+    console.log('calendar ngAfterViewInit called');
   }
 
 
@@ -93,7 +95,7 @@ export class CalendarControl implements AfterViewInit, ControlValueAccessor, OnC
       this.displayedDateString = newFormattedDate;
 
       this.calendar.setDate(DateStringLibrary.tryParseDate(newFormattedDate,
-                                                           this.config.language));
+        this.config.language));
 
       this.propagateDateChange(this.calendar.getDate());
 
@@ -119,7 +121,7 @@ export class CalendarControl implements AfterViewInit, ControlValueAccessor, OnC
 
 
   registerOnTouched(fn: any): void {
-    //this.propagateTouch = fn;
+    // this.propagateTouch = fn;
   }
 
 
@@ -146,11 +148,11 @@ export class CalendarControl implements AfterViewInit, ControlValueAccessor, OnC
   // private methods
 
   private attachEvents() {
-    this.calendar.attachEvent("onClick",
-                              date => {
-                                this.displayedDateString = DateStringLibrary.formatDMY(date);
-                                this.propagateDateChange(date);
-                              });
+    this.calendar.attachEvent('onClick',
+      date => {
+        this.displayedDateString = DateStringLibrary.formatDMY(date);
+        this.propagateDateChange(date);
+      });
   }
 
 

@@ -26,10 +26,10 @@ import { SharedService } from '@app/shared/shared.service';
 
 enum FormMessages {
   IncompleteActivityData =
-  "Los campos marcados en rojo son requeridos.",
+  'Los campos marcados en rojo son requeridos.',
 
   TargetDateIsGreaterThanDueDate =
-  "La fecha objetivo de la actividad no puede ser posterior a la fecha máxima de entrega.",
+  'La fecha objetivo de la actividad no puede ser posterior a la fecha máxima de entrega.',
 }
 
 
@@ -80,7 +80,8 @@ export class ActivityFormComponent extends AbstractForm implements OnInit, OnCha
                 `<strong>${this.activity.name}</strong> de este proyecto.<br/><br/>` +
                 `¿Elimino esta actividad?`;
 
-    this.app.messageBox.confirm(msg, "Eliminar actividad", 'DeleteCancel', 'Eliminar esta actividad').subscribe(
+    this.app.messageBox.confirm(msg, 'Eliminar actividad',
+                               'DeleteCancel', 'Eliminar esta actividad').subscribe(
       result => {
         if (result) {
           this.setCommand('delete');

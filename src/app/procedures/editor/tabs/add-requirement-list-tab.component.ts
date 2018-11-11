@@ -8,7 +8,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 
 export class AddRequirementListTabComponent {
 
-  @Output() public isCanceled = new EventEmitter<boolean>();
+  @Output() isCanceled = new EventEmitter<boolean>();
 
   cancel(): void {
     this.isCanceled.emit(true);

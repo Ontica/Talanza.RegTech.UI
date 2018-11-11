@@ -18,16 +18,16 @@ export enum RagStatus {
 
 @Component({
   selector: 'rag-status-control',
-  template:`
+  template: `
     <div class="circle" [ngClass]="statusColorCssClass"
          (click)="onclick()">
     </div>
   `,
-  styleUrls:['./rag-status.control.scss']
+  styleUrls: ['./rag-status.control.scss']
 })
 export class RagStatusControl {
 
-  @Output() public change = new EventEmitter<RagStatus>();
+  @Output() change = new EventEmitter<RagStatus>();
 
   @Input()
   get status(): RagStatus { return this._status; }

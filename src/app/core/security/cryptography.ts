@@ -9,9 +9,9 @@ import * as CryptoJS from 'crypto-js';
 
 export class Cryptography {
 
-  public static convertToMd5(value: string): string {
+  static convertToMd5(value: string): string {
 
     return CryptoJS.MD5(value).toString();
   }
 
-} //class Cryptography
+} // class Cryptography

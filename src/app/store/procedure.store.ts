@@ -11,7 +11,7 @@ import { map } from 'rxjs/operators';
 
 import { ProcedureService } from '@app/services/regulation';
 
-import { BaseProcedure, Procedure } from "@app/models/regulation";
+import { BaseProcedure, Procedure } from '@app/models/regulation';
 
 
 @Injectable()
@@ -32,7 +32,7 @@ export class ProcedureStore {
 
   getProcedure(procedureUID: string | number): Observable<Procedure> {
     const procedure = this._procedures.find(
-      x => x.uid === procedureUID || x.id == procedureUID
+      x => x.uid === procedureUID || x.id === procedureUID
     );
     if (procedure) {
       return of(procedure);

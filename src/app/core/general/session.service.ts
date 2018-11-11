@@ -26,21 +26,25 @@ export class SessionService {
     this.appSettings = this.appSettingsService.getApplicationSettings();
   }
 
-  public getSettings(): ApplicationSettings {
+
+  getSettings(): ApplicationSettings {
     return this.appSettings;
   }
 
-  public getPrincipal(): Principal {
+
+  getPrincipal(): Principal {
     return this.principal;
   }
 
-  public setPrincipal(principal: Principal) {
+
+  setPrincipal(principal: Principal) {
     Assertion.assertValue(principal, 'principal');
 
     this.principal = principal;
   }
 
-  public getData<T>(key: string): T {
+
+  getData<T>(key: string): T {
     Assertion.assertValue(key, 'key');
 
     const index = this.data.findIndex((x) => x.key === key);
@@ -52,7 +56,8 @@ export class SessionService {
     }
   }
 
-  public setData<T>(key: string, value: T): void {
+
+  setData<T>(key: string, value: T): void {
     Assertion.assertValue(key, 'key');
     Assertion.assertValue(value, 'value');
 
@@ -61,7 +66,7 @@ export class SessionService {
     if (index !== -1) {
       this.data[index] = { key, value };
     } else {
-      this.data.push( { key, value });
+      this.data.push({ key, value });
     }
   }
 

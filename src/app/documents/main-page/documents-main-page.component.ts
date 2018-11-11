@@ -10,39 +10,39 @@ import { DocumentService } from '@app/services/regulation';
 import { Document, DocumentFilter } from '@app/models/regulation';
 
 @Component({
-  selector:'documents-main-page',
-  templateUrl:'./documents-main-page.component.html',
+  selector: 'documents-main-page',
+  templateUrl: './documents-main-page.component.html',
   styleUrls: ['./documents-main-page.component.scss'],
   providers: [DocumentService]
 })
 export class DocumentsMainPageComponent implements OnInit {
 
-  public documentsList: Document[] = [];
-  public filter = new DocumentFilter();
+  documentsList: Document[] = [];
+  filter = new DocumentFilter();
 
   constructor(private documentService: DocumentService) { }
 
-  public ngOnInit() {
+  ngOnInit() {
     this.loadDocumentsList();
   }
 
-  public onChangeFilter() {
-    this.loadDocumentsList()
+  onChangeFilter() {
+    this.loadDocumentsList();
   }
 
-  public onResetFilter() {
+  onResetFilter() {
     this.filter = new DocumentFilter();
 
     this.loadDocumentsList();
   }
 
-  public openExternalWindow(url:string): void {
+  openExternalWindow(url: string): void {
     window.open(url, '_blank', 'location=yes,height=570,width=620,scrollbars=yes,status=yes');
   }
 
   private loadDocumentsList() {
     this.documentService.getDocuments(this.filter)
-                        .then((list) => this.documentsList = list);
+      .then((list) => this.documentsList = list);
   }
 
 }

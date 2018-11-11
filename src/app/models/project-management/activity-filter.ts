@@ -38,7 +38,7 @@ export class ActivityFilter {
 
 
   clone(): ActivityFilter {
-    let clone = new ActivityFilter();
+    const clone = new ActivityFilter();
 
     clone.contract = this.contract;
     clone.project = this.project;
@@ -56,27 +56,27 @@ export class ActivityFilter {
     let filter = '';
 
     if (!isEmpty(this.contract)) {
-      filter = this.addFilterConnector(filter) + "contract=" + this.contract;
+      filter = this.addFilterConnector(filter) + 'contract=' + this.contract;
     }
     if (!isEmpty(this.project)) {
-      filter = this.addFilterConnector(filter) + "project=" + this.project;
+      filter = this.addFilterConnector(filter) + 'project=' + this.project;
     }
     if (!isEmpty(this.stage)) {
-      filter = this.addFilterConnector(filter) + "stage=" + this.stage;
+      filter = this.addFilterConnector(filter) + 'stage=' + this.stage;
     }
     if ((this.tags.length !== 0)) {
       this.tags.forEach((x) => {
-        filter = this.addFilterConnector(filter) + "tag=" + x;
-      })
+        filter = this.addFilterConnector(filter) + 'tag=' + x;
+      });
     }
     if (!isEmpty(this.responsible)) {
-      filter = this.addFilterConnector(filter) + "responsible=" + this.responsible;
+      filter = this.addFilterConnector(filter) + 'responsible=' + this.responsible;
     }
     if (this.keywords !== '') {
-      filter = this.addFilterConnector(filter) + "keywords=" + this.keywords;
+      filter = this.addFilterConnector(filter) + 'keywords=' + this.keywords;
     }
     if (this.orderBy !== '') {
-      filter = this.addFilterConnector(filter) + "orderBy=" + this.orderBy;
+      filter = this.addFilterConnector(filter) + 'orderBy=' + this.orderBy;
     }
     return filter;
   }

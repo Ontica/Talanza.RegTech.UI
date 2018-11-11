@@ -5,7 +5,7 @@
  * See LICENSE.txt in the project root for complete license information.
  */
 
-import { MatDialogConfig } from "@angular/material";
+import { MatDialogConfig } from '@angular/material';
 
 
 export type ConfirmMessageBoxType = 'Accept' | 'AcceptCancel' | 'DeleteCancel';
@@ -17,8 +17,8 @@ export interface MessageBoxConfig extends MatDialogConfig {
 
 
 export interface MessageBoxData {
-  messageBoxType: 'Accept' | ConfirmMessageBoxType,
-  message: string,
-  title: string,
-  mainButtonText: string
+  messageBoxType: 'Accept' | ConfirmMessageBoxType;
+  message: string;
+  title: string;
+  mainButtonText: string;
 }

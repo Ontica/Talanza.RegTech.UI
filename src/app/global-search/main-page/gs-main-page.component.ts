@@ -13,8 +13,10 @@ import { SharedService } from '@app/shared/services';
 import { ContractsService, DocumentService, ProcedureService } from '@app/services/regulation';
 import { PostingsService } from '@app/services/knowledge-base';
 
-import { BaseProcedure, ContractClauseRef, Document,
-         DocumentFilter, ProcedureFilter } from '@app/models/regulation';
+import {
+  BaseProcedure, ContractClauseRef, Document,
+  DocumentFilter, ProcedureFilter
+} from '@app/models/regulation';
 import { Posting, BASE_OBJECT_UID } from '@app/models/knowledge-base';
 
 import { NavBarConfig } from '@app/controls/nav-bar/nav-bar.control';
@@ -27,24 +29,24 @@ import { NavBarConfig } from '@app/controls/nav-bar/nav-bar.control';
 })
 export class GlobalSearchMainPageComponent {
 
-  public procedures: BaseProcedure[] = [];
-  public selectedProcedureUID = '';
-  public navBarConfig: NavBarConfig[] = [];
-  public selectedOption = '';
+  procedures: BaseProcedure[] = [];
+  selectedProcedureUID = '';
+  navBarConfig: NavBarConfig[] = [];
+  selectedOption = '';
 
-  public masterContainer = 'centered-container';
-  public isDetailsContainerVisible = false;
+  masterContainer = 'centered-container';
+  isDetailsContainerVisible = false;
 
-  public clauses: ContractClauseRef[] = [];
-  public clause: ContractClauseRef;
+  clauses: ContractClauseRef[] = [];
+  clause: ContractClauseRef;
 
-  public documents: Document[] = [];
-  public documentURI = '';
+  documents: Document[] = [];
+  documentURI = '';
 
-  public FAQs: Posting[] = [];
-  public FAQUid = '';
+  FAQs: Posting[] = [];
+  FAQUid = '';
 
-  private _keywords: string = '';
+  private _keywords = '';
   @Input()
   set keywords(keywords: string) {
     if (keywords) {
@@ -57,7 +59,7 @@ export class GlobalSearchMainPageComponent {
     return this._keywords;
   }
 
-  @Output() public onClose = new EventEmitter();
+  @Output() onClose = new EventEmitter();
 
   constructor(private route: ActivatedRoute,
     private app: SharedService,
@@ -74,19 +76,19 @@ export class GlobalSearchMainPageComponent {
   }
 
 
-  public selectOption(option: string) {
+  selectOption(option: string) {
     this.selectedOption = option;
 
     this.closeDetailsContainer();
   }
 
 
-  public closeGlobalSearch(): void {
+  closeGlobalSearch(): void {
     this.onClose.emit();
   }
 
 
-  public selectProcedure(procedureUID: string): void {
+  selectProcedure(procedureUID: string): void {
 
     if (procedureUID) {
       this.selectedProcedureUID = procedureUID;
@@ -96,28 +98,28 @@ export class GlobalSearchMainPageComponent {
   }
 
 
-  public setSelectedClause(clause: ContractClauseRef): void {
+  setSelectedClause(clause: ContractClauseRef): void {
     this.clause = clause;
 
     this.showDetailsContainer();
   }
 
 
-  public setSelectedDocument(document: Document): void {
+  setSelectedDocument(document: Document): void {
     this.documentURI = document.url;
 
     this.showDetailsContainer();
   }
 
 
-  public setSelectedFAQ(FAQUid: string): void {
+  setSelectedFAQ(FAQUid: string): void {
     this.FAQUid = FAQUid;
 
     this.showDetailsContainer();
   }
 
 
-  public closeDetailsContainer(): void {
+  closeDetailsContainer(): void {
     this.masterContainer = 'centered-container';
     this.isDetailsContainerVisible = false;
   }
@@ -147,10 +149,20 @@ export class GlobalSearchMainPageComponent {
 
   private fillNavBar(): void {
     this.navBarConfig = [];
-    this.navBarConfig.push({ name: 'procedures', displayText: 'Trámites (' + this.procedures.length.toString() + ')' });
-    this.navBarConfig.push({ name: 'contracts', displayText: 'Contratos (' + this.clauses.length.toString() + ')' });
-    this.navBarConfig.push({ name: 'documents', displayText: 'Documentos (' + this.documents.length.toString() + ')' });
-    this.navBarConfig.push({ name: 'FAQs', displayText: 'Q&A (' + this.FAQs.length.toString() + ')' });
+    this.navBarConfig.push({
+      name: 'procedures',
+      displayText: 'Trámites (' + this.procedures.length.toString() + ')'
+    });
+    this.navBarConfig.push({
+      name: 'contracts',
+      displayText: 'Contratos (' + this.clauses.length.toString() + ')'
+    });
+    this.navBarConfig.push({
+      name: 'documents', displayText: 'Documentos (' + this.documents.length.toString() + ')'
+    });
+    this.navBarConfig.push({
+      name: 'FAQs', displayText: 'Q&A (' + this.FAQs.length.toString() + ')'
+    });
   }
 
 
@@ -160,7 +172,7 @@ export class GlobalSearchMainPageComponent {
 
 
   private async loadProcedures() {
-    let filter = new ProcedureFilter();
+    const filter = new ProcedureFilter();
     filter.keywords = this.keywords;
 
     this.app.spinner.show();
@@ -176,9 +188,7 @@ export class GlobalSearchMainPageComponent {
 
 
   private async loadContractClauses() {
-    const errMsg = 'Ocurrió un problema al intentar leer la lista de cláusulas para el contrato.';
-
-    const contractUID = '57993f7c-1390-4103-9f4d-3b98866bf956'; //Contrato: 3.1 Consorcio
+    const contractUID = '57993f7c-1390-4103-9f4d-3b98866bf956'; // Contrato: 3.1 Consorcio
 
     this.app.spinner.show();
 
@@ -193,7 +203,7 @@ export class GlobalSearchMainPageComponent {
 
 
   private async loadDocuments() {
-    let filter = new DocumentFilter();
+    const filter = new DocumentFilter();
 
     filter.type = '';
     filter.keywords = this.keywords;

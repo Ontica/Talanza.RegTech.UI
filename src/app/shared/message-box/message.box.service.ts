@@ -10,7 +10,7 @@ import { Observable, of } from 'rxjs';
 
 import { Exception } from '@app/core';
 
-import { MatDialog, MatDialogConfig } from "@angular/material";
+import { MatDialog, MatDialogConfig } from '@angular/material';
 
 import { MessageBoxComponent } from './message-box.component';
 
@@ -23,10 +23,10 @@ export class MessageBoxService {
   constructor(private dialog: MatDialog) { }
 
 
-  confirm(message: string, title: string = "",
+  confirm(message: string, title: string = '',
           messageBoxType: ConfirmMessageBoxType = 'AcceptCancel',
           mainButtonText: string = 'Aceptar',
-          config: MessageBoxConfig = undefined): Observable<boolean> {
+          config?: MessageBoxConfig): Observable<boolean> {
 
     const data: MessageBoxData = {
       messageBoxType: messageBoxType || 'AcceptCancel',
@@ -51,8 +51,8 @@ export class MessageBoxService {
   }
 
 
-  show(message: string, title: string = "",
-       config: MessageBoxConfig = undefined): Observable<void> {
+  show(message: string, title: string = '',
+       config?: MessageBoxConfig): Observable<void> {
 
     const data: MessageBoxData = {
       messageBoxType: 'Accept',
@@ -70,7 +70,7 @@ export class MessageBoxService {
 
 
   showError(error: Error | any,
-            config: MessageBoxConfig = undefined): Observable<void> {
+            config?: MessageBoxConfig): Observable<void> {
 
     const data: MessageBoxData = {
       messageBoxType: 'Accept',
@@ -90,7 +90,8 @@ export class MessageBoxService {
   // private methods
 
 
-  private getDialogConfig(config: MessageBoxConfig, messageBoxData: MessageBoxData): MatDialogConfig<MessageBoxData> {
+  private getDialogConfig(config: MessageBoxConfig,
+                          messageBoxData: MessageBoxData): MatDialogConfig<MessageBoxData> {
     if (!config) {
       config = new MatDialogConfig<MessageBoxData>();
     }
@@ -114,7 +115,7 @@ export class MessageBoxService {
 
     if (error instanceof Exception) {
       return (error as Exception).message +
-              "<br/><br/>" +
+              '<br/><br/>' +
              (error as Exception).innerError.message;
 
     } else if (error instanceof Error) {

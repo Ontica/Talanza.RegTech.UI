@@ -19,14 +19,14 @@ import { EmptyPosting, BASE_OBJECT_UID } from '@app/models/knowledge-base';
 })
 export class AddFAQComponent {
 
-  public faq = EmptyPosting();
+  faq = EmptyPosting();
 
-  @Output() public onAddFaq = new EventEmitter();
+  @Output() onAddFaq = new EventEmitter();
 
   constructor(private faqService: PostingsService) { }
 
 
-  public async onSaveFAQ() {
+  async onSaveFAQ() {
     if (!this.validate()) {
       return;
     }

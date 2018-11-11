@@ -16,7 +16,8 @@ import { ContractClauseRef, EmptyContractClause } from '@app/models/regulation';
   selector: 'contract-clause-selector',
   template: `<ul class="clause-list">
                 <li *ngFor="let clause of clauses">
-                  <a [class.selected]="clause === currentClause" (click)="onClickSelectClause(clause)">{{clause.clauseNo}} {{clause.title}}</a>
+                  <a [class.selected]="clause === currentClause"
+                    (click)="onClickSelectClause(clause)">{{clause.clauseNo}} {{clause.title}}</a>
                 </li>
                </ul> `,
   styleUrls: ['./contracts-clause.selector.component.scss'],
@@ -39,14 +40,14 @@ export class ContractsClauseSelectorComponent {
 
   @Output() selectedClause = new EventEmitter<ContractClauseRef>();
 
-  public currentClause: ContractClauseRef;
+  currentClause: ContractClauseRef;
 
-  constructor(private contractService: ContractsService) { }
 
-  public onClickSelectClause(selectedClause: ContractClauseRef): void {
+  onClickSelectClause(selectedClause: ContractClauseRef): void {
     this.currentClause = selectedClause;
     this.selectedClause.emit(selectedClause);
   }
+
 
   private emitSelectedClause(selectedClause: ContractClauseRef): void {
     this.selectedClause.emit(selectedClause);

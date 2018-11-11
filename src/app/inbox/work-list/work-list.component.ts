@@ -20,9 +20,9 @@ import { InboxFilter, InboxRef } from '@app/models/inbox';
 })
 export class WorkListComponent {
 
-  public inboxList: InboxRef[] = [];
-  public selectedItem: InboxRef;
-  public isEditorWindow = false;
+  inboxList: InboxRef[] = [];
+  selectedItem: InboxRef;
+  isEditorWindow = false;
 
   private _filter: InboxFilter;
   @Input()
@@ -37,11 +37,11 @@ export class WorkListComponent {
 
   constructor(private inboxService: InboxService) { }
 
-  public closeInboxEditorWindow(): void {
+  closeInboxEditorWindow(): void {
     this.isEditorWindow = false;
   }
 
-  public openInboxEditorWindow(selectedItem: any): void {
+  openInboxEditorWindow(selectedItem: any): void {
     this.selectedItem = selectedItem;
     this.isEditorWindow = true;
   }

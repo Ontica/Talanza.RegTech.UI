@@ -7,8 +7,8 @@
  */
 
 export class Process {
-  public uid: string;
-  public name: string;
-  public version: string;
-  public xml: string;
+  uid: string;
+  name: string;
+  version: string;
+  xml: string;
 }

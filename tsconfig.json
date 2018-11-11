@@ -9,6 +9,8 @@
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
+    // "noUnusedLocals": true,
+    // "noUnusedParameters": true,
     "paths": {
       "@app/*": ["src/app/*"],
       "@assets/*": ["src/assets/*"]

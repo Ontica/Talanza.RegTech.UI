@@ -30,7 +30,7 @@ export class LocalizationLibrary {
   static findMonth(monthName: string): number {
     // ToDo: replace by an array look up using a for
 
-    let month = this.getMonth(monthName, 'sp');
+    const month = this.getMonth(monthName, 'sp');
 
     if (month !== -1) {
       return month;
@@ -120,7 +120,7 @@ export class LocalizationLibrary {
                                      lang: Language): Error {
 
     return new Error(`Localization library method '${fnName}'
-                      do not support language '${lang}'.`)
+                      do not support language '${lang}'.`);
   }
 
 }

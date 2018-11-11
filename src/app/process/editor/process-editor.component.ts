@@ -21,19 +21,19 @@ import { Process } from '@app/models/regulation';
 })
 export class ProcessEditorComponent implements OnInit {
 
-  public url: SafeResourceUrl;
-  public process: Process;
-  public processes: Process[] = [];
+  url: SafeResourceUrl;
+  process: Process;
+  processes: Process[] = [];
 
-  @ViewChild('modeler') public el: ElementRef;
+  @ViewChild('modeler') el: ElementRef;
 
-  public activateSaveNewDiagramPopup = false;
-  public isNewDiagram = false;
-  public _editionMode: boolean;
-  public saveAsLabel = 'Guardar como';
-  public title = 'Editor de procesos';
+  activateSaveNewDiagramPopup = false;
+  isNewDiagram = false;
+  _editionMode: boolean;
+  saveAsLabel = 'Guardar como';
+  title = 'Editor de procesos';
 
-  public showShapeInfo = false;
+  showShapeInfo = false;
 
   get editionMode() {
     return this._editionMode;
@@ -48,19 +48,19 @@ export class ProcessEditorComponent implements OnInit {
     this._editionMode = edition;
   }
 
-  private processUID: string = '';
+  private processUID = '';
 
-  public constructor(private sanitizer: DomSanitizer, private processService: ProcessService,
+  constructor(private sanitizer: DomSanitizer, private processService: ProcessService,
                      private ref: ChangeDetectorRef) {
     this.load();
     this.url = this.sanitizer.bypassSecurityTrustResourceUrl('./modeler/process-modeler.html');
   }
 
-  public ngOnInit() {
+  ngOnInit() {
     this.setProcesses();
   }
 
-  public createDiagram(): void {
+  createDiagram(): void {
     alert('Lo sentimos ...\n\nPor el momento no es posible crear nuevos procesos.');
 
     return;
@@ -73,18 +73,18 @@ export class ProcessEditorComponent implements OnInit {
     // this.attachModelerEventHandler();
   }
 
-  public onOpenForEdition(): void {
+  onOpenForEdition(): void {
     this.editionMode = true;
   }
 
-  public onCancelChanges(): void {
+  onCancelChanges(): void {
     this.refreshDiagram();
   }
 
-  public async onSaveDiagram() {
+  async onSaveDiagram() {
     this.editionMode = false;
 
-    let xml = this.modeler.getXML();
+    const xml = this.modeler.getXML();
 
     this.process.xml = xml;
 
@@ -93,11 +93,11 @@ export class ProcessEditorComponent implements OnInit {
     this.refreshDiagram();
   }
 
-  public saveNewDiagram(process: Process): void {
+  saveNewDiagram(process: Process): void {
     this.closeSaveNewDiagramPopup();
 
     this.process = process;
-    let xml = this.modeler.getXML();
+    const xml = this.modeler.getXML();
     this.process.xml = xml;
     this.processService.saveNewDiagram(this.process);
 
@@ -107,29 +107,29 @@ export class ProcessEditorComponent implements OnInit {
     this.title = process.name;
   }
 
-  public showSaveNewDiagramPopup(): void {
+  showSaveNewDiagramPopup(): void {
     this.editionMode = false;
     this.activateSaveNewDiagramPopup = true;
   }
 
-  public closeSaveNewDiagramPopup(): void {
+  closeSaveNewDiagramPopup(): void {
     this.activateSaveNewDiagramPopup = false;
     this.editionMode = true;
   }
 
-  public closeShapeInfo(): void {
+  closeShapeInfo(): void {
     this.showShapeInfo = false;
     this.editionMode = true;
     this.ref.detectChanges();
   }
 
-  public onChangeSelectedProcess(uid: string): void {
+  onChangeSelectedProcess(uid: string): void {
     this.processUID = uid;
 
     this.refreshDiagram();
   }
 
-  public async refreshDiagram() {
+  async refreshDiagram() {
     this.isNewDiagram = false;
 
     if (this.processUID === '') {
@@ -164,7 +164,7 @@ export class ProcessEditorComponent implements OnInit {
 
   private onModelerDoubleClick(element: any): void {
     this.editionMode = false;
-    let bpmnType = JSON.parse(element);
+    const bpmnType = JSON.parse(element);
     this.selectBpmnElmentInfo(bpmnType.type);
   }
 

@@ -15,7 +15,7 @@ import { ProjectMeetingService } from '@app/services/project-management';
 
 export class MeetingComponent {
 
-    private _meetingUID: string = '';
+    private _meetingUID = '';
     @Input()
     set meetingUID(meetingUID: string) {
         if (Validate.hasValue(meetingUID)) {
@@ -30,16 +30,16 @@ export class MeetingComponent {
 
     @Output() onUpdateMeeting = new EventEmitter<Meeting>();
 
-    public meeting: Meeting = EmptyMeeting();
-    public meetingStatus = '';
+    meeting: Meeting = EmptyMeeting();
+    meetingStatus = '';
 
-    public isOpenEditMeetingWindow = false;
+    isOpenEditMeetingWindow = false;
 
-    public isEditableMeetingParticipants = true;
+    isEditableMeetingParticipants = true;
 
     constructor(private projectMeetingService: ProjectMeetingService) {}
 
-    public closeEditMeetingWindow(meeting: Meeting): void {
+    closeEditMeetingWindow(meeting: Meeting): void {
         this.isOpenEditMeetingWindow = false;
 
         this.meeting = meeting;
@@ -57,7 +57,7 @@ export class MeetingComponent {
 
     private loadMeeting() {
         this.projectMeetingService.getMeeting(this.meetingUID)
-                          .subscribe((meeting)=> {
+                          .subscribe((meeting) => {
                               this.meeting = meeting;
                               this.setMeetingStatus();
                             });
@@ -65,24 +65,24 @@ export class MeetingComponent {
 
     private closeMeeting(): void {
         this.projectMeetingService.closeMeeting(this.meeting.uid)
-                                  .subscribe((x)=> {
+                                  .subscribe((x) => {
                                         this.loadMeeting();
                                         this.isEditableMeetingParticipants = true;
                                         this.onUpdateMeeting.emit(this.meeting);
-                                    })
+                                    });
     }
 
     private openMeeting(): void {
         this.projectMeetingService.openMeeting(this.meeting.uid)
-                                  .subscribe((x)=> {
+                                  .subscribe((x) => {
                                       this.loadMeeting();
                                       this.onUpdateMeeting.emit(this.meeting);
-                                    })
+                                    });
     }
 
     private deleteMeeting(): void {
         this.projectMeetingService.deleteMeeting(this.meeting.uid)
-                                  .subscribe((x)=>{
+                                  .subscribe((x) => {
                                       this.meeting = x;
                                       this.onUpdateMeeting.emit(this.meeting);
                                    });

@@ -21,17 +21,17 @@ import { ProjectMeetingService } from '@app/services/project-management';
 })
 export class MeetingsComponent implements OnInit {
 
-  public openedMeetings: Meeting[] = [];
-  public closedMeetings: Meeting[] = [];
+  openedMeetings: Meeting[] = [];
+  closedMeetings: Meeting[] = [];
 
-  public selectedMeetingUid = '';
-  public filter = 'all';
+  selectedMeetingUid = '';
+  filter = 'all';
 
-  public keywords = '';
+  keywords = '';
 
-  public isOpenAddMeetingWindow = false;
+  isOpenAddMeetingWindow = false;
 
-  private _updatedMeeting: Meeting;;
+  private _updatedMeeting: Meeting;
   @Input()
   set updatedMeeting(updatedMeeting: Meeting) {
     if (Validate.hasValue(updatedMeeting)) {
@@ -45,8 +45,8 @@ export class MeetingsComponent implements OnInit {
     return this._updatedMeeting;
   }
 
-  @Output() public onSelectedMeeting = new EventEmitter<string>();
-  @Output() public onAddMeeting = new EventEmitter();
+  @Output() onSelectedMeeting = new EventEmitter<string>();
+  @Output() onAddMeeting = new EventEmitter();
 
   constructor(private projectMeetingService: ProjectMeetingService) { }
 
@@ -54,22 +54,22 @@ export class MeetingsComponent implements OnInit {
     this.loadMeetings();
   }
 
-  public onFilterBy(filter: string): void {
+  onFilterBy(filter: string): void {
     this.filter = filter;
   }
 
-  public onSelectMeeting(uid: string): void {
+  onSelectMeeting(uid: string): void {
     this.selectedMeetingUid = uid;
 
     this.onSelectedMeeting.emit(uid);
   }
 
-  public search(keywords: string): void {
+  search(keywords: string): void {
     this.keywords = keywords;
     this.loadMeetings();
   }
 
-  public addMeeting(): void {
+  addMeeting(): void {
     this.onAddMeeting.emit();
   }
 

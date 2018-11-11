@@ -20,34 +20,34 @@ export class AuthenticationService {
 
   constructor(private session: SessionService,
               private securityService: SecurityDataService,
-              private logger: LoggerService) {}
+              private logger: LoggerService) { }
 
-  public login(userID: string, userPassword: string): Promise<void> {
+  login(userID: string, userPassword: string): Promise<void> {
     Assertion.assertValue(userID, 'userID');
     Assertion.assertValue(userPassword, 'userPassword');
 
     const sessionToken = this.securityService.createSession(userID, userPassword)
-                             .toPromise()
-                             .catch((e) => this.handleAuthenticationError(e));
+      .toPromise()
+      .catch((e) => this.handleAuthenticationError(e));
 
     const identity = this.securityService.getPrincipalIdentity()
-                         .toPromise()
-                         .catch((e) => this.handleAuthenticationError(e));
+      .toPromise()
+      .catch((e) => this.handleAuthenticationError(e));
 
     const claimsList = this.securityService.getPrincipalClaimsList()
-                           .toPromise()
-                           .catch((e) => this.handleAuthenticationError(e));
+      .toPromise()
+      .catch((e) => this.handleAuthenticationError(e));
 
-    return Promise.all( [sessionToken, identity, claimsList])
-                  .then( ([sessionToken, identity, claimsList]) => {
-                    const principal = new Principal(sessionToken, identity, claimsList);
+    return Promise.all([sessionToken, identity, claimsList])
+      .then(([a, b, c]) => {
+        const principal = new Principal(a, b, c);
 
-                    this.session.setPrincipal(principal);
-                  });
+        this.session.setPrincipal(principal);
+      });
   }
 
 
-  public logout(): Promise<boolean> {
+  logout(): Promise<boolean> {
     const principal = this.session.getPrincipal();
 
     if (!principal.isAuthenticated) {
@@ -55,7 +55,7 @@ export class AuthenticationService {
     }
 
     return this.securityService.closeSession()
-               .then( () => Promise.resolve(true) );
+      .then(() => Promise.resolve(true));
   }
 
   // private methods
@@ -65,7 +65,7 @@ export class AuthenticationService {
       return Promise.reject(new Error('No reconozco las credenciales de acceso proporcionadas.'));
     } else {
       return Promise.reject(new Error('Tengo un problema para ingresar al sistema:' +
-                                      `${error.status} ${error.statusText} ${error.message}`));
+        `${error.status} ${error.statusText} ${error.message}`));
     }
   }
 

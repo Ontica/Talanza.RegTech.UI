@@ -11,60 +11,62 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { Assertion } from '../general/assertion';
 import { SessionService } from '../general/session.service';
 
-import { Service, HttpMethod, HttpClientOptions, DefaultHttpClientOptions } from './common-types';
-import { Principal } from '../security/principal';
+import {
+  DefaultHttpClientOptions, HttpClientOptions,
+  HttpMethod, Service
+} from './common-types';
+
 
 @Injectable()
 export class HttpHandler {
 
   constructor(private http: HttpClient,
-              private session: SessionService) {
+    private session: SessionService) {
 
   }
 
-  public get<T>(path: string,
-                options?: HttpClientOptions, service?: Service): Observable<T> {
+  get<T>(path: string, options?: HttpClientOptions, service?: Service): Observable<T> {
     return this.invokeHttpCall<T>(HttpMethod.GET, path, undefined, options, service);
   }
 
-  public post<T>(path: string, body: any,
-                 options?: HttpClientOptions, service?: Service): Observable<T> {
+
+  post<T>(path: string, body: any, options?: HttpClientOptions, service?: Service): Observable<T> {
     return this.invokeHttpCall<T>(HttpMethod.POST, path, body, options, service);
   }
 
-  public delete<T>(path: string,
-                   options?: HttpClientOptions, service?: Service): Observable<T> {
+
+  delete<T>(path: string, options?: HttpClientOptions, service?: Service): Observable<T> {
     return this.invokeHttpCall<T>(HttpMethod.DELETE, path, undefined, options, service);
   }
 
-  public put<T>(path: string, body: any,
-                options?: HttpClientOptions, service?: Service): Observable<T> {
+
+  put<T>(path: string, body: any, options?: HttpClientOptions, service?: Service): Observable<T> {
     return this.invokeHttpCall<T>(HttpMethod.PUT, path, body, options, service);
   }
 
-  public patch<T>(path: string, body: any,
-                  options?: HttpClientOptions, service?: Service): Observable<T> {
+
+  patch<T>(path: string, body: any, options?: HttpClientOptions, service?: Service): Observable<T> {
     return this.invokeHttpCall<T>(HttpMethod.PATCH, path, body, options, service);
   }
 
-  public head<T>(path: string,
-                 options?: HttpClientOptions, service?: Service): Observable<T> {
+
+  head<T>(path: string, options?: HttpClientOptions, service?: Service): Observable<T> {
     return this.invokeHttpCall<T>(HttpMethod.HEAD, path, undefined, options, service);
   }
 
-  public options<T>(path: string,
-                    options?: HttpClientOptions, service?: Service): Observable<T> {
+
+  options<T>(path: string, options?: HttpClientOptions, service?: Service): Observable<T> {
     return this.invokeHttpCall<T>(HttpMethod.OPTIONS, path, undefined, options, service);
   }
+
 
   // Private methods
 
   private invokeHttpCall<T>(method: HttpMethod, path: string, body: any,
-                            callerOptions: HttpClientOptions,
-                            service: Service): Observable<T> {
+    callerOptions: HttpClientOptions,
+    service: Service): Observable<T> {
     const url = this.buildUrl(path, service);
 
     const payloadDataField = this.getPayloadDataField(path, callerOptions, service);
@@ -78,10 +80,11 @@ export class HttpHandler {
     }
 
     return this.http.request(HttpMethod[method].toString(), url, requestOptions)
-                    .pipe(
-                       map((response) => (payloadDataField ? response.body[payloadDataField] : response) as T)
-                    );
+      .pipe(
+        map((response) => (payloadDataField ? response.body[payloadDataField] : response) as T)
+      );
   }
+
 
   // Helpers
 
@@ -91,7 +94,7 @@ export class HttpHandler {
     if (service) {
       return service.baseAddress + service.path;
 
-    } else if (path.includes('http://') || path.includes('https://') ) {
+    } else if (path.includes('http://') || path.includes('https://')) {
       return path;
 
     } else {
@@ -100,9 +103,9 @@ export class HttpHandler {
     }
   }
 
+
   private getHeaders(method: HttpMethod, path: string,
-                     options?: HttpClientOptions,
-                     service?: Service): HttpHeaders {
+                     options?: HttpClientOptions, service?: Service): HttpHeaders {
     const settings = this.session.getSettings();
     const principal = this.session.getPrincipal();
 
@@ -111,12 +114,12 @@ export class HttpHandler {
       headers = headers.set('Authorization', 'bearer ' + principal.sessionToken.access_token);
 
     } else if (service && service.isProtected && !principal.isAuthenticated) {
-      throw 'Unauthenticated user';
+      throw new Error('Unauthenticated user');
 
     } else if (service && !service.isProtected) {
       headers = headers.set('ApplicationKey', settings.applicationKey);
 
-    } else if (path.includes('http://') || path.includes('https://') ) {
+    } else if (path.includes('http://') || path.includes('https://')) {
       // no-op
 
     } else if (principal.isAuthenticated) {
@@ -129,8 +132,8 @@ export class HttpHandler {
     return headers;
   }
 
-  private getPayloadDataField(path: string,
-                              options: HttpClientOptions, service: Service): string {
+
+  private getPayloadDataField(path: string, options: HttpClientOptions, service: Service): string {
     if (options && options.dataField) {
       return options.dataField;
 

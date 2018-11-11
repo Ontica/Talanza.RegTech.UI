@@ -22,15 +22,15 @@ import { AgreementsComponent } from './parts/agreements.component';
 import { AddMeetingModalWindowComponent } from './views/add-meeting-modal.window.component';
 
 import { MeetingsComponent } from './views/project-meetings.component';
-import { MeetingComponent } from  './views/meeting.component';
+import { MeetingComponent } from './views/meeting.component';
 
 
 @NgModule({
   imports: [ProjectMeetingsRoutingModule, CommonModule, FormsModule, ControlsModule],
   declarations: [ProjectMeetingComponent, MeetingRootComponent, ParticipantsComponent,
-                 SubjectComponent, RecomendationsComponent, AddMeetingModalWindowComponent,
-                 AgreementsComponent, MeetingsComponent, MeetingComponent],
+    SubjectComponent, RecomendationsComponent, AddMeetingModalWindowComponent,
+    AgreementsComponent, MeetingsComponent, MeetingComponent],
   exports: [ProjectMeetingComponent, AddMeetingModalWindowComponent, MeetingsComponent,
-            MeetingComponent]
+    MeetingComponent]
 })
-export class ProjectMeetingsModule {}
+export class ProjectMeetingsModule { }

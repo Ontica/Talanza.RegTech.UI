@@ -6,10 +6,10 @@
  */
 
 export class Authority {
-  public entity: Entity;
-  public office: Office;
-  public position: Position;
-  public contact: Contact;
+  entity: Entity;
+  office: Office;
+  position: Position;
+  contact: Contact;
 
   constructor() {
     this.entity = new Entity();
@@ -21,9 +21,9 @@ export class Authority {
 }
 
 export class Contact {
-  public uid: string;
-  public name: string;
-  public email: string;
+  uid: string;
+  name: string;
+  email: string;
 
   constructor() {
     this.uid = '';
@@ -34,12 +34,12 @@ export class Contact {
 }
 
 export class Entity {
-  public id: number;
-  public uid: string;
-  public name: string;
-  public shortName: string;
-  public offices: Office[];
-  public positions: Position[];
+  id: number;
+  uid: string;
+  name: string;
+  shortName: string;
+  offices: Office[];
+  positions: Position[];
 
   constructor() {
     this.id = 0;
@@ -54,8 +54,8 @@ export class Entity {
 
 
 export class Office {
-  public uid: string;
-  public name: string;
+  uid: string;
+  name: string;
 
   constructor() {
     this.uid = '';
@@ -66,9 +66,9 @@ export class Office {
 
 
 export class Officer {
-  public uid: string;
-  public name: string;
-  public email: string;
+  uid: string;
+  name: string;
+  email: string;
 
   constructor() {
     this.uid = '';
@@ -80,10 +80,10 @@ export class Officer {
 
 
 export class Position {
-  public uid: string;
-  public name: string;
-  public phone: string;
-  public officer: Officer;
+  uid: string;
+  name: string;
+  phone: string;
+  officer: Officer;
 
   constructor() {
     this.uid = '';

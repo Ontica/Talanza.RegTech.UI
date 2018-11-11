@@ -6,13 +6,12 @@
  */
 
 import { Component, Input, ViewEncapsulation } from '@angular/core';
-
-import { CoreService } from '@app/core/core.service';
-
 import { ContractsService } from '@app/services/regulation';
 
-import { ContractClause, ContractClauseRef,
-         EmptyContractClause, Rule } from '@app/models/regulation';
+import {
+  ContractClause, ContractClauseRef,
+  EmptyContractClause, Rule
+} from '@app/models/regulation';
 
 
 @Component({
@@ -24,62 +23,61 @@ import { ContractClause, ContractClauseRef,
 })
 export class ContractsSelectedClauseComponent {
 
-  public procedureUID = "";
-  public isVisibleProcedureInfo = false;
-  public clauseInfoWidth = '100%';
+  procedureUID = '';
+  isVisibleProcedureInfo = false;
+  clauseInfoWidth = '100%';
 
-  public rules: Rule[] = [];
+  rules: Rule[] = [];
 
-  public clause: ContractClause = EmptyContractClause();
+  clause: ContractClause = EmptyContractClause();
 
   constructor(private contractService: ContractsService) { }
 
   @Input()
   set clauseRef(clauseRef: ContractClauseRef) {
-    if (clauseRef && clauseRef.uid != '') {
+    if (clauseRef && clauseRef.uid !== '') {
       this.loadGridValues(clauseRef);
     }
   }
 
-  public onSelectedProcedure(procedureUID: string): void {
+
+  onSelectedProcedure(procedureUID: string): void {
     this.isVisibleProcedureInfo = true;
     this.procedureUID = procedureUID;
   }
 
-  public onCloseProcedureInfoModal(): void {
+
+  onCloseProcedureInfoModal(): void {
     this.isVisibleProcedureInfo = false;
   }
+
 
   private loadGridValues(clauseRef: ContractClauseRef): void {
     this.loadClause(clauseRef);
     this.loadObligations(clauseRef);
   }
 
-  private loadClause(clauseRef: ContractClauseRef): void {
-    const errMsg = 'Ocurrió un problema al intentar leer la cláusula.';
 
+  private loadClause(clauseRef: ContractClauseRef): void {
     this.contractService.getClause(clauseRef.contractUID, clauseRef.uid)
       .toPromise()
       .then((x) => {
-      this.clause = x;
-        this.setClauseInfoContainerWidth();
+        this.clause = x;
       });
   }
 
-  private loadObligations(clauseRef: ContractClauseRef): void {
-    const errMsg = 'Ocurrió un problema al intentar leer la cláusula.';
 
+  private loadObligations(clauseRef: ContractClauseRef): void {
     this.contractService.getObligations(clauseRef.contractUID, clauseRef.uid)
       .toPromise()
       .then((x) => {
-      this.rules = x.rules;
+        this.rules = x.rules;
         this.setClauseInfoContainerWidth();
       });
-
   }
 
-  private setClauseInfoContainerWidth(): void {
 
+  private setClauseInfoContainerWidth(): void {
     if (this.rules.length > 0) {
       this.clauseInfoWidth = '50%';
       return;
@@ -89,7 +87,6 @@ export class ContractsSelectedClauseComponent {
     } else {
       this.clauseInfoWidth = '50%';
     }
-
   }
 
 }

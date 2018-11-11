@@ -27,7 +27,7 @@ export class NavigationHeaderComponent implements OnChanges {
 
   title = 'Seleccionar un contrato';
 
-  //breadcrumb = 'Todos los proyectos » Shell » Ronda 2.4 » Salina Area 28';
+  // breadcrumb = 'Todos los proyectos » Shell » Ronda 2.4 » Salina Area 28';
   breadcrumb = '';
 
   selectedProject: Project;
@@ -81,7 +81,7 @@ export class NavigationHeaderComponent implements OnChanges {
 
 
   openCreateProjectTemplateDialog() {
-      //open dialog (ask for name)
+      // open dialog (ask for name)
   }
 
 

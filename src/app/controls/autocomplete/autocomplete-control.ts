@@ -1,6 +1,7 @@
 import {
-  Component, ElementRef, EventEmitter, Input, Output } from '@angular/core';
-  
+  Component, ElementRef, EventEmitter, Input, Output
+} from '@angular/core';
+
 @Component({
   selector: 'autocomplete-control',
   host: {
@@ -12,37 +13,37 @@ import {
 
 export class AutocompleteControl {
 
-  public filteredList = [];
-  public items : any[] = [];
+  filteredList = [];
+  items: any[] = [];
 
-  public query = "";
-  public elementRef: any;
-  
-  public isHideControl = false;
-  public isAddFlag = false;
+  query = '';
+  elementRef: any;
 
-  public _tags : any;
-  @Input() 
+  isHideControl = false;
+  isAddFlag = false;
+
+  _tags: any;
+  @Input()
   set tags(tags: any) {
-    this._tags  = tags;
+    this._tags = tags;
     this.loadItems();
   }
   get tags(): any {
     return this._tags;
   }
 
-  @Input() isWritable: boolean = true;
+  @Input() isWritable = true;
 
-  @Input() config: object =  { valueField: 'name' }
-  
-  @Output() public selected = new EventEmitter<string[]>();
+  @Input() config: object = { valueField: 'name' };
+
+  @Output() selected = new EventEmitter<string[]>();
 
   constructor(myElement: ElementRef) {
     this.elementRef = myElement;
   }
- 
-  public filter(): void {
-    if (this.query !== "") {
+
+  filter(): void {
+    if (this.query !== '') {
       this.filteredList = this.items.filter(function (el) {
         return el.name.toLowerCase().indexOf(this.query.toLowerCase()) > -1;
       }.bind(this));
@@ -56,18 +57,18 @@ export class AutocompleteControl {
     }
   }
 
-  public addItem(): void {
-    //save to api
-    let newItem : Object = {
+  addItem(): void {
+    // save to api
+    const newItem: Object = {
       name: this.query, selected: true
-    }
+    };
     this.items.push(newItem);
     this.selected.emit(this.items.filter(item => item.selected === true));
-      
+
     this.isAddFlag = false;
   }
 
-  public handleClick(event): void {
+  handleClick(event): void {
     let clickedComponent = event.target;
     let inside = false;
     do {
@@ -81,30 +82,30 @@ export class AutocompleteControl {
     }
   }
 
-  public onSelectItem(selectedItem: any): void {
-    this.updateItem(selectedItem.name, true);   
+  onSelectItem(selectedItem: any): void {
+    this.updateItem(selectedItem.name, true);
     this.selected.emit(this.items.filter(item => item.selected === true));
   }
 
-  public onUnselectItem(selectedItem: any): void {
-    this.updateItem(selectedItem.name, false);   
+  onUnselectItem(selectedItem: any): void {
+    this.updateItem(selectedItem.name, false);
     this.selected.emit(this.items.filter(item => item.selected === true));
   }
 
-  private loadItems(): void {    
-    this.items = [];    
-    this.tags.forEach((obj, i) => {              
-         this.items[i] = obj;
-    });   
-    
+  private loadItems(): void {
+    this.items = [];
+    this.tags.forEach((obj, i) => {
+      this.items[i] = obj;
+    });
+
   }
 
   private updateItem(selectedItemName: string, selected: boolean): void {
-    let index = this.items.findIndex((x) => x.name === selectedItemName);
+    const index = this.items.findIndex((x) => x.name === selectedItemName);
     this.items[index].selected = selected;
   }
 
-  public onClick(): void {
+  onClick(): void {
     this.query = '';
     this.filteredList = this.items;
     this.isHideControl = false;

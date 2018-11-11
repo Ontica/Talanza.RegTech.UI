@@ -15,18 +15,18 @@ import { Component, EventEmitter, Output } from '@angular/core';
 
 export class SearchControl {
 
-  @Output() public onSearch = new EventEmitter<string>();
+  @Output() onSearch = new EventEmitter<string>();
 
-  public keywords = "";
+  keywords = '';
 
-  public search(): void {
+  search(): void {
     if (this.keywords) {
       this.onSearch.emit(this.keywords);
     }
   }
 
-  public clean(): void {
-    this.keywords = "";
+  clean(): void {
+    this.keywords = '';
   }
 
 }

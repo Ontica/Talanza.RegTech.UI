@@ -21,7 +21,7 @@ export class SecurityDataService {
 
   constructor(private httpHandler: HttpHandler) { }
 
-  public createSession(userID: string, userPassword: string): Observable<SessionToken> {
+  createSession(userID: string, userPassword: string): Observable<SessionToken> {
 
     const body = {
       user_name: userID,
@@ -31,24 +31,26 @@ export class SecurityDataService {
     return this.httpHandler.post<SessionToken>('v2/security/login', body);
   }
 
-  public closeSession(): Promise<void> {
+  closeSession(): Promise<void> {
     return this.httpHandler.post<void>('v1/security/logout', undefined)
-                           .toPromise();
+      .toPromise();
   }
 
-  public getPrincipalIdentity(): Observable<Identity> {
-    const fakeIdentity = { username: 'jrulfo',
-                           email: 'jrulfo@escritores.com',
-                           fullname: '{Nombre del usuario} || settings' };
+  getPrincipalIdentity(): Observable<Identity> {
+    const fakeIdentity = {
+      username: 'jrulfo',
+      email: 'jrulfo@escritores.com',
+      fullname: '{Nombre del usuario} || settings'
+    };
 
     return of<Identity>(fakeIdentity);
   }
 
-  public getPrincipalClaimsList(): Observable<ClaimsList> {
+  getPrincipalClaimsList(): Observable<ClaimsList> {
     const list = [
-                  { type: 'token', value: 'abc' },
-                  { type: 'phone', value: '567-890-1234' }
-                 ];
+      { type: 'token', value: 'abc' },
+      { type: 'phone', value: '567-890-1234' }
+    ];
 
     const claims = new ClaimsList(list);
 

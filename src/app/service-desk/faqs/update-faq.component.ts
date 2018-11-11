@@ -29,13 +29,13 @@ export class UpdateFAQComponent {
     return this._faq;
   }
 
-  @Output() public onClose = new EventEmitter();
+  @Output() onClose = new EventEmitter();
 
 
   constructor(private faqService: PostingsService) { }
 
 
-  public async onUpdateFAQ() {
+  async onUpdateFAQ() {
     if (!this.validate()) {
       return;
     }
@@ -57,7 +57,8 @@ export class UpdateFAQComponent {
       return false;
     }
     if (this.faq.accessMode === '') {
-      alert('Requiero se seleccione de la lista la visibilidad que tendrá la pregunta dentro de la base de conocimiento.');
+      alert('Requiero se seleccione de la lista la visibilidad que tendrá ' +
+            'la pregunta dentro de la base de conocimiento.');
       return false;
     }
     if (this.faq.status === '') {

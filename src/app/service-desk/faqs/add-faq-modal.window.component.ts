@@ -15,9 +15,9 @@ import { Component, EventEmitter, Output } from '@angular/core';
 })
 export class AddFAQModalWindowComponent {
 
-  @Output() public onClose = new EventEmitter();
+  @Output() onClose = new EventEmitter();
 
-  public close(): void {
+  close(): void {
     this.onClose.emit();
   }
 

@@ -10,15 +10,15 @@ import { KeyValue } from '../data-types/key-value';
 
 export class ApplicationSettings {
 
-  constructor (private settingsArray: KeyValue[]) {
+  constructor(private settingsArray: KeyValue[]) {
 
   }
 
-  public get applicationKey(): string {
+  get applicationKey(): string {
     return this.get<string>('APPLICATION_KEY');
   }
 
-  public get httpApiBaseAddress(): string {
+  get httpApiBaseAddress(): string {
     return this.get<string>('HTTP_API_BASE_ADDRESS');
   }
 

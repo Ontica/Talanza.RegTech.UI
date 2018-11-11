@@ -28,7 +28,10 @@ import { ActivityEditorComponent } from './activity-editor/activity-editor.compo
 import { ActivityFormComponent } from './activity-editor/activity-form/activity-form.component';
 
 import { ActivityDesignerComponent } from './activity-designer/activity-designer.component';
-import { ActivityModelFormComponent } from './activity-designer/activity-model-form/activity-model-form.component';
+
+import {
+  ActivityModelFormComponent
+} from './activity-designer/activity-model-form/activity-model-form.component';
 
 
 import { AddEventDialogComponent } from './add-event-dialog/add-event-dialog.component';

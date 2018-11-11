@@ -1,19 +1,19 @@
 import { Component, Input } from '@angular/core';
 
 @Component({
-	selector: 'chips',
-	templateUrl: './chips.html',
-	styleUrls: ['./chips.scss']
+  selector: 'chips',
+  templateUrl: './chips.html',
+  styleUrls: ['./chips.scss']
 })
 
 export class Chips {
 
-	@Input() items: any;
+  @Input() items: any;
 
-	public removeTag(tag: string): void {
-		let index =  this.items.findIndex((x) => x.name === tag);
+  removeTag(tag: string): void {
+    const index = this.items.findIndex((x) => x.name === tag);
 
-		this.items[index].selected = false;
-	}
+    this.items[index].selected = false;
+  }
 
 }

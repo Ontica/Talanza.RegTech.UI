@@ -13,7 +13,7 @@ export type DateString = Date | string;
 
 export class DateStringLibrary {
 
-  public static compareDateParts(value1: DateString, value2: DateString): number {
+  static compareDateParts(value1: DateString, value2: DateString): number {
     const date1 = this.datePart(value1);
     const date2 = this.datePart(value2);
 
@@ -33,18 +33,20 @@ export class DateStringLibrary {
   }
 
 
-  public static datePart(value: DateString): string {
+  static datePart(value: DateString): string {
     const date = this.toDate(value);
 
     if (!date) {
       return '';
     }
 
-    return `${date.getFullYear()}-${this.padZeros(date.getMonth() + 1, 2)}-${this.padZeros(date.getDate(), 2)}`;
+    return `${date.getFullYear()}-
+            ${this.padZeros(date.getMonth() + 1, 2)}-
+            ${this.padZeros(date.getDate(), 2)}`;
   }
 
 
-  public static dateTimePart(value: DateString): string {
+  static dateTimePart(value: DateString): string {
     const date = this.toDate(value);
 
     if (!date) {
@@ -56,7 +58,7 @@ export class DateStringLibrary {
   }
 
 
-  public static formatDMY(value: DateString): string {
+  static formatDMY(value: DateString): string {
     const date = DateStringLibrary.tryParseDateValue(value);
 
     const dmyFormatted = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
@@ -65,8 +67,8 @@ export class DateStringLibrary {
   }
 
 
-  public static isDate(dateString: string,
-    format: DateFormat = 'DMY'): boolean {
+  static isDate(dateString: string,
+                format: DateFormat = 'DMY'): boolean {
 
     const formatted = this.tryFormat(dateString);
 
@@ -74,9 +76,9 @@ export class DateStringLibrary {
       return false;
     }
 
-    let dateParts = formatted.split("/");
+    const dateParts = formatted.split('/');
 
-    if (dateParts.length != 3) {
+    if (dateParts.length !== 3) {
       return false;
     }
 
@@ -85,35 +87,35 @@ export class DateStringLibrary {
     }
 
     switch (dateParts[1].toLowerCase()) {
-      case "feb":
+      case 'feb':
         if (+dateParts[0] > 29) {
           return false;
         }
 
-        if (+dateParts[0] == 29) { // check leap years
-          if ((+dateParts[2] % 4) != 0) {
+        if (+dateParts[0] === 29) { // check leap years
+          if ((+dateParts[2] % 4) !== 0) {
             return false;
-          } else if (((+dateParts[2] % 100) == 0) && ((+dateParts[2] % 400) != 0)) {
+          } else if (((+dateParts[2] % 100) === 0) && ((+dateParts[2] % 400) !== 0)) {
             return false;
           }
         }
 
         return true;
 
-      case "abr": case "apr":
-      case "jun": case "sep": case "nov":
+      case 'abr': case 'apr':
+      case 'jun': case 'sep': case 'nov':
 
-        if (+dateParts[0] == 31) {
+        if (+dateParts[0] === 31) {
           return false;
         }
 
         return true;
 
-      case "ene": case "jan":
-      case "mar": case "may": case "jul":
-      case "ago": case "aug":
-      case "oct":
-      case "dic": case "dec":
+      case 'ene': case 'jan':
+      case 'mar': case 'may': case 'jul':
+      case 'ago': case 'aug':
+      case 'oct':
+      case 'dic': case 'dec':
 
         return true;
 
@@ -123,7 +125,7 @@ export class DateStringLibrary {
   }
 
 
-  public static toDate(value: DateString): Date {
+  static toDate(value: DateString): Date {
     if (value instanceof Date) {
       return value;
     }
@@ -132,8 +134,7 @@ export class DateStringLibrary {
   }
 
 
-  public static tryFormat(value: string,
-    fromFormat: DateFormat = 'DMY'): string {
+  static tryFormat(value: string, fromFormat: DateFormat = 'DMY'): string {
 
     if (!value || value.length === 0) {
       return null;
@@ -141,13 +142,13 @@ export class DateStringLibrary {
 
     let temp = String(value).toLowerCase();
     let regex = /-/g;
-    temp = temp.replace(regex, "/");
+    temp = temp.replace(regex, '/');
     regex = /[.]/g;
-    temp = temp.replace(regex, "/");
+    temp = temp.replace(regex, '/');
 
-    let dateParts = temp.split("/");
+    const dateParts = temp.split('/');
 
-    if (dateParts.length != 3) {
+    if (dateParts.length !== 3) {
       return null;
     }
 
@@ -184,11 +185,11 @@ export class DateStringLibrary {
 
     }
 
-    return dateParts[0] + "/" + dateParts[1] + "/" + dateParts[2];
+    return dateParts[0] + '/' + dateParts[1] + '/' + dateParts[2];
   }
 
 
-  public static tryParseDateValue(value: DateString): Date {
+  static tryParseDateValue(value: DateString): Date {
     if (!value) {
       return undefined;
     }
@@ -203,12 +204,12 @@ export class DateStringLibrary {
   }
 
 
-  public static tryParseDate(value: string,
+  static tryParseDate(value: string,
                              lang: Language = DEFAULT_LANGUAGE): Date {
 
-    let dateParts = (value as string).split("/");
+    const dateParts = (value as string).split('/');
 
-    let month = LocalizationLibrary.getMonth(dateParts[1], lang);
+    const month = LocalizationLibrary.getMonth(dateParts[1], lang);
 
     return new Date(+dateParts[2], month, +dateParts[0], 0, 0, 0, 0);
 
@@ -218,9 +219,9 @@ export class DateStringLibrary {
 
   private static formatMonthName(name: string): string {
 
-    const month = LocalizationLibrary.findMonth(name)
+    const month = LocalizationLibrary.findMonth(name);
 
-    if (month != -1) {
+    if (month !== -1) {
       return LocalizationLibrary.shortMonthName(month);
     }
 
@@ -237,10 +238,10 @@ export class DateStringLibrary {
 
 
   private static padZeros(value: number, size: number): string {
-    var temp = String(value);
+    let temp = String(value);
 
     while (temp.length < size) {
-      temp = "0" + temp;
+      temp = '0' + temp;
     }
     return temp;
   }
