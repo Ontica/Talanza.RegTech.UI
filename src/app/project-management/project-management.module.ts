@@ -64,7 +64,6 @@ import { ActivityTasksComponent } from './activity-tasks/activity-tasks.componen
 
 
   declarations: [
-
     ActivityDesignerComponent,
     ActivityModelFormComponent,
 

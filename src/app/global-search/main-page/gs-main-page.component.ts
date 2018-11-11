@@ -18,7 +18,7 @@ import { BaseProcedure, ContractClauseRef, Document,
 
 import { Posting, BASE_OBJECT_UID } from '@app/models/knowledge-base';
 
-import { NavBarConfig } from '@app/controls/nav-bar/nav-bar.control';
+import { NavBarConfig } from '../search-results-navbar/search-results-navbar.component';
 
 
 @Component({

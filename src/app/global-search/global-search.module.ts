@@ -18,13 +18,10 @@ import { ProceduresModule } from '../procedures/procedures.module';
 import { ProjectMeetingsModule } from '../project-meetings/project-meetings.module';
 import { ServiceDeskModule } from '../service-desk/service-desk.module';
 
-
-import { ContractsService, DocumentService, ProcedureService } from '@app/services/regulation';
-import { PostingsService } from '@app/services/knowledge-base';
-
 import { GlobalSearchRoutingModule } from './global-search-routing.module';
 
 import { GlobalSearchMainPageComponent } from './main-page/gs-main-page.component';
+import { SearchResultsNavBarComponent } from './search-results-navbar/search-results-navbar.component';
 import { GlobalAddComponent } from './global-add/global-add.component';
 
 
@@ -46,19 +43,12 @@ import { GlobalAddComponent } from './global-add/global-add.component';
 
   declarations: [
     GlobalSearchMainPageComponent,
-    GlobalAddComponent
+    GlobalAddComponent,
+    SearchResultsNavBarComponent
   ],
 
   exports: [
-    GlobalSearchMainPageComponent,
-    GlobalAddComponent
-  ],
-
-  providers: [
-    ContractsService,
-    DocumentService,
-    PostingsService,
-    ProcedureService
+    GlobalSearchMainPageComponent
   ]
 
 })

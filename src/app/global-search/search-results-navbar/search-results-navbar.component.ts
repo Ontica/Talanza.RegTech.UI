@@ -1,17 +1,18 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
+
 export interface NavBarConfig {
   name: string;
   displayText: string;
 }
 
-@Component({
-  selector: 'emp-ng-navbar',
-  templateUrl: './nav-bar.control.html',
-  styleUrls: ['./nav-bar.control.scss']
-})
 
-export class NavBarControl {
+@Component({
+  selector: 'emp-kb-search-results-navbar',
+  templateUrl: './search-results-navbar.component.html',
+  styleUrls: ['./search-results-navbar.component.scss']
+})
+export class SearchResultsNavBarComponent {
 
   @Input() options: NavBarConfig[] = [];
 
