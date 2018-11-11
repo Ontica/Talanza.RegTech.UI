@@ -11,7 +11,7 @@ import { Requirement, Procedure } from '@app/models/regulation';
 
 
 @Component({
-  selector: 'pv-requirements',
+  selector: 'emp-gov-pv-requirements',
   templateUrl: './pv-requirements.component.html',
   styleUrls: ['./pv-requirements.component.scss']
 })

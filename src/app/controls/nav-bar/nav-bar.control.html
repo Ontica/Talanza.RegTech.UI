@@ -1,7 +1,7 @@
 <div class="nav-bar">
     <ul *ngFor="let option of options">
         <li [class.selected]="selectedOption === option.name">
-            <a (click)="select(option.name)">{{option.displayText}}</a>
-        </li>        
+            <a (click)="onSelect(option.name)">{{option.displayText}}</a>
+        </li>
     </ul>
 </div>

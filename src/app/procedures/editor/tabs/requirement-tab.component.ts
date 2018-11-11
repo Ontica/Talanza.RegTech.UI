@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'requirement-tab',
+  selector: 'emp-gov-requirement-tab',
   templateUrl: './requirement-tab.component.html',
   styleUrls: ['./requirement-tab.component.scss']
 })

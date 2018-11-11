@@ -13,7 +13,7 @@ import { InboxFilter } from '@app/models/inbox';
 
 
 @Component({
-  selector: 'inbox-main-page',
+  selector: 'emp-steps-inbox-main-page',
   templateUrl: './inbox-main-page.component.html',
   styleUrls: ['./inbox-main-page.component.scss'],
   providers: [ProjectService, ActivityService]

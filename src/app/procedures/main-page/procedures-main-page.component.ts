@@ -11,7 +11,7 @@ import { BaseProcedure } from '@app/models/regulation';
 
 
 @Component({
-  selector: 'task-procedures-editor',
+  selector: 'emp-gov-task-procedures-editor',
   templateUrl: './procedures-main-page.component.html',
   styleUrls: ['./procedures-main-page.component.scss'],
 })

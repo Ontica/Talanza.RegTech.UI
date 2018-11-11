@@ -20,7 +20,7 @@ import { Assertion } from '@app/core';
 
 
 @Component({
-  selector: 'activity-timeline',
+  selector: 'emp-steps-activity-timeline',
   templateUrl: './activity-timeline.component.html',
   styleUrls: ['./activity-timeline.component.scss'],
 })

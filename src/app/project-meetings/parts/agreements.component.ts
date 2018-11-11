@@ -9,7 +9,7 @@ import { Component } from '@angular/core';
 
 
 @Component({
-  selector: 'agreements',
+  selector: 'emp-kb-agreements',
   templateUrl: './agreements.component.html',
   styleUrls: ['./agreements.component.scss']
 })

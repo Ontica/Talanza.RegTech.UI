@@ -14,7 +14,7 @@ import { Procedure } from '@app/models/regulation';
 
 
 @Component({
-  selector: 'procedure-editor',
+  selector: 'emp-gov-procedure-editor',
   templateUrl: './procedure-editor.component.html',
   styleUrls: ['./procedure-editor.component.scss'],
   providers: [ProcedureService]
@@ -23,7 +23,7 @@ export class ProcedureEditorComponent implements OnInit {
   @HostBinding('style.display') display = 'block';
   @HostBinding('style.position') position = 'absolute';
 
-  @Output() onCloseEvent = new EventEmitter();
+  @Output() close = new EventEmitter();
   @Input() procedureUID: string;
 
   selectedTask = '';
@@ -49,8 +49,8 @@ export class ProcedureEditorComponent implements OnInit {
     this.isDisabled = disabled;
   }
 
-  close(): void {
-    this.onCloseEvent.emit();
+  onClose(): void {
+    this.close.emit();
   }
 
   private setNewProcedureTitle(): void {

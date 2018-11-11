@@ -6,9 +6,9 @@
     </div>
   </div>
 
-  <activity-form *ngIf="selectedTask.uid.length !== 0"
-                  (update)="refreshTasksList()" (delete)="refreshTasksList()"
-                  [activity]="selectedTask" [task]="selectedTask"></activity-form>
+  <emp-steps-activity-form *ngIf="selectedTask.uid.length !== 0"
+                           (update)="refreshTasksList()" (delete)="refreshTasksList()"
+                           [activity]="selectedTask" [task]="selectedTask"></emp-steps-activity-form>
 
   <div style="padding:16px" *ngIf="selectedTask.uid.length === 0">
     <input #txtTaskName type="text" class='text-box inline-editor-text-box' (keyup.esc)='txtTaskName.value = "";'

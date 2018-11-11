@@ -51,8 +51,7 @@
             <div class="column expand" style="white-space:nowrap">F. Máxima: {{activity.dueDate | date:'dd/LLL/yyyy'}}</div>
           </div>
 
-          <rag-status-control [status]="activity.ragStatus">
-          </rag-status-control>
+          <emp-ng-rag-status [status]="activity.ragStatus"></emp-ng-rag-status>
 
         </div>
 

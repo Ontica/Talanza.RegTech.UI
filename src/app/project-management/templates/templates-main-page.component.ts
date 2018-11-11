@@ -13,7 +13,7 @@ import { Activity, EmptyActivity, ActivityOperation } from '@app/models/project-
 
 
 @Component({
-  selector: 'templates-main-page',
+  selector: 'emp-steps-templates-main-page',
   templateUrl: './templates-main-page.component.html',
   styleUrls: ['./templates-main-page.component.scss']
 })

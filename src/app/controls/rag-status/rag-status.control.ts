@@ -17,7 +17,7 @@ export enum RagStatus {
 
 
 @Component({
-  selector: 'rag-status-control',
+  selector: 'emp-ng-rag-status',
   template: `
     <div class="circle" [ngClass]="statusColorCssClass"
          (click)="onclick()">

@@ -12,16 +12,20 @@ import { InboxRef } from '@app/models/inbox';
 
 
 @Component({
-  selector: 'inbox-editor',
+  selector: 'emp-steps-inbox-editor',
   templateUrl: './inbox-editor.component.html',
   styleUrls: ['./inbox-editor.component.scss'],
 })
 export class InboxEditorComponent {
 
+  selectedTask = 'generalInfo';
+  concludedTaskLabel = '';
+
+
   @HostBinding('style.display') display = 'block';
   @HostBinding('style.position') position = 'absolute';
 
-  private _inboxItem: InboxRef;
+
   @Input()
   set inboxItem(item: InboxRef) {
     this._inboxItem = item;
@@ -29,18 +33,19 @@ export class InboxEditorComponent {
   get inboxItem(): InboxRef {
     return this._inboxItem;
   }
+  private _inboxItem: InboxRef;
 
-  @Output() onCloseEvent = new EventEmitter();
 
-  selectedTask = 'generalInfo';
-  concluededTaskLabel = '';
+  @Output() close = new EventEmitter();
+
 
   cancel(): void {
     this.onClose();
   }
 
+
   onClose(): void {
-    this.onCloseEvent.emit();
+    this.close.emit();
   }
 
 }

@@ -14,7 +14,7 @@ import { TransitionCheckState } from '@angular/material';
 
 
 @Component({
-  selector: 'activity-tasks',
+  selector: 'emp-steps-activity-tasks',
   templateUrl: './activity-tasks.component.html',
   styleUrls: ['./activity-tasks.component.scss']
 })

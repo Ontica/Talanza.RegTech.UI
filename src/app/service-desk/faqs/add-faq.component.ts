@@ -13,7 +13,7 @@ import { EmptyPosting, BASE_OBJECT_UID } from '@app/models/knowledge-base';
 
 
 @Component({
-  selector: 'add-faq',
+  selector: 'emp-kb-add-faq',
   templateUrl: './add-faq.component.html',
   styleUrls: ['./add-faq.component.scss']
 })
@@ -21,12 +21,12 @@ export class AddFAQComponent {
 
   faq = EmptyPosting();
 
-  @Output() onAddFaq = new EventEmitter();
+  @Output() close = new EventEmitter();
 
   constructor(private faqService: PostingsService) { }
 
 
-  async onSaveFAQ() {
+  async save() {
     if (!this.validate()) {
       return;
     }
@@ -60,13 +60,13 @@ export class AddFAQComponent {
   private addFAQ(): void {
     this.faqService.createPosting(BASE_OBJECT_UID, this.faq)
       .subscribe((x) => {
-        this.onAddFaq.emit();
+        this.close.emit();
       });
   }
 
 
-  private cancel(): void {
-    this.onAddFaq.emit();
+  private onCancel(): void {
+    this.close.emit();
   }
 
 

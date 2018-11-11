@@ -12,5 +12,6 @@
     <br />
     <button mat-stroked-button (click)="setEditor(true)">Tenemos una pregunta</button>
   </div>
-  <postings-editor *ngIf="showEditor()" [target]="target" (edit)="onCreate($event)"></postings-editor>
+  <emp-kb-postings-editor *ngIf="showEditor()"
+       [target]="target" (edit)="onCreate($event)"></emp-kb-postings-editor>
 </div>

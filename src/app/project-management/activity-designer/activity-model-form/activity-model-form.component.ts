@@ -33,7 +33,7 @@ enum FormMessages {
 
 
 @Component({
-  selector: 'activity-model-form',
+  selector: 'emp-steps-activity-model-form',
   templateUrl: './activity-model-form.component.html',
   styleUrls: ['./activity-model-form.component.scss']
 })

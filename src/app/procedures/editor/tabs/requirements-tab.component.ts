@@ -11,7 +11,7 @@ import { Procedure } from '@app/models/regulation';
 
 
 @Component({
-  selector: 'requirements-tab',
+  selector: 'emp-gov-requirements-tab',
   templateUrl: './requirements-tab.component.html',
   styleUrls: ['./requirements-tab.component.scss']
 })

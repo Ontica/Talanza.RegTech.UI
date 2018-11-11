@@ -14,7 +14,7 @@ import { ProjectMeetingService } from '@app/services/project-management';
 
 
 @Component({
-  selector: 'meetings',
+  selector: 'emp-kb-meetings',
   templateUrl: './project-meetings.component.html',
   styleUrls: ['./project-meetings.component.scss'],
   providers: [ProjectMeetingService]
@@ -45,8 +45,8 @@ export class MeetingsComponent implements OnInit {
     return this._updatedMeeting;
   }
 
-  @Output() onSelectedMeeting = new EventEmitter<string>();
-  @Output() onAddMeeting = new EventEmitter();
+  @Output() select = new EventEmitter<string>();
+  @Output() create = new EventEmitter();
 
   constructor(private projectMeetingService: ProjectMeetingService) { }
 
@@ -61,7 +61,7 @@ export class MeetingsComponent implements OnInit {
   onSelectMeeting(uid: string): void {
     this.selectedMeetingUid = uid;
 
-    this.onSelectedMeeting.emit(uid);
+    this.select.emit(uid);
   }
 
   search(keywords: string): void {
@@ -70,7 +70,7 @@ export class MeetingsComponent implements OnInit {
   }
 
   addMeeting(): void {
-    this.onAddMeeting.emit();
+    this.create.emit();
   }
 
   private async loadMeetings() {

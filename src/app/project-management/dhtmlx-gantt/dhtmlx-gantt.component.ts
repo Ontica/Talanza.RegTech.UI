@@ -21,7 +21,7 @@ import { Activity, ViewConfig, GanttTask } from '@app/models/project-management'
 import { GanttService } from '@app/services/project-management';
 
 @Component({
-  selector: 'dhtmlx-gantt',
+  selector: 'emp-steps-dhtmlx-gantt',
   templateUrl: './dhtmlx-gantt.component.html',
   styleUrls: ['./dhtmlx-gantt.component.scss'],
   providers: [GanttService],

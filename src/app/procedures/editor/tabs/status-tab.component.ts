@@ -8,7 +8,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'status-tab',
+  selector: 'emp-gov-procedure-status-tab',
   templateUrl: './status-tab.component.html',
   styleUrls: ['./status-tab.component.scss']
 })

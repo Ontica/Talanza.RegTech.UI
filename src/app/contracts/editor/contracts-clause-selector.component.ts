@@ -13,7 +13,7 @@ import { ContractClauseRef, EmptyContractClause } from '@app/models/regulation';
 
 
 @Component({
-  selector: 'contract-clause-selector',
+  selector: 'emp-gov-contract-clause-selector',
   template: `<ul class="clause-list">
                 <li *ngFor="let clause of clauses">
                   <a [class.selected]="clause === currentClause"

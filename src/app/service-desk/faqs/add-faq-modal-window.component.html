@@ -1,5 +1,5 @@
-<modal-window [title]="'Nueva FAQ'" (onClose)="close()">
-    <div class="form-frame">
-        <add-faq (onAddFaq)="close()"></add-faq>
-    </div>
-</modal-window>
+<emp-ng-modal-window [title]="'Nueva FAQ'" (close)="onClose()">
+  <div class="form-frame">
+    <emp-kb-add-faq (close)="onClose()"></emp-kb-add-faq>
+  </div>
+</emp-ng-modal-window>

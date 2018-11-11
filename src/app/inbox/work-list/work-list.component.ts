@@ -13,7 +13,7 @@ import { InboxFilter, InboxRef } from '@app/models/inbox';
 
 
 @Component({
-  selector: 'work-list',
+  selector: 'emp-steps-work-list',
   templateUrl: './work-list.component.html',
   styleUrls: ['./work-list.component.scss'],
   providers: [InboxService]

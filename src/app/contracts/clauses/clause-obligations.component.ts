@@ -14,7 +14,7 @@ import { ContractsService } from '@app/services/regulation';
 import { ContractClauseRef, Rule } from '@app/models/regulation';
 
 @Component({
-  selector: 'clause-obligations',
+  selector: 'emp-gov-clause-obligations',
   templateUrl: './clause-obligations.component.html',
   styleUrls: ['./clause-obligations.component.scss'],
   providers: [ContractsService]

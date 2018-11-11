@@ -6,26 +6,39 @@
       <button class="tab-links left-position" [disabled]="isDisabled" [class.selected]="selectedTask==='FAQ'" (click)="setSelectedTask('FAQ')">FAQs</button>
     </div>
     <div class="content" [ngSwitch]="selectedTask">
-      <faqs *ngSwitchCase="'FAQ'" (onSelectedFAQ)="setSelectedFAQ($event)"></faqs>
-      <meetings *ngSwitchCase="'ticket'" [updatedMeeting]="meetingUpdated" 
-         (onAddMeeting)="addMeeting()"   (onSelectedMeeting)="selectedMeeting($event)"></meetings>
+
+      <emp-kb-faqs *ngSwitchCase="'FAQ'"
+        (select)="setSelectedFAQ($event)">
+      </emp-kb-faqs>
+
+      <emp-kb-meetings *ngSwitchCase="'ticket'"
+        [updatedMeeting]="meetingUpdated"
+        (select)="selectedMeeting($event)"
+        (create)="addMeeting()">
+      </emp-kb-meetings>
+
     </div>
   </div>
 
-  <div class="right-panel right">      
+  <div class="right-panel right">
    <div class="content" [ngSwitch]="selectedTask">
      <div *ngSwitchCase="'ticket'">
-       <ng-container *ngIf="selectedTicketUID !== ''">
-          <meeting [meetingUID]="selectedTicketUID" (onUpdateMeeting)="notifyMeetingWasUpdate($event)"></meeting>
-       </ng-container>
-       <div  style="padding-left:50px;"*ngIf="onAddMeeting">
-          <project-meeting (onUpdateMeeting)="notifyMeetingWasUpdate($event)" ></project-meeting>
+
+        <emp-kb-meeting *ngIf="selectedTicketUID !== ''"
+            [meetingUID]="selectedTicketUID"
+            (update)="notifyMeetingWasUpdate($event)">
+        </emp-kb-meeting>
+
+       <div style="padding-left:50px;" *ngIf="onAddMeeting">
+          <emp-kb-project-meeting
+            (update)="notifyMeetingWasUpdate($event)">
+          </emp-kb-project-meeting>
        </div>
-       
+
      </div>
-      
+
       <div *ngIf="isDisplayFaq">
-        <faq *ngSwitchCase="'FAQ'" [faqUID]="FAQUid"></faq>
+        <emp-kb-faq *ngSwitchCase="'FAQ'" [faqUID]="FAQUid"></emp-kb-faq>
       </div>
 
     </div>

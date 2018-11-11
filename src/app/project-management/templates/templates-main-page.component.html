@@ -3,20 +3,21 @@
 
   <div class="explorer-panel primary">
 
-    <activity-tree [templateDesignerMode]="true"
-                   [project]="selectedTemplate"
-                   (edited)="onActivityTreeEdited($event)"
-                   (activitySelected)="showEditor($event)">
-    </activity-tree>
+    <emp-steps-activity-tree
+         [templateDesignerMode]="true"
+         [project]="selectedTemplate"
+         (edited)="onActivityTreeEdited($event)"
+         (activitySelected)="showEditor($event)">
+    </emp-steps-activity-tree>
 
   </div>
 
   <div *ngIf="displayEditor" class="explorer-panel secondary">
 
-      <activity-designer [activity]="selectedActivity"
-                         (update)="onActivityUpdated($event)"
-                         (close)="onEditorClosed()">
-      </activity-designer>
+    <emp-steps-activity-designer [activity]="selectedActivity"
+                                 (update)="onActivityUpdated($event)"
+                                 (close)="onEditorClosed()">
+    </emp-steps-activity-designer>
 
   </div>
 

@@ -4,13 +4,13 @@
     "directive-selector": [
       true,
       "attribute",
-      "emp",
+      ["empNg", "empSteps", "empGov", "empKB"],
       "camelCase"
     ],
     "component-selector": [
       true,
       "element",
-      "emp",
+      ["emp-ng", "emp-steps", "emp-gov", "emp-kb"],
       "kebab-case"
     ]
   }

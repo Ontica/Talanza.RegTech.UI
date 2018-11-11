@@ -23,7 +23,7 @@ let _uniqueIdCounter = 0;
 
 
 @Component({
-  selector: 'calendar-control',
+  selector: 'emp-ng-calendar-control',
   templateUrl: './calendar-control.html',
   styleUrls: ['./calendar-control.scss'],
   providers: [

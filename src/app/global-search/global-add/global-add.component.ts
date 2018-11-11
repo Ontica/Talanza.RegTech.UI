@@ -9,7 +9,7 @@ import { Component, ElementRef } from '@angular/core';
 
 
 @Component({
-  selector: 'global-add',
+  selector: 'emp-kb-global-add',
   host: {
     '(document:click)': 'handleClick($event)'
   },

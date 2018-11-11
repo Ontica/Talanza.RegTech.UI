@@ -14,7 +14,7 @@ import { Process } from '@app/models/regulation';
 
 
 @Component({
-  selector: 'process-editor',
+  selector: 'emp-steps-process-editor',
   templateUrl: './process-editor.component.html',
   styleUrls: ['./process-editor.component.scss'],
   providers: [ProcessService]

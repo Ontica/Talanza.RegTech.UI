@@ -15,7 +15,7 @@ import {
 
 
 @Component({
-  selector: 'selected-clause',
+  selector: 'emp-gov-selected-clause',
   templateUrl: './contracts-selected-clause.component.html',
   styleUrls: ['./contracts-selected-clause.component.scss'],
   providers: [ContractsService],

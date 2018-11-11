@@ -9,13 +9,13 @@
 
   <div class="menu-bar">
 
-    <nav-menu class="menu"
+    <emp-ng-nav-menu class="menu"
               [items]="mainMenuItems"
-              (click)="onClickMenu($event)"></nav-menu>
+              (click)="onClickMenu($event)"></emp-ng-nav-menu>
 
-    <nav-menu class="menu"
+    <emp-ng-nav-menu class="menu"
               [items]="secondaryMenuItems"
-              (click)="onClickMenu($event)"></nav-menu>
+              (click)="onClickMenu($event)"></emp-ng-nav-menu>
 
     <select *ngIf="layoutType === 'Projects'" #cboProjects
             class="select-box" style="width:260px;"

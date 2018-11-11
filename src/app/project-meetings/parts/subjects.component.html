@@ -1,22 +1,22 @@
 <table class="form">
-    <tr>
-        <td class="form-title form-title-text">Temas</td>
-    </tr>
-    <tr>
-        <td>
-            <ol>
-                <li *ngFor="let subject of subjects;">{{subject}}</li>
-            </ol>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <textarea class="text-area" rows="3" cols="25" [(ngModel)]="newSubjectText"></textarea>
-        </td>
-    </tr>
-    <tr>
-        <td class="text-align-right">
-            <button type="buton" class="btn-action" (click)="addSubject()">Agregar</button>
-        </td>
-    </tr>
+  <tr>
+    <td class="form-title form-title-text">Temas</td>
+  </tr>
+  <tr>
+    <td>
+      <ol>
+        <li *ngFor="let subject of subjects;">{{subject}}</li>
+      </ol>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <textarea class="text-area" rows="3" cols="25" [(ngModel)]="newSubjectText"></textarea>
+    </td>
+  </tr>
+  <tr>
+    <td class="text-align-right">
+      <button type="buton" class="btn-action" (click)="addSubject()">Agregar</button>
+    </td>
+  </tr>
 </table>

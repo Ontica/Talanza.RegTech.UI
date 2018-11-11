@@ -31,7 +31,7 @@
       <input class="text-box" type="search" style="width:310px" (keyup.enter)="onChangeFilter()" [(ngModel)]="filter.keywords">
       <button class="btn" style="width:55px;" (click)="onChangeFilter()">Buscar</button>
     </td>
-    <td><a (click)="cleanCombos() ">Limpiar filtros</a></td>
+    <td><a (click)="onCleanCombos() ">Limpiar filtros</a></td>
   </tr>
   <!--
   <tr>
@@ -56,7 +56,7 @@
 						</select>
 		</td>
     <td>
-      <button style="width:144px" class="btn-action" type="button" (click)="newProcedure()">+ Nuevo trámite</button>
+      <button style="width:144px" class="btn-action" type="button" (click)="onCreateProcedure()">+ Nuevo trámite</button>
     </td>
 	</tr>
 	!-->

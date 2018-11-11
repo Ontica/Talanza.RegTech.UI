@@ -15,7 +15,7 @@ import { ProcedureStore } from '@app/store/procedure.store';
 export type Identifier = string | number;
 
 @Component({
-  selector: 'procedure-viewer',
+  selector: 'emp-gov-procedure-viewer',
   styleUrls: [],
   templateUrl: './procedure-viewer.component.html'
 })

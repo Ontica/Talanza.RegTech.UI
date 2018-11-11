@@ -9,7 +9,7 @@ import { Component } from '@angular/core';
 
 
 @Component({
-  selector: 'service-desk',
+  selector: 'emp-kb-service-desk',
   templateUrl: './service-desk-main-page.component.html',
   styleUrls: ['./service-desk-main-page.component.scss']
 })

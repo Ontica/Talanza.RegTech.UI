@@ -9,7 +9,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'obligations-main-page',
+  selector: 'emp-gov-obligations-main-page',
   templateUrl: './obligations-main-page.component.html',
   styleUrls: ['./obligations-main-page.component.scss'],
 })

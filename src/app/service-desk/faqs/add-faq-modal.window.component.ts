@@ -9,16 +9,16 @@ import { Component, EventEmitter, Output } from '@angular/core';
 
 
 @Component({
-  selector: 'add-faq-modal-window',
+  selector: 'emp-kb-add-faq-modal-window',
   templateUrl: './add-faq-modal-window.component.html',
   styleUrls: ['./add-faq-modal-window.component.scss']
 })
 export class AddFAQModalWindowComponent {
 
-  @Output() onClose = new EventEmitter();
+  @Output() close = new EventEmitter();
 
-  close(): void {
-    this.onClose.emit();
+  onClose(): void {
+    this.close.emit();
   }
 
 }

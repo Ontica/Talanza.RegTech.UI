@@ -1,7 +1,7 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 
 @Component({
-  selector: 'app-root',
+  selector: 'emp-steps-covar-root',
   encapsulation: ViewEncapsulation.None,
   template: '<router-outlet></router-outlet>'
 })

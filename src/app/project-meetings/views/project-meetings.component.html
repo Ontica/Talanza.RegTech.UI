@@ -1,6 +1,6 @@
 <div class="search-bar">
   <div class="search-control">
-    <search-control (onSearch)="search($event)"></search-control>
+    <emp-ng-search-control (search)="search($event)"></emp-ng-search-control>
   </div>
   <a class="right" (click)="addMeeting()">+ Agregar reunión</a>
   <div class="filters-bar">
@@ -38,6 +38,8 @@
     </ng-container>
   </ul>
 </div>
-<div *ngIf="isOpenAddMeetingWindow">    
-<add-meeting-modal-window (onCloseTicket)="isOpenAddMeetingWindow = false" (onChageMeeting)="loadMeetings()"></add-meeting-modal-window>
+<div *ngIf="isOpenAddMeetingWindow">
+  <emp-kb-add-meeting-modal-window
+       (close)="isOpenAddMeetingWindow = false;loadMeetings()">
+  </emp-kb-add-meeting-modal-window>
 </div>

@@ -9,7 +9,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 
 
 @Component({
-  selector: 'activity-inline-editor',
+  selector: 'emp-steps-activity-inline-editor',
   template: `
     <input #txtActivityName type="text"
       class='text-box inline-editor-text-box'

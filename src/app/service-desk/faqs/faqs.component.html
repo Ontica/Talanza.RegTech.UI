@@ -1,6 +1,6 @@
 <div class="search-bar">
     <div class="search-control">
-        <search-control (onSearch)="search($event)"></search-control>
+        <emp-ng-search-control (search)="search($event)"></emp-ng-search-control>
     </div>
     <a class="right" (click)="onAddFAQ(selectedTask)">+ Agregar FAQ</a>
 
@@ -32,5 +32,5 @@
     </ul>
 </div>
 <div *ngIf="isOpenAddFAQWindow">
-    <add-faq-modal-window  (onClose)="closeAddFAQWindow()"></add-faq-modal-window>
+    <emp-kb-add-faq-modal-window  (close)="closeAddFAQWindow()"></emp-kb-add-faq-modal-window>
 </div>

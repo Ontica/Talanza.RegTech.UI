@@ -6,10 +6,10 @@
  *
  */
 
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'obligations-filter',
+  selector: 'emp-gov-obligations-filter',
   templateUrl: './obligations-filter.component.html',
   styleUrls: ['./obligations-filter.component.scss']
 })

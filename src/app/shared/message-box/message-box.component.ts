@@ -13,7 +13,7 @@ import { MessageBoxData } from './message-box.types';
 
 
 @Component({
-  selector: 'message-box',
+  selector: 'emp-ng-message-box',
   templateUrl: './message-box.component.html',
   styleUrls: ['./message-box.component.scss']
 })

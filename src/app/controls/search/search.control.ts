@@ -8,25 +8,27 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
-  selector: 'search-control',
+  selector: 'emp-ng-search-control',
   templateUrl: './search.control.html',
   styleUrls: ['./search.control.scss']
 })
 
 export class SearchControl {
 
-  @Output() onSearch = new EventEmitter<string>();
+  @Output() search = new EventEmitter<string>();
 
   keywords = '';
 
-  search(): void {
-    if (this.keywords) {
-      this.onSearch.emit(this.keywords);
-    }
+
+  onCancel(): void {
+    this.keywords = '';
   }
 
-  clean(): void {
-    this.keywords = '';
+
+  onSearch(): void {
+    if (this.keywords) {
+      this.search.emit(this.keywords);
+    }
   }
 
 }

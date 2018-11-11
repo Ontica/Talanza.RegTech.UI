@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'chips',
+  selector: 'emp-ng-chips',
   templateUrl: './chips.html',
   styleUrls: ['./chips.scss']
 })

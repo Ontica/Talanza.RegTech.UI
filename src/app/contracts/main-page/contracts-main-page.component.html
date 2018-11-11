@@ -1,8 +1,9 @@
 <div class="main-container">
-  <contract-filters (clauses)="onChangeClausesList($event)"></contract-filters>
+  <emp-gov-contract-filters (clauses)="onChangeClausesList($event)"></emp-gov-contract-filters>
   <div class="left-panel" *ngIf="isVisibleLeftPanel" [ngStyle]="{'width' : leftPanelWidth }">
     <div class="clauses-container">
-      <contract-clause-selector [clauses]="clausesList" (selectedClause)="onSelectedClauseRef($event)"></contract-clause-selector>
+      <emp-gov-contract-clause-selector [clauses]="clausesList"
+                                        (selectedClause)="onSelectedClauseRef($event)"></emp-gov-contract-clause-selector>
       <br /><br /><br /><br />
     </div>
   </div>
@@ -11,7 +12,7 @@
     <!--<div class="right"><i class="fa fa-arrows-alt full-window-button" aria-hidden="true" (click)="onHideLeftPanel()"></i></div> !-->
     <div class="clause-info-container">
       <div *ngIf="isSelectedClause">
-        <selected-clause [clauseRef]="clause"></selected-clause>
+        <emp-gov-selected-clause [clauseRef]="clause"></emp-gov-selected-clause>
       </div>
     </div>
   </div>

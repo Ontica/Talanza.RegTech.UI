@@ -13,12 +13,12 @@
   <mat-tab-group color="accent">
 
     <mat-tab label="Actividad">
-      <activity-form [activity]="activity"
-                     (delete)="onClose()" (update)="onUpdateActivity()"></activity-form>
+      <emp-steps-activity-form [activity]="activity"
+                               (delete)="onClose()" (update)="onUpdateActivity()"></emp-steps-activity-form>
     </mat-tab>
 
     <mat-tab label="Subtareas">
-      <activity-tasks [activity]="activity"></activity-tasks>
+      <emp-steps-activity-tasks [activity]="activity"></emp-steps-activity-tasks>
     </mat-tab>
 
     <mat-tab label="Documentos" disabled="true">
@@ -26,13 +26,13 @@
     </mat-tab>
 
     <mat-tab label="Anotaciones" disabled="true">
-      <postings-list [target]="activity"></postings-list>
+      <emp-kb-postings-list [target]="activity"></emp-kb-postings-list>
     </mat-tab>
 
     <mat-tab label="Regulación" [disabled]="!activity.workflowObject">
-      <activity-designer [activity]="activity.workflowObject" [settings]="childrenSettings"></activity-designer>
+      <emp-steps-activity-designer [activity]="activity.workflowObject"
+                                   [settings]="childrenSettings"></emp-steps-activity-designer>
     </mat-tab>
-
 
   </mat-tab-group>
 

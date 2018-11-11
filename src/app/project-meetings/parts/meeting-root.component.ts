@@ -15,7 +15,7 @@ import { Meeting, EmptyMeeting, Project } from '@app/models/project-management';
 
 
 @Component({
-  selector: 'meeting-root',
+  selector: 'emp-kb-meeting-root',
   templateUrl: './meeting-root.component.html',
   styleUrls: ['./meeting-root.component.scss'],
   providers: [ProjectMeetingService, ProjectService]
@@ -40,7 +40,7 @@ export class MeetingRootComponent implements OnInit {
     return this._meetingUID;
   }
 
-  @Output() onUpdateMeeting = new EventEmitter<Meeting>();
+  @Output() update = new EventEmitter<Meeting>();
 
 
   constructor(private projectMeetingService: ProjectMeetingService,
@@ -50,6 +50,8 @@ export class MeetingRootComponent implements OnInit {
   ngOnInit() {
     this.loadProjectsList();
   }
+
+
   async doOperation() {
 
     if (!this.validate()) {
@@ -69,7 +71,7 @@ export class MeetingRootComponent implements OnInit {
 
   cancel() {
     this.loadMeeting();
-    this.onUpdateMeeting.emit(this.meeting);
+    this.update.emit(this.meeting);
   }
 
 
@@ -145,7 +147,7 @@ export class MeetingRootComponent implements OnInit {
   private async saveMeetingData() {
     await this.projectMeetingService.addMeeting(this.meeting)
       .subscribe((x) => {
-        this.onUpdateMeeting.emit(x);
+        this.update.emit(x);
         this.isMeetingData = true;
         this.meetingUID = x.uid;
       });
@@ -163,7 +165,7 @@ export class MeetingRootComponent implements OnInit {
   private updateMeeting() {
     this.projectMeetingService.updateMeeting(this.meeting)
       .subscribe((x) => {
-        this.onUpdateMeeting.emit(x);
+        this.update.emit(x);
       });
   }
 

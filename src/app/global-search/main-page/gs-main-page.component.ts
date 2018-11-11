@@ -13,17 +13,16 @@ import { SharedService } from '@app/shared/services';
 import { ContractsService, DocumentService, ProcedureService } from '@app/services/regulation';
 import { PostingsService } from '@app/services/knowledge-base';
 
-import {
-  BaseProcedure, ContractClauseRef, Document,
-  DocumentFilter, ProcedureFilter
-} from '@app/models/regulation';
+import { BaseProcedure, ContractClauseRef, Document,
+         DocumentFilter, ProcedureFilter } from '@app/models/regulation';
+
 import { Posting, BASE_OBJECT_UID } from '@app/models/knowledge-base';
 
 import { NavBarConfig } from '@app/controls/nav-bar/nav-bar.control';
 
 
 @Component({
-  selector: 'global-search',
+  selector: 'emp-kb-global-search',
   templateUrl: './gs-main-page.component.html',
   styleUrls: ['./gs-main-page.component.scss']
 })
@@ -59,7 +58,7 @@ export class GlobalSearchMainPageComponent {
     return this._keywords;
   }
 
-  @Output() onClose = new EventEmitter();
+  @Output() close = new EventEmitter();
 
   constructor(private route: ActivatedRoute,
     private app: SharedService,
@@ -84,7 +83,7 @@ export class GlobalSearchMainPageComponent {
 
 
   closeGlobalSearch(): void {
-    this.onClose.emit();
+    this.close.emit();
   }
 
 

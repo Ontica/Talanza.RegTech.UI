@@ -22,7 +22,7 @@ import { ProjectStore } from '@app/store/project.store';
 
 
 @Component({
-  selector: 'add-event-dialog',
+  selector: 'emp-steps-add-event-dialog',
   templateUrl: './add-event-dialog.component.html',
   styleUrls: ['./add-event-dialog.component.scss']
 })

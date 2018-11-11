@@ -1,15 +1,22 @@
-<i class="fa fa-plus-circle" aria-hidden="true" (click)="onClick()"></i>  
-<div class="container">  
-  <div class="items-div" *ngIf="isHideControl">    
+<i class="fa fa-plus-circle" aria-hidden="true" (click)="onClick()"></i>
+<div class="container">
+  <div class="items-div" *ngIf="isHideControl">
      <ul *ngFor="let item of items">
-       <li  (click)="onSelectItem(item)">          
+       <li  (click)="onSelectItem(item)">
          {{item}}
-       </li> 
+       </li>
      </ul>
-  </div>  
+  </div>
 </div>
 
 <div [ngSwitch]="selectedItem">
-    <add-faq-modal-window *ngSwitchCase="'FAQ'"  (onClose)="selectedItem=''"></add-faq-modal-window>
-    <add-meeting-modal-window *ngSwitchCase="'Ticket'" (onCloseTicket)="selectedItem=''"> </add-meeting-modal-window>
+
+  <emp-kb-add-faq-modal-window *ngSwitchCase="'FAQ'"
+      (close)="selectedItem=''">
+  </emp-kb-add-faq-modal-window>
+
+  <emp-kb-add-meeting-modal-window *ngSwitchCase="'Ticket'"
+      (close)="selectedItem=''">
+  </emp-kb-add-meeting-modal-window>
+
 </div>

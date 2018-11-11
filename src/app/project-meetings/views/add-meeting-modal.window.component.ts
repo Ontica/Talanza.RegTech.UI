@@ -1,18 +1,17 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
-    selector: 'add-meeting-modal-window',
-    templateUrl: './add-meeting-modal-window.component.html',
-    styleUrls: ['./add-meeting-modal-window.component.scss']
+  selector: 'emp-kb-add-meeting-modal-window',
+  templateUrl: './add-meeting-modal-window.component.html',
+  styleUrls: ['./add-meeting-modal-window.component.scss']
 })
 
 export class AddMeetingModalWindowComponent {
 
+  @Output() close = new EventEmitter();
 
-    @Output() onCloseTicket = new EventEmitter();
-
-    close(): void {
-        this.onCloseTicket.emit();
-    }
+  onClose(): void {
+    this.close.emit();
+  }
 
 }

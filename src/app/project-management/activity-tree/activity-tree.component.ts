@@ -19,7 +19,7 @@ import { MoveActivityDialogComponent } from '../move-activity-dialog/move-activi
 
 
 @Component({
-  selector: 'activity-tree',
+  selector: 'emp-steps-activity-tree',
   templateUrl: './activity-tree.component.html',
   styleUrls: ['./activity-tree.component.scss'],
 })

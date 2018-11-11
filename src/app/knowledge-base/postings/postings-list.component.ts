@@ -14,7 +14,7 @@ import { Posting, EmptyPosting } from '@app/models/knowledge-base';
 
 
 @Component({
-  selector: 'postings-list',
+  selector: 'emp-kb-postings-list',
   templateUrl: './postings-list.component.html',
   styleUrls: ['./postings-list.component.scss']
 })

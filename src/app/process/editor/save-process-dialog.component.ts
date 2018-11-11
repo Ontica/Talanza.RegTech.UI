@@ -11,7 +11,7 @@ import { Process } from '@app/models/regulation';
 
 
 @Component({
-  selector: 'save-process-dialog',
+  selector: 'emp-steps-save-process-dialog',
   templateUrl: './save-process-dialog.component.html',
   styleUrls: ['./save-process-dialog.component.css']
 })
@@ -20,8 +20,8 @@ export class SaveProcessDialogComponent {
   process: Process = new Process();
   alerts: string;
 
-  @Output() onSetDiagramIdentificationEvent = new EventEmitter<Process>();
-  @Output() onCancelEvent = new EventEmitter();
+  @Output() save = new EventEmitter<Process>();
+  @Output() cancel = new EventEmitter();
 
   @HostBinding('style.display') private display = 'block';
   @HostBinding('style.position') private position = 'absolute';
@@ -31,22 +31,26 @@ export class SaveProcessDialogComponent {
     this.process.version = '';
   }
 
-  setDiagramIdentification(): void {
+
+  onCancel(): void {
+    this.closePopup();
+  }
+
+
+  onSave(): void {
     if (!this.validate()) {
       return;
     }
 
-    this.onSetDiagramIdentificationEvent.emit(this.process);
+    this.save.emit(this.process);
     this.closePopup();
   }
 
-  cancel(): void {
-    this.closePopup();
-  }
 
   private closePopup(): void {
-    this.onCancelEvent.emit();
+    this.cancel.emit();
   }
+
 
   private validate(): Boolean {
     if (this.process.name.length === 0) {

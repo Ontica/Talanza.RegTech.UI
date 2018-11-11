@@ -1,6 +1,6 @@
 <div class="editor-container editor-container-style">
   <div class="header">
-    <div class="close-button right-position" (click)="close()">&times;</div>
+    <div class="close-button right-position" (click)="onClose()">&times;</div>
     <div class="small-title">{{newNameLabel}}</div>
     <div class="title">{{procedure.name}}</div>
     <div class="subtitle">{{procedure.entityName}}</div><br>
@@ -16,11 +16,11 @@
   </div>
 
   <div class="form-frame" [ngSwitch]="selectedTask">
-    <general-info-tab *ngSwitchCase="'generalInfo'" [procedure]="procedure"> </general-info-tab>
-    <filing-conditions-tab *ngSwitchCase="'conditions'" [procedure]="procedure"></filing-conditions-tab>
-    <requirements-tab *ngSwitchCase="'requirements'" [procedure]="procedure"></requirements-tab>
-    <filing-fee-tab *ngSwitchCase="'payments'" [procedure]="procedure"></filing-fee-tab>
-    <status-tab *ngSwitchCase="'status'"></status-tab>
-    <requirement-tab *ngSwitchCase="'requirementGrid'"></requirement-tab>
+    <emp-gov-general-info-tab *ngSwitchCase="'generalInfo'" [procedure]="procedure"></emp-gov-general-info-tab>
+    <emp-gov-filing-conditions-tab *ngSwitchCase="'conditions'" [procedure]="procedure"></emp-gov-filing-conditions-tab>
+    <emp-gov-requirements-tab *ngSwitchCase="'requirements'" [procedure]="procedure"></emp-gov-requirements-tab>
+    <emp-gov-filing-fee-tab *ngSwitchCase="'payments'" [procedure]="procedure"></emp-gov-filing-fee-tab>
+    <emp-gov-procedure-status-tab *ngSwitchCase="'status'"></emp-gov-procedure-status-tab>
+    <emp-gov-requirement-tab *ngSwitchCase="'requirementGrid'"></emp-gov-requirement-tab>
   </div>
 </div>

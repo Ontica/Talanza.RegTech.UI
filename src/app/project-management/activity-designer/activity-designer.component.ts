@@ -18,7 +18,7 @@ import { CardSettings } from '@app/models/user-interface';
 
 
 @Component({
-  selector: 'activity-designer',
+  selector: 'emp-steps-activity-designer',
   templateUrl: './activity-designer.component.html',
   styleUrls: ['./activity-designer.component.scss']
 })

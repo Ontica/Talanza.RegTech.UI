@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'pdf-viewer',
+  selector: 'emp-ng-pdf-viewer',
   template: '<object class="object-viewer" [data]="documentURI | safeUrl"></object>',
   styles: [
     `

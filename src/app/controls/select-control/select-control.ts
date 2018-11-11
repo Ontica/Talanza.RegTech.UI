@@ -4,7 +4,7 @@ import {
 
 
 @Component({
-  selector: 'select-control',
+  selector: 'emp-ng-select-control',
   host: {
     '(document:click)': 'handleClick($event)'
   },
@@ -42,7 +42,7 @@ export class SelectControl {
 
   @Input() config: object = { valueField: 'name' };
 
-  @Output() onSelectedItem = new EventEmitter<string>();
+  @Output() select = new EventEmitter<string>();
 
   constructor(myElement: ElementRef) {
     this.elementRef = myElement;
@@ -55,7 +55,7 @@ export class SelectControl {
   onSelectItem(item: any): void {
     this.selectedItem = item;
     this.isHideControl = !this.isHideControl;
-    this.onSelectedItem.emit(this.selectedItem);
+    this.select.emit(this.selectedItem);
   }
 
   handleClick(event): void {

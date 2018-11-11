@@ -10,7 +10,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 
 @Component({
-  selector: 'main-layout',
+  selector: 'emp-ng-main-layout',
   templateUrl: './main-layout.component.html',
   styleUrls: ['./main-layout.component.scss']
 })

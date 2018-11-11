@@ -19,11 +19,11 @@
 
         </div>
 
-        <main-menu class="main-menu"></main-menu>
+        <emp-ng-main-menu class="main-menu"></emp-ng-main-menu>
 
         <div class="search-and-settings">
 
-          <search-control (onSearch)="search($event)"></search-control>
+          <emp-ng-search-control (search)="search($event)"></emp-ng-search-control>
 
           <div>
             <i class="fa fa-envelope disabled" aria-hidden="true"></i>
@@ -49,9 +49,9 @@
 
       <div class="content">
 
-        <navigation-header [layoutType]="layoutType"
-                           (action)="onAction($event)">
-        </navigation-header>
+        <emp-ng-navigation-header [layoutType]="layoutType"
+                                  (action)="onAction($event)">
+        </emp-ng-navigation-header>
 
         <div class="workarea">
           <router-outlet></router-outlet>

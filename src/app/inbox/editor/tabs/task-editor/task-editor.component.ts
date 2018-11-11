@@ -11,7 +11,7 @@ import { InboxRef } from '@app/models/inbox';
 
 
 @Component({
-  selector: 'task-editor',
+  selector: 'emp-steps-task-editor',
   templateUrl: './task-editor.component.html',
   styleUrls: ['./task-editor.component.scss']
 })

@@ -1,4 +1,5 @@
-<procedure-filter (onSearch)="getProcedures($event)" (onNewProcedure)="onOpenProcedureEditorWindow($event)"></procedure-filter>
+<emp-gov-procedure-filter (change)="getProcedures($event)"></emp-gov-procedure-filter>
+
 <table class="grid">
   <thead>
     <tr>
@@ -39,5 +40,5 @@
 </div>
 
 <div *ngIf="showProcedureEditorWindow " class="popup ">
-  <procedure-viewer [procedure]="selectedProcedureUID" (onCloseEvent)="closeProcedureEditorWindow()"></procedure-viewer>
+  <emp-gov-procedure-viewer [procedure]="selectedProcedureUID" (close)="closeProcedureEditorWindow()"></emp-gov-procedure-viewer>
 </div>

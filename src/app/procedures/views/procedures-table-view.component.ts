@@ -12,21 +12,22 @@ import { BaseProcedure } from '@app/models/regulation';
 
 
 @Component({
-  selector: 'procedures-table-view',
+  selector: 'emp-gov-procedures-table-view',
   templateUrl: './procedures-table-view.component.html',
   styleUrls: ['./procedures-table-view.component.scss'],
 })
 export class ProceduresTableViewComponent {
 
-  @Input() procedures: BaseProcedure[] = [];
-
   selectedProcedureUID: string;
 
-  @Output() onSelectProcedure = new EventEmitter<string>();
+  @Input() procedures: BaseProcedure[] = [];
+
+  @Output() select = new EventEmitter<string>();
+
 
   selectProcedure(procedureUID: string): void {
     this.selectedProcedureUID = procedureUID;
-    this.onSelectProcedure.emit(procedureUID);
+    this.select.emit(procedureUID);
   }
 
 }

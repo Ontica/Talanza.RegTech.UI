@@ -11,7 +11,7 @@ import { Procedure } from '@app/models/regulation';
 
 
 @Component({
-  selector: 'filing-conditions-tab',
+  selector: 'emp-gov-filing-conditions-tab',
   templateUrl: './filing-conditions-tab.component.html',
   styleUrls: ['./filing-conditions-tab.component.scss']
 })

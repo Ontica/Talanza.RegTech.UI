@@ -70,7 +70,7 @@ export class DateStringLibrary {
   static isDate(dateString: string,
                 format: DateFormat = 'DMY'): boolean {
 
-    const formatted = this.tryFormat(dateString);
+    const formatted = this.tryFormat(dateString, format);
 
     if (!formatted) {
       return false;

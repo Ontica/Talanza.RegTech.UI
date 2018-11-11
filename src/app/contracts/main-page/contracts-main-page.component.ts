@@ -10,7 +10,7 @@ import { Component, OnInit } from '@angular/core';
 import { ContractClauseRef } from '@app/models/regulation';
 
 @Component({
-  selector: 'contract-view',
+  selector: 'emp-gov-contract-view',
   templateUrl: './contracts-main-page.component.html',
   styleUrls: ['./contracts-main-page.component.scss']
 })

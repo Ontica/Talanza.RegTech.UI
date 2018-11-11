@@ -13,7 +13,7 @@ import { Posting, EmptyPosting, BASE_OBJECT_UID } from '@app/models/knowledge-ba
 
 
 @Component({
-  selector: 'update-faq',
+  selector: 'emp-kb-update-faq',
   templateUrl: './update-faq.component.html',
   styleUrls: ['./update-faq.component.scss']
 })
@@ -29,7 +29,7 @@ export class UpdateFAQComponent {
     return this._faq;
   }
 
-  @Output() onClose = new EventEmitter();
+  @Output() close = new EventEmitter();
 
 
   constructor(private faqService: PostingsService) { }
@@ -72,12 +72,12 @@ export class UpdateFAQComponent {
 
   private updateFAQ(): void {
     this.faqService.updatePosting(BASE_OBJECT_UID, this.faq)
-      .subscribe((x) => this.onClose.emit());
+      .subscribe((x) => this.close.emit());
   }
 
 
-  private close(): void {
-    this.onClose.emit();
+  private onClose(): void {
+    this.close.emit();
   }
 
 

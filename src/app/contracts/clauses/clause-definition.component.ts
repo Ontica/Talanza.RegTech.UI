@@ -17,7 +17,7 @@ import {
 } from '@app/models/regulation';
 
 @Component({
-  selector: 'clause-definition',
+  selector: 'emp-gov-clause-definition',
   templateUrl: './clause-definition.component.html',
   styleUrls: ['./clause-definition.component.scss'],
   providers: [ContractsService],

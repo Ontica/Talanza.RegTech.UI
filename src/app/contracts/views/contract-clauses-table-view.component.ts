@@ -15,14 +15,14 @@ import {
 } from '@app/models/regulation';
 
 @Component({
-  selector: 'contract-clauses-table',
+  selector: 'emp-gov-contract-clauses-table',
   templateUrl: './contract-clauses-table-view.component.html',
   styleUrls: ['./contract-clauses-table-view.component.scss'],
   providers: [ContractsService]
 })
 export class ContractClausesTableViewComponent {
 
-  @Output() onSelectClause = new EventEmitter<ContractClause>();
+  @Output() select = new EventEmitter<ContractClause>();
 
   @Input() clauses: ContractClauseRef[] = [];
   selectedClause = EmptyContractClause();
@@ -39,7 +39,7 @@ export class ContractClausesTableViewComponent {
   private loadClause(): void {
     this.contractService.getClause(this.selectedClause.contractUID, this.selectedClause.uid)
       .toPromise()
-      .then((x) => { this.onSelectClause.emit(x); });
+      .then(x => this.select.emit(x));
   }
 
 }

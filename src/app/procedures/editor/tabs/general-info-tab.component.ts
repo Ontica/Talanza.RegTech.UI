@@ -11,7 +11,7 @@ import { Entity, Office, Position, Procedure } from '@app/models/regulation';
 
 
 @Component({
-  selector: 'general-info-tab',
+  selector: 'emp-gov-general-info-tab',
   templateUrl: './general-info-tab.component.html',
   styleUrls: ['./general-info-tab.component.scss']
 })

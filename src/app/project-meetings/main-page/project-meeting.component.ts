@@ -11,7 +11,7 @@ import { Meeting } from '@app/models/project-management';
 
 
 @Component({
-  selector: 'project-meeting',
+  selector: 'emp-kb-project-meeting',
   templateUrl: './project-meeting.component.html',
   styleUrls: ['./project-meeting.component.scss']
 })
@@ -31,7 +31,7 @@ export class ProjectMeetingComponent {
   }
 
 
-  @Output() onUpdateMeeting = new EventEmitter<Meeting>();
+  @Output() update = new EventEmitter<Meeting>();
 
 
   setSelectedTask(selectedTask: string): void {
@@ -42,7 +42,7 @@ export class ProjectMeetingComponent {
   updateMeetingData(projectMeeting: Meeting): void {
     this.title = projectMeeting.title;
 
-    this.onUpdateMeeting.emit(projectMeeting);
+    this.update.emit(projectMeeting);
   }
 
 }

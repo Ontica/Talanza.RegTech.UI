@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
-  selector: 'add-requirement-list-tab',
+  selector: 'emp-gov-add-requirement-list-tab',
   templateUrl: './add-requirement-list-tab.component.html',
   styleUrls: ['./add-requirement-list-tab.component.scss']
 })

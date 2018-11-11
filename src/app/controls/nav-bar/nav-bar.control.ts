@@ -6,7 +6,7 @@ export interface NavBarConfig {
 }
 
 @Component({
-  selector: 'nav-bar',
+  selector: 'emp-ng-navbar',
   templateUrl: './nav-bar.control.html',
   styleUrls: ['./nav-bar.control.scss']
 })
@@ -15,13 +15,13 @@ export class NavBarControl {
 
   @Input() options: NavBarConfig[] = [];
 
-  @Output() onSelect = new EventEmitter<string>();
+  @Output() select = new EventEmitter<string>();
 
   selectedOption = '';
 
-  select(option: string): void {
+  onSelect(option: string): void {
     this.selectedOption = option;
-    this.onSelect.emit(this.selectedOption);
+    this.select.emit(this.selectedOption);
   }
 
 }

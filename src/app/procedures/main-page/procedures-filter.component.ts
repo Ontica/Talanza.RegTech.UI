@@ -13,7 +13,7 @@ import { BaseProcedure, Entity, Office, ProcedureFilter } from '@app/models/regu
 
 
 @Component({
-  selector: 'procedure-filter',
+  selector: 'emp-gov-procedure-filter',
   templateUrl: './procedures-filter.component.html',
   styleUrls: ['./procedures-filter.component.scss'],
   providers: [ProcedureService, EntityService]
@@ -25,43 +25,34 @@ export class ProcedureFilterComponent implements OnInit {
   offices: Office[] = [];
   entities: Entity[] = [];
 
-  @Output() onSearch = new EventEmitter<BaseProcedure[]>();
-  @Output() onNewProcedure = new EventEmitter<string>();
+  @Output() change = new EventEmitter<BaseProcedure[]>();
 
-  constructor(private procedureService: ProcedureService, private authorityService: EntityService) { }
+
+  constructor(private procedureService: ProcedureService,
+              private authorityService: EntityService) { }
+
 
   ngOnInit() {
     this.setEntities();
-    this.search();
+    this.onChangeFilter();
   }
 
-  async onChangeFilter() {
-    this.search();
-  }
 
-  newProcedure(): void {
-    this.onNewProcedure.emit('');
-  }
-
-  cleanCombos(): void {
-    this.filter.clean();
-    this.onSearch.emit([]);
-  }
-
-  search(): void {
+  onChangeFilter() {
     this.procedureService.getProceduresList(this.filter)
-                         .then((procedures) => this.onSearch.emit(procedures));
+                         .then(x => this.change.emit(x));
   }
+
+
+  onCleanCombos() {
+    this.filter.clean();
+    this.change.emit([]);
+  }
+
 
   private setEntities(): void {
     this.authorityService.getEntities()
-                         .then((entities) => this.entities = entities);
+                         .then(x => this.entities = x);
   }
-
-  // private async setOffices(entityUID: string) {
-  //   await this.authorityService.getEntity(entityUID)
-  //                              .then((entity) => { this.offices = entity.offices; });
-  //   this.filter.officeUID = '';
-  // }
 
 }

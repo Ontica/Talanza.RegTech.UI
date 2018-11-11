@@ -15,7 +15,7 @@ import { Participant, EmptyParticipant } from '@app/models/project-management';
 
 
 @Component({
-  selector: 'participants',
+  selector: 'emp-kb-participants',
   templateUrl: './participants.component.html',
   styleUrls: ['./participants.component.scss'],
   providers: [ProjectMeetingService]

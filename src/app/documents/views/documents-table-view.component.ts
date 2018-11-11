@@ -11,23 +11,22 @@ import { Document } from '@app/models/regulation';
 
 
 @Component({
-  selector: 'documents-table-view',
+  selector: 'emp-gov-documents-table-view',
   templateUrl: './documents-table-view.component.html',
   styleUrls: ['./documents-table-view.component.scss']
 })
 export class DocumentsTableViewComponent {
 
-  @Input() documentsList: Document[] = [];
-
-  @Output() onSelectDocument = new EventEmitter<Document>();
-
   selectedDocumentUID = '';
 
+  @Input() documentsList: Document[] = [];
+
+  @Output() select = new EventEmitter<Document>();
+
+
   setSelectedDocument(document: Document): void {
-
     this.selectedDocumentUID = document.uid;
-
-    this.onSelectDocument.emit(document);
+    this.select.emit(document);
   }
 
 }

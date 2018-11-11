@@ -14,7 +14,7 @@ import { ContractsService } from '@app/services/regulation';
 import { Contract, EmptyContract, ContractClauseRef } from '@app/models/regulation';
 
 @Component({
-  selector: 'contract-filters',
+  selector: 'emp-gov-contract-filters',
   templateUrl: './contracts-filters.component.html',
   styleUrls: ['./contracts-filters.component.scss'],
   providers: [ContractsService]

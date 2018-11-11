@@ -19,7 +19,7 @@ export type ProjectViewType = 'Tree' | 'Gantt' | 'Timeline';
 
 
 @Component({
-  selector: 'navigation-header',
+  selector: 'emp-ng-navigation-header',
   templateUrl: './nav-header.component.html',
   styleUrls: ['./nav-header.component.scss']
 })

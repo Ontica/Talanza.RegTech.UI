@@ -13,7 +13,7 @@ import { CardSettings } from '@app/models/user-interface';
 
 
 @Component({
-  selector: 'activity-editor',
+  selector: 'emp-steps-activity-editor',
   templateUrl: './activity-editor.component.html',
   styleUrls: ['./activity-editor.component.scss']
 })

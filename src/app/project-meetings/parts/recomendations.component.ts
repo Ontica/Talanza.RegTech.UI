@@ -9,7 +9,7 @@ import { Component } from '@angular/core';
 
 
 @Component({
-  selector: 'recomendations',
+  selector: 'emp-kb-recomendations',
   templateUrl: './recomendations.component.html',
   styleUrls: ['./recomendations.component.scss']
 })

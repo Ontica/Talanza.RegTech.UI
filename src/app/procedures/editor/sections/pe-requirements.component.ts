@@ -13,7 +13,7 @@ import { Requirement } from '@app/models/regulation';
 
 
 @Component({
-  selector: 'pe-requirements',
+  selector: 'emp-gov-pe-requirements',
   templateUrl: './pe-requirements.component.html',
   styleUrls: ['./pe-requirements.component.scss'],
   providers: [ProcedureService]

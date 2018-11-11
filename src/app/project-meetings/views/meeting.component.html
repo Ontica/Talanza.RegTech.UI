@@ -49,14 +49,17 @@
       </table>
     </div>
     <div class="meeting-general-info-edit" *ngIf="isOpenEditMeetingWindow">
-      <meeting-root (onUpdateMeeting)="closeEditMeetingWindow($event)" [meetingUID]="meetingUID"></meeting-root>
+      <emp-kb-meeting-root
+          [meetingUID]="meetingUID"
+          (update)="closeEditMeetingWindow($event)">
+      </emp-kb-meeting-root>
     </div>
     <br>
 
     <table>
       <tr>
         <td>
-          <participants [meetingUID]="meetingUID" [isReadOnly]="isEditableMeetingParticipants"></participants>
+          <emp-kb-participants [meetingUID]="meetingUID" [isReadOnly]="isEditableMeetingParticipants"></emp-kb-participants>
         </td>
         <td *ngIf="meeting.status === 'Opened'">
           <button class="right btn" *ngIf="isEditableMeetingParticipants" (click)="isEditableMeetingParticipants = false">Editar participantes</button>

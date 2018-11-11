@@ -11,7 +11,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 interface config { uid: string; name: string; }
 
 @Component({
-  selector: 'dropdown-menu',
+  selector: 'emp-ng-dropdown-menu',
   templateUrl: './dropdown-menu.control.html',
   styleUrls: ['./dropdown-menu.control.scss']
 })

@@ -3,7 +3,7 @@ import {
 } from '@angular/core';
 
 @Component({
-  selector: 'autocomplete-control',
+  selector: 'emp-ng-autocomplete-control',
   host: {
     '(document:click)': 'handleClick($event)'
   },
@@ -36,7 +36,7 @@ export class AutocompleteControl {
 
   @Input() config: object = { valueField: 'name' };
 
-  @Output() selected = new EventEmitter<string[]>();
+  @Output() select = new EventEmitter<string[]>();
 
   constructor(myElement: ElementRef) {
     this.elementRef = myElement;
@@ -63,7 +63,7 @@ export class AutocompleteControl {
       name: this.query, selected: true
     };
     this.items.push(newItem);
-    this.selected.emit(this.items.filter(item => item.selected === true));
+    this.select.emit(this.items.filter(item => item.selected === true));
 
     this.isAddFlag = false;
   }
@@ -84,12 +84,12 @@ export class AutocompleteControl {
 
   onSelectItem(selectedItem: any): void {
     this.updateItem(selectedItem.name, true);
-    this.selected.emit(this.items.filter(item => item.selected === true));
+    this.select.emit(this.items.filter(item => item.selected === true));
   }
 
   onUnselectItem(selectedItem: any): void {
     this.updateItem(selectedItem.name, false);
-    this.selected.emit(this.items.filter(item => item.selected === true));
+    this.select.emit(this.items.filter(item => item.selected === true));
   }
 
   private loadItems(): void {

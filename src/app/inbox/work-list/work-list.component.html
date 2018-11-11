@@ -22,7 +22,7 @@
         Fecha Objetivo: &nbsp;{{inbox.extensionData.targetDate | date: 'dd/MMM/yyyy'}}<br> Fecha Máxima: &nbsp;{{inbox.extensionData.dueDate | date: 'dd/MMM/yyyy'}}
       </td>
       <td style="width:8%;" class="text-align-center">
-        <rag-status-control [status]="inbox.extensionData.ragStatus"></rag-status-control>
+        <emp-ng-rag-status [status]="inbox.extensionData.ragStatus"></emp-ng-rag-status>
       </td>
       <td style="width:15%;">{{inbox.to.name}}</td>
       <td style="width:15%">
@@ -45,5 +45,8 @@
   </table>
 </div>
 <div *ngIf="isEditorWindow">
-  <inbox-editor [inboxItem]="selectedItem" (onCloseEvent)="closeInboxEditorWindow()"></inbox-editor>
+  <emp-steps-inbox-editor
+       [inboxItem]="selectedItem"
+       (close)="closeInboxEditorWindow()">
+  </emp-steps-inbox-editor>
 </div>

@@ -9,7 +9,7 @@
       </tr>
       <tr>
         <td colspan="2">
-          <requirement-grid></requirement-grid>
+          <emp-gov-requirements-grid></emp-gov-requirements-grid>
         </td>
       </tr>
     </table>
@@ -74,9 +74,9 @@
     </table>
   </div>
   <div *ngIf="isShowAddRequirementForm">
-    <add-requirement-tab (isCanceled)="onCancelForm($event)"></add-requirement-tab>
+    <emp-gov-add-requirement-tab (isCanceled)="onCancelForm($event)"></emp-gov-add-requirement-tab>
   </div>
   <div *ngIf="isAddRequirementListForm">
-    <add-requirement-list-tab (isCanceled)="onCancelForm($event)"></add-requirement-list-tab>
+    <emp-gov-add-requirement-list-tab (isCanceled)="onCancelForm($event)"></emp-gov-add-requirement-list-tab>
   </div>
 </div>

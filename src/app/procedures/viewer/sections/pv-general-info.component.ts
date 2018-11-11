@@ -11,7 +11,7 @@ import { Procedure } from '@app/models/regulation';
 
 
 @Component({
-  selector: 'pv-general-info',
+  selector: 'emp-gov-pv-general-info',
   templateUrl: './pv-general-info.component.html',
   styleUrls: ['./pv-general-info.component.scss']
 })

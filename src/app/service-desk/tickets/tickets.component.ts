@@ -13,7 +13,7 @@ import { Ticket } from '@app/models/service-desk';
 
 
 @Component({
-  selector: 'tickets',
+  selector: 'emp-kb-tickets',
   templateUrl: './tickets.component.html',
   styleUrls: ['./tickets.component.scss'],
   providers: [TicketService]
@@ -28,7 +28,7 @@ export class TicketsComponent implements OnInit {
 
   keywords = '';
 
-  @Output() onSelectedTicket = new EventEmitter<string>();
+  @Output() select = new EventEmitter<string>();
 
   constructor(private ticketService: TicketService) { }
 
@@ -44,7 +44,7 @@ export class TicketsComponent implements OnInit {
   onSelectTicket(uid: string): void {
     this.selectedTicketUid = uid;
 
-    this.onSelectedTicket.emit(uid);
+    this.select.emit(uid);
   }
 
 

@@ -11,7 +11,7 @@ import { Procedure } from '@app/models/regulation';
 
 
 @Component({
-  selector: 'filing-fee-tab',
+  selector: 'emp-gov-filing-fee-tab',
   templateUrl: './filing-fee-tab.component.html',
   styleUrls: ['./filing-fee-tab.component.scss'],
 })

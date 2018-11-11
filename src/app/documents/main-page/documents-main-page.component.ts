@@ -10,7 +10,7 @@ import { DocumentService } from '@app/services/regulation';
 import { Document, DocumentFilter } from '@app/models/regulation';
 
 @Component({
-  selector: 'documents-main-page',
+  selector: 'emp-gov-documents-main-page',
   templateUrl: './documents-main-page.component.html',
   styleUrls: ['./documents-main-page.component.scss'],
   providers: [DocumentService]

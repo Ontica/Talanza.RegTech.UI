@@ -11,7 +11,7 @@ import { Posting } from '@app/models/knowledge-base';
 
 
 @Component({
-  selector: 'faqs-table-view',
+  selector: 'emp-kb-faqs-table-view',
   templateUrl: './faqs-table-view.component.html',
   styleUrls: ['./faqs-table-view.component.scss']
 })
@@ -19,14 +19,14 @@ export class FAQsTableViewComponent {
 
   @Input() FAQs: Posting[] = [];
 
-  @Output() onSelectFAQ = new EventEmitter<string>();
+  @Output() select = new EventEmitter<string>();
 
   selectedFAQUID = '';
 
 
   selectFAQ(uid: string): void {
     this.selectedFAQUID = uid;
-    this.onSelectFAQ.emit(uid);
+    this.select.emit(uid);
   }
 
 }

@@ -4,10 +4,10 @@
     <div class="title">{{inboxItem.title}}</div>
   </div>
   <!--
-  <div class="tab">   
-    <button class="tab-links left-position" [disabled]="isDisabled" [class.selected]="selectedTask==='closeTask'" (click)="setSelectedTask('closeTask')"><span [innerHTML]="concluededTaskLabel"> </span></button>
+  <div class="tab">
+    <button class="tab-links left-position" [disabled]="isDisabled" [class.selected]="selectedTask==='closeTask'" (click)="setSelectedTask('closeTask')"><span [innerHTML]="concludedTaskLabel"> </span></button>
   </div>-->
   <div class="form-frame" [ngSwitch]="selectedTask">
-    <task-editor *ngSwitchCase="'generalInfo'" [inboxItem]="inboxItem"></task-editor>
+    <emp-steps-task-editor *ngSwitchCase="'generalInfo'" [inboxItem]="inboxItem"></emp-steps-task-editor>
   </div>
 </div>

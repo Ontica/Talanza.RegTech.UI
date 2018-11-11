@@ -3,7 +3,7 @@
     <td class="form-title form-title-text">Pregunta:</td>
   </tr>
   <tr>
-    <td> <textarea class="text-area"  rows="4" cols="25" [(ngModel)]="faq.title"></textarea></td>
+    <td><textarea class="text-area"  rows="4" cols="25" [(ngModel)]="faq.title"></textarea></td>
   </tr>
   <tr>
     <td class="form-title form-title-text">Respuesta:</td>
@@ -41,10 +41,10 @@
 <table class="form ">
   <tr>
     <td>
-      <button class="btn" (click)="cancel()">Cancelar</button>
+      <button class="btn" (click)="onCancel()">Cancelar</button>
     </td>
     <td class="text-align-right">
-      <button class="btn-action" (click)="onSaveFAQ()">Agregar FAQ</button>
+      <button class="btn-action" (click)="save()">Agregar FAQ</button>
     </td>
   </tr>
 </table>

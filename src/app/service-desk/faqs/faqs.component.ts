@@ -13,7 +13,7 @@ import { Posting } from '@app/models/knowledge-base';
 
 
 @Component({
-  selector: 'faqs',
+  selector: 'emp-kb-faqs',
   templateUrl: './faqs.component.html',
   styleUrls: ['./faqs.component.scss']
 })
@@ -28,7 +28,7 @@ export class FAQsComponent implements OnInit {
 
   keywords = '';
 
-  @Output() onSelectedFAQ = new EventEmitter<string>();
+  @Output() select = new EventEmitter<string>();
 
   constructor(private faqService: PostingsService) { }
 
@@ -39,7 +39,7 @@ export class FAQsComponent implements OnInit {
 
   onClickSelectFaq(uid: string): void {
     this.selectedFaqUID = uid;
-    this.onSelectedFAQ.emit(this.selectedFaqUID);
+    this.select.emit(this.selectedFaqUID);
   }
 
 

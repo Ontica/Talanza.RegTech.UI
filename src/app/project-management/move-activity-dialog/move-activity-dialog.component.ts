@@ -14,7 +14,7 @@ import { Activity, ActivityOperation } from '@app/models/project-management';
 
 
 @Component({
-  selector: 'move-activity-dialog',
+  selector: 'emp-steps-move-activity-dialog',
   templateUrl: './move-activity-dialog.component.html',
   styleUrls: ['./move-activity-dialog.component.scss']
 })

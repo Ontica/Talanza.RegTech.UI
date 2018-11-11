@@ -17,7 +17,7 @@ import { Posting, EmptyPosting } from '@app/models/knowledge-base';
 
 
 @Component({
-  selector: 'postings-editor',
+  selector: 'emp-kb-postings-editor',
   templateUrl: './postings-editor.component.html',
   styleUrls: ['./postings-editor.component.scss']
 })

@@ -7,7 +7,7 @@ import { Meeting, EmptyMeeting } from '@app/models/project-management';
 import { ProjectMeetingService } from '@app/services/project-management';
 
 @Component({
-    selector: 'meeting',
+    selector: 'emp-kb-meeting',
     templateUrl: './meeting.component.html',
     styleUrls: ['./meeting.component.scss'],
     providers: [ProjectMeetingService]
@@ -28,7 +28,7 @@ export class MeetingComponent {
         return this._meetingUID;
     }
 
-    @Output() onUpdateMeeting = new EventEmitter<Meeting>();
+    @Output() update = new EventEmitter<Meeting>();
 
     meeting: Meeting = EmptyMeeting();
     meetingStatus = '';
@@ -44,7 +44,7 @@ export class MeetingComponent {
 
         this.meeting = meeting;
 
-        this.onUpdateMeeting.emit(this.meeting);
+        this.update.emit(this.meeting);
     }
 
     private setMeetingStatus(): void {
@@ -68,7 +68,7 @@ export class MeetingComponent {
                                   .subscribe((x) => {
                                         this.loadMeeting();
                                         this.isEditableMeetingParticipants = true;
-                                        this.onUpdateMeeting.emit(this.meeting);
+                                        this.update.emit(this.meeting);
                                     });
     }
 
@@ -76,7 +76,7 @@ export class MeetingComponent {
         this.projectMeetingService.openMeeting(this.meeting.uid)
                                   .subscribe((x) => {
                                       this.loadMeeting();
-                                      this.onUpdateMeeting.emit(this.meeting);
+                                      this.update.emit(this.meeting);
                                     });
     }
 
@@ -84,7 +84,7 @@ export class MeetingComponent {
         this.projectMeetingService.deleteMeeting(this.meeting.uid)
                                   .subscribe((x) => {
                                       this.meeting = x;
-                                      this.onUpdateMeeting.emit(this.meeting);
+                                      this.update.emit(this.meeting);
                                    });
     }
 

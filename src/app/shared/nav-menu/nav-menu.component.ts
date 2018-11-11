@@ -61,7 +61,7 @@ export class MenuItem {
 
 
 @Component({
-  selector: 'nav-menu',
+  selector: 'emp-ng-nav-menu',
   templateUrl: './nav-menu.component.html',
   styleUrls: ['./nav-menu.component.scss']
 })

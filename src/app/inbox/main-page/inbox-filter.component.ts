@@ -15,13 +15,13 @@ import { InboxFilter } from '@app/models/inbox';
 
 
 @Component({
-  selector: 'inbox-filter',
+  selector: 'emp-steps-inbox-filter',
   templateUrl: './inbox-filter.component.html',
   styleUrls: ['./inbox-filter.component.scss']
 })
 export class InboxFilterComponent implements OnInit {
 
-  @Output() onChangeFilter = new EventEmitter<InboxFilter>();
+  @Output() change = new EventEmitter<InboxFilter>();
 
   isAddActivityEditorWindowVisible = false;
 
@@ -72,7 +72,7 @@ export class InboxFilterComponent implements OnInit {
 
     this.filter = this.filter.clone();
 
-    this.onChangeFilter.emit(this.filter);
+    this.change.emit(this.filter);
   }
 
 

@@ -12,7 +12,7 @@ import { SpinnerState, SpinnerService } from './spinner.service';
 
 
 @Component({
-  selector: 'spinner',
+  selector: 'emp-ng-spinner',
   templateUrl: './spinner.component.html',
   styleUrls: ['./spinner.component.scss']
 })

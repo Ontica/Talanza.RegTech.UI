@@ -18,7 +18,7 @@ const OPERATIONS: string[] = [
 
 
 @Component({
-  selector: 'faq',
+  selector: 'emp-kb-faq',
   templateUrl: './faq.component.html',
   styleUrls: ['./faq.component.scss']
 })

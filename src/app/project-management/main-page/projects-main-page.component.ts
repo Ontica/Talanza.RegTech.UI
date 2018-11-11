@@ -57,7 +57,7 @@ const projectKBSecondaryMenu: MenuItem[] = [
 ];
 
 @Component({
-  selector: 'projects-main-page',
+  selector: 'emp-steps-projects-main-page',
   templateUrl: './projects-main-page.component.html',
   styleUrls: ['./projects-main-page.component.scss']
 })
