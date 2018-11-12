@@ -1,7 +1,8 @@
 <div>
   <table>
     <thead>
-      <th colspan="2" class="header text-align-left ">Información general del trámite
+      <th colspan="2" class="header text-align-left ">
+        Información general del trámite
         <span class="right" (click)="onDisplayGeneralInfo()"><i class="fa fa-plus-circle " aria-hidden="true "></i></span>
       </th>
     </thead>
@@ -41,7 +42,8 @@
 <div>
   <table>
     <thead>
-      <th colspan="2" class="header text-align-left ">Obligación y fundamento legal
+      <th colspan="2" class="header text-align-left ">
+        Obligación y fundamento legal
         <span class="right" (click)="onDisplayGeneralInfo()"><i class="fa fa-plus-circle " aria-hidden="true "></i></span>
       </th>
     </thead>
@@ -69,8 +71,9 @@
 <div>
   <table>
     <thead>
-      <th colspan="2" class="header text-align-left ">Condiciones de inicio y forma y plazos de entrega<span class="right " (click)="onDisplayInitialTerms() ">
-              <i class="fa fa-plus-circle " aria-hidden="true "></i></span>
+      <th colspan="2" class="header text-align-left ">
+        Condiciones de inicio y forma y plazos de entrega
+        <span class="right" (click)="onDisplayInitialTerms()"><i class="fa fa-plus-circle " aria-hidden="true "></i></span>
       </th>
     </thead>
     <tbody *ngIf="isInitialTermsVisible">
@@ -121,8 +124,9 @@
 <div>
   <table>
     <thead>
-      <th colspan="2" class="header text-align-left ">Plazo de resolución y prórrogas<span class="right " (click)="onDisplayInitialTerms() ">
-                <i class="fa fa-plus-circle " aria-hidden="true "></i></span>
+      <th colspan="2" class="header text-align-left ">
+        Plazo de resolución y prórrogas
+        <span class="right " (click)="onDisplayInitialTerms() "><i class="fa fa-plus-circle " aria-hidden="true "></i></span>
       </th>
     </thead>
     <tbody *ngIf="isInitialTermsVisible">
@@ -148,9 +152,12 @@
 <div>
   <table>
     <thead>
-      <th colspan="2" class="header text-align-left ">Pago de derechos<span class="right " (click)="onDisplayPaymentInfo() "><i class="fa fa-plus-circle " aria-hidden="true "></i></span></th>
+      <th colspan="2" class="header text-align-left ">
+        Pago de derechos
+        <span class="right" (click)="onDisplayPaymentInfo()"><i class="fa fa-plus-circle" aria-hidden="true"></i></span>
+      </th>
     </thead>
-    <tbody *ngIf="isPaymentInfoVisible ">
+    <tbody *ngIf="isPaymentInfoVisible">
       <tr>
         <td class='label'>Tipo de pago:</td>
         <td>{{procedure.filingFee.filingFeeType}}</td>
@@ -170,7 +177,10 @@
 <div>
   <table>
     <thead>
-      <th colspan="2" class="header text-align-left ">Información de contacto<span class="right " (click)="onDisplayAuthorityInfo() "><i class="fa fa-plus-circle " aria-hidden="true "></i></span></th>
+      <th colspan="2" class="header text-align-left ">
+        Información de contacto
+        <span class="right" (click)="onDisplayAuthorityInfo() "><i class="fa fa-plus-circle" aria-hidden="true"></i></span>
+      </th>
     </thead>
     <tbody *ngIf="isAuthorityInfoVisible">
       <tr>
