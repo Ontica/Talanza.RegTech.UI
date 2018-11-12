@@ -4,11 +4,11 @@
   </div>
 
   <div class="tab">
-    <button class="tab-links left-position" [disabled]="isDisabled" [class.selected]="selectedTask==='meetingData'"
+    <button class="tab-links left-position" [class.selected]="selectedTask==='meetingData'"
       (click)="setSelectedTask('meetingData')">Informacion general</button>
-    <button class="tab-links left-position" [disabled]="isDisabled" [class.selected]="selectedTask==='recomendations'"
+    <button class="tab-links left-position" [class.selected]="selectedTask==='recomendations'"
       (click)="setSelectedTask('recomendations')">Recomendaciones</button>
-    <button class="tab-links left-position" [disabled]="isDisabled" [class.selected]="selectedTask==='agreements'"
+    <button class="tab-links left-position" [class.selected]="selectedTask==='agreements'"
       (click)="setSelectedTask('agreements')">Acuerdos</button>
   </div>
   <br>

@@ -23,6 +23,11 @@ export class MainLayoutComponent {
     this.layoutType = route.snapshot.data['layoutType'];
   }
 
+  onAction(event: any) {
+
+  }
+
+
   search(keywords: string) {
     if (keywords) {
       this.router.navigate(['/search/main', { keywords: keywords } ]);

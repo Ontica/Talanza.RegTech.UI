@@ -12,7 +12,7 @@
     <select id="targetProject" name="targetProject" [(ngModel)]="targetProjectUID" required
             class="select-box" style="width:90%">
       <option value="">( Proyectos )</option>
-      <option *ngFor="let project of templateStore.templates | async" [value]="project.uid">{{project.name}}</option>
+      <option *ngFor="let project of templates | async" [value]="project.uid">{{project.name}}</option>
     </select>
 
     <br />

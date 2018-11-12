@@ -25,8 +25,8 @@ export class ContractsMainPageComponent implements OnInit {
   private isResizeDiv = false;
   private centerPanelPreviousWidth = '';
 
-  private clausesList: ContractClauseRef[] = [];
-  private clause: ContractClauseRef;
+  clausesList: ContractClauseRef[] = [];
+  clause: ContractClauseRef;
 
   isSelectedClause = false;
 

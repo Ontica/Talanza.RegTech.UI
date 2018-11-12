@@ -2,8 +2,8 @@
 
   <div class="left-panel">
     <div class="tab">
-      <button class="tab-links left-position" [disabled]="isDisabled" [class.selected]="selectedTask==='ticket'" (click)="setSelectedTask('ticket')">Reuniones</button>
-      <button class="tab-links left-position" [disabled]="isDisabled" [class.selected]="selectedTask==='FAQ'" (click)="setSelectedTask('FAQ')">FAQs</button>
+      <button class="tab-links left-position" [class.selected]="selectedTask==='ticket'" (click)="setSelectedTask('ticket')">Reuniones</button>
+      <button class="tab-links left-position" [class.selected]="selectedTask==='FAQ'" (click)="setSelectedTask('FAQ')">FAQs</button>
     </div>
     <div class="content" [ngSwitch]="selectedTask">
 

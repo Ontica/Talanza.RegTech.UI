@@ -19,8 +19,6 @@ import { Posting, EmptyPosting, BASE_OBJECT_UID } from '@app/models/knowledge-ba
 })
 export class UpdateFAQComponent {
 
-  private _faq = EmptyPosting();
-
   @Input()
   set faq(faq: Posting) {
     this._faq = faq;
@@ -28,6 +26,7 @@ export class UpdateFAQComponent {
   get faq(): Posting {
     return this._faq;
   }
+  private _faq = EmptyPosting();
 
   @Output() close = new EventEmitter();
 
@@ -35,19 +34,34 @@ export class UpdateFAQComponent {
   constructor(private faqService: PostingsService) { }
 
 
-  async onUpdateFAQ() {
+  onClose() {
+    this.close.emit();
+  }
+
+
+  onUpdate() {
     if (!this.validate()) {
       return;
     }
 
-    this.updateFAQ();
+    this.update();
 
-    this.cleanFAQ();
+    this.clean();
+  }
+
+
+  private clean() {
+    this.faq = EmptyPosting();
+  }
+
+
+  private update() {
+    this.faqService.updatePosting(BASE_OBJECT_UID, this.faq)
+      .subscribe((x) => this.close.emit());
   }
 
 
   private validate(): boolean {
-
     if (this.faq.title === '') {
       alert('Requiero el título de la pregunta.');
       return false;
@@ -67,22 +81,6 @@ export class UpdateFAQComponent {
     }
 
     return true;
-  }
-
-
-  private updateFAQ(): void {
-    this.faqService.updatePosting(BASE_OBJECT_UID, this.faq)
-      .subscribe((x) => this.close.emit());
-  }
-
-
-  private onClose(): void {
-    this.close.emit();
-  }
-
-
-  private cleanFAQ(): void {
-    this.faq = EmptyPosting();
   }
 
 }

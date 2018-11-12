@@ -1,51 +1,50 @@
 <table class="form">
-        <tr>
-          <td class="form-title form-title-text">Pregunta:</td>
-        </tr>
-        <tr>
-          <td> <textarea class="text-area" rows="5" cols="25" [(ngModel)]="faq.title"></textarea></td>
-        </tr>
-        <tr>
-          <td class="form-title form-title-text">Respuesta:</td>
-        </tr>
-        <tr>
-          <td><textarea class="text-area" rows="12" cols="25" [(ngModel)]="faq.body"></textarea></td>
-        </tr>
-        <tr>
-          <td class="form-title form-title-text">Notas:</td>
-        </tr>
-      </table>
-      <table class="form">
-        <tr>
-          <td>Visibilidad:</td>
-          <td>
-            <select class="select-box" style="width:140px" [(ngModel)]="faq.accessMode">
-              <option value="">( Seleccionar )</option>
-              <option value="Public">Pública</option>
-              <option value="Private">Privada</option>
-              <option value="Internal">Interna</option>
-            </select>
-          </td>
-          <td class="text-align-right">
-            <span> Estado:</span>
-            <select class="select-box" style="width:140px" [(ngModel)]="faq.status">
-              <option value="">( Seleccionar )</option>
-              <option value="Active">Activa</option>
-              <option value="Pending">Pendiente</option>
-              <option value="Obsolete">Obsoleta</option>
-            </select>
-          </td>
-        </tr>
-      </table>
-      <hr>
-      <table class="form ">
-        <tr>
-          <td>
-            <button class="btn" (click)="onClose()">Cancelar</button>
-          </td>
-          <td class="text-align-right">
-            <button class="btn-action" (click)="onUpdateFAQ()">Guardar cambios</button>
-          </td>
-        </tr>
-      </table>
-
+  <tr>
+    <td class="form-title form-title-text">Pregunta:</td>
+  </tr>
+  <tr>
+    <td> <textarea class="text-area" rows="5" cols="25" [(ngModel)]="faq.title"></textarea></td>
+  </tr>
+  <tr>
+    <td class="form-title form-title-text">Respuesta:</td>
+  </tr>
+  <tr>
+    <td><textarea class="text-area" rows="12" cols="25" [(ngModel)]="faq.body"></textarea></td>
+  </tr>
+  <tr>
+    <td class="form-title form-title-text">Notas:</td>
+  </tr>
+</table>
+<table class="form">
+  <tr>
+    <td>Visibilidad:</td>
+    <td>
+      <select class="select-box" style="width:140px" [(ngModel)]="faq.accessMode">
+        <option value="">( Seleccionar )</option>
+        <option value="Public">Pública</option>
+        <option value="Private">Privada</option>
+        <option value="Internal">Interna</option>
+      </select>
+    </td>
+    <td class="text-align-right">
+      <span> Estado:</span>
+      <select class="select-box" style="width:140px" [(ngModel)]="faq.status">
+        <option value="">( Seleccionar )</option>
+        <option value="Active">Activa</option>
+        <option value="Pending">Pendiente</option>
+        <option value="Obsolete">Obsoleta</option>
+      </select>
+    </td>
+  </tr>
+</table>
+<hr>
+<table class="form ">
+  <tr>
+    <td>
+      <button class="btn" (click)="onClose()">Cancelar</button>
+    </td>
+    <td class="text-align-right">
+      <button class="btn-action" (click)="onUpdate()">Guardar cambios</button>
+    </td>
+  </tr>
+</table>

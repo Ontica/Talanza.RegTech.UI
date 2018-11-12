@@ -22,7 +22,6 @@ import { KnowledgeBaseModule } from './knowledge-base/knowledge-base.module';
 import { ProcessModule } from './process/process.module';
 import { GlobalSearchModule } from './global-search/global-search.module';
 import { InboxModule } from './inbox/inbox.module';
-import { ObligationsModule } from './obligations/obligations.module';
 import { ProjectManagementModule } from './project-management/project-management.module';
 import { SecurityUIModule } from './security-ui/security-ui.module';
 import { ServiceDeskModule } from './service-desk/service-desk.module';
@@ -54,7 +53,6 @@ const EXCEPTION_HANDLER_PROVIDER =  { provide: ErrorHandler, useClass: Exception
     SecurityUIModule,
     DashboardModule,
     KnowledgeBaseModule,
-    ObligationsModule,
     ContractsModule,
     DocumentsModule,
     ProcessModule,

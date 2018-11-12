@@ -26,52 +26,49 @@ export class AddFAQComponent {
   constructor(private faqService: PostingsService) { }
 
 
-  async save() {
+  save() {
     if (!this.validate()) {
       return;
     }
-    await this.addFAQ();
+    this.add();
+    this.clean();
+  }
 
-    this.cleanFAQ();
+
+  onCancel(): void {
+    this.close.emit();
+  }
+
+
+  private add(): void {
+    this.faqService.createPosting(BASE_OBJECT_UID, this.faq)
+      .subscribe(x => this.close.emit());
+  }
+
+
+  private clean(): void {
+    this.faq = EmptyPosting();
   }
 
 
   private validate(): boolean {
     if (this.faq.title === '') {
-      alert('Uts!!!, la pregunta se encuentra en blanco...');
+      alert('La pregunta se encuentra en blanco.');
       return false;
     }
     if (this.faq.body === '') {
-      alert('Uts!!!, la respuesta se encuentra en blanco...');
+      alert('Requiero se proporcione el texto de la respuesta.');
       return false;
     }
     if (this.faq.accessMode === '') {
-      alert('Uts!!!, No has seleccionado la visibilidad');
+      alert('Necesito conocer la visibilidad.');
       return false;
     }
     if (this.faq.status === '') {
-      alert('Uts!!!, No has seleccionado el status');
+      alert('Requiero saber el estado.');
       return false;
     }
     return true;
-  }
-
-
-  private addFAQ(): void {
-    this.faqService.createPosting(BASE_OBJECT_UID, this.faq)
-      .subscribe((x) => {
-        this.close.emit();
-      });
-  }
-
-
-  private onCancel(): void {
-    this.close.emit();
-  }
-
-
-  private cleanFAQ(): void {
-    this.faq = EmptyPosting();
   }
 
 }

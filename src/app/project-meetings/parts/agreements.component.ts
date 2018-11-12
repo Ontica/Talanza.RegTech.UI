@@ -15,4 +15,12 @@ import { Component } from '@angular/core';
 })
 export class AgreementsComponent {
 
+  addAgreement() {
+
+  }
+
+  setSelectedDate(date: any) {
+
+  }
+
 }

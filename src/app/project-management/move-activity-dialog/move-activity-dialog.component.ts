@@ -6,11 +6,13 @@
  */
 
 import { Component, Inject } from '@angular/core';
+import { Observable } from 'rxjs';
+import { List } from 'immutable';
 
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 
 import { ProjectTemplateStore } from '@app/store/project-template.store';
-import { Activity, ActivityOperation } from '@app/models/project-management';
+import { Activity, ActivityOperation, Project } from '@app/models/project-management';
 
 
 @Component({
@@ -19,6 +21,8 @@ import { Activity, ActivityOperation } from '@app/models/project-management';
   styleUrls: ['./move-activity-dialog.component.scss']
 })
 export class MoveActivityDialogComponent {
+
+  templates: Observable<List<Project>>;
 
   selectedActivity: Activity;
   targetProjectUID = '';
@@ -29,6 +33,7 @@ export class MoveActivityDialogComponent {
 
     this.selectedActivity = data as Activity;
 
+    this.templates = templateStore.templates;
   }
 
 

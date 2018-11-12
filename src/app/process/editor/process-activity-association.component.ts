@@ -26,7 +26,7 @@ export class ProcessActivityAssociationComponent {
   }
 
 
-  private onClose(): void {
+  onClose(): void {
     this.close.emit();
   }
 

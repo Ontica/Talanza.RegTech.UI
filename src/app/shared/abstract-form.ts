@@ -88,7 +88,8 @@ export abstract class AbstractForm {
 
   /// fields and constructor
 
-  protected form: FormGroup;
+  form: FormGroup;
+
   private spinner: Displayable;
 
   private currentCommand: Command = { name: ''};
@@ -152,7 +153,7 @@ export abstract class AbstractForm {
   }
 
 
-  protected keyboardHandler(event: KeyboardEvent): void {
+  keyboardHandler(event: KeyboardEvent): void {
     if (event.code !== 'Enter') {
       return;
     }
@@ -171,7 +172,7 @@ export abstract class AbstractForm {
   }
 
 
-  protected onSubmit(options?: FormSubmitOptions): void {
+  onSubmit(options?: FormSubmitOptions): void {
     try {
 
       if (this.processing) {
@@ -203,7 +204,7 @@ export abstract class AbstractForm {
   }
 
 
-  protected setCommand(command: Command | string): void {
+  setCommand(command: Command | string): void {
     Assertion.assertValue(command, 'command');
 
     Assertion.assert(!this.processing, FormMessages.CantSetCommandWhileProcessing);
