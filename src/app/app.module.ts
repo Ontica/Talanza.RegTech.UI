@@ -10,13 +10,11 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-
 import { CoreModule } from './core/core.module';
 import { StoreModule } from './store/store.module';
 import { ServicesModule } from './services/services.module';
 
 import { ContractsModule } from './contracts/contracts.module';
-import { ControlsModule } from './controls/controls.module';
 import { DocumentsModule } from './documents/documents.module';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { KnowledgeBaseModule } from './knowledge-base/knowledge-base.module';
@@ -58,7 +56,6 @@ const EXCEPTION_HANDLER_PROVIDER =  { provide: ErrorHandler, useClass: Exception
     KnowledgeBaseModule,
     ObligationsModule,
     ContractsModule,
-    ControlsModule,
     DocumentsModule,
     ProcessModule,
     ProjectManagementModule,

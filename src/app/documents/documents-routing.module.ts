@@ -12,7 +12,7 @@ import { SecurityGuardService } from '@app/core';
 
 import { MainLayoutComponent } from '@app/shared';
 
-import { DocumentsMainPageComponent } from '../documents/main-page/documents-main-page.component';
+import { DocumentsMainPageComponent } from './main-page/documents-main-page.component';
 
 
 @NgModule({

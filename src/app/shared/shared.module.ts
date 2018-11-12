@@ -12,8 +12,6 @@ import { FormsModule } from '@angular/forms';
 
 import { AngularMaterialModule } from './angular-material.module';
 
-import { ControlsModule } from '../controls/controls.module';
-
 import { MainLayoutComponent } from './main-layout/main-layout.component';
 import { MainMenuComponent } from './main-layout/main-menu/main-menu.component';
 
@@ -26,11 +24,20 @@ import { MessageBoxService } from './message-box/message.box.service';
 import { NoContentComponent } from './no-content/no-content.component';
 
 import { SafeHtmlPipe } from './pipes/safe-html.pipe';
+import { SafeUrlPipe } from './pipes/safe-url.pipe';
 
 import { SpinnerComponent } from './spinner/spinner.component';
 import { SpinnerService } from './spinner/spinner.service';
 
 import { SharedService } from './shared.service';
+
+
+import { CalendarControl } from './calendar/calendar-control';
+import { ModalWindow } from './modal-window/modal-window';
+import { PdfViewer } from './pdf-viewer/pdf-viewer';
+
+import { RagStatusControl } from './rag-status/rag-status.control';
+import { SearchControl } from './search/search.control';
 
 
 @NgModule({
@@ -39,9 +46,7 @@ import { SharedService } from './shared.service';
     RouterModule,
     CommonModule,
     FormsModule,
-    AngularMaterialModule,
-
-    ControlsModule
+    AngularMaterialModule
   ],
 
   declarations: [
@@ -53,6 +58,13 @@ import { SharedService } from './shared.service';
     NoContentComponent,
     SafeHtmlPipe,
     SpinnerComponent,
+    CalendarControl,
+    ModalWindow,
+    PdfViewer,
+    RagStatusControl,
+    SafeHtmlPipe,
+    SafeUrlPipe,
+    SearchControl
   ],
 
   exports: [
@@ -61,7 +73,14 @@ import { SharedService } from './shared.service';
     NavigationHeaderComponent,
     NoContentComponent,
     SafeHtmlPipe,
-    SpinnerComponent
+    SpinnerComponent,
+    CalendarControl,
+    ModalWindow,
+    PdfViewer,
+    RagStatusControl,
+    SafeHtmlPipe,
+    SafeUrlPipe,
+    SearchControl
   ],
 
   providers: [

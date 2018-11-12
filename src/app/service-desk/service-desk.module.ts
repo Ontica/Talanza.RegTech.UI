@@ -1,39 +1,59 @@
 /**
  * @license
- * Copyright (c) 2017 La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
+ * Copyright (c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
  *
  * See LICENSE.txt in the project root for complete license information.
- *
  */
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { ControlsModule } from '../controls/controls.module';
-import { ProjectMeetingsModule } from '../project-meetings/project-meetings.module';
+
+import { ProjectMeetingsModule } from '@app/project-meetings/project-meetings.module';
+import { SharedModule } from '@app/shared/shared.module';
+
+import { AddFAQModalWindowComponent } from './faqs/add-faq-modal.window.component';
+import { AddFAQComponent } from './faqs/add-faq.component';
+import { FAQComponent } from './faqs/faq.component';
+import { FAQsComponent } from './faqs/faqs.component';
+import { UpdateFAQComponent } from './faqs/update-faq.component';
+import { FAQsTableViewComponent } from './faqs/views/faqs-table-view.component';
+import { ServiceDeskMainPageComponent } from './main-page/service-desk-main-page.component';
+import { TicketsComponent } from './tickets/tickets.component';
 
 import { ServiceDeskRoutingModule } from './service-desk-routing.module';
 
-import { ServiceDeskMainPageComponent } from './main-page/service-desk-main-page.component';
-import { TicketsComponent } from './tickets/tickets.component';
-import { FAQsComponent } from './faqs/faqs.component';
-import { FAQComponent } from './faqs/faq.component';
-import { AddFAQComponent } from './faqs/add-faq.component';
-import { AddFAQModalWindowComponent } from './faqs/add-faq-modal.window.component';
-import { UpdateFAQComponent } from './faqs/update-faq.component';
-
-import { FAQsTableViewComponent } from './faqs/views/faqs-table-view.component';
-
-/**
- * Do not specify providers for modules that might be imported by a lazy loaded module.
- */
 
 @NgModule({
-  imports: [ServiceDeskRoutingModule, CommonModule, FormsModule, ControlsModule, ProjectMeetingsModule],
-  declarations: [ServiceDeskMainPageComponent, TicketsComponent, FAQsComponent,
-                 FAQComponent, AddFAQComponent, AddFAQModalWindowComponent, UpdateFAQComponent,
-                 FAQsTableViewComponent],
-  exports: [ServiceDeskMainPageComponent, AddFAQComponent, FAQsTableViewComponent,
-             FAQComponent, AddFAQModalWindowComponent]
+
+  imports: [
+    CommonModule,
+    FormsModule,
+    SharedModule,
+
+    ProjectMeetingsModule,
+
+    ServiceDeskRoutingModule,
+  ],
+
+  declarations: [
+    AddFAQComponent,
+    AddFAQModalWindowComponent,
+    FAQComponent,
+    FAQsComponent,
+    FAQsTableViewComponent,
+    ServiceDeskMainPageComponent,
+    TicketsComponent,
+    UpdateFAQComponent
+  ],
+
+  exports: [
+    AddFAQComponent,
+    AddFAQModalWindowComponent,
+    FAQComponent,
+    FAQsTableViewComponent,
+    ServiceDeskMainPageComponent
+  ]
+
 })
 export class ServiceDeskModule { }

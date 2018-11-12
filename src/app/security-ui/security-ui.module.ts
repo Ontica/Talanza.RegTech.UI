@@ -25,9 +25,13 @@ import { UserLoginComponent } from './user-login/user-login.component';
     SecurityUIRoutingModule,
   ],
 
-  declarations: [UserLoginComponent],
+  declarations: [
+    UserLoginComponent
+  ],
 
-  exports: [UserLoginComponent]
+  exports: [
+    UserLoginComponent
+  ]
 
 })
 export class SecurityUIModule { }

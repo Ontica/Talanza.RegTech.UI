@@ -11,7 +11,7 @@ import { FormsModule } from '@angular/forms';
 
 import { AngularMaterialModule } from '@app/shared/angular-material.module';
 
-import { ControlsModule } from '../controls/controls.module';
+import { SharedModule } from '@app/shared/shared.module';
 
 // Procedure viewer components
 
@@ -49,7 +49,7 @@ import { ProceduresRoutingModule } from './procedures-routing.module';
     CommonModule,
     FormsModule,
     AngularMaterialModule,
-    ControlsModule,
+    SharedModule,
     ProceduresRoutingModule
   ],
 

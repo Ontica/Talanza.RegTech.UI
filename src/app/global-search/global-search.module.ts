@@ -9,36 +9,35 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
-import { SharedModule } from '../shared/shared.module';
+import { SharedModule } from '@app/shared/shared.module';
 
-import { ControlsModule } from '../controls/controls.module';
+
 import { ContractsModule } from '../contracts/contracts.module';
 import { DocumentsModule } from '../documents/documents.module';
 import { ProceduresModule } from '../procedures/procedures.module';
 import { ProjectMeetingsModule } from '../project-meetings/project-meetings.module';
 import { ServiceDeskModule } from '../service-desk/service-desk.module';
 
-import { GlobalSearchRoutingModule } from './global-search-routing.module';
-
 import { GlobalSearchMainPageComponent } from './main-page/gs-main-page.component';
 import { SearchResultsNavBarComponent } from './search-results-navbar/search-results-navbar.component';
 import { GlobalAddComponent } from './global-add/global-add.component';
 
+import { GlobalSearchRoutingModule } from './global-search-routing.module';
 
 @NgModule({
 
   imports: [
-    GlobalSearchRoutingModule,
     CommonModule,
     FormsModule,
     SharedModule,
 
-    ProceduresModule,
-    ControlsModule,
     ContractsModule,
     DocumentsModule,
     ServiceDeskModule,
-    ProjectMeetingsModule
+    ProceduresModule,
+    ProjectMeetingsModule,
+
+    GlobalSearchRoutingModule
   ],
 
   declarations: [

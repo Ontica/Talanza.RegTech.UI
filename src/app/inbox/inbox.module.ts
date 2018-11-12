@@ -1,35 +1,46 @@
 /**
  * @license
- * Copyright (c) 2017 La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
+ * Copyright (c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
  *
  * See LICENSE.txt in the project root for complete license information.
- *
  */
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { SharedModule } from '../shared/shared.module';
-import { ControlsModule } from '../controls/controls.module';
 
-import { InboxRoutingModule } from './inbox-routing.module';
-
-import { WorkListComponent } from './work-list/work-list.component';
-
-import { InboxFilterComponent } from './main-page/inbox-filter.component';
-import { InboxMainPageComponent } from './main-page/inbox-main-page.component';
+import { SharedModule } from '@app/shared/shared.module';
 
 import { InboxEditorComponent } from './editor/inbox-editor.component';
 import { TaskEditorComponent } from './editor/tabs/task-editor/task-editor.component';
+import { InboxFilterComponent } from './main-page/inbox-filter.component';
+import { InboxMainPageComponent } from './main-page/inbox-main-page.component';
+import { WorkListComponent } from './work-list/work-list.component';
 
-/**
- * Do not specify providers for modules that might be imported by a lazy loaded module.
- */
+import { InboxRoutingModule } from './inbox-routing.module';
+
 
 @NgModule({
-  imports: [InboxRoutingModule, SharedModule, CommonModule, FormsModule, ControlsModule],
-  declarations: [InboxMainPageComponent, InboxFilterComponent, WorkListComponent,
-                 TaskEditorComponent, InboxEditorComponent ],
-  exports: [InboxMainPageComponent]
+
+  imports: [
+    CommonModule,
+    FormsModule,
+    SharedModule,
+
+    InboxRoutingModule
+  ],
+
+  declarations: [
+    InboxEditorComponent,
+    InboxFilterComponent,
+    InboxMainPageComponent,
+    TaskEditorComponent,
+    WorkListComponent
+  ],
+
+  exports: [
+    InboxMainPageComponent
+  ]
+
 })
 export class InboxModule { }
