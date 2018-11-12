@@ -28,11 +28,11 @@
       <tr>
         <td>Fecha objetivo:</td>
         <td>
-          <emp-ng-calendar-control formControlName="targetDate"></emp-ng-calendar-control>
+          <emp-ng-date-picker formControlName="targetDate"></emp-ng-date-picker>
         </td>
         <td class="text-align-right" style="width:100%;white-space:normal">Fecha máxima de entrega:</td>
         <td>
-          <emp-ng-calendar-control formControlName="dueDate"></emp-ng-calendar-control>
+          <emp-ng-date-picker formControlName="dueDate"></emp-ng-date-picker>
         </td>
       </tr>
       <tr>
@@ -67,12 +67,12 @@
       <tr class="border-top">
         <td>Iniciada el:</td>
         <td>
-          <emp-ng-calendar-control formControlName="startDate"></emp-ng-calendar-control>
+          <emp-ng-date-picker formControlName="startDate"></emp-ng-date-picker>
           <button mat-button type="button" [disabled]="disabled" (click)="onStart()">Iniciar</button>
         </td>
         <td class="text-align-right" style="width:100%;white-space:normal">Cerrada el:</td>
         <td>
-          <emp-ng-calendar-control formControlName="endDate"></emp-ng-calendar-control>
+          <emp-ng-date-picker formControlName="endDate"></emp-ng-date-picker>
           <button mat-button type="button" [disabled]="disabled" (click)="onEnd()">Cerrar</button>
         </td>
       </tr>

@@ -1,6 +1,6 @@
 <i class="fa fa-plus-circle" aria-hidden="true" (click)="onClick()"></i>
 <div class="container">
-  <div class="items-div" *ngIf="isHideControl">
+  <div class="items-div" *ngIf="visible">
      <ul *ngFor="let item of items">
        <li  (click)="onSelectItem(item)">
          {{item}}
@@ -12,11 +12,11 @@
 <div [ngSwitch]="selectedItem">
 
   <emp-kb-add-faq-modal-window *ngSwitchCase="'FAQ'"
-      (close)="selectedItem=''">
+      (close)="onSelectItem('')">
   </emp-kb-add-faq-modal-window>
 
   <emp-kb-add-meeting-modal-window *ngSwitchCase="'Ticket'"
-      (close)="selectedItem=''">
+      (close)="onSelectItem('')">
   </emp-kb-add-meeting-modal-window>
 
 </div>

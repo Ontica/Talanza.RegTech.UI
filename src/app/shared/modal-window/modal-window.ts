@@ -1,20 +1,20 @@
 /**
  * @license
- * Copyright (c) 2017 La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
+ * Copyright (c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
  *
  * See LICENSE.txt in the project root for complete license information.
- *
  */
 
-import { Component, EventEmitter, HostBinding, Input, Output } from '@angular/core';
+import { Component, EventEmitter,
+         HostBinding, Input, Output } from '@angular/core';
+
 
 @Component({
   selector: 'emp-ng-modal-window',
   templateUrl: './modal-window.html',
   styleUrls: ['./modal-window.scss']
 })
-
-export class ModalWindow {
+export class ModalWindowComponent {
 
   @HostBinding('style.display') display = 'block';
   @HostBinding('style.position') position = 'absolute';
@@ -23,7 +23,9 @@ export class ModalWindow {
 
   @Output() close = new EventEmitter();
 
+
   onClose(): void {
     this.close.emit();
   }
+
 }

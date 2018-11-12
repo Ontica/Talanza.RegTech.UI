@@ -7,10 +7,16 @@
 
 import { NgModule } from '@angular/core';
 
-import { MatButtonModule, MatDatepickerModule,
-         MatDialogModule, MatFormFieldModule,
-         MatMenuModule, MatNativeDateModule,
-         MatProgressSpinnerModule, MatTabsModule } from '@angular/material';
+import {
+  MatButtonModule,
+  MatDatepickerModule,
+  MatDialogModule,
+  MatFormFieldModule,
+  MatMenuModule,
+  MatNativeDateModule,
+  MatProgressSpinnerModule,
+  MatTabsModule
+} from '@angular/material';
 
 
 @NgModule({

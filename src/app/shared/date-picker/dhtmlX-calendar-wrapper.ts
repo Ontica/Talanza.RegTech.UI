@@ -11,7 +11,7 @@ import { CalendarSettings } from './calendar.settings';
 
 declare var dhtmlXCalendarObject: any;
 
-export class CalendarWrapper {
+export class DatePickerWrapper {
 
   private _calendar: any;
 

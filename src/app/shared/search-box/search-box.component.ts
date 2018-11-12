@@ -1,31 +1,31 @@
 /**
  * @license
- * Copyright (c) 2017-2018 La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
+ * Copyright (c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
  *
  * See LICENSE.txt in the project root for complete license information.
- *
  */
+
 import { Component, EventEmitter, Output } from '@angular/core';
 
-@Component({
-  selector: 'emp-ng-search-control',
-  templateUrl: './search.control.html',
-  styleUrls: ['./search.control.scss']
-})
 
-export class SearchControl {
+@Component({
+  selector: 'emp-ng-search-box',
+  templateUrl: './search-box.component.html',
+  styleUrls: ['./search-box.component.scss']
+})
+export class SearchBoxComponent {
 
   @Output() search = new EventEmitter<string>();
 
   keywords = '';
 
 
-  onCancel(): void {
+  onCancel() {
     this.keywords = '';
   }
 
 
-  onSearch(): void {
+  onSearch() {
     if (this.keywords) {
       this.search.emit(this.keywords);
     }

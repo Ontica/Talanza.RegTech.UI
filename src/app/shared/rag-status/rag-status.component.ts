@@ -23,9 +23,9 @@ export enum RagStatus {
          (click)="onclick()">
     </div>
   `,
-  styleUrls: ['./rag-status.control.scss']
+  styleUrls: ['./rag-status.component.scss']
 })
-export class RagStatusControl {
+export class RagStatusComponent {
 
   @Output() change = new EventEmitter<RagStatus>();
 
@@ -40,7 +40,7 @@ export class RagStatusControl {
   private _status: RagStatus = RagStatus.NoColor;
 
 
-  protected statusColorCssClass = '';
+  statusColorCssClass = '';
 
 
   onclick() {
@@ -48,6 +48,7 @@ export class RagStatusControl {
 
     this.change.emit(nextColor);
   }
+
 
   // private methods
 

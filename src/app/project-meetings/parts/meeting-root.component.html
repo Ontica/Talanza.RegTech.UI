@@ -9,9 +9,7 @@
     <tr>
         <td>Fecha:</td>
         <td>
-            <emp-ng-calendar-control [date]="meeting.date"
-                                     (change)="meeting.date=$event">
-            </emp-ng-calendar-control>
+          <emp-ng-date-picker [date]="meeting.date" (change)="meeting.date=$event"></emp-ng-date-picker>
         </td>
         <td>Inicio:</td>
         <td>

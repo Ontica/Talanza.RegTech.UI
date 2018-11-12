@@ -7,80 +7,71 @@
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+
+import { DatePickerComponent } from './date-picker/date-picker.component';
+import { MainLayoutComponent } from './main-layout/main-layout.component';
+import { MainMenuComponent } from './main-layout/main-menu/main-menu.component';
+import { MessageBoxComponent } from './message-box/message-box.component';
+import { ModalWindowComponent } from './modal-window/modal-window';
+import { NavigationHeaderComponent } from './nav-header/nav-header.component';
+import { NavigationMenuComponent } from './nav-menu/nav-menu.component';
+import { NoContentComponent } from './no-content/no-content.component';
+import { ObjectComponent } from './object/object.component';
+import { SafeHtmlPipe } from './pipes/safe-html.pipe';
+import { SafeUrlPipe } from './pipes/safe-url.pipe';
+import { RagStatusComponent } from './rag-status/rag-status.component';
+import { SearchBoxComponent } from './search-box/search-box.component';
+import { SpinnerComponent } from './spinner/spinner.component';
 
 import { AngularMaterialModule } from './angular-material.module';
 
-import { MainLayoutComponent } from './main-layout/main-layout.component';
-import { MainMenuComponent } from './main-layout/main-menu/main-menu.component';
-
-import { NavigationHeaderComponent } from './nav-header/nav-header.component';
-import { NavigationMenuComponent } from './nav-menu/nav-menu.component';
-
-import { MessageBoxComponent } from './message-box/message-box.component';
 import { MessageBoxService } from './message-box/message.box.service';
-
-import { NoContentComponent } from './no-content/no-content.component';
-
-import { SafeHtmlPipe } from './pipes/safe-html.pipe';
-import { SafeUrlPipe } from './pipes/safe-url.pipe';
-
-import { SpinnerComponent } from './spinner/spinner.component';
-import { SpinnerService } from './spinner/spinner.service';
-
 import { SharedService } from './shared.service';
-
-
-import { CalendarControl } from './calendar/calendar-control';
-import { ModalWindow } from './modal-window/modal-window';
-import { PdfViewer } from './pdf-viewer/pdf-viewer';
-
-import { RagStatusControl } from './rag-status/rag-status.control';
-import { SearchControl } from './search/search.control';
+import { SpinnerService } from './spinner/spinner.service';
 
 
 @NgModule({
 
   imports: [
-    RouterModule,
     CommonModule,
+    RouterModule,
     FormsModule,
+
     AngularMaterialModule
   ],
 
   declarations: [
+    DatePickerComponent,
     MainLayoutComponent,
     MainMenuComponent,
     MessageBoxComponent,
+    ModalWindowComponent,
     NavigationHeaderComponent,
     NavigationMenuComponent,
     NoContentComponent,
-    SafeHtmlPipe,
-    SpinnerComponent,
-    CalendarControl,
-    ModalWindow,
-    PdfViewer,
-    RagStatusControl,
+    ObjectComponent,
+    RagStatusComponent,
     SafeHtmlPipe,
     SafeUrlPipe,
-    SearchControl
+    SearchBoxComponent,
+    SpinnerComponent
   ],
 
   exports: [
+    DatePickerComponent,
     MainLayoutComponent,
     MessageBoxComponent,
+    ModalWindowComponent,
     NavigationHeaderComponent,
     NoContentComponent,
-    SafeHtmlPipe,
-    SpinnerComponent,
-    CalendarControl,
-    ModalWindow,
-    PdfViewer,
-    RagStatusControl,
+    ObjectComponent,
+    RagStatusComponent,
     SafeHtmlPipe,
     SafeUrlPipe,
-    SearchControl
+    SearchBoxComponent,
+    SpinnerComponent
   ],
 
   providers: [
