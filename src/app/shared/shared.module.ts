@@ -10,6 +10,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
+import { DatepickerComponent } from './datepicker/datepicker.component';
 import { DatePickerComponent } from './date-picker/date-picker.component';
 import { MainLayoutComponent } from './main-layout/main-layout.component';
 import { MainMenuComponent } from './main-layout/main-menu/main-menu.component';
@@ -43,6 +44,7 @@ import { SpinnerService } from './spinner/spinner.service';
   ],
 
   declarations: [
+    DatepickerComponent,
     DatePickerComponent,
     MainLayoutComponent,
     MainMenuComponent,
@@ -60,6 +62,7 @@ import { SpinnerService } from './spinner/spinner.service';
   ],
 
   exports: [
+    DatepickerComponent,
     DatePickerComponent,
     MainLayoutComponent,
     MessageBoxComponent,
