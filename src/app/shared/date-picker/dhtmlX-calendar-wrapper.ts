@@ -7,6 +7,8 @@
 
 import { Language, DEFAULT_LANGUAGE, LocalizationLibrary } from '@app/models/localization';
 
+import { DateString } from '@app/models/core/date-string-library';
+
 import { CalendarSettings } from './calendar.settings';
 
 declare var dhtmlXCalendarObject: any;
@@ -56,7 +58,7 @@ export class DatePickerWrapper {
   }
 
 
-  setDate(date: Date | string): void {
+  setDate(date: DateString): void {
     this._calendar.setDate(date);
   }
 

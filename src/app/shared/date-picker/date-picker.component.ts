@@ -43,7 +43,7 @@ export class DatePickerComponent implements AfterViewInit, ControlValueAccessor,
   @Input()
   get date(): DateString { return this._date; }
   set date(value: DateString) {
-    this._date = DateStringLibrary.tryParseDateValue(value);
+    this._date = DateStringLibrary.toDate(value);
 
     this.refreshCalendarDate();
   }
@@ -86,15 +86,14 @@ export class DatePickerComponent implements AfterViewInit, ControlValueAccessor,
       this.propagateDateChange(null);
 
     } else if (DateStringLibrary.isDate(this.displayedDateString)) {
-      const newFormattedDate = DateStringLibrary.tryFormat(this.displayedDateString);
 
-      this.displayedDateString = newFormattedDate;
+     this.displayedDateString = DateStringLibrary.format(this.displayedDateString);
 
-      const parsedDate = DateStringLibrary.tryParseDate(newFormattedDate, this.config.language);
+     const parsedDate = DateStringLibrary.toDate(this.displayedDateString);
 
-      this.calendar.setDate(parsedDate);
+     this.calendar.setDate(parsedDate);
 
-      this.propagateDateChange(this.calendar.getDate());
+     this.propagateDateChange(this.calendar.getDate());
 
     } else {
       this.displayedDateString = '';
@@ -144,7 +143,7 @@ export class DatePickerComponent implements AfterViewInit, ControlValueAccessor,
   private attachEvents() {
     this.calendar.attachEvent('onClick',
       date => {
-        this.displayedDateString = DateStringLibrary.formatDMY(date);
+        this.displayedDateString = DateStringLibrary.format(date);
         this.propagateDateChange(date);
       });
   }
@@ -187,7 +186,7 @@ export class DatePickerComponent implements AfterViewInit, ControlValueAccessor,
 
   private refreshCalendarDate() {
     if (this.date) {
-      this.displayedDateString = DateStringLibrary.formatDMY(this.date);
+      this.displayedDateString = DateStringLibrary.format(this.date);
     } else {
       this.displayedDateString = '';
     }
