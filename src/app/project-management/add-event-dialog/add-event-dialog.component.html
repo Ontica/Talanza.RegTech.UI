@@ -15,16 +15,15 @@
   <br/>
   Fecha:
   <br/>
-  <emp-ng-date-picker formControlName="eventDate"></emp-ng-date-picker>
+  <emp-ng-datepicker formControlName="eventDate"></emp-ng-datepicker>
   <br/>
   <br/>
   <br/>
+
 </mat-dialog-content>
 
 <mat-dialog-actions>
   <button mat-raised-button (click)="close()">Cerrar</button>
 
   <button mat-raised-button color="primary" [disabled]="!this.form.valid" (click)="save()">Agregar al proyecto</button>
-
 </mat-dialog-actions>
-

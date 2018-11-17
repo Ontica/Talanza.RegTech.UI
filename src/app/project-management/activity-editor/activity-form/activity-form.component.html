@@ -28,11 +28,11 @@
       <tr>
         <td>Fecha objetivo:</td>
         <td>
-          <emp-ng-date-picker formControlName="targetDate"></emp-ng-date-picker>
+          <emp-ng-datepicker formControlName="targetDate"></emp-ng-datepicker>
         </td>
         <td class="text-align-right" style="width:100%;white-space:normal">Fecha máxima de entrega:</td>
         <td>
-          <emp-ng-date-picker formControlName="dueDate"></emp-ng-date-picker>
+          <emp-ng-datepicker formControlName="dueDate"></emp-ng-datepicker>
         </td>
       </tr>
       <tr>
@@ -67,12 +67,12 @@
       <tr class="border-top">
         <td>Iniciada el:</td>
         <td>
-          <emp-ng-date-picker formControlName="startDate"></emp-ng-date-picker>
+          <emp-ng-datepicker formControlName="startDate"></emp-ng-datepicker>
           <button mat-button type="button" [disabled]="disabled" (click)="onStart()">Iniciar</button>
         </td>
         <td class="text-align-right" style="width:100%;white-space:normal">Cerrada el:</td>
         <td>
-          <emp-ng-date-picker formControlName="endDate"></emp-ng-date-picker>
+          <emp-ng-datepicker formControlName="endDate"></emp-ng-datepicker>
           <button mat-button type="button" [disabled]="disabled" (click)="onEnd()">Cerrar</button>
         </td>
       </tr>
@@ -110,16 +110,19 @@
     <table class="form-section">
       <tr>
         <td>
-          <button *ngIf="!disabled && task.uid.length === 0" type="button" class="btn-warning" (click)="onDelete()">Eliminar</button>
+          <button *ngIf="!disabled && task.uid.length === 0" type="button" class="btn-warning"
+                  (click)="onDelete()">Eliminar</button>
         </td>
         <td class="text-align-right">
 
-          <button *ngIf="!disabled" type="submit" class="btn-action btn-margin-right" (click)="setCommand('update')">Guardar
-            los cambios</button>
+          <button *ngIf="!disabled" type="submit" class="btn-action btn-margin-right"
+                  (click)="setCommand('update')">Guardar los cambios</button>
 
-          <button *ngIf="disabled" type="button" class="btn-action right" (click)="enable()">Editar</button>
+          <button *ngIf="disabled" type="button" class="btn-action right"
+                  (click)="enable()">Editar</button>
 
-          <button *ngIf="!disabled" type="button" class="btn right" (click)="onCancelEdition()">Cancelar edición</button>
+          <button *ngIf="!disabled" type="button" class="btn right"
+                  (click)="onCancelEdition()">Cancelar edición</button>
 
         </td>
       </tr>
