@@ -264,12 +264,10 @@ export class ActivityFormComponent extends AbstractForm implements OnInit, OnCha
       return;
     }
 
-    if (DateStringLibrary.compareDateParts(targetDate, dueDate) > 0) {
+    if (DateStringLibrary.compareDates(targetDate, dueDate) > 0) {
       this.addException(FormMessages.TargetDateIsGreaterThanDueDate);
       this.get('targetDate').markAsDirty();
     }
-
-
   }
 
   // these methods must be handled through component input data (architecture concern)

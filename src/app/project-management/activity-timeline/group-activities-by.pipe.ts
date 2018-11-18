@@ -10,8 +10,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { Assertion } from '@app/core';
 
 import { Activity } from '@app/models/project-management';
-import { DateString } from '@app/models/core';
-
+import { DateString, DateStringLibrary } from '@app/models/core';
 
 const EMPTY_RESPONSIBLE_GROUP = 'Actividades sin asignar';
 
@@ -150,8 +149,7 @@ export class GroupActivitiesByPipe implements PipeTransform  {
 
   private getYearMonthGroupName(dateValue: DateString, dateProperty: GroupByDateProperty) {
     if (dateValue) {
-      return new Date(dateValue).getFullYear() + '-' +
-            (new Date(dateValue).getMonth() + 1).toString().padStart(2, '0');
+      return DateStringLibrary.yearMonth(dateValue);
 
     } else if (dateProperty === 'dueDate') {
       return 'Sin fecha máxima de entrega';

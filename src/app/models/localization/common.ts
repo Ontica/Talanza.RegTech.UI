@@ -9,4 +9,4 @@ export type Language = 'sp' | 'en';
 
 export const DEFAULT_LANGUAGE: Language = 'sp';
 
-export type DateFormat = 'DMY' | 'YMD';
+export type DateFormat = 'DMY' | 'YMD' | 'MDY';
