@@ -50,9 +50,8 @@ export class ActivityService {
   searchActivities(projectUID: string, filter: object,
     orderBy: string, keywords: string): Observable<Activity[]> {
 
-    const path = `v1/project-management/projects/${projectUID}/activities?filter=${filter}
-                                                                          &orderBy=${orderBy}
-                                                                          &keywords=${keywords}`;
+    const path = `v1/project-management/projects/${projectUID}/activities?` +
+                 `filter=${filter}&orderBy=${orderBy}&keywords=${keywords}`;
 
     return this.core.http.get<Activity[]>(path)
       .pipe(

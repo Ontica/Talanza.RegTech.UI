@@ -169,9 +169,8 @@ export class ProjectService {
     Assertion.assertValue(targetProjectUID, 'targetProjectUID');
     Assertion.assertValue(activity, 'activity');
 
-
-    const path = `v1/project-management/projects/${activity.project.uid}/
-                  activities/${activity.uid}/copyTo/${targetProjectUID}`;
+    const path = `v1/project-management/projects/${activity.project.uid}/activities/` +
+                 `${activity.uid}/copyTo/${targetProjectUID}`;
 
     const body = {
 
@@ -187,8 +186,7 @@ export class ProjectService {
   deleteActivity(activity: Activity): Observable<void> {
     Assertion.assertValue(activity, 'activity');
 
-    const path = `v1/project-management/projects/${activity.project.uid}
-                 /activities/${activity.uid}`;
+    const path = `v1/project-management/projects/${activity.project.uid}/activities/${activity.uid}`;
 
     return this.core.http.delete<any>(path)
                          .pipe(
@@ -248,8 +246,8 @@ export class ProjectService {
     Assertion.assertValue(activity, 'activity');
 
 
-    const path = `v1/project-management/projects/${activity.project.uid}/
-                  activities/${activity.uid}/moveTo/${targetProjectUID}`;
+    const path = `v1/project-management/projects/${activity.project.uid}/activities/` +
+                 `${activity.uid}/moveTo/${targetProjectUID}`;
 
     const body = {
 
