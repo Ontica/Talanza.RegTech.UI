@@ -6,7 +6,7 @@
  */
 
 import { DateFormat, Language, LocalizationLibrary, DEFAULT_LANGUAGE } from '../localization';
-
+import * as moment from 'moment';
 
 export type DateString = Date | string;
 
@@ -233,10 +233,9 @@ export class DateStringLibrary {
       return null;
     }
 
-
-    const parsedDate = new Date(`${+dateParts[yearIndex]}-` +
-                                `${this.padZeros(+dateParts[monthIndex] + 1)}-` +
-                                `${this.padZeros(+dateParts[dayIndex])}`);
+    const parsedDate = moment(`${+dateParts[yearIndex]}-` +
+                              `${this.padZeros(+dateParts[monthIndex] + 1)}-` +
+                              `${this.padZeros(+dateParts[dayIndex])}`).toDate();
 
     if (parsedDate && !isNaN(parsedDate.getFullYear())) {
       return parsedDate;
