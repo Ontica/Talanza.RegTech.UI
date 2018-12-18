@@ -7,8 +7,8 @@
 
 import { Component, ChangeDetectionStrategy,
          ElementRef, EventEmitter,
-         Input, Output,
-         OnInit, ViewChild } from '@angular/core';
+         Input, Output, OnInit,
+         ViewChild, ViewEncapsulation } from '@angular/core';
 
 import { ProjectModel, ProjectStore } from '@app/store/project.store';
 
@@ -25,6 +25,7 @@ import { GanttService } from '@app/services/project-management';
   templateUrl: './dhtmlx-gantt.component.html',
   styleUrls: ['./dhtmlx-gantt.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None
 })
 export class DhtmlxGanttComponent implements OnInit {
 
@@ -45,7 +46,7 @@ export class DhtmlxGanttComponent implements OnInit {
   get config(): ViewConfig { return this._config; }
   set config(value: ViewConfig) {
     this._config = value;
-    this.setConfiguration();
+    this.configGantt();
     this.resetGantt();
   }
   private _config;
@@ -70,8 +71,14 @@ export class DhtmlxGanttComponent implements OnInit {
 
 
   ngOnInit() {
+    this.store.selectedView().subscribe(
+      x => this.config = x
+    );
+
+
     this.attachEvents();
 
+    this.configGantt();
     this.resetGantt();
   }
 
@@ -86,7 +93,7 @@ export class DhtmlxGanttComponent implements OnInit {
         return;
       }
 
-      this.selectedTask = this.ganttData.find( x => x.id === +id );
+      this.selectedTask = this.ganttData.find(x => x.id === +id);
 
       const activity = this.store.getActivity(this.selectedTask.uid);
 
@@ -95,6 +102,15 @@ export class DhtmlxGanttComponent implements OnInit {
     });
 
   }
+
+
+  private configGantt() {
+    this.setLayout();
+    this.setProperties();
+    this.setTemplates();
+    this.setViewConfig();
+  }
+
 
   private refreshData() {
     if (this.project.project.uid === '') {
@@ -115,17 +131,19 @@ export class DhtmlxGanttComponent implements OnInit {
                       });
   }
 
+
   private resetGantt() {
     gantt.init(this.ganttContainer.nativeElement);
 
     if (this.selectedTask) {
       this.innerReset = true;
       gantt.selectTask(this.selectedTask.id);
+      gantt.showTask(this.selectedTask.id);
     }
   }
 
 
-  private setConfiguration() {
+  private setLayout() {
 
     gantt.config.layout = {
       css: 'gantt_container',
@@ -133,14 +151,12 @@ export class DhtmlxGanttComponent implements OnInit {
           {
              cols: [
               {
-                // the default grid view
                 view: 'grid',
                 scrollX: 'scrollHor',
                 scrollY: 'scrollVer'
               },
               { resizer: true, width: 1 },
               {
-                // the default timeline view
                 view: 'timeline',
                 scrollX: 'scrollHor',
                 scrollY: 'scrollVer'
@@ -151,11 +167,22 @@ export class DhtmlxGanttComponent implements OnInit {
               }
           ]},
           {
-              view: 'scrollbar',
-              id: 'scrollHor'
+            view: 'scrollbar',
+            id: 'scrollHor'
           }
       ]
     };
+
+  }
+
+
+  private setProperties() {
+    gantt.config.columns =  [
+      { name: 'text', label: 'Obligaciones / Actividades',
+        width: '*', min_width: 520, tree: true, resize: true
+      }
+    ];
+
 
     gantt.config.xml_date = '%Y-%m-%d %H:%i';
 
@@ -169,11 +196,39 @@ export class DhtmlxGanttComponent implements OnInit {
     gantt.config.open_tree_initially = true;
     gantt.config.select_task = true;
     gantt.config.readonly = true;
+    gantt.config.smart_scales = true;
     gantt.config.preserve_scroll = true;
+  }
 
+
+  private setTemplates() {
+    gantt.templates.grid_folder = item => {
+      return "<div class='gantt_tree_icon " + (item.$open ? 'open' : 'closed') + "'></div>";
+    };
+
+    gantt.templates.grid_file = item => {
+      return "<div class='gantt_tree_icon'></div>";
+    };
+  }
+
+
+  private setViewConfig() {
     gantt.config.scale_unit = this.config ? this.config.timeScaleUnit : 'quarter';
-    gantt.config.date_scale = '%M %Y';
 
+    switch (gantt.config.scale_unit) {
+      case 'year':
+        gantt.config.date_scale = '%Y';
+        break;
+      case 'quarter':
+        gantt.config.date_scale = '%M-%Y';
+        break;
+      case 'month':
+        gantt.config.date_scale = '%M-%Y';
+        break;
+      case 'week':
+        gantt.config.date_scale = '%d %M %y';
+        break;
+    }
   }
 
 }
