@@ -3,8 +3,8 @@
 
   <div [ngSwitch]="viewConfig.viewType"
        class="explorer-panel"
-       [class.primary]="viewConfig.viewType !== 'Gantt'"
-       [class.primary-full]="viewConfig.viewType === 'Gantt'">
+       [class.primary]="viewConfig.viewType !== 'ganttView'"
+       [class.primary-full]="viewConfig.viewType === 'ganttView'">
 
     <emp-steps-activity-tree *ngSwitchCase="'treeView'"
          [templateDesignerMode]="false"
