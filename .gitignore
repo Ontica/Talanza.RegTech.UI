@@ -39,4 +39,4 @@ testem.log
 Thumbs.db
 
 # Application related
-empiria.config.ts
+empiria.config.json

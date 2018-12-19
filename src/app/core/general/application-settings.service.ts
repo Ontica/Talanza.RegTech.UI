@@ -6,24 +6,39 @@
  */
 
 import { Injectable } from '@angular/core';
-import { APP_SETTINGS } from '@assets/empiria.config';
+import { HttpClient } from '@angular/common/http';
 
 import { ApplicationSettings } from './application-settings';
+import { KeyValue } from '../data-types/key-value';
 
 
 @Injectable()
 export class ApplicationSettingsService {
 
-  private settings: ApplicationSettings;
+  private settings: Promise<ApplicationSettings>;
 
-  constructor() {
-    const data = JSON.parse(JSON.stringify(APP_SETTINGS.settings));
-
-    this.settings = new ApplicationSettings(data);
+  constructor(private http: HttpClient) {
+    this.loadData();
   }
 
-  getApplicationSettings(): ApplicationSettings {
+
+  getApplicationSettings(): Promise<ApplicationSettings> {
     return this.settings;
+  }
+
+
+  private loadData() {
+    if (this.settings) {
+      return;
+    }
+
+    this.settings = this.http.get('./assets/empiria.config.json')
+                        .toPromise()
+                        .then((response) => {
+                          const data = response['settings'] as KeyValue[];
+
+                          return new ApplicationSettings(data);
+                        });
   }
 
 }

@@ -1,15 +1,14 @@
 /**
  * @license
- * Copyright (c) 2017 La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
+ * Copyright (c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
  *
  * See LICENSE.txt in the project root for complete license information.
- *
  */
 
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, forkJoin } from 'rxjs';
+import { map, flatMap } from 'rxjs/operators';
 
 import { SessionService } from '../general/session.service';
 
@@ -23,9 +22,7 @@ import {
 export class HttpHandler {
 
   constructor(private http: HttpClient,
-    private session: SessionService) {
-
-  }
+              private session: SessionService) { }
 
   get<T>(path: string, options?: HttpClientOptions, service?: Service): Observable<T> {
     return this.invokeHttpCall<T>(HttpMethod.GET, path, undefined, options, service);
@@ -65,48 +62,54 @@ export class HttpHandler {
   // Private methods
 
   private invokeHttpCall<T>(method: HttpMethod, path: string, body: any,
-    callerOptions: HttpClientOptions,
-    service: Service): Observable<T> {
-    const url = this.buildUrl(path, service);
+                            callerOptions: HttpClientOptions,
+                            service: Service): Observable<T> {
 
     const payloadDataField = this.getPayloadDataField(path, callerOptions, service);
 
     const requestOptions = DefaultHttpClientOptions();
-
-    requestOptions.headers = this.getHeaders(method, path, callerOptions, service);
-
     if (body) {
       requestOptions.body = body;
     }
 
-    return this.http.request(HttpMethod[method].toString(), url, requestOptions)
-      .pipe(
-        map((response) => (payloadDataField ? response.body[payloadDataField] : response) as T)
-      );
+    return forkJoin(
+      this.getUrl(path, service),
+      this.getHeaders(method, path, callerOptions, service)
+    ).pipe(
+      flatMap(([url, headers]) => {
+
+        requestOptions.headers = headers;
+
+        return this.http.request(HttpMethod[method].toString(), url, requestOptions)
+                   .pipe(
+                      map(response => (payloadDataField ? response.body[payloadDataField] : response) as T)
+                    );
+      })
+    );
   }
 
 
   // Helpers
 
-  private buildUrl(path: string, service?: Service): string {
-    const settings = this.session.getSettings();
+  private async getUrl(path: string, service?: Service): Promise<string> {
+    const settings = await this.session.getSettings();
 
     if (service) {
-      return service.baseAddress + service.path;
+      return Promise.resolve(service.baseAddress + service.path);
 
     } else if (path.includes('http://') || path.includes('https://')) {
-      return path;
+      return Promise.resolve(path);
 
     } else {
-      return settings.httpApiBaseAddress + path;
+      return Promise.resolve(settings.httpApiBaseAddress + path);
 
     }
   }
 
 
-  private getHeaders(method: HttpMethod, path: string,
-                     options?: HttpClientOptions, service?: Service): HttpHeaders {
-    const settings = this.session.getSettings();
+  private async getHeaders(method: HttpMethod, path: string,
+                           options?: HttpClientOptions, service?: Service): Promise<HttpHeaders> {
+    const settings = await this.session.getSettings();
     const principal = this.session.getPrincipal();
 
     let headers = new HttpHeaders();
@@ -129,7 +132,7 @@ export class HttpHandler {
       headers = headers.set('ApplicationKey', settings.applicationKey);
     }
 
-    return headers;
+    return Promise.resolve(headers);
   }
 
 
