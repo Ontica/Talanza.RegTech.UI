@@ -9,7 +9,6 @@ import { Injectable } from '@angular/core';
 
 import { Assertion } from '../general/assertion';
 import { SessionService } from '../general/session.service';
-import { LoggerService } from '../general/logger.service';
 
 import { SecurityDataService } from './security-data.service';
 import { Principal } from './principal';
@@ -19,31 +18,23 @@ import { Principal } from './principal';
 export class AuthenticationService {
 
   constructor(private session: SessionService,
-              private securityService: SecurityDataService,
-              private logger: LoggerService) { }
+              private securityService: SecurityDataService) { }
+
 
   login(userID: string, userPassword: string): Promise<void> {
     Assertion.assertValue(userID, 'userID');
     Assertion.assertValue(userPassword, 'userPassword');
 
-    const sessionToken = this.securityService.createSession(userID, userPassword)
-      .toPromise()
-      .catch((e) => this.handleAuthenticationError(e));
-
-    const identity = this.securityService.getPrincipalIdentity()
-      .toPromise()
-      .catch((e) => this.handleAuthenticationError(e));
-
-    const claimsList = this.securityService.getPrincipalClaimsList()
-      .toPromise()
-      .catch((e) => this.handleAuthenticationError(e));
+    const sessionToken = this.securityService.createSession(userID, userPassword);
+    const identity = this.securityService.getPrincipalIdentity();
+    const claimsList = this.securityService.getPrincipalClaimsList();
 
     return Promise.all([sessionToken, identity, claimsList])
-      .then(([a, b, c]) => {
-        const principal = new Principal(a, b, c);
-
-        this.session.setPrincipal(principal);
-      });
+                  .then(([a, b, c]) => {
+                    const principal = new Principal(a, b, c);
+                    this.session.setPrincipal(principal);
+                    })
+                  .catch((e) => this.handleAuthenticationError(e));
   }
 
 
@@ -55,17 +46,19 @@ export class AuthenticationService {
     }
 
     return this.securityService.closeSession()
-      .then(() => Promise.resolve(true));
+               .then(() => Promise.resolve(true));
   }
 
+
   // private methods
+
 
   private handleAuthenticationError(error): Promise<never> {
     if (error.status === 401) {
       return Promise.reject(new Error('No reconozco las credenciales de acceso proporcionadas.'));
     } else {
-      return Promise.reject(new Error('Tengo un problema para ingresar al sistema:' +
-        `${error.status} ${error.statusText} ${error.message}`));
+      return Promise.reject(new Error(`Tengo un problema para ingresar al sistema: ` +
+                                      `${error.status} ${error.statusText} ${error.message}`));
     }
   }
 

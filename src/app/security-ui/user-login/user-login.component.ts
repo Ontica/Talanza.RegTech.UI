@@ -42,11 +42,12 @@ export class UserLoginComponent extends AbstractForm implements OnInit {
 
   ngOnInit() {
     this.authenticationService.logout()
-                              .then( (x: Boolean) => this.reloadPage(x) );
+        .then((x: boolean) => this.reloadPage(x));
   }
 
 
   // abstract methods implementation
+
 
   protected createFormGroup(): FormGroup {
 
@@ -62,7 +63,6 @@ export class UserLoginComponent extends AbstractForm implements OnInit {
 
 
   protected execute(): Promise<any> {
-
     switch (this.command.name) {
 
       case 'authenticate':
@@ -82,16 +82,16 @@ export class UserLoginComponent extends AbstractForm implements OnInit {
     return Promise.resolve();
   }
 
+
   // private methods
 
   private authenticate(): Promise<boolean> {
     return this.authenticationService.login(this.form.value.userID, this.form.value.password)
-               .then( () => this.router.navigate(['/projects/main']) );
-
+               .then(() => this.router.navigate(['/projects/main']));
   }
 
 
-  private reloadPage(mustReload) {
+  private reloadPage(mustReload: boolean) {
     if (mustReload) {
       window.location.reload();
     }

@@ -18,17 +18,14 @@ import { KeyValue } from '../data-types/key-value';
 @Injectable()
 export class SessionService {
 
-  private appSettings: ApplicationSettings = undefined;
   private principal: Principal = Principal.empty;
   private data: KeyValue[] = [];
 
-  constructor(private appSettingsService: ApplicationSettingsService) {
-    this.appSettings = this.appSettingsService.getApplicationSettings();
-  }
+  constructor(private appSettingsService: ApplicationSettingsService) { }
 
 
-  getSettings(): ApplicationSettings {
-    return this.appSettings;
+  getSettings(): Promise<ApplicationSettings> {
+    return this.appSettingsService.getApplicationSettings();
   }
 
 
