@@ -74,7 +74,7 @@ export class HttpHandler {
 
     return forkJoin(
       this.getUrl(path, service),
-      this.getHeaders(method, path, callerOptions, service)
+      this.getHeaders(path, service)
     ).pipe(
       flatMap(([url, headers]) => {
 
@@ -107,8 +107,7 @@ export class HttpHandler {
   }
 
 
-  private async getHeaders(method: HttpMethod, path: string,
-                           options?: HttpClientOptions, service?: Service): Promise<HttpHeaders> {
+  private async getHeaders(path: string, service?: Service): Promise<HttpHeaders> {
     const settings = await this.session.getSettings();
     const principal = this.session.getPrincipal();
 

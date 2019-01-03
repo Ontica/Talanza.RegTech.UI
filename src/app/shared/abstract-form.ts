@@ -77,7 +77,7 @@ export abstract class AbstractForm {
 
 
   get showExceptionMsg(): boolean {
-    return this.submitted && (this.invalid);
+    return this.submitted && this.invalid;
   }
 
 
@@ -92,7 +92,7 @@ export abstract class AbstractForm {
 
   private spinner: Displayable;
 
-  private currentCommand: Command = { name: ''};
+  private currentCommand: Command = { name: '' };
   private disabledFlag = false;
   private submittedFlag = false;
   private processing = false;

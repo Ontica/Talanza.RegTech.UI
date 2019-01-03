@@ -38,6 +38,6 @@ export interface Claim {
 
 export class ClaimsList {
 
-  constructor(private claims: Claim[]) { }
+  constructor(public claims: Claim[]) { }
 
 }

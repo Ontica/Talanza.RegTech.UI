@@ -5,18 +5,18 @@
  * See LICENSE.txt in the project root for complete license information.
  *
  */
-import { ErrorHandler, Injectable, Injector } from '@angular/core';
+import { ErrorHandler, Injectable } from '@angular/core';
 
 import { Exception } from './exception';
 
 @Injectable()
 export class ExceptionHandler extends ErrorHandler {
 
-  private trace: any[] = [];
+  // private trace: any[] = [];
 
   private verbose = false;
 
-  constructor(private injector: Injector) {
+  constructor() {
     super();
   }
 

@@ -12,7 +12,6 @@ import { switchMap } from 'rxjs/operators';
 
 import { Assertion } from '../general/assertion';
 import { Exception } from '../general/exception';
-import { ExceptionHandler } from '../general/exception-handler';
 
 import { DirectoryService } from './directory.service';
 import { HttpHandler } from './http-handler';
@@ -23,8 +22,7 @@ import { HttpClientOptions, HttpMethod } from './common-types';
 export class HttpService {
 
   constructor(private httpHandler: HttpHandler,
-              private directory: DirectoryService,
-              private exceptionHandler: ExceptionHandler) { }
+              private directory: DirectoryService) { }
 
 
   get<T>(path: string, options?: HttpClientOptions): Observable<T> {

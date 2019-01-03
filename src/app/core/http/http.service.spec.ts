@@ -14,10 +14,10 @@ import { DirectoryService } from './directory.service';
 //   });
 
 //   it('should return the license name', async(inject([HttpService], (httpService: HttpService) => {
-//     const path = 'http://empiria.steps/api/' + 'v1/system/license';
+//     const path = 'http://empiria/api/' + 'v1/system/license';
 
 //     httpService.get<string>(path)
-//                .subscribe((value) => expect(value).toBe('COVAR') );
+//                .subscribe((value) => expect(value).toBe('LicenceName') );
 
 //   })));
 

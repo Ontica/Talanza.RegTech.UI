@@ -65,7 +65,9 @@ const EXCEPTION_HANDLER_PROVIDER =  { provide: ErrorHandler, useClass: Exception
     AppRoutingModule,
   ],
 
-  providers: [ EXCEPTION_HANDLER_PROVIDER ]
+  providers: [
+    EXCEPTION_HANDLER_PROVIDER
+  ]
 
 })
 export class AppModule {}

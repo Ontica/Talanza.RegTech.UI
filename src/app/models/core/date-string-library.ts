@@ -5,7 +5,7 @@
  * See LICENSE.txt in the project root for complete license information.
  */
 
-import { DateFormat, Language, LocalizationLibrary, DEFAULT_LANGUAGE } from '../localization';
+import { DateFormat, LocalizationLibrary } from '../localization';
 import * as moment from 'moment';
 
 export type DateString = Date | string;
