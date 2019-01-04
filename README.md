@@ -2,7 +2,7 @@
 
 Angular-based front-end Regulatory Compliance Solution for the Mexican Energy Sector, custom-tailored and developed in association with [Covar Energy Consulting](http://www.covarenergy.com).
 
-### Quick start
+## Quick start
 
 This project is being built with Angular 7 and TypeScript 3.
 
@@ -38,16 +38,16 @@ ng serve --open
 
 By default, you have to navigate to [http://localhost:4200](http://localhost:4200) to see the application running.
 
-# Backend access
+## Backend access
 
 In order to run this application, you MUST have a valid API KEY and access credentials to connect to the system's backend. Please request them by sending us an email.
 
-# License
+## License
 
 This web application is distributed by the [GNU AFFERO](https://github.com/Ontica/Empiria.Steps.Covar/blob/master/LICENSE.txt) GENERAL PUBLIC LICENSE.
 
 For third-party components, please read [ThirdPartyNotices](https://github.com/Ontica/Empiria.Steps.Covar/blob/master/ThirdPartyNotices.txt) file.
 
-# Copyright
+## Copyright
 
-Copyright © 2017-2018. La Vía Óntica SC, Ontica LLC and contributors.
+Copyright © 2017-2019. La Vía Óntica SC, Ontica LLC and contributors.
