@@ -5,12 +5,15 @@
  * See LICENSE.txt in the project root for complete license information.
  */
 
+import { DateString } from '@app/models/core';
+
+
 export interface InboxRef {
   description: string;
   extensionData: ExtensionData;
   externalUID: string;
   from: UidName;
-  received: Date;
+  received: DateString;
   status: string;
   title: string;
   to: UidName;
@@ -20,7 +23,8 @@ export interface InboxRef {
 
 
 interface ExtensionData {
-  dueDate: Date;
+  deadline: DateString;
+  plannedEndDate: DateString;
   ragStatus: string;
   stage: string;
   tags: string[];

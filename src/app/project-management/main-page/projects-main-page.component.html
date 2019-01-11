@@ -22,22 +22,22 @@
     </emp-steps-dhtmlx-gantt>
 
 
-    <emp-steps-activity-timeline *ngSwitchCase="'dueDate'"
-         [groupBy]="'dueDate'"
+    <emp-steps-activity-timeline *ngSwitchCase="'deadline'"
+         [groupBy]="'deadline'"
          [project]="selectedProject"
          (activitySelected)="showEditor($event)">
     </emp-steps-activity-timeline>
 
 
-    <emp-steps-activity-timeline *ngSwitchCase="'targetDate'"
-         [groupBy]="'targetDate'"
+    <emp-steps-activity-timeline *ngSwitchCase="'plannedEndDate'"
+         [groupBy]="'plannedEndDate'"
          [project]="selectedProject"
          (activitySelected)="showEditor($event)">
     </emp-steps-activity-timeline>
 
 
-    <emp-steps-activity-timeline *ngSwitchCase="'startDate'"
-         [groupBy]="'startDate'"
+    <emp-steps-activity-timeline *ngSwitchCase="'actualStartDate'"
+         [groupBy]="'actualStartDate'"
          [project]="selectedProject"
          (activitySelected)="showEditor($event)">
     </emp-steps-activity-timeline>

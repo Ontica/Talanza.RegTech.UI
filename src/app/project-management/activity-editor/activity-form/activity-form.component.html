@@ -28,11 +28,11 @@
       <tr>
         <td>Fecha objetivo:</td>
         <td>
-          <emp-ng-datepicker formControlName="targetDate"></emp-ng-datepicker>
+          <emp-ng-datepicker formControlName="plannedEndDate"></emp-ng-datepicker>
         </td>
         <td class="text-align-right" style="width:100%;white-space:normal">Fecha máxima de entrega:</td>
         <td>
-          <emp-ng-datepicker formControlName="dueDate"></emp-ng-datepicker>
+          <emp-ng-datepicker formControlName="deadline"></emp-ng-datepicker>
         </td>
       </tr>
       <tr>
@@ -67,13 +67,13 @@
       <tr class="border-top">
         <td>Iniciada el:</td>
         <td>
-          <emp-ng-datepicker formControlName="startDate"></emp-ng-datepicker>
+          <emp-ng-datepicker formControlName="actualStartDate"></emp-ng-datepicker>
           <button mat-button type="button" [disabled]="disabled" (click)="onStart()">Iniciar</button>
         </td>
-        <td class="text-align-right" style="width:100%;white-space:normal">Cerrada el:</td>
+        <td class="text-align-right" style="width:100%;white-space:normal">Concluida el:</td>
         <td>
-          <emp-ng-datepicker formControlName="endDate"></emp-ng-datepicker>
-          <button mat-button type="button" [disabled]="disabled" (click)="onEnd()">Cerrar</button>
+          <emp-ng-datepicker formControlName="actualEndDate"></emp-ng-datepicker>
+          <button mat-button type="button" [disabled]="disabled" (click)="onEnd()">Concluir</button>
         </td>
       </tr>
     </table>

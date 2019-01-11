@@ -14,7 +14,7 @@ import { DateString, DateStringLibrary } from '@app/models/core';
 
 const EMPTY_RESPONSIBLE_GROUP = 'Actividades sin asignar';
 
-export type GroupByDateProperty = 'dueDate' | 'targetDate' | 'startDate';
+export type GroupByDateProperty = 'deadline' | 'plannedEndDate' | 'actualStartDate';
 export type GroupByProperty = GroupByDateProperty | 'responsible';
 
 @Pipe({
@@ -28,14 +28,14 @@ export class GroupActivitiesByPipe implements PipeTransform  {
     }
 
     switch (groupByProperty) {
-      case 'dueDate':
-        return this.groupByYearMonth(data, 'dueDate');
+      case 'deadline':
+        return this.groupByYearMonth(data, 'deadline');
 
-      case 'targetDate':
-        return this.groupByYearMonth(data, 'targetDate');
+      case 'plannedEndDate':
+        return this.groupByYearMonth(data, 'plannedEndDate');
 
-      case 'startDate':
-        return this.groupByYearMonth(data, 'startDate');
+      case 'actualStartDate':
+        return this.groupByYearMonth(data, 'actualStartDate');
 
       case 'responsible':
         return this.groupByResponsible(data);
@@ -69,7 +69,7 @@ export class GroupActivitiesByPipe implements PipeTransform  {
       } else {
         previous[responsibleName].push(current);
 
-        previous[responsibleName].sort( (a, b) => this.compareDateAndPosition(a, b, 'dueDate') );
+        previous[responsibleName].sort( (a, b) => this.compareDateAndPosition(a, b, 'deadline') );
       }
 
       return previous;
@@ -151,13 +151,13 @@ export class GroupActivitiesByPipe implements PipeTransform  {
     if (dateValue) {
       return DateStringLibrary.yearMonth(dateValue);
 
-    } else if (dateProperty === 'dueDate') {
+    } else if (dateProperty === 'deadline') {
       return 'Sin fecha máxima de entrega';
 
-    } else if (dateProperty === 'targetDate') {
+    } else if (dateProperty === 'plannedEndDate') {
       return 'Sin fecha objetivo';
 
-    } else if (dateProperty === 'startDate') {
+    } else if (dateProperty === 'actualStartDate') {
       return 'Sin fecha de inicio';
 
     } else {

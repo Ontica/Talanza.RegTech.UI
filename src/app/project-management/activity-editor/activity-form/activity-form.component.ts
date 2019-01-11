@@ -28,7 +28,7 @@ enum FormMessages {
   IncompleteActivityData =
   'Los campos marcados en rojo son requeridos.',
 
-  TargetDateIsGreaterThanDueDate =
+  PlannedEndDateIsGreaterThenDeadline =
   'La fecha objetivo de la actividad no puede ser posterior a la fecha máxima de entrega.',
 }
 
@@ -51,7 +51,8 @@ export class ActivityFormComponent extends AbstractForm implements OnInit, OnCha
   responsibles: Observable<Contact[]> = of([]);
 
   constructor(private app: SharedService,
-              private projectStore: ProjectStore, private taskStore: TaskService) {
+              private projectStore: ProjectStore,
+              private taskStore: TaskService) {
     super();
   }
 
@@ -113,10 +114,10 @@ export class ActivityFormComponent extends AbstractForm implements OnInit, OnCha
       name: new FormControl('', Validators.required),
       notes: new FormControl(),
 
-      startDate: new FormControl(),
-      targetDate: new FormControl(),
-      dueDate: new FormControl(),
-      endDate: new FormControl(),
+      deadline: new FormControl(),
+      plannedEndDate: new FormControl(),
+      actualStartDate: new FormControl(),
+      actualEndDate: new FormControl(),
 
       durationValue: new FormControl(),
       durationType: new FormControl(),
@@ -183,10 +184,10 @@ export class ActivityFormComponent extends AbstractForm implements OnInit, OnCha
       name: formModel.name,
       notes: formModel.notes,
 
-      startDate: formModel.startDate,
-      targetDate: formModel.targetDate,
-      dueDate: formModel.dueDate,
-      endDate: formModel.endDate,
+      deadline: formModel.deadline,
+      plannedEndDate: formModel.plannedEndDate,
+      actualStartDate: formModel.actualStartDate,
+      actualEndDate: formModel.actualEndDate,
 
       estimatedDuration: {
         value: formModel.durationValue,
@@ -209,10 +210,10 @@ export class ActivityFormComponent extends AbstractForm implements OnInit, OnCha
       name: this.activity.name,
       notes: this.activity.notes,
 
-      startDate: this.activity.startDate,
-      targetDate: this.activity.targetDate,
-      dueDate: this.activity.dueDate,
-      endDate: this.activity.endDate,
+      deadline: this.activity.deadline,
+      plannedEndDate: this.activity.plannedEndDate,
+      actualStartDate: this.activity.actualStartDate,
+      actualEndDate: this.activity.actualEndDate,
 
       durationValue: this.activity.estimatedDuration.value !== 0 ? this.activity.estimatedDuration.value : '',
       durationType: this.activity.estimatedDuration.type,
@@ -257,16 +258,16 @@ export class ActivityFormComponent extends AbstractForm implements OnInit, OnCha
 
 
   private validateTargetDate(): void {
-    const targetDate = this.value('targetDate');
-    const dueDate = this.value('dueDate');
+    const plannedEndDate = this.value('plannedEndDate');
+    const deadline = this.value('deadline');
 
-    if (!targetDate || !dueDate) {
+    if (!plannedEndDate || !deadline) {
       return;
     }
 
-    if (DateStringLibrary.compareDates(targetDate, dueDate) > 0) {
-      this.addException(FormMessages.TargetDateIsGreaterThanDueDate);
-      this.get('targetDate').markAsDirty();
+    if (DateStringLibrary.compareDates(plannedEndDate, deadline) > 0) {
+      this.addException(FormMessages.PlannedEndDateIsGreaterThenDeadline);
+      this.get('plannedEndDate').markAsDirty();
     }
   }
 

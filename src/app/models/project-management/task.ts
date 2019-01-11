@@ -23,10 +23,11 @@ export interface Task extends Identifiable, PartitionedType {
   warnDays: number;
   warnType: string;
 
-  startDate: DateString;
-  targetDate: DateString;
-  endDate: DateString;
-  dueDate: DateString;
+  deadline: DateString;
+  plannedEndDate: DateString;
+  actualStartDate: DateString;
+  actualEndDate: DateString;
+
 
   tags: string[];
   position: number;
@@ -54,10 +55,10 @@ export const EmptyTask: Task = {
   warnDays: 0,
   warnType: '',
 
-  startDate: '',
-  targetDate: '',
-  endDate: '',
-  dueDate: '',
+  deadline: '',
+  plannedEndDate: '',
+  actualStartDate: '',
+  actualEndDate: '',
 
   tags: [],
   position: 0,

@@ -5,9 +5,12 @@
  * See LICENSE.txt in the project root for complete license information.
  */
 
+import { DateString } from '@app/models/core';
+
+
 export class CloseActivityCommand {
 
-  endDate = new Date();
+  actualEndDate: DateString = '';
   requestedByUID = '';
 
 }

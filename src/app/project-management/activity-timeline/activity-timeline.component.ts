@@ -53,13 +53,13 @@ export class ActivityTimelineComponent implements OnChanges {
   get viewTitle() {
 
     switch (this.groupBy) {
-      case 'dueDate':
+      case 'deadline':
         return 'Fecha máxima de entrega';
 
-      case 'targetDate':
+      case 'plannedEndDate':
         return 'Fecha objetivo';
 
-      case 'startDate':
+      case 'actualStartDate':
         return 'Fecha de inicio';
 
       case 'responsible':

@@ -16,10 +16,10 @@
       </td>
       <td style="width:30%">
         <a (click)="openInboxEditorWindow(inbox)">{{inbox.title}}</a><br>
-        Proyecto: {{inbox.project.name}}
+        Proyecto: {{inbox.title}}
       </td>
       <td style="width:15%;">
-        Fecha Objetivo: &nbsp;{{inbox.extensionData.targetDate | date: 'dd/MMM/yyyy'}}<br> Fecha Máxima: &nbsp;{{inbox.extensionData.dueDate | date: 'dd/MMM/yyyy'}}
+        Fecha Objetivo: &nbsp;{{inbox.extensionData.plannedEndDate | date: 'dd/MMM/yyyy'}}<br> Fecha Máxima: &nbsp;{{inbox.extensionData.deadline | date: 'dd/MMM/yyyy'}}
       </td>
       <td style="width:8%;" class="text-align-center">
         <emp-ng-rag-status [status]="inbox.extensionData.ragStatus"></emp-ng-rag-status>

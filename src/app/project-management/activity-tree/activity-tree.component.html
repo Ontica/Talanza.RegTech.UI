@@ -65,24 +65,24 @@
               <div class="column expand" style="white-space:nowrap">
                 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
               </div>
-              <div class="column expand" style="white-space:nowrap;min-width:80px;">F. Objetivo: {{activity.targetDate | date:'dd/LLL/yyyy'}}</div>
+              <div class="column expand" style="white-space:nowrap;min-width:80px;">F. Objetivo: {{activity.plannedEndDate | date:'dd/LLL/yyyy'}}</div>
               <div class="column expand" style="white-space:nowrap">
                 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
               </div>
-              <div class="column expand" style="white-space:nowrap">F. Máxima: {{activity.dueDate | date:'dd/LLL/yyyy'}}</div>
+              <div class="column expand" style="white-space:nowrap">F. Máxima: {{activity.deadline | date:'dd/LLL/yyyy'}}</div>
             </div>
 
-            <div *ngIf="!templateDesignerMode && activity.responsible.uid === 'Empty' && activity.dueDate"
+            <div *ngIf="!templateDesignerMode && activity.responsible.uid === 'Empty' && activity.deadline"
                   class="activity-status">
               <div class="column expand" style="white-space:nowrap;min-width:100px;">No asignada</div>
               <div class="column expand" style="white-space:nowrap">
                 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
               </div>
-              <div class="column expand" style="white-space:nowrap;min-width:80px;">F. Objetivo: {{activity.targetDate | date:'dd/LLL/yyyy'}}</div>
+              <div class="column expand" style="white-space:nowrap;min-width:80px;">F. Objetivo: {{activity.plannedEndDate | date:'dd/LLL/yyyy'}}</div>
               <div class="column expand" style="white-space:nowrap">
                 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
               </div>
-              <div class="column expand" style="white-space:nowrap">F. Máxima: {{activity.dueDate | date:'dd/LLL/yyyy'}}</div>
+              <div class="column expand" style="white-space:nowrap">F. Máxima: {{activity.deadline | date:'dd/LLL/yyyy'}}</div>
             </div>
 
           </div>

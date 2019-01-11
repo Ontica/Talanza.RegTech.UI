@@ -33,9 +33,9 @@
               (change)="onChangeView()" [(ngModel)]="viewConfig.viewType">
         <option value="treeView">Árbol de actividades</option>
         <option value="ganttView">Diagrama Gantt</option>
-        <option value="dueDate">Fecha máxima de entrega</option>
-        <option value="targetDate">Fecha objetivo</option>
-        <option value="startDate">Fecha de inicio</option>
+        <option value="deadline">Fecha máxima de entrega</option>
+        <option value="plannedEndDate">Fecha objetivo</option>
+        <option value="actualStartDate">Fecha de inicio</option>
         <option value="responsible">Responsables</option>
       </select>
       <span *ngIf="cboView.value === 'ganttView'" class="label">Escala: </span>

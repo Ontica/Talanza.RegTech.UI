@@ -31,12 +31,13 @@ export interface Activity extends Identifiable, PartitionedType {
   project: Project;
   responsible: Contact;
   parent: Identifiable;
+
   estimatedDuration: Duration;
 
-  startDate: DateString;
-  targetDate: DateString;
-  endDate: DateString;
-  dueDate: DateString;
+  deadline: DateString;
+  plannedEndDate: DateString;
+  actualStartDate: DateString;
+  actualEndDate: DateString;
 
   warnDays: number;
   warnType: string;
@@ -66,10 +67,10 @@ export const EmptyActivity: Activity = {
   parent: Empty,
 
   estimatedDuration: DefaultDuration,
-  startDate: '',
-  targetDate: '',
-  endDate: '',
-  dueDate: '',
+  actualStartDate: '',
+  plannedEndDate: '',
+  actualEndDate: '',
+  deadline: '',
 
   warnDays: 0,
   warnType: '',
