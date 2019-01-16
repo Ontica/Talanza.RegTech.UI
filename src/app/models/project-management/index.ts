@@ -18,3 +18,5 @@ export * from './gantt';
 export * from './meeting';
 
 export * from './project';
+
+export * from './project-template';
