@@ -9,6 +9,7 @@ import { Contact, DateString, Empty,
          Identifiable, PartitionedType } from '@app/models/core';
 
 import { Project } from './project';
+import { ActivityTemplate } from './project-template';
 
 
 export const ACTIVITY_TYPE_NAME = 'ObjectType.ProjectItem.Activity';
@@ -25,11 +26,11 @@ export const DefaultDuration: Duration = {
   type: 'Unknown',
 };
 
+
 export interface Activity extends Identifiable, PartitionedType {
   id: number;
   notes: string;
   project: Project;
-  responsible: Contact;
   parent: Identifiable;
 
   estimatedDuration: Duration;
@@ -42,17 +43,16 @@ export interface Activity extends Identifiable, PartitionedType {
   warnDays: number;
   warnType: string;
 
-  tags: string[];
   position: number;
   level: number;
   ragStatus: string;
   stage: string;
   status: string;
 
-  visible: string;
+  tags: string[];
+  responsible: Contact;
 
-  config?: any;
-  workflowObject?: any;
+  template?: ActivityTemplate;
 }
 
 
@@ -80,12 +80,7 @@ export const EmptyActivity: Activity = {
   level: 0,
   ragStatus: '',
   stage: '',
-  status: '',
-
-  visible: '',
-
-  config: {},
-  workflowObject: {}
+  status: ''
 };
 
 
