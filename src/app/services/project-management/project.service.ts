@@ -14,7 +14,6 @@ import { Assertion, CoreService } from '@app/core';
 import { Activity, Contract, Project, Resource, Stage } from '@app/models/project-management';
 
 import { Contact } from '@app/models/core';
-import { Entity } from '@app/models/regulation';
 import { ColoredTag } from '@app/models/user-interface';
 
 
@@ -41,10 +40,7 @@ enum Errors {
   '[MOVE_TO_PROJECT] Ocurrió un problema al intentar mover la actividad a otro proyecto.',
 
   UPDATE_ACTIVITY =
-  '[UPDATE_ACTIVITY] Ocurrió un problema al actualizar la actividad.',
-
-  CREATE_FROM_EVENT =
-  '[CREATE_FROM_EVENT] Ocurrió un problema al agregar la obligacion al proyecto.',
+  '[UPDATE_ACTIVITY] Ocurrió un problema al actualizar la actividad.'
 }
 
 
@@ -55,7 +51,6 @@ export class ProjectService {
 
 
   getContracts(): Observable<Contract[]> {
-
     const CONTRACTS: Contract[] = [ { uid: '576', name: 'Ronda 2.4' } ];
 
     return of(CONTRACTS);
@@ -68,18 +63,6 @@ export class ProjectService {
     return this.core.http.get<Project[]>(path);
   }
 
-
-  getTemplatesList(): Observable<Project[]> {
-    const path = 'v1/project-management/templates';
-
-    return this.core.http.get<Project[]>(path);
-  }
-
-  getEventsList(): Observable<Activity[]> {
-    const path = 'v1/project-management/templates/events';
-
-    return this.core.http.get<Activity[]>(path);
-  }
 
   getRequestersList(projectUID: string): Observable<Contact[]> {
     const path = `v1/project-management/projects/${projectUID}/requesters`;
@@ -101,13 +84,6 @@ export class ProjectService {
     const path = `v1/project-management/projects/166871D7-5CD7-40C7-AA47-618DB5E643B8/responsibles`;
 
     return this.core.http.get<Contact[]>(path);
-  }
-
-
-  getEntitiesList(): Observable<Entity[]> {
-    const path = `v1/modeling/entities`;
-
-    return this.core.http.get<Entity[]>(path);
   }
 
 
@@ -194,18 +170,6 @@ export class ProjectService {
                          );
   }
 
-
-  createFromEvent(project: Project, data: { eventUID: string, eventDate: Date }) {
-    Assertion.assertValue(project, 'project');
-    Assertion.assertValue(data, 'data');
-
-    const path = `v1/project-management/projects/${project.uid}/create-from-event`;
-
-    return this.core.http.post<Activity>(path, data)
-                         .pipe(
-                            catchError((e) => this.core.http.throw(e, Errors.CREATE_FROM_EVENT))
-                         );
-  }
 
   insertActivity(project: Project,
                  newActivity: { name: string, position: number }): Observable<Activity> {
