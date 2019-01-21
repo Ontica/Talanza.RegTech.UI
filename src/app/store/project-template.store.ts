@@ -9,17 +9,18 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { List } from 'immutable';
 
-import { ProjectService } from '@app/services/project-management';
+import { ProjectTemplateService } from '@app/services/project-management';
 
-import { Activity, Project, Stage } from '@app/models/project-management';
+import { Activity, ActivityTemplate,
+         Project, ProjectTemplate, EmptyProjectTemplate } from '@app/models/project-management';
 import { Entity } from '@app/models/regulation';
 import { Empty } from '@app/models/core';
 
 
 export class ProjectTemplateModel {
 
-  project: Project = Empty;
-  activities: List<Activity> = List([]);
+  project: ProjectTemplate = EmptyProjectTemplate;
+  activities: List<ActivityTemplate> = List([]);
 
 }
 
@@ -31,10 +32,7 @@ export class ProjectTemplateStore {
 
   private _templatesList = new BehaviorSubject(List([]));
 
-  private _stages = new BehaviorSubject(List([]));
-
-
-  constructor(private projectService: ProjectService) {
+  constructor(private projectTemplateService: ProjectTemplateService) {
     this.loadInitialData();
   }
 
@@ -44,122 +42,129 @@ export class ProjectTemplateStore {
   }
 
 
-  selectTemplate(template: Project) {
+  selectTemplate(template: ProjectTemplate) {
     this.updateSelectedTemplate(template);
   }
 
 
-  get templates(): Observable<List<Project>> {
+  get templates(): Observable<List<ProjectTemplate>> {
     return this._templatesList.asObservable();
   }
 
-  events(): Observable<Activity[]> {
-    return this.projectService.getEventsList();
+
+  startEvents(): Observable<ActivityTemplate[]> {
+    return this.projectTemplateService.getStartEvents();
   }
 
 
-  get stages(): Observable<List<Stage>> {
-    return this._stages.asObservable();
+  getActivityTemplate(activityTemplateUID: string): ActivityTemplate {
+    return this._selectedTemplate.value.activities.find(x => x.uid === activityTemplateUID);
   }
 
 
-  getActivity(activityUID: string): Activity {
-    return this._selectedTemplate.value.activities.find( x => x.uid === activityUID);
-  }
-
-
-  activities(): Activity[] {
+  activities(): ActivityTemplate[] {
     return this._selectedTemplate.value.activities.toArray();
   }
 
+
   entities(): Observable<Entity[]> {
-    return this.projectService.getEntitiesList();
+    return this.projectTemplateService.getEntitiesList();
   }
 
 
-  findById(templateUID: string): Project {
-    return this._templatesList.value.find((x) => x.uid === templateUID);
+  findById(activityTemplateUID: string): ProjectTemplate {
+    return this._templatesList.value.find(x => x.uid === activityTemplateUID);
   }
 
 
-  copyToProject(targetProjectUID: string, activity: Activity): Promise<Activity> {
-    return this.projectService.copyToProject(targetProjectUID, activity)
+  copyTo(activityTemplate: ActivityTemplate,
+         targetProjectTemplateUID: string): Promise<ActivityTemplate> {
+    return this.projectTemplateService.copyTo(activityTemplate, targetProjectTemplateUID)
                .toPromise()
-               .then( x => {
-                  this.updateSelectedTemplate(activity.project);
-                  Object.assign(activity, x);
+               .then(x => {
+                  this.updateSelectedTemplate(activityTemplate.project);
+                  Object.assign(activityTemplate, x);
 
-                  return activity;
+                  return activityTemplate;
                });
   }
 
-  changeParent(activity: Activity, newParent: Activity): Promise<Activity> {
-    return this.projectService.changeParent(activity, newParent)
-               .toPromise()
-               .then( x => {
-                   this.updateSelectedTemplate(activity.project);
-                   Object.assign(activity, x);
 
-                   return activity;
+  createFromActivityTemplate(project: Project,
+                             activityTemplateUID: string,
+                             eventDate: Date): Promise<Activity> {
+    return this.projectTemplateService.createFromActivityTemplate(project, activityTemplateUID, eventDate)
+                                      .toPromise();
+  }
+
+
+  changeParent(activityTemplate: ActivityTemplate, newParent: ActivityTemplate): Promise<ActivityTemplate> {
+    return this.projectTemplateService.changeParent(activityTemplate, newParent)
+               .toPromise()
+               .then(x => {
+                   this.updateSelectedTemplate(activityTemplate.project);
+                   Object.assign(activityTemplate, x);
+
+                   return activityTemplate;
               });
   }
 
 
-  deleteActivity(activity: Activity): Promise<void> {
-    return this.projectService.deleteActivity(activity)
+  delete(activityTemplate: ActivityTemplate): Promise<void> {
+    return this.projectTemplateService.delete(activityTemplate)
                .toPromise()
                .then(() => {
-                  this.updateSelectedTemplate(activity.project);
-                  Object.assign(activity, null);
+                  this.updateSelectedTemplate(activityTemplate.project);
+                  Object.assign(activityTemplate, null);
                });
   }
 
 
-  insertActivity(template: Project,
-                 newActivity: { name: string, position: number }): Promise<Activity> {
-
-    return this.projectService.insertActivity(template, newActivity)
+  insert(projectTemplate: ProjectTemplate,
+         newActivityTemplate: { name: string, position: number }): Promise<ActivityTemplate> {
+    return this.projectTemplateService.insert(projectTemplate, newActivityTemplate)
                .toPromise()
-               .then( x => {
-                  this.updateSelectedTemplate(template);
+               .then(x => {
+                  this.updateSelectedTemplate(projectTemplate);
 
                   return x;
              });
   }
 
 
-  moveActivity(activity: Activity, newPosition: number): Promise<Activity> {
-    return this.projectService.moveActivity(activity, newPosition)
+  move(activityTemplate: ActivityTemplate, newPosition: number): Promise<ActivityTemplate> {
+    return this.projectTemplateService.move(activityTemplate, newPosition)
                .toPromise()
-               .then( x => {
-                  this.updateSelectedTemplate(activity.project);
-                  Object.assign(activity, x);
+               .then(x => {
+                  this.updateSelectedTemplate(activityTemplate.project);
+                  Object.assign(activityTemplate, x);
 
-                  return activity;
+                  return activityTemplate;
                });
   }
 
 
-  moveToProject(targetProjectUID: string, activity: Activity): Promise<Activity> {
-    return this.projectService.moveToProject(targetProjectUID, activity)
+  moveTo(activityTemplate: ActivityTemplate, targetProjectTemplateUID: string): Promise<ActivityTemplate> {
+    return this.projectTemplateService.moveTo(activityTemplate, targetProjectTemplateUID)
                .toPromise()
-               .then( x => {
-                  this.updateSelectedTemplate(activity.project);
-                  Object.assign(activity, x);
+               .then(x => {
+                  this.updateSelectedTemplate(activityTemplate.project);
+                  Object.assign(activityTemplate, x);
 
-                  return activity;
+                  return activityTemplate;
                });
   }
 
 
-  updateActivity(activity: Activity, updateData: Partial<Activity>): Promise<Activity> {
-    return this.projectService.updateActivity(activity, updateData)
+  update(activityTemplate: ActivityTemplate,
+         updateData: Partial<ActivityTemplate>): Promise<ActivityTemplate> {
+    return this.projectTemplateService.update(activityTemplate, updateData)
                .toPromise()
-               .then( x => {
-                  this.updateSelectedTemplate(activity.project);
-                  Object.assign(activity, x);
+               .then(x => {
+                  this.updateSelectedTemplate(activityTemplate.project);
+                  Object.assign(activityTemplate, x);
 
-                  return activity;
+                  return activityTemplate;
                });
   }
 
@@ -167,31 +172,22 @@ export class ProjectTemplateStore {
   // private methods
 
   private loadInitialData() {
-
-    this.projectService.getTemplatesList()
+    this.projectTemplateService.getProjectTemplatesList()
         .subscribe(
             data =>
               this._templatesList.next(List(data))
             ,
             err => console.log('Error reading project template data', err)
         );
-
-
-    this.projectService.getStages()
-        .subscribe(
-            data =>
-              this._stages.next(List(data))
-            ,
-            err => console.log('Error reading stages data', err)
-        );
   }
 
 
-  private updateSelectedTemplate(project: Project) {
-    this.projectService.getActivitiesTree(project).subscribe(
+  private updateSelectedTemplate(projectModel: ProjectTemplate) {
+    this.projectTemplateService.getTreeStructure(projectModel).subscribe(
       data => {
         const templateModel = new ProjectTemplateModel();
-        templateModel.project = project;
+
+        templateModel.project = projectModel;
         templateModel.activities = List(data);
 
         this._selectedTemplate.next(templateModel);

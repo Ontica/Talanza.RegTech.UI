@@ -15,7 +15,7 @@ import { Contact, Empty } from '@app/models/core';
 
 import { Activity, Contract, Project,
          Stage, ViewConfig, DefaultViewConfig } from '@app/models/project-management';
-import { Entity } from '@app/models/regulation';
+
 import { ColoredTag } from '@app/models/user-interface';
 
 
@@ -86,17 +86,12 @@ export class ProjectStore {
 
 
   getActivity(activityUID: string): Activity {
-    return this._selectedProject.value.activities.find( x => x.uid === activityUID);
+    return this._selectedProject.value.activities.find(x => x.uid === activityUID);
   }
 
 
   activities(): Activity[] {
     return this._selectedProject.value.activities.toArray();
-  }
-
-
-  entities(): Observable<Entity[]> {
-    return this.projectService.getEntitiesList();
   }
 
 
@@ -106,7 +101,7 @@ export class ProjectStore {
 
 
   findById(projectUID: string): Project {
-    return this._projects.value.find((x) => x.uid === projectUID);
+    return this._projects.value.find(x => x.uid === projectUID);
   }
 
 
@@ -129,16 +124,6 @@ export class ProjectStore {
                   this.updateSelectedProject(activity.project);
                   Object.assign(activity, null);
                });
-  }
-
-
-  createFromEvent(project: Project, data: { eventUID: string, eventDate: Date }) {
-    return this.projectService.createFromEvent(project, data)
-               .toPromise()
-               .then( x => {
-                  this.updateSelectedProject(project);
-               });
-
   }
 
 
