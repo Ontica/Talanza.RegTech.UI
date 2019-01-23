@@ -14,7 +14,8 @@
 
     <mat-tab label="Actividad">
       <emp-steps-activity-form [activity]="activity"
-                               (delete)="onClose()" (update)="onUpdateActivity()"></emp-steps-activity-form>
+                               (delete)="onClose()"
+                               (update)="onUpdateActivity()"></emp-steps-activity-form>
     </mat-tab>
 
     <mat-tab label="Subtareas">
@@ -29,8 +30,8 @@
       <emp-kb-postings-list [target]="activity"></emp-kb-postings-list>
     </mat-tab>
 
-    <mat-tab label="Regulación" [disabled]="!activity.workflowObject">
-      <emp-steps-activity-designer [activity]="activity.workflowObject"
+    <mat-tab label="Regulación" [disabled]="!activity.template">
+      <emp-steps-activity-designer [activityTemplate]="activity.template"
                                    [settings]="childrenSettings"></emp-steps-activity-designer>
     </mat-tab>
 

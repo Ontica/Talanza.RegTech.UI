@@ -5,7 +5,7 @@
 
     <emp-steps-activity-tree
          [templateDesignerMode]="true"
-         [project]="selectedTemplate"
+         [project]="model"
          (edited)="onActivityTreeEdited($event)"
          (activitySelected)="showEditor($event)">
     </emp-steps-activity-tree>
@@ -14,7 +14,7 @@
 
   <div *ngIf="displayEditor" class="explorer-panel secondary">
 
-    <emp-steps-activity-designer [activity]="selectedActivity"
+    <emp-steps-activity-designer [activityTemplate]="selectedActivityTemplate"
                                  (update)="onActivityUpdated($event)"
                                  (close)="onEditorClosed()">
     </emp-steps-activity-designer>

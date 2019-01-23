@@ -2,8 +2,8 @@
 
   <div *ngIf="settings.showTitle" class="card-header">
     <div class="card-title">
-      {{activity.name}}
-      <div class="card-hint">Actividad en {{activity.project.name}}</div>
+      {{activityTemplate.name}}
+      <div class="card-hint">Actividad en {{activityTemplate.project.name}}</div>
     </div>
     <div class="card-header-options">
       <i class="fa fa-times close-icon" aria-hidden="true" (click)="onClose()"></i>
@@ -14,8 +14,8 @@
 
     <mat-tab label="Obligación">
       <emp-steps-activity-model-form
-           [activity]="activity" [readonly]="settings.readonly"
-           (delete)="onDeleteActivity()" (update)="onUpdateActivity()">
+           [activity]="activityTemplate" [readonly]="settings.readonly"
+           (delete)="onDelete()" (update)="onUpdate()">
       </emp-steps-activity-model-form>
     </mat-tab>
 
@@ -28,7 +28,7 @@
 
     <mat-tab label="Asesoría Covar">
       <emp-kb-postings-list
-           [target]="activity" [readonly]="settings.readonly">
+           [target]="activityTemplate" [readonly]="settings.readonly">
       </emp-kb-postings-list>
     </mat-tab>
 

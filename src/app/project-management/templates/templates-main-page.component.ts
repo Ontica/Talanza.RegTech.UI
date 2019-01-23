@@ -9,7 +9,9 @@ import { Component, OnInit } from '@angular/core';
 
 import { ProjectTemplateStore, ProjectTemplateModel } from '@app/store/project-template.store';
 
-import { Activity, EmptyActivity, ActivityOperation } from '@app/models/project-management';
+import { ActivityTemplate, ActivityTemplateOperation,
+         EmptyActivityTemplate, } from '@app/models/project-management';
+import { isEmpty } from '@app/models/core';
 
 
 @Component({
@@ -19,8 +21,8 @@ import { Activity, EmptyActivity, ActivityOperation } from '@app/models/project-
 })
 export class TemplatesMainPageComponent implements OnInit {
 
-  selectedTemplate: ProjectTemplateModel;
-  selectedActivity = EmptyActivity;
+  model: ProjectTemplateModel;
+  selectedActivityTemplate = EmptyActivityTemplate;
 
   displayEditor = false;
   toggleEditor = false;
@@ -31,55 +33,55 @@ export class TemplatesMainPageComponent implements OnInit {
   ngOnInit() {
     this.store.selectedTemplate().subscribe (
       x => {
-        if (this.selectedTemplate &&
-            this.selectedTemplate.project.uid !== x.project.uid) {
-          this.selectedActivity = EmptyActivity;
+        this.model = x;
+
+        if (!isEmpty(this.model.project)) {
           this.displayEditor = false;
         }
-        this.selectedTemplate = x;
+        this.model = x;
       }
     );
   }
 
 
-  onActivityUpdated(activity: Activity) {
+  onActivityUpdated(activityTemplate: ActivityTemplate) {
 
   }
 
 
-  onActivityTreeEdited(event: ActivityOperation) {
+  onActivityTreeEdited(event: ActivityTemplateOperation) {
     switch (event.operation) {
 
       case 'copyToProject':
-        this.store.copyToProject(event.targetProjectUID, event.activity as Activity)
-                  .then( () => this.displayEditor = false )
-                  .catch( response => console.log(response.error.message) );
+        this.store.copyTo(event.activity as ActivityTemplate, event.targetProjectUID)
+                  .then(() => this.displayEditor = false)
+                  .catch(response => console.log(response.error.message));
         return;
 
 
-      case 'createActivity':
-        this.store.insertActivity(this.selectedTemplate.project, event.activity)
-                  .then( x => this.selectedActivity = x )
-                  .catch( response => console.log(response.error.message) );
+      case 'insertActivity':
+        this.store.insert(this.model.project, event.activity)
+                  .then(x => this.selectedActivityTemplate = x)
+                  .catch(response => console.log(response.error.message));
         return;
 
 
       case 'moveActivity':
-        this.store.moveActivity(event.activity as Activity, event.newPosition)
-                  .catch( response => console.log(response.error.message) );
+        this.store.move(event.activity as ActivityTemplate, event.newPosition)
+                  .catch(response => console.log(response.error.message));
         return;
 
 
       case 'moveToProject':
-        this.store.moveToProject(event.targetProjectUID, event.activity as Activity)
-                  .then( () => this.displayEditor = false )
-                  .catch( response => console.log(response.error.message) );
+        this.store.moveTo(event.activity as ActivityTemplate, event.targetProjectUID)
+                  .then(() => this.displayEditor = false)
+                  .catch(response => console.log(response.error.message));
         return;
 
 
       case 'changeParent':
-        this.store.changeParent(event.activity as Activity, event.newParent)
-                  .catch( response => console.log(response.error.message) );
+        this.store.changeParent(event.activity as ActivityTemplate, event.newParent)
+                  .catch(response => console.log(response.error.message));
         return;
 
 
@@ -98,9 +100,9 @@ export class TemplatesMainPageComponent implements OnInit {
   }
 
 
-  showEditor(activity: Activity) {
-    if (activity) {
-      this.selectedActivity = activity;
+  showEditor(activityTemplate: ActivityTemplate) {
+    if (activityTemplate) {
+      this.selectedActivityTemplate = activityTemplate;
 
       const lastValue = this.displayEditor;
 

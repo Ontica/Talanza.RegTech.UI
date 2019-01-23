@@ -11,7 +11,7 @@ import { Observable } from 'rxjs';
 
 import { ProcedureStore } from '@app/store/procedure.store';
 
-import { Activity, EmptyActivity } from '@app/models/project-management';
+import { ActivityTemplate, EmptyActivityTemplate } from '@app/models/project-management';
 import { Procedure } from '@app/models/regulation';
 
 import { CardSettings } from '@app/models/user-interface';
@@ -27,21 +27,23 @@ export class ActivityDesignerComponent implements OnChanges {
   procedure: Observable<Procedure> = null;
 
   @Output() close = new EventEmitter();
-  @Output() update = new EventEmitter<Activity>();
+  @Output() update = new EventEmitter<ActivityTemplate>();
 
-  @Input() activity = EmptyActivity;
+  @Input() activityTemplate = EmptyActivityTemplate;
   @Input() settings = new CardSettings();
 
   constructor(private store: ProcedureStore) { }
 
   ngOnChanges() {
-    if (!this.activity) {
-      this.activity = EmptyActivity;
+    if (!this.activityTemplate) {
+      this.activityTemplate = EmptyActivityTemplate;
       this.procedure = null;
       return;
     }
     if (this.hasProcedure) {
-      this.procedure = this.store.getProcedure(this.activity.config.procedure);
+      this.procedure = this.getProcedure();
+    } else {
+      this.procedure = null;
     }
   }
 
@@ -51,18 +53,23 @@ export class ActivityDesignerComponent implements OnChanges {
   }
 
 
-  onDeleteActivity() {
+  onDelete() {
     this.onClose();
   }
 
 
-  onUpdateActivity() {
-    this.update.emit(this.activity);
+  onUpdate() {
+    this.update.emit(this.activityTemplate);
   }
 
 
   get hasProcedure() {
-    return (this.activity.config && this.activity.config.procedure !== -1);
+    return (this.activityTemplate && this.activityTemplate.procedure !== -1);
+  }
+
+
+  private getProcedure(): Observable<Procedure> {
+    return this.store.getProcedure(this.activityTemplate.procedure);
   }
 
 }
