@@ -17,7 +17,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { Observable, of } from 'rxjs';
 
 import { ProjectTemplateStore } from '@app/store/project-template.store';
-import { Activity, Project } from '@app/models/project-management';
+import { ActivityTemplate, Project } from '@app/models/project-management';
 import { ProjectStore } from '@app/store/project.store';
 
 
@@ -31,7 +31,7 @@ export class AddEventDialogComponent implements OnInit {
   form: FormGroup;
 
   project: Project;
-  events: Observable<Activity[]> = of([]);
+  events: Observable<ActivityTemplate[]> = of([]);
 
   constructor(private projectStore: ProjectStore,
               private templateStore: ProjectTemplateStore,
@@ -42,12 +42,11 @@ export class AddEventDialogComponent implements OnInit {
   }
 
   ngOnInit() {
-
     this.projectStore.selectedProject().subscribe (
       x => { this.project = x.project; }
     );
 
-    this.events = this.templateStore.events();
+    this.events = this.templateStore.startEvents();
 
     this.createFormGroup();
 
@@ -55,14 +54,13 @@ export class AddEventDialogComponent implements OnInit {
 
 
   save() {
-
     if (!this.form.valid) {
       return;
     }
 
     const data = this.getFormData();
 
-    this.projectStore.createFromEvent(this.project, data);
+    this.templateStore.createFromActivityTemplate(this.project, data.eventUID, data.eventDate);
 
     this.dialogRef.close(this.form.value);
   }
@@ -92,11 +90,8 @@ export class AddEventDialogComponent implements OnInit {
     const formModel = this.form.value;
 
     return {
-
       eventUID: formModel.selectedEvent,
-
-      eventDate: formModel.eventDate,
-
+      eventDate: formModel.eventDate
     };
   }
 
