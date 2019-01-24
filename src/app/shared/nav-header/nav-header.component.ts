@@ -11,9 +11,9 @@ import { Component, EventEmitter,
 import { MenuItem } from '../nav-menu/nav-menu.component';
 
 import { ProjectStore } from '@app/store/project.store';
-import { Project, ViewConfig, DefaultViewConfig } from '@app/models/project-management';
-
 import { ProjectTemplateStore } from '@app/store/project-template.store';
+
+import { Project, ProjectTemplate, ViewConfig, DefaultViewConfig } from '@app/models/project-management';
 
 export type ProjectViewType = 'Tree' | 'Gantt' | 'Timeline';
 
@@ -31,7 +31,7 @@ export class NavigationHeaderComponent implements OnChanges {
   breadcrumb = '';
 
   selectedProject: Project;
-  selectedTemplate: Project;
+  selectedTemplate: ProjectTemplate;
   viewConfig: ViewConfig = DefaultViewConfig();
 
   @Output() action = new EventEmitter<string>();
@@ -75,13 +75,13 @@ export class NavigationHeaderComponent implements OnChanges {
   }
 
   cleanProjectActivities() {
-      // showYesNo
-      // executeIfYes
+    // showYesNo
+    // executeIfYes
   }
 
 
   openCreateProjectTemplateDialog() {
-      // open dialog (ask for name)
+    // open dialog (ask for name)
   }
 
 
