@@ -77,7 +77,7 @@ export class GroupActivitiesByPipe implements PipeTransform  {
     }, {});
 
     return Object.keys(groups).map( key => ({ key, value: groups[key] }) )
-                                   .sort( (a, b) => this.compareResponsibleNames(a.key, b.key));
+                              .sort( (a, b) => this.compareResponsibleNames(a.key, b.key));
   }
 
 

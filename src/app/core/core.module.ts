@@ -62,10 +62,7 @@ import { throwIfAlreadyLoaded } from './module-import-guard';
 export class CoreModule {
 
   constructor(@Optional() @SkipSelf() parentModule: CoreModule) {
-    console.log('CoreModule cntrcor');
-
     throwIfAlreadyLoaded(parentModule, 'CoreModule');
-
   }
 
 }

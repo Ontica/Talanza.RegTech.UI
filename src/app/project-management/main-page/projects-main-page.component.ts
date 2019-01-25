@@ -13,6 +13,7 @@ import { Activity, EmptyActivity, ActivityOperation,
          DefaultViewConfig, ViewConfig } from '@app/models/project-management';
 
 import { MenuItem } from '@app/shared/nav-menu/nav-menu.component';
+import { Exception } from '@app/core';
 
 
 const mainMenu: MenuItem[] = [
@@ -107,30 +108,23 @@ export class ProjectsMainPageComponent implements OnInit {
     switch (event.operation) {
 
       case 'createActivity':
-
         this.store.insertActivity(this.selectedProject.project, event.activity)
-                  .then( x => this.selectedActivity = x )
-                  .catch( response => console.log(response.error.message) );
-
+                  .then(x => this.selectedActivity = x)
+                  .catch(response => console.log(response.error.message));
         return;
 
       case 'moveActivity':
-
         this.store.moveActivity(event.activity as Activity, event.newPosition)
-                  .catch( response => console.log(response.error.message) );
-
+                  .catch(response => console.log(response.error.message));
         return;
 
       case 'changeParent':
-
         this.store.changeParent(event.activity as Activity, event.newParent)
-                  .catch( response => console.log(response.error.message) );
-
+                  .catch(response => console.log(response.error.message));
         return;
 
       default:
-
-        console.log('Unhandled operation name', event.operation);
+        throw new Exception(`Unhandled operation name '${event.operation}'.`);
 
     }
 
