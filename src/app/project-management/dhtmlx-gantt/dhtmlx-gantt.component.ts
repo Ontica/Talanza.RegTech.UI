@@ -7,7 +7,7 @@
 
 import { Component, ChangeDetectionStrategy,
          ElementRef, EventEmitter,
-         Input, Output, OnInit,
+         Input, Output, OnDestroy, OnInit,
          ViewChild, ViewEncapsulation } from '@angular/core';
 
 import { ProjectModel, ProjectStore } from '@app/store/project.store';
@@ -19,6 +19,7 @@ declare let gantt: any;
 import { Activity, ViewConfig, GanttTask } from '@app/models/project-management';
 
 import { GanttService } from '@app/services/project-management';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'emp-steps-dhtmlx-gantt',
@@ -27,7 +28,7 @@ import { GanttService } from '@app/services/project-management';
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None
 })
-export class DhtmlxGanttComponent implements OnInit {
+export class DhtmlxGanttComponent implements OnInit, OnDestroy {
 
   @Input()
   get project(): ProjectModel { return this._project; }
@@ -37,10 +38,13 @@ export class DhtmlxGanttComponent implements OnInit {
     }
 
     this._project = value;
+
     this.refreshData();
   }
   private _project;
 
+  private selectedView$: Subscription;
+  private attachEvent$: any;
 
   @Input()
   get config(): ViewConfig { return this._config; }
@@ -71,7 +75,7 @@ export class DhtmlxGanttComponent implements OnInit {
 
 
   ngOnInit() {
-    this.store.selectedView().subscribe(
+    this.selectedView$ = this.store.selectedView().subscribe(
       x => this.config = x
     );
 
@@ -83,11 +87,18 @@ export class DhtmlxGanttComponent implements OnInit {
   }
 
 
+  ngOnDestroy() {
+    this.selectedView$.unsubscribe();
+    gantt.detachEvent(this.attachEvent$);
+  }
+
+
+
  // Private methods
 
   private attachEvents() {
 
-    gantt.attachEvent('onTaskSelected', id => {
+    this.attachEvent$ = gantt.attachEvent('onTaskSelected', id => {
       if (this.innerReset) {
         this.innerReset = false;
         return;
@@ -95,9 +106,14 @@ export class DhtmlxGanttComponent implements OnInit {
 
       this.selectedTask = this.ganttData.find(x => x.id === +id);
 
-      const activity = this.store.getActivity(this.selectedTask.uid);
 
-      return this.activitySelected.emit(activity);
+      if (this.selectedTask && this.selectedTask.uid) {
+        const activity = this.store.getActivity(this.selectedTask.uid);
+
+        return this.activitySelected.emit(activity);
+      } else {
+        console.log('Undefined this.selectedTask.id:', id, this.ganttData);
+      }
 
     });
 
@@ -124,7 +140,8 @@ export class DhtmlxGanttComponent implements OnInit {
     ];
 
     this.ganttService.getActivitiesTree(this.project.project)
-                     .subscribe( data => {
+                     .toPromise()
+                     .then(data => {
                         this.ganttData = data;
                         gantt.clearAll();
                         gantt.parse({ data, links });
