@@ -107,7 +107,7 @@ export class ProjectsMainPageComponent implements OnInit {
   onActivityTreeEdited(event: ActivityOperation) {
     switch (event.operation) {
 
-      case 'createActivity':
+      case 'insertActivity':
         this.store.insertActivity(this.selectedProject.project, event.activity)
                   .then(x => this.selectedActivity = x)
                   .catch(response => console.log(response.error.message));

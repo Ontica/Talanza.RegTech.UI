@@ -75,13 +75,13 @@ export class ActivityTreeComponent implements OnChanges {
 
     this.hideInlineEditors();
 
-    const activity = {
+    const newActivity = {
       name: name,
       position: position ? position + 1 : 1
     };
 
-    this.edited.emit({ operation: 'createActivity',
-                       activity: activity
+    this.edited.emit({ operation: 'insertActivity',
+                       activity: newActivity
                      });
   }
 
