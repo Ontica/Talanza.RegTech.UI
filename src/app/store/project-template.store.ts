@@ -13,8 +13,6 @@ import { ProjectTemplateService } from '@app/services/project-management';
 
 import { Activity, ActivityTemplate,
          Project, ProjectTemplate, EmptyProjectTemplate } from '@app/models/project-management';
-import { Entity } from '@app/models/regulation';
-import { Empty } from '@app/models/core';
 
 
 export class ProjectTemplateModel {
@@ -64,11 +62,6 @@ export class ProjectTemplateStore {
 
   activities(): ActivityTemplate[] {
     return this._selectedTemplate.value.activities.toArray();
-  }
-
-
-  entities(): Observable<Entity[]> {
-    return this.projectTemplateService.getEntitiesList();
   }
 
 

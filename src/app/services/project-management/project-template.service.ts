@@ -21,13 +21,6 @@ export class ProjectTemplateService {
 
   // GET methods
 
-  getEntitiesList(): Observable<Entity[]> {
-    const path = 'v1/modeling/entities';
-
-    return this.http.get<Entity[]>(path);
-  }
-
-
   getProjectTemplatesList(): Observable<Project[]> {
     const path = 'v1/project-management/project-templates';
 

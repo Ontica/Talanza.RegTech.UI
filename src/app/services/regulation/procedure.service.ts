@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 
 import { CoreService } from '@app/core/core.service';
 
-import { BaseProcedure, Procedure, ProcedureFilter } from '@app/models/regulation';
+import { BaseProcedure, Entity, Procedure, ProcedureFilter } from '@app/models/regulation';
 
 
 @Injectable()
@@ -23,6 +23,13 @@ export class ProcedureService {
     const path = `v1/procedures`;
 
     return this.core.http.get<BaseProcedure[]>(path);
+  }
+
+
+  getEntities(): Observable<Entity[]> {
+    const path = 'v1/modeling/entities';
+
+    return this.core.http.get<Entity[]>(path);
   }
 
 
