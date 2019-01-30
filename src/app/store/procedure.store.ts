@@ -6,32 +6,39 @@
  */
 
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable, of, combineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { ProcedureService } from '@app/services/regulation';
 
-import { BaseProcedure, Procedure } from '@app/models/regulation';
+import { BaseProcedure, Entity, Procedure } from '@app/models/regulation';
 
 
 @Injectable()
 export class ProcedureStore {
 
-  private _baseProcedures: BehaviorSubject<BaseProcedure[]> = new BehaviorSubject([]);
-  private _procedures: Array<Procedure> = [];
+  private _baseProcedures = new BehaviorSubject<BaseProcedure[]>([]);
+  private _fullRetrivedProcedures: Array<Procedure> = [];
+  private _entities = new BehaviorSubject<Entity[]>([]);
+
 
   constructor(private procedureService: ProcedureService) {
     this.loadInitialData();
   }
 
 
-  baseProcedures(): Observable<BaseProcedure[]> {
+  entities(): Observable<Entity[]> {
+    return this._entities.asObservable();
+  }
+
+
+  procedures(): Observable<BaseProcedure[]> {
     return this._baseProcedures.asObservable();
   }
 
 
   getProcedure(procedureUID: string | number): Observable<Procedure> {
-    const procedure = this._procedures.find(
+    const procedure = this._fullRetrivedProcedures.find(
       x => x.uid === procedureUID || x.id === procedureUID
     );
     if (procedure) {
@@ -41,13 +48,28 @@ export class ProcedureStore {
     return this.procedureService.getProcedure(procedureUID)
       .pipe(
         map(data => {
-          this._procedures.push(data);
+          this._fullRetrivedProcedures.push(data);
 
           return data;
         })
       );
   }
 
+
+  getProceduresFilteredByEntityId(filter: Observable<number>): Observable<BaseProcedure[]> {
+    return combineLatest(
+      this.entities(),
+      this.procedures(),
+      filter, (entitiesArray, proceduresArray, filterValue) => {
+        const entity = entitiesArray.find(x => x.id === filterValue);
+        if (entity) {
+          return proceduresArray.filter(x => x.entityName === entity.shortName);
+        } else {
+        return proceduresArray;
+        }
+      }
+    );
+  }
 
   // private methods
 
@@ -58,6 +80,13 @@ export class ProcedureStore {
           this._baseProcedures.next(data)
         ,
         err => console.log('Error reading base procedures data', err)
+      );
+
+    this.procedureService.getEntities()
+      .subscribe(
+        data => this._entities.next(data)
+        ,
+        err => console.log('Error reading entities data', err)
       );
   }
 

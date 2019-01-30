@@ -6,11 +6,11 @@
  */
 
 import { Component, EventEmitter, Input,
-         OnChanges, OnInit, Output } from '@angular/core';
+         OnChanges, OnInit, Output, OnDestroy } from '@angular/core';
 
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
-import { Observable, of } from 'rxjs';
+import { Observable, of, BehaviorSubject, combineLatest } from 'rxjs';
 
 import { ProjectTemplateStore } from '@app/store/project-template.store';
 import { ProcedureStore } from '@app/store/procedure.store';
@@ -19,7 +19,6 @@ import { ActivityTemplate, EmptyActivityTemplate } from '@app/models/project-man
 import { BaseProcedure, Entity } from '@app/models/regulation';
 
 import { AbstractForm, MessageBoxService } from '@app/shared/services';
-
 
 enum FormMessages {
 
@@ -31,13 +30,14 @@ enum FormMessages {
 
 }
 
+const ALL_ENTITIES = -1;
 
 @Component({
   selector: 'emp-steps-activity-model-form',
   templateUrl: './activity-model-form.component.html',
   styleUrls: ['./activity-model-form.component.scss']
 })
-export class ActivityModelFormComponent extends AbstractForm implements OnInit, OnChanges {
+export class ActivityModelFormComponent extends AbstractForm implements OnInit, OnChanges, OnDestroy {
 
   @Output() delete = new EventEmitter();
   @Output() update = new EventEmitter<ActivityTemplate>();
@@ -48,8 +48,10 @@ export class ActivityModelFormComponent extends AbstractForm implements OnInit, 
   form: FormGroup;
 
   dueOnControllers: ActivityTemplate[] = [];
+
   entities: Observable<Entity[]> = of([]);
   procedures: Observable<BaseProcedure[]> = of([]);
+  selectedEntityIdSubject = new BehaviorSubject<number>(ALL_ENTITIES);
 
   constructor(private messageService: MessageBoxService,
               private templateStore: ProjectTemplateStore,
@@ -63,16 +65,32 @@ export class ActivityModelFormComponent extends AbstractForm implements OnInit, 
   }
 
 
+  ngOnInit() {
+    this.entities = this.procedureStore.entities();
+    this.procedures = this.procedureStore.getProceduresFilteredByEntityId(this.selectedEntityIdSubject);
+  }
+
+
   ngOnChanges() {
     if (!this.activity) {
       this.activity = EmptyActivityTemplate;
     }
     this.onReset();
+    this.selectedEntityIdSubject.next(this.activity.entity);
   }
 
 
-  ngOnInit() {
-    this.loadCatalogues();
+  ngOnDestroy(): void {
+    this.selectedEntityIdSubject.unsubscribe();
+  }
+
+
+  onChangeEntity(entityId: string) {
+    if (!entityId || +entityId < 1) {
+      this.selectedEntityIdSubject.next(ALL_ENTITIES);
+    } else {
+      this.selectedEntityIdSubject.next(+entityId);
+    }
   }
 
 
@@ -91,6 +109,7 @@ export class ActivityModelFormComponent extends AbstractForm implements OnInit, 
       }
     );
   }
+
 
   onReset() {
     this.rebuildForm();
@@ -285,21 +304,6 @@ export class ActivityModelFormComponent extends AbstractForm implements OnInit, 
 
 
   // these methods must be handled through component input data (architecture concern)
-
-  private loadCatalogues() {
-    this.loadEntities();
-    this.loadProcedures();
-  }
-
-
-  private loadEntities() {
-    this.entities = this.templateStore.entities();
-  }
-
-
-  private loadProcedures() {
-    this.procedures = this.procedureStore.baseProcedures();
-  }
 
 
   private loadDueOnControllers() {
