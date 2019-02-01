@@ -68,12 +68,12 @@
         <td>Iniciada el:</td>
         <td>
           <emp-ng-datepicker formControlName="actualStartDate"></emp-ng-datepicker>
-          <button mat-button type="button" [disabled]="disabled" (click)="onStart()">Iniciar</button>
         </td>
         <td class="text-align-right" style="width:100%;white-space:normal">Finalizada el:</td>
         <td>
           <emp-ng-datepicker formControlName="actualEndDate"></emp-ng-datepicker>
-          <button mat-button type="button" [disabled]="disabled" (click)="onComplete()">Cerrar</button>
+          <button *ngIf="!disabled" type="button" class="btn-action"
+                  (click)="onComplete()">Finalizar</button>
         </td>
       </tr>
     </table>
@@ -116,10 +116,13 @@
         <td class="text-align-right">
 
           <button *ngIf="!disabled" type="submit" class="btn-action btn-margin-right"
-                  (click)="setCommand('update')">Guardar los cambios</button>
+                  (click)="setCommand('updateActivity')">Guardar los cambios</button>
 
-          <button *ngIf="disabled" type="button" class="btn-action right"
+          <button *ngIf="disabled && activity.status !== 'Completed'" type="button" class="btn-action right"
                   (click)="enable()">Editar</button>
+
+          <button *ngIf="disabled && activity.status === 'Completed'" type="button" class="btn right"
+                  (click)="onReactivate()">Reactivar</button>
 
           <button *ngIf="!disabled" type="button" class="btn right"
                   (click)="onCancelEdition()">Cancelar edición</button>

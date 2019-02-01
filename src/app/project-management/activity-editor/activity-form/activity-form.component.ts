@@ -107,6 +107,22 @@ export class ActivityFormComponent extends AbstractForm implements OnInit, OnCha
   }
 
 
+  onReactivate() {
+    const msg = `Esta operación volverá a abrir la actividad ` +
+                `<strong>${this.activity.name}</strong> para hacerle cambios.<br/><br/>` +
+                `La fecha de finalización será removida.<br/><br/>` +
+                `¿Reactivo esta actividad?`;
+
+    this.app.messageBox.confirm(msg, 'Reactivar la actividad', 'AcceptCancel', 'Reactivar').subscribe(
+      result => {
+        if (result) {
+          this.setCommand('reactivateActivity');
+          this.onSubmit({ skipFormValidation: true });
+        }
+      });
+  }
+
+
   onStart() {
 
   }
@@ -149,6 +165,9 @@ export class ActivityFormComponent extends AbstractForm implements OnInit, OnCha
 
       case 'deleteActivity':
         return this.deleteActivity();
+
+      case 'reactivateActivity':
+        return this.reactivateActivity();
 
       case 'updateActivity':
         return Promise.resolve(this.updateActivity());
@@ -261,6 +280,25 @@ export class ActivityFormComponent extends AbstractForm implements OnInit, OnCha
     }
 
     return this.projectStore.completeActivity(this.activity, updateData)
+      .then(() => {
+        this.resetForm();
+        this.update.emit();
+      })
+      .catch(err => this.app.messageBox.showError(err).toPromise());
+  }
+
+
+  private reactivateActivity(): Promise<void> {
+    if (isTypeOf(this.activity, TASK_TYPE_NAME)) {
+      this.taskStore.reactivateTask(this.task)
+      .subscribe(() => {
+        this.resetForm();
+        this.update.emit();
+      });
+      return Promise.resolve();
+    }
+
+    return this.projectStore.reactivateActivity(this.activity)
       .then(() => {
         this.resetForm();
         this.update.emit();

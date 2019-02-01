@@ -24,6 +24,9 @@ enum Errors {
   DELETE_TASK =
   '[DELETE_TASK] Ocurrió un problema al eliminar la tarea.',
 
+  REACTIVATE_TASK =
+  '[REACTIVATE_TASK] Ocurrió un problema al reactivar la tarea.',
+
   UPDATE_TASK =
   '[UPDATE_TASK] Ocurrió un problema al actualizar la tarea.'
 }
@@ -69,6 +72,16 @@ export class TaskService {
     return this.core.http.delete<Task[]>(path)
       .pipe(
         catchError((e) => this.core.http.throw(e, Errors.DELETE_TASK))
+      );
+  }
+
+
+  reactivateTask(task: Task): Observable<Task> {
+    const path = `v1/project-management/activities/${task.activity.uid}/tasks/${task.uid}/reactivate`;
+
+    return this.core.http.post<Task>(path, {})
+      .pipe(
+        catchError((e) => this.core.http.throw(e, Errors.REACTIVATE_TASK))
       );
   }
 

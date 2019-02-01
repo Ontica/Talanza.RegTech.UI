@@ -164,6 +164,18 @@ export class ProjectStore {
   }
 
 
+  reactivateActivity(activity: Activity): Promise<Activity> {
+    return this.projectService.reactivateActivity(activity)
+               .toPromise()
+               .then( x => {
+                   this.updateSelectedProject(activity.project);
+                   Object.assign(activity, x);
+
+                   return activity;
+              });
+  }
+
+
   updateActivity(activity: Activity, updateData: Partial<Activity>): Promise<Activity> {
     return this.projectService.updateActivity(activity, updateData)
                .toPromise()

@@ -42,6 +42,9 @@ enum Errors {
   MOVE_TO_PROJECT =
   '[MOVE_TO_PROJECT] Ocurrió un problema al intentar mover la actividad a otro proyecto.',
 
+  REACTIVATE_ACTIVITY =
+  '[REACTIVATE_ACTIVITY] Ocurrió un problema al reactivar la actividad.',
+
   UPDATE_ACTIVITY =
   '[UPDATE_ACTIVITY] Ocurrió un problema al actualizar la actividad.'
 }
@@ -227,6 +230,20 @@ export class ProjectService {
                          .pipe(
                             catchError((e) => this.core.http.throw(e, Errors.MOVE_TO_PROJECT))
                          );
+  }
+
+
+  reactivateActivity(activity: Activity): Observable<Activity> {
+    Assertion.assertValue(activity, 'activity');
+
+    const path =
+      `v1/project-management/projects/${activity.project.uid}/activities/${activity.uid}/reactivate`;
+
+    return this.core.http.post<Activity>(path, {})
+                         .pipe(
+                            catchError(e => this.core.http.throw(e, Errors.REACTIVATE_ACTIVITY))
+                         );
+
   }
 
 
