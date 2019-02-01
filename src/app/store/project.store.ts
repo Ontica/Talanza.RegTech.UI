@@ -117,6 +117,18 @@ export class ProjectStore {
   }
 
 
+  closeActivity(activity: Activity, updateData: Partial<Activity>): Promise<Activity> {
+    return this.projectService.closeActivity(activity, updateData)
+               .toPromise()
+               .then( x => {
+                   this.updateSelectedProject(activity.project);
+                   Object.assign(activity, x);
+
+                   return activity;
+              });
+  }
+
+
   deleteActivity(activity: Activity): Promise<void> {
     return this.projectService.deleteActivity(activity)
                .toPromise()

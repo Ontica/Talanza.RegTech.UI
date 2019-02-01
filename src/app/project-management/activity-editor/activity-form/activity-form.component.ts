@@ -85,15 +85,25 @@ export class ActivityFormComponent extends AbstractForm implements OnInit, OnCha
                                'DeleteCancel', 'Eliminar esta actividad').subscribe(
       result => {
         if (result) {
-          this.setCommand('delete');
+          this.setCommand('deleteActivity');
           this.onSubmit({ skipFormValidation: true });
         }
       });
   }
 
 
-  onEnd() {
+  onCloseActivity() {
+    const msg = `Esta operación cerrará la actividad ` +
+                `<strong>${this.activity.name}</strong>.<br/><br/>` +
+                `¿Cierro esta actividad?`;
 
+    this.app.messageBox.confirm(msg, 'Cerrar actividad', 'AcceptCancel', 'Cerrar esta actividad').subscribe(
+      result => {
+        if (result) {
+          this.setCommand('closeActivity');
+          this.onSubmit({ skipFormValidation: true });
+        }
+      });
   }
 
 
@@ -134,10 +144,13 @@ export class ActivityFormComponent extends AbstractForm implements OnInit, OnCha
 
   protected execute(): Promise<any> {
     switch (this.command.name) {
-      case 'delete':
+      case 'closeActivity':
+        return Promise.resolve(this.closeActivity());
+
+      case 'deleteActivity':
         return this.deleteActivity();
 
-      case 'update':
+      case 'updateActivity':
         return Promise.resolve(this.updateActivity());
 
       default:
@@ -161,7 +174,6 @@ export class ActivityFormComponent extends AbstractForm implements OnInit, OnCha
 
 
   private deleteActivity(): Promise<void> {
-
     if (isTypeOf(this.activity, TASK_TYPE_NAME)) {
       this.taskStore.deleteTask(this.task)
       .subscribe(() => {
@@ -172,8 +184,8 @@ export class ActivityFormComponent extends AbstractForm implements OnInit, OnCha
     }
 
     return this.projectStore.deleteActivity(this.activity)
-      .then(() => this.delete.emit())
-      .catch(err => this.app.messageBox.showError(err).toPromise());
+               .then(() => this.delete.emit())
+               .catch(err => this.app.messageBox.showError(err).toPromise());
   }
 
 
@@ -233,6 +245,27 @@ export class ActivityFormComponent extends AbstractForm implements OnInit, OnCha
   private resetForm() {
     this.rebuildForm();
     this.disable();
+  }
+
+
+  private closeActivity(): Promise<void> {
+    const updateData = this.getUpdateData();
+
+    if (isTypeOf(this.activity, TASK_TYPE_NAME)) {
+      this.taskStore.closeTask(this.task, updateData)
+      .subscribe(() => {
+        this.resetForm();
+        this.update.emit();
+      });
+      return Promise.resolve();
+    }
+
+    return this.projectStore.closeActivity(this.activity, updateData)
+      .then(() => {
+        this.resetForm();
+        this.update.emit();
+      })
+      .catch(err => this.app.messageBox.showError(err).toPromise());
   }
 
 

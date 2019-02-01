@@ -18,6 +18,9 @@ import { ColoredTag } from '@app/models/user-interface';
 
 
 enum Errors {
+  CLOSE_ACTIVITY =
+  '[CLOSE_ACTIVITY] Ocurrió un problema al cerrar la actividad.',
+
   COPY_TO_PROJECT=
   '[COPY_TO_PROJECT] Ocurrió un problema al intentar copiar la actividad.',
 
@@ -88,7 +91,6 @@ export class ProjectService {
 
 
   getStages(): Observable<Stage[]> {
-
     const STAGES: Stage[] = [
       { uid: 'Transición', name: 'Transición' },
       { uid: 'Evaluación', name: 'Evaluación' },
@@ -127,6 +129,18 @@ export class ProjectService {
   }
 
 
+  closeActivity(activity: Activity, updateData?: Partial<Activity>): Observable<Activity> {
+    Assertion.assertValue(activity, 'activity');
+
+    const path = `v1/project-management/projects/${activity.project.uid}/activities/${activity.uid}/close`;
+
+    return this.core.http.post<Activity>(path, updateData)
+                         .pipe(
+                            catchError(e => this.core.http.throw(e, Errors.CLOSE_ACTIVITY))
+                         );
+  }
+
+
   changeParent(activity: Activity, newParent: Activity): Observable<Activity> {
     Assertion.assertValue(activity, 'activity');
     Assertion.assertValue(newParent, 'newParent');
@@ -148,11 +162,7 @@ export class ProjectService {
     const path = `v1/project-management/projects/${activity.project.uid}/activities/` +
                  `${activity.uid}/copyTo/${targetProjectUID}`;
 
-    const body = {
-
-    };
-
-    return this.core.http.post<Activity>(path, body)
+    return this.core.http.post<Activity>(path, {})
                          .pipe(
                             catchError((e) => this.core.http.throw(e, Errors.COPY_TO_PROJECT))
                          );
@@ -209,15 +219,10 @@ export class ProjectService {
     Assertion.assertValue(targetProjectUID, 'targetProjectUID');
     Assertion.assertValue(activity, 'activity');
 
-
     const path = `v1/project-management/projects/${activity.project.uid}/activities/` +
                  `${activity.uid}/moveTo/${targetProjectUID}`;
 
-    const body = {
-
-    };
-
-    return this.core.http.post<Activity>(path, body)
+    return this.core.http.post<Activity>(path, {})
                          .pipe(
                             catchError((e) => this.core.http.throw(e, Errors.MOVE_TO_PROJECT))
                          );
