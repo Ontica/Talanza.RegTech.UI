@@ -7,7 +7,6 @@
 
 import { NgModule } from '@angular/core';
 
-import { ActivityService } from './activity.service';
 import { GanttService } from './gantt.service';
 import { ProjectMeetingService } from './project-meeting.service';
 import { ProjectTemplateService } from './project-template.service';
@@ -17,7 +16,6 @@ import { TaskService } from './task.service';
 @NgModule({
 
   providers: [
-    ActivityService,
     GanttService,
     ProjectMeetingService,
     ProjectTemplateService,

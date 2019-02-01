@@ -10,7 +10,7 @@ import { Component, EventEmitter, Input,
 
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
-import { Observable, of, BehaviorSubject, combineLatest } from 'rxjs';
+import { Observable, of, BehaviorSubject } from 'rxjs';
 
 import { ProjectTemplateStore } from '@app/store/project-template.store';
 import { ProcedureStore } from '@app/store/procedure.store';

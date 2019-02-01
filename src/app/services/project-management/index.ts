@@ -5,8 +5,6 @@
  * See LICENSE.txt in the project root for complete license information.
  */
 
-export * from './activity.service';
-
 export * from './gantt.service';
 
 export * from './project-meeting.service';
