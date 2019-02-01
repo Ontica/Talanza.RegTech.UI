@@ -54,6 +54,7 @@
                  (click)="onSelectActivity(activity, true)">{{activity.name}}</a>
 
               <a *ngIf="!templateDesignerMode" [ngClass]="activityNameClass(activity.level)"
+                 [class.activity-name-completed]="activity.status === 'Completed'"
                  [class.dragover-activity-name]="dragZoneItem === activity.name"
                  (click)="onSelectActivity(activity, true)">{{activity.name}}</a>
 

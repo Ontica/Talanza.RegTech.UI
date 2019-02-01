@@ -53,6 +53,10 @@
   font-weight:400;
 }
 
+.activity-name-completed {
+  text-decoration-line: line-through;
+}
+
 
 .activity-name a:hover {
   color: $dark-blue;
