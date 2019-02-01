@@ -117,8 +117,8 @@ export class ProjectStore {
   }
 
 
-  closeActivity(activity: Activity, updateData: Partial<Activity>): Promise<Activity> {
-    return this.projectService.closeActivity(activity, updateData)
+  completeActivity(activity: Activity, updateData: Partial<Activity>): Promise<Activity> {
+    return this.projectService.completeActivity(activity, updateData)
                .toPromise()
                .then( x => {
                    this.updateSelectedProject(activity.project);

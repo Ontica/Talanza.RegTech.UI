@@ -18,8 +18,8 @@ import { ColoredTag } from '@app/models/user-interface';
 
 
 enum Errors {
-  CLOSE_ACTIVITY =
-  '[CLOSE_ACTIVITY] Ocurrió un problema al cerrar la actividad.',
+  COMPLETE_ACTIVITY =
+  '[COMPLETE_ACTIVITY] Ocurrió un problema al cerrar la actividad.',
 
   COPY_TO_PROJECT=
   '[COPY_TO_PROJECT] Ocurrió un problema al intentar copiar la actividad.',
@@ -128,15 +128,16 @@ export class ProjectService {
                          );
   }
 
+  // update methods
 
-  closeActivity(activity: Activity, updateData?: Partial<Activity>): Observable<Activity> {
+  completeActivity(activity: Activity, updateData?: Partial<Activity>): Observable<Activity> {
     Assertion.assertValue(activity, 'activity');
 
-    const path = `v1/project-management/projects/${activity.project.uid}/activities/${activity.uid}/close`;
+    const path = `v1/project-management/projects/${activity.project.uid}/activities/${activity.uid}/complete`;
 
     return this.core.http.post<Activity>(path, updateData)
                          .pipe(
-                            catchError(e => this.core.http.throw(e, Errors.CLOSE_ACTIVITY))
+                            catchError(e => this.core.http.throw(e, Errors.COMPLETE_ACTIVITY))
                          );
   }
 

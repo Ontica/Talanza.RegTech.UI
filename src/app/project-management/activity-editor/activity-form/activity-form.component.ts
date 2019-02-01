@@ -76,6 +76,21 @@ export class ActivityFormComponent extends AbstractForm implements OnInit, OnCha
   }
 
 
+  onComplete() {
+    const msg = `Esta operación cerrará la actividad ` +
+                `<strong>${this.activity.name}</strong>.<br/><br/>` +
+                `¿Cierro esta actividad?`;
+
+    this.app.messageBox.confirm(msg, 'Cerrar actividad', 'AcceptCancel', 'Cerrar esta actividad').subscribe(
+      result => {
+        if (result) {
+          this.setCommand('completeActivity');
+          this.onSubmit({ skipFormValidation: true });
+        }
+      });
+  }
+
+
   onDelete() {
     const msg = `Esta operación eliminará la actividad ` +
                 `<strong>${this.activity.name}</strong> de este proyecto.<br/><br/>` +
@@ -86,21 +101,6 @@ export class ActivityFormComponent extends AbstractForm implements OnInit, OnCha
       result => {
         if (result) {
           this.setCommand('deleteActivity');
-          this.onSubmit({ skipFormValidation: true });
-        }
-      });
-  }
-
-
-  onCloseActivity() {
-    const msg = `Esta operación cerrará la actividad ` +
-                `<strong>${this.activity.name}</strong>.<br/><br/>` +
-                `¿Cierro esta actividad?`;
-
-    this.app.messageBox.confirm(msg, 'Cerrar actividad', 'AcceptCancel', 'Cerrar esta actividad').subscribe(
-      result => {
-        if (result) {
-          this.setCommand('closeActivity');
           this.onSubmit({ skipFormValidation: true });
         }
       });
@@ -144,8 +144,8 @@ export class ActivityFormComponent extends AbstractForm implements OnInit, OnCha
 
   protected execute(): Promise<any> {
     switch (this.command.name) {
-      case 'closeActivity':
-        return Promise.resolve(this.closeActivity());
+      case 'completeActivity':
+        return Promise.resolve(this.completeActivity());
 
       case 'deleteActivity':
         return this.deleteActivity();
@@ -248,11 +248,11 @@ export class ActivityFormComponent extends AbstractForm implements OnInit, OnCha
   }
 
 
-  private closeActivity(): Promise<void> {
+  private completeActivity(): Promise<void> {
     const updateData = this.getUpdateData();
 
     if (isTypeOf(this.activity, TASK_TYPE_NAME)) {
-      this.taskStore.closeTask(this.task, updateData)
+      this.taskStore.completeTask(this.task, updateData)
       .subscribe(() => {
         this.resetForm();
         this.update.emit();
@@ -260,7 +260,7 @@ export class ActivityFormComponent extends AbstractForm implements OnInit, OnCha
       return Promise.resolve();
     }
 
-    return this.projectStore.closeActivity(this.activity, updateData)
+    return this.projectStore.completeActivity(this.activity, updateData)
       .then(() => {
         this.resetForm();
         this.update.emit();

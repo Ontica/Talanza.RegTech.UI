@@ -45,13 +45,10 @@ export class TaskService {
   }
 
 
-  closeTask(task: Task, data?: Partial<Task>): Observable<Task> {
-    const path = `v1/project-management/activities/${task.activity.uid}/tasks/${task.uid}/close`;
+  completeTask(task: Task, data?: Partial<Task>): Observable<Task> {
+    const path = `v1/project-management/activities/${task.activity.uid}/tasks/${task.uid}/complete`;
 
-    return this.core.http.post<Task>(path, data)
-      .pipe(
-        catchError((e) => this.core.http.throw(e, Errors.UPDATE_TASK))
-      );
+    return this.core.http.post<Task>(path, data);
   }
 
 
