@@ -6,52 +6,57 @@
 .outer {
   align-items: center;
   display: flex;
-  height: 100vh;
+  height: 80vh;
   justify-content: center;
   width: 100%;
-  color: $text-title;
+  color: $primary-color;
 }
 
 .login-div {
   display: flex;
-  height: 300px;
-  width: 400px;
+  height: 340px;
+  width: 600px;
 }
 
 .left-column {
-  height: 300px;
-  width: 180px;
+  height: 340px;
+  width: 220px;
 }
 
 .logo {
-  height: 60px;
+  margin-top: 40px;
+  height: 200px;
 }
 
 .central-column {
-  height: 300px;
-  width: 20px;
-  background-color: #9b1b1f;
+  height: 340px;
+  width: 16px;
+  background-color: $primary-color;
 }
 
 .right-column {
-  height: 300px;
-  width: 200px;
+  margin-left: 50px;
+  height: 340px;
+  width: 340px;
 }
 
 .authentication-section-welcome {
   padding-top: 12px;
   padding-left: 12px;
   font-size: 15pt;
-  line-height: 12pt;
+  text-transform: uppercase;
+  color: $primary-color;
+  line-height: 16pt;
 }
 
 .authentication-section-form {
   padding-left: 12px;
   padding-top: 12px;
+  width: 75%;
 }
 
 .authentication-section-form input {
-  margin-bottom: 16px;
+  margin-bottom: 20px;
 }
 
 .authentication-section-footer {
