@@ -11,8 +11,6 @@ import { FormsModule } from '@angular/forms';
 
 import { SharedModule } from '@app/shared/shared.module';
 
-import { InboxEditorComponent } from './editor/inbox-editor.component';
-import { TaskEditorComponent } from './editor/tabs/task-editor/task-editor.component';
 import { InboxFilterComponent } from './main-page/inbox-filter.component';
 import { InboxMainPageComponent } from './main-page/inbox-main-page.component';
 import { WorkListComponent } from './work-list/work-list.component';
@@ -31,10 +29,8 @@ import { InboxRoutingModule } from './inbox-routing.module';
   ],
 
   declarations: [
-    InboxEditorComponent,
     InboxFilterComponent,
     InboxMainPageComponent,
-    TaskEditorComponent,
     WorkListComponent
   ],
 

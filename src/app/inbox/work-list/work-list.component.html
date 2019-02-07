@@ -12,7 +12,7 @@
   <tbody>
     <tr style="min-height:65px" *ngFor="let inbox of inboxList">
       <td class="main-icon">
-        <a (click)="onOpenProcedureEditorWindow(procedure.uid)"><i class="fa fa-inbox" aria-hidden="true"></i></a>
+        <i class="fa fa-inbox" aria-hidden="true"></i>
       </td>
       <td style="width:30%">
         <a (click)="openInboxEditorWindow(inbox)">{{inbox.title}}</a><br>
@@ -43,10 +43,4 @@
       <td class="grid-footer-items text-align-right ">Página 1 de 1</td>
     </tr>
   </table>
-</div>
-<div *ngIf="isEditorWindow">
-  <emp-steps-inbox-editor
-       [inboxItem]="selectedItem"
-       (close)="closeInboxEditorWindow()">
-  </emp-steps-inbox-editor>
 </div>
