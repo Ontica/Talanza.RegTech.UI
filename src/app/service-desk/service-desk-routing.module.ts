@@ -12,16 +12,13 @@ import { SecurityGuardService } from '@app/core';
 
 import { MainLayoutComponent } from '@app/shared';
 
-import { ServiceDeskMainPageComponent } from './main-page/service-desk-main-page.component';
-
-
 @NgModule({
 
   imports: [
     RouterModule.forChild([
       {
         path: 'service-desk', component: MainLayoutComponent, canActivate: [SecurityGuardService],
-        children: [{ path: 'search', component: ServiceDeskMainPageComponent }]
+        children: [{ path: 'search', component: MainLayoutComponent }]
       }
     ])],
 

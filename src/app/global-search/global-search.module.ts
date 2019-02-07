@@ -11,16 +11,13 @@ import { FormsModule } from '@angular/forms';
 
 import { SharedModule } from '@app/shared/shared.module';
 
-
 import { ContractsModule } from '../contracts/contracts.module';
 import { DocumentsModule } from '../documents/documents.module';
 import { ProceduresModule } from '../procedures/procedures.module';
-import { ProjectMeetingsModule } from '../project-meetings/project-meetings.module';
 import { ServiceDeskModule } from '../service-desk/service-desk.module';
 
 import { GlobalSearchMainPageComponent } from './main-page/gs-main-page.component';
 import { SearchResultsNavBarComponent } from './search-results-navbar/search-results-navbar.component';
-import { GlobalAddComponent } from './global-add/global-add.component';
 
 import { GlobalSearchRoutingModule } from './global-search-routing.module';
 
@@ -35,14 +32,12 @@ import { GlobalSearchRoutingModule } from './global-search-routing.module';
     DocumentsModule,
     ServiceDeskModule,
     ProceduresModule,
-    ProjectMeetingsModule,
 
     GlobalSearchRoutingModule
   ],
 
   declarations: [
     GlobalSearchMainPageComponent,
-    GlobalAddComponent,
     SearchResultsNavBarComponent
   ],
 
