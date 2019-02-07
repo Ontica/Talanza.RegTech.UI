@@ -36,7 +36,7 @@
 .activity-container {
   margin-left: 24pt;
   padding-left: 8pt;
-  border-left: 3px solid $dark-blue;
+  border-left: 3px solid $primary-color;
 }
 
 
@@ -69,7 +69,6 @@
 
 
 .activity-name a:hover {
-  color: $dark-blue;
   text-decoration: underline;
 }
 

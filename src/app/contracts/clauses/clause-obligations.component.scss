@@ -1,8 +1,10 @@
 @import "../../../styles/grid";
+
 .clause-subtitle {
-  font-size: 10pt;
-  color: $dark-blue;
-  font-weight: 500;
+  color: $primary-color;
+  font-size: 12pt;
+  font-weight: 600;
+  padding: 4pt;
 }
 
 table.grid td:nth-child(1), table.grid th:nth-child(1) {

@@ -1,10 +1,6 @@
-@import "../../../styles/variables";
+@import "../../../styles/general-styles";
 @import "../../../styles/card";
 
-
-.card {
-  max-height: 100%;
-}
 
 
 .title-bar {
@@ -31,7 +27,6 @@
 .gs-container {
   height: 100%;
   width: 100%;
-  display: inline-block;
 }
 
 
@@ -46,27 +41,12 @@
 
 .block-container {
   display: inline-block;
-  margin-left: 3%;
-  margin-right: 3%;
-  width: 44%;
+  margin-left: 16px;
+  margin-right: 16px;
+  width: 46%;
   height: 100%;
   overflow-x: hidden;
-}
-
-
-.right {
-  float: right;
-}
-
-
-.close-icon {
-  float: right;
-  color: $black;
-}
-
-
-.close-icon:hover {
-  cursor: pointer;
+  overflow-y: auto;
 }
 
 

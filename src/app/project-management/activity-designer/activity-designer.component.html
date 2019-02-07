@@ -1,4 +1,4 @@
-<div class="card" [class.card-shadow]="!settings.flat">
+<div class="card" [class.card-border]="!settings.flat">
 
   <div *ngIf="settings.showTitle" class="card-header">
     <div class="card-title">
@@ -26,7 +26,7 @@
     </mat-tab>
 
 
-    <mat-tab label="Asesoría Covar">
+    <mat-tab label="Asesoría Talanza">
       <emp-kb-postings-list
            [target]="activityTemplate" [readonly]="settings.readonly">
       </emp-kb-postings-list>

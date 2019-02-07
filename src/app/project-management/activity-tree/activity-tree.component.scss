@@ -16,7 +16,7 @@
   background-color: $grid-hover-background-color;
 
   .ghost-icon {
-    color: $dark-blue;
+    color: $secondary-color;
   }
 }
 
@@ -50,7 +50,7 @@
   vertical-align: -webkit-baseline-middle;
   margin-right: 12pt;
   max-width: calc(100% - 120px);
-  font-weight:400;
+  font-weight: 400;
 }
 
 .activity-name-completed {
@@ -59,7 +59,6 @@
 
 
 .activity-name a:hover {
-  color: $dark-blue;
   text-decoration: underline;
 }
 
@@ -83,13 +82,13 @@
 
 .activity-name-level-4 {
   font-size: 9.0pt;
-  font-weight: 600;
+  font-weight: 400;
 }
 
 
 .activity-name-level-5 {
   font-size: 9pt;
-  font-weight: 500;
+  font-weight: 400;
 }
 
 
@@ -126,12 +125,12 @@
 
 
 .dragover-activity-row {
-  border-top: 1px solid $dark-blue;
+  border-top: 1px solid $secondary-color;
 }
 
 
 .dragover-activity-name {
-  border: 1px dotted $dark-blue;
+  border: 1px dotted $primary-color;
 }
 
 

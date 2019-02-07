@@ -1,34 +1,40 @@
 <div class="title-bar">
-    Resultados de la búsqueda "{{keywords}}" <i class="fa fa-times-circle close-global-search-icon" (click)="closeGlobalSearch()"></i>
+  Resultados de la búsqueda "{{keywords}}" <i class="fa fa-times-circle close-global-search-icon" (click)="closeGlobalSearch()"></i>
 </div>
-<div  class="nav-bar">
+<div class="nav-bar">
   <emp-kb-search-results-navbar [options]="navBarConfig" (select)="selectOption($event)"></emp-kb-search-results-navbar>
 </div>
 <div class="gs-container">
 
   <div [class]="masterContainer">
-      <div [ngSwitch]="selectedOption">
-         <emp-gov-procedures-table-view  *ngSwitchCase="'procedures'" [procedures]="procedures" (select)="selectProcedure($event)"></emp-gov-procedures-table-view>
-         <emp-gov-contract-clauses-table *ngSwitchCase="'contracts'" [clauses]="clauses" (select)="setSelectedClause($event)"></emp-gov-contract-clauses-table>
-         <emp-gov-documents-table-view *ngSwitchCase="'documents'" [documentsList]="documents" (select)="setSelectedDocument($event)"></emp-gov-documents-table-view>
-         <emp-kb-faqs-table-view *ngSwitchCase="'FAQs'" [FAQs]="FAQs" (select)="setSelectedFAQ($event)"></emp-kb-faqs-table-view>
-      </div>
+    <div [ngSwitch]="selectedOption">
+      <emp-gov-procedures-table-view *ngSwitchCase="'procedures'" [procedures]="procedures" (select)="selectProcedure($event)"></emp-gov-procedures-table-view>
+      <emp-gov-contract-clauses-table *ngSwitchCase="'contracts'" [clauses]="clauses" (select)="setSelectedClause($event)"></emp-gov-contract-clauses-table>
+      <emp-gov-documents-table-view *ngSwitchCase="'documents'" [documentsList]="documents" (select)="setSelectedDocument($event)"></emp-gov-documents-table-view>
+      <emp-kb-faqs-table-view *ngSwitchCase="'FAQs'" [FAQs]="FAQs" (select)="setSelectedFAQ($event)"></emp-kb-faqs-table-view>
+    </div>
 
   </div>
- <div *ngIf="isDetailsContainerVisible" class="block-container right">
-      <div><i class="fa fa-times close-icon" (click)="closeDetailsContainer()"></i></div>
-      <div [ngSwitch]="selectedOption">
-          <div *ngSwitchCase="'procedures'" class="card">
-            <emp-gov-procedure-viewer [procedure]="selectedProcedureUID"></emp-gov-procedure-viewer>
-          </div>
-          <div *ngSwitchCase="'contracts'">
-                <emp-gov-clause-definition [clauseRef]="clause"></emp-gov-clause-definition><br>
-                <emp-gov-clause-obligations [clauseRef]="clause"></emp-gov-clause-obligations>
-          </div>
-          <div *ngSwitchCase="'documents'" class="pdf-control" >
-            <emp-ng-object [data]="documentURI"></emp-ng-object>
-          </div>
-          <emp-kb-faq *ngSwitchCase="'FAQs'" [faqUID]="FAQUid"></emp-kb-faq>
+  <div *ngIf="isDetailsContainerVisible" class="card card-border block-container right">
+
+    <div class="card-header-options right">
+      <i class="fa fa-times close-icon" aria-hidden="true" (click)="closeDetailsContainer()"></i>
+    </div>
+
+    <div [ngSwitch]="selectedOption">
+      <div *ngSwitchCase="'procedures'">
+        <emp-gov-procedure-viewer [procedure]="selectedProcedureUID"></emp-gov-procedure-viewer>
       </div>
+      <div *ngSwitchCase="'contracts'">
+        <emp-gov-clause-definition [clauseRef]="clause"></emp-gov-clause-definition><br>
+        <emp-gov-clause-obligations [clauseRef]="clause"></emp-gov-clause-obligations>
+      </div>
+      <div *ngSwitchCase="'documents'" class="pdf-control">
+        <emp-ng-object [data]="documentURI"></emp-ng-object>
+      </div>
+      <emp-kb-faq *ngSwitchCase="'FAQs'" [faqUID]="FAQUid"></emp-kb-faq>
+    </div>
+
   </div>
+
 </div>

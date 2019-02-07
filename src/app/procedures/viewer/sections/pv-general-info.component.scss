@@ -1,5 +1,6 @@
 @import "../../../../styles/general-styles";
 @import "../../../../styles/editor-window-style";
+
 table {
   width: 90%;
   border-collapse: collapse;
@@ -8,9 +9,8 @@ table {
 }
 
 .header {
-  background-color: $dark-blue;
-  color: $white;
-  padding: 5pt;
+  background-color: $disabled-color;
+  padding: 8pt;
 }
 
 .sub-header {

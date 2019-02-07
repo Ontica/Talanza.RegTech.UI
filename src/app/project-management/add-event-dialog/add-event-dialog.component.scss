@@ -5,7 +5,13 @@
 }
 
 .mat-dialog-title {
-  font: $control-font;
+  border-bottom: 2px solid $primary-color;
+  color: $primary-color;
   font-size: 14pt;
   font-weight: 600;
+  padding: 8pt;
+}
+
+.mat-dialog-actions {
+  border-top: 1px solid $secondary-color;
 }
