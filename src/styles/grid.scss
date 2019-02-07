@@ -11,7 +11,7 @@
 }
 
 table.grid thead {
-  background-color: $text-title;
+  background-color: #929392;
   color: white;
 }
 
@@ -23,7 +23,7 @@ table.grid thead th {
   font-weight: normal;
   font-size: 9pt;
   color: white;
-  padding: 4pt;
+  padding: 8pt;
 }
 
 table.grid tbody {
@@ -34,6 +34,7 @@ table.grid tbody tr {
   height: auto;
   display: block;
   overflow: hidden;
+  padding: 8px;
 }
 
 table.grid tbody {
@@ -79,8 +80,7 @@ table.grid tbody tr:nth-child(even) {
 }
 
 .selected-row {
-  border-bottom: 2px solid $dark-blue;
-  border-top: 2px solid $dark-blue;
-  z-index:1000;
-  font-weight: 600;
+  border-bottom: 1px solid $secondary-color;
+  border-top: 1px solid $secondary-color;
+  font-weight: 500;
 }

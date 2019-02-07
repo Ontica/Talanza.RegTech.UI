@@ -6,17 +6,17 @@
 
 <mat-dialog-actions *ngIf="model.messageBoxType === 'Accept'">
 
-    <button mat-flat-button color="primary" cdk-focus-start
+    <button class="btn-action" cdk-focus-start
             (click)="onClickButton('accept')">{{model.mainButtonText || 'Aceptar'}}</button>
 
 </mat-dialog-actions>
 
 <mat-dialog-actions *ngIf="model.messageBoxType === 'AcceptCancel'">
 
-    <button mat-flat-button color="primary" cdk-focus-start
+    <button class="btn-action" cdk-focus-start
             (click)="onClickButton('accept')">{{model.mainButtonText || 'Aceptar'}}</button>
 
-    <button mat-button
+    <button class="btn"
             (click)="onClickButton('cancel')">Cancelar</button>
 
 </mat-dialog-actions>
@@ -24,10 +24,10 @@
 
 <mat-dialog-actions *ngIf="model.messageBoxType === 'DeleteCancel'">
 
-  <button mat-stroked-button color="warn"
+  <button class="btn-warning"
           (click)="onClickButton('accept')">{{model.mainButtonText || 'Eliminar'}}</button>
 
-  <button mat-flat-button color="primary" cdk-focus-start
+  <button class="btn-action" cdk-focus-start
           (click)="onClickButton('cancel')">Cancelar</button>
 
 </mat-dialog-actions>

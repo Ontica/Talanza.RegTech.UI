@@ -6,9 +6,9 @@
     <div class="breadcrumb">{{breadcrumb}}</div>
 
   </div>
+</div>
 
-  <div class="menu-bar">
-
+<div class="menu-bar">
     <emp-ng-nav-menu class="menu"
               [items]="mainMenuItems"
               (click)="onClickMenu($event)"></emp-ng-nav-menu>
@@ -17,8 +17,9 @@
               [items]="secondaryMenuItems"
               (click)="onClickMenu($event)"></emp-ng-nav-menu>
 
+    <span *ngIf="layoutType === 'Projects'" class="label">Contratos: </span>
     <select *ngIf="layoutType === 'Projects'" #cboProjects
-            class="select-box" style="width:260px;"
+            class="select-box" style="width:220px;"
             (change)="onSelectProject(cboProjects.value)">
       <option value="">( Seleccionar un contrato )</option>
       <option *ngFor="let project of projectStore.projects | async"
@@ -29,7 +30,7 @@
       &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
       <span class="label">Vista: </span>
       <select #cboView
-              class="select-box" style="width:176px;"
+              class="select-box" style="width:200px;"
               (change)="onChangeView()" [(ngModel)]="viewConfig.viewType">
         <option value="treeView">Árbol de actividades</option>
         <option value="ganttView">Diagrama Gantt</option>
@@ -49,15 +50,13 @@
         </select>
     </span>
 
-
+    <span *ngIf="layoutType === 'ProjectsTemplates'" class="label">Diseños: </span>
     <select *ngIf="layoutType === 'ProjectsTemplates'" #cboTemplates
             class="select-box" style="width:360px;"
             (change)="onSelectTemplate(cboTemplates.value)">
-      <option value="">( Seleccionar un patrón de obligaciones )</option>
+      <option value="">( Seleccionar un diseño de obligaciones )</option>
       <option *ngFor="let template of templateStore.templates | async"
               [value]="template.uid">{{template.name}}</option>
     </select>
 
   </div>
-
-</div>

@@ -19,11 +19,11 @@ table td:last-child {
 
 @mixin input-button-settings {
   font: $control-font;
-  border-radius: 6px;
+  text-transform: uppercase;
   border: $button-border;
   height: $button-height;
   min-width: 88px;
-  padding: 4pt;
+  padding: 4pt 8pt;
   white-space: nowrap;
 }
 

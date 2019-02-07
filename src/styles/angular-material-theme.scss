@@ -2,10 +2,10 @@
 
 // variables
 
-$primary-font-family: "-apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'" !default;
+$primary-font-family: "'Work Sans', sans-serif" !default;
 
 
-$covar-app-typography: mat-typography-config(
+$talanza-app-typography: mat-typography-config(
   $font-family: $primary-font-family,
   $headline: mat-typography-level(24pt, 34pt, 400),
   $title: mat-typography-level(14pt, 20pt, 500),
@@ -21,28 +21,25 @@ $covar-app-typography: mat-typography-config(
 // have to load a single css file for Angular Material in your app.
 // Be sure that you only ever include this mixin once!
 // Also applies custom typography that allow use of angular material style classes in html items.
-@include mat-core($covar-app-typography);
+@include mat-core($talanza-app-typography);
 
 
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue.
-$covar-app-primary: mat-palette($mat-indigo, 700);
-$covar-app-accent:  mat-palette($mat-red, 900, 300, 900);
-
-// $covar-app-primary: mat-palette($mat-indigo);
-// $covar-app-accent:  mat-palette($mat-orange);
+$talanza-app-primary: mat-palette($mat-indigo, 700);
+$talanza-app-accent:  mat-palette($mat-teal, 300, 200, 500);
 
 // The warn palette is optional (defaults to red).
-$covar-app-warn:  mat-palette($mat-red, 500);
+$talanza-app-warn:  mat-palette($mat-red, 500);
 
 // Create the theme object (a Sass map containing all of the palettes).
-$covar-app-theme: mat-light-theme($covar-app-primary, $covar-app-accent, $covar-app-warn);
+$talanza-app-theme: mat-light-theme($talanza-app-primary, $talanza-app-accent, $talanza-app-warn);
 
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
-@include angular-material-theme($covar-app-theme);
+@include angular-material-theme($talanza-app-theme);
 
 // Apply custom typography to all angular material components.
-@include angular-material-typography($covar-app-typography);
+@include angular-material-typography($talanza-app-typography);

@@ -7,37 +7,27 @@
 
 
 .mat-dialog-title {
-  font: $control-font;
-  color: $dark-blue;
+  border-bottom: 2px solid $primary-color;
+  color: $primary-color;
   font-size: 12pt;
   font-weight: 600;
-
-  min-height: 26px;
-
-  border-bottom: 1px solid $dark-red;
+  margin-bottom: 16pt;
 }
 
 
 .mat-dialog-content {
   font-size: 10pt;
-  color: $dark-blue;
-  font-weight: 400;
 }
 
 
 .mat-dialog-actions {
+  border-bottom: 1px solid $secondary-color;
   justify-content: flex-end;
   vertical-align: bottom;
   margin-top: 16px;
 
   button {
-    margin-left: 16px;
+    margin-left: 24px;
   }
 }
 
-
-button {
-  font: $control-font;
-  line-height: 32px;
-  font-size: 10pt;
-}

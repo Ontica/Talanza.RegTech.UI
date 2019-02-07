@@ -6,26 +6,27 @@
 
     <div class="side-bar"></div>
 
-
     <div class="main-column">
 
       <div class="nav-bar">
 
         <div class="left-section">
 
-          <i class="fa fa-bars disabled" aria-hidden="true"></i>
+          <!-- <i class="fa fa-bars disabled" aria-hidden="true"></i> -->
 
-          <img class="logo" src="assets/img/customer-logo.png" alt="COVAR Energy Consulting" />
+          <img class="logo" src="assets/img/customer-logo-horizontal.png" alt="Talanza Energy Consulting" />
 
         </div>
 
         <emp-ng-main-menu class="main-menu"></emp-ng-main-menu>
 
+        <emp-ng-search-box (search)="search($event)"></emp-ng-search-box>
+
         <div class="search-and-settings">
 
-          <emp-ng-search-box (search)="search($event)"></emp-ng-search-box>
 
-          <div>
+
+          <!-- <div>
             <i class="fa fa-envelope disabled" aria-hidden="true"></i>
           </div>
 
@@ -39,7 +40,7 @@
 
           <div>
             <i class="fa fa-cog disabled" aria-hidden="true"></i>
-          </div>
+          </div> -->
 
 
         </div>

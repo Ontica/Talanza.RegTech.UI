@@ -17,9 +17,8 @@
 }
 
 .nav-bar li {
-  border-right: 1px solid $light-gray;
-  padding: 5px 10px;
-  color: $gray;
+  color: $disabled-color;
+  padding: 5px 16px;
   white-space: nowrap;
 }
 
@@ -28,15 +27,16 @@
 }
 
 .nav-bar a, a:visited {
-  color: $dark-blue;
-  font-weight: 420;
+  color: $secondary-color;
+  font-weight: 400;
   text-decoration: none;
 }
 
 .nav-bar a:hover {
-  border-bottom: 3px solid $dark-red;
+  border-bottom: 2px solid $primary-color;
 }
 
 .selected {
-  border-bottom: 3px solid $dark-red;
+  border-bottom: 2px solid $primary-color;
+  font-weight: 700 !important;
 }

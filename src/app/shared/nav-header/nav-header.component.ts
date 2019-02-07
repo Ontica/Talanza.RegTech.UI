@@ -105,7 +105,7 @@ export class NavigationHeaderComponent implements OnChanges {
 
   private setProjectsLayout() {
 
-    this.breadcrumb = 'Todos los contratos';
+    this.breadcrumb = 'Administración de contratos';
 
     this.mainMenuItems =  [
       new MenuItem('Bandeja de tareas', undefined, '/inbox/main', true),
@@ -132,7 +132,7 @@ export class NavigationHeaderComponent implements OnChanges {
 
   private setTemplatesDesignerLayout() {
 
-    this.breadcrumb = 'Todos los diseños';
+    this.breadcrumb = 'Diseñador de obligaciones';
 
     this.mainMenuItems =  [
       new MenuItem('Diseños', undefined, '/projects-templates/main'),

@@ -23,18 +23,30 @@ $dark-white: #f4f4f4 !default;
 $white: #fefefe !default;
 $light-white: white;
 
+
+$background-color: #ffffff !default;
+$primary-color: #3dbab3 !default;
+$primary-color-light: #9bdfdb !default;
+
+$disabled-color: #edeef0 !default;
+$disabled-color-light: #f4f4f4 !default;
+$secondary-color: #4d5055 !default;
+$secondary-text-color: $white !default;
+$action-color: $primary-color;
+$action-selected-color: rgb(52, 126, 122);
+
 //
 // Typography
 //
-$font-family:-apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol" !default;
+$font-family: 'Work Sans', sans-serif !default;
 $font-size-root: 10pt !default;
 $font-size-base: 1.0rem !default;
 $font-weight-base: 200 !default;
-$text-color: $dark-blue !default;
+$text-color: $secondary-color !default;
 //
 $font-size-title: $font-size-base * 1.25;
 $font-weight-title: 500;
-$text-title: $dark-blue !default;
+$text-title: $secondary-color !default;
 //
 $font-size-command: $font-size-base * 0.85;
 $font-weight-command: 300;
@@ -50,16 +62,14 @@ $text-italic: italic;
 // Elements colors
 //
 
-$background-color: #f7f7f7 !default;
-$secondary-color: $dark-red !default;
-$secondary-text-color: $white !default;
-$selected-item-text-color: $orange;
 
-$link-color: $dark-blue;
+$selected-item-text-color: $text-color;
+
+$link-color: $text-color;
 //
 // icons
 //
-$primary-icon-color: $light-blue;
+$primary-icon-color: $primary-color-light;
 $primary-icon-size: 16pt;
 //
 // editor-window
@@ -93,14 +103,12 @@ $form-title-color:$gray;
 // html controls
 //
 
-$control-font: 9.5pt 'Segoe UI', Helvetica, Arial, sans-serif !default;
-$control-small-font: 8.5pt 'Segoe UI', Helvetica, Arial, sans-serif !default;
+$control-font: 9.5pt 'Work Sans', sans-serif !default;
+$control-small-font: 8.5pt 'Work Sans', sans-serif !default;
 
-$primary-color: #ff9900;
-$primary-selected-color: #e67300;
 
-$action-color: $light-blue;
-$action-selected-color: $blue;
+$primary-selected-color: $secondary-color;
+
 
 $warning-color: $light-red;
 $warning-selected-color: $red;
@@ -130,7 +138,7 @@ $selected-control-border: 1px solid #c9c9c9;
 // grid
 //
 $grid-border: none;
-$grid-even-background-color: #fffffd;
-$grid-odd-background-color: #eef7fa;
-$grid-selected-background-color: #f0f8ff;
-$grid-hover-background-color: #f6f6f6;
+$grid-even-background-color: $white;
+$grid-odd-background-color: $disabled-color-light;
+$grid-selected-background-color: $disabled-color;
+$grid-hover-background-color: $disabled-color;

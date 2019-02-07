@@ -3,41 +3,34 @@
 $margin-size: 8px;
 
 .header {
-
-  border-top-left-radius: 4px;
-  border-top-right-radius: 4px;
-
-  //box-shadow: 0 6px 4px -2px rgba(0,0,0,0.30);
-
-  min-height: 100px;
   overflow: visible;
 
-  background: rgb(2,0,36);
-  background: linear-gradient(45deg, rgba(2,0,36,1) 0%,
-                                     rgba(16,64,112,1) 33%,
-                                     rgba(19,68,119,1) 46%,
-                                     rgba(22,89,156,1) 100%);
+  background: $primary-color;
+  min-height: 60px;
 
   > div {
-    margin-bottom: $margin-size;
     margin-left: 42px;
   }
 
+  padding-bottom: 8px;
+  padding-top: 8px;
 }
 
 .title {
   color: $white;
-  font-size: 20pt;
+  font-size: 16pt;
   font-weight: 200;
   min-width: 160px;
   padding-top: 8px;
   padding-bottom: 8px;
   color: $white;
+  text-transform: uppercase;
 
   .breadcrumb {
-    color: $gray;
+    color: $white;
     font-size: $font-size-hint;
     font-weight: 400;
+    text-transform: uppercase;
   }
 
   i {
@@ -50,13 +43,18 @@ $margin-size: 8px;
 }
 
 .menu-bar {
-  margin-left: !important;
-
+  background-color: $secondary-color;
   padding-bottom: 8px;
+  padding-top: 8px;
+
+  select.select-box {
+    background-color: #EDEEF0;
+  }
+
 }
 
 .menu {
-  //margin-left: 16px;
+  margin-left: 42px !important;
 }
 
 a {
