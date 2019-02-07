@@ -18,11 +18,11 @@ const OPERATIONS: string[] = [
 
 
 @Component({
-  selector: 'emp-kb-faq',
-  templateUrl: './faq.component.html',
-  styleUrls: ['./faq.component.scss']
+  selector: 'emp-kb-faq-viewer',
+  templateUrl: './faq-viewer.component.html',
+  styleUrls: ['./faq-viewer.component.scss']
 })
-export class FAQComponent {
+export class FaqViewerComponent {
 
   private _faqUID = '';
   @Input()

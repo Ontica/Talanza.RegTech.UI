@@ -24,7 +24,6 @@ import { GlobalSearchModule } from './global-search/global-search.module';
 import { InboxModule } from './inbox/inbox.module';
 import { ProjectManagementModule } from './project-management/project-management.module';
 import { SecurityUIModule } from './security-ui/security-ui.module';
-import { ServiceDeskModule } from './service-desk/service-desk.module';
 import { SharedModule } from './shared/shared.module';
 
 // App is our top level component
@@ -58,7 +57,6 @@ const EXCEPTION_HANDLER_PROVIDER =  { provide: ErrorHandler, useClass: Exception
     ProcessModule,
     ProjectManagementModule,
     InboxModule,
-    ServiceDeskModule,
     SharedModule,
     GlobalSearchModule,
 

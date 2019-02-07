@@ -13,13 +13,14 @@ import { SharedModule } from '@app/shared/shared.module';
 
 import { ContractsModule } from '../contracts/contracts.module';
 import { DocumentsModule } from '../documents/documents.module';
+import { KnowledgeBaseModule } from '@app/knowledge-base/knowledge-base.module';
 import { ProceduresModule } from '../procedures/procedures.module';
-import { ServiceDeskModule } from '../service-desk/service-desk.module';
 
 import { GlobalSearchMainPageComponent } from './main-page/gs-main-page.component';
 import { SearchResultsNavBarComponent } from './search-results-navbar/search-results-navbar.component';
 
 import { GlobalSearchRoutingModule } from './global-search-routing.module';
+
 
 @NgModule({
 
@@ -30,7 +31,7 @@ import { GlobalSearchRoutingModule } from './global-search-routing.module';
 
     ContractsModule,
     DocumentsModule,
-    ServiceDeskModule,
+    KnowledgeBaseModule,
     ProceduresModule,
 
     GlobalSearchRoutingModule

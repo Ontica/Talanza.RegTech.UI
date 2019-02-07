@@ -7,6 +7,7 @@
 
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
+
 import { PostingsService } from '@app/services/knowledge-base';
 
 import { Posting, EmptyPosting, BASE_OBJECT_UID } from '@app/models/knowledge-base';
@@ -14,10 +15,10 @@ import { Posting, EmptyPosting, BASE_OBJECT_UID } from '@app/models/knowledge-ba
 
 @Component({
   selector: 'emp-kb-update-faq',
-  templateUrl: './update-faq.component.html',
-  styleUrls: ['./update-faq.component.scss']
+  templateUrl: './faq-editor.component.html',
+  styleUrls: ['./faq-editor.component.scss']
 })
-export class UpdateFAQComponent {
+export class FaqEditorComponent {
 
   @Input()
   set faq(faq: Posting) {
