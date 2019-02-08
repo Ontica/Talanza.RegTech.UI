@@ -1,4 +1,5 @@
 @import "../../../styles/general-styles";
+
 :host {
   position: relative;
   top: 38%;
@@ -6,7 +7,7 @@
 }
 
 table.association {
-  border: 1px solid $black;
+  border: 1px solid $border-color-light;
   border-collapse: collapse;
   margin: 3px 10px 3px 3px;
 }
@@ -16,8 +17,7 @@ table.association tr {
 }
 
 table.association tr:first-child {
-  border-bottom: 1px solid $black;
-  background-color: $dark-red;
+  border-bottom: 1px solid $border-color-light;
   color: $white;
 }
 
@@ -26,5 +26,5 @@ table.association tr:nth-child(6) {
 }
 
 table.association tr:last-child {
-  border-top: 1px solid $black;
+  border-top: 1px solid $border-color-light;
 }

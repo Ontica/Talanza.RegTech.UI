@@ -1,12 +1,1 @@
 @import "../../../styles/grid";
-
-table.grid tbody {
-  height: calc(100vh - 260px);
-}
-
-.no-summary td {
-  padding-top: 12px;
-  min-height: 48pt;
-  height: auto;
-  padding-left: 30pt;
-}

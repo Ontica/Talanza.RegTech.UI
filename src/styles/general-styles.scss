@@ -32,7 +32,7 @@ table td:last-child {
   height: 2.0em !important;
   width: 2.0em !important;
   font-size: 1.25em !important;
-  box-shadow: 1px 2px 2px #bbb;
+  box-shadow: 1px 2px 2px $icon-color;
 }
 
 button:focus {
@@ -52,7 +52,7 @@ button.btn {
 
 button.btn:hover {
   background-color: $button-selected-color;
-  color: $dark-blue;
+  color: $text-color;
   transition: 0.3s ease-out;
 }
 
@@ -63,7 +63,7 @@ button.btn-primary {
 }
 
 button.btn-primary:hover {
-  background-color: $primary-selected-color;
+  background-color: $secondary-color;
   transition: 0.3s ease-out;
 }
 
@@ -78,18 +78,6 @@ button.btn-action:hover {
   transition: 0.3s ease-out;
 }
 
-button.btn-cancel {
-  @include input-button-settings;
-  background-color: $cancel-color;
-  color: $control-color;
-  border: 1px solid #cecece;
-}
-
-button.btn-cancel:hover {
-  background-color: $cancel-selected-color;
-  transition: 0.3s ease-out;
-}
-
 button.btn-warning {
   @include input-button-settings;
   background-color: $warning-color;
@@ -97,7 +85,7 @@ button.btn-warning {
 }
 
 button.btn-warning:hover {
-  background-color: $warning-selected-color;
+  background-color: $warning-color-dark;
   transition: 0.3s ease-out;
 }
 
@@ -123,7 +111,6 @@ button.btn-margin-right {
 
   border-radius: 2px;
   transition: 0.3s ease-out;
-
 }
 
 @mixin disabled-element {
@@ -140,12 +127,15 @@ select.select-warning {
   background-color: $warning-color;
 }
 
+select:focus {
+  outline: none;
+  color: $selected-control-color;
+  background-color: $selected-control-background-color;
+  border: $selected-control-border;
+}
+
 input.search-box {
   @include input-settings;
-  /*background-image: url('../../../assets/icon/search-icon.png');
-  background-position: 3px 3px;
-  background-repeat: no-repeat;
-  padding-left: 20px;*/
 }
 
 input.text-box {
@@ -159,39 +149,22 @@ input:focus {
   border: $selected-control-border;
 }
 
-select:focus {
-  outline: none;
-  color: $selected-control-color;
-  background-color: $selected-control-background-color;
-  border: $selected-control-border;
-}
-
-textarea:focus {
-  outline: none;
-  color: $selected-control-color;
-  background-color: $selected-control-background-color;
-  border: $selected-control-border;
-  box-shadow: inset 0 0 2px $selected-control-border;
-}
 
 .input-icon {
   position: absolute;
   right: 14px;
   top: calc(50% - 0.4em);
-  color: $gray;
+  color: $icon-color;
 }
 
 .input-icon:hover {
-  color: $blue;
+  color: $icon-color-dark;
   cursor: pointer;
 }
 
 .text-area {
   background-color: $control-background-color;
-  border-top: $control-border;
-  border-bottom: $control-border;
-  border-left: $control-border;
-  border-right: $control-border;
+  border: $control-border;
   color: $control-color;
   font: $control-font;
   font-weight: normal;
@@ -206,6 +179,14 @@ textarea:focus {
   transition: 0.3s ease-out;
 
   resize: vertical;
+}
+
+textarea:focus {
+  outline: none;
+  color: $selected-control-color;
+  background-color: $selected-control-background-color;
+  border: $selected-control-border;
+  box-shadow: inset 0 0 2px $selected-control-border;
 }
 
 .text-align-left {
@@ -242,7 +223,7 @@ textarea:focus {
 }
 
 .hint {
-  color: $gray;
+  color: $border-color-dark;
   font-size: 8pt;
   font-weight: 400;
 }
@@ -252,7 +233,7 @@ textarea:focus {
 }
 
 .ghost-icon:hover {
-  color: $dark-blue;
+  color: $icon-color-dark;
 }
 
 
@@ -309,13 +290,13 @@ i.disabled {
 }
 
 .main-icon a {
-  color: $primary-icon-color;
+  color: $primary-color-light;
   font-size: $primary-icon-size;
   padding-right: 6pt;
 }
 
 .main-icon a {
-  color: $primary-icon-color;
+  color: $primary-color-light;
 }
 
 .main-icon a:hover {
@@ -323,12 +304,12 @@ i.disabled {
 }
 
 .term-definition {
-  border-bottom: 1px double $primary-icon-color;
+  border-bottom: 1px double $primary-color-light;
   cursor: pointer;
 }
 
 .tag {
-  background-color: $purple;
+  background-color: $primary-color-light;
   border-radius: 8px;
   color: white;
   padding: 4px 4px 4px 8px;
@@ -341,5 +322,5 @@ i.disabled {
 }
 
 .tag i:hover {
-  color: $orange;
+  color: $primary-color;
 }

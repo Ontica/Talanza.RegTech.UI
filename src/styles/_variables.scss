@@ -1,39 +1,43 @@
 //
 // Colors
 //
-$black: #1a1a1a !default;
-$dark-gray: #606060!default;
-$gray: #909090!default;
-$light-gray: #e8e8e8 !default;
-$brown: #604020 !default;
-$light-brown: #d9b38c !default;
-$dark-blue: #104070 !default;
-$blue: #16599c !default;
-$light-blue: #6ba1ff !default;
-$green: #17c457 !default;
-$light-green: hsl(135, 22%, 93%) !default;
-$dark-orange: #e68a00 !default;
-$orange: #ffca99 !default;
-$light-orange: #fff2e6 !default;
-$purple: #A700AE !default;
-$dark-red:#9b1b1f !default;
-$red:#d04f4f !default;
-$light-red: #e49a9a !default;
-$dark-white: #f4f4f4 !default;
-$white: #fefefe !default;
-$light-white: white;
 
+$white: #ffffff !default;
 
-$background-color: #ffffff !default;
 $primary-color: #3dbab3 !default;
 $primary-color-light: #9bdfdb !default;
+$primary-color-dark: rgb(52, 126, 122) !default;
+
+$secondary-color: #4d5055 !default;
+$secondary-color-light: #edeef0 !default;
+$secondary-color-semi-light: #929392 !default;
+$secondary-color-dark: #4d5055 !default;
+
+$warning-color: #e49a9a !default;
+$warning-color-light: $warning-color;
+$warning-color-dark: #d04f4f !default;
+
+$title-color: $primary-color !default;
+$text-color: $secondary-color !default;
+$text-color-light: $secondary-color-dark !default;
+$text-color-dark: $secondary-color-dark !default;
+
+$background-color: #ffffff !default;
+
+$border-color: #e8e8e8 !default;
+$border-color-light: #edeef0 !default;
+$border-color-dark: #909090!default;
 
 $disabled-color: #edeef0 !default;
-$disabled-color-light: #f4f4f4 !default;
-$secondary-color: #4d5055 !default;
+
 $secondary-text-color: $white !default;
 $action-color: $primary-color;
-$action-selected-color: rgb(52, 126, 122);
+$action-selected-color: $primary-color-dark;
+
+$icon-color: #909090 !default;
+$icon-color-light: #e8e8e8 !default;
+$icon-color-dark: #606060 !default;
+
 
 //
 // Typography
@@ -42,86 +46,56 @@ $font-family: 'Work Sans', sans-serif !default;
 $font-size-root: 10pt !default;
 $font-size-base: 1.0rem !default;
 $font-weight-base: 200 !default;
-$text-color: $secondary-color !default;
 //
 $font-size-title: $font-size-base * 1.25;
 $font-weight-title: 500;
-$text-title: $secondary-color !default;
+
 //
 $font-size-command: $font-size-base * 0.85;
 $font-weight-command: 300;
 //
 $font-size-hint: $font-size-base * 0.75;
 $font-weight-hint: 300;
-$text-hint: $dark-gray !default;
-//
 $text-bold: lighten($text-color, 3%);
-$text-muted: $gray !default;
 $text-italic: italic;
 //
 // Elements colors
 //
-
-
 $selected-item-text-color: $text-color;
 
 $link-color: $text-color;
 //
 // icons
 //
-$primary-icon-color: $primary-color-light;
 $primary-icon-size: 16pt;
+
 //
-// editor-window
-//
-$editor-window-border: 1px solid #ccc;
-$editor-window-background-color: $white;
-//
-// tabs
-//
-$tab-border: 1px solid #ccc;
-$tab-background-color: #f1f1f1;
-$tab-hover: #ddd;
-$tab-selected: $orange;
-$tab-font-size: 10px;
-$tab-selected-background-color: $secondary-color;
-//
-// close-button
-//
-$close-button-color: $black;
-$close-button-font-size: 28px;
-$close-button-hover: $black;
-//
-// tab-form
+// form
 //
 $form-color: #6a6a6a;
-$form-title-border: 1px dotted $gray;
+$form-title-border: 1px dotted $border-color-dark;
 $form-font-weight: 300;
-$form-border-bottom:1px solid $black;
-$form-title-color:$gray;
+$form-border-bottom: 1px solid $icon-color-light;
+$form-title-color: $border-color-dark;
 //
 // html controls
 //
-
 $control-font: 9.5pt 'Work Sans', sans-serif !default;
 $control-small-font: 8.5pt 'Work Sans', sans-serif !default;
 
 
-$primary-selected-color: $secondary-color;
-
-
-$warning-color: $light-red;
-$warning-selected-color: $red;
-
-$cancel-color: $light-orange;
-$cancel-selected-color: $orange;
-
+$control-color: $secondary-color;
+$control-background-color: #fafafa;
 $control-border: 1px solid #dfdfdf;
-$control-background-color: #fcfcfc;
-$control-color: $text-title;
-$control-width: 99%;
-$control-disabled-color: $text-title;
+
+$selected-control-background-color: #f6f6f6;
+$selected-control-color: $secondary-color;
+$selected-control-border: 1px solid #bababa;
+
 $control-disabled-background: #f4f4f4;
+$control-disabled-color: $secondary-color;
+
+$control-width: 99%;
 $control-height: 28px;
 
 $button-color: #f8f8f8;
@@ -130,15 +104,11 @@ $button-selected-color: #e6e6e6;
 $button-border: 0px solid #cecece;
 $button-height: 28px;
 
-$selected-control-background-color: #fffffa;
-$selected-control-color: $text-title;
-$selected-control-border: 1px solid #c9c9c9;
-
 //
 // grid
 //
 $grid-border: none;
 $grid-even-background-color: $white;
-$grid-odd-background-color: $disabled-color-light;
+$grid-odd-background-color: #f4f4f4 !default;
 $grid-selected-background-color: $disabled-color;
 $grid-hover-background-color: $disabled-color;

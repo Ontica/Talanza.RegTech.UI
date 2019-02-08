@@ -1,4 +1,5 @@
 @import "../../../styles/grid";
+
 .main-container {
   float: left;
   outline: none;
@@ -63,5 +64,5 @@ table.grid td {
 
 .marked-text {
   font-size: 10pt;
-  color: $dark-red;
+  color: $warning-color;
 }

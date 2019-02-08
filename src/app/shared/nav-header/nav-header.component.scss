@@ -35,7 +35,7 @@ $margin-size: 8px;
 
   i {
     font-size: 12pt;
-    color: $gray;
+    color: $border-color-dark;
     margin-right: 12px;
     margin-left: 8px;
   }
@@ -59,7 +59,7 @@ $margin-size: 8px;
 
 a {
   font-size: 10pt;
-  color: $gray;
+  color: $border-color-dark;
 }
 
 a:hover {

@@ -1,4 +1,9 @@
-@import "../../../styles/_variables";
+// constants
+
+$green-color: #17c457 !default;
+$amber-color: #e68a00 !default;
+$red-color: #9b1b1f !default;
+$no-color: #909090!default;
 
 .circle {
   border-radius: 50%;
@@ -14,15 +19,15 @@
 }
 
 .amber {
-  background-color: $dark-orange;
+  background-color: $amber-color;
 }
 
 .green {
-  background: $green;
+  background: $green-color;
 }
 
 .red {
-  background: $dark-red;
+  background: $red-color;
 }
 
 .no-color {
@@ -30,5 +35,5 @@
 }
 
 .no-color:hover {
-  border: 1pt solid $gray;
+  border: 1pt solid $no-color;
 }

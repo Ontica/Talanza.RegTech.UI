@@ -17,24 +17,24 @@ fieldset {
 
 .form-footer {
   margin-top: 14px;
-  border-top: 1px solid $light-gray;
+  border-top: 1px solid $border-color;
 }
 
 
 .form-errors {
-  color: $red;
+  color: $warning-color;
   font-size: 10pt;
   padding: 8pt;
 }
 
 
 form.submitted .ng-invalid:not(form)  {
-  border-left: 5px solid $red;
+  border-left: 5px solid $warning-color;
 }
 
 
 form.submitted .inline-error {
-  color: $red;
+  color: $warning-color;
   font-size: 10pt;
   font-weight: 400;
   padding: 8pt;
@@ -48,7 +48,7 @@ table.form-section {
 }
 
 table.form-section td {
-  color: $text-title;
+  color: $text-color;
   white-space: nowrap;
   vertical-align: text-top;
   font-size: 9pt;
@@ -70,7 +70,7 @@ table.form-section .form-section-title {
 }
 
 .border-top > td {
-  border-top: 1px solid $light-gray;
+  border-top: 1px solid $border-color;
 }
 
 .border-bottom {

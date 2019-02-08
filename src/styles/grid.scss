@@ -11,7 +11,7 @@
 }
 
 table.grid thead {
-  background-color: #929392;
+  background-color: $secondary-color-semi-light;
   color: white;
 }
 
@@ -64,11 +64,11 @@ table.grid tbody tr:nth-child(even) {
 }
 
 .grid-search-table {
-  border-bottom: 1px solid $text-title;
+  border-bottom: 1px solid $border-color;
   margin: 3px 10px 3px 3px;
   width: 100%;
   font-size: 9pt;
-  color: $text-title;
+  color: $text-color;
 }
 
 .grid-search-table td {
@@ -80,7 +80,7 @@ table.grid tbody tr:nth-child(even) {
 }
 
 .selected-row {
-  border-bottom: 1px solid $secondary-color;
-  border-top: 1px solid $secondary-color;
+  border-bottom: 1px solid $border-color;
+  border-top: 1px solid $border-color;
   font-weight: 500;
 }
