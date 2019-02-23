@@ -15,8 +15,8 @@
         <a (click)="openInboxEditorWindow(task)"><i class="fa fa-inbox" aria-hidden="true"></i></a>
       </td>
       <td style="width:30%">
-        <a (click)="openInboxEditorWindow(task)">{{task.title}}</a><br>
-        Proyecto:
+        <a [class.task-name-completed]="task.status === 'Completed'" (click)="openInboxEditorWindow(task)">{{task.title}}</a><br>
+        Proyecto: {{task.project.name}}
       </td>
       <td style="width:15%;">
         Fecha Objetivo: &nbsp;{{task.extensionData.plannedEndDate | date: 'dd/MMM/yyyy'}}<br> Fecha Máxima: &nbsp;{{task.extensionData.deadline | date: 'dd/MMM/yyyy'}}
@@ -33,6 +33,7 @@
     </tr>
   </tbody>
 </table>
+
 <div class="grid-footer">
   <table class="grid-footer-style">
     <tr>
