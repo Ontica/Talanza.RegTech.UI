@@ -19,39 +19,65 @@
         {{group.key}}
       </div>
 
-      <div *ngFor="let activity of group.value" class="activity-row">
+      <div *ngFor="let activity of group.value"
+           class="activity-row"
+           [class.selected-activity]="isSelected(activity)">
 
-        <div class="activity-container" [class.selected-activity]="isActivitySelected(activity)">
+        <div class="activity-container"
+             [style.border-left-color]="getTimelineColor(activity, activity.deadline, 'border')">
 
           <div class="activity-name">
-            <a (click)="onSelectActivity(activity, true)">{{activity.name}}</a>
+            <a [class.completed-activity]="isCompleted(activity)"
+               [class.blink]="getTimelineColor(activity, activity.deadline, 'title')"
+               [style.color]="getTimelineColor(activity, activity.deadline, 'title')"
+               (click)="onSelectActivity(activity, true)">{{activity.name}}</a>
           </div>
 
-          <div *ngIf="activity.responsible.uid !== 'Empty'" class="activity-status">
-            <div class="column expand" style="white-space:nowrap;min-width:100px;">{{activity.responsible.name}}</div>
-            <div class="column expand" style="white-space:nowrap">
-              &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-            </div>
-            <div class="column expand" style="white-space:nowrap;min-width:80px;">F. Objetivo: {{activity.plannedEndDate | date:'dd/LLL/yyyy'}}</div>
-            <div class="column expand" style="white-space:nowrap">
-              &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-            </div>
-            <div class="column expand" style="white-space:nowrap">F. Máxima: {{activity.deadline | date:'dd/LLL/yyyy'}}</div>
-          </div>
+          <div class="activity-status">
 
-          <div *ngIf="activity.responsible.uid === 'Empty' && activity.deadline" class="activity-status">
-            <div class="column expand" style="white-space:nowrap;min-width:100px;">No asignada</div>
-            <div class="column expand" style="white-space:nowrap">
-              &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+            <div class="column" style="min-width:240px;max-width:30%">
+              {{activity.project.name}}
+              <br/>
+              {{activity.parent.uid !== 'Undefined' ? activity.parent.name : ''}}
             </div>
-            <div class="column expand" style="white-space:nowrap;min-width:80px;">F. Objetivo: {{activity.plannedEndDate | date:'dd/LLL/yyyy'}}</div>
-            <div class="column expand" style="white-space:nowrap">
-              &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-            </div>
-            <div class="column expand" style="white-space:nowrap">F. Máxima: {{activity.deadline | date:'dd/LLL/yyyy'}}</div>
-          </div>
 
-          <emp-ng-rag-status [status]="activity.ragStatus"></emp-ng-rag-status>
+            <div class="column"
+                 [style.color]="getTimelineColor(activity, activity.deadline)">
+              <div>Fecha máxima:</div>
+              <div>
+                {{(activity.deadline | date:'dd/LLL/yyyy') || 'No determinada'}}
+              </div>
+            </div>
+
+            <div *ngIf="displayPlannedDate(activity)" class="column nowrap"
+                 [style.color]="getTimelineColor(activity, activity.plannedEndDate)">
+              <div>Fecha objetivo:</div>
+              <div>
+                {{activity.plannedEndDate | date:'dd/LLL/yyyy'}} &nbsp;
+                <span>
+                  {{plannedEndDateVsDeadlineDays(activity)}}
+                </span>
+              </div>
+            </div>
+
+            <div *ngIf="isCompleted(activity)" class="column nowrap">
+              <div>Finalizada el:</div>
+              <div>
+                {{activity.actualEndDate | date:'dd/LLL/yyyy'}} &nbsp;
+                <span [style.color]="getTimelineColor(activity, activity.actualEndDate)"
+                      [innerHTML]="actualEndDateVsDeadlineDays(activity) | safeHtml">
+                </span>
+              </div>
+            </div>
+
+            <div class="activity-controls column expand">
+              <span style="padding-right:8pt;text-align:right">
+                {{activity.responsible.uid !== 'Empty' ? activity.responsible.name : ''}}
+              </span>
+              <emp-ng-rag-status [status]="activity.ragStatus"></emp-ng-rag-status>
+            </div>
+
+          </div>
 
         </div>
 

@@ -30,6 +30,19 @@ export class DateStringLibrary {
   }
 
 
+  static daysBetween(value1: DateString, value2: DateString): number {
+    const date1 = moment(value1);
+    const date2 = moment(value2);
+
+    return date2.diff(date1, 'days');
+  }
+
+
+  static today(): DateString {
+    return moment().format('YYYY-MM-DD');
+  }
+
+
   static datePart(value: DateString): string {
     const date = this.toDate(value);
 
