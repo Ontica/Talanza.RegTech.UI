@@ -5,7 +5,12 @@ $amber-color: #e68a00 !default;
 $red-color: #9b1b1f !default;
 $no-color: #909090!default;
 
+:host {
+  display: inline;
+}
+
 .circle {
+  display: inline-block;
   border-radius: 50%;
   height: 15px;
   width: 15px;

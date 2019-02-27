@@ -69,3 +69,11 @@ $small-max-width: 540px;
 .stretch {
   align-items: stretch;
 }
+
+.end {
+  align-content: flex-end;
+}
+
+.nowrap {
+  white-space: nowrap;
+}
