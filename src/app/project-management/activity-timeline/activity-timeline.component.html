@@ -24,12 +24,12 @@
            [class.selected-activity]="isSelected(activity)">
 
         <div class="activity-container"
-             [style.border-left-color]="getTimelineColor(activity, activity.deadline, 'border')">
+             [style.border-left-color]="timelineHelper.getTimelineColor(activity, activity.deadline, 'border')">
 
           <div class="activity-name">
-            <a [class.completed-activity]="isCompleted(activity)"
-               [class.blink]="getTimelineColor(activity, activity.deadline, 'title')"
-               [style.color]="getTimelineColor(activity, activity.deadline, 'title')"
+            <a [class.completed-activity]="timelineHelper.isCompleted(activity)"
+               [class.blink]="timelineHelper.getTimelineColor(activity, activity.deadline, 'title')"
+               [style.color]="timelineHelper.getTimelineColor(activity, activity.deadline, 'title')"
                (click)="onSelectActivity(activity, true)">{{activity.name}}</a>
           </div>
 
@@ -42,30 +42,30 @@
             </div>
 
             <div class="column"
-                 [style.color]="getTimelineColor(activity, activity.deadline)">
+                 [style.color]="timelineHelper.getTimelineColor(activity, activity.deadline)">
               <div>Fecha máxima:</div>
               <div>
                 {{(activity.deadline | date:'dd/LLL/yyyy') || 'No determinada'}}
               </div>
             </div>
 
-            <div *ngIf="displayPlannedDate(activity)" class="column nowrap"
-                 [style.color]="getTimelineColor(activity, activity.plannedEndDate)">
+            <div *ngIf="timelineHelper.displayPlannedEndDate(activity)" class="column nowrap"
+                 [style.color]="timelineHelper.getTimelineColor(activity, activity.plannedEndDate)">
               <div>Fecha objetivo:</div>
               <div>
                 {{activity.plannedEndDate | date:'dd/LLL/yyyy'}} &nbsp;
                 <span>
-                  {{plannedEndDateVsDeadlineDays(activity)}}
+                  {{timelineHelper.plannedEndDateVsDeadlineDays(activity)}}
                 </span>
               </div>
             </div>
 
-            <div *ngIf="isCompleted(activity)" class="column nowrap">
+            <div *ngIf="timelineHelper.isCompleted(activity)" class="column nowrap">
               <div>Finalizada el:</div>
               <div>
                 {{activity.actualEndDate | date:'dd/LLL/yyyy'}} &nbsp;
-                <span [style.color]="getTimelineColor(activity, activity.actualEndDate)"
-                      [innerHTML]="actualEndDateVsDeadlineDays(activity) | safeHtml">
+                <span [style.color]="timelineHelper.getTimelineColor(activity, activity.actualEndDate)"
+                      [innerHTML]="timelineHelper.actualEndDateVsDeadlineDays(activity) | safeHtml">
                 </span>
               </div>
             </div>
