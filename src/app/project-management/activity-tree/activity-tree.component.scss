@@ -6,7 +6,7 @@
   background-color: $grid-even-background-color;
   border-top: 1px $border-color solid;
   float: left;
-  min-height: 38px;
+  min-height: 46px;
   width: 100%;
   margin: 4px;
 }
@@ -20,6 +20,9 @@
   }
 }
 
+.column {
+  padding-right: 36px;
+}
 
 .selected-activity {
   background-color: $grid-selected-background-color;
@@ -44,13 +47,19 @@
   vertical-align: -webkit-baseline-middle;
 }
 
+.activity-controls {
+  @include row;
+  justify-content: flex-end;
+  font-size: 8pt;
+}
 
 .activity-name {
   display: inline-block;
   vertical-align: -webkit-baseline-middle;
   margin-right: 12pt;
-  max-width: calc(100% - 120px);
+  padding-bottom: 2pt;
   font-weight: 400;
+  width: calc(100% - 120px);
 }
 
 .activity-name-completed {
@@ -100,10 +109,9 @@
 
 .activity-status {
   @include row;
-  align-items: stretch;
-  align-content: space-between;
+  justify-content: space-between;
   font-size: 8pt;
-  width: calc(100% - 120px);
+  width: 98%;
 }
 
 

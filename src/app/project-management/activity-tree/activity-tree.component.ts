@@ -17,6 +17,8 @@ import { Activity, EmptyActivity, ActivityOperation } from '@app/models/project-
 import { AddEventDialogComponent } from '../add-event-dialog/add-event-dialog.component';
 import { MoveActivityDialogComponent } from '../move-activity-dialog/move-activity-dialog.component';
 
+import { TimelineHelper } from '../utilities/timeline-helper';
+
 
 @Component({
   selector: 'emp-steps-activity-tree',
@@ -58,6 +60,11 @@ export class ActivityTreeComponent implements OnChanges {
 
   get hasSelectedActivities() {
     return (this.selectedActivity.uid !== '');
+  }
+
+
+  get timelineHelper() {
+    return TimelineHelper;
   }
 
 
@@ -149,6 +156,7 @@ export class ActivityTreeComponent implements OnChanges {
       this.addFirstActivityEditorVisible = true;
     }
   }
+
 
   // Drag & drop methods
 
