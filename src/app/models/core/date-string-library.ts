@@ -6,7 +6,10 @@
  */
 
 import { DateFormat, LocalizationLibrary } from '../localization';
+import { Assertion } from '@app/core';
+
 import * as moment from 'moment';
+
 
 export type DateString = Date | string;
 
@@ -18,15 +21,18 @@ export class DateStringLibrary {
     const date1 = this.datePart(value1);
     const date2 = this.datePart(value2);
 
-    if (date1 < date2) {
+    if (date1 && date2) {
+      return date1.localeCompare(date2);
+    } else if (date1 && !date2) {
       return -1;
-
-    } else if (date1 === date2) {
-      return 0;
-
-    } else {
+    } else if (!date1 && date2) {
       return 1;
+    } else if (!date1 && !date2) {
+      return 0;
+    } else {
+      throw Assertion.assertNoReachThisCode('DateStringLibrary.compareDates() programming error.');
     }
+
   }
 
 

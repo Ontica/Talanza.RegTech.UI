@@ -5,7 +5,7 @@
  * See LICENSE.txt in the project root for complete license information.
  */
 
-import { Pipe, PipeTransform } from '@angular/core';
+import { Pipe, PipeTransform, ɵtextBinding } from '@angular/core';
 
 import { Assertion } from '@app/core';
 
@@ -15,8 +15,8 @@ import { DateString, DateStringLibrary } from '@app/models/core';
 export type GroupByDateProperty = 'actualEndDate' | 'plannedEndDate' | 'deadline' | 'actualStartDate';
 export type GroupByProperty = 'timeline' | 'responsible' | GroupByDateProperty;
 
-const DATES_ORDERING_ARRAY:
-            GroupByDateProperty[] = ['actualEndDate', 'plannedEndDate', 'deadline', 'actualStartDate'];
+const TIMELINE_DATES_ARRAY: GroupByDateProperty[] = ['actualEndDate', 'plannedEndDate', 'deadline'];
+const DEFAULT_DATES_ORDERING_ARRAY: GroupByDateProperty[] = ['actualEndDate', 'deadline', 'plannedEndDate'];
 
 const EMPTY_RESPONSIBLE_GROUP = 'Actividades sin asignar';
 
@@ -74,7 +74,7 @@ export class GroupActivitiesByPipe implements PipeTransform  {
       } else {
         previous[responsibleName].push(current);
 
-        previous[responsibleName].sort( (a, b) => this.compareDateAndPosition(a, b, 'deadline') );
+        previous[responsibleName].sort( (a, b) => this.compareTimelineDates(a, b) );
       }
 
       return previous;
@@ -120,11 +120,8 @@ export class GroupActivitiesByPipe implements PipeTransform  {
       } else {
         previous[yearMonth].push(current);
 
-        if (current[dateProperty]) {
-          previous[yearMonth].sort( (a, b) => this.compareDateAndPosition(a, b, dateProperty) );
-        } else {
-          previous[yearMonth].sort( (a, b) => a.position - b.position );
-        }
+        previous[yearMonth].sort((a, b) =>
+                      this.compareDatesOrPosition(a, b, [dateProperty].concat(DEFAULT_DATES_ORDERING_ARRAY)));
 
       }
 
@@ -140,46 +137,46 @@ export class GroupActivitiesByPipe implements PipeTransform  {
   // comparison methods
 
 
-  private compareTimelineDates(a: Activity, b: Activity): number {
-    for (let a_fieldIndex = 0; a_fieldIndex < DATES_ORDERING_ARRAY.length; a_fieldIndex++) {
+  private compareDatesOrPosition(a: Activity, b: Activity, comparisionFields: GroupByDateProperty[]): number {
+    const compare  = this.compareDateValues(a, b, comparisionFields);
 
-      for (let b_fieldIndex = 0; b_fieldIndex < DATES_ORDERING_ARRAY.length; b_fieldIndex++) {
-
-        const a_dateValue = a[DATES_ORDERING_ARRAY[a_fieldIndex]];
-        const b_dateValue = b[DATES_ORDERING_ARRAY[b_fieldIndex]];
-
-        if (!a_dateValue || !b_dateValue) {
-          continue;
-        }
-
-        const compare = DateStringLibrary.compareDates(a_dateValue, b_dateValue);
-
-        if (compare !== 0) {
-          return compare;
-        }
-
-      }  // for a_fieldIndex
-
-    }  // for b_fieldIndex
+    if (compare !== 0) {
+      return compare;
+    }
 
     return a.position - b.position;
   }
 
 
-  private compareDateAndPosition(a: any, b: any, dateProperty: string): number {
-    if (a[dateProperty] && b[dateProperty]) {
-      return a[dateProperty].localeCompare(b[dateProperty]);
+  private compareDateValues(a: Activity, b: Activity, comparisonFields: GroupByDateProperty[]): number {
+    for (let fieldIndex = 0; fieldIndex < comparisonFields.length; fieldIndex++) {
+      const dateField = comparisonFields[fieldIndex];
 
-    } else if (a[dateProperty] && !b[dateProperty]) {
-      return -1;
+      const compare = DateStringLibrary.compareDates(a[dateField], b[dateField]);
 
-    } else if (!a[dateProperty] && b[dateProperty]) {
-      return 1;
-
-    } else if (!a[dateProperty] && !b[dateProperty]) {
-      return a.position - b.position;
-
+      if (compare !== 0) {
+        return compare;
+      }
     }
+
+    return 0;
+  }
+
+
+  private compareFirstNotNullDates(a: Activity, b: Activity,
+                                   comparisonFields: GroupByDateProperty[]): number {
+    const a_FirstNotNullDate = this.getFirstNotNullDate(a, comparisonFields);
+    const b_FirstNotNullDate = this.getFirstNotNullDate(b, comparisonFields);
+
+    if (!a_FirstNotNullDate && !b_FirstNotNullDate) {
+      return a.position - b.position;
+    } else if (!a_FirstNotNullDate  && b_FirstNotNullDate) {
+      return 1;
+    } else if (a_FirstNotNullDate && !b_FirstNotNullDate) {
+      return -1;
+    }
+
+    return DateStringLibrary.compareDates(a_FirstNotNullDate, b_FirstNotNullDate);
   }
 
 
@@ -199,12 +196,41 @@ export class GroupActivitiesByPipe implements PipeTransform  {
   }
 
 
+  private compareTimelineDates(a: Activity, b: Activity): number {
+    let compare = this.compareFirstNotNullDates(a, b, TIMELINE_DATES_ARRAY);
+
+    if (compare !== 0) {
+      return compare;
+    }
+
+    compare = this.compareDateValues(a, b, DEFAULT_DATES_ORDERING_ARRAY);
+
+    if (compare !== 0) {
+      return compare;
+    }
+
+    return a.position - b.position;
+  }
+
+
   // other auxiliary methods
 
 
-  getTimelineYearMonthGroupName(activity: Activity): any {
-    for (let fieldIndex = 0; fieldIndex < DATES_ORDERING_ARRAY.length; fieldIndex++) {
-      const dateField = DATES_ORDERING_ARRAY[fieldIndex];
+  private getFirstNotNullDate(activity: Activity, comparisonFields: GroupByDateProperty[]): DateString {
+    for (let fieldIndex = 0; fieldIndex < comparisonFields.length; fieldIndex++) {
+      const dateField = comparisonFields[fieldIndex];
+
+      if (activity[dateField]) {
+        return activity[dateField];
+      }
+    }
+    return '';
+  }
+
+
+  private getTimelineYearMonthGroupName(activity: Activity): any {
+    for (let fieldIndex = 0; fieldIndex < TIMELINE_DATES_ARRAY.length; fieldIndex++) {
+      const dateField = TIMELINE_DATES_ARRAY[fieldIndex];
 
       if (activity[dateField]) {
         return this.getYearMonthGroupName(activity[dateField], dateField);
