@@ -25,7 +25,6 @@ export interface InboxRef {
 interface ExtensionData {
   deadline: DateString;
   plannedEndDate: DateString;
-  ragStatus: string;
   stage: string;
   tags: string[];
 }

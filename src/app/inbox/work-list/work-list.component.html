@@ -4,7 +4,6 @@
       <th style="width:20pt"></th>
       <th style="width:30%">Tarea</th>
       <th style="width:14%">Fechas límite</th>
-      <th style="width:8%">Estado</th>
       <th style="width:15%">Responsable</th>
       <th style="width:15%">Etiquetas</th>
     </tr>
@@ -19,10 +18,8 @@
         Proyecto: {{task.project.name}}
       </td>
       <td style="width:15%;">
-        Fecha Objetivo: &nbsp;{{task.extensionData.plannedEndDate | date: 'dd/MMM/yyyy'}}<br> Fecha Máxima: &nbsp;{{task.extensionData.deadline | date: 'dd/MMM/yyyy'}}
-      </td>
-      <td style="width:8%;" class="text-align-center">
-        <emp-ng-rag-status [status]="task.extensionData.ragStatus"></emp-ng-rag-status>
+        Fecha Máxima: &nbsp;{{task.extensionData.deadline | date: 'dd/MMM/yyyy'}}
+        Fecha Objetivo: &nbsp;{{task.extensionData.plannedEndDate | date: 'dd/MMM/yyyy'}}
       </td>
       <td style="width:15%;">{{task.to.name}}</td>
       <td style="width:15%">

@@ -14,6 +14,5 @@ export class GanttTask {
   duration: number;
   position: number;
   level: number;
-  ragStatus: string;
   parent: number;
 }

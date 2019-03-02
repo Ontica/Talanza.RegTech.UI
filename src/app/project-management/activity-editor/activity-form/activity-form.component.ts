@@ -151,9 +151,7 @@ export class ActivityFormComponent extends AbstractForm implements OnInit, OnCha
       warnDays: new FormControl(),
       warnType: new FormControl(),
 
-      responsibleUID: new FormControl('', Validators.required),
-      ragStatus: new FormControl('', Validators.required),
-
+      responsibleUID: new FormControl('', Validators.required)
     });
   }
 
@@ -228,8 +226,7 @@ export class ActivityFormComponent extends AbstractForm implements OnInit, OnCha
       warnDays: formModel.warnDays,
       warnType: formModel.warnType,
 
-      responsibleUID: formModel.responsibleUID,
-      ragStatus: formModel.ragStatus,
+      responsibleUID: formModel.responsibleUID
     };
 
     return data;
@@ -252,9 +249,7 @@ export class ActivityFormComponent extends AbstractForm implements OnInit, OnCha
       warnDays: this.activity.warnDays !== 0 ? this.activity.warnDays : '',
       warnType: this.activity.warnType,
 
-      responsibleUID: this.activity.responsible.uid,
-      ragStatus: this.activity.ragStatus,
-
+      responsibleUID: this.activity.responsible.uid
     });
 
     this.cleanExceptions();

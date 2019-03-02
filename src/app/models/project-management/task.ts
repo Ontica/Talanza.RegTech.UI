@@ -32,7 +32,6 @@ export interface Task extends Identifiable, PartitionedType {
   tags: string[];
   position: number;
   level: number;
-  ragStatus: string;
   stage: string;
   status: string;
 
@@ -63,7 +62,6 @@ export const EmptyTask: Task = {
   tags: [],
   position: 0,
   level: 0,
-  ragStatus: '',
   stage: '',
   status: '',
 

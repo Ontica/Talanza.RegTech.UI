@@ -45,7 +45,6 @@ export interface Activity extends Identifiable, PartitionedType {
 
   position: number;
   level: number;
-  ragStatus: string;
   stage: string;
   status: string;
 
@@ -78,7 +77,6 @@ export const EmptyActivity: Activity = {
   tags: [],
   position: 0,
   level: 0,
-  ragStatus: '',
   stage: '',
   status: ''
 };

@@ -89,15 +89,6 @@
             <option *ngFor="let responsible of responsibles | async" [value]="responsible.uid">{{responsible.name}}</option>
           </select>
         </td>
-        <td>Estado:</td>
-        <td>
-          <select class="select-box" style="width:224px" formControlName="ragStatus">
-            <option value="NoColor">No determinado</option>
-            <option value="Green">Verde</option>
-            <option value="Amber">Ambar</option>
-            <option value="Red">Rojo</option>
-          </select>
-        </td>
       </tr>
     </table>
 

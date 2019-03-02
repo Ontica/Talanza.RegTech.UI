@@ -47,17 +47,18 @@
   vertical-align: -webkit-baseline-middle;
 }
 
+
 .activity-controls {
-  @include row;
-  justify-content: flex-end;
   font-size: 8pt;
+  text-align: right;
 }
+
 
 .activity-name {
   display: inline-block;
   vertical-align: -webkit-baseline-middle;
-  margin-right: 12pt;
   padding-bottom: 2pt;
+  padding-right: 12pt;
   font-weight: 400;
   width: calc(100% - 120px);
 }
