@@ -12,10 +12,13 @@ import { Assertion } from '@app/core';
 import { Activity } from '@app/models/project-management';
 import { DateString, DateStringLibrary } from '@app/models/core';
 
-const EMPTY_RESPONSIBLE_GROUP = 'Actividades sin asignar';
+export type GroupByDateProperty = 'actualEndDate' | 'plannedEndDate' | 'deadline' | 'actualStartDate';
+export type GroupByProperty = 'timeline' | 'responsible' | GroupByDateProperty;
 
-export type GroupByDateProperty = 'deadline' | 'plannedEndDate' | 'actualStartDate';
-export type GroupByProperty = GroupByDateProperty | 'responsible';
+const DATES_ORDERING_ARRAY:
+            GroupByDateProperty[] = ['actualEndDate', 'plannedEndDate', 'deadline', 'actualStartDate'];
+
+const EMPTY_RESPONSIBLE_GROUP = 'Actividades sin asignar';
 
 @Pipe({
   name: 'groupActivitiesBy'
@@ -28,6 +31,9 @@ export class GroupActivitiesByPipe implements PipeTransform  {
     }
 
     switch (groupByProperty) {
+      case 'timeline':
+        return this.groupByTimeline(data);
+
       case 'deadline':
         return this.groupByYearMonth(data, 'deadline');
 
@@ -62,7 +68,6 @@ export class GroupActivitiesByPipe implements PipeTransform  {
         responsibleName = EMPTY_RESPONSIBLE_GROUP;
       }
 
-
       if (!previous[responsibleName]) {
         previous[responsibleName] = [current];
 
@@ -78,6 +83,29 @@ export class GroupActivitiesByPipe implements PipeTransform  {
 
     return Object.keys(groups).map( key => ({ key, value: groups[key] }) )
                               .sort( (a, b) => this.compareResponsibleNames(a.key, b.key));
+  }
+
+
+  private groupByTimeline(data: Array<Activity>): Array<{key, value}> {
+    const groups = data.reduce((previous, current) => {
+
+      const yearMonth = this.getTimelineYearMonthGroupName(current);
+
+      if (!previous[yearMonth]) {
+        previous[yearMonth] = [current];
+
+      } else {
+        previous[yearMonth].push(current);
+
+        previous[yearMonth].sort( (a, b) => this.compareTimelineDates(a, b) );
+      }
+
+      return previous;
+
+    }, {});
+
+    return Object.keys(groups).map( key => ({ key, value: groups[key] }) )
+                              .sort( (a, b) => a.key.localeCompare(b.key) );
   }
 
 
@@ -110,6 +138,32 @@ export class GroupActivitiesByPipe implements PipeTransform  {
 
 
   // comparison methods
+
+
+  private compareTimelineDates(a: Activity, b: Activity): number {
+    for (let a_fieldIndex = 0; a_fieldIndex < DATES_ORDERING_ARRAY.length; a_fieldIndex++) {
+
+      for (let b_fieldIndex = 0; b_fieldIndex < DATES_ORDERING_ARRAY.length; b_fieldIndex++) {
+
+        const a_dateValue = a[DATES_ORDERING_ARRAY[a_fieldIndex]];
+        const b_dateValue = b[DATES_ORDERING_ARRAY[b_fieldIndex]];
+
+        if (!a_dateValue || !b_dateValue) {
+          continue;
+        }
+
+        const compare = DateStringLibrary.compareDates(a_dateValue, b_dateValue);
+
+        if (compare !== 0) {
+          return compare;
+        }
+
+      }  // for a_fieldIndex
+
+    }  // for b_fieldIndex
+
+    return a.position - b.position;
+  }
 
 
   private compareDateAndPosition(a: any, b: any, dateProperty: string): number {
@@ -146,6 +200,19 @@ export class GroupActivitiesByPipe implements PipeTransform  {
 
 
   // other auxiliary methods
+
+
+  getTimelineYearMonthGroupName(activity: Activity): any {
+    for (let fieldIndex = 0; fieldIndex < DATES_ORDERING_ARRAY.length; fieldIndex++) {
+      const dateField = DATES_ORDERING_ARRAY[fieldIndex];
+
+      if (activity[dateField]) {
+        return this.getYearMonthGroupName(activity[dateField], dateField);
+      }
+    }
+    return 'Sin ninguna fecha asignada';
+  }
+
 
   private getYearMonthGroupName(dateValue: DateString, dateProperty: GroupByDateProperty) {
     if (dateValue) {

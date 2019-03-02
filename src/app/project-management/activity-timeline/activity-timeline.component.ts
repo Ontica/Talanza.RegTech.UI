@@ -61,6 +61,10 @@ export class ActivityTimelineComponent implements OnChanges {
   get viewTitle() {
 
     switch (this.groupBy) {
+
+      case 'timeline':
+        return 'Línea de tiempo';
+
       case 'deadline':
         return 'Fecha máxima de entrega';
 
