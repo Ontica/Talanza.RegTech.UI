@@ -20,6 +20,7 @@ export class ProcedureStore {
   private _baseProcedures = new BehaviorSubject<BaseProcedure[]>([]);
   private _fullRetrivedProcedures: Array<Procedure> = [];
   private _entities = new BehaviorSubject<Entity[]>([]);
+  private _themes = new BehaviorSubject<string[]>([]);
 
 
   constructor(private procedureService: ProcedureService) {
@@ -34,6 +35,11 @@ export class ProcedureStore {
 
   procedures(): Observable<BaseProcedure[]> {
     return this._baseProcedures.asObservable();
+  }
+
+
+  themes(): Observable<string[]> {
+    return this._themes.asObservable();
   }
 
 
@@ -74,19 +80,39 @@ export class ProcedureStore {
   // private methods
 
   private loadInitialData() {
+    this.loadBaseProcedures();
+    this.loadEntities();
+    this.loadThemes();
+  }
+
+
+  loadThemes(): any {
+    this.procedureService.getThemes()
+    .subscribe(
+      data => this._themes.next(data)
+      ,
+      err => console.log('Error reading themes', err)
+    );
+  }
+
+
+  loadEntities(): any {
+    this.procedureService.getEntities()
+      .subscribe(
+        data => this._entities.next(data)
+        ,
+        err => console.log('Error reading entities data', err)
+      );
+  }
+
+
+  loadBaseProcedures(): any {
     this.procedureService.getBaseProcedures()
       .subscribe(
         data =>
           this._baseProcedures.next(data)
         ,
         err => console.log('Error reading base procedures data', err)
-      );
-
-    this.procedureService.getEntities()
-      .subscribe(
-        data => this._entities.next(data)
-        ,
-        err => console.log('Error reading entities data', err)
       );
   }
 

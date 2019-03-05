@@ -154,20 +154,7 @@
         <td>
           <select class="select-box" style="width:336px" formControlName="theme">
             <option value="">( Sin tema asignado )</option>
-            <option value="Administración">Administración</option>
-            <option value="Aprovechamiento de Gas Natural">Aprovechamiento de Gas Natural</option>
-            <option value="ARES">ARES</option>
-            <option value="Certificación de Reservas">Certificación de Reservas</option>
-            <option value="Comercialización, almacenamiento y transporte">Comercialización, almacenamiento y transporte</option>
-            <option value="Contenido Nacional">Contenido Nacional</option>
-            <option value="Impacto Social">Impacto Social</option>
-            <option value="Medición">Medición</option>
-            <option value="Medio ambiente">Medio ambiente</option>
-            <option value="Pagos">Pagos</option>
-            <option value="Planes">Planes</option>
-            <option value="Pozos">Pozos</option>
-            <option value="Seguridad industrial">Seguridad industrial</option>
-            <option value="Sistema de Administración">Sistema de Administración</option>
+            <option *ngFor="let themeName of themesList | async" [value]="themeName">{{themeName}}</option>
           </select>
         </td>
       </tr>

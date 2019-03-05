@@ -66,6 +66,13 @@ export class ProcedureService {
   }
 
 
+  getThemes(): Observable<string[]> {
+    const path = 'v1/catalogues/procedure-themes';
+
+    return this.core.http.get<string[]>(path);
+  }
+
+
   createProcedure(procedure: Procedure): Promise<Procedure> {
     return this.core.http.post<Procedure>('v1/procedures', procedure)
                          .toPromise();

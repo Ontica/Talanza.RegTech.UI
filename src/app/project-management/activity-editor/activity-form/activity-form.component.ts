@@ -49,6 +49,7 @@ export class ActivityFormComponent extends AbstractForm implements OnInit, OnCha
   form: FormGroup;
 
   responsibles: Observable<Contact[]> = of([]);
+  themesList: Observable<string[]> = of([]);
 
   constructor(private app: SharedService,
               private projectStore: ProjectStore,
@@ -68,6 +69,7 @@ export class ActivityFormComponent extends AbstractForm implements OnInit, OnCha
 
   ngOnInit() {
     this.loadResponsibles();
+    this.loadThemes();
   }
 
 
@@ -141,7 +143,9 @@ export class ActivityFormComponent extends AbstractForm implements OnInit, OnCha
     return (this.activity.template && this.activity.template.uid);
   }
 
+
   // abstract methods implementation
+
 
   protected createFormGroup(): FormGroup {
     // ToDo fix: this.formBuilder.group ... can't be used because
@@ -357,6 +361,10 @@ export class ActivityFormComponent extends AbstractForm implements OnInit, OnCha
 
   private loadResponsibles() {
     this.responsibles = this.projectStore.responsibles(this.activity.project);
+  }
+
+  private loadThemes() {
+    this.themesList = this.projectStore.themes();
   }
 
 }

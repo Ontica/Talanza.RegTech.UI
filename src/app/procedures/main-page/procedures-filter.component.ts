@@ -23,6 +23,7 @@ export class ProcedureFilterComponent implements OnInit {
 
   offices: Office[] = [];
   entities: Entity[] = [];
+  themesList: string[] = [];
 
   @Output() change = new EventEmitter<BaseProcedure[]>();
 
@@ -33,6 +34,7 @@ export class ProcedureFilterComponent implements OnInit {
 
   ngOnInit() {
     this.setEntities();
+    this.setThemesList();
     this.onChangeFilter();
   }
 
@@ -52,6 +54,13 @@ export class ProcedureFilterComponent implements OnInit {
   private setEntities(): void {
     this.authorityService.getEntities()
                          .then(x => this.entities = x);
+  }
+
+
+  private setThemesList(): void {
+    this.procedureService.getThemes()
+                         .toPromise()
+                         .then(x => this.themesList = x);
   }
 
 }

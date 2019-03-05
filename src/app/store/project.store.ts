@@ -36,9 +36,10 @@ export class ProjectStore {
 
   private _projects: BehaviorSubject<List<Project>> = new BehaviorSubject(List([]));
 
-  private _tags: BehaviorSubject<ColoredTag[]> = new BehaviorSubject([]);
   private _stages: BehaviorSubject<List<Stage>> = new BehaviorSubject(List([]));
 
+  private _tags: BehaviorSubject<ColoredTag[]> = new BehaviorSubject([]);
+  private _themes: BehaviorSubject<string[]> = new BehaviorSubject([]);
 
   constructor(private projectService: ProjectService) {
     this.loadInitialData();
@@ -82,6 +83,11 @@ export class ProjectStore {
 
   get tags(): Observable<ColoredTag[]> {
     return this._tags.asObservable();
+  }
+
+
+  themes(): Observable<string[]> {
+    return this._themes.asObservable();
   }
 
 
@@ -190,8 +196,16 @@ export class ProjectStore {
 
   // private methods
 
-  private loadInitialData() {
 
+  private loadInitialData() {
+    this.loadProjectList();
+    this.loadTags();
+    this.loadThemes();
+    this.loadStages();
+  }
+
+
+  private loadProjectList() {
     this.projectService.getProjectList()
         .subscribe(
             data =>
@@ -199,8 +213,10 @@ export class ProjectStore {
             ,
             err => console.log('Error reading project data', err)
         );
+  }
 
 
+  private loadTags() {
     this.projectService.getTags()
         .subscribe(
             data =>
@@ -208,7 +224,22 @@ export class ProjectStore {
             ,
             err => console.log('Error reading tags data', err)
         );
+  }
 
+
+  private loadThemes() {
+    this.projectService.getThemesList()
+        .subscribe(
+            data =>
+              this._themes.next(data)
+            ,
+            err => console.log('Error reading projects themes', err)
+        );
+
+  }
+
+
+  private loadStages() {
     this.projectService.getStages()
         .subscribe(
             data =>

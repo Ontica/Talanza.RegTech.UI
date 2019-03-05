@@ -51,6 +51,8 @@ export class ActivityModelFormComponent extends AbstractForm implements OnInit, 
 
   entities: Observable<Entity[]> = of([]);
   procedures: Observable<BaseProcedure[]> = of([]);
+  themesList: Observable<string[]> = of([]);
+
   selectedEntityIdSubject = new BehaviorSubject<number>(ALL_ENTITIES);
 
   constructor(private messageService: MessageBoxService,
@@ -68,6 +70,7 @@ export class ActivityModelFormComponent extends AbstractForm implements OnInit, 
   ngOnInit() {
     this.entities = this.procedureStore.entities();
     this.procedures = this.procedureStore.getProceduresFilteredByEntityId(this.selectedEntityIdSubject);
+    this.themesList = this.procedureStore.themes();
   }
 
 
