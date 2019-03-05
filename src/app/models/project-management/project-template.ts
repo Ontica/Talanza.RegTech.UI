@@ -18,6 +18,7 @@ export interface ProjectTemplate extends Identifiable {
 export interface ActivityTemplate extends Identifiable, PartitionedType {
   id: number;
   notes: string;
+  theme: string;
 
   activityType: string;
   executionMode: string;
@@ -64,6 +65,7 @@ export const EmptyActivityTemplate: ActivityTemplate = {
   name: '',
   type: '',
   notes: '',
+  theme: '',
 
   activityType: '',
   executionMode: '',

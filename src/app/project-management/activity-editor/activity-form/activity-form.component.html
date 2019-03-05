@@ -129,7 +129,7 @@
                   (click)="setCommand('updateActivity')">Guardar los cambios</button>
 
           <button *ngIf="disabled && activity.status !== 'Completed'" type="button" class="btn-action right"
-                  (click)="enable()">Editar</button>
+                  (click)="enableForm()">Editar</button>
 
           <button *ngIf="disabled && activity.status === 'Completed'" type="button" class="btn right"
                   (click)="onReactivate()">Reactivar</button>

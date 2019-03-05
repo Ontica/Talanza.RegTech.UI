@@ -128,6 +128,19 @@ export class ActivityFormComponent extends AbstractForm implements OnInit, OnCha
   }
 
 
+  enableForm() {
+    this.enable();
+
+    if (this.hasTemplate()) {
+      this.get('theme').disable();
+    }
+  }
+
+
+  hasTemplate() {
+    return (this.activity.template && this.activity.template.uid);
+  }
+
   // abstract methods implementation
 
   protected createFormGroup(): FormGroup {

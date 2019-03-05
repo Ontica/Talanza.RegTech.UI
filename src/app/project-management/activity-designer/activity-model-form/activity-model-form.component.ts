@@ -133,6 +133,8 @@ export class ActivityModelFormComponent extends AbstractForm implements OnInit, 
 
       notes: new FormControl(),
 
+      theme: new FormControl(),
+
       activityType: new FormControl('', Validators.required),
 
       executionMode: new FormControl('', Validators.required),
@@ -211,6 +213,7 @@ export class ActivityModelFormComponent extends AbstractForm implements OnInit, 
     const data = {
       name: formModel.name,
       notes: formModel.notes,
+      theme: formModel.theme,
 
       config: {
 
@@ -243,6 +246,7 @@ export class ActivityModelFormComponent extends AbstractForm implements OnInit, 
     this.form.reset({
       name: this.activity.name,
       notes: this.activity.notes,
+      theme: this.activity.theme,
 
       activityType: this.activity.activityType,
       executionMode: this.activity.executionMode,

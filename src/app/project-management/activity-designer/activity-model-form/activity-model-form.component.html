@@ -138,7 +138,7 @@
 
     <table class="form-section">
       <tr>
-        <td class="form-section-title" colspan="2">Entidad reguladora, trámite asociado e información legal</td>
+        <td class="form-section-title" colspan="4">Entidad reguladora, trámite asociado e información legal</td>
       </tr>
       <tr>
         <td>Entidad:</td>
@@ -150,10 +150,30 @@
             <option *ngFor="let entity of entities | async" [value]="entity.id">{{entity.shortName}}</option>
           </select>
         </td>
+        <td class="text-align-right" style="width:98%">Tema:</td>
+        <td>
+          <select class="select-box" style="width:336px" formControlName="theme">
+            <option value="">( Sin tema asignado )</option>
+            <option value="Administración">Administración</option>
+            <option value="Aprovechamiento de Gas Natural">Aprovechamiento de Gas Natural</option>
+            <option value="ARES">ARES</option>
+            <option value="Certificación de Reservas">Certificación de Reservas</option>
+            <option value="Comercialización, almacenamiento y transporte">Comercialización, almacenamiento y transporte</option>
+            <option value="Contenido Nacional">Contenido Nacional</option>
+            <option value="Impacto Social">Impacto Social</option>
+            <option value="Medición">Medición</option>
+            <option value="Medio ambiente">Medio ambiente</option>
+            <option value="Pagos">Pagos</option>
+            <option value="Planes">Planes</option>
+            <option value="Pozos">Pozos</option>
+            <option value="Seguridad industrial">Seguridad industrial</option>
+            <option value="Sistema de Administración">Sistema de Administración</option>
+          </select>
+        </td>
       </tr>
       <tr>
         <td>Trámite <br>asociado:</td>
-        <td style="width:100%">
+        <td colspan="3" style="width:100%">
           <select class="select-box" style="width:98%" formControlName="procedure">
             <option value="-1">No está asociada a un trámite</option>
             <option *ngFor="let procedure of procedures | async" [value]="procedure.id">[{{procedure.code}}]
@@ -163,13 +183,13 @@
       </tr>
       <tr>
         <td>Cláusula<br />contractual:</td>
-        <td>
+        <td colspan="3">
           <input type="text" class="text-box" formControlName="contractClause">
         </td>
       </tr>
       <tr>
         <td>Fundamento<br />(regulación):</td>
-        <td>
+        <td colspan="3">
           <textarea class="text-area" rows="2" cols="25" formControlName="legalBasis"></textarea>
         </td>
       </tr>
