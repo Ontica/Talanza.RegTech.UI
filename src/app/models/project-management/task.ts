@@ -28,7 +28,7 @@ export interface Task extends Identifiable, PartitionedType {
   actualStartDate: DateString;
   actualEndDate: DateString;
 
-
+  theme: string;
   tags: string[];
   position: number;
   level: number;
@@ -59,6 +59,7 @@ export const EmptyTask: Task = {
   actualStartDate: '',
   actualEndDate: '',
 
+  theme: '',
   tags: [],
   position: 0,
   level: 0,

@@ -14,5 +14,6 @@ export class GanttTask {
   duration: number;
   position: number;
   level: number;
+  theme: string;
   parent: number;
 }

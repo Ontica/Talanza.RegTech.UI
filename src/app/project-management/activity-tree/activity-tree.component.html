@@ -68,6 +68,7 @@
             <div *ngIf="!templateDesignerMode" class="activity-status">
 
               <div class="column" style="min-width:180px;max-width:30%">
+                {{activity.theme || 'Sin tema'}}<br/>
                 {{activity.project.name}}
               </div>
 

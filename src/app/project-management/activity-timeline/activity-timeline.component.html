@@ -36,7 +36,7 @@
           <div class="activity-status">
 
             <div class="column" style="min-width:240px;max-width:30%">
-              {{activity.project.name}}
+              {{activity.project.name}}: {{activity.theme || 'Sin tema'}}
               <br/>
               {{activity.parent.uid !== 'Undefined' ? activity.parent.name : ''}}
             </div>

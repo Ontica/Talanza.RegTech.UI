@@ -5,6 +5,7 @@
       <th style="width:30%">Tarea</th>
       <th style="width:14%">Fechas límite</th>
       <th style="width:15%">Responsable</th>
+      <th style="width:8%">Tema</th>
       <th style="width:15%">Etiquetas</th>
     </tr>
   </thead>
@@ -22,8 +23,9 @@
         Fecha Objetivo: &nbsp;{{task.extensionData.plannedEndDate | date: 'dd/MMM/yyyy'}}
       </td>
       <td style="width:15%;">{{task.to.name}}</td>
+      <td style="width:8%;">{{task.theme}}</td>
       <td style="width:15%">
-        <ng-container *ngFor="let tag of task.extensionData.tags">
+        <ng-container *ngFor="let tag of task.tags">
           <span class="tag">{{tag}}</span>
         </ng-container>
       </td>

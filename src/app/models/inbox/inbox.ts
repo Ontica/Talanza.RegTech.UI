@@ -5,18 +5,21 @@
  * See LICENSE.txt in the project root for complete license information.
  */
 
-import { DateString } from '@app/models/core';
+import { DateString, Identifiable } from '@app/models/core';
 
 
 export interface InboxRef {
   description: string;
   extensionData: ExtensionData;
   externalUID: string;
-  from: UidName;
+  from: Identifiable;
   received: DateString;
+  project: Identifiable;
   status: string;
   title: string;
-  to: UidName;
+  theme: string;
+  tags: string[];
+  to: Identifiable;
   type: string;
   uid: string;
 }
@@ -26,11 +29,4 @@ interface ExtensionData {
   deadline: DateString;
   plannedEndDate: DateString;
   stage: string;
-  tags: string[];
-}
-
-
-interface UidName {
-  uid: string;
-  name: string;
 }
