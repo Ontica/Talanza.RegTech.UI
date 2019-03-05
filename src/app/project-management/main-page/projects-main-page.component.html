@@ -56,6 +56,13 @@
          (activitySelected)="showEditor($event)">
     </emp-steps-activity-timeline>
 
+
+    <emp-steps-activity-timeline *ngSwitchCase="'theme'"
+         [groupBy]="'theme'"
+         [project]="selectedProject"
+         (activitySelected)="showEditor($event)">
+    </emp-steps-activity-timeline>
+
   </div>
 
   <div *ngIf="displayEditor" class="explorer-panel secondary">

@@ -59,9 +59,7 @@ export class ActivityTimelineComponent implements OnChanges {
 
 
   get viewTitle() {
-
     switch (this.groupBy) {
-
       case 'timeline':
         return 'Línea de tiempo';
 
@@ -77,10 +75,12 @@ export class ActivityTimelineComponent implements OnChanges {
       case 'responsible':
         return 'Responsables';
 
+      case 'theme':
+        return 'Temas';
+
       default:
         throw Assertion.assertNoReachThisCode(`Unrecognized groupBy value '${this.groupBy}'.`);
     }
-
   }
 
 

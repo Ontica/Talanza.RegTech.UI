@@ -5,7 +5,7 @@
  * See LICENSE.txt in the project root for complete license information.
  */
 
-import { Pipe, PipeTransform, ɵtextBinding } from '@angular/core';
+import { Pipe, PipeTransform } from '@angular/core';
 
 import { Assertion } from '@app/core';
 
@@ -13,12 +13,12 @@ import { Activity } from '@app/models/project-management';
 import { DateString, DateStringLibrary } from '@app/models/core';
 
 export type GroupByDateProperty = 'actualEndDate' | 'plannedEndDate' | 'deadline' | 'actualStartDate';
-export type GroupByProperty = 'timeline' | 'responsible' | GroupByDateProperty;
+export type GroupByProperty = 'timeline' | 'responsible' | 'theme' | GroupByDateProperty;
+
 
 const TIMELINE_DATES_ARRAY: GroupByDateProperty[] = ['actualEndDate', 'plannedEndDate', 'deadline'];
 const DEFAULT_DATES_ORDERING_ARRAY: GroupByDateProperty[] = ['actualEndDate', 'deadline', 'plannedEndDate'];
 
-const EMPTY_RESPONSIBLE_GROUP = 'Actividades sin asignar';
 
 @Pipe({
   name: 'groupActivitiesBy'
@@ -46,6 +46,9 @@ export class GroupActivitiesByPipe implements PipeTransform  {
       case 'responsible':
         return this.groupByResponsible(data);
 
+      case 'theme':
+        return this.groupByTheme(data);
+
       default:
         throw Assertion.assertNoReachThisCode(`GroupActivitiesByPipe not implemented for
                                                groupBy value '${groupByProperty}'.`);
@@ -58,6 +61,8 @@ export class GroupActivitiesByPipe implements PipeTransform  {
 
 
   private groupByResponsible(data: Array<Activity>): Array<{key, value}> {
+    const EMPTY_RESPONSIBLE_GROUP = 'Actividades sin asignar';
+
     const groups = data.reduce((previous, current) => {
 
       let responsibleName: string;
@@ -74,15 +79,16 @@ export class GroupActivitiesByPipe implements PipeTransform  {
       } else {
         previous[responsibleName].push(current);
 
-        previous[responsibleName].sort( (a, b) => this.compareTimelineDates(a, b) );
+        previous[responsibleName].sort((a, b) => this.compareTimelineDates(a, b));
       }
 
       return previous;
 
     }, {});
 
-    return Object.keys(groups).map( key => ({ key, value: groups[key] }) )
-                              .sort( (a, b) => this.compareResponsibleNames(a.key, b.key));
+    return Object.keys(groups).map(key => ({ key, value: groups[key] }))
+                              .sort((a, b) => this.compareStringValues(a.key, b.key,
+                                                                       EMPTY_RESPONSIBLE_GROUP));
   }
 
 
@@ -97,15 +103,47 @@ export class GroupActivitiesByPipe implements PipeTransform  {
       } else {
         previous[yearMonth].push(current);
 
-        previous[yearMonth].sort( (a, b) => this.compareTimelineDates(a, b) );
+        previous[yearMonth].sort((a, b) => this.compareTimelineDates(a, b));
       }
 
       return previous;
 
     }, {});
 
-    return Object.keys(groups).map( key => ({ key, value: groups[key] }) )
-                              .sort( (a, b) => a.key.localeCompare(b.key) );
+    return Object.keys(groups).map(key => ({ key, value: groups[key] }))
+                              .sort((a, b) => a.key.localeCompare(b.key));
+  }
+
+
+  private groupByTheme(data: Array<Activity>): Array<{key, value}> {
+    const EMPTY_THEME_GROUP = 'Actividades sin tema asignado';
+
+    const groups = data.reduce((previous, current) => {
+
+      let theme: string;
+
+      if (current['theme'] !== '') {
+        theme = current['theme'];
+      } else {
+        theme = EMPTY_THEME_GROUP;
+      }
+
+      if (!previous[theme]) {
+        previous[theme] = [current];
+
+      } else {
+        previous[theme].push(current);
+
+        previous[theme].sort((a, b) => this.compareTimelineDates(a, b));
+      }
+
+      return previous;
+
+    }, {});
+
+    return Object.keys(groups).map(key => ({ key, value: groups[key] }))
+                              .sort((a, b) => this.compareStringValues(a.key, b.key,
+                                                                       EMPTY_THEME_GROUP));
   }
 
 
@@ -129,8 +167,8 @@ export class GroupActivitiesByPipe implements PipeTransform  {
 
     }, {});
 
-    return Object.keys(groups).map( key => ({ key, value: groups[key] }) )
-                              .sort( (a, b) => a.key.localeCompare(b.key) );
+    return Object.keys(groups).map(key => ({ key, value: groups[key] }))
+                              .sort((a, b) => a.key.localeCompare(b.key));
   }
 
 
@@ -180,14 +218,14 @@ export class GroupActivitiesByPipe implements PipeTransform  {
   }
 
 
-  private compareResponsibleNames(a: string, b: string): number {
-    if (a === EMPTY_RESPONSIBLE_GROUP && b === EMPTY_RESPONSIBLE_GROUP) {
+  private compareStringValues(a: string, b: string, emptyGroupValue: string): number {
+    if (a === emptyGroupValue && b === emptyGroupValue) {
       return 0;
 
-    } else if (a === EMPTY_RESPONSIBLE_GROUP && b !== EMPTY_RESPONSIBLE_GROUP) {
+    } else if (a === emptyGroupValue && b !== emptyGroupValue) {
       return 1;
 
-    } else if (a !== EMPTY_RESPONSIBLE_GROUP && b === EMPTY_RESPONSIBLE_GROUP) {
+    } else if (a !== emptyGroupValue && b === emptyGroupValue) {
       return -1;
 
     } else {
