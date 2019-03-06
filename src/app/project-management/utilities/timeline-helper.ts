@@ -26,6 +26,7 @@ enum DEFAULT_BOUNDS {
   red_bound = 7
 }
 
+const USE_WEEKS_AND_MONTHS_FORMAT = false;
 
 export class TimelineHelper {
 
@@ -33,7 +34,7 @@ export class TimelineHelper {
   static actualEndDateVsDeadlineDays(activity: Activity) {
     const actualEarnedDays = DateStringLibrary.daysBetween(activity.actualEndDate, activity.deadline);
 
-    const label = this.daysDifferenceLabel(actualEarnedDays);
+    const label = this.daysDifferenceLabel(actualEarnedDays, USE_WEEKS_AND_MONTHS_FORMAT);
 
     return this.applyTextColorBasedOnDays(actualEarnedDays, label);
   }
@@ -90,7 +91,7 @@ export class TimelineHelper {
   static plannedEndDateVsDeadlineDays(activity: Activity) {
     const plannedEarnedDays = DateStringLibrary.daysBetween(activity.plannedEndDate, activity.deadline);
 
-    return this.daysDifferenceLabel(plannedEarnedDays);
+    return this.daysDifferenceLabel(plannedEarnedDays, USE_WEEKS_AND_MONTHS_FORMAT);
   }
 
 
@@ -108,7 +109,7 @@ export class TimelineHelper {
   }
 
 
-  private static daysDifferenceLabel(days: number) {
+  private static daysDifferenceLabel(days: number, useWeeksAndMonths = true) {
     if (!days || days === 0) {
       return '';
     }
@@ -116,18 +117,20 @@ export class TimelineHelper {
     const months = days / 30.5;
     const weeks = days / 7;
 
-    if (weeks > 8) {
-      return `${months.toFixed(1).replace('.0', '')} meses antes`;
+    if (useWeeksAndMonths) {
+      if (weeks > 8) {
+        return `${months.toFixed(1).replace('.0', '')} meses antes`;
 
-    } else if (weeks < -8) {
-      return `${Math.abs(months).toFixed(1).replace('.0', '')} meses después`;
-    }
+      } else if (weeks < -8) {
+        return `${Math.abs(months).toFixed(1).replace('.0', '')} meses después`;
+      }
 
-    if (weeks >= 4) {
-      return `${weeks.toFixed(1).replace('.0', '')} semanas antes`;
+      if (weeks >= 4) {
+        return `${weeks.toFixed(1).replace('.0', '')} semanas antes`;
 
-    } else if (weeks <= -4) {
-      return `${Math.abs(weeks).toFixed(1).replace('.0', '')} semanas después`;
+      } else if (weeks <= -4) {
+        return `${Math.abs(weeks).toFixed(1).replace('.0', '')} semanas después`;
+      }
     }
 
     if (days === 1) {

@@ -11,8 +11,6 @@ import { Assertion, HttpService } from '@app/core';
 
 import { Activity, ActivityTemplate, Project, ProjectTemplate } from '@app/models/project-management';
 
-import { Entity } from '@app/models/regulation';
-
 
 @Injectable()
 export class ProjectTemplateService {
@@ -73,7 +71,8 @@ export class ProjectTemplateService {
 
 
   createFromActivityTemplate(targetProject: Project,
-                             activityTemplateUID: string, eventDate: Date): Observable<Activity> {
+                             activityTemplateUID: string,
+                             eventDate: Date): Observable<Activity> {
     Assertion.assertValue(targetProject, 'targetProject');
     Assertion.assertValue(activityTemplateUID, 'activityTemplateUID');
 
