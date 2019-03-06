@@ -123,7 +123,7 @@ export class ProjectService {
 
 
   getThemesList(): Observable<string[]> {
-    const path = `v1/catalogues/procedure-themes`;
+    const path = `v1/project-management/themes`;
 
     return this.core.http.get<string[]>(path);
   }

@@ -13,12 +13,14 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Observable, of, BehaviorSubject } from 'rxjs';
 
 import { ProjectTemplateStore } from '@app/store/project-template.store';
+import { ProjectStore } from '@app/store/project.store';
 import { ProcedureStore } from '@app/store/procedure.store';
 
 import { ActivityTemplate, EmptyActivityTemplate } from '@app/models/project-management';
 import { BaseProcedure, Entity } from '@app/models/regulation';
 
 import { AbstractForm, MessageBoxService } from '@app/shared/services';
+
 
 enum FormMessages {
 
@@ -56,6 +58,7 @@ export class ActivityModelFormComponent extends AbstractForm implements OnInit, 
   selectedEntityIdSubject = new BehaviorSubject<number>(ALL_ENTITIES);
 
   constructor(private messageService: MessageBoxService,
+              private projectStore: ProjectStore,
               private templateStore: ProjectTemplateStore,
               private procedureStore: ProcedureStore) {
     super();
@@ -70,7 +73,7 @@ export class ActivityModelFormComponent extends AbstractForm implements OnInit, 
   ngOnInit() {
     this.entities = this.procedureStore.entities();
     this.procedures = this.procedureStore.getProceduresFilteredByEntityId(this.selectedEntityIdSubject);
-    this.themesList = this.procedureStore.themes();
+    this.themesList = this.projectStore.themes();
   }
 
 
