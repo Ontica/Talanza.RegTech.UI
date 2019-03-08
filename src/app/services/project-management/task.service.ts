@@ -79,7 +79,7 @@ export class TaskService {
   reactivateTask(task: Task): Observable<Task> {
     const path = `v1/project-management/activities/${task.activity.uid}/tasks/${task.uid}/reactivate`;
 
-    return this.core.http.post<Task>(path, {})
+    return this.core.http.post<Task>(path)
       .pipe(
         catchError((e) => this.core.http.throw(e, Errors.REACTIVATE_TASK))
       );

@@ -29,7 +29,7 @@ export class HttpHandler {
   }
 
 
-  post<T>(path: string, body: any, options?: HttpClientOptions, service?: Service): Observable<T> {
+  post<T>(path: string, body?: any, options?: HttpClientOptions, service?: Service): Observable<T> {
     return this.invokeHttpCall<T>(HttpMethod.POST, path, body, options, service);
   }
 
@@ -68,6 +68,7 @@ export class HttpHandler {
     const payloadDataField = this.getPayloadDataField(path, callerOptions, service);
 
     const requestOptions = DefaultHttpClientOptions();
+
     if (body) {
       requestOptions.body = body;
     }

@@ -63,10 +63,9 @@ export class ProjectTemplateService {
     Assertion.assertValue(activityTemplate, 'activityTemplate');
     Assertion.assertValue(targetProjectTemplateUID, 'targetProjectTemplateUID');
 
-
     const path = this.getActivityTemplateEndpoint(activityTemplate) + `/copyTo/${targetProjectTemplateUID}`;
 
-    return this.http.post<ActivityTemplate>(path, {});
+    return this.http.post<ActivityTemplate>(path);
   }
 
 
@@ -135,7 +134,7 @@ export class ProjectTemplateService {
     const path = this.getActivityTemplateEndpoint(activityTemplate) +
                  `/moveTo/${targetProjectTemplateUID}`;
 
-    return this.http.post<ActivityTemplate>(path, {});
+    return this.http.post<ActivityTemplate>(path);
   }
 
 

@@ -173,7 +173,7 @@ export class ProjectService {
     const path = `v1/project-management/projects/${activity.project.uid}/activities/` +
                  `${activity.uid}/copyTo/${targetProjectUID}`;
 
-    return this.core.http.post<Activity>(path, {})
+    return this.core.http.post<Activity>(path)
                          .pipe(
                             catchError((e) => this.core.http.throw(e, Errors.COPY_TO_PROJECT))
                          );
@@ -233,7 +233,7 @@ export class ProjectService {
     const path = `v1/project-management/projects/${activity.project.uid}/activities/` +
                  `${activity.uid}/moveTo/${targetProjectUID}`;
 
-    return this.core.http.post<Activity>(path, {})
+    return this.core.http.post<Activity>(path)
                          .pipe(
                             catchError((e) => this.core.http.throw(e, Errors.MOVE_TO_PROJECT))
                          );
@@ -246,7 +246,7 @@ export class ProjectService {
     const path =
       `v1/project-management/projects/${activity.project.uid}/activities/${activity.uid}/reactivate`;
 
-    return this.core.http.post<Activity>(path, {})
+    return this.core.http.post<Activity>(path)
                          .pipe(
                             catchError(e => this.core.http.throw(e, Errors.REACTIVATE_ACTIVITY))
                          );

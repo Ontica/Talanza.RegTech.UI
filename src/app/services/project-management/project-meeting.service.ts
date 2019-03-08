@@ -107,7 +107,7 @@ export class ProjectMeetingService {
   closeMeeting(meetingUID: string) {
     const path = `v1/project-management/meetings/${meetingUID}/close`;
 
-    return this.core.http.post<any>(path, '')
+    return this.core.http.post<any>(path)
       .pipe(
         catchError(e => this.core.http.showAndReturn(e, MeetingServiceErr.CLOSE_MEETING_ERR, null))
       );
@@ -117,7 +117,7 @@ export class ProjectMeetingService {
   openMeeting(meetingUID: string) {
     const path = `v1/project-management/meetings/${meetingUID}/open`;
 
-    return this.core.http.post<any>(path, '')
+    return this.core.http.post<any>(path)
       .pipe(
         catchError(e => this.core.http.showAndReturn(e, MeetingServiceErr.OPEN_MEETING_ERR, null))
       );

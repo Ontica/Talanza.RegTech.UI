@@ -42,13 +42,6 @@ export class DirectoryService {
                              method: HttpMethod): Observable<Service> {
     let condition: (Service) => boolean;
 
-    // if (servicePathOrUID.includes('/') && method === undefined) {
-    //   condition = (service: Service) => (service.path === servicePathOrUID);
-
-    // } else if (servicePathOrUID.includes('/') && method !== undefined) {
-    //   condition = (service: Service) => (service.path === servicePathOrUID &&
-    //                                      service.method.toString() === HttpMethod[method]);
-
     if (servicePathOrUID.includes('/')) {
       return of<Service>(undefined);
 
