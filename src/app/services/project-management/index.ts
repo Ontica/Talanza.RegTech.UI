@@ -12,3 +12,5 @@ export * from './project-meeting.service';
 export * from './project.service';
 
 export * from './project-template.service';
+
+export * from './what-if.service';

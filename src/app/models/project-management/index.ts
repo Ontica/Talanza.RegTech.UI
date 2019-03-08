@@ -20,3 +20,5 @@ export * from './meeting';
 export * from './project';
 
 export * from './project-template';
+
+export * from './what-if-result';

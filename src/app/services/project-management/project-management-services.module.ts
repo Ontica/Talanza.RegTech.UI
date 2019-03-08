@@ -12,6 +12,7 @@ import { ProjectMeetingService } from './project-meeting.service';
 import { ProjectTemplateService } from './project-template.service';
 import { ProjectService } from './project.service';
 import { TaskService } from './task.service';
+import { WhatIfService } from './what-if.service';
 
 @NgModule({
 
@@ -20,7 +21,8 @@ import { TaskService } from './task.service';
     ProjectMeetingService,
     ProjectTemplateService,
     ProjectService,
-    TaskService
+    TaskService,
+    WhatIfService
   ],
 
 })
