@@ -7,18 +7,17 @@
 
 import { Component, Inject, OnInit } from '@angular/core';
 
-import {
-  FormBuilder, FormControl,
-  FormGroup, Validators
-} from '@angular/forms';
-
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 
 import { Observable, of } from 'rxjs';
 
 import { ProjectTemplateStore } from '@app/store/project-template.store';
-import { ActivityTemplate, Project } from '@app/models/project-management';
 import { ProjectStore } from '@app/store/project.store';
+import { WhatIfService } from '@app/services/project-management';
+
+import { ActivityTemplate, Project, WhatIfResult } from '@app/models/project-management';
+import { TimelineHelper } from '../utilities/timeline-helper';
 
 
 @Component({
@@ -32,14 +31,21 @@ export class AddEventDialogComponent implements OnInit {
 
   project: Project;
   events: Observable<ActivityTemplate[]> = of([]);
+  whatIfResult: Observable<WhatIfResult> = of();
 
   constructor(private projectStore: ProjectStore,
               private templateStore: ProjectTemplateStore,
-              private fb: FormBuilder,
+              private whatIfService: WhatIfService,
               private dialogRef: MatDialogRef<AddEventDialogComponent>,
               @Inject(MAT_DIALOG_DATA) data) {
 
   }
+
+
+  get timelineHelper() {
+    return TimelineHelper;
+  }
+
 
   ngOnInit() {
     this.projectStore.selectedProject().subscribe (
@@ -50,6 +56,24 @@ export class AddEventDialogComponent implements OnInit {
 
     this.createFormGroup();
 
+    this.dialogRef.updateSize();
+
+  }
+
+
+  loadWhatIfList() {
+    if (!this.form.valid) {
+      return;
+    }
+
+    const data = this.getFormData();
+
+    this.whatIfResult =
+              this.whatIfService.whatIfCreatedFromEvent(this.project, data.eventUID, data.eventDate);
+  }
+
+  close() {
+    this.dialogRef.close();
   }
 
 
@@ -66,12 +90,8 @@ export class AddEventDialogComponent implements OnInit {
   }
 
 
-  close() {
-    this.dialogRef.close();
-  }
-
-
   // private methods
+
 
   private createFormGroup() {
     const formGroup = new FormGroup({

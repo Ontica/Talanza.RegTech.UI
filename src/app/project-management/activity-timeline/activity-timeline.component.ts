@@ -8,7 +8,7 @@
 import { Component, EventEmitter,
          Input, OnChanges, Output } from '@angular/core';
 
-import { MatDialog, MatDialogConfig } from '@angular/material';
+import { MatDialog } from '@angular/material';
 
 import { ProjectModel } from '@app/store/project.store';
 import { Activity, EmptyActivity } from '@app/models/project-management';
@@ -94,14 +94,7 @@ export class ActivityTimelineComponent implements OnChanges {
 
 
   openAddEventDialog() {
-    const dialogConfig = new MatDialogConfig();
-
-    dialogConfig.disableClose = true;
-    dialogConfig.autoFocus = true;
-    dialogConfig.height = '400px',
-    dialogConfig.width = '600px',
-
-    this.dialog.open(AddEventDialogComponent, dialogConfig);
+    this.dialog.open(AddEventDialogComponent);
   }
 
 

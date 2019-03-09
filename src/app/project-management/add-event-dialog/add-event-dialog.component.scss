@@ -1,8 +1,6 @@
+@import "../../../styles/responsive";
 @import "../../../styles/general-styles";
 
-.mat-form-field {
-  display: block;
-}
 
 .mat-dialog-title {
   border-bottom: 2px solid $primary-color;
@@ -13,5 +11,111 @@
 }
 
 .mat-dialog-actions {
+  justify-content: flex-end;
   border-top: 1px solid $secondary-color;
+  padding: 12px;
+  width: 100%;
+}
+
+
+.form {
+  border-bottom: 1px solid $border-color;
+  font-size: 10pt;
+}
+
+
+.activity-row {
+  margin-left: 14pt;
+  padding: 4pt 8pt 8pt 8pt;
+  border-left: 5px solid $primary-color;
+
+  background-color: $grid-even-background-color;
+  border-bottom: 1px $border-color solid;
+  // border-left: 5px solid $primary-color;
+  // padding-left: 16px;
+  min-height: 46px;
+  max-width: 600px;
+  width: 98%;
+}
+
+
+.activity-row:hover {
+  background-color: $grid-hover-background-color;
+  .ghost-icon {
+    color: $icon-color-light;
+  }
+}
+
+
+.selected-activity {
+  background-color: $grid-selected-background-color;
+}
+
+
+.activity-position-controls {
+  display: inline-block;
+  margin-left: 8px;
+  vertical-align: -webkit-baseline-middle;
+}
+
+.activity-container {
+  margin-left: 14pt;
+  padding: 4pt 8pt 8pt 8pt;
+  border-left: 5px solid $primary-color;
+  width: 100%;
+}
+
+
+.activity-menu {
+  float: right;
+  margin-right: 8px;
+  width: 60px;
+  vertical-align: -webkit-baseline-middle;
+}
+
+
+.activity-group {
+  display: inline-block;
+  vertical-align: -webkit-baseline-bottom;
+  font-size: 12pt;
+  font-weight: 500;
+  margin-top: 32px;
+  padding-left: 8px;
+}
+
+
+.activity-name {
+  display: inline-block;
+  vertical-align: -webkit-baseline-middle;
+  padding-right: 24pt;
+  padding-bottom: 2pt;
+  max-width: 98%;
+  font-size: 10pt;
+  font-weight: 400;
+}
+
+
+.activity-name a:hover {
+  text-decoration: underline;
+}
+
+.completed-activity {
+  text-decoration-line: line-through;
+}
+
+.activity-status {
+  @include row;
+  justify-content: space-between;
+  font-size: 8pt;
+  width: 98%;
+}
+
+.activity-controls {
+  @include row;
+  justify-content: flex-end;
+  font-size: 8pt;
+}
+
+.column {
+  padding-right: 36px;
 }

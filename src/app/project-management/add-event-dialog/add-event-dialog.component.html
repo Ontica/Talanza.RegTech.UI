@@ -2,24 +2,49 @@
 
 <mat-dialog-content [formGroup]="form">
 
-  Evento:
-  <br>
+  <div class="form">
+      Evento:
+      <br>
+      <select class="select-box" style="max-width:600px;width:90%" formControlName="selectedEvent">
+        <option value="">( Eventos )</option>
+        <option *ngFor="let event of events | async"
+                [value]="event.uid">{{event.name}}</option>
+      </select>
+      <br/>
+      Fecha:
+      <br/>
+      <emp-ng-datepicker formControlName="eventDate"></emp-ng-datepicker>
+      <button class="btn" [disabled]="!this.form.valid" (click)="loadWhatIfList()">Ver lista de obligaciones</button>
+  </div>
 
-  <select class="select-box" style="width:90%" formControlName="selectedEvent">
-    <option value="">( Eventos )</option>
-    <option *ngFor="let event of events | async"
-            [value]="event.uid">{{event.name}}</option>
-  </select>
+  <div style="min-height:380px;margin-top:6px;">
+    <div *ngFor="let stateChange of (whatIfResult | async)?.stateChanges"
+          class="activity-row"
+          [style.border-left-color]="timelineHelper.getTimelineColor(stateChange, stateChange.deadline, 'border')"
+          [style.padding-left.pt]="stateChange.level * 9">
 
-  <br/>
-  <br/>
-  Fecha:
-  <br/>
-  <emp-ng-datepicker formControlName="eventDate"></emp-ng-datepicker>
-  <br/>
-  <br/>
-  <br/>
+      <div class="activity-name">
+        <a [class.blink]="timelineHelper.getTimelineColor(stateChange, stateChange.deadline, 'title')"
+           [style.color]="timelineHelper.getTimelineColor(stateChange, stateChange.deadline, 'title')">
+            {{stateChange.name}}
+        </a>
+      </div>
 
+      <div class="activity-status">
+        <div class="column" style="min-width:240px;max-width:30%">
+          {{stateChange.theme || 'Sin tema'}}
+        </div>
+
+        <div class="column"
+              [style.color]="timelineHelper.getTimelineColor(stateChange, stateChange.deadline)">
+          <div>Fecha máxima:</div>
+          <div>
+            {{(stateChange.deadline | date:'dd/LLL/yyyy') || 'No determinada'}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </mat-dialog-content>
 
 <mat-dialog-actions>
