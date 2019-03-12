@@ -65,18 +65,25 @@ export class TimelineHelper {
 
     if (activity.warnDays >= DEFAULT_BOUNDS.green_bound) {
       warnDaysFactor = activity.warnDays / DEFAULT_BOUNDS.green_bound;
+
     } else if (activity.warnDays >= 1) {
       warnDaysFactor = activity.warnDays / DEFAULT_BOUNDS.red_bound;
+
     }
+
 
     if (remainingDays <= DEFAULT_BOUNDS.red_bound * warnDaysFactor) {
       return COLORS.red;
+
     } else if (remainingDays <= DEFAULT_BOUNDS.amber_bound * warnDaysFactor) {
       return COLORS.amber;
+
     } else if (remainingDays <= DEFAULT_BOUNDS.green_bound * warnDaysFactor) {
       return COLORS.green;
+
     } else if (use === 'border') {
       return date ? COLORS.default_color : COLORS.ghost_color;
+
     } else {
       return '';
     }
@@ -101,8 +108,10 @@ export class TimelineHelper {
   private static applyTextColorBasedOnDays(days: number, text: string)  {
     if (days > 0) {
       return `<span style="color:${COLORS.green}">${text}</span>`;
+
     } else if (days < 0) {
       return `<span style="color:${COLORS.red}">${text}</span>`;
+
     } else {
       return `${text}`;
     }

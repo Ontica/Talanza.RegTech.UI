@@ -16,8 +16,8 @@ import { ProjectTemplateStore } from '@app/store/project-template.store';
 import { ProjectStore } from '@app/store/project.store';
 import { WhatIfService } from '@app/services/project-management';
 
-import { ActivityTemplate, Project, WhatIfResult } from '@app/models/project-management';
-import { TimelineHelper } from '../utilities/timeline-helper';
+import { ActivityTemplate, Project, StateChange, WhatIfResult } from '@app/models/project-management';
+import { TimelineHelper } from '../common/timeline-helper';
 
 
 @Component({
@@ -42,11 +42,6 @@ export class AddEventDialogComponent implements OnInit {
   }
 
 
-  get timelineHelper() {
-    return TimelineHelper;
-  }
-
-
   ngOnInit() {
     this.projectStore.selectedProject().subscribe (
       x => { this.project = x.project; }
@@ -57,7 +52,16 @@ export class AddEventDialogComponent implements OnInit {
     this.createFormGroup();
 
     this.dialogRef.updateSize();
+  }
 
+
+  get timelineHelper() {
+    return TimelineHelper;
+  }
+
+
+  isSelected(stateChange: StateChange) {
+    console.log('selected: ' + stateChange.name);
   }
 
 

@@ -3,10 +3,10 @@
 
 
 .activity-row {
+  @include row;
   background-color: $grid-even-background-color;
-  border-top: 1px $border-color solid;
+  border-bottom: 1px $border-color solid;
   min-height: 46px;
-  width: 100%;
 }
 
 
@@ -14,7 +14,7 @@
   background-color: $grid-hover-background-color;
 
   .ghost-icon {
-    color: $icon-color-light;
+    color: $icon-color;
   }
 }
 
@@ -24,12 +24,6 @@
 }
 
 
-.activity-position-controls {
-  display: inline-block;
-  margin-left: 8px;
-  vertical-align: -webkit-baseline-middle;
-}
-
 .activity-container {
   margin-left: 28pt;
   padding: 4pt 8pt 8pt 8pt;
@@ -38,16 +32,27 @@
 }
 
 
-.activity-menu {
-  float: right;
-  margin-right: 8px;
-  width: 60px;
-  vertical-align: -webkit-baseline-middle;
+.activity-status {
+  @include row;
+  justify-content: space-between;
+  font-size: 8pt;
+  width: 98%;
 }
 
 
-.activity-group {
-  display: inline-block;
+.column {
+  padding-right: 36px;
+}
+
+
+.right-column {
+  justify-content: flex-end;
+  padding-right: 8pt;
+  text-align: right;
+}
+
+
+.activity-group-name {
   vertical-align: -webkit-baseline-bottom;
   font-size: 12pt;
   font-weight: 500;
@@ -57,7 +62,6 @@
 
 
 .activity-name {
-  display: inline-block;
   vertical-align: -webkit-baseline-middle;
   padding-right: 24pt;
   padding-bottom: 2pt;
@@ -71,23 +75,20 @@
   text-decoration: underline;
 }
 
+
+.activity-theme {
+  min-width: 200px;
+  max-width: 40%;
+  padding-right: 36px;
+}
+
+
 .completed-activity {
   text-decoration-line: line-through;
 }
 
-.activity-status {
-  @include row;
-  justify-content: space-between;
-  font-size: 8pt;
-  width: 98%;
-}
 
-.activity-controls {
-  @include row;
-  justify-content: flex-end;
-  font-size: 8pt;
-}
-
-.column {
-  padding-right: 36px;
+.activity-drag-control {
+  margin-left: 8px;
+  vertical-align: -webkit-baseline-middle;
 }

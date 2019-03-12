@@ -15,7 +15,7 @@
 
     <div *ngFor="let group of project.activities | groupActivitiesBy: groupBy ">
 
-      <div class="activity-group">
+      <div class="activity-group-name">
         {{group.key}}
       </div>
 
@@ -35,7 +35,7 @@
 
           <div class="activity-status">
 
-            <div class="column" style="min-width:240px;max-width:30%">
+            <div class="activity-theme">
               {{activity.project.name}}: {{activity.theme || 'Sin tema'}}
               <br/>
               {{activity.parent.uid !== 'Undefined' ? activity.parent.name : ''}}
@@ -70,10 +70,8 @@
               </div>
             </div>
 
-            <div class="activity-controls column expand">
-              <span style="padding-right:8pt;text-align:right">
+            <div class="right-column expand">
                 {{activity.responsible.uid !== 'Empty' ? activity.responsible.name : ''}}
-              </span>
             </div>
 
           </div>

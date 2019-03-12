@@ -18,13 +18,13 @@ import { AddEventDialogComponent } from '../add-event-dialog/add-event-dialog.co
 import { GroupByProperty } from './group-activities-by.pipe';
 
 import { Assertion } from '@app/core';
-import { TimelineHelper } from '../utilities/timeline-helper';
+import { TimelineHelper } from '../common/timeline-helper';
 
 
 @Component({
   selector: 'emp-steps-activity-timeline',
   templateUrl: './activity-timeline.component.html',
-  styleUrls: ['./activity-timeline.component.scss'],
+  styleUrls: ['../common/activity.scss'],
 })
 export class ActivityTimelineComponent implements OnChanges {
 

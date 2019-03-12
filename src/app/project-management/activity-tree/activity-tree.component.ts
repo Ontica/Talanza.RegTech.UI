@@ -17,7 +17,7 @@ import { Activity, EmptyActivity, ActivityOperation } from '@app/models/project-
 import { AddEventDialogComponent } from '../add-event-dialog/add-event-dialog.component';
 import { MoveActivityDialogComponent } from '../move-activity-dialog/move-activity-dialog.component';
 
-import { TimelineHelper } from '../utilities/timeline-helper';
+import { TimelineHelper } from '../common/timeline-helper';
 
 
 @Component({
@@ -49,15 +49,6 @@ export class ActivityTreeComponent implements OnChanges {
   }
 
 
-  activityNameClass(level: number): string {
-    if (1 <= level && level <= 6) {
-      return `activity-name-level-${level}`;
-    } else {
-      return 'activity-name-level-6';
-    }
-  }
-
-
   get hasSelectedActivities() {
     return (this.selectedActivity.uid !== '');
   }
@@ -77,8 +68,6 @@ export class ActivityTreeComponent implements OnChanges {
     //       Use a spinner and block the command
     //       Use a command processor (as a front controller)?
     //       For now this.hideInlineEditors() avoids multiple calls
-
-    this.showSpinner();
 
     this.hideInlineEditors();
 
@@ -184,6 +173,7 @@ export class ActivityTreeComponent implements OnChanges {
     event.dataTransfer.setData('activity', JSON.stringify(activity));
   }
 
+
   moveActivity(event: DragEvent, newPosition: number) {
     const activity = this.getDraggedActivity(event);
 
@@ -211,6 +201,7 @@ export class ActivityTreeComponent implements OnChanges {
 
   // private methods
 
+
   private configureDragEventBehaviour(event: DragEvent): any {
     event.stopPropagation();
     event.preventDefault();
@@ -225,14 +216,5 @@ export class ActivityTreeComponent implements OnChanges {
     return activity;
   }
 
-
-  private hideSpinner() {
-    // ToDo: call spinner component
-  }
-
-
-  private showSpinner() {
-    // ToDo: call spinner component
-  }
 
 }
