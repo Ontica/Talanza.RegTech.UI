@@ -16,7 +16,7 @@
 .card {
   display: flex;
   flex-direction: column;
-  height: calc(100% - 10px);
+  height: calc(100vh - 220px);
   width: auto;
 }
 
@@ -63,7 +63,7 @@
 
 .card-body {
   margin-top: 4px;
-  height: 100%;
+  height: auto;
   width: auto;
   overflow-x: hidden;
   overflow-y: auto;
