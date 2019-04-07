@@ -1,5 +1,5 @@
-Empiria Steps COVAR Edition
----------------------------
+# Talanza Regulatory Compliance Solution Frontend
+-------------------------------------------------
 
 THIRD-PARTY SOFTWARE NOTICES AND INFORMATION
 

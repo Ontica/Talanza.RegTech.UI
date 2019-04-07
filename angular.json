@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "covar-app": {
+    "talanza-frontend": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/covar-app",
+            "outputPath": "dist/talanza-frontend",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -55,18 +55,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "covar-app:build"
+            "browserTarget": "talanza-frontend:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "covar-app:build:production"
+              "browserTarget": "talanza-frontend:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "covar-app:build"
+            "browserTarget": "talanza-frontend:build"
           }
         },
         "test": {
@@ -100,7 +100,7 @@
         }
       }
     },
-    "covar-app-e2e": {
+    "talanza-frontend-e2e": {
       "root": "e2e/",
       "projectType": "application",
       "architect": {
@@ -108,11 +108,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "covar-app:serve"
+            "devServerTarget": "talanza-frontend:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "covar-app:serve:production"
+              "devServerTarget": "talanza-frontend:serve:production"
             }
           }
         },
@@ -128,5 +128,5 @@
       }
     }
   },
-  "defaultProject": "covar-app"
+  "defaultProject": "talanza-frontend"
 }

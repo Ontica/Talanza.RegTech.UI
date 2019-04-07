@@ -1,21 +1,23 @@
 {
-  "name": "empiria-rcs-covar-edition",
+  "name": "talanza-regtech-frontend",
   "author": "La Vía Óntica SC || Ontica LLC",
   "version": "1.0.0",
-  "description": "Empiria Regulatory Compliance Solution custom-tailored for COVAR Energy Consulting",
+  "description": "Talanza Regulatory Compliance Solution Frontend for the Mexican energy sector.",
   "license": "AGPL-3.0",
   "homepage": "http://ontica.org",
   "private": true,
   "repository": {
     "type": "git",
-    "url": "https://github.com/Ontica/Empiria.Steps.Covar"
+    "url": "https://github.com/Ontica/Talanza.RegTech.FrontEnd"
   },
   "contributors": [
     "Christian Yáñez <cyanez@ontica.org>",
     "José Manuel Cota  <jmcota@ontica.org>"
   ],
   "keywords": [
+    "regtech",
     "bpmn",
+    "regulatory compliance",
     "business process",
     "process automation",
     "process management",

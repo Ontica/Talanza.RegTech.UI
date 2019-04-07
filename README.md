@@ -1,6 +1,6 @@
-# Empiria Regulatory Compliance Solution. COVAR Edition
+# Talanza Regulatory Compliance Solution Frontend
 
-Angular-based front-end Regulatory Compliance Solution for the Mexican Energy Sector, custom-tailored and developed in association with [Covar Energy Consulting](http://www.covarenergy.com).
+Angular-based front-end Regulatory Compliance Solution for the Mexican Energy Sector, custom-tailored and developed in association with [Talanza Energy Consulting](http://www.talanza.energy).
 
 ## Quick start
 
@@ -24,10 +24,10 @@ After that, please download and install this repo:
 
 ```bash
 # clone (or fork) this repo
-git clone https://github.com/Ontica/Covar.RCS.FrontEnd
+git clone https://github.com/Ontica/Talanza.RegTech.Frontend
 
 # change directory
-cd Covar.RCS.FrontEnd
+cd Talanza.RegTech.Frontend
 
 # install the repo with npm
 npm install
@@ -44,10 +44,10 @@ In order to run this application, you MUST have a valid API KEY and access crede
 
 ## License
 
-This web application is distributed by the [GNU AFFERO](https://github.com/Ontica/Empiria.Steps.Covar/blob/master/LICENSE.txt) GENERAL PUBLIC LICENSE.
+This web application is distributed by the [GNU AFFERO](https://github.com/Ontica/Talanza.RegTech.Frontend/blob/master/LICENSE.txt) GENERAL PUBLIC LICENSE.
 
-For third-party components, please read [ThirdPartyNotices](https://github.com/Ontica/Empiria.Steps.Covar/blob/master/ThirdPartyNotices.txt) file.
+For third-party components, please read [ThirdPartyNotices](https://github.com/Ontica/Talanza.RegTech.Frontend/blob/master/ThirdPartyNotices.txt) file.
 
 ## Copyright
 
-Copyright © 2017-2019. La Vía Óntica SC, Ontica LLC and contributors.
+Copyright © 2017-2019. Talanza Energy Consulting, La Vía Óntica SC, Ontica LLC and contributors.

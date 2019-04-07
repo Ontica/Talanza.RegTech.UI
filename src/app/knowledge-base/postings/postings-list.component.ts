@@ -83,7 +83,7 @@ export class PostingsListComponent implements OnInit, OnChanges {
   }
 
   showDocument(fileName: string): void {
-    const url = `https://covar.azurewebsites.net/documents-library/advice/${fileName}`;
+    const url = `https://talanza.azurewebsites.net/documents-library/advice/${fileName}`;
 
     window.open(url, '_blank', 'location=yes,height=570,width=620,scrollbars=yes,status=yes');
   }
