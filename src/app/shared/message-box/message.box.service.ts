@@ -111,21 +111,31 @@ export class MessageBoxService {
   }
 
 
-  private getErrorMsg(error: Error | Exception | string | any) {
+  private getErrorMsg(error: Error | Exception | string | any): string {
+    if (!error) {
+      return 'Error desconocido';
 
-    if (error instanceof Exception) {
-      return (error as Exception).message +
-              '<br/><br/>' +
-             (error as Exception).innerError.message;
+    } else if (error instanceof Exception) {
+      return this.getExceptionMessage(error as Exception);
 
     } else if (error instanceof Error) {
       return (error as Error).message;
 
-    } else {
+    } else if (typeof(error) === 'string') {
       return error;
-
+    } else {
+      return JSON.stringify(error).toString();
     }
 
+  }
+
+  private getExceptionMessage(exception: Exception): string {
+    if (exception.innerError &&
+        exception.innerError.message.localeCompare(exception.message) !== 0) {
+      return `${exception.message}<br/><br/>${exception.innerError.message}`;
+    } else {
+      return exception.message || 'Error desconocido';
+    }
   }
 
 
