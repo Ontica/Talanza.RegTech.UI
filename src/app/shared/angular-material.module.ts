@@ -12,6 +12,7 @@ import {
   MatDatepickerModule,
   MatDialogModule,
   MatFormFieldModule,
+  MatIconModule,
   MatMenuModule,
   MatProgressSpinnerModule,
   MatTabsModule
@@ -74,6 +75,7 @@ export const DATE_FORMATS = {
     MatDatepickerModule,
     MatDialogModule,
     MatFormFieldModule,
+    MatIconModule,
     MatMenuModule,
     MatMomentDateModule,
     MatProgressSpinnerModule,
@@ -85,6 +87,7 @@ export const DATE_FORMATS = {
     MatDatepickerModule,
     MatDialogModule,
     MatFormFieldModule,
+    MatIconModule,
     MatMenuModule,
     MatMomentDateModule,
     MatProgressSpinnerModule,

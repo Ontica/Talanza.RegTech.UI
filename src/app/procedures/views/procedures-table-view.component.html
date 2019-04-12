@@ -2,23 +2,21 @@
   <thead>
     <tr>
       <th style="width:20pt"></th>
-      <th style='width:60%'>Trámite / Homoclave</th>
-      <th style='width:100px'>Dependencia</th>
-      <th style='width:12%'>Tema</th>
+      <th style='width:60%'>Procedure name and Official code</th>
+      <th style='width:100px'>Entity</th>
+      <th style='width:12%'>Theme</th>
       <th style='width:10%'></th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let procedure of procedures" [class.selected-row]="selectedProcedureUID === procedure.uid">
-      <td class="main-icon">
-        <a (click)="selectProcedure(procedure.uid)">
-          <i class="fa fa-university" aria-hidden="true"></i>
-        </a>
+      <td>
+        <mat-icon (click)="selectProcedure(procedure.uid)" color="accent">contact_mail_outline</mat-icon>
       </td>
       <td style='width:60%'>
         <a (click)="selectProcedure(procedure.uid)">{{procedure.name}}</a>
         <br />
-        <span *ngIf="procedure.modality.length !== 0">Modalidad: {{procedure.modality}} | </span>{{procedure.code}}
+        <span *ngIf="procedure.modality.length !== 0">Modality: {{procedure.modality}} | </span>{{procedure.code}}
       </td>
       <td style='width:100px'>{{procedure.entityName}}</td>
       <td style='width:12%'>{{procedure.theme}}</td>

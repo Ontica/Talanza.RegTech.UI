@@ -1,7 +1,7 @@
 <div class="container">
-  <i class="fa fa-search input-icon" (click)="onSearch()"></i>
+  <mat-icon class="input-icon" (click)="onSearch()">search</mat-icon>
   <input class="text-box" type="text"
-         placeholder="Búsqueda general"
+         placeholder="General search ..."
          [(ngModel)]="keywords"
          (keyup.enter)="onSearch()"
          (keyup.escape)="onCancel()">
