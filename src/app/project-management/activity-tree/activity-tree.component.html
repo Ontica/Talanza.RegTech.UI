@@ -14,134 +14,121 @@
               (click)="openAddEventDialog()">Agregar obligaciones</button>
       &nbsp; &nbsp;
       <button type="button" class="btn-action"
-              (click)="showInitialActivityInlineEditor()">{{ templateDesignerMode ? 'Agregar obligación' : 'Agregar actividad'}}</button>
+              (click)="showInitialActivityInlineEditor()">{{ templateDesignerMode ? 'Agregar obligación' : 'Agregar actividad' }}</button>
     </div>
   </div>
 
-  <div class="card-body">
+  <div class="card-body drag-boundary">
 
     <div *ngIf="addFirstActivityEditorVisible"
-          style="margin-left:32pt">
+          style="margin-left:52pt">
           <emp-steps-activity-inline-editor (insert)="insertActivity($event)"
                                             (cancel)="hideInlineEditors()">
           </emp-steps-activity-inline-editor>
     </div>
 
-    <div *ngFor="let activity of project.activities"
-         class="activity-row"
-         [class.selected-activity]="isActivitySelected(activity)"
-         (click)="onSelectActivity(activity)"
+    <div cdkDropList (cdkDropListDropped)="dropActivity($event)" class="drop-list">
 
-         [class.dragover-activity-row]="dragZoneItem === activity"
-         (dragover)="allowDrop($event, activity);"
-         (dragleave)="setDragZoneItem(null)"
-         (drop)="moveActivity($event, activity.position)">
+      <div *ngFor="let activity of project.activities" class="drop-item"
+            cdkDrag cdkDragLockAxis="y" [cdkDragData]="activity" cdkDragBoundary=".drag-boundary">
 
-         <div class="activity-drag-control"
-              draggable="true"
-              (dragstart)="startDrag($event, activity)">
+        <div class="activity-row"
+             [class.selected-activity]="isActivitySelected(activity)"
+             (click)="onSelectActivity(activity)" >
+
+            <div class="drag-control" cdkDragHandle>
               <i class="fa fa-align-justify ghost-icon grabbable" aria-hidden="true"></i>
-        </div>
-
-        <div class="activity-container"
-             [style.border-left-color]="timelineHelper.getTimelineColor(activity, activity.deadline, 'border')"
-             [style.padding-left.pt]="activity.level * 14">
-
-
-            <div class="activity-name">
-
-              <div (dragover)="allowDrop($event, activity.name)"
-                   (dragleave)="setDragZoneItem(null)"
-                   (drop)="moveActivityAsChildOf($event, activity)">
-
-                <a *ngIf="templateDesignerMode"
-                   [class.dragover-activity-name]="dragZoneItem === activity.name"
-                   (click)="onSelectActivity(activity, true)">{{activity.name}}</a>
-
-                <a *ngIf="!templateDesignerMode"
-                   [class.blink]="timelineHelper.getTimelineColor(activity, activity.deadline, 'title')"
-                   [style.color]="timelineHelper.getTimelineColor(activity, activity.deadline)"
-                   [class.completed-activity]="timelineHelper.isCompleted(activity)"
-                   [class.dragover-activity-name]="dragZoneItem === activity.name"
-                   (click)="onSelectActivity(activity, true)">{{activity.name}}</a>
-
-              </div>
-
             </div>
 
-            <div *ngIf="!templateDesignerMode" class="activity-status">
+            <div class="activity-container"
+                [style.border-left-color]="timelineHelper.getTimelineColor(activity, activity.deadline, 'border')"
+                [style.padding-left.pt]="activity.level * 14">
 
-              <div class="activity-theme">
-                {{activity.theme || 'Sin tema'}}<br/>
-                {{activity.project.name}}
-              </div>
 
-              <div *ngIf="activity.deadline" class="column nowrap"
-                    [style.color]="timelineHelper.getTimelineColor(activity, activity.deadline)">
-                <div>Fecha máxima:</div>
-                <div>
-                  {{(activity.deadline | date:'dd/LLL/yyyy') || 'No determinada'}}
+                <div class="activity-name">
+
+                  <div>
+                    <a *ngIf="templateDesignerMode"
+                      (click)="onSelectActivity(activity, true)">{{activity.name}}</a>
+
+                    <a *ngIf="!templateDesignerMode"
+                      [class.blink]="timelineHelper.getTimelineColor(activity, activity.deadline, 'title')"
+                      [style.color]="timelineHelper.getTimelineColor(activity, activity.deadline)"
+                      [class.completed-activity]="timelineHelper.isCompleted(activity)"
+                      (click)="onSelectActivity(activity, true)">{{activity.name}}</a>
+                  </div>
+
                 </div>
-              </div>
 
-              <div *ngIf="timelineHelper.displayPlannedEndDate(activity)"
-                    class="column nowrap"
-                    [style.color]="timelineHelper.getTimelineColor(activity, activity.plannedEndDate)">
-                <div>Fecha objetivo:</div>
-                <div>
-                  {{activity.plannedEndDate | date:'dd/LLL/yyyy'}} &nbsp;
-                  <span>
-                    {{timelineHelper.plannedEndDateVsDeadlineDays(activity)}}
-                  </span>
+                <div *ngIf="!templateDesignerMode" class="activity-status">
+
+                  <div class="activity-theme">
+                    {{activity.theme || 'Sin tema'}}<br/>
+                    {{activity.project.name}}
+                  </div>
+
+                  <div *ngIf="activity.deadline" class="column nowrap"
+                        [style.color]="timelineHelper.getTimelineColor(activity, activity.deadline)">
+                    <div>Fecha máxima:</div>
+                    <div>
+                      {{(activity.deadline | date:'dd/LLL/yyyy') || 'No determinada'}}
+                    </div>
+                  </div>
+
+                  <div *ngIf="timelineHelper.displayPlannedEndDate(activity)"
+                        class="column nowrap"
+                        [style.color]="timelineHelper.getTimelineColor(activity, activity.plannedEndDate)">
+                    <div>Fecha objetivo:</div>
+                    <div>
+                      {{activity.plannedEndDate | date:'dd/LLL/yyyy'}} &nbsp;
+                      <span>
+                        {{timelineHelper.plannedEndDateVsDeadlineDays(activity)}}
+                      </span>
+                    </div>
+                  </div>
+
+                  <div *ngIf="timelineHelper.isCompleted(activity)"
+                        class="column nowrap">
+                    <div>Finalizada el:</div>
+                    <div>
+                      {{activity.actualEndDate | date:'dd/LLL/yyyy'}} &nbsp;
+                      <span [style.color]="timelineHelper.getTimelineColor(activity, activity.actualEndDate)"
+                            [innerHTML]="timelineHelper.actualEndDateVsDeadlineDays(activity) | safeHtml">
+                      </span>
+                    </div>
+                  </div>
+
+                  <div class="right-column expand">
+                    {{activity.responsible.uid !== 'Empty' ? activity.responsible.name : ''}}
+                  </div>
+
                 </div>
-              </div>
 
-              <div *ngIf="timelineHelper.isCompleted(activity)"
-                    class="column nowrap">
-                <div>Finalizada el:</div>
-                <div>
-                  {{activity.actualEndDate | date:'dd/LLL/yyyy'}} &nbsp;
-                  <span [style.color]="timelineHelper.getTimelineColor(activity, activity.actualEndDate)"
-                        [innerHTML]="timelineHelper.actualEndDateVsDeadlineDays(activity) | safeHtml">
-                  </span>
+
+                <div *ngIf="templateDesignerMode" class="activity-status">
+
+                  <div class="activity-theme">
+                    {{activity.theme || 'Sin tema'}}
+                  </div>
+
+                  <div class="right-column expand">
+                      <i class="fa fa-ellipsis-v ghost-icon" aria-hidden="true" (click)="openCopyOrMoveActivityDialog(activity)"></i>
+                  </div>
+
                 </div>
-              </div>
-
-              <div class="right-column expand">
-                {{activity.responsible.uid !== 'Empty' ? activity.responsible.name : ''}}
-              </div>
-
-            </div>
-
-
-            <div *ngIf="templateDesignerMode" class="activity-status">
-
-              <div class="activity-theme">
-                {{activity.theme || 'Sin tema'}}
-              </div>
-
-              <div class="right-column expand">
-                  <i class="fa fa-ellipsis-v ghost-icon" aria-hidden="true" (click)="openCopyOrMoveActivityDialog(activity)"></i>
-              </div>
 
             </div>
 
         </div>
 
+        <div *ngIf="isActivitySelected(activity) && insertActivityEditorVisible"
+              [style.margin-left.pt]="activity.level * 14 + 38">
+          <emp-steps-activity-inline-editor (insert)="insertActivity($event, activity.position)"
+                                            (cancel)="hideInlineEditors()"></emp-steps-activity-inline-editor>
+        </div>
 
-      <div *ngIf="isActivitySelected(activity) && insertActivityEditorVisible"
-            [style.margin-left.pt]="activity.level * 14 + 20">
-        <emp-steps-activity-inline-editor (insert)="insertActivity($event, activity.position)"
-                                          (cancel)="hideInlineEditors()"></emp-steps-activity-inline-editor>
       </div>
 
-    </div>
-
-    <div class="activity-row"
-        [class.dragover-activity-row]="dragZoneItem === this"
-        (dragover)="allowDrop($event, this)"
-        (dragleave)="setDragZoneItem(null)"
-        (drop)="moveActivity($event, project.activities.size + 1)">
     </div>
 
   </div>

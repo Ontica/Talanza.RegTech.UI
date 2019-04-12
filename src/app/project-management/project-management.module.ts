@@ -8,6 +8,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 import { KnowledgeBaseModule } from '@app/knowledge-base/knowledge-base.module';
 import { ProceduresModule } from '@app/procedures/procedures.module';
@@ -40,6 +41,7 @@ import { ProjectManagementRoutingModule } from './project-management-routing.mod
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    DragDropModule,
 
     AngularMaterialModule,
     SharedModule,

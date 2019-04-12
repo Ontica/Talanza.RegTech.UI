@@ -10,6 +10,8 @@ import { Component, EventEmitter,
 
 import { MatDialog, MatDialogConfig } from '@angular/material';
 
+import { CdkDragDrop, CdkDragEnd, moveItemInArray } from '@angular/cdk/drag-drop';
+
 import { ProjectModel } from '@app/store/project.store';
 
 import { Activity, EmptyActivity, ActivityOperation } from '@app/models/project-management';
@@ -18,6 +20,8 @@ import { AddEventDialogComponent } from '../add-event-dialog/add-event-dialog.co
 import { MoveActivityDialogComponent } from '../move-activity-dialog/move-activity-dialog.component';
 
 import { TimelineHelper } from '../common/timeline-helper';
+import { sanitizeResourceUrl } from '@angular/core/src/sanitization/sanitization';
+
 
 
 @Component({
@@ -59,6 +63,20 @@ export class ActivityTreeComponent implements OnChanges {
   }
 
 
+  dropActivity(event: CdkDragDrop<string[]>) {
+    if (event.currentIndex === event.previousIndex) {
+      event.item.reset();
+      return;
+    }
+
+    const activity =  event.item.data as Activity;
+    const newPosition = event.currentIndex < event.previousIndex ?
+                                             event.currentIndex + 1 : event.currentIndex + 2;
+
+    this.moveActivity(activity, newPosition);
+  }
+
+
   insertActivity(name: string, position?: number) {
     if (!name) {
       return;
@@ -93,6 +111,27 @@ export class ActivityTreeComponent implements OnChanges {
   }
 
 
+  onSelectActivity(activity: Activity, emitEvent: boolean = false) {
+    this.selectedActivity = activity;
+
+    if (emitEvent) {
+      this.activitySelected.emit(activity);
+    }
+  }
+
+
+  openAddEventDialog() {
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.height = '400px',
+    dialogConfig.width = '600px',
+
+    this.dialog.open(AddEventDialogComponent, dialogConfig);
+  }
+
+
   openCopyOrMoveActivityDialog(activity: Activity) {
     const dialogConfig = new MatDialogConfig();
 
@@ -115,27 +154,6 @@ export class ActivityTreeComponent implements OnChanges {
   }
 
 
-  onSelectActivity(activity: Activity, emitEvent: boolean = false) {
-    this.selectedActivity = activity;
-
-    if (emitEvent) {
-      this.activitySelected.emit(activity);
-    }
-  }
-
-
-  openAddEventDialog() {
-    const dialogConfig = new MatDialogConfig();
-
-    dialogConfig.disableClose = true;
-    dialogConfig.autoFocus = true;
-    dialogConfig.height = '400px',
-    dialogConfig.width = '600px',
-
-    this.dialog.open(AddEventDialogComponent, dialogConfig);
-  }
-
-
   showInitialActivityInlineEditor() {
     this.hideInlineEditors();
 
@@ -146,40 +164,9 @@ export class ActivityTreeComponent implements OnChanges {
     }
   }
 
+  // private methods
 
-  // Drag & drop methods
-
-  allowDrop(event: DragEvent, dragZoneItem: any) {
-    this.configureDragEventBehaviour(event);
-
-    this.setDragZoneItem(dragZoneItem);
-  }
-
-
-  setDragZoneItem(dragZoneItem: any) {
-    this.dragZoneItem = dragZoneItem;
-  }
-
-
-  startDrag(event: DragEvent, activity: Activity) {
-    this.hideInlineEditors();
-
-    this.onSelectActivity(activity);
-
-    event.srcElement.parentElement.classList.add('dragged');
-
-    event.dataTransfer.dropEffect = 'move';
-
-    event.dataTransfer.setData('activity', JSON.stringify(activity));
-  }
-
-
-  moveActivity(event: DragEvent, newPosition: number) {
-    const activity = this.getDraggedActivity(event);
-
-    this.configureDragEventBehaviour(event);
-    this.setDragZoneItem(null);
-
+  private moveActivity(activity: Activity, newPosition: number) {
     this.edited.emit({ operation: 'moveActivity',
                        activity: activity,
                        newPosition: newPosition
@@ -187,34 +174,11 @@ export class ActivityTreeComponent implements OnChanges {
   }
 
 
-  moveActivityAsChildOf(event: DragEvent, newParent: Activity) {
-    const activity = this.getDraggedActivity(event);
-
-    this.configureDragEventBehaviour(event);
-    this.setDragZoneItem(null);
-
+  private moveActivityAsChildOf(activity: Activity, newParent: Activity) {
     this.edited.emit({ operation: 'changeParent',
                        activity: activity,
                        newParent: newParent
                      });
   }
-
-  // private methods
-
-
-  private configureDragEventBehaviour(event: DragEvent): any {
-    event.stopPropagation();
-    event.preventDefault();
-  }
-
-
-  private getDraggedActivity(event: DragEvent): Activity {
-    this.configureDragEventBehaviour(event);
-
-    const activity = JSON.parse(event.dataTransfer.getData('activity'));
-
-    return activity;
-  }
-
 
 }
