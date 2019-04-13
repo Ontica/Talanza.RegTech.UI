@@ -9,19 +9,17 @@ import { Component, EventEmitter,
          Input, OnChanges, Output } from '@angular/core';
 
 import { MatDialog, MatDialogConfig } from '@angular/material';
-
-import { CdkDragDrop, CdkDragEnd, moveItemInArray } from '@angular/cdk/drag-drop';
+import { CdkDragDrop } from '@angular/cdk/drag-drop';
 
 import { ProjectModel } from '@app/store/project.store';
 
+import { isEmpty } from '@app/models/core';
 import { Activity, EmptyActivity, ActivityOperation } from '@app/models/project-management';
 
 import { AddEventDialogComponent } from '../add-event-dialog/add-event-dialog.component';
 import { MoveActivityDialogComponent } from '../move-activity-dialog/move-activity-dialog.component';
 
 import { TimelineHelper } from '../common/timeline-helper';
-import { sanitizeResourceUrl } from '@angular/core/src/sanitization/sanitization';
-
 
 
 @Component({
@@ -69,11 +67,107 @@ export class ActivityTreeComponent implements OnChanges {
       return;
     }
 
-    const activity =  event.item.data as Activity;
+    const activity = event.item.data as Activity;
     const newPosition = event.currentIndex < event.previousIndex ?
                                              event.currentIndex + 1 : event.currentIndex + 2;
 
     this.moveActivity(activity, newPosition);
+  }
+
+
+  isIndentable(activity: Activity): boolean {
+    try {
+      if (activity.position === 1) {
+        return false;
+      }
+
+      const previous = this.project.activities.find(x => x.position === activity.position - 1);
+
+      if (!previous) {
+        console.log('No Previous in isIndentable', activity);
+        return false;
+      }
+
+      if (activity.level > previous.level) {
+        return false;
+      }
+
+      return true;
+    } catch (e) {
+      console.log('isIndentable error', e, activity);
+      return false;
+    }
+  }
+
+
+  isOutdentable(activity: Activity): boolean {
+    try {
+      if (activity.level === 1) {
+        return false;
+      }
+
+      const previous = this.project.activities.find(x => x.position === activity.position - 1);
+
+      if (!previous) {
+        console.log('Undefined "previous" in isOutdentable', activity);
+        return false;
+      }
+
+
+      if (activity.level < previous.level || previous.level === 1) {
+        return false;
+      }
+
+      const hasNextSiblings = this.project.activities.find(x => x.position > activity.position &&
+                                                           x.parent.uid === activity.parent.uid);
+
+      if (hasNextSiblings) {
+        return false;
+      }
+
+      return true;
+    } catch (e) {
+      console.log('isOutdentable error', e, activity);
+      return false;
+    }
+  }
+
+
+
+  indentActivity(activity: Activity) {
+    if (!this.isIndentable(activity)) {
+      return;
+    }
+
+    const previous = this.project.activities.find(x => x.position === activity.position - 1);
+
+    if (previous.level === activity.level) {
+      this.changeActivityParent(activity, previous);
+      return;
+    }
+
+    const previousParent = this.project.activities.find(x => x.uid === previous.parent.uid);
+    if (previousParent) {
+      this.changeActivityParent(activity, previousParent);
+    }
+  }
+
+
+
+  outdentActivity(activity: Activity) {
+    if (!this.isOutdentable(activity)) {
+      return;
+    }
+
+    const previous = this.project.activities.find(x => x.position === activity.position - 1);
+    const previousParent = this.project.activities.find(x => x.uid === previous.parent.uid);
+
+    if (!previousParent) {
+      console.log('Undefined "previousParent" in outdentActivity', activity);
+      return;
+    }
+
+    this.changeActivityParent(activity, previousParent);
   }
 
 
@@ -164,20 +258,22 @@ export class ActivityTreeComponent implements OnChanges {
     }
   }
 
+
   // private methods
+
+
+  private changeActivityParent(activity: Activity, newParent: Activity) {
+    this.edited.emit({ operation: 'changeParent',
+                       activity: activity,
+                       newParent: newParent
+                     });
+  }
+
 
   private moveActivity(activity: Activity, newPosition: number) {
     this.edited.emit({ operation: 'moveActivity',
                        activity: activity,
                        newPosition: newPosition
-                     });
-  }
-
-
-  private moveActivityAsChildOf(activity: Activity, newParent: Activity) {
-    this.edited.emit({ operation: 'changeParent',
-                       activity: activity,
-                       newParent: newParent
                      });
   }
 

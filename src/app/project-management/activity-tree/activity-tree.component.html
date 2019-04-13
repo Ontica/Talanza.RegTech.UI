@@ -36,8 +36,14 @@
              [class.selected-activity]="isActivitySelected(activity)"
              (click)="onSelectActivity(activity)" >
 
-            <div class="drag-control" cdkDragHandle>
-              <i class="fa fa-align-justify ghost-icon grabbable" aria-hidden="true"></i>
+            <div class="edition-controls">
+              <mat-icon cdkDragHandle class="ghost-icon grabbable">drag_indicator</mat-icon>
+
+              &nbsp; &nbsp;
+              <mat-icon *ngIf="isIndentable(activity)"
+                         class="ghost-icon" (click)="indentActivity(activity)">subdirectory_arrow_right</mat-icon>
+              <mat-icon *ngIf="!isIndentable(activity) && isOutdentable(activity)"
+                         class="ghost-icon" (click)="outdentActivity(activity)">subdirectory_arrow_left</mat-icon>
             </div>
 
             <div class="activity-container"

@@ -41,6 +41,7 @@ export class ProjectStore {
   private _tags: BehaviorSubject<ColoredTag[]> = new BehaviorSubject([]);
   private _themes: BehaviorSubject<string[]> = new BehaviorSubject([]);
 
+
   constructor(private projectService: ProjectService) {
     this.loadInitialData();
   }
@@ -106,7 +107,19 @@ export class ProjectStore {
   }
 
 
-  findById(projectUID: string): Project {
+
+  getMasterProject() {
+   // this.projectStore;
+
+  }
+
+
+  getMergedProject(projectUID: string[]) {
+    // this.selectedProjects = this.projectStore.findById(projectUID);
+  }
+
+
+  getProject(projectUID: string): Project {
     return this._projects.value.find(x => x.uid === projectUID);
   }
 
@@ -114,11 +127,9 @@ export class ProjectStore {
   changeParent(activity: Activity, newParent: Activity): Promise<Activity> {
     return this.projectService.changeParent(activity, newParent)
                .toPromise()
-               .then( x => {
+               .then(x => {
                    this.updateSelectedProject(activity.project);
-                   Object.assign(activity, x);
-
-                   return activity;
+                   return x;
               });
   }
 
@@ -150,9 +161,8 @@ export class ProjectStore {
 
     return this.projectService.insertActivity(project, newActivity)
                .toPromise()
-               .then( x => {
+               .then(x => {
                   this.updateSelectedProject(project);
-
                   return x;
              });
   }
@@ -161,19 +171,17 @@ export class ProjectStore {
   moveActivity(activity: Activity, newPosition: number): Promise<Activity> {
     return this.projectService.moveActivity(activity, newPosition)
                .toPromise()
-               .then( x => {
+               .then(x => {
                   this.updateSelectedProject(activity.project);
-                  Object.assign(activity, x);
-
-                  return activity;
-               });
+                  return x;
+                });
   }
 
 
   reactivateActivity(activity: Activity): Promise<Activity> {
     return this.projectService.reactivateActivity(activity)
                .toPromise()
-               .then( x => {
+               .then(x => {
                    this.updateSelectedProject(activity.project);
                    Object.assign(activity, x);
 

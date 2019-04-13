@@ -115,11 +115,13 @@ export class ProjectsMainPageComponent implements OnInit {
 
       case 'moveActivity':
         this.store.moveActivity(event.activity as Activity, event.newPosition)
+                  .then(x => this.selectedActivity = x)
                   .catch(response => console.log(response.error.message));
         return;
 
       case 'changeParent':
         this.store.changeParent(event.activity as Activity, event.newParent)
+                  .then(x => this.selectedActivity = x)
                   .catch(response => console.log(response.error.message));
         return;
 

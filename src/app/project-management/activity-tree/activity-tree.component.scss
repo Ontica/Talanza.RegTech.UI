@@ -8,11 +8,12 @@
 }
 
 
-.drag-control {
-  margin-left: 8pt;
-  margin-top: 8pt;
+.edition-controls {
+  display: inline-flex;
+  padding-top: 12pt;
+  padding-left: 4pt;
+  min-width: 64px;
 }
-
 
 .cdk-drag-preview {
   box-sizing: border-box;
