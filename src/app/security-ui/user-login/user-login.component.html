@@ -12,22 +12,24 @@
 
     <div class="right-column">
 
-      <div class="authentication-section-welcome">
-        <span class="hint">Sistema para el</span><br>
-        <span><b>Cumplimiento regulatorio</b></span><br><br>
+      <div class="authentication-section-welcome" i18n>
+        <b>Regulatory Compliance</b><br>
+        <span class="hint">RegTech System for the Energy Sector</span>
       </div>
+
+      <br>
 
       <form [class.submitted]="submitted" [formGroup]="form" (ngSubmit)="onSubmit()"
             (keydown)="keyboardHandler($event)">
 
         <div class="authentication-section-form">
 
-          <label for="userID">Usuario:</label>
+          <label for="userID" i18n>User name:</label>
           <input type="text" class="text-box" id="userID"
                  autocomplete="username" autofocus required
                  formControlName="userID">
 
-          <label for="password">Contraseña:</label>
+          <label for="password" i18n>Password:</label>
           <input type="password" class="text-box" id="password"
                  autocomplete="current-password" required
                  formControlName="password">
@@ -35,21 +37,13 @@
           <div *ngIf="showExceptionMsg"
                 class="inline-error">{{exceptionMsg}}</div>
 
-          <button type="submit" class="btn-action" (click)="setCommand('authenticate')">Ingresar</button>
+          <button type="submit" class="btn-action" (click)="setCommand('authenticate')" i18n>Log in</button>
 
         </div>
 
       </form>
 
-      <!--
-      <div class="authentication-section-footer">
-        <a href="#" (click)="onResetCredentials();">Olvidé la contraseña</a><br>
-        <a href="#">Crear una cuenta</a>
-      </div>
-      !-->
-
     </div>
-
 
   </div>
 

@@ -5,16 +5,16 @@
 
     <table class="form-section">
       <tr>
-        <td class="form-section-title" colspan="2">Información general de la obligación o actividad</td>
+        <td class="form-section-title" colspan="2" i18n>General information about the obligation or activity</td>
       </tr>
       <tr>
-        <td>Nombre:</td>
+        <td i18n>Name:</td>
         <td>
           <input type="text" class="text-box" formControlName="name">
         </td>
       </tr>
       <tr>
-        <td>Observaciones:</td>
+        <td i18n>Description:</td>
         <td>
           <textarea class="text-area" rows="5" cols="25" formControlName="notes"></textarea>
         </td>
@@ -23,76 +23,76 @@
 
     <table class="form-section">
       <tr>
-        <td class="form-section-title" colspan="5">Control de fechas</td>
+        <td class="form-section-title" colspan="5" i18n>Dates control</td>
       </tr>
       <tr>
-        <td>Fecha objetivo:</td>
+        <td i18n="editor|plannedEndDate">Planned End Date:</td>
         <td>
           <emp-ng-datepicker formControlName="plannedEndDate"></emp-ng-datepicker>
         </td>
-        <td class="text-align-right" style="width:100%;white-space:normal">Fecha máxima de entrega:</td>
+        <td class="text-align-right" style="width:100%;white-space:normal" i18n="editor|deadline">Deadline:</td>
         <td>
           <emp-ng-datepicker formControlName="deadline"></emp-ng-datepicker>
         </td>
       </tr>
       <tr>
-        <td>Duración estimada:</td>
+        <td i18n>Estimated duration:</td>
         <td>
           <input type="text" class="text-box" style="width:40px" formControlName="durationValue">
 
           <select class="select-box" style="width:130px" formControlName="durationType">
-            <option value="">( Tiempo )</option>
-            <option value="BusinessDays">Días hábiles</option>
-            <option value="CalendarDays">Días naturales</option>
-            <option value="Hours">Horas</option>
-            <option value="Months">Meses</option>
-            <option value="Years">Años</option>
-            <option value="Unknown">Indeterminada</option>
-            <option value="NA">No aplica</option>
+            <option value="" i18n>( Time unit )</option>
+            <option value="BusinessDays" i18n>Business days</option>
+            <option value="CalendarDays" i18n>Calendar days</option>
+            <option value="Hours" i18n>Hours</option>
+            <option value="Months" i18n>Months</option>
+            <option value="Years" i18n>Years</option>
+            <option value="Unknown" i18n>Indeterminate</option>
+            <option value="NA" i18n>Not apply</option>
           </select>
         </td>
-        <td class="text-align-right">Alertar:</td>
+        <td class="text-align-right" i18n>Send alerts:</td>
         <td>
           <input type="text" class="text-box" style="width:40px" formControlName="warnDays">
 
-          <select class="select-box" style="width:234px" formControlName="warnType">
-            <option value="">( Días )</option>
-            <option value="CalendarDays">Días naturales antes de la fecha</option>
-            <option value="Default">Configuración predeterminada</option>
-            <option value="NA">No emitir alertas</option>
+          <select class="select-box" style="width:246px" formControlName="warnType">
+            <option value="" i18n>( Configuration )</option>
+            <option value="CalendarDays" i18n>Calendar days before the deadline</option>
+            <option value="Default" i18n>Use Default Configuration</option>
+            <option value="NA" i18n>Do not emit alerts</option>
           </select>
         </td>
       </tr>
       <tr class="border-top">
-        <td>Iniciada el:</td>
+        <td i18n="editor|actualStartDate">Actual Start Date:</td>
         <td>
           <emp-ng-datepicker formControlName="actualStartDate"></emp-ng-datepicker>
         </td>
-        <td class="text-align-right" style="width:100%;white-space:normal">Finalizada el:</td>
+        <td class="text-align-right" style="width:100%;white-space:normal" i18n="editor|actualEndDate">Actual End Date:</td>
         <td>
           <emp-ng-datepicker formControlName="actualEndDate"></emp-ng-datepicker>
           <button *ngIf="!disabled" type="button" class="btn-action"
-                  (click)="onComplete()">Finalizar</button>
+                  (click)="onComplete()" i18n>Mark as completed</button>
         </td>
       </tr>
     </table>
 
     <table class="form-section">
       <tr>
-        <td class="form-section-title" colspan="4">Responsable y estado de la obligación o actividad</td>
+        <td class="form-section-title" colspan="4" i18n>Responsible and theme</td>
       </tr>
       <tr>
-        <td>Responsable:</td>
+        <td i18n>Responsible:</td>
         <td style="width:100%">
           <select class="select-box" formControlName="responsibleUID">
-            <option value="Empty">No asignada</option>
+            <option value="Empty" i18n>Unassigned</option>
             <option *ngFor="let responsible of responsibles | async" [value]="responsible.uid">{{responsible.name}}</option>
           </select>
         </td>
-        <td>Tema:</td>
+        <td i18n>Theme:</td>
         <td>
           <select class="select-box" style="width:336px" formControlName="theme">
-            <option value="">( Sin tema asignado )</option>
+            <option value="" i18n>( No theme )</option>
             <option *ngFor="let themeName of themesList | async" [value]="themeName">{{themeName}}</option>
           </select>
         </td>
@@ -108,21 +108,21 @@
       <tr>
         <td>
           <button *ngIf="!disabled && task.uid.length === 0" type="button" class="btn-warning"
-                  (click)="onDelete()">Eliminar</button>
+                  (click)="onDelete()" i18n>Delete</button>
         </td>
         <td class="text-align-right">
 
           <button *ngIf="!disabled" type="submit" class="btn-action btn-margin-right"
-                  (click)="setCommand('updateActivity')">Guardar los cambios</button>
+                  (click)="setCommand('updateActivity')" i18n>Save changes</button>
 
           <button *ngIf="disabled && activity.status !== 'Completed'" type="button" class="btn-action right"
-                  (click)="enableForm()">Editar</button>
+                  (click)="enableForm()" i18n>Edit</button>
 
           <button *ngIf="disabled && activity.status === 'Completed'" type="button" class="btn right"
-                  (click)="onReactivate()">Reactivar</button>
+                  (click)="onReactivate()" i18n>Reactivate</button>
 
           <button *ngIf="!disabled" type="button" class="btn right"
-                  (click)="onCancelEdition()">Cancelar edición</button>
+                  (click)="onCancelEdition()" i18n>Cancel edition</button>
 
         </td>
       </tr>

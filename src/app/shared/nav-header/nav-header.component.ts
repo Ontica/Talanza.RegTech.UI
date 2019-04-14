@@ -25,9 +25,9 @@ export type ProjectViewType = 'Tree' | 'Gantt' | 'Timeline';
 })
 export class NavigationHeaderComponent implements OnChanges {
 
-  title = 'Seleccionar un contrato';
+  title = 'Select a contract';
 
-  // breadcrumb = 'Todos los proyectos » Shell » Ronda 2.4 » Salina Area 28';
+  // breadcrumb = 'All contracts » Shell » Ronda 2.4 » Salina Area 28';
   breadcrumb = '';
 
   selectedProject: Project;
@@ -62,7 +62,7 @@ export class NavigationHeaderComponent implements OnChanges {
 
 
   onSelectProject(projectUID: string) {
-    this.selectedProject = this.projectStore.findById(projectUID);
+    this.selectedProject = this.projectStore.getProject(projectUID);
 
     this.projectStore.selectProject(this.selectedProject);
   }
@@ -73,6 +73,7 @@ export class NavigationHeaderComponent implements OnChanges {
 
     this.templateStore.selectTemplate(this.selectedTemplate);
   }
+
 
   cleanProjectActivities() {
     // showYesNo
@@ -104,13 +105,12 @@ export class NavigationHeaderComponent implements OnChanges {
 
 
   private setProjectsLayout() {
-
-    this.breadcrumb = 'Administración de contratos';
+    this.breadcrumb = 'Contracts management';
 
     this.mainMenuItems =  [
-      new MenuItem('Bandeja de tareas', undefined, '/inbox/main', true),
-      new MenuItem('Actividades', undefined, '/projects/main'),
-      new MenuItem('Archivos', undefined, undefined, true)
+      new MenuItem('Inbox', undefined, '/inbox/main', true),
+      new MenuItem('Activities', undefined, '/projects/main'),
+      new MenuItem('Documents', undefined, undefined, true)
     ];
 
     // this.secondaryMenuItems =  [
@@ -124,24 +124,24 @@ export class NavigationHeaderComponent implements OnChanges {
     this.projectStore.selectedProject().subscribe (
       next => {
         this.selectedProject = next.project;
-        this.title = this.selectedProject.uid ? this.selectedProject.name : 'Seleccionar un contrato';
+        this.title = this.selectedProject.uid ? this.selectedProject.name : 'Select a contract';
       }
     );
 
   }
 
   private setTemplatesDesignerLayout() {
-
-    this.breadcrumb = 'Diseñador de obligaciones';
+    this.breadcrumb = 'Regulatory processes designer';
 
     this.mainMenuItems =  [
-      new MenuItem('Diseños', undefined, '/projects-templates/main'),
+      new MenuItem('Processes', undefined, '/projects-templates/main'),
     ];
 
     this.templateStore.selectedTemplate().subscribe (
       next => {
         this.selectedTemplate = next.project;
-        this.title = this.selectedTemplate.uid ? this.selectedTemplate.name : 'Seleccionar un diseño';
+        this.title = this.selectedTemplate.uid ?
+                              this.selectedTemplate.name : 'Select a regulatory process design';
       }
     );
 

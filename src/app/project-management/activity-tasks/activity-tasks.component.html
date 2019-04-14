@@ -2,7 +2,7 @@
   <div *ngFor="let task of tasksList" class="posting" #postings>
     <a (click)="toggleSelectedTask(task)">{{task.name}}</a>
     <div class="posting-body">
-      Responsable: {{task.responsible.name}}
+      <span i18n>Responsible:</span> {{task.responsible.name}}
     </div>
   </div>
 
@@ -12,6 +12,6 @@
 
   <div style="padding:16px" *ngIf="selectedTask.uid.length === 0">
     <input #txtTaskName type="text" class='text-box inline-editor-text-box' (keyup.esc)='txtTaskName.value = "";'
-      (keyup.enter)='onInsert(txtTaskName.value);txtTaskName.value = "";' placeholder='Agregar una subtarea a esta actividad' />
+      (keyup.enter)='onInsert(txtTaskName.value);txtTaskName.value = "";' placeholder='Add a subtask to this activity' i18n-placeholder/>
   </div>
 </div>

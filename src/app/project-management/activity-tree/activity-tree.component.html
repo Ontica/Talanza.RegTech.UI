@@ -2,19 +2,19 @@
 
   <div class="card-header card-header-flat">
     <div *ngIf="templateDesignerMode" class="card-title">
-      Árbol de obligaciones
+      <span i18n>Obligations Tree</span>
       <div class="card-hint">{{project.project.name}}</div>
     </div>
     <div *ngIf="!templateDesignerMode" class="card-title">
-      Actividades del contrato
-      <div class="card-hint">Contrato: {{project.project.name}}</div>
+      <span i18n>Contract Activities</span>
+      <div class="card-hint" i18n>Contract: {{project.project.name}}</div>
     </div>
     <div class="card-header-options">
       <button *ngIf="!templateDesignerMode" type="button" class="btn disabled"
-              (click)="openAddEventDialog()">Agregar obligaciones</button>
+              (click)="openAddEventDialog()" i18n>Add obligations</button>
       &nbsp; &nbsp;
       <button type="button" class="btn-action"
-              (click)="showInitialActivityInlineEditor()">{{ templateDesignerMode ? 'Agregar obligación' : 'Agregar actividad' }}</button>
+              (click)="showInitialActivityInlineEditor()" i18n>{{ templateDesignerMode ? 'Insert obligation' : 'Insert activity' }}</button>
     </div>
   </div>
 
@@ -68,23 +68,23 @@
 
                 <div *ngIf="!templateDesignerMode" class="activity-status">
 
-                  <div class="activity-theme">
-                    {{activity.theme || 'Sin tema'}}<br/>
+                  <div class="activity-theme" i18n>
+                    {{activity.theme || 'No theme'}}<br/>
                     {{activity.project.name}}
                   </div>
 
                   <div *ngIf="activity.deadline" class="column nowrap"
                         [style.color]="timelineHelper.getTimelineColor(activity, activity.deadline)">
-                    <div>Fecha máxima:</div>
-                    <div>
-                      {{(activity.deadline | date:'dd/LLL/yyyy') || 'No determinada'}}
+                    <div i18n>Deadline:</div>
+                    <div i18n>
+                      {{(activity.deadline | date:'dd/LLL/yyyy') || 'Unknown'}}
                     </div>
                   </div>
 
                   <div *ngIf="timelineHelper.displayPlannedEndDate(activity)"
                         class="column nowrap"
                         [style.color]="timelineHelper.getTimelineColor(activity, activity.plannedEndDate)">
-                    <div>Fecha objetivo:</div>
+                    <div i18n>Planned End Date:</div>
                     <div>
                       {{activity.plannedEndDate | date:'dd/LLL/yyyy'}} &nbsp;
                       <span>
@@ -95,7 +95,7 @@
 
                   <div *ngIf="timelineHelper.isCompleted(activity)"
                         class="column nowrap">
-                    <div>Finalizada el:</div>
+                    <div i18n>Actual End Date:</div>
                     <div>
                       {{activity.actualEndDate | date:'dd/LLL/yyyy'}} &nbsp;
                       <span [style.color]="timelineHelper.getTimelineColor(activity, activity.actualEndDate)"
@@ -113,8 +113,8 @@
 
                 <div *ngIf="templateDesignerMode" class="activity-status">
 
-                  <div class="activity-theme">
-                    {{activity.theme || 'Sin tema'}}
+                  <div class="activity-theme" i18n>
+                    {{activity.theme || 'No theme'}}
                   </div>
 
                   <div class="right-column expand">

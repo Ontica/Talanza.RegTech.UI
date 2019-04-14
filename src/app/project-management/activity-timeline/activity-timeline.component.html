@@ -3,11 +3,11 @@
   <div class="card-header card-header-flat">
     <div class="card-title">
       {{viewTitle}}
-      <div class="card-hint">Contrato: {{project.project.name}}</div>
+      <div class="card-hint"><span i18n>Contract:</span> {{project.project.name}}</div>
     </div>
     <div class="card-header-options">
       <button type="button" class="btn disabled"
-              (click)="openAddEventDialog()">Agregar obligaciones</button>
+              (click)="search()" i18n>Search</button>
     </div>
   </div>
 
@@ -36,22 +36,22 @@
           <div class="activity-status">
 
             <div class="activity-theme">
-              {{activity.project.name}}: {{activity.theme || 'Sin tema'}}
+              {{activity.project.name}}: {{activity.theme || 'No theme'}}
               <br/>
               {{activity.parent.uid !== 'Undefined' ? activity.parent.name : ''}}
             </div>
 
             <div class="column"
                  [style.color]="timelineHelper.getTimelineColor(activity, activity.deadline)">
-              <div>Fecha máxima:</div>
+              <div i18n>Deadline:</div>
               <div>
-                {{(activity.deadline | date:'dd/LLL/yyyy') || 'No determinada'}}
+                {{(activity.deadline | date:'dd/LLL/yyyy') || 'Unknown'}}
               </div>
             </div>
 
             <div *ngIf="timelineHelper.displayPlannedEndDate(activity)" class="column nowrap"
                  [style.color]="timelineHelper.getTimelineColor(activity, activity.plannedEndDate)">
-              <div>Fecha objetivo:</div>
+              <div i18n>Planned End Date:</div>
               <div>
                 {{activity.plannedEndDate | date:'dd/LLL/yyyy'}} &nbsp;
                 <span>
@@ -61,7 +61,7 @@
             </div>
 
             <div *ngIf="timelineHelper.isCompleted(activity)" class="column nowrap">
-              <div>Finalizada el:</div>
+              <div i18n>Actual End Date:</div>
               <div>
                 {{activity.actualEndDate | date:'dd/LLL/yyyy'}} &nbsp;
                 <span [style.color]="timelineHelper.getTimelineColor(activity, activity.actualEndDate)"

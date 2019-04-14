@@ -3,7 +3,7 @@
   <div *ngIf="settings.showTitle" class="card-header">
     <div class="card-title">
       {{activityTemplate.name}}
-      <div class="card-hint">Actividad en {{activityTemplate.project.name}}</div>
+      <div class="card-hint" i18n>Activity in {{activityTemplate.project.name}}</div>
     </div>
     <div class="card-header-options">
       <i class="fa fa-times close-icon" aria-hidden="true" (click)="onClose()"></i>
@@ -12,21 +12,21 @@
 
   <mat-tab-group color="accent">
 
-    <mat-tab label="Obligación">
+    <mat-tab label="Obligation" i18n-label>
       <emp-steps-activity-model-form
            [activity]="activityTemplate" [readonly]="settings.readonly"
            (delete)="onDelete()" (update)="onUpdate()">
       </emp-steps-activity-model-form>
     </mat-tab>
 
-    <mat-tab label="Trámite" [disabled]="!hasProcedure">
+    <mat-tab label="Procedure" [disabled]="!hasProcedure" i18n-label>
       <emp-gov-procedure-viewer *ngIf="hasProcedure"
            [procedure]="procedure | async">
       </emp-gov-procedure-viewer>
     </mat-tab>
 
 
-    <mat-tab label="Asesoría Talanza">
+    <mat-tab label="Talanza Guidance" i18n-label>
       <emp-kb-postings-list
            [target]="activityTemplate" [readonly]="settings.readonly">
       </emp-kb-postings-list>

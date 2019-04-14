@@ -15,8 +15,8 @@ import { Component, EventEmitter, Output } from '@angular/core';
       class='text-box inline-editor-text-box'
       (keyup.esc)='onCancel()'
       (keyup.enter)='onInsert(txtActivityName.value)'
-      placeholder= 'Agregar una actividad'>
-    <button class='btn' (click)='onCancel()'>Cancelar</button>
+      placeholder= 'Activity or obligation name' i18n-placeholder>
+    <button class='btn' (click)='onCancel()' i18n>Cancel</button>
   `,
   styleUrls: ['./activity-inline-editor.component.scss']
 })

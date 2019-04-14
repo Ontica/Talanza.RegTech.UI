@@ -17,7 +17,7 @@ import { AbstractForm } from '@app/shared/services';
 enum FormMessages {
 
   IncompleteLoginData =
-    'Para ingresar requiero se proporcione el nombre de usuario y la contraseña.',
+    'Please provide your user name and password.',
 
 }
 
