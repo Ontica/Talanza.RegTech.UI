@@ -1,0 +1,1110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="en" datatype="plaintext" original="ng2.template">
+    <body>
+      <trans-unit id="ee9372b18e541c98d8f4c55923d1391e353fb5e0" datatype="html">
+        <source>
+          <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;" />
+          Regulatory Compliance
+          <x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;" />
+          <x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br/&gt;" />
+          <x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span&gt;" />
+          RegTech System for the Energy Sector
+          <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;" />
+        </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/security-ui/user-login/user-login.component.html</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4c882b1b89ffc3deda00ba58fa5dd28f32b7afc6" datatype="html">
+        <source>User name:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/security-ui/user-login/user-login.component.html</context>
+          <context context-type="linenumber">27</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4434eb250f44b5effd90253c0c9f2bf1e69ec13f" datatype="html">
+        <source>Password:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/security-ui/user-login/user-login.component.html</context>
+          <context context-type="linenumber">32</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="f093d9574ab746b231504bd2cbb65f04bd7b00db" datatype="html">
+        <source>Log in</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/security-ui/user-login/user-login.component.html</context>
+          <context context-type="linenumber">40</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="20a6782e512eb98abd4cf5a9a36fb3333902d183" datatype="html">
+        <source>Contracts:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/shared/nav-header/nav-header.component.html</context>
+          <context context-type="linenumber">20</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="c5521f86e43de8fd438a617b707ca5138bce928a" datatype="html">
+        <source>( Select a contract )</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/shared/nav-header/nav-header.component.html</context>
+          <context context-type="linenumber">24</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="f56b0a65aade5ed1337e138826f1ebc0057f65fa" datatype="html">
+        <source>All contracts</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/shared/nav-header/nav-header.component.html</context>
+          <context context-type="linenumber">25</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="61545292e1bb7f7508f912023dbef9f6202e6220" datatype="html">
+        <source>View:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/shared/nav-header/nav-header.component.html</context>
+          <context context-type="linenumber">32</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8b501bfec8e14ab87754191103357a011f519812" datatype="html">
+        <source>Activities tree</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/shared/nav-header/nav-header.component.html</context>
+          <context context-type="linenumber">36</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="b6c4eb2f70914efe4fb9622e43e0a667a7a3caec" datatype="html">
+        <source>Gantt Chart</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/shared/nav-header/nav-header.component.html</context>
+          <context context-type="linenumber">37</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="342b520ffc24c6c8c46ed7b2f7bbdffbd130d663" datatype="html">
+        <source>Timeline</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/shared/nav-header/nav-header.component.html</context>
+          <context context-type="linenumber">38</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-designer/activity-model-form/activity-model-form.component.html</context>
+          <context context-type="linenumber">48</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="c0e89f1410a993b4643d8e2c712e1d75805f6a79" datatype="html">
+        <source>Deadline</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/shared/nav-header/nav-header.component.html</context>
+          <context context-type="linenumber">39</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1e7e415545254db9a45a8fd35f403a0581fb42e9" datatype="html">
+        <source>Planned End Date</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/shared/nav-header/nav-header.component.html</context>
+          <context context-type="linenumber">40</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="594d9a9d79084b06f04699aa3bdff9a7f08cd645" datatype="html">
+        <source>Actual Start Date</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/shared/nav-header/nav-header.component.html</context>
+          <context context-type="linenumber">41</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1bc476b9d286609a1ac744b079773500cb8744dd" datatype="html">
+        <source>By responsible</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/shared/nav-header/nav-header.component.html</context>
+          <context context-type="linenumber">42</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="17d2f9edd2f82f5431f38f74e38ad6d1083d70fc" datatype="html">
+        <source>By theme</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/shared/nav-header/nav-header.component.html</context>
+          <context context-type="linenumber">43</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="9a656e79c3b20b8c8ebbf503819277abe12d0843" datatype="html">
+        <source>Scale:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/shared/nav-header/nav-header.component.html</context>
+          <context context-type="linenumber">45</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="9987202abfd54ecb0587553d5a92f78dd000cc2f" datatype="html">
+        <source>Annual</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/shared/nav-header/nav-header.component.html</context>
+          <context context-type="linenumber">49</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="b8fd1b9efc2d6dad19dc07b533da9885c1f696e1" datatype="html">
+        <source>Quarterly</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/shared/nav-header/nav-header.component.html</context>
+          <context context-type="linenumber">50</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5c7ea93dc8dff716e9531461e31bdb888e3e7f13" datatype="html">
+        <source>Monthly</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/shared/nav-header/nav-header.component.html</context>
+          <context context-type="linenumber">51</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="fbf7ac0008332622d7380335be909c2d408303ac" datatype="html">
+        <source>Weekly</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/shared/nav-header/nav-header.component.html</context>
+          <context context-type="linenumber">52</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="e07c849e1e039f67ca0b5f343e57e85fbcfb8825" datatype="html">
+        <source>Regulatory processes:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/shared/nav-header/nav-header.component.html</context>
+          <context context-type="linenumber">56</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="0aa9cbf5c959808038b0562b29263826cee08b46" datatype="html">
+        <source>( Please select a regulatory process )</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/shared/nav-header/nav-header.component.html</context>
+          <context context-type="linenumber">60</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="022e9b5de0a339bcea279f3a4a1a8d762f5ea77f" datatype="html">
+        <source>General search ...</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/shared/search-box/search-box.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="edbc6de769144e131104f54dff57d8544ed526cb" datatype="html">
+        <source>Search results for:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/global-search/main-page/gs-main-page.component.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="480e083ee348a67c6560267f6ccab6436ffb12cc" datatype="html">
+        <source>MY TASKS</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/shared/main-layout/main-menu/main-menu.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2f3a10604e237d08707f4d0bd22cf65783006a4b" datatype="html">
+        <source>TIMELINES</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/shared/main-layout/main-menu/main-menu.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ceb373b1537c17eefa744e2a40a2ef082790189d" datatype="html">
+        <source>CONTRACTS</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/shared/main-layout/main-menu/main-menu.component.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="18ea03f2deaa08c092f9a30c455c2a805b042b62" datatype="html">
+        <source>REGULATORY PROCESSES</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/shared/main-layout/main-menu/main-menu.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="af254c574eb442de204cb25a93ab78eb47142527" datatype="html">
+        <source>LIBRARY</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/shared/main-layout/main-menu/main-menu.component.html</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4b8bb24326ffeabcd738e805fe7eeff39d6aaa0d" datatype="html">
+        <source>
+          Activity in
+          <x id="INTERPOLATION" equiv-text="{{activityTemplate.project.name}}" />
+        </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-designer/activity-designer.component.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="f218b43cf9941277bdfcd920f45d0467a3126d9f" datatype="html">
+        <source>Obligation</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-designer/activity-designer.component.html</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-designer/activity-model-form/activity-model-form.component.html</context>
+          <context context-type="linenumber">35</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="74e6cee5768e5c2db6fd86b84f536207eecffc8a" datatype="html">
+        <source>Procedure</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-designer/activity-designer.component.html</context>
+          <context context-type="linenumber">22</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-designer/activity-model-form/activity-model-form.component.html</context>
+          <context context-type="linenumber">34</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="cc80c671302f64012a288c6b5a405625b37f639f" datatype="html">
+        <source>Talanza Guidance</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-designer/activity-designer.component.html</context>
+          <context context-type="linenumber">29</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="a81ec1386bd882b820aa05906a8b86373d0d9267" datatype="html">
+        <source>
+          Activity in
+          <x id="INTERPOLATION" equiv-text="{{activity.project.name}}" />
+        </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-editor/activity-editor.component.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="f2005fa461c06dc2e04d8918bbabedf23604b5b7" datatype="html">
+        <source>Activity</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-editor/activity-editor.component.html</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="83efb157e6da28ea41b257d0f2b8c3cd8b5a6d72" datatype="html">
+        <source>Subtasks</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-editor/activity-editor.component.html</context>
+          <context context-type="linenumber">21</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="9d51b3c90afda70700229d1b8a55371c13cb3bce" datatype="html">
+        <source>Documents</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-editor/activity-editor.component.html</context>
+          <context context-type="linenumber">25</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3f7be0397ce094e29cd35e80d45684ca64b451d1" datatype="html">
+        <source>Annotations</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-editor/activity-editor.component.html</context>
+          <context context-type="linenumber">29</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ea9507a9e3084b3b4bb6fec64365ef3f04d19902" datatype="html">
+        <source>Regulation</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-editor/activity-editor.component.html</context>
+          <context context-type="linenumber">33</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5a95dc996c45604fadae335b66498440c7d1e362" datatype="html">
+        <source>General information about the obligation or activity</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-editor/activity-form/activity-form.component.html</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="616e206cb4f25bd5885fc35925365e43cf5fb929" datatype="html">
+        <source>Name:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-editor/activity-form/activity-form.component.html</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-designer/activity-model-form/activity-model-form.component.html</context>
+          <context context-type="linenumber">12</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4a22c6843133f0b0d7dc0d28f864f2f90c1de7ad" datatype="html">
+        <source>Description:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-editor/activity-form/activity-form.component.html</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-designer/activity-model-form/activity-model-form.component.html</context>
+          <context context-type="linenumber">18</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="017b040bb72c88ea400ba78166f01d4447f4e863" datatype="html">
+        <source>Dates control</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-editor/activity-form/activity-form.component.html</context>
+          <context context-type="linenumber">26</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="16c41c79ae1e7a1bfa0160280dca4cffbbc17542" datatype="html">
+        <source>Planned End Date:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-editor/activity-form/activity-form.component.html</context>
+          <context context-type="linenumber">29</context>
+        </context-group>
+        <note priority="1" from="description">plannedEndDate</note>
+        <note priority="1" from="meaning">editor</note>
+      </trans-unit>
+      <trans-unit id="c1400ee52e57bd8c969f2717c995a72aeb725765" datatype="html">
+        <source>Deadline:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-editor/activity-form/activity-form.component.html</context>
+          <context context-type="linenumber">33</context>
+        </context-group>
+        <note priority="1" from="description">deadline</note>
+        <note priority="1" from="meaning">editor</note>
+      </trans-unit>
+      <trans-unit id="bd4da649f4b8a456ec23eaf730b6012e0b389dd9" datatype="html">
+        <source>Estimated duration:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-editor/activity-form/activity-form.component.html</context>
+          <context context-type="linenumber">39</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="c6b9cc7215ac0e4dfd61f4f167ac2ce82b300cd1" datatype="html">
+        <source>( Time unit )</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-editor/activity-form/activity-form.component.html</context>
+          <context context-type="linenumber">44</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-designer/activity-model-form/activity-model-form.component.html</context>
+          <context context-type="linenumber">121</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="a0b985e7d16628f5b42d94f7174a0c63b529f2f8" datatype="html">
+        <source>Business days</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-editor/activity-form/activity-form.component.html</context>
+          <context context-type="linenumber">45</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-designer/activity-model-form/activity-model-form.component.html</context>
+          <context context-type="linenumber">81</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-designer/activity-model-form/activity-model-form.component.html</context>
+          <context context-type="linenumber">122</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4068358d4bc5e323b75e5eb21a62ab78d0e9bcc4" datatype="html">
+        <source>Calendar days</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-editor/activity-form/activity-form.component.html</context>
+          <context context-type="linenumber">46</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-designer/activity-model-form/activity-model-form.component.html</context>
+          <context context-type="linenumber">82</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-designer/activity-model-form/activity-model-form.component.html</context>
+          <context context-type="linenumber">123</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3bbce5fef7e1151da052a4e529453edb340e3912" datatype="html">
+        <source>Hours</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-editor/activity-form/activity-form.component.html</context>
+          <context context-type="linenumber">47</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-designer/activity-model-form/activity-model-form.component.html</context>
+          <context context-type="linenumber">83</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-designer/activity-model-form/activity-model-form.component.html</context>
+          <context context-type="linenumber">124</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12cc9773650706e6b16eec367da84f99a1e6399c" datatype="html">
+        <source>Months</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-editor/activity-form/activity-form.component.html</context>
+          <context context-type="linenumber">48</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-designer/activity-model-form/activity-model-form.component.html</context>
+          <context context-type="linenumber">84</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-designer/activity-model-form/activity-model-form.component.html</context>
+          <context context-type="linenumber">125</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="003c94fc143882ac8af6251a1595fe62978fe3e6" datatype="html">
+        <source>Years</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-editor/activity-form/activity-form.component.html</context>
+          <context context-type="linenumber">49</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-designer/activity-model-form/activity-model-form.component.html</context>
+          <context context-type="linenumber">85</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-designer/activity-model-form/activity-model-form.component.html</context>
+          <context context-type="linenumber">126</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="31e03d83ca79bdbb4ed1ce34991f3f34d4644e4c" datatype="html">
+        <source>Indeterminate</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-editor/activity-form/activity-form.component.html</context>
+          <context context-type="linenumber">50</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="754156a2c3a27d47233f22ed666449543117c62f" datatype="html">
+        <source>Not apply</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-editor/activity-form/activity-form.component.html</context>
+          <context context-type="linenumber">51</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-designer/activity-model-form/activity-model-form.component.html</context>
+          <context context-type="linenumber">87</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-designer/activity-model-form/activity-model-form.component.html</context>
+          <context context-type="linenumber">101</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-designer/activity-model-form/activity-model-form.component.html</context>
+          <context context-type="linenumber">110</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-designer/activity-model-form/activity-model-form.component.html</context>
+          <context context-type="linenumber">128</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-designer/activity-model-form/activity-model-form.component.html</context>
+          <context context-type="linenumber">148</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="eb068096d40f7946693780c9399814b1e37d78b1" datatype="html">
+        <source>Send alerts:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-editor/activity-form/activity-form.component.html</context>
+          <context context-type="linenumber">54</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="bb08f72568b9494e44c441933e1ef9337d8a1ba6" datatype="html">
+        <source>( Configuration )</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-editor/activity-form/activity-form.component.html</context>
+          <context context-type="linenumber">59</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="54b61f6be412a7c1f4272ddd898211d6f244a88f" datatype="html">
+        <source>Calendar days before the deadline</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-editor/activity-form/activity-form.component.html</context>
+          <context context-type="linenumber">60</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1dbf7506b0bcac6c17b782ebf3098289814060f3" datatype="html">
+        <source>Use Default Configuration</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-editor/activity-form/activity-form.component.html</context>
+          <context context-type="linenumber">61</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8a33a6bad016966a1b215796a901e98fa72718b3" datatype="html">
+        <source>Do not emit alerts</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-editor/activity-form/activity-form.component.html</context>
+          <context context-type="linenumber">62</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="73f105d2cb598f2f36708e523f050c6faf90298f" datatype="html">
+        <source>Actual Start Date:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-editor/activity-form/activity-form.component.html</context>
+          <context context-type="linenumber">67</context>
+        </context-group>
+        <note priority="1" from="description">actualStartDate</note>
+        <note priority="1" from="meaning">editor</note>
+      </trans-unit>
+      <trans-unit id="d17cd375c63621f7f02b571a37488ac9d4e0c2ff" datatype="html">
+        <source>Actual End Date:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-editor/activity-form/activity-form.component.html</context>
+          <context context-type="linenumber">71</context>
+        </context-group>
+        <note priority="1" from="description">actualEndDate</note>
+        <note priority="1" from="meaning">editor</note>
+      </trans-unit>
+      <trans-unit id="337b573836e1b1b853405a85e6ce4b9521fde51b" datatype="html">
+        <source>Mark as completed</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-editor/activity-form/activity-form.component.html</context>
+          <context context-type="linenumber">75</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="583745e083536bfa46fef0b3d44fc0fb9bedc74b" datatype="html">
+        <source>Responsible and theme</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-editor/activity-form/activity-form.component.html</context>
+          <context context-type="linenumber">82</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="0fe9663272e4456bb22756c8093225c950aa0b5b" datatype="html">
+        <source>Responsible:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-editor/activity-form/activity-form.component.html</context>
+          <context context-type="linenumber">85</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-tasks/activity-tasks.component.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="0f12253192a0f3f41184ac9fac65669ccb9d8c37" datatype="html">
+        <source>Unassigned</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-editor/activity-form/activity-form.component.html</context>
+          <context context-type="linenumber">88</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="43ffaa8d6dee235f38b2fc50a4e2b4d7ad2addde" datatype="html">
+        <source>Theme:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-editor/activity-form/activity-form.component.html</context>
+          <context context-type="linenumber">92</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-designer/activity-model-form/activity-model-form.component.html</context>
+          <context context-type="linenumber">152</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="179731ce24cac6a6978b6200a320a28f9e8d774a" datatype="html">
+        <source>( No theme )</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-editor/activity-form/activity-form.component.html</context>
+          <context context-type="linenumber">95</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="826b25211922a1b46436589233cb6f1a163d89b7" datatype="html">
+        <source>Delete</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-editor/activity-form/activity-form.component.html</context>
+          <context context-type="linenumber">111</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-designer/activity-model-form/activity-model-form.component.html</context>
+          <context context-type="linenumber">193</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5b3075e8dc3f3921ec316b0bd83b6d14a06c1a4f" datatype="html">
+        <source>Save changes</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-editor/activity-form/activity-form.component.html</context>
+          <context context-type="linenumber">116</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-designer/activity-model-form/activity-model-form.component.html</context>
+          <context context-type="linenumber">197</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="28f86ffd419b869711aa13f5e5ff54be6d70731c" datatype="html">
+        <source>Edit</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-editor/activity-form/activity-form.component.html</context>
+          <context context-type="linenumber">119</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-designer/activity-model-form/activity-model-form.component.html</context>
+          <context context-type="linenumber">199</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="79063d6264506a075a24229511ae67cd4adf0d89" datatype="html">
+        <source>Reactivate</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-editor/activity-form/activity-form.component.html</context>
+          <context context-type="linenumber">122</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="b8e4770d06bd778403edccf790b3a10c927ce017" datatype="html">
+        <source>Cancel edition</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-editor/activity-form/activity-form.component.html</context>
+          <context context-type="linenumber">125</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-designer/activity-model-form/activity-model-form.component.html</context>
+          <context context-type="linenumber">201</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5ead688e49c99fb23a55d49604ac7196f468b3de" datatype="html">
+        <source>Activity or obligation name</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-tree/activity-inline-editor.component.ts</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="d7b35c384aecd25a516200d6921836374613dfe7" datatype="html">
+        <source>Cancel</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-tree/activity-inline-editor.component.ts</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ddbddf7457f719d315e09508a5a4521c5d9ecd1d" datatype="html">
+        <source>General information of the obligation or activity</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-designer/activity-model-form/activity-model-form.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1412cde8c62aa87894e7f7343ab7d443dbe0dd16" datatype="html">
+        <source>Configuration data</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-designer/activity-model-form/activity-model-form.component.html</context>
+          <context context-type="linenumber">27</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="50e2db27b8a3382c773c31158ad1ff675a42086a" datatype="html">
+        <source>Activity type:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-designer/activity-model-form/activity-model-form.component.html</context>
+          <context context-type="linenumber">30</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="d8b6e86ac30baad6123c1bc904f7b1c7553b6913" datatype="html">
+        <source>( Select )</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-designer/activity-model-form/activity-model-form.component.html</context>
+          <context context-type="linenumber">33</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="a20835f355331a7398ce79b54cff3c57e96b3c75" datatype="html">
+        <source>Event</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-designer/activity-model-form/activity-model-form.component.html</context>
+          <context context-type="linenumber">36</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8b549cc024abf73010e959becd54c3fd44a82bab" datatype="html">
+        <source>Milestone</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-designer/activity-model-form/activity-model-form.component.html</context>
+          <context context-type="linenumber">37</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="eff0da8d2a4232f77a94d74edbada866e4c6b321" datatype="html">
+        <source>Internal activity</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-designer/activity-model-form/activity-model-form.component.html</context>
+          <context context-type="linenumber">38</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1e0fec778120b7a4d373c825e5b2196bc2f527bd" datatype="html">
+        <source>External activity</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-designer/activity-model-form/activity-model-form.component.html</context>
+          <context context-type="linenumber">39</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1775cd773b8452259c697c4969a441541e7f5557" datatype="html">
+        <source>Decision</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-designer/activity-model-form/activity-model-form.component.html</context>
+          <context context-type="linenumber">40</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="a173b6d508cd0b2d45875e58ebec30ba3b15ce7c" datatype="html">
+        <source>Section</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-designer/activity-model-form/activity-model-form.component.html</context>
+          <context context-type="linenumber">41</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="437e658297995c3323cd249deb354d23901811ed" datatype="html">
+        <source>Execution type and mode:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-designer/activity-model-form/activity-model-form.component.html</context>
+          <context context-type="linenumber">44</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7fd1e45fe003afec6a999a71357256034e47724e" datatype="html">
+        <source>( Execution type )</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-designer/activity-model-form/activity-model-form.component.html</context>
+          <context context-type="linenumber">47</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="a4b743748f0f1288088685f3656fa1dfdaadb336" datatype="html">
+        <source>Eventual</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-designer/activity-model-form/activity-model-form.component.html</context>
+          <context context-type="linenumber">49</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="0e7a82d26b109cd0b62c8b8bb9bdf9b6b1fa15c5" datatype="html">
+        <source>Periodic</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-designer/activity-model-form/activity-model-form.component.html</context>
+          <context context-type="linenumber">50</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1a5f04270b3cfe19f6612dd4343fc08fd64751f0" datatype="html">
+        <source>( Mode )</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-designer/activity-model-form/activity-model-form.component.html</context>
+          <context context-type="linenumber">53</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="20da2718b078b92db625c8a6659ae183cb0b1869" datatype="html">
+        <source>Mandatory</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-designer/activity-model-form/activity-model-form.component.html</context>
+          <context context-type="linenumber">54</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5317cde482fdb766008de3e1ae09cf0610366abc" datatype="html">
+        <source>Optional</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-designer/activity-model-form/activity-model-form.component.html</context>
+          <context context-type="linenumber">55</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="b3d5924f5b005695512a7bca68cf1487669ab59e" datatype="html">
+        <source>This activity controls the start or the end date of other obligations or activities?</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-designer/activity-model-form/activity-model-form.component.html</context>
+          <context context-type="linenumber">61</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4f20f2d5a6882190892e58b85f6ccbedfa737952" datatype="html">
+        <source>Yes</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-designer/activity-model-form/activity-model-form.component.html</context>
+          <context context-type="linenumber">64</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3d3ae7deebc5949b0c1c78b9847886a94321d9fd" datatype="html">
+        <source>No</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-designer/activity-model-form/activity-model-form.component.html</context>
+          <context context-type="linenumber">65</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1b6dbdb6698b4b2a1352636347de527b99e6d2b3" datatype="html">
+        <source>Execution and estimated time conditions</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-designer/activity-model-form/activity-model-form.component.html</context>
+          <context context-type="linenumber">73</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ceaf0249ac5484cc1531d3165266c02a6d3c9220" datatype="html">
+        <source>
+          This activity
+          <x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br/&gt;" />
+          must be done:
+          <x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br/&gt;" />
+        </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-designer/activity-model-form/activity-model-form.component.html</context>
+          <context context-type="linenumber">76</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="70e8723d4367ddd4837709b6cc9e71132928d972" datatype="html">
+        <source>( Term unit )</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-designer/activity-model-form/activity-model-form.component.html</context>
+          <context context-type="linenumber">80</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="274e9fabe7fbfccad7ffd5b8574ec1f987076445" datatype="html">
+        <source>Undefined</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-designer/activity-model-form/activity-model-form.component.html</context>
+          <context context-type="linenumber">86</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1348414aefeea41d37fa0d20fb149eb0f6a1a4e2" datatype="html">
+        <source>( Condition )</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-designer/activity-model-form/activity-model-form.component.html</context>
+          <context context-type="linenumber">92</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="b00df30d00853184dea27527cadb91c8d74b61f9" datatype="html">
+        <source>Before ...</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-designer/activity-model-form/activity-model-form.component.html</context>
+          <context context-type="linenumber">93</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="67a0ce081b2b2a32f73d31a86769e5cfeb25e3ac" datatype="html">
+        <source>Before the start of ...</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-designer/activity-model-form/activity-model-form.component.html</context>
+          <context context-type="linenumber">94</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4f8786cddd8757d9bbd50a0b2fe927fc5c9a0e5d" datatype="html">
+        <source>After the start of ...</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-designer/activity-model-form/activity-model-form.component.html</context>
+          <context context-type="linenumber">95</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="334503407ced0cebdced3e99108af179896e8d7b" datatype="html">
+        <source>During ...</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-designer/activity-model-form/activity-model-form.component.html</context>
+          <context context-type="linenumber">96</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="88401023a5e657f3d88e52ae700c2e1d9266a3bc" datatype="html">
+        <source>Before the end of ...</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-designer/activity-model-form/activity-model-form.component.html</context>
+          <context context-type="linenumber">97</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="41521ac8a81cf3a44d1e0bc52e5348b5d4656c6a" datatype="html">
+        <source>After the end of ...</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-designer/activity-model-form/activity-model-form.component.html</context>
+          <context context-type="linenumber">98</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8e48fc600845a9e57ed75682c94fe50a6725473a" datatype="html">
+        <source>After ...</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-designer/activity-model-form/activity-model-form.component.html</context>
+          <context context-type="linenumber">99</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="e274d18d0565520361832dfb0cff0c04452fb292" datatype="html">
+        <source>From ...</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-designer/activity-model-form/activity-model-form.component.html</context>
+          <context context-type="linenumber">100</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4a8ab80da48d40543160b0970b40d4243f33a360" datatype="html">
+        <source>( Activity or obligation )</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-designer/activity-model-form/activity-model-form.component.html</context>
+          <context context-type="linenumber">109</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="c19b216d59b6f3e9e22335195821b40c82acd26b" datatype="html">
+        <source>
+          Estimated time to do
+          <x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br/&gt;" />
+          the obligation or activity:
+        </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-designer/activity-model-form/activity-model-form.component.html</context>
+          <context context-type="linenumber">116</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="88712f40bcf4edbd7c71ec0a72929ceedcdd9bde" datatype="html">
+        <source>Indefinite</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-designer/activity-model-form/activity-model-form.component.html</context>
+          <context context-type="linenumber">127</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="f336006fe51502c7da913994e14a3137dd5c5009" datatype="html">
+        <source>Periodicity:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-designer/activity-model-form/activity-model-form.component.html</context>
+          <context context-type="linenumber">131</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="eedbb3822b355f6d6b664612456826ce08fe71a1" datatype="html">
+        <source>Legal and regulatory information</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-designer/activity-model-form/activity-model-form.component.html</context>
+          <context context-type="linenumber">140</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="fc17f454af59f5c7eebaf1c86d19e2c16189fc36" datatype="html">
+        <source>Regulator Entity:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-designer/activity-model-form/activity-model-form.component.html</context>
+          <context context-type="linenumber">143</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="0f5bfb628d1faf88e18d200c52fdbf95e3e597d6" datatype="html">
+        <source>( Entity )</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-designer/activity-model-form/activity-model-form.component.html</context>
+          <context context-type="linenumber">147</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="329d20c0030941442b26cd5c2b693e9e6bd94707" datatype="html">
+        <source>
+          Associated
+          <x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br/&gt;" />
+          procedure:
+        </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-designer/activity-model-form/activity-model-form.component.html</context>
+          <context context-type="linenumber">161</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="65061e47d262d8027ee3872a4e07ad829d916a01" datatype="html">
+        <source>Activity is not associated with a government procedure</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-designer/activity-model-form/activity-model-form.component.html</context>
+          <context context-type="linenumber">164</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4e7a6b52761bb111623e1931117ddfe039eb018a" datatype="html">
+        <source>
+          Contract
+          <x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br/&gt;" />
+          clause:
+        </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-designer/activity-model-form/activity-model-form.component.html</context>
+          <context context-type="linenumber">171</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="576d735c0ec064a9091ecd765c76273db3382dde" datatype="html">
+        <source>Legal basis:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-designer/activity-model-form/activity-model-form.component.html</context>
+          <context context-type="linenumber">177</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="e085976ab4c8e561d439dccc29a93629a263f88c" datatype="html">
+        <source>Add a subtask to this activity</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-tasks/activity-tasks.component.html</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="b1c386114e247f54aab597a2f46bd7fd21d8857b" datatype="html">
+        <source>Contract:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-timeline/activity-timeline.component.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7e892ba15f2c6c17e83510e273b3e10fc32ea016" datatype="html">
+        <source>Search</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-timeline/activity-timeline.component.html</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="287628a9d3c31a07593caf82ddd3986582074273" datatype="html">
+        <source>Deadline:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-timeline/activity-timeline.component.html</context>
+          <context context-type="linenumber">46</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-tree/activity-tree.component.html</context>
+          <context context-type="linenumber">78</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="992a47ee2f0033d380fa4845bb20ed547db8b64e" datatype="html">
+        <source>Planned End Date:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-timeline/activity-timeline.component.html</context>
+          <context context-type="linenumber">54</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-tree/activity-tree.component.html</context>
+          <context context-type="linenumber">87</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7b5369f64e04e59af7b59650b375d816fa1ed8db" datatype="html">
+        <source>Actual End Date:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-timeline/activity-timeline.component.html</context>
+          <context context-type="linenumber">64</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-tree/activity-tree.component.html</context>
+          <context context-type="linenumber">98</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="91e43cf81595e47016f406934c22b2ad9f12f777" datatype="html">
+        <source>Obligations Tree</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-tree/activity-tree.component.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="d909c1a8fc1e305495ab06272503e6ba7b327dc2" datatype="html">
+        <source>Contract Activities</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-tree/activity-tree.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="808cd39c212c7cb3766c4b5147758496c71af386" datatype="html">
+        <source>
+          Contract:
+          <x id="INTERPOLATION" equiv-text="{{project.project.name}}" />
+        </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-tree/activity-tree.component.html</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="72425faa5fbc9b365bf2c421433a01b2daac42e2" datatype="html">
+        <source>Add obligations</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-tree/activity-tree.component.html</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="118cb347301a14bbe70c86b5bbf9dea66e101da9" datatype="html">
+        <source>
+          <x id="INTERPOLATION" equiv-text="{{ templateDesignerMode ? 'Insert obligation' : 'Insert activity' }}" />
+        </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-tree/activity-tree.component.html</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1e1d059b1d426a6e7896f314cabf098dde7b6113" datatype="html">
+        <source>
+          <x id="INTERPOLATION" equiv-text="{{activity.theme || 'No theme'}}" />
+          <x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br/&gt;" />
+          <x id="INTERPOLATION_1" equiv-text="{{activity.project.name}}" />
+        </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-tree/activity-tree.component.html</context>
+          <context context-type="linenumber">71</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3450c024a6d43680da8e43f3e26f2b4f2256970a" datatype="html">
+        <source>
+          <x id="INTERPOLATION" equiv-text="{{(activity.deadline | date:'dd/LLL/yyyy') || 'Unknown'}}" />
+        </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-tree/activity-tree.component.html</context>
+          <context context-type="linenumber">79</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="f7584515a624d6ba5976b74ea8a23e75f34a303a" datatype="html">
+        <source>
+          <x id="INTERPOLATION" equiv-text="{{activity.theme || 'No theme'}}" />
+        </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-tree/activity-tree.component.html</context>
+          <context context-type="linenumber">116</context>
+        </context-group>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
