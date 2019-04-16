@@ -25,10 +25,10 @@ import { AbstractForm, MessageBoxService } from '@app/shared/services';
 enum FormMessages {
 
   IncompleteActivityData =
-  'Los campos marcados en rojo son requeridos.',
+  'Fields marked with red color are required.',
 
   UnrecognizedValue =
-  'El campo tiene un valor que no reconozco.',
+  'The field has an unrecognizable value.',
 
 }
 
@@ -101,12 +101,12 @@ export class ActivityModelFormComponent extends AbstractForm implements OnInit, 
 
 
   onDelete() {
-    const msg = `Esta operación eliminará la obligación ` +
-                `<strong>${this.activity.name}</strong> de este árbol de diseño de obligaciones.<br/><br/>` +
-                `¿Elimino la obligación de este diseño?`;
+    const msg = `This operation will delete the activity or obligation design ` +
+                `<strong>${this.activity.name}</strong> from this regulatory process.<br/><br/>` +
+                `Do you want to delete this activity from the current process?`;
 
-    this.messageService.confirm(msg, 'Eliminar obligación',
-                                'DeleteCancel', 'Eliminar esta obligación').subscribe(
+    this.messageService.confirm(msg, 'Delete activity design',
+                                'DeleteCancel', 'Delete activity design').subscribe(
       result => {
         if (result) {
           this.setCommand('delete');

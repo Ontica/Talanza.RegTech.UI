@@ -26,10 +26,10 @@ import { SharedService } from '@app/shared/shared.service';
 
 enum FormMessages {
   IncompleteActivityData =
-  'Los campos marcados en rojo son requeridos.',
+  'All fields marked in red are required.',
 
   PlannedEndDateIsGreaterThenDeadline =
-  'La fecha objetivo de la actividad no puede ser posterior a la fecha máxima de entrega.',
+  'Planned End Date can not be later than the Deadline.',
 }
 
 
@@ -79,11 +79,12 @@ export class ActivityFormComponent extends AbstractForm implements OnInit, OnCha
 
 
   onComplete() {
-    const msg = `Esta operación cerrará la actividad ` +
+    const msg = `This operation will close activity or obligation ` +
                 `<strong>${this.activity.name}</strong>.<br/><br/>` +
-                `¿Cierro esta actividad?`;
+                `Do you want to close this activity?`;
 
-    this.app.messageBox.confirm(msg, 'Cerrar actividad', 'AcceptCancel', 'Cerrar esta actividad').subscribe(
+    this.app.messageBox.confirm(msg, 'Close activity or obligation',
+                               'AcceptCancel', 'Close activity').subscribe(
       result => {
         if (result) {
           this.setCommand('completeActivity');
@@ -94,12 +95,12 @@ export class ActivityFormComponent extends AbstractForm implements OnInit, OnCha
 
 
   onDelete() {
-    const msg = `Esta operación eliminará la actividad ` +
-                `<strong>${this.activity.name}</strong> de este proyecto.<br/><br/>` +
-                `¿Elimino esta actividad?`;
+    const msg = `This operation will delete activity ` +
+                `<strong>${this.activity.name}</strong> from this project.<br/><br/>` +
+                `Do you want to delete this activity?`;
 
-    this.app.messageBox.confirm(msg, 'Eliminar actividad',
-                               'DeleteCancel', 'Eliminar esta actividad').subscribe(
+    this.app.messageBox.confirm(msg, 'Delete activity',
+                               'DeleteCancel', 'Delete activity').subscribe(
       result => {
         if (result) {
           this.setCommand('deleteActivity');
@@ -110,12 +111,13 @@ export class ActivityFormComponent extends AbstractForm implements OnInit, OnCha
 
 
   onReactivate() {
-    const msg = `Esta operación volverá a abrir la actividad ` +
-                `<strong>${this.activity.name}</strong> para hacerle cambios.<br/><br/>` +
-                `La fecha de finalización será removida.<br/><br/>` +
-                `¿Reactivo esta actividad?`;
+    const msg = `This operation will reactivate activity or obligation ` +
+                `<strong>${this.activity.name}</strong> in order to modify it.<br/><br/>` +
+                `Its Actual End Date will be removed.<br/><br/>` +
+                `Do you want to re-open this activity or obligation?`;
 
-    this.app.messageBox.confirm(msg, 'Reactivar la actividad', 'AcceptCancel', 'Reactivar').subscribe(
+    this.app.messageBox.confirm(msg, 'Reactivate activity or obligation',
+                                'AcceptCancel', 'Reactivate').subscribe(
       result => {
         if (result) {
           this.setCommand('reactivateActivity');

@@ -2,24 +2,24 @@
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
   <file source-language="en" datatype="plaintext" original="ng2.template" target-language="es">
     <body>
-      <trans-unit id="ee9372b18e541c98d8f4c55923d1391e353fb5e0" datatype="html">
+      <trans-unit id="8c2c72642f94304bbf971eb3315ecb5f148867cd" datatype="html">
         <source>
           <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;" />
           Regulatory Compliance
           <x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;" />
           <x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br/&gt;" />
           <x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span&gt;" />
-          RegTech System for the Energy Sector
+          RegTech System for the Energy Industry
           <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;" />
         </source>
         <target state="translated">
-          <x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span&gt;" />
-          Sistema para el
-          <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;" />
-          <x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br/&gt;" />
           <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;" />
-          Cumplimiento regulatorio
+          Cumplimineto Regulatorio
           <x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;" />
+          <x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br/&gt;" />
+          <x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span&gt;" />
+          Sistema RegTech para la Industria Energética
+          <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;" />
         </target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/security-ui/user-login/user-login.component.html</context>
@@ -80,6 +80,10 @@
         <context-group purpose="location">
           <context context-type="sourcefile">app/shared/nav-header/nav-header.component.html</context>
           <context context-type="linenumber">32</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/shared/nav-header/nav-header.component.html</context>
+          <context context-type="linenumber">65</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8b501bfec8e14ab87754191103357a011f519812" datatype="html">
@@ -206,6 +210,22 @@
           <context context-type="linenumber">60</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="05a7b3ea34b935c0d920e551d41fd953fb42c2f5" datatype="html">
+        <source>Activities tree design</source>
+        <target state="translated">Diseño del árbol de actividades</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/shared/nav-header/nav-header.component.html</context>
+          <context context-type="linenumber">69</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="c544d5e95239d12b627eff80b84a6cc2e624878a" datatype="html">
+        <source>Process diagram (BPMN)</source>
+        <target state="translated">Diagrama de procesos (BPMN)</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/shared/nav-header/nav-header.component.html</context>
+          <context context-type="linenumber">70</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="022e9b5de0a339bcea279f3a4a1a8d762f5ea77f" datatype="html">
         <source>General search ...</source>
         <target state="translated">Búsqueda general ...</target>
@@ -262,13 +282,13 @@
           <context context-type="linenumber">8</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="4b8bb24326ffeabcd738e805fe7eeff39d6aaa0d" datatype="html">
+      <trans-unit id="22e56a25671084f80b9c53d2dd31f4fb03ac5f6a" datatype="html">
         <source>
-          Activity in
+          Activity design in
           <x id="INTERPOLATION" equiv-text="{{activityTemplate.project.name}}" />
         </source>
         <target state="translated">
-          Actividad en
+          Template de actividad en
           <x id="INTERPOLATION" equiv-text="{{activityTemplate.project.name}}" />
         </target>
         <context-group purpose="location">
@@ -440,6 +460,10 @@
         <context-group purpose="location">
           <context context-type="sourcefile">app/project-management/activity-timeline/activity-timeline.component.html</context>
           <context context-type="linenumber">46</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/add-event-dialog/add-event-dialog.component.html</context>
+          <context context-type="linenumber">44</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">app/project-management/activity-tree/activity-tree.component.html</context>
@@ -654,6 +678,90 @@
           <context context-type="linenumber">98</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="c6409f49438837937fdc91b64513b6aae72acf37" datatype="html">
+        <source>What is happening?</source>
+        <target state="translated">¿Qué está ocurriendo?</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/add-event-dialog/add-event-dialog.component.html</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/activity-tree/activity-tree.component.html</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="e448083f01653a17433ef5882796cb02c20b0838" datatype="html">
+        <source>Please select an event:</source>
+        <target state="translated">Seleccionar un evento:</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/add-event-dialog/add-event-dialog.component.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5a6e6c7ee215186d51c4cf367a0639e968cf8c35" datatype="html">
+        <source>( Events list )</source>
+        <target state="translated">( Lista de eventos disponibles para el contrato )</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/add-event-dialog/add-event-dialog.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1913b9c66886e575b0b01985ee65b6eec2f159a7" datatype="html">
+        <source>Event date:</source>
+        <target state="translated">Event date:</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/add-event-dialog/add-event-dialog.component.html</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5c806f561ae3776983fd970fd3c1282351003082" datatype="html">
+        <source>Show obligations list</source>
+        <target state="translated">Show obligations list</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/add-event-dialog/add-event-dialog.component.html</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="d2ff137eacdfea6ba530abca3e548353e32f83a0" datatype="html">
+        <source>
+          <x id="INTERPOLATION" equiv-text="{{stateChange.theme || 'No theme'}}" />
+        </source>
+        <target state="translated">
+          <x id="INTERPOLATION" equiv-text="{{stateChange.theme || 'Sin tema'}}" />
+        </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/add-event-dialog/add-event-dialog.component.html</context>
+          <context context-type="linenumber">38</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="45bca61b08f124fc35b74482d411c6a120057b16" datatype="html">
+        <source>
+          <x id="INTERPOLATION" equiv-text="{{(stateChange.deadline | date:'dd/LLL/yyyy') || 'Not determinated'}}" />
+        </source>
+        <target state="translated">
+          <x id="INTERPOLATION" equiv-text="{{(stateChange.deadline | date:'dd/LLL/yyyy') || 'No determinada'}}" />
+        </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/add-event-dialog/add-event-dialog.component.html</context>
+          <context context-type="linenumber">45</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="f4e529ae5ffd73001d1ff4bbdeeb0a72e342e5c8" datatype="html">
+        <source>Close</source>
+        <target state="translated">Cerrar</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/add-event-dialog/add-event-dialog.component.html</context>
+          <context context-type="linenumber">60</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="874b590ea416f6f33bd4062988845833517abb57" datatype="html">
+        <source>Add to contract</source>
+        <target state="translated">Agregar al contrato</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/project-management/add-event-dialog/add-event-dialog.component.html</context>
+          <context context-type="linenumber">62</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="337b573836e1b1b853405a85e6ce4b9521fde51b" datatype="html">
         <source>Mark as completed</source>
         <target state="translated">Finalizar</target>
@@ -782,9 +890,9 @@
           <context context-type="linenumber">7</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="ddbddf7457f719d315e09508a5a4521c5d9ecd1d" datatype="html">
-        <source>General information of the obligation or activity</source>
-        <target state="translated">Información general de la obligación u actividad</target>
+      <trans-unit id="7da2d1d0186b245c3f1b927835a82497adea2922" datatype="html">
+        <source>General information of the obligation or activity design</source>
+        <target state="translated">Información general del template (diseño) de obligación o actividad</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/project-management/activity-designer/activity-model-form/activity-model-form.component.html</context>
           <context context-type="linenumber">9</context>
@@ -1220,14 +1328,6 @@
         <context-group purpose="location">
           <context context-type="sourcefile">app/project-management/activity-tree/activity-tree.component.html</context>
           <context context-type="linenumber">9</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="72425faa5fbc9b365bf2c421433a01b2daac42e2" datatype="html">
-        <source>Add obligations</source>
-        <target state="translated">Agregar obligaciones</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/project-management/activity-tree/activity-tree.component.html</context>
-          <context context-type="linenumber">14</context>
         </context-group>
       </trans-unit>
       <trans-unit id="118cb347301a14bbe70c86b5bbf9dea66e101da9" datatype="html">
