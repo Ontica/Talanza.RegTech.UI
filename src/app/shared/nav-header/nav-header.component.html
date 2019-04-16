@@ -61,5 +61,12 @@
       <option *ngFor="let template of templateStore.templates | async"
               [value]="template.uid">{{template.name}}</option>
     </select>
-
+    &nbsp; &nbsp;
+    <span *ngIf="layoutType === 'ProjectsTemplates'" class="label" i18n>View: </span>
+    <select *ngIf="layoutType === 'ProjectsTemplates'"
+            class="select-box" style="width:188px"
+            (change)="onChangeView()" [(ngModel)]="viewConfig.viewType">
+      <option value="treeView" i18n>Activities tree design</option>
+      <option value="bpmnView" i18n>Process diagram (BPMN)</option>
+    </select>
   </div>
