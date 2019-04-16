@@ -180,6 +180,24 @@ export class ProjectService {
   }
 
 
+  createFromActivityTemplate(targetProject: Project,
+                             activityTemplateUID: string,
+                             eventDate: Date): Observable<Activity> {
+    Assertion.assertValue(targetProject, 'targetProject');
+    Assertion.assertValue(activityTemplateUID, 'activityTemplateUID');
+
+
+    const path = `v1/project-management/projects/${targetProject.uid}/create-from-activity-template`;
+
+    const body = {
+    activityTemplateUID: activityTemplateUID,
+    eventDate: eventDate
+    };
+
+    return this.core.http.post<Activity>(path, body);
+  }
+
+
   deleteActivity(activity: Activity): Observable<void> {
     Assertion.assertValue(activity, 'activity');
 

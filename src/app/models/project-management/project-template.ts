@@ -10,8 +10,6 @@ import { Empty, Identifiable, PartitionedType } from '@app/models/core';
 
 export interface ProjectTemplate extends Identifiable {
   notes: string;
-  ownerUID: string;
-  managerUID: string;
   status: string;
 }
 
@@ -53,8 +51,6 @@ export const EmptyProjectTemplate: ProjectTemplate = {
   uid: '',
   name: '',
   notes: '',
-  ownerUID: '',
-  managerUID: '',
   status: ''
 };
 

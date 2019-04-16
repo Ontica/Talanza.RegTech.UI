@@ -146,6 +146,18 @@ export class ProjectStore {
   }
 
 
+  createFromActivityTemplate(project: Project,
+                             activityTemplateUID: string,
+                             eventDate: Date): Promise<Activity> {
+      return this.projectService.createFromActivityTemplate(project, activityTemplateUID, eventDate)
+                 .toPromise()
+                 .then((x) => {
+                  this.updateSelectedProject(project);
+                  return x;
+             });
+  }
+
+
   deleteActivity(activity: Activity): Promise<void> {
     return this.projectService.deleteActivity(activity)
                .toPromise()

@@ -61,7 +61,7 @@ export class AddEventDialogComponent implements OnInit {
 
 
   isSelected(stateChange: StateChange) {
-    console.log('selected: ' + stateChange.name);
+
   }
 
 
@@ -76,6 +76,7 @@ export class AddEventDialogComponent implements OnInit {
               this.whatIfService.whatIfCreatedFromEvent(this.project, data.eventUID, data.eventDate);
   }
 
+
   close() {
     this.dialogRef.close();
   }
@@ -88,7 +89,7 @@ export class AddEventDialogComponent implements OnInit {
 
     const data = this.getFormData();
 
-    this.templateStore.createFromActivityTemplate(this.project, data.eventUID, data.eventDate);
+    this.projectStore.createFromActivityTemplate(this.project, data.eventUID, data.eventDate);
 
     this.dialogRef.close(this.form.value);
   }

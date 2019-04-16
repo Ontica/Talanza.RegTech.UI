@@ -13,8 +13,6 @@ import { MatDialog } from '@angular/material';
 import { ProjectModel } from '@app/store/project.store';
 import { Activity, EmptyActivity } from '@app/models/project-management';
 
-import { AddEventDialogComponent } from '../add-event-dialog/add-event-dialog.component';
-
 import { GroupByProperty } from './group-activities-by.pipe';
 
 import { Assertion } from '@app/core';
@@ -36,7 +34,7 @@ export class ActivityTimelineComponent implements OnChanges {
   @Output() activitySelected = new EventEmitter<Activity>();
 
 
-  constructor(private dialog: MatDialog) { }
+  constructor() { }
 
 
   ngOnChanges() {
@@ -90,11 +88,6 @@ export class ActivityTimelineComponent implements OnChanges {
     if (emitEvent) {
       this.activitySelected.emit(activity);
     }
-  }
-
-
-  openAddEventDialog() {
-    this.dialog.open(AddEventDialogComponent);
   }
 
 

@@ -1,20 +1,20 @@
-<h4 mat-dialog-title>Agregar obligaciones</h4>
+<h4 mat-dialog-title i18n>What is happening?</h4>
 
 <mat-dialog-content [formGroup]="form">
 
   <div class="form-section">
-      Evento:
-      <br>
-      <select class="select-box" formControlName="selectedEvent">
-        <option value="">( Eventos )</option>
-        <option *ngFor="let event of events | async"
-                [value]="event.uid">{{event.name}}</option>
-      </select>
-      <br/>
-      Fecha:
-      <br/>
-      <emp-ng-datepicker formControlName="eventDate"></emp-ng-datepicker>
-      <button class="btn" [disabled]="!this.form.valid" (click)="loadWhatIfList()">Ver lista de obligaciones</button>
+    <span i18n>Please select an event:</span>
+    <br>
+    <select class="select-box" formControlName="selectedEvent">
+      <option value="" i18n>( Events list )</option>
+      <option *ngFor="let event of events | async"
+              [value]="event.uid">{{event.name}}</option>
+    </select>
+    <br/><br/>
+    <span i18n>Event date:</span>
+    <br/>
+    <emp-ng-datepicker formControlName="eventDate"></emp-ng-datepicker>
+    <button class="btn" [disabled]="!this.form.valid" (click)="loadWhatIfList()" i18n>Show obligations list</button>
   </div>
 
   <div class="what-if-section">
@@ -35,15 +35,15 @@
           </div>
 
           <div class="activity-status">
-              <div class="activity-theme">
-                {{stateChange.theme || 'Sin tema'}}
+              <div class="activity-theme" i18n>
+                {{stateChange.theme || 'No theme'}}
               </div>
 
               <div class="right-column nowrap"
                    [style.color]="timelineHelper.getTimelineColor(stateChange, stateChange.deadline)">
-                <div>Fecha máxima:</div>
-                <div>
-                  {{(stateChange.deadline | date:'dd/LLL/yyyy') || 'No determinada'}}
+                <div i18n>Deadline:</div>
+                <div i18n>
+                  {{(stateChange.deadline | date:'dd/LLL/yyyy') || 'Not determinated'}}
                 </div>
               </div>
           </div>
@@ -57,7 +57,7 @@
 </mat-dialog-content>
 
 <mat-dialog-actions>
-  <button class="btn btn-margin-right" (click)="close()">Cerrar</button>
+  <button class="btn btn-margin-right" (click)="close()" i18n>Close</button>
 
-  <button class="btn-action right" [disabled]="!this.form.valid" (click)="save()">Agregar al proyecto</button>
+  <button class="btn-action right" [disabled]="!this.form.valid" (click)="save()" i18n>Add to contract</button>
 </mat-dialog-actions>

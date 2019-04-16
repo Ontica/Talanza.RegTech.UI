@@ -83,14 +83,6 @@ export class ProjectTemplateStore {
   }
 
 
-  createFromActivityTemplate(project: Project,
-                             activityTemplateUID: string,
-                             eventDate: Date): Promise<Activity> {
-    return this.projectTemplateService.createFromActivityTemplate(project, activityTemplateUID, eventDate)
-                                      .toPromise();
-  }
-
-
   changeParent(activityTemplate: ActivityTemplate, newParent: ActivityTemplate): Promise<ActivityTemplate> {
     return this.projectTemplateService.changeParent(activityTemplate, newParent)
                .toPromise()
