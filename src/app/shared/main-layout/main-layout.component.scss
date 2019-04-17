@@ -1,35 +1,20 @@
 @import "../../../styles/general-styles";
 
-.main-layout {
-  @include column;
 
+mat-sidenav-container,
+mat-sidenav-content,
+mat-sidenav {
+  height: 100%;
+  overflow: hidden;
+}
+
+
+.main-layout {
   height: 100%;
 
-  margin: 0 calc((100% - 1024px) * 0.280 + 10px);
+  margin: 0;
+}
 
-  @include small() {
-    margin: 0 1px;
-  }
-
-  @include medium() {
-    margin: 0 10px;
-  }
-
-  .central-container {
-    @include row;
-    flex: 1;
-
-    .main-column {
-      @include column;
-      @include expand;
-
-      padding-bottom: $margin-size;
-
-    }
-
-  }
-
-}  // main layout
 
 .top-bar {
   display: none;
@@ -38,6 +23,7 @@
   padding: $margin-size;
   height: 35px;
 }
+
 
 .nav-bar {
   @include row;
@@ -49,25 +35,78 @@
   align-items: flex-start;
 
   color: $text-color-dark;
-  padding: $margin-size;
+
+
+  .left-section {
+    @include row;
+
+    width: auto;
+    align-items: center;
+
+    > * {
+      margin-right: 16px;
+    }
+  }
+
+  .search-and-settings {
+    @include row;
+
+    width: auto;
+    align-items: center;
+    margin-top: 8px;
+
+    > * {
+      margin-left: 32px;
+    }
+  }
+
+  .logo {
+    @include small-hide;
+
+    height: 35px;
+    margin-left: 15px;
+  }
+
+  .main-menu {
+    margin-left: 30px;
+    margin-top: 12px;
+  }
+
 }
+
+
+.content {
+  background-color: $white;
+}
+
 
 .side-bar {
-  @include column;
-  display: none;
-
   background-color: $secondary-color;
   color: $white;
-  width: 200px;
+
+  width: 280px;
+  padding: $margin-size;
+  padding-top: 16px;
 }
 
-.aside-bar {
-  @include column;
+
+.sidenav-toggle {
+  background-color: #EDEEF0;
+  height: 52px;
+  margin: 0;
+  padding: 8px;
+  padding-top: 12px;
+}
+
+
+.right-bar {
   display: none;
 
-  height: 100%;
+  background-color: $primary-color;
+
   width: 200px;
 }
+
 
 .footer {
   display: none;
@@ -75,50 +114,4 @@
 
   padding: $margin-size;
   border-top: 1px inset $border-color-light;
-}
-
-
-.left-section {
-  @include row;
-
-  width: auto;
-  align-items: center;
-
-  > * {
-    margin-right: 16px;
-  }
-}
-
-.search-and-settings {
-  @include row;
-
-  width: auto;
-  align-items: center;
-
-  > * {
-    margin-left: 32px;
-  }
-}
-
-.logo {
-  @include small-hide;
-
-  height: 35px;
-  margin-left: 30px;
-}
-
-.main-menu {
-  margin-top: 4px;
-  margin-left: 30px;
-}
-
-.content {
-  @include expand;
-
-  position: relative;
-  background-color: $white;
-
- // border: 1px solid $border-color;
-  border-radius: 6px;
-
 }

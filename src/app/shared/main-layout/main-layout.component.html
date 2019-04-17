@@ -2,53 +2,49 @@
 
   <div class="top-bar"></div>
 
-  <div class="central-container">
+  <div class="nav-bar">
 
-    <div class="side-bar"></div>
+    <div class="left-section">
 
-    <div class="main-column">
-
-      <div class="nav-bar">
-
-        <div class="left-section">
-
-          <!-- <i class="fa fa-bars disabled" aria-hidden="true"></i> -->
-
-          <img class="logo" src="assets/img/customer-logo-horizontal.png" alt="Talanza Energy Consulting" />
-
-        </div>
-
-        <emp-ng-main-menu class="main-menu"></emp-ng-main-menu>
-
-        <emp-ng-search-box (search)="search($event)"></emp-ng-search-box>
-
-        <div class="search-and-settings">
-
-
-
-          <!-- <div>
-            <i class="fa fa-envelope disabled" aria-hidden="true"></i>
-          </div>
-
-          <div>
-            <i class="fa fa-bell disabled" aria-hidden="true"></i>
-          </div>
-
-          <div>
-            <i class="fa fa-star disabled" aria-hidden="true"></i>
-          </div>
-
-          <div>
-            <i class="fa fa-cog disabled" aria-hidden="true"></i>
-          </div> -->
-
-
-        </div>
-
+      <div class="sidenav-toggle">
+        <mat-icon (click)="sidenav.toggle()">menu</mat-icon>
       </div>
 
+      <img class="logo" src="assets/img/customer-logo-horizontal.png" alt="Talanza Energy Consulting" />
 
-      <div class="content">
+    </div>
+
+    <emp-ng-main-menu class="main-menu"></emp-ng-main-menu>
+
+
+    <div class="search-and-settings">
+
+      <emp-ng-search-box (search)="search($event)"></emp-ng-search-box>
+
+      <!-- <div>
+        <i class="fa fa-bell disabled" aria-hidden="true"></i>
+      </div> -->
+
+    </div>
+
+    <div></div>
+    <div></div>
+
+  </div>
+
+  <mat-sidenav-container>
+
+    <mat-sidenav class="side-bar" mode="side" #sidenav opened disableClose="true">
+
+    </mat-sidenav>
+
+    <mat-sidenav class="right-bar" mode="side" #rightSidenav position="end">
+
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+
+      <div class="content" [style.margin-left.px]="sidenav.opened ? 6 : 0">
 
         <emp-ng-navigation-header [layoutType]="layoutType"
                                   (action)="onAction($event)">
@@ -59,13 +55,10 @@
         </div>
 
       </div>
+    </mat-sidenav-content>
 
+  </mat-sidenav-container>
 
-    </div>  <!--main-column !-->
-
-    <div class="aside-bar"></div>
-
-  </div>  <!--central-container-->
 
   <footer class="footer"></footer>
 
