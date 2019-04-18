@@ -73,7 +73,7 @@ export class ActivityModelFormComponent extends AbstractForm implements OnInit, 
   ngOnInit() {
     this.entities = this.procedureStore.entities();
     this.procedures = this.procedureStore.getProceduresFilteredByEntityId(this.selectedEntityIdSubject);
-    this.themesList = this.projectStore.themes();
+    this.themesList = this.projectStore.themes;
   }
 
 

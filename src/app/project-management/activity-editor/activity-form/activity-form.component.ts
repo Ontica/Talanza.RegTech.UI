@@ -366,7 +366,7 @@ export class ActivityFormComponent extends AbstractForm implements OnInit, OnCha
   }
 
   private loadThemes() {
-    this.themesList = this.projectStore.themes();
+    this.themesList = this.projectStore.themes;
   }
 
 }

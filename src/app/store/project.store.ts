@@ -36,6 +36,8 @@ export class ProjectStore {
 
   private _projects: BehaviorSubject<List<Project>> = new BehaviorSubject(List([]));
 
+  private _responsibles: BehaviorSubject<List<Project>> = new BehaviorSubject(List([]));
+
   private _stages: BehaviorSubject<List<Stage>> = new BehaviorSubject(List([]));
 
   private _tags: BehaviorSubject<ColoredTag[]> = new BehaviorSubject([]);
@@ -72,6 +74,11 @@ export class ProjectStore {
   }
 
 
+  get allResponsibles(): Observable<List<Contact>> {
+    return this._responsibles.asObservable();
+  }
+
+
   get projects(): Observable<List<Project>> {
     return this._projects.asObservable();
   }
@@ -87,7 +94,7 @@ export class ProjectStore {
   }
 
 
-  themes(): Observable<string[]> {
+  get themes(): Observable<string[]> {
     return this._themes.asObservable();
   }
 
@@ -219,9 +226,11 @@ export class ProjectStore {
 
   private loadInitialData() {
     this.loadProjectList();
+    this.loadResponsibles();
     this.loadTags();
     this.loadThemes();
     this.loadStages();
+
   }
 
 
@@ -232,6 +241,17 @@ export class ProjectStore {
               this._projects.next(List(data))
             ,
             err => console.log('Error reading project data', err)
+        );
+  }
+
+
+  private loadResponsibles() {
+    this.projectService.getResponsiblesList(undefined)
+        .subscribe(
+            data =>
+              this._responsibles.next(List(data))
+            ,
+            err => console.log('Error reading responsibles data', err)
         );
   }
 
