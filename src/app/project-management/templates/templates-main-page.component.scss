@@ -4,9 +4,6 @@ $primary-panel-min-width: 266px;
 $secondary-panel-min-width: 680px;
 $gap-width: 30px;
 
-:host {
-  @include workarea-host;
-}
 
 .explorer {
   @include explorer-defaults;
@@ -15,16 +12,17 @@ $gap-width: 30px;
   min-width: calc($primary-panel-min-width + $secondary-panel-min-width + $gap-width);
  }
 
+
 .explorer-panel {
 
   &.primary {
-    flex: 1 3 640px;
-    max-width: 845px;
+    flex: 1 3 940px;
+    max-width: 945px;
     min-width: $primary-panel-min-width;
   }
 
   &.primary-full {
-    flex: 1 3 940px;
+    flex: 1 3 1040px;
     max-width: 100%;
     min-width: $primary-panel-min-width;
   }

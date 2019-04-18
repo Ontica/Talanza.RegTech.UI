@@ -1,18 +1,21 @@
 @import "../../../styles/general-styles";
 
 
-mat-sidenav-container,
-mat-sidenav-content,
-mat-sidenav {
-  height: 100%;
-  overflow: hidden;
-}
-
-
 .main-layout {
+  @include column;
+
   height: 100%;
 
   margin: 0;
+}
+
+
+mat-sidenav-container,
+mat-sidenav-content,
+mat-sidenav {
+  @include expand;
+
+  overflow: hidden;
 }
 
 
@@ -35,7 +38,6 @@ mat-sidenav {
   align-items: flex-start;
 
   color: $text-color-dark;
-
 
   .left-section {
     @include row;
@@ -76,17 +78,22 @@ mat-sidenav {
 
 
 .content {
-  background-color: $white;
+  @include column;
+}
+
+
+.workarea {
+  @include expand;
 }
 
 
 .side-bar {
   background-color: $secondary-color;
   color: $white;
+  font-size: 10pt;
 
-  width: 280px;
-  padding: $margin-size;
-  padding-top: 16px;
+  padding: 24px 12px;
+  width: 250px;
 }
 
 

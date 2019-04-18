@@ -1,14 +1,6 @@
 @import "general-styles";
 
 
-@mixin workarea-host {
-  display: flex;
-  flex-direction: column;
-  height: calc(100% - 102px);
-  width: 100%;
-  position: absolute;
-}
-
 @mixin explorer-defaults {
   display: flex;
   flex-flow: row nowrap;

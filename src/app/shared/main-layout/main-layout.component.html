@@ -35,26 +35,29 @@
   <mat-sidenav-container>
 
     <mat-sidenav class="side-bar" mode="side" #sidenav opened disableClose="true">
-
+      <emp-ng-sidebar [layoutType]="layoutType"></emp-ng-sidebar>
     </mat-sidenav>
 
     <mat-sidenav class="right-bar" mode="side" #rightSidenav position="end">
 
     </mat-sidenav>
 
-    <mat-sidenav-content>
+    <mat-sidenav-content class="content" [style.margin-left.px]="sidenav.opened ? 6 : 0">
 
-      <div class="content" [style.margin-left.px]="sidenav.opened ? 6 : 0">
+      <!-- <div > -->
 
-        <emp-ng-navigation-header [layoutType]="layoutType"
-                                  (action)="onAction($event)">
-        </emp-ng-navigation-header>
+        <div>
+          <emp-ng-navigation-header [layoutType]="layoutType"
+                                    (action)="onAction($event)">
+          </emp-ng-navigation-header>
+        </div>
 
         <div class="workarea">
           <router-outlet></router-outlet>
         </div>
 
-      </div>
+      <!-- </div> -->
+
     </mat-sidenav-content>
 
   </mat-sidenav-container>
