@@ -1,0 +1,55 @@
+<mat-expansion-panel expanded>
+
+  <mat-expansion-panel-header>
+    Contracts
+  </mat-expansion-panel-header>
+
+  <mat-selection-list #projects>
+    <mat-list-option  checkboxPosition='before' i18n>All contracts</mat-list-option>
+    <mat-divider></mat-divider>
+    <mat-list-option *ngFor="let project of projectStore.projects | async" checkboxPosition='before'>
+      {{project.name}}
+    </mat-list-option>
+  </mat-selection-list>
+
+</mat-expansion-panel>
+
+
+<div class="panel-separator"></div>
+
+
+<mat-expansion-panel expanded>
+
+  <mat-expansion-panel-header>
+    Responsibles
+  </mat-expansion-panel-header>
+
+  <mat-selection-list #responsibles>
+    <mat-list-option checkboxPosition='before' i18n>All responsibles</mat-list-option>
+    <mat-divider></mat-divider>
+    <mat-list-option *ngFor="let responsible of projectStore.allResponsibles | async" checkboxPosition='before'>
+      {{responsible.name}}
+    </mat-list-option>
+  </mat-selection-list>
+
+</mat-expansion-panel>
+
+
+<div class="panel-separator"></div>
+
+
+<mat-expansion-panel expanded>
+
+  <mat-expansion-panel-header>
+    Themes
+  </mat-expansion-panel-header>
+
+  <mat-selection-list #themes>
+    <mat-list-option checkboxPosition='before' i18n>All themes</mat-list-option>
+    <mat-divider></mat-divider>
+    <mat-list-option *ngFor="let theme of projectStore.themes | async" checkboxPosition='before'>
+      {{theme}}
+    </mat-list-option>
+  </mat-selection-list>
+
+</mat-expansion-panel>

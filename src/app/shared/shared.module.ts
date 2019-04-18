@@ -13,6 +13,8 @@ import { RouterModule } from '@angular/router';
 import { DatepickerComponent } from './datepicker/datepicker.component';
 import { MainLayoutComponent } from './main-layout/main-layout.component';
 import { MainMenuComponent } from './main-layout/main-menu/main-menu.component';
+import { SidebarComponent } from './main-layout/sidebar/sidebar.component';
+
 import { MessageBoxComponent } from './message-box/message-box.component';
 import { ModalWindowComponent } from './modal-window/modal-window';
 import { NavigationHeaderComponent } from './nav-header/nav-header.component';
@@ -46,6 +48,8 @@ import { SpinnerService } from './spinner/spinner.service';
     DatepickerComponent,
     MainLayoutComponent,
     MainMenuComponent,
+    SidebarComponent,
+
     MessageBoxComponent,
     ModalWindowComponent,
     NavigationHeaderComponent,

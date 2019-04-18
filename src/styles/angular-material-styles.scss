@@ -64,3 +64,25 @@
   border-top: 1px solid $secondary-color;
   padding: 12px;
 }
+
+
+
+.mat-drawer-inner-container::-webkit-scrollbar {
+  height: 6px;
+  width: 6px;
+  scrollbar-color: $primary-color-light;
+  scroll-padding-right: 2px;
+}
+
+
+.mat-drawer-inner-container::-webkit-scrollbar-thumb {
+  background: $primary-color;
+}
+
+
+
+.mat-list-base .mat-list-item .mat-list-item-content,
+.mat-list-base .mat-list-option .mat-list-item-content {
+  padding-right: 0px !important;
+  padding-left: 0px !important;
+}
