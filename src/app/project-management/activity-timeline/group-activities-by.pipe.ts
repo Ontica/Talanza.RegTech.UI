@@ -25,7 +25,7 @@ const DEFAULT_DATES_ORDERING_ARRAY: GroupByDateProperty[] = ['actualEndDate', 'd
 })
 export class GroupActivitiesByPipe implements PipeTransform  {
 
-  transform(data: Array<Activity>, groupByProperty: GroupByProperty): Array<{key, value}> {
+  transform(data: Array<Activity>, groupByProperty: GroupByProperty): Array<{key: string, value}> {
     if (!data) {
       return null;
     }
@@ -61,7 +61,7 @@ export class GroupActivitiesByPipe implements PipeTransform  {
 
 
   private groupByResponsible(data: Array<Activity>): Array<{key, value}> {
-    const EMPTY_RESPONSIBLE_GROUP = 'Actividades sin asignar';
+    const EMPTY_RESPONSIBLE_GROUP = 'Activities without responsible';
 
     const groups = data.reduce((previous, current) => {
 
@@ -116,7 +116,7 @@ export class GroupActivitiesByPipe implements PipeTransform  {
 
 
   private groupByTheme(data: Array<Activity>): Array<{key, value}> {
-    const EMPTY_THEME_GROUP = 'Actividades sin tema asignado';
+    const EMPTY_THEME_GROUP = 'Activities without theme';
 
     const groups = data.reduce((previous, current) => {
 
@@ -274,7 +274,7 @@ export class GroupActivitiesByPipe implements PipeTransform  {
         return this.getYearMonthGroupName(activity[dateField], dateField);
       }
     }
-    return 'Sin ninguna fecha asignada';
+    return 'Activities with no dates assigned';
   }
 
 
@@ -283,13 +283,13 @@ export class GroupActivitiesByPipe implements PipeTransform  {
       return DateStringLibrary.yearMonth(dateValue);
 
     } else if (dateProperty === 'deadline') {
-      return 'Sin fecha máxima de entrega';
+      return 'Activities with no deadline';
 
     } else if (dateProperty === 'plannedEndDate') {
-      return 'Sin fecha objetivo';
+      return 'Activities with no planned end date';
 
     } else if (dateProperty === 'actualStartDate') {
-      return 'Sin fecha de inicio';
+      return 'Activities with no start date';
 
     } else {
       Assertion.assertNoReachThisCode(`Method not implemented for dateProperty '${dateProperty}'.`);

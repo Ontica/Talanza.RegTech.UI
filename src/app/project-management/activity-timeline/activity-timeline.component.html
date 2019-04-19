@@ -13,15 +13,17 @@
 
   <div class="card-body">
 
-    <div *ngFor="let group of project.activities | groupActivitiesBy: groupBy ">
+    <div *ngFor="let group of project.activities | groupActivitiesBy: groupBy">
 
       <div class="activity-group-name">
-        {{group.key}}
+        {{timelineHelper.getGroupName(group.key)}}
       </div>
 
       <div *ngFor="let activity of group.value"
            class="activity-row"
            [class.selected-activity]="isSelected(activity)">
+
+        <div class="timeline-padding"></div>
 
         <div class="activity-container"
              [style.border-left-color]="timelineHelper.getTimelineColor(activity, activity.deadline, 'border')">

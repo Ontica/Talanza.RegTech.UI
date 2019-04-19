@@ -5,7 +5,7 @@
  * See LICENSE.txt in the project root for complete license information.
  */
 
-import { DateFormat, LocalizationLibrary } from '../localization';
+import { DateFormat, LocalizationLibrary, DEFAULT_LANGUAGE, Language } from '../localization';
 import { Assertion } from '@app/core';
 
 import * as moment from 'moment';
@@ -32,7 +32,6 @@ export class DateStringLibrary {
     } else {
       throw Assertion.assertNoReachThisCode('DateStringLibrary.compareDates() programming error.');
     }
-
   }
 
 
@@ -41,6 +40,11 @@ export class DateStringLibrary {
     const date2 = moment(value2);
 
     return date2.diff(date1, 'days');
+  }
+
+
+  static shortMonthName(value: number, lang: Language = DEFAULT_LANGUAGE) {
+    return LocalizationLibrary.shortMonthName(value, lang);
   }
 
 

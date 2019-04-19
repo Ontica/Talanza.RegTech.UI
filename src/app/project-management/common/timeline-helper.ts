@@ -26,7 +26,9 @@ enum DEFAULT_BOUNDS {
   red_bound = 7
 }
 
+
 const USE_WEEKS_AND_MONTHS_FORMAT = false;
+
 
 export class TimelineHelper {
 
@@ -43,6 +45,25 @@ export class TimelineHelper {
   static displayPlannedEndDate(activity: Activity) {
     return activity.plannedEndDate && !this.isCompleted(activity) &&
            !this.samePlannedDateAndDeadline(activity);
+  }
+
+
+  static getGroupName(groupKey: string): string {
+    if (!groupKey) {
+      return '';
+    }
+
+    const groupKeyParts = groupKey.split('-');
+
+    if (groupKeyParts.length !== 2) {
+      return groupKey;
+    }
+
+    if (isNaN(Number(groupKeyParts[0])) || isNaN(Number(groupKeyParts[1]))) {
+      return groupKey;
+    }
+
+    return groupKeyParts[0] + '-' + DateStringLibrary.shortMonthName(Number(groupKeyParts[1]) - 1, 'en');
   }
 
 
