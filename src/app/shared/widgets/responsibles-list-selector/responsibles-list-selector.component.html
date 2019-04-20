@@ -1,0 +1,16 @@
+<mat-expansion-panel expanded>
+
+  <mat-expansion-panel-header i18n>
+    Responsibles
+  </mat-expansion-panel-header>
+
+  <mat-selection-list [(ngModel)]="selectedOptions">
+    <mat-list-option checkboxPosition='before' value='all' (click)="onSelected('all')" i18n>All responsibles</mat-list-option>
+    <mat-divider></mat-divider>
+    <mat-list-option *ngFor="let responsible of responsibles" checkboxPosition='before'
+                     [value]="responsible.uid" (click)="onSelected(responsible.uid)">
+      {{responsible.name}}
+    </mat-list-option>
+  </mat-selection-list>
+
+</mat-expansion-panel>

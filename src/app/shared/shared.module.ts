@@ -13,6 +13,7 @@ import { RouterModule } from '@angular/router';
 import { DatepickerComponent } from './datepicker/datepicker.component';
 import { MainLayoutComponent } from './main-layout/main-layout.component';
 import { MainMenuComponent } from './main-layout/main-menu/main-menu.component';
+
 import { SidebarComponent } from './main-layout/sidebar/sidebar.component';
 
 import { MessageBoxComponent } from './message-box/message-box.component';
@@ -28,6 +29,7 @@ import { SearchBoxComponent } from './search-box/search-box.component';
 import { SpinnerComponent } from './spinner/spinner.component';
 
 import { AngularMaterialModule } from './angular-material.module';
+import { WidgetsModule } from './widgets/widgets.module';
 
 import { MessageBoxService } from './message-box/message.box.service';
 import { SharedService } from './shared.service';
@@ -41,13 +43,15 @@ import { SpinnerService } from './spinner/spinner.service';
     RouterModule,
     FormsModule,
 
-    AngularMaterialModule
+    AngularMaterialModule,
+    WidgetsModule
   ],
 
   declarations: [
     DatepickerComponent,
     MainLayoutComponent,
     MainMenuComponent,
+
     SidebarComponent,
 
     MessageBoxComponent,

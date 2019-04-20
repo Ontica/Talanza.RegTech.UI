@@ -1,0 +1,15 @@
+<mat-expansion-panel expanded>
+
+  <mat-expansion-panel-header i18n>
+    Selected contract
+  </mat-expansion-panel-header>
+
+  <select #cboProjects
+          class="select-box" style="width:100%" [value]="selected.uid"
+          (change)="onSelectProject(cboProjects.value)">
+    <option value="" i18n>( Select a contract )</option>
+    <option *ngFor="let project of projects"
+        [value]="project.uid">{{project.name}}</option>
+  </select>
+
+</mat-expansion-panel>

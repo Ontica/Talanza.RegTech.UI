@@ -1,0 +1,15 @@
+<mat-expansion-panel expanded>
+
+  <mat-expansion-panel-header i18n>
+    Contracts
+  </mat-expansion-panel-header>
+
+  <mat-selection-list [(ngModel)]="selectedOptions">
+    <mat-list-option checkboxPosition='before' value='all' (click)="onSelected('all')" i18n>All contracts</mat-list-option>
+    <mat-divider></mat-divider>
+    <mat-list-option *ngFor="let project of projects" checkboxPosition='before' [value]="project.uid" (click)="onSelected(project.uid)">
+      {{project.name}}
+    </mat-list-option>
+  </mat-selection-list>
+
+</mat-expansion-panel>
