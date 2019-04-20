@@ -17,30 +17,20 @@
               [items]="secondaryMenuItems"
               (click)="onClickMenu($event)"></emp-ng-nav-menu>
 
-    <span *ngIf="layoutType === 'Projects'" class="label" i18n>Contracts: </span>
-    <select *ngIf="layoutType === 'Projects'" #cboProjects
-            class="select-box" style="width:220px;"
-            (change)="onSelectProject(cboProjects.value)">
-      <option value="" i18n>( Select a contract )</option>
-      <option value="all-projects" i18n>All contracts</option>
-      <option *ngFor="let project of projectStore.projects | async"
-              [value]="project.uid">{{project.name}}</option>
-    </select>
-
-    <span *ngIf="layoutType === 'Projects'">
+    <span *ngIf="layoutType === 'Projects' || layoutType === 'Timelines'">
       &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
       <span class="label" i18n>View: </span>
       <select #cboView
               class="select-box" style="width:200px;"
               (change)="onChangeView()" [(ngModel)]="viewConfig.viewType">
-        <option value="treeView" i18n>Activities tree</option>
+        <option value="treeView" *ngIf="layoutType === 'Projects'" i18n>Activities tree</option>
         <option value="ganttView" i18n>Gantt Chart</option>
         <option value="timeline" i18n>General Timeline</option>
-        <option value="deadline" i18n>Deadline</option>
-        <option value="plannedEndDate" i18n>Planned End Date</option>
-        <option value="actualStartDate" i18n>Actual Start Date</option>
-        <option value="responsible" i18n>By responsible</option>
-        <option value="theme" i18n>By theme</option>
+        <option value="deadline" i18n>By Deadline</option>
+        <option value="plannedEndDate" i18n>By Planned End Date</option>
+        <option value="actualStartDate" i18n>By Actual Start Date</option>
+        <option value="responsible" i18n>By Responsible timeline</option>
+        <option value="theme" i18n>By Theme timeline</option>
       </select>
       <span *ngIf="cboView.value === 'ganttView'" class="label" i18n>Scale:</span>
       <select *ngIf="cboView.value === 'ganttView'"
@@ -50,7 +40,7 @@
           <option value="quarter" i18n>Quarterly</option>
           <option value="month" i18n>Monthly</option>
           <option value="week" i18n>Weekly</option>
-        </select>
+      </select>
     </span>
 
     <span *ngIf="layoutType === 'ProjectsTemplates'" class="label" i18n>Regulatory processes: </span>

@@ -5,68 +5,22 @@
  * See LICENSE.txt in the project root for complete license information.
  */
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { ProjectStore , ProjectModel } from '@app/store/project.store';
 
 import { Activity, EmptyActivity, ActivityOperation,
          DefaultViewConfig, ViewConfig } from '@app/models/project-management';
 
-import { MenuItem } from '@app/shared/nav-menu/nav-menu.component';
 import { Exception } from '@app/core';
-
-
-const mainMenu: MenuItem[] = [
-  new MenuItem('Tareas', 'showProjectTasks'),
-  new MenuItem('Diseño', 'showProjectActivities'),
-  new MenuItem('Reuniones', 'showProjectMeetings'),
-  new MenuItem('Documentos', 'showProjectDocuments'),
-  new MenuItem('KB', 'showProjectKB'),
-  new MenuItem('Dashboard', 'showProjectDashboard'),
-];
-
-
-const projectActivitiesSecondaryMenu: MenuItem[] = [
-  new MenuItem('Árbol', 'showTree'),
-  new MenuItem('Lista', 'showList'),
-  new MenuItem('Gantt', 'showGantt'),
-  new MenuItem('Kanban', 'showKanban'),
-  new MenuItem('Calendario', 'showCalendar')
-];
-
-
-const projectMeetingsSecondaryMenu: MenuItem[] = [
-  new MenuItem('Lista', 'showMeetingsList'),
-  new MenuItem('Calendario', 'showMeetingsCalendar'),
-];
-
-
-const projectDocumentsSecondaryMenu: MenuItem[] = [
-  new MenuItem('Todos'),
-  new MenuItem('En proceso'),
-  new MenuItem('Enviados'),
-];
-
-
-const projectKBSecondaryMenu: MenuItem[] = [
-  new MenuItem('Todo'),
-  new MenuItem('Q&A'),
-  new MenuItem('Regulaciones', 'showRegulations'),
-  new MenuItem('Procesos'),
-  new MenuItem('Trámites'),
-  new MenuItem('Contratos'),
-];
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'emp-steps-projects-main-page',
   templateUrl: './projects-main-page.component.html',
   styleUrls: ['./projects-main-page.component.scss']
 })
-export class ProjectsMainPageComponent implements OnInit {
-
-  mainMenuItems: MenuItem[];
-
-  secondaryMenuItems: MenuItem[];
+export class ProjectsMainPageComponent implements OnInit, OnDestroy {
 
   selectedProject: ProjectModel;
   selectedActivity = EmptyActivity;
@@ -76,26 +30,33 @@ export class ProjectsMainPageComponent implements OnInit {
   displayEditor = false;
   toggleEditor = false;
 
+  private subs1: Subscription;
+  private subs2: Subscription;
+
   constructor(private store: ProjectStore) { }
 
 
   ngOnInit() {
-    this.mainMenuItems = mainMenu;
+    this.subs1 = this.store.selectedProject().subscribe(
+                    x => {
+                      if (this.selectedProject &&
+                          this.selectedProject.project.uid !== x.project.uid) {
+                        this.selectedActivity = EmptyActivity;
+                        this.displayEditor = false;
+                      }
+                      this.selectedProject = x;
+                    }
+                  );
 
-    this.store.selectedProject().subscribe(
-      x => {
-        if (this.selectedProject &&
-            this.selectedProject.project.uid !== x.project.uid) {
-          this.selectedActivity = EmptyActivity;
-          this.displayEditor = false;
-        }
-        this.selectedProject = x;
-      }
-    );
-
-    this.store.selectedView().subscribe(
+    this.subs2 = this.store.selectedView().subscribe(
       x => this.viewConfig = x
     );
+  }
+
+
+  ngOnDestroy() {
+    this.subs1.unsubscribe();
+    this.subs2.unsubscribe();
   }
 
 
@@ -160,19 +121,6 @@ export class ProjectsMainPageComponent implements OnInit {
 
   onAction(action: string) {
     switch (action) {
-      case 'showProjectActivities':
-        this.secondaryMenuItems = projectActivitiesSecondaryMenu;
-        return;
-      case 'showProjectDocuments':
-        this.secondaryMenuItems = projectDocumentsSecondaryMenu;
-        return;
-      case 'showProjectMeetings':
-        this.secondaryMenuItems = projectMeetingsSecondaryMenu;
-        return;
-      case 'showProjectKB':
-        this.secondaryMenuItems = projectKBSecondaryMenu;
-        return;
-
       case 'showTree':
         this.viewConfig = this.getViewConfig({ viewType: 'activity-tree' });
         return;

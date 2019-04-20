@@ -87,7 +87,7 @@ export class UserLoginComponent extends AbstractForm implements OnInit {
 
   private authenticate(): Promise<boolean> {
     return this.authenticationService.login(this.form.value.userID, this.form.value.password)
-               .then(() => this.router.navigate(['/projects/main']));
+               .then(() => this.router.navigate(['/home']));
   }
 
 

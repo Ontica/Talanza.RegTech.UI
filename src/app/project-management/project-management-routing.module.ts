@@ -15,23 +15,37 @@ import { MainLayoutComponent } from '@app/shared';
 import { ProjectsMainPageComponent } from './main-page/projects-main-page.component';
 import { TemplatesMainPageComponent } from './templates/templates-main-page.component';
 
-
 @NgModule({
 
   imports: [
     RouterModule.forChild([
       {
-        path: 'projects', component: MainLayoutComponent,
+        path: 'contract-management', component: MainLayoutComponent,
         canActivate: [SecurityGuardService], data: { layoutType: 'Projects' },
         children: [
-          { path: 'main', component: ProjectsMainPageComponent }
+          { path: 'my-tasks', component: ProjectsMainPageComponent, },
+          { path: 'activities', component: ProjectsMainPageComponent },
+          { path: 'timelines', component: ProjectsMainPageComponent },
+          { path: 'documents', component: ProjectsMainPageComponent },
+          { path: '', redirectTo: 'my-tasks', pathMatch: 'full' }
         ]
       },
       {
-        path: 'projects-templates', component: MainLayoutComponent,
+        path: 'home', component: MainLayoutComponent,
+        canActivate: [SecurityGuardService], data: { layoutType: 'Timelines' },
+        children: [
+          { path: 'my-tasks', component: ProjectsMainPageComponent, },
+          { path: 'activities', component: ProjectsMainPageComponent },
+          { path: 'timelines', component: ProjectsMainPageComponent },
+          { path: 'documents', component: ProjectsMainPageComponent },
+          { path: '', redirectTo: 'my-tasks', pathMatch: 'full' }
+        ]
+      },
+      {
+        path: 'regulatory-processes', component: MainLayoutComponent,
         canActivate: [SecurityGuardService], data: { layoutType: 'ProjectsTemplates' },
         children: [
-          { path: 'main', component: TemplatesMainPageComponent }
+          { path: '', component: TemplatesMainPageComponent }
         ]
       }
     ])],

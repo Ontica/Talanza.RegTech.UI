@@ -6,7 +6,8 @@
  */
 
 import { Component, EventEmitter,
-         Input, Output, OnChanges } from '@angular/core';
+         Input, Output, OnChanges, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
 
 import { MenuItem } from '../nav-menu/nav-menu.component';
 
@@ -14,6 +15,7 @@ import { ProjectStore } from '@app/store/project.store';
 import { ProjectTemplateStore } from '@app/store/project-template.store';
 
 import { Project, ProjectTemplate, ViewConfig, DefaultViewConfig } from '@app/models/project-management';
+
 
 export type ProjectViewType = 'Tree' | 'Gantt' | 'Timeline';
 
@@ -23,7 +25,7 @@ export type ProjectViewType = 'Tree' | 'Gantt' | 'Timeline';
   templateUrl: './nav-header.component.html',
   styleUrls: ['./nav-header.component.scss']
 })
-export class NavigationHeaderComponent implements OnChanges {
+export class NavigationHeaderComponent implements OnChanges, OnDestroy {
 
   title = 'Select a contract';
 
@@ -33,6 +35,9 @@ export class NavigationHeaderComponent implements OnChanges {
   selectedProject: Project;
   selectedTemplate: ProjectTemplate;
   viewConfig: ViewConfig = DefaultViewConfig();
+
+  private subs1: Subscription;
+  private subs2: Subscription;
 
   @Output() action = new EventEmitter<string>();
 
@@ -51,6 +56,16 @@ export class NavigationHeaderComponent implements OnChanges {
   }
 
 
+  ngOnDestroy() {
+    if (this.subs1) {
+      this.subs1.unsubscribe();
+    }
+    if (this.subs2) {
+      this.subs2.unsubscribe();
+    }
+  }
+
+
   onClickMenu(menuItem: MenuItem) {
     this.action.emit(menuItem.action);
   }
@@ -61,11 +76,11 @@ export class NavigationHeaderComponent implements OnChanges {
   }
 
 
-  onSelectProject(projectUID: string) {
-    this.selectedProject = this.projectStore.getProject(projectUID);
+  // onSelectProject(projectUID: string) {
+  //   this.selectedProject = this.projectStore.getProject(projectUID);
 
-    this.projectStore.selectProject(this.selectedProject);
-  }
+  //   this.projectStore.selectProject(this.selectedProject);
+  // }
 
 
   onSelectTemplate(projectUID) {
@@ -94,6 +109,11 @@ export class NavigationHeaderComponent implements OnChanges {
         this.setProjectsLayout();
         return;
 
+      case 'Timelines':
+        this.setTimelinesLayout();
+        return;
+
+
       case 'ProjectsTemplates':
         this.setTemplatesDesignerLayout();
         return;
@@ -103,28 +123,38 @@ export class NavigationHeaderComponent implements OnChanges {
     }
   }
 
-
   private setProjectsLayout() {
-    this.breadcrumb = 'Contracts management';
+    this.breadcrumb = 'Contract management';
 
     this.mainMenuItems =  [
-      new MenuItem('Inbox', undefined, '/inbox/main', true),
-      new MenuItem('Activities', undefined, '/projects/main'),
-      new MenuItem('Documents', undefined, undefined, true)
+      new MenuItem('Activities List', undefined, '/contract-management/activities'),
+      new MenuItem('Timelines', undefined, '/contract-management/timelines', false),
+      new MenuItem('Documents', undefined, '/contract-management/documents', false)
     ];
 
-    // this.secondaryMenuItems =  [
-    //   new MenuItem('Árbol'),
-    //   new MenuItem('Lista'),
-    //   new MenuItem('Gantt'),
-    //   new MenuItem('Kanban'),
-    //   new MenuItem('Calendario')
-    // ];
-
-    this.projectStore.selectedProject().subscribe (
+    this.subs1 = this.projectStore.selectedProject().subscribe (
       next => {
         this.selectedProject = next.project;
         this.title = this.selectedProject.uid ? this.selectedProject.name : 'Select a contract';
+      }
+    );
+
+  }
+
+
+  private setTimelinesLayout() {
+    this.breadcrumb = 'Home page';
+
+    this.mainMenuItems =  [
+      new MenuItem('My Tasks', undefined, '/home/my-tasks', false),
+      new MenuItem('Timelines', undefined, '/home/timelines', false),
+      new MenuItem('Documents', undefined, '/home/documents', false)
+    ];
+
+    this.subs1 = this.projectStore.selectedProject().subscribe (
+      next => {
+        this.selectedProject = next.project;
+        this.title = this.selectedProject.uid ? this.selectedProject.name : 'All contracts';
       }
     );
 
@@ -134,10 +164,10 @@ export class NavigationHeaderComponent implements OnChanges {
     this.breadcrumb = 'Regulatory processes designer';
 
     this.mainMenuItems =  [
-      new MenuItem('Processes', undefined, '/projects-templates/main'),
+      new MenuItem('Processes', undefined, '/regulatory-processes'),
     ];
 
-    this.templateStore.selectedTemplate().subscribe (
+    this.subs2 = this.templateStore.selectedTemplate().subscribe (
       next => {
         this.selectedTemplate = next.project;
         this.title = this.selectedTemplate.uid ?

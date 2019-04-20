@@ -6,7 +6,7 @@
  */
 
 import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router, ActivationEnd } from '@angular/router';
 
 
 @Component({
@@ -19,9 +19,17 @@ export class MainLayoutComponent {
   keywords = '';
   layoutType: string;
 
-  constructor(route: ActivatedRoute, private router: Router) {
-    this.layoutType = route.snapshot.data['layoutType'];
+  constructor(private router: Router) {
+    this.router.events.subscribe(val => {
+      if (val instanceof ActivationEnd) {
+        if (val.snapshot.data['layoutType']) {
+          this.layoutType = val.snapshot.data['layoutType'];
+          console.log('route change', val, this.layoutType);
+        }
+      }
+    });
   }
+
 
   onAction(event: any) {
 
