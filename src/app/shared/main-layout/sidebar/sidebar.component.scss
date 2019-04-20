@@ -1,7 +1,7 @@
-@import "../../../../styles/variables";
+@import "../../../../styles/general-styles.scss";
 
 
-.mat-list-base, .mat-list-option {
+.mat-list-base, .mat-list-item, .mat-list-option {
   font-size: 9pt;
 }
 
@@ -12,8 +12,8 @@
 
 
 .mat-expansion-panel-header {
-  font-size: 11pt;
-  height: 48px !important;
+  font-size: 10pt;
+  height: 42px !important;
 }
 
 
