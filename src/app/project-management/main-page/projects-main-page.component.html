@@ -15,10 +15,10 @@
 
 
     <emp-steps-dhtmlx-gantt *ngSwitchCase="'ganttView'"
-         [project]="selectedProject"
-         [config]="viewConfig"
+         [tasks]="ganttTasks"
+         [timeScaleUnit]="viewConfig.timeScaleUnit"
          [reset]="toggleEditor"
-         (activitySelected)="showEditor($event)">
+         (activitySelected)="showEditorFromGanttTask($event)">
     </emp-steps-dhtmlx-gantt>
 
 

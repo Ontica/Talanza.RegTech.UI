@@ -9,7 +9,7 @@
 
 .gantt-main-container {
   flex: 1;
-  height: 100%;
+  height: calc(100vh - 200px);
 }
 
 .gantt_container, .gantt_tooltip {

@@ -10,50 +10,50 @@ import { Component, ChangeDetectionStrategy,
          Input, Output, OnDestroy, OnInit,
          ViewChild, ViewEncapsulation } from '@angular/core';
 
-import { ProjectModel, ProjectStore } from '@app/store/project.store';
-
 import 'dhtmlx-gantt';
 
 declare let gantt: any;
 
-import { Activity, ViewConfig, GanttTask } from '@app/models/project-management';
-
-import { GanttService } from '@app/services/project-management';
-import { Subscription } from 'rxjs';
+import { GanttTask } from '@app/models/project-management';
 
 @Component({
   selector: 'emp-steps-dhtmlx-gantt',
   templateUrl: './dhtmlx-gantt.component.html',
   styleUrls: ['./dhtmlx-gantt.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None
 })
 export class DhtmlxGanttComponent implements OnInit, OnDestroy {
 
   @Input()
-  get project(): ProjectModel { return this._project; }
-  set project(value: ProjectModel) {
-    if (this.project && this.project.project.uid !== value.project.uid) {
-      this.selectedTask = null;
+  get tasks(): GanttTask[] { return this._tasks; }
+  set tasks(value: GanttTask[]) {
+    try {
+      if (!value) {
+        value = [];
+        this.selectedTask = null;
+      }
+      if (this.selectedTask && !value.find(x => x.uid === this.selectedTask.uid)) {
+        this.selectedTask = null;
+      }
+
+      this._tasks = value;
+
+      this.refreshData();
+    } catch (e) {
+      console.log('Exception loading data', e);
     }
-
-    this._project = value;
-
-    this.refreshData();
   }
-  private _project;
+  private _tasks: GanttTask[] = [];
 
-  private selectedView$: Subscription;
-  private attachEvent$: any;
 
   @Input()
-  get config(): ViewConfig { return this._config; }
-  set config(value: ViewConfig) {
-    this._config = value;
+  get timeScaleUnit(): string { return this._timeScaleUnit; }
+  set timeScaleUnit(value: string) {
+    this._timeScaleUnit = value;
     this.configGantt();
     this.resetGantt();
   }
-  private _config;
+  private _timeScaleUnit: string;
 
 
   @Input()
@@ -61,25 +61,21 @@ export class DhtmlxGanttComponent implements OnInit, OnDestroy {
      this.resetGantt();
   }
 
-  @Output() activitySelected = new EventEmitter<Activity>();
+  @Output() activitySelected = new EventEmitter<GanttTask>();
 
   @ViewChild('gantt') ganttContainer: ElementRef;
 
 
-  private ganttData: GanttTask[] = [];
+  private attachEvent$: any;
+
   private selectedTask: GanttTask;
   private innerReset = false;
 
-  constructor(private store: ProjectStore,
-              private ganttService: GanttService) { }
+
+  constructor() { }
 
 
   ngOnInit() {
-    this.selectedView$ = this.store.selectedView().subscribe(
-      x => this.config = x
-    );
-
-
     this.attachEvents();
 
     this.configGantt();
@@ -88,8 +84,10 @@ export class DhtmlxGanttComponent implements OnInit, OnDestroy {
 
 
   ngOnDestroy() {
-    this.selectedView$.unsubscribe();
     gantt.detachEvent(this.attachEvent$);
+    gantt.clearAll();
+
+    // gantt.destructor(); // PRO VERSION
   }
 
 
@@ -104,15 +102,13 @@ export class DhtmlxGanttComponent implements OnInit, OnDestroy {
         return;
       }
 
-      this.selectedTask = this.ganttData.find(x => x.id === +id);
+      this.selectedTask = this.tasks.find(x => x.id === +id);
 
 
       if (this.selectedTask && this.selectedTask.uid) {
-        const activity = this.store.getActivity(this.selectedTask.uid);
-
-        return this.activitySelected.emit(activity);
+        return this.activitySelected.emit(this.selectedTask);
       } else {
-        console.log('Undefined this.selectedTask.id:', id, this.ganttData);
+        console.log('Undefined this.selectedTask.id:', id, this.tasks);
       }
 
     });
@@ -129,23 +125,15 @@ export class DhtmlxGanttComponent implements OnInit, OnDestroy {
 
 
   private refreshData() {
-    if (this.project.project.uid === '') {
-      return;
-    }
-
-    const links = [
-      { id: 1, source: 103271, target: 103272, type: '1'},                       // link's id = 1
-      { id: 2, source: 103272, target: 103273, type: '0'},                       // link's id = 2
-      { id: 3, source: 103273, target: 103274, type: '0'}                        // link's id = 3
+    const data = this.tasks;
+    const links =  [
+      //   // { id: 1, source: 103271, target: 103272, type: '1'},                       // link's id = 1
+      //   // { id: 2, source: 103272, target: 103273, type: '0'},                       // link's id = 2
+      //   // { id: 3, source: 103273, target: 103274, type: '0'}                        // link's id = 3
     ];
 
-    this.ganttService.getActivitiesTree(this.project.project)
-                     .toPromise()
-                     .then(data => {
-                        this.ganttData = data;
-                        gantt.clearAll();
-                        gantt.parse({ data, links });
-                      });
+    gantt.clearAll();
+    gantt.parse({ data, links });
   }
 
 
@@ -200,7 +188,6 @@ export class DhtmlxGanttComponent implements OnInit, OnDestroy {
       }
     ];
 
-
     gantt.config.xml_date = '%Y-%m-%d %H:%i';
 
     gantt.config.keep_grid_width = true;
@@ -223,14 +210,14 @@ export class DhtmlxGanttComponent implements OnInit, OnDestroy {
       return "<div class='gantt_tree_icon " + (item.$open ? 'open' : 'closed') + "'></div>";
     };
 
-    gantt.templates.grid_file = item => {
+    gantt.templates.grid_file = () => {
       return "<div class='gantt_tree_icon'></div>";
     };
   }
 
 
   private setViewConfig() {
-    gantt.config.scale_unit = this.config ? this.config.timeScaleUnit : 'quarter';
+    gantt.config.scale_unit = this.timeScaleUnit ? this.timeScaleUnit : 'quarter';
 
     switch (gantt.config.scale_unit) {
       case 'year':

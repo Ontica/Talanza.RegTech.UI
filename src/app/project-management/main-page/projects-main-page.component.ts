@@ -6,14 +6,16 @@
  */
 
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
 
 import { ProjectStore , ProjectModel } from '@app/store/project.store';
+import { GanttService } from '@app/services/project-management';
 
 import { Activity, EmptyActivity, ActivityOperation,
-         DefaultViewConfig, ViewConfig } from '@app/models/project-management';
+         DefaultViewConfig, ViewConfig, GanttTask } from '@app/models/project-management';
 
 import { Exception } from '@app/core';
-import { Subscription } from 'rxjs';
+
 
 @Component({
   selector: 'emp-steps-projects-main-page',
@@ -24,8 +26,9 @@ export class ProjectsMainPageComponent implements OnInit, OnDestroy {
 
   selectedProject: ProjectModel;
   selectedActivity = EmptyActivity;
+  ganttTasks = [];
 
-  viewConfig = DefaultViewConfig();
+  viewConfig: ViewConfig = DefaultViewConfig();
 
   displayEditor = false;
   toggleEditor = false;
@@ -33,7 +36,8 @@ export class ProjectsMainPageComponent implements OnInit, OnDestroy {
   private subs1: Subscription;
   private subs2: Subscription;
 
-  constructor(private store: ProjectStore) { }
+  constructor(private store: ProjectStore,
+              private ganttService: GanttService)  { }
 
 
   ngOnInit() {
@@ -45,11 +49,19 @@ export class ProjectsMainPageComponent implements OnInit, OnDestroy {
                         this.displayEditor = false;
                       }
                       this.selectedProject = x;
+                      if (this.viewConfig.viewType === 'ganttView') {
+                        this.loadGanttTasks();
+                      }
                     }
                   );
 
     this.subs2 = this.store.selectedView().subscribe(
-      x => this.viewConfig = x
+      x => {
+        this.viewConfig = x;
+        if (this.viewConfig.viewType === 'ganttView') {
+          this.loadGanttTasks();
+        }
+      }
     );
   }
 
@@ -116,45 +128,25 @@ export class ProjectsMainPageComponent implements OnInit, OnDestroy {
   }
 
 
-  // temporal view controller methods
+  showEditorFromGanttTask(task: GanttTask) {
+    const activity = this.store.getActivity(task.uid);
+    this.showEditor(activity);
+  }
 
 
-  onAction(action: string) {
-    switch (action) {
-      case 'showTree':
-        this.viewConfig = this.getViewConfig({ viewType: 'activity-tree' });
-        return;
-      case 'showList':
-        this.viewConfig = this.getViewConfig({ viewType: 'tasks-list' });
-        return;
-      case 'showGantt':
-        this.viewConfig = this.getViewConfig({ viewType: 'gantt' });
-        return;
-      case 'showKanban':
-        this.viewConfig = this.getViewConfig({ viewType: 'kanban' });
-        return;
-      case 'showCalendar':
-        this.viewConfig = this.getViewConfig({ viewType: 'calendar' });
-        return;
+  // private methods
 
 
-      case 'showRegulations':
-        // this.router.navigate(['/documents/search'])
-        return;
-
-      default:
-        throw new Error(`Unhandled action ${action}.`);
+  private loadGanttTasks() {
+    if (!this.selectedProject ||
+       !this.selectedProject.project ||
+       !this.selectedProject.project.uid) {
+      return;
     }
-  }
 
-
-  onViewChanged(viewConfig: ViewConfig) {
-    this.viewConfig = viewConfig;
-  }
-
-
-  private getViewConfig(newData: Partial<ViewConfig>): ViewConfig {
-    return Object.assign(this.viewConfig, newData);
+    this.ganttService.getActivitiesTree(this.selectedProject.project)
+                     .toPromise()
+                     .then(x => this.ganttTasks = x);
   }
 
 }
