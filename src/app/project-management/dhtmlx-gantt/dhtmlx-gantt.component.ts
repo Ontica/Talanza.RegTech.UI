@@ -5,8 +5,7 @@
  * See LICENSE.txt in the project root for complete license information.
  */
 
-import { Component, ChangeDetectionStrategy,
-         ElementRef, EventEmitter,
+import { Component, ElementRef, EventEmitter,
          Input, Output, OnDestroy, OnInit,
          ViewChild, ViewEncapsulation } from '@angular/core';
 
@@ -53,7 +52,7 @@ export class DhtmlxGanttComponent implements OnInit, OnDestroy {
     this.configGantt();
     this.resetGantt();
   }
-  private _timeScaleUnit: string;
+  private _timeScaleUnit = 'quarter';
 
 
   @Input()
@@ -120,7 +119,7 @@ export class DhtmlxGanttComponent implements OnInit, OnDestroy {
     this.setLayout();
     this.setProperties();
     this.setTemplates();
-    this.setViewConfig();
+    this.setTimescale();
   }
 
 
@@ -216,7 +215,7 @@ export class DhtmlxGanttComponent implements OnInit, OnDestroy {
   }
 
 
-  private setViewConfig() {
+  private setTimescale() {
     gantt.config.scale_unit = this.timeScaleUnit ? this.timeScaleUnit : 'quarter';
 
     switch (gantt.config.scale_unit) {

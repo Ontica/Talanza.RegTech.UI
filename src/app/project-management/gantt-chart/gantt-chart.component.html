@@ -1,0 +1,37 @@
+<div class="card">
+
+  <div class="card-header card-header-flat">
+    <div class="card-title">
+      <span i18n>Gantt chart</span>
+      <div class="card-hint"><span i18n>Contract: </span> {{contractName}}</div>
+    </div>
+    <div class="card-header-options">
+
+      <label i18n>Scale:</label>
+
+      <select class="select-box" style="width:98px"
+          (change)="onChangeScale()" [(ngModel)]="timeScaleUnit">
+          <option value="year" i18n>Annual</option>
+          <option value="quarter" i18n>Quarterly</option>
+          <option value="month" i18n>Monthly</option>
+          <option value="week" i18n>Weekly</option>
+      </select>
+
+      <div style="width:38px"></div>
+
+      <button type="button" class="btn disabled"
+              (click)="onSearch()" i18n>Search</button>
+    </div>
+  </div>
+
+  <div>
+    <emp-steps-dhtmlx-gantt
+      [tasks]="tasks"
+      [timeScaleUnit]="timeScaleUnit"
+      [reset]="reset"
+      (activitySelected)="onActivitySelected($event)">
+    </emp-steps-dhtmlx-gantt>
+
+  </div>
+
+</div>

@@ -28,12 +28,16 @@ import { GroupActivitiesByPipe } from './activity-timeline/group-activities-by.p
 import { ActivityInlineEditorComponent } from './activity-tree/activity-inline-editor.component';
 import { ActivityTreeComponent } from './activity-tree/activity-tree.component';
 import { AddEventDialogComponent } from './add-event-dialog/add-event-dialog.component';
+
+import { GanttChartComponent } from './gantt-chart/gantt-chart.component';
 import { DhtmlxGanttComponent } from './dhtmlx-gantt/dhtmlx-gantt.component';
+
 import { ProjectsMainPageComponent } from './main-page/projects-main-page.component';
 import { MoveActivityDialogComponent } from './move-activity-dialog/move-activity-dialog.component';
 import { TemplatesMainPageComponent } from './templates/templates-main-page.component';
 
 import { ProjectManagementRoutingModule } from './project-management-routing.module';
+
 
 @NgModule({
 
@@ -67,7 +71,8 @@ import { ProjectManagementRoutingModule } from './project-management-routing.mod
     GroupActivitiesByPipe,
     MoveActivityDialogComponent,
     ProjectsMainPageComponent,
-    TemplatesMainPageComponent
+    TemplatesMainPageComponent,
+    GanttChartComponent
   ],
 
   exports: [

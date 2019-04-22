@@ -42,11 +42,23 @@
 
 
   .card-header-options {
-    flex: none;
+    display: flex;
+    flex-flow: row nowrap;
+
     align-self: flex-start;
     align-content: flex-end;
+    align-items: center;
+
     padding-top: 6px;
     padding-left: 6px;
+
+    label {
+      color: $secondary-color;
+      font-size: 10pt;
+      font-weight: 400;
+      padding-right: 8px;
+    }
+
   }
 
 
