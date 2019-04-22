@@ -9,17 +9,9 @@ import { Component, EventEmitter,
          Input, Output, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 
-import { ProjectStore } from '@app/store/project.store';
-import { ProjectTemplateStore } from '@app/store/project-template.store';
 import { UserInterfaceStore } from '@app/store/ui.store';
 
-import { MenuItem, NavigationHeader,
-         ProjectViewConfig, DefaultProjectViewConfig } from '@app/models/user-interface';
-
-import { Project, ProjectTemplate } from '@app/models/project-management';
-
-
-export type ProjectViewType = 'Tree' | 'Gantt' | 'Timeline';
+import { MenuItem, NavigationHeader } from '@app/models/user-interface';
 
 
 @Component({
@@ -35,16 +27,9 @@ export class NavigationHeaderComponent implements OnInit, OnDestroy {
 
   navigationHeader: NavigationHeader;
 
-  viewConfig: ProjectViewConfig = DefaultProjectViewConfig;
-
-  selectedProject: Project;
-  selectedTemplate: ProjectTemplate;
-
   private subscription: Subscription;
 
-  constructor(protected uiStore: UserInterfaceStore,
-              protected projectStore: ProjectStore,
-              protected templateStore: ProjectTemplateStore) {}
+  constructor(protected uiStore: UserInterfaceStore) { }
 
 
   ngOnInit(): void {
@@ -65,31 +50,5 @@ export class NavigationHeaderComponent implements OnInit, OnDestroy {
     this.action.emit(menuItem.action);
   }
 
-
-  onChangeView() {
-    this.uiStore.setProjectViewConfig(this.viewConfig);
-  }
-
-
-  onSelectTemplate(projectUID) {
-    this.selectedTemplate = this.templateStore.findById(projectUID);
-
-    this.templateStore.selectTemplate(this.selectedTemplate);
-  }
-
-
-  // private methods
-
-
-  private setHomeLayout() {
-    // this.breadcrumb = 'Home page';
-
-    // this.mainMenuItems =  [
-    //   new MenuItem('My Tasks', undefined, '/home/my-tasks', false),
-    //   new MenuItem('Timelines', undefined, '/home/timelines', false),
-    //   new MenuItem('Documents', undefined, '/home/documents', false)
-    // ];
-
-  }
 
 }
