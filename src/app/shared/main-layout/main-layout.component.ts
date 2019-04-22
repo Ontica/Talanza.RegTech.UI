@@ -5,8 +5,13 @@
  * See LICENSE.txt in the project root for complete license information.
  */
 
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivationEnd } from '@angular/router';
+import { Subscription } from 'rxjs';
+
+import { UserInterfaceStore } from '@app/store/ui.store';
+
+import { LayoutType } from '@app/models/user-interface';
 
 
 @Component({
@@ -14,20 +19,39 @@ import { Router, ActivationEnd } from '@angular/router';
   templateUrl: './main-layout.component.html',
   styleUrls: ['./main-layout.component.scss']
 })
-export class MainLayoutComponent {
+export class MainLayoutComponent implements OnInit, OnDestroy {
 
   keywords = '';
   layoutType: string;
 
-  constructor(private router: Router) {
+  private subscription: Subscription;
+
+  constructor(private uiStore: UserInterfaceStore,
+              private router: Router) {
     this.router.events.subscribe(val => {
       if (val instanceof ActivationEnd) {
         if (val.snapshot.data['layoutType']) {
-          this.layoutType = val.snapshot.data['layoutType'];
-          console.log('route change', val, this.layoutType);
+          uiStore.setLayoutType(val.snapshot.data['layoutType'] as LayoutType);
+        }
+        if (val.snapshot.data['viewName']) {
+          uiStore.setCurrentView(val.snapshot.data['viewName']);
         }
       }
     });
+  }
+
+
+  ngOnInit(): void {
+    this.subscription = this.uiStore.layoutType.subscribe(
+      value => this.layoutType = value
+    );
+  }
+
+
+  ngOnDestroy(): void {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 
 

@@ -1,0 +1,56 @@
+@import "../../../styles/explorer";
+
+
+$primary-panel-min-width: 466px;
+$secondary-panel-min-width: 680px;
+$gap-width: 30px;
+
+// :host {
+//   @include row;
+//   align-items: center;
+//   justify-content: center;
+
+//   @include expand;
+// }
+
+.explorer {
+  @include explorer-defaults;
+
+  justify-content: center;
+
+  overflow: auto;
+
+  min-width: calc($primary-panel-min-width + $secondary-panel-min-width + $gap-width);
+ }
+
+
+p {
+ margin-top : 40pt;
+}
+
+.container {
+ // @include expand;
+
+  overflow: scroll;
+  height: 100%;
+  max-height: 100%;
+//   position: absolute;
+// top: 0;
+// left: 0;
+// right: 0;
+// bottom: 0;
+
+
+
+
+  background-color: yellow;
+
+  // height: auto;
+  // width: 40%;
+  margin: 32px 24px;
+}
+
+.content {
+  // height: 100%;
+  // width: 100%;
+}

@@ -23,29 +23,17 @@ import { TemplatesMainPageComponent } from './templates/templates-main-page.comp
         path: 'contract-management', component: MainLayoutComponent,
         canActivate: [SecurityGuardService], data: { layoutType: 'Projects' },
         children: [
-          { path: 'my-tasks', component: ProjectsMainPageComponent, },
-          { path: 'activities', component: ProjectsMainPageComponent },
-          { path: 'timelines', component: ProjectsMainPageComponent },
-          { path: 'documents', component: ProjectsMainPageComponent },
-          { path: '', redirectTo: 'my-tasks', pathMatch: 'full' }
-        ]
-      },
-      {
-        path: 'home', component: MainLayoutComponent,
-        canActivate: [SecurityGuardService], data: { layoutType: 'Timelines' },
-        children: [
-          { path: 'my-tasks', component: ProjectsMainPageComponent, },
-          { path: 'activities', component: ProjectsMainPageComponent },
-          { path: 'timelines', component: ProjectsMainPageComponent },
-          { path: 'documents', component: ProjectsMainPageComponent },
-          { path: '', redirectTo: 'my-tasks', pathMatch: 'full' }
+          { path: 'activities', component: ProjectsMainPageComponent, data: { viewName: 'Project.Activities' }},
+          { path: 'timelines', component: ProjectsMainPageComponent, data: { viewName: 'Project.Timelines' }},
+          { path: 'documents', component: ProjectsMainPageComponent, data: {viewName: 'Project.Documents' }},
+          { path: '', redirectTo: 'activities', pathMatch: 'full' }
         ]
       },
       {
         path: 'regulatory-processes', component: MainLayoutComponent,
-        canActivate: [SecurityGuardService], data: { layoutType: 'ProjectsTemplates' },
+        canActivate: [SecurityGuardService], data: { layoutType: 'Processes' },
         children: [
-          { path: '', component: TemplatesMainPageComponent }
+          { path: '', component: TemplatesMainPageComponent, data: { viewName: 'Process.Tree' }}
         ]
       }
     ])],
