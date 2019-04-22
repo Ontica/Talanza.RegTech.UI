@@ -13,8 +13,7 @@ import { ProjectService } from '@app/services/project-management';
 
 import { Contact, Empty } from '@app/models/core';
 
-import { Activity, Contract, Project,
-         Stage, ViewConfig, DefaultViewConfig } from '@app/models/project-management';
+import { Activity, Contract, Project, Stage } from '@app/models/project-management';
 
 import { ColoredTag } from '@app/models/user-interface';
 
@@ -31,8 +30,6 @@ export class ProjectModel {
 export class ProjectStore {
 
   private _selectedProject: BehaviorSubject<ProjectModel> = new BehaviorSubject(new ProjectModel());
-
-  private _selectedView: BehaviorSubject<ViewConfig> = new BehaviorSubject(DefaultViewConfig());
 
   private _projects: BehaviorSubject<List<Project>> = new BehaviorSubject(List([]));
 
@@ -59,18 +56,8 @@ export class ProjectStore {
   }
 
 
-  selectedView(): Observable<ViewConfig> {
-    return this._selectedView.asObservable();
-  }
-
-
   selectProject(project: Project) {
     this.updateSelectedProject(project);
-  }
-
-
-  selectView(viewConfig: ViewConfig) {
-    this._selectedView.next(viewConfig);
   }
 
 

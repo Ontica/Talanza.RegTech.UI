@@ -90,18 +90,4 @@ export class ActivityFilter {
     return filter;
   }
 
-} // class ActivityFilter
-
-
-export function DefaultViewConfig(): ViewConfig {
-  return {
-    viewType: 'treeView',
-    timeScaleUnit: 'quarter',
-  };
-}
-
-
-export class ViewConfig {
-  viewType: string;
-  timeScaleUnit: string;
 }

@@ -14,6 +14,8 @@ import { RegulationServicesModule } from './regulation/regulation.services.modul
 import { InboxService } from './inbox/inbox.service';
 import { TicketService } from './service-desk/ticket.service';
 
+import { UserInterfaceService } from './user.interface.service';
+
 
 @NgModule({
 
@@ -31,7 +33,8 @@ import { TicketService } from './service-desk/ticket.service';
 
   providers: [
     InboxService,
-    TicketService
+    TicketService,
+    UserInterfaceService
   ]
 
 })

@@ -8,56 +8,7 @@
 import { Component, EventEmitter,
          Input, Output } from '@angular/core';
 
-
-export class MenuItem {
-
-  readonly action: string = '';
-  readonly text: string = '';
-  readonly routerLink: string = '';
-
-  private _disabled = false;
-  private _selected = false;
-
-  constructor(text: string, action?: string, routerLink?: string, disabled?: boolean) {
-    this.text = text;
-    this.action = action || text;
-    this.routerLink = routerLink || '';
-
-    this._disabled = disabled || false;
-  }
-
-
-  get disabled(): boolean {
-    return this._disabled;
-  }
-
-
-  get enabled(): boolean {
-    return !this._disabled;
-  }
-
-
-  get selected(): boolean {
-    return this._selected;
-  }
-
-  enable() {
-    this._disabled = false;
-  }
-
-  disable() {
-    this._disabled = true;
-  }
-
-  select() {
-    this._selected = true;
-  }
-
-  unselect() {
-    this._selected = false;
-  }
-
-}
+import { MenuItem } from '../../models/user-interface';
 
 
 @Component({
@@ -66,10 +17,6 @@ export class MenuItem {
   styleUrls: ['./nav-menu.component.scss']
 })
 export class NavigationMenuComponent {
-
-  @Output() click = new EventEmitter<MenuItem>();
-
-  @Input() layoutType: string;
 
   @Input()
   get items(): MenuItem[] { return this._items; }
@@ -85,6 +32,9 @@ export class NavigationMenuComponent {
 
   }
   private _items: MenuItem[];
+
+
+  @Output() click = new EventEmitter<MenuItem>();
 
 
   onClick(menuItem: MenuItem) {
