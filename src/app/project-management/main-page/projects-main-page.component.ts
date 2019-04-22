@@ -9,12 +9,18 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { ProjectStore , ProjectModel } from '@app/store/project.store';
+import { UserInterfaceStore } from '@app/store/ui.store';
+
 import { GanttService } from '@app/services/project-management';
 
-import { Activity, EmptyActivity, ActivityOperation,
-         DefaultViewConfig, ViewConfig, GanttTask } from '@app/models/project-management';
+import { Activity, EmptyActivity, ActivityOperation, GanttTask } from '@app/models/project-management';
+
+import { MenuItem, NavigationHeader,
+         ProjectViewConfig, DefaultProjectViewConfig } from '@app/models/user-interface';
 
 import { Exception } from '@app/core';
+
+import { isEmpty } from '@app/models/core';
 
 
 @Component({
@@ -28,7 +34,7 @@ export class ProjectsMainPageComponent implements OnInit, OnDestroy {
   selectedActivity = EmptyActivity;
   ganttTasks = [];
 
-  viewConfig: ViewConfig = DefaultViewConfig();
+  viewConfig: ProjectViewConfig = DefaultProjectViewConfig;
 
   displayEditor = false;
   toggleEditor = false;
@@ -36,12 +42,15 @@ export class ProjectsMainPageComponent implements OnInit, OnDestroy {
   private subs1: Subscription;
   private subs2: Subscription;
 
-  constructor(private store: ProjectStore,
-              private ganttService: GanttService)  { }
+  constructor(private projectStore: ProjectStore,
+              private ganttService: GanttService,
+              private uiStore: UserInterfaceStore)  { }
 
 
   ngOnInit() {
-    this.subs1 = this.store.selectedProject().subscribe(
+    this.setNavigationHeader();
+
+    this.subs1 = this.projectStore.selectedProject().subscribe(
                     x => {
                       if (this.selectedProject &&
                           this.selectedProject.project.uid !== x.project.uid) {
@@ -52,10 +61,13 @@ export class ProjectsMainPageComponent implements OnInit, OnDestroy {
                       if (this.viewConfig.viewType === 'ganttView') {
                         this.loadGanttTasks();
                       }
+                      if (!isEmpty(this.selectedProject.project)) {
+                        this.uiStore.setMainTitle(this.selectedProject.project.name);
+                      }
                     }
                   );
 
-    this.subs2 = this.store.selectedView().subscribe(
+    this.subs2 = this.uiStore.projectViewConfig.subscribe(
       x => {
         this.viewConfig = x;
         if (this.viewConfig.viewType === 'ganttView') {
@@ -67,8 +79,12 @@ export class ProjectsMainPageComponent implements OnInit, OnDestroy {
 
 
   ngOnDestroy() {
-    this.subs1.unsubscribe();
-    this.subs2.unsubscribe();
+    if (this.subs1) {
+      this.subs1.unsubscribe();
+    }
+    if (this.subs2) {
+      this.subs2.unsubscribe();
+    }
   }
 
 
@@ -81,19 +97,19 @@ export class ProjectsMainPageComponent implements OnInit, OnDestroy {
     switch (event.operation) {
 
       case 'insertActivity':
-        this.store.insertActivity(this.selectedProject.project, event.activity)
+        this.projectStore.insertActivity(this.selectedProject.project, event.activity)
                   .then(x => this.selectedActivity = x)
                   .catch(response => console.log(response.error.message));
         return;
 
       case 'moveActivity':
-        this.store.moveActivity(event.activity as Activity, event.newPosition)
+        this.projectStore.moveActivity(event.activity as Activity, event.newPosition)
                   .then(x => this.selectedActivity = x)
                   .catch(response => console.log(response.error.message));
         return;
 
       case 'changeParent':
-        this.store.changeParent(event.activity as Activity, event.newParent)
+        this.projectStore.changeParent(event.activity as Activity, event.newParent)
                   .then(x => this.selectedActivity = x)
                   .catch(response => console.log(response.error.message));
         return;
@@ -129,7 +145,7 @@ export class ProjectsMainPageComponent implements OnInit, OnDestroy {
 
 
   showEditorFromGanttTask(task: GanttTask) {
-    const activity = this.store.getActivity(task.uid);
+    const activity = this.projectStore.getActivity(task.uid);
     this.showEditor(activity);
   }
 
@@ -147,6 +163,21 @@ export class ProjectsMainPageComponent implements OnInit, OnDestroy {
     this.ganttService.getActivitiesTree(this.selectedProject.project)
                      .toPromise()
                      .then(x => this.ganttTasks = x);
+  }
+
+
+  private setNavigationHeader() {
+    const header: NavigationHeader = {
+      title: 'Please select a contract',
+      hint: 'Contract management',
+      mainMenu: [
+        new MenuItem('Activities List', undefined, '/contract-management/activities'),
+        new MenuItem('Timelines', undefined, '/contract-management/timelines', false),
+        new MenuItem('Documents', undefined, '/contract-management/documents', false)
+      ]
+    };
+
+    this.uiStore.setNavigationHeader(header);
   }
 
 }

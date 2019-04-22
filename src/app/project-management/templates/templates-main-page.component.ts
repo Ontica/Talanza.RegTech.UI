@@ -8,11 +8,12 @@
 import { Component, OnInit } from '@angular/core';
 
 import { ProjectTemplateStore, ProjectTemplateModel } from '@app/store/project-template.store';
+import { UserInterfaceStore } from '@app/store/ui.store';
 
 import { ActivityTemplate, ActivityTemplateOperation,
          EmptyActivityTemplate, } from '@app/models/project-management';
+import { NavigationHeader, MenuItem } from '@app/models/user-interface';
 import { isEmpty } from '@app/models/core';
-
 
 @Component({
   selector: 'emp-steps-templates-main-page',
@@ -27,16 +28,20 @@ export class TemplatesMainPageComponent implements OnInit {
   displayEditor = false;
   toggleEditor = false;
 
-  constructor(private store: ProjectTemplateStore) { }
+  constructor(private uiStore: UserInterfaceStore,
+              private store: ProjectTemplateStore) { }
 
 
   ngOnInit() {
+    this.setNavigationHeader();
+
     this.store.selectedTemplate().subscribe (
       x => {
         this.model = x;
 
         if (!isEmpty(this.model.project)) {
           this.displayEditor = false;
+          this.uiStore.setMainTitle(this.model.project.name);
         }
         this.model = x;
       }
@@ -112,6 +117,21 @@ export class TemplatesMainPageComponent implements OnInit {
         this.toggleEditor = !this.toggleEditor;
       }
     }
+  }
+
+  // private methods
+
+
+  private setNavigationHeader() {
+    const header: NavigationHeader = {
+      title: 'Please select a regulatory process',
+      hint: 'Regulatory process designer',
+      mainMenu: [
+        new MenuItem('Processes', undefined, '/regulatory-processes'),
+      ]
+    };
+
+    this.uiStore.setNavigationHeader(header);
   }
 
 }

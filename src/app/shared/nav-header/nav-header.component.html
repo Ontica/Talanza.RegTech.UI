@@ -2,61 +2,65 @@
 
   <div class="title">
 
-    <div>{{title}}</div>
-    <div class="breadcrumb">{{breadcrumb}}</div>
+    <div>{{navigationHeader.title}}</div>
+    <div class="breadcrumb">{{navigationHeader.hint}}</div>
 
   </div>
 </div>
 
 <div class="menu-bar">
     <emp-ng-nav-menu class="menu"
-              [items]="mainMenuItems"
-              (click)="onClickMenu($event)"></emp-ng-nav-menu>
+                     [items]="navigationHeader.mainMenu"
+                     (click)="onClickMenu($event)"></emp-ng-nav-menu>
 
     <emp-ng-nav-menu class="menu"
-              [items]="secondaryMenuItems"
-              (click)="onClickMenu($event)"></emp-ng-nav-menu>
+                    (click)="onClickMenu($event)"></emp-ng-nav-menu>
 
-    <span *ngIf="layoutType === 'Projects' || layoutType === 'Timelines'">
-      &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-      <span class="label" i18n>View: </span>
-      <select #cboView
-              class="select-box" style="width:200px;"
-              (change)="onChangeView()" [(ngModel)]="viewConfig.viewType">
-        <option value="treeView" *ngIf="layoutType === 'Projects'" i18n>Activities tree</option>
-        <option value="ganttView" i18n>Gantt Chart</option>
-        <option value="timeline" i18n>General Timeline</option>
-        <option value="deadline" i18n>By Deadline</option>
-        <option value="plannedEndDate" i18n>By Planned End Date</option>
-        <option value="actualStartDate" i18n>By Actual Start Date</option>
-        <option value="responsible" i18n>By Responsible timeline</option>
-        <option value="theme" i18n>By Theme timeline</option>
-      </select>
-      <span *ngIf="cboView.value === 'ganttView'" class="label" i18n>Scale:</span>
-      <select *ngIf="cboView.value === 'ganttView'"
-              class="select-box" style="width:98px"
-              (change)="onChangeView()" [(ngModel)]="viewConfig.timeScaleUnit">
-          <option value="year" i18n>Annual</option>
-          <option value="quarter" i18n>Quarterly</option>
-          <option value="month" i18n>Monthly</option>
-          <option value="week" i18n>Weekly</option>
-      </select>
+    <span *ngIf="layoutType === 'Home' || layoutType === 'Projects'">
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+
+        <span class="label" i18n>View: </span>
+        <select #cboView
+                class="select-box" style="width:200px;"
+                (change)="onChangeView()" [(ngModel)]="viewConfig.viewType">
+          <option value="treeView" *ngIf="layoutType === 'Projects'" i18n>Activities tree</option>
+          <option value="ganttView" i18n>Gantt Chart</option>
+          <option value="timeline" i18n>General Timeline</option>
+          <option value="deadline" i18n>By Deadline</option>
+          <option value="plannedEndDate" i18n>By Planned End Date</option>
+          <option value="actualStartDate" i18n>By Actual Start Date</option>
+          <option value="responsible" i18n>By Responsible timeline</option>
+          <option value="theme" i18n>By Theme timeline</option>
+        </select>
+        &nbsp; &nbsp; &nbsp; &nbsp;
+        <span *ngIf="cboView.value === 'ganttView'" class="label" i18n>Scale:</span>
+        <select *ngIf="cboView.value === 'ganttView'"
+                class="select-box" style="width:98px"
+                (change)="onChangeView()" [(ngModel)]="viewConfig.timeScaleUnit">
+            <option value="year" i18n>Annual</option>
+            <option value="quarter" i18n>Quarterly</option>
+            <option value="month" i18n>Monthly</option>
+            <option value="week" i18n>Weekly</option>
+        </select>
     </span>
 
-    <span *ngIf="layoutType === 'ProjectsTemplates'" class="label" i18n>Regulatory processes: </span>
-    <select *ngIf="layoutType === 'ProjectsTemplates'" #cboTemplates
-            class="select-box" style="width:360px;"
-            (change)="onSelectTemplate(cboTemplates.value)">
-      <option value="" i18n>( Please select a regulatory process )</option>
-      <option *ngFor="let template of templateStore.templates | async"
-              [value]="template.uid">{{template.name}}</option>
-    </select>
-    &nbsp; &nbsp;
-    <span *ngIf="layoutType === 'ProjectsTemplates'" class="label" i18n>View: </span>
-    <select *ngIf="layoutType === 'ProjectsTemplates'"
-            class="select-box" style="width:188px"
-            (change)="onChangeView()" [(ngModel)]="viewConfig.viewType">
-      <option value="treeView" i18n>Activities tree design</option>
-      <option value="bpmnView" i18n>Process diagram (BPMN)</option>
-    </select>
+
+    <span *ngIf="layoutType === 'Processes'">
+        <span class="label" i18n>Regulatory processes: </span>
+        <select #cboTemplates
+                class="select-box" style="width:360px;"
+                (change)="onSelectTemplate(cboTemplates.value)">
+          <option value="" i18n>( Please select a regulatory process )</option>
+          <option *ngFor="let template of templateStore.templates | async"
+                  [value]="template.uid">{{template.name}}</option>
+        </select>
+        &nbsp; &nbsp;
+        <span class="label" i18n>View: </span>
+        <select class="select-box" style="width:188px"
+                (change)="onChangeView()" [(ngModel)]="viewConfig.viewType">
+          <option value="treeView" i18n>Obligations tree</option>
+          <option value="bpmnView" i18n>Process diagram (BPMN)</option>
+        </select>
+    </span>
+
   </div>

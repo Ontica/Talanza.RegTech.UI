@@ -41,9 +41,13 @@ $margin-size: 8px;
 }
 
 .menu-bar {
+  @include row;
+
   background-color: $secondary-color;
   padding-bottom: 8px;
   padding-top: 8px;
+  height: 48px;
+  align-items: center;
 
   select.select-box {
     background-color: #EDEEF0;
