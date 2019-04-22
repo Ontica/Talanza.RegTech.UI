@@ -5,19 +5,10 @@
  * See LICENSE.txt in the project root for complete license information.
  */
 
-import { Component, Output, EventEmitter, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 
-import { ProjectStore } from '@app/store/project.store';
-import { ProjectTemplateStore } from '@app/store/project-template.store';
 import { UserInterfaceStore } from '@app/store/ui.store';
-
-import { Project, ProjectTemplate } from '@app/models/project-management';
-
-import { ProjectViewConfig, DefaultProjectViewConfig } from '@app/models/user-interface';
-
-
-export type ProjectViewType = 'Tree' | 'Gantt' | 'Timeline';
 
 
 @Component({
@@ -29,15 +20,9 @@ export class ViewSelectorComponent implements OnInit, OnDestroy {
 
   layoutType: string;
 
-  viewConfig: ProjectViewConfig = DefaultProjectViewConfig;
-
-  selectedTemplate: ProjectTemplate;
-
   private subscription: Subscription;
 
-  constructor(protected uiStore: UserInterfaceStore,
-              public projectStore: ProjectStore,
-              public templateStore: ProjectTemplateStore) { }
+  constructor(protected uiStore: UserInterfaceStore) { }
 
 
   ngOnInit(): void {
@@ -51,18 +36,6 @@ export class ViewSelectorComponent implements OnInit, OnDestroy {
     if (this.subscription) {
       this.subscription.unsubscribe();
     }
-  }
-
-
-  onChangeView() {
-    this.uiStore.setProjectViewConfig(this.viewConfig);
-  }
-
-
-  onSelectTemplate(projectUID) {
-    this.selectedTemplate = this.templateStore.findById(projectUID);
-
-    this.templateStore.selectTemplate(this.selectedTemplate);
   }
 
 }

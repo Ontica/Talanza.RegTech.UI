@@ -5,11 +5,10 @@
  * See LICENSE.txt in the project root for complete license information.
  */
 
+export * from './layout-config';
+
 export * from './menu-item';
 
 export * from './navigation-header';
 
-export * from './project-view-config';
-
 export * from './user-interface';
-

@@ -23,17 +23,42 @@ import { TemplatesMainPageComponent } from './templates/templates-main-page.comp
         path: 'contract-management', component: MainLayoutComponent,
         canActivate: [SecurityGuardService], data: { layoutType: 'Projects' },
         children: [
-          { path: 'activities', component: ProjectsMainPageComponent, data: { viewName: 'Project.Activities' }},
-          { path: 'timelines', component: ProjectsMainPageComponent, data: { viewName: 'Project.Timelines' }},
-          { path: 'documents', component: ProjectsMainPageComponent, data: {viewName: 'Project.Documents' }},
-          { path: '', redirectTo: 'activities', pathMatch: 'full' }
+          {
+            path: 'activities',
+            component: ProjectsMainPageComponent,
+            data: { viewName: 'Project.Activities' }
+          },
+          {
+            path: 'gantt',
+            component: ProjectsMainPageComponent,
+            data: { viewName: 'Project.Gantt' }
+          },
+          {
+            path: 'timelines',
+            component: ProjectsMainPageComponent,
+            data: { viewName: 'Project.Timelines' }
+          },
+          {
+            path: 'documents',
+            component: ProjectsMainPageComponent,
+            data: { viewName: 'Project.Documents' }
+          },
+          {
+            path: '',
+            redirectTo: 'activities',
+            pathMatch: 'full'
+          }
         ]
       },
       {
         path: 'regulatory-processes', component: MainLayoutComponent,
         canActivate: [SecurityGuardService], data: { layoutType: 'Processes' },
         children: [
-          { path: '', component: TemplatesMainPageComponent, data: { viewName: 'Process.Tree' }}
+          {
+            path: '',
+            component: TemplatesMainPageComponent,
+            data: { viewName: 'Processes.Tree' }
+          }
         ]
       }
     ])],

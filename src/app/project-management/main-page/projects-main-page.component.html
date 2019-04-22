@@ -1,67 +1,34 @@
 <div class="explorer"
     [class.remove-min-width]="!displayEditor">
 
-  <div [ngSwitch]="viewConfig.viewType"
-       class="explorer-panel"
-       [class.primary]="viewConfig.viewType !== 'ganttView'"
-       [class.primary-full]="viewConfig.viewType === 'ganttView'">
+  <div class="explorer-panel"
+       [class.primary]="currentView !== 'Project.Gantt'"
+       [class.primary-full]="currentView === 'Project.Gantt'">
 
-    <emp-steps-activity-tree *ngSwitchCase="'treeView'"
-         [templateDesignerMode]="false"
-         [project]="selectedProject"
-         (edited)="onActivityTreeEdited($event)"
-         (activitySelected)="showEditor($event)">
-    </emp-steps-activity-tree>
+    <ng-container *ngIf="currentView === 'Project.Activities'">
+      <emp-steps-activity-tree
+          [templateDesignerMode]="false"
+          [project]="selectedProject"
+          (edited)="onActivityTreeEdited($event)"
+          (activitySelected)="showEditor($event)">
+      </emp-steps-activity-tree>
+    </ng-container>
 
+    <ng-container *ngIf="currentView === 'Project.Gantt'">
+      <emp-steps-gantt-chart
+          [project]="selectedProject"
+          [reset]="toggleEditor"
+          (activitySelected)="showEditor($event)">
+      </emp-steps-gantt-chart>
+    </ng-container>
 
-    <emp-steps-dhtmlx-gantt *ngSwitchCase="'ganttView'"
-         [tasks]="ganttTasks"
-         [timeScaleUnit]="viewConfig.timeScaleUnit"
-         [reset]="toggleEditor"
-         (activitySelected)="showEditorFromGanttTask($event)">
-    </emp-steps-dhtmlx-gantt>
-
-
-    <emp-steps-activity-timeline *ngSwitchCase="'timeline'"
-        [groupBy]="'timeline'"
-        [project]="selectedProject"
-        (activitySelected)="showEditor($event)">
-    </emp-steps-activity-timeline>
-
-
-    <emp-steps-activity-timeline *ngSwitchCase="'deadline'"
-         [groupBy]="'deadline'"
-         [project]="selectedProject"
-         (activitySelected)="showEditor($event)">
-    </emp-steps-activity-timeline>
-
-
-    <emp-steps-activity-timeline *ngSwitchCase="'plannedEndDate'"
-         [groupBy]="'plannedEndDate'"
-         [project]="selectedProject"
-         (activitySelected)="showEditor($event)">
-    </emp-steps-activity-timeline>
-
-
-    <emp-steps-activity-timeline *ngSwitchCase="'actualStartDate'"
-         [groupBy]="'actualStartDate'"
-         [project]="selectedProject"
-         (activitySelected)="showEditor($event)">
-    </emp-steps-activity-timeline>
-
-
-    <emp-steps-activity-timeline *ngSwitchCase="'responsible'"
-         [groupBy]="'responsible'"
-         [project]="selectedProject"
-         (activitySelected)="showEditor($event)">
-    </emp-steps-activity-timeline>
-
-
-    <emp-steps-activity-timeline *ngSwitchCase="'theme'"
-         [groupBy]="'theme'"
-         [project]="selectedProject"
-         (activitySelected)="showEditor($event)">
-    </emp-steps-activity-timeline>
+    <ng-container *ngIf="currentView === 'Project.Timelines'">
+      <emp-steps-activity-timeline
+          [groupBy]="'timeline'"
+          [project]="selectedProject"
+          (activitySelected)="showEditor($event)">
+      </emp-steps-activity-timeline>
+    </ng-container>
 
   </div>
 

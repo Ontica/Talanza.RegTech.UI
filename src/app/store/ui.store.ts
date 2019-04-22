@@ -10,8 +10,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 
 import { UserInterfaceService } from '@app/services/user.interface.service';
 
-import { DefaultNavigationHeader, DefaultProjectViewConfig,
-         NavigationHeader, ProjectViewConfig, LayoutType, } from '@app/models/user-interface';
+import { DefaultNavigationHeader, LayoutType, NavigationHeader } from '@app/models/user-interface';
 
 
 @Injectable()
@@ -24,12 +23,8 @@ export class UserInterfaceStore {
   private _navigationHeader:
                 BehaviorSubject<NavigationHeader> = new BehaviorSubject(DefaultNavigationHeader);
 
-  private _selectedView: BehaviorSubject<ProjectViewConfig> = new BehaviorSubject(DefaultProjectViewConfig);
 
-
-  constructor(private uiService: UserInterfaceService) {
-    this.loadInitialData();
-  }
+  constructor(private uiService: UserInterfaceService) { }
 
 
   // select methods
@@ -47,12 +42,6 @@ export class UserInterfaceStore {
   get navigationHeader(): Observable<NavigationHeader> {
     return this._navigationHeader.asObservable();
   }
-
-
-  get projectViewConfig(): Observable<ProjectViewConfig> {
-    return this._selectedView.asObservable();
-  }
-
 
   // reduce methods
 
@@ -80,19 +69,6 @@ export class UserInterfaceStore {
 
   setNavigationHeader(value: NavigationHeader) {
     this._navigationHeader.next(value);
-  }
-
-
-  setProjectViewConfig(viewConfig: ProjectViewConfig) {
-    this._selectedView.next(viewConfig);
-  }
-
-
-  // private methods
-
-
-  private loadInitialData() {
-
   }
 
 }

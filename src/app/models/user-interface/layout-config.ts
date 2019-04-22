@@ -7,15 +7,3 @@
 
 
 export type LayoutType = 'Home' | 'Projects' | 'Processes' | 'Library' | 'Search';
-
-
-export const DefaultProjectViewConfig: ProjectViewConfig = {
-    viewType: 'treeView',
-    timeScaleUnit: 'quarter'
-};
-
-
-export class ProjectViewConfig {
-  viewType: string;
-  timeScaleUnit: string;
-}

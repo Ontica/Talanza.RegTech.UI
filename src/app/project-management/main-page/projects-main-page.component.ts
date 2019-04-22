@@ -11,12 +11,9 @@ import { Subscription } from 'rxjs';
 import { ProjectStore , ProjectModel } from '@app/store/project.store';
 import { UserInterfaceStore } from '@app/store/ui.store';
 
-import { GanttService } from '@app/services/project-management';
+import { Activity, EmptyActivity, ActivityOperation } from '@app/models/project-management';
 
-import { Activity, EmptyActivity, ActivityOperation, GanttTask } from '@app/models/project-management';
-
-import { MenuItem, NavigationHeader,
-         ProjectViewConfig, DefaultProjectViewConfig } from '@app/models/user-interface';
+import { MenuItem, NavigationHeader } from '@app/models/user-interface';
 
 import { Exception } from '@app/core';
 
@@ -30,50 +27,30 @@ import { isEmpty } from '@app/models/core';
 })
 export class ProjectsMainPageComponent implements OnInit, OnDestroy {
 
-  selectedProject: ProjectModel;
-  selectedActivity = EmptyActivity;
-  ganttTasks = [];
-
-  viewConfig: ProjectViewConfig = DefaultProjectViewConfig;
-
+  currentView: string;
   displayEditor = false;
   toggleEditor = false;
+
+  selectedProject: ProjectModel;
+  selectedActivity = EmptyActivity;
 
   private subs1: Subscription;
   private subs2: Subscription;
 
+
   constructor(private projectStore: ProjectStore,
-              private ganttService: GanttService,
               private uiStore: UserInterfaceStore)  { }
 
 
   ngOnInit() {
+    this.subs1 = this.uiStore.currentView.subscribe(
+      x => this.currentView = x
+    );
+
     this.setNavigationHeader();
 
-    this.subs1 = this.projectStore.selectedProject().subscribe(
-                    x => {
-                      if (this.selectedProject &&
-                          this.selectedProject.project.uid !== x.project.uid) {
-                        this.selectedActivity = EmptyActivity;
-                        this.displayEditor = false;
-                      }
-                      this.selectedProject = x;
-                      if (this.viewConfig.viewType === 'ganttView') {
-                        this.loadGanttTasks();
-                      }
-                      if (!isEmpty(this.selectedProject.project)) {
-                        this.uiStore.setMainTitle(this.selectedProject.project.name);
-                      }
-                    }
-                  );
-
-    this.subs2 = this.uiStore.projectViewConfig.subscribe(
-      x => {
-        this.viewConfig = x;
-        if (this.viewConfig.viewType === 'ganttView') {
-          this.loadGanttTasks();
-        }
-      }
+    this.subs2 = this.projectStore.selectedProject().subscribe(
+      x => this.onSelectedProjectChanged(x)
     );
   }
 
@@ -144,25 +121,21 @@ export class ProjectsMainPageComponent implements OnInit, OnDestroy {
   }
 
 
-  showEditorFromGanttTask(task: GanttTask) {
-    const activity = this.projectStore.getActivity(task.uid);
-    this.showEditor(activity);
-  }
-
-
   // private methods
 
 
-  private loadGanttTasks() {
-    if (!this.selectedProject ||
-       !this.selectedProject.project ||
-       !this.selectedProject.project.uid) {
-      return;
+  private onSelectedProjectChanged(value: ProjectModel) {
+    if (this.selectedProject &&
+        this.selectedProject.project.uid !== value.project.uid) {
+      this.selectedActivity = EmptyActivity;
+      this.displayEditor = false;
     }
 
-    this.ganttService.getActivitiesTree(this.selectedProject.project)
-                     .toPromise()
-                     .then(x => this.ganttTasks = x);
+    this.selectedProject = value;
+
+    if (!isEmpty(this.selectedProject.project)) {
+      this.uiStore.setMainTitle(this.selectedProject.project.name);
+    }
   }
 
 
@@ -172,6 +145,7 @@ export class ProjectsMainPageComponent implements OnInit, OnDestroy {
       hint: 'Contract management',
       mainMenu: [
         new MenuItem('Activities List', undefined, '/contract-management/activities'),
+        new MenuItem('Gantt chart', undefined, '/contract-management/gantt'),
         new MenuItem('Timelines', undefined, '/contract-management/timelines', false),
         new MenuItem('Documents', undefined, '/contract-management/documents', false)
       ]

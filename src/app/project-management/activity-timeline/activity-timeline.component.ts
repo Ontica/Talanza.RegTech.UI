@@ -8,12 +8,15 @@
 import { Component, EventEmitter,
          Input, OnChanges, Output } from '@angular/core';
 
+import { Assertion } from '@app/core';
+
 import { ProjectModel } from '@app/store/project.store';
+import { UserInterfaceStore } from '@app/store/ui.store';
+
 import { Activity, EmptyActivity } from '@app/models/project-management';
 
 import { GroupByProperty } from './group-activities-by.pipe';
 
-import { Assertion } from '@app/core';
 import { TimelineHelper } from '../common/timeline-helper';
 
 
@@ -27,12 +30,12 @@ export class ActivityTimelineComponent implements OnChanges {
   selectedActivity: Activity = EmptyActivity;
 
   @Input() project: ProjectModel;
-  @Input() groupBy: GroupByProperty;
+  @Input() groupBy: GroupByProperty = 'timeline';
 
   @Output() activitySelected = new EventEmitter<Activity>();
 
 
-  constructor() { }
+  constructor(private uiStore: UserInterfaceStore) { }
 
 
   ngOnChanges() {
@@ -60,13 +63,13 @@ export class ActivityTimelineComponent implements OnChanges {
         return 'General Timeline';
 
       case 'deadline':
-        return 'Deadline';
+        return 'By Deadline';
 
       case 'plannedEndDate':
-        return 'Planed End Date';
+        return 'By Planned End Date';
 
       case 'actualStartDate':
-        return 'Actual Start Date';
+        return 'By Actual Start Date';
 
       case 'responsible':
         return 'By Responsible';
@@ -79,6 +82,15 @@ export class ActivityTimelineComponent implements OnChanges {
     }
   }
 
+
+  onChangeGroupBy(groupBy: GroupByProperty) {
+    this.groupBy = groupBy;
+  }
+
+
+  onSearch() {
+
+  }
 
   onSelectActivity(activity: Activity, emitEvent: boolean = false) {
     this.selectedActivity = activity;

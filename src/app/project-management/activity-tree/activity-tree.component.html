@@ -3,11 +3,21 @@
   <div class="card-header card-header-flat">
     <div *ngIf="templateDesignerMode" class="card-title">
       <span i18n>Obligations Tree</span>
+
+      <button mat-icon-button [matMenuTriggerFor]="menu">
+        <mat-icon>arrow_drop_down</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item>Obligations Tree</button>
+        <button mat-menu-item>Process diagram (BPMN)</button>
+      </mat-menu>
+
       <div class="card-hint">{{project.project.name}}</div>
     </div>
     <div *ngIf="!templateDesignerMode" class="card-title">
       <span i18n>Contract Activities</span>
-      <div class="card-hint" i18n>Contract: {{project.project.name}}</div>
+
+    <div class="card-hint" i18n>Contract: {{project.project.name}}</div>
     </div>
     <div class="card-header-options">
       <button *ngIf="!templateDesignerMode" type="button" class="btn disabled"
