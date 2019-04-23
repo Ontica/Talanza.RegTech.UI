@@ -18,6 +18,8 @@ import { ProceduresModule } from '@app/procedures/procedures.module';
 
 import { ProcessesMainPageComponent } from './main-page/processes-main-page.component';
 
+import { ProcessesListComponent } from './list/processes-list.component';
+
 import { ProcessTreeDesignerComponent } from './tree-designer/tree-designer.component';
 
 import { ProcessActivityAssociationComponent } from './former-editor/process-activity-association.component';
@@ -33,6 +35,7 @@ import {
 } from './activity-designer/activity-model-form/activity-model-form.component';
 
 import { ProcessesRoutingModule } from './processes-routing.module';
+
 
 @NgModule({
 
@@ -59,7 +62,8 @@ import { ProcessesRoutingModule } from './processes-routing.module';
     ProcessTreeDesignerComponent,
     ProcessActivityAssociationComponent,
     ProcessEditorComponent,
-    SaveProcessDialogComponent
+    SaveProcessDialogComponent,
+    ProcessesListComponent,
   ],
 
   exports: [

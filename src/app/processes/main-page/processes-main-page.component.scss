@@ -4,8 +4,26 @@ $primary-panel-min-width: 266px;
 $secondary-panel-min-width: 680px;
 $gap-width: 30px;
 
+.container {
+  @include row;
+}
+
+.explorer-aside {
+  width: 240px;
+  max-width: 240px;
+
+  min-width: $primary-panel-min-width;
+
+  margin-top: 8px;
+  margin-bottom: 8px;
+  margin-right: $gap-width;
+
+  border: 1px solid $primary-color;
+}
 
 .explorer {
+  @include expand;
+
   @include explorer-defaults;
 
   justify-content: center;

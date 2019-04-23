@@ -1,26 +1,30 @@
-<div class="explorer"
-     [class.remove-min-width]="!displayEditor">
+<div class="container">
 
-  <div class="explorer-panel primary">
-
-    <div>The processes menu ...</div>
-
-    <emp-steps-tree-designer
-         [project]="model"
-         (edited)="onActivityTreeEdited($event)"
-         (activitySelected)="showEditor($event)">
-    </emp-steps-tree-designer>
-
+  <div class="explorer-aside">
+    <emp-steps-processes-list
+        [processes]="store.templates | async"
+        (processSelected)="onProcessSelected($event)">
+    </emp-steps-processes-list>
   </div>
 
-  <div *ngIf="displayEditor" class="explorer-panel secondary">
+  <div class="explorer"
+      [class.remove-min-width]="!displayEditor">
 
-    <emp-steps-activity-designer
-        [activityTemplate]="selectedActivityTemplate"
-        (update)="onActivityUpdated($event)"
-        (close)="onEditorClosed()">
-    </emp-steps-activity-designer>
+    <div class="explorer-panel primary">
+      <emp-steps-tree-designer
+          [project]="model"
+          (edited)="onActivityTreeEdited($event)"
+          (activitySelected)="showEditor($event)">
+      </emp-steps-tree-designer>
+    </div>
+
+    <div *ngIf="displayEditor" class="explorer-panel secondary">
+      <emp-steps-activity-designer
+          [activityTemplate]="selectedActivityTemplate"
+          (update)="onActivityUpdated($event)"
+          (close)="onEditorClosed()">
+      </emp-steps-activity-designer>
+    </div>
 
   </div>
-
 </div>

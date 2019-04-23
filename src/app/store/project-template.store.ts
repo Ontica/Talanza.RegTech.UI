@@ -11,8 +11,7 @@ import { List } from 'immutable';
 
 import { ProjectTemplateService } from '@app/services/project-management';
 
-import { Activity, ActivityTemplate,
-         Project, ProjectTemplate, EmptyProjectTemplate } from '@app/models/project-management';
+import { ActivityTemplate, ProjectTemplate, EmptyProjectTemplate } from '@app/models/project-management';
 
 
 export class ProjectTemplateModel {

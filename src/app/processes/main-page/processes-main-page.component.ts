@@ -11,7 +11,8 @@ import { ProjectTemplateStore, ProjectTemplateModel } from '@app/store/project-t
 import { UserInterfaceStore } from '@app/store/ui.store';
 
 import { ActivityTemplate, ActivityTemplateOperation,
-         EmptyActivityTemplate, } from '@app/models/project-management';
+         EmptyActivityTemplate,
+         ProjectTemplate, } from '@app/models/project-management';
 import { NavigationHeader, MenuItem } from '@app/models/user-interface';
 import { isEmpty } from '@app/models/core';
 
@@ -28,8 +29,8 @@ export class ProcessesMainPageComponent implements OnInit {
   displayEditor = false;
   toggleEditor = false;
 
-  constructor(private uiStore: UserInterfaceStore,
-              private store: ProjectTemplateStore) { }
+  constructor(public store: ProjectTemplateStore,
+              public uiStore: UserInterfaceStore) { }
 
 
   ngOnInit() {
@@ -105,6 +106,11 @@ export class ProcessesMainPageComponent implements OnInit {
   }
 
 
+  onProcessSelected(process: ProjectTemplate) {
+    this.store.selectTemplate(process);
+  }
+
+
   showEditor(activityTemplate: ActivityTemplate) {
     if (activityTemplate) {
       this.selectedActivityTemplate = activityTemplate;
@@ -127,7 +133,8 @@ export class ProcessesMainPageComponent implements OnInit {
       title: 'Please select a regulatory process',
       hint: 'Regulatory process designer',
       mainMenu: [
-        new MenuItem('Processes', undefined, '/regulatory-processes'),
+        new MenuItem('Obligations Tree', undefined, '/regulatory-processes/obligations-tree'),
+        new MenuItem('Process diagram', undefined, '/regulatory-processes/process-diagram')
       ]
     };
 

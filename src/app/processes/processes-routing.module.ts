@@ -23,9 +23,19 @@ import { ProcessesMainPageComponent } from './main-page/processes-main-page.comp
         canActivate: [SecurityGuardService], data: { layoutType: 'Processes' },
         children: [
           {
-            path: '',
+            path: 'obligations-tree',
             component: ProcessesMainPageComponent,
             data: { viewName: 'Processes.Tree' }
+          },
+          {
+            path: 'process-diagram',
+            component: ProcessesMainPageComponent,
+            data: { viewName: 'Processes.Diagram' }
+          },
+          {
+            path: '',
+            redirectTo: 'obligations-tree',
+            pathMatch: 'full'
           }
         ]
       }
