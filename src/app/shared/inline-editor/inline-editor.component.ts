@@ -5,22 +5,24 @@
  * See LICENSE.txt in the project root for complete license information.
  */
 
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 
 @Component({
-  selector: 'emp-steps-activity-inline-editor',
+  selector: 'emp-ng-inline-editor',
   template: `
-    <input #txtActivityName type="text"
+    <input #txtField type="text"
       class='text-box inline-editor-text-box'
       (keyup.esc)='onCancel()'
-      (keyup.enter)='onInsert(txtActivityName.value)'
-      placeholder= 'Activity or obligation name' i18n-placeholder>
+      (keyup.enter)='onInsert(txtField.value)'
+      placeholder= '{{placeholder}}' i18n-placeholder>
     <button class='btn' (click)='onCancel()' i18n>Cancel</button>
   `,
-  styleUrls: ['./activity-inline-editor.component.scss']
+  styleUrls: ['./inline-editor.component.scss']
 })
-export class ActivityInlineEditorComponent {
+export class InlineEditorComponent {
+
+  @Input() placeholder = '';
 
   @Output() cancel = new EventEmitter<void>();
 

@@ -3,20 +3,22 @@
 
   <div class="explorer-panel primary">
 
-    <emp-steps-activity-tree
-         [templateDesignerMode]="true"
+    <div>The processes menu ...</div>
+
+    <emp-steps-tree-designer
          [project]="model"
          (edited)="onActivityTreeEdited($event)"
          (activitySelected)="showEditor($event)">
-    </emp-steps-activity-tree>
+    </emp-steps-tree-designer>
 
   </div>
 
   <div *ngIf="displayEditor" class="explorer-panel secondary">
 
-    <emp-steps-activity-designer [activityTemplate]="selectedActivityTemplate"
-                                 (update)="onActivityUpdated($event)"
-                                 (close)="onEditorClosed()">
+    <emp-steps-activity-designer
+        [activityTemplate]="selectedActivityTemplate"
+        (update)="onActivityUpdated($event)"
+        (close)="onEditorClosed()">
     </emp-steps-activity-designer>
 
   </div>

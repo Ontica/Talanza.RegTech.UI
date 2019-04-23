@@ -11,21 +11,27 @@ import { RouterModule } from '@angular/router';
 import { SecurityGuardService } from '@app/core';
 
 import { MainLayoutComponent } from '@app/shared';
-import { ProcessEditorComponent } from './editor/process-editor.component';
 
+import { ProcessesMainPageComponent } from './main-page/processes-main-page.component';
 
 @NgModule({
 
   imports: [
     RouterModule.forChild([
       {
-        path: 'process', component: MainLayoutComponent, canActivate: [SecurityGuardService],
-        children: [{ path: 'editor', component: ProcessEditorComponent }]
-
+        path: 'regulatory-processes', component: MainLayoutComponent,
+        canActivate: [SecurityGuardService], data: { layoutType: 'Processes' },
+        children: [
+          {
+            path: '',
+            component: ProcessesMainPageComponent,
+            data: { viewName: 'Processes.Tree' }
+          }
+        ]
       }
     ])],
 
   exports: [RouterModule]
 
 })
-export class ProcessRoutingModule { }
+export class ProcessesRoutingModule { }

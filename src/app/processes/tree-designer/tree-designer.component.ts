@@ -15,17 +15,15 @@ import { ProjectModel } from '@app/store/project.store';
 
 import { Activity, EmptyActivity, ActivityOperation } from '@app/models/project-management';
 
-import { AddEventDialogComponent } from '../add-event-dialog/add-event-dialog.component';
-
-import { TimelineHelper } from '../common/timeline-helper';
+import { MoveActivityDialogComponent } from '../move-activity-dialog/move-activity-dialog.component';
 
 
 @Component({
-  selector: 'emp-steps-activity-tree',
-  templateUrl: './activity-tree.component.html',
-  styleUrls: ['./activity-tree.component.scss'],
+  selector: 'emp-steps-tree-designer',
+  templateUrl: './tree-designer.component.html',
+  styleUrls: ['./tree-designer.component.scss'],
 })
-export class ActivityTreeComponent implements OnChanges {
+export class ProcessTreeDesignerComponent implements OnChanges {
 
   selectedActivity: Activity = EmptyActivity;
 
@@ -49,11 +47,6 @@ export class ActivityTreeComponent implements OnChanges {
 
   get hasSelectedActivities() {
     return (this.selectedActivity.uid !== '');
-  }
-
-
-  get timelineHelper() {
-    return TimelineHelper;
   }
 
 
@@ -210,15 +203,25 @@ export class ActivityTreeComponent implements OnChanges {
   }
 
 
-  openAddEventDialog() {
+  openCopyOrMoveActivityDialog(activity: Activity) {
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.height = '400px',
     dialogConfig.width = '600px',
+    dialogConfig.data = activity;
 
-    this.dialog.open(AddEventDialogComponent, dialogConfig);
+    const dialogRef = this.dialog.open(MoveActivityDialogComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe(
+        result => {
+        if (result) {
+          this.edited.emit(result as ActivityOperation);
+        }
+      }
+    );
+
   }
 
 

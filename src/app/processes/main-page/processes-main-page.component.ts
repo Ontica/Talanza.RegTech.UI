@@ -16,11 +16,11 @@ import { NavigationHeader, MenuItem } from '@app/models/user-interface';
 import { isEmpty } from '@app/models/core';
 
 @Component({
-  selector: 'emp-steps-templates-main-page',
-  templateUrl: './templates-main-page.component.html',
-  styleUrls: ['./templates-main-page.component.scss']
+  selector: 'emp-steps-processes-main-page',
+  templateUrl: './processes-main-page.component.html',
+  styleUrls: ['./processes-main-page.component.scss']
 })
-export class TemplatesMainPageComponent implements OnInit {
+export class ProcessesMainPageComponent implements OnInit {
 
   model: ProjectTemplateModel;
   selectedActivityTemplate = EmptyActivityTemplate;

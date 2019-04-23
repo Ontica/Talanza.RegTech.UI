@@ -28,6 +28,8 @@ import { RagStatusComponent } from './rag-status/rag-status.component';
 import { SearchBoxComponent } from './search-box/search-box.component';
 import { SpinnerComponent } from './spinner/spinner.component';
 
+import { InlineEditorComponent } from './inline-editor/inline-editor.component';
+
 import { AngularMaterialModule } from './angular-material.module';
 import { WidgetsModule } from './widgets/widgets.module';
 
@@ -64,7 +66,8 @@ import { SpinnerService } from './spinner/spinner.service';
     SafeHtmlPipe,
     SafeUrlPipe,
     SearchBoxComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    InlineEditorComponent
   ],
 
   exports: [
@@ -79,7 +82,8 @@ import { SpinnerService } from './spinner/spinner.service';
     SafeHtmlPipe,
     SafeUrlPipe,
     SearchBoxComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    InlineEditorComponent
   ],
 
   providers: [

@@ -23,7 +23,7 @@ import { TimelineHelper } from '../common/timeline-helper';
 @Component({
   selector: 'emp-steps-activity-timeline',
   templateUrl: './activity-timeline.component.html',
-  styleUrls: ['../common/activity.scss'],
+  styleUrls: ['./activity-timeline.component.scss'],
 })
 export class ActivityTimelineComponent implements OnChanges {
 

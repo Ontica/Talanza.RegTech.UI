@@ -1,0 +1,95 @@
+<div *ngIf="project.project.uid !== ''" class="card">
+
+  <div class="card-header card-header-flat">
+    <div class="card-title">
+      <span i18n>Obligations Tree</span>
+
+      <button mat-icon-button [matMenuTriggerFor]="menu">
+        <mat-icon>arrow_drop_down</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item>Obligations Tree</button>
+        <button mat-menu-item>Process diagram (BPMN)</button>
+      </mat-menu>
+
+      <div class="card-hint">{{project.project.name}}</div>
+    </div>
+    <div class="card-header-options">
+      <button type="button" class="btn-action"
+              (click)="showInitialActivityInlineEditor()" i18n>Insert obligation</button>
+    </div>
+  </div>
+
+  <div class="card-body drag-boundary">
+
+    <div *ngIf="addFirstActivityEditorVisible"
+          style="margin-left:68pt">
+          <emp-ng-inline-editor
+            placeholder='Activity or obligation name'
+            (insert)="insertActivity($event)"
+            (cancel)="hideInlineEditors()">
+          </emp-ng-inline-editor>
+    </div>
+
+    <div cdkDropList (cdkDropListDropped)="dropActivity($event)" class="drop-list">
+
+      <div *ngFor="let activity of project.activities" class="drop-item"
+            cdkDrag cdkDragLockAxis="y" [cdkDragData]="activity" cdkDragBoundary=".drag-boundary">
+
+        <div class="activity-row"
+             [class.selected-activity]="isActivitySelected(activity)"
+             (click)="onSelectActivity(activity)" >
+
+            <div class="edition-controls">
+              <mat-icon cdkDragHandle class="ghost-icon grabbable">drag_indicator</mat-icon>
+
+              &nbsp; &nbsp;
+              <mat-icon *ngIf="isIndentable(activity)"
+                         class="ghost-icon" (click)="indentActivity(activity)">subdirectory_arrow_right</mat-icon>
+              <mat-icon *ngIf="!isIndentable(activity) && isOutdentable(activity)"
+                         class="ghost-icon" (click)="outdentActivity(activity)">subdirectory_arrow_left</mat-icon>
+            </div>
+
+            <div class="activity-container"
+                [style.padding-left.pt]="activity.level * 14">
+
+                <div class="activity-name">
+
+                  <div>
+                    <a (click)="onSelectActivity(activity, true)">{{activity.name}}</a>
+                  </div>
+
+                </div>
+
+                <div class="activity-status">
+
+                  <div class="activity-theme" i18n>
+                    {{activity.theme || 'No theme'}}
+                  </div>
+
+                  <div class="right-column expand">
+                      <i class="fa fa-ellipsis-v ghost-icon" aria-hidden="true" (click)="openCopyOrMoveActivityDialog(activity)"></i>
+                  </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div *ngIf="isActivitySelected(activity) && insertActivityEditorVisible"
+              [style.margin-left.pt]="activity.level * 14 + 54">
+          <emp-ng-inline-editor
+              placeholder='Activity or obligation name'
+              (insert)="insertActivity($event, activity.position)"
+              (cancel)="hideInlineEditors()">
+          </emp-ng-inline-editor>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

@@ -13,7 +13,7 @@ import { SecurityGuardService } from '@app/core';
 import { MainLayoutComponent } from '@app/shared';
 
 import { ProjectsMainPageComponent } from './main-page/projects-main-page.component';
-import { TemplatesMainPageComponent } from './templates/templates-main-page.component';
+
 
 @NgModule({
 
@@ -47,17 +47,6 @@ import { TemplatesMainPageComponent } from './templates/templates-main-page.comp
             path: '',
             redirectTo: 'activities',
             pathMatch: 'full'
-          }
-        ]
-      },
-      {
-        path: 'regulatory-processes', component: MainLayoutComponent,
-        canActivate: [SecurityGuardService], data: { layoutType: 'Processes' },
-        children: [
-          {
-            path: '',
-            component: TemplatesMainPageComponent,
-            data: { viewName: 'Processes.Tree' }
           }
         ]
       }

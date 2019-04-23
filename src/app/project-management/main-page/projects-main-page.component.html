@@ -7,7 +7,6 @@
 
     <ng-container *ngIf="currentView === 'Project.Activities'">
       <emp-steps-activity-tree
-          [templateDesignerMode]="false"
           [project]="selectedProject"
           (edited)="onActivityTreeEdited($event)"
           (activitySelected)="showEditor($event)">

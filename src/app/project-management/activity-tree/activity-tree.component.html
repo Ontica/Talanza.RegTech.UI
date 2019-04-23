@@ -1,30 +1,18 @@
 <div *ngIf="project.project.uid !== ''" class="card">
 
   <div class="card-header card-header-flat">
-    <div *ngIf="templateDesignerMode" class="card-title">
-      <span i18n>Obligations Tree</span>
 
-      <button mat-icon-button [matMenuTriggerFor]="menu">
-        <mat-icon>arrow_drop_down</mat-icon>
-      </button>
-      <mat-menu #menu="matMenu">
-        <button mat-menu-item>Obligations Tree</button>
-        <button mat-menu-item>Process diagram (BPMN)</button>
-      </mat-menu>
-
-      <div class="card-hint">{{project.project.name}}</div>
-    </div>
-    <div *ngIf="!templateDesignerMode" class="card-title">
+    <div class="card-title">
       <span i18n>Contract Activities</span>
 
     <div class="card-hint" i18n>Contract: {{project.project.name}}</div>
     </div>
     <div class="card-header-options">
-      <button *ngIf="!templateDesignerMode" type="button" class="btn disabled"
+      <button type="button" class="btn disabled"
               (click)="openAddEventDialog()" i18n>What is happening?</button>
       &nbsp; &nbsp;
       <button type="button" class="btn-action"
-              (click)="showInitialActivityInlineEditor()" i18n>{{ templateDesignerMode ? 'Insert obligation' : 'Insert activity' }}</button>
+              (click)="showInitialActivityInlineEditor()" i18n>Insert activity</button>
     </div>
   </div>
 
@@ -32,9 +20,11 @@
 
     <div *ngIf="addFirstActivityEditorVisible"
           style="margin-left:68pt">
-          <emp-steps-activity-inline-editor (insert)="insertActivity($event)"
-                                            (cancel)="hideInlineEditors()">
-          </emp-steps-activity-inline-editor>
+          <emp-ng-inline-editor
+              placeholder='Activity or obligation name'
+              (insert)="insertActivity($event)"
+              (cancel)="hideInlineEditors()">
+          </emp-ng-inline-editor>
     </div>
 
     <div cdkDropList (cdkDropListDropped)="dropActivity($event)" class="drop-list">
@@ -64,11 +54,7 @@
                 <div class="activity-name">
 
                   <div>
-                    <a *ngIf="templateDesignerMode"
-                      (click)="onSelectActivity(activity, true)">{{activity.name}}</a>
-
-                    <a *ngIf="!templateDesignerMode"
-                      [class.blink]="timelineHelper.getTimelineColor(activity, activity.deadline, 'title')"
+                    <a [class.blink]="timelineHelper.getTimelineColor(activity, activity.deadline, 'title')"
                       [style.color]="timelineHelper.getTimelineColor(activity, activity.deadline)"
                       [class.completed-activity]="timelineHelper.isCompleted(activity)"
                       (click)="onSelectActivity(activity, true)">{{activity.name}}</a>
@@ -76,7 +62,7 @@
 
                 </div>
 
-                <div *ngIf="!templateDesignerMode" class="activity-status">
+                <div class="activity-status">
 
                   <div class="activity-theme" i18n>
                     {{activity.theme || 'No theme'}}<br/>
@@ -120,27 +106,17 @@
 
                 </div>
 
-
-                <div *ngIf="templateDesignerMode" class="activity-status">
-
-                  <div class="activity-theme" i18n>
-                    {{activity.theme || 'No theme'}}
-                  </div>
-
-                  <div class="right-column expand">
-                      <i class="fa fa-ellipsis-v ghost-icon" aria-hidden="true" (click)="openCopyOrMoveActivityDialog(activity)"></i>
-                  </div>
-
-                </div>
-
             </div>
 
         </div>
 
         <div *ngIf="isActivitySelected(activity) && insertActivityEditorVisible"
               [style.margin-left.pt]="activity.level * 14 + 54">
-          <emp-steps-activity-inline-editor (insert)="insertActivity($event, activity.position)"
-                                            (cancel)="hideInlineEditors()"></emp-steps-activity-inline-editor>
+            <emp-ng-inline-editor
+                placeholder='Activity or obligation name'
+                (insert)="insertActivity($event, activity.position)"
+                (cancel)="hideInlineEditors()">
+            </emp-ng-inline-editor>
         </div>
 
       </div>
