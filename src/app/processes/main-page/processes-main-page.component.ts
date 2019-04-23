@@ -38,11 +38,11 @@ export class ProcessesMainPageComponent implements OnInit {
 
     this.store.selectedTemplate().subscribe (
       x => {
-        this.model = x;
-
-        if (!isEmpty(this.model.project)) {
-          this.displayEditor = false;
-          this.uiStore.setMainTitle(this.model.project.name);
+        if (!isEmpty(x.project)) {
+          if (this.model && this.model.project.uid !== x.project.uid) {
+            this.displayEditor = false;
+            this.uiStore.setMainTitle(x.project.name);
+          }
         }
         this.model = x;
       }

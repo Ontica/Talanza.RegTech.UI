@@ -1,5 +1,4 @@
-@import "responsive";
-@import "card";
+@import "general-styles";
 
 
 .list-item {
@@ -45,6 +44,7 @@
 .column {
   padding-right: 36px;
 }
+
 
 .right-column {
   justify-content: flex-end;

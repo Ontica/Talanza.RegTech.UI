@@ -8,10 +8,10 @@
     <div class="card-hint" i18n>Contract: {{project.project.name}}</div>
     </div>
     <div class="card-header-options">
-      <button type="button" class="btn disabled"
+      <button type="button" class="btn-action"
               (click)="openAddEventDialog()" i18n>What is happening?</button>
       &nbsp; &nbsp;
-      <button type="button" class="btn-action"
+      <button type="button" class="btn disabled"
               (click)="showInitialActivityInlineEditor()" i18n>Insert activity</button>
     </div>
   </div>
@@ -32,7 +32,7 @@
       <div *ngFor="let activity of project.activities" class="drop-item"
             cdkDrag cdkDragLockAxis="y" [cdkDragData]="activity" cdkDragBoundary=".drag-boundary">
 
-        <div class="activity-row"
+        <div class="activity-row" matRipple [matRippleTrigger]="trigger"
              [class.selected-activity]="isActivitySelected(activity)"
              (click)="onSelectActivity(activity)" >
 
@@ -50,16 +50,12 @@
                 [style.border-left-color]="timelineHelper.getTimelineColor(activity, activity.deadline, 'border')"
                 [style.padding-left.pt]="activity.level * 14">
 
-
                 <div class="activity-name">
-
-                  <div>
-                    <a [class.blink]="timelineHelper.getTimelineColor(activity, activity.deadline, 'title')"
+                  <a #trigger
+                      [class.blink]="timelineHelper.getTimelineColor(activity, activity.deadline, 'title')"
                       [style.color]="timelineHelper.getTimelineColor(activity, activity.deadline)"
                       [class.completed-activity]="timelineHelper.isCompleted(activity)"
                       (click)="onSelectActivity(activity, true)">{{activity.name}}</a>
-                  </div>
-
                 </div>
 
                 <div class="activity-status">

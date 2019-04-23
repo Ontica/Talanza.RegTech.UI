@@ -28,7 +28,7 @@
       <div *ngFor="let activity of project.activities" class="drop-item"
             cdkDrag cdkDragLockAxis="y" [cdkDragData]="activity" cdkDragBoundary=".drag-boundary">
 
-        <div class="activity-row"
+        <div class="activity-row" matRipple [matRippleTrigger]="trigger"
              [class.selected-activity]="isActivitySelected(activity)"
              (click)="onSelectActivity(activity)" >
 
@@ -46,7 +46,7 @@
                 [style.padding-left.pt]="activity.level * 14">
 
                 <div class="activity-name">
-                  <a (click)="onSelectActivity(activity, true)">{{activity.name}}</a>
+                  <a #trigger (click)="onSelectActivity(activity, true)">{{activity.name}}</a>
                 </div>
 
                 <div class="activity-status">

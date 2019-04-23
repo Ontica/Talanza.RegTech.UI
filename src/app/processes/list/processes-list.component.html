@@ -14,10 +14,10 @@
   <div class="card-body">
 
     <div *ngFor="let process of processes"
-          class="list-item"
+          class="list-item" matRipple [matRippleTrigger]="trigger"
           [class.list-item-selected]="isSelected(process)">
       <div class="item-name">
-        <a (click)="onSelect(process)">{{process.name}}</a>
+        <a #trigger (click)="onSelect(process)">{{process.name}}</a>
       </div>
     </div>
 

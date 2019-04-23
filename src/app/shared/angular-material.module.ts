@@ -18,6 +18,7 @@ import {
   MatListModule,
   MatMenuModule,
   MatProgressSpinnerModule,
+  MatRippleModule,
   MatSidenavModule,
   MatTabsModule
 } from '@angular/material';
@@ -86,6 +87,7 @@ export const DATE_FORMATS = {
     MatMenuModule,
     MatMomentDateModule,
     MatProgressSpinnerModule,
+    MatRippleModule,
     MatSidenavModule,
     MatTabsModule
   ],
@@ -102,6 +104,7 @@ export const DATE_FORMATS = {
     MatMenuModule,
     MatMomentDateModule,
     MatProgressSpinnerModule,
+    MatRippleModule,
     MatSidenavModule,
     MatTabsModule
   ],
