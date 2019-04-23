@@ -1,6 +1,6 @@
 # Talanza Regulatory Compliance Solution Frontend
 
-Angular-based front-end Regulatory Compliance Solution for the Mexican Energy Industry, custom-tailored and developed in association with [Talanza Energy Consulting](http://www.talanza.energy).
+Angular-based front-end Regulatory Compliance Solution for the Mexican Oil & Gas Industry, custom-tailored and developed in association with [Talanza Energy Consulting](http://www.talanza.energy).
 
 ## Quick start
 

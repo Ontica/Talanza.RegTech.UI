@@ -42,9 +42,9 @@
 
     </mat-sidenav>
 
-    <mat-sidenav-content class="content" [style.margin-left.px]="sidenav.opened ? 6 : 0">
+    <mat-sidenav-content class="content">
 
-      <!-- <div > -->
+      <div [style.margin-left.px]="sidenav.opened ? 6 : 0">
 
         <div>
           <emp-ng-navigation-header [layoutType]="layoutType"
@@ -56,7 +56,7 @@
           <router-outlet></router-outlet>
         </div>
 
-      <!-- </div> -->
+      </div>
 
     </mat-sidenav-content>
 
