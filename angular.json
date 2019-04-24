@@ -28,6 +28,8 @@
             ],
             "styles": [
               "node_modules/font-awesome/css/font-awesome.css",
+              "node_modules/bpmn-js/dist/assets/diagram-js.css",
+              "node_modules/bpmn-js/dist/assets/bpmn-font/css/bpmn-embedded.css",
               "src/styles.scss"
             ],
             "scripts": []

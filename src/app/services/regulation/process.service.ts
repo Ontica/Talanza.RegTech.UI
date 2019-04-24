@@ -6,6 +6,7 @@
  */
 
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 import { CoreService } from '@app/core/core.service';
 
@@ -21,6 +22,12 @@ export class ProcessService {
     return this.core.http.get<Process[]>('v1/process-definitions')
                          .toPromise();
   }
+
+
+  getNewProcessDiagram(): Observable<Process> {
+    return this.core.http.get<Process>('v1/process-definitions/empty-process');
+  }
+
 
   getProcessDiagram(uid: string): Promise<Process> {
     return this.core.http.get<Process>('v1/process-definitions/' + uid)

@@ -5,7 +5,8 @@
  * See LICENSE.txt in the project root for complete license information.
  */
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
 
 import { ProjectTemplateStore, ProjectTemplateModel } from '@app/store/project-template.store';
 import { UserInterfaceStore } from '@app/store/ui.store';
@@ -16,37 +17,56 @@ import { ActivityTemplate, ActivityTemplateOperation,
 import { NavigationHeader, MenuItem } from '@app/models/user-interface';
 import { isEmpty } from '@app/models/core';
 
+
 @Component({
   selector: 'emp-steps-processes-main-page',
   templateUrl: './processes-main-page.component.html',
   styleUrls: ['./processes-main-page.component.scss']
 })
-export class ProcessesMainPageComponent implements OnInit {
+export class ProcessesMainPageComponent implements OnInit, OnDestroy {
+
+  currentView: string;
+  displayEditor = false;
+  toggleEditor = false;
 
   model: ProjectTemplateModel;
   selectedActivityTemplate = EmptyActivityTemplate;
 
-  displayEditor = false;
-  toggleEditor = false;
+  private subs1: Subscription;
+  private subs2: Subscription;
 
   constructor(public store: ProjectTemplateStore,
               public uiStore: UserInterfaceStore) { }
 
 
   ngOnInit() {
+    this.subs1 = this.uiStore.currentView.subscribe(
+      x => this.currentView = x
+    );
+
     this.setNavigationHeader();
 
-    this.store.selectedTemplate().subscribe (
+    this.subs2 = this.store.selectedTemplate().subscribe (
       x => {
         if (!isEmpty(x.project)) {
           if (this.model && this.model.project.uid !== x.project.uid) {
             this.displayEditor = false;
-            this.uiStore.setMainTitle(x.project.name);
           }
+          this.uiStore.setMainTitle(x.project.name);
         }
         this.model = x;
       }
     );
+  }
+
+
+  ngOnDestroy(): void {
+    if (this.subs1) {
+      this.subs1.unsubscribe();
+    }
+    if (this.subs2) {
+      this.subs2.unsubscribe();
+    }
   }
 
 
@@ -57,13 +77,11 @@ export class ProcessesMainPageComponent implements OnInit {
 
   onActivityTreeEdited(event: ActivityTemplateOperation) {
     switch (event.operation) {
-
       case 'copyToProject':
         this.store.copyTo(event.activity as ActivityTemplate, event.targetProjectUID)
                   .then(() => this.displayEditor = false)
                   .catch(response => console.log(response.error.message));
         return;
-
 
       case 'insertActivity':
         this.store.insert(this.model.project, event.activity)
@@ -71,12 +89,10 @@ export class ProcessesMainPageComponent implements OnInit {
                   .catch(response => console.log(response.error.message));
         return;
 
-
       case 'moveActivity':
         this.store.move(event.activity as ActivityTemplate, event.newPosition)
                   .catch(response => console.log(response.error.message));
         return;
-
 
       case 'moveToProject':
         this.store.moveTo(event.activity as ActivityTemplate, event.targetProjectUID)
@@ -84,18 +100,14 @@ export class ProcessesMainPageComponent implements OnInit {
                   .catch(response => console.log(response.error.message));
         return;
 
-
       case 'changeParent':
         this.store.changeParent(event.activity as ActivityTemplate, event.newParent)
                   .catch(response => console.log(response.error.message));
         return;
 
-
       default:
         console.log('Unhandled operation name', event.operation);
-
     }
-
   }
 
 
@@ -103,6 +115,10 @@ export class ProcessesMainPageComponent implements OnInit {
     this.displayEditor = false;
 
     this.toggleEditor = !this.toggleEditor;
+  }
+
+  onProcessDiagramEdited(event: any) {
+
   }
 
 

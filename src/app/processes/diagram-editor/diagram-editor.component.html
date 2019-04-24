@@ -1,0 +1,28 @@
+<div *ngIf="project.project.uid !== ''" class="card">
+
+  <div class="card-header card-header-flat">
+    <div class="card-title">
+      <span i18n>Process Diagram Editor</span>
+      <div class="card-hint"><span i18n>Process: </span> {{project.project.name}}</div>
+    </div>
+    <div class="card-header-options">
+
+      <div style="width:38px"></div>
+
+      <button type="button" class="btn disabled"
+              (click)="onSave()" i18n>Save</button>
+    </div>
+  </div>
+
+  <div>
+
+    <emp-steps-bpmn-modeler
+        [xml]="xml"
+        [execute]="modelerAction"
+        (event)="onModelerEvent($event)"
+        (error)="onModelerError($event)">
+    </emp-steps-bpmn-modeler>
+
+  </div>
+
+</div>

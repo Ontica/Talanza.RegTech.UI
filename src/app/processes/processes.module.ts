@@ -22,6 +22,8 @@ import { ProcessesListComponent } from './list/processes-list.component';
 
 import { ProcessTreeDesignerComponent } from './tree-designer/tree-designer.component';
 
+import { ProcessDiagramEditorComponent } from './diagram-editor/diagram-editor.component';
+
 import { ProcessActivityAssociationComponent } from './former-editor/process-activity-association.component';
 import { ProcessEditorComponent } from './former-editor/process-editor.component';
 import { SaveProcessDialogComponent } from './former-editor/save-process-dialog.component';
@@ -30,11 +32,14 @@ import { ActivityDesignerComponent } from './activity-designer/activity-designer
 
 import { MoveActivityDialogComponent } from './move-activity-dialog/move-activity-dialog.component';
 
+
 import {
  ActivityModelFormComponent
 } from './activity-designer/activity-model-form/activity-model-form.component';
 
 import { ProcessesRoutingModule } from './processes-routing.module';
+import { BpmnModelerComponent } from './diagram-editor/bpmn-modeler/bpmn-modeler.component';
+
 
 
 @NgModule({
@@ -64,6 +69,8 @@ import { ProcessesRoutingModule } from './processes-routing.module';
     ProcessEditorComponent,
     SaveProcessDialogComponent,
     ProcessesListComponent,
+    ProcessDiagramEditorComponent,
+    BpmnModelerComponent,
   ],
 
   exports: [

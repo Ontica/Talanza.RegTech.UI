@@ -25,12 +25,12 @@ import { ProcessesMainPageComponent } from './main-page/processes-main-page.comp
           {
             path: 'obligations-tree',
             component: ProcessesMainPageComponent,
-            data: { viewName: 'Processes.Tree' }
+            data: { viewName: 'Process.Tree' }
           },
           {
             path: 'process-diagram',
             component: ProcessesMainPageComponent,
-            data: { viewName: 'Processes.Diagram' }
+            data: { viewName: 'Process.Diagram' }
           },
           {
             path: '',
