@@ -11,28 +11,26 @@ import { ProjectTemplate } from '@app/models/project-management';
 
 
 @Component({
-  selector: 'emp-steps-processes-list',
-  templateUrl: './processes-list.component.html',
-  styleUrls: ['./processes-list.component.scss']
+  selector: 'emp-steps-process-selector',
+  templateUrl: './process-selector.component.html',
+  styleUrls: ['./process-selector.component.scss']
 })
-export class ProcessesListComponent {
+export class ProcessSelectorComponent {
 
   @Input() processes: ProjectTemplate[] = [];
 
-  @Output() processSelected = new EventEmitter<ProjectTemplate>();
+  @Input() selected: ProjectTemplate;
 
-  selectedProcess: ProjectTemplate;
+  @Output() change = new EventEmitter<ProjectTemplate>();
 
 
   onSelect(process: ProjectTemplate) {
-    this.selectedProcess = process;
-
-    this.processSelected.emit(process);
+    this.change.emit(process);
   }
 
 
   isSelected(process: ProjectTemplate) {
-    return (this.selectedProcess && process.uid === this.selectedProcess.uid);
+    return (this.selected && process.uid === this.selected.uid);
   }
 
 }

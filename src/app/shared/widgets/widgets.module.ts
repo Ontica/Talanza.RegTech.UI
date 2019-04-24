@@ -12,6 +12,7 @@ import { RouterModule } from '@angular/router';
 
 import { AngularMaterialModule } from '../angular-material.module';
 
+import { ProcessSelectorComponent } from './process-selector/process-selector.component';
 import { ProjectSelectorComponent } from './project-selector/project-selector.component';
 import { ProjectsListSelectorComponent } from './projects-list-selector/projects-list-selector.component';
 
@@ -35,6 +36,7 @@ import { ThemesListSelectorComponent } from './themes-list-selector/themes-list-
   ],
 
   declarations: [
+    ProcessSelectorComponent,
     ProjectSelectorComponent,
     ProjectsListSelectorComponent,
     ResponsiblesListSelectorComponent,
@@ -43,6 +45,7 @@ import { ThemesListSelectorComponent } from './themes-list-selector/themes-list-
   ],
 
   exports: [
+    ProcessSelectorComponent,
     ProjectSelectorComponent,
     ProjectsListSelectorComponent,
     ResponsiblesListSelectorComponent,

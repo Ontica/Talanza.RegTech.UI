@@ -18,8 +18,6 @@ import { ProceduresModule } from '@app/procedures/procedures.module';
 
 import { ProcessesMainPageComponent } from './main-page/processes-main-page.component';
 
-import { ProcessesListComponent } from './list/processes-list.component';
-
 import { ProcessTreeDesignerComponent } from './tree-designer/tree-designer.component';
 
 import { ProcessDiagramEditorComponent } from './diagram-editor/diagram-editor.component';
@@ -68,7 +66,6 @@ import { BpmnModelerComponent } from './diagram-editor/bpmn-modeler/bpmn-modeler
     ProcessActivityAssociationComponent,
     ProcessEditorComponent,
     SaveProcessDialogComponent,
-    ProcessesListComponent,
     ProcessDiagramEditorComponent,
     BpmnModelerComponent,
   ],

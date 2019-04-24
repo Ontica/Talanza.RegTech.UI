@@ -1,0 +1,15 @@
+<mat-expansion-panel expanded>
+
+  <mat-expansion-panel-header i18n>
+    Selected process
+  </mat-expansion-panel-header>
+
+  <div *ngFor="let process of processes"
+        class="list-item" matRipple [matRippleTrigger]="trigger"
+        [class.list-item-selected]="isSelected(process)">
+    <div class="item-name">
+        <a #trigger (click)="onSelect(process)">{{process.name}}</a>
+    </div>
+  </div>
+
+</mat-expansion-panel>
