@@ -11,7 +11,6 @@ import { Component, EventEmitter,
 import { Assertion } from '@app/core';
 
 import { ProjectModel } from '@app/store/project.store';
-import { UserInterfaceStore } from '@app/store/ui.store';
 
 import { Activity, EmptyActivity } from '@app/models/project-management';
 
@@ -33,9 +32,6 @@ export class ActivityTimelineComponent implements OnChanges {
   @Input() groupBy: GroupByProperty = 'timeline';
 
   @Output() activitySelected = new EventEmitter<Activity>();
-
-
-  constructor(private uiStore: UserInterfaceStore) { }
 
 
   ngOnChanges() {
@@ -60,7 +56,7 @@ export class ActivityTimelineComponent implements OnChanges {
   get viewTitle() {
     switch (this.groupBy) {
       case 'timeline':
-        return 'General Timeline';
+        return 'Default Timeline';
 
       case 'deadline':
         return 'By Deadline';

@@ -3,10 +3,10 @@
   <div class="card-header card-header-flat">
 
     <div class="card-title">
-      <span i18n>Contract Activities</span>
-
-    <div class="card-hint" i18n>Contract: {{project.project.name}}</div>
+      {{project.project.name}}
+      <div class="card-hint" i18n>Activities Tree</div>
     </div>
+
     <div class="card-header-options">
       <button type="button" class="btn-action"
               (click)="openAddEventDialog()" i18n>What is happening?</button>
@@ -14,6 +14,7 @@
       <button type="button" class="btn disabled"
               (click)="showInitialActivityInlineEditor()" i18n>Insert activity</button>
     </div>
+
   </div>
 
   <div class="card-body drag-boundary">

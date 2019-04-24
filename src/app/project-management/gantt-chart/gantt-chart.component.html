@@ -1,27 +1,30 @@
 <div class="card">
 
   <div class="card-header card-header-flat">
+
     <div class="card-title">
-      <span i18n>Gantt chart</span>
-      <div class="card-hint"><span i18n>Contract: </span> {{contractName}}</div>
+      {{contractName}}
+      <div class="card-hint" i18n>Gantt Chart</div>
     </div>
+
     <div class="card-header-options">
-
-      <label i18n>Scale:</label>
-
-      <select class="select-box" style="width:98px"
-          (change)="onChangeScale()" [(ngModel)]="timeScaleUnit">
-          <option value="year" i18n>Annual</option>
-          <option value="quarter" i18n>Quarterly</option>
-          <option value="month" i18n>Monthly</option>
-          <option value="week" i18n>Weekly</option>
-      </select>
+        <label i18n>Scale:</label> {{scaleName()}}
+        <button mat-icon-button [matMenuTriggerFor]="menu2" class="menu-trigger-icon">
+            <mat-icon>arrow_drop_down</mat-icon>
+        </button>
+        <mat-menu #menu2="matMenu">
+            <button mat-menu-item (click)="onChangeScale('year')">Annual</button>
+            <button mat-menu-item (click)="onChangeScale('quarter')">Quarterly</button>
+            <button mat-menu-item (click)="onChangeScale('month')">Monthly</button>
+            <button mat-menu-item (click)="onChangeScale('week')">Weekly</button>
+        </mat-menu>
 
       <div style="width:38px"></div>
 
       <button type="button" class="btn disabled"
               (click)="onSearch()" i18n>Search</button>
     </div>
+
   </div>
 
   <div>

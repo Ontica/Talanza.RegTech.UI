@@ -1,13 +1,16 @@
 <div class="card" [class.card-border]="!settings.flat">
 
   <div *ngIf="settings.showTitle" class="card-header">
+
     <div class="card-title">
       {{activityTemplate.name}}
-      <div class="card-hint" i18n>Activity design in {{activityTemplate.project.name}}</div>
+      <div class="card-hint">{{activityTemplate.project.name}}</div>
     </div>
+
     <div class="card-header-options">
       <i class="fa fa-times close-icon" aria-hidden="true" (click)="onClose()"></i>
     </div>
+
   </div>
 
   <mat-tab-group color="accent">

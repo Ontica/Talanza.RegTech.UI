@@ -1,26 +1,32 @@
 <div *ngIf="project.project.uid !== ''" class="card">
 
   <div class="card-header card-header-flat">
-    <div class="card-title">
-      {{viewTitle}}
 
-      <button mat-icon-button [matMenuTriggerFor]="menu2">
-          <mat-icon>arrow_drop_down</mat-icon>
-      </button>
-      <mat-menu #menu2="matMenu">
-          <button mat-menu-item (click)="onChangeGroupBy('timeline')">General Timeline</button>
-          <button mat-menu-item (click)="onChangeGroupBy('deadline')">By Deadline</button>
-          <button mat-menu-item (click)="onChangeGroupBy('plannedEndDate')">By Planned End Date</button>
-          <button mat-menu-item (click)="onChangeGroupBy('actualStartDate')">By Actual Start Date</button>
-          <button mat-menu-item (click)="onChangeGroupBy('responsible')">By Responsible</button>
-          <button mat-menu-item (click)="onChangeGroupBy('theme')">By Theme</button>
-      </mat-menu>
-      <div class="card-hint"><span i18n>Contract:</span> {{project.project.name}}</div>
+    <div class="card-title">
+      {{project.project.name}}
+      <div class="card-hint"><span i18n>Timelines</span> » {{viewTitle}}</div>
     </div>
+
     <div class="card-header-options">
-      <button type="button" class="btn disabled"
-              (click)="onSearch()" i18n>Search</button>
+        {{viewTitle}}
+        <button mat-icon-button [matMenuTriggerFor]="menu2" class="menu-trigger-icon">
+            <mat-icon>arrow_drop_down</mat-icon>
+        </button>
+        <mat-menu #menu2="matMenu">
+            <button mat-menu-item (click)="onChangeGroupBy('timeline')">Default Timeline</button>
+            <button mat-menu-item (click)="onChangeGroupBy('deadline')">By Deadline</button>
+            <button mat-menu-item (click)="onChangeGroupBy('plannedEndDate')">By Planned End Date</button>
+            <button mat-menu-item (click)="onChangeGroupBy('actualStartDate')">By Actual Start Date</button>
+            <button mat-menu-item (click)="onChangeGroupBy('responsible')">By Responsible</button>
+            <button mat-menu-item (click)="onChangeGroupBy('theme')">By Theme</button>
+        </mat-menu>
+
+        <div style="width:32px"></div>
+
+        <button type="button" class="btn disabled"
+                (click)="onSearch()" i18n>Search</button>
     </div>
+
   </div>
 
   <div class="card-body">

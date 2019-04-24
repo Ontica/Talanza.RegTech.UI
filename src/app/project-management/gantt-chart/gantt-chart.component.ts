@@ -36,8 +36,23 @@ export class GanttChartComponent implements OnChanges {
               private ganttService: GanttService) { }
 
 
-  onChangeScale() {
-    console.log('scale changed');
+  onChangeScale(value: string) {
+    this.timeScaleUnit = value;
+  }
+
+  scaleName() {
+    switch (this.timeScaleUnit) {
+      case 'year':
+        return 'Annual';
+      case 'quarter':
+        return 'Quarterly';
+      case 'month':
+        return 'Monthly';
+      case 'week':
+        return 'Weekly';
+      default:
+        return `Undefined scale ${this.timeScaleUnit}.`;
+    }
   }
 
   ngOnChanges(): void {

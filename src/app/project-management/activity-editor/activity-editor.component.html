@@ -1,13 +1,16 @@
 <div class="card card-border">
 
   <div class="card-header">
+
     <div class="card-title">
       {{activity.name}}
-      <div class="card-hint" i18n>Activity in {{activity.project.name}}</div>
+      <div class="card-hint">{{activity.project.name}}</div>
     </div>
+
     <div class="card-header-options">
       <i class="fa fa-times close-icon" aria-hidden="true" (click)="onClose()"></i>
     </div>
+
   </div>
 
   <mat-tab-group color="accent">
