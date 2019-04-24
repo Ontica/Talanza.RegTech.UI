@@ -6,6 +6,37 @@
  */
 
 
+export interface Action {
+  type: string;
+  payload?: any;
+}
+
+
+export interface EventData {
+  type: string;
+  payload?: any;
+}
+
+export function createAction(type: string, payload?: any): Action {
+  const action: Action = {
+    type: type,
+    payload: payload
+  };
+
+  return action;
+}
+
+
+export function createEventData(type: string, payload?: any): EventData {
+  const event: EventData = {
+    type: type,
+    payload: payload
+  };
+
+  return event;
+}
+
+
 export interface Identifiable {
   readonly uid: string;
   name: string;
