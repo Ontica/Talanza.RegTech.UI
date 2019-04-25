@@ -13,7 +13,7 @@ import { UserInterfaceStore } from '@app/store/ui.store';
 
 import { Activity, EmptyActivity, ActivityOperation } from '@app/models/project-management';
 
-import { MenuItem, NavigationHeader } from '@app/models/user-interface';
+import { View } from '@app/models/user-interface';
 
 import { Exception } from '@app/core';
 
@@ -27,7 +27,7 @@ import { isEmpty } from '@app/models/core';
 })
 export class ProjectsMainPageComponent implements OnInit, OnDestroy {
 
-  currentView: string;
+  currentView: View;
   displayEditor = false;
   toggleEditor = false;
 
@@ -43,11 +43,10 @@ export class ProjectsMainPageComponent implements OnInit, OnDestroy {
 
 
   ngOnInit() {
-    this.subs1 = this.uiStore.currentView.subscribe(
-      x => this.currentView = x
-    );
 
-    this.setNavigationHeader();
+    this.subs1 = this.uiStore.currentView.subscribe(
+      x => this.onViewChanged(x)
+    );
 
     this.subs2 = this.projectStore.selectedProject().subscribe(
       x => this.onSelectedProjectChanged(x)
@@ -134,24 +133,17 @@ export class ProjectsMainPageComponent implements OnInit, OnDestroy {
     this.selectedProject = value;
 
     if (!isEmpty(this.selectedProject.project)) {
-      this.uiStore.setMainTitle(this.selectedProject.project.name);
+      this.uiStore.setMainTitle(this.currentView.title);
     }
   }
 
 
-  private setNavigationHeader() {
-    const header: NavigationHeader = {
-      title: 'Please select a contract',
-      hint: 'Contract management',
-      mainMenu: [
-        new MenuItem('Activities List', undefined, '/contract-management/activities'),
-        new MenuItem('Gantt chart', undefined, '/contract-management/gantt'),
-        new MenuItem('Timelines', undefined, '/contract-management/timelines', false),
-        new MenuItem('Documents', undefined, '/contract-management/documents', false)
-      ]
-    };
+  private onViewChanged(view: View) {
+    this.currentView = view;
 
-    this.uiStore.setNavigationHeader(header);
+    if (!this.selectedProject) {
+      this.uiStore.setMainTitle('Please select a contract');
+    }
   }
 
 }

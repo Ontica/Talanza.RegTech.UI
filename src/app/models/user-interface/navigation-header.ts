@@ -5,7 +5,8 @@
  * See LICENSE.txt in the project root for complete license information.
  */
 
-import { MenuItem } from './menu-item';
+import { Layout } from './user-interface';
+import { MenuItem, createMenuItemForView } from './menu-item';
 
 
 export interface NavigationHeader {
@@ -20,3 +21,20 @@ export const DefaultNavigationHeader: NavigationHeader = {
   hint: '',
   mainMenu: []
 };
+
+
+export function buildNavigationHeader(layout: Layout, title?: string): NavigationHeader {
+  const navHeader: NavigationHeader = {
+    title: title || layout.defaultTitle,
+    hint: layout.hint,
+    mainMenu: []
+  };
+
+  for (const view of layout.views) {
+    const menuItem = createMenuItemForView(view);
+
+    navHeader.mainMenu.push(menuItem);
+  }
+
+  return navHeader;
+}

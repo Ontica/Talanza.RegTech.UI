@@ -14,7 +14,9 @@ import { UserInterfaceStore } from '@app/store/ui.store';
 import { ActivityTemplate, ActivityTemplateOperation,
          EmptyActivityTemplate,
          ProjectTemplate, } from '@app/models/project-management';
-import { NavigationHeader, MenuItem } from '@app/models/user-interface';
+
+import { View } from '@app/models/user-interface';
+
 import { isEmpty } from '@app/models/core';
 
 
@@ -25,7 +27,7 @@ import { isEmpty } from '@app/models/core';
 })
 export class ProcessesMainPageComponent implements OnInit, OnDestroy {
 
-  currentView: string;
+  currentView: View;
   displayEditor = false;
   toggleEditor = false;
 
@@ -41,26 +43,16 @@ export class ProcessesMainPageComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.subs1 = this.uiStore.currentView.subscribe(
-      x => this.currentView = x
+      x => this.onViewChanged(x)
     );
 
-    this.setNavigationHeader();
-
     this.subs2 = this.store.selectedTemplate().subscribe (
-      x => {
-        if (!isEmpty(x.project)) {
-          if (this.model && this.model.project.uid !== x.project.uid) {
-            this.displayEditor = false;
-          }
-          this.uiStore.setMainTitle(x.project.name);
-        }
-        this.model = x;
-      }
+      x => this.onModelSelected(x)
     );
   }
 
 
-  ngOnDestroy(): void {
+  ngOnDestroy() {
     if (this.subs1) {
       this.subs1.unsubscribe();
     }
@@ -141,20 +133,27 @@ export class ProcessesMainPageComponent implements OnInit, OnDestroy {
     }
   }
 
+
   // private methods
 
 
-  private setNavigationHeader() {
-    const header: NavigationHeader = {
-      title: 'Please select a regulatory process',
-      hint: 'Regulatory process designer',
-      mainMenu: [
-        new MenuItem('Obligations Tree', undefined, '/regulatory-processes/obligations-tree'),
-        new MenuItem('Process diagram', undefined, '/regulatory-processes/process-diagram')
-      ]
-    };
+  private onModelSelected(x: ProjectTemplateModel) {
+    if (!isEmpty(x.project)) {
+      if (this.model && this.model.project.uid !== x.project.uid) {
+        this.displayEditor = false;
+      }
+      this.uiStore.setMainTitle(this.currentView.title);
+    }
+    this.model = x;
+  }
 
-    this.uiStore.setNavigationHeader(header);
+
+  private onViewChanged(view: View) {
+    this.currentView = view;
+
+    if (!this.model) {
+      this.uiStore.setMainTitle('Please select a process');
+    }
   }
 
 }

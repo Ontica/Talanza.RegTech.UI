@@ -21,8 +21,6 @@ import { MenuItem, NavigationHeader } from '@app/models/user-interface';
 })
 export class NavigationHeaderComponent implements OnInit, OnDestroy {
 
-  @Input() layoutType: string;
-
   @Output() action = new EventEmitter<string>();
 
   navigationHeader: NavigationHeader;
@@ -32,7 +30,7 @@ export class NavigationHeaderComponent implements OnInit, OnDestroy {
   constructor(protected uiStore: UserInterfaceStore) { }
 
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.subscription = this.uiStore.navigationHeader.subscribe (
       value => this.navigationHeader = value
     );

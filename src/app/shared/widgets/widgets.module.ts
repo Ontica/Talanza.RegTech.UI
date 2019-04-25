@@ -20,8 +20,6 @@ import {
   ResponsiblesListSelectorComponent
 } from './responsibles-list-selector/responsibles-list-selector.component';
 
-import { ViewSelectorComponent } from './view-selector/view-selector.component';
-
 import { ThemesListSelectorComponent } from './themes-list-selector/themes-list-selector.component';
 
 
@@ -40,8 +38,7 @@ import { ThemesListSelectorComponent } from './themes-list-selector/themes-list-
     ProjectSelectorComponent,
     ProjectsListSelectorComponent,
     ResponsiblesListSelectorComponent,
-    ThemesListSelectorComponent,
-    ViewSelectorComponent
+    ThemesListSelectorComponent
   ],
 
   exports: [
@@ -49,8 +46,7 @@ import { ThemesListSelectorComponent } from './themes-list-selector/themes-list-
     ProjectSelectorComponent,
     ProjectsListSelectorComponent,
     ResponsiblesListSelectorComponent,
-    ThemesListSelectorComponent,
-    ViewSelectorComponent
+    ThemesListSelectorComponent
   ]
 
 })

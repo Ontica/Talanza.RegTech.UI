@@ -2,10 +2,10 @@
       [class.remove-min-width]="!displayEditor">
 
   <div class="explorer-panel"
-        [class.primary]="currentView !== 'Process.Diagram'"
-        [class.primary-full]="currentView === 'Process.Diagram'">
+        [class.primary]="currentView.name !== 'Process.Diagram'"
+        [class.primary-full]="currentView.name === 'Process.Diagram'">
 
-    <ng-container *ngIf="currentView === 'Process.Diagram'">
+    <ng-container *ngIf="currentView.name === 'Process.Diagram'">
       <emp-ng-process-diagram-editor
           [project]="model"
           (edited)="onProcessDiagramEdited($event)"
@@ -13,7 +13,7 @@
       </emp-ng-process-diagram-editor>
     </ng-container>
 
-    <ng-container *ngIf="currentView === 'Process.Tree'">
+    <ng-container *ngIf="currentView.name === 'Process.Tree'">
       <emp-steps-process-tree-designer
           [project]="model"
           (edited)="onActivityTreeEdited($event)"

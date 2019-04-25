@@ -2,10 +2,10 @@
     [class.remove-min-width]="!displayEditor">
 
   <div class="explorer-panel"
-       [class.primary]="currentView !== 'Project.Gantt'"
-       [class.primary-full]="currentView === 'Project.Gantt'">
+       [class.primary]="currentView.name !== 'Project.Gantt'"
+       [class.primary-full]="currentView.name === 'Project.Gantt'">
 
-    <ng-container *ngIf="currentView === 'Project.Activities'">
+    <ng-container *ngIf="currentView.name === 'Project.Activities'">
       <emp-steps-activity-tree
           [project]="selectedProject"
           (edited)="onActivityTreeEdited($event)"
@@ -13,7 +13,7 @@
       </emp-steps-activity-tree>
     </ng-container>
 
-    <ng-container *ngIf="currentView === 'Project.Gantt'">
+    <ng-container *ngIf="currentView.name === 'Project.Gantt'">
       <emp-steps-gantt-chart
           [project]="selectedProject"
           [reset]="toggleEditor"
@@ -21,7 +21,7 @@
       </emp-steps-gantt-chart>
     </ng-container>
 
-    <ng-container *ngIf="currentView === 'Project.Timelines'">
+    <ng-container *ngIf="currentView.name === 'Project.Timelines'">
       <emp-steps-activity-timeline
           [groupBy]="'timeline'"
           [project]="selectedProject"

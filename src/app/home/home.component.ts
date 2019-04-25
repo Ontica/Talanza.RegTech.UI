@@ -5,11 +5,13 @@
  * See LICENSE.txt in the project root for complete license information.
  */
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
 
 import { UserInterfaceStore } from '@app/store/ui.store';
 
-import { NavigationHeader, MenuItem } from '@app/models/user-interface';
+import { NavigationHeader, createMenuItemForView, View } from '@app/models/user-interface';
+
 
 
 @Component({
@@ -17,30 +19,31 @@ import { NavigationHeader, MenuItem } from '@app/models/user-interface';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
+
+  currentView: View;
+  displayEditor = false;
+  toggleEditor = false;
+
+  private subs1: Subscription;
+
 
   constructor(private uiStore: UserInterfaceStore) { }
 
+
   ngOnInit() {
-    this.setNavigationHeader();
+    this.subs1 = this.uiStore.currentView.subscribe(
+      x => {
+        this.currentView = x;
+      }
+    );
   }
 
 
-  // private methods
-
-
-  private setNavigationHeader() {
-    const header: NavigationHeader = {
-      title: 'Home page',
-      hint: 'Contract management',
-      mainMenu: [
-        new MenuItem('My Tasks', undefined, '/home/my-tasks', false),
-        new MenuItem('Timelines', undefined, '/home/timelines', false),
-        new MenuItem('Documents', undefined, '/home/documents', false)
-      ]
-    };
-
-    this.uiStore.setNavigationHeader(header);
+  ngOnDestroy() {
+    if (this.subs1) {
+      this.subs1.unsubscribe();
+    }
   }
 
 }
