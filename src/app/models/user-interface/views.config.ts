@@ -10,22 +10,22 @@ import { View } from './user-interface';
 
 export const HomePageViews: View[] = [
   {
-    name: 'Home.PendingTasks',
+    name: 'Projects.PendingTasks',
     title: 'Pending Tasks',
     url: '/home/pending-tasks'
   },
   {
-    name: 'Home.TasksFinder',
+    name: 'Projects.TasksFinder',
     title: 'Tasks Finder',
     url: '/home/tasks-finder'
   },
   {
-    name: 'Home.OverallTimelines',
+    name: 'Projects.OverallTimelines',
     title: 'Overall Timelines',
     url: '/home/overall-timelines'
   },
   {
-    name: 'Home.DocumentsStore',
+    name: 'Projects.DocumentsStore',
     title: 'Documents Store',
     url: '/home/documents-store'
   }
@@ -78,10 +78,25 @@ export const ProcessManagementViews: View[] = [
 
 export const LibraryViews: View[] = [
   {
-    name: 'Library.Main',
-    title: 'Library Main Page',
-    url: '/library'
+    name: 'Library.Guidance',
+    title: 'Talanza Guidance',
+    url: '/library/talanza-guidance'
   },
+  {
+    name: 'Library.Contracts',
+    title: 'Contract Models',
+    url: '/library/oil-and-gas-contract-models'
+  },
+  {
+    name: 'Library.Documents',
+    title: 'Regulatory Documents',
+    url: '/library/regulatory-documents'
+  },
+  {
+    name: 'Library.Procedures',
+    title: 'Procedures',
+    url: '/library/procedures'
+  }
 ];
 
 

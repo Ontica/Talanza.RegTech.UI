@@ -31,6 +31,10 @@ import { DhtmlxGanttComponent } from './dhtmlx-gantt/dhtmlx-gantt.component';
 
 import { ProjectsMainPageComponent } from './main-page/projects-main-page.component';
 
+import {
+  MultiProjectsMainPageComponent
+} from './multi-projects-main-page/multi-projects-main-page.component';
+
 import { ProjectManagementRoutingModule } from './project-management-routing.module';
 
 
@@ -63,11 +67,13 @@ import { ProjectManagementRoutingModule } from './project-management-routing.mod
     AddEventDialogComponent,
     DhtmlxGanttComponent,
     GroupActivitiesByPipe,
+    MultiProjectsMainPageComponent,
     ProjectsMainPageComponent,
     GanttChartComponent
   ],
 
   exports: [
+    MultiProjectsMainPageComponent,
     ProjectsMainPageComponent
   ],
 

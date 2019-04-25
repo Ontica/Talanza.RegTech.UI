@@ -10,7 +10,7 @@
     <td>
       <select #theme class="select-box" style="width:210px" (change)="onChangeFilter()" [(ngModel)]="filter.theme">
           <option value="">( Todos )</option>
-          <option *ngFor="let themeName of themesList | async" [value]="themeName">{{themeName}}</option>
+          <option *ngFor="let themeName of themesList" [value]="themeName">{{themeName}}</option>
 				</select>
     </td>
     <td>Buscar:</td>

@@ -26,6 +26,9 @@ export class PVGeneralInfoComponent {
   @Input()
   get procedure() { return this._procedure; }
   set procedure(procedure: Procedure) {
+    if (!procedure) {
+      return;
+    }
     this._procedure = procedure;
   }
   private _procedure: Procedure;

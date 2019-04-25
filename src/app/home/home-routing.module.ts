@@ -12,7 +12,9 @@ import { SecurityGuardService } from '@app/core';
 
 import { MainLayoutComponent } from '@app/shared';
 
-import { HomeComponent } from './home.component';
+import {
+  MultiProjectsMainPageComponent
+} from '@app/project-management/multi-projects-main-page/multi-projects-main-page.component';
 
 
 @NgModule({
@@ -23,10 +25,10 @@ import { HomeComponent } from './home.component';
         path: 'home', component: MainLayoutComponent,
         canActivate: [SecurityGuardService],
         children: [
-          { path: 'pending-tasks', component: HomeComponent },
-          { path: 'tasks-finder', component: HomeComponent },
-          { path: 'overall-timelines', component: HomeComponent },
-          { path: 'documents-store', component: HomeComponent },
+          { path: 'pending-tasks', component: MultiProjectsMainPageComponent },
+          { path: 'tasks-finder', component: MultiProjectsMainPageComponent },
+          { path: 'overall-timelines', component: MultiProjectsMainPageComponent },
+          { path: 'documents-store', component: MultiProjectsMainPageComponent },
           { path: '', redirectTo: 'pending-tasks', pathMatch: 'full' }
         ]
       }

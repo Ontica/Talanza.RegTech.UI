@@ -26,13 +26,14 @@ export class ProcedureViewerComponent {
   @Input()
   set procedure(value: Observable<Procedure> | Procedure | Identifier) {
     if (!value) {
-      this._procedure = null;
+      return;
 
     } else if (typeof value === 'string' || typeof value === 'number') {
       this._procedure = this.store.getProcedure(value);
 
     } else if (isObservable(value)) {
       this._procedure = value as Observable<Procedure>;
+
     } else {
       this._procedure = of(value);
     }

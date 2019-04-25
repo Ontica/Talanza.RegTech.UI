@@ -7,7 +7,9 @@
 
 import { Component } from '@angular/core';
 
-import { BaseProcedure } from '@app/models/regulation';
+import { BaseProcedure, Procedure } from '@app/models/regulation';
+import { Observable } from 'rxjs';
+import { ProcedureStore } from '@app/store/procedure.store';
 
 
 @Component({
@@ -18,12 +20,22 @@ import { BaseProcedure } from '@app/models/regulation';
 export class ProceduresMainPageComponent {
 
   procedures: BaseProcedure[] = [];
-  selectedProcedureUID: string;
+
+  selectedProcedure: Procedure;
+
   showProcedureEditorWindow = false;
 
+  constructor(protected store: ProcedureStore) {
+
+  }
+
   onOpenProcedureEditorWindow(UID: string): void {
-    this.selectedProcedureUID = UID;
-    this.showProcedureEditorWindow = true;
+    this.store.getProcedure(UID)
+              .toPromise()
+              .then(x => {
+                this.selectedProcedure = x;
+                this.showProcedureEditorWindow = true;
+              });
   }
 
   closeProcedureEditorWindow(): void {

@@ -13,6 +13,9 @@ import { SecurityGuardService } from '@app/core';
 import { MainLayoutComponent } from '@app/shared';
 
 import { LibraryMainPageComponent } from './main-page/library-main-page.component';
+import { ProceduresMainPageComponent } from '@app/procedures/main-page/procedures-main-page.component';
+import { ContractsMainPageComponent } from '@app/contracts/main-page/contracts-main-page.component';
+import { DocumentsMainPageComponent } from '@app/documents/main-page/documents-main-page.component';
 
 
 @NgModule({
@@ -23,11 +26,11 @@ import { LibraryMainPageComponent } from './main-page/library-main-page.componen
         path: 'library', component: MainLayoutComponent,
         canActivate: [SecurityGuardService],
         children: [
-          {
-            path: '',
-            component: LibraryMainPageComponent,
-            data: { viewName: 'Library.Main' }
-          }
+          { path: 'talanza-guidance', component: LibraryMainPageComponent },
+          { path: 'oil-and-gas-contract-models', component: ContractsMainPageComponent },
+          { path: 'regulatory-documents', component: DocumentsMainPageComponent },
+          { path: 'procedures', component: ProceduresMainPageComponent },
+          { path: '', redirectTo: 'talanza-guidance', pathMatch: 'full' }
         ]
       }
     ])],

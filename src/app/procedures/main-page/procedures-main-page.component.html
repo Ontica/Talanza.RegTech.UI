@@ -39,6 +39,6 @@
   </table>
 </div>
 
-<div *ngIf="showProcedureEditorWindow " class="popup ">
-  <emp-gov-procedure-viewer [procedure]="selectedProcedureUID" (close)="closeProcedureEditorWindow()"></emp-gov-procedure-viewer>
+<div *ngIf="showProcedureEditorWindow" class="popup ">
+  <emp-gov-procedure-viewer [procedure]="selectedProcedure" (close)="closeProcedureEditorWindow()"></emp-gov-procedure-viewer>
 </div>

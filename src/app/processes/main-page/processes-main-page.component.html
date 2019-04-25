@@ -21,6 +21,10 @@
       </emp-steps-process-tree-designer>
     </ng-container>
 
+    <ng-container *ngIf="currentView.name === 'Process.Documentation'">
+      ONE Process documentation store
+    </ng-container>
+
   </div>
 
   <div *ngIf="displayEditor" class="explorer-panel secondary">

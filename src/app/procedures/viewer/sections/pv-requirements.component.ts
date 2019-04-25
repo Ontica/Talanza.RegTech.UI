@@ -24,6 +24,9 @@ export class PVRequirementsComponent {
   @Input()
   get procedure() { return this._procedure; }
   set procedure(procedure: Procedure) {
+    if (!procedure) {
+      return;
+    }
     this._procedure = procedure;
     this.loadRequirements();
   }
@@ -53,6 +56,5 @@ export class PVRequirementsComponent {
   private loadOutputDocuments(): void {
     this.outputDocuments = this.procedure.requirements.filter((x) => x.type === 'OutputDocument');
   }
-
 
 }
