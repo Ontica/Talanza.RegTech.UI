@@ -45,17 +45,17 @@ export class BpmnModelerComponent implements AfterContentInit, OnDestroy, OnChan
   }
 
 
-  ngAfterContentInit(): void {
+  ngAfterContentInit() {
     this.modeler.attachTo(this.el.nativeElement);
   }
 
 
-  ngOnDestroy(): void {
+  ngOnDestroy() {
     this.modeler.destroy();
   }
 
 
-  ngOnChanges(changes: SimpleChanges): void {
+  ngOnChanges(changes: SimpleChanges) {
     if (changes['xml']) {
       this.modeler.importXML(this.xml, null);
 

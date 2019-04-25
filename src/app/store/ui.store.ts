@@ -8,34 +8,36 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 
-import { UserInterfaceService } from '@app/services/user.interface.service';
+import { Assertion, Exception } from '@app/core';
 
-import { DefaultNavigationHeader, LayoutType, NavigationHeader } from '@app/models/user-interface';
+import { APP_VIEWS, APP_LAYOUTS, buildNavigationHeader,
+         DefaultNavigationHeader, DefaultView,
+         Layout, NavigationHeader, View } from '@app/models/user-interface';
 
 
 @Injectable()
 export class UserInterfaceStore {
 
-  private _layoutType: BehaviorSubject<LayoutType> = new BehaviorSubject<LayoutType>('Home');
+  private _currentLayout: BehaviorSubject<Layout> = new BehaviorSubject<Layout>(APP_LAYOUTS['Home']);
 
-  private _currentView: BehaviorSubject<string> = new BehaviorSubject<string>('');
+  private _currentView: BehaviorSubject<View> = new BehaviorSubject<View>(DefaultView);
 
   private _navigationHeader:
                 BehaviorSubject<NavigationHeader> = new BehaviorSubject(DefaultNavigationHeader);
 
 
-  constructor(private uiService: UserInterfaceService) { }
+  constructor() { }
 
 
   // select methods
 
-  get currentView(): Observable<string> {
+  get currentView(): Observable<View> {
     return this._currentView.asObservable();
   }
 
 
-  get layoutType(): Observable<LayoutType> {
-    return this._layoutType.asObservable();
+  get layout(): Observable<Layout> {
+    return this._currentLayout.asObservable();
   }
 
 
@@ -46,16 +48,25 @@ export class UserInterfaceStore {
   // reduce methods
 
 
-  setCurrentView(viewName: string) {
-    if (this._currentView.value !== viewName) {
-      this._currentView.next(viewName);
-    }
-  }
+  setCurrentViewFromUrl(url: string) {
+    if (this._currentView.value.url !== url) {
+      const view = APP_VIEWS.find(x => x.url === url);
 
+      if (!view) {
+        const msg = `Unregistered view with url '${url}'.`;
+        console.log(msg);
+        throw new Exception(msg);
+      }
 
-  setLayoutType(value: LayoutType) {
-    if (this._layoutType.value !== value) {
-      this._layoutType.next(value);
+      const viewLayout = this.getViewLayout(view);
+
+      if (this._currentLayout.value !== viewLayout) {
+        this.setLayout(viewLayout);
+      }
+
+      this.setNavigationHeader(view);
+
+      this._currentView.next(view);
     }
   }
 
@@ -67,8 +78,37 @@ export class UserInterfaceStore {
   }
 
 
-  setNavigationHeader(value: NavigationHeader) {
-    this._navigationHeader.next(value);
+  setNavigationHeader(value: NavigationHeader | View) {
+    if (value && value['url']) {
+      const layout = APP_LAYOUTS.find(x => x.name === this._currentLayout.value.name);
+
+      const navHeader = buildNavigationHeader(layout, value.title);
+
+      this._navigationHeader.next(navHeader);
+
+    } else if (value) {
+      this._navigationHeader.next(value as NavigationHeader);
+    }
+  }
+
+
+  // private methods
+
+
+  private getViewLayout(view: View): Layout {
+    for (const layout of APP_LAYOUTS) {
+      if (layout.views.includes(view)) {
+        return layout;
+      }
+    }
+    throw Assertion.assertNoReachThisCode(`Unregistered view ${view.name}.`);
+  }
+
+
+  private setLayout(value: Layout) {
+    if (this._currentLayout.value !== value) {
+      this._currentLayout.next(value);
+    }
   }
 
 }

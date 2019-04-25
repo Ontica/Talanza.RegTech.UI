@@ -1,10 +1,11 @@
-
 /**
  * @license
  * Copyright (c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
  *
  * See LICENSE.txt in the project root for complete license information.
  */
+
+import { View } from './user-interface';
 
 
 export class MenuItem {
@@ -58,4 +59,9 @@ export class MenuItem {
     this._selected = false;
   }
 
+}
+
+
+export function createMenuItemForView(view: View): MenuItem {
+  return new MenuItem(view.menuTitle || view.title, undefined, view.url, false);
 }

@@ -86,7 +86,7 @@ export class ActivityModelFormComponent extends AbstractForm implements OnInit, 
   }
 
 
-  ngOnDestroy(): void {
+  ngOnDestroy() {
     this.selectedEntityIdSubject.unsubscribe();
   }
 

@@ -39,6 +39,8 @@ export class Assertion {
 
     const msg = (failMessage && Validate.hasValue(failMessage)) ? failMessage : defaultMsg;
 
+    console.log(msg);
+
     throw new Exception(msg);
   }
 

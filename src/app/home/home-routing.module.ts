@@ -12,8 +12,8 @@ import { SecurityGuardService } from '@app/core';
 
 import { MainLayoutComponent } from '@app/shared';
 
-// import { ProjectsMainPageComponent } from '../project-management/main-page/projects-main-page.component';
 import { HomeComponent } from './home.component';
+
 
 @NgModule({
 
@@ -21,12 +21,13 @@ import { HomeComponent } from './home.component';
     RouterModule.forChild([
       {
         path: 'home', component: MainLayoutComponent,
-        canActivate: [SecurityGuardService], data: { layoutType: 'Home' },
+        canActivate: [SecurityGuardService],
         children: [
-          { path: 'my-tasks', component: HomeComponent, data: { viewName: 'Home.MyTasks' }},
-          { path: 'timelines', component: HomeComponent, data: { viewName: 'Home.Timelines' }},
-          { path: 'documents', component: HomeComponent, data: { viewName: 'Home.Documents' }},
-          { path: '', redirectTo: 'my-tasks', pathMatch: 'full' }
+          { path: 'pending-tasks', component: HomeComponent },
+          { path: 'tasks-finder', component: HomeComponent },
+          { path: 'overall-timelines', component: HomeComponent },
+          { path: 'documents-store', component: HomeComponent },
+          { path: '', redirectTo: 'pending-tasks', pathMatch: 'full' }
         ]
       }
     ])],

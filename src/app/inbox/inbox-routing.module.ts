@@ -20,8 +20,10 @@ import { InboxMainPageComponent } from './main-page/inbox-main-page.component';
     RouterModule.forChild([
       {
         path: 'inbox', component: MainLayoutComponent,
-        data: { layoutType: 'Inbox' }, canActivate: [SecurityGuardService],
-        children: [{ path: 'main', component: InboxMainPageComponent }]
+        canActivate: [SecurityGuardService],
+        children: [
+          { path: 'main', component: InboxMainPageComponent }
+        ]
       }
     ])],
   exports: [RouterModule]

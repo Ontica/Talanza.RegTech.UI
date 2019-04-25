@@ -20,23 +20,12 @@ import { ProcessesMainPageComponent } from './main-page/processes-main-page.comp
     RouterModule.forChild([
       {
         path: 'regulatory-processes', component: MainLayoutComponent,
-        canActivate: [SecurityGuardService], data: { layoutType: 'Processes' },
+        canActivate: [SecurityGuardService],
         children: [
-          {
-            path: 'obligations-tree',
-            component: ProcessesMainPageComponent,
-            data: { viewName: 'Process.Tree' }
-          },
-          {
-            path: 'process-diagram',
-            component: ProcessesMainPageComponent,
-            data: { viewName: 'Process.Diagram' }
-          },
-          {
-            path: '',
-            redirectTo: 'obligations-tree',
-            pathMatch: 'full'
-          }
+          { path: 'obligations-tree', component: ProcessesMainPageComponent },
+          { path: 'process-diagram', component: ProcessesMainPageComponent },
+          { path: 'documentation', component: ProcessesMainPageComponent },
+          { path: '', redirectTo: 'obligations-tree', pathMatch: 'full' }
         ]
       }
     ])],

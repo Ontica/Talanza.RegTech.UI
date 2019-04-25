@@ -21,7 +21,7 @@ import { DocumentationMainPageComponent } from './main-page/documentation-main-p
     RouterModule.forChild([
       {
         path: 'documentation', component: MainLayoutComponent,
-        canActivate: [SecurityGuardService], data: { layoutType: 'Documents' },
+        canActivate: [SecurityGuardService],
         children: [
           { path: 'main', component: DocumentationMainPageComponent }
         ]

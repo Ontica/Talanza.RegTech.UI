@@ -6,6 +6,29 @@
  */
 
 
+export interface Layout {
+  name: string;
+  views: View[];
+  hint: string;
+  defaultTitle: string;
+}
+
+
+export interface View {
+  name: string;
+  title: string;
+  url: string;
+  menuTitle?: string;
+}
+
+
+export const DefaultView: View = {
+  name: 'Default view',
+  title: 'Default view',
+  url: '/',
+};
+
+
 export interface ISelectable {
   selected: boolean;
 }

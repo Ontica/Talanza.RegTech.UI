@@ -21,33 +21,13 @@ import { ProjectsMainPageComponent } from './main-page/projects-main-page.compon
     RouterModule.forChild([
       {
         path: 'contract-management', component: MainLayoutComponent,
-        canActivate: [SecurityGuardService], data: { layoutType: 'Projects' },
+        canActivate: [SecurityGuardService],
         children: [
-          {
-            path: 'activities',
-            component: ProjectsMainPageComponent,
-            data: { viewName: 'Project.Activities' }
-          },
-          {
-            path: 'gantt',
-            component: ProjectsMainPageComponent,
-            data: { viewName: 'Project.Gantt' }
-          },
-          {
-            path: 'timelines',
-            component: ProjectsMainPageComponent,
-            data: { viewName: 'Project.Timelines' }
-          },
-          {
-            path: 'documents',
-            component: ProjectsMainPageComponent,
-            data: { viewName: 'Project.Documents' }
-          },
-          {
-            path: '',
-            redirectTo: 'activities',
-            pathMatch: 'full'
-          }
+          { path: 'activities', component: ProjectsMainPageComponent },
+          { path: 'gantt', component: ProjectsMainPageComponent },
+          { path: 'timelines', component: ProjectsMainPageComponent },
+          { path: 'documents', component: ProjectsMainPageComponent },
+          { path: '', redirectTo: 'activities', pathMatch: 'full' }
         ]
       }
     ])],

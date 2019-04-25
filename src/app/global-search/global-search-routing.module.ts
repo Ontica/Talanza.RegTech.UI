@@ -21,7 +21,7 @@ import { GlobalSearchMainPageComponent } from './main-page/gs-main-page.componen
     RouterModule.forChild([
       {
         path: 'search', component: MainLayoutComponent,
-        canActivate: [SecurityGuardService], data: { layoutType: 'Search' },
+        canActivate: [SecurityGuardService],
         children: [
           { path: 'main', component: GlobalSearchMainPageComponent }
         ]

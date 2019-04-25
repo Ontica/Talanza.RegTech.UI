@@ -21,9 +21,13 @@ import { LibraryMainPageComponent } from './main-page/library-main-page.componen
     RouterModule.forChild([
       {
         path: 'library', component: MainLayoutComponent,
-        canActivate: [SecurityGuardService], data: { layoutType: 'Library' },
+        canActivate: [SecurityGuardService],
         children: [
-          { path: '', component: LibraryMainPageComponent, data: { layoutType: 'Library.Main' }}
+          {
+            path: '',
+            component: LibraryMainPageComponent,
+            data: { viewName: 'Library.Main' }
+          }
         ]
       }
     ])],
