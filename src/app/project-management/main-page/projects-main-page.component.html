@@ -24,13 +24,15 @@
     <ng-container *ngIf="currentView.name === 'Project.Timelines'">
       <emp-steps-activity-timeline
           [groupBy]="'timeline'"
-          [project]="selectedProject"
+          [activities]="selectedProject.activities"
+          [title]="selectedProject.project.name"
+          hint="Project Timelines"
           (activitySelected)="showEditor($event)">
       </emp-steps-activity-timeline>
     </ng-container>
 
     <ng-container *ngIf="currentView.name === 'Project.Documents'">
-        ONE Project document store
+
     </ng-container>
 
 

@@ -81,8 +81,10 @@
 
 
 .activity-theme {
+  @include expand;
+
   min-width: 200px;
-  max-width: 40%;
+  // max-width: 40%;
   padding-right: 36px;
 }
 

@@ -56,6 +56,13 @@ export class ProjectService {
   constructor(private core: CoreService) { }
 
 
+  getAllActivities(): Observable<Activity[]> {
+    const path = `v1/project-management/activities/all-activities`;
+
+    return this.core.http.get<Activity[]>(path);
+  }
+
+
   getContracts(): Observable<Contract[]> {
     const CONTRACTS: Contract[] = [ { uid: '576', name: 'Ronda 2.4' } ];
 

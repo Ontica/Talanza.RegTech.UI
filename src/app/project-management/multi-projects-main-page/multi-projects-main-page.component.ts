@@ -8,14 +8,14 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 
-import { ProjectStore , ProjectModel } from '@app/store/project.store';
+import { ProjectStore } from '@app/store/project.store';
 import { UserInterfaceStore } from '@app/store/ui.store';
 
 import { Activity, EmptyActivity, Project } from '@app/models/project-management';
 
 import { View } from '@app/models/user-interface';
-
-import { isEmpty } from '@app/models/core';
+import { Contact } from '@app/models/core';
+import { TimelineHelper } from '../common/timeline-helper';
 
 
 @Component({
@@ -29,29 +29,49 @@ export class MultiProjectsMainPageComponent implements OnInit, OnDestroy {
   displayEditor = false;
   toggleEditor = false;
 
-  selectedProject: ProjectModel;
+  filteredActivities: Activity[] = [];
   selectedActivity = EmptyActivity;
+
+  private allActivities: Activity[] = [];
+  private projectsFilter: Project[] = [];
+  private responsiblesFilter: Contact[] = [];
+  private themesFilter: string[] = [];
 
   private subs1: Subscription;
   private subs2: Subscription;
   private subs3: Subscription;
+  private subs4: Subscription;
 
   constructor(private projectStore: ProjectStore,
               private uiStore: UserInterfaceStore)  { }
 
 
   ngOnInit() {
+    this.loadAllActivities();
 
     this.subs1 = this.uiStore.currentView.subscribe(
       x => this.currentView = x
     );
 
-    this.subs2 = this.projectStore.selectedProject().subscribe(
-      x => this.onSelectedProjectChanged(x)
+    this.subs2 = this.uiStore.getValue<Project[]>('Sidebar.Selected.Projects').subscribe(
+      x => {
+        this.projectsFilter = x;
+        this.applyFilters();
+      }
     );
 
-    this.subs3 = this.uiStore.getValue<Project[]>('Sidebar.Selected.Projects').subscribe(
-      x => console.log('Sidebar projects changed', x)
+    this.subs3 = this.uiStore.getValue<Contact[]>('Sidebar.Selected.Responsibles').subscribe(
+      x => {
+        this.responsiblesFilter = x;
+        this.applyFilters();
+      }
+    );
+
+    this.subs4 = this.uiStore.getValue<string[]>('Sidebar.Selected.Themes').subscribe(
+      x => {
+        this.themesFilter = x;
+        this.applyFilters();
+      }
     );
   }
 
@@ -66,11 +86,15 @@ export class MultiProjectsMainPageComponent implements OnInit, OnDestroy {
     if (this.subs3) {
       this.subs3.unsubscribe();
     }
+    if (this.subs4) {
+      this.subs4.unsubscribe();
+    }
   }
 
 
   onActivityUpdated(activity: Activity) {
-
+    this.loadAllActivities()
+        .then(() => this.updateSelectedActivity());
   }
 
 
@@ -95,23 +119,81 @@ export class MultiProjectsMainPageComponent implements OnInit, OnDestroy {
     }
   }
 
-
   // private methods
 
 
-  private onSelectedProjectChanged(value: ProjectModel) {
-    if (this.selectedProject &&
-        this.selectedProject.project.uid !== value.project.uid) {
-      this.selectedActivity = EmptyActivity;
-      this.displayEditor = false;
+  private applyFilters() {
+    let filtered = this.applyProjectsFilter(this.allActivities);
+
+    filtered = this.applyResponsiblesFilter(filtered);
+    filtered = this.applyThemesFilter(filtered);
+
+    filtered = this.applyViewFilter(filtered);
+
+    this.filteredActivities = filtered;
+  }
+
+
+  private applyProjectsFilter(source: Activity[]): Activity[] {
+    if (!this.projectsFilter || this.projectsFilter.length === 0) {
+      return source;
     }
 
-    this.selectedProject = value;
+    const uids = this.projectsFilter.map(x => x.uid);
 
-    if (!isEmpty(this.selectedProject.project)) {
-      this.uiStore.setMainTitle(this.currentView.title);
+    return source.filter(x => uids.includes(x.project.uid));
+  }
+
+
+  private applyResponsiblesFilter(source: Activity[]): Activity[] {
+    if (!this.responsiblesFilter || this.responsiblesFilter.length === 0) {
+      return source;
+    }
+
+    const uids = this.responsiblesFilter.map(x => x.uid);
+
+    return source.filter(x => uids.includes(x.responsible.uid));
+  }
+
+
+  private applyThemesFilter(source: Activity[]): Activity[] {
+    if (!this.themesFilter || this.themesFilter.length === 0) {
+      return source;
+    }
+
+    return source.filter(x => this.themesFilter.includes(x.theme));
+  }
+
+
+  private applyViewFilter(source: Activity[]): Activity[] {
+    switch (this.currentView.name) {
+      case 'Projects.PendingTasks':
+        return TimelineHelper.filterForInbox(source);
+
+      case 'Projects.OverallTimelines':
+        return TimelineHelper.filterForOverallTimeline(source);
+
+      default:
+        return source;
     }
   }
 
+
+  private loadAllActivities(): Promise<void> {
+    return this.projectStore.getAllActivities()
+              .toPromise()
+              .then(x => {
+                this.allActivities = x;
+                this.applyFilters();
+              });
+  }
+
+
+  private updateSelectedActivity() {
+    if (!this.filteredActivities.find(x => x.uid === this.selectedActivity.uid)) {
+      this.displayEditor = false;
+      this.selectedActivity = EmptyActivity;
+    }
+  }
 
 }

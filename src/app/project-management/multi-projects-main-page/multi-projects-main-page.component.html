@@ -1,20 +1,14 @@
 <div class="explorer"
     [class.remove-min-width]="!displayEditor">
 
-  <div class="explorer-panel" class="primary">
+  <div class="explorer-panel primary">
 
     <ng-container *ngIf="currentView.name === 'Projects.PendingTasks'">
       <emp-steps-activity-timeline
           [groupBy]="'timeline'"
-          [project]="selectedProject"
-          (activitySelected)="showEditor($event)">
-      </emp-steps-activity-timeline>
-    </ng-container>
-
-    <ng-container *ngIf="currentView.name === 'Projects.TasksFinder'">
-      <emp-steps-activity-timeline
-          [groupBy]="'timeline'"
-          [project]="selectedProject"
+          [activities]="filteredActivities"
+          title="Pending tasks"
+          [hint]="filteredActivities.length + ' pending tasks found'"
           (activitySelected)="showEditor($event)">
       </emp-steps-activity-timeline>
     </ng-container>
@@ -22,13 +16,25 @@
     <ng-container *ngIf="currentView.name === 'Projects.OverallTimelines'">
       <emp-steps-activity-timeline
           [groupBy]="'timeline'"
-          [project]="selectedProject"
+          [activities]="filteredActivities"
+          title="Overall Timelines"
+          [hint]="filteredActivities.length + ' tasks found'"
+          (activitySelected)="showEditor($event)">
+      </emp-steps-activity-timeline>
+    </ng-container>
+
+    <ng-container *ngIf="currentView.name === 'Projects.TasksFinder'">
+      <emp-steps-activity-timeline
+          [groupBy]="'timeline'"
+          [activities]="filteredActivities"
+          title="Tasks finder"
+          [hint]="filteredActivities.length + ' tasks found'"
           (activitySelected)="showEditor($event)">
       </emp-steps-activity-timeline>
     </ng-container>
 
     <ng-container *ngIf="currentView.name === 'Projects.DocumentsStore'">
-      Many Projects documents store ...
+
     </ng-container>
 
   </div>

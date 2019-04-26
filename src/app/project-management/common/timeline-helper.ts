@@ -16,7 +16,8 @@ enum COLORS {
   red = '#cc0000',
   gray = '#9a9a9a',
   ghost_color = '#ececec',
-  default_color = '#3dbab3'
+  default_color = '#3dbab3',
+  empty = ''
 }
 
 
@@ -48,6 +49,25 @@ export class TimelineHelper {
   }
 
 
+  static filterForInbox(source: Activity[]) {
+    let filtered = source.filter(x => x.status !== 'Completed');
+
+    const colored = [COLORS.red, COLORS.amber, COLORS.green];
+
+    filtered = filtered.filter(x =>
+                  colored.includes(TimelineHelper.getTimelineColor(x, x.deadline.toString(), 'border')));
+
+    return filtered;
+  }
+
+
+  static filterForOverallTimeline(source: Activity[]) {
+    return source.filter(x => x.status !== 'Completed' &&
+                        (x.deadline || x.plannedEndDate || x.actualStartDate || x.actualEndDate));
+
+  }
+
+
   static getGroupName(groupKey: string): string {
     if (!groupKey) {
       return '';
@@ -69,17 +89,17 @@ export class TimelineHelper {
 
   static getTimelineColor(activity: Activity, date: string, use: 'border' | 'date' | 'title') {
     if (this.isCompleted(activity)) {
-      return use === 'border' ? COLORS.gray : '';
+      return use === 'border' ? COLORS.gray : COLORS.empty;
     }
 
     if (activity.warnType === 'NA') {
-      return '';
+      return COLORS.empty;
     }
 
     const remainingDays = DateStringLibrary.daysBetween(DateStringLibrary.today(), date);
 
     if (use === 'title') {
-      return remainingDays <= 0 ? COLORS.red : '';
+      return remainingDays <= 0 ? COLORS.red : COLORS.empty;
     }
 
     let warnDaysFactor = 1;
@@ -106,7 +126,7 @@ export class TimelineHelper {
       return date ? COLORS.default_color : COLORS.ghost_color;
 
     } else {
-      return '';
+      return COLORS.empty;
     }
   }
 

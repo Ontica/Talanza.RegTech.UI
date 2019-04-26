@@ -274,7 +274,7 @@ export class GroupActivitiesByPipe implements PipeTransform  {
         return this.getYearMonthGroupName(activity[dateField], dateField);
       }
     }
-    return 'Activities with no dates assigned';
+    return 'Activities with no assigned dates';
   }
 
 

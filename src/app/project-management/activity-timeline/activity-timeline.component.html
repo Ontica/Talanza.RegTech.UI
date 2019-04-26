@@ -1,10 +1,10 @@
-<div *ngIf="project.project.uid !== ''" class="card">
+<div class="card">
 
   <div class="card-header card-header-flat">
 
     <div class="card-title">
-      {{project.project.name}}
-      <div class="card-hint"><span i18n>Timelines</span> » {{viewTitle}}</div>
+      {{title}}
+      <div class="card-hint">{{hint}}</div>
     </div>
 
     <div class="card-header-options">
@@ -31,7 +31,7 @@
 
   <div class="card-body">
 
-    <div *ngFor="let group of project.activities | groupActivitiesBy: groupBy">
+    <div *ngFor="let group of activities | groupActivitiesBy: groupBy">
 
       <div class="activity-group-name">
         {{timelineHelper.getGroupName(group.key)}}
@@ -91,7 +91,7 @@
               </div>
             </div>
 
-            <div class="right-column expand">
+            <div class="right-column nowrap" style="min-width:250px">
                 {{activity.responsible.uid !== 'Empty' ? activity.responsible.name : ''}}
             </div>
 

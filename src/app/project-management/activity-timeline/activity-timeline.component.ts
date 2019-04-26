@@ -6,11 +6,9 @@
  */
 
 import { Component, EventEmitter,
-         Input, OnChanges, Output } from '@angular/core';
+         Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 
 import { Assertion } from '@app/core';
-
-import { ProjectModel } from '@app/store/project.store';
 
 import { Activity, EmptyActivity } from '@app/models/project-management';
 
@@ -26,19 +24,20 @@ import { TimelineHelper } from '../common/timeline-helper';
 })
 export class ActivityTimelineComponent implements OnChanges {
 
-  selectedActivity: Activity = EmptyActivity;
-
-  @Input() project: ProjectModel;
+  @Input() activities: Activity[] = [];
   @Input() groupBy: GroupByProperty = 'timeline';
+
+  @Input() title = 'Please select a contract';
+  @Input() hint = 'Timelines';
 
   @Output() activitySelected = new EventEmitter<Activity>();
 
+  selectedActivity: Activity = EmptyActivity;
 
-  ngOnChanges() {
-    if (this.project) {
-      if (this.selectedActivity.project.uid !== this.project.project.uid) {
-        this.selectedActivity = EmptyActivity;
-      }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['activities']) {
+      this.resetSelectedActivity();
     }
   }
 
@@ -88,6 +87,7 @@ export class ActivityTimelineComponent implements OnChanges {
 
   }
 
+
   onSelectActivity(activity: Activity, emitEvent: boolean = false) {
     this.selectedActivity = activity;
 
@@ -99,6 +99,18 @@ export class ActivityTimelineComponent implements OnChanges {
 
   isSelected(activity: Activity): boolean {
     return (activity.uid === this.selectedActivity.uid);
+  }
+
+
+  // private methods
+
+
+  private resetSelectedActivity() {
+    const found = this.activities.find(x => x.uid === this.selectedActivity.uid);
+
+    if (!found) {
+      this.selectedActivity = EmptyActivity;
+    }
   }
 
 }

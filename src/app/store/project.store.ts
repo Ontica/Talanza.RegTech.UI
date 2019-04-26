@@ -101,6 +101,10 @@ export class ProjectStore {
   }
 
 
+  getAllActivities(): Observable<Activity[]> {
+    return this.projectService.getAllActivities();
+  }
+
 
   getMasterProject() {
    // this.projectStore;
