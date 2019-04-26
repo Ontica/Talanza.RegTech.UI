@@ -21,8 +21,6 @@ export class ThemesListSelectorComponent {
 
   @Input()
   set selected(value: string[]) {
-    console.log('selected themes', value);
-
     if (!value || value.length === 0) {
       this.selectedOptions = ['all'];
     } else {

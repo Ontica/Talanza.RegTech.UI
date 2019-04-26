@@ -29,6 +29,7 @@
 
   <emp-steps-projects-list-selector
       [projects]="projectStore.projects | async"
+      [selected]="selectedProjects"
       (change)="onSelectedProjects($event)">
   </emp-steps-projects-list-selector>
 
@@ -40,6 +41,7 @@
 <div *ngIf="showWidget('ResponsiblesListSelector')">
   <emp-steps-responsibles-list-selector
       [responsibles]="projectStore.allResponsibles | async"
+      [selected]="selectedResponsibles"
       (change)="onSelectedResponsibles($event)">
   </emp-steps-responsibles-list-selector>
 
@@ -50,6 +52,7 @@
 <div *ngIf="showWidget('ThemesListSelector')">
   <emp-steps-themes-list-selector
       [themes]="projectStore.themes | async"
+      [selected]="selectedThemes"
       (change)="onSelectedThemes($event)">
   </emp-steps-themes-list-selector>
 

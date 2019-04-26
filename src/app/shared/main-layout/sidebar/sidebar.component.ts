@@ -27,7 +27,14 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
   @Input() layout: Layout;
 
-  private subscription: Subscription;
+  selectedProjects: Project[] = [];
+  selectedResponsibles: Contact[] = [];
+  selectedThemes: string[] = [];
+
+  private subs1: Subscription;
+  private subs2: Subscription;
+  private subs3: Subscription;
+  private subs4: Subscription;
 
   constructor(public uiStore: UserInterfaceStore,
               public processStore: ProjectTemplateStore,
@@ -35,17 +42,37 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
 
   ngOnInit() {
-    this.subscription = this.uiStore.layout.subscribe(
+    this.subs1 = this.uiStore.layout.subscribe(
       value => this.layout = value
     );
+    this.subs2 = this.uiStore.getValue<Project[]>('Sidebar.Selected.Projects').subscribe(
+      value => this.selectedProjects = value
+    );
+    this.subs3 = this.uiStore.getValue<Contact[]>('Sidebar.Selected.Responsibles').subscribe(
+      value => this.selectedResponsibles = value
+    );
+    this.subs4 = this.uiStore.getValue<string[]>('Sidebar.Selected.Themes').subscribe(
+      value => this.selectedThemes = value
+    );
+
   }
 
 
   ngOnDestroy() {
-    if (this.subscription) {
-      this.subscription.unsubscribe();
+    if (this.subs1) {
+      this.subs1.unsubscribe();
+    }
+    if (this.subs2) {
+      this.subs2.unsubscribe();
+    }
+    if (this.subs3) {
+      this.subs3.unsubscribe();
+    }
+    if (this.subs4) {
+      this.subs4.unsubscribe();
     }
   }
+
 
   onSelectProcess(process: ProjectTemplate) {
     this.processStore.selectTemplate(process);
@@ -60,17 +87,17 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
 
   onSelectedProjects(projectList: Project[]) {
-    console.log('onSelectedProjects', projectList);
+    this.uiStore.setValue<Project[]>('Sidebar.Selected.Projects', projectList);
   }
 
 
   onSelectedResponsibles(responsiblesList: Contact[]) {
-    console.log('onSelectedResponsibles', responsiblesList);
+    this.uiStore.setValue<Contact[]>('Sidebar.Selected.Responsibles', responsiblesList);
   }
 
 
   onSelectedThemes(themesList: string[]) {
-    console.log('onSelectedThemes', themesList);
+    this.uiStore.setValue<string[]>('Sidebar.Selected.Themes', themesList);
   }
 
 

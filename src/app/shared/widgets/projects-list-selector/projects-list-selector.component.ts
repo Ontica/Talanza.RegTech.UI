@@ -24,8 +24,6 @@ export class ProjectsListSelectorComponent {
 
   @Input()
   set selected(value: Project[]) {
-    console.log('set selected', value);
-
     if (!value || value.length === 0) {
       this.selectedOptions = ['all'];
     } else {

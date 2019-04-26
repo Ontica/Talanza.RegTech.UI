@@ -11,7 +11,7 @@ import { Subscription } from 'rxjs';
 import { ProjectStore , ProjectModel } from '@app/store/project.store';
 import { UserInterfaceStore } from '@app/store/ui.store';
 
-import { Activity, EmptyActivity } from '@app/models/project-management';
+import { Activity, EmptyActivity, Project } from '@app/models/project-management';
 
 import { View } from '@app/models/user-interface';
 
@@ -34,7 +34,7 @@ export class MultiProjectsMainPageComponent implements OnInit, OnDestroy {
 
   private subs1: Subscription;
   private subs2: Subscription;
-
+  private subs3: Subscription;
 
   constructor(private projectStore: ProjectStore,
               private uiStore: UserInterfaceStore)  { }
@@ -49,6 +49,10 @@ export class MultiProjectsMainPageComponent implements OnInit, OnDestroy {
     this.subs2 = this.projectStore.selectedProject().subscribe(
       x => this.onSelectedProjectChanged(x)
     );
+
+    this.subs3 = this.uiStore.getValue<Project[]>('Sidebar.Selected.Projects').subscribe(
+      x => console.log('Sidebar projects changed', x)
+    );
   }
 
 
@@ -58,6 +62,9 @@ export class MultiProjectsMainPageComponent implements OnInit, OnDestroy {
     }
     if (this.subs2) {
       this.subs2.unsubscribe();
+    }
+    if (this.subs3) {
+      this.subs3.unsubscribe();
     }
   }
 

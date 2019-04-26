@@ -10,9 +10,18 @@ import { BehaviorSubject, Observable } from 'rxjs';
 
 import { Assertion, Exception } from '@app/core';
 
-import { APP_VIEWS, APP_LAYOUTS, buildNavigationHeader,
-         DefaultNavigationHeader, DefaultView,
-         Layout, NavigationHeader, View } from '@app/models/user-interface';
+import {
+  APP_LAYOUTS,
+  APP_VIEWS,
+  VALUE_SELECTOR,
+  DefaultNavigationHeader,
+  DefaultView,
+  Layout,
+  NavigationHeader,
+  View,
+  buildNavigationHeader,
+  getValueSelectorDefaultValue
+} from '@app/models/user-interface';
 
 
 @Injectable()
@@ -24,6 +33,8 @@ export class UserInterfaceStore {
 
   private _navigationHeader:
                 BehaviorSubject<NavigationHeader> = new BehaviorSubject(DefaultNavigationHeader);
+
+  private _valuesMap = new Map<string, BehaviorSubject<any>>();
 
 
   constructor() { }
@@ -45,8 +56,25 @@ export class UserInterfaceStore {
     return this._navigationHeader.asObservable();
   }
 
-  // reduce methods
 
+  getValue<T>(selector: VALUE_SELECTOR): Observable<T> {
+    if (this._valuesMap.has(selector)) {
+      const subject = this._valuesMap.get(selector) as BehaviorSubject<T>;
+
+      return subject.asObservable();
+
+    } else {
+      const defaultValue = getValueSelectorDefaultValue(selector) as T;
+      const subject = new BehaviorSubject<T>(defaultValue);
+
+      this._valuesMap.set(selector, subject);
+
+      return subject.asObservable();
+    }
+  }
+
+
+  // reduce methods
 
   setCurrentViewFromUrl(url: string) {
     if (this._currentView.value.url !== url) {
@@ -91,6 +119,17 @@ export class UserInterfaceStore {
     }
   }
 
+
+  setValue<T>(selector: VALUE_SELECTOR, value: T) {
+    if (!this._valuesMap.has(selector)) {
+      this._valuesMap.set(selector, new BehaviorSubject<T>(value));
+    } else {
+      const subject = this._valuesMap.get(selector) as BehaviorSubject<T>;
+
+      subject.next(value);
+    }
+
+  }
 
   // private methods
 
