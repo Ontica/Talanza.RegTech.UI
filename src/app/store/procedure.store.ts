@@ -91,7 +91,7 @@ export class ProcedureStore {
     .subscribe(
       data => this._themes.next(data)
       ,
-      err => console.log('Error reading themes', err)
+      err => console.log('Error reading topics', err)
     );
   }
 

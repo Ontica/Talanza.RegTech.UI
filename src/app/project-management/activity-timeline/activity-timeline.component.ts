@@ -71,7 +71,7 @@ export class ActivityTimelineComponent implements OnChanges {
         return 'By Responsible';
 
       case 'theme':
-        return 'By Theme';
+        return 'By Topic';
 
       default:
         throw Assertion.assertNoReachThisCode(`Unrecognized groupBy value '${this.groupBy}'.`);
@@ -85,7 +85,7 @@ export class ActivityTimelineComponent implements OnChanges {
         return 'Upcoming Tasks';
 
       case 'active-tasks':
-        return 'Active Tasks';
+        return 'Defined Tasks';
 
       case 'all-tasks':
         return 'All Tasks';

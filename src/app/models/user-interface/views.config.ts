@@ -22,7 +22,7 @@ export const HomePageViews: View[] = [
   },
   {
     name: 'Projects.DocumentsStore',
-    title: 'Documents Store',
+    title: 'Files',
     url: '/home/documents-store'
   }
 ];

@@ -149,10 +149,10 @@
             <option *ngFor="let entity of entities | async" [value]="entity.id">{{entity.shortName}}</option>
           </select>
         </td>
-        <td class="text-align-right" style="width:97%" i18n>Theme:</td>
+        <td class="text-align-right" style="width:97%" i18n>Topic:</td>
         <td>
           <select class="select-box" style="width:336px" formControlName="theme">
-            <option value="">( No theme )</option>
+            <option value="" i18n>( No topic )</option>
             <option *ngFor="let themeName of themesList | async" [value]="themeName">{{themeName}}</option>
           </select>
         </td>

@@ -116,7 +116,7 @@ export class GroupActivitiesByPipe implements PipeTransform  {
 
 
   private groupByTheme(data: Array<Activity>): Array<{key, value}> {
-    const EMPTY_THEME_GROUP = 'Activities without theme';
+    const EMPTY_THEME_GROUP = 'Activities without topic';
 
     const groups = data.reduce((previous, current) => {
 

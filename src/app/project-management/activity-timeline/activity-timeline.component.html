@@ -14,7 +14,7 @@
         </button>
         <mat-menu #menu1="matMenu">
             <button mat-menu-item (click)="onChangeInboxType('upcoming-tasks')">Upcoming tasks</button>
-            <button mat-menu-item (click)="onChangeInboxType('active-tasks')">Active tasks</button>
+            <button mat-menu-item (click)="onChangeInboxType('active-tasks')">Defined tasks</button>
             <button mat-menu-item (click)="onChangeInboxType('all-tasks')">All tasks</button>
         </mat-menu>
         <div style="width:32px"></div>
@@ -28,7 +28,7 @@
             <button mat-menu-item (click)="onChangeGroupBy('plannedEndDate')">By Planned End Date</button>
             <button mat-menu-item (click)="onChangeGroupBy('actualStartDate')">By Actual Start Date</button>
             <button mat-menu-item (click)="onChangeGroupBy('responsible')">By Responsible</button>
-            <button mat-menu-item (click)="onChangeGroupBy('theme')">By Theme</button>
+            <button mat-menu-item (click)="onChangeGroupBy('theme')">By Topic</button>
         </mat-menu>
 
         <div style="width:32px"></div>
@@ -67,7 +67,7 @@
           <div class="activity-status">
 
             <div class="activity-theme">
-              {{activity.project.name}}: {{activity.theme || 'No theme'}}
+              {{activity.project.name}}: {{activity.theme || 'No topic'}}
               <br/>
               {{activity.parent.uid !== 'Undefined' ? activity.parent.name : ''}}
             </div>

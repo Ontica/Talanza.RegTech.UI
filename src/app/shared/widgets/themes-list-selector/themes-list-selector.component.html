@@ -1,11 +1,11 @@
 <mat-expansion-panel expanded>
 
   <mat-expansion-panel-header i18n>
-    Themes
+    Topics
   </mat-expansion-panel-header>
 
   <mat-selection-list [(ngModel)]="selectedOptions">
-    <mat-list-option checkboxPosition='before' value='all' (click)="onSelected('all')" i18n>All themes</mat-list-option>
+    <mat-list-option checkboxPosition='before' value='all' (click)="onSelected('all')" i18n>All topics</mat-list-option>
     <mat-divider></mat-divider>
     <mat-list-option *ngFor="let theme of themes" checkboxPosition='before'
                      [value]="theme" (click)="onSelected(theme)">

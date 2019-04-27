@@ -264,7 +264,7 @@ export class ProjectStore {
             data =>
               this._themes.next(data)
             ,
-            err => console.log('Error reading projects themes', err)
+            err => console.log('Error reading topics', err)
         );
 
   }

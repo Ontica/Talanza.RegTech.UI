@@ -79,7 +79,7 @@
 
     <table class="form-section">
       <tr>
-        <td class="form-section-title" colspan="4" i18n>Responsible and theme</td>
+        <td class="form-section-title" colspan="4" i18n>Responsible and topic</td>
       </tr>
       <tr>
         <td i18n>Responsible:</td>
@@ -89,10 +89,10 @@
             <option *ngFor="let responsible of responsibles | async" [value]="responsible.uid">{{responsible.name}}</option>
           </select>
         </td>
-        <td i18n>Theme:</td>
+        <td i18n>Topic:</td>
         <td>
           <select class="select-box" style="width:336px" formControlName="theme">
-            <option value="" i18n>( No theme )</option>
+            <option value="" i18n>( No topic )</option>
             <option *ngFor="let themeName of themesList | async" [value]="themeName">{{themeName}}</option>
           </select>
         </td>
