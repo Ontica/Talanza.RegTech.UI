@@ -19,6 +19,7 @@ export interface View {
   title: string;
   url: string;
   menuTitle?: string;
+  disabled?: boolean;
 }
 
 

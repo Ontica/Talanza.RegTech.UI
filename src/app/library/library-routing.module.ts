@@ -26,11 +26,11 @@ import { DocumentsMainPageComponent } from '@app/documents/main-page/documents-m
         path: 'library', component: MainLayoutComponent,
         canActivate: [SecurityGuardService],
         children: [
-          { path: 'talanza-guidance', component: LibraryMainPageComponent },
           { path: 'oil-and-gas-contract-models', component: ContractsMainPageComponent },
           { path: 'regulatory-documents', component: DocumentsMainPageComponent },
           { path: 'procedures', component: ProceduresMainPageComponent },
-          { path: '', redirectTo: 'talanza-guidance', pathMatch: 'full' }
+          { path: 'talanza-guidance', component: LibraryMainPageComponent },
+          { path: '', redirectTo: 'oil-and-gas-contract-models', pathMatch: 'full' }
         ]
       }
     ])],

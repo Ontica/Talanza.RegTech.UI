@@ -3,12 +3,22 @@
   <div class="card-header card-header-flat">
 
     <div class="card-title">
-      {{title}}
-      <div class="card-hint">{{hint}}</div>
+      {{getCardTitle()}}
+      <div class="card-hint">{{getCardHint()}}</div>
     </div>
 
     <div class="card-header-options">
-        {{viewTitle}}
+        Show: &nbsp;{{inboxTypeTitle}}
+        <button mat-icon-button [matMenuTriggerFor]="menu1" class="menu-trigger-icon">
+            <mat-icon>arrow_drop_down</mat-icon>
+        </button>
+        <mat-menu #menu1="matMenu">
+            <button mat-menu-item (click)="onChangeInboxType('upcoming-tasks')">Upcoming tasks</button>
+            <button mat-menu-item (click)="onChangeInboxType('active-tasks')">Active tasks</button>
+            <button mat-menu-item (click)="onChangeInboxType('all-tasks')">All tasks</button>
+        </mat-menu>
+        <div style="width:32px"></div>
+        Group by: &nbsp;{{groupByTitle}}
         <button mat-icon-button [matMenuTriggerFor]="menu2" class="menu-trigger-icon">
             <mat-icon>arrow_drop_down</mat-icon>
         </button>
@@ -31,7 +41,7 @@
 
   <div class="card-body">
 
-    <div *ngFor="let group of activities | groupActivitiesBy: groupBy">
+    <div *ngFor="let group of filteredActivities | groupActivitiesBy: groupBy">
 
       <div class="activity-group-name">
         {{timelineHelper.getGroupName(group.key)}}

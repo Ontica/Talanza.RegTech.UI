@@ -128,8 +128,6 @@ export class MultiProjectsMainPageComponent implements OnInit, OnDestroy {
     filtered = this.applyResponsiblesFilter(filtered);
     filtered = this.applyThemesFilter(filtered);
 
-    filtered = this.applyViewFilter(filtered);
-
     this.filteredActivities = filtered;
   }
 
@@ -162,20 +160,6 @@ export class MultiProjectsMainPageComponent implements OnInit, OnDestroy {
     }
 
     return source.filter(x => this.themesFilter.includes(x.theme));
-  }
-
-
-  private applyViewFilter(source: Activity[]): Activity[] {
-    switch (this.currentView.name) {
-      case 'Projects.PendingTasks':
-        return TimelineHelper.filterForInbox(source);
-
-      case 'Projects.OverallTimelines':
-        return TimelineHelper.filterForOverallTimeline(source);
-
-      default:
-        return source;
-    }
   }
 
 

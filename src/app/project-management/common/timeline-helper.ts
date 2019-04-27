@@ -31,6 +31,9 @@ enum DEFAULT_BOUNDS {
 const USE_WEEKS_AND_MONTHS_FORMAT = false;
 
 
+export type InboxType = 'upcoming-tasks' | 'active-tasks' | 'all-tasks';
+
+
 export class TimelineHelper {
 
 
@@ -43,13 +46,33 @@ export class TimelineHelper {
   }
 
 
+  static applyInboxTypeFilter(source: Activity[], inboxType: InboxType): Activity[] {
+    switch (inboxType) {
+      case 'upcoming-tasks':
+        return TimelineHelper.filterUpcomingTasks(source);
+
+      case 'active-tasks':
+        return TimelineHelper.filterActiveTasks(source);
+
+      default:
+        return source;
+    }
+  }
+
+
   static displayPlannedEndDate(activity: Activity) {
     return activity.plannedEndDate && !this.isCompleted(activity) &&
            !this.samePlannedDateAndDeadline(activity);
   }
 
 
-  static filterForInbox(source: Activity[]) {
+  static filterActiveTasks(source: Activity[]) {
+    return source.filter(x => x.status !== 'Completed' &&
+                        (x.deadline || x.plannedEndDate || x.actualStartDate || x.actualEndDate));
+  }
+
+
+  static filterUpcomingTasks(source: Activity[]) {
     let filtered = source.filter(x => x.status !== 'Completed');
 
     const colored = [COLORS.red, COLORS.amber, COLORS.green];
@@ -58,13 +81,6 @@ export class TimelineHelper {
                   colored.includes(TimelineHelper.getTimelineColor(x, x.deadline.toString(), 'border')));
 
     return filtered;
-  }
-
-
-  static filterForOverallTimeline(source: Activity[]) {
-    return source.filter(x => x.status !== 'Completed' &&
-                        (x.deadline || x.plannedEndDate || x.actualStartDate || x.actualEndDate));
-
   }
 
 

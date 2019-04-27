@@ -20,15 +20,16 @@ export class MainLayoutComponent {
 
   keywords = '';
 
-  constructor(private uiStore: UserInterfaceStore,
+  constructor(uiStore: UserInterfaceStore,
               private router: Router) {
     this.router.events.subscribe(val => {
       if (val instanceof ActivationEnd) {
-        uiStore.setCurrentViewFromUrl(this.router.routerState.snapshot.url);
+        const url = this.router.routerState.snapshot.url.split(';')[0];
+
+        uiStore.setCurrentViewFromUrl(url);
       }
     });
   }
-
 
 
   onAction(event: any) {

@@ -63,5 +63,5 @@ export class MenuItem {
 
 
 export function createMenuItemForView(view: View): MenuItem {
-  return new MenuItem(view.menuTitle || view.title, undefined, view.url, false);
+  return new MenuItem(view.menuTitle || view.title, undefined, view.url, view.disabled);
 }

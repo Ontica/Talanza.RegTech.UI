@@ -10,19 +10,15 @@ import { View } from './user-interface';
 
 export const HomePageViews: View[] = [
   {
-    name: 'Projects.PendingTasks',
-    title: 'Pending Tasks',
-    url: '/home/pending-tasks'
+    name: 'Projects.Tasks',
+    title: 'Tasks',
+    url: '/home/tasks'
   },
   {
-    name: 'Projects.TasksFinder',
-    title: 'Tasks Finder',
-    url: '/home/tasks-finder'
-  },
-  {
-    name: 'Projects.OverallTimelines',
-    title: 'Overall Timelines',
-    url: '/home/overall-timelines'
+    name: 'Projects.Gantt',
+    title: 'Gantt chart',
+    url: '/home/gantt',
+    disabled: true
   },
   {
     name: 'Projects.DocumentsStore',
@@ -78,11 +74,6 @@ export const ProcessManagementViews: View[] = [
 
 export const LibraryViews: View[] = [
   {
-    name: 'Library.Guidance',
-    title: 'Talanza Guidance',
-    url: '/library/talanza-guidance'
-  },
-  {
     name: 'Library.Contracts',
     title: 'Contract Models',
     url: '/library/oil-and-gas-contract-models'
@@ -96,6 +87,11 @@ export const LibraryViews: View[] = [
     name: 'Library.Procedures',
     title: 'Procedures',
     url: '/library/procedures'
+  },
+  {
+    name: 'Library.Guidance',
+    title: 'Talanza Guidance',
+    url: '/library/talanza-guidance'
   }
 ];
 
@@ -104,7 +100,6 @@ export const SearchViews: View[] = [
   {
     name: 'Search.Main',
     title: 'Search Results',
-    url: '/library'
+    url: '/search/main'
   },
 ];
-

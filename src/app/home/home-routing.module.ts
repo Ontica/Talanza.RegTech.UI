@@ -25,11 +25,10 @@ import {
         path: 'home', component: MainLayoutComponent,
         canActivate: [SecurityGuardService],
         children: [
-          { path: 'pending-tasks', component: MultiProjectsMainPageComponent },
-          { path: 'tasks-finder', component: MultiProjectsMainPageComponent },
-          { path: 'overall-timelines', component: MultiProjectsMainPageComponent },
+          { path: 'tasks', component: MultiProjectsMainPageComponent },
+          { path: 'gantt', component: MultiProjectsMainPageComponent },
           { path: 'documents-store', component: MultiProjectsMainPageComponent },
-          { path: '', redirectTo: 'pending-tasks', pathMatch: 'full' }
+          { path: '', redirectTo: 'tasks', pathMatch: 'full' }
         ]
       }
     ])],

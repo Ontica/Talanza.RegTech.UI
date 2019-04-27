@@ -14,8 +14,7 @@ import { Activity, EmptyActivity } from '@app/models/project-management';
 
 import { GroupByProperty } from './group-activities-by.pipe';
 
-import { TimelineHelper } from '../common/timeline-helper';
-
+import { InboxType, TimelineHelper } from '../common/timeline-helper';
 
 @Component({
   selector: 'emp-steps-activity-timeline',
@@ -25,19 +24,22 @@ import { TimelineHelper } from '../common/timeline-helper';
 export class ActivityTimelineComponent implements OnChanges {
 
   @Input() activities: Activity[] = [];
+  @Input() inboxType: InboxType = 'upcoming-tasks';
+
   @Input() groupBy: GroupByProperty = 'timeline';
 
-  @Input() title = 'Please select a contract';
-  @Input() hint = 'Timelines';
+  @Input() title = '';
 
   @Output() activitySelected = new EventEmitter<Activity>();
 
   selectedActivity: Activity = EmptyActivity;
 
+  filteredActivities: Activity[] = [];
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['activities']) {
       this.resetSelectedActivity();
+      this.applyFilters();
     }
   }
 
@@ -51,8 +53,7 @@ export class ActivityTimelineComponent implements OnChanges {
     return TimelineHelper;
   }
 
-
-  get viewTitle() {
+  get groupByTitle() {
     switch (this.groupBy) {
       case 'timeline':
         return 'Default Timeline';
@@ -78,8 +79,51 @@ export class ActivityTimelineComponent implements OnChanges {
   }
 
 
+  get inboxTypeTitle() {
+    switch (this.inboxType) {
+      case 'upcoming-tasks':
+        return 'Upcoming Tasks';
+
+      case 'active-tasks':
+        return 'Active Tasks';
+
+      case 'all-tasks':
+        return 'All Tasks';
+
+      default:
+        return 'Tasks';
+    }
+  }
+
+
+  getCardHint(): string {
+    const counter = this.filteredActivities.length;
+
+    if (counter !== 1) {
+      return `${counter} tasks found.`;
+    } else {
+      return `One task found.`;
+    }
+  }
+
+
+
+  getCardTitle(): string {
+    if (this.title) {
+      return this.title;
+    }
+    return this.inboxTypeTitle;
+  }
+
+
   onChangeGroupBy(groupBy: GroupByProperty) {
     this.groupBy = groupBy;
+  }
+
+
+  onChangeInboxType(inboxType: InboxType) {
+    this.inboxType = inboxType;
+    this.applyFilters();
   }
 
 
@@ -105,6 +149,12 @@ export class ActivityTimelineComponent implements OnChanges {
   // private methods
 
 
+  private applyFilters() {
+    this.filteredActivities =
+              TimelineHelper.applyInboxTypeFilter(this.activities, this.inboxType);
+  }
+
+
   private resetSelectedActivity() {
     const found = this.activities.find(x => x.uid === this.selectedActivity.uid);
 
@@ -112,5 +162,6 @@ export class ActivityTimelineComponent implements OnChanges {
       this.selectedActivity = EmptyActivity;
     }
   }
+
 
 }
