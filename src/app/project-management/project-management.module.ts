@@ -36,6 +36,7 @@ import {
 } from './multi-projects-main-page/multi-projects-main-page.component';
 
 import { ProjectManagementRoutingModule } from './project-management-routing.module';
+import { ActivityFilesComponent } from './activity-files/activity-files.component';
 
 
 @NgModule({
@@ -69,7 +70,8 @@ import { ProjectManagementRoutingModule } from './project-management-routing.mod
     GroupActivitiesByPipe,
     MultiProjectsMainPageComponent,
     ProjectsMainPageComponent,
-    GanttChartComponent
+    GanttChartComponent,
+    ActivityFilesComponent
   ],
 
   exports: [

@@ -13,31 +13,33 @@
 
   </div>
 
-  <mat-tab-group color="accent">
+  <div class="card-body">
+    <mat-tab-group color="accent">
 
-    <mat-tab label="Activity" i18n-label>
-      <emp-steps-activity-form [activity]="activity"
-                               (delete)="onClose()"
-                               (update)="onUpdateActivity()"></emp-steps-activity-form>
-    </mat-tab>
+      <mat-tab label="Activity" i18n-label>
+        <emp-steps-activity-form [activity]="activity"
+                                (delete)="onClose()"
+                                (update)="onUpdateActivity()"></emp-steps-activity-form>
+      </mat-tab>
 
-    <mat-tab label="Subtasks" i18n-label>
-      <emp-steps-activity-tasks [activity]="activity"></emp-steps-activity-tasks>
-    </mat-tab>
+      <mat-tab label="Subtasks" i18n-label>
+        <emp-steps-activity-tasks [activity]="activity"></emp-steps-activity-tasks>
+      </mat-tab>
 
-    <mat-tab label="Documents" disabled="true" i18n-label>
+      <mat-tab label="Files" i18n-label>
+        <emp-steps-activity-files [activity]="activity"></emp-steps-activity-files>
+      </mat-tab>
 
-    </mat-tab>
+      <mat-tab label="Annotations" i18n-label>
+        <emp-kb-postings-list [target]="activity"></emp-kb-postings-list>
+      </mat-tab>
 
-    <mat-tab label="Annotations" disabled="true" i18n-label>
-      <emp-kb-postings-list [target]="activity"></emp-kb-postings-list>
-    </mat-tab>
+      <mat-tab label="Regulation" [disabled]="!activity.template" i18n-label>
+        <emp-steps-activity-designer [activityTemplate]="activity.template"
+                                    [settings]="childrenSettings"></emp-steps-activity-designer>
+      </mat-tab>
 
-    <mat-tab label="Regulation" [disabled]="!activity.template" i18n-label>
-      <emp-steps-activity-designer [activityTemplate]="activity.template"
-                                   [settings]="childrenSettings"></emp-steps-activity-designer>
-    </mat-tab>
-
-  </mat-tab-group>
+    </mat-tab-group>
+  </div>
 
 </div>

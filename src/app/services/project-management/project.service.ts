@@ -13,7 +13,7 @@ import { Assertion, CoreService } from '@app/core';
 
 import { Activity, Contract, Project, Resource, Stage } from '@app/models/project-management';
 
-import { Contact } from '@app/models/core';
+import { Contact, Identifiable } from '@app/models/core';
 import { ColoredTag } from '@app/models/user-interface';
 
 
@@ -297,6 +297,17 @@ export class ProjectService {
                             catchError(e => this.core.http.showAndThrow(e, Errors.UPDATE_ACTIVITY))
                          );
 
+  }
+
+
+  uploadFile(activity: Activity, fileToUpload: File): Observable<Identifiable> {
+    const path = `/v1/media/upload`;
+
+    const formData: FormData = new FormData();
+
+    formData.append('media', fileToUpload, fileToUpload.name);
+
+    return this.core.http.post<Identifiable>(path, formData);
   }
 
 }

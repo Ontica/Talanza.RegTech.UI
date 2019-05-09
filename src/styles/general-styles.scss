@@ -142,6 +142,10 @@ input.text-box {
   @include input-settings;
 }
 
+div.text-box {
+  @include input-settings;
+}
+
 input:focus {
   outline: none;
   color: $selected-control-color;
