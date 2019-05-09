@@ -17,13 +17,12 @@ export const HomePageViews: View[] = [
   {
     name: 'Projects.Gantt',
     title: 'Gantt chart',
-    url: '/home/gantt',
-    disabled: true
+    url: '/home/gantt'
   },
   {
-    name: 'Projects.DocumentsStore',
+    name: 'Projects.Files',
     title: 'Files',
-    url: '/home/documents-store'
+    url: '/home/files'
   }
 ];
 
@@ -45,9 +44,9 @@ export const ProjectManagementViews: View[] = [
     url: '/contract-management/timelines'
   },
   {
-    name: 'Project.Documents',
-    title: 'Documents',
-    url: '/contract-management/documents'
+    name: 'Project.Files',
+    title: 'Files',
+    url: '/contract-management/files'
   }
 ];
 

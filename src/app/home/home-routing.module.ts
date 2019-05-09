@@ -27,7 +27,7 @@ import {
         children: [
           { path: 'tasks', component: MultiProjectsMainPageComponent },
           { path: 'gantt', component: MultiProjectsMainPageComponent },
-          { path: 'documents-store', component: MultiProjectsMainPageComponent },
+          { path: 'files', component: MultiProjectsMainPageComponent },
           { path: '', redirectTo: 'tasks', pathMatch: 'full' }
         ]
       }

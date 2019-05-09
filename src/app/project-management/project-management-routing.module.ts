@@ -26,7 +26,7 @@ import { ProjectsMainPageComponent } from './main-page/projects-main-page.compon
           { path: 'activities', component: ProjectsMainPageComponent },
           { path: 'gantt', component: ProjectsMainPageComponent },
           { path: 'timelines', component: ProjectsMainPageComponent },
-          { path: 'documents', component: ProjectsMainPageComponent },
+          { path: 'files', component: ProjectsMainPageComponent },
           { path: '', redirectTo: 'activities', pathMatch: 'full' }
         ]
       }

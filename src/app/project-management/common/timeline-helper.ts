@@ -185,31 +185,31 @@ export class TimelineHelper {
 
     if (useWeeksAndMonths) {
       if (weeks > 8) {
-        return `${months.toFixed(1).replace('.0', '')} meses antes`;
+        return `${months.toFixed(1).replace('.0', '')} months before`;
 
       } else if (weeks < -8) {
-        return `${Math.abs(months).toFixed(1).replace('.0', '')} meses después`;
+        return `${Math.abs(months).toFixed(1).replace('.0', '')} months after`;
       }
 
       if (weeks >= 4) {
-        return `${weeks.toFixed(1).replace('.0', '')} semanas antes`;
+        return `${weeks.toFixed(1).replace('.0', '')} weeks before`;
 
       } else if (weeks <= -4) {
-        return `${Math.abs(weeks).toFixed(1).replace('.0', '')} semanas después`;
+        return `${Math.abs(weeks).toFixed(1).replace('.0', '')} weeks after`;
       }
     }
 
     if (days === 1) {
-      return 'Un día antes';
+      return 'One day before';
 
     } else if (days > 1) {
-      return `${days} días antes`;
+      return `${days} days before`;
 
     } else if (days === -1) {
-      return `Un día después`;
+      return `One day after`;
 
     } else if (days < -1) {
-      return `${Math.abs(days)} días después`;
+      return `${Math.abs(days)} days after`;
 
     } else {
       return '';

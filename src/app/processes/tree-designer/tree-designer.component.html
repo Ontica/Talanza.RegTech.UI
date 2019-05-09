@@ -48,6 +48,7 @@
                 [style.padding-left.pt]="activity.level * 14">
 
                 <div class="activity-name">
+                  <b *ngIf="activity.level === 1">* </b>
                   <a #trigger (click)="onSelectActivity(activity, true)">{{activity.name}}</a>
                 </div>
 
