@@ -1,9 +1,9 @@
 <table class="grid-search-table">
   <tr>
-    <td>Tipo de documento:</td>
+    <td i18n>Document type:</td>
     <td>
       <select class="select-box" style="width:210px;" (change)="onChangeFilter()" [(ngModel)]="filter.type">
-         <option value="">( Todos )</option>
+         <option value="" i18n>( All )</option>
          <option value="Acuerdo">Acuerdos</option>
          <option value="Criterios">Criterios</option>
          <option value="DACG">DACGs</option>
@@ -13,17 +13,17 @@
          <option value="Ley">Leyes</option>
          <option value="Lineamiento">Lineamientos</option>
          <option value="Reglamento">Reglamentos</option>
-         <option value="Recomendaciones">Recomendaciones Talanza</option>
+         <!-- <option value="Recomendaciones">Recomendaciones Talanza</option> -->
       </select>
     </td>
-    <td>Buscar:</td>
+    <td i18n>Search:</td>
     <td>
       <input type="search" class="text-box" style="width:364px;" (keyup.enter)="onChangeFilter()" [(ngModel)]="filter.keywords">
     </td>
     <td>
-      <button class="btn" style="width:55px;" (click)="onChangeFilter()">Buscar</button>
+      <button class="btn" style="width:55px;" (click)="onChangeFilter()" i18n>Search</button>
     </td>
-    <td><a (click)="onResetFilter()">Limpiar filtros</a></td>
+    <td><a (click)="onResetFilter()" i18n>Clean filters</a></td>
   </tr>
 </table>
 
@@ -31,9 +31,9 @@
   <thead>
     <tr>
       <th style="width:20pt"></th>
-      <th style="width:40%;min-width:350pt">Nombre</th>
-      <th style="width:140pt">Acrónimo / Tipo</th>
-      <th style="width:50%"></th>
+      <th style="width:50%;min-width:350pt" i18n>Document name</th>
+      <th style="width:140pt" i18n>Acronym / Type</th>
+      <th style="width:30%"></th>
     </tr>
   </thead>
   <tbody>
@@ -41,13 +41,13 @@
       <td class="main-icon">
         <a (click)="openExternalWindow(document.url)"><i class="fa fa-book" aria-hidden="true"></i></a>
       </td>
-      <td style="width:40%;min-width:350pt;padding-right:50pt">
+      <td style="width:50%;min-width:350pt;padding-right:50pt">
         <a (click)="openExternalWindow(document.url)">{{document.name}}</a>
       </td>
       <td style="width:140pt">
         {{document.code}}<br> {{document.type}}
       </td>
-      <td style="width:50%"></td>
+      <td style="width:30%"></td>
     </tr>
   </tbody>
 </table>
@@ -55,11 +55,11 @@
 <div class="grid-footer">
   <table class="grid-footer-style">
     <tr>
-      <td class="grid-footer-items" style="width:30%">{{documentsList.length}} documentos encontrados</td>
+      <td class="grid-footer-items" style="width:30%" i18n>{{documentsList.length}} documents found</td>
       <td class="grid-footer-items text-align-center">
 
       </td>
-      <td class="grid-footer-items text-align-right ">Página 1 de 1</td>
+      <td class="grid-footer-items text-align-right" i18n>Page 1 of 1</td>
     </tr>
   </table>
 </div>

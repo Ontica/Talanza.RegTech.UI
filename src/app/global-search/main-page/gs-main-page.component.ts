@@ -150,17 +150,19 @@ export class GlobalSearchMainPageComponent {
     this.navBarConfig = [];
     this.navBarConfig.push({
       name: 'procedures',
-      displayText: 'Trámites (' + this.procedures.length.toString() + ')'
+      displayText: 'Procedures (' + this.procedures.length.toString() + ')'
     });
     this.navBarConfig.push({
       name: 'contracts',
-      displayText: 'Contratos (' + this.clauses.length.toString() + ')'
+      displayText: 'Contracts (' + this.clauses.length.toString() + ')'
     });
     this.navBarConfig.push({
-      name: 'documents', displayText: 'Documentos (' + this.documents.length.toString() + ')'
+      name: 'documents',
+      displayText: 'Documents (' + this.documents.length.toString() + ')'
     });
     this.navBarConfig.push({
-      name: 'FAQs', displayText: 'Q&A (' + this.FAQs.length.toString() + ')'
+      name: 'FAQs',
+      displayText: 'Q&A (' + this.FAQs.length.toString() + ')'
     });
   }
 

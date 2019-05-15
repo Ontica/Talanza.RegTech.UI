@@ -11,8 +11,8 @@ export interface Posting {
   objectUID: string;
   body: string;
   title?: string;
-  fileName?: string;
-  controlNo?: string;
+  fileUrl?: string;
+  authors?: string;
   tags?: string;
   date?: Date;
   accessMode?: string;
@@ -27,8 +27,8 @@ export function EmptyPosting(): Posting {
     objectUID: '',
     body: '',
     title: '',
-    fileName: '',
-    controlNo: '',
+    fileUrl: '',
+    authors: '',
     tags: '',
     date: new Date,
     accessMode: '',

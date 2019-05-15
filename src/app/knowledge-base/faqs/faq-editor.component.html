@@ -1,35 +1,35 @@
 <table class="form">
   <tr>
-    <td class="form-title form-title-text">Pregunta:</td>
+    <td class="form-title form-title-text" i18n>Question:</td>
   </tr>
   <tr>
     <td> <textarea class="text-area" rows="5" cols="25" [(ngModel)]="faq.title"></textarea></td>
   </tr>
   <tr>
-    <td class="form-title form-title-text">Respuesta:</td>
+    <td class="form-title form-title-text" i18n>Answer:</td>
   </tr>
   <tr>
     <td><textarea class="text-area" rows="12" cols="25" [(ngModel)]="faq.body"></textarea></td>
   </tr>
   <tr>
-    <td class="form-title form-title-text">Notas:</td>
+    <td class="form-title form-title-text" i18n>Notes:</td>
   </tr>
 </table>
 <table class="form">
   <tr>
-    <td>Visibilidad:</td>
+    <td i18n>Visibility:</td>
     <td>
       <select class="select-box" style="width:140px" [(ngModel)]="faq.accessMode">
-        <option value="">( Seleccionar )</option>
+        <option value="" i18n>( Select )</option>
         <option value="Public">Pública</option>
         <option value="Private">Privada</option>
         <option value="Internal">Interna</option>
       </select>
     </td>
     <td class="text-align-right">
-      <span> Estado:</span>
+      <span i18n>Status:</span>
       <select class="select-box" style="width:140px" [(ngModel)]="faq.status">
-        <option value="">( Seleccionar )</option>
+        <option value="" i18n>( Select )</option>
         <option value="Active">Activa</option>
         <option value="Pending">Pendiente</option>
         <option value="Obsolete">Obsoleta</option>
@@ -41,10 +41,10 @@
 <table class="form ">
   <tr>
     <td>
-      <button class="btn" (click)="onClose()">Cancelar</button>
+      <button class="btn" (click)="onClose()" i18n>Cancel</button>
     </td>
     <td class="text-align-right">
-      <button class="btn-action" (click)="onUpdate()">Guardar cambios</button>
+      <button class="btn-action" (click)="onUpdate()" i18n>Save</button>
     </td>
   </tr>
 </table>

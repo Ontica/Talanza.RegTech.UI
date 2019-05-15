@@ -1,50 +1,23 @@
 <table class="grid-search-table">
   <tr>
-    <td>Dependencia:</td>
+    <td i18n>Agency:</td>
     <td><select #entity class="select-box" style="width:90px;" (change)="onChangeFilter()" [(ngModel)]="filter.entityUID">
-					<option value="">( Todas )</option>
-					<option *ngFor="let entity of entities" [value]="entity.uid">{{entity.shortName}}</option>
+					<option value="" i18n>( All )</option>
+					<option *ngFor="let entity of entities" [value]="entity.shortName">{{entity.shortName}}</option>
 				</select>
     </td>
-    <td>Tema:</td>
+    <td i18n>Topic:</td>
     <td>
       <select #theme class="select-box" style="width:210px" (change)="onChangeFilter()" [(ngModel)]="filter.theme">
-          <option value="">( Todos )</option>
+          <option value="" i18n>( All )</option>
           <option *ngFor="let themeName of themesList" [value]="themeName">{{themeName}}</option>
 				</select>
     </td>
-    <td>Buscar:</td>
+    <td i18n>Search:</td>
     <td colspan="3">
       <input class="text-box" type="search" style="width:310px" (keyup.enter)="onChangeFilter()" [(ngModel)]="filter.keywords">
-      <button class="btn" style="width:55px;" (click)="onChangeFilter()">Buscar</button>
+      <button class="btn" style="width:55px;" (click)="onChangeFilter()" i18n>Search</button>
     </td>
-    <td><a (click)="onCleanCombos() ">Limpiar filtros</a></td>
+    <td><a (click)="onCleanCombos()" i18n>Clean filters</a></td>
   </tr>
-  <!--
-  <tr>
-    <td>Etapa:</td>
-    <td>
-      <select #stage class="select-box text-align-right" style="width:245px" [(ngModel)]="filter.stage">
-							<option value="">( Todas )</option>
-							<option value="Etapa de Exploración">Etapa de Exploración</option>
-							<option value="Etapa de Abandono">Etapa de Abandono</option>
-							<option value="Período de Desarrollo">Período de Desarrollo</option>
-							<option value="Período de Evaluación">Período de Evaluación</option>
-							<option value="Transición de Arranque">Transición de Arranque</option>
-							<option value="Transversales">Transversales</option>
-						</select>
-    </td>
-    <td>Contrato:</td>
-    <td><select class="select-box" style="width:165px" [(ngModel)]="filter.contract">
-							<option value="">( Todas )</option>
-							<option value="1.3">Ronda 1.3</option>
-							<option value="1.4">Ronda 1.4</option>
-							<option value="2.1">Ronda 2.1</option>
-						</select>
-		</td>
-    <td>
-      <button style="width:144px" class="btn-action" type="button" (click)="onCreateProcedure()">+ Nuevo trámite</button>
-    </td>
-	</tr>
-	!-->
 </table>

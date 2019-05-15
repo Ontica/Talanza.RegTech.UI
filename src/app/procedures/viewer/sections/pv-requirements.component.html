@@ -1,22 +1,22 @@
 <table class="grid">
   <thead>
     <tr>
-      <th style="width:60%">Requisitos del trámite</th>
-      <th style="width:20%">Aplica a</th>
-      <th style="width:15%">Presentar</th>
+      <th style="width:60%" i18n>Procedure requirements</th>
+      <th style="width:20%" i18n>Applies to</th>
+      <th style="width:15%" i18n>Original/copies</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let condition of conditions">
       <td style="width:60%">{{condition.name}}<br>
-        <a *ngIf="condition.sourceUrl !== ''" (click)="openExternalWindow(condition.sourceUrl)"><u>Obtener Formato</u></a><br>
-        <a *ngIf="condition.sampleUrl !== ''" (click)="openExternalWindow(condition.sampleUrl)"><u>Ejemplo</u></a>
+        <a *ngIf="condition.sourceUrl !== ''" (click)="openExternalWindow(condition.sourceUrl)"><u i18n>Get Form</u></a><br>
+        <a *ngIf="condition.sampleUrl !== ''" (click)="openExternalWindow(condition.sampleUrl)"><u i18n>Sample</u></a>
       </td>
       <td style="width:20%">{{condition.appliesTo}}</td>
       <td style="width:15%">{{condition.copies}}</td>
     </tr>
     <tr *ngIf="conditions.length === 0">
-      <td colspan="3"><i>No aplica</i></td>
+      <td colspan="3"><i i18n>Do not apply</i></td>
     </tr>
   </tbody>
 </table>
@@ -24,22 +24,22 @@
 <table class="grid">
   <thead>
     <tr>
-      <th style="width:60%">Documentos a entregar</th>
-      <th style="width:20%">Aplica a</th>
-      <th style="width:15%">Entregar</th>
+      <th style="width:60%" i18n>Documents to turn-in</th>
+      <th style="width:20%" i18n>Applies to</th>
+      <th style="width:15%" i18n>Original/copies</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let inputDocument of inputDocuments">
       <td style="width:60%">{{inputDocument.name}}<br>
-        <a *ngIf="inputDocument.sourceUrl !== ''" (click)="openExternalWindow(inputDocument.sourceUrl)"><br><u>Obtener Formato</u></a> <br>
-        <a *ngIf="inputDocument.sampleUrl !== ''" (click)="openExternalWindow(inputDocument.sampleUrl)"><u>Ejemplo</u></a>
+        <a *ngIf="inputDocument.sourceUrl !== ''" (click)="openExternalWindow(inputDocument.sourceUrl)"><br><u i18n>Get Form</u></a> <br>
+        <a *ngIf="inputDocument.sampleUrl !== ''" (click)="openExternalWindow(inputDocument.sampleUrl)"><u i18n>Sample</u></a>
       </td>
       <td style="width:20%">{{inputDocument.appliesTo}}</td>
       <td style="width:15%">{{inputDocument.copies}}</td>
     </tr>
     <tr *ngIf="inputDocuments.length === 0">
-      <td colspan="3"><i>No aplica</i></td>
+      <td colspan="3"><i i18n>Do not apply</i></td>
     </tr>
   </tbody>
 </table>
@@ -47,18 +47,18 @@
 <table class="grid">
   <thead>
     <tr>
-      <th style="width:95%">Documentos que expide la dependencia</th>
+      <th style="width:95%">Returned official documents</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let outputDocument of outputDocuments">
       <td>{{outputDocument.name}}<br>
-        <a *ngIf="outputDocument.sourceUrl !== ''" (click)="openExternalWindow(outputDocument.sourceUrl)">Formato</a> <br>
-        <a *ngIf="outputDocument.sampleUrl !== ''" (click)="openExternalWindow(outputDocument.sampleUrl)">Ejemplo</a>
+        <a *ngIf="outputDocument.sourceUrl !== ''" (click)="openExternalWindow(outputDocument.sourceUrl)" i18n>Get Form</a> <br>
+        <a *ngIf="outputDocument.sampleUrl !== ''" (click)="openExternalWindow(outputDocument.sampleUrl)" i18n>Sample</a>
       </td>
     </tr>
     <tr *ngIf="outputDocuments.length === 0">
-      <td><i>No aplica</i></td>
+      <td><i i18n>Do not apply</i></td>
     </tr>
   </tbody>
 </table>

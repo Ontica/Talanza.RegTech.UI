@@ -1,8 +1,8 @@
 <div style="width:80%;padding-left:32px" [formGroup]="form">
-  <input type="text" class='text-box' formControlName="title" placeholder="Pregunta" />
-  <textarea class="text-area" rows="3" cols="20" formControlName="body" placeholder="Texto con la respuesta u observaciones"></textarea>
-  <input type="text" class='text-box' formControlName="fileName" placeholder="Documento asociado (opcional)" />
+  <input type="text" class='text-box' formControlName="title" placeholder="Question" />
+  <textarea class="text-area" rows="3" cols="20" formControlName="body" placeholder="Answer"></textarea>
+  <input type="text" class='text-box' formControlName="fileName" placeholder="Attached document (optional)" />
   <div>
-    <button mat-stroked-button color="primary" [disabled]="!form.valid" (click)="onSave()">Anexar</button>
+    <button mat-stroked-button color="primary" [disabled]="!form.valid" (click)="onSave()">Save</button>
   </div>
 </div>

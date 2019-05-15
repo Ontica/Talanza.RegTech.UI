@@ -11,7 +11,14 @@ export interface Document {
   readonly type: string;
   readonly name: string;
   readonly code: string;
+  readonly authority: string;
+  readonly stage: string;
+  readonly version: string;
+  readonly lastUpdated: string;
+  readonly fromDate: string;
+  readonly toDate: string;
   readonly url: string;
+  readonly officialUrl: string;
 }
 
 export class DocumentFilter {

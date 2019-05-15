@@ -1,7 +1,7 @@
 <div *ngIf="!isOpenFAQEditor" class="faq-container">
   <div>
     <div class="faq">
-      <span style="float:right;"><a (click)="onOpenFAQEditor()">Editar</a></span>
+      <span style="float:right;"><a (click)="onOpenFAQEditor()" i18n>Edit</a></span>
     </div>
   </div>
 
@@ -9,12 +9,17 @@
     <div class="question">
       {{faq.title}}
     </div>
+
+    <div class="pdf-control">
+      <emp-ng-object [data]="faq.fileUrl"></emp-ng-object>
+    </div>
   </div>
-  <div class="answer">
+
+  <!-- <div class="answer">
     <div>
       {{faq.body}}
     </div>
-  </div>
+  </div> -->
 
 </div>
 <div *ngIf="isOpenFAQEditor">

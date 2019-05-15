@@ -34,3 +34,10 @@
   max-width: 600pt;
   display: inline-block;
 }
+
+
+.pdf-control {
+  height: calc(100vh - 240px);
+  width: 100%;
+  overflow-y: hidden;
+}

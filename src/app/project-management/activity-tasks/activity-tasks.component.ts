@@ -10,7 +10,6 @@ import { Component, Input, OnChanges } from '@angular/core';
 import { TaskService } from '@app/services/project-management/task.service';
 
 import { Activity, EmptyActivity, Task, EmptyTask } from '@app/models/project-management';
-import { TransitionCheckState } from '@angular/material';
 
 
 @Component({

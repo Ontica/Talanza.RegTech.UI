@@ -3,17 +3,17 @@
 table {
   width: 90%;
   border-collapse: collapse;
-  font-size: 10pt;
   margin-left: 15pt;
 }
 
 .header {
   background-color: $disabled-color;
   padding: 8pt;
+  font-weight: 400;
 }
 
 .sub-header {
-  font-weight: 600;
+  font-weight: 400;
   padding: 5pt;
 }
 
@@ -21,6 +21,5 @@ table td.label {
   color: #6a6a6a;
   max-width: 260px;
   width: 260px;
-  font-size: 10pt;
   white-space: nowrap;
 }

@@ -19,9 +19,10 @@ export class PVGeneralInfoComponent {
 
   editionMode = false;
   isVisibleGeneralInfo = true;
-  isInitialTermsVisible = true;
-  isPaymentInfoVisible = true;
-  isAuthorityInfoVisible = true;
+  isVisibleObligationsInfo = false;
+  isInitialTermsVisible = false;
+  isPaymentInfoVisible = false;
+  isAuthorityInfoVisible = false;
 
   @Input()
   get procedure() { return this._procedure; }
@@ -34,27 +35,32 @@ export class PVGeneralInfoComponent {
   private _procedure: Procedure;
 
 
-  onDisplayGeneralInfo(): void {
+  onDisplayGeneralInfo() {
     this.isVisibleGeneralInfo = !this.isVisibleGeneralInfo;
   }
 
 
-  onDisplayInitialTerms(): void {
+  onDisplayObligationsInfo() {
+    this.isVisibleObligationsInfo = !this.isVisibleObligationsInfo;
+  }
+
+
+  onDisplayInitialTerms() {
     this.isInitialTermsVisible = !this.isInitialTermsVisible;
   }
 
 
-  onDisplayPaymentInfo(): void {
+  onDisplayPaymentInfo() {
     this.isPaymentInfoVisible = !this.isPaymentInfoVisible;
   }
 
 
-  onDisplayAuthorityInfo(): void {
+  onDisplayAuthorityInfo() {
     this.isAuthorityInfoVisible = !this.isAuthorityInfoVisible;
   }
 
 
-  openExternalWindow(url: string): void {
+  openExternalWindow(url: string) {
     window.open(url, '_blank', 'location=yes,height=570,width=620,scrollbars=yes,status=yes');
   }
 

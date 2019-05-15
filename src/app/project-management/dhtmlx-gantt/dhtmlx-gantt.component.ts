@@ -182,7 +182,7 @@ export class DhtmlxGanttComponent implements OnInit, OnDestroy {
 
   private setProperties() {
     gantt.config.columns =  [
-      { name: 'text', label: 'Obligaciones / Actividades',
+      { name: 'text', label: 'Activities',
         width: '*', min_width: 520, tree: true, resize: true
       }
     ];

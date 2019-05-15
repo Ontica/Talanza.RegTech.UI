@@ -1,6 +1,6 @@
 <div *ngIf="rules.length > 0">
-  <span class="clause-subtitle">
-    Obligaciones
+  <span class="clause-subtitle" i18n>
+    Obligations
   </span>
 
   <div *ngFor="let rule of rules">
@@ -18,7 +18,7 @@
             <span>{{rule.description}}</span>
             <br/>
             <br/>
-            <span class='clause-subtitle' *ngIf="rule.procedures.length !== 0">Trámites involucrados</span>
+            <span class='clause-subtitle' *ngIf="rule.procedures.length !== 0" i18n>Related procedures</span>
           </td>
         </tr>
         <tr *ngFor="let procedure of rule.procedures">

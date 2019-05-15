@@ -109,9 +109,9 @@ export class ProcedureFilter {
   toString() {
     let filter = '';
 
-    // if (this.entityUID) {
-    //   filter = this.addFilterConnector(filter) + 'AuthEntity.ContactUID=\'' + this.entityUID + '\'';
-    // }
+    if (this.entityUID) {
+      filter = this.addFilterConnector(filter) + 'Entity=\'' + this.entityUID + '\'';
+    }
 
     // if (this.officeUID) {
     //   filter = this.addFilterConnector(filter) + 'AuthOffice.ContactUID=\'' + this.officeUID + '\'';

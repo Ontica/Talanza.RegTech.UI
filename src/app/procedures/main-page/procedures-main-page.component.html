@@ -4,10 +4,10 @@
   <thead>
     <tr>
       <th style="width:20pt"></th>
-      <th style='width:40%'>Trámite / Modalidad / Homoclave</th>
-      <th style='width:100px'>Dependencia</th>
-      <th style='width:12%'>Tema</th>
-      <th style='width:40%'></th>
+      <th style='width:50%' i18n>Procedure / Modality / Official code</th>
+      <th style='width:100px' i18n>Agency</th>
+      <th style='width:12%' i18n>Topic</th>
+      <th style='width:20%'></th>
     </tr>
   </thead>
   <tbody>
@@ -15,14 +15,14 @@
       <td class="main-icon">
         <a (click)="onOpenProcedureEditorWindow(procedure.uid)"><i class="fa fa-university" aria-hidden="true"></i></a>
       </td>
-      <td style='width:40%'>
+      <td style='width:50%'>
         <a (click)="onOpenProcedureEditorWindow(procedure.uid)">{{procedure.shortName}}</a>
         <br/>
-        <span *ngIf="procedure.modality.length !== 0">Modalidad: {{procedure.modality}} | </span>{{procedure.code}}
+        <span *ngIf="procedure.modality.length !== 0" i18n>Modality: {{procedure.modality}} | </span>{{procedure.code}}
       </td>
       <td style='width:100px'>{{procedure.entityName}}</td>
       <td style='width:12%'>{{procedure.theme}}</td>
-      <th style='width:40%'></th>
+      <th style='width:20%'></th>
     </tr>
   </tbody>
 </table>
@@ -30,11 +30,11 @@
 <div class="grid-footer">
   <table class="grid-footer-style">
     <tr>
-      <td class="grid-footer-items">{{procedures.length}} trámites encontrados</td>
+      <td class="grid-footer-items" i18n>{{procedures.length}} procedures found</td>
       <td class="grid-footer-items text-align-center">
 
       </td>
-      <td class="grid-footer-items text-align-right ">Página 1 de 1</td>
+      <td class="grid-footer-items text-align-right" i18n>Page 1 of 1</td>
     </tr>
   </table>
 </div>

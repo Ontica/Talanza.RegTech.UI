@@ -1,16 +1,16 @@
 <div class="list">
-  <div class="section">Preguntas y respuestas</div>
+  <div class="section" i18n>Questions and answers</div>
   <div *ngFor="let posting of postingsList" class="posting" #postings>
     <a (click)="onSelect(posting)">{{posting.title}}</a>
     <div class="posting-body">
       {{posting.body}}
       <br />
-      <a *ngIf="posting.fileName" class="file-name" (click)="showDocument(posting.fileName)">[Ver documento anexo]</a>
+      <a *ngIf="posting.fileUrl" class="file-name" (click)="showDocument(posting.fileUrl)" i18n>[Show attached document]</a>
     </div>
   </div>
   <div *ngIf="readonly" class="posting">
     <br />
-    <button mat-stroked-button (click)="setEditor(true)">Tenemos una pregunta</button>
+    <button mat-stroked-button (click)="setEditor(true)" i18n>We have a question</button>
   </div>
   <emp-kb-postings-editor *ngIf="showEditor()"
        [target]="target" (edit)="onCreate($event)"></emp-kb-postings-editor>
