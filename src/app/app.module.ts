@@ -24,7 +24,6 @@ import { ProcessesModule } from './processes/processes.module';
 import { GlobalSearchModule } from './global-search/global-search.module';
 import { InboxModule } from './inbox/inbox.module';
 import { ProjectManagementModule } from './project-management/project-management.module';
-import { DocumentationModule } from './documentation/documentation.module';
 import { LibraryModule } from './library/library.module';
 
 import { SecurityUIModule } from './security-ui/security-ui.module';
@@ -63,7 +62,6 @@ const EXCEPTION_HANDLER_PROVIDER =  { provide: ErrorHandler, useClass: Exception
     DocumentsModule,
     ProcessesModule,
     ProjectManagementModule,
-    DocumentationModule,
     LibraryModule,
     InboxModule,
     SharedModule,
