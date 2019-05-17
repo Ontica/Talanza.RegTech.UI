@@ -4,10 +4,12 @@
  *
  * See LICENSE.txt in the project root for complete license information.
  */
+
 import { Component, OnInit } from '@angular/core';
 
 import { DocumentService } from '@app/services/regulation';
 import { Document, DocumentFilter } from '@app/models/regulation';
+
 
 @Component({
   selector: 'emp-gov-documents-main-page',
@@ -35,21 +37,13 @@ export class DocumentsMainPageComponent implements OnInit {
   }
 
 
-  onResetFilter() {
-    this.filter = new DocumentFilter();
-
-    this.loadDocumentsList();
-  }
-
-
   onCloseEditor() {
     this.displayEditor = false;
     this.selectedDocument = null;
   }
 
 
-  selectDocument(document: Document): void {
-    // window.open(url, '_blank', 'location=yes,height=570,width=620,scrollbars=yes,status=yes');
+  selectDocument(document: Document) {
     this.selectedDocument = document;
     this.displayEditor = true;
   }

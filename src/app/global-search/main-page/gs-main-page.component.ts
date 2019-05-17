@@ -40,10 +40,10 @@ export class GlobalSearchMainPageComponent {
   clause: ContractClauseRef;
 
   documents: Document[] = [];
-  documentURI = '';
+  document: Document;
 
   FAQs: Posting[] = [];
-  FAQUid = '';
+  faq: Posting;
 
   private _keywords = '';
   @Input()
@@ -105,14 +105,14 @@ export class GlobalSearchMainPageComponent {
 
 
   setSelectedDocument(document: Document): void {
-    this.documentURI = document.url;
+    this.document = document;
 
     this.showDetailsContainer();
   }
 
 
-  setSelectedFAQ(FAQUid: string): void {
-    this.FAQUid = FAQUid;
+  setSelectedFAQ(faq: Posting): void {
+    this.faq = faq;
 
     this.showDetailsContainer();
   }

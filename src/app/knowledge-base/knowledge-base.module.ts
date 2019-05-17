@@ -10,8 +10,10 @@ import { CommonModule } from '@angular/common';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { SharedModule } from '@app/shared/shared.module';
 import { AngularMaterialModule } from '@app/shared/angular-material.module';
+
+import { SharedModule } from '@app/shared/shared.module';
+
 
 import { FaqEditorComponent } from './faqs/faq-editor.component';
 import { FaqListComponent } from './faqs/faq-list.component';
@@ -19,6 +21,9 @@ import { FaqViewerComponent } from './faqs/faq-viewer.component';
 
 import { PostingsListComponent } from './postings/postings-list.component';
 import { PostingsEditorComponent } from './postings/postings-editor.component';
+
+import { KnowledgeBaseMainPageComponent } from './main-page/kb-main-page.component';
+import { KBItemEditorComponent } from './editor/kb-item-editor.component';
 
 
 @NgModule({
@@ -36,8 +41,11 @@ import { PostingsEditorComponent } from './postings/postings-editor.component';
     FaqListComponent,
     FaqViewerComponent,
 
+    KnowledgeBaseMainPageComponent,
     PostingsEditorComponent,
     PostingsListComponent,
+
+    KBItemEditorComponent
   ],
 
   exports: [
@@ -46,6 +54,7 @@ import { PostingsEditorComponent } from './postings/postings-editor.component';
 
     PostingsEditorComponent,
     PostingsListComponent,
+    KBItemEditorComponent
   ]
 
 })

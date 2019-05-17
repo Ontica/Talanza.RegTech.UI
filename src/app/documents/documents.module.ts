@@ -44,7 +44,8 @@ import { DocumentEditorComponent } from './document-editor/document-editor.compo
 
   exports: [
     DocumentsMainPageComponent,
-    DocumentsTableViewComponent
+    DocumentsTableViewComponent,
+    DocumentEditorComponent
   ]
 
 })

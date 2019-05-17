@@ -24,22 +24,11 @@ const OPERATIONS: string[] = [
 })
 export class FaqViewerComponent {
 
-  private _faqUID = '';
-  @Input()
-  set faqUID(faqUID: string) {
-    this._faqUID = faqUID;
+  @Input() faq: Posting;
 
-    this.loadFaq();
-  }
-  get faqUID(): string {
-    return this._faqUID;
-  }
-
-  faq: Posting;
   isOpenFAQEditor = false;
   operations = OPERATIONS;
 
-  constructor(private faqService: PostingsService) { }
 
   onOpenFAQEditor(): void {
     this.isOpenFAQEditor = true;
@@ -47,13 +36,6 @@ export class FaqViewerComponent {
 
   onEditedFAQ(): void {
     this.isOpenFAQEditor = false;
-
-    this.loadFaq();
-  }
-
-  private loadFaq(): void {
-    this.faqService.getPosting(BASE_OBJECT_UID, this.faqUID)
-                   .subscribe((faq) => { this.faq = faq; });
   }
 
   onChangeOperation(operation: string): void {

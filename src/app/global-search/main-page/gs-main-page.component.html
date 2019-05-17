@@ -29,10 +29,12 @@
         <emp-gov-clause-definition [clauseRef]="clause"></emp-gov-clause-definition><br>
         <emp-gov-clause-obligations [clauseRef]="clause"></emp-gov-clause-obligations>
       </div>
-      <div *ngSwitchCase="'documents'" class="pdf-control">
-        <emp-ng-object [data]="documentURI"></emp-ng-object>
+      <div *ngSwitchCase="'documents'">
+        <emp-gov-document-editor [document]="document"></emp-gov-document-editor>
       </div>
-      <emp-kb-faq-viewer *ngSwitchCase="'FAQs'" [faqUID]="FAQUid"></emp-kb-faq-viewer>
+      <div *ngSwitchCase="'FAQs'">
+        <emp-kb-item-editor  [document]="faq"></emp-kb-item-editor>
+      </div>
     </div>
 
   </div>

@@ -13,19 +13,19 @@ import { Posting } from '@app/models/knowledge-base';
 @Component({
   selector: 'emp-kb-faq-list',
   templateUrl: './faq-list.component.html',
-  styleUrls: ['./faq-list.component.scss']
+  styleUrls: ['../../../styles/grid.scss']
 })
 export class FaqListComponent {
 
   @Input() FAQs: Posting[] = [];
 
-  @Output() select = new EventEmitter<string>();
+  @Output() select = new EventEmitter<Posting>();
 
-  selectedFAQUID = '';
+  selectedFAQ: Posting;
 
-  selectFAQ(uid: string): void {
-    this.selectedFAQUID = uid;
-    this.select.emit(uid);
+  selectFAQ(faq: Posting): void {
+    this.selectedFAQ = faq;
+    this.select.emit(faq);
   }
 
 }

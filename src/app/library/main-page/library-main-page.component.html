@@ -1,0 +1,53 @@
+<!-- <div class="explorer"
+    [class.remove-min-width]="!displayEditor">
+
+  <div class="explorer-panel primary">
+
+    <ng-container *ngIf="currentView.name === 'Library.Contracts'">
+    </ng-container>
+
+    <ng-container *ngIf="currentView.name === 'Library.Documents'">
+    </ng-container>
+
+      <emp-steps-activity-tree
+          [project]="selectedProject"
+          (edited)="onActivityTreeEdited($event)"
+          (activitySelected)="showEditor($event)">
+      </emp-steps-activity-tree>
+    </ng-container>
+
+    <ng-container *ngIf="currentView.name === 'Project.Gantt'">
+      <emp-steps-gantt-chart
+          [project]="selectedProject"
+          [reset]="toggleEditor"
+          (activitySelected)="showEditor($event)">
+      </emp-steps-gantt-chart>
+    </ng-container>
+
+    <ng-container *ngIf="currentView.name === 'Project.Timelines'">
+      <emp-steps-activity-timeline
+          [groupBy]="'timeline'"
+          [activities]="selectedProject.activities.toArray()"
+          [title]="selectedProject.project.uid ? selectedProject.project.name : 'Please select a contract'"
+          (activitySelected)="showEditor($event)">
+      </emp-steps-activity-timeline>
+    </ng-container>
+
+    <ng-container *ngIf="currentView.name === 'Project.Documents'">
+
+    </ng-container>
+
+
+  </div>
+
+  <div *ngIf="displayEditor" class="explorer-panel secondary">
+
+    <emp-steps-activity-editor
+         [activity]="selectedActivity"
+         (update)="onActivityUpdated($event)"
+         (close)="onEditorClosed()">
+    </emp-steps-activity-editor>
+
+  </div>
+
+</div> -->

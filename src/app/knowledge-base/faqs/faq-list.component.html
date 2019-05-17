@@ -7,14 +7,14 @@
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let faq of FAQs" [class.selected-row]="selectedFAQUID === faq.uid">
+        <tr *ngFor="let faq of FAQs">
             <td class="main-icon">
-                <a (click)="selectFAQ(faq.uid)">
+                <a (click)="selectFAQ(faq)">
                     <i class="fa fa-question" aria-hidden="true"></i>
                 </a>
             </td>
             <td style='width:60%'>
-                <a (click)="selectFAQ(faq.uid)">{{faq.title}}</a>
+                <a (click)="selectFAQ(faq)">{{faq.title}}</a>
                 <br/> {{faq.accessMode}}
             </td>
             <td style='width:35%'>

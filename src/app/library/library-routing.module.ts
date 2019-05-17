@@ -12,10 +12,10 @@ import { SecurityGuardService } from '@app/core';
 
 import { MainLayoutComponent } from '@app/shared';
 
-import { LibraryMainPageComponent } from './main-page/library-main-page.component';
 import { ProceduresMainPageComponent } from '@app/procedures/main-page/procedures-main-page.component';
 import { ContractsMainPageComponent } from '@app/contracts/main-page/contracts-main-page.component';
 import { DocumentsMainPageComponent } from '@app/documents/main-page/documents-main-page.component';
+import { KnowledgeBaseMainPageComponent } from '@app/knowledge-base/main-page/kb-main-page.component';
 
 
 @NgModule({
@@ -29,7 +29,7 @@ import { DocumentsMainPageComponent } from '@app/documents/main-page/documents-m
           { path: 'oil-and-gas-contract-models', component: ContractsMainPageComponent },
           { path: 'regulatory-documents', component: DocumentsMainPageComponent },
           { path: 'procedures', component: ProceduresMainPageComponent },
-          { path: 'talanza-guidance', component: LibraryMainPageComponent },
+          { path: 'talanza-guidance', component: KnowledgeBaseMainPageComponent },
           { path: '', redirectTo: 'oil-and-gas-contract-models', pathMatch: 'full' }
         ]
       }
