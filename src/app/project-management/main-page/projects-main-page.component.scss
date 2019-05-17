@@ -1,7 +1,7 @@
 @import "../../../styles/explorer";
 
 $primary-panel-min-width: 480px;
-$secondary-panel-min-width: 820px;
+$secondary-panel-min-width: 720px;
 $gap-width: 30px;
 
 .explorer {
@@ -27,7 +27,7 @@ $gap-width: 30px;
   }
 
   &.secondary {
-    flex: 1 1 820px;
+    flex: 1 0 720px;
     max-width: 980px;
     min-width: $secondary-panel-min-width;
     margin-left: $gap-width;

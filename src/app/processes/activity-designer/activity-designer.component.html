@@ -13,35 +13,31 @@
 
   </div>
 
-  <!-- <div class="card-body"> -->
+  <mat-tab-group color="accent" [class.wide-margin]=!settings.showTitle>
 
-    <mat-tab-group color="accent">
+    <mat-tab label="Obligation" i18n-label>
+      <emp-steps-activity-model-form
+          [activity]="activityTemplate" [readonly]="settings.readonly"
+          (delete)="onDelete()" (update)="onUpdate()">
+      </emp-steps-activity-model-form>
+    </mat-tab>
 
-      <mat-tab label="Obligation" i18n-label>
-        <emp-steps-activity-model-form
-            [activity]="activityTemplate" [readonly]="settings.readonly"
-            (delete)="onDelete()" (update)="onUpdate()">
-        </emp-steps-activity-model-form>
-      </mat-tab>
+    <mat-tab label="Procedure" [disabled]="!hasProcedure" i18n-label>
+      <emp-gov-procedure-viewer *ngIf="hasProcedure"
+          [procedure]="procedure | async">
+      </emp-gov-procedure-viewer>
+    </mat-tab>
 
-      <mat-tab label="Procedure" [disabled]="!hasProcedure" i18n-label>
-        <emp-gov-procedure-viewer *ngIf="hasProcedure"
-            [procedure]="procedure | async">
-        </emp-gov-procedure-viewer>
-      </mat-tab>
+    <mat-tab label="Documentation" i18n-label>
 
-      <mat-tab label="Documentation" i18n-label>
+    </mat-tab>
 
-      </mat-tab>
+    <mat-tab label="Talanza Guidance" i18n-label>
+      <emp-kb-postings-list
+          [target]="activityTemplate" [readonly]="settings.readonly">
+      </emp-kb-postings-list>
+    </mat-tab>
 
-      <mat-tab label="Talanza Guidance" i18n-label>
-        <emp-kb-postings-list
-            [target]="activityTemplate" [readonly]="settings.readonly">
-        </emp-kb-postings-list>
-      </mat-tab>
+  </mat-tab-group>
 
-    </mat-tab-group>
-
-    </div>
-
-<!-- </div> -->
+</div>
