@@ -1,65 +1,46 @@
-<table class="grid-search-table">
-  <tr>
-    <td i18n>Document type:</td>
-    <td>
-      <select class="select-box" style="width:210px;" (change)="onChangeFilter()" [(ngModel)]="filter.type">
-         <option value="" i18n>( All )</option>
-         <option value="Acuerdo">Acuerdos</option>
-         <option value="Criterios">Criterios</option>
-         <option value="DACG">DACGs</option>
-         <option value="DT">Disposiciones técnicas</option>
-         <option value="Formato">Formatos</option>
-         <option value="Guia">Guías</option>
-         <option value="Ley">Leyes</option>
-         <option value="Lineamiento">Lineamientos</option>
-         <option value="Reglamento">Reglamentos</option>
-         <!-- <option value="Recomendaciones">Recomendaciones Talanza</option> -->
-      </select>
-    </td>
-    <td i18n>Search:</td>
-    <td>
-      <input type="search" class="text-box" style="width:364px;" (keyup.enter)="onChangeFilter()" [(ngModel)]="filter.keywords">
-    </td>
-    <td>
-      <button class="btn" style="width:55px;" (click)="onChangeFilter()" i18n>Search</button>
-    </td>
-    <td><a (click)="onResetFilter()" i18n>Clean filters</a></td>
-  </tr>
-</table>
+<div class="explorer"
+    [class.remove-min-width]="!displayEditor">
 
-<table class="grid">
-  <thead>
-    <tr>
-      <th style="width:20pt"></th>
-      <th style="width:50%;min-width:350pt" i18n>Document name</th>
-      <th style="width:140pt" i18n>Acronym / Type</th>
-      <th style="width:30%"></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let document of documentsList">
-      <td class="main-icon">
-        <a (click)="openExternalWindow(document.url)"><i class="fa fa-book" aria-hidden="true"></i></a>
-      </td>
-      <td style="width:50%;min-width:350pt;padding-right:50pt">
-        <a (click)="openExternalWindow(document.url)">{{document.name}}</a>
-      </td>
-      <td style="width:140pt">
-        {{document.code}}<br> {{document.type}}
-      </td>
-      <td style="width:30%"></td>
-    </tr>
-  </tbody>
-</table>
+    <div class="explorer-panel primary">
 
-<div class="grid-footer">
-  <table class="grid-footer-style">
-    <tr>
-      <td class="grid-footer-items" style="width:30%" i18n>{{documentsList.length}} documents found</td>
-      <td class="grid-footer-items text-align-center">
+      <div class="card">
 
-      </td>
-      <td class="grid-footer-items text-align-right" i18n>Page 1 of 1</td>
-    </tr>
-  </table>
+          <div class="card-header card-header-flat">
+
+            <div class="card-title">
+              Regulatory documents
+              <div class="card-hint">{{documentsList.length}} documents found</div>
+            </div>
+
+            <div class="card-header-options">
+                Document type: &nbsp;
+                <select class="select-box" style="width:180px;" (change)="onChangeFilter()" [(ngModel)]="filter.type">
+                    <option value="" i18n>( All )</option>
+                    <option value="Acuerdo">Acuerdos</option>
+                    <option value="Criterios">Criterios</option>
+                    <option value="DACG">DACGs</option>
+                    <option value="DT">Disposiciones técnicas</option>
+                    <option value="Formato">Formatos</option>
+                    <option value="Guia">Guías</option>
+                    <option value="Ley">Leyes</option>
+                    <option value="Lineamiento">Lineamientos</option>
+                    <option value="Reglamento">Reglamentos</option>
+                </select>
+                <input type="search" class="text-box" style="width:190px;" (keyup.enter)="onChangeFilter()" [(ngModel)]="filter.keywords">
+                <button class="btn" (click)="onChangeFilter()" i18n>Search</button>
+            </div>
+
+          </div>
+
+          <div class="card-body">
+            <emp-gov-documents-table-view [documentsList]="documentsList" (select)="selectDocument($event)"></emp-gov-documents-table-view>
+          </div>
+      </div>
+
+  </div>
+
+  <div *ngIf="displayEditor" class="explorer-panel secondary">
+    <emp-gov-document-editor [document]="selectedDocument" (close)=onCloseEditor()></emp-gov-document-editor>
+  </div>
+
 </div>

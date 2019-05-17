@@ -77,3 +77,10 @@ $small-max-width: 540px;
 .nowrap {
   white-space: nowrap;
 }
+
+.expand-no-scroll {
+  height: 100%;
+  width: 100%;
+  overflow-y: hidden;
+  overflow-x: hidden;
+}

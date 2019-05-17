@@ -16,6 +16,9 @@ import { Document, DocumentFilter } from '@app/models/regulation';
 })
 export class DocumentsMainPageComponent implements OnInit {
 
+  displayEditor = false;
+  selectedDocument: Document;
+
   documentsList: Document[] = [];
   filter = new DocumentFilter();
 
@@ -39,8 +42,16 @@ export class DocumentsMainPageComponent implements OnInit {
   }
 
 
-  openExternalWindow(url: string): void {
-    window.open(url, '_blank', 'location=yes,height=570,width=620,scrollbars=yes,status=yes');
+  onCloseEditor() {
+    this.displayEditor = false;
+    this.selectedDocument = null;
+  }
+
+
+  selectDocument(document: Document): void {
+    // window.open(url, '_blank', 'location=yes,height=570,width=620,scrollbars=yes,status=yes');
+    this.selectedDocument = document;
+    this.displayEditor = true;
   }
 
 
