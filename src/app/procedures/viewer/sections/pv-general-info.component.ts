@@ -19,10 +19,10 @@ export class PVGeneralInfoComponent {
 
   editionMode = false;
   isVisibleGeneralInfo = true;
-  isVisibleObligationsInfo = false;
-  isInitialTermsVisible = false;
-  isPaymentInfoVisible = false;
-  isAuthorityInfoVisible = false;
+  isVisibleObligationsInfo = true;
+  isInitialTermsVisible = true;
+  isPaymentInfoVisible = true;
+  isAuthorityInfoVisible = true;
 
   @Input()
   get procedure() { return this._procedure; }
@@ -61,6 +61,9 @@ export class PVGeneralInfoComponent {
 
 
   openExternalWindow(url: string) {
+    if (!url.startsWith('http')) {
+      url = 'http://' + url;
+    }
     window.open(url, '_blank', 'location=yes,height=570,width=620,scrollbars=yes,status=yes');
   }
 

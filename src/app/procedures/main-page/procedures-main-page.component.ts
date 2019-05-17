@@ -19,27 +19,26 @@ import { ProcedureStore } from '@app/store/procedure.store';
 })
 export class ProceduresMainPageComponent {
 
+  displayEditor = false;
+
   procedures: BaseProcedure[] = [];
-
   selectedProcedure: Procedure;
-
-  showProcedureEditorWindow = false;
 
   constructor(protected store: ProcedureStore) {
 
   }
 
-  onOpenProcedureEditorWindow(UID: string): void {
+  onSelectProcedure(UID: string): void {
     this.store.getProcedure(UID)
               .toPromise()
               .then(x => {
                 this.selectedProcedure = x;
-                this.showProcedureEditorWindow = true;
+                this.displayEditor = true;
               });
   }
 
-  closeProcedureEditorWindow(): void {
-    this.showProcedureEditorWindow = false;
+  onCloseEditor(): void {
+    this.displayEditor = false;
   }
 
   getProcedures(procedures: BaseProcedure[]): void {

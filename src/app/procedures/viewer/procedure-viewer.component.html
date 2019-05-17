@@ -1,4 +1,4 @@
-<mat-tab-group *ngIf="_procedure | async" class="secondary-mat-tab-group">
+<mat-tab-group *ngIf="_procedure | async">
 
   <mat-tab label="General information" i18n-label>
     <emp-gov-pv-general-info [procedure]="_procedure | async"></emp-gov-pv-general-info>

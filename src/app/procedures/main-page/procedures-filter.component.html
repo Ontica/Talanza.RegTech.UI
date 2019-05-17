@@ -1,23 +1,16 @@
-<table class="grid-search-table">
-  <tr>
-    <td i18n>Agency:</td>
-    <td><select #entity class="select-box" style="width:90px;" (change)="onChangeFilter()" [(ngModel)]="filter.entityUID">
-					<option value="" i18n>( All )</option>
-					<option *ngFor="let entity of entities" [value]="entity.shortName">{{entity.shortName}}</option>
-				</select>
-    </td>
-    <td i18n>Topic:</td>
-    <td>
-      <select #theme class="select-box" style="width:210px" (change)="onChangeFilter()" [(ngModel)]="filter.theme">
-          <option value="" i18n>( All )</option>
-          <option *ngFor="let themeName of themesList" [value]="themeName">{{themeName}}</option>
-				</select>
-    </td>
-    <td i18n>Search:</td>
-    <td colspan="3">
-      <input class="text-box" type="search" style="width:310px" (keyup.enter)="onChangeFilter()" [(ngModel)]="filter.keywords">
-      <button class="btn" style="width:55px;" (click)="onChangeFilter()" i18n>Search</button>
-    </td>
-    <td><a (click)="onCleanCombos()" i18n>Clean filters</a></td>
-  </tr>
-</table>
+<span i18n>Agency:</span>&nbsp;
+
+<select #entity class="select-box" style="width:90px;" (change)="onChangeFilter()" [(ngModel)]="filter.entityUID">
+  <option value="" i18n>( All )</option>
+  <option *ngFor="let entity of entities" [value]="entity.shortName">{{entity.shortName}}</option>
+</select>
+
+<span i18n>Topic:</span>&nbsp;
+<select #theme class="select-box" style="width:210px" (change)="onChangeFilter()" [(ngModel)]="filter.theme">
+  <option value="" i18n>( All )</option>
+  <option *ngFor="let themeName of themesList" [value]="themeName">{{themeName}}</option>
+</select>
+
+<span i18n>Search:</span>&nbsp;
+<input class="text-box" type="search" style="width:210px" (keyup.enter)="onChangeFilter()" [(ngModel)]="filter.keywords">
+<button class="btn" style="width:55px;" (click)="onChangeFilter()" i18n>Search</button>

@@ -2,8 +2,8 @@
   <thead>
     <tr>
       <th style="width:20pt"></th>
-      <th style='width:60%'>Procedure name and Official code</th>
-      <th style='width:100px'>Entity</th>
+      <th style='width:60%'>Procedure / Modality / Official code</th>
+      <th style='width:100px'>Agency</th>
       <th style='width:12%'>Topic</th>
       <th style='width:10%'></th>
     </tr>
@@ -14,7 +14,7 @@
         <mat-icon (click)="selectProcedure(procedure.uid)" color="accent">contact_mail_outline</mat-icon>
       </td>
       <td style='width:60%'>
-        <a (click)="selectProcedure(procedure.uid)">{{procedure.name}}</a>
+        <a (click)="selectProcedure(procedure.uid)">{{procedure.shortName}}</a>
         <br />
         <span *ngIf="procedure.modality.length !== 0">Modality: {{procedure.modality}} | </span>{{procedure.code}}
       </td>

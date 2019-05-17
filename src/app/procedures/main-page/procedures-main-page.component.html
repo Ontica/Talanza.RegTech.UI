@@ -1,44 +1,52 @@
-<emp-gov-procedure-filter (change)="getProcedures($event)"></emp-gov-procedure-filter>
+<div class="explorer"
+    [class.remove-min-width]="!displayEditor">
 
-<table class="grid">
-  <thead>
-    <tr>
-      <th style="width:20pt"></th>
-      <th style='width:50%' i18n>Procedure / Modality / Official code</th>
-      <th style='width:100px' i18n>Agency</th>
-      <th style='width:12%' i18n>Topic</th>
-      <th style='width:20%'></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let procedure of procedures" class="grid-items">
-      <td class="main-icon">
-        <a (click)="onOpenProcedureEditorWindow(procedure.uid)"><i class="fa fa-university" aria-hidden="true"></i></a>
-      </td>
-      <td style='width:50%'>
-        <a (click)="onOpenProcedureEditorWindow(procedure.uid)">{{procedure.shortName}}</a>
-        <br/>
-        <span *ngIf="procedure.modality.length !== 0" i18n>Modality: {{procedure.modality}} | </span>{{procedure.code}}
-      </td>
-      <td style='width:100px'>{{procedure.entityName}}</td>
-      <td style='width:12%'>{{procedure.theme}}</td>
-      <th style='width:20%'></th>
-    </tr>
-  </tbody>
-</table>
+    <div class="explorer-panel primary">
 
-<div class="grid-footer">
-  <table class="grid-footer-style">
-    <tr>
-      <td class="grid-footer-items" i18n>{{procedures.length}} procedures found</td>
-      <td class="grid-footer-items text-align-center">
+      <div class="card">
 
-      </td>
-      <td class="grid-footer-items text-align-right" i18n>Page 1 of 1</td>
-    </tr>
-  </table>
-</div>
+          <div class="card-header card-header-flat">
 
-<div *ngIf="showProcedureEditorWindow" class="popup ">
-  <emp-gov-procedure-viewer [procedure]="selectedProcedure" (close)="closeProcedureEditorWindow()"></emp-gov-procedure-viewer>
+            <div class="card-title">
+              Procedures
+              <div class="card-hint">{{procedures.length}} procedures found</div>
+            </div>
+
+            <div class="card-header-options">
+              <emp-gov-procedure-filter (change)="getProcedures($event)"></emp-gov-procedure-filter>
+            </div>
+          </div>
+
+          <div class="card-body">
+              <emp-gov-procedures-table-view [procedures]="procedures" (select)="onSelectProcedure($event)"></emp-gov-procedures-table-view>
+          </div>
+      </div>
+    </div>
+
+
+  <div class="explorer-panel secondary" *ngIf="displayEditor">
+
+    <div class="card card-border">
+
+      <div class="card-header">
+        <div class="card-title">
+          {{selectedProcedure.shortName}}
+          <div class="card-hint">
+            <span *ngIf="selectedProcedure.modality.length !== 0">Modality: {{selectedProcedure.modality}} | </span>{{selectedProcedure.code}}
+          </div>
+        </div>
+
+        <div class="card-header-options">
+          <i class="fa fa-times close-icon" aria-hidden="true" (click)="onCloseEditor()"></i>
+        </div>
+      </div>
+
+      <div class="card-body">
+        <emp-gov-procedure-viewer [procedure]="selectedProcedure" (close)="onCloseEditor()"></emp-gov-procedure-viewer>
+      </div>
+
+    </div>
+
+  </div>
+
 </div>

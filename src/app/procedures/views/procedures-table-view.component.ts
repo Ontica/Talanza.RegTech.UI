@@ -14,7 +14,7 @@ import { BaseProcedure } from '@app/models/regulation';
 @Component({
   selector: 'emp-gov-procedures-table-view',
   templateUrl: './procedures-table-view.component.html',
-  styleUrls: ['./procedures-table-view.component.scss'],
+  styleUrls: ['../../../styles/grid.scss'],
 })
 export class ProceduresTableViewComponent {
 

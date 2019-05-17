@@ -15,7 +15,7 @@ import { BaseProcedure, Entity, Office, ProcedureFilter } from '@app/models/regu
 @Component({
   selector: 'emp-gov-procedure-filter',
   templateUrl: './procedures-filter.component.html',
-  styleUrls: ['./procedures-filter.component.scss']
+  styleUrls: ['../../../styles/general-styles.scss']
 })
 export class ProcedureFilterComponent implements OnInit {
 
