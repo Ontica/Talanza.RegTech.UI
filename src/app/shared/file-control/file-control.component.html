@@ -1,9 +1,9 @@
-<div class="text-box file-drop-area" (drop)="onDropFile($event)">
+<div class="text-box file-drop-area" (drop)="onDropFile($event)" (dragover)="onDragOver($event)">
     <label for="file" *ngIf="!fileToUpload" i18n><strong>Choose a file</strong> or drag and drop it here.</label>
      {{fileToUpload ? fileToUpload.name : ''}}
      <span class="right">
        <button *ngIf="fileToUpload" type="button" class="btn remove-file-btn"
-               (click)="removeFile()" i18n>Remove</button>
+               (click)="removeFile()" i18n>Clear</button>
      </span>
 </div>
 

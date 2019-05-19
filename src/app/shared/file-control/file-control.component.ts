@@ -20,23 +20,35 @@ export class FileControlComponent {
 
 
   handleFileInput(files: FileList) {
+    if (!files || files.length === 0) {
+      return;
+    }
+
     const file = files.item(0);
 
     this.fileToUpload = file;
-
-    console.log('original called', file);
 
     this.selected.emit(file);
   }
 
 
   removeFile() {
-    this.fileToUpload = null;    console.log('original called', null);
+    this.fileToUpload = null;
     this.selected.emit(null);
   }
 
 
+  onDragOver(event: DragEvent): void {
+    event.preventDefault();
+    event.dataTransfer.dropEffect = 'copy';
+    event.stopPropagation();
+  }
+
+
   onDropFile(event: DragEvent): void {
+    event.preventDefault();
+
+    this.handleFileInput(event.dataTransfer.files);
     console.log('onDrop', event);
     event.stopPropagation();
   }
