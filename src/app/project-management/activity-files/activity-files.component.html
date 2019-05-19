@@ -1,3 +1,10 @@
+<div *ngFor="let media of mediaList" class="posting" #postings>
+    <a (click)="toggleSelectedTask(task)">{{media.metadata.title}}</a>
+    <div class="posting-body">
+      <span i18n>url:</span> {{media.url}}
+    </div>
+  </div>
+
 <form class="form-container" autocomplete="off" [formGroup]="form" (ngSubmit)="onSubmit()">
 
   <fieldset>
@@ -9,16 +16,7 @@
       <tr>
         <td i18n>File:</td>
         <td>
-          <div class="text-box" style="height:48px;padding-top:16px;border: dashed 1px #3dbab3">
-             <label for="file" *ngIf="!fileToUpload" i18n><strong>Choose a file</strong> or drag and drop it here.</label>
-              {{fileToUpload ? fileToUpload.name : ''}}
-              <span class="right">
-                <button *ngIf="fileToUpload" type="button" class="btn" style="margin-top:-8px;margin-right:16px"
-                        (click)="removeFile()" i18n>Remove</button>
-              </span>
-          </div>
-          <input type="file" id="file" formControlName="file"
-                 (change)="handleFileInput($event.target.files)" style='display:none'>
+          <emp-ng-file-control (selected)="handleFileInput($event)"></emp-ng-file-control>
         </td>
       </tr>
       <tr>
@@ -30,7 +28,7 @@
       <tr>
         <td class="align-top" i18n>Notes:</td>
         <td>
-          <textarea class="text-area" rows="5" cols="25" formControlName="notes"></textarea>
+          <textarea class="text-area" rows="5" cols="25" formControlName="summary"></textarea>
         </td>
       </tr>
       <tr>

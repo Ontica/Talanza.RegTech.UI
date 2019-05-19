@@ -1,0 +1,14 @@
+@import "../../../styles/general-styles";
+
+
+.file-drop-area {
+  border: dashed 1px $primary-color !important;
+  height: 48px !important;
+  padding-top: 16px !important;
+}
+
+
+.remove-file-btn {
+  margin-top: -8px;
+  margin-right: 16px;
+}

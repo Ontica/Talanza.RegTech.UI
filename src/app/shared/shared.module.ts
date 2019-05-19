@@ -11,6 +11,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 import { DatepickerComponent } from './datepicker/datepicker.component';
+import { FileControlComponent } from './file-control/file-control.component';
 import { MainLayoutComponent } from './main-layout/main-layout.component';
 import { MainMenuComponent } from './main-layout/main-menu/main-menu.component';
 
@@ -27,6 +28,7 @@ import { SafeUrlPipe } from './pipes/safe-url.pipe';
 import { RagStatusComponent } from './rag-status/rag-status.component';
 import { SearchBoxComponent } from './search-box/search-box.component';
 import { SpinnerComponent } from './spinner/spinner.component';
+
 
 import { InlineEditorComponent } from './inline-editor/inline-editor.component';
 
@@ -51,6 +53,7 @@ import { SpinnerService } from './spinner/spinner.service';
 
   declarations: [
     DatepickerComponent,
+    FileControlComponent,
     MainLayoutComponent,
     MainMenuComponent,
 
@@ -72,6 +75,7 @@ import { SpinnerService } from './spinner/spinner.service';
 
   exports: [
     DatepickerComponent,
+    FileControlComponent,
     MainLayoutComponent,
     MessageBoxComponent,
     ModalWindowComponent,
