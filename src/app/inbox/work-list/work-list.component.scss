@@ -1,9 +1,0 @@
-@import "../../../styles/grid";
-
-table.grid tbody {
-  height: calc(100vh - 290px);
-}
-
-.task-name-completed {
-  text-decoration-line: line-through;
-}

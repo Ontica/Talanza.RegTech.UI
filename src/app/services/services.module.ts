@@ -11,7 +11,6 @@ import { KnowledgeBaseServicesModule } from './knowledge-base/knowledge-base.ser
 import { ProjectManagementServicesModule } from './project-management/project-management-services.module';
 import { RegulationServicesModule } from './regulation/regulation.services.module';
 
-import { InboxService } from './inbox/inbox.service';
 import { TicketService } from './service-desk/ticket.service';
 
 import { UserInterfaceService } from './user.interface.service';
@@ -32,7 +31,6 @@ import { UserInterfaceService } from './user.interface.service';
   ],
 
   providers: [
-    InboxService,
     TicketService,
     UserInterfaceService
   ]

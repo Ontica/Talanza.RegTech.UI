@@ -22,7 +22,7 @@ import { KnowledgeBaseModule } from './knowledge-base/knowledge-base.module';
 
 import { ProcessesModule } from './processes/processes.module';
 import { GlobalSearchModule } from './global-search/global-search.module';
-import { InboxModule } from './inbox/inbox.module';
+
 import { ProjectManagementModule } from './project-management/project-management.module';
 import { LibraryModule } from './library/library.module';
 
@@ -63,7 +63,6 @@ const EXCEPTION_HANDLER_PROVIDER =  { provide: ErrorHandler, useClass: Exception
     ProcessesModule,
     ProjectManagementModule,
     LibraryModule,
-    InboxModule,
     SharedModule,
     GlobalSearchModule,
 
