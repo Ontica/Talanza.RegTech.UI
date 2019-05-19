@@ -6,7 +6,7 @@
  */
 
 import { Component, EventEmitter,
-         HostBinding, Input, Output } from '@angular/core';
+         Input, Output } from '@angular/core';
 
 
 @Component({
@@ -16,16 +16,29 @@ import { Component, EventEmitter,
 })
 export class ModalWindowComponent {
 
-  @HostBinding('style.display') display = 'block';
-  @HostBinding('style.position') position = 'absolute';
-
   @Input() title = '';
+
+  @Input() config = {
+    height: 'auto',
+    width: 'auto',
+    maxWidth: '90%',
+    maxHeight: '90%',
+    disableClose: false
+  };
+
 
   @Output() close = new EventEmitter();
 
-
-  onClose(): void {
+  onClose() {
     this.close.emit();
   }
 
+
+  onClickOverlay() {
+    if (!this.config.disableClose) {
+      this.close.emit();
+    }
+  }
+
 }
+
