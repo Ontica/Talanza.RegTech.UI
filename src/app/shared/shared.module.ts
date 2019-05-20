@@ -17,6 +17,7 @@ import { MainMenuComponent } from './main-layout/main-menu/main-menu.component';
 
 import { SidebarComponent } from './main-layout/sidebar/sidebar.component';
 
+import { CardComponent } from './card/card.component';
 import { MessageBoxComponent } from './message-box/message-box.component';
 import { ModalWindowComponent } from './modal-window/modal-window';
 import { NavigationHeaderComponent } from './nav-header/nav-header.component';
@@ -40,6 +41,7 @@ import { SharedService } from './shared.service';
 import { SpinnerService } from './spinner/spinner.service';
 
 
+
 @NgModule({
 
   imports: [
@@ -59,6 +61,7 @@ import { SpinnerService } from './spinner/spinner.service';
 
     SidebarComponent,
 
+    CardComponent,
     MessageBoxComponent,
     ModalWindowComponent,
     NavigationHeaderComponent,
@@ -74,6 +77,7 @@ import { SpinnerService } from './spinner/spinner.service';
   ],
 
   exports: [
+    CardComponent,
     DatepickerComponent,
     FileControlComponent,
     MainLayoutComponent,

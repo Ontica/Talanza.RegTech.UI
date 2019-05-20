@@ -1,0 +1,20 @@
+<div class="card card-border card-shadow">
+
+  <div class="card-header">
+
+    <div class="card-title">
+      {{title}}
+      <div class="card-hint">{{hint}}</div>
+    </div>
+
+    <div *ngIf="!disableClose" class="card-header-options">
+      <i class="fa fa-times close-icon" aria-hidden="true" (click)="onClose()"></i>
+    </div>
+
+  </div>
+
+  <div class="card-body">
+    <ng-content></ng-content>
+  </div>
+
+</div>
