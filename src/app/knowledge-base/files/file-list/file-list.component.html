@@ -1,0 +1,43 @@
+<div class="list-header">
+  <div class="column" i18n>
+    File / Type / Authors
+  </div>
+
+  <div class="right-column expand" i18n>
+    Posted by
+  </div>
+</div>
+
+<div *ngFor="let file of files"
+     class="list-item" matRipple [matRippleTrigger]="trigger">
+
+  <mat-icon class="material-icons-outlined" (click)="onSelect(file)">insert_drive_file_outline</mat-icon>
+
+  <div class="list-item-container">
+
+    <div class="item-name">
+      <a #trigger (click)="onSelect(file)">{{file.metadata.title || file.originalFileName}}</a>
+    </div>
+
+    <div class="list-item-columns">
+      <div class="column">
+        {{file.metadata.type}}<br/>
+        {{file.metadata.authors}}
+      </div>
+
+      <div class="right-column expand">
+          {{file.postedBy.name}}<br>
+          {{file.postingTime | date:'dd/LLL/yyyy'}}<br>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<div *ngIf="files.length === 0" class="list-item-container">
+  <div class="column" i18n>
+    No attached files
+  </div>
+</div>

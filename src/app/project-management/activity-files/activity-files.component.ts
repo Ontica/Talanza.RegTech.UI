@@ -5,57 +5,78 @@
  * See LICENSE.txt in the project root for complete license information.
  */
 
-import { Component, Input } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { Component, Input, OnChanges } from '@angular/core';
 
-import { Activity, EmptyActivity } from '@app/models/project-management';
 import { ProjectService } from '@app/services/project-management';
 
+import { Activity, EmptyActivity } from '@app/models/project-management';
+import { MediaFile, FileToUpload, EmptyMediaFile } from '@app/models/knowledge-base';
 
 @Component({
   selector: 'emp-steps-activity-files',
   templateUrl: './activity-files.component.html',
-  styleUrls: ['./activity-files.component.scss']
+  styleUrls: ['../../../styles/general-styles.scss']
 })
-export class ActivityFilesComponent {
+export class ActivityFilesComponent implements OnChanges {
+
 
   @Input() activity: Activity = EmptyActivity;
 
+  filesList: MediaFile[] = [];
 
-  fileToUpload: File = null;
+  selectedMediaFile: MediaFile = EmptyMediaFile;
 
-  form = new FormGroup( {
-    file: new FormControl(''),
-    title: new FormControl(''),
-    notes: new FormControl(''),
-    tags: new FormControl(''),
-    authors: new FormControl('')
-  });
+  displayEditor = false;
 
-  constructor(private projectService: ProjectService) { }
+  constructor(private service: ProjectService) { }
 
 
-  handleFileInput(files: FileList) {
-    this.fileToUpload = files.item(0);
+  ngOnChanges() {
+    this.selectedMediaFile = EmptyMediaFile;
+    this.loadFilesList();
   }
 
 
-  removeFile() {
-    this.fileToUpload = null;
+  onClickAttachFile() {
+    this.selectedMediaFile = EmptyMediaFile;
+    this.showFileEditor();
+
   }
 
 
-  uploadFileToActivity() {
-    this.projectService.uploadFile(this.activity, this.fileToUpload)
-    .subscribe(x => {
-      // do something, if upload success
+  onFileSelected(file: MediaFile = EmptyMediaFile) {
+    this.selectedMediaFile = file;
+    this.showFileEditor();
+  }
+
+
+  hideFileEditor() {
+    this.displayEditor = false;
+  }
+
+  showFileEditor() {
+    this.displayEditor = true;
+  }
+
+
+  uploadFile(fileToUpload: FileToUpload) {
+    this.hideFileEditor();
+
+    this.service.uploadFile(this.activity, fileToUpload.file, fileToUpload.metadata)
+    .subscribe(() => {
+        this.loadFilesList();
       }, error => {
         console.log(error);
       });
   }
 
-  onSubmit(): void {
 
+  private loadFilesList()  {
+    this.service.getFiles(this.activity)
+        .toPromise()
+        .then (x => this.filesList = x);
   }
 
+
 }
+

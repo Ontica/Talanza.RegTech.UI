@@ -5,7 +5,6 @@
  * See LICENSE.txt in the project root for complete license information.
  */
 
-
 export interface Posting {
   uid: string;
   objectUID: string;
@@ -36,6 +35,5 @@ export function EmptyPosting(): Posting {
     status: ''
   };
 }
-
 
 export const BASE_OBJECT_UID = '7111442e-f059-4613-9770-84be3eb939db';

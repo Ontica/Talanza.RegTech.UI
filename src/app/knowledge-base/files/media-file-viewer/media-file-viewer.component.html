@@ -1,0 +1,42 @@
+<div class="card card-border card-shadow">
+
+  <div class="card-header">
+
+    <div class="card-title">
+      {{mediaFile.metadata.title || mediaFile.originalFileName}}
+      <div class="card-hint">{{mediaFile.metadata.type}}</div>
+    </div>
+
+    <div class="card-header-options">
+      <i class="fa fa-times close-icon" aria-hidden="true" (click)="onClose()"></i>
+    </div>
+
+  </div>
+
+
+
+  <mat-tab-group color="accent">
+
+    <ng-container>
+      <mat-tab label="PDF File" i18n-label>
+        <div class="expand-no-scroll">
+          <emp-ng-object [data]="mediaFile.url"></emp-ng-object>
+        </div>
+      </mat-tab>
+    </ng-container>
+
+    <mat-tab label="Edition" i18n-label>
+      <emp-kb-file-editor [mediaFile]="mediaFile"
+                          (save)="onUpload($event)">
+    </emp-kb-file-editor>
+    </mat-tab>
+
+    <mat-tab label="Annotations" i18n-label>
+      <emp-kb-postings-list [target]="mediaFile"></emp-kb-postings-list>
+    </mat-tab>
+
+
+
+  </mat-tab-group>
+
+</div>

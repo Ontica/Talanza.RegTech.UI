@@ -1,0 +1,58 @@
+<form class="form-container" autocomplete="off" [formGroup]="form">
+
+  <fieldset>
+
+    <table class="form-section">
+      <tr>
+        <td class="form-section-title" colspan="2" i18n>Upload a document</td>
+      </tr>
+      <tr>
+        <td i18n>File:</td>
+        <td>
+          <emp-ng-file-control (selected)="handleFileInput($event)"></emp-ng-file-control>
+        </td>
+      </tr>
+      <tr>
+        <td i18n>Title:</td>
+        <td>
+          <input type="text" class="text-box" formControlName="title">
+        </td>
+      </tr>
+      <tr>
+        <td i18n>Type:</td>
+        <td>
+          <input type="text" class="text-box" formControlName="type">
+        </td>
+      </tr>
+      <tr>
+        <td class="align-top" i18n>Summary:</td>
+        <td>
+          <textarea class="text-area" rows="5" cols="25" formControlName="summary"></textarea>
+        </td>
+      </tr>
+      <tr>
+        <td i18n>Tags:</td>
+        <td>
+          <input type="text" class="text-box" formControlName="tags">
+        </td>
+      </tr>
+      <tr>
+        <td i18n>Authors:</td>
+        <td>
+          <input type="text" class="text-box" formControlName="authors">
+        </td>
+      </tr>
+      <tr>
+        <td></td>
+        <td class="text-align-right">
+            <button type="button" class="btn-action right"
+            (click)="onUpload()" i18n>Upload</button>
+        </td>
+      </tr>
+    </table>
+
+  </fieldset>
+
+</form>
+
+

@@ -14,10 +14,13 @@ import { AngularMaterialModule } from '@app/shared/angular-material.module';
 
 import { SharedModule } from '@app/shared/shared.module';
 
-
 import { FaqEditorComponent } from './faqs/faq-editor.component';
 import { FaqListComponent } from './faqs/faq-list.component';
 import { FaqViewerComponent } from './faqs/faq-viewer.component';
+
+import { FileEditorComponent } from './files/file-editor/file-editor.component';
+import { FileListComponent } from './files/file-list/file-list.component';
+import { MediaFileViewerComponent } from './files/media-file-viewer/media-file-viewer.component';
 
 import { PostingsListComponent } from './postings/postings-list.component';
 import { PostingsEditorComponent } from './postings/postings-editor.component';
@@ -41,6 +44,10 @@ import { KBItemEditorComponent } from './editor/kb-item-editor.component';
     FaqListComponent,
     FaqViewerComponent,
 
+    FileEditorComponent,
+    FileListComponent,
+    MediaFileViewerComponent,
+
     KnowledgeBaseMainPageComponent,
     PostingsEditorComponent,
     PostingsListComponent,
@@ -52,9 +59,18 @@ import { KBItemEditorComponent } from './editor/kb-item-editor.component';
     FaqListComponent,
     FaqViewerComponent,
 
+    FileEditorComponent,
+    FileListComponent,
+    MediaFileViewerComponent,
+
     PostingsEditorComponent,
     PostingsListComponent,
-    KBItemEditorComponent
+    KBItemEditorComponent,
+
+  ],
+
+  entryComponents: [
+    FileEditorComponent
   ]
 
 })

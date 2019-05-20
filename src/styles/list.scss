@@ -1,21 +1,32 @@
 @import "general-styles";
 
 
+.list-header {
+  @include row;
+  justify-content: space-between;
+  font-size: 8pt;
+  width: 100%;
+
+  margin-left: 4pt;
+  padding: 4pt 16pt 4pt 8pt;
+  border-bottom: 1pt solid $primary-color-light;
+}
+
+
 .list-item {
   @include row;
 
-  align-items: center;
+  align-items: flex-start;
 
   background-color: $grid-even-background-color;
   border-bottom: 1px $border-color solid;
-  min-height: 46px;
+  min-height: 38px;
   padding: 8px;
+  font-size: 8pt;
 }
 
 
 .list-item:hover {
-  background-color: $grid-hover-background-color;
-
   .ghost-icon {
     color: $icon-color;
   }
@@ -31,14 +42,14 @@
   margin-left: 4pt;
   padding: 4pt 8pt 8pt 8pt;
   width: 100%;
+  font-size: 8pt;
 }
 
-
-.list-item-hint {
+.list-item-columns {
   @include row;
   justify-content: space-between;
   font-size: 8pt;
-  width: 98%;
+  width: 100%;
 }
 
 .column {
@@ -74,4 +85,3 @@
 .item-name a:hover {
   text-decoration: underline;
 }
-

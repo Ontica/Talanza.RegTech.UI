@@ -1,57 +1,31 @@
-<div *ngFor="let media of mediaList" class="posting" #postings>
-    <a (click)="toggleSelectedTask(task)">{{media.metadata.title}}</a>
-    <div class="posting-body">
-      <span i18n>url:</span> {{media.url}}
-    </div>
-  </div>
+<div style="margin: 0 22px">
+  <emp-kb-file-list [files]="filesList"
+                    (select)="onFileSelected($event)">
+  </emp-kb-file-list>
+</div>
 
-<form class="form-container" autocomplete="off" [formGroup]="form" (ngSubmit)="onSubmit()">
+<div class="float-right" style="margin: 12px 32px">
+    <button type="button" class="btn-action"
+            (click)="onClickAttachFile()" i18n>Attach a file</button>
+</div>
 
-  <fieldset>
+<emp-ng-modal-window *ngIf="displayEditor && selectedMediaFile.uid"
+                     [config]="{width:'980px', height:'78%'}"
+                     (close)="hideFileEditor()">
+  <emp-kb-media-file-viewer [mediaFile]="selectedMediaFile"
+                      (save)="uploadFile($event)"
+                      (close)="hideFileEditor()">
+  </emp-kb-media-file-viewer>
+</emp-ng-modal-window>
 
-    <table class="form-section">
-      <tr>
-        <td class="form-section-title" colspan="2" i18n>Attach a document to this activity</td>
-      </tr>
-      <tr>
-        <td i18n>File:</td>
-        <td>
-          <emp-ng-file-control (selected)="handleFileInput($event)"></emp-ng-file-control>
-        </td>
-      </tr>
-      <tr>
-        <td i18n>Title:</td>
-        <td>
-          <input type="text" class="text-box" formControlName="title">
-        </td>
-      </tr>
-      <tr>
-        <td class="align-top" i18n>Notes:</td>
-        <td>
-          <textarea class="text-area" rows="5" cols="25" formControlName="summary"></textarea>
-        </td>
-      </tr>
-      <tr>
-        <td i18n>Tags:</td>
-        <td>
-          <input type="text" class="text-box" formControlName="tags">
-        </td>
-      </tr>
-      <tr>
-        <td i18n>Authors:</td>
-        <td>
-          <input type="text" class="text-box" formControlName="authors">
-        </td>
-      </tr>
-      <tr>
-        <td></td>
-        <td class="text-align-right">
-            <button type="button" class="btn-action right"
-            (click)="uploadFileToActivity()" i18n>Upload</button>
-        </td>
-      </tr>
-    </table>
-
-  </fieldset>
-
-</form>
+<emp-ng-modal-window *ngIf="displayEditor && !selectedMediaFile.uid"
+                     [config]="{width:'680px', height:'580px'}"
+                     (close)="hideFileEditor()">
+    <emp-ng-card title='File uploader'
+                 [hint]="activity.name"
+                 (close)="hideFileEditor()">
+      <emp-kb-file-editor [mediaFile]="selectedMediaFile"
+                          (save)="uploadFile($event)">
+    </emp-kb-file-editor>
+  </emp-ng-card>
+</emp-ng-modal-window>

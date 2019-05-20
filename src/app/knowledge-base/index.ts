@@ -5,5 +5,6 @@
  * See LICENSE.txt in the project root for complete license information.
  */
 
-export * from './media-files';
-export * from './posting';
+export * from './files/file-editor/file-editor.component';
+export * from './files/file-list/file-list.component';
+export * from './files/file-list/file-list.component';

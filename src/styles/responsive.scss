@@ -84,3 +84,9 @@ $small-max-width: 540px;
   overflow-y: hidden;
   overflow-x: hidden;
 }
+
+.float-right {
+  @include row;
+
+  justify-content: flex-end;
+}
