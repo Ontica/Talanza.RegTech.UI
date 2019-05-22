@@ -21,8 +21,7 @@ import { ColoredTag } from '@app/models/user-interface';
 export class ProjectModel {
 
   project: Project = Empty;
-  activities: List<Activity> = List([]);
-
+  activities: Activity[] = [];
 }
 
 
@@ -92,7 +91,7 @@ export class ProjectStore {
 
 
   activities(): Activity[] {
-    return this._selectedProject.value.activities.toArray();
+    return this._selectedProject.value.activities;
   }
 
 
@@ -286,7 +285,7 @@ export class ProjectStore {
       data => {
         const projectModel = new ProjectModel();
         projectModel.project = project;
-        projectModel.activities = List(data);
+        projectModel.activities = data;
 
         this._selectedProject.next(projectModel);
       },

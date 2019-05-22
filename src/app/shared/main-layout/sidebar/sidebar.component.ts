@@ -14,7 +14,9 @@ import { ProjectStore } from '@app/store/project.store';
 
 import { Layout } from '@app/models/user-interface';
 
-import { Project, ProjectTemplate } from '@app/models/project-management';
+import { Project, ProjectTemplate,
+         ProjectItemFilter, EmptyProjectItemFilter } from '@app/models/project-management';
+
 import { Contact } from '@app/models/regulation';
 
 
@@ -31,10 +33,10 @@ export class SidebarComponent implements OnInit, OnDestroy {
   selectedResponsibles: Contact[] = [];
   selectedThemes: string[] = [];
 
+  filter: ProjectItemFilter = EmptyProjectItemFilter;
+
   private subs1: Subscription;
   private subs2: Subscription;
-  private subs3: Subscription;
-  private subs4: Subscription;
 
   constructor(public uiStore: UserInterfaceStore,
               public processStore: ProjectTemplateStore,
@@ -45,14 +47,9 @@ export class SidebarComponent implements OnInit, OnDestroy {
     this.subs1 = this.uiStore.layout.subscribe(
       value => this.layout = value
     );
-    this.subs2 = this.uiStore.getValue<Project[]>('Sidebar.Selected.Projects').subscribe(
-      value => this.selectedProjects = value
-    );
-    this.subs3 = this.uiStore.getValue<Contact[]>('Sidebar.Selected.Responsibles').subscribe(
-      value => this.selectedResponsibles = value
-    );
-    this.subs4 = this.uiStore.getValue<string[]>('Sidebar.Selected.Themes').subscribe(
-      value => this.selectedThemes = value
+
+    this.subs2 = this.uiStore.getValue<ProjectItemFilter>('Sidebar.ProjectFilter').subscribe(
+      value => this.filter = value
     );
 
   }
@@ -65,39 +62,39 @@ export class SidebarComponent implements OnInit, OnDestroy {
     if (this.subs2) {
       this.subs2.unsubscribe();
     }
-    if (this.subs3) {
-      this.subs3.unsubscribe();
-    }
-    if (this.subs4) {
-      this.subs4.unsubscribe();
-    }
   }
 
 
-  onSelectProcess(process: ProjectTemplate) {
+  onProcessChange(process: ProjectTemplate) {
     this.processStore.selectTemplate(process);
   }
 
 
-  onSelectProject(project: Project) {
+  onProjectChange(project: Project) {
     if (project && project.uid) {
       this.projectStore.selectProject(project);
     }
   }
 
 
-  onSelectedProjects(projectList: Project[]) {
-    this.uiStore.setValue<Project[]>('Sidebar.Selected.Projects', projectList);
+  onProjectsChange(projectList: Project[]) {
+    this.filter = {...this.filter, projects: projectList };
+
+    this.uiStore.setValue<ProjectItemFilter>('Sidebar.ProjectFilter', this.filter);
   }
 
 
-  onSelectedResponsibles(responsiblesList: Contact[]) {
-    this.uiStore.setValue<Contact[]>('Sidebar.Selected.Responsibles', responsiblesList);
+  onResponsiblesChange(responsibleList: Contact[]) {
+    this.filter = {...this.filter, responsibles: responsibleList };
+
+    this.uiStore.setValue<ProjectItemFilter>('Sidebar.ProjectFilter', this.filter);
   }
 
 
-  onSelectedThemes(themesList: string[]) {
-    this.uiStore.setValue<string[]>('Sidebar.Selected.Themes', themesList);
+  onThemesChange(themesList: string[]) {
+    this.filter = {...this.filter, themes: themesList };
+
+    this.uiStore.setValue<ProjectItemFilter>('Sidebar.ProjectFilter', this.filter);
   }
 
 

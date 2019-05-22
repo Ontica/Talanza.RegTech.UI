@@ -11,7 +11,8 @@ import { Subscription } from 'rxjs';
 import { ProjectStore , ProjectModel } from '@app/store/project.store';
 import { UserInterfaceStore } from '@app/store/ui.store';
 
-import { Activity, EmptyActivity, ActivityOperation } from '@app/models/project-management';
+import { Activity, ActivityOperation, EmptyActivity,
+         ProjectItemFile, ProjectItemFilter, EmptyProjectItemFilter } from '@app/models/project-management';
 
 import { View } from '@app/models/user-interface';
 
@@ -34,9 +35,13 @@ export class ProjectsMainPageComponent implements OnInit, OnDestroy {
   selectedProject: ProjectModel;
   selectedActivity = EmptyActivity;
 
+  filter: ProjectItemFilter = EmptyProjectItemFilter;
+
+  projectFiles: ProjectItemFile[] = [];
+
   private subs1: Subscription;
   private subs2: Subscription;
-
+  private subs3: Subscription;
 
   constructor(private projectStore: ProjectStore,
               private uiStore: UserInterfaceStore)  { }
@@ -51,6 +56,10 @@ export class ProjectsMainPageComponent implements OnInit, OnDestroy {
     this.subs2 = this.projectStore.selectedProject().subscribe(
       x => this.onSelectedProjectChanged(x)
     );
+
+    this.subs3 = this.uiStore.getValue<ProjectItemFilter>('Sidebar.ProjectFilter').subscribe(
+      x => this.filter = x
+    );
   }
 
 
@@ -60,6 +69,9 @@ export class ProjectsMainPageComponent implements OnInit, OnDestroy {
     }
     if (this.subs2) {
       this.subs2.unsubscribe();
+    }
+    if (this.subs3) {
+      this.subs3.unsubscribe();
     }
   }
 

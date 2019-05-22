@@ -6,18 +6,13 @@
  */
 
 
-export type VALUE_SELECTOR =
-    'Sidebar.Selected.Projects' |
-    'Sidebar.Selected.Responsibles' |
-    'Sidebar.Selected.Themes';
+export type VALUE_SELECTOR = 'Sidebar.ProjectFilter';
 
 
 export function getValueSelectorDefaultValue(selector: VALUE_SELECTOR): any {
   switch (selector) {
-    case 'Sidebar.Selected.Projects':
-    case 'Sidebar.Selected.Responsibles':
-    case 'Sidebar.Selected.Themes':
-      return [];
+    // case 'Sidebar.ProjectsArray':
+    //   return [];
     default:
       return {};
   }

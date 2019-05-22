@@ -27,7 +27,7 @@
     <ng-container *ngIf="currentView.name === 'Project.Timelines'">
       <emp-steps-activity-timeline
           [groupBy]="'timeline'"
-          [activities]="selectedProject.activities.toArray()"
+          [activities]="selectedProject.activities"
           [title]="selectedProject.project.uid ? selectedProject.project.name : 'Please select a contract'"
           (activitySelected)="showEditor($event)">
       </emp-steps-activity-timeline>

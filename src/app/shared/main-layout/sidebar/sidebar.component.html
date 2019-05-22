@@ -3,7 +3,7 @@
   <emp-steps-process-selector
     [processes]="processStore.templates | async"
     [selected]="(processStore.selectedTemplate() | async).project"
-    (change)="onSelectProcess($event)">
+    (change)="onProcessChange($event)">
   </emp-steps-process-selector>
 
 
@@ -17,7 +17,7 @@
   <emp-steps-project-selector
       [projects]="projectStore.projects | async"
       [selected]="(projectStore.selectedProject() | async).project"
-      (change)="onSelectProject($event)">
+      (change)="onProjectChange($event)">
   </emp-steps-project-selector>
 
   <div class="panel-separator"></div>
@@ -29,8 +29,8 @@
 
   <emp-steps-projects-list-selector
       [projects]="projectStore.projects | async"
-      [selected]="selectedProjects"
-      (change)="onSelectedProjects($event)">
+      [selected]="filter.projects"
+      (change)="onProjectsChange($event)">
   </emp-steps-projects-list-selector>
 
   <div class="panel-separator"></div>
@@ -41,8 +41,8 @@
 <div *ngIf="showWidget('ResponsiblesListSelector')">
   <emp-steps-responsibles-list-selector
       [responsibles]="projectStore.allResponsibles | async"
-      [selected]="selectedResponsibles"
-      (change)="onSelectedResponsibles($event)">
+      [selected]="filter.responsibles"
+      (change)="onResponsiblesChange($event)">
   </emp-steps-responsibles-list-selector>
 
   <div class="panel-separator"></div>
@@ -52,8 +52,8 @@
 <div *ngIf="showWidget('ThemesListSelector')">
   <emp-steps-themes-list-selector
       [themes]="projectStore.themes | async"
-      [selected]="selectedThemes"
-      (change)="onSelectedThemes($event)">
+      [selected]="filter.themes"
+      (change)="onThemesChange($event)">
   </emp-steps-themes-list-selector>
 
   <div class="panel-separator"></div>

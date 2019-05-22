@@ -5,8 +5,8 @@
 
     <ng-container *ngIf="currentView.name === 'Projects.Tasks'">
       <emp-steps-activity-timeline
-          [groupBy]="'timeline'"
-          [activities]="filteredActivities"
+          groupBy='timeline'
+          [activities]="allActivities | applyFilter: filter"
           (activitySelected)="showEditor($event)">
       </emp-steps-activity-timeline>
     </ng-container>
@@ -15,8 +15,10 @@
 
     </ng-container>
 
-    <ng-container *ngIf="currentView.name === 'Projects.DocumentsStore'">
+    <ng-container *ngIf="currentView.name === 'Projects.Files'">
+      <emp-steps-files-grid>
 
+      </emp-steps-files-grid>
     </ng-container>
 
   </div>

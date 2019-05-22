@@ -23,6 +23,7 @@ import { ActivityTasksComponent } from './activity-tasks/activity-tasks.componen
 import { ActivityFilesComponent } from './activity-files/activity-files.component';
 import { ActivityTimelineComponent } from './activity-timeline/activity-timeline.component';
 import { GroupActivitiesByPipe } from './activity-timeline/group-activities-by.pipe';
+import { ApplyFilterPipe } from './common/apply-filter.pipe';
 
 import { ActivityTreeComponent } from './activity-tree/activity-tree.component';
 import { AddEventDialogComponent } from './add-event-dialog/add-event-dialog.component';
@@ -37,6 +38,7 @@ import {
 } from './multi-projects-main-page/multi-projects-main-page.component';
 
 import { ProjectManagementRoutingModule } from './project-management-routing.module';
+import { FilesGridComponent } from './files-grid/files-grid.component';
 
 
 
@@ -69,10 +71,14 @@ import { ProjectManagementRoutingModule } from './project-management-routing.mod
     ActivityTreeComponent,
     AddEventDialogComponent,
     DhtmlxGanttComponent,
+
     GroupActivitiesByPipe,
+    ApplyFilterPipe,
+
     MultiProjectsMainPageComponent,
     ProjectsMainPageComponent,
-    GanttChartComponent
+    GanttChartComponent,
+    FilesGridComponent
   ],
 
   exports: [
