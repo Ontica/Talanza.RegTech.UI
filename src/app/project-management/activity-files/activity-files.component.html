@@ -22,7 +22,7 @@
                      [config]="{width:'680px', height:'580px'}"
                      (close)="hideFileEditor()">
     <emp-ng-card title='File uploader'
-                 [hint]="activity.name"
+                 [hint]="projectItem.name"
                  (close)="hideFileEditor()">
       <emp-kb-file-editor [mediaFile]="selectedMediaFile"
                           (save)="uploadFile($event)">

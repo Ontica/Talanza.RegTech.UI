@@ -19,6 +19,7 @@ import { View } from '@app/models/user-interface';
 import { Exception } from '@app/core';
 
 import { isEmpty } from '@app/models/core';
+import { ProjectFilesService } from '@app/services/project-management';
 
 
 @Component({
@@ -44,6 +45,7 @@ export class ProjectsMainPageComponent implements OnInit, OnDestroy {
   private subs3: Subscription;
 
   constructor(private projectStore: ProjectStore,
+              private filesService: ProjectFilesService,
               private uiStore: UserInterfaceStore)  { }
 
 
@@ -147,6 +149,8 @@ export class ProjectsMainPageComponent implements OnInit, OnDestroy {
     if (!isEmpty(this.selectedProject.project)) {
       this.uiStore.setMainTitle(this.currentView.title);
     }
+
+    this.loadProjectFiles();
   }
 
 
@@ -156,6 +160,12 @@ export class ProjectsMainPageComponent implements OnInit, OnDestroy {
     if (!this.selectedProject) {
       this.uiStore.setMainTitle('Please select a contract');
     }
+  }
+
+  private loadProjectFiles() {
+    this.filesService.getProjectFiles(this.selectedProject.project)
+        .toPromise()
+        .then(x => this.projectFiles = x);
   }
 
 }

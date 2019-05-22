@@ -16,8 +16,7 @@
     </ng-container>
 
     <ng-container *ngIf="currentView.name === 'Projects.Files'">
-      <emp-steps-files-grid>
-
+      <emp-steps-files-grid [files]="allFiles | applyFilesFilter: filter">
       </emp-steps-files-grid>
     </ng-container>
 

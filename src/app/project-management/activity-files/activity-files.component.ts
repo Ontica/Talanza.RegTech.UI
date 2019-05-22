@@ -7,10 +7,11 @@
 
 import { Component, Input, OnChanges } from '@angular/core';
 
-import { ProjectService } from '@app/services/project-management';
+import { ProjectFilesService } from '@app/services/project-management';
 
-import { Activity, EmptyActivity } from '@app/models/project-management';
+import { EmptyActivity, ProjectItem } from '@app/models/project-management';
 import { MediaFile, FileToUpload, EmptyMediaFile } from '@app/models/knowledge-base';
+
 
 @Component({
   selector: 'emp-steps-activity-files',
@@ -20,7 +21,7 @@ import { MediaFile, FileToUpload, EmptyMediaFile } from '@app/models/knowledge-b
 export class ActivityFilesComponent implements OnChanges {
 
 
-  @Input() activity: Activity = EmptyActivity;
+  @Input() projectItem: ProjectItem = EmptyActivity;
 
   filesList: MediaFile[] = [];
 
@@ -28,7 +29,7 @@ export class ActivityFilesComponent implements OnChanges {
 
   displayEditor = false;
 
-  constructor(private service: ProjectService) { }
+  constructor(private service: ProjectFilesService) { }
 
 
   ngOnChanges() {
@@ -62,7 +63,9 @@ export class ActivityFilesComponent implements OnChanges {
   uploadFile(fileToUpload: FileToUpload) {
     this.hideFileEditor();
 
-    this.service.uploadFile(this.activity, fileToUpload.file, fileToUpload.metadata)
+    this.service.uploadProjectItemFile(this.projectItem,
+                                       fileToUpload.file,
+                                       fileToUpload.metadata)
     .subscribe(() => {
         this.loadFilesList();
       }, error => {
@@ -72,7 +75,7 @@ export class ActivityFilesComponent implements OnChanges {
 
 
   private loadFilesList()  {
-    this.service.getFiles(this.activity)
+    this.service.getProjectItemFiles(this.projectItem)
         .toPromise()
         .then (x => this.filesList = x);
   }

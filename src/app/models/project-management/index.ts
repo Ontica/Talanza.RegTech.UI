@@ -11,6 +11,10 @@ export * from './activity';
 
 export * from './task';
 
+export * from './project-item';
+
+export * from './project-item-file';
+
 export * from './commands';
 
 export * from './gantt';

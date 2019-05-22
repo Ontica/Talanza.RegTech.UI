@@ -12,11 +12,9 @@ import { catchError } from 'rxjs/operators';
 import { Assertion, CoreService } from '@app/core';
 
 import { Activity, Contract, Project, Resource, Stage } from '@app/models/project-management';
-import { MediaMetadata, MediaFile } from '@app/models/knowledge-base';
 
 import { Contact } from '@app/models/core';
 import { ColoredTag } from '@app/models/user-interface';
-
 
 
 enum Errors {
@@ -299,31 +297,6 @@ export class ProjectService {
                             catchError(e => this.core.http.showAndThrow(e, Errors.UPDATE_ACTIVITY))
                          );
 
-  }
-
-
-  getFiles(activity: Activity): Observable<MediaFile[]> {
-    const path = `v1/project-management/activities/${activity.uid}/files`;
-
-    return this.core.http.get<MediaFile[]>(path);
-  }
-
-
-  uploadFile(activity: Activity, fileToUpload: File, metadata: MediaMetadata): Observable<MediaFile> {
-    const path = `v1/project-management/activities/${activity.uid}/files`;
-
-    const formData: FormData = new FormData();
-
-    formData.append('media', fileToUpload, fileToUpload.name);
-
-    formData.append('title', metadata.title);
-    formData.append('type', metadata.type);
-    formData.append('summary', metadata.summary);
-    formData.append('authors', metadata.authors);
-    formData.append('tags', metadata.tags);
-    formData.append('topics', metadata.topics);
-
-    return this.core.http.post<MediaFile>(path, formData);
   }
 
 }

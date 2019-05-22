@@ -24,6 +24,7 @@ import { ActivityFilesComponent } from './activity-files/activity-files.componen
 import { ActivityTimelineComponent } from './activity-timeline/activity-timeline.component';
 import { GroupActivitiesByPipe } from './activity-timeline/group-activities-by.pipe';
 import { ApplyFilterPipe } from './common/apply-filter.pipe';
+import { ApplyFilesFilterPipe } from './common/apply-files-filter.pipe';
 
 import { ActivityTreeComponent } from './activity-tree/activity-tree.component';
 import { AddEventDialogComponent } from './add-event-dialog/add-event-dialog.component';
@@ -74,6 +75,7 @@ import { FilesGridComponent } from './files-grid/files-grid.component';
 
     GroupActivitiesByPipe,
     ApplyFilterPipe,
+    ApplyFilesFilterPipe,
 
     MultiProjectsMainPageComponent,
     ProjectsMainPageComponent,
