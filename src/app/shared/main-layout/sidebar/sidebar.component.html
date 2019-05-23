@@ -6,7 +6,6 @@
     (change)="onProcessChange($event)">
   </emp-steps-process-selector>
 
-
   <div class="panel-separator"></div>
 
 </div>
@@ -16,7 +15,7 @@
 
   <emp-steps-project-selector
       [projects]="projectStore.projects | async"
-      [selected]="(projectStore.selectedProject() | async).project"
+      [selected]="filter.selectedProject"
       (change)="onProjectChange($event)">
   </emp-steps-project-selector>
 
@@ -30,7 +29,7 @@
   <emp-steps-projects-list-selector
       [projects]="projectStore.projects | async"
       [selected]="filter.projects"
-      (change)="onProjectsChange($event)">
+      (change)="onMultiProjectsChange($event)">
   </emp-steps-projects-list-selector>
 
   <div class="panel-separator"></div>

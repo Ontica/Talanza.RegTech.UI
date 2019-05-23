@@ -5,6 +5,8 @@
  * See LICENSE.txt in the project root for complete license information.
  */
 
+export * from './project';
+
 export * from './activity-filter';
 
 export * from './activity';
@@ -20,8 +22,6 @@ export * from './commands';
 export * from './gantt';
 
 export * from './meeting';
-
-export * from './project';
 
 export * from './project-template';
 

@@ -29,10 +29,6 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
   @Input() layout: Layout;
 
-  selectedProjects: Project[] = [];
-  selectedResponsibles: Contact[] = [];
-  selectedThemes: string[] = [];
-
   filter: ProjectItemFilter = EmptyProjectItemFilter;
 
   private subs1: Subscription;
@@ -48,7 +44,8 @@ export class SidebarComponent implements OnInit, OnDestroy {
       value => this.layout = value
     );
 
-    this.subs2 = this.uiStore.getValue<ProjectItemFilter>('Sidebar.ProjectFilter').subscribe(
+    this.subs2 = this.uiStore.getValue<ProjectItemFilter>('Sidebar.ProjectFilter',
+                                                          EmptyProjectItemFilter).subscribe(
       value => this.filter = value
     );
 
@@ -70,17 +67,19 @@ export class SidebarComponent implements OnInit, OnDestroy {
   }
 
 
-  onProjectChange(project: Project) {
-    if (project && project.uid) {
-      this.projectStore.selectProject(project);
-    }
+  onMultiProjectsChange(multiProjectsList: Project[]) {
+    this.filter = {...this.filter, projects: multiProjectsList };
+
+    this.uiStore.setValue<ProjectItemFilter>('Sidebar.ProjectFilter', this.filter);
   }
 
 
-  onProjectsChange(projectList: Project[]) {
-    this.filter = {...this.filter, projects: projectList };
-
-    this.uiStore.setValue<ProjectItemFilter>('Sidebar.ProjectFilter', this.filter);
+  onProjectChange(project: Project) {
+    if (project && project.uid) {
+      this.filter = {...this.filter, selectedProject: project };
+      this.uiStore.setValue<ProjectItemFilter>('Sidebar.ProjectFilter', this.filter);
+      this.projectStore.selectProject(project);
+    }
   }
 
 

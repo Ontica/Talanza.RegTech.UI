@@ -45,3 +45,9 @@ export interface Step extends Identifiable {
   stepNo: string;
   involvedParty: string;
 }
+
+
+export const EmptyProject: Project = {
+  uid: '',
+  name: ''
+};

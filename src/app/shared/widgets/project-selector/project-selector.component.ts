@@ -7,7 +7,7 @@
 
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 
-import { Project } from '@app/models/project-management';
+import { Project, EmptyProject } from '@app/models/project-management';
 
 
 @Component({
@@ -19,7 +19,7 @@ export class ProjectSelectorComponent {
 
   @Input() projects: Project[];
 
-  @Input() selected: Project;
+  @Input() selected: Project = EmptyProject;
 
   @Output() change = new EventEmitter<Project>();
 
