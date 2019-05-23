@@ -15,21 +15,14 @@
 
     </ng-container>
 
-    <ng-container *ngIf="currentView.name === 'Projects.Files'">
-      <emp-steps-files-grid [files]="allFiles | applyFilesFilter: filter">
-      </emp-steps-files-grid>
-    </ng-container>
-
   </div>
 
   <div *ngIf="displayEditor" class="explorer-panel secondary">
-
     <emp-steps-activity-editor
          [activity]="selectedActivity"
          (update)="onActivityUpdated($event)"
          (close)="onEditorClosed()">
     </emp-steps-activity-editor>
-
   </div>
 
 </div>

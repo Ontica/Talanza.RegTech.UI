@@ -12,9 +12,7 @@ import { SecurityGuardService } from '@app/core';
 
 import { MainLayoutComponent } from '@app/shared';
 
-import {
-  MultiProjectsMainPageComponent
-} from '@app/project-management/multi-projects-main-page/multi-projects-main-page.component';
+import { MultiProjectsMainPageComponent, ProjectFilesMainPageComponent } from '@app/project-management';
 
 
 @NgModule({
@@ -27,7 +25,7 @@ import {
         children: [
           { path: 'tasks', component: MultiProjectsMainPageComponent },
           { path: 'gantt', component: MultiProjectsMainPageComponent },
-          { path: 'files', component: MultiProjectsMainPageComponent },
+          { path: 'files', component: ProjectFilesMainPageComponent },
           { path: '', redirectTo: 'tasks', pathMatch: 'full' }
         ]
       }

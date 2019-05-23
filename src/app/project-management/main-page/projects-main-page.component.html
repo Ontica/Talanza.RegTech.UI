@@ -30,12 +30,6 @@
       </emp-steps-activity-timeline>
     </ng-container>
 
-    <ng-container *ngIf="currentView.name === 'Project.Files' && selectedProject">
-      <emp-steps-files-grid [files]="projectFiles | applyFilesFilter: filter">
-      </emp-steps-files-grid>
-    </ng-container>
-
-
   </div>
 
   <div *ngIf="displayEditor" class="explorer-panel secondary">

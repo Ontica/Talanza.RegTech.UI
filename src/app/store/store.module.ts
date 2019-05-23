@@ -12,7 +12,10 @@ import { ProcedureStore } from './procedure.store';
 
 import { ProjectStore } from './project.store';
 import { ProjectTemplateStore } from './project-template.store';
+import { FileStore } from './file.store';
+
 import { UserInterfaceStore } from './ui.store';
+
 
 
 @NgModule({
@@ -22,9 +25,10 @@ import { UserInterfaceStore } from './ui.store';
   ],
 
   providers: [
-    ProjectStore,
     ProjectTemplateStore,
+    ProjectStore,
     ProcedureStore,
+    FileStore,
     UserInterfaceStore
   ]
 })

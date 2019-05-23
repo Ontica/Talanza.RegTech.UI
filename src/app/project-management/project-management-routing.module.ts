@@ -14,6 +14,8 @@ import { MainLayoutComponent } from '@app/shared';
 
 import { ProjectsMainPageComponent } from './main-page/projects-main-page.component';
 
+import { ProjectFilesMainPageComponent } from './project-files-main-page/project-files-main-page.component';
+
 
 @NgModule({
 
@@ -26,7 +28,7 @@ import { ProjectsMainPageComponent } from './main-page/projects-main-page.compon
           { path: 'activities', component: ProjectsMainPageComponent },
           { path: 'gantt', component: ProjectsMainPageComponent },
           { path: 'timelines', component: ProjectsMainPageComponent },
-          { path: 'files', component: ProjectsMainPageComponent },
+          { path: 'files', component: ProjectFilesMainPageComponent },
           { path: '', redirectTo: 'activities', pathMatch: 'full' }
         ]
       }

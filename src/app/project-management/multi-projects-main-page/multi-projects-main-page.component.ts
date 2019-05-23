@@ -12,10 +12,9 @@ import { ProjectStore } from '@app/store/project.store';
 import { UserInterfaceStore } from '@app/store/ui.store';
 
 import { Activity, EmptyActivity,
-         ProjectItemFilter, EmptyProjectItemFilter, ProjectItemFile } from '@app/models/project-management';
+         ProjectItemFilter, EmptyProjectItemFilter } from '@app/models/project-management';
 
 import { View } from '@app/models/user-interface';
-import { ProjectFilesService } from '@app/services/project-management';
 
 
 @Component({
@@ -33,8 +32,6 @@ export class MultiProjectsMainPageComponent implements OnInit, OnDestroy {
 
   allActivities: Activity[] = [];
 
-  allFiles: ProjectItemFile[] = [];
-
   filter: ProjectItemFilter = EmptyProjectItemFilter;
 
   private subs1: Subscription;
@@ -42,13 +39,11 @@ export class MultiProjectsMainPageComponent implements OnInit, OnDestroy {
 
 
   constructor(private projectStore: ProjectStore,
-              private filesService: ProjectFilesService,
-              private uiStore: UserInterfaceStore)  { }
+              private uiStore: UserInterfaceStore) { }
 
 
   ngOnInit() {
     this.loadAllActivities();
-    this.loadAllFiles();
 
     this.subs1 = this.uiStore.currentView.subscribe(
       x => this.currentView = x
@@ -104,13 +99,6 @@ export class MultiProjectsMainPageComponent implements OnInit, OnDestroy {
     return this.projectStore.getAllActivities()
                 .toPromise()
                 .then(x => this.allActivities = x);
-  }
-
-
-  private loadAllFiles() {
-    return this.filesService.getAllFiles()
-                .toPromise()
-                .then(x => this.allFiles = x);
   }
 
 

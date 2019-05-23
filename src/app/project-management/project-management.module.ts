@@ -20,9 +20,13 @@ import { ProcessesModule } from '@app/processes/processes.module';
 import { ActivityEditorComponent } from './activity-editor/activity-editor.component';
 import { ActivityFormComponent } from './activity-editor/activity-form/activity-form.component';
 import { ActivityTasksComponent } from './activity-tasks/activity-tasks.component';
+
 import { ActivityFilesComponent } from './activity-files/activity-files.component';
+import { FilesGridComponent } from './files-grid/files-grid.component';
+
 import { ActivityTimelineComponent } from './activity-timeline/activity-timeline.component';
 import { GroupActivitiesByPipe } from './activity-timeline/group-activities-by.pipe';
+
 import { ApplyFilterPipe } from './common/apply-filter.pipe';
 import { ApplyFilesFilterPipe } from './common/apply-files-filter.pipe';
 
@@ -38,8 +42,10 @@ import {
   MultiProjectsMainPageComponent
 } from './multi-projects-main-page/multi-projects-main-page.component';
 
+import { ProjectFilesMainPageComponent } from './project-files-main-page/project-files-main-page.component';
+
 import { ProjectManagementRoutingModule } from './project-management-routing.module';
-import { FilesGridComponent } from './files-grid/files-grid.component';
+
 
 
 
@@ -80,12 +86,14 @@ import { FilesGridComponent } from './files-grid/files-grid.component';
     MultiProjectsMainPageComponent,
     ProjectsMainPageComponent,
     GanttChartComponent,
-    FilesGridComponent
+    FilesGridComponent,
+    ProjectFilesMainPageComponent
   ],
 
   exports: [
     MultiProjectsMainPageComponent,
-    ProjectsMainPageComponent
+    ProjectsMainPageComponent,
+    ProjectFilesMainPageComponent,
   ],
 
   entryComponents: [
