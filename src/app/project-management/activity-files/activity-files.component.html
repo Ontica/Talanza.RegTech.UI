@@ -13,8 +13,8 @@
                      [config]="{width:'980px', height:'78%'}"
                      (close)="hideFileEditor()">
   <emp-kb-media-file-viewer [mediaFile]="selectedMediaFile"
-                      (save)="uploadFile($event)"
-                      (close)="hideFileEditor()">
+                      (mediaFileViewerSave)="uploadFile($event)"
+                      (mediaFileViewerClose)="hideFileEditor()">
   </emp-kb-media-file-viewer>
 </emp-ng-modal-window>
 
@@ -26,6 +26,6 @@
                  (close)="hideFileEditor()">
       <emp-kb-file-editor [mediaFile]="selectedMediaFile"
                           (save)="uploadFile($event)">
-    </emp-kb-file-editor>
-  </emp-ng-card>
+      </emp-kb-file-editor>
+    </emp-ng-card>
 </emp-ng-modal-window>

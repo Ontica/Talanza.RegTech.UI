@@ -1,43 +1,60 @@
-<div class="list-header">
-  <div class="column" i18n>
-    File / Type / Authors
-  </div>
+<div class="card">
 
-  <div class="right-column expand" i18n>
-    Posted by
-  </div>
-</div>
+  <div class="card-header card-header-flat">
 
-<div *ngFor="let file of files"
-     class="list-item" matRipple [matRippleTrigger]="trigger">
-
-  <mat-icon class="material-icons-outlined" (click)="onSelect(file)">insert_drive_file_outline</mat-icon>
-
-  <div class="list-item-container">
-
-    <div class="item-name">
-      <a #trigger (click)="onSelect(file)">{{file.mediaFile.metadata.title || file.mediaFile.originalFileName}}</a>
+    <div class="card-title">
+      All contract files
+      <div class="card-hint">{{filteredFiles.length}} files found</div>
     </div>
 
-    <div class="list-item-columns">
-      <div class="column">
-        {{file.mediaFile.metadata.type}}<br/>
-        {{file.mediaFile.metadata.authors}}
-      </div>
-
-      <div class="right-column expand">
-          {{file.postedBy.name}}<br>
-          {{file.postingTime | date:'dd/LLL/yyyy'}}<br>
-      </div>
-
+    <div class="card-header-options">
+      <input class="text-box" type="search" style="width:210px"
+             placeholder='Find a file ...' (keyup.enter)="onSearch()" [(ngModel)]="filter">
+      <button type="button" class="btn"
+              (click)="onSearch()" i18n>Search</button>
     </div>
 
   </div>
 
-</div>
+  <div class="card-body" #gridContainer>
 
-<div *ngIf="files.length === 0" class="list-item-container">
-  <div class="column" i18n>
-    No attached files
+    <mat-grid-list [cols]="gridColumns" rowHeight="300px" gutterSize="16px">
+
+      <mat-grid-tile *ngFor="let file of filteredFiles">
+
+        <div class="tile" [class.selected-tile]="isSelected(file)"
+              matRipple [matRippleTrigger]="trigger">
+
+          <div class="tile-header">
+            <a #trigger (click)="onSelect(file)">{{file.mediaFile.name}}</a>
+            <div class="hint">
+              {{file.mediaFile.metadata.type}}
+            </div>
+          </div>
+
+          <div class="tile-content">
+            <label>Activity:</label>
+            {{file.projectItem.name}}
+            <label>Project:</label>
+            {{file.projectItem.project.name}}
+          </div>
+
+          <div class="tile-footer">
+            <a (click)="onSelect(file)">
+              <i class="fa fa-file-o tile-icon"></i>
+            </a>
+            <div style="margin-left:8pt">
+              {{file.postedBy.name}}<br>
+              {{file.postingTime | date:'dd/LLL/yyyy'}}
+            </div>
+          </div>
+
+        </div>
+
+      </mat-grid-tile>
+
+    </mat-grid-list>
+
   </div>
+
 </div>

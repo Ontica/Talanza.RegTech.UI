@@ -1,9 +1,9 @@
-<div class="card card-border card-shadow">
+<div class="card card-border">
 
   <div class="card-header">
 
     <div class="card-title">
-      {{mediaFile.metadata.title || mediaFile.originalFileName}}
+      {{mediaFile.name}}
       <div class="card-hint">{{mediaFile.metadata.type}}</div>
     </div>
 
@@ -34,8 +34,6 @@
     <mat-tab label="Annotations" i18n-label>
       <emp-kb-postings-list [target]="mediaFile"></emp-kb-postings-list>
     </mat-tab>
-
-
 
   </mat-tab-group>
 

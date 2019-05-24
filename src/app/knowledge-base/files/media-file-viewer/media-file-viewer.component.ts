@@ -5,7 +5,7 @@
  * See LICENSE.txt in the project root for complete license information.
  */
 
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, AfterViewInit } from '@angular/core';
 
 import { MediaFile, FileToUpload } from '@app/models/knowledge-base';
 
@@ -16,22 +16,29 @@ import { MediaFile, FileToUpload } from '@app/models/knowledge-base';
   styleUrls: ['../../../../styles/card.scss']
 
 })
-export class MediaFileViewerComponent {
+export class MediaFileViewerComponent implements AfterViewInit {
 
   @Input() mediaFile: MediaFile;
 
-  @Output() save = new EventEmitter<FileToUpload>();
+  @Output() init = new EventEmitter<void>();
 
-  @Output() close = new EventEmitter<void>();
+  @Output() mediaFileViewerSave = new EventEmitter<FileToUpload>();
+
+  @Output() mediaFileViewerClose = new EventEmitter<void>();
+
+
+  ngAfterViewInit() {
+    this.init.emit();
+  }
 
 
   onClose() {
-    this.close.emit();
+    this.mediaFileViewerClose.emit();
   }
 
 
   onUpload(fileToUpload: FileToUpload) {
-    this.save.emit(fileToUpload);
+    this.mediaFileViewerSave.emit(fileToUpload);
   }
 
 }

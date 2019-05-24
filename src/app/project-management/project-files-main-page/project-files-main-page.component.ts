@@ -12,9 +12,9 @@ import { FileStore } from '@app/store/file.store';
 import { UserInterfaceStore } from '@app/store/ui.store';
 
 import { ProjectItemFile, ProjectItemFilter, EmptyProjectItemFilter } from '@app/models/project-management';
+import { FileToUpload } from '@app/models/knowledge-base';
 import { View } from '@app/models/user-interface';
 import { isEmpty } from '@app/models/core';
-
 
 
 @Component({
@@ -26,7 +26,6 @@ export class ProjectFilesMainPageComponent implements OnInit, OnDestroy {
 
   currentView: View;
   displayEditor = false;
-  toggleEditor = false;
 
   files: Observable<ProjectItemFile[]> = of([]);
 
@@ -69,24 +68,20 @@ export class ProjectFilesMainPageComponent implements OnInit, OnDestroy {
   }
 
 
-  onEditorClosed() {
+  onEditorClose() {
     this.displayEditor = false;
+  }
 
-    this.toggleEditor = !this.toggleEditor;
+
+  onMediaFileViewerSave(file: FileToUpload) {
+
   }
 
 
   showEditor(file: ProjectItemFile) {
     if (file) {
       this.selectedFile = file;
-
-      const lastValue = this.displayEditor;
-
       this.displayEditor = true;
-
-      if (lastValue !== this.displayEditor) {
-        this.toggleEditor = !this.toggleEditor;
-      }
     }
   }
 

@@ -4,15 +4,15 @@
   <div class="explorer-panel primary">
     <emp-steps-files-grid
         [files]="(files | async) | applyFilesFilter: filter"
-        (select)="showEditor($event)">
+        (fileSelect)="showEditor($event)">
     </emp-steps-files-grid>
   </div>
 
   <div *ngIf="displayEditor" class="explorer-panel secondary">
     <emp-kb-media-file-viewer
         [mediaFile]="selectedFile.mediaFile"
-        (save)="uploadFile($event)"
-        (close)="onEditorClosed()">
+        (mediaFileViewerSave)="onMediaFileViewerSave($event)"
+        (mediaFileViewerClose)="onEditorClose()">
     </emp-kb-media-file-viewer>
   </div>
 
