@@ -49,7 +49,6 @@ export class FileControlComponent {
     event.preventDefault();
 
     this.handleFileInput(event.dataTransfer.files);
-    console.log('onDrop', event);
     event.stopPropagation();
   }
 

@@ -29,7 +29,6 @@ export class ProcessesMainPageComponent implements OnInit, OnDestroy {
 
   currentView: View;
   displayEditor = false;
-  toggleEditor = false;
 
   model: ProjectTemplateModel;
   selectedActivityTemplate = EmptyActivityTemplate;
@@ -105,8 +104,6 @@ export class ProcessesMainPageComponent implements OnInit, OnDestroy {
 
   onEditorClosed() {
     this.displayEditor = false;
-
-    this.toggleEditor = !this.toggleEditor;
   }
 
   onProcessDiagramEdited(event: any) {
@@ -122,14 +119,7 @@ export class ProcessesMainPageComponent implements OnInit, OnDestroy {
   showEditor(activityTemplate: ActivityTemplate) {
     if (activityTemplate) {
       this.selectedActivityTemplate = activityTemplate;
-
-      const lastValue = this.displayEditor;
-
       this.displayEditor = true;
-
-      if (lastValue !== this.displayEditor) {
-        this.toggleEditor = !this.toggleEditor;
-      }
     }
   }
 

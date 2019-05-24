@@ -73,7 +73,6 @@ export class ProcessTreeDesignerComponent implements OnChanges {
       const previous = this.project.activities.find(x => x.position === activity.position - 1);
 
       if (!previous) {
-        console.log('No Previous in isIndentable', activity);
         return false;
       }
 
@@ -98,7 +97,6 @@ export class ProcessTreeDesignerComponent implements OnChanges {
       const previous = this.project.activities.find(x => x.position === activity.position - 1);
 
       if (!previous) {
-        console.log('Undefined "previous" in isOutdentable', activity);
         return false;
       }
 
@@ -152,7 +150,6 @@ export class ProcessTreeDesignerComponent implements OnChanges {
     const previousParent = this.project.activities.find(x => x.uid === previous.parent.uid);
 
     if (!previousParent) {
-      console.log('Undefined "previousParent" in outdentActivity', activity);
       return;
     }
 

@@ -12,16 +12,14 @@ import { EmptyProjectItemFilter,
 
 
 @Pipe({
-  name: 'applyFilter',
-  pure: true
+  name: 'applyFilter'
 })
 export class ApplyFilterPipe implements PipeTransform {
 
   filter: ProjectItemFilter = EmptyProjectItemFilter;
 
-  transform(data: ProjectItem[], filter: ProjectItemFilter): ProjectItem[] {
-    console.log('pipe transform', data.length, filter);
 
+  transform(data: ProjectItem[], filter: ProjectItemFilter): ProjectItem[] {
     this.filter = filter || EmptyProjectItemFilter;
 
     if (!data) {
@@ -39,8 +37,6 @@ export class ApplyFilterPipe implements PipeTransform {
 
     filtered = this.applyResponsiblesFilter(filtered);
     filtered = this.applyThemesFilter(filtered);
-
-    console.log('applied filter', filtered.length);
 
     return filtered;
   }

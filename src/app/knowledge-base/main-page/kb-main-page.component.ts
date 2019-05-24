@@ -48,7 +48,6 @@ export class KnowledgeBaseMainPageComponent implements OnInit {
   selectDocument(document: Posting) {
     this.selectedDocument = document;
     this.displayEditor = true;
-    console.log('selectedDocument', this.selectedDocument);
   }
 
 

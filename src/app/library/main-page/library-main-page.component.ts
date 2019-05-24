@@ -21,7 +21,6 @@ export class LibraryMainPageComponent implements OnInit, OnDestroy {
 
   currentView: View;
   displayEditor = false;
-  toggleEditor = false;
 
   private subs1: Subscription;
 
