@@ -28,7 +28,7 @@ export class ThemesListSelectorComponent {
     }
   }
 
-  @Output() change = new EventEmitter<string[]>();
+  @Output() selectedThemesChange = new EventEmitter<string[]>();
 
 
   onSelected(value: string) {
@@ -38,7 +38,7 @@ export class ThemesListSelectorComponent {
     if (value === 'all') {
       this.selectedOptions = ['all'];
 
-      this.change.emit([]);
+      this.selectedThemesChange.emit([]);
 
       return;
     }
@@ -47,7 +47,7 @@ export class ThemesListSelectorComponent {
 
     const array = this.selectedOptions.map(x => this.themes.find(y => y === x));
 
-    this.change.emit(array);
+    this.selectedThemesChange.emit(array);
   }
 
 }

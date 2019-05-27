@@ -29,14 +29,14 @@ export class FaqEditorComponent {
   }
   private _faq = EmptyPosting();
 
-  @Output() close = new EventEmitter();
+  @Output() faqEditorClose = new EventEmitter();
 
 
   constructor(private faqService: PostingsService) { }
 
 
   onClose() {
-    this.close.emit();
+    this.faqEditorClose.emit();
   }
 
 
@@ -58,7 +58,7 @@ export class FaqEditorComponent {
 
   private update() {
     this.faqService.updatePosting(BASE_OBJECT_UID, this.faq)
-      .subscribe((x) => this.close.emit());
+      .subscribe((x) => this.faqEditorClose.emit());
   }
 
 

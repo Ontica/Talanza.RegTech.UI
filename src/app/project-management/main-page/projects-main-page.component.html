@@ -8,8 +8,8 @@
     <ng-container *ngIf="currentView.name === 'Project.Activities'">
       <emp-steps-activity-tree
           [project]="selectedProject"
-          (edited)="onActivityTreeEdited($event)"
-          (activitySelected)="showEditor($event)">
+          (activityChange)="onActivityTreeEdited($event)"
+          (activitySelect)="showEditor($event)">
       </emp-steps-activity-tree>
     </ng-container>
 
@@ -17,7 +17,7 @@
       <emp-steps-gantt-chart
           [project]="selectedProject"
           [reset]="toggleEditor"
-          (activitySelected)="showEditor($event)">
+          (activitySelect)="showEditor($event)">
       </emp-steps-gantt-chart>
     </ng-container>
 
@@ -26,7 +26,7 @@
           groupBy='timeline'
           [activities]="selectedProject.activities | applyFilter: filter"
           [title]="selectedProject.project.uid ? selectedProject.project.name : 'Please select a contract'"
-          (activitySelected)="showEditor($event)">
+          (activitySelect)="showEditor($event)">
       </emp-steps-activity-timeline>
     </ng-container>
 
@@ -36,8 +36,8 @@
 
     <emp-steps-activity-editor
          [activity]="selectedActivity"
-         (update)="onActivityUpdated($event)"
-         (close)="onEditorClosed()">
+         (activityChange)="onActivityUpdated($event)"
+         (activityEditorClose)="onEditorClosed()">
     </emp-steps-activity-editor>
 
   </div>

@@ -8,16 +8,16 @@
     <ng-container *ngIf="currentView.name === 'Process.Diagram'">
       <emp-ng-process-diagram-editor
           [project]="model"
-          (edited)="onProcessDiagramEdited($event)"
-          (activitySelected)="showEditor($event)">
+          (activityChange)="onProcessDiagramEdited($event)"
+          (activitySelect)="showEditor($event)">
       </emp-ng-process-diagram-editor>
     </ng-container>
 
     <ng-container *ngIf="currentView.name === 'Process.Tree'">
       <emp-steps-process-tree-designer
           [project]="model"
-          (edited)="onActivityTreeEdited($event)"
-          (activitySelected)="showEditor($event)">
+          (activityChange)="onActivityTreeEdited($event)"
+          (activitySelect)="showEditor($event)">
       </emp-steps-process-tree-designer>
     </ng-container>
 
@@ -30,8 +30,8 @@
   <div *ngIf="displayEditor" class="explorer-panel secondary">
     <emp-steps-activity-designer
         [activityTemplate]="selectedActivityTemplate"
-        (update)="onActivityUpdated($event)"
-        (close)="onEditorClosed()">
+        (activityTemplateChange)="onActivityUpdated($event)"
+        (activityDesignerClose)="onEditorClosed()">
     </emp-steps-activity-designer>
   </div>
 

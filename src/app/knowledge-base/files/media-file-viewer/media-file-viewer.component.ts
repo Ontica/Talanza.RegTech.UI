@@ -20,7 +20,7 @@ export class MediaFileViewerComponent implements AfterViewInit {
 
   @Input() mediaFile: MediaFile;
 
-  @Output() init = new EventEmitter<void>();
+  @Output() mediaFileViewerInit = new EventEmitter<void>();
 
   @Output() mediaFileViewerSave = new EventEmitter<FileToUpload>();
 
@@ -28,7 +28,7 @@ export class MediaFileViewerComponent implements AfterViewInit {
 
 
   ngAfterViewInit() {
-    this.init.emit();
+    this.mediaFileViewerInit.emit();
   }
 
 

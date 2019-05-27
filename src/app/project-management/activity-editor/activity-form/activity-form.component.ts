@@ -40,8 +40,8 @@ enum FormMessages {
 })
 export class ActivityFormComponent extends AbstractForm implements OnInit, OnChanges {
 
-  @Output() delete = new EventEmitter();
-  @Output() update = new EventEmitter<Activity>();
+  @Output() activityDelete = new EventEmitter();
+  @Output() activityChange = new EventEmitter<Activity>();
 
   @Input() activity: Activity = EmptyActivity;
   @Input() task: Task = EmptyTask;     // ToDo: Just one input for activity or task, not both
@@ -215,13 +215,13 @@ export class ActivityFormComponent extends AbstractForm implements OnInit, OnCha
       this.taskStore.deleteTask(this.task)
       .subscribe(() => {
         this.resetForm();
-        this.delete.emit();
+        this.activityDelete.emit();
       });
       return Promise.resolve();
     }
 
     return this.projectStore.deleteActivity(this.activity)
-               .then(() => this.delete.emit())
+               .then(() => this.activityDelete.emit())
                .catch(err => this.app.messageBox.showError(err).toPromise());
   }
 
@@ -291,7 +291,7 @@ export class ActivityFormComponent extends AbstractForm implements OnInit, OnCha
       this.taskStore.completeTask(this.task, updateData)
       .subscribe(() => {
         this.resetForm();
-        this.update.emit();
+        this.activityChange.emit();
       });
       return Promise.resolve();
     }
@@ -299,7 +299,7 @@ export class ActivityFormComponent extends AbstractForm implements OnInit, OnCha
     return this.projectStore.completeActivity(this.activity, updateData)
       .then(() => {
         this.resetForm();
-        this.update.emit();
+        this.activityChange.emit();
       })
       .catch(err => this.app.messageBox.showError(err).toPromise());
   }
@@ -310,7 +310,7 @@ export class ActivityFormComponent extends AbstractForm implements OnInit, OnCha
       this.taskStore.reactivateTask(this.task)
       .subscribe(() => {
         this.resetForm();
-        this.update.emit();
+        this.activityChange.emit();
       });
       return Promise.resolve();
     }
@@ -318,7 +318,7 @@ export class ActivityFormComponent extends AbstractForm implements OnInit, OnCha
     return this.projectStore.reactivateActivity(this.activity)
       .then(() => {
         this.resetForm();
-        this.update.emit();
+        this.activityChange.emit();
       })
       .catch(err => this.app.messageBox.showError(err).toPromise());
   }
@@ -331,7 +331,7 @@ export class ActivityFormComponent extends AbstractForm implements OnInit, OnCha
       this.taskStore.updateTask(this.task, updateData)
       .subscribe(() => {
         this.resetForm();
-        this.update.emit();
+        this.activityChange.emit();
       });
       return Promise.resolve();
     }
@@ -339,7 +339,7 @@ export class ActivityFormComponent extends AbstractForm implements OnInit, OnCha
     return this.projectStore.updateActivity(this.activity, updateData)
       .then(() => {
         this.resetForm();
-        this.update.emit();
+        this.activityChange.emit();
       })
       .catch(err => this.app.messageBox.showError(err).toPromise());
   }

@@ -26,7 +26,7 @@ export class PostingsEditorComponent implements OnInit {
   form: FormGroup;
 
   @Input() target: Identifiable = Empty;
-  @Output() edit = new EventEmitter<any>();
+  @Output() postingChange = new EventEmitter<any>();
 
   posting = EmptyPosting;
 
@@ -51,7 +51,7 @@ export class PostingsEditorComponent implements OnInit {
     }
     const data = this.getFormData();
 
-    this.edit.emit(data);
+    this.postingChange.emit(data);
     this.reset();
   }
 

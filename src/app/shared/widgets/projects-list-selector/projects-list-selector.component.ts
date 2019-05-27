@@ -31,7 +31,7 @@ export class ProjectsListSelectorComponent {
     }
   }
 
-  @Output() change = new EventEmitter<Project[]>();
+  @Output() selectedProjectsChange = new EventEmitter<Project[]>();
 
 
   onSelected(value: string) {
@@ -41,7 +41,7 @@ export class ProjectsListSelectorComponent {
     if (value === 'all') {
       this.selectedOptions = ['all'];
 
-      this.change.emit([]);
+      this.selectedProjectsChange.emit([]);
 
       return;
     }
@@ -50,7 +50,7 @@ export class ProjectsListSelectorComponent {
 
     const array = this.selectedOptions.map(x => this.projects.find(y => y.uid === x));
 
-    this.change.emit(array);
+    this.selectedProjectsChange.emit(array);
   }
 
 }

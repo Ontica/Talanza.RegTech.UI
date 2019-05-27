@@ -24,7 +24,7 @@ export class GanttChartComponent implements OnChanges {
 
   @Input() reset = true;
 
-  @Output() activitySelected = new EventEmitter<Activity>();
+  @Output() activitySelect = new EventEmitter<Activity>();
 
   tasks: GanttTask[] = [];
 
@@ -72,7 +72,7 @@ export class GanttChartComponent implements OnChanges {
   onActivitySelected(task: GanttTask) {
     const activity = this.projectStore.getActivity(task.uid);
 
-    return this.activitySelected.emit(activity);
+    return this.activitySelect.emit(activity);
   }
 
   private loadGanttTasks() {

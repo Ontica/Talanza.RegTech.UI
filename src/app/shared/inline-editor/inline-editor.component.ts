@@ -24,16 +24,16 @@ export class InlineEditorComponent {
 
   @Input() placeholder = '';
 
-  @Output() cancel = new EventEmitter<void>();
+  @Output() inlineEditorCancel = new EventEmitter<void>();
 
-  @Output() insert = new EventEmitter<string>();
+  @Output() inlineEditorInsertText = new EventEmitter<string>();
 
   onCancel() {
-    this.cancel.emit();
+    this.inlineEditorCancel.emit();
   }
 
   onInsert(activityName: string) {
-    this.insert.emit(activityName);
+    this.inlineEditorInsertText.emit(activityName);
   }
 
 }

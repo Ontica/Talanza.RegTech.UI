@@ -10,7 +10,7 @@
   <option value="" i18n>( All )</option>
   <option *ngFor="let themeName of themesList" [value]="themeName">{{themeName}}</option>
 </select>
-
-<span i18n>Search:</span>&nbsp;
-<input class="text-box" type="search" style="width:210px" (keyup.enter)="onChangeFilter()" [(ngModel)]="filter.keywords">
+&nbsp;
+<input class="text-box" type="search" style="width:210px"
+       placeholder='Find a procedure ...' (keyup.enter)="onChangeFilter()" [(ngModel)]="filter.keywords">
 <button class="btn" style="width:55px;" (click)="onChangeFilter()" i18n>Search</button>

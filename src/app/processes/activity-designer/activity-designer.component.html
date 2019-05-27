@@ -17,8 +17,8 @@
 
     <mat-tab label="Obligation" i18n-label>
       <emp-steps-activity-model-form
-          [activity]="activityTemplate" [readonly]="settings.readonly"
-          (delete)="onDelete()" (update)="onUpdate()">
+          [template]="activityTemplate" [readonly]="settings.readonly"
+          (templateDelete)="onDelete()" (templateChange)="onUpdate()">
       </emp-steps-activity-model-form>
     </mat-tab>
 

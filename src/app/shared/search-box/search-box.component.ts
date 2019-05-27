@@ -15,7 +15,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 })
 export class SearchBoxComponent {
 
-  @Output() search = new EventEmitter<string>();
+  @Output() searchBoxChange = new EventEmitter<string>();
 
   keywords = '';
 
@@ -27,7 +27,7 @@ export class SearchBoxComponent {
 
   onSearch() {
     if (this.keywords) {
-      this.search.emit(this.keywords);
+      this.searchBoxChange.emit(this.keywords);
     }
   }
 

@@ -33,14 +33,20 @@
           </div>
 
           <div class="card-body">
-            <emp-gov-documents-table-view [documentsList]="documentsList" (select)="selectDocument($event)"></emp-gov-documents-table-view>
+            <emp-gov-documents-table-view
+                [documentsList]="documentsList"
+                (documentSelect)="selectDocument($event)">
+            </emp-gov-documents-table-view>
           </div>
       </div>
 
   </div>
 
   <div *ngIf="displayEditor" class="explorer-panel secondary">
-    <emp-gov-document-editor [document]="selectedDocument" (close)=onCloseEditor()></emp-gov-document-editor>
+    <emp-gov-document-editor
+        [document]="selectedDocument"
+        (documentEditorClose)="onCloseEditor()">
+    </emp-gov-document-editor>
   </div>
 
 </div>

@@ -1,6 +1,6 @@
 <div style="margin: 0 22px">
   <emp-kb-file-list [files]="filesList"
-                    (select)="onFileSelected($event)">
+                    (fileSelect)="onFileSelect($event)">
   </emp-kb-file-list>
 </div>
 
@@ -11,7 +11,7 @@
 
 <emp-ng-modal-window *ngIf="displayEditor && selectedMediaFile.uid"
                      [config]="{width:'980px', height:'78%'}"
-                     (close)="hideFileEditor()">
+                     (modalWindowClose)="hideFileEditor()">
   <emp-kb-media-file-viewer [mediaFile]="selectedMediaFile"
                       (mediaFileViewerSave)="uploadFile($event)"
                       (mediaFileViewerClose)="hideFileEditor()">
@@ -20,12 +20,12 @@
 
 <emp-ng-modal-window *ngIf="displayEditor && !selectedMediaFile.uid"
                      [config]="{width:'680px', height:'580px'}"
-                     (close)="hideFileEditor()">
+                     (modalWindowClose)="hideFileEditor()">
     <emp-ng-card title='File uploader'
                  [hint]="projectItem.name"
-                 (close)="hideFileEditor()">
+                 (cardClose)="hideFileEditor()">
       <emp-kb-file-editor [mediaFile]="selectedMediaFile"
-                          (save)="uploadFile($event)">
+                          (saveFile)="uploadFile($event)">
       </emp-kb-file-editor>
     </emp-ng-card>
 </emp-ng-modal-window>

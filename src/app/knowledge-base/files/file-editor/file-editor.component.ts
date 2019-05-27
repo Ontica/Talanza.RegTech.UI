@@ -20,7 +20,7 @@ export class FileEditorComponent implements OnChanges {
 
   @Input() mediaFile: MediaFile;
 
-  @Output() save = new EventEmitter<FileToUpload>();
+  @Output() saveFile = new EventEmitter<FileToUpload>();
 
   fileToUpload: File = null;
 
@@ -55,7 +55,7 @@ export class FileEditorComponent implements OnChanges {
       metadata: this.getMetadata()
     };
 
-    this.save.emit(data);
+    this.saveFile.emit(data);
   }
 
 

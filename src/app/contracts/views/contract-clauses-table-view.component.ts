@@ -20,9 +20,10 @@ import { ContractClauseRef, ContractClause,
 })
 export class ContractClausesTableViewComponent {
 
-  @Output() select = new EventEmitter<ContractClause>();
+  @Output() contractClauseSelect = new EventEmitter<ContractClause>();
 
   @Input() clauses: ContractClauseRef[] = [];
+
   selectedClause = EmptyContractClause();
 
   constructor(private contractService: ContractsService) { }
@@ -37,7 +38,7 @@ export class ContractClausesTableViewComponent {
   private loadClause(): void {
     this.contractService.getClause(this.selectedClause.contractUID, this.selectedClause.uid)
       .toPromise()
-      .then(x => this.select.emit(x));
+      .then(x => this.contractClauseSelect.emit(x));
   }
 
 }

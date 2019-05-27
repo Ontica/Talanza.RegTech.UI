@@ -26,8 +26,8 @@ export class ActivityDesignerComponent implements OnChanges {
 
   procedure: Observable<Procedure> = null;
 
-  @Output() close = new EventEmitter();
-  @Output() update = new EventEmitter<ActivityTemplate>();
+  @Output() activityDesignerClose = new EventEmitter();
+  @Output() activityTemplateChange = new EventEmitter<ActivityTemplate>();
 
   @Input() activityTemplate = EmptyActivityTemplate;
   @Input() settings = new CardSettings();
@@ -49,7 +49,7 @@ export class ActivityDesignerComponent implements OnChanges {
 
 
   onClose() {
-    this.close.emit();
+    this.activityDesignerClose.emit();
   }
 
 
@@ -59,7 +59,7 @@ export class ActivityDesignerComponent implements OnChanges {
 
 
   onUpdate() {
-    this.update.emit(this.activityTemplate);
+    this.activityTemplateChange.emit(this.activityTemplate);
   }
 
 

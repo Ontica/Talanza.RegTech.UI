@@ -34,7 +34,7 @@ export class NavigationMenuComponent {
   private _items: MenuItem[];
 
 
-  @Output() click = new EventEmitter<MenuItem>();
+  @Output() navMenuItemClick = new EventEmitter<MenuItem>();
 
 
   onClick(menuItem: MenuItem) {
@@ -43,7 +43,7 @@ export class NavigationMenuComponent {
     }
     this.select(menuItem);
 
-    this.click.emit(menuItem);
+    this.navMenuItemClick.emit(menuItem);
   }
 
 

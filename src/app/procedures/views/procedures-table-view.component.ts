@@ -22,12 +22,12 @@ export class ProceduresTableViewComponent {
 
   @Input() procedures: BaseProcedure[] = [];
 
-  @Output() select = new EventEmitter<string>();
+  @Output() procedureSelect = new EventEmitter<string>();
 
 
   selectProcedure(procedureUID: string): void {
     this.selectedProcedureUID = procedureUID;
-    this.select.emit(procedureUID);
+    this.procedureSelect.emit(procedureUID);
   }
 
 }

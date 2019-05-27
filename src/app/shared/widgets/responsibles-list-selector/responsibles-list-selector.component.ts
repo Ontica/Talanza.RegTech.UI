@@ -30,7 +30,7 @@ export class ResponsiblesListSelectorComponent {
     }
   }
 
-  @Output() change = new EventEmitter<Contact[]>();
+  @Output() selectedResponsiblesChange = new EventEmitter<Contact[]>();
 
 
   onSelected(value: string) {
@@ -40,7 +40,7 @@ export class ResponsiblesListSelectorComponent {
     if (value === 'all') {
       this.selectedOptions = ['all'];
 
-      this.change.emit([]);
+      this.selectedResponsiblesChange.emit([]);
 
       return;
     }
@@ -49,7 +49,7 @@ export class ResponsiblesListSelectorComponent {
 
     const array = this.selectedOptions.map(x => this.responsibles.find(y => y.uid === x));
 
-    this.change.emit(array);
+    this.selectedResponsiblesChange.emit(array);
   }
 
 }

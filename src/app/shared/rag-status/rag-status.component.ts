@@ -27,7 +27,7 @@ export enum RagStatus {
 })
 export class RagStatusComponent {
 
-  @Output() change = new EventEmitter<RagStatus>();
+  @Output() statusChange = new EventEmitter<RagStatus>();
 
   @Input()
   get status(): RagStatus { return this._status; }
@@ -46,7 +46,7 @@ export class RagStatusComponent {
   onclick() {
     const nextColor = this.getNextColor();
 
-    this.change.emit(nextColor);
+    this.statusChange.emit(nextColor);
   }
 
 

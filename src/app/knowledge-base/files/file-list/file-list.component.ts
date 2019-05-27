@@ -19,7 +19,7 @@ export class FileListComponent {
 
   @Input() files: MediaFile[] = [];
 
-  @Output() select = new EventEmitter<MediaFile>();
+  @Output() fileSelect = new EventEmitter<MediaFile>();
 
   selectedFile: MediaFile;
 
@@ -31,7 +31,7 @@ export class FileListComponent {
 
   onSelect(file: MediaFile) {
     this.selectedFile = file;
-    this.select.emit(file);
+    this.fileSelect.emit(file);
   }
 
 }

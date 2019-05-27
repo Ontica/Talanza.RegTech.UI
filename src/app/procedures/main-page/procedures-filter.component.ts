@@ -25,7 +25,7 @@ export class ProcedureFilterComponent implements OnInit {
   entities: Entity[] = [];
   themesList: string[] = [];
 
-  @Output() change = new EventEmitter<BaseProcedure[]>();
+  @Output() procedureFilterChange = new EventEmitter<BaseProcedure[]>();
 
 
   constructor(private procedureService: ProcedureService,
@@ -41,13 +41,13 @@ export class ProcedureFilterComponent implements OnInit {
 
   onChangeFilter() {
     this.procedureService.getProceduresList(this.filter)
-                         .then(x => this.change.emit(x));
+                         .then(x => this.procedureFilterChange.emit(x));
   }
 
 
   onCleanCombos() {
     this.filter.clean();
-    this.change.emit([]);
+    this.procedureFilterChange.emit([]);
   }
 
 

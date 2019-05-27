@@ -20,8 +20,8 @@
           style="margin-left:68pt">
           <emp-ng-inline-editor
             placeholder='Activity or obligation name'
-            (insert)="insertActivity($event)"
-            (cancel)="hideInlineEditors()">
+            (inlineEditorInsertText)="insertActivity($event)"
+            (inlineEditorCancel)="hideInlineEditors()">
           </emp-ng-inline-editor>
     </div>
 
@@ -72,8 +72,8 @@
               [style.margin-left.pt]="activity.level * 14 + 54">
           <emp-ng-inline-editor
               placeholder='Activity or obligation name'
-              (insert)="insertActivity($event, activity.position)"
-              (cancel)="hideInlineEditors()">
+              (inlineEditorInsertText)="insertActivity($event, activity.position)"
+              (inlineEditorCancel)="hideInlineEditors()">
           </emp-ng-inline-editor>
         </div>
 

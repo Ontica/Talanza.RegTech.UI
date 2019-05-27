@@ -32,8 +32,8 @@ export class ProcessTreeDesignerComponent implements OnChanges {
 
   @Input() project: ProjectModel;
 
-  @Output() activitySelected = new EventEmitter<Activity>();
-  @Output() edited = new EventEmitter<ActivityOperation>();
+  @Output() activityChange = new EventEmitter<ActivityOperation>();
+  @Output() activitySelect = new EventEmitter<Activity>();
 
   constructor(private dialog: MatDialog) { }
 
@@ -174,7 +174,7 @@ export class ProcessTreeDesignerComponent implements OnChanges {
       position: position ? position + 1 : 1
     };
 
-    this.edited.emit({ operation: 'insertActivity',
+    this.activityChange.emit({ operation: 'insertActivity',
                        activity: newActivity
                      });
   }
@@ -195,7 +195,7 @@ export class ProcessTreeDesignerComponent implements OnChanges {
     this.selectedActivity = activity;
 
     if (emitEvent) {
-      this.activitySelected.emit(activity);
+      this.activitySelect.emit(activity);
     }
   }
 
@@ -214,7 +214,7 @@ export class ProcessTreeDesignerComponent implements OnChanges {
     dialogRef.afterClosed().subscribe(
         result => {
         if (result) {
-          this.edited.emit(result as ActivityOperation);
+          this.activityChange.emit(result as ActivityOperation);
         }
       }
     );
@@ -237,7 +237,7 @@ export class ProcessTreeDesignerComponent implements OnChanges {
 
 
   private changeActivityParent(activity: Activity, newParent: Activity) {
-    this.edited.emit({ operation: 'changeParent',
+    this.activityChange.emit({ operation: 'changeParent',
                        activity: activity,
                        newParent: newParent
                      });
@@ -245,7 +245,7 @@ export class ProcessTreeDesignerComponent implements OnChanges {
 
 
   private moveActivity(activity: Activity, newPosition: number) {
-    this.edited.emit({ operation: 'moveActivity',
+    this.activityChange.emit({ operation: 'moveActivity',
                        activity: activity,
                        newPosition: newPosition
                      });

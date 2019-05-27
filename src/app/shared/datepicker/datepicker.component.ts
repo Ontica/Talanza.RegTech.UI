@@ -23,7 +23,7 @@ import { isMoment } from 'moment';
 })
 export class DatepickerComponent implements ControlValueAccessor {
 
-  @Output() change = new EventEmitter<DateString>();
+  @Output() datepickerChange = new EventEmitter<DateString>();
 
   @Input()
   get value(): DateString { return this.date; }
@@ -122,7 +122,7 @@ export class DatepickerComponent implements ControlValueAccessor {
 
     const emittedValue = DateStringLibrary.datePart(this.date);
 
-    this.change.emit(emittedValue);
+    this.datepickerChange.emit(emittedValue);
     this.propagateChange(emittedValue);
   }
 

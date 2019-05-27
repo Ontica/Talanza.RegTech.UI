@@ -45,7 +45,7 @@ export class ActivityFilesComponent implements OnChanges {
   }
 
 
-  onFileSelected(file: MediaFile = EmptyMediaFile) {
+  onFileSelect(file: MediaFile = EmptyMediaFile) {
     this.selectedMediaFile = file;
     this.showFileEditor();
   }

@@ -58,7 +58,7 @@ export class GlobalSearchMainPageComponent {
     return this._keywords;
   }
 
-  @Output() close = new EventEmitter();
+  @Output() globalSearchClose = new EventEmitter();
 
   constructor(private route: ActivatedRoute,
     private app: SharedService,
@@ -83,7 +83,7 @@ export class GlobalSearchMainPageComponent {
 
 
   closeGlobalSearch(): void {
-    this.close.emit();
+    this.globalSearchClose.emit();
   }
 
 

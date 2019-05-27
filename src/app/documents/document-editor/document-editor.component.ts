@@ -18,11 +18,11 @@ export class DocumentEditorComponent {
 
   @Input() document: Document;
 
-  @Output() close = new EventEmitter();
+  @Output() documentEditorClose = new EventEmitter();
 
 
   onClose() {
-    this.close.emit();
+    this.documentEditorClose.emit();
   }
 
 }

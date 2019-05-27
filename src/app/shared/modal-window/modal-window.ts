@@ -27,16 +27,16 @@ export class ModalWindowComponent {
   };
 
 
-  @Output() close = new EventEmitter();
+  @Output() modalWindowClose = new EventEmitter();
 
   onClose() {
-    this.close.emit();
+    this.modalWindowClose.emit();
   }
 
 
   onClickOverlay() {
     if (!this.config.disableClose) {
-      this.close.emit();
+      this.modalWindowClose.emit();
     }
   }
 

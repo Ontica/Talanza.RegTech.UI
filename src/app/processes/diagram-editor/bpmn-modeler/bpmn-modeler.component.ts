@@ -31,9 +31,9 @@ export class BpmnModelerComponent implements AfterContentInit, OnDestroy, OnChan
 
   @Input() execute: Action;
 
-  @Output() event = new EventEmitter<EventData>();
+  @Output() bpmnModelerEvent = new EventEmitter<EventData>();
 
-  @Output() error = new EventEmitter<any>();
+  @Output() bpmnModelerError = new EventEmitter<any>();
 
   @ViewChild('ref') private el: ElementRef;
 
@@ -102,7 +102,7 @@ export class BpmnModelerComponent implements AfterContentInit, OnDestroy, OnChan
       if (!err) {
         this.modeler.get('canvas').zoom('fit-viewport');
       } else {
-        this.error.emit(err);
+        this.bpmnModelerError.emit(err);
       }
     });
   }
@@ -113,10 +113,10 @@ export class BpmnModelerComponent implements AfterContentInit, OnDestroy, OnChan
       if (!err) {
         const eventData = createEventData('save', { xml: xml });
 
-        this.event.emit(eventData);
+        this.bpmnModelerEvent.emit(eventData);
 
       } else {
-        this.error.emit(err);
+        this.bpmnModelerError.emit(err);
       }
     });
   }

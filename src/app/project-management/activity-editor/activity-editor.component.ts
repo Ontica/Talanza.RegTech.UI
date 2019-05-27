@@ -19,8 +19,8 @@ import { CardSettings } from '@app/models/user-interface';
 })
 export class ActivityEditorComponent implements OnChanges {
 
-  @Output() close = new EventEmitter();
-  @Output() update = new EventEmitter<Activity>();
+  @Output() activityEditorClose = new EventEmitter();
+  @Output() activityChange = new EventEmitter<Activity>();
 
   @Input() activity: Activity = EmptyActivity;
 
@@ -37,12 +37,12 @@ export class ActivityEditorComponent implements OnChanges {
 
 
   onClose() {
-    this.close.emit();
+    this.activityEditorClose.emit();
   }
 
 
   onUpdateActivity() {
-    this.update.emit(this.activity);
+    this.activityChange.emit(this.activity);
   }
 
 }

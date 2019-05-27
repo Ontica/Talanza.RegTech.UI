@@ -21,14 +21,14 @@
           </div>
 
           <div class="card-body">
-            <emp-kb-faq-list [FAQs]="documentsList" (select)="selectDocument($event)"></emp-kb-faq-list>
+            <emp-kb-faq-list [FAQs]="documentsList" (faqSelect)="selectDocument($event)"></emp-kb-faq-list>
           </div>
       </div>
 
   </div>
 
   <div *ngIf="displayEditor" class="explorer-panel secondary">
-    <emp-kb-item-editor [document]="selectedDocument" (close)="onCloseEditor()"></emp-kb-item-editor>
+    <emp-kb-item-editor [document]="selectedDocument" (kbItemEditorClose)="onCloseEditor()"></emp-kb-item-editor>
   </div>
 
 </div>

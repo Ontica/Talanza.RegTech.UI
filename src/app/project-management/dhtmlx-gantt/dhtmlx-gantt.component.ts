@@ -60,7 +60,7 @@ export class DhtmlxGanttComponent implements OnInit, OnDestroy {
      this.resetGantt();
   }
 
-  @Output() activitySelected = new EventEmitter<GanttTask>();
+  @Output() activitySelect = new EventEmitter<GanttTask>();
 
   @ViewChild('gantt') ganttContainer: ElementRef;
 
@@ -105,7 +105,7 @@ export class DhtmlxGanttComponent implements OnInit, OnDestroy {
 
 
       if (this.selectedTask && this.selectedTask.uid) {
-        return this.activitySelected.emit(this.selectedTask);
+        return this.activitySelect.emit(this.selectedTask);
       } else {
         console.log('Undefined this.selectedTask.id:', id, this.tasks);
       }

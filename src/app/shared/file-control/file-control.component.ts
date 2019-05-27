@@ -14,7 +14,7 @@ import { Component, Output, EventEmitter } from '@angular/core';
 })
 export class FileControlComponent {
 
-  @Output() selected = new EventEmitter<File | null>();
+  @Output() fileControlChange = new EventEmitter<File | null>();
 
   fileToUpload: File | null = null;
 
@@ -28,13 +28,13 @@ export class FileControlComponent {
 
     this.fileToUpload = file;
 
-    this.selected.emit(file);
+    this.fileControlChange.emit(file);
   }
 
 
   removeFile() {
     this.fileToUpload = null;
-    this.selected.emit(null);
+    this.fileControlChange.emit(null);
   }
 
 

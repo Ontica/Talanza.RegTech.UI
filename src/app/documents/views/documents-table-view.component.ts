@@ -21,12 +21,12 @@ export class DocumentsTableViewComponent {
 
   @Input() documentsList: Document[] = [];
 
-  @Output() select = new EventEmitter<Document>();
+  @Output() documentSelect = new EventEmitter<Document>();
 
 
   setSelectedDocument(document: Document): void {
     this.selectedDocumentUID = document.uid;
-    this.select.emit(document);
+    this.documentSelect.emit(document);
   }
 
 }

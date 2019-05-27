@@ -18,8 +18,8 @@
     <emp-steps-bpmn-modeler
         [xml]="xml"
         [execute]="modelerAction"
-        (event)="onModelerEvent($event)"
-        (error)="onModelerError($event)">
+        (bpmnModelerEvent)="onModelerEvent($event)"
+        (bpmnModelerError)="onModelerError($event)">
     </emp-steps-bpmn-modeler>
 
   </div>

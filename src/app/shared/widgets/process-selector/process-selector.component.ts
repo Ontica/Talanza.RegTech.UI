@@ -21,11 +21,11 @@ export class ProcessSelectorComponent {
 
   @Input() selected: ProjectTemplate;
 
-  @Output() change = new EventEmitter<ProjectTemplate>();
+  @Output() selectedProcessChange = new EventEmitter<ProjectTemplate>();
 
 
   onSelect(process: ProjectTemplate) {
-    this.change.emit(process);
+    this.selectedProcessChange.emit(process);
   }
 
 

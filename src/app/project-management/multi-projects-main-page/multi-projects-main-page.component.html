@@ -7,7 +7,7 @@
       <emp-steps-activity-timeline
           groupBy='timeline'
           [activities]="allActivities | applyFilter: filter"
-          (activitySelected)="showEditor($event)">
+          (activitySelect)="showEditor($event)">
       </emp-steps-activity-timeline>
     </ng-container>
 
@@ -20,8 +20,8 @@
   <div *ngIf="displayEditor" class="explorer-panel secondary">
     <emp-steps-activity-editor
          [activity]="selectedActivity"
-         (update)="onActivityUpdated($event)"
-         (close)="onEditorClosed()">
+         (activityChange)="onActivityUpdated($event)"
+         (activityEditorClose)="onEditorClosed()">
     </emp-steps-activity-editor>
   </div>
 

@@ -21,14 +21,14 @@ export class ProjectSelectorComponent {
 
   @Input() selected: Project = EmptyProject;
 
-  @Output() change = new EventEmitter<Project>();
+  @Output() selectedProjectChange = new EventEmitter<Project>();
 
 
   onSelectProject(projectUID: string) {
     const project = this.projects.find(x => x.uid === projectUID);
 
     if (project) {
-      this.change.emit(project);
+      this.selectedProjectChange.emit(project);
     }
   }
 

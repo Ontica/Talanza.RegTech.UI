@@ -16,9 +16,11 @@
   <mat-tab-group color="accent">
 
     <mat-tab label="Activity" i18n-label>
-      <emp-steps-activity-form [activity]="activity"
-                              (delete)="onClose()"
-                              (update)="onUpdateActivity()"></emp-steps-activity-form>
+      <emp-steps-activity-form
+        [activity]="activity"
+        (activityChange)="onUpdateActivity()"
+        (activityDelete)="onClose()">
+      </emp-steps-activity-form>
     </mat-tab>
 
     <mat-tab label="Subtasks" i18n-label>
@@ -35,8 +37,10 @@
 
     <mat-tab label="Regulation" [disabled]="!activity.template" i18n-label>
       <div class="expand-no-scroll">
-        <emp-steps-activity-designer [activityTemplate]="activity.template"
-                                     [settings]="childrenSettings"></emp-steps-activity-designer>
+        <emp-steps-activity-designer
+           [activityTemplate]="activity.template"
+           [settings]="childrenSettings">
+        </emp-steps-activity-designer>
       </div>
     </mat-tab>
 

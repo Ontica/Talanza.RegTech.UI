@@ -1,4 +1,12 @@
+/**
+ * @license
+ * Copyright (c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
+ *
+ * See LICENSE.txt in the project root for complete license information.
+ */
+
 import { Component, Input, Output, EventEmitter } from '@angular/core';
+
 
 @Component({
   selector: 'emp-ng-card',
@@ -13,11 +21,11 @@ export class CardComponent {
 
   @Input() disableClose = false;
 
-  @Output() close = new EventEmitter<void>();
+  @Output() cardClose = new EventEmitter<void>();
 
 
   onClose() {
-    this.close.emit();
+    this.cardClose.emit();
   }
 
 }

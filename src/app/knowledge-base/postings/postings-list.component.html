@@ -13,5 +13,5 @@
     <button mat-stroked-button (click)="setEditor(true)" i18n>We have a question</button>
   </div>
   <emp-kb-postings-editor *ngIf="showEditor()"
-       [target]="target" (edit)="onCreate($event)"></emp-kb-postings-editor>
+       [target]="target" (postingChange)="onCreate($event)"></emp-kb-postings-editor>
 </div>

@@ -2,16 +2,16 @@
   <span i18n>Search results for: </span>"{{keywords}}" <i class="fa fa-times-circle close-global-search-icon" (click)="closeGlobalSearch()"></i>
 </div>
 <div class="nav-bar">
-  <emp-kb-search-results-navbar [options]="navBarConfig" (select)="selectOption($event)"></emp-kb-search-results-navbar>
+  <emp-kb-search-results-navbar [options]="navBarConfig" (navBarItemSelect)="selectOption($event)"></emp-kb-search-results-navbar>
 </div>
 <div class="gs-container">
 
   <div [class]="masterContainer">
     <div [ngSwitch]="selectedOption">
-      <emp-gov-procedures-table-view *ngSwitchCase="'procedures'" [procedures]="procedures" (select)="selectProcedure($event)"></emp-gov-procedures-table-view>
-      <emp-gov-contract-clauses-table *ngSwitchCase="'contracts'" [clauses]="clauses" (select)="setSelectedClause($event)"></emp-gov-contract-clauses-table>
-      <emp-gov-documents-table-view *ngSwitchCase="'documents'" [documentsList]="documents" (select)="setSelectedDocument($event)"></emp-gov-documents-table-view>
-      <emp-kb-faq-list *ngSwitchCase="'FAQs'" [FAQs]="FAQs" (select)="setSelectedFAQ($event)"></emp-kb-faq-list>
+      <emp-gov-procedures-table-view *ngSwitchCase="'procedures'" [procedures]="procedures" (procedureSelect)="selectProcedure($event)"></emp-gov-procedures-table-view>
+      <emp-gov-contract-clauses-table *ngSwitchCase="'contracts'" [clauses]="clauses" (contractClauseSelect)="setSelectedClause($event)"></emp-gov-contract-clauses-table>
+      <emp-gov-documents-table-view *ngSwitchCase="'documents'" [documentsList]="documents" (documentSelect)="setSelectedDocument($event)"></emp-gov-documents-table-view>
+      <emp-kb-faq-list *ngSwitchCase="'FAQs'" [FAQs]="FAQs" (faqSelect)="setSelectedFAQ($event)"></emp-kb-faq-list>
     </div>
 
   </div>

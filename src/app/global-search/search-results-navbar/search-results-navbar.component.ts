@@ -16,13 +16,13 @@ export class SearchResultsNavBarComponent {
 
   @Input() options: NavBarConfig[] = [];
 
-  @Output() select = new EventEmitter<string>();
+  @Output() navBarItemSelect = new EventEmitter<string>();
 
   selectedOption = '';
 
   onSelect(option: string): void {
     this.selectedOption = option;
-    this.select.emit(this.selectedOption);
+    this.navBarItemSelect.emit(this.selectedOption);
   }
 
 }

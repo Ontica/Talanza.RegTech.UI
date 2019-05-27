@@ -19,11 +19,11 @@ export class KBItemEditorComponent {
 
   @Input() document: Posting;
 
-  @Output() close = new EventEmitter();
+  @Output() kbItemEditorClose = new EventEmitter();
 
 
   onClose() {
-    this.close.emit();
+    this.kbItemEditorClose.emit();
   }
 
 }

@@ -30,7 +30,7 @@ export class ActivityTimelineComponent implements OnChanges {
 
   @Input() title = '';
 
-  @Output() activitySelected = new EventEmitter<Activity>();
+  @Output() activitySelect = new EventEmitter<Activity>();
 
   selectedActivity: Activity = EmptyActivity;
 
@@ -136,7 +136,7 @@ export class ActivityTimelineComponent implements OnChanges {
     this.selectedActivity = activity;
 
     if (emitEvent) {
-      this.activitySelected.emit(activity);
+      this.activitySelect.emit(activity);
     }
   }
 

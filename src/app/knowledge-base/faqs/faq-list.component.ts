@@ -19,13 +19,13 @@ export class FaqListComponent {
 
   @Input() FAQs: Posting[] = [];
 
-  @Output() select = new EventEmitter<Posting>();
+  @Output() faqSelect = new EventEmitter<Posting>();
 
   selectedFAQ: Posting;
 
   selectFAQ(faq: Posting): void {
     this.selectedFAQ = faq;
-    this.select.emit(faq);
+    this.faqSelect.emit(faq);
   }
 
 }

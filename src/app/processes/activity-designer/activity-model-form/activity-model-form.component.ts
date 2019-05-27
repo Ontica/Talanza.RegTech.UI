@@ -41,10 +41,10 @@ const ALL_ENTITIES = -1;
 })
 export class ActivityModelFormComponent extends AbstractForm implements OnInit, OnChanges, OnDestroy {
 
-  @Output() delete = new EventEmitter();
-  @Output() update = new EventEmitter<ActivityTemplate>();
+  @Output() templateDelete = new EventEmitter();
+  @Output() templateChange = new EventEmitter<ActivityTemplate>();
 
-  @Input() activity = EmptyActivityTemplate;
+  @Input() template = EmptyActivityTemplate;
   @Input() readonly = false;
 
   form: FormGroup;
@@ -78,11 +78,11 @@ export class ActivityModelFormComponent extends AbstractForm implements OnInit, 
 
 
   ngOnChanges() {
-    if (!this.activity) {
-      this.activity = EmptyActivityTemplate;
+    if (!this.template) {
+      this.template = EmptyActivityTemplate;
     }
     this.onReset();
-    this.selectedEntityIdSubject.next(this.activity.entity);
+    this.selectedEntityIdSubject.next(this.template.entity);
   }
 
 
@@ -102,7 +102,7 @@ export class ActivityModelFormComponent extends AbstractForm implements OnInit, 
 
   onDelete() {
     const msg = `This operation will delete the activity or obligation design ` +
-                `<strong>${this.activity.name}</strong> from this regulatory process.<br/><br/>` +
+                `<strong>${this.template.name}</strong> from this regulatory process.<br/><br/>` +
                 `Do you want to delete this activity from the current process?`;
 
     this.messageService.confirm(msg, 'Delete activity design',
@@ -207,8 +207,8 @@ export class ActivityModelFormComponent extends AbstractForm implements OnInit, 
   // private methods
 
   private deleteActivity(): Promise<void> {
-    return this.templateStore.delete(this.activity)
-               .then(() => this.delete.emit())
+    return this.templateStore.delete(this.template)
+               .then(() => this.templateDelete.emit())
                .catch(err => this.messageService.showError(err).toPromise());
   }
 
@@ -250,28 +250,28 @@ export class ActivityModelFormComponent extends AbstractForm implements OnInit, 
 
   private rebuildForm() {
     this.form.reset({
-      name: this.activity.name,
-      notes: this.activity.notes,
-      theme: this.activity.theme,
+      name: this.template.name,
+      notes: this.template.notes,
+      theme: this.template.theme,
 
-      activityType: this.activity.activityType,
-      executionMode: this.activity.executionMode,
-      isMandatory: this.activity.isMandatory ? 'true' : 'false',
-      isController: this.activity.isController ? 'true' : 'false',
+      activityType: this.template.activityType,
+      executionMode: this.template.executionMode,
+      isMandatory: this.template.isMandatory ? 'true' : 'false',
+      isController: this.template.isController ? 'true' : 'false',
 
-      dueOnTerm: this.activity.dueOnTerm,
-      dueOnTermUnit: this.activity.dueOnTermUnit,
-      dueOnCondition: this.activity.dueOnCondition,
-      dueOnController: this.activity.dueOnController,
+      dueOnTerm: this.template.dueOnTerm,
+      dueOnTermUnit: this.template.dueOnTermUnit,
+      dueOnCondition: this.template.dueOnCondition,
+      dueOnController: this.template.dueOnController,
 
-      duration: this.activity.duration,
-      durationUnit: this.activity.durationUnit,
-      periodicity: this.activity.periodicity,
+      duration: this.template.duration,
+      durationUnit: this.template.durationUnit,
+      periodicity: this.template.periodicity,
 
-      entity: this.activity.entity,
-      procedure: this.activity.procedure,
-      contractClause: this.activity.contractClause,
-      legalBasis: this.activity.legalBasis,
+      entity: this.template.entity,
+      procedure: this.template.procedure,
+      contractClause: this.template.contractClause,
+      legalBasis: this.template.legalBasis,
     });
 
     this.cleanExceptions();
@@ -281,7 +281,7 @@ export class ActivityModelFormComponent extends AbstractForm implements OnInit, 
   private updateActivity(): Promise<void> {
     const updateData = this.getUpdateData();
 
-    return this.templateStore.update(this.activity, updateData)
+    return this.templateStore.update(this.template, updateData)
                .then(() => this.onReset())
                .catch(err => this.messageService.showError(err).toPromise());
   }
@@ -319,7 +319,7 @@ export class ActivityModelFormComponent extends AbstractForm implements OnInit, 
   private loadDueOnControllers() {
     this.dueOnControllers =
       this.templateStore.activities().filter((x) => x.isController &&
-                                                    x.uid !== this.activity.uid);
+                                                    x.uid !== this.template.uid);
   }
 
 }
