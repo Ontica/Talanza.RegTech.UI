@@ -22,10 +22,6 @@ import { ProcessTreeDesignerComponent } from './tree-designer/tree-designer.comp
 
 import { ProcessDiagramEditorComponent } from './diagram-editor/diagram-editor.component';
 
-import { ProcessActivityAssociationComponent } from './former-editor/process-activity-association.component';
-import { ProcessEditorComponent } from './former-editor/process-editor.component';
-import { SaveProcessDialogComponent } from './former-editor/save-process-dialog.component';
-
 import { ActivityDesignerComponent } from './activity-designer/activity-designer.component';
 
 import { MoveActivityDialogComponent } from './move-activity-dialog/move-activity-dialog.component';
@@ -63,9 +59,6 @@ import { BpmnModelerComponent } from './diagram-editor/bpmn-modeler/bpmn-modeler
     MoveActivityDialogComponent,
     ProcessesMainPageComponent,
     ProcessTreeDesignerComponent,
-    ProcessActivityAssociationComponent,
-    ProcessEditorComponent,
-    SaveProcessDialogComponent,
     ProcessDiagramEditorComponent,
     BpmnModelerComponent,
   ],
