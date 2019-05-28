@@ -9,6 +9,8 @@ export { KeyValue, KeyValue_Empty } from '@app/core/data-types/key-value';
 
 export { DateString, DateStringLibrary } from './date-string-library';
 
+export { StringLibrary } from './string-library';
+
 export * from './core-types';
 
 export * from './contact';
