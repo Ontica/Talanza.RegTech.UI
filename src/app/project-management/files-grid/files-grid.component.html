@@ -4,14 +4,14 @@
 
     <div class="card-title">
       All contract files
-      <div class="card-hint">{{filteredFiles.length}} files found</div>
+      <div class="card-hint">{{files.length}} files found</div>
     </div>
 
     <div class="card-header-options">
       <input class="text-box" type="search" style="width:210px"
-             placeholder='Find a file ...' (keyup.enter)="onSearch()" [(ngModel)]="filter">
+             placeholder='Find a file ...' (keyup.enter)="onFilterChange()" [(ngModel)]="filter">
       <button type="button" class="btn"
-              (click)="onSearch()" i18n>Search</button>
+              (click)="onFilterChange()" i18n>Search</button>
     </div>
 
   </div>
@@ -20,7 +20,7 @@
 
     <mat-grid-list [cols]="gridColumns" rowHeight="300px" gutterSize="16px">
 
-      <mat-grid-tile *ngFor="let file of filteredFiles">
+      <mat-grid-tile *ngFor="let file of files">
 
         <div class="tile" [class.selected-tile]="isSelected(file)"
               matRipple [matRippleTrigger]="trigger">

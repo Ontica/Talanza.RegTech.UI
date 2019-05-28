@@ -19,6 +19,7 @@ export interface ProjectItemFilter {
   selectedProject: Project;
   responsibles: Contact[];
   themes: string[];
+  keywords: string;
 }
 
 
@@ -27,4 +28,5 @@ export const EmptyProjectItemFilter: ProjectItemFilter = {
   selectedProject: EmptyProject,
   responsibles: [],
   themes: [],
+  keywords: ''
 };

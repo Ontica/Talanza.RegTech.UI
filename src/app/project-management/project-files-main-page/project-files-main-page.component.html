@@ -4,7 +4,8 @@
   <div class="explorer-panel primary">
     <emp-steps-files-grid
         [files]="(files | async) | applyFilesFilter: filter"
-        (fileSelect)="showEditor($event)">
+        (fileSelect)="showEditor($event)"
+        (fileFilterChange)="applyKeywordsFilter($event)">
     </emp-steps-files-grid>
   </div>
 

@@ -5,9 +5,8 @@
  * See LICENSE.txt in the project root for complete license information.
  */
 
-import { Component, EventEmitter, Input, Output,
-         OnInit, ViewChild, ElementRef, OnDestroy,
-         OnChanges, SimpleChanges } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, Output,
+         OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { interval, Subscription } from 'rxjs';
 
 import { ProjectItemFile } from '@app/models/project-management';
@@ -18,11 +17,14 @@ import { ProjectItemFile } from '@app/models/project-management';
   templateUrl: './files-grid.component.html',
   styleUrls: ['./files-grid.component.scss']
 })
-export class FilesGridComponent implements OnInit, OnChanges, OnDestroy {
+export class FilesGridComponent implements OnInit, OnDestroy {
 
   @Input() files: ProjectItemFile[] = [];
 
   @Output() fileSelect = new EventEmitter<ProjectItemFile>();
+
+  @Output() fileFilterChange = new EventEmitter<string>();
+
 
   @ViewChild('gridContainer') container: ElementRef;
 
@@ -31,8 +33,6 @@ export class FilesGridComponent implements OnInit, OnChanges, OnDestroy {
   tileWidth = 270;
 
   selectedFile: ProjectItemFile;
-
-  filteredFiles: ProjectItemFile[] = [];
 
   filter = '';
 
@@ -48,13 +48,6 @@ export class FilesGridComponent implements OnInit, OnChanges, OnDestroy {
   }
 
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes['files']) {
-      this.applyFilters();
-    }
-  }
-
-
   ngOnDestroy(): void {
     if (this.subs) {
       this.subs.unsubscribe();
@@ -67,8 +60,8 @@ export class FilesGridComponent implements OnInit, OnChanges, OnDestroy {
   }
 
 
-  onSearch() {
-    this.applyFilters();
+  onFilterChange() {
+    this.fileFilterChange.emit(this.filter);
   }
 
 
@@ -79,18 +72,6 @@ export class FilesGridComponent implements OnInit, OnChanges, OnDestroy {
 
 
   // private methods
-
-
-  private applyFilters() {
-    if (this.filter === '') {
-      this.filteredFiles = this.files;
-      return;
-    }
-
-    this.filteredFiles = this.files.filter(x => x.projectItem.name.includes(this.filter) ||
-                                                x.mediaFile.name.includes(this.filter));
-
-  }
 
 
   private setGridColumns() {

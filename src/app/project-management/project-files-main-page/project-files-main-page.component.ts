@@ -38,7 +38,7 @@ export class ProjectFilesMainPageComponent implements OnInit, OnDestroy {
 
 
   constructor(private fileStore: FileStore,
-              private uiStore: UserInterfaceStore)  { }
+              private uiStore: UserInterfaceStore) { }
 
 
   ngOnInit() {
@@ -65,6 +65,11 @@ export class ProjectFilesMainPageComponent implements OnInit, OnDestroy {
     if (this.subs2) {
       this.subs2.unsubscribe();
     }
+  }
+
+
+  applyKeywordsFilter(keywords: string) {
+    this.filter = {...this.filter, keywords: keywords };
   }
 
 
