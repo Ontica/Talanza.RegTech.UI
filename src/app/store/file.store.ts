@@ -43,7 +43,10 @@ export class FileStore {
   private loadAllFiles() {
     this.filesService.getAllFiles()
         .subscribe(
-            data => this._files.next(data),
+            data => {
+              data = data.sort((x, y) => x.mediaFile.name.localeCompare(y.mediaFile.name));
+              this._files.next(data);
+            },
             err => console.log('Error reading project data', err)
         );
   }
