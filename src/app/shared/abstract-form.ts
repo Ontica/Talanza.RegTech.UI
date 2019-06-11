@@ -158,9 +158,9 @@ export abstract class AbstractForm {
       return;
     }
 
-    if (event.srcElement.tagName === 'TEXTAREA') {
-      return;
-    }
+    // if (event.srcElement.tagName === 'TEXTAREA') {
+    //   return;
+    // }
 
     event.preventDefault();
     event.stopPropagation();

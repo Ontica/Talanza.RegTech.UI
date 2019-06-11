@@ -26,7 +26,7 @@ export class FilesGridComponent implements OnInit, OnDestroy {
   @Output() fileFilterChange = new EventEmitter<string>();
 
 
-  @ViewChild('gridContainer') container: ElementRef;
+  @ViewChild('gridContainer', { static: true }) container: ElementRef;
 
 
   gridColumns = 6;

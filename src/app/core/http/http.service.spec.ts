@@ -1,5 +1,5 @@
 import { TestBed, inject, async } from '@angular/core/testing';
-import { HttpModule, Http } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 
 import { HttpService } from './http.service';
 import { DirectoryService } from './directory.service';
@@ -8,7 +8,7 @@ import { DirectoryService } from './directory.service';
 
 //   beforeEach(() => {
 //     TestBed.configureTestingModule({
-//       imports: [HttpModule],
+//       imports: [HttpClientModule],
 //       providers: [HttpService, DirectoryService]
 //     });
 //   });

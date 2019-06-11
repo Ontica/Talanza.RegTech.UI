@@ -46,9 +46,6 @@ import { ProjectFilesMainPageComponent } from './project-files-main-page/project
 
 import { ProjectManagementRoutingModule } from './project-management-routing.module';
 
-
-
-
 @NgModule({
 
   imports: [

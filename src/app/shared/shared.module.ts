@@ -18,20 +18,18 @@ import { MainMenuComponent } from './main-layout/main-menu/main-menu.component';
 import { SidebarComponent } from './main-layout/sidebar/sidebar.component';
 
 import { CardComponent } from './card/card.component';
+import { InlineEditorComponent } from './inline-editor/inline-editor.component';
 import { MessageBoxComponent } from './message-box/message-box.component';
 import { ModalWindowComponent } from './modal-window/modal-window';
 import { NavigationHeaderComponent } from './nav-header/nav-header.component';
 import { NavigationMenuComponent } from './nav-menu/nav-menu.component';
 import { NoContentComponent } from './no-content/no-content.component';
 import { ObjectComponent } from './object/object.component';
+import { RagStatusComponent } from './rag-status/rag-status.component';
 import { SafeHtmlPipe } from './pipes/safe-html.pipe';
 import { SafeUrlPipe } from './pipes/safe-url.pipe';
-import { RagStatusComponent } from './rag-status/rag-status.component';
 import { SearchBoxComponent } from './search-box/search-box.component';
 import { SpinnerComponent } from './spinner/spinner.component';
-
-
-import { InlineEditorComponent } from './inline-editor/inline-editor.component';
 
 import { AngularMaterialModule } from './angular-material.module';
 import { WidgetsModule } from './widgets/widgets.module';
@@ -39,7 +37,6 @@ import { WidgetsModule } from './widgets/widgets.module';
 import { MessageBoxService } from './message-box/message.box.service';
 import { SharedService } from './shared.service';
 import { SpinnerService } from './spinner/spinner.service';
-
 
 
 @NgModule({
@@ -62,6 +59,7 @@ import { SpinnerService } from './spinner/spinner.service';
     SidebarComponent,
 
     CardComponent,
+    InlineEditorComponent,
     MessageBoxComponent,
     ModalWindowComponent,
     NavigationHeaderComponent,
@@ -72,14 +70,14 @@ import { SpinnerService } from './spinner/spinner.service';
     SafeHtmlPipe,
     SafeUrlPipe,
     SearchBoxComponent,
-    SpinnerComponent,
-    InlineEditorComponent
+    SpinnerComponent
   ],
 
   exports: [
     CardComponent,
     DatepickerComponent,
     FileControlComponent,
+    InlineEditorComponent,
     MainLayoutComponent,
     MessageBoxComponent,
     ModalWindowComponent,
@@ -90,8 +88,7 @@ import { SpinnerService } from './spinner/spinner.service';
     SafeHtmlPipe,
     SafeUrlPipe,
     SearchBoxComponent,
-    SpinnerComponent,
-    InlineEditorComponent
+    SpinnerComponent
   ],
 
   providers: [

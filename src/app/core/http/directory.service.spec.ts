@@ -1,14 +1,14 @@
 import { TestBed, inject, async } from '@angular/core/testing';
-import { HttpModule, Http } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 
 import { DirectoryService } from './directory.service';
-import { Service, HttpMethod } from './common-types';
+import { HttpMethod } from './common-types';
 
 describe('DirectoryService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpModule],
+      imports: [HttpClientModule],
       providers: [DirectoryService]
     });
   });

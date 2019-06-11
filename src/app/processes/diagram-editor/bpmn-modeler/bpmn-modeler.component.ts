@@ -35,7 +35,7 @@ export class BpmnModelerComponent implements AfterContentInit, OnDestroy, OnChan
 
   @Output() bpmnModelerError = new EventEmitter<any>();
 
-  @ViewChild('ref') private el: ElementRef;
+  @ViewChild('ref', { static: true }) private el: ElementRef;
 
   private modeler: BpmnJS = new BpmnJS();
 

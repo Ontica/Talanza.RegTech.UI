@@ -62,7 +62,7 @@ export class DhtmlxGanttComponent implements OnInit, OnDestroy {
 
   @Output() activitySelect = new EventEmitter<GanttTask>();
 
-  @ViewChild('gantt') ganttContainer: ElementRef;
+  @ViewChild('gantt', { static: true }) ganttContainer: ElementRef;
 
 
   private attachEvent$: any;
