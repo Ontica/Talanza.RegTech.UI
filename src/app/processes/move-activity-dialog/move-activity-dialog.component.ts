@@ -9,7 +9,7 @@ import { Component, Inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { List } from 'immutable';
 
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 import { ProjectTemplateStore } from '@app/store/project-template.store';
 import { Activity, ActivityOperation, Project } from '@app/models/project-management';

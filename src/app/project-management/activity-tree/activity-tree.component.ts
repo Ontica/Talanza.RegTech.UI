@@ -8,7 +8,7 @@
 import { Component, EventEmitter,
          Input, OnChanges, Output } from '@angular/core';
 
-import { MatDialog, MatDialogConfig } from '@angular/material';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { CdkDragDrop } from '@angular/cdk/drag-drop';
 
 import { ProjectModel } from '@app/store/project.store';

@@ -10,7 +10,7 @@ import { Observable, of } from 'rxjs';
 
 import { Exception } from '@app/core';
 
-import { MatDialog, MatDialogConfig } from '@angular/material';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 
 import { MessageBoxComponent } from './message-box.component';
 
