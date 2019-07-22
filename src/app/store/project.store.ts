@@ -37,6 +37,7 @@ export class ProjectStore {
   private _stages: BehaviorSubject<List<Stage>> = new BehaviorSubject(List([]));
 
   private _tags: BehaviorSubject<ColoredTag[]> = new BehaviorSubject([]);
+
   private _themes: BehaviorSubject<string[]> = new BehaviorSubject([]);
 
 

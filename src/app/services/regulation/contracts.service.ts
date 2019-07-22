@@ -73,7 +73,7 @@ export class ContractsService {
   }
 
   addRelatedProcedure(contractUID: string, clauseUID: string,
-                             relatedProcedure: RelatedProcedure): Observable<RelatedProcedure> {
+                      relatedProcedure: RelatedProcedure): Observable<RelatedProcedure> {
     const path = `v1/contracts/${contractUID}/clauses/${clauseUID}/related-procedures`;
 
     return this.core.http.post<RelatedProcedure>(path, relatedProcedure);

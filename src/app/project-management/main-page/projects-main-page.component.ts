@@ -46,7 +46,6 @@ export class ProjectsMainPageComponent implements OnInit, OnDestroy {
 
 
   ngOnInit() {
-
     this.subs1 = this.uiStore.currentView.subscribe(
       x => this.onViewChanged(x)
     );
@@ -153,6 +152,8 @@ export class ProjectsMainPageComponent implements OnInit, OnDestroy {
 
     if (!this.selectedProject) {
       this.uiStore.setMainTitle('Please select a contract');
+    } else {
+      this.uiStore.setMainTitle(this.selectedProject.project.name);
     }
   }
 
