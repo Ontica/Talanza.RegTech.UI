@@ -29,7 +29,8 @@
       <tr>
         <td i18n>Activity type:</td>
         <td>
-          <select class="select-box" style="width:180px" formControlName="activityType">
+          <select class="select-box" style="width:180px" formControlName="activityType"
+                  (change)="setDefaultValuesForSectionActivityType()">
             <option value="" i18n>( Select )</option>
             <option value="Procedure" i18n>Procedure</option>
             <option value="Obligation" i18n>Obligation</option>
@@ -58,7 +59,7 @@
       </tr>
       <tr>
         <td colspan="4" style="width:100%">
-          <span i18n>This activity controls the start or the end date of other obligations or activities? </span>
+          <span i18n>Do this activity controls the start or the end date of other obligations or activities? </span>
           <select class="select-box" style="width:60px" formControlName="isController">
             <option value="">( ? )</option>
             <option value="true" i18n>Yes</option>
@@ -76,7 +77,8 @@
         <td i18n>This activity<br>must be done:<br /></td>
         <td>
           <input type="text" class="text-box" style="width:70px" formControlName="dueOnTerm">
-          <select class="select-box" style="width:130px" formControlName="dueOnTermUnit">
+          <select class="select-box" style="width:130px" formControlName="dueOnTermUnit"
+                  (change)="setDefaultValuesForDueOnTermUnit()">
             <option value="" i18n>( Term unit )</option>
             <option value="BusinessDays" i18n>Business days</option>
             <option value="CalendarDays" i18n>Calendar days</option>
@@ -109,6 +111,17 @@
             <option value="" i18n>( Activity or obligation )</option>
             <option value="-1" i18n>Not apply</option>
             <option *ngFor="let controller of dueOnControllers" [value]="controller.id">{{controller.name}}</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>&nbsp;</td>
+        <td colspan="3" style="width:100%">
+          <span i18n>Do this time rule is fixed for all contracts? (i.e. only changes when regulation changes) </span>
+          <select class="select-box" style="width:92px" formControlName="dueOnRuleAppliesForAllContracts">
+            <option value="true" i18n>Yes</option>
+            <option value="false" i18n>No</option>
+            <option value="" i18n>Not apply</option>
           </select>
         </td>
       </tr>

@@ -126,7 +126,33 @@ export class ActivityModelFormComponent extends AbstractForm implements OnInit, 
   }
 
 
+  setDefaultValuesForDueOnTermUnit() {
+    if (this.form.value.dueOnTermUnit === 'NA') {
+      this.setNotApplyDueOnTermFormControls();
+    } else if (this.form.value.dueOnTermUnit !== 'NA') {
+      this.changeFormValueToIfCurrentValueIs('dueOnCondition', 'NA', '');
+      this.changeFormValueToIfCurrentValueIs('dueOnController', '-1', '');
+      this.changeFormValueToIfCurrentValueIs('durationUnit', 'NA', '');
+    }
+  }
+
+
+  setDefaultValuesForSectionActivityType() {
+    if (this.form.value.activityType === 'Section') {
+      this.set('executionMode', 'Timeline');
+      this.set('isMandatory', false);
+      this.set('dueOnTerm', '');
+      this.set('dueOnTermUnit', 'NA');
+      this.set('dueOnRuleAppliesForAllContracts', '');
+      this.set('entity', '-1');
+      this.set('procedure', '-1');
+      this.setNotApplyDueOnTermFormControls();
+    }
+  }
+
+
   // abstract methods implementation
+
 
   protected createFormGroup(): FormGroup {
     // ToDo fix: this.formBuilder.group ... can't be used because
@@ -158,6 +184,8 @@ export class ActivityModelFormComponent extends AbstractForm implements OnInit, 
 
       dueOnController: new FormControl('', Validators.required),
 
+      dueOnRuleAppliesForAllContracts: new FormControl(''),
+
 
       duration: new FormControl(),
 
@@ -171,7 +199,7 @@ export class ActivityModelFormComponent extends AbstractForm implements OnInit, 
 
       contractClause: new FormControl(),
 
-      legalBasis: new FormControl(),
+      legalBasis: new FormControl()
 
     });
   }
@@ -206,6 +234,12 @@ export class ActivityModelFormComponent extends AbstractForm implements OnInit, 
 
   // private methods
 
+
+  private changeFormValueToIfCurrentValueIs(path: string, currentValue: any, newValue: any) {
+    this.set(path, this.value(path) === currentValue ? newValue : this.value(path));
+  }
+
+
   private deleteActivity(): Promise<void> {
     return this.templateStore.delete(this.template)
                .then(() => this.templateDelete.emit())
@@ -232,6 +266,7 @@ export class ActivityModelFormComponent extends AbstractForm implements OnInit, 
         dueOnTermUnit: formModel.dueOnTermUnit,
         dueOnCondition: formModel.dueOnCondition,
         dueOnController: Number(formModel.dueOnController),
+        dueOnRuleAppliesForAllContracts: formModel.dueOnRuleAppliesForAllContracts,
 
         duration: formModel.duration ? Number(formModel.duration) : '',
         durationUnit: formModel.durationUnit,
@@ -245,6 +280,13 @@ export class ActivityModelFormComponent extends AbstractForm implements OnInit, 
     };
 
     return data;
+  }
+
+
+  private isPositiveInteger(str: string) {
+    const n = Number(str);
+
+    return n !== Infinity && Number.isInteger(n) && n > 0;
   }
 
 
@@ -263,6 +305,7 @@ export class ActivityModelFormComponent extends AbstractForm implements OnInit, 
       dueOnTermUnit: this.template.dueOnTermUnit,
       dueOnCondition: this.template.dueOnCondition,
       dueOnController: this.template.dueOnController,
+      dueOnRuleAppliesForAllContracts: this.template.dueOnRuleAppliesForAllContracts,
 
       duration: this.template.duration,
       durationUnit: this.template.durationUnit,
@@ -278,6 +321,17 @@ export class ActivityModelFormComponent extends AbstractForm implements OnInit, 
   }
 
 
+  private setNotApplyDueOnTermFormControls() {
+    this.set('dueOnCondition', 'NA');
+    this.set('dueOnController', '-1');
+    this.set('dueOnRuleAppliesForAllContracts', '');
+
+    this.set('durationUnit', 'NA');
+    this.set('dueOnTerm', '');
+    this.set('duration', '');
+  }
+
+
   private updateActivity(): Promise<void> {
     const updateData = this.getUpdateData();
 
@@ -286,10 +340,10 @@ export class ActivityModelFormComponent extends AbstractForm implements OnInit, 
                .catch(err => this.messageService.showError(err).toPromise());
   }
 
-  private isPositiveInteger(str: string) {
-    const n = Number(str);
 
-    return n !== Infinity && Number.isInteger(n) && n > 0;
+  private validateFormFields(): void {
+    this.validateIntegerValue('dueOnTerm');
+    this.validateIntegerValue('duration');
   }
 
 
@@ -304,12 +358,6 @@ export class ActivityModelFormComponent extends AbstractForm implements OnInit, 
       this.addException(FormMessages.UnrecognizedValue + 'Value ' + value);
       this.get(path).markAsDirty();
     }
-  }
-
-
-  private validateFormFields(): void {
-    this.validateIntegerValue('dueOnTerm');
-    this.validateIntegerValue('duration');
   }
 
 
