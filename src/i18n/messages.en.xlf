@@ -579,8 +579,8 @@
         </context-group>
       </trans-unit>
       <trans-unit id="754156a2c3a27d47233f22ed666449543117c62f" datatype="html">
-        <source>Not apply</source>
-        <target state="final">Not apply</target>
+        <source>Not applicable</source>
+        <target state="final">Not applicable</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/project-management/activity-editor/activity-form/activity-form.component.html</context>
           <context context-type="linenumber">51</context>
