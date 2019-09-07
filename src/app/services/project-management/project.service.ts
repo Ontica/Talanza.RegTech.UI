@@ -170,13 +170,9 @@ export class ProjectService {
     Assertion.assertValue(activity, 'activity');
     Assertion.assertValue(newParent, 'newParent');
 
-    const path = `v1/project-management/projects/${activity.project.uid}/activities/${activity.uid}`;
+    const path = `v1/project-management/projects/${activity.project.uid}/activities/${activity.uid}/change-parent/${newParent.uid}`;
 
-    const body = {
-      parentUID: newParent.uid
-    };
-
-    return this.core.http.put<Activity>(path, body);
+    return this.core.http.post<Activity>(path);
   }
 
 
@@ -245,13 +241,9 @@ export class ProjectService {
     Assertion.assertValue(activity, 'activity');
     Assertion.assert(newPosition > 0, 'newPosition must be greater than zero.');
 
-    const path = `v1/project-management/projects/${activity.project.uid}/activities/${activity.uid}`;
+    const path = `v1/project-management/projects/${activity.project.uid}/activities/${activity.uid}/change-position/${newPosition}`;
 
-    const body = {
-      position: newPosition
-    };
-
-    return this.core.http.put<Activity>(path, body)
+    return this.core.http.post<Activity>(path)
                          .pipe(
                             catchError((e) => this.core.http.throw(e, Errors.MOVE_ACTIVITY))
                          );

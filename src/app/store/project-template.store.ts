@@ -75,9 +75,9 @@ export class ProjectTemplateStore {
                .toPromise()
                .then(x => {
                   this.updateSelectedTemplate(activityTemplate.project);
-                  Object.assign(activityTemplate, x);
+                  // Object.assign(activityTemplate, x);
 
-                  return activityTemplate;
+                  return x;
                });
   }
 
@@ -87,9 +87,8 @@ export class ProjectTemplateStore {
                .toPromise()
                .then(x => {
                    this.updateSelectedTemplate(activityTemplate.project);
-                   Object.assign(activityTemplate, x);
 
-                   return activityTemplate;
+                   return x;
               });
   }
 
@@ -121,9 +120,9 @@ export class ProjectTemplateStore {
                .toPromise()
                .then(x => {
                   this.updateSelectedTemplate(activityTemplate.project);
-                  Object.assign(activityTemplate, x);
+               //   Object.assign(activityTemplate, x);
 
-                  return activityTemplate;
+                  return x;
                });
   }
 
@@ -133,9 +132,9 @@ export class ProjectTemplateStore {
                .toPromise()
                .then(x => {
                   this.updateSelectedTemplate(activityTemplate.project);
-                  Object.assign(activityTemplate, x);
+                  // Object.assign(activityTemplate, x);
 
-                  return activityTemplate;
+                  return x;
                });
   }
 
@@ -146,9 +145,9 @@ export class ProjectTemplateStore {
                .toPromise()
                .then(x => {
                   this.updateSelectedTemplate(activityTemplate.project);
-                  Object.assign(activityTemplate, x);
+                  // Object.assign(activityTemplate, x);
 
-                  return activityTemplate;
+                  return x;
                });
   }
 

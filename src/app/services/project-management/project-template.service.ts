@@ -48,13 +48,9 @@ export class ProjectTemplateService {
     Assertion.assertValue(activityTemplate, 'activityTemplate');
     Assertion.assertValue(newParent, 'newParent');
 
-    const path = this.getActivityTemplateEndpoint(activityTemplate);
+    const path = this.getActivityTemplateEndpoint(activityTemplate) + `/change-parent/${newParent.uid}`;
 
-    const body = {
-      parentUID: newParent.uid
-    };
-
-    return this.http.put<ActivityTemplate>(path, body);
+    return this.http.post<ActivityTemplate>(path);
   }
 
 
@@ -98,13 +94,9 @@ export class ProjectTemplateService {
     Assertion.assertValue(activityTemplate, 'activityTemplate');
     Assertion.assert(newPosition > 0, 'newPosition must be greater than zero.');
 
-    const path = this.getActivityTemplateEndpoint(activityTemplate);
+    const path = this.getActivityTemplateEndpoint(activityTemplate) + `/change-position/${newPosition}`;
 
-    const body = {
-      position: newPosition
-    };
-
-    return this.http.put<ActivityTemplate>(path, body);
+    return this.http.post<ActivityTemplate>(path);
   }
 
 
