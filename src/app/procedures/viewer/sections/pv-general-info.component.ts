@@ -35,6 +35,38 @@ export class PVGeneralInfoComponent {
   private _procedure: Procedure;
 
 
+  get projectTypes(): string {
+    const types = ['Terrestre', 'Aguas someras', 'Aguas profundas', 'No convencionales'];
+
+    let temp = '';
+
+    for (let i = 0; i < types.length; i++) {
+      // tslint:disable-next-line:no-bitwise
+      if ((this.procedure.projectTypeFlags & (2 ** i)) !== 0) {
+        temp += (temp.length !== 0 ? ', ' : '') + types[i];
+      }
+    }
+
+    return temp;
+  }
+
+
+  get stages(): string {
+    const stages = ['ETA', 'Exploración', 'Evaluación', 'Extracción', 'Transición final'];
+
+    let temp = '';
+
+    for (let i = 0; i < stages.length; i++) {
+      // tslint:disable-next-line:no-bitwise
+      if ((this.procedure.stageFlags & (2 ** i)) !== 0) {
+        temp += (temp.length !== 0 ? ', ' : '') + stages[i];
+      }
+    }
+
+    return temp;
+  }
+
+
   onDisplayGeneralInfo() {
     this.isVisibleGeneralInfo = !this.isVisibleGeneralInfo;
   }

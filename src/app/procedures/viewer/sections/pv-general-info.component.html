@@ -20,12 +20,32 @@
         <td>{{procedure.shortName}}</td>
       </tr>
       <tr>
+        <td class='label' i18n>Other name:</td>
+        <td>{{procedure.govName}}</td>
+      </tr>
+      <tr>
         <td class='label' i18n>Modality:</td>
         <td>{{procedure.modality || 'No aplicable' }}</td>
       </tr>
       <tr>
         <td class='label' i18n>Topic:</td>
         <td>{{procedure.theme}}</td>
+      </tr>
+      <tr>
+        <td class='label' i18n>Subtopic:</td>
+        <td>{{procedure.subtheme}}</td>
+      </tr>
+      <tr>
+        <td class='label' i18n>Tags:</td>
+        <td>{{procedure.tags}}</td>
+      </tr>
+      <tr>
+        <td class='label' i18n>Project type:</td>
+        <td>{{projectTypes}}</td>
+      </tr>
+      <tr>
+        <td class='label' i18n>Stage:</td>
+        <td>{{stages}}</td>
       </tr>
       <tr>
         <td class='label' i18n>Official web page:</td>
@@ -130,6 +150,10 @@
         <td>{{procedure.filingCondition.ficta}}</td>
       </tr>
       <tr>
+        <td class='label' i18n>Ficta notes:</td>
+        <td>{{procedure.filingCondition.fictaNotes}}</td>
+      </tr>
+      <tr>
         <td class='label' i18n>Deferrals term notes:</td>
         <td>
           <div [innerHTML]="procedure.hypertext.deferralsTermNotes | safeHtml "></div>
@@ -181,14 +205,6 @@
       <tr>
         <td class='label' i18n>Authority:</td>
         <td>{{procedure.authorityName}}</td>
-      </tr>
-      <tr>
-        <td class='label' i18n>Title:</td>
-        <td>{{procedure.authorityTitle}}</td>
-      </tr>
-      <tr>
-        <td class='label' i18n>Contact:</td>
-        <td>{{procedure.authorityContact}}</td>
       </tr>
     </tbody>
   </table>

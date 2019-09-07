@@ -19,12 +19,19 @@ export interface BaseProcedure extends Identifiable {
 
 
 export interface Procedure extends BaseProcedure {
+  govName: string;
+  subtheme: string;
+  tags: string;
+
   projectType: string;
+
   executionMode: string;
 
+  projectTypeFlags: number;
+  stageFlags: number;
+
   authorityName: string;
-  authorityTitle: string;
-  authorityContact: string;
+
 
   legalInfo: LegalInfo;
   filingCondition: FilingCondition;
@@ -60,6 +67,7 @@ export interface FilingCondition {
   validityTermWhenIssued: string;
   validityTermUnitWhenIssued: string;
   ficta: string;
+  fictaNotes: string;
 
   hasInnerInteraction: string;
 }
