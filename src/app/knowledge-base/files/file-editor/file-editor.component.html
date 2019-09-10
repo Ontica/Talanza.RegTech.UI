@@ -3,10 +3,10 @@
   <fieldset>
 
     <table class="form-section">
-      <tr>
+      <tr *ngIf="!readonly">
         <td class="form-section-title" colspan="2" i18n>Upload a document</td>
       </tr>
-      <tr>
+      <tr *ngIf="!readonly">
         <td i18n>File:</td>
         <td>
           <emp-ng-file-control (fileControlChange)="handleFileInput($event)"></emp-ng-file-control>
@@ -15,38 +15,45 @@
       <tr>
         <td i18n>Title:</td>
         <td>
-          <input type="text" class="text-box" formControlName="title">
+          <input type="text" class="text-box" formControlName="title" [readonly]="readonly">
         </td>
       </tr>
       <tr>
         <td i18n>Type:</td>
         <td>
-          <input type="text" class="text-box" formControlName="type">
+          <input type="text" class="text-box" formControlName="type" [readonly]="readonly">
         </td>
       </tr>
       <tr>
         <td class="align-top" i18n>Summary:</td>
         <td>
-          <textarea class="text-area" rows="5" cols="25" formControlName="summary"></textarea>
+          <textarea class="text-area" rows="5" cols="25" formControlName="summary" [readonly]="readonly"></textarea>
         </td>
       </tr>
       <tr>
         <td i18n>Tags:</td>
         <td>
-          <input type="text" class="text-box" formControlName="tags">
+          <input type="text" class="text-box" formControlName="tags" [readonly]="readonly">
         </td>
       </tr>
       <tr>
         <td i18n>Authors:</td>
         <td>
-          <input type="text" class="text-box" formControlName="authors">
+          <input type="text" class="text-box" formControlName="authors" [readonly]="readonly">
         </td>
       </tr>
-      <tr>
+      <tr *ngIf="!readonly">
         <td></td>
         <td class="text-align-right">
             <button type="button" class="btn-action right"
             (click)="onUpload()" i18n>Upload</button>
+        </td>
+      </tr>
+      <tr *ngIf="readonly">
+        <td></td>
+        <td class="text-align-right">
+            <button type="button" class="btn-action right"
+            (click)="onDelete()" i18n>Delete</button>
         </td>
       </tr>
     </table>

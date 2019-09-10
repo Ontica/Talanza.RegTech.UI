@@ -6,7 +6,7 @@
  */
 
 import { Component, Input, Output, EventEmitter, OnChanges } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 import { MediaFile, MediaMetadata, FileToUpload } from '@app/models/knowledge-base';
 
@@ -19,14 +19,16 @@ import { MediaFile, MediaMetadata, FileToUpload } from '@app/models/knowledge-ba
 export class FileEditorComponent implements OnChanges {
 
   @Input() mediaFile: MediaFile;
+  @Input() readonly: false;
 
+  @Output() deleteFile = new EventEmitter<void>();
   @Output() saveFile = new EventEmitter<FileToUpload>();
 
   fileToUpload: File = null;
 
   form = new FormGroup( {
     type: new FormControl(''),
-    title: new FormControl(''),
+    title: new FormControl('', Validators.required),
     summary: new FormControl(''),
     authors: new FormControl(''),
     tags: new FormControl(''),
@@ -44,16 +46,26 @@ export class FileEditorComponent implements OnChanges {
   }
 
 
+  onDelete() {
+    this.deleteFile.emit();
+  }
+
+
   onSubmit(): void {
 
   }
 
 
   onUpload() {
+    if (!this.form.valid) {
+      return;
+    }
     const data: FileToUpload = {
       file: this.fileToUpload,
       metadata: this.getMetadata()
     };
+
+    console.log('onupload', data);
 
     this.saveFile.emit(data);
   }

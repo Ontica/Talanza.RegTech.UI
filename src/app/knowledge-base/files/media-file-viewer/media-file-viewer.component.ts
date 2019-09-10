@@ -22,6 +22,8 @@ export class MediaFileViewerComponent implements AfterViewInit {
 
   @Output() mediaFileViewerInit = new EventEmitter<void>();
 
+  @Output() mediaFileViewerDelete = new EventEmitter<void>();
+
   @Output() mediaFileViewerSave = new EventEmitter<FileToUpload>();
 
   @Output() mediaFileViewerClose = new EventEmitter<void>();
@@ -34,6 +36,11 @@ export class MediaFileViewerComponent implements AfterViewInit {
 
   onClose() {
     this.mediaFileViewerClose.emit();
+  }
+
+
+  onDeleteFile() {
+    this.mediaFileViewerDelete.emit();
   }
 
 

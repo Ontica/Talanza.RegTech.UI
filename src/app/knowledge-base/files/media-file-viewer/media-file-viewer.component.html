@@ -27,11 +27,12 @@
 
     <mat-tab label="Edition" i18n-label>
       <emp-kb-file-editor [mediaFile]="mediaFile"
-                          (save)="onUpload($event)">
-    </emp-kb-file-editor>
+                          [readonly]="true"
+                          (deleteFile)="onDeleteFile()">
+      </emp-kb-file-editor>
     </mat-tab>
 
-    <mat-tab label="Annotations" i18n-label>
+    <mat-tab label="Annotations" i18n-label [disabled]="true">
       <emp-kb-postings-list [target]="mediaFile"></emp-kb-postings-list>
     </mat-tab>
 

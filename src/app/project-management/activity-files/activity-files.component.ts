@@ -11,6 +11,7 @@ import { ProjectFilesService } from '@app/services/project-management';
 
 import { EmptyActivity, ProjectItem } from '@app/models/project-management';
 import { MediaFile, FileToUpload, EmptyMediaFile } from '@app/models/knowledge-base';
+import { FileStore } from '@app/store/file.store';
 
 
 @Component({
@@ -29,7 +30,7 @@ export class ActivityFilesComponent implements OnChanges {
 
   displayEditor = false;
 
-  constructor(private service: ProjectFilesService) { }
+  constructor(private store: FileStore, private service: ProjectFilesService) { }
 
 
   ngOnChanges() {
@@ -60,6 +61,15 @@ export class ActivityFilesComponent implements OnChanges {
   }
 
 
+  deleteFile() {
+    this.service.deleteProjectItemFile(this.projectItem, this.selectedMediaFile)
+      .subscribe(() => {
+        this.displayEditor = false;
+        this.store.refreshAllFiles();
+        this.loadFilesList();
+      });
+  }
+
   uploadFile(fileToUpload: FileToUpload) {
     this.hideFileEditor();
 
@@ -67,7 +77,9 @@ export class ActivityFilesComponent implements OnChanges {
                                        fileToUpload.file,
                                        fileToUpload.metadata)
     .subscribe(() => {
+        this.store.refreshAllFiles();
         this.loadFilesList();
+
       }, error => {
         console.log(error);
       });

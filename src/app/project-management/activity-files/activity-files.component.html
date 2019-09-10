@@ -12,20 +12,22 @@
 <emp-ng-modal-window *ngIf="displayEditor && selectedMediaFile.uid"
                      [config]="{width:'980px', height:'78%'}"
                      (modalWindowClose)="hideFileEditor()">
-  <emp-kb-media-file-viewer [mediaFile]="selectedMediaFile"
-                      (mediaFileViewerSave)="uploadFile($event)"
-                      (mediaFileViewerClose)="hideFileEditor()">
+  <emp-kb-media-file-viewer
+      [mediaFile]="selectedMediaFile"
+      (mediaFileViewerSave)="uploadFile($event)"
+      (mediaFileViewerDelete)="deleteFile()"
+      (mediaFileViewerClose)="hideFileEditor()">
   </emp-kb-media-file-viewer>
 </emp-ng-modal-window>
 
 <emp-ng-modal-window *ngIf="displayEditor && !selectedMediaFile.uid"
                      [config]="{width:'680px', height:'580px'}"
                      (modalWindowClose)="hideFileEditor()">
-    <emp-ng-card title='File uploader'
-                 [hint]="projectItem.name"
-                 (cardClose)="hideFileEditor()">
-      <emp-kb-file-editor [mediaFile]="selectedMediaFile"
-                          (saveFile)="uploadFile($event)">
-      </emp-kb-file-editor>
-    </emp-ng-card>
+  <emp-ng-card title='File uploader'
+                [hint]="projectItem.name"
+                (cardClose)="hideFileEditor()">
+    <emp-kb-file-editor [mediaFile]="selectedMediaFile"
+                        (saveFile)="uploadFile($event)">
+    </emp-kb-file-editor>
+  </emp-ng-card>
 </emp-ng-modal-window>

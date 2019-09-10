@@ -32,6 +32,12 @@ export class FileStore {
     return of(this._files.value.filter(x => x.projectItem.project.uid === project.uid));
   }
 
+
+  refreshAllFiles() {
+    this.loadAllFiles();
+  }
+
+
   // private methods
 
 
