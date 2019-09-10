@@ -27,6 +27,7 @@ export interface ActivityTemplate extends Identifiable, PartitionedType {
   dueOnTermUnit: string;
   dueOnCondition: string;
   dueOnController: number;
+  dueOnControllerName: string;
   dueOnRuleAppliesForAllContracts: 'true' | 'false' | '';
   duration: number | string;
   durationUnit: string;
@@ -72,6 +73,7 @@ export const EmptyActivityTemplate: ActivityTemplate = {
   dueOnTermUnit: '',
   dueOnCondition: '',
   dueOnController: -1,
+  dueOnControllerName: '',
   dueOnRuleAppliesForAllContracts: 'true',
 
   duration: '',

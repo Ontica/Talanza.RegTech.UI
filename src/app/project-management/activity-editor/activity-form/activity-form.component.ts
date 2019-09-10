@@ -134,10 +134,6 @@ export class ActivityFormComponent extends AbstractForm implements OnInit, OnCha
 
   enableForm() {
     this.enable();
-
-    if (this.hasTemplate()) {
-      this.get('theme').disable();
-    }
   }
 
 

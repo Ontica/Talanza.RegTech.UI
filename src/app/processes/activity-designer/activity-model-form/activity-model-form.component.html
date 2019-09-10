@@ -107,11 +107,12 @@
       <tr>
         <td>&nbsp;</td>
         <td colspan="3" style="width:100%">
-          <select class="select-box" style="width:100%" formControlName="dueOnController">
+          <select *ngIf="!readonly" class="select-box" style="width:100%" formControlName="dueOnController">
             <option value="" i18n>( Activity or obligation )</option>
             <option value="-1" i18n>Not applicable</option>
             <option *ngFor="let controller of dueOnControllers" [value]="controller.id">{{controller.name}}</option>
           </select>
+          <input *ngIf="readonly" type="text" disabled="true" class="text-box" style="width:100%" [value]="template.dueOnControllerName">
         </td>
       </tr>
       <tr>

@@ -14,11 +14,11 @@ export const HomePageViews: View[] = [
     title: 'Tasks',
     url: '/home/tasks'
   },
-  {
-    name: 'Projects.Gantt',
-    title: 'Gantt chart',
-    url: '/home/gantt'
-  },
+  // {
+  //   name: 'Projects.Gantt',
+  //   title: 'Gantt chart',
+  //   url: '/home/gantt'
+  // },
   {
     name: 'Projects.Files',
     title: 'Files',

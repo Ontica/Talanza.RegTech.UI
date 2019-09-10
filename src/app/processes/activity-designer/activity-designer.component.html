@@ -32,7 +32,7 @@
 
     </mat-tab>
 
-    <mat-tab label="Talanza Guidance" i18n-label>
+    <mat-tab label="Talanza Guidance" i18n-label [disabled]="true">
       <emp-kb-postings-list
           [target]="activityTemplate" [readonly]="settings.readonly">
       </emp-kb-postings-list>

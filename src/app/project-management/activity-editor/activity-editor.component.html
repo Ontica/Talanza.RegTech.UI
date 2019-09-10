@@ -23,7 +23,7 @@
       </emp-steps-activity-form>
     </mat-tab>
 
-    <mat-tab label="Subtasks" i18n-label>
+    <mat-tab label="Subtasks" i18n-label [disabled]="true">
       <emp-steps-activity-tasks [activity]="activity"></emp-steps-activity-tasks>
     </mat-tab>
 
@@ -31,7 +31,7 @@
       <emp-steps-activity-files [projectItem]="activity"></emp-steps-activity-files>
     </mat-tab>
 
-    <mat-tab label="Annotations" i18n-label>
+    <mat-tab label="Annotations" i18n-label [disabled]="true">
       <emp-kb-postings-list [target]="activity"></emp-kb-postings-list>
     </mat-tab>
 
