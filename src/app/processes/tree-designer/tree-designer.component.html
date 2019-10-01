@@ -49,7 +49,8 @@
 
                 <div class="activity-name">
                   <b *ngIf="activity.level === 1">* </b>
-                  <a #trigger (click)="onSelectActivity(activity, true)">{{activity.name}}</a>
+                  <b *ngIf="activity?.template?.activityType === 'Subprocess'">$</b>
+                  <a #trigger (click)="onSelectActivity(activity, true)">{{activity?.template?.activityType}} {{activity.name}}</a>
                 </div>
 
                 <div class="activity-status">

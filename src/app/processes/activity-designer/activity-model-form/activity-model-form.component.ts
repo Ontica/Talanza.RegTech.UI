@@ -336,7 +336,10 @@ export class ActivityModelFormComponent extends AbstractForm implements OnInit, 
     const updateData = this.getUpdateData();
 
     return this.templateStore.update(this.template, updateData)
-               .then(() => this.onReset())
+               .then(x => {
+                  this.template = x;
+                  this.onReset();
+                })
                .catch(err => this.messageService.showError(err).toPromise());
   }
 
@@ -367,7 +370,8 @@ export class ActivityModelFormComponent extends AbstractForm implements OnInit, 
   private loadDueOnControllers() {
     this.dueOnControllers =
       this.templateStore.activities().filter((x) => x.isController &&
-                                                    x.uid !== this.template.uid);
+                                                    x.uid !== this.template.uid)
+                                     .sort((t, s) => t.name.localeCompare(s.name));
   }
 
 }
