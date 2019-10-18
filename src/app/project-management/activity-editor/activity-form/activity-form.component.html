@@ -79,7 +79,7 @@
 
     <table class="form-section">
       <tr>
-        <td class="form-section-title" colspan="4" i18n>Assignee and topic</td>
+        <td class="form-section-title" colspan="4" i18n>Assignee, topic and resource</td>
       </tr>
       <tr>
         <td i18n>Assignee:</td>
@@ -96,6 +96,24 @@
             <option *ngFor="let themeName of themesList | async" [value]="themeName">{{themeName}}</option>
           </select>
         </td>
+      </tr>
+      <tr>
+        <td i18n>Resource:</td>
+        <td style="width:100%">
+          <select class="select-box" formControlName="resource">
+            <option value="Contrato">Contrato</option>
+            <option value="Campo 1">Campo 1</option>
+            <option value="Campo 2">Campo 2</option>
+            <option value="Medidor 056">Medidor 056</option>
+            <option value="Medidor A78">Medidor A78</option>
+            <option value="Pozo Alfa">Pozo Alfa</option>
+            <option value="Pozo Beta">Pozo Beta</option>
+            <option value="Pozo Gamma">Pozo Gamma</option>
+            <option value="Tanque X">Tanque X</option>
+            <option value="Tanque Y">Tanque Y</option>
+          </select>
+        </td>
+        <td colspan="2">&nbsp;</td>
       </tr>
     </table>
 

@@ -13,7 +13,7 @@ import { Activity } from '@app/models/project-management';
 import { DateString, DateStringLibrary } from '@app/models/core';
 
 export type GroupByDateProperty = 'actualEndDate' | 'plannedEndDate' | 'deadline' | 'actualStartDate';
-export type GroupByProperty = 'timeline' | 'responsible' | 'theme' | GroupByDateProperty;
+export type GroupByProperty = 'timeline' | 'responsible' | 'theme' | 'resource' | GroupByDateProperty;
 
 
 const TIMELINE_DATES_ARRAY: GroupByDateProperty[] = ['actualEndDate', 'plannedEndDate', 'deadline'];
@@ -42,6 +42,9 @@ export class GroupActivitiesByPipe implements PipeTransform  {
 
       case 'actualStartDate':
         return this.groupByYearMonth(data, 'actualStartDate');
+
+      case 'resource':
+        return this.groupByResource(data);
 
       case 'responsible':
         return this.groupByResponsible(data);
@@ -89,6 +92,38 @@ export class GroupActivitiesByPipe implements PipeTransform  {
     return Object.keys(groups).map(key => ({ key, value: groups[key] }))
                               .sort((a, b) => this.compareStringValues(a.key, b.key,
                                                                        EMPTY_RESPONSIBLE_GROUP));
+  }
+
+
+  private groupByResource(data: Array<Activity>): Array<{key, value}> {
+    const EMPTY_RESOURCE_GROUP = 'Contract';
+    const groups = data.reduce((previous, current) => {
+
+      let resourceName: string;
+
+      if (current['resource'] !== '' && current['resource'] !== 'Contrato') {
+        resourceName = current['resource'];
+      } else {
+        resourceName = EMPTY_RESOURCE_GROUP;
+      }
+
+      if (!previous[resourceName]) {
+        previous[resourceName] = [current];
+
+      } else {
+        previous[resourceName].push(current);
+
+        previous[resourceName].sort((a, b) => this.compareTimelineDates(a, b));
+      }
+
+      return previous;
+
+    }, {});
+
+    return Object.keys(groups).map(key => ({ key, value: groups[key] }))
+                              .sort((a, b) => this.compareStringValues(a.key, b.key,
+                                              EMPTY_RESOURCE_GROUP));
+
   }
 
 

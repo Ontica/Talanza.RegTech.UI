@@ -67,6 +67,9 @@ export class ActivityTimelineComponent implements OnChanges {
       case 'actualStartDate':
         return 'By Actual Start Date';
 
+      case 'resource':
+        return 'By Resource';
+
       case 'responsible':
         return 'By Responsible';
 

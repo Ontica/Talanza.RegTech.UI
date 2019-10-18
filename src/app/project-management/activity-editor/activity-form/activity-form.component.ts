@@ -155,6 +155,7 @@ export class ActivityFormComponent extends AbstractForm implements OnInit, OnCha
       name: new FormControl('', Validators.required),
       notes: new FormControl(),
       theme: new FormControl(),
+      resource: new FormControl(),
 
       deadline: new FormControl(),
       plannedEndDate: new FormControl(),
@@ -229,7 +230,7 @@ export class ActivityFormComponent extends AbstractForm implements OnInit, OnCha
       name: formModel.name,
       notes: formModel.notes,
       theme: formModel.theme,
-
+      resource: formModel.resource,
       deadline: formModel.deadline,
       plannedEndDate: formModel.plannedEndDate,
       actualStartDate: formModel.actualStartDate,
@@ -255,6 +256,7 @@ export class ActivityFormComponent extends AbstractForm implements OnInit, OnCha
       name: this.activity.name,
       notes: this.activity.notes,
       theme: this.activity.theme,
+      resource: this.activity.resource || 'Contrato',
 
       deadline: this.activity.deadline,
       plannedEndDate: this.activity.plannedEndDate,

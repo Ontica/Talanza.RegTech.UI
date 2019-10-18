@@ -49,6 +49,7 @@ export interface Activity extends Identifiable, PartitionedType {
   status: string;
 
   theme: string;
+  resource: string;
   tags: string[];
   responsible: Contact;
 
@@ -76,6 +77,7 @@ export const EmptyActivity: Activity = {
   warnType: '',
 
   theme: '',
+  resource: '',
   tags: [],
   position: 0,
   level: 0,
