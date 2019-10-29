@@ -10,6 +10,8 @@ import { Component, EventEmitter, Input,
 
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+
 import { Observable, of } from 'rxjs';
 
 import { ProjectStore } from '@app/store/project.store';
@@ -22,6 +24,7 @@ import { Contact, DateStringLibrary, isTypeOf } from '@app/models/core';
 
 import { AbstractForm } from '@app/shared/services';
 import { SharedService } from '@app/shared/shared.service';
+import { ChangeDateDialogComponent } from '@app/project-management/change-date-dialog/change-date-dialog.component';
 
 
 enum FormMessages {
@@ -53,7 +56,8 @@ export class ActivityFormComponent extends AbstractForm implements OnInit, OnCha
 
   constructor(private app: SharedService,
               private projectStore: ProjectStore,
-              private taskStore: TaskService) {
+              private taskStore: TaskService,
+              private dialog: MatDialog) {
     super();
   }
 
@@ -79,18 +83,28 @@ export class ActivityFormComponent extends AbstractForm implements OnInit, OnCha
 
 
   onComplete() {
-    const msg = `This operation will close activity or obligation ` +
-                `<strong>${this.activity.name}</strong>.<br/><br/>` +
-                `Do you want to close this activity?`;
+    const dialogConfig = new MatDialogConfig();
 
-    this.app.messageBox.confirm(msg, 'Close activity or obligation',
-                               'AcceptCancel', 'Close activity').subscribe(
-      result => {
-        if (result) {
-          this.setCommand('completeActivity');
-          this.onSubmit({ skipFormValidation: true });
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.height = '400px',
+    dialogConfig.minWidth = '600px',
+
+    dialogConfig.data = {
+      activity: this.activity,
+      actualEndDate: this.form.value.actualEndDate
+    };
+
+    this.dialog.open(ChangeDateDialogComponent, dialogConfig)
+      .afterClosed().subscribe(
+        (result) => {
+          if (result) {
+            this.activityChange.emit();
+            this.resetForm();
+          }
         }
-      });
+
+      );
   }
 
 
@@ -175,8 +189,8 @@ export class ActivityFormComponent extends AbstractForm implements OnInit, OnCha
 
   protected execute(): Promise<any> {
     switch (this.command.name) {
-      case 'completeActivity':
-        return Promise.resolve(this.completeActivity());
+      case 'completeTask':
+        return Promise.resolve(this.completeTask());
 
       case 'deleteActivity':
         return this.deleteActivity();
@@ -282,24 +296,15 @@ export class ActivityFormComponent extends AbstractForm implements OnInit, OnCha
   }
 
 
-  private completeActivity(): Promise<void> {
+  private completeTask(): Promise<void> {
     const updateData = this.getUpdateData();
 
-    if (isTypeOf(this.activity, TASK_TYPE_NAME)) {
-      this.taskStore.completeTask(this.task, updateData)
-      .subscribe(() => {
-        this.resetForm();
-        this.activityChange.emit();
-      });
-      return Promise.resolve();
-    }
-
-    return this.projectStore.completeActivity(this.activity, updateData)
-      .then(() => {
-        this.resetForm();
-        this.activityChange.emit();
-      })
-      .catch(err => this.app.messageBox.showError(err).toPromise());
+    this.taskStore.completeTask(this.task, updateData)
+    .subscribe(() => {
+      this.resetForm();
+      this.activityChange.emit();
+    });
+    return Promise.resolve();
   }
 
 

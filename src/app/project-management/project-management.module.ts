@@ -32,6 +32,7 @@ import { ApplyFilesFilterPipe } from './common/apply-files-filter.pipe';
 
 import { ActivityTreeComponent } from './activity-tree/activity-tree.component';
 import { AddEventDialogComponent } from './add-event-dialog/add-event-dialog.component';
+import { ChangeDateDialogComponent } from './change-date-dialog/change-date-dialog.component';
 
 import { GanttChartComponent } from './gantt-chart/gantt-chart.component';
 import { DhtmlxGanttComponent } from './dhtmlx-gantt/dhtmlx-gantt.component';
@@ -74,6 +75,8 @@ import { ProjectManagementRoutingModule } from './project-management-routing.mod
     ActivityTimelineComponent,
     ActivityTreeComponent,
     AddEventDialogComponent,
+    ChangeDateDialogComponent,
+
     DhtmlxGanttComponent,
 
     GroupActivitiesByPipe,
@@ -94,7 +97,8 @@ import { ProjectManagementRoutingModule } from './project-management-routing.mod
   ],
 
   entryComponents: [
-    AddEventDialogComponent
+    AddEventDialogComponent,
+    ChangeDateDialogComponent
   ]
 
 })
