@@ -9,7 +9,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Assertion, HttpService } from '@app/core';
 
-import { Activity, ActivityTemplate, Project, ProjectTemplate } from '@app/models/project-management';
+import { ActivityTemplate, Project, ProjectTemplate } from '@app/models/project-management';
 
 
 @Injectable()
@@ -26,8 +26,8 @@ export class ProjectTemplateService {
   }
 
 
-  getStartEvents(): Observable<ActivityTemplate[]> {
-    const path = 'v1/project-management/project-templates/start-events';
+  getStartEvents(project: Project): Observable<ActivityTemplate[]> {
+    const path = `v1/project-management/project-templates/start-events/${project.uid}`;
 
     return this.http.get<ActivityTemplate[]>(path);
   }

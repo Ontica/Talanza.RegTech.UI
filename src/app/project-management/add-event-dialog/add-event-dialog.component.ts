@@ -44,10 +44,11 @@ export class AddEventDialogComponent implements OnInit {
 
   ngOnInit() {
     this.projectStore.selectedProject().subscribe (
-      x => { this.project = x.project; }
+      x => {
+        this.project = x.project;
+        this.events = this.templateStore.startEvents(this.project);
+      }
     );
-
-    this.events = this.templateStore.startEvents();
 
     this.createFormGroup();
 

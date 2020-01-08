@@ -198,7 +198,7 @@
 
   <div *ngIf="!readonly" class="form-footer">
 
-    <table class="form-section">
+    <table class="form-section" style="margin-bottom: 120px">
       <tr>
         <td>
           <button *ngIf="!disabled" type="button" class="btn-warning" (click)="onDelete()" i18n>Delete</button>
@@ -210,7 +210,11 @@
           <button *ngIf="disabled" type="button" class="btn-action right" (click)="enable()" i18n>Edit</button>
 
           <button *ngIf="!disabled" type="button" class="btn right" (click)="onReset()" i18n>Cancel edition</button>
-
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+        <br><br><br><br><br><br>&nbsp;
         </td>
       </tr>
     </table>

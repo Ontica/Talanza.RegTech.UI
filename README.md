@@ -50,4 +50,4 @@ For third-party components, please read [ThirdPartyNotices](https://github.com/O
 
 ## Copyright
 
-Copyright © 2017-2019. Talanza Energy Consulting, La Vía Óntica SC, Ontica LLC and contributors.
+Copyright © 2017-2020. Talanza Energy Consulting, La Vía Óntica SC, Ontica LLC and contributors.

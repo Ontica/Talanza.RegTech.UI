@@ -11,7 +11,8 @@ import { List } from 'immutable';
 
 import { ProjectTemplateService } from '@app/services/project-management';
 
-import { ActivityTemplate, ProjectTemplate, EmptyProjectTemplate } from '@app/models/project-management';
+import { ActivityTemplate, Project,
+        ProjectTemplate, EmptyProjectTemplate } from '@app/models/project-management';
 
 
 export class ProjectTemplateModel {
@@ -49,8 +50,8 @@ export class ProjectTemplateStore {
   }
 
 
-  startEvents(): Observable<ActivityTemplate[]> {
-    return this.projectTemplateService.getStartEvents();
+  startEvents(project: Project): Observable<ActivityTemplate[]> {
+    return this.projectTemplateService.getStartEvents(project);
   }
 
 

@@ -1,7 +1,7 @@
 Talanza Regulatory Compliance Solution Frontend
 ===============================================
 
-Copyright (c) 2017-2019. Talanza Energy Consulting, La Vía Óntica SC, Ontica LLC and contributors.
+Copyright (c) 2017-2020. Talanza Energy Consulting, La Vía Óntica SC, Ontica LLC and contributors.
 --------------------------------------------------------------------------------------------------
 
 These software components are free software: you can redistribute them
