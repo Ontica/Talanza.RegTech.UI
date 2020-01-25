@@ -19,6 +19,8 @@ import { AddEventDialogComponent } from '../add-event-dialog/add-event-dialog.co
 
 import { TimelineHelper } from '../common/timeline-helper';
 
+import { CollapsableTree, CollapsableTreeNodeDisplayMode } from '../common/collapsable-tree';
+
 
 @Component({
   selector: 'emp-steps-activity-tree',
@@ -33,9 +35,12 @@ export class ActivityTreeComponent implements OnChanges {
   insertActivityEditorVisible = false;
 
   @Input() project: ProjectModel;
+  @Input() collapsedActivities = [];
 
   @Output() activitySelect = new EventEmitter<Activity>();
   @Output() activityChange = new EventEmitter<ActivityOperation>();
+
+  private collapsableTreeHandler: CollapsableTree;
 
   constructor(private dialog: MatDialog) { }
 
@@ -44,6 +49,7 @@ export class ActivityTreeComponent implements OnChanges {
     if (this.selectedActivity.project.uid !== this.project.project.uid) {
       this.selectedActivity = EmptyActivity;
     }
+    this.collapsableTreeHandler = new CollapsableTree(this.project.activities, this.collapsedActivities);
   }
 
 
@@ -54,6 +60,16 @@ export class ActivityTreeComponent implements OnChanges {
 
   get timelineHelper() {
     return TimelineHelper;
+  }
+
+
+  activityDisplayMode(activity: Activity): CollapsableTreeNodeDisplayMode {
+    return this.collapsableTreeHandler.nodeDisplayMode(activity);
+  }
+
+
+  toggleCollapse(activity: Activity) {
+    return this.collapsableTreeHandler.toggleCollapse(activity);
   }
 
 
@@ -127,7 +143,6 @@ export class ActivityTreeComponent implements OnChanges {
   }
 
 
-
   indentActivity(activity: Activity) {
     if (!this.isIndentable(activity)) {
       return;
@@ -145,7 +160,6 @@ export class ActivityTreeComponent implements OnChanges {
       this.changeActivityParent(activity, previousParent);
     }
   }
-
 
 
   outdentActivity(activity: Activity) {

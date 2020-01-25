@@ -33,9 +33,9 @@
       <div *ngFor="let activity of project.activities" class="drop-item"
             cdkDrag cdkDragLockAxis="y" [cdkDragData]="activity" cdkDragBoundary=".drag-boundary">
 
-        <div class="activity-row" matRipple [matRippleTrigger]="trigger"
+        <div *ngIf="activityDisplayMode(activity); let displayMode" class="activity-row" matRipple [matRippleTrigger]="trigger"
              [class.selected-activity]="isActivitySelected(activity)"
-             (click)="onSelectActivity(activity)" >
+             (click)="onSelectActivity(activity)">
 
             <div class="edition-controls">
               <mat-icon cdkDragHandle class="ghost-icon grabbable">drag_indicator</mat-icon>
@@ -47,61 +47,72 @@
                          class="ghost-icon" (click)="outdentActivity(activity)">subdirectory_arrow_left</mat-icon>
             </div>
 
-            <div class="activity-container"
+
+            <div class="activity-tree-container"
                 [style.border-left-color]="timelineHelper.getTimelineColor(activity, activity.deadline, 'border')"
                 [style.padding-left.pt]="activity.level * 14">
 
-                <div class="activity-name">
-                  <a #trigger
-                      [class.blink]="timelineHelper.getTimelineColor(activity, activity.deadline, 'title')"
-                      [style.color]="timelineHelper.getTimelineColor(activity, activity.deadline)"
-                      [class.completed-activity]="timelineHelper.isCompleted(activity)"
-                      (click)="onSelectActivity(activity, true)">{{activity.name}}</a>
+                <div class="activity-tree-controls">
+                  <mat-icon *ngIf="displayMode !== 'leaf'" class='activity-tree-icon'
+                            (click)="toggleCollapse(activity)">
+                            {{displayMode === "expanded" ? "expand_less" : "expand_more"}}</mat-icon>
                 </div>
 
-                <div class="activity-status">
+                <div>
 
-                  <div class="activity-theme" i18n>
-                    {{activity.theme || 'No topic'}}<br/>
-                    {{activity.project.name}} | {{activity.resource || 'Contrato' }}
+                  <div class="activity-name">
+                    <a #trigger
+                        [class.blink]="timelineHelper.getTimelineColor(activity, activity.deadline, 'title')"
+                        [style.color]="timelineHelper.getTimelineColor(activity, activity.deadline)"
+                        [class.completed-activity]="timelineHelper.isCompleted(activity)"
+                        (click)="onSelectActivity(activity, true)">{{activity.name}}</a>
                   </div>
 
-                  <div *ngIf="activity.deadline" class="column nowrap"
-                        [style.color]="timelineHelper.getTimelineColor(activity, activity.deadline)">
-                    <div i18n>Deadline:</div>
-                    <div i18n>
-                      {{(activity.deadline | date:'dd/LLL/yyyy') || 'Unknown'}}
+                  <div class="activity-status">
+
+                    <div class="activity-theme" i18n>
+                      {{activity.theme || 'No topic'}}<br/>
+                      {{activity.project.name}} | {{activity.resource || 'Contrato' }}
                     </div>
-                  </div>
 
-                  <div *ngIf="timelineHelper.displayPlannedEndDate(activity)"
-                        class="column nowrap"
-                        [style.color]="timelineHelper.getTimelineColor(activity, activity.plannedEndDate)">
-                    <div i18n>Planned End Date:</div>
-                    <div>
-                      {{activity.plannedEndDate | date:'dd/LLL/yyyy'}} &nbsp;
-                      <span>
-                        {{timelineHelper.plannedEndDateVsDeadlineDays(activity)}}
-                      </span>
+                    <div *ngIf="activity.deadline" class="column nowrap"
+                          [style.color]="timelineHelper.getTimelineColor(activity, activity.deadline)">
+                      <div i18n>Deadline:</div>
+                      <div i18n>
+                        {{(activity.deadline | date:'dd/LLL/yyyy') || 'Unknown'}}
+                      </div>
                     </div>
-                  </div>
 
-                  <div *ngIf="timelineHelper.isCompleted(activity)"
-                        class="column nowrap">
-                    <div i18n>Actual End Date:</div>
-                    <div>
-                      {{activity.actualEndDate | date:'dd/LLL/yyyy'}} &nbsp;
-                      <span [style.color]="timelineHelper.getTimelineColor(activity, activity.actualEndDate)"
-                            [innerHTML]="timelineHelper.actualEndDateVsDeadlineDays(activity) | safeHtml">
-                      </span>
+                    <div *ngIf="timelineHelper.displayPlannedEndDate(activity)"
+                          class="column nowrap"
+                          [style.color]="timelineHelper.getTimelineColor(activity, activity.plannedEndDate)">
+                      <div i18n>Planned End Date:</div>
+                      <div>
+                        {{activity.plannedEndDate | date:'dd/LLL/yyyy'}} &nbsp;
+                        <span>
+                          {{timelineHelper.plannedEndDateVsDeadlineDays(activity)}}
+                        </span>
+                      </div>
                     </div>
+
+                    <div *ngIf="timelineHelper.isCompleted(activity)"
+                          class="column nowrap">
+                      <div i18n>Actual End Date:</div>
+                      <div>
+                        {{activity.actualEndDate | date:'dd/LLL/yyyy'}} &nbsp;
+                        <span [style.color]="timelineHelper.getTimelineColor(activity, activity.actualEndDate)"
+                              [innerHTML]="timelineHelper.actualEndDateVsDeadlineDays(activity) | safeHtml">
+                        </span>
+                      </div>
+                    </div>
+
+                    <div class="right-column expand">
+                      {{activity.responsible.uid !== 'Empty' ? activity.responsible.name : ''}}
+                    </div>
+
                   </div>
 
-                  <div class="right-column expand">
-                    {{activity.responsible.uid !== 'Empty' ? activity.responsible.name : ''}}
-                  </div>
-
-                </div>
+              </div>
 
             </div>
 

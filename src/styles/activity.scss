@@ -30,6 +30,25 @@
   width: 100%;
 }
 
+.activity-tree-container {
+  @include row;
+
+  margin-left: 4pt;
+  padding: 4pt 8pt 8pt 8pt;
+  border-left: 5px solid $primary-color;
+  width: 100%;
+}
+
+.activity-tree-controls {
+  margin-right: 6pt;
+  width: 18px;
+}
+
+.activity-tree-icon {
+  color: #bcbcbc;
+  font-size: 18px;
+  font-weight: 100;
+}
 
 .timeline-padding {
   width: 26px;
@@ -86,7 +105,6 @@
   @include expand;
 
   min-width: 200px;
-  // max-width: 40%;
   padding-right: 36px;
 }
 
