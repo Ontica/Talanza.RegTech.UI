@@ -56,7 +56,7 @@ export interface PartitionedType {
 
 export function isEmpty(instance: Identifiable): boolean {
   return (!instance || !instance.uid ||
-          instance.uid === '' || instance.uid === 'Empty');
+          instance.uid === '' || instance.uid === 'Empty' || instance.uid === 'Undefined');
 }
 
 
