@@ -33,7 +33,8 @@
       <div *ngFor="let activity of project.activities" class="drop-item"
             cdkDrag cdkDragLockAxis="y" [cdkDragData]="activity" cdkDragBoundary=".drag-boundary">
 
-        <div *ngIf="activityDisplayMode(activity); let displayMode" class="activity-row" matRipple [matRippleTrigger]="trigger"
+        <div *ngIf="activityDisplayMode(activity); let displayMode"
+             class="activity-row" matRipple [matRippleTrigger]="trigger"
              [class.selected-activity]="isActivitySelected(activity)"
              (click)="onSelectActivity(activity)">
 
@@ -49,8 +50,8 @@
 
 
             <div class="activity-tree-container"
-                [style.border-left-color]="timelineHelper.getTimelineColor(activity, activity.deadline, 'border')"
-                [style.padding-left.pt]="activity.level * 14">
+                 [style.border-left-color]="timelineHelper.getTimelineColor(activity, activity.deadline, 'border')"
+                 [style.padding-left.pt]="activity.level * 14">
 
                 <div class="activity-tree-controls">
                   <mat-icon *ngIf="displayMode !== 'leaf'" class='activity-tree-icon'
@@ -58,9 +59,8 @@
                             {{displayMode === "expanded" ? "expand_less" : "expand_more"}}</mat-icon>
                 </div>
 
-                <div>
-
-                  <div class="activity-name">
+                <div class="expand">
+                  <div class="activity-name" [class]="activityNameClass(activity)">
                     <a #trigger
                         [class.blink]="timelineHelper.getTimelineColor(activity, activity.deadline, 'title')"
                         [style.color]="timelineHelper.getTimelineColor(activity, activity.deadline)"
@@ -111,7 +111,6 @@
                     </div>
 
                   </div>
-
               </div>
 
             </div>

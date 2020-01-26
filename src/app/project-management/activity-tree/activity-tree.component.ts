@@ -73,6 +73,17 @@ export class ActivityTreeComponent implements OnChanges {
   }
 
 
+  activityNameClass(activity: Activity) {
+    if (activity.level === 1) {
+      return 'activity-name-level-1';
+    } else if (activity.level % 2 === 0) {
+      return 'activity-name-even-level';
+    } else {
+      return 'activity-name-odd-level';
+    }
+  }
+
+
   dropActivity(event: CdkDragDrop<string[]>) {
     if (event.currentIndex === event.previousIndex) {
       event.item.reset();

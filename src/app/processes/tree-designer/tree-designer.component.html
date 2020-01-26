@@ -55,7 +55,7 @@
                 </div>
 
                 <div class="expand">
-                  <div class="activity-name">
+                  <div class="activity-name" [class]="activityNameClass(activity)">
                     <a #trigger (click)="onSelectActivity(activity, true)">{{activity.name}}</a>
                   </div>
 

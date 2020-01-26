@@ -39,16 +39,18 @@
   width: 100%;
 }
 
+
 .activity-tree-controls {
   margin-right: 6pt;
   width: 18px;
 }
 
+
 .activity-tree-icon {
   color: #bcbcbc;
   font-size: 18px;
-  font-weight: 100;
 }
+
 
 .timeline-padding {
   width: 26px;
@@ -98,6 +100,22 @@
 
 .activity-name a:hover {
   text-decoration: underline;
+}
+
+
+.activity-name-level-1 {
+  font-size: 11.5pt;
+}
+
+
+.activity-name-even-level {
+  font-size: 10pt;
+}
+
+
+.activity-name-odd-level {
+  font-size: 10pt;
+  font-style: italic;
 }
 
 
