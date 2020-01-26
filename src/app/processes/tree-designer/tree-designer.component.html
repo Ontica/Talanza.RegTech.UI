@@ -30,7 +30,8 @@
       <div *ngFor="let activity of project.activities" class="drop-item"
             cdkDrag cdkDragLockAxis="y" [cdkDragData]="activity" cdkDragBoundary=".drag-boundary">
 
-        <div class="activity-row" matRipple [matRippleTrigger]="trigger"
+        <div *ngIf="activityDisplayMode(activity); let displayMode"
+             class="activity-row" matRipple [matRippleTrigger]="trigger"
              [class.selected-activity]="isActivitySelected(activity)"
              (click)="onSelectActivity(activity)" >
 
@@ -44,25 +45,30 @@
                          class="ghost-icon" (click)="outdentActivity(activity)">subdirectory_arrow_left</mat-icon>
             </div>
 
-            <div class="activity-container"
-                [style.padding-left.pt]="activity.level * 14">
+            <div class="activity-tree-container"
+                 [style.padding-left.pt]="activity.level * 14">
 
-                <div class="activity-name">
-                  <b *ngIf="activity.level === 1">* </b>
-                  <b *ngIf="activity?.template?.activityType === 'Subprocess'">$</b>
-                  <a #trigger (click)="onSelectActivity(activity, true)">{{activity?.template?.activityType}} {{activity.name}}</a>
+                <div class="activity-tree-controls">
+                  <mat-icon *ngIf="displayMode !== 'leaf'" class='activity-tree-icon'
+                            (click)="toggleCollapse(activity)">
+                            {{displayMode === "expanded" ? "expand_less" : "expand_more"}}</mat-icon>
                 </div>
 
-                <div class="activity-status">
-
-                  <div class="activity-theme" i18n>
-                    {{activity.theme || 'No topic'}}
+                <div class="expand">
+                  <div class="activity-name">
+                    <a #trigger (click)="onSelectActivity(activity, true)">{{activity.name}}</a>
                   </div>
 
-                  <div class="right-column expand">
-                      <i class="fa fa-ellipsis-v ghost-icon" aria-hidden="true" (click)="openCopyOrMoveActivityDialog(activity)"></i>
-                  </div>
+                  <div class="activity-status">
+                    <div class="activity-theme" i18n>
+                      {{activity.theme || 'No topic'}}
+                    </div>
 
+                    <div class="right-column expand">
+                        <i class="fa fa-ellipsis-v ghost-icon" aria-hidden="true" (click)="openCopyOrMoveActivityDialog(activity)"></i>
+                    </div>
+
+                  </div>
                 </div>
 
             </div>

@@ -17,6 +17,8 @@ import { Activity, EmptyActivity, ActivityOperation } from '@app/models/project-
 
 import { MoveActivityDialogComponent } from '../move-activity-dialog/move-activity-dialog.component';
 
+import { CollapsableTree, CollapsableTreeNodeDisplayMode } from '@app/project-management/common/collapsable-tree';
+
 
 @Component({
   selector: 'emp-steps-process-tree-designer',
@@ -31,9 +33,12 @@ export class ProcessTreeDesignerComponent implements OnChanges {
   insertActivityEditorVisible = false;
 
   @Input() project: ProjectModel;
+  @Input() collapsedActivities = [];
 
   @Output() activityChange = new EventEmitter<ActivityOperation>();
   @Output() activitySelect = new EventEmitter<Activity>();
+
+  private collapsableTreeHandler: CollapsableTree;
 
   constructor(private dialog: MatDialog) { }
 
@@ -42,11 +47,22 @@ export class ProcessTreeDesignerComponent implements OnChanges {
     if (this.selectedActivity.project.uid !== this.project.project.uid) {
       this.selectedActivity = EmptyActivity;
     }
+    this.collapsableTreeHandler = new CollapsableTree(this.project.activities, this.collapsedActivities);
   }
 
 
   get hasSelectedActivities() {
     return (this.selectedActivity.uid !== '');
+  }
+
+
+  activityDisplayMode(activity: Activity): CollapsableTreeNodeDisplayMode {
+    return this.collapsableTreeHandler.nodeDisplayMode(activity);
+  }
+
+
+  toggleCollapse(activity: Activity) {
+    return this.collapsableTreeHandler.toggleCollapse(activity);
   }
 
 
