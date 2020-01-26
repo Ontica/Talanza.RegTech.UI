@@ -20,16 +20,31 @@ export class CollapsableTree {
 
   constructor(private allNodes: TreeNode[], private collapsedNodes: string[]) { }
 
-  nodeDisplayMode(activity: TreeNode): CollapsableTreeNodeDisplayMode {
-    if (this.hasCollapsedAncestor(activity)) {
+
+  collapseAll() {
+    const withNoParent = this.allNodes.filter(x => isEmpty(x.parent)).map(x => x.uid);
+
+    this.collapsedNodes = Array.from(withNoParent);
+  }
+
+
+  expandAll() {
+    const withNoParent = this.allNodes.filter(x => !isEmpty(x.parent)).map(x => x.uid);
+
+    this.collapsedNodes = Array.from(withNoParent);
+  }
+
+
+  nodeDisplayMode(node: TreeNode): CollapsableTreeNodeDisplayMode {
+    if (this.hasCollapsedAncestor(node)) {
       return undefined;
     }
 
-    const collapsed = this.isCollapsed(activity);
+    const collapsed = this.isCollapsed(node);
 
     if (collapsed) {
       return 'collapsed';
-    } else if (this.hasChildren(activity)) {
+    } else if (this.hasChildren(node)) {
       return 'expanded';
     } else {
       return 'leaf';
@@ -37,24 +52,24 @@ export class CollapsableTree {
   }
 
 
-  toggleCollapse(activity: Identifiable) {
-    const index = this.collapsedNodes.indexOf(activity.uid);
+  toggleCollapse(node: Identifiable) {
+    const index = this.collapsedNodes.indexOf(node.uid);
 
     if (index >= 0) {
       this.collapsedNodes.splice(index, 1);
     } else {
-      this.collapsedNodes.push(activity.uid);
+      this.collapsedNodes.push(node.uid);
     }
   }
 
 
-  private hasChildren(activity: Identifiable): boolean {
-    return this.allNodes.find(x => x.parent.uid === activity.uid) ? true : false;
+  private hasChildren(node: Identifiable): boolean {
+    return this.allNodes.find(x => x.parent.uid === node.uid) ? true : false;
   }
 
 
-  private hasCollapsedAncestor(activity: TreeNode): boolean {
-    let parent = activity.parent;
+  private hasCollapsedAncestor(node: TreeNode): boolean {
+    let parent = node.parent;
 
     while (true) {
       if (isEmpty(parent)) {
@@ -68,8 +83,8 @@ export class CollapsableTree {
   }
 
 
-  private isCollapsed(item: Identifiable): boolean {
-    return this.collapsedNodes.indexOf(item.uid) >= 0;
+  private isCollapsed(node: Identifiable): boolean {
+    return this.collapsedNodes.indexOf(node.uid) >= 0;
   }
 
 }

@@ -42,12 +42,13 @@ export class ProcessTreeDesignerComponent implements OnChanges {
 
   constructor(private dialog: MatDialog) { }
 
-
   ngOnChanges() {
     if (this.selectedActivity.project.uid !== this.project.project.uid) {
       this.selectedActivity = EmptyActivity;
     }
+
     this.collapsableTreeHandler = new CollapsableTree(this.project.activities, this.collapsedActivities);
+    this.collapsableTreeHandler.collapseAll();
   }
 
 
