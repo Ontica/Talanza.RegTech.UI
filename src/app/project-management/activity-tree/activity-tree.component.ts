@@ -64,6 +64,10 @@ export class ActivityTreeComponent implements OnChanges {
 
 
   activityDisplayMode(activity: Activity): CollapsableTreeNodeDisplayMode {
+    if (activity.status === 'Completed' &&
+        activity.template && activity.template.executionMode === 'Periodic') {
+      return null;
+    }
     return this.collapsableTreeHandler.nodeDisplayMode(activity);
   }
 
