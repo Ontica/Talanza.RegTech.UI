@@ -13,6 +13,12 @@ export interface ProjectTemplate extends Identifiable {
   status: string;
 }
 
+export interface PeriodicityRule {
+  ruleType: string;
+  month?: number | '';
+  day?: number | '';
+}
+
 export interface ActivityTemplate extends Identifiable, PartitionedType {
   id: number;
   notes: string;
@@ -31,6 +37,8 @@ export interface ActivityTemplate extends Identifiable, PartitionedType {
   dueOnRuleAppliesForAllContracts: 'true' | 'false' | '';
   duration: number | string;
   durationUnit: string;
+
+  periodicityRule: PeriodicityRule | null;
   periodicity: string;
 
   entity: number;
@@ -78,6 +86,8 @@ export const EmptyActivityTemplate: ActivityTemplate = {
 
   duration: '',
   durationUnit: '',
+
+  periodicityRule: null,
   periodicity: '',
 
   entity: -1,

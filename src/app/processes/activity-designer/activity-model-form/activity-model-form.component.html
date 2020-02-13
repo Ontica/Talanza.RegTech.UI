@@ -41,7 +41,7 @@
         </td>
         <td class="text-align-right" style="width:100%" i18n>Execution type and mode:</td>
         <td>
-          <select class="select-box" style="width:144px" formControlName="executionMode">
+          <select class="select-box" style="width:144px" #executionMode formControlName="executionMode">
             <option value="" i18n>( Execution type )</option>
             <option value="Timeline" i18n>Timeline</option>
             <option value="Eventual" i18n>Eventual</option>
@@ -74,7 +74,7 @@
         <td i18n>This activity<br>must be done:<br /></td>
         <td>
           <input type="text" class="text-box" style="width:70px" formControlName="dueOnTerm">
-          <select class="select-box" style="width:130px" formControlName="dueOnTermUnit"
+          <select class="select-box" style="width:182px" formControlName="dueOnTermUnit"
                   (change)="setDefaultValuesForDueOnTermUnit()">
             <option value="" i18n>( Term unit )</option>
             <option value="BusinessDays" i18n>Business days</option>
@@ -104,7 +104,7 @@
       <tr>
         <td>&nbsp;</td>
         <td colspan="3" style="width:100%">
-          <select *ngIf="!readonly" class="select-box" style="width:100%" formControlName="dueOnController">
+          <select *ngIf="!readonly" class="select-box" style="width:99%" formControlName="dueOnController">
             <option value="" i18n>( Activity or obligation )</option>
             <option value="-1" i18n>Not applicable</option>
             <option *ngFor="let controller of dueOnControllers" [value]="controller.id">{{controller.name}}</option>
@@ -113,22 +113,11 @@
         </td>
       </tr>
       <tr>
-        <td>&nbsp;</td>
-        <td colspan="3" style="width:100%">
-          <span i18n>Does this time rule is fixed for all contracts? (i.e. only changes when regulation changes) </span>
-          <select class="select-box" style="width:92px" formControlName="dueOnRuleAppliesForAllContracts">
-            <option value="true" i18n>Yes</option>
-            <option value="false" i18n>No</option>
-            <option value="" i18n>Not applicable</option>
-          </select>
-        </td>
-      </tr>
-      <tr>
         <td i18n>Estimated time to do<br>the obligation or activity:</td>
         <td>
           <input type="text" class="text-box" style="width:70px" formControlName="duration">
 
-          <select class="select-box" style="width:130px" formControlName="durationUnit">
+          <select class="select-box" style="width:182px" formControlName="durationUnit">
             <option value="" i18n>( Time unit )</option>
             <option value="BusinessDays" i18n>Business days</option>
             <option value="CalendarDays" i18n>Calendar days</option>
@@ -139,8 +128,53 @@
             <option value="NA" i18n>Not applicable</option>
           </select>
         </td>
-        <td i18n>Periodicity:</td>
+        <td style="width:100%">
+          <span i18n>Does this time rule is fixed for all contracts?<br />(i.e. only changes when regulation changes)</span>
+        </td>
         <td>
+          <select class="select-box" style="width:120px" formControlName="dueOnRuleAppliesForAllContracts">
+            <option value="true" i18n>Yes</option>
+            <option value="false" i18n>No</option>
+            <option value="" i18n>Not applicable</option>
+          </select>
+        </td>
+      </tr>
+      <tr [hidden]="executionMode.value !== 'Periodic'">
+        <td i18n>Periodicity rule:</td>
+        <td i18n>
+          <select class="select-box" style="width:260px" #periodicityRule formControlName="periodicityRule">
+            <option value="OncePerYear-OnFixedDate" i18n>Yearly, on X calendar date</option>
+            <option value="Monthly-OnFixedDay" i18n>Monthly, during first X calendar days</option>
+            <option value="Monthly-BusinessDays" i18n>Monthly, during first X business days</option>
+            <option value="Manual" i18n>The processing rule is not defined</option>
+          </select>
+        </td>
+        <td colspan="2" [hidden]="periodicityRule.value === 'Manual'">
+          <select class="select-box" style="width:150px"
+                  [hidden]="periodicityRule.value !== 'OncePerYear-OnFixedDate'" formControlName="periodicityMonth">
+            <option value="" i18n>( Month )</option>
+            <option value="1">January</option>
+            <option value="2">February</option>
+            <option value="3">March</option>
+            <option value="4">April</option>
+            <option value="5">May</option>
+            <option value="6">June</option>
+            <option value="7">July</option>
+            <option value="8">August</option>
+            <option value="9">September</option>
+            <option value="10">October</option>
+            <option value="11">November</option>
+            <option value="12">December</option>
+          </select>
+          <span *ngIf="periodicityRule.value === 'OncePerYear-OnFixedDate'">Day: </span>
+          <span *ngIf="periodicityRule.value.startsWith('Monthly')">During first X days: </span>
+          <input type="number" class="text-box" style="width:70px"
+                 maxlength="2" min="1" max="31" formControlName="periodicityDay">
+        </td>
+      </tr>
+      <tr [hidden]="executionMode.value !== 'Periodic'">
+      <td i18n>Periodicity rule notes:</td>
+        <td colspan="3" style="width:100%">
           <input type="text" class="text-box" formControlName="periodicity">
         </td>
       </tr>

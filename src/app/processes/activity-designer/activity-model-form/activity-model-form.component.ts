@@ -191,6 +191,9 @@ export class ActivityModelFormComponent extends AbstractForm implements OnInit, 
 
       durationUnit: new FormControl('', Validators.required),
 
+      periodicityRule: new FormControl(''),
+      periodicityMonth: new FormControl(),
+      periodicityDay: new FormControl(),
       periodicity: new FormControl(),
 
       entity: new FormControl('', Validators.required),
@@ -250,6 +253,8 @@ export class ActivityModelFormComponent extends AbstractForm implements OnInit, 
   private getUpdateData() {
     const formModel = this.form.value;
 
+    const periodicityRule = this.getPeriodicityRuleUpdateData();
+
     const data = {
       name: formModel.name,
       notes: formModel.notes,
@@ -270,6 +275,9 @@ export class ActivityModelFormComponent extends AbstractForm implements OnInit, 
 
         duration: formModel.duration ? Number(formModel.duration) : '',
         durationUnit: formModel.durationUnit,
+
+        periodicityRule,
+
         periodicity: formModel.periodicity || '',
 
         entity: Number(formModel.entity),
@@ -280,6 +288,34 @@ export class ActivityModelFormComponent extends AbstractForm implements OnInit, 
     };
 
     return data;
+  }
+
+
+  getPeriodicityRuleUpdateData() {
+    const formModel = this.form.value;
+
+    if (!formModel.periodicityRule) {
+      return null;
+    }
+
+    if (formModel.periodicityRule === 'OncePerYear-OnFixedDate') {
+      return {
+        ruleType: formModel.periodicityRule,
+        month:  formModel.periodicityMonth ? Number(formModel.periodicityMonth) : '',
+        day: formModel.periodicityDay ? Number(formModel.periodicityDay) : ''
+      };
+    }
+
+    if (formModel.periodicityRule === 'Manual') {
+      return {
+        ruleType: formModel.periodicityRule
+      };
+    }
+
+    return {
+      ruleType: formModel.periodicityRule,
+      day: formModel.periodicityDay ? Number(formModel.periodicityDay) : ''
+    };
   }
 
 
@@ -309,6 +345,10 @@ export class ActivityModelFormComponent extends AbstractForm implements OnInit, 
 
       duration: this.template.duration,
       durationUnit: this.template.durationUnit,
+
+      periodicityRule: this.template.periodicityRule ? this.template.periodicityRule.ruleType : '',
+      periodicityMonth: this.template.periodicityRule ? this.template.periodicityRule.month : '',
+      periodicityDay: this.template.periodicityRule ? this.template.periodicityRule.day : '',
       periodicity: this.template.periodicity,
 
       entity: this.template.entity,
@@ -347,6 +387,8 @@ export class ActivityModelFormComponent extends AbstractForm implements OnInit, 
   private validateFormFields(): void {
     this.validateIntegerValue('dueOnTerm');
     this.validateIntegerValue('duration');
+    this.validateIntegerValue('periodicityDay');
+    this.validatePeriodicity();
   }
 
 
@@ -363,6 +405,28 @@ export class ActivityModelFormComponent extends AbstractForm implements OnInit, 
     }
   }
 
+
+  private validatePeriodicity() {
+    if (this.value('executionMode') !== 'Periodic') {
+      return;
+    }
+
+    if (!this.value('periodicityRule')) {
+      this.addException('The periodicity rule is incomplete.');
+      this.get('periodicityRule').markAsDirty();
+
+    } else if (this.value('periodicityRule') === 'OncePerYear-OnFixedDate' &&
+              !this.value('periodicityMonth')) {
+      this.addException('Periodicity month needed.');
+      this.get('periodicityMonth').markAsDirty();
+
+    } else if (this.value('periodicityRule') !== 'Manual' &&
+              !this.value('periodicityDay')) {
+      this.addException('Periodicity rule is incomplete.');
+      this.get('periodicityDay').markAsDirty();
+    }
+
+  }
 
   // these methods must be handled through component input data (architecture concern)
 
