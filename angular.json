@@ -4,19 +4,28 @@
   "newProjectRoot": "projects",
   "projects": {
     "talanza-frontend": {
+      "i18n": {
+        "locales": {
+          "es": {
+            "translation": "src/i18n/messages.es.xlf",
+            "baseHref": ""
+          }
+        }
+      },
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
       "prefix": "app",
       "schematics": {
         "@schematics/angular:component": {
-          "styleext": "scss"
+          "style": "scss"
         }
       },
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "aot": true,
             "outputPath": "dist/talanza-frontend",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -36,6 +45,12 @@
           },
           "configurations": {
             "production": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -53,15 +68,20 @@
               "buildOptimizer": true
             },
             "es": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.prod.ts"
                 }
               ],
-              "outputPath": "dist/talanza-frontend-es",
+              "outputPath": "dist/talanza-frontend/es",
               "i18nFile": "src/i18n/messages.es.xlf",
-              "i18nFormat": "xlf",
               "i18nLocale": "es",
               "optimization": true,
               "outputHashing": "all",

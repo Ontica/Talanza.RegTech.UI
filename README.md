@@ -4,7 +4,7 @@ Angular-based front-end Regulatory Compliance Solution for the Mexican Oil & Gas
 
 ## Quick start
 
-This project is being built with Angular 8.2.10 and TypeScript 3.5.
+This project is being built with Angular 9 and TypeScript 3.7.
 
 It uses [Angular CLI](https://github.com/angular/angular-cli), so both the CLI and generated project, have dependencies that require Node 10.16 or higher, together with NPM 6.9 or higher.
 
