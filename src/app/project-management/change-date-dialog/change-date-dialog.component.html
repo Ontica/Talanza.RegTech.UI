@@ -11,8 +11,8 @@
       Deadline: {{activity.deadline | date:'dd/LLL/yyyy'}}
       &nbsp; &nbsp; &nbsp;
     </span>
-    <span i18n>
-      Actual End Date:
+    <span>
+      <span i18n>Actual End Date:</span>
       <emp-ng-datepicker formControlName="eventDate"></emp-ng-datepicker>
       <button class="btn" [disabled]="!this.form.valid" (click)="loadWhatIfList()" i18n>Refresh list</button>
     </span>
