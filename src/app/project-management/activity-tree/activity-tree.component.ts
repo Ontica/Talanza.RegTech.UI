@@ -53,6 +53,11 @@ export class ActivityTreeComponent implements OnChanges {
   }
 
 
+  get allCollapsed() {
+    return this.collapsableTreeHandler.allCollapsed;
+  }
+
+
   get hasSelectedActivities() {
     return (this.selectedActivity.uid !== '');
   }
@@ -74,6 +79,12 @@ export class ActivityTreeComponent implements OnChanges {
 
   toggleCollapse(activity: Activity) {
     return this.collapsableTreeHandler.toggleCollapse(activity);
+  }
+
+
+
+  toggleCollapseAll() {
+    this.collapsableTreeHandler.toggleCollapseAll();
   }
 
 

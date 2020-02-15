@@ -18,15 +18,19 @@ export type CollapsableTreeNodeDisplayMode = 'collapsed' | 'expanded' | 'leaf' |
 
 export class CollapsableTree {
 
+  private _allCollapsed = false;
+
   constructor(private allNodes: TreeNode[], private collapsedNodes: string[]) { }
 
+  get allCollapsed() {
+    return this._allCollapsed;
+  }
 
   collapseAll() {
     const mainNodes = this.allNodes.filter(x => isEmpty(x.parent) && this.hasChildren(x));
 
     this.collapsedNodes = Array.from(mainNodes.map(x => x.uid));
   }
-
 
   expandAll() {
     this.collapsedNodes = Array.from([]);
@@ -58,6 +62,15 @@ export class CollapsableTree {
     } else {
       this.collapsedNodes.push(node.uid);
     }
+  }
+
+  toggleCollapseAll() {
+    if (this._allCollapsed) {
+      this.expandAll();
+    } else {
+      this.collapseAll();
+    }
+    this._allCollapsed = !this._allCollapsed;
   }
 
 
