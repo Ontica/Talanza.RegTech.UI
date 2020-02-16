@@ -1,9 +1,19 @@
 <div class="list">
-  <div class="section" i18n>Questions and answers</div>
+  <div class="section" i18n>Annotations</div>
   <div *ngFor="let posting of postingsList" class="posting" #postings>
     <a (click)="onSelect(posting)">{{posting.title}}</a>
     <div class="posting-body">
       {{posting.body}}
+      <br />
+      &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+      &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+      <a (click)="onToggleDelete(posting)">[delete]</a>
+      &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+      &nbsp; &nbsp;
+      <span [hidden]="!showDeleteConfirm(posting)">
+        Confirm delete:
+        <a (click)="onDelete(posting)">[Yes]</a> / <a (click)="onToggleDelete(posting)">[No]</a>
+      </span>
       <br />
       <a *ngIf="posting.fileUrl" class="file-name" (click)="showDocument(posting.fileUrl)" i18n>[Show attached document]</a>
     </div>

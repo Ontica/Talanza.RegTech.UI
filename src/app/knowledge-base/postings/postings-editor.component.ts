@@ -40,11 +40,6 @@ export class PostingsEditorComponent implements OnInit {
   }
 
 
-  onInsert(posting: Posting) {
-
-  }
-
-
   onSave() {
     if (!this.form.valid) {
       return;
@@ -62,7 +57,7 @@ export class PostingsEditorComponent implements OnInit {
     const formGroup = new FormGroup({
       title: new FormControl('', Validators.required),
       body: new FormControl('', Validators.required),
-      fileName: new FormControl('')
+      // fileName: new FormControl('')
     });
 
     this.form = formGroup;
@@ -74,8 +69,8 @@ export class PostingsEditorComponent implements OnInit {
 
     return {
       title: formModel.title,
-      body: formModel.body,
-      fileName: formModel.fileName
+      body: formModel.body
+     // fileName: formModel.fileName
     };
   }
 

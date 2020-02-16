@@ -28,6 +28,7 @@ export class PostingsListComponent implements OnInit, OnChanges {
   postingsList: Posting[] = [];
   selected: Posting = EmptyPosting();
 
+  _showDeleteConfirm = false;
 
   constructor(private store: PostingsService) {}
 
@@ -63,13 +64,33 @@ export class PostingsListComponent implements OnInit, OnChanges {
       });
   }
 
+  onDelete(posting: Posting) {
+    this.selected = EmptyPosting();
+    this.store.deletePosting(this.target.uid, posting.uid)
+      .subscribe(x => {
+        this.postingsList = x,
+        this._displayEditor = false;
+      });
+  }
+
+
   onSelect(posting: Posting) {
     this.selected = posting;
   }
 
 
+  onToggleDelete(posting: Posting) {
+    this._showDeleteConfirm = !this._showDeleteConfirm;
+    this.selected = posting;
+  }
+
   showEditor() {
     return (!this.readonly || this._displayEditor);
+  }
+
+
+  showDeleteConfirm(posting: Posting) {
+    return (this._showDeleteConfirm && this.selected.uid === posting.uid);
   }
 
 
