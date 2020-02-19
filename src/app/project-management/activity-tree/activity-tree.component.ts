@@ -255,6 +255,10 @@ export class ActivityTreeComponent implements OnChanges {
     dialogConfig.height = '400px',
     dialogConfig.width = '600px',
 
+    dialogConfig.data = {
+      insertionPoint: this.selectedActivity
+    };
+
     this.dialog.open(AddEventDialogComponent, dialogConfig);
   }
 

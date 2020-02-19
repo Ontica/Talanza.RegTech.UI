@@ -2,19 +2,39 @@
 
 <mat-dialog-content [formGroup]="form">
 
-  <div class="form-section">
-    <span i18n>Please select an event:</span>
-    <br>
-    <select class="select-box" formControlName="selectedEvent">
-      <option value="" i18n>( Events list )</option>
-      <option *ngFor="let event of events | async"
-              [value]="event.uid">{{event.name}}</option>
-    </select>
-    <br/><br/>
-    <span i18n>Event date:</span>
-    <br/>
-    <emp-ng-datepicker formControlName="eventDate"></emp-ng-datepicker>
-    <button class="btn" [disabled]="!this.form.valid" (click)="loadWhatIfList()" i18n>Show obligations list</button>
+  <div class="form-section column">
+    <div i18n>Please select an event:</div>
+    <div>
+      <select class="select-box" formControlName="selectedEvent">
+        <option value="" i18n>( Events list )</option>
+        <option *ngFor="let event of events | async"
+                [value]="event.uid">{{event.name}}</option>
+      </select>
+    </div>
+    <div *ngIf="insertionPoint?.uid" class="row">Insertion point: {{insertionPoint.name}}</div>
+    <div class="row">
+      <div class="column nowrap">
+        <div i18n>Event date:</div>
+        <div>
+          <emp-ng-datepicker formControlName="eventDate"></emp-ng-datepicker>
+          <button class="btn" [disabled]="!this.form.valid" (click)="loadWhatIfList()" i18n>Show obligations</button>
+        </div>
+      </div>
+      <div *ngIf="insertionPoint?.uid" class="column nowrap">
+        <div i18n>Insert as:</div>
+        <div>
+          <select class="select-box" style="width:280px" formControlName="position">
+            <option value="" i18n>( Insert as )</option>
+            <option value="AsSiblingBeforeInsertionPoint" i18n>As sibling, before insertion point</option>
+            <option value="AsSiblingAfterInsertionPoint" i18n>As sibling, after insertion point</option>
+            <option value="AsChildAsFirstNode" i18n>As the first child of the insertion point</option>
+            <option value="AsChildAsLastNode" i18n>As last child of the insertion point</option>
+            <option value="AsTreeRootAtStart" i18n>At tree root, at the start</option>
+            <option value="AsTreeRootAtEnd" i18n>As tree root, at the end</option>
+          </select>
+        </div>
+      </div>
+    </div>
   </div>
 
   <div class="what-if-section">

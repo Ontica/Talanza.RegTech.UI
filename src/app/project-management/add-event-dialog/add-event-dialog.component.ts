@@ -16,8 +16,9 @@ import { ProjectTemplateStore } from '@app/store/project-template.store';
 import { ProjectStore } from '@app/store/project.store';
 import { WhatIfService } from '@app/services/project-management';
 
-import { ActivityTemplate, Project, StateChange, WhatIfResult } from '@app/models/project-management';
+import { ActivityTemplate, Project, StateChange, WhatIfResult, Activity } from '@app/models/project-management';
 import { TimelineHelper } from '../common/timeline-helper';
+import { isEmpty } from '@app/models/core';
 
 
 @Component({
@@ -32,13 +33,14 @@ export class AddEventDialogComponent implements OnInit {
   project: Project;
   events: Observable<ActivityTemplate[]> = of([]);
   whatIfResult: Observable<WhatIfResult> = of();
+  insertionPoint: Activity;
 
   constructor(private projectStore: ProjectStore,
               private templateStore: ProjectTemplateStore,
               private whatIfService: WhatIfService,
               private dialogRef: MatDialogRef<AddEventDialogComponent>,
               @Inject(MAT_DIALOG_DATA) data) {
-
+    this.insertionPoint = data.insertionPoint;
   }
 
 
@@ -74,7 +76,7 @@ export class AddEventDialogComponent implements OnInit {
     const data = this.getFormData();
 
     this.whatIfResult =
-              this.whatIfService.whatIfCreatedFromEvent(this.project, data.eventUID, data.eventDate);
+        this.whatIfService.whatIfCreatedFromEvent(this.project, data.activityTemplateUID, data.eventDate);
   }
 
 
@@ -90,7 +92,7 @@ export class AddEventDialogComponent implements OnInit {
 
     const data = this.getFormData();
 
-    this.projectStore.createFromActivityTemplate(this.project, data.eventUID, data.eventDate);
+    this.projectStore.createFromActivityTemplate(this.project, data);
 
     this.dialogRef.close(this.form.value);
   }
@@ -101,11 +103,9 @@ export class AddEventDialogComponent implements OnInit {
 
   private createFormGroup() {
     const formGroup = new FormGroup({
-
       selectedEvent: new FormControl('', Validators.required),
-
       eventDate: new FormControl('', Validators.required),
-
+      position: new FormControl('AsTreeRootAtStart', Validators.required)
     });
 
     this.form = formGroup;
@@ -115,9 +115,17 @@ export class AddEventDialogComponent implements OnInit {
   private getFormData() {
     const formModel = this.form.value;
 
+    if (isEmpty(this.insertionPoint)) {
+      return {
+        activityTemplateUID: formModel.selectedEvent,
+        eventDate: formModel.eventDate
+      };
+    }
     return {
-      eventUID: formModel.selectedEvent,
-      eventDate: formModel.eventDate
+      activityTemplateUID: formModel.selectedEvent,
+      eventDate: formModel.eventDate,
+      insertionPointUID: this.insertionPoint.uid,
+      insertionPosition: formModel.position
     };
   }
 
