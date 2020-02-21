@@ -14,6 +14,11 @@ import { ActivityTemplate } from './project-template';
 export type WhatIfOperation = 'CreateFromTemplate' | 'Complete' | 'Reactivate';
 
 
+export interface ProjectProcess extends Identifiable {
+  level: number;
+}
+
+
 export interface WhatIfResult {
 
   sourceOperation: WhatIfOperation;

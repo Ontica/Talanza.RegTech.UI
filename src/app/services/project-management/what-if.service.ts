@@ -11,13 +11,31 @@ import { Assertion, HttpService } from '@app/core';
 
 import { DateString } from '@app/models/core';
 
-import { Activity, Project, WhatIfResult } from '@app/models/project-management';
+import { Activity, Project, ProjectProcess, WhatIfResult } from '@app/models/project-management';
 
 
 @Injectable()
 export class WhatIfService {
 
   constructor(private http: HttpService) { }
+
+
+  processesCheckList(project: Project): Observable<ProjectProcess[]> {
+    Assertion.assertValue(project, 'project');
+
+    const path = `v1/project-management/projects/${project.uid}/processes-check-list`;
+
+    return this.http.get<ProjectProcess[]>(path);
+  }
+
+
+  whatIfUpdatedWithLastProcessChanges(project: Project, process: ProjectProcess): Observable<WhatIfResult> {
+    Assertion.assertValue(process, 'process');
+
+    const path = `v1/project-management/projects/${project.uid}/what-if-updated-with-last-process-changes/${process.uid}`;
+
+    return this.http.get<WhatIfResult>(path);
+  }
 
 
   whatIfCompleted(activity: Activity, completedDate: DateString): Observable<WhatIfResult> {

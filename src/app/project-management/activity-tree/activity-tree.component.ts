@@ -16,6 +16,7 @@ import { ProjectModel } from '@app/store/project.store';
 import { Activity, EmptyActivity, ActivityOperation } from '@app/models/project-management';
 
 import { AddEventDialogComponent } from '../add-event-dialog/add-event-dialog.component';
+import { CheckProcessesDialogComponent } from '../check-processes-dialog/check-processes-dialog.component';
 
 
 import { TimelineHelper } from '../common/timeline-helper';
@@ -262,6 +263,18 @@ export class ActivityTreeComponent implements OnChanges {
     };
 
     this.dialog.open(AddEventDialogComponent, dialogConfig);
+  }
+
+
+  openCheckProcessesDialog() {
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.height = '400px',
+    dialogConfig.width = '700px',
+
+    this.dialog.open(CheckProcessesDialogComponent, dialogConfig);
   }
 
 
