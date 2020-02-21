@@ -6,7 +6,7 @@
  */
 
 import { Component, EventEmitter,
-         Input, OnChanges, Output, SimpleChanges } from '@angular/core';
+         Input, OnChanges, Output, SimpleChanges, ChangeDetectionStrategy } from '@angular/core';
 
 import { Assertion } from '@app/core';
 
@@ -20,6 +20,7 @@ import { InboxType, TimelineHelper } from '../common/timeline-helper';
   selector: 'emp-steps-activity-timeline',
   templateUrl: './activity-timeline.component.html',
   styleUrls: ['./activity-timeline.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ActivityTimelineComponent implements OnChanges {
 

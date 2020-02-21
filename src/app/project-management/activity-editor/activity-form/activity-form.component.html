@@ -1,5 +1,4 @@
-<form class="form-container" autocomplete="off" [class.submitted]="submitted" [formGroup]="form" (ngSubmit)="onSubmit()"
-  (keydown)="keyboardHandler($event)">
+<form class="form-container" autocomplete="off" [class.submitted]="submitted" [formGroup]="form" (ngSubmit)="onSubmit()">
 
   <fieldset>
 
@@ -40,7 +39,7 @@
         <td>
           <input type="text" class="text-box" style="width:40px" formControlName="durationValue">
 
-          <select class="select-box" style="width:130px" formControlName="durationType">
+          <select class="select-box" style="width:120px" formControlName="durationType">
             <option value="" i18n>( Time unit )</option>
             <option value="BusinessDays" i18n>Business days</option>
             <option value="CalendarDays" i18n>Calendar days</option>
@@ -55,12 +54,13 @@
         <td>
           <input type="text" class="text-box" style="width:40px" formControlName="warnDays">
 
-          <select class="select-box" style="width:246px" formControlName="warnType">
+          <select class="select-box" style="width:244px" formControlName="warnType">
             <option value="" i18n>( Configuration )</option>
             <option value="CalendarDays" i18n>Calendar days before the deadline</option>
             <option value="Default" i18n>Use Default Configuration</option>
             <option value="NA" i18n>Do not emit alerts</option>
           </select>
+          <span><mat-icon>person_add</mat-icon></span>
         </td>
       </tr>
       <tr class="border-top">
@@ -142,6 +142,11 @@
           <button *ngIf="!disabled" type="button" class="btn right"
                   (click)="onCancelEdition()" i18n>Cancel edition</button>
 
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+        <br><br><br><br><br><br><br><br><br><br>&nbsp;
         </td>
       </tr>
     </table>

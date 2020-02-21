@@ -6,13 +6,13 @@
  */
 
 import { Component, EventEmitter, Input,
-         OnChanges, OnInit, Output } from '@angular/core';
+         OnChanges, OnInit, Output, OnDestroy } from '@angular/core';
 
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 
-import { Observable, of } from 'rxjs';
+import { Observable, of, Subject } from 'rxjs';
 
 import { ProjectStore } from '@app/store/project.store';
 import { TaskService } from '@app/services/project-management/task.service';
@@ -25,6 +25,7 @@ import { Contact, DateStringLibrary, isTypeOf } from '@app/models/core';
 import { AbstractForm } from '@app/shared/services';
 import { SharedService } from '@app/shared/shared.service';
 import { ChangeDateDialogComponent } from '@app/project-management/change-date-dialog/change-date-dialog.component';
+import { takeUntil } from 'rxjs/operators';
 
 
 enum FormMessages {
@@ -41,7 +42,7 @@ enum FormMessages {
   templateUrl: './activity-form.component.html',
   styleUrls: ['./activity-form.component.scss']
 })
-export class ActivityFormComponent extends AbstractForm implements OnInit, OnChanges {
+export class ActivityFormComponent extends AbstractForm implements OnInit, OnChanges, OnDestroy {
 
   @Output() activityDelete = new EventEmitter();
   @Output() activityChange = new EventEmitter<Activity>();
@@ -53,6 +54,8 @@ export class ActivityFormComponent extends AbstractForm implements OnInit, OnCha
 
   responsibles: Observable<Contact[]> = of([]);
   themesList: Observable<string[]> = of([]);
+
+  private unsubscribe: Subject<void> = new Subject();
 
   constructor(private app: SharedService,
               private projectStore: ProjectStore,
@@ -74,6 +77,12 @@ export class ActivityFormComponent extends AbstractForm implements OnInit, OnCha
   ngOnInit() {
     this.loadResponsibles();
     this.loadThemes();
+  }
+
+
+  ngOnDestroy() {
+    this.unsubscribe.next();
+    this.unsubscribe.complete();
   }
 
 
@@ -365,11 +374,13 @@ export class ActivityFormComponent extends AbstractForm implements OnInit, OnCha
   // these methods must be handled through component input data (architecture concern)
 
   private loadResponsibles() {
-    this.responsibles = this.projectStore.responsibles(this.activity.project);
+    this.responsibles = this.projectStore.responsibles(this.activity.project)
+                                         .pipe(takeUntil(this.unsubscribe));
   }
 
   private loadThemes() {
-    this.themesList = this.projectStore.themes;
+    this.themesList = this.projectStore.themes
+                          .pipe(takeUntil(this.unsubscribe));
   }
 
 }

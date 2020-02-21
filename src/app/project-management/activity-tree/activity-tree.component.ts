@@ -6,7 +6,7 @@
  */
 
 import { Component, EventEmitter,
-         Input, OnChanges, Output } from '@angular/core';
+         Input, OnChanges, Output, ChangeDetectionStrategy } from '@angular/core';
 
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { CdkDragDrop } from '@angular/cdk/drag-drop';
@@ -17,6 +17,7 @@ import { Activity, EmptyActivity, ActivityOperation } from '@app/models/project-
 
 import { AddEventDialogComponent } from '../add-event-dialog/add-event-dialog.component';
 
+
 import { TimelineHelper } from '../common/timeline-helper';
 
 import { CollapsableTree, CollapsableTreeNodeDisplayMode } from '../common/collapsable-tree';
@@ -26,6 +27,7 @@ import { CollapsableTree, CollapsableTreeNodeDisplayMode } from '../common/colla
   selector: 'emp-steps-activity-tree',
   templateUrl: './activity-tree.component.html',
   styleUrls: ['./activity-tree.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ActivityTreeComponent implements OnChanges {
 
@@ -69,10 +71,10 @@ export class ActivityTreeComponent implements OnChanges {
 
 
   activityDisplayMode(activity: Activity): CollapsableTreeNodeDisplayMode {
-    if (activity.status === 'Completed' &&
-        activity.template && activity.template.executionMode === 'Periodic') {
-      return null;
-    }
+    // if (activity.status === 'Completed' &&
+    //     activity.template && activity.template.executionMode === 'Periodic') {
+    //   return null;
+    // }
     return this.collapsableTreeHandler.nodeDisplayMode(activity);
   }
 
