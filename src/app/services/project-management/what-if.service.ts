@@ -30,9 +30,11 @@ export class WhatIfService {
 
 
   whatIfUpdatedWithLastProcessChanges(project: Project, process: ProjectProcess): Observable<WhatIfResult> {
+    Assertion.assertValue(project, 'project');
     Assertion.assertValue(process, 'process');
 
-    const path = `v1/project-management/projects/${project.uid}/what-if-updated-with-last-process-changes/${process.uid}`;
+    const path =
+      `v1/project-management/projects/${project.uid}/activities/${process.startActivity.uid}/what-if-updated-with-last-process-changes`;
 
     return this.http.get<WhatIfResult>(path);
   }

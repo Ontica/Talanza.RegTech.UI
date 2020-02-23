@@ -13,7 +13,7 @@ import { ProjectService } from '@app/services/project-management';
 
 import { Contact, Empty } from '@app/models/core';
 
-import { Activity, Contract, Project, Stage } from '@app/models/project-management';
+import { Activity, Contract, Project, Stage, ProjectProcess } from '@app/models/project-management';
 
 import { ColoredTag } from '@app/models/user-interface';
 
@@ -107,7 +107,7 @@ export class ProjectStore {
 
 
   getMasterProject() {
-   // this.projectStore;
+    // this.projectStore;
 
   }
 
@@ -124,90 +124,100 @@ export class ProjectStore {
 
   changeParent(activity: Activity, newParent: Activity): Promise<Activity> {
     return this.projectService.changeParent(activity, newParent)
-               .toPromise()
-               .then(x => {
-                   this.updateSelectedProject(activity.project);
-                   return x;
-              });
+      .toPromise()
+      .then(x => {
+        this.updateSelectedProject(activity.project);
+        return x;
+      });
   }
 
 
   completeActivity(activity: Activity, updateData: Partial<Activity>): Promise<Activity> {
     return this.projectService.completeActivity(activity, updateData)
-               .toPromise()
-               .then( x => {
-                   this.updateSelectedProject(activity.project);
-                   Object.assign(activity, x);
+      .toPromise()
+      .then(x => {
+        this.updateSelectedProject(activity.project);
+        Object.assign(activity, x);
 
-                   return activity;
-              });
+        return activity;
+      });
   }
 
 
   createFromActivityTemplate(project: Project,
-                             createFromTemplateData: any): Promise<Activity> {
-      return this.projectService.createFromActivityTemplate(project, createFromTemplateData)
-                 .toPromise()
-                 .then((x) => {
-                  this.updateSelectedProject(project);
-                  return x;
-             });
+    createFromTemplateData: any): Promise<Activity> {
+    return this.projectService.createFromActivityTemplate(project, createFromTemplateData)
+      .toPromise()
+      .then((x) => {
+        this.updateSelectedProject(project);
+        return x;
+      });
   }
 
 
   deleteActivity(activity: Activity): Promise<void> {
     return this.projectService.deleteActivity(activity)
-               .toPromise()
-               .then(() => {
-                  this.updateSelectedProject(activity.project);
-                  Object.assign(activity, null);
-               });
+      .toPromise()
+      .then(() => {
+        this.updateSelectedProject(activity.project);
+        Object.assign(activity, null);
+      });
   }
 
 
   insertActivity(project: Project,
-                 newActivity: { name: string, position: number }): Promise<Activity> {
+    newActivity: { name: string, position: number }): Promise<Activity> {
 
     return this.projectService.insertActivity(project, newActivity)
-               .toPromise()
-               .then(x => {
-                  this.updateSelectedProject(project);
-                  return x;
-             });
+      .toPromise()
+      .then(x => {
+        this.updateSelectedProject(project);
+        return x;
+      });
+  }
+
+
+  mergeProcessChanges(project: Project, process: ProjectProcess) {
+    return this.projectService.mergeProcessChanges(project, process)
+      .toPromise()
+      .then(x => {
+        this.updateSelectedProject(project);
+        return x;
+      });
   }
 
 
   moveActivity(activity: Activity, newPosition: number): Promise<Activity> {
     return this.projectService.moveActivity(activity, newPosition)
-               .toPromise()
-               .then(x => {
-                  this.updateSelectedProject(activity.project);
-                  return x;
-                });
+      .toPromise()
+      .then(x => {
+        this.updateSelectedProject(activity.project);
+        return x;
+      });
   }
 
 
   reactivateActivity(activity: Activity): Promise<Activity> {
     return this.projectService.reactivateActivity(activity)
-               .toPromise()
-               .then(x => {
-                   this.updateSelectedProject(activity.project);
-                   Object.assign(activity, x);
+      .toPromise()
+      .then(x => {
+        this.updateSelectedProject(activity.project);
+        Object.assign(activity, x);
 
-                   return activity;
-              });
+        return activity;
+      });
   }
 
 
   updateActivity(activity: Activity, updateData: Partial<Activity>): Promise<Activity> {
     return this.projectService.updateActivity(activity, updateData)
-               .toPromise()
-               .then( x => {
-                  this.updateSelectedProject(activity.project);
-                  Object.assign(activity, x);
+      .toPromise()
+      .then(x => {
+        this.updateSelectedProject(activity.project);
+        Object.assign(activity, x);
 
-                  return activity;
-               });
+        return activity;
+      });
   }
 
 
@@ -226,57 +236,57 @@ export class ProjectStore {
 
   private loadProjectList() {
     this.projectService.getProjectList()
-        .subscribe(
-            data =>
-              this._projects.next(List(data))
-            ,
-            err => console.log('Error reading project data', err)
-        );
+      .subscribe(
+        data =>
+          this._projects.next(List(data))
+        ,
+        err => console.log('Error reading project data', err)
+      );
   }
 
 
   private loadResponsibles() {
     this.projectService.getResponsiblesList(undefined)
-        .subscribe(
-            data =>
-              this._responsibles.next(List(data))
-            ,
-            err => console.log('Error reading responsibles data', err)
-        );
+      .subscribe(
+        data =>
+          this._responsibles.next(List(data))
+        ,
+        err => console.log('Error reading responsibles data', err)
+      );
   }
 
 
   private loadTags() {
     this.projectService.getTags()
-        .subscribe(
-            data =>
-              this._tags.next(data)
-            ,
-            err => console.log('Error reading tags data', err)
-        );
+      .subscribe(
+        data =>
+          this._tags.next(data)
+        ,
+        err => console.log('Error reading tags data', err)
+      );
   }
 
 
   private loadThemes() {
     this.projectService.getThemesList()
-        .subscribe(
-            data =>
-              this._themes.next(data)
-            ,
-            err => console.log('Error reading topics', err)
-        );
+      .subscribe(
+        data =>
+          this._themes.next(data)
+        ,
+        err => console.log('Error reading topics', err)
+      );
 
   }
 
 
   private loadStages() {
     this.projectService.getStages()
-        .subscribe(
-            data =>
-              this._stages.next(List(data))
-            ,
-            err => console.log('Error reading stages data', err)
-        );
+      .subscribe(
+        data =>
+          this._stages.next(List(data))
+        ,
+        err => console.log('Error reading stages data', err)
+      );
   }
 
 

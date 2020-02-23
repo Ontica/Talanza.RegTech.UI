@@ -16,7 +16,7 @@ import { ProjectTemplateStore } from '@app/store/project-template.store';
 import { ProjectStore } from '@app/store/project.store';
 import { WhatIfService } from '@app/services/project-management';
 
-import { Project, StateChange, WhatIfResult, Activity, ProjectProcess } from '@app/models/project-management';
+import { Project, ProjectProcess, WhatIfResult, StateChange } from '@app/models/project-management';
 import { TimelineHelper } from '../common/timeline-helper';
 
 
@@ -30,8 +30,7 @@ export class CheckProcessesDialogComponent implements OnInit {
   form: FormGroup;
 
   project: Project;
-  processesList: Observable<ProjectProcess[]> = of([]);
-  selectedProcess: ProjectProcess;
+  processesList: ProjectProcess[] = [];
   whatIfResult: Observable<WhatIfResult> = of();
 
   constructor(private projectStore: ProjectStore,
@@ -45,7 +44,10 @@ export class CheckProcessesDialogComponent implements OnInit {
     this.projectStore.selectedProject().subscribe (
       x => {
         this.project = x.project;
-        this.processesList = this.whatIfService.processesCheckList(this.project);
+        this.whatIfService.processesCheckList(this.project)
+                          .subscribe(
+                            y => this.processesList = y
+                          );
       }
     );
 
@@ -65,13 +67,11 @@ export class CheckProcessesDialogComponent implements OnInit {
   }
 
 
-  loadProcessChangesList() {
-    if (!this.form.valid) {
-      return;
-    }
+  loadProcessChangesList(processUID: string) {
+    const selectedProcess = this.processesList.find(x => x.uid === processUID);
 
     this.whatIfResult =
-        this.whatIfService.whatIfUpdatedWithLastProcessChanges(this.project, this.selectedProcess);
+            this.whatIfService.whatIfUpdatedWithLastProcessChanges(this.project, selectedProcess);
   }
 
 
@@ -80,14 +80,10 @@ export class CheckProcessesDialogComponent implements OnInit {
   }
 
 
-  save() {
-    if (!this.form.valid) {
-      return;
-    }
+  mergeProcessChanges(processUID: string) {
+    const selectedProcess = this.processesList.find(x => x.uid === processUID);
 
-    const data = this.getFormData();
-
-    this.projectStore.createFromActivityTemplate(this.project, data);
+    this.projectStore.mergeProcessChanges(this.project, selectedProcess);
 
     this.dialogRef.close(this.form.value);
   }

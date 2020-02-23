@@ -11,7 +11,8 @@ import { catchError } from 'rxjs/operators';
 
 import { Assertion, CoreService } from '@app/core';
 
-import { Activity, Contract, Project, Resource, Stage } from '@app/models/project-management';
+import { Activity, Contract, Project,
+         ProjectProcess, Resource, Stage } from '@app/models/project-management';
 
 import { Contact } from '@app/models/core';
 import { ColoredTag } from '@app/models/user-interface';
@@ -227,6 +228,17 @@ export class ProjectService {
                          .pipe(
                             catchError((e) => this.core.http.throw(e, Errors.INSERT_ACTIVITY))
                          );
+  }
+
+
+  mergeProcessChanges(project: Project, process: ProjectProcess): Observable<Activity> {
+    Assertion.assertValue(project, 'project');
+    Assertion.assertValue(process, 'process');
+
+    const path =
+        `v1/project-management/projects/${project.uid}/activities/${process.startActivity.uid}/update-with-last-process-changes`;
+
+    return this.core.http.post<Activity>(path);
   }
 
 

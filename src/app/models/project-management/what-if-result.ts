@@ -11,11 +11,16 @@ import { Activity } from './activity';
 import { ActivityTemplate } from './project-template';
 
 
-export type WhatIfOperation = 'CreateFromTemplate' | 'Complete' | 'Reactivate';
+export type WhatIfOperation = 'CreateFromTemplate' | 'Complete' | 'Reactivate'
+                            | 'UpdateDeadline' | 'UpdateProcessChanges';
+
+export type ProcessMatchResult = 'Unknown' | 'MatchedEqual' | 'MatchedWithDataChanges' |
+        'MatchedWithDeadlineChanges' | 'MatchedWithDeadlineAndDataChanges' |
+        'DeletedFromProject' | 'DeletedFromProcess' | 'OnlyInProject' | 'OnlyInProcess' | 'OrphanInProject';
 
 
 export interface ProjectProcess extends Identifiable {
-  level: number;
+  startActivity: Activity;
 }
 
 
@@ -48,7 +53,10 @@ export interface StateChange extends Identifiable {
 
   notes: string;
 
+  currentDeadline: DateString;
+
   deadline: DateString;
+
 
   plannedEndDate: DateString;
 
@@ -61,5 +69,7 @@ export interface StateChange extends Identifiable {
   projectUID: string;
 
   templateUID: string;
+
+  matchResult: ProcessMatchResult;
 
 }

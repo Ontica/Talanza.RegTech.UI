@@ -5,12 +5,12 @@
   <div class="form-section column nowrap">
     <div i18n>Processes in this contract that have changes:</div>
     <div>
-      <select class="select-box" formControlName="selectedProcess">
+      <select class="select-box" #process formControlName="selectedProcessUID">
         <option value="" i18n>( Processes with changes )</option>
-        <option *ngFor="let process of processesList | async"
-                [value]="process.uid">{{'-'.repeat(process.level -1)}} {{process.name}}</option>
+        <option *ngFor="let process of processesList"
+                [value]="process.uid">{{'-'.repeat(process.startActivity.level - 1)}} {{process.name}}</option>
       </select>
-      <button class="btn" [disabled]="!this.form.valid" (click)="loadProcessChangesList()" i18n>Show changes</button>
+      <button class="btn" [disabled]="!this.form.valid" (click)="loadProcessChangesList(process.value)" i18n>Show changes</button>
     </div>
   </div>
 
@@ -33,14 +33,17 @@
 
           <div class="activity-status">
               <div class="activity-theme" i18n>
-                {{stateChange.theme || 'No topic'}}
+                {{stateChange.theme || 'No topic'}} | Match result: {{ stateChange.matchResult }}
               </div>
 
               <div class="right-column nowrap"
                    [style.color]="timelineHelper.getTimelineColor(stateChange, stateChange.deadline)">
                 <div i18n>Deadline:</div>
                 <div i18n>
-                  {{(stateChange.deadline | date:'dd/LLL/yyyy') || 'Not determinated'}}
+                  {{(stateChange.deadline | date:'dd/LLL/yyyy') || 'Unchanged'}}
+                </div>
+                <div i18n *ngIf="stateChange.currentDeadline">
+                  (current: {{(stateChange.currentDeadline | date:'dd/LLL/yyyy') }})
                 </div>
               </div>
           </div>
@@ -54,7 +57,8 @@
 </mat-dialog-content>
 
 <mat-dialog-actions>
-  <button class="btn btn-margin-right" (click)="close()" i18n>Close</button>
+  <button class="btn-action btn-margin-right" [disabled]="!this.form.valid"
+          (click)="mergeProcessChanges(process.value)" i18n>Update contract</button>
 
-  <button class="btn-action right" [disabled]="!this.form.valid" (click)="save()" i18n>Update contract</button>
+  <button class="btn right" (click)="close()" i18n>Close</button>
 </mat-dialog-actions>
