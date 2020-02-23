@@ -14,7 +14,7 @@ export class ExceptionHandler extends ErrorHandler {
 
   // private trace: any[] = [];
 
-  private verbose = false;
+  private verbose = true;
 
   constructor() {
     super();
