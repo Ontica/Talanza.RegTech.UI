@@ -35,7 +35,7 @@
       <emp-kb-postings-list [target]="activity"></emp-kb-postings-list>
     </mat-tab>
 
-    <mat-tab label="Regulation" [disabled]="!activity.template" i18n-label>
+    <mat-tab label="Regulation" [disabled]="!activity.template?.uid" i18n-label>
       <div class="expand-no-scroll">
         <emp-steps-activity-designer
            [activityTemplate]="activity.template"
