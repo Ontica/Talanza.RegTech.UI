@@ -73,7 +73,10 @@ export class ProjectFilesService {
     formData.append('tags', metadata.tags);
     formData.append('topics', metadata.topics);
 
-    return this.core.http.post<MediaFile>(path, formData);
+    return this.core.http.post<MediaFile>(path, formData, {
+      reportProgress: true,
+      observe: 'events'
+    });
   }
 
 
