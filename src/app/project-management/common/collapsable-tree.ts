@@ -18,7 +18,7 @@ export type CollapsableTreeNodeDisplayMode = 'collapsed' | 'expanded' | 'leaf' |
 
 export class CollapsableTree {
 
-  private _allCollapsed = false;
+  private _allCollapsed = true;
 
   constructor(private allNodes: TreeNode[], private collapsedNodes: string[]) { }
 

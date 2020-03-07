@@ -49,10 +49,13 @@ export class ActivityTreeComponent implements OnChanges {
 
 
   ngOnChanges() {
+    this.collapsableTreeHandler = new CollapsableTree(this.project.activities,
+                                                      this.collapsedActivities);
+
     if (this.selectedActivity.project.uid !== this.project.project.uid) {
       this.selectedActivity = EmptyActivity;
+      this.collapsableTreeHandler.collapseAll();
     }
-    this.collapsableTreeHandler = new CollapsableTree(this.project.activities, this.collapsedActivities);
   }
 
 
