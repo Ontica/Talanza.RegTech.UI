@@ -85,10 +85,10 @@ export class ProjectService {
   }
 
 
-  getResourcesList(projectUID: string): Observable<Resource[]> {
-    const path = `v1/project-management/projects/${projectUID}/resources`;
+  getResourcesList(): Observable<string[]> {
+    const path = `v1/project-management/resources`;
 
-    return this.core.http.get<Resource[]>(path);
+    return this.core.http.get<string[]>(path);
   }
 
 

@@ -32,6 +32,8 @@ export class ProjectStore {
 
   private _projects: BehaviorSubject<List<Project>> = new BehaviorSubject(List([]));
 
+  private _resources: BehaviorSubject<string[]> = new BehaviorSubject([]);
+
   private _responsibles: BehaviorSubject<List<Project>> = new BehaviorSubject(List([]));
 
   private _stages: BehaviorSubject<List<Stage>> = new BehaviorSubject(List([]));
@@ -68,6 +70,11 @@ export class ProjectStore {
 
   get projects(): Observable<List<Project>> {
     return this._projects.asObservable();
+  }
+
+
+  get resources(): Observable<string[]> {
+    return this._resources.asObservable();
   }
 
 
@@ -227,6 +234,7 @@ export class ProjectStore {
   private loadInitialData() {
     this.loadProjectList();
     this.loadResponsibles();
+    this.loadResources();
     this.loadTags();
     this.loadThemes();
     this.loadStages();
@@ -241,6 +249,17 @@ export class ProjectStore {
           this._projects.next(List(data))
         ,
         err => console.log('Error reading project data', err)
+      );
+  }
+
+
+  private loadResources() {
+    this.projectService.getResourcesList()
+      .subscribe(
+        data =>
+          this._resources.next(data)
+        ,
+        err => console.log('Error reading resources', err)
       );
   }
 

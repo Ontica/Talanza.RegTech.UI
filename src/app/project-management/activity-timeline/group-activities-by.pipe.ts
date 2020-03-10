@@ -96,12 +96,12 @@ export class GroupActivitiesByPipe implements PipeTransform  {
 
 
   private groupByResource(data: Array<Activity>): Array<{key, value}> {
-    const EMPTY_RESOURCE_GROUP = 'Contract';
+    const EMPTY_RESOURCE_GROUP = 'No resource';
     const groups = data.reduce((previous, current) => {
 
       let resourceName: string;
 
-      if (current['resource'] !== '' && current['resource'] !== 'Contrato') {
+      if (current['resource'] !== '') {
         resourceName = current['resource'];
       } else {
         resourceName = EMPTY_RESOURCE_GROUP;

@@ -52,8 +52,10 @@ export class ActivityFormComponent extends AbstractForm implements OnInit, OnCha
 
   form: FormGroup;
 
+  resourcesList: Observable<string[]> = of([]);
   responsibles: Observable<Contact[]> = of([]);
   themesList: Observable<string[]> = of([]);
+
 
   private unsubscribe: Subject<void> = new Subject();
 
@@ -75,6 +77,7 @@ export class ActivityFormComponent extends AbstractForm implements OnInit, OnCha
 
 
   ngOnInit() {
+    this.loadResources();
     this.loadResponsibles();
     this.loadThemes();
   }
@@ -279,7 +282,7 @@ export class ActivityFormComponent extends AbstractForm implements OnInit, OnCha
       name: this.activity.name,
       notes: this.activity.notes,
       theme: this.activity.theme,
-      resource: this.activity.resource || 'Contrato',
+      resource: this.activity.resource || '',
 
       deadline: this.activity.deadline,
       plannedEndDate: this.activity.plannedEndDate,
@@ -371,12 +374,21 @@ export class ActivityFormComponent extends AbstractForm implements OnInit, OnCha
     }
   }
 
+
   // these methods must be handled through component input data (architecture concern)
+
+
+  private loadResources() {
+    this.resourcesList = this.projectStore.resources
+                             .pipe(takeUntil(this.unsubscribe));
+  }
+
 
   private loadResponsibles() {
     this.responsibles = this.projectStore.responsibles(this.activity.project)
                                          .pipe(takeUntil(this.unsubscribe));
   }
+
 
   private loadThemes() {
     this.themesList = this.projectStore.themes
