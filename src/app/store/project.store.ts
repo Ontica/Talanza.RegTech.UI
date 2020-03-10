@@ -247,6 +247,9 @@ export class ProjectStore {
       .subscribe(
         data => {
           this._projects.next(List(data));
+          if (data.length === 1) {
+            this.selectProject(data[0]);
+          }
         },
         err => console.log('Error reading project data', err)
       );
