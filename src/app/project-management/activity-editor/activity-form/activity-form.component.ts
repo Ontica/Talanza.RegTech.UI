@@ -54,6 +54,7 @@ export class ActivityFormComponent extends AbstractForm implements OnInit, OnCha
 
   resourcesList: Observable<string[]> = of([]);
   responsibles: Observable<Contact[]> = of([]);
+  tagsList: Observable<string[]> = of([]);
   themesList: Observable<string[]> = of([]);
 
 
@@ -80,6 +81,7 @@ export class ActivityFormComponent extends AbstractForm implements OnInit, OnCha
     this.loadResources();
     this.loadResponsibles();
     this.loadThemes();
+    this.loadTags();
   }
 
 
@@ -182,6 +184,7 @@ export class ActivityFormComponent extends AbstractForm implements OnInit, OnCha
       notes: new FormControl(),
       theme: new FormControl(),
       resource: new FormControl(),
+      tags: new FormControl(),
 
       deadline: new FormControl(),
       plannedEndDate: new FormControl(),
@@ -257,6 +260,8 @@ export class ActivityFormComponent extends AbstractForm implements OnInit, OnCha
       notes: formModel.notes,
       theme: formModel.theme,
       resource: formModel.resource,
+      tags: formModel.tags,
+
       deadline: formModel.deadline,
       plannedEndDate: formModel.plannedEndDate,
       actualStartDate: formModel.actualStartDate,
@@ -283,6 +288,7 @@ export class ActivityFormComponent extends AbstractForm implements OnInit, OnCha
       notes: this.activity.notes,
       theme: this.activity.theme,
       resource: this.activity.resource || '',
+      tags: this.activity.tags,
 
       deadline: this.activity.deadline,
       plannedEndDate: this.activity.plannedEndDate,
@@ -387,6 +393,12 @@ export class ActivityFormComponent extends AbstractForm implements OnInit, OnCha
   private loadResponsibles() {
     this.responsibles = this.projectStore.responsibles(this.activity.project)
                                          .pipe(takeUntil(this.unsubscribe));
+  }
+
+
+  private loadTags() {
+    this.tagsList = this.projectStore.tags
+                          .pipe(takeUntil(this.unsubscribe));
   }
 
 

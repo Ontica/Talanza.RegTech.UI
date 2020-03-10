@@ -50,7 +50,7 @@ export interface Activity extends Identifiable, PartitionedType {
 
   theme: string;
   resource: string;
-  tags: string[];
+  tags: string | string[];
   responsible: Contact;
 
   template?: ActivityTemplate;
@@ -78,7 +78,7 @@ export const EmptyActivity: Activity = {
 
   theme: '',
   resource: '',
-  tags: [],
+  tags: '',
   position: 0,
   level: 0,
 

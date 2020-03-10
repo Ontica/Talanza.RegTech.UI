@@ -38,7 +38,7 @@ export class ProjectStore {
 
   private _stages: BehaviorSubject<List<Stage>> = new BehaviorSubject(List([]));
 
-  private _tags: BehaviorSubject<ColoredTag[]> = new BehaviorSubject([]);
+  private _tags: BehaviorSubject<string[]> = new BehaviorSubject([]);
 
   private _themes: BehaviorSubject<string[]> = new BehaviorSubject([]);
 
@@ -83,7 +83,7 @@ export class ProjectStore {
   }
 
 
-  get tags(): Observable<ColoredTag[]> {
+  get tags(): Observable<string[]> {
     return this._tags.asObservable();
   }
 
@@ -245,9 +245,9 @@ export class ProjectStore {
   private loadProjectList() {
     this.projectService.getProjectList()
       .subscribe(
-        data =>
-          this._projects.next(List(data))
-        ,
+        data => {
+          this._projects.next(List(data));
+        },
         err => console.log('Error reading project data', err)
       );
   }

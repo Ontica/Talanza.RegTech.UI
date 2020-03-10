@@ -105,7 +105,13 @@
             <option *ngFor="let resourceName of resourcesList | async" [value]="resourceName">{{resourceName}}</option>
           </select>
         </td>
-        <td colspan="2">&nbsp;</td>
+        <td i18n>Tags:</td>
+        <td>
+          <select class="select-box" style="width:336px" formControlName="tags">
+            <option value="">No tags</option>
+            <option *ngFor="let tagName of tagsList | async" [value]="tagName">{{tagName}}</option>
+          </select>
+        </td>
       </tr>
     </table>
 

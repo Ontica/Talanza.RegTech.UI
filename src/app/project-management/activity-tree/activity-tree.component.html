@@ -78,7 +78,7 @@
 
                     <div class="activity-theme" i18n>
                       {{activity.theme || 'No topic'}}<br/>
-                      {{activity.project.name}} | {{activity.resource || 'No resource' }}
+                      {{activity.project.name}} | {{activity.resource || 'No resource' }} | {{activity.tags || 'No tags' }}
                     </div>
 
                     <div *ngIf="activity.deadline" class="column nowrap"

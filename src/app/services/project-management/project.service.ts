@@ -123,10 +123,10 @@ export class ProjectService {
   }
 
 
-  getTags(): Observable<ColoredTag[]> {
+  getTags(): Observable<string[]> {
     const path = `v1/project-management/tags`;
 
-    return this.core.http.get<any[]>(path);
+    return this.core.http.get<string[]>(path);
   }
 
 
