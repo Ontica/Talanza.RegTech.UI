@@ -298,7 +298,8 @@ export class ActivityModelFormComponent extends AbstractForm implements OnInit, 
       return null;
     }
 
-    if (formModel.periodicityRule === 'OncePerYear-OnFixedDate') {
+    if (formModel.periodicityRule === 'OncePerYear-OnFixedDate' ||
+        formModel.periodicityRule.startsWith('Semi-annual')) {
       return {
         ruleType: formModel.periodicityRule,
         month:  formModel.periodicityMonth ? Number(formModel.periodicityMonth) : '',
@@ -316,6 +317,12 @@ export class ActivityModelFormComponent extends AbstractForm implements OnInit, 
       ruleType: formModel.periodicityRule,
       day: formModel.periodicityDay ? Number(formModel.periodicityDay) : ''
     };
+  }
+
+
+  hidePeriodicityMonth(periodicityRule: string) {
+    return periodicityRule !== 'OncePerYear-OnFixedDate' &&
+           !periodicityRule.startsWith('Semi-annual');
   }
 
 

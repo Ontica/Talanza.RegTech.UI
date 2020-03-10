@@ -143,14 +143,17 @@
         <td>
           <select class="select-box" style="width:260px" #periodicityRule formControlName="periodicityRule">
             <option value="OncePerYear-OnFixedDate" i18n>Yearly, on X calendar date</option>
+            <option value="Semi-annual-OnFixedDays" i18n>Semi-annual, during first X calendar days</option>
+            <option value="Semi-annual-BusinessDays" i18n>Semi-annual, during first X business days</option>
             <option value="Monthly-OnFixedDay" i18n>Monthly, during first X calendar days</option>
             <option value="Monthly-BusinessDays" i18n>Monthly, during first X business days</option>
+            <option value="Daily" i18n>Daily</option>
             <option value="Manual" i18n>The processing rule is not defined</option>
           </select>
         </td>
-        <td colspan="2" [hidden]="periodicityRule.value === 'Manual'">
+        <td colspan="2" [hidden]="periodicityRule.value === 'Manual' || periodicityRule.value === 'Daily'">
           <select class="select-box" style="width:150px"
-                  [hidden]="periodicityRule.value !== 'OncePerYear-OnFixedDate'" formControlName="periodicityMonth">
+                  [hidden]="hidePeriodicityMonth(periodicityRule.value)" formControlName="periodicityMonth">
             <option value="" i18n>( Month )</option>
             <option value="1">January</option>
             <option value="2">February</option>
