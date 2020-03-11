@@ -57,3 +57,13 @@
 
   <div class="panel-separator"></div>
 </div>
+
+<div *ngIf="showWidget('TagsListSelector')">
+  <emp-steps-tags-list-selector
+      [tags]="projectStore.tags | async"
+      [selected]="filter.tags"
+      (selectedTagsChange)="onTagsChange($event)">
+  </emp-steps-tags-list-selector>
+
+  <div class="panel-separator"></div>
+</div>

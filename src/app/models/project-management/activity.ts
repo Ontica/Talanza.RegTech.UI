@@ -50,7 +50,7 @@ export interface Activity extends Identifiable, PartitionedType {
 
   theme: string;
   resource: string;
-  tags: string | string[];
+  tags: string;
   responsible: Contact;
 
   template?: ActivityTemplate;

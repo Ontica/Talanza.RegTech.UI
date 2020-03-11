@@ -90,6 +90,13 @@ export class SidebarComponent implements OnInit, OnDestroy {
   }
 
 
+  onTagsChange(tagsList: string[]) {
+    this.filter = {...this.filter, tags: tagsList };
+
+    this.uiStore.setValue<ProjectItemFilter>('Sidebar.ProjectFilter', this.filter);
+  }
+
+
   onThemesChange(themesList: string[]) {
     this.filter = {...this.filter, themes: themesList };
 
@@ -110,6 +117,9 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
       case 'ResponsiblesListSelector':
         return this.layout.name === 'Home' || this.layout.name === 'Projects';
+
+      case 'TagsListSelector':
+        return this.layout.name !== 'Processes';
 
       case 'ThemesListSelector':
         return this.layout.name !== 'Processes';

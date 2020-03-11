@@ -15,12 +15,11 @@ import { AngularMaterialModule } from '../angular-material.module';
 import { ProcessSelectorComponent } from './process-selector/process-selector.component';
 import { ProjectSelectorComponent } from './project-selector/project-selector.component';
 import { ProjectsListSelectorComponent } from './projects-list-selector/projects-list-selector.component';
-
 import {
   ResponsiblesListSelectorComponent
 } from './responsibles-list-selector/responsibles-list-selector.component';
-
 import { ThemesListSelectorComponent } from './themes-list-selector/themes-list-selector.component';
+import { TagsListSelectorComponent } from './tags-list-selector/tags-list-selector.component';
 
 
 @NgModule({
@@ -38,7 +37,8 @@ import { ThemesListSelectorComponent } from './themes-list-selector/themes-list-
     ProjectSelectorComponent,
     ProjectsListSelectorComponent,
     ResponsiblesListSelectorComponent,
-    ThemesListSelectorComponent
+    TagsListSelectorComponent,
+    ThemesListSelectorComponent,
   ],
 
   exports: [
@@ -46,6 +46,7 @@ import { ThemesListSelectorComponent } from './themes-list-selector/themes-list-
     ProjectSelectorComponent,
     ProjectsListSelectorComponent,
     ResponsiblesListSelectorComponent,
+    TagsListSelectorComponent,
     ThemesListSelectorComponent
   ]
 
