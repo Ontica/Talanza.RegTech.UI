@@ -13,7 +13,7 @@ import { Activity } from '@app/models/project-management';
 import { DateString, DateStringLibrary } from '@app/models/core';
 
 export type GroupByDateProperty = 'actualEndDate' | 'plannedEndDate' | 'deadline' | 'actualStartDate';
-export type GroupByProperty = 'timeline' | 'responsible' | 'theme' | 'resource' | GroupByDateProperty;
+export type GroupByProperty = 'timeline' | 'responsible' | 'tag' | 'theme' | 'resource' | GroupByDateProperty;
 
 
 const TIMELINE_DATES_ARRAY: GroupByDateProperty[] = ['actualEndDate', 'plannedEndDate', 'deadline'];
@@ -48,6 +48,9 @@ export class GroupActivitiesByPipe implements PipeTransform  {
 
       case 'responsible':
         return this.groupByResponsible(data);
+
+      case 'tag':
+        return this.groupByTag(data);
 
       case 'theme':
         return this.groupByTheme(data);
@@ -147,6 +150,38 @@ export class GroupActivitiesByPipe implements PipeTransform  {
 
     return Object.keys(groups).map(key => ({ key, value: groups[key] }))
                               .sort((a, b) => a.key.localeCompare(b.key));
+  }
+
+
+  private groupByTag(data: Array<Activity>): Array<{key, value}> {
+    const EMPTY_TAG_GROUP = 'Activities without tag';
+
+    const groups = data.reduce((previous, current) => {
+
+      let tag: string;
+
+      if (current['tags'] !== '') {
+        tag = current['tags'];
+      } else {
+        tag = EMPTY_TAG_GROUP;
+      }
+
+      if (!previous[tag]) {
+        previous[tag] = [current];
+
+      } else {
+        previous[tag].push(current);
+
+        previous[tag].sort((a, b) => this.compareTimelineDates(a, b));
+      }
+
+      return previous;
+
+    }, {});
+
+    return Object.keys(groups).map(key => ({ key, value: groups[key] }))
+                              .sort((a, b) => this.compareStringValues(a.key, b.key,
+                                                                       EMPTY_TAG_GROUP));
   }
 
 

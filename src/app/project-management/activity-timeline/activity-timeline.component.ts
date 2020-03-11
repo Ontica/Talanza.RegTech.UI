@@ -74,6 +74,9 @@ export class ActivityTimelineComponent implements OnChanges {
       case 'responsible':
         return 'By Responsible';
 
+      case 'tag':
+        return 'By Tag';
+
       case 'theme':
         return 'By Topic';
 
