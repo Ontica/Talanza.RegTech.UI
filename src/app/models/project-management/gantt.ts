@@ -5,6 +5,9 @@
  * See LICENSE.txt in the project root for complete license information.
  */
 
+import { Contact } from '../core';
+
+
 export class GanttTask {
   uid: string;
   id: number;
@@ -15,5 +18,7 @@ export class GanttTask {
   position: number;
   level: number;
   theme: string;
+  tags: string;
+  responsible: Contact;
   parent: number;
 }

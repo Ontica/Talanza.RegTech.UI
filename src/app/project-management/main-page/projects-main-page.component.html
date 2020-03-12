@@ -16,6 +16,7 @@
     <ng-container *ngIf="currentView.name === 'Project.Gantt'">
       <emp-steps-gantt-chart
           [project]="selectedProject"
+          [filter]="filter"
           [reset]="toggleEditor"
           (activitySelect)="showEditor($event)">
       </emp-steps-gantt-chart>
