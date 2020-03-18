@@ -307,7 +307,9 @@ export class ActivityModelFormComponent extends AbstractForm implements OnInit, 
       };
     }
 
-    if (formModel.periodicityRule === 'Manual') {
+    if (formModel.periodicityRule === 'Manual' ||
+        formModel.periodicityRule === 'Daily' ||
+        formModel.periodicityRule.startsWith('After-Given-Activity')) {
       return {
         ruleType: formModel.periodicityRule
       };
@@ -421,6 +423,10 @@ export class ActivityModelFormComponent extends AbstractForm implements OnInit, 
     if (!this.value('periodicityRule')) {
       this.addException('The periodicity rule is incomplete.');
       this.get('periodicityRule').markAsDirty();
+
+    } else if (this.value('periodicityRule') === 'Daily' ||
+              this.value('periodicityRule').startsWith('After-Given-Activity')) {
+      return;
 
     } else if (this.value('periodicityRule') === 'OncePerYear-OnFixedDate' &&
               !this.value('periodicityMonth')) {
