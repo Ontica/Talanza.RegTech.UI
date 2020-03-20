@@ -27,7 +27,21 @@ export const DefaultDuration: Duration = {
 };
 
 
-export interface Activity extends Identifiable, PartitionedType {
+export interface BaseProjectItem {
+  readonly id: number;
+  readonly uid: string;
+  readonly parent: Identifiable | number;
+
+  position: number;
+
+  theme: string;
+  resource: string;
+  tags: string;
+  responsible: Contact;
+}
+
+
+export interface Activity extends Identifiable, PartitionedType, BaseProjectItem  {
   id: number;
   notes: string;
   project: Project;

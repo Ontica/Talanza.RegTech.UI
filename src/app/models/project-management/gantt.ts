@@ -7,10 +7,14 @@
 
 import { Contact } from '../core';
 
+import { BaseProjectItem } from './activity';
 
-export class GanttTask {
-  uid: string;
-  id: number;
+
+export interface GanttTask extends BaseProjectItem {
+  readonly uid: string;
+  readonly id: number;
+  readonly parent: number;
+
   type: string;
   text: string;
   start_date: string;
@@ -19,6 +23,6 @@ export class GanttTask {
   level: number;
   theme: string;
   tags: string;
+  resource: string;
   responsible: Contact;
-  parent: number;
 }
