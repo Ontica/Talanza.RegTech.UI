@@ -13,7 +13,8 @@ import { CdkDragDrop } from '@angular/cdk/drag-drop';
 
 import { ProjectModel } from '@app/store/project.store';
 
-import { Activity, EmptyActivity, ActivityOperation } from '@app/models/project-management';
+import { Activity, EmptyActivity, ActivityOperation,
+         ProjectItemFilter, EmptyProjectItemFilter } from '@app/models/project-management';
 
 import { AddEventDialogComponent } from '../add-event-dialog/add-event-dialog.component';
 import { CheckProcessesDialogComponent } from '../check-processes-dialog/check-processes-dialog.component';
@@ -22,6 +23,7 @@ import { CheckProcessesDialogComponent } from '../check-processes-dialog/check-p
 import { TimelineHelper } from '../common/timeline-helper';
 
 import { CollapsableTree, CollapsableTreeNodeDisplayMode } from '../common/collapsable-tree';
+import { FilterHelper } from '../common/filter-helper';
 
 
 @Component({
@@ -38,10 +40,16 @@ export class ActivityTreeComponent implements OnChanges {
   insertActivityEditorVisible = false;
 
   @Input() project: ProjectModel;
+
+  @Input() filter: ProjectItemFilter = EmptyProjectItemFilter;
+
   @Input() collapsedActivities = [];
 
   @Output() activitySelect = new EventEmitter<Activity>();
   @Output() activityChange = new EventEmitter<ActivityOperation>();
+
+  filteredActivities: Activity[] = [];
+  treeEditionMode = false;
 
   private collapsableTreeHandler: CollapsableTree;
 
@@ -49,13 +57,7 @@ export class ActivityTreeComponent implements OnChanges {
 
 
   ngOnChanges() {
-    this.collapsableTreeHandler = new CollapsableTree(this.project.activities,
-                                                      this.collapsedActivities);
-
-    if (this.selectedActivity.project.uid !== this.project.project.uid) {
-      this.selectedActivity = EmptyActivity;
-      this.collapsableTreeHandler.collapseAll();
-    }
+    this.displayActivitiesTree();
   }
 
 
@@ -91,6 +93,12 @@ export class ActivityTreeComponent implements OnChanges {
 
   toggleCollapseAll() {
     this.collapsableTreeHandler.toggleCollapseAll();
+  }
+
+  toggleTreeEditionMode() {
+    this.treeEditionMode = !this.treeEditionMode;
+
+    this.displayActivitiesTree();
   }
 
 
@@ -300,6 +308,23 @@ export class ActivityTreeComponent implements OnChanges {
                        activity: activity,
                        newParent: newParent
                      });
+  }
+
+
+  private displayActivitiesTree() {
+    if (this.treeEditionMode) {
+      this.filteredActivities = this.project.activities;
+    } else {
+      this.filteredActivities = FilterHelper.applyFilter(this.filter, this.project.activities);
+    }
+
+    this.collapsableTreeHandler = new CollapsableTree(this.filteredActivities,
+                                                      this.collapsedActivities);
+
+    if (this.selectedActivity.project.uid !== this.project.project.uid) {
+      this.selectedActivity = EmptyActivity;
+      this.collapsableTreeHandler.collapseAll();
+    }
   }
 
 

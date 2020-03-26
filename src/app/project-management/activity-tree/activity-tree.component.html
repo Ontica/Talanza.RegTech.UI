@@ -7,17 +7,19 @@
       <div class="card-hint" i18n>Activities Tree
         &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
       <a (click)="toggleCollapseAll()">{{ allCollapsed ? '[open all]' : '[close all]'}}</a>
+      &nbsp; &nbsp;
+      <a (click)="toggleTreeEditionMode()">{{ treeEditionMode ? '[filtering mode]' : '[edition mode]'}}</a>
       </div>
     </div>
 
     <div class="card-header-options">
-      <button type="button" class="btn-action"
+      <button type="button" class="btn-action" [hidden]="!treeEditionMode"
               (click)="openAddEventDialog()" i18n>What is happening?</button>
       &nbsp; &nbsp;
-      <button type="button" class="btn disabled"
+      <button type="button" class="btn disabled" [hidden]="!treeEditionMode"
               (click)="showInitialActivityInlineEditor()" i18n>Insert activity</button>
       &nbsp; &nbsp;
-      <button type="button" class="btn disabled"
+      <button type="button" class="btn disabled" [hidden]="!treeEditionMode"
               (click)="openCheckProcessesDialog()" i18n>Check processes</button>
     </div>
 
@@ -36,22 +38,22 @@
 
     <div cdkDropList (cdkDropListDropped)="dropActivity($event)" class="drop-list">
 
-      <div *ngFor="let activity of project.activities" class="drop-item"
-            cdkDrag cdkDragLockAxis="y" [cdkDragData]="activity" cdkDragBoundary=".drag-boundary">
+      <div *ngFor="let activity of filteredActivities" class="drop-item"
+            cdkDrag cdkDragLockAxis="y" [cdkDragData]="activity" cdkDragBoundary=".drag-boundary"
+            [cdkDragDisabled]="!treeEditionMode">
 
         <div *ngIf="activityDisplayMode(activity); let displayMode"
              class="activity-row" matRipple [matRippleTrigger]="trigger"
              [class.selected-activity]="isActivitySelected(activity)"
              (click)="onSelectActivity(activity)">
 
-            <div class="edition-controls">
+            <div *ngIf="treeEditionMode" class="edition-controls">
               <mat-icon cdkDragHandle class="ghost-icon grabbable">drag_indicator</mat-icon>
-
               &nbsp; &nbsp;
               <mat-icon *ngIf="isIndentable(activity)"
                          class="ghost-icon" (click)="indentActivity(activity)">subdirectory_arrow_right</mat-icon>
               <mat-icon *ngIf="!isIndentable(activity) && isOutdentable(activity)"
-                         class="ghost-icon" (click)="outdentActivity(activity)">subdirectory_arrow_left</mat-icon>
+                        class="ghost-icon" (click)="outdentActivity(activity)">subdirectory_arrow_left</mat-icon>
             </div>
 
 
