@@ -7,7 +7,7 @@
   <select #cboProjects
           class="select-box" style="width:100%" [value]="selected.uid"
           (change)="onSelectProject(cboProjects.value)">
-    <option *ngIf="projects.length > 1" value="" i18n>( Select a contract )</option>
+    <option [hidden]="projects.length <= 2" value="" i18n>( Select a contract )</option>
     <option *ngFor="let project of projects"
         [value]="project.uid">{{project.name}}</option>
   </select>
