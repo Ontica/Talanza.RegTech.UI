@@ -5,14 +5,10 @@
  * See LICENSE.txt in the project root for complete license information.
  */
 
+import { Identifiable } from './core-types';
 
-export interface KeyValue {
-  readonly key: string;
-  readonly value: any;
+
+// tslint:disable-next-line:no-empty-interface
+export interface Contact extends Identifiable {
+
 }
-
-
-export const EmptyKeyValue: KeyValue = {
-  key: 'Empty',
-  value: 'Sin valor',
-};
