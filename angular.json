@@ -189,5 +189,8 @@
       }
     }
   },
-  "defaultProject": "talanza-frontend"
+  "defaultProject": "talanza-frontend",
+  "cli": {
+    "analytics": "652a0b18-76a1-4c9c-9984-89963b371982"
+  }
 }

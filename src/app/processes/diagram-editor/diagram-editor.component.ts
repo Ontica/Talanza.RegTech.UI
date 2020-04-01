@@ -14,7 +14,6 @@ import { ProcessService } from '@app/services/regulation';
 import { ProjectModel } from '@app/store/project.store';
 
 
-
 @Component({
   selector: 'emp-ng-process-diagram-editor',
   templateUrl: './diagram-editor.component.html',

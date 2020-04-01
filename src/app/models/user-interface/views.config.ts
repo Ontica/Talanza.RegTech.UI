@@ -30,7 +30,7 @@ export const HomePageViews: View[] = [
 export const ProjectManagementViews: View[] = [
   {
     name: 'Project.Activities',
-    title: 'Activities List',
+    title: 'Activities Tree',
     url: '/contract-management/activities'
   },
   {

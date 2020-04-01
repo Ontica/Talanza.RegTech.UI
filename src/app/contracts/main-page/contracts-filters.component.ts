@@ -34,6 +34,7 @@ export class ContractsFiltersComponent implements OnInit {
     this.setInitialValues();
   }
 
+
   async onChangeContract(uid: string) {
     if (uid === '') {
       this.selectedContract.clausesList = [];
@@ -66,7 +67,7 @@ export class ContractsFiltersComponent implements OnInit {
 
   async onSearch() {
     if (this.selectedContract.uid === '') {
-      alert('Es necesario seleccionar un contrato de la lista de contrados');
+      alert('Es necesario seleccionar un contrato de la lista de contratos.');
       return;
     }
 
@@ -88,7 +89,9 @@ export class ContractsFiltersComponent implements OnInit {
   private loadContractsList(): void {
     this.contractService.getContractList()
       .toPromise()
-      .then((x) => this.contractsList = x);
+      .then((x) => {
+        this.contractsList = x;
+      });
   }
 
   private async loadSelectedContractClausesList(keywords: string) {
