@@ -71,7 +71,7 @@ export class CheckProcessesDialogComponent implements OnInit {
     const selectedProcess = this.processesList.find(x => x.uid === processUID);
 
     this.whatIfResult =
-            this.whatIfService.whatIfUpdatedWithLastProcessChanges(this.project, selectedProcess);
+            this.whatIfService.whatIfDeadlinesUpdated(this.project, selectedProcess);
   }
 
 
@@ -83,7 +83,7 @@ export class CheckProcessesDialogComponent implements OnInit {
   mergeProcessChanges(processUID: string) {
     const selectedProcess = this.processesList.find(x => x.uid === processUID);
 
-    this.projectStore.mergeProcessChanges(this.project, selectedProcess);
+    this.projectStore.updateDeadlines(this.project, selectedProcess);
 
     this.dialogRef.close(this.form.value);
   }

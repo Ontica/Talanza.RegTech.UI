@@ -231,6 +231,17 @@ export class ProjectService {
   }
 
 
+  updateDeadlines(project: Project, process: ProjectProcess): Observable<Activity> {
+    Assertion.assertValue(project, 'project');
+    Assertion.assertValue(process, 'process');
+
+    const path =
+        `v1/project-management/projects/${project.uid}/activities/${process.startActivity.uid}/update-deadlines`;
+
+    return this.core.http.post<Activity>(path);
+  }
+
+
   mergeProcessChanges(project: Project, process: ProjectProcess): Observable<Activity> {
     Assertion.assertValue(project, 'project');
     Assertion.assertValue(process, 'process');

@@ -29,6 +29,18 @@ export class WhatIfService {
   }
 
 
+  whatIfDeadlinesUpdated(project: Project, process: ProjectProcess): Observable<WhatIfResult> {
+    Assertion.assertValue(project, 'project');
+    Assertion.assertValue(process, 'process');
+
+    const path =
+      `v1/project-management/projects/${project.uid}/activities/${process.startActivity.uid}/what-if-deadlines-updated`;
+
+    return this.http.get<WhatIfResult>(path);
+  }
+
+
+
   whatIfUpdatedWithLastProcessChanges(project: Project, process: ProjectProcess): Observable<WhatIfResult> {
     Assertion.assertValue(project, 'project');
     Assertion.assertValue(process, 'process');
@@ -55,8 +67,8 @@ export class WhatIfService {
 
 
   whatIfCreatedFromEvent(targetProject: Project,
-                         activityTemplateUID: string,
-                         eventDate: Date): Observable<WhatIfResult> {
+    activityTemplateUID: string,
+    eventDate: Date): Observable<WhatIfResult> {
     Assertion.assertValue(targetProject, 'targetProject');
     Assertion.assertValue(activityTemplateUID, 'activityTemplateUID');
 

@@ -194,6 +194,16 @@ export class ProjectStore {
   }
 
 
+  updateDeadlines(project: Project, process: ProjectProcess) {
+    return this.projectService.updateDeadlines(project, process)
+      .toPromise()
+      .then(x => {
+        this.updateSelectedProject(project);
+        return x;
+      });
+  }
+
+
   moveActivity(activity: Activity, newPosition: number): Promise<Activity> {
     return this.projectService.moveActivity(activity, newPosition)
       .toPromise()
