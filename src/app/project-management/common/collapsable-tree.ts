@@ -89,11 +89,13 @@ export class CollapsableTree {
         return true;
       } else {
         const temp = this.allNodes.find(x => x.uid === parent.uid);
-        if (!temp) {
+        if (temp) {
+          parent = temp.parent;
+        } else {
           console.log('hasCollapsedAncestor data issue: Node not found in allNodes',
                       node.name, node.uid, parent.name, parent.uid);
+          parent = undefined;
         }
-        parent = temp.parent;
       }
     }
   }
