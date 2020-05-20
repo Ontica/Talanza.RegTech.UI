@@ -29,6 +29,7 @@ export class ActivityFilesComponent implements OnChanges {
   selectedMediaFile: MediaFile = EmptyMediaFile;
 
   displayEditor = false;
+  uploading = false;
 
   constructor(private store: FileStore, private service: ProjectFilesService) { }
 
@@ -56,6 +57,7 @@ export class ActivityFilesComponent implements OnChanges {
     this.displayEditor = false;
   }
 
+
   showFileEditor() {
     this.displayEditor = true;
   }
@@ -70,17 +72,24 @@ export class ActivityFilesComponent implements OnChanges {
       });
   }
 
-  uploadFile(fileToUpload: FileToUpload) {
-    this.hideFileEditor();
 
+  uploadFile(fileToUpload: FileToUpload) {
+    if (this.uploading) {
+      return;
+    }
+
+    this.uploading = true;
     this.service.uploadProjectItemFile(this.projectItem,
                                        fileToUpload.file,
                                        fileToUpload.metadata)
     .subscribe(() => {
         this.store.refreshAllFiles();
+        this.uploading = false;
         this.loadFilesList();
-
+        this.hideFileEditor();
       }, error => {
+        this.uploading = false;
+        alert(`There was a problem uploading the file ${fileToUpload.file.name}` );
         console.log(error);
       });
   }
@@ -94,4 +103,3 @@ export class ActivityFilesComponent implements OnChanges {
 
 
 }
-
