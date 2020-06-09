@@ -34,14 +34,22 @@
 
           <div class="tile-content">
             <label>Activity:</label>
-            {{file.projectItem.name}}
+            <a #trigger (click)="onSelectProjectItem(file)">{{file.projectItem.name}}</a>
+            <ng-container *ngIf="!file.projectItem.actualEndDate">
+              <label>Deadline:</label>
+              <a #trigger (click)="onSelectProjectItem(file)">{{file.projectItem.deadline | date:'dd/LLL/yyyy'}}</a>
+            </ng-container>
+            <ng-container *ngIf="file.projectItem.actualEndDate">
+              <label>Actual End Date:</label>
+              <a #trigger (click)="onSelectProjectItem(file)">{{file.projectItem.actualEndDate | date:'dd/LLL/yyyy'}}</a>
+            </ng-container>
             <label>Project:</label>
             {{file.projectItem.project.name}}
           </div>
 
           <div class="tile-footer">
             <a (click)="onSelect(file)">
-              <i class="fa fa-file-o tile-icon"></i>
+              <i [class]="fileIcon(file)"></i>
             </a>
             <div style="margin-left:8pt">
               {{file.postedBy.name}}<br>

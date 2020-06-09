@@ -25,7 +25,8 @@ import { isEmpty } from '@app/models/core';
 export class ProjectFilesMainPageComponent implements OnInit, OnDestroy {
 
   currentView: View;
-  displayEditor = false;
+  displayFileEditor = false;
+  displayProjectItemEditor = false;
 
   files: Observable<ProjectItemFile[]> = of([]);
 
@@ -73,8 +74,13 @@ export class ProjectFilesMainPageComponent implements OnInit, OnDestroy {
   }
 
 
-  onEditorClose() {
-    this.displayEditor = false;
+  onFileEditorClose() {
+    this.displayFileEditor = false;
+  }
+
+
+  onProjectEditorClose() {
+     this.displayProjectItemEditor = false;
   }
 
 
@@ -83,12 +89,23 @@ export class ProjectFilesMainPageComponent implements OnInit, OnDestroy {
   }
 
 
-  showEditor(file: ProjectItemFile) {
+  showFileEditor(file: ProjectItemFile) {
     if (file) {
       this.selectedFile = file;
-      this.displayEditor = true;
+      this.displayFileEditor = true;
+      this.displayProjectItemEditor = false;
     }
   }
+
+
+  showProjectItemEditor(file: ProjectItemFile) {
+    if (file) {
+      this.selectedFile = file;
+      this.displayFileEditor = false;
+      this.displayProjectItemEditor = true;
+    }
+  }
+
 
   // private methods
 

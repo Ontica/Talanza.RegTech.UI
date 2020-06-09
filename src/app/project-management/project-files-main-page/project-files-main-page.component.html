@@ -1,20 +1,28 @@
 <div class="explorer"
-    [class.remove-min-width]="!displayEditor">
+    [class.remove-min-width]="!displayFileEditor && !displayProjectItemEditor">
 
   <div class="explorer-panel primary">
     <emp-steps-files-grid
         [files]="(files | async) | applyFilesFilter: filter"
-        (fileSelect)="showEditor($event)"
+        (fileSelect)="showFileEditor($event)"
+        (projectItemSelect)="showProjectItemEditor($event)">
         (fileFilterChange)="applyKeywordsFilter($event)">
     </emp-steps-files-grid>
   </div>
 
-  <div *ngIf="displayEditor" class="explorer-panel secondary">
+  <div *ngIf="displayFileEditor" class="explorer-panel secondary">
     <emp-kb-media-file-viewer
         [mediaFile]="selectedFile.mediaFile"
         (mediaFileViewerSave)="onMediaFileViewerSave($event)"
-        (mediaFileViewerClose)="onEditorClose()">
+        (mediaFileViewerClose)="onFileEditorClose()">
     </emp-kb-media-file-viewer>
+  </div>
+
+  <div *ngIf="displayProjectItemEditor" class="explorer-panel secondary">
+    <emp-steps-activity-editor
+         [activity]="selectedFile.projectItem"
+         (activityEditorClose)="onProjectEditorClose()">
+    </emp-steps-activity-editor>
   </div>
 
 </div>

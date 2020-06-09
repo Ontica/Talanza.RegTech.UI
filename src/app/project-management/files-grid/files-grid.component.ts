@@ -22,6 +22,7 @@ export class FilesGridComponent implements OnInit, OnDestroy {
   @Input() files: ProjectItemFile[] = [];
 
   @Output() fileSelect = new EventEmitter<ProjectItemFile>();
+  @Output() projectItemSelect = new EventEmitter<ProjectItemFile>();
 
   @Output() fileFilterChange = new EventEmitter<string>();
 
@@ -68,6 +69,29 @@ export class FilesGridComponent implements OnInit, OnDestroy {
   onSelect(file: ProjectItemFile) {
     this.selectedFile = file;
     this.fileSelect.emit(file);
+  }
+
+
+  onSelectProjectItem(file: ProjectItemFile) {
+    this.selectedFile = file;
+    this.projectItemSelect.emit(file);
+  }
+
+
+  fileIcon(file: ProjectItemFile) {
+    switch(file.mediaFile.mediaType) {
+      case 'application/pdf':
+        return 'fa fa-file-pdf-o tile-icon';
+      case 'application/vnd.ms-excel':
+      case 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet':
+        return 'fa fa-file-excel-o tile-icon';
+      case 'application/vnd.openxmlformats-officedocument.wordprocessingml.document':
+        return 'fa fa-file-word-o tile-icon';
+      case 'application/x-zip-compressed':
+        return 'fa fa-file-archive-o tile-icon';
+      default:
+        return 'fa fa-file-o tile-icon';
+    }
   }
 
 
