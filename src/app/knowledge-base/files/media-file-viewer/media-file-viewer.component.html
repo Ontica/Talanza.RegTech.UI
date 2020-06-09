@@ -17,7 +17,7 @@
 
   <mat-tab-group color="accent">
 
-    <ng-container>
+    <ng-container *ngIf="isPDFFile()">
       <mat-tab label="PDF File" i18n-label>
         <div class="expand-no-scroll">
           <emp-ng-object [data]="mediaFile.url"></emp-ng-object>
@@ -25,11 +25,17 @@
       </mat-tab>
     </ng-container>
 
-    <mat-tab label="Edition" i18n-label>
+    <mat-tab label="File Data" i18n-label>
       <emp-kb-file-editor [mediaFile]="mediaFile"
                           [readonly]="true"
                           (deleteFile)="onDeleteFile()">
       </emp-kb-file-editor>
+
+      <a [href]="mediaFile.url" target="_blank"
+         [download]="mediaFile.originalFileName">
+         <button type="button" class="btn-action" style="margin-left:32px" i18n>Download this file</button>
+      </a>
+
     </mat-tab>
 
     <mat-tab label="Annotations" i18n-label [disabled]="true">

@@ -48,4 +48,9 @@ export class MediaFileViewerComponent implements AfterViewInit {
     this.mediaFileViewerSave.emit(fileToUpload);
   }
 
+
+  isPDFFile() {
+    return this.mediaFile.mediaType === 'application/pdf';
+  }
+
 }
