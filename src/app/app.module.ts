@@ -20,6 +20,8 @@ import { DocumentsModule } from './documents/documents.module';
 
 import { KnowledgeBaseModule } from './knowledge-base/knowledge-base.module';
 
+import { StepsModule } from './steps/steps.module';
+
 import { ProcessesModule } from './processes/processes.module';
 import { GlobalSearchModule } from './global-search/global-search.module';
 
@@ -40,12 +42,12 @@ import { ExceptionHandler } from './core/general/exception-handler';
 
 
 
+
 const EXCEPTION_HANDLER_PROVIDER =  { provide: ErrorHandler, useClass: ExceptionHandler };
 
 @NgModule({
   bootstrap: [ AppComponent ],
   declarations: [ AppComponent ],
-
   imports: [
 
     BrowserModule,
@@ -61,6 +63,7 @@ const EXCEPTION_HANDLER_PROVIDER =  { provide: ErrorHandler, useClass: Exception
     ContractsModule,
     DocumentsModule,
     ProcessesModule,
+    StepsModule,
     ProjectManagementModule,
     LibraryModule,
     SharedModule,
