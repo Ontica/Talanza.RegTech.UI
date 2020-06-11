@@ -119,7 +119,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
         return this.layout.name === 'Home' || this.layout.name === 'Projects';
 
       case 'TagsListSelector':
-        return this.layout.name !== 'Processes';
+        return this.layout.name === 'Home' || this.layout.name === 'Projects';
 
       case 'ThemesListSelector':
         return this.layout.name !== 'Processes';
