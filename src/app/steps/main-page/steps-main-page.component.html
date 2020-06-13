@@ -1,0 +1,30 @@
+<div class="explorer"
+      [class.remove-min-width]="!displayEditor">
+
+  <div class="explorer-panel"
+        [class.primary]="currentView.name !== 'Steps.Diagram'"
+        [class.primary-full]="currentView.name === 'Steps.Diagram'">
+
+    <ng-container *ngIf="currentView.name === 'Steps.List'">
+      <emp-steps-list
+          [project]="model"
+          (activityChange)="onActivityTreeEdited($event)"
+          (activitySelect)="showEditor($event)">
+      </emp-steps-list>
+    </ng-container>
+
+    <ng-container *ngIf="currentView.name === 'Steps.Documentation'">
+       <!-- Process documentation store -->
+    </ng-container>
+
+  </div>
+
+  <div *ngIf="displayEditor" class="explorer-panel secondary">
+    <emp-steps-designer
+        [activityTemplate]="selectedActivityTemplate"
+        (activityTemplateChange)="onActivityUpdated($event)"
+        (activityDesignerClose)="onEditorClosed()">
+    </emp-steps-designer>
+  </div>
+
+</div>
