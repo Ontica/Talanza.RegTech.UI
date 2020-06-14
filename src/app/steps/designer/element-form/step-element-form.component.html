@@ -1,0 +1,264 @@
+<form class="form-container" autocomplete="off"
+      [class.submitted]="submitted" [formGroup]="form" (ngSubmit)="onSubmit()">
+
+  <fieldset>
+
+    <table class="form-section">
+      <tr>
+        <td class="form-section-title" colspan="2" i18n>General information of the obligation or activity design</td>
+      </tr>
+      <tr>
+        <td i18n>Name:</td>
+        <td>
+          <input type="text" class="text-box" formControlName="name">
+        </td>
+      </tr>
+      <tr>
+        <td class="align-top" i18n>Description:</td>
+        <td>
+          <textarea class="text-area" rows="5" cols="25" formControlName="notes"></textarea>
+        </td>
+      </tr>
+    </table>
+
+    <table class="form-section">
+      <tr>
+        <td class="form-section-title" colspan="4" i18n>Configuration data</td>
+      </tr>
+      <tr>
+        <td i18n>Activity type:</td>
+        <td>
+          <select class="select-box" style="width:180px" formControlName="activityType"
+                  (change)="setDefaultValuesForSectionActivityType()">
+            <option value="" i18n>( Select )</option>
+            <option value="Event" i18n>Event</option>
+            <option value="Internal" i18n>Internal activity</option>
+            <option value="External" i18n>External activity</option>
+            <option value="Section" i18n>Section</option>
+            <option value="Subprocess" i18n>Subprocess</option>
+          </select>
+        </td>
+        <td class="text-align-right" style="width:100%" i18n>Execution type and mode:</td>
+        <td>
+          <select class="select-box" style="width:144px" #executionMode formControlName="executionMode">
+            <option value="" i18n>( Execution type )</option>
+            <option value="Timeline" i18n>Timeline</option>
+            <option value="Eventual" i18n>Eventual</option>
+            <option value="Periodic" i18n>Periodic</option>
+          </select>
+          <select class="select-box" style="width:98px" formControlName="isMandatory">
+            <option value="" i18n>( Mode ) </option>
+            <option value="true" i18n>Mandatory</option>
+            <option value="false" i18n>Optional</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="4" style="width:100%">
+          <span i18n>Does this activity controls the start or the end date of other obligations or activities? </span>
+          <select class="select-box" style="width:60px" formControlName="isController">
+            <option value="">( ? )</option>
+            <option value="true" i18n>Yes</option>
+            <option value="false" i18n>No</option>
+          </select>
+        </td>
+      </tr>
+    </table>
+
+    <table class="form-section">
+      <tr>
+        <td class="form-section-title" colspan="4" i18n>Execution and estimated time conditions</td>
+      </tr>
+      <tr>
+        <td i18n>This activity<br>must be done:<br /></td>
+        <td>
+          <input type="text" class="text-box" style="width:70px" formControlName="dueOnTerm">
+          <select class="select-box" style="width:182px" formControlName="dueOnTermUnit"
+                  (change)="setDefaultValuesForDueOnTermUnit()">
+            <option value="" i18n>( Term unit )</option>
+            <option value="BusinessDays" i18n>Business days</option>
+            <option value="CalendarDays" i18n>Calendar days</option>
+            <option value="Hours" i18n>Hours</option>
+            <option value="Months" i18n>Months</option>
+            <option value="Years" i18n>Years</option>
+            <option value="Undefined" i18n>Undefined</option>
+            <option value="NA" i18n>Not applicable</option>
+          </select>
+        </td>
+        <td colspan="2" style="width:100%">
+          <select class="select-box" style="width:98%" formControlName="dueOnCondition">
+            <option value="" i18n>( Condition )</option>
+            <option value="Before" i18n>Before ...</option>
+            <option value="BeforeStart" i18n>Before the start of ...</option>
+            <option value="AfterStart" i18n>After the start of ...</option>
+            <option value="During" i18n>During ...</option>
+            <option value="BeforeFinish" i18n>Before the end of ...</option>
+            <option value="AfterFinish" i18n>After the end of ...</option>
+            <option value="After"i18n>After ...</option>
+            <option value="From" i18n>From ...</option>
+            <option value="NA" i18n>Not applicable</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>&nbsp;</td>
+        <td colspan="3" style="width:100%">
+          <select *ngIf="!readonly" class="select-box" style="width:99%" formControlName="dueOnController">
+            <option value="" i18n>( Activity or obligation )</option>
+            <option value="-1" i18n>Not applicable</option>
+            <option *ngFor="let controller of dueOnControllers" [value]="controller.id">{{controller.name}}</option>
+          </select>
+          <input *ngIf="readonly" type="text" disabled="true" class="text-box" style="width:100%" [value]="template.dueOnControllerName">
+        </td>
+      </tr>
+      <tr>
+        <td i18n>Estimated time to do<br>the obligation or activity:</td>
+        <td>
+          <input type="text" class="text-box" style="width:70px" formControlName="duration">
+
+          <select class="select-box" style="width:182px" formControlName="durationUnit">
+            <option value="" i18n>( Time unit )</option>
+            <option value="BusinessDays" i18n>Business days</option>
+            <option value="CalendarDays" i18n>Calendar days</option>
+            <option value="Hours" i18n>Hours</option>
+            <option value="Months" i18n>Months</option>
+            <option value="Years" i18n>Years</option>
+            <option value="Undefined" i18n>Indefinite</option>
+            <option value="NA" i18n>Not applicable</option>
+          </select>
+        </td>
+        <td style="width:100%">
+          <span i18n>Does this time rule is fixed for all contracts?<br />(i.e. only changes when regulation changes)</span>
+        </td>
+        <td>
+          <select class="select-box" style="width:120px" formControlName="dueOnRuleAppliesForAllContracts">
+            <option value="true" i18n>Yes</option>
+            <option value="false" i18n>No</option>
+            <option value="" i18n>Not applicable</option>
+          </select>
+        </td>
+      </tr>
+      <tr [hidden]="executionMode.value !== 'Periodic'">
+        <td i18n>Periodicity rule:</td>
+        <td>
+          <select class="select-box" style="width:260px" #periodicityRule formControlName="periodicityRule">
+            <option value="OncePerYear-OnFixedDate" i18n>Yearly, on X calendar date</option>
+            <option value="After-Given-Activity-Yearly" i18n>Yearly, after the given obligation</option>
+            <option value="Semi-annual-OnFixedDays" i18n>Semi-annual, during first X calendar days</option>
+            <option value="Semi-annual-BusinessDays" i18n>Semi-annual, during first X business days</option>
+            <option value="After-Given-Activity-Semi-annual" i18n>Semi-annual, after the given obligation</option>
+            <option value="Monthly-OnFixedDay" i18n>Monthly, during first X calendar days</option>
+            <option value="Monthly-BusinessDays" i18n>Monthly, during first X business days</option>
+            <option value="After-Given-Activity-Monthly" i18n>Monthly, after the given obligation</option>
+            <option value="Daily" i18n>Daily</option>
+            <option value="Manual" i18n>The processing rule is not defined</option>
+          </select>
+        </td>
+        <td colspan="2" [hidden]="periodicityRule.value === 'Manual' || periodicityRule.value === 'Daily' ||
+                                  periodicityRule.value.startsWith('After-Given-Activity')">
+          <select class="select-box" style="width:150px"
+                  [hidden]="hidePeriodicityMonth(periodicityRule.value)" formControlName="periodicityMonth">
+            <option value="" i18n>( Month )</option>
+            <option value="1">January</option>
+            <option value="2">February</option>
+            <option value="3">March</option>
+            <option value="4">April</option>
+            <option value="5">May</option>
+            <option value="6">June</option>
+            <option value="7">July</option>
+            <option value="8">August</option>
+            <option value="9">September</option>
+            <option value="10">October</option>
+            <option value="11">November</option>
+            <option value="12">December</option>
+          </select>
+          <span [hidden]="periodicityRule.value !== 'OncePerYear-OnFixedDate'">Day: </span>
+          <span [hidden]="!periodicityRule.value.startsWith('Monthly')">During first X days: </span>
+          <input type="number" class="text-box" style="width:70px"
+                 maxlength="2" min="1" max="31" formControlName="periodicityDay">
+        </td>
+      </tr>
+      <tr [hidden]="executionMode.value !== 'Periodic'">
+      <td i18n>Periodicity rule notes:</td>
+        <td colspan="3" style="width:100%">
+          <input type="text" class="text-box" formControlName="periodicity">
+        </td>
+      </tr>
+    </table>
+
+    <table class="form-section">
+      <tr>
+        <td class="form-section-title" colspan="4" i18n>Legal and regulatory information</td>
+      </tr>
+      <tr>
+        <td i18n>Regulator Entity:</td>
+        <td>
+          <select #entityList class="select-box" style="width:200px" formControlName="entity"
+                  (change)="onChangeEntity(entityList.value)">
+            <option value="" i18n>( Entity )</option>
+            <option value="-1" i18n>Not applicable</option>
+            <option *ngFor="let entity of entities | async" [value]="entity.id">{{entity.shortName}}</option>
+          </select>
+        </td>
+        <td class="text-align-right" style="width:97%" i18n>Topic:</td>
+        <td>
+          <select class="select-box" style="width:336px" formControlName="theme">
+            <option value="" i18n>( No topic )</option>
+            <option *ngFor="let themeName of themesList | async" [value]="themeName">{{themeName}}</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td i18n>Associated<br>procedure:</td>
+        <td colspan="3" style="width:100%">
+          <select class="select-box" style="width:98%" formControlName="procedure">
+            <option value="-1" i18n>Activity is not associated with a government procedure</option>
+            <option *ngFor="let procedure of procedures | async" [value]="procedure.id">[{{procedure.code}}]
+              {{procedure.shortName}} {{procedure.modality ? '(Modality: ' + procedure.modality + ')' : ''}}</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td i18n>Contract<br />clause:</td>
+        <td colspan="3">
+          <input type="text" class="text-box" formControlName="contractClause">
+        </td>
+      </tr>
+      <tr>
+        <td i18n>Legal basis:</td>
+        <td colspan="3">
+          <textarea class="text-area" rows="2" cols="25" formControlName="legalBasis"></textarea>
+        </td>
+      </tr>
+    </table>
+
+  </fieldset>
+
+  <div class="form-errors" *ngIf="showExceptionMsg">{{exceptionMsg}}</div>
+
+  <div *ngIf="!readonly" class="form-footer">
+
+    <table class="form-section" style="margin-bottom: 120px">
+      <tr>
+        <td>
+          <button *ngIf="!disabled" type="button" class="btn-warning" (click)="onDelete()" i18n>Delete</button>
+        </td>
+        <td class="text-align-right">
+
+          <button *ngIf="!disabled" type="submit" class="btn-action btn-margin-right" (click)="setCommand('update')" i18n>Save changes</button>
+
+          <button *ngIf="disabled" type="button" class="btn-action right" (click)="enable()" i18n>Edit</button>
+
+          <button *ngIf="!disabled" type="button" class="btn right" (click)="onReset()" i18n>Cancel edition</button>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+        <br><br><br><br><br><br>&nbsp;
+        </td>
+      </tr>
+    </table>
+
+  </div>
+
+</form>

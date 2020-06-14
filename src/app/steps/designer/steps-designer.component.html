@@ -1,0 +1,43 @@
+<div class="card" [class.card-border]="!settings.flat">
+
+  <div *ngIf="settings.showTitle" class="card-header">
+
+    <div class="card-title">
+      {{activityTemplate.name}}
+      <div class="card-hint">{{activityTemplate.project.name}}</div>
+    </div>
+
+    <div class="card-header-options">
+      <i class="fa fa-times close-icon" aria-hidden="true" (click)="onClose()"></i>
+    </div>
+
+  </div>
+
+  <mat-tab-group color="accent" [class.wide-margin]=!settings.showTitle>
+
+    <mat-tab label="Obligation" i18n-label>
+      <emp-steps-element-form
+          [template]="activityTemplate" [readonly]="settings.readonly"
+          (templateDelete)="onDelete()" (templateChange)="onUpdate()">
+      </emp-steps-element-form>
+    </mat-tab>
+
+    <mat-tab label="Procedure" [disabled]="!hasProcedure" i18n-label>
+      <emp-gov-procedure-viewer *ngIf="hasProcedure"
+          [procedure]="procedure | async">
+      </emp-gov-procedure-viewer>
+    </mat-tab>
+
+    <mat-tab label="Documentation" i18n-label>
+
+    </mat-tab>
+
+    <mat-tab label="Talanza Guidance" i18n-label [disabled]="true">
+      <emp-kb-postings-list
+          [target]="activityTemplate" [readonly]="settings.readonly">
+      </emp-kb-postings-list>
+    </mat-tab>
+
+  </mat-tab-group>
+
+</div>

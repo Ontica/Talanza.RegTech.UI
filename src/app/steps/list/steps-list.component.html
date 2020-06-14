@@ -1,0 +1,96 @@
+<div *ngIf="project.project.uid !== ''" class="card">
+
+  <div class="card-header card-header-flat">
+
+    <div class="card-title">
+      Processes List
+      <div class="card-hint" i18n>
+        {{project.activities.length}} processes found
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+      </div>
+    </div>
+
+    <div class="card-header-options">
+      <button type="button" class="btn-action"
+              (click)="showInitialActivityInlineEditor()" i18n>New process</button>
+    </div>
+
+  </div>
+
+  <div class="card-body drag-boundary">
+
+    <div *ngIf="addFirstActivityEditorVisible"
+          style="margin-left:68pt">
+          <emp-ng-inline-editor
+            placeholder='Activity or obligation name'
+            (inlineEditorInsertText)="insertActivity($event)"
+            (inlineEditorCancel)="hideInlineEditors()">
+          </emp-ng-inline-editor>
+    </div>
+
+    <div cdkDropList (cdkDropListDropped)="dropActivity($event)" class="drop-list">
+
+      <div *ngFor="let activity of project.activities" class="drop-item"
+            cdkDrag cdkDragLockAxis="y" [cdkDragData]="activity" cdkDragBoundary=".drag-boundary">
+
+        <div *ngIf="activityDisplayMode(activity); let displayMode"
+             class="activity-row" matRipple [matRippleTrigger]="trigger"
+             [class.selected-activity]="isActivitySelected(activity)"
+             (click)="onSelectActivity(activity)" >
+
+            <div class="edition-controls">
+              <mat-icon cdkDragHandle class="ghost-icon grabbable">drag_indicator</mat-icon>
+
+              &nbsp; &nbsp;
+              <mat-icon *ngIf="isIndentable(activity)"
+                         class="ghost-icon" (click)="indentActivity(activity)">subdirectory_arrow_right</mat-icon>
+              <mat-icon *ngIf="!isIndentable(activity) && isOutdentable(activity)"
+                         class="ghost-icon" (click)="outdentActivity(activity)">subdirectory_arrow_left</mat-icon>
+            </div>
+
+            <div class="activity-tree-container"
+                 [style.padding-left.pt]="activity.level * 14">
+
+                <div class="activity-tree-controls">
+                  <mat-icon *ngIf="displayMode !== 'leaf'" class='activity-tree-icon'
+                            (click)="toggleCollapse(activity)">
+                            {{displayMode === "expanded" ? "expand_less" : "expand_more"}}</mat-icon>
+                </div>
+
+                <div class="expand">
+                  <div class="activity-name" [class]="activityNameClass(activity)">
+                    <a #trigger (click)="onSelectActivity(activity, true)">{{activity.name}}</a>
+                  </div>
+
+                  <div class="activity-status">
+                    <div class="activity-theme" i18n>
+                      {{activity.theme || 'No topic'}}
+                    </div>
+
+                    <div class="right-column expand">
+                        <i class="fa fa-ellipsis-v ghost-icon" aria-hidden="true" (click)="openCopyOrMoveActivityDialog(activity)"></i>
+                    </div>
+
+                  </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div *ngIf="isActivitySelected(activity) && insertActivityEditorVisible"
+              [style.margin-left.pt]="activity.level * 14 + 54">
+          <emp-ng-inline-editor
+              placeholder='Activity or obligation name'
+              (inlineEditorInsertText)="insertActivity($event, activity.position)"
+              (inlineEditorCancel)="hideInlineEditors()">
+          </emp-ng-inline-editor>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
