@@ -19,6 +19,8 @@ import { Activity, EmptyActivity, ActivityOperation } from '@app/models/project-
 
 import { CollapsableTree, CollapsableTreeNodeDisplayMode } from '@app/project-management/common/collapsable-tree';
 
+import { Process } from '@app/models/steps';
+
 
 @Component({
   selector: 'emp-steps-list',
@@ -32,6 +34,8 @@ export class StepsListComponent implements OnChanges {
   addFirstActivityEditorVisible = false;
   insertActivityEditorVisible = false;
 
+  @Input() processList: Process[];
+
   @Input() project: ProjectModel;
   @Input() collapsedActivities = [];
 
@@ -44,13 +48,13 @@ export class StepsListComponent implements OnChanges {
 
 
   ngOnChanges() {
-    this.collapsableTreeHandler = new CollapsableTree(this.project.activities,
-                                                      this.collapsedActivities);
+    // this.collapsableTreeHandler = new CollapsableTree(this.project.activities,
+    //                                                   this.collapsedActivities);
 
-    if (this.selectedActivity.project.uid !== this.project.project.uid) {
-      this.selectedActivity = EmptyActivity;
-      this.collapsableTreeHandler.collapseAll();
-    }
+    // if (this.selectedActivity.project.uid !== this.project.project.uid) {
+    //   this.selectedActivity = EmptyActivity;
+    //   this.collapsableTreeHandler.collapseAll();
+    // }
   }
 
 
@@ -65,7 +69,9 @@ export class StepsListComponent implements OnChanges {
 
 
   activityDisplayMode(activity: Activity): CollapsableTreeNodeDisplayMode {
-    return this.collapsableTreeHandler.nodeDisplayMode(activity);
+    return "collapsed";
+
+    // return this.collapsableTreeHandler.nodeDisplayMode(activity);
   }
 
 

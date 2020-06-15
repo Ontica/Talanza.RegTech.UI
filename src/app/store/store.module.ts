@@ -8,14 +8,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import { FileStore } from './file.store';
 import { ProcedureStore } from './procedure.store';
-
 import { ProjectStore } from './project.store';
 import { ProjectTemplateStore } from './project-template.store';
-import { FileStore } from './file.store';
+import { StepsStore } from './steps.store';
 
 import { UserInterfaceStore } from './ui.store';
-
 
 
 @NgModule({
@@ -25,10 +24,11 @@ import { UserInterfaceStore } from './ui.store';
   ],
 
   providers: [
+    FileStore,
     ProjectTemplateStore,
     ProjectStore,
     ProcedureStore,
-    FileStore,
+    StepsStore,
     UserInterfaceStore
   ]
 })

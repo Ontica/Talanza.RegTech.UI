@@ -6,10 +6,9 @@
  */
 
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
 
-import { ProjectTemplateStore, ProjectTemplateModel } from '@app/store/project-template.store';
+import { StepsStore } from '@app/store/steps.store';
 import { UserInterfaceStore } from '@app/store/ui.store';
 
 import { ActivityTemplate, ActivityTemplateOperation,
@@ -18,7 +17,7 @@ import { ActivityTemplate, ActivityTemplateOperation,
 
 import { View } from '@app/models/user-interface';
 
-import { isEmpty } from '@app/models/core';
+import { Process } from '@app/models/steps';
 
 
 @Component({
@@ -31,33 +30,35 @@ export class StepsMainPageComponent implements OnInit, OnDestroy {
   currentView: View;
   displayEditor = false;
 
-  model: ProjectTemplateModel;
+  processList: Process[] = []
+
   selectedActivityTemplate = EmptyActivityTemplate;
 
-  private unsubscribe: Subject<void> = new Subject();
+  private subs1: Subscription;
+  private subs2: Subscription;
 
-  constructor(public store: ProjectTemplateStore,
+  constructor(public store: StepsStore,
               public uiStore: UserInterfaceStore) { }
 
 
   ngOnInit() {
-    this.uiStore.currentView
-      .pipe(takeUntil(this.unsubscribe))
-      .subscribe(
-        x => this.onViewChanged(x)
+    this.subs1 = this.uiStore.currentView.subscribe(
+      x => this.currentView = x
     );
 
-    this.store.selectedTemplate()
-      .pipe(takeUntil(this.unsubscribe))
-      .subscribe (
-        x => this.onModelSelected(x)
+    this.subs2 = this.store.processList().subscribe (
+      x => this.processList = x
     );
   }
 
 
   ngOnDestroy() {
-    this.unsubscribe.next();
-    this.unsubscribe.complete();
+    if (this.subs1) {
+      this.subs1.unsubscribe();
+    }
+    if (this.subs2) {
+      this.subs2.unsubscribe();
+    }
   }
 
 
@@ -67,38 +68,42 @@ export class StepsMainPageComponent implements OnInit, OnDestroy {
 
 
   onActivityTreeEdited(event: ActivityTemplateOperation) {
-    switch (event.operation) {
-      case 'copyToProject':
-        this.store.copyTo(event.activity as ActivityTemplate, event.targetProjectUID)
-                  .then(() => this.displayEditor = false)
-                  .catch(response => console.log(response.error.message));
-        return;
+    console.log('catched activity edition event', event);
 
-      case 'insertActivity':
-        this.store.insert(this.model.project, event.activity)
-                  .then(x => this.selectedActivityTemplate = x)
-                  .catch(response => console.log(response.error.message));
-        return;
+    return;
 
-      case 'moveActivity':
-        this.store.move(event.activity as ActivityTemplate, event.newPosition)
-                  .catch(response => console.log(response.error.message));
-        return;
+    // switch (event.operation) {
+    //   case 'copyToProject':
+    //     this.store.copyTo(event.activity as ActivityTemplate, event.targetProjectUID)
+    //               .then(() => this.displayEditor = false)
+    //               .catch(response => console.log(response.error.message));
+    //     return;
 
-      case 'moveToProject':
-        this.store.moveTo(event.activity as ActivityTemplate, event.targetProjectUID)
-                  .then(() => this.displayEditor = false)
-                  .catch(response => console.log(response.error.message));
-        return;
+    //   case 'insertActivity':
+    //     this.store.insert(this.model.project, event.activity)
+    //               .then(x => this.selectedActivityTemplate = x)
+    //               .catch(response => console.log(response.error.message));
+    //     return;
 
-      case 'changeParent':
-        this.store.changeParent(event.activity as ActivityTemplate, event.newParent)
-                  .catch(response => console.log(response.error.message));
-        return;
+    //   case 'moveActivity':
+    //     this.store.move(event.activity as ActivityTemplate, event.newPosition)
+    //               .catch(response => console.log(response.error.message));
+    //     return;
 
-      default:
-        console.log('Unhandled operation name', event.operation);
-    }
+    //   case 'moveToProject':
+    //     this.store.moveTo(event.activity as ActivityTemplate, event.targetProjectUID)
+    //               .then(() => this.displayEditor = false)
+    //               .catch(response => console.log(response.error.message));
+    //     return;
+
+    //   case 'changeParent':
+    //     this.store.changeParent(event.activity as ActivityTemplate, event.newParent)
+    //               .catch(response => console.log(response.error.message));
+    //     return;
+
+    //   default:
+    //     console.log('Unhandled operation name', event.operation);
+    // }
   }
 
 
@@ -113,7 +118,7 @@ export class StepsMainPageComponent implements OnInit, OnDestroy {
 
 
   onProcessSelected(process: ProjectTemplate) {
-    this.store.selectTemplate(process);
+    // this.store.selectTemplate(process);
   }
 
 
@@ -123,29 +128,5 @@ export class StepsMainPageComponent implements OnInit, OnDestroy {
       this.displayEditor = true;
     }
   }
-
-
-  // private methods
-
-
-  private onModelSelected(x: ProjectTemplateModel) {
-    if (!isEmpty(x.project)) {
-      if (this.model && this.model.project.uid !== x.project.uid) {
-        this.displayEditor = false;
-      }
-      this.uiStore.setMainTitle(this.currentView.title);
-    }
-    this.model = x;
-  }
-
-
-  private onViewChanged(view: View) {
-    this.currentView = view;
-
-    if (!this.model) {
-      this.uiStore.setMainTitle('Please select a process');
-    }
-  }
-
 
 }

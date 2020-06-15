@@ -41,7 +41,7 @@ export const APP_LAYOUTS: Layout[] = [
     name: 'Steps',
     views: StepsViews,
     hint: 'Regulatory processes',
-    defaultTitle: 'Please select a process'
+    defaultTitle: 'Processes list'
   },
   {
     name: 'Processes',

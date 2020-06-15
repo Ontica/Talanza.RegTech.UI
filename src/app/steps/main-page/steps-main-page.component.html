@@ -7,7 +7,7 @@
 
     <ng-container *ngIf="currentView.name === 'Steps.List'">
       <emp-steps-list
-          [project]="model"
+          [processList]="processList"
           (activityChange)="onActivityTreeEdited($event)"
           (activitySelect)="showEditor($event)">
       </emp-steps-list>

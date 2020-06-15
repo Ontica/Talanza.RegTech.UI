@@ -1,11 +1,11 @@
-<div *ngIf="project.project.uid !== ''" class="card">
+<div class="card">
 
   <div class="card-header card-header-flat">
 
     <div class="card-title">
       Processes List
       <div class="card-hint" i18n>
-        {{project.activities.length}} processes found
+        {{processList.length}} processes found
         &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
       </div>
     </div>
@@ -30,7 +30,7 @@
 
     <div cdkDropList (cdkDropListDropped)="dropActivity($event)" class="drop-list">
 
-      <div *ngFor="let activity of project.activities" class="drop-item"
+      <div *ngFor="let activity of processList" class="drop-item"
             cdkDrag cdkDragLockAxis="y" [cdkDragData]="activity" cdkDragBoundary=".drag-boundary">
 
         <div *ngIf="activityDisplayMode(activity); let displayMode"
