@@ -17,6 +17,10 @@ export interface GanttTask extends BaseProjectItem {
 
   type: string;
   text: string;
+
+  name: string;
+  nameForeignLang: string;
+
   start_date: string;
   duration: number;
   position: number;

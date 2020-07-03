@@ -68,6 +68,11 @@ export interface Activity extends Identifiable, PartitionedType, BaseProjectItem
   responsible: Contact;
 
   template?: ActivityTemplate;
+
+  foreignLanguage: {
+    name: string;
+    notes: string;
+  };
 }
 
 
@@ -97,7 +102,12 @@ export const EmptyActivity: Activity = {
   level: 0,
 
   stage: '',
-  status: ''
+  status: '',
+
+  foreignLanguage: {
+    name: '',
+    notes: ''
+  }
 };
 
 

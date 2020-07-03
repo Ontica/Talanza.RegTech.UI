@@ -38,6 +38,11 @@ export interface Task extends Identifiable, PartitionedType {
   responsible: Identifiable;
   assignedDate: DateString;
   assignedBy: Identifiable;
+
+  foreignLanguage: {
+    name: string;
+    notes: string;
+  };
 }
 
 
@@ -68,5 +73,11 @@ export const EmptyTask: Task = {
 
   responsible: Empty,
   assignedDate: '',
-  assignedBy: Empty
+  assignedBy: Empty,
+
+  foreignLanguage: {
+    name: '',
+    notes: ''
+  }
+
 };

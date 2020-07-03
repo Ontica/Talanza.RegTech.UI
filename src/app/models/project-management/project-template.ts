@@ -53,6 +53,13 @@ export interface ActivityTemplate extends Identifiable, PartitionedType {
   level: number;
   stage: string;
   status: string;
+
+  foreignLanguage: {
+    name: string;
+    notes: string;
+    contractClause: string;
+    legalBasis: string;
+  };
 }
 
 
@@ -102,6 +109,13 @@ export const EmptyActivityTemplate: ActivityTemplate = {
   level: 0,
   stage: '',
   status: '',
+
+  foreignLanguage: {
+    name: '',
+    notes: '',
+    contractClause: '',
+    legalBasis: '',
+  }
 };
 
 
