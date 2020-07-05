@@ -5,7 +5,7 @@
  * See LICENSE.txt in the project root for complete license information.
  */
 
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivationEnd, Router } from '@angular/router';
 
 import { UserInterfaceStore } from '@app/store/ui.store';
@@ -16,11 +16,14 @@ import { UserInterfaceStore } from '@app/store/ui.store';
   templateUrl: './main-layout.component.html',
   styleUrls: ['./main-layout.component.scss']
 })
-export class MainLayoutComponent {
+export class MainLayoutComponent implements OnInit {
 
   keywords = '';
 
-  constructor(uiStore: UserInterfaceStore,
+  useForeignLanguage = false;
+  currentLanguage = 'Spanish';
+
+  constructor(private uiStore: UserInterfaceStore,
               private router: Router) {
     this.router.events.subscribe(val => {
       if (val instanceof ActivationEnd) {
@@ -30,6 +33,21 @@ export class MainLayoutComponent {
       }
     });
   }
+
+
+  ngOnInit(): void {
+    this.uiStore.useForeignLanguage.subscribe(
+      x => {
+        this.useForeignLanguage = x;
+        if (this.useForeignLanguage) {
+          this.currentLanguage = 'English';
+        } else {
+          this.currentLanguage = 'Spanish';
+        }
+      }
+    )
+  }
+
 
 
   onAction(event: any) {
@@ -43,4 +61,7 @@ export class MainLayoutComponent {
     }
   }
 
+  toggleLanguage() {
+    this.uiStore.toggleForeignLanguage();
+  }
 }

@@ -36,11 +36,14 @@ export class UserInterfaceStore {
 
   private _valuesMap = new Map<string, BehaviorSubject<any>>();
 
+  private _useForeignLanguage = new BehaviorSubject<boolean>(false);
+
 
   constructor() { }
 
 
   // select methods
+
 
   get currentView(): Observable<View> {
     return this._currentView.asObservable();
@@ -54,6 +57,11 @@ export class UserInterfaceStore {
 
   get navigationHeader(): Observable<NavigationHeader> {
     return this._navigationHeader.asObservable();
+  }
+
+
+  get useForeignLanguage(): Observable<boolean> {
+    return this._useForeignLanguage.asObservable();
   }
 
 
@@ -128,8 +136,13 @@ export class UserInterfaceStore {
 
       subject.next(value);
     }
-
   }
+
+
+  toggleForeignLanguage() {
+    this._useForeignLanguage.next(!this._useForeignLanguage.value);
+  }
+
 
   // private methods
 
