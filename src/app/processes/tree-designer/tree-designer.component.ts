@@ -20,6 +20,7 @@ import { MoveActivityDialogComponent } from '../move-activity-dialog/move-activi
 import { CollapsableTree, CollapsableTreeNodeDisplayMode } from '@app/project-management/common/collapsable-tree';
 
 
+
 @Component({
   selector: 'emp-steps-process-tree-designer',
   templateUrl: './tree-designer.component.html',
@@ -34,11 +35,13 @@ export class ProcessTreeDesignerComponent implements OnChanges {
 
   @Input() project: ProjectModel;
   @Input() collapsedActivities = [];
+  @Input() useForeignLanguage: false;
 
   @Output() activityChange = new EventEmitter<ActivityOperation>();
   @Output() activitySelect = new EventEmitter<Activity>();
 
   private collapsableTreeHandler: CollapsableTree;
+
 
   constructor(private dialog: MatDialog) { }
 
@@ -61,6 +64,15 @@ export class ProcessTreeDesignerComponent implements OnChanges {
 
   get hasSelectedActivities() {
     return (this.selectedActivity.uid !== '');
+  }
+
+
+  getActivityName(activity: Activity) {
+    if (this.useForeignLanguage) {
+      return activity.foreignLanguage.name || activity.name;
+    } else {
+      return activity.name;
+    }
   }
 
 

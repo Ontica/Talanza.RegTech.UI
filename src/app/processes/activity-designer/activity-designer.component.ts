@@ -30,7 +30,9 @@ export class ActivityDesignerComponent implements OnChanges {
   @Output() activityTemplateChange = new EventEmitter<ActivityTemplate>();
 
   @Input() activityTemplate = EmptyActivityTemplate;
+  @Input() useForeignLanguage = false;
   @Input() settings = new CardSettings();
+
 
   constructor(private store: ProcedureStore) { }
 
@@ -44,6 +46,15 @@ export class ActivityDesignerComponent implements OnChanges {
       this.procedure = this.getProcedure();
     } else {
       this.procedure = null;
+    }
+  }
+
+
+  get activityTemplateName() {
+    if (this.useForeignLanguage) {
+      return this.activityTemplate.foreignLanguage.name || this.activityTemplate.name;
+    } else {
+      return this.activityTemplate.name;
     }
   }
 

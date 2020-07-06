@@ -16,6 +16,7 @@
     <ng-container *ngIf="currentView.name === 'Process.Tree'">
       <emp-steps-process-tree-designer
           [project]="model"
+          [useForeignLanguage]="useForeignLanguage"
           (activityChange)="onActivityTreeEdited($event)"
           (activitySelect)="showEditor($event)">
       </emp-steps-process-tree-designer>
@@ -30,6 +31,7 @@
   <div *ngIf="displayEditor" class="explorer-panel secondary">
     <emp-steps-activity-designer
         [activityTemplate]="selectedActivityTemplate"
+        [useForeignLanguage]="useForeignLanguage"
         (activityTemplateChange)="onActivityUpdated($event)"
         (activityDesignerClose)="onEditorClosed()">
     </emp-steps-activity-designer>

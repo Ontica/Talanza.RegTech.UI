@@ -29,12 +29,14 @@ export class ProcessesMainPageComponent implements OnInit, OnDestroy {
 
   currentView: View;
   displayEditor = false;
+  useForeignLanguage = false;
 
   model: ProjectTemplateModel;
   selectedActivityTemplate = EmptyActivityTemplate;
 
   private subs1: Subscription;
   private subs2: Subscription;
+  private subs3: Subscription;
 
   constructor(public store: ProjectTemplateStore,
               public uiStore: UserInterfaceStore) { }
@@ -45,7 +47,11 @@ export class ProcessesMainPageComponent implements OnInit, OnDestroy {
       x => this.onViewChanged(x)
     );
 
-    this.subs2 = this.store.selectedTemplate().subscribe (
+    this.subs2 = this.uiStore.useForeignLanguage.subscribe (
+      x => this.useForeignLanguage = x
+    );
+
+    this.subs3 = this.store.selectedTemplate().subscribe (
       x => this.onModelSelected(x)
     );
   }
@@ -57,6 +63,9 @@ export class ProcessesMainPageComponent implements OnInit, OnDestroy {
     }
     if (this.subs2) {
       this.subs2.unsubscribe();
+    }
+    if (this.subs3) {
+      this.subs3.unsubscribe();
     }
   }
 
