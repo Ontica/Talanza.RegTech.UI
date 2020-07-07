@@ -162,8 +162,10 @@ export class ActivityModelFormComponent extends AbstractForm implements OnInit, 
     return new FormGroup({
 
       name: new FormControl('', Validators.required),
+      nameForeignLang: new FormControl(''),
 
       notes: new FormControl(),
+      notesForeignLang: new FormControl(''),
 
       theme: new FormControl(),
 
@@ -201,8 +203,10 @@ export class ActivityModelFormComponent extends AbstractForm implements OnInit, 
       procedure: new FormControl('', Validators.required),
 
       contractClause: new FormControl(),
+      contractClauseForeignLang: new FormControl(),
 
-      legalBasis: new FormControl()
+      legalBasis: new FormControl(),
+      legalBasisForeignLang: new FormControl()
 
     });
   }
@@ -283,8 +287,17 @@ export class ActivityModelFormComponent extends AbstractForm implements OnInit, 
         entity: Number(formModel.entity),
         procedure: Number(formModel.procedure),
         contractClause: formModel.contractClause || '',
-        legalBasis: formModel.legalBasis || '',
+        legalBasis: formModel.legalBasis || ''
+
       },
+
+      foreignLang: {
+        name: formModel.nameForeignLang,
+        notes: formModel.notesForeignLang,
+        contractClause: formModel.contractClauseForeignLang,
+        legalBasis: formModel.legalBasisForeignLang
+      }
+
     };
 
     return data;
@@ -338,7 +351,11 @@ export class ActivityModelFormComponent extends AbstractForm implements OnInit, 
   private rebuildForm() {
     this.form.reset({
       name: this.template.name,
+      nameForeignLang: this.template.foreignLanguage.name,
+
       notes: this.template.notes,
+      notesForeignLang: this.template.foreignLanguage.notes,
+
       theme: this.template.theme,
 
       activityType: this.template.activityType,
@@ -362,8 +379,13 @@ export class ActivityModelFormComponent extends AbstractForm implements OnInit, 
 
       entity: this.template.entity,
       procedure: this.template.procedure,
+
       contractClause: this.template.contractClause,
+      contractClauseForeignLang: this.template.foreignLanguage.contractClause,
+
       legalBasis: this.template.legalBasis,
+      legalBasisForeignLang: this.template.foreignLanguage.legalBasis
+
     });
 
     this.cleanExceptions();
