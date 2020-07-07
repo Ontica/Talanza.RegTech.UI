@@ -181,7 +181,11 @@ export class ActivityFormComponent extends AbstractForm implements OnInit, OnCha
     return new FormGroup({
 
       name: new FormControl('', Validators.required),
+      nameForeignLang: new FormControl(''),
+
       notes: new FormControl(),
+      notesForeignLang: new FormControl(),
+
       theme: new FormControl(),
       resource: new FormControl(),
       tags: new FormControl(),
@@ -275,7 +279,13 @@ export class ActivityFormComponent extends AbstractForm implements OnInit, OnCha
       warnDays: formModel.warnDays,
       warnType: formModel.warnType,
 
-      responsibleUID: formModel.responsibleUID
+      responsibleUID: formModel.responsibleUID,
+
+      foreignLang: {
+        name: formModel.nameForeignLang,
+        notes: formModel.notesForeignLang
+      },
+
     };
 
     return data;
@@ -285,7 +295,11 @@ export class ActivityFormComponent extends AbstractForm implements OnInit, OnCha
   private rebuildForm() {
     this.form.reset({
       name: this.activity.name,
+      nameForeignLang: this.activity.foreignLanguage.name,
+
       notes: this.activity.notes,
+      notesForeignLang: this.activity.foreignLanguage.notes,
+
       theme: this.activity.theme,
       resource: this.activity.resource || '',
       tags: this.activity.tags,
