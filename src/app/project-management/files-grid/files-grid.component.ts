@@ -9,7 +9,7 @@ import { Component, ElementRef, EventEmitter, Input, Output,
          OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { interval, Subscription } from 'rxjs';
 
-import { ProjectItemFile } from '@app/models/project-management';
+import { ProjectItemFile, ProjectItem } from '@app/models/project-management';
 
 
 @Component({
@@ -20,6 +20,7 @@ import { ProjectItemFile } from '@app/models/project-management';
 export class FilesGridComponent implements OnInit, OnDestroy {
 
   @Input() files: ProjectItemFile[] = [];
+  @Input() useForeignLanguage = false;
 
   @Output() fileSelect = new EventEmitter<ProjectItemFile>();
   @Output() projectItemSelect = new EventEmitter<ProjectItemFile>();
@@ -52,6 +53,15 @@ export class FilesGridComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     if (this.subs) {
       this.subs.unsubscribe();
+    }
+  }
+
+
+  getProjectItemName(projectItem: ProjectItem) {
+    if (this.useForeignLanguage) {
+      return projectItem.foreignLanguage.name || projectItem.name;
+    } else {
+      return projectItem.name;
     }
   }
 

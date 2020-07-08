@@ -27,6 +27,7 @@ export class MultiProjectsMainPageComponent implements OnInit, OnDestroy {
   currentView: View;
   displayEditor = false;
   toggleEditor = false;
+  useForeignLanguage = false;
 
   selectedActivity = EmptyActivity;
 
@@ -36,7 +37,7 @@ export class MultiProjectsMainPageComponent implements OnInit, OnDestroy {
 
   private subs1: Subscription;
   private subs2: Subscription;
-
+  private subs3: Subscription;
 
   constructor(private projectStore: ProjectStore,
               private uiStore: UserInterfaceStore) { }
@@ -52,6 +53,10 @@ export class MultiProjectsMainPageComponent implements OnInit, OnDestroy {
     this.subs2 = this.uiStore.getValue<ProjectItemFilter>('Sidebar.ProjectFilter').subscribe(
       value => this.filter = value
     );
+
+    this.subs3 = this.uiStore.useForeignLanguage.subscribe(
+      x => this.useForeignLanguage = x
+    );
   }
 
 
@@ -61,6 +66,9 @@ export class MultiProjectsMainPageComponent implements OnInit, OnDestroy {
     }
     if (this.subs2) {
       this.subs2.unsubscribe();
+    }
+    if (this.subs3) {
+      this.subs3.unsubscribe();
     }
   }
 

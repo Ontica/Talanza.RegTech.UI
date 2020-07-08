@@ -34,7 +34,7 @@
 
           <div class="tile-content">
             <label>Activity:</label>
-            <a #trigger (click)="onSelectProjectItem(file)">{{file.projectItem.name}}</a>
+            <a #trigger (click)="onSelectProjectItem(file)">{{getProjectItemName(file.projectItem)}}</a>
             <ng-container *ngIf="!file.projectItem.actualEndDate">
               <label>Deadline:</label>
               <a #trigger (click)="onSelectProjectItem(file)">{{file.projectItem.deadline | date:'dd/LLL/yyyy'}}</a>

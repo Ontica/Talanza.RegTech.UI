@@ -27,6 +27,7 @@ export class ProjectFilesMainPageComponent implements OnInit, OnDestroy {
   currentView: View;
   displayFileEditor = false;
   displayProjectItemEditor = false;
+  useForeignLanguage = false;
 
   files: Observable<ProjectItemFile[]> = of([]);
 
@@ -36,7 +37,7 @@ export class ProjectFilesMainPageComponent implements OnInit, OnDestroy {
 
   private subs1: Subscription;
   private subs2: Subscription;
-
+  private subs3: Subscription;
 
   constructor(private fileStore: FileStore,
               private uiStore: UserInterfaceStore) { }
@@ -56,6 +57,10 @@ export class ProjectFilesMainPageComponent implements OnInit, OnDestroy {
         this.loadFiles();
       }
     );
+
+    this.subs3 = this.uiStore.useForeignLanguage.subscribe(
+      x => this.useForeignLanguage = x
+    );
   }
 
 
@@ -65,6 +70,9 @@ export class ProjectFilesMainPageComponent implements OnInit, OnDestroy {
     }
     if (this.subs2) {
       this.subs2.unsubscribe();
+    }
+    if (this.subs3) {
+      this.subs3.unsubscribe();
     }
   }
 

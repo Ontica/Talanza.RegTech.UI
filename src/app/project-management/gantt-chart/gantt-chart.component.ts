@@ -22,10 +22,9 @@ import { FilterHelper } from '../common/filter-helper';
 export class GanttChartComponent implements OnChanges {
 
   @Input() project: ProjectModel;
-
   @Input() filter: ProjectItemFilter = EmptyProjectItemFilter;
-
   @Input() reset = true;
+  @Input() useForeignLanguage: false;
 
   @Output() activitySelect = new EventEmitter<Activity>();
 
@@ -68,9 +67,11 @@ export class GanttChartComponent implements OnChanges {
    this.loadGanttTasks();
   }
 
+
   onSearch() {
 
   }
+
 
   onActivitySelected(task: GanttTask) {
     const activity = this.projectStore.getActivity(task.uid);
@@ -81,7 +82,20 @@ export class GanttChartComponent implements OnChanges {
   private loadGanttTasks() {
     this.ganttService.getActivitiesTree(this.project.project)
                      .toPromise()
-                     .then(x => this.tasks = FilterHelper.applyFilter(this.filter, x));
+                     .then(x => {
+                       this.tasks = FilterHelper.applyFilter(this.filter, x);
+                       this.tasks = this.tasks.map(x => this.setForeignLanguageText(x));
+                     });
+  }
+
+
+  private setForeignLanguageText(task: GanttTask): GanttTask {
+    if (this.useForeignLanguage) {
+      task.text = task.nameForeignLang || task.name;
+    } else {
+      task.text = task.name;
+    }
+    return task;
   }
 
 }

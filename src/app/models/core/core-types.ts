@@ -17,6 +17,7 @@ export interface EventData {
   payload?: any;
 }
 
+
 export function createAction(type: string, payload?: any): Action {
   const action: Action = {
     type: type,

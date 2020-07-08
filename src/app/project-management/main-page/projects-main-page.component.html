@@ -9,6 +9,7 @@
       <emp-steps-activity-tree
           [project]="selectedProject"
           [filter]="filter"
+          [useForeignLanguage]="useForeignLanguage"
           (activityChange)="onActivityTreeEdited($event)"
           (activitySelect)="showEditor($event)">
       </emp-steps-activity-tree>
@@ -19,6 +20,7 @@
           [project]="selectedProject"
           [filter]="filter"
           [reset]="toggleEditor"
+          [useForeignLanguage]="useForeignLanguage"
           (activitySelect)="showEditor($event)">
       </emp-steps-gantt-chart>
     </ng-container>
@@ -28,6 +30,7 @@
           groupBy='timeline'
           [activities]="selectedProject.activities | applyFilter: filter"
           [title]="selectedProject.project.uid ? selectedProject.project.name : 'Please select a contract'"
+          [useForeignLanguage]="useForeignLanguage"
           (activitySelect)="showEditor($event)">
       </emp-steps-activity-timeline>
     </ng-container>
@@ -38,6 +41,7 @@
 
     <emp-steps-activity-editor
          [activity]="selectedActivity"
+         [useForeignLanguage]="useForeignLanguage"
          (activityChange)="onActivityUpdated($event)"
          (activityEditorClose)="onEditorClosed()">
     </emp-steps-activity-editor>

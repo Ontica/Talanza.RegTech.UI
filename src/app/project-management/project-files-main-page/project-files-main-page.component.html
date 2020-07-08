@@ -4,6 +4,7 @@
   <div class="explorer-panel primary">
     <emp-steps-files-grid
         [files]="(files | async) | applyFilesFilter: filter"
+        [useForeignLanguage]="useForeignLanguage"
         (fileSelect)="showFileEditor($event)"
         (projectItemSelect)="showProjectItemEditor($event)">
         (fileFilterChange)="applyKeywordsFilter($event)">
@@ -21,6 +22,7 @@
   <div *ngIf="displayProjectItemEditor" class="explorer-panel secondary">
     <emp-steps-activity-editor
          [activity]="selectedFile.projectItem"
+         [useForeignLanguage]="useForeignLanguage"
          (activityEditorClose)="onProjectEditorClose()">
     </emp-steps-activity-editor>
   </div>

@@ -23,6 +23,7 @@ export class ActivityEditorComponent implements OnChanges {
   @Output() activityChange = new EventEmitter<Activity>();
 
   @Input() activity: Activity = EmptyActivity;
+  @Input() useForeignLanguage: false;
 
   readonly childrenSettings = new CardSettings();
 
@@ -33,6 +34,15 @@ export class ActivityEditorComponent implements OnChanges {
     this.childrenSettings.showTitle = false;
     this.childrenSettings.readonly = true;
     this.childrenSettings.flat = true;
+  }
+
+
+  get activityName() {
+    if (this.useForeignLanguage) {
+      return this.activity.foreignLanguage.name || this.activity.name;
+    } else {
+      return this.activity.name;
+    }
   }
 
 

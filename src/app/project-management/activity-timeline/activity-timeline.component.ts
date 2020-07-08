@@ -26,10 +26,9 @@ export class ActivityTimelineComponent implements OnChanges {
 
   @Input() activities: Activity[] = [];
   @Input() inboxType: InboxType = 'upcoming-tasks';
-
   @Input() groupBy: GroupByProperty = 'timeline';
-
   @Input() title = '';
+  @Input() useForeignLanguage: false;
 
   @Output() activitySelect = new EventEmitter<Activity>();
 
@@ -99,6 +98,15 @@ export class ActivityTimelineComponent implements OnChanges {
 
       default:
         return 'Tasks';
+    }
+  }
+
+
+  getActivityName(activity: Activity) {
+    if (this.useForeignLanguage) {
+      return activity.foreignLanguage.name || activity.name;
+    } else {
+      return activity.name;
     }
   }
 

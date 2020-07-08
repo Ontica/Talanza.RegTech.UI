@@ -31,6 +31,7 @@ export class ProjectsMainPageComponent implements OnInit, OnDestroy {
   currentView: View;
   displayEditor = false;
   toggleEditor = false;
+  useForeignLanguage = false;
 
   selectedProject: ProjectModel;
   selectedActivity = EmptyActivity;
@@ -40,6 +41,8 @@ export class ProjectsMainPageComponent implements OnInit, OnDestroy {
   private subs1: Subscription;
   private subs2: Subscription;
   private subs3: Subscription;
+  private subs4: Subscription;
+
 
   constructor(private projectStore: ProjectStore,
               private uiStore: UserInterfaceStore) { }
@@ -57,6 +60,11 @@ export class ProjectsMainPageComponent implements OnInit, OnDestroy {
     this.subs3 = this.uiStore.getValue<ProjectItemFilter>('Sidebar.ProjectFilter').subscribe(
       x => this.filter = x
     );
+
+    this.subs4 = this.uiStore.useForeignLanguage.subscribe(
+      x => this.useForeignLanguage = x
+    );
+
   }
 
 
@@ -69,6 +77,9 @@ export class ProjectsMainPageComponent implements OnInit, OnDestroy {
     }
     if (this.subs3) {
       this.subs3.unsubscribe();
+    }
+    if (this.subs4) {
+      this.subs4.unsubscribe();
     }
   }
 

@@ -63,7 +63,7 @@
                [class.completed-activity]="timelineHelper.isCompleted(activity)"
                [class.blink]="timelineHelper.getTimelineColor(activity, activity.deadline, 'title')"
                [style.color]="timelineHelper.getTimelineColor(activity, activity.deadline, 'title')"
-               (click)="onSelectActivity(activity, true)">{{activity.name}}</a>
+               (click)="onSelectActivity(activity, true)">{{getActivityName(activity)}}</a>
           </div>
 
           <div class="activity-status">

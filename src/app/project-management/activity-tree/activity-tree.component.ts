@@ -40,10 +40,9 @@ export class ActivityTreeComponent implements OnChanges {
   insertActivityEditorVisible = false;
 
   @Input() project: ProjectModel;
-
   @Input() filter: ProjectItemFilter = EmptyProjectItemFilter;
-
   @Input() collapsedActivities = [];
+  @Input() useForeignLanguage: false;
 
   @Output() activitySelect = new EventEmitter<Activity>();
   @Output() activityChange = new EventEmitter<ActivityOperation>();
@@ -124,6 +123,15 @@ export class ActivityTreeComponent implements OnChanges {
                                              event.currentIndex + 1 : event.currentIndex + 2;
 
     this.moveActivity(activity, newPosition);
+  }
+
+
+  getActivityName(activity: Activity) {
+    if (this.useForeignLanguage) {
+      return activity.foreignLanguage.name || activity.name;
+    } else {
+      return activity.name;
+    }
   }
 
 
