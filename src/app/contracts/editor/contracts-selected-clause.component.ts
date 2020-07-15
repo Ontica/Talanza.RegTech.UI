@@ -5,7 +5,7 @@
  * See LICENSE.txt in the project root for complete license information.
  */
 
-import { Component, Input, ViewEncapsulation } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 import { ContractsService } from '@app/services/regulation';
 
@@ -18,8 +18,7 @@ import {
 @Component({
   selector: 'emp-gov-selected-clause',
   templateUrl: './contracts-selected-clause.component.html',
-  styleUrls: ['./contracts-selected-clause.component.scss'],
-  encapsulation: ViewEncapsulation.Native
+  styleUrls: ['./contracts-selected-clause.component.scss']
 })
 export class ContractsSelectedClauseComponent {
 

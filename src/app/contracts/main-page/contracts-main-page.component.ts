@@ -41,6 +41,7 @@ export class ContractsMainPageComponent implements OnInit {
     event.stopPropagation();
   }
 
+
   onHideLeftPanel(): void {
     this.isVisibleLeftPanel = !this.isVisibleLeftPanel;
 
@@ -53,11 +54,13 @@ export class ContractsMainPageComponent implements OnInit {
 
   }
 
+
   onSelectedClauseRef(clauseRef: ContractClauseRef): void {
     this.isSelectedClause = true;
 
     this.clause = clauseRef;
   }
+
 
   onChangeClausesList(clausesList: ContractClauseRef[]): void {
     this.clausesList = clausesList;

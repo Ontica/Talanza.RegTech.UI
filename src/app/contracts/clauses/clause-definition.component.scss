@@ -1,4 +1,4 @@
-@import "../../../styles/grid";
+@import "../../../styles/general-styles";
 
 .clause-title {
   font-size: 14pt;
@@ -13,4 +13,9 @@
   text-align: justify;
   font-size: 11pt;
   max-width: 600pt;
+}
+
+.term-definition {
+  border-bottom: 1px double $primary-color-light;
+  cursor: pointer;
 }
