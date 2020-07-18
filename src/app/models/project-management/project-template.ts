@@ -14,10 +14,20 @@ export interface ProjectTemplate extends Identifiable {
 }
 
 export interface PeriodicityRule {
-  ruleType: string;
-  month?: number | '';
-  day?: number | '';
+  each: {
+    unit: string;
+    value?: number | '';
+  }
+  dueOn?: {
+    type: string;
+    month?: number | '';
+    day?: number | '';
+    dayOfWeek?: number | '';
+  }
+
+  notes: string;
 }
+
 
 export interface ActivityTemplate extends Identifiable, PartitionedType {
   id: number;

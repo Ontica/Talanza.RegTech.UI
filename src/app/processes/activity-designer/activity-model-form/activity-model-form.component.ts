@@ -129,11 +129,14 @@ export class ActivityModelFormComponent extends AbstractForm implements OnInit, 
   setDefaultValuesForDueOnTermUnit() {
     if (this.form.value.dueOnTermUnit === 'NA') {
       this.setNotApplyDueOnTermFormControls();
+
     } else if (this.form.value.dueOnTermUnit !== 'NA') {
       this.changeFormValueToIfCurrentValueIs('dueOnCondition', 'NA', '');
       this.changeFormValueToIfCurrentValueIs('dueOnController', '-1', '');
       this.changeFormValueToIfCurrentValueIs('durationUnit', 'NA', '');
+
     }
+
   }
 
 
@@ -193,10 +196,13 @@ export class ActivityModelFormComponent extends AbstractForm implements OnInit, 
 
       durationUnit: new FormControl('', Validators.required),
 
-      periodicityRule: new FormControl(''),
-      periodicityMonth: new FormControl(),
-      periodicityDay: new FormControl(),
-      periodicity: new FormControl(),
+      periodUnit: new FormControl(''),
+      periodValue: new FormControl(''),
+      periodDueOn: new FormControl(''),
+      periodMonth: new FormControl(''),
+      periodDayOfWeek: new FormControl(''),
+      periodDay: new FormControl(''),
+      periodNotes: new FormControl(),
 
       entity: new FormControl('', Validators.required),
 
@@ -259,6 +265,8 @@ export class ActivityModelFormComponent extends AbstractForm implements OnInit, 
 
     const periodicityRule = this.getPeriodicityRuleUpdateData();
 
+    console.log('periodicityRule', periodicityRule);
+
     const data = {
       name: formModel.name,
       notes: formModel.notes,
@@ -282,8 +290,6 @@ export class ActivityModelFormComponent extends AbstractForm implements OnInit, 
 
         periodicityRule,
 
-        periodicity: formModel.periodicity || '',
-
         entity: Number(formModel.entity),
         procedure: Number(formModel.procedure),
         contractClause: formModel.contractClause || '',
@@ -305,39 +311,92 @@ export class ActivityModelFormComponent extends AbstractForm implements OnInit, 
 
 
   getPeriodicityRuleUpdateData() {
-    const formModel = this.form.value;
-
-    if (!formModel.periodicityRule) {
+    if (this.value('executionMode') !== 'Periodic') {
       return null;
     }
 
-    if (formModel.periodicityRule === 'OncePerYear-OnFixedDate' ||
-        formModel.periodicityRule.startsWith('Semi-annual')) {
-      return {
-        ruleType: formModel.periodicityRule,
-        month:  formModel.periodicityMonth ? Number(formModel.periodicityMonth) : '',
-        day: formModel.periodicityDay ? Number(formModel.periodicityDay) : ''
-      };
-    }
-
-    if (formModel.periodicityRule === 'Manual' ||
-        formModel.periodicityRule === 'Daily' ||
-        formModel.periodicityRule.startsWith('After-Given-Activity')) {
-      return {
-        ruleType: formModel.periodicityRule
-      };
-    }
-
-    return {
-      ruleType: formModel.periodicityRule,
-      day: formModel.periodicityDay ? Number(formModel.periodicityDay) : ''
+    var periodicityRule = {
+      notes: this.form.get('periodNotes').value,
+      each: {
+        value: this.form.get('periodValue').value,
+        unit: this.form.get('periodUnit').value
+      }
     };
+
+    if (!this.showControl('periodDueOn')) {
+      return periodicityRule;
+    }
+
+    var dueOn = {
+      type: this.form.get('periodDueOn').value
+    };
+
+    if (this.showControl('periodMonth')) {
+      dueOn = {...dueOn, ...{ month: this.form.get('periodMonth').value }};
+    }
+
+    if (this.showControl('periodDayOfWeek')) {
+      dueOn = {...dueOn, ...{ dayOfWeek: this.form.get('periodDayOfWeek').value }};
+    }
+
+    if (this.showControl('periodDay')) {
+      dueOn = {...dueOn, ...{ day: this.form.get('periodDay').value }};
+    }
+
+    return {...periodicityRule, ... { dueOn }};
   }
 
 
-  hidePeriodicityMonth(periodicityRule: string) {
-    return periodicityRule !== 'OncePerYear-OnFixedDate' &&
-           !periodicityRule.startsWith('Semi-annual');
+  appliesPeriodDueOnOption(periodDueOn: string) {
+    const periodUnit = this.form.get('periodUnit').value;
+    const periodValue = this.form.get('periodValue').value;
+
+    switch (periodDueOn) {
+      case 'OnFixedDate':
+        return periodUnit === 'Years' || periodUnit === 'Months';
+
+      case 'OnFixedDayOfWeek':
+        return periodUnit === 'Weeks';
+
+      default:
+        return true;
+    }
+  }
+
+
+  showControl(controlName: string) {
+    const periodUnit = this.form.get('periodUnit').value;
+    const periodValue = this.form.get('periodValue').value;
+    const periodDueOn = this.form.get('periodDueOn').value;
+
+    if (!controlName || !periodUnit) {
+      return false;
+    }
+
+    if (periodUnit === 'Manual') {
+      return false;
+    }
+
+    if (periodDueOn === '' && controlName != 'periodDueOn') {
+      return false;
+    }
+
+    switch(controlName)  {
+      case 'periodDueOn':
+        return periodUnit !== 'CalendarDays';
+
+      case 'periodMonth':
+        return (periodUnit === 'Years' || (periodUnit === 'Months' && periodValue > 1)) && periodDueOn !== 'AfterTheGivenStep';
+
+      case 'periodDayOfWeek':
+        return periodUnit === 'Weeks' && periodDueOn !== 'AfterTheGivenStep';
+
+      case 'periodDay':
+        return periodUnit !== 'CalendarDays' && periodUnit !== 'Weeks' && periodDueOn !== 'AfterTheGivenStep';
+
+      default:
+        return true;
+    }
   }
 
 
@@ -372,10 +431,13 @@ export class ActivityModelFormComponent extends AbstractForm implements OnInit, 
       duration: this.template.duration,
       durationUnit: this.template.durationUnit,
 
-      periodicityRule: this.template.periodicityRule ? this.template.periodicityRule.ruleType : '',
-      periodicityMonth: this.template.periodicityRule ? this.template.periodicityRule.month : '',
-      periodicityDay: this.template.periodicityRule ? this.template.periodicityRule.day : '',
-      periodicity: this.template.periodicity,
+      periodUnit: this.template.periodicityRule?.each?.unit,
+      periodValue: this.template.periodicityRule?.each?.value,
+      periodDueOn: this.template.periodicityRule?.dueOn?.type,
+      periodMonth: this.template.periodicityRule?.dueOn?.month,
+      periodDayOfWeek: this.template.periodicityRule?.dueOn?.dayOfWeek,
+      periodDay: this.template.periodicityRule?.dueOn?.day,
+      periodNotes: this.template.periodicityRule?.notes,
 
       entity: this.template.entity,
       procedure: this.template.procedure,
@@ -418,7 +480,8 @@ export class ActivityModelFormComponent extends AbstractForm implements OnInit, 
   private validateFormFields(): void {
     this.validateIntegerValue('dueOnTerm');
     this.validateIntegerValue('duration');
-    this.validateIntegerValue('periodicityDay');
+    this.validateIntegerValue('periodValue');
+    this.validateIntegerValue('periodDay');
     this.validatePeriodicity();
   }
 
@@ -442,25 +505,58 @@ export class ActivityModelFormComponent extends AbstractForm implements OnInit, 
       return;
     }
 
-    if (!this.value('periodicityRule')) {
+    if (!this.value('periodUnit')) {
       this.addException('The periodicity rule is incomplete.');
-      this.get('periodicityRule').markAsDirty();
+      this.get('periodUnit').markAsDirty();
 
-    } else if (this.value('periodicityRule') === 'Daily' ||
-              this.value('periodicityRule').startsWith('After-Given-Activity')) {
       return;
-
-    } else if (this.value('periodicityRule') === 'OncePerYear-OnFixedDate' &&
-              !this.value('periodicityMonth')) {
-      this.addException('Periodicity month needed.');
-      this.get('periodicityMonth').markAsDirty();
-
-    } else if (this.value('periodicityRule') !== 'Manual' &&
-              !this.value('periodicityDay')) {
-      this.addException('Periodicity rule is incomplete.');
-      this.get('periodicityDay').markAsDirty();
     }
 
+    if (this.value('periodUnit') === 'Manual') {
+      this.set('periodValue', '');
+
+      return;
+    }
+
+    if (!this.value('periodValue')) {
+      this.addException('The periodicity rule is incomplete.');
+      this.get('periodValue').markAsDirty();
+
+      return;
+    }
+
+
+    if (!this.showControl('periodDueOn')) {
+      return;
+    }
+
+    if (!this.value('periodDueOn')) {
+      this.addException('The periodicity rule is incomplete.');
+      this.get('periodDueOn').markAsDirty();
+    }
+
+    if (!this.appliesPeriodDueOnOption(this.value('periodDueOn'))) {
+      this.addException('The periodicity rule is incomplete.');
+      this.set('periodDueOn', '');
+      this.get('periodDueOn').markAsDirty();
+    }
+
+    if (this.showControl('periodMonth') && !this.value('periodMonth')) {
+      this.addException('The periodicity rule is incomplete.');
+      this.get('periodMonth').markAsDirty();
+    }
+
+
+    if (this.showControl('periodDay') && !this.value('periodDay')) {
+      this.addException('The periodicity rule is incomplete.');
+      this.get('periodDay').markAsDirty();
+    }
+
+
+    if (this.showControl('periodDayOfWeek') && !this.value('periodDayOfWeek')) {
+      this.addException('The periodicity rule is incomplete.');
+      this.get('periodDayOfWeek').markAsDirty();
+    }
   }
 
   // these methods must be handled through component input data (architecture concern)

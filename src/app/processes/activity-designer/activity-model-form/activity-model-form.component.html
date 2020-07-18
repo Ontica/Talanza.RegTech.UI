@@ -123,6 +123,79 @@
           <input *ngIf="readonly" type="text" disabled="true" class="text-box" style="width:100%" [value]="template.dueOnControllerName">
         </td>
       </tr>
+      <tr [hidden]="executionMode.value !== 'Periodic'">
+        <td i18n>Periodicity rule:</td>
+        <td>
+          Every:
+          <input type="number" class="text-box" style="width:70px" maxlength="3" min="1" max="999" formControlName="periodValue">
+          <select class="select-box" style="width:90px" formControlName="periodUnit">
+            <option value="" i18n>( Every )</option>
+            <option value="CalendarDays" i18n>Days</option>
+            <option value="Weeks" i18n>Weeks</option>
+            <option value="Months" i18n>Months</option>
+            <option value="Years" i18n>Years</option>
+            <option value="Manual" i18n>Manual</option>
+          </select>
+        </td>
+        <td colspan="2">
+          <span [hidden]="!showControl('periodDueOn')">
+            Due on:
+            <select class="select-box" style="width:240px" #periodDueOn formControlName="periodDueOn">
+              <option value="" i18n>( Due on rule )</option>
+              <option [hidden]="!appliesPeriodDueOnOption('OnFixedDate')" value="OnFixedDate" i18n>On X calendar day</option>
+              <option [hidden]="!appliesPeriodDueOnOption('OnFixedDayOfWeek')" value="OnFixedDayOfWeek" i18n>On X day of the week</option>
+              <option [hidden]="!appliesPeriodDueOnOption('OnFirstCalendarDays')" value="OnFirstCalendarDays" i18n>During first X calendar days</option>
+              <option [hidden]="!appliesPeriodDueOnOption('OnFirstBusinessDays')" value="OnFirstBusinessDays" i18n>During first X business days</option>
+              <option [hidden]="!appliesPeriodDueOnOption('AfterTheGivenStep')" value="AfterTheGivenStep" i18n>After the given obligation</option>
+            </select>
+            <br />
+          </span>
+          <span [hidden]="!showControl('periodMonth')">
+            Month:
+            <select class="select-box" style="width:110px" formControlName="periodMonth">
+              <option value="" i18n>( Month )</option>
+              <option value="1">January</option>
+              <option value="2">February</option>
+              <option value="3">March</option>
+              <option value="4">April</option>
+              <option value="5">May</option>
+              <option value="6">June</option>
+              <option value="7">July</option>
+              <option value="8">August</option>
+              <option value="9">September</option>
+              <option value="10">October</option>
+              <option value="11">November</option>
+              <option value="12">December</option>
+            </select>
+          </span>
+          <span [hidden]="!showControl('periodDayOfWeek')">
+            Day of the week:
+            <select class="select-box" style="width:110px"  formControlName="periodDayOfWeek">
+              <option value="" i18n>( Day )</option>
+              <option value="1">Monday</option>
+              <option value="2">Tuesday</option>
+              <option value="3">Wednesday</option>
+              <option value="4">Thursday</option>
+              <option value="5">Friday</option>
+              <option value="6">Saturday</option>
+              <option value="0">Sunday</option>
+            </select>
+          </span>
+          <span [hidden]="!showControl('periodDay')">
+            <span [hidden]="periodDueOn.value !== 'OnFixedDate'">Day: &nbsp; &nbsp; &nbsp; </span>
+            <span [hidden]="periodDueOn.value === 'OnFixedDate'">During first X days: </span>
+            <input type="number" class="text-box" style="width:70px"
+                   maxlength="3" min="1" max="999" formControlName="periodDay">
+          </span>
+        </td>
+      </tr>
+      <tr [hidden]="executionMode.value !== 'Periodic'">
+      <td i18n>Periodicity rule notes:</td>
+        <td colspan="3" style="width:100%">
+          <input type="text" class="text-box" formControlName="periodNotes">
+        </td>
+      </tr>
+
       <tr>
         <td i18n>Estimated time to do<br>the obligation or activity:</td>
         <td>
@@ -148,52 +221,6 @@
             <option value="false" i18n>No</option>
             <option value="" i18n>Not applicable</option>
           </select>
-        </td>
-      </tr>
-      <tr [hidden]="executionMode.value !== 'Periodic'">
-        <td i18n>Periodicity rule:</td>
-        <td>
-          <select class="select-box" style="width:260px" #periodicityRule formControlName="periodicityRule">
-            <option value="OncePerYear-OnFixedDate" i18n>Yearly, on X calendar date</option>
-            <option value="After-Given-Activity-Yearly" i18n>Yearly, after the given obligation</option>
-            <option value="Semi-annual-OnFixedDays" i18n>Semi-annual, during first X calendar days</option>
-            <option value="Semi-annual-BusinessDays" i18n>Semi-annual, during first X business days</option>
-            <option value="After-Given-Activity-Semi-annual" i18n>Semi-annual, after the given obligation</option>
-            <option value="Monthly-OnFixedDay" i18n>Monthly, during first X calendar days</option>
-            <option value="Monthly-BusinessDays" i18n>Monthly, during first X business days</option>
-            <option value="After-Given-Activity-Monthly" i18n>Monthly, after the given obligation</option>
-            <option value="Daily" i18n>Daily</option>
-            <option value="Manual" i18n>The processing rule is not defined</option>
-          </select>
-        </td>
-        <td colspan="2" [hidden]="periodicityRule.value === 'Manual' || periodicityRule.value === 'Daily' ||
-                                  periodicityRule.value.startsWith('After-Given-Activity')">
-          <select class="select-box" style="width:150px"
-                  [hidden]="hidePeriodicityMonth(periodicityRule.value)" formControlName="periodicityMonth">
-            <option value="" i18n>( Month )</option>
-            <option value="1">January</option>
-            <option value="2">February</option>
-            <option value="3">March</option>
-            <option value="4">April</option>
-            <option value="5">May</option>
-            <option value="6">June</option>
-            <option value="7">July</option>
-            <option value="8">August</option>
-            <option value="9">September</option>
-            <option value="10">October</option>
-            <option value="11">November</option>
-            <option value="12">December</option>
-          </select>
-          <span [hidden]="periodicityRule.value !== 'OncePerYear-OnFixedDate'">Day: </span>
-          <span [hidden]="!periodicityRule.value.startsWith('Monthly')">During first X days: </span>
-          <input type="number" class="text-box" style="width:70px"
-                 maxlength="2" min="1" max="31" formControlName="periodicityDay">
-        </td>
-      </tr>
-      <tr [hidden]="executionMode.value !== 'Periodic'">
-      <td i18n>Periodicity rule notes:</td>
-        <td colspan="3" style="width:100%">
-          <input type="text" class="text-box" formControlName="periodicity">
         </td>
       </tr>
     </table>

@@ -355,10 +355,10 @@ export class StepElementFormComponent extends AbstractForm implements OnInit, On
       duration: this.template.duration,
       durationUnit: this.template.durationUnit,
 
-      periodicityRule: this.template.periodicityRule ? this.template.periodicityRule.ruleType : '',
-      periodicityMonth: this.template.periodicityRule ? this.template.periodicityRule.month : '',
-      periodicityDay: this.template.periodicityRule ? this.template.periodicityRule.day : '',
-      periodicity: this.template.periodicity,
+      // periodicityRule: this.template.periodicityRule ? this.template.periodicityRule.ruleType : '',
+      // periodicityMonth: this.template.periodicityRule ? this.template.periodicityRule.month : '',
+      // periodicityDay: this.template.periodicityRule ? this.template.periodicityRule.day : '',
+      // periodicity: this.template.periodicity,
 
       entity: this.template.entity,
       procedure: this.template.procedure,
