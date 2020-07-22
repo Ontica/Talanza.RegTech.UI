@@ -108,7 +108,7 @@ export class TimelineHelper {
       return use === 'border' ? COLORS.gray : COLORS.empty;
     }
 
-    if (activity.warnType === 'NA') {
+    if (!activity.trafficLight || activity.trafficLight.type === 'NA') {
       return COLORS.empty;
     }
 
@@ -118,24 +118,20 @@ export class TimelineHelper {
       return remainingDays <= 0 ? COLORS.red : COLORS.empty;
     }
 
-    let warnDaysFactor = 1;
+    let trafficLightDaysFactor = 1;
 
-    if (activity.warnDays >= DEFAULT_BOUNDS.green_bound) {
-      warnDaysFactor = activity.warnDays / DEFAULT_BOUNDS.green_bound;
-
-    } else if (activity.warnDays >= 1) {
-      warnDaysFactor = activity.warnDays / DEFAULT_BOUNDS.red_bound;
-
+    if (activity.trafficLight.type === 'CalendarDays') {
+      trafficLightDaysFactor = (activity.trafficLight?.days || DEFAULT_BOUNDS.red_bound) / DEFAULT_BOUNDS.red_bound;
     }
 
 
-    if (remainingDays <= DEFAULT_BOUNDS.red_bound * warnDaysFactor) {
+    if (remainingDays <= DEFAULT_BOUNDS.red_bound * trafficLightDaysFactor) {
       return COLORS.red;
 
-    } else if (remainingDays <= DEFAULT_BOUNDS.amber_bound * warnDaysFactor) {
+    } else if (remainingDays <= DEFAULT_BOUNDS.amber_bound * trafficLightDaysFactor) {
       return COLORS.amber;
 
-    } else if (remainingDays <= DEFAULT_BOUNDS.green_bound * warnDaysFactor) {
+    } else if (remainingDays <= DEFAULT_BOUNDS.green_bound * trafficLightDaysFactor) {
       return COLORS.green;
 
     } else if (use === 'border') {
