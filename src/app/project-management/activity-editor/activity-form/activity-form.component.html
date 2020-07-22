@@ -49,9 +49,9 @@
       <tr>
         <td i18n>Estimated duration:</td>
         <td>
-          <input type="text" class="text-box" style="width:40px" formControlName="durationValue">
+          <input type="number" class="text-box" maxlength="3" min="1" max="999" style="width:50px" formControlName="durationValue">
 
-          <select class="select-box" style="width:120px" formControlName="durationType">
+          <select class="select-box" style="width:120px" (change)="updateControls('durationType')" formControlName="durationType">
             <option value="" i18n>( Time unit )</option>
             <option value="BusinessDays" i18n>Business days</option>
             <option value="CalendarDays" i18n>Calendar days</option>
@@ -62,17 +62,16 @@
             <option value="NA" i18n>Not applicable</option>
           </select>
         </td>
-        <td class="text-align-right" i18n>Send alerts:</td>
+        <td class="text-align-right" i18n>Traffic light:</td>
         <td>
-          <input type="text" class="text-box" style="width:40px" formControlName="warnDays">
+          <input type="number" class="text-box" maxlength="3" min="1" max="999" style="width:50px" formControlName="trafficLightDays">
 
-          <select class="select-box" style="width:244px" formControlName="warnType">
+          <select class="select-box" style="width:264px" (change)="updateControls('trafficLightType')" formControlName="trafficLightType">
             <option value="" i18n>( Configuration )</option>
-            <option value="CalendarDays" i18n>Calendar days before the deadline</option>
-            <option value="Default" i18n>Use Default Configuration</option>
-            <option value="NA" i18n>Do not emit alerts</option>
+            <option value="CalendarDays" i18n>X days before the deadline (x, 2x, 4x)</option>
+            <option value="Default" i18n>Use default Config (7, 14, 28)</option>
+            <option value="NA" i18n>Do not use traffic light</option>
           </select>
-          <span><mat-icon>person_add</mat-icon></span>
         </td>
       </tr>
       <tr class="border-top">

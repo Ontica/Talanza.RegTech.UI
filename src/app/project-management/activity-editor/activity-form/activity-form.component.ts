@@ -29,11 +29,18 @@ import { takeUntil } from 'rxjs/operators';
 
 
 enum FormMessages {
+
+  DurationValueConfig =
+  'Incomplete estimated duration configuration.',
+
   IncompleteActivityData =
   'All fields marked in red are required.',
 
   PlannedEndDateIsGreaterThenDeadline =
   'Planned End Date can not be later than the Deadline.',
+
+  WrongTrafficLightConfig =
+  'Incomplete traffic light configuration.',
 }
 
 
@@ -162,6 +169,8 @@ export class ActivityFormComponent extends AbstractForm implements OnInit, OnCha
 
   enableForm() {
     this.enable();
+    this.updateEstimatedDurationControls();
+    this.updateTrafficLightControls();
   }
 
 
@@ -195,11 +204,11 @@ export class ActivityFormComponent extends AbstractForm implements OnInit, OnCha
       actualStartDate: new FormControl(),
       actualEndDate: new FormControl(),
 
-      durationValue: new FormControl(),
+      durationValue: new FormControl({value: '', disabled: true}),
       durationType: new FormControl(),
 
-      warnDays: new FormControl(),
-      warnType: new FormControl(),
+      trafficLightDays: new FormControl({value: '', disabled: true}),
+      trafficLightType: new FormControl(),
 
       responsibleUID: new FormControl('', Validators.required)
     });
@@ -226,6 +235,22 @@ export class ActivityFormComponent extends AbstractForm implements OnInit, OnCha
   }
 
 
+  updateControls(sourceControl: string) {
+    switch (sourceControl) {
+      case 'durationType':
+        this.updateEstimatedDurationControls();
+        return;
+
+      case 'trafficLightType':
+        this.updateTrafficLightControls();
+        return;
+
+      default:
+
+    }
+  }
+
+
   protected validate(): Promise<any> {
     if (!this.valid) {
       this.addException(FormMessages.IncompleteActivityData);
@@ -233,11 +258,107 @@ export class ActivityFormComponent extends AbstractForm implements OnInit, OnCha
 
     this.validateTargetDate();
 
+    this.validateEstimatedDuration();
+    this.validateTrafficLight();
+
+
     return Promise.resolve();
   }
 
 
   // private methods
+
+
+  private isPositiveInteger(str: string) {
+    const n = Number(str);
+
+    return n !== Infinity && Number.isInteger(n) && n > 0;
+  }
+
+
+  private updateEstimatedDurationControls() {
+    const durationType = this.value('durationType');
+
+    if (durationType === 'NA' || durationType === 'Unknown' || durationType === '') {
+      return this.get('durationValue').disable();
+    } else {
+      return this.get('durationValue').enable();
+    }
+  }
+
+
+  private updateTrafficLightControls() {
+    const trafficLightType = this.value('trafficLightType');
+
+    if (trafficLightType === 'CalendarDays') {
+      return this.get('trafficLightDays').enable();
+    } else {
+      return this.get('trafficLightDays').disable();
+    }
+  }
+
+
+
+  private validateIntegerValue(path: string, exceptionMsg?: string): void {
+    const value = this.value(path);
+
+    if (!value) {
+      return;
+    }
+
+    if (!this.isPositiveInteger(value)) {
+      this.addException(exceptionMsg || 'A control has a unrecognized value: ' + value);
+      this.get(path).markAsDirty();
+    }
+  }
+
+
+  private validateEstimatedDuration() {
+    this.validateIntegerValue('durationValue', FormMessages.DurationValueConfig);
+
+    if (this.value('durationType') === '') {
+      this.addException('Please select the estimated duration type.');
+      this.get('durationType').markAsDirty();
+      return;
+    }
+
+    if (this.value('durationType') === 'Unknown' || this.value('durationType') === 'NA') {
+      this.set('durationValue', '');
+
+      return;
+    }
+
+    if (!this.value('durationValue')) {
+      this.addException('I need the estimated duration value.');
+      this.get('durationValue').markAsDirty();
+
+      return;
+    }
+  }
+
+
+  private validateTrafficLight() {
+    this.validateIntegerValue('trafficLightDays', FormMessages.WrongTrafficLightConfig);
+
+    if (this.value('trafficLightType') === '') {
+      this.addException('Please select the traffic light configuration type.');
+      this.get('trafficLightType').markAsDirty();
+      return;
+    }
+
+    if (this.value('trafficLightType') !== 'CalendarDays') {
+      this.set('trafficLightDays', '');
+
+      return;
+    }
+
+    if (!this.value('trafficLightDays')) {
+      this.addException('I need the number of days to calculate the traffic light rule.');
+      this.get('trafficLightDays').markAsDirty();
+
+      return;
+    }
+  }
 
 
   private deleteActivity(): Promise<void> {
@@ -276,8 +397,11 @@ export class ActivityFormComponent extends AbstractForm implements OnInit, OnCha
         type: formModel.durationType
       },
 
-      warnDays: formModel.warnDays,
-      warnType: formModel.warnType,
+      trafficLight: {
+        days:formModel.trafficLightDays,
+        type: formModel.trafficLightType,
+      },
+
 
       responsibleUID: formModel.responsibleUID,
 
@@ -312,8 +436,8 @@ export class ActivityFormComponent extends AbstractForm implements OnInit, OnCha
       durationValue: this.activity.estimatedDuration.value !== 0 ? this.activity.estimatedDuration.value : '',
       durationType: this.activity.estimatedDuration.type,
 
-      warnDays: this.activity.warnDays !== 0 ? this.activity.warnDays : '',
-      warnType: this.activity.warnType,
+      trafficLightDays: this.activity.trafficLight?.days || '',
+      trafficLightType: this.activity.trafficLight?.type || 'Default',
 
       responsibleUID: this.activity.responsible.uid
     });

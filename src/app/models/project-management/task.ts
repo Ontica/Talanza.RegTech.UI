@@ -20,8 +20,11 @@ export interface Task extends Identifiable, PartitionedType {
   project: Identifiable;
 
   estimatedDuration: Duration;
-  warnDays: number;
-  warnType: string;
+
+  trafficLight?: {
+    type: string;
+    days: number;
+  };
 
   deadline: DateString;
   plannedEndDate: DateString;
@@ -56,8 +59,6 @@ export const EmptyTask: Task = {
   project: Empty,
 
   estimatedDuration: DefaultDuration,
-  warnDays: 0,
-  warnType: '',
 
   deadline: '',
   plannedEndDate: '',

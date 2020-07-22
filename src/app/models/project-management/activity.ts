@@ -54,8 +54,10 @@ export interface Activity extends Identifiable, PartitionedType, BaseProjectItem
   actualStartDate: DateString;
   actualEndDate: DateString;
 
-  warnDays: number;
-  warnType: string;
+  trafficLight?: {
+    type: string;
+    days: number;
+  };
 
   position: number;
   level: number;
@@ -91,9 +93,6 @@ export const EmptyActivity: Activity = {
   plannedEndDate: '',
   actualEndDate: '',
   deadline: '',
-
-  warnDays: 0,
-  warnType: '',
 
   theme: '',
   resource: '',
