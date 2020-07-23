@@ -39,6 +39,9 @@ enum FormMessages {
   PlannedEndDateIsGreaterThenDeadline =
   'Planned End Date can not be later than the Deadline.',
 
+  WrongReminderDays =
+    'Incomplete reminder days configuration.',
+
   WrongTrafficLightConfig =
   'Incomplete traffic light configuration.',
 }
@@ -210,6 +213,8 @@ export class ActivityFormComponent extends AbstractForm implements OnInit, OnCha
       trafficLightDays: new FormControl({value: '', disabled: true}),
       trafficLightType: new FormControl(),
 
+      reminderDays : new FormControl(),
+
       responsibleUID: new FormControl('', Validators.required)
     });
   }
@@ -260,7 +265,7 @@ export class ActivityFormComponent extends AbstractForm implements OnInit, OnCha
 
     this.validateEstimatedDuration();
     this.validateTrafficLight();
-
+    this.validateIntegerValue('reminderDays', FormMessages.WrongReminderDays);
 
     return Promise.resolve();
   }
@@ -398,10 +403,14 @@ export class ActivityFormComponent extends AbstractForm implements OnInit, OnCha
       },
 
       trafficLight: {
-        days:formModel.trafficLightDays,
+        days: formModel.trafficLightDays,
         type: formModel.trafficLightType,
       },
 
+
+      reminder: {
+        days: formModel.reminderDays
+      },
 
       responsibleUID: formModel.responsibleUID,
 
@@ -438,6 +447,8 @@ export class ActivityFormComponent extends AbstractForm implements OnInit, OnCha
 
       trafficLightDays: this.activity.trafficLight?.days || '',
       trafficLightType: this.activity.trafficLight?.type || 'Default',
+
+      reminderDays: this.activity.reminder?.days,
 
       responsibleUID: this.activity.responsible.uid
     });

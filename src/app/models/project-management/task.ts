@@ -26,6 +26,10 @@ export interface Task extends Identifiable, PartitionedType {
     days: number;
   };
 
+  reminder?: {
+    days: number;
+  };
+
   deadline: DateString;
   plannedEndDate: DateString;
   actualStartDate: DateString;

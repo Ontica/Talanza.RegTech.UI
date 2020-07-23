@@ -59,6 +59,10 @@ export interface Activity extends Identifiable, PartitionedType, BaseProjectItem
     days: number;
   };
 
+  reminder?: {
+    days: number;
+  };
+
   position: number;
   level: number;
   stage: string;
