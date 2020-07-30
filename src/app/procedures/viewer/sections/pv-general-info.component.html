@@ -110,11 +110,15 @@
         <td>{{procedure.filingCondition.howToFile}}</td>
       </tr>
       <tr>
-        <td class='label' i18n>Filing Email:</td>
-        <td *ngIf="procedure.filingCondition.howToFileAddress !== 'No aplicable'">
+        <td class='label' i18n>Filing address:</td>
+        <td *ngIf="procedure.filingCondition.howToFileAddress.includes('@')">
           <a href="mailto:{{procedure.filingCondition.howToFileAddress}}">{{procedure.filingCondition.howToFileAddress}}</a>
         </td>
-        <td *ngIf="procedure.filingCondition.howToFileAddress === 'No aplicable'">
+        <td *ngIf="procedure.filingCondition.howToFileAddress.includes('http')">
+          <a href="{{procedure.filingCondition.howToFileAddress}}" target="_base">{{procedure.filingCondition.howToFileAddress}}</a>
+        </td>
+        <td *ngIf="!procedure.filingCondition.howToFileAddress.includes('@') &&
+                   !procedure.filingCondition.howToFileAddress.includes('http')">
           {{procedure.filingCondition.howToFileAddress}}
         </td>
       </tr>
