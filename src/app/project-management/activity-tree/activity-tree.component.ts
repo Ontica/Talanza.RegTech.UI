@@ -24,6 +24,7 @@ import { TimelineHelper } from '../common/timeline-helper';
 
 import { CollapsableTree, CollapsableTreeNodeDisplayMode } from '../common/collapsable-tree';
 import { FilterHelper } from '../common/filter-helper';
+import { ExportActivitiesDialogComponent } from '../export-activities-dialog/export-activities-dialog.component';
 
 
 @Component({
@@ -294,6 +295,18 @@ export class ActivityTreeComponent implements OnChanges {
     dialogConfig.width = '700px',
 
     this.dialog.open(CheckProcessesDialogComponent, dialogConfig);
+  }
+
+
+  openExportDataDialog() {
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.height = '400px',
+    dialogConfig.width = '700px',
+
+    this.dialog.open(ExportActivitiesDialogComponent, dialogConfig);
   }
 
 

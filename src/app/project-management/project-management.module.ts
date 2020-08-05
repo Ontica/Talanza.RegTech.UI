@@ -34,6 +34,7 @@ import { ActivityTreeComponent } from './activity-tree/activity-tree.component';
 import { AddEventDialogComponent } from './add-event-dialog/add-event-dialog.component';
 import { ChangeDateDialogComponent } from './change-date-dialog/change-date-dialog.component';
 import { CheckProcessesDialogComponent } from './check-processes-dialog/check-processes-dialog.component';
+import { ExportActivitiesDialogComponent } from './export-activities-dialog/export-activities-dialog.component';
 
 import { GanttChartComponent } from './gantt-chart/gantt-chart.component';
 import { DhtmlxGanttComponent } from './dhtmlx-gantt/dhtmlx-gantt.component';
@@ -79,6 +80,7 @@ import { ProjectManagementRoutingModule } from './project-management-routing.mod
     AddEventDialogComponent,
     ChangeDateDialogComponent,
     CheckProcessesDialogComponent,
+    ExportActivitiesDialogComponent,
 
     DhtmlxGanttComponent,
 
@@ -90,19 +92,20 @@ import { ProjectManagementRoutingModule } from './project-management-routing.mod
     ProjectsMainPageComponent,
     GanttChartComponent,
     FilesGridComponent,
-    ProjectFilesMainPageComponent,
+    ProjectFilesMainPageComponent
 
   ],
 
   exports: [
     MultiProjectsMainPageComponent,
     ProjectsMainPageComponent,
-    ProjectFilesMainPageComponent,
+    ProjectFilesMainPageComponent
   ],
 
   entryComponents: [
     AddEventDialogComponent,
-    ChangeDateDialogComponent
+    ChangeDateDialogComponent,
+    ExportActivitiesDialogComponent
   ]
 
 })

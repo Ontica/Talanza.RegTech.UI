@@ -8,11 +8,15 @@
         &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
       <a (click)="toggleCollapseAll()">{{ allCollapsed ? '[open all]' : '[close all]'}}</a>
       &nbsp; &nbsp;
-      <a (click)="toggleTreeEditionMode()">{{ treeEditionMode ? '[filtering mode]' : '[edition mode]'}}</a>
+      <a (click)="toggleTreeEditionMode()">{{ treeEditionMode ? '[view mode]' : '[edition mode]'}}</a>
       </div>
     </div>
 
     <div class="card-header-options">
+
+      <button type="button" class="btn disabled" [hidden]="treeEditionMode"
+              (click)="openExportDataDialog()" i18n>Export</button>
+
       <button type="button" class="btn-action" [hidden]="!treeEditionMode"
               (click)="openAddEventDialog()" i18n>What is happening?</button>
       &nbsp; &nbsp;
