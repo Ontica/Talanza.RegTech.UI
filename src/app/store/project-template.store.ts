@@ -140,6 +140,12 @@ export class ProjectTemplateStore {
   }
 
 
+  translate(text: string): Promise<string> {
+    return this.projectTemplateService.translate(text)
+               .toPromise();
+  }
+
+
   update(activityTemplate: ActivityTemplate,
          updateData: Partial<ActivityTemplate>): Promise<ActivityTemplate> {
     return this.projectTemplateService.update(activityTemplate, updateData)

@@ -406,6 +406,23 @@ export class ActivityModelFormComponent extends AbstractForm implements OnInit, 
   }
 
 
+  translate() {
+    if (this.value('name') && !this.value('nameForeignLang')) {
+      this.doTranslation('name', 'nameForeignLang');
+    }
+
+    if (this.value('notes') && !this.value('notesForeignLang')) {
+      this.doTranslation('notes', 'notesForeignLang');
+    }
+  }
+
+
+  private doTranslation(sourceControlName: string, targetControlName: string) {
+    this.templateStore.translate(this.value(sourceControlName))
+                      .then(x => this.set(targetControlName, x));
+  }
+
+
   private isPositiveInteger(str: string) {
     const n = Number(str);
 

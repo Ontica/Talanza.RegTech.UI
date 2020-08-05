@@ -15,6 +15,7 @@ import { ActivityTemplate, Project, ProjectTemplate } from '@app/models/project-
 @Injectable()
 export class ProjectTemplateService {
 
+
   constructor(private http: HttpService) { }
 
   // GET methods
@@ -109,6 +110,15 @@ export class ProjectTemplateService {
                  `/moveTo/${targetProjectTemplateUID}`;
 
     return this.http.post<ActivityTemplate>(path);
+  }
+
+
+  translate(text: string): Observable<string> {
+    const path = 'v3/steps/services/translator/to-english';
+
+    const body = { text };
+
+    return this.http.post<string>(path, body);
   }
 
 
