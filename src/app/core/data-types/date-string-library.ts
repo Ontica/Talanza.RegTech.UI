@@ -5,7 +5,7 @@
  * See LICENSE.txt in the project root for complete license information.
  */
 
-import { DateFormat, LocalizationLibrary, DEFAULT_LANGUAGE, Language } from '../localization';
+import { DateFormat, LocalizationLibrary, DEFAULT_LANGUAGE, Language } from '../../models/localization';
 import { Assertion } from '../general/assertion';
 
 import * as moment from 'moment';
