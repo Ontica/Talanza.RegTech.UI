@@ -37,7 +37,7 @@ const ALL_ENTITIES = -1;
 @Component({
   selector: 'emp-steps-activity-model-form',
   templateUrl: './activity-model-form.component.html',
-  styleUrls: ['./activity-model-form.component.scss']
+  styleUrls: ['../../../../styles/form.scss']
 })
 export class ActivityModelFormComponent extends AbstractForm implements OnInit, OnChanges, OnDestroy {
 

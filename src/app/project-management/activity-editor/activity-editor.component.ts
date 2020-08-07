@@ -15,7 +15,7 @@ import { CardSettings } from '@app/models/user-interface';
 @Component({
   selector: 'emp-steps-activity-editor',
   templateUrl: './activity-editor.component.html',
-  styleUrls: ['./activity-editor.component.scss']
+  styleUrls: ['../../../styles/card.scss']
 })
 export class ActivityEditorComponent implements OnChanges {
 

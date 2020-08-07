@@ -64,9 +64,9 @@ table.form-section .top {
 }
 
 table.form-section .form-section-title {
-  color: $form-title-color;
-  border-bottom: $form-title-border;
-  font: $control-font;
+  color: $primary-color;
+  font-size: 9.5pt;
+  font-weight: 600;
 }
 
 .border-top > td {

@@ -351,3 +351,21 @@ i.disabled {
   margin-top: -4px;
   margin-left: -6px;
 }
+
+
+// Forms as divs
+
+.form {
+  margin: 22px 22px;
+}
+
+.form-section-title {
+  color: $primary-color;
+  font-size: 10pt;
+  font-weight: 600;
+  margin-bottom: 12pt;
+}
+
+.form-item-border {
+  border-bottom: $form-title-border;
+}

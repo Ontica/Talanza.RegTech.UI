@@ -17,7 +17,7 @@ import { ProjectModel } from '@app/store/project.store';
 @Component({
   selector: 'emp-ng-process-diagram-editor',
   templateUrl: './diagram-editor.component.html',
-  styleUrls: ['./diagram-editor.component.scss']
+  styleUrls: ['../../../styles/card.scss']
 })
 export class ProcessDiagramEditorComponent implements OnInit, OnChanges {
 
