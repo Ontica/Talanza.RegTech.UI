@@ -5,37 +5,63 @@
  * See LICENSE.txt in the project root for complete license information.
  */
 
-import { Component, OnDestroy, OnInit, HostBinding } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Component, OnDestroy, Input } from '@angular/core';
+import { Observable, Subscription } from 'rxjs';
 
-import { SpinnerState, SpinnerService } from './spinner.service';
+import { Assertion } from '@app/core';
+
+
+export type OverlayType = 'None' | 'Container' | 'FullScreen';
 
 
 @Component({
   selector: 'emp-ng-spinner',
   templateUrl: './spinner.component.html',
-  styleUrls: ['./spinner.component.scss']
+  styleUrls: ['./spinner.component.scss'],
 })
-export class SpinnerComponent implements OnDestroy, OnInit {
+export class SpinnerComponent implements OnDestroy {
 
-  @HostBinding('style.display') display = 'block';
-  @HostBinding('style.position') position = 'absolute';
-
-  private spinnerStateChanged: Subscription;
-
-  visible = false;
-
-  constructor(private spinnerService: SpinnerService) {
-
+  @Input()
+  set overlay(value: OverlayType) {
+    this.overlayClass = SpinnerComponent.getContainerClass(value);
   }
 
-  ngOnInit() {
-    this.spinnerStateChanged = this.spinnerService.spinnerState
-                                   .subscribe((state: SpinnerState) => this.visible = state.show );
+
+  @Input()
+  set service(service: Observable<boolean>) {
+    if (!service) {
+      return;
+    }
+    this.subscription = service.subscribe(
+      x => this.visible = x
+    );
   }
+
+  @Input() visible = false;
+
+  overlayClass = SpinnerComponent.getContainerClass('Container');
+
+  private subscription: Subscription;
+
+
+  private static getContainerClass(overlayType: OverlayType) {
+    switch (overlayType) {
+      case 'None':
+        return 'no-overlay';
+      case 'Container':
+        return 'container-overlay';
+      case 'FullScreen':
+        return 'full-screen-overlay';
+      default:
+        throw Assertion.assertNoReachThisCode(`Unhandled spinner overlay ${overlayType}.`);
+    }
+  }
+
 
   ngOnDestroy() {
-    this.spinnerStateChanged.unsubscribe();
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 
 }

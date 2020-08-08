@@ -20,7 +20,7 @@ import { SidebarComponent } from './main-layout/sidebar/sidebar.component';
 import { CardComponent } from './card/card.component';
 import { InlineEditorComponent } from './inline-editor/inline-editor.component';
 import { MessageBoxComponent } from './message-box/message-box.component';
-import { ModalWindowComponent } from './modal-window/modal-window';
+import { ModalWindowComponent } from './modal-window';
 import { NavigationHeaderComponent } from './nav-header/nav-header.component';
 import { NavigationMenuComponent } from './nav-menu/nav-menu.component';
 import { NoContentComponent } from './no-content/no-content.component';
@@ -29,7 +29,9 @@ import { RagStatusComponent } from './rag-status/rag-status.component';
 import { SafeHtmlPipe } from './pipes/safe-html.pipe';
 import { SafeUrlPipe } from './pipes/safe-url.pipe';
 import { SearchBoxComponent } from './search-box/search-box.component';
+
 import { SpinnerComponent } from './spinner/spinner.component';
+import { SpinnerHostDirective } from './spinner/spinner-host.directive';
 
 import { AngularMaterialModule } from './angular-material.module';
 import { WidgetsModule } from './widgets/widgets.module';
@@ -70,7 +72,8 @@ import { SpinnerService } from './spinner/spinner.service';
     SafeHtmlPipe,
     SafeUrlPipe,
     SearchBoxComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    SpinnerHostDirective
   ],
 
   exports: [
@@ -88,7 +91,8 @@ import { SpinnerService } from './spinner/spinner.service';
     SafeHtmlPipe,
     SafeUrlPipe,
     SearchBoxComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    SpinnerHostDirective
   ],
 
   providers: [

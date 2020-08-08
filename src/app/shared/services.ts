@@ -11,4 +11,4 @@ export { SharedService } from './shared.service';
 
 export { MessageBoxService } from './message-box/message.box.service';
 
-export { SpinnerService, SpinnerState } from './spinner/spinner.service';
+export { SpinnerService } from './spinner/spinner.service';
