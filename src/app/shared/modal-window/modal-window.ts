@@ -9,6 +9,24 @@ import { Component, EventEmitter,
          Input, Output } from '@angular/core';
 
 
+export interface ModalWindowConfig {
+  height?: string;
+  width?: string;
+  maxWidth?: string;
+  maxHeight?: string;
+  disableClose?: boolean;
+}
+
+
+export const DefaultModalWindowConfig: ModalWindowConfig = {
+  height: 'auto',
+  width: 'auto',
+  maxWidth: '90%',
+  maxHeight: '90%',
+  disableClose: false
+};
+
+
 @Component({
   selector: 'emp-ng-modal-window',
   templateUrl: './modal-window.html',
@@ -18,14 +36,7 @@ export class ModalWindowComponent {
 
   @Input() title = '';
 
-  @Input() config = {
-    height: 'auto',
-    width: 'auto',
-    maxWidth: '90%',
-    maxHeight: '90%',
-    disableClose: false
-  };
-
+  @Input() config: ModalWindowConfig = DefaultModalWindowConfig;
 
   @Output() modalWindowClose = new EventEmitter();
 
@@ -41,4 +52,3 @@ export class ModalWindowComponent {
   }
 
 }
-
