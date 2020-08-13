@@ -5,6 +5,10 @@
  * See LICENSE.txt in the project root for complete license information.
  */
 
-export * from './steps-design';
 
-export * from './steps-data-objects';
+export class Process {
+  uid: string;
+  type: string;
+  name: string;
+  theme: string;
+}
