@@ -12,7 +12,9 @@ import { FileStore } from './file.store';
 import { ProcedureStore } from './procedure.store';
 import { ProjectStore } from './project.store';
 import { ProjectTemplateStore } from './project-template.store';
+
 import { StepsStore } from './steps.store';
+import { StepsDataObjectsStore } from './steps-data-objects.store';
 
 import { UserInterfaceStore } from './ui.store';
 
@@ -29,6 +31,7 @@ import { UserInterfaceStore } from './ui.store';
     ProjectStore,
     ProcedureStore,
     StepsStore,
+    StepsDataObjectsStore,
     UserInterfaceStore
   ]
 })

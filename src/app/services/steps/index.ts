@@ -6,3 +6,5 @@
  */
 
 export * from './steps-design.service';
+
+export * from './steps-data-objects.service';

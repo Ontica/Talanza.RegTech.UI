@@ -8,12 +8,14 @@
 import { NgModule } from '@angular/core';
 
 import { StepsDesignService } from './steps-design.service';
+import { StepsDataObjectsService } from './steps-data-objects.service';
 
 
 @NgModule({
 
   providers: [
-    StepsDesignService
+    StepsDesignService,
+    StepsDataObjectsService
   ],
 
 })
