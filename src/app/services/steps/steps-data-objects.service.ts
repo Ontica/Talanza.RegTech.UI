@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 
 import { HttpService, Assertion } from '@app/core';
 
-import { DataObject, DataObjectSource } from '@app/models/steps';
+import { DataObject, DataSource } from '@app/models/steps';
 import { ProjectItem } from '@app/models/project-management';
 
 
@@ -20,10 +20,10 @@ export class StepsDataObjectsService {
   constructor(private http: HttpService) { }
 
 
-  getActionDataObjects(actionUID: string): Observable<DataObject[]> {
-    Assertion.assertValue(actionUID, 'actionUID');
+  getActivityDataObjects(activityUID: string): Observable<DataObject[]> {
+    Assertion.assertValue(activityUID, 'activityUID');
 
-    const path = `v3/empiria-steps/actions/${actionUID}/data-objects`;
+    const path = `v3/empiria-steps/activities/${activityUID}/data-objects`;
 
     return this.http.get<DataObject[]>(path);
   }
@@ -38,21 +38,25 @@ export class StepsDataObjectsService {
   }
 
 
-  getDataSources(): Observable<DataObjectSource[]> {
+  getDataSources(): Observable<DataSource[]> {
     const path = `v3/empiria-steps/data-objects/data-sources`;
 
-    return this.http.get<DataObjectSource[]>(path);
+    return this.http.get<DataSource[]>(path);
   }
 
 
-  linkStepWithDataSource(step: ProjectItem, dataSource: DataObjectSource): Observable<DataObject> {
+  linkStepWithDataSource(step: ProjectItem, dataSource: DataSource): Promise<DataObject> {
+    Assertion.assertValue(step, 'step');
+    Assertion.assertValue(dataSource, 'dataSource');
+
     const path = `v3/empiria-steps/steps/${step.uid}/data-objects`;
 
     const body = {
       dataSourceUID: dataSource.uid
     };
 
-    return this.http.post<DataObject>(path, body);
+    return this.http.post<DataObject>(path, body)
+               .toPromise();
   }
 
 }

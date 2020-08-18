@@ -5,11 +5,10 @@
  * See LICENSE.txt in the project root for complete license information.
  */
 
-import { MediaFile } from '../knowledge-base';
 import { Identifiable } from '../core';
 
 
-export interface DataObjectSource {
+export interface DataSource {
   uid: string;
   type: string;
   family: string;

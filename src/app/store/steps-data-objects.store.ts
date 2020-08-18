@@ -8,36 +8,23 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 
-import { DataObjectSource, DataObject } from '@app/models/steps';
+import { DataSource } from '@app/models/steps';
 
 import { StepsDataObjectsService } from '@app/services/steps';
-import { ProjectItem } from '@app/models/project-management';
-import { Assertion } from '@app/core';
-
 
 
 @Injectable()
 export class StepsDataObjectsStore {
 
-  private _dataObjectSources = new BehaviorSubject<DataObjectSource[]>([]);
+  private _dataSources = new BehaviorSubject<DataSource[]>([]);
 
-
-  constructor(private dataObjectsService: StepsDataObjectsService) {
+  constructor(private service: StepsDataObjectsService) {
     this.loadInitialData();
   }
 
 
-  getDataObjectSources(): Observable<DataObjectSource[]> {
-    return this._dataObjectSources.asObservable();
-  }
-
-
-  linkStepWithDataSource(step: ProjectItem, dataSource: DataObjectSource): Promise<DataObject> {
-    Assertion.assertValue(step, 'step');
-    Assertion.assertValue(dataSource, 'dataSource');
-
-    return this.dataObjectsService.linkStepWithDataSource(step, dataSource)
-          .toPromise();
+  getDataSources(): Observable<DataSource[]> {
+    return this._dataSources.asObservable();
   }
 
 
@@ -50,10 +37,10 @@ export class StepsDataObjectsStore {
 
 
   private loadDataSources() {
-    this.dataObjectsService.getDataSources()
+    this.service.getDataSources()
         .subscribe(
             data => {
-              this._dataObjectSources.next(data);
+              this._dataSources.next(data);
             },
             err => console.log('Error reading data sources', err)
         );
