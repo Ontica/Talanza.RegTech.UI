@@ -1,0 +1,41 @@
+<div class="list-header">
+  <div class="column" i18n>
+    Data object / Type / Format
+  </div>
+
+  <div class="right-column expand" i18n>
+
+  </div>
+</div>
+
+<div *ngFor="let dataObject of dataObjects"
+      class="list-item" matRipple [matRippleTrigger]="trigger">
+
+  <mat-icon class="material-icons-outlined" (click)="onSelectDataObject(dataObject)">insert_drive_file_outline</mat-icon>
+
+  <div class="list-item-container">
+
+    <div class="item-name">
+      <a #trigger (click)="onSelectDataObject(dataObject)">{{dataObject.name}}</a>
+    </div>
+
+    <div class="list-item-columns">
+      <div class="column">
+        {{dataObject.type}}
+      </div>
+
+      <div class="right-column expand">
+        <mat-icon class="material-icons-outlined" (click)="onDeleteDataObject(dataObject)">delete_outline</mat-icon>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<div *ngIf="dataObjects && dataObjects.length === 0" class="list-item-container">
+  <div class="column" i18n>
+    No data objects
+  </div>
+</div>
