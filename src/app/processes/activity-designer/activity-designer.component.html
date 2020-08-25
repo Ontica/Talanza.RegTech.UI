@@ -22,16 +22,15 @@
       </emp-steps-activity-model-form>
     </mat-tab>
 
+    <mat-tab label="Forms & Documents" i18n-label>
+      <emp-steps-step-data-configuration [step]="activityTemplate"></emp-steps-step-data-configuration>
+    </mat-tab>
+
     <mat-tab label="Procedure" [disabled]="!hasProcedure" i18n-label>
       <emp-gov-procedure-viewer *ngIf="hasProcedure"
           [procedure]="procedure | async">
       </emp-gov-procedure-viewer>
     </mat-tab>
-
-    <mat-tab label="Documentation" i18n-label>
-
-    </mat-tab>
-
     <mat-tab label="Talanza Guidance" i18n-label [disabled]="true">
       <emp-kb-postings-list
           [target]="activityTemplate" [readonly]="settings.readonly">

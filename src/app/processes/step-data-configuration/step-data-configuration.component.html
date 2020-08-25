@@ -1,0 +1,34 @@
+<div class="form">
+
+  <div class="form-section-title" i18n>Linked forms and documents</div>
+
+  <div>
+    <emp-steps-step-data-objects-list [dataObjects]="dataObjects | async" (listEvent)="onDataObjectsListEvent($event)">
+    </emp-steps-step-data-objects-list>
+  </div>
+
+  <div class="float-right">
+    <button type="button" class="btn-action" (click)="showDataSourceSelector()" i18n>Link a form or document</button>
+  </div>
+
+  <emp-ng-modal-window *ngIf="displayEditor && selectedDataObject" [config]="{ width:'1200px', height: '90%', disableClose: true }"
+                        (modalWindowClose)="hideEditor()">
+
+    <emp-steps-step-data-object-designer *ngIf="selectedDataObject"
+      [dataObject]="selectedDataObject" (designerClose)="hideEditor()">
+    </emp-steps-step-data-object-designer>
+  </emp-ng-modal-window>
+
+
+  <emp-ng-modal-window *ngIf="displayEditor && !selectedDataObject" [config]="{ width:'680px', height: '540px', disableClose: true }"
+                        (modalWindowClose)="hideEditor()">
+    <emp-ng-card title='Link a data source' [hint]="step.name" (cardClose)="hideEditor()">
+
+      <emp-steps-data-source-selector
+        (selected)="linkStepToDataSource($event)">
+      </emp-steps-data-source-selector>
+
+     </emp-ng-card>
+  </emp-ng-modal-window>
+
+</div>

@@ -24,16 +24,21 @@ import { ProcessDiagramEditorComponent } from './diagram-editor/diagram-editor.c
 
 import { ActivityDesignerComponent } from './activity-designer/activity-designer.component';
 
-import { MoveActivityDialogComponent } from './move-activity-dialog/move-activity-dialog.component';
+import { StepDataConfigurationComponent } from './step-data-configuration/step-data-configuration.component';
 
+import { MoveActivityDialogComponent } from './move-activity-dialog/move-activity-dialog.component';
 
 import {
  ActivityModelFormComponent
 } from './activity-designer/activity-model-form/activity-model-form.component';
 
-import { ProcessesRoutingModule } from './processes-routing.module';
 import { BpmnModelerComponent } from './diagram-editor/bpmn-modeler/bpmn-modeler.component';
 
+import { StepDataObjectsListComponent } from './step-data-configuration/step-data-objects-list.component';
+import { DataSourceSelectorComponent } from './step-data-configuration/data-source-selector.component';
+import { StepDataObjectDesignerComponent } from './step-data-configuration/step-data-object-designer.component';
+
+import { ProcessesRoutingModule } from './processes-routing.module';
 
 
 @NgModule({
@@ -60,7 +65,11 @@ import { BpmnModelerComponent } from './diagram-editor/bpmn-modeler/bpmn-modeler
     ProcessesMainPageComponent,
     ProcessTreeDesignerComponent,
     ProcessDiagramEditorComponent,
+    StepDataConfigurationComponent,
     BpmnModelerComponent,
+    StepDataObjectsListComponent,
+    DataSourceSelectorComponent,
+    StepDataObjectDesignerComponent
   ],
 
   exports: [
