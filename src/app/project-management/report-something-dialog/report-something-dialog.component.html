@@ -1,4 +1,4 @@
-<h4 mat-dialog-title i18n>Add obligation</h4>
+<h4 mat-dialog-title i18n>Report an event or task</h4>
 
 <mat-dialog-content [formGroup]="form">
 
@@ -6,32 +6,17 @@
     <div i18n>Please select the obligation to add to the contract:</div>
     <div>
       <select class="select-box" formControlName="selectedEvent">
-        <option value="" i18n>( Obligations list )</option>
+        <option value="" i18n>( Event type )</option>
         <option *ngFor="let event of events | async"
                 [value]="event.uid">{{event.name}}</option>
       </select>
     </div>
-    <div *ngIf="insertionPoint?.uid" class="row">Insertion point: {{insertionPoint.name}}</div>
     <div class="row">
       <div class="column nowrap">
         <div i18n>Event date:</div>
         <div>
           <emp-ng-datepicker formControlName="eventDate"></emp-ng-datepicker>
           <button class="btn" [disabled]="!this.form.valid" (click)="loadWhatIfList()" i18n>Show tasks list</button>
-        </div>
-      </div>
-      <div *ngIf="insertionPoint?.uid" class="column nowrap">
-        <div i18n>Insert as:</div>
-        <div>
-          <select class="select-box" style="width:280px" formControlName="position">
-            <option value="" i18n>( Insert as )</option>
-            <option value="AsSiblingBeforeInsertionPoint" i18n>As sibling, before insertion point</option>
-            <option value="AsSiblingAfterInsertionPoint" i18n>As sibling, after insertion point</option>
-            <option value="AsChildAsFirstNode" i18n>As the first child of the insertion point</option>
-            <option value="AsChildAsLastNode" i18n>As last child of the insertion point</option>
-            <option value="AsTreeRootAtStart" i18n>At tree root, at the start</option>
-            <option value="AsTreeRootAtEnd" i18n>As tree root, at the end</option>
-          </select>
         </div>
       </div>
     </div>

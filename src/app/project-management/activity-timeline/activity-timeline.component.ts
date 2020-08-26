@@ -15,11 +15,13 @@ import { Activity, EmptyActivity } from '@app/models/project-management';
 import { GroupByProperty } from './group-activities-by.pipe';
 
 import { InboxType, TimelineHelper } from '../common/timeline-helper';
+import { MatDialogConfig, MatDialog } from '@angular/material/dialog';
+import { ReportSomethingDialogComponent } from '../report-something-dialog/report-something-dialog.component';
 
 @Component({
   selector: 'emp-steps-activity-timeline',
   templateUrl: './activity-timeline.component.html',
-  styleUrls: ['./activity-timeline.component.scss'],
+  styleUrls: ['../../../styles/card.scss', '../../../styles/activity.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ActivityTimelineComponent implements OnChanges {
@@ -35,6 +37,8 @@ export class ActivityTimelineComponent implements OnChanges {
   selectedActivity: Activity = EmptyActivity;
 
   filteredActivities: Activity[] = [];
+
+  constructor(private dialog: MatDialog) { }
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['activities']) {
@@ -153,6 +157,18 @@ export class ActivityTimelineComponent implements OnChanges {
     if (emitEvent) {
       this.activitySelect.emit(activity);
     }
+  }
+
+
+  openReportSomethingDialog() {
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.height = '400px',
+    dialogConfig.width = '600px',
+
+    this.dialog.open(ReportSomethingDialogComponent, dialogConfig);
   }
 
 

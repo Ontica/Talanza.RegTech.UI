@@ -17,7 +17,9 @@
             <button mat-menu-item (click)="onChangeInboxType('active-tasks')">Defined tasks</button>
             <button mat-menu-item (click)="onChangeInboxType('all-tasks')">All tasks</button>
         </mat-menu>
-        <div style="width:32px"></div>
+
+        <div style="width:24px"></div>
+
         Group by:&nbsp; {{groupByTitle}}
         <button mat-icon-button [matMenuTriggerFor]="menu2" class="menu-trigger-icon">
             <mat-icon>arrow_drop_down</mat-icon>
@@ -34,6 +36,11 @@
         </mat-menu>
 
         <div style="width:32px"></div>
+
+        <button type="button" class="btn btn-action" title="Report an event, task or activity"
+                (click)="openReportSomethingDialog()" i18n>Report event</button>
+
+        <div style="width:16px"></div>
 
         <button type="button" class="btn disabled"
                 (click)="onSearch()" i18n>Search</button>
