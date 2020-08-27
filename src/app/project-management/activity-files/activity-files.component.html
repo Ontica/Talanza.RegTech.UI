@@ -1,12 +1,32 @@
-<div style="margin: 0 22px">
-  <emp-kb-file-list [files]="filesList"
-                    (fileSelect)="onFileSelect($event)">
-  </emp-kb-file-list>
-</div>
+<div class="form">
 
-<div class="float-right" style="margin: 12px 32px">
-    <button type="button" class="btn-action"
-            (click)="onClickAttachFile()" i18n>Attach a file</button>
+  <div class="form-section-title">
+    Forms and documents
+  </div>
+
+  <div>
+    <emp-steps-activity-data-objects-list
+      [projectItem]="projectItem"
+      (listEvent)="onDataObjectsListEvent($event)">
+    </emp-steps-activity-data-objects-list>
+  </div>
+
+
+  <div class="form-section-title" style="margin-top: 48px">
+    Additional files
+  </div>
+
+  <div>
+    <emp-kb-file-list [files]="filesList"
+                      (fileSelect)="onFileSelect($event)">
+    </emp-kb-file-list>
+  </div>
+
+  <div class="float-right" style="margin-top: 32px">
+      <button type="button" class="btn-action"
+              (click)="onClickAttachFile()" i18n>Attach a file</button>
+  </div>
+
 </div>
 
 <emp-ng-modal-window *ngIf="displayEditor && selectedMediaFile.uid"

@@ -47,6 +47,9 @@ import {
 
 import { ProjectFilesMainPageComponent } from './project-files-main-page/project-files-main-page.component';
 
+import { ActivityDataObjectsListComponent } from './activity-data-objects/activity-data-objects-list.component';
+import { ReportSomethingDialogComponent } from './report-something-dialog/report-something-dialog.component';
+
 import { ProjectManagementRoutingModule } from './project-management-routing.module';
 
 
@@ -92,7 +95,9 @@ import { ProjectManagementRoutingModule } from './project-management-routing.mod
     ProjectsMainPageComponent,
     GanttChartComponent,
     FilesGridComponent,
-    ProjectFilesMainPageComponent
+    ProjectFilesMainPageComponent,
+    ReportSomethingDialogComponent,
+    ActivityDataObjectsListComponent
 
   ],
 
