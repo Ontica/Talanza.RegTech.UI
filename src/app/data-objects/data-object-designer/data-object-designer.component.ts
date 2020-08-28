@@ -4,17 +4,18 @@
  *
  * See LICENSE.txt in the project root for complete license information.
  */
+
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 import { DataObject } from '@app/models/steps';
 
 
 @Component({
-  selector: 'emp-steps-step-data-object-designer',
-  templateUrl: './step-data-object-designer.component.html',
+  selector: 'emp-data-object-designer',
+  templateUrl: './data-object-designer.component.html',
   styleUrls: ['../../../styles/card.scss']
 })
-export class StepDataObjectDesignerComponent {
+export class DataObjectDesignerComponent {
 
   @Input() dataObject: DataObject;
 

@@ -13,11 +13,11 @@ import { DataObject } from '@app/models/steps';
 
 
 @Component({
-  selector: 'emp-steps-step-data-objects-list',
-  templateUrl: './step-data-objects-list.component.html',
+  selector: 'emp-data-objects-list',
+  templateUrl: './data-objects-list.component.html',
   styleUrls: ["../../../styles/list.scss"]
 })
-export class StepDataObjectsListComponent {
+export class DataObjectsListComponent {
 
   @Input() dataObjects: DataObject[] = [];
 

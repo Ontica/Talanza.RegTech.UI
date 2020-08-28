@@ -17,7 +17,7 @@ import { StepsDataObjectsStore } from '@app/store/steps-data-objects.store';
 
 
 @Component({
-  selector: 'emp-steps-data-source-selector',
+  selector: 'emp-data-source-selector',
   templateUrl: './data-source-selector.component.html',
   styleUrls: ["../../../styles/form.scss"]
 })

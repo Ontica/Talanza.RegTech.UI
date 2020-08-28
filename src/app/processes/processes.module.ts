@@ -13,30 +13,22 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { AngularMaterialModule } from '@app/shared/angular-material.module';
 import { SharedModule } from '@app/shared/shared.module';
 
+import { DataObjectsModule } from '@app/data-objects/data-objects.module';
 import { KnowledgeBaseModule } from '@app/knowledge-base/knowledge-base.module';
 import { ProceduresModule } from '@app/procedures/procedures.module';
 
 import { ProcessesMainPageComponent } from './main-page/processes-main-page.component';
-
 import { ProcessTreeDesignerComponent } from './tree-designer/tree-designer.component';
-
 import { ProcessDiagramEditorComponent } from './diagram-editor/diagram-editor.component';
-
 import { ActivityDesignerComponent } from './activity-designer/activity-designer.component';
-
 import { StepDataConfigurationComponent } from './step-data-configuration/step-data-configuration.component';
-
 import { MoveActivityDialogComponent } from './move-activity-dialog/move-activity-dialog.component';
+import { BpmnModelerComponent } from './diagram-editor/bpmn-modeler/bpmn-modeler.component';
 
 import {
  ActivityModelFormComponent
 } from './activity-designer/activity-model-form/activity-model-form.component';
 
-import { BpmnModelerComponent } from './diagram-editor/bpmn-modeler/bpmn-modeler.component';
-
-import { StepDataObjectsListComponent } from './step-data-configuration/step-data-objects-list.component';
-import { DataSourceSelectorComponent } from './step-data-configuration/data-source-selector.component';
-import { StepDataObjectDesignerComponent } from './step-data-configuration/step-data-object-designer.component';
 
 import { ProcessesRoutingModule } from './processes-routing.module';
 
@@ -52,7 +44,9 @@ import { ProcessesRoutingModule } from './processes-routing.module';
     AngularMaterialModule,
     SharedModule,
 
+    DataObjectsModule,
     KnowledgeBaseModule,
+
     ProceduresModule,
 
     ProcessesRoutingModule
@@ -66,10 +60,7 @@ import { ProcessesRoutingModule } from './processes-routing.module';
     ProcessTreeDesignerComponent,
     ProcessDiagramEditorComponent,
     StepDataConfigurationComponent,
-    BpmnModelerComponent,
-    StepDataObjectsListComponent,
-    DataSourceSelectorComponent,
-    StepDataObjectDesignerComponent
+    BpmnModelerComponent
   ],
 
   exports: [

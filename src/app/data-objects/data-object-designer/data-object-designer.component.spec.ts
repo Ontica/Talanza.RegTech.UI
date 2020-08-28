@@ -7,22 +7,21 @@
 
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { StepDataObjectsListComponent } from './step-data-objects-list.component';
+import { DataObjectDesignerComponent } from './data-object-designer.component';
 
-
-describe('StepDataObjectsListComponent', () => {
-  let component: StepDataObjectsListComponent;
-  let fixture: ComponentFixture<StepDataObjectsListComponent>;
+describe('DataObjectDesignerComponent', () => {
+  let component: DataObjectDesignerComponent;
+  let fixture: ComponentFixture<DataObjectDesignerComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ StepDataObjectsListComponent ]
+      declarations: [ DataObjectDesignerComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(StepDataObjectsListComponent);
+    fixture = TestBed.createComponent(DataObjectDesignerComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

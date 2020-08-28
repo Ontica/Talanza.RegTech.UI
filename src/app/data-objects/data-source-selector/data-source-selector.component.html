@@ -1,0 +1,110 @@
+<form class="form-container" autocomplete="off" [empNgSpinnerHost]="spinner" [formGroup]="form">
+
+  <emp-ng-spinner #spinner [visible]="isLoading"></emp-ng-spinner>
+
+  <fieldset>
+
+    <table class="form-section">
+      <tr>
+        <td class="form-section-title" colspan="2" i18n>Associated data source</td>
+      </tr>
+      <tr>
+        <td i18n>Knowledge base:</td>
+        <td>
+          <select class="select-box" style="width:380px" formControlName="dataSourceKB" (change)="updateUIControls()">
+            <option value="" i18n>All knowledge bases</option>
+            <option value="oil-and-gas" i18n>Oil & Gas Industry compliance</option>
+            <option value="oil-and-gas; upstream" i18n> - Upstream</option>
+            <option value="oil-and-gas; midstream" i18n> - Midstream</option>
+            <option value="oil-and-gas; downstream" i18n> - Downstream</option>
+            <option value="construction" i18n>Construction Industry compliance</option>
+            <option value="transportation" i18n>Transportation Industry compliance</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td i18n>Family:</td>
+        <td>
+          <select class="select-box" style="width:380px" formControlName="dataSourceFamily" (change)="updateUIControls()">
+            <option value="" i18n>All families</option>
+            <option *ngFor="let family of dataSourceFamilies" [value]="family">{{family}}</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td i18n>Storage / Format:</td>
+        <td>
+          <select class="select-box" style="width:380px" formControlName="format" (change)="updateUIControls()">
+            <option value="" i18n>( All storages and formats ) </option>
+            <option value="File" i18n>Data file</option>
+            <option value="Database.Connection" i18n>External Database</option>
+            <option value="Document.Excel.TemplateBased" i18n>Excel file template</option>
+            <option value="Document.PDF.TemplateBased" i18n>PDF file template</option>
+            <option value="WebForm" i18n>Web form</option>
+            <option value="WebService.DataRequest" i18n>Web service</option>
+            <option value="Document.Word.TemplateBased" i18n>Word file template</option>
+            <option value="ZipFile.FolderStructure" i18n>Zip file</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+      <tr>
+        <td i18n>Action:</td>
+        <td>
+          <select class="select-box" style="width:380px" formControlName="dataSourceType"
+                  (change)="updateUIControls()">
+            <option value="">All data source types</option>
+            <option value="">--- Fill out and file attachments ---</option>
+            <option value="AttachDataFile" i18n>Attach a data file</option>
+            <option value="AttachADataFileReference" i18n>Attach a data file reference (for large files)</option>
+            <option value="FillOut" i18n>Fill out a form or template</option>
+            <option value="IncludeADocumentReferenceFromAnotherActivity" i18n>Include a document reference from another activity</option>
+            <option value="GetDocumentCopyFromAnotherActivity" i18n>Get a document copy from another activity</option>
+            <option value="">--- Automatic generation ---</option>
+            <option value="Autogenerate" i18n>Generate the file with a dataset</option>
+            <option value="GenerateZipWithFilesFolderStructure" i18n>Generate a folder structure with files</option>
+            <option value="">--- Connection to external data and services ---</option>
+            <option value="GetDataFromAnExternalDatabase" i18n>Get data from an external database</option>
+            <option value="GetDataFromWebService" i18n>Get data from a web service</option>
+            <option value="ExportDataToAnExternalDatabase" i18n>Export data to an external database</option>
+            <option value="ExportDataToAnExternalWebService" i18n>Export data to an external web service</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td i18n>Data source:</td>
+        <td>
+          <select class="select-box" style="width:100%" formControlName="dataSource" (change)="selectDataSource()">
+            <option value="" i18n>( Select a data source )</option>
+            <option *ngFor="let dataSource of filteredDataSources" [value]="dataSource.uid">{{dataSource.name}}</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>&nbsp;</td>
+        <td>
+          <a *ngIf="selectedDataSource" [href]="selectedDataSource?.templateUrl" target="_base">View template file</a>
+        </td>
+      </tr>
+      <tr>
+        <td i18n>Description:</td>
+        <td>
+          <textarea class="text-area" rows="3" cols="25" readonly="readonly"
+                    [value]="selectedDataSource?.description"></textarea>
+        </td>
+      </tr>
+    </table>
+
+    <table class="form-section">
+      <tr>
+        <td>&nbsp;</td>
+        <td class="text-align-right">
+          <button type="button" class="btn right" [class.btn-action]="isValidForm"
+                  [disabled]="!isValidForm" (click)="linkDataSource()">Add to obligation</button>
+        </td>
+      </tr>
+    </table>
+
+  </fieldset>
+
+</form>
