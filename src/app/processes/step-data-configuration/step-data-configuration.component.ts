@@ -13,7 +13,7 @@ import { EventInfo } from '@app/core/data-types';
 import { ProjectItem } from '@app/models/project-management';
 import { DataObject, DataSource } from '@app/models/steps';
 
-import { StepsDataObjectsService } from '@app/services/steps';
+import { DataObjectsService } from '@app/services/data-objects';
 import { Exception } from '@app/core';
 
 
@@ -32,7 +32,7 @@ export class StepDataConfigurationComponent implements OnChanges {
 
   selectedDataObject: DataObject;
 
-  constructor(private service: StepsDataObjectsService) {};
+  constructor(private service: DataObjectsService) {};
 
 
   ngOnChanges() {
@@ -49,7 +49,7 @@ export class StepDataConfigurationComponent implements OnChanges {
     this.selectedDataObject = null;
     this.displayEditor = false;
 
-    this.service.linkStepWithDataSource(this.step, dataSource)
+    this.service.linkEntityWithDataSource(this.step, dataSource)
       .then(() => this.loadStepDataObjects());
   }
 
@@ -79,7 +79,7 @@ export class StepDataConfigurationComponent implements OnChanges {
   // private methods
 
   private loadStepDataObjects() {
-    this.dataObjects = this.service.getDataObjects(this.step.uid);
+    this.dataObjects = this.service.getEntityDataObjects(this.step);
   }
 
 

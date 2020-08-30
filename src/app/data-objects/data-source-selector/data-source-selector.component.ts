@@ -13,7 +13,7 @@ import { takeUntil } from 'rxjs/operators';
 
 import { DataSource } from '@app/models/steps';
 
-import { StepsDataObjectsStore } from '@app/store/steps-data-objects.store';
+import { DataObjectsStore } from '@app/store/data-objects.store';
 
 
 @Component({
@@ -42,7 +42,7 @@ export class DataSourceSelectorComponent implements OnInit, OnDestroy {
 
   private destroyed: Subject<void> = new Subject();
 
-  constructor(private store: StepsDataObjectsStore) { }
+  constructor(private store: DataObjectsStore) { }
 
 
   ngOnInit() {

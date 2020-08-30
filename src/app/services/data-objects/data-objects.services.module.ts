@@ -7,13 +7,14 @@
 
 import { NgModule } from '@angular/core';
 
-import { StepsDesignService } from './steps-design.service';
+import { DataObjectsService } from './data-objects.service';
+
 
 @NgModule({
 
   providers: [
-    StepsDesignService
+    DataObjectsService
   ],
 
 })
-export class StepsServicesModule { }
+export class DataObjectsServicesModule { }

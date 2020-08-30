@@ -10,15 +10,15 @@ import { BehaviorSubject, Observable } from 'rxjs';
 
 import { DataSource } from '@app/models/steps';
 
-import { StepsDataObjectsService } from '@app/services/steps';
+import { DataObjectsService } from '@app/services/data-objects';
 
 
 @Injectable()
-export class StepsDataObjectsStore {
+export class DataObjectsStore {
 
   private _dataSources = new BehaviorSubject<DataSource[]>([]);
 
-  constructor(private service: StepsDataObjectsService) {
+  constructor(private service: DataObjectsService) {
     this.loadInitialData();
   }
 

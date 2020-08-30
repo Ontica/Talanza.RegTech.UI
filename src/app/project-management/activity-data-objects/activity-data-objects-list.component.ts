@@ -12,8 +12,8 @@ import { EventInfo } from '@app/core/data-types';
 import { DataObject } from '@app/models/steps';
 import { EmptyActivity, ProjectItem } from '@app/models/project-management';
 
+import { DataObjectsService } from '@app/services/data-objects';
 
-import { StepsDataObjectsService } from '@app/services/steps';
 
 @Component({
   selector: 'emp-steps-activity-data-objects-list',
@@ -28,7 +28,7 @@ export class ActivityDataObjectsListComponent implements OnChanges {
 
   dataObjects: DataObject[] = []
 
-  constructor(private service: StepsDataObjectsService) { }
+  constructor(private service: DataObjectsService) { }
 
 
   ngOnChanges() {
@@ -49,7 +49,7 @@ export class ActivityDataObjectsListComponent implements OnChanges {
 
 
   private loadDataObjects() {
-    this.service.getActivityDataObjects(this.projectItem.uid)
+    this.service.getSubjectDataRequests(this.projectItem)
     .toPromise()
     .then (x => this.dataObjects = x);
   }

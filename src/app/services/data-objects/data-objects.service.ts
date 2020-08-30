@@ -10,29 +10,30 @@ import { Observable } from 'rxjs';
 
 import { HttpService, Assertion } from '@app/core';
 
+import { Identifiable } from '@app/models/core';
+
 import { DataObject, DataSource } from '@app/models/steps';
-import { ProjectItem } from '@app/models/project-management';
 
 
 @Injectable()
-export class StepsDataObjectsService {
+export class DataObjectsService {
 
   constructor(private http: HttpService) { }
 
 
-  getActivityDataObjects(activityUID: string): Observable<DataObject[]> {
-    Assertion.assertValue(activityUID, 'activityUID');
+  getSubjectDataRequests(subject: Identifiable): Observable<DataObject[]> {
+    Assertion.assertValue(subject, 'subject');
 
-    const path = `v3/empiria-steps/activities/${activityUID}/data-objects`;
+    const path = `v3/empiria-steps/activities/${subject.uid}/data-objects`;
 
     return this.http.get<DataObject[]>(path);
   }
 
 
-  getDataObjects(stepUID: string): Observable<DataObject[]> {
-    Assertion.assertValue(stepUID, 'stepUID');
+  getEntityDataObjects(entity: Identifiable): Observable<DataObject[]> {
+    Assertion.assertValue(entity, 'entity');
 
-    const path = `v3/empiria-steps/steps/${stepUID}/data-objects`;
+    const path = `v3/empiria-steps/steps/${entity.uid}/data-objects`;
 
     return this.http.get<DataObject[]>(path);
   }
@@ -45,11 +46,18 @@ export class StepsDataObjectsService {
   }
 
 
-  linkStepWithDataSource(step: ProjectItem, dataSource: DataSource): Promise<DataObject> {
-    Assertion.assertValue(step, 'step');
+  getFileAsBlob(fileUID: string): Observable<Blob> {
+    const path = `v3/empiria-steps/files/${fileUID}`;
+
+    return this.http.get<Blob>(path, { responseType: 'blob' });
+  }
+
+
+  linkEntityWithDataSource(entity: Identifiable, dataSource: DataSource): Promise<DataObject> {
+    Assertion.assertValue(entity, 'entity');
     Assertion.assertValue(dataSource, 'dataSource');
 
-    const path = `v3/empiria-steps/steps/${step.uid}/data-objects`;
+    const path = `v3/empiria-steps/steps/${entity.uid}/data-objects`;
 
     const body = {
       dataSourceUID: dataSource.uid
