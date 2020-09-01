@@ -24,7 +24,7 @@ export interface HttpClientOptions {
 
   headers?: HttpHeaders;
 
-  observe: 'body' | 'events' | 'response';
+  observe?: 'body' | 'events' | 'response';
 
   params?: HttpParams;
 

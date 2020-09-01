@@ -81,7 +81,7 @@ export class HttpHandler {
 
         requestOptions.headers = headers;
 
-        return this.http.request(HttpMethod[method].toString(), url, requestOptions)
+        return this.http.request(HttpMethod[method].toString(), url, callerOptions || requestOptions)
                    .pipe(
                       map(response => (payloadDataField ? response.body[payloadDataField] : response) as T)
                     );
@@ -142,6 +142,9 @@ export class HttpHandler {
 
     } else if (service && service.payloadDataField) {
       return service.payloadDataField;
+
+    } else if (options && options.responseType !== 'json') {
+      return '';
 
     } else if (path.includes('http://') || path.includes('https://')) {
       return '';
