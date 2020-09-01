@@ -18,7 +18,9 @@ import { KnowledgeBaseModule } from '@app/knowledge-base/knowledge-base.module';
 
 import { DataObjectsListComponent } from './data-objects-list/data-objects-list.component';
 import { DataObjectDesignerComponent } from './data-object-designer/data-object-designer.component';
+import { DataRequesterComponent } from './data-requester/data-requester.component';
 import { DataSourceSelectorComponent } from './data-source-selector/data-source-selector.component';
+
 
 @NgModule({
 
@@ -35,12 +37,14 @@ import { DataSourceSelectorComponent } from './data-source-selector/data-source-
   declarations: [
     DataObjectDesignerComponent,
     DataObjectsListComponent,
+    DataRequesterComponent,
     DataSourceSelectorComponent,
   ],
 
   exports: [
     DataObjectDesignerComponent,
     DataObjectsListComponent,
+    DataRequesterComponent,
     DataSourceSelectorComponent
   ]
 
