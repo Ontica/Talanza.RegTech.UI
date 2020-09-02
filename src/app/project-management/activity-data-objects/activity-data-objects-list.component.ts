@@ -9,7 +9,8 @@ import { Component, Input, OnChanges, EventEmitter, Output } from '@angular/core
 
 import { EventInfo } from '@app/core/data-types';
 
-import { DataObject } from '@app/models/steps';
+import { DataObject } from '@app/models/data-objects';
+
 import { EmptyActivity, ProjectItem } from '@app/models/project-management';
 
 import { DataObjectsService } from '@app/services/data-objects';

@@ -8,13 +8,14 @@
 import { Component, Input, OnChanges } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
+import { Exception } from '@app/core';
 import { EventInfo } from '@app/core/data-types';
 
 import { ProjectItem } from '@app/models/project-management';
-import { DataObject, DataSource } from '@app/models/steps';
+
+import { DataObject, DataSource } from '@app/models/data-objects';
 
 import { DataObjectsService } from '@app/services/data-objects';
-import { Exception } from '@app/core';
 
 
 @Component({

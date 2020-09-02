@@ -8,7 +8,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 
-import { DataSource } from '@app/models/steps';
+import { DataSource } from '@app/models/data-objects';
 
 import { DataObjectsService } from '@app/services/data-objects';
 

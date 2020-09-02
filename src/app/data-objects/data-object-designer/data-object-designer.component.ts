@@ -7,7 +7,7 @@
 
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 
-import { DataObject } from '@app/models/steps';
+import { DataObject } from '@app/models/data-objects';
 
 
 @Component({

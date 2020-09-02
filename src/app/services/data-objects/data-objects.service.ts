@@ -12,7 +12,7 @@ import { HttpService, Assertion } from '@app/core';
 
 import { Identifiable } from '@app/models/core';
 
-import { DataObject, DataSource } from '@app/models/steps';
+import { DataObject, DataSource } from '@app/models/data-objects';
 
 
 @Injectable()

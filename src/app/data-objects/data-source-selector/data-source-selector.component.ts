@@ -11,7 +11,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
-import { DataSource } from '@app/models/steps';
+import { DataSource } from '@app/models/data-objects';
 
 import { DataObjectsStore } from '@app/store/data-objects.store';
 

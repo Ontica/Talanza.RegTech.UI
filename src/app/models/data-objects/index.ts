@@ -5,4 +5,4 @@
  * See LICENSE.txt in the project root for complete license information.
  */
 
-export * from './steps-design';
+export * from './data-objects';

@@ -23,8 +23,8 @@ export interface DataObject {
   type: string;
   name: string;
   description : string;
-  step: Identifiable;
-  activity: Identifiable;
+  entity: Identifiable;
+  subject: Identifiable;
   action: string;
   mediaFormat: string;
   templateUrl?: string;
