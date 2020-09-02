@@ -6,3 +6,5 @@
  */
 
  export * from './data-objects.service';
+
+ export * from './data-form.service';

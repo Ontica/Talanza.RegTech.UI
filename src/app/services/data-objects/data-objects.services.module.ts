@@ -8,12 +8,14 @@
 import { NgModule } from '@angular/core';
 
 import { DataObjectsService } from './data-objects.service';
+import { DataFormService } from './data-form.service';
 
 
 @NgModule({
 
   providers: [
-    DataObjectsService
+    DataObjectsService,
+    DataFormService
   ],
 
 })
