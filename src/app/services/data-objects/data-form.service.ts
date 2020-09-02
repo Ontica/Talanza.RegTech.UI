@@ -10,7 +10,7 @@ import { of, Observable } from 'rxjs';
 
 import { HttpService, Assertion } from '@app/core';
 
-import { QuestionBase, DataObject } from '@app/models/data-objects';
+import { DataFormField, DataObject } from '@app/models/data-objects';
 
 
 @Injectable()
@@ -18,12 +18,12 @@ export class DataFormService {
 
   constructor(private http: HttpService) { }
 
-  getFormFields(dataObject: DataObject): Observable<QuestionBase[]> {
+  getFormFields(dataObject: DataObject): Observable<DataFormField[]> {
     Assertion.assertValue(dataObject, 'dataObject');
 
     const path = `v3/empiria-steps/data-objects/${dataObject.uid}/data-form`;
 
-    return this.http.get<QuestionBase[]>(path);
+    return this.http.get<DataFormField[]>(path);
   }
 
 

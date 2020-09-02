@@ -20,6 +20,9 @@ import { DataObjectsListComponent } from './data-objects-list/data-objects-list.
 import { DataObjectDesignerComponent } from './data-object-designer/data-object-designer.component';
 import { DataRequesterComponent } from './data-requester/data-requester.component';
 import { DataSourceSelectorComponent } from './data-source-selector/data-source-selector.component';
+import { DataFormComponent } from './data-form/data-form.component';
+import { DataFormElementComponent } from './data-form/data-form-element.component';
+import { DataFileGeneratorComponent } from './data-file-generator/data-file-generator.component';
 
 
 @NgModule({
@@ -39,13 +42,17 @@ import { DataSourceSelectorComponent } from './data-source-selector/data-source-
     DataObjectsListComponent,
     DataRequesterComponent,
     DataSourceSelectorComponent,
+    DataFormComponent,
+    DataFormElementComponent,
+    DataFileGeneratorComponent,
   ],
 
   exports: [
     DataObjectDesignerComponent,
     DataObjectsListComponent,
     DataRequesterComponent,
-    DataSourceSelectorComponent
+    DataSourceSelectorComponent,
+    DataFormComponent
   ]
 
 })

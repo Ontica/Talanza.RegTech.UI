@@ -1,0 +1,40 @@
+<form (ngSubmit)="onSubmit()" [empNgSpinnerHost]="spinner" [formGroup]="form">
+
+  <emp-ng-spinner #spinner [visible]="isLoading"></emp-ng-spinner>
+
+  <fieldset>
+
+    <table class="form-section">
+      <tr>
+        <td class="form-section-title" colspan="2" i18n>Form fill out</td>
+      </tr>
+      <tr *ngFor="let formField of formFields">
+        <td>{{formField.label}}</td>
+        <td [ngSwitch]="formField.controlType">
+          <input *ngSwitchCase="'textbox'" [id]="formField.key"
+                 [type]="formField.type" [formControlName]="formField.key"
+                 class="text-box">
+
+          <select *ngSwitchCase="'dropdown'" [id]="formField.key"
+                  [formControlName]="formField.key" class="select-box">
+            <option *ngFor="let opt of formField.options" [value]="opt.key">{{opt.value}}</option>
+          </select>
+
+          <b class="errorMessage" *ngIf="!isValid(formField.key)"><br>{{formField.label}} is required</b>
+        </td>
+      </tr>
+    </table>
+
+    <table class="form-section">
+      <tr>
+        <td>&nbsp;</td>
+        <td class="text-align-right">
+          <button type="button" class="btn right" [class.btn-action]="form.valid"
+                  [disabled]="!form.valid" (click)="save()">Save changes</button>
+        </td>
+      </tr>
+    </table>
+
+  </fieldset>
+
+</form>
