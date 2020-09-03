@@ -18,6 +18,15 @@ export interface DataSource {
 }
 
 
+export const EmptyDataSource: DataSource = {
+  uid: '',
+  type: '',
+  family: '',
+  name: '',
+  description: ''
+};
+
+
 export interface DataObject {
   uid: string;
   type: string;
