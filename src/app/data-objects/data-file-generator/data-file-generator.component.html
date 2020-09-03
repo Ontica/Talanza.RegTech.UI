@@ -1,0 +1,52 @@
+<div class="form">
+
+  <div *ngIf="!dataObject.autofillFileUrl">
+    <div class="form-section-title" i18n>Autofill</div>
+
+    <div>
+      <button type="button" class="btn-action"
+              (click)="generateFile()">Generate the file</button>
+    </div>
+
+  </div>
+
+  <div *ngIf="dataObject.autofillFileUrl">
+    <div class="form-section-title" i18n>Download the generated file</div>
+
+    <a [href]="dataObject.autofillFileUrl" download target="_blank">Download the generated file</a>
+  </div>
+
+  <div *ngIf="dataObject.autofillFileUrl">
+    <br><br>
+    <div>
+      <button type="button" class="btn"
+              (click)="generateFile()">Generate a new version</button>
+      &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+      <button type="button" class="btn"
+              (click)="discardFile()">Discard the file</button>
+    </div>
+  </div>
+
+  <div *ngIf="dataObject.autofillFileUrl && !dataObject.uploadedFileUrl">
+    <br><br><br><br>
+
+    <div class="form-section-title" i18n>Upload the completed version</div>
+
+        <emp-ng-file-control (fileControlChange)="handleFileInput($event)"></emp-ng-file-control>
+
+        <button type="button" class="btn"
+            (click)="uploadFile()">Upload</button>
+  </div>
+
+  <div *ngIf="dataObject.uploadedFileUrl">
+    <br><br><br><br>
+
+    <div class="form-section-title" i18n>Uploaded file</div>
+
+      <a [href]="dataObject.autofillFileUrl" download target="_blank">Download the uploaded file</a>
+      <br><br>
+      <button type="button" class="btn"
+            (click)="deleteUploadedFile()">Delete the uploaded file</button>
+  </div>
+
+</div>
