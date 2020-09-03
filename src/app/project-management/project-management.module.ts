@@ -13,6 +13,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { AngularMaterialModule } from '@app/shared/angular-material.module';
 import { SharedModule } from '@app/shared/shared.module';
 
+import { DataObjectsModule } from '@app/data-objects/data-objects.module';
 import { KnowledgeBaseModule } from '@app/knowledge-base/knowledge-base.module';
 import { ProceduresModule } from '@app/procedures/procedures.module';
 import { ProcessesModule } from '@app/processes/processes.module';
@@ -48,9 +49,14 @@ import {
 import { ProjectFilesMainPageComponent } from './project-files-main-page/project-files-main-page.component';
 
 import { ActivityDataObjectsListComponent } from './activity-data-objects/activity-data-objects-list.component';
+import { ActivityDataObjectComponent } from './activity-data-objects/activity-data-object.component';
+
+
 import { ReportSomethingDialogComponent } from './report-something-dialog/report-something-dialog.component';
 
 import { ProjectManagementRoutingModule } from './project-management-routing.module';
+
+
 
 
 @NgModule({
@@ -64,6 +70,7 @@ import { ProjectManagementRoutingModule } from './project-management-routing.mod
     AngularMaterialModule,
     SharedModule,
 
+    DataObjectsModule,
     ProceduresModule,
     KnowledgeBaseModule,
 
@@ -97,8 +104,8 @@ import { ProjectManagementRoutingModule } from './project-management-routing.mod
     FilesGridComponent,
     ProjectFilesMainPageComponent,
     ReportSomethingDialogComponent,
-    ActivityDataObjectsListComponent
-
+    ActivityDataObjectsListComponent,
+    ActivityDataObjectComponent
   ],
 
   exports: [
