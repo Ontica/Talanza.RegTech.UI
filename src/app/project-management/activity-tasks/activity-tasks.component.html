@@ -1,4 +1,7 @@
 <div class="list">
+
+  <div class="form-section-title">Subtasks list</div>
+
   <div *ngFor="let task of tasksList" class="posting" #postings>
     <a (click)="toggleSelectedTask(task)">{{task.name}}</a>
     <div class="posting-body">
@@ -14,7 +17,8 @@
   </emp-steps-activity-form>
 
   <div style="padding:16px" *ngIf="selectedTask.uid.length === 0">
-    <input #txtTaskName type="text" class='text-box inline-editor-text-box' (keyup.esc)='txtTaskName.value = "";'
-      (keyup.enter)='onInsert(txtTaskName.value);txtTaskName.value = "";' placeholder='Add a subtask to this activity' i18n-placeholder/>
+    <input #txtTaskName type="text" class='text-box inline-editor-text-box' (keyup.esc)='txtTaskName.value = ""'
+      (keyup.enter)='onInsert(txtTaskName.value);txtTaskName.value = "";'
+      placeholder='Add a subtask to this activity' i18n-placeholder/>
   </div>
 </div>

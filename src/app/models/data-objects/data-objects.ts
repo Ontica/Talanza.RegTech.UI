@@ -27,7 +27,9 @@ export interface DataObject {
   subject: Identifiable;
   action: string;
   mediaFormat: string;
+  autofillFileUrl?: string;
+  uploadedFileUrl?: string;
   templateUrl?: string;
-  mediaUrl?: string;
+
   status : string;
 }

@@ -1,5 +1,5 @@
 <div class="list">
-  <div class="section" i18n>Annotations</div>
+  <div class="form-section-title" i18n>Annotations</div>
   <div *ngFor="let posting of postingsList" class="posting" #postings>
     <a (click)="onSelect(posting)">{{posting.title}}</a>
     <div class="posting-body">

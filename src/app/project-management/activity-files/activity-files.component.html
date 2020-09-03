@@ -29,23 +29,32 @@
 
 </div>
 
-<emp-ng-modal-window *ngIf="displayEditor && selectedMediaFile.uid"
+
+<emp-ng-modal-window *ngIf="displayDataObjectEditor && selectedDataObject" [config]="{ width:'1200px', height: '90%', disableClose: true }"
+                        (modalWindowClose)="hideEditors()">
+    <emp-steps-activity-data-object
+      [dataObject]="selectedDataObject" (designerClose)="hideEditors()">
+    </emp-steps-activity-data-object>
+</emp-ng-modal-window>
+
+
+<emp-ng-modal-window *ngIf="displayFileEditor && selectedMediaFile.uid"
                      [config]="{width:'980px', height:'78%'}"
-                     (modalWindowClose)="hideFileEditor()">
+                     (modalWindowClose)="hideEditors()">
   <emp-kb-media-file-viewer
       [mediaFile]="selectedMediaFile"
       (mediaFileViewerSave)="uploadFile($event)"
       (mediaFileViewerDelete)="deleteFile()"
-      (mediaFileViewerClose)="hideFileEditor()">
+      (mediaFileViewerClose)="hideEditors()">
   </emp-kb-media-file-viewer>
 </emp-ng-modal-window>
 
-<emp-ng-modal-window *ngIf="displayEditor && !selectedMediaFile.uid"
+<emp-ng-modal-window *ngIf="displayFileEditor && !selectedMediaFile.uid"
                      [config]="{width:'680px', height:'580px'}"
-                     (modalWindowClose)="hideFileEditor()">
+                     (modalWindowClose)="hideEditors()">
   <emp-ng-card title='File uploader'
                [hint]="projectItem.name"
-               (cardClose)="hideFileEditor()">
+               (cardClose)="hideEditors()">
     <emp-kb-file-editor [mediaFile]="selectedMediaFile"
                         (saveFile)="uploadFile($event)" [hidden]="uploading">
     </emp-kb-file-editor>

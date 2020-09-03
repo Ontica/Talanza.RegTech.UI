@@ -7,11 +7,16 @@
 
 import { Component, Input, OnChanges } from '@angular/core';
 
-import { ProjectFilesService } from '@app/services/project-management';
+import { EventInfo } from '@app/core/data-types';
 
 import { EmptyActivity, ProjectItem } from '@app/models/project-management';
+
 import { MediaFile, FileToUpload, EmptyMediaFile } from '@app/models/knowledge-base';
+import { DataObject } from '@app/models/data-objects';
+
 import { FileStore } from '@app/store/file.store';
+
+import { ProjectFilesService } from '@app/services/project-management';
 
 
 @Component({
@@ -26,12 +31,17 @@ export class ActivityFilesComponent implements OnChanges {
 
   filesList: MediaFile[] = [];
 
+  selectedDataObject: DataObject;
   selectedMediaFile: MediaFile = EmptyMediaFile;
 
-  displayEditor = false;
+  displayDataObjectEditor = false;
+  displayFileEditor = false;
+
+
   uploading = false;
 
-  constructor(private store: FileStore, private service: ProjectFilesService) { }
+  constructor(private store: FileStore,
+              private service: ProjectFilesService) { }
 
 
   ngOnChanges() {
@@ -41,32 +51,36 @@ export class ActivityFilesComponent implements OnChanges {
 
 
   onClickAttachFile() {
+    this.hideEditors();
     this.selectedMediaFile = EmptyMediaFile;
-    this.showFileEditor();
+    this.displayFileEditor = true;
+  }
 
+
+  onDataObjectsListEvent(event: EventInfo) {
+    this.hideEditors();
+    this.selectedDataObject = event.payload.dataObject;
+    this.displayDataObjectEditor = true;
   }
 
 
   onFileSelect(file: MediaFile = EmptyMediaFile) {
+    this.hideEditors();
     this.selectedMediaFile = file;
-    this.showFileEditor();
+    this.displayFileEditor = true;
   }
 
 
-  hideFileEditor() {
-    this.displayEditor = false;
-  }
-
-
-  showFileEditor() {
-    this.displayEditor = true;
+  hideEditors() {
+    this.displayDataObjectEditor = false;
+    this.displayFileEditor = false;
   }
 
 
   deleteFile() {
     this.service.deleteProjectItemFile(this.projectItem, this.selectedMediaFile)
       .subscribe(() => {
-        this.displayEditor = false;
+        this.displayFileEditor = false;
         this.store.refreshAllFiles();
         this.loadFilesList();
       });
@@ -86,7 +100,7 @@ export class ActivityFilesComponent implements OnChanges {
         this.store.refreshAllFiles();
         this.uploading = false;
         this.loadFilesList();
-        this.hideFileEditor();
+        this.hideEditors();
       }, error => {
         this.uploading = false;
         alert(`There was a problem uploading the file ${fileToUpload.file.name}` );
@@ -100,6 +114,5 @@ export class ActivityFilesComponent implements OnChanges {
         .toPromise()
         .then (x => this.filesList = x);
   }
-
 
 }

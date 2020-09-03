@@ -5,7 +5,7 @@
  * See LICENSE.txt in the project root for complete license information.
  */
 
-import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
+import { Component, Input, EventEmitter, Output } from '@angular/core';
 
 import { EventInfo } from '@app/core/data-types';
 
@@ -17,15 +17,15 @@ import { DataObject } from '@app/models/data-objects';
   templateUrl: './data-requester.component.html',
   styleUrls: ['../../../styles/card.scss']
 })
-export class DataRequesterComponent implements OnInit {
+export class DataRequesterComponent {
 
   @Input() dataObject: DataObject;
 
   @Output() dataObjectEdition = new EventEmitter<EventInfo>();
 
-  constructor() { }
 
-  ngOnInit(): void {
+  onFormEvent(event: EventInfo) {
+    console.log('event', event);
   }
 
 }

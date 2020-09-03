@@ -8,7 +8,7 @@
 import { Component, Input, Output, EventEmitter, OnChanges } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
-import { MediaFile, MediaMetadata, FileToUpload } from '@app/models/knowledge-base';
+import { MediaFile, MediaMetadata, FileToUpload, EmptyMediaFile } from '@app/models/knowledge-base';
 
 
 @Component({
@@ -18,7 +18,7 @@ import { MediaFile, MediaMetadata, FileToUpload } from '@app/models/knowledge-ba
 })
 export class FileEditorComponent implements OnChanges {
 
-  @Input() mediaFile: MediaFile;
+  @Input() mediaFile: MediaFile = EmptyMediaFile;
   @Input() readonly: false;
 
   @Output() deleteFile = new EventEmitter<void>();
