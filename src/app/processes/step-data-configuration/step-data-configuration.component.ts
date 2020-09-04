@@ -88,6 +88,8 @@ export class StepDataConfigurationComponent implements OnChanges {
     if (!confirm(`¿Do you want to remove the format or document ${dataObject.name}?`)) {
       return;
     }
+    this.service.removeDataObject(dataObject)
+                .then(() => this.loadStepDataObjects());
   }
 
 

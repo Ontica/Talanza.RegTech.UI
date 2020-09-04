@@ -20,7 +20,6 @@ export class DataObjectsService {
 
   constructor(private http: HttpService) { }
 
-
   getSubjectDataRequests(subject: Identifiable): Observable<DataObject[]> {
     Assertion.assertValue(subject, 'subject');
 
@@ -64,6 +63,16 @@ export class DataObjectsService {
     };
 
     return this.http.post<DataObject>(path, body)
+               .toPromise();
+  }
+
+
+  removeDataObject(dataObject: DataObject): Promise<any> {
+    Assertion.assertValue(dataObject, 'dataObject');
+
+    const path = `v3/empiria-steps/data-objects/${dataObject.uid}`;
+
+    return this.http.delete<any>(path)
                .toPromise();
   }
 

@@ -20,7 +20,7 @@
   </emp-ng-modal-window>
 
 
-  <emp-ng-modal-window *ngIf="displayEditor && !selectedDataObject" [config]="{ width:'680px', height: '540px', disableClose: true }"
+  <emp-ng-modal-window *ngIf="displayEditor && !selectedDataObject"
                         (modalWindowClose)="hideEditor()">
     <emp-ng-card title='Link a data source' [hint]="step.name" (cardClose)="hideEditor()">
 
