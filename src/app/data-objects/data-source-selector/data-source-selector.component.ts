@@ -6,14 +6,14 @@
  */
 
 import { Component, Output, EventEmitter, OnInit, OnDestroy } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
+import { isEmpty } from '@app/models/core';
 import { DataSource, EmptyDataSource } from '@app/models/data-objects';
 
-import { DataObjectsStore } from '@app/store/data-objects.store';
 import { DataObjectsService } from '@app/services/data-objects';
 
 
@@ -27,7 +27,6 @@ export class DataSourceSelectorComponent implements OnInit, OnDestroy {
   @Output() selected = new EventEmitter<DataSource>();
 
   dataSources: DataSource[] = [];
-  families: string[] = [];
 
   filteredDataSources: DataSource[] = [];
   selectedDataSource: DataSource = EmptyDataSource;
@@ -35,9 +34,7 @@ export class DataSourceSelectorComponent implements OnInit, OnDestroy {
   isLoading = true;
 
   form = new FormGroup({
-    family: new FormControl(''),
-    keywords: new FormControl(''),
-    dataSource: new FormControl('', Validators.required)
+    keywords: new FormControl('')
   });
 
 
@@ -58,7 +55,7 @@ export class DataSourceSelectorComponent implements OnInit, OnDestroy {
 
 
   get isValidForm() {
-    return (this.form.valid && this.selectedDataSource);
+    return (this.form.valid && !isEmpty(this.selectedDataSource));
   }
 
 
@@ -71,10 +68,8 @@ export class DataSourceSelectorComponent implements OnInit, OnDestroy {
   }
 
 
-  selectDataSource() {
-    const selectedUID = this.form.get('dataSource').value;
-
-    this.selectedDataSource = null;
+  selectDataSource(selectedUID: string) {
+    this.selectedDataSource = EmptyDataSource;
 
     if (selectedUID) {
       this.selectedDataSource = this.dataSources.find(x => x.uid === selectedUID);
@@ -84,15 +79,9 @@ export class DataSourceSelectorComponent implements OnInit, OnDestroy {
 
   setFilter() {
     const keywords = this.form.get('keywords').value.toLowerCase();
-    const family = this.form.get('family').value;
 
-    if (keywords && family) {
-      this.filteredDataSources = this.dataSources.filter(x => x.name.toLowerCase().includes(keywords) &&
-                                                         x.family === family);
-    } else if (keywords && !family) {
+    if (keywords) {
       this.filteredDataSources = this.dataSources.filter(x => x.name.toLowerCase().includes(keywords));
-    } else if (!keywords && family) {
-      this.filteredDataSources = this.dataSources.filter(x => x.family === family);
     } else {
       this.filteredDataSources = this.dataSources;
     }
@@ -103,6 +92,10 @@ export class DataSourceSelectorComponent implements OnInit, OnDestroy {
   }
 
 
+  testSelect(event: any) {
+    console.log('event', event);
+  }
+
   // private members
 
   private loadDataSources() {
@@ -111,7 +104,6 @@ export class DataSourceSelectorComponent implements OnInit, OnDestroy {
       .subscribe(
         (x) => {
           this.dataSources = x;
-          this.families = [...new Set(x.map(y => y.family))].sort();
           this.setFilter();
           this.isLoading = false;
         }

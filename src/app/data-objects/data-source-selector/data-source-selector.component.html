@@ -14,31 +14,18 @@
           <input type="text" class="text-box" style="width:380px" formControlName="keywords" (change)="setFilter()">
         </td>
       </tr>
-      <tr>
-        <td i18n>Family:</td>
-        <td>
-          <select class="select-box" style="width:380px" formControlName="family" (change)="setFilter()">
-            <option value="" i18n>All families</option>
-            <option *ngFor="let family of families" [value]="family">{{family}}</option>
-          </select>
-        </td>
-      </tr>
-      <tr>
-        <td i18n>Data source:</td>
-        <td>
-          <select class="select-box" style="width:100%" formControlName="dataSource" (change)="selectDataSource()">
-            <option value="" i18n>( Select a data source )</option>
-            <option *ngFor="let dataSource of filteredDataSources" [value]="dataSource.uid">{{dataSource.name}}</option>
-          </select>
-        </td>
-      </tr>
-      <tr>
-        <td>&nbsp;</td>
-        <td>
-          <a *ngIf="selectedDataSource" [href]="selectedDataSource?.templateUrl" target="_base">View template file</a>
-        </td>
-      </tr>
     </table>
+
+    <ejs-grid [dataSource]='filteredDataSources' (rowSelected)="selectDataSource($event.data.uid)"
+              allowFiltering='true' allowPaging='true'
+              [filterSettings]='{ type: "CheckBox" }' enableHover='true'
+              [pageSettings]='{ pageCount: 3, pageSize: 10 }' allowTextWrap='true' rowHeight='50' height='320' width='780'>
+      <e-columns>
+        <e-column field='name' headerText='Data source' width='500' [allowFiltering]="false"></e-column>
+        <e-column field='family' headerText='Family'></e-column>
+      </e-columns>
+    </ejs-grid>
+
 
     <table class="form-section">
       <tr>
@@ -48,6 +35,7 @@
                   [disabled]="!isValidForm" (click)="linkDataSource()">Add to obligation</button>
         </td>
       </tr>
+
     </table>
 
   </fieldset>

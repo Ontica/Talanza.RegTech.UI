@@ -11,8 +11,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AngularMaterialModule } from '@app/shared/angular-material.module';
-
 import { SharedModule } from '@app/shared/shared.module';
+import { GridModule, FilterService, PageService } from '@syncfusion/ej2-angular-grids';
 
 import { KnowledgeBaseModule } from '@app/knowledge-base/knowledge-base.module';
 
@@ -32,7 +32,10 @@ import { DataFileGeneratorComponent } from './data-file-generator/data-file-gene
     FormsModule,
     ReactiveFormsModule,
     AngularMaterialModule,
+
     SharedModule,
+
+    GridModule,
 
     KnowledgeBaseModule
   ],
@@ -53,6 +56,11 @@ import { DataFileGeneratorComponent } from './data-file-generator/data-file-gene
     DataRequesterComponent,
     DataSourceSelectorComponent,
     DataFormComponent
+  ],
+
+  providers: [
+    FilterService,
+    PageService
   ]
 
 })
