@@ -1,0 +1,116 @@
+<div>
+  <div style="float: right; position: relative; margin-right: 16px">
+    <button type="button" class="btn btn-margin-right" [disabled]="!currentRow" (click)="deleteRow()">Delete</button>
+    <button type="button" class="btn btn-margin-left btn-margin-right" [disabled]="!currentRow" (click)="cloneRow()">Clone</button>
+    <button type="button" class="btn btn-margin-right" [disabled]="!currentRow" (click)="updateRow()">Edit</button>
+    <button type="button" class="btn-action" (click)="addRow()">Add</button>
+
+  </div>
+</div>
+
+<br><br>
+
+<div [ngSwitch]="dataObject.decorator">
+
+  <div *ngSwitchCase="'Sasisopa.CustomGrid'">
+    <ejs-grid [dataSource]="dataSource" (rowSelected)="selectRow($event.data)"
+              allowPaging='true' [allowSorting]='true' enableHover='true' allowTextWrap='true' rowHeight='50'
+              [pageSettings]='{ pageCount: 3, pageSize: 20 }'>
+
+      <e-columns>
+        <e-column field='anexo' headerText='Anexo' width='140'></e-column>
+        <e-column field='elemento' headerText='Elemento' width='140'></e-column>
+        <e-column field='actividad' headerText='Actividad'></e-column>
+        <e-column field='descripcion' headerText='Descripción'></e-column>
+        <e-column field='periodicidad' headerText='Periodicidad' width='200'></e-column>
+        <e-column field='avance' headerText='Avance' width='100'></e-column>
+      </e-columns>
+
+    </ejs-grid>
+  </div>
+
+
+  <div *ngSwitchCase="'Actividades.CNH.CustomGrid'">
+    <ejs-grid [dataSource]="dataSource" (rowSelected)="selectRow($event.data)"
+              allowPaging='true'  [allowSorting]='true' enableHover='true' allowTextWrap='true'
+              [pageSettings]='{ pageCount: 3, pageSize: 20 }'>
+
+      <e-columns>
+        <e-column field='subtaskCode' headerText='Código' width='120'></e-column>
+        <e-column field='subtaskName' headerText='Subtarea'></e-column>
+        <e-column field='subactivityName' headerText='Subactividad'></e-column>
+        <e-column field='fechaInicio' headerText='Inicio' width='120'></e-column>
+        <e-column field='fechaFin' headerText='Fin' width='120'></e-column>
+        <e-column field='unidadesTrabajo' headerText='U de Trabajo' width='120'></e-column>
+        <e-column field='responsable' headerText='Reponsable'></e-column>
+      </e-columns>
+
+    </ejs-grid>
+  </div>
+
+    <div *ngSwitchCase="'Bitacora.CNIH.CustomForm'">
+    <ejs-grid [dataSource]="dataSource" (rowSelected)="selectRow($event.data)"
+              allowPaging='true' [allowSorting]='true' enableHover='true' allowTextWrap='true' rowHeight='50'
+              [pageSettings]='{ pageCount: 3, pageSize: 20 }'>
+
+      <e-columns>
+        <e-column field='pozo' headerText='Pozo' width='160'></e-column>
+        <e-column field='fechaReporte' headerText='F. Reporte' width='120'></e-column>
+        <e-column field='tipoTerminacion' headerText='Terminación' width='140'></e-column>
+        <e-column field='registroHidrocarburos' headerText='Registro' width='140'></e-column>
+        <e-column field='metrosDesarrollados' headerText='(md)' width='100'></e-column>
+        <e-column field='metrosVerticales' headerText='(mv)' width='100'></e-column>
+        <e-column field='pesoAplicadoBarrena' headerText='Barrena' width='100'></e-column>
+        <e-column field='velocidadMR' headerText='MR' width='80'></e-column>
+        <e-column field='torque' headerText='Torque' width='100'></e-column>
+        <e-column field='proximoMovimiento' headerText='Próximo movimiento'></e-column>
+      </e-columns>
+
+    </ejs-grid>
+  </div>
+
+
+  <div *ngSwitchCase="'Fluidos.CNIH.CustomGrid'">
+    <ejs-grid [dataSource]="dataSource" (rowSelected)="selectRow($event.data)"
+              allowPaging='true' [allowSorting]='true' enableHover='true' allowTextWrap='true' rowHeight='50'
+              [pageSettings]='{ pageCount: 3, pageSize: 20 }'>
+
+      <e-columns>
+        <e-column field='pozo' headerText='Pozo'></e-column>
+        <e-column field='archivoLaboratorio' headerText='Archivo Laboratorio'></e-column>
+        <e-column field='tipoMuestras' headerText='Tipo muestras'></e-column>
+        <e-column field='fechaMuestreo' headerText='Fecha muestreo'></e-column>
+        <e-column field='fechaEntrega' headerText='Fecha entrega'></e-column>
+        <e-column field='caja' headerText='Caja'></e-column>
+        <e-column field='cantidadMuestra' headerText='Cantidad muestra'></e-column>
+        <e-column field='condicionesTomaMuestra' headerText='Condiciones'></e-column>
+      </e-columns>
+
+    </ejs-grid>
+  </div>
+
+  <div *ngSwitchDefault>
+
+        <ejs-grid [dataSource]="dataSource" (rowSelected)="selectRow($event.data)"
+              allowPaging='true' enableHover='true' allowTextWrap='true' rowHeight='50'
+              [pageSettings]='{ pageCount: 3, pageSize: 20 }'>
+
+        </ejs-grid>
+
+  </div>
+
+</div>
+
+
+
+
+
+<emp-ng-modal-window *ngIf="displayEditor"
+                     [config]="{ width:'760px', height: 'auto', disableClose: true }"
+                     (modalWindowClose)="hideEditor()">
+  <emp-ng-card [title]='dataObject.name' [hint]="dataObject.entity.name" (cardClose)="hideEditor()">
+
+    <emp-data-form [dataObject]="dataObject" [data]="currentRow"
+                  (formEvent)="onFormEvent($event)"></emp-data-form>
+  </emp-ng-card>
+</emp-ng-modal-window>

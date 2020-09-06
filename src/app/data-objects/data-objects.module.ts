@@ -12,7 +12,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AngularMaterialModule } from '@app/shared/angular-material.module';
 import { SharedModule } from '@app/shared/shared.module';
-import { GridModule, FilterService, PageService } from '@syncfusion/ej2-angular-grids';
+import { GridModule, FilterService, SortService, PageService } from '@syncfusion/ej2-angular-grids';
 
 import { KnowledgeBaseModule } from '@app/knowledge-base/knowledge-base.module';
 
@@ -23,6 +23,7 @@ import { DataSourceSelectorComponent } from './data-source-selector/data-source-
 import { DataFormComponent } from './data-form/data-form.component';
 import { DataFormElementComponent } from './data-form/data-form-element.component';
 import { DataFileGeneratorComponent } from './data-file-generator/data-file-generator.component';
+import { DataGridComponent } from './data-grid/data-grid.component';
 
 
 @NgModule({
@@ -48,6 +49,7 @@ import { DataFileGeneratorComponent } from './data-file-generator/data-file-gene
     DataFormComponent,
     DataFormElementComponent,
     DataFileGeneratorComponent,
+    DataGridComponent,
   ],
 
   exports: [
@@ -55,12 +57,13 @@ import { DataFileGeneratorComponent } from './data-file-generator/data-file-gene
     DataObjectsListComponent,
     DataRequesterComponent,
     DataSourceSelectorComponent,
-    DataFormComponent
+    DataFormComponent,
   ],
 
   providers: [
     FilterService,
-    PageService
+    PageService,
+    SortService
   ]
 
 })
