@@ -39,6 +39,6 @@ export interface DataObject {
   autofillFileUrl?: string;
   uploadedFileUrl?: string;
   templateUrl?: string;
-
   status : string;
+  decorator: string;
 }

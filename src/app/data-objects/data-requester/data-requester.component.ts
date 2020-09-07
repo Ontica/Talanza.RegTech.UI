@@ -23,7 +23,6 @@ export class DataRequesterComponent {
 
   @Output() dataObjectEdition = new EventEmitter<EventInfo>();
 
-
   onFormEvent(event: EventInfo) {
     console.log('event', event);
   }
