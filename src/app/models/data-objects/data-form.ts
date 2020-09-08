@@ -14,5 +14,7 @@ export interface DataFormField {
   order?: number;
   controlType: string;
   type?: string;
-  options?: {key: string, value: string}[];
+  values?: {key: string, value: string}[];
+  width?: string;
+  unit?: string;
 }

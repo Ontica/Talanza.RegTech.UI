@@ -8,13 +8,21 @@ export class FormGroupTransformer {
 
   constructor() { }
 
-  toFormGroup(questions: DataFormField[]) {
+  toFormGroup(questions: DataFormField[], data?: any) {
     const group: any = {};
 
-    questions.forEach(question => {
-      group[question.key] = question.required ? new FormControl(question.value || '', Validators.required)
-                                              : new FormControl(question.value || '');
-    });
+    if (!data) {
+      questions.forEach(question => {
+        group[question.key] = question.required ? new FormControl(question.value || '', Validators.required)
+                                                : new FormControl(question.value || '');
+      });
+
+    } else {
+      questions.forEach(question => {
+        group[question.key] = question.required ? new FormControl(data[question.key] || question.value || '', Validators.required)
+                                                : new FormControl(data[question.key] || question.value || '');
+      });
+    }
     return new FormGroup(group);
   }
 }

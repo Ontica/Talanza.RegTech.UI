@@ -5,22 +5,28 @@
   <fieldset>
 
     <table class="form-section">
-      <tr>
-        <td class="form-section-title" colspan="2" i18n>Form fill out</td>
-      </tr>
+
       <tr *ngFor="let formField of formFields">
-        <td>{{formField.label}}</td>
-        <td [ngSwitch]="formField.controlType">
-          <input *ngSwitchCase="'textbox'" [id]="formField.key"
-                 [type]="formField.type" [formControlName]="formField.key"
-                 class="text-box">
+        <td>{{formField.label}}:</td>
+
+        <td [ngSwitch]="formField.controlType" colspan="2">
+
+          <span *ngSwitchCase="'textbox'">
+            <input  [id]="formField.key"
+                   [type]="formField.type" [formControlName]="formField.key" [style.width]="formField.width"
+                   class="text-box"> &nbsp; {{formField.unit}}
+          </span>
+
+          <textarea *ngSwitchCase="'textarea'" [id]="formField.key"
+                    [formControlName]="formField.key" class="text-area" rows="3" cols="25">
+          </textarea>
 
           <select *ngSwitchCase="'dropdown'" [id]="formField.key"
-                  [formControlName]="formField.key" class="select-box">
-            <option *ngFor="let opt of formField.options" [value]="opt.key">{{opt.value}}</option>
+                  [formControlName]="formField.key" class="select-box" [style.width]="formField.width">
+            <option *ngFor="let listItem of formField.values" [value]="listItem.key">{{listItem.value}}</option>
           </select>
 
-          <b class="errorMessage" *ngIf="!isValid(formField.key)"><br>{{formField.label}} is required</b>
+          <div class="form-errors" *ngIf="submitted && !isValid(formField.key)">{{formField.label}} is required.</div>
         </td>
       </tr>
     </table>
@@ -29,8 +35,8 @@
       <tr>
         <td>&nbsp;</td>
         <td class="text-align-right">
-          <button type="button" class="btn right" [class.btn-action]="form.valid"
-                  [disabled]="!form.valid" (click)="save()">Save changes</button>
+          <button type="button" class="btn right" [class.btn-action]="!form.pristine && form.valid"
+                  (click)="onSubmit()">{{actionButtonLabel}}</button>
         </td>
       </tr>
     </table>

@@ -11,10 +11,12 @@ import { of, Observable } from 'rxjs';
 import { HttpService, Assertion } from '@app/core';
 
 import { DataFormField, DataObject } from '@app/models/data-objects';
+import { EventInfo } from '@app/core/data-types';
 
 
 @Injectable()
 export class DataFormService {
+
 
   constructor(private http: HttpService) { }
 
@@ -27,10 +29,19 @@ export class DataFormService {
   }
 
 
+  getGridFormDataSource<T>(dataObject: DataObject): Observable<T[]> {
+    Assertion.assertValue(dataObject, 'dataObject');
+
+    const path = `v3/empiria-steps/data-objects/${dataObject.uid}/grid-data-source/${dataObject.subject.uid}`;
+
+    return this.http.get<T[]>(path);
+  }
+
+
   generateAutofillFile(dataObject: DataObject): Promise<DataObject> {
     Assertion.assertValue(dataObject, 'dataObject');
 
-    const path = `v3/empiria-steps/data-objects/${dataObject.uid}/autofill`;
+    const path = `v3/empiria-steps/data-objects/${dataObject.uid}/autofill/${dataObject.subject.uid}`;
 
     return this.http.post<DataObject>(path)
                .toPromise();
@@ -40,7 +51,7 @@ export class DataFormService {
   discardAutofillFile(dataObject: DataObject): Promise<DataObject> {
     Assertion.assertValue(dataObject, 'dataObject');
 
-    const path = `v3/empiria-steps/data-objects/${dataObject.uid}/autofill`;
+    const path = `v3/empiria-steps/data-objects/${dataObject.uid}/autofill/${dataObject.subject.uid}`;
 
     return this.http.delete<DataObject>(path)
                .toPromise();
@@ -49,24 +60,20 @@ export class DataFormService {
   removeUploadedFile(dataObject: DataObject): Promise<DataObject> {
     Assertion.assertValue(dataObject, 'dataObject');
 
-    const path = `v3/empiria-steps/data-objects/${dataObject.uid}/upload-file`;
+    const path = `v3/empiria-steps/data-objects/${dataObject.uid}/upload-file/${dataObject.subject.uid}`;
 
     return this.http.delete<DataObject>(path)
                .toPromise();
   }
 
 
-  saveFormData(dataObject: DataObject, formData: string): Promise<DataObject> {
+  saveFormData(dataObject: DataObject, event: EventInfo): Promise<DataObject> {
     Assertion.assertValue(dataObject, 'dataObject');
-    Assertion.assertValue(formData, 'formData');
+    Assertion.assertValue(event, 'event');
 
-    const path = `v3/empiria-steps/data-objects/${dataObject.uid}/data-form`;
+    const path = `v3/empiria-steps/data-objects/${dataObject.uid}/data-form/${dataObject.subject.uid}`;
 
-    const body = {
-      formData
-    };
-
-    return this.http.post<DataObject>(path, body)
+    return this.http.post<DataObject>(path, event)
                .toPromise();
   }
 
@@ -75,7 +82,7 @@ export class DataFormService {
     Assertion.assertValue(dataObject, 'dataObject');
     Assertion.assertValue(fileToUpload, 'fileToUpload');
 
-    const path = `v3/empiria-steps/data-objects/${dataObject.uid}/upload-file`;
+    const path = `v3/empiria-steps/data-objects/${dataObject.uid}/upload-file/${dataObject.subject.uid}`;
 
     const formData: FormData = new FormData();
 

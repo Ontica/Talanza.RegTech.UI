@@ -7,7 +7,7 @@
 
     <select *ngSwitchCase="'dropdown'" [id]="formField.key"
             [formControlName]="formField.key" class="select-box">
-      <option *ngFor="let opt of formField.options" [value]="opt.key">{{opt.value}}</option>
+      <option *ngFor="let opt of formField.values" [value]="opt.key">{{opt.value}}</option>
     </select>
   </td>
 </ng-container>
