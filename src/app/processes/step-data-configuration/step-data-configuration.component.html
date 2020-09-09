@@ -3,16 +3,19 @@
   <div class="form-section-title" i18n>Linked forms and documents</div>
 
   <div>
-    <emp-data-objects-list [dataObjects]="dataObjects | async" (listEvent)="onDataObjectsListEvent($event)">
+    <emp-data-objects-list [dataObjects]="dataObjects | async" [readonly]='readonly'
+                           (listEvent)="onDataObjectsListEvent($event)">
     </emp-data-objects-list>
   </div>
 
   <div class="float-right">
-    <button type="button" class="btn-action" (click)="showDataSourceSelector()" i18n>Link a form or document</button>
+    <button type="button" *ngIf="!readonly" class="btn-action"
+            (click)="showDataSourceSelector()" i18n>Link a form or document</button>
   </div>
 
-  <emp-ng-modal-window *ngIf="displayEditor && selectedDataObject" [config]="{ width:'1200px', height: '90%', disableClose: true }"
-                        (modalWindowClose)="hideEditor()">
+  <emp-ng-modal-window *ngIf="displayEditor && selectedDataObject"
+                       [config]="{ width:'1200px', height: '90%', disableClose: true }"
+                       (modalWindowClose)="hideEditor()">
 
     <emp-data-object-designer *ngIf="selectedDataObject"
       [dataObject]="selectedDataObject" (designerClose)="hideEditor()">
@@ -21,6 +24,7 @@
 
 
   <emp-ng-modal-window *ngIf="displayEditor && !selectedDataObject"
+                        [config]="{ width:'760px', height: '640px', disableClose: true }"
                         (modalWindowClose)="hideEditor()">
     <emp-ng-card title='Link a data source' [hint]="step.name" (cardClose)="hideEditor()">
 

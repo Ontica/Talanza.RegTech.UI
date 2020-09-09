@@ -1,22 +1,20 @@
 <div class="form">
 
-  <div *ngIf="!dataObject.autofillFileUrl">
-    <div class="form-section-title" i18n>Autofill</div>
+  <div *ngIf="showGenerateAutofill()">
+    <div class="form-section-title" i18n>Auto-generation</div>
 
     <div>
       <button type="button" class="btn-action"
               (click)="generateFile()">Generate the file</button>
     </div>
-
+    <br><br><br><br>
   </div>
 
-  <div *ngIf="dataObject.autofillFileUrl">
-    <div class="form-section-title" i18n>Download the generated file</div>
+  <div *ngIf="showReadyToDownload()">
+    <div class="form-section-title" i18n>Download the auto-generated file</div>
 
-    <a [href]="dataObject.autofillFileUrl" download target="_blank">Download the generated file</a>
-  </div>
+    <a [href]="dataObject.autofillFileUrl" download target="_blank">Download the auto-generated file</a>
 
-  <div *ngIf="dataObject.autofillFileUrl">
     <br><br>
     <div>
       <button type="button" class="btn"
@@ -25,25 +23,25 @@
       <button type="button" class="btn"
               (click)="discardFile()">Discard the file</button>
     </div>
+    <br><br><br><br>
   </div>
 
-  <div *ngIf="dataObject.autofillFileUrl && !dataObject.uploadedFileUrl">
-    <br><br><br><br>
 
+  <div *ngIf="showFileUpload()">
     <div class="form-section-title" i18n>Upload the completed version</div>
 
         <emp-ng-file-control (fileControlChange)="handleFileInput($event)"></emp-ng-file-control>
 
         <button type="button" class="btn"
             (click)="uploadFile()">Upload</button>
+
+    <br><br><br><br>
   </div>
 
-  <div *ngIf="dataObject.uploadedFileUrl">
-    <br><br><br><br>
-
+  <div *ngIf="showUploadedFile()">
     <div class="form-section-title" i18n>Uploaded file</div>
 
-      <a [href]="dataObject.autofillFileUrl" download target="_blank">Download the uploaded file</a>
+      <a [href]="dataObject.uploadedFileUrl" download target="_blank">Download the uploaded file</a>
       <br><br>
       <button type="button" class="btn"
             (click)="deleteUploadedFile()">Delete the uploaded file</button>

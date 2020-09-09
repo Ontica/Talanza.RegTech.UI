@@ -27,6 +27,8 @@ export class StepDataConfigurationComponent implements OnChanges {
 
   @Input() step: ProjectItem;
 
+  @Input() readonly = false;
+
   dataObjects: Observable<DataObject[]> = of([]);
 
   displayEditor =  false;

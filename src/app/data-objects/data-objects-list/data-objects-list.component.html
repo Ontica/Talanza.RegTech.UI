@@ -24,7 +24,7 @@
         {{dataObject.type}}
       </div>
 
-      <div class="right-column expand">
+      <div class="right-column expand" *ngIf="!readonly">
         <mat-icon class="material-icons-outlined" (click)="onDeleteDataObject(dataObject)">delete_outline</mat-icon>
       </div>
 

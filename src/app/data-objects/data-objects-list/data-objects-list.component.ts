@@ -21,6 +21,8 @@ export class DataObjectsListComponent {
 
   @Input() dataObjects: DataObject[] = [];
 
+  @Input() readonly = false;
+
   @Output() listEvent = new EventEmitter<EventInfo>();
 
 

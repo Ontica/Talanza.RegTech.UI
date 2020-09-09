@@ -23,7 +23,7 @@
     </mat-tab>
 
     <mat-tab label="Forms & Documents" i18n-label>
-      <emp-steps-step-data-configuration [step]="activityTemplate"></emp-steps-step-data-configuration>
+      <emp-steps-step-data-configuration [step]="activityTemplate" [readonly]="settings.readonly"></emp-steps-step-data-configuration>
     </mat-tab>
 
     <mat-tab label="Procedure" [disabled]="!hasProcedure" i18n-label>
