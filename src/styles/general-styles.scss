@@ -93,6 +93,12 @@ button.btn-margin-right {
   margin-right: 32px;
 }
 
+
+button.btn-margin-left {
+  margin-left:  32px;
+}
+
+
 @mixin input-settings {
   background-color: $control-background-color;
   border-top: $control-border;
@@ -141,6 +147,11 @@ input.search-box {
 input.text-box {
   @include input-settings;
 }
+
+input.text-box.number {
+  @include input-settings;
+}
+
 
 div.text-box {
   @include input-settings;
