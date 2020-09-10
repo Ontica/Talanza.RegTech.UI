@@ -87,6 +87,17 @@ mat-sidenav {
 }
 
 
+.right-section {
+  margin-top: 12px;
+
+  > * {
+    margin-right: 48px;
+  }
+
+  align-items: end;
+}
+
+
 .side-bar {
   background-color: $secondary-color;
   color: $white;

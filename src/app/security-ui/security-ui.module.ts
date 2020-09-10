@@ -11,6 +11,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { SecurityUIRoutingModule } from './security-ui-routing.module';
 import { UserLoginComponent } from './user-login/user-login.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 
 
 /**
@@ -26,11 +27,13 @@ import { UserLoginComponent } from './user-login/user-login.component';
   ],
 
   declarations: [
-    UserLoginComponent
+    UserLoginComponent,
+    ChangePasswordComponent
   ],
 
   exports: [
-    UserLoginComponent
+    UserLoginComponent,
+    ChangePasswordComponent
   ]
 
 })

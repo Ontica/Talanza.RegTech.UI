@@ -11,6 +11,9 @@ import { Cryptography } from '../security/cryptography';
 
 import { HttpHandler } from '../http/http-handler';
 
+import { EventInfo } from '../data-types';
+import { Assertion } from '../general/assertion';
+
 import { SessionToken, Identity, ClaimsList } from './security-types';
 
 
@@ -20,8 +23,17 @@ export class SecurityDataService {
   constructor(private httpHandler: HttpHandler) { }
 
 
+
+  changePassword(event: EventInfo): Promise<boolean> {
+    Assertion.assertValue(event, 'event');
+
+    return this.httpHandler.post<boolean>('v2/security/change-password', event)
+                           .toPromise();
+  }
+
+
   closeSession(): Promise<void> {
-    return this.httpHandler.post<void>('v1/security/logout', undefined)
+    return this.httpHandler.post<void>('v1/security/logout')
                .toPromise();
   }
 

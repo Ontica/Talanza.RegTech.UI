@@ -39,6 +39,7 @@ import { WidgetsModule } from './widgets/widgets.module';
 import { MessageBoxService } from './message-box/message.box.service';
 import { SharedService } from './shared.service';
 import { SpinnerService } from './spinner/spinner.service';
+import { SecurityUIModule } from '@app/security-ui/security-ui.module';
 
 
 @NgModule({
@@ -49,7 +50,9 @@ import { SpinnerService } from './spinner/spinner.service';
     FormsModule,
 
     AngularMaterialModule,
-    WidgetsModule
+    WidgetsModule,
+
+    SecurityUIModule
   ],
 
   declarations: [

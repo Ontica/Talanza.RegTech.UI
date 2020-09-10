@@ -23,6 +23,9 @@ export class MainLayoutComponent implements OnInit {
   useForeignLanguage = false;
   currentLanguage = 'Spanish';
 
+  displayEditor = false;
+
+
   constructor(private uiStore: UserInterfaceStore,
               private router: Router) {
     this.router.events.subscribe(val => {
@@ -48,10 +51,18 @@ export class MainLayoutComponent implements OnInit {
     )
   }
 
-
-
   onAction(event: any) {
 
+  }
+
+
+  onShowSettings() {
+    this.displayEditor = true;
+  }
+
+
+  hideEditor() {
+    this.displayEditor = false;
   }
 
 
@@ -64,4 +75,5 @@ export class MainLayoutComponent implements OnInit {
   toggleLanguage() {
     this.uiStore.toggleForeignLanguage();
   }
+
 }

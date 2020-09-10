@@ -22,14 +22,12 @@
       <emp-ng-search-box (searchBoxChange)="search($event)"></emp-ng-search-box>
 
       <div><a (click)="toggleLanguage()">{{currentLanguage}}</a></div>
-      <!-- <div>
-        <i class="fa fa-bell disabled" aria-hidden="true"></i>
-      </div> -->
 
     </div>
 
-    <div></div>
-    <div></div>
+    <div class="right-section">
+      <mat-icon class="material-icons-outlined" (click)="onShowSettings()">account_circle</mat-icon>
+    </div>
 
   </div>
 
@@ -64,4 +62,13 @@
 
   <footer class="footer"></footer>
 
+
 </div>
+
+<emp-ng-modal-window *ngIf="displayEditor"
+                     [config]="{ width:'580px', height: '500px', disableClose: true }"
+                     (modalWindowClose)="hideEditor()">
+  <emp-ng-card title='Change your password' hint="Please fill out the following information" (cardClose)="hideEditor()">
+    <emp-ng-change-password (formEvent)="hideEditor()"></emp-ng-change-password>
+  </emp-ng-card>
+</emp-ng-modal-window>
