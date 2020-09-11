@@ -19,6 +19,8 @@ import { ContractsModule } from './contracts/contracts.module';
 import { DocumentsModule } from './documents/documents.module';
 
 import { KnowledgeBaseModule } from './knowledge-base/knowledge-base.module';
+import { DashboardModule } from './dashboard/dashboard.module';
+import { DataAnalyticsModule } from './data-analytics/data-analytics.module';
 
 import { StepsModule } from './steps/steps.module';
 
@@ -41,8 +43,6 @@ import { ErrorHandler } from '@angular/core';
 import { ExceptionHandler } from './core/general/exception-handler';
 
 
-
-
 const EXCEPTION_HANDLER_PROVIDER =  { provide: ErrorHandler, useClass: ExceptionHandler };
 
 @NgModule({
@@ -60,6 +60,9 @@ const EXCEPTION_HANDLER_PROVIDER =  { provide: ErrorHandler, useClass: Exception
 
     HomeModule,
     KnowledgeBaseModule,
+    DashboardModule,
+    DataAnalyticsModule,
+
     ContractsModule,
     DocumentsModule,
     ProcessesModule,
