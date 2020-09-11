@@ -18,7 +18,16 @@ import { DataObject, DataSource } from '@app/models/data-objects';
 @Injectable()
 export class DataObjectsService {
 
+
   constructor(private http: HttpService) { }
+
+  getGraphData() {
+    const path = `v3/empiria-steps/data-graph`;
+
+    return this.http.get<DataObject[]>(path)
+               .toPromise();
+  }
+
 
   getSubjectDataRequests(subject: Identifiable): Observable<DataObject[]> {
     Assertion.assertValue(subject, 'subject');

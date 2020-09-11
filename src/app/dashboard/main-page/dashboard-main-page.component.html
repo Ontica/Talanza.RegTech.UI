@@ -1,0 +1,40 @@
+<div class="card">
+
+  <div class="card-body" #gridContainer style="display: flex; flex-flow: row nowrap;">
+
+    <div class="tile" matRipple [matRippleTrigger]="trigger">
+      <div class="tile-header">
+        <a #trigger>Tasks per contract</a>
+        <div class="hint">
+          Shows the total tasks per contract
+        </div>
+      </div>
+      <div class="tile-content" style="width:450px; height:450px;">
+        <ejs-chart [primaryXAxis]='primaryXAxis' [primaryYAxis]='primaryYAxis'>
+          <e-series-collection>
+            <e-series [dataSource]='chartData' type='Column' xName='project' yName='totalTasks'></e-series>
+          </e-series-collection>
+        </ejs-chart>
+      </div>
+    </div>
+
+
+    <div class="tile" matRipple [matRippleTrigger]="trigger">
+      <div class="tile-header">
+        <a #trigger>Contract benchmark</a>
+        <div class="hint">
+          Compares the total number of days per contract
+        </div>
+      </div>
+      <div class="tile-content" style="width:450px; height:450px;">
+        <ejs-chart [primaryXAxis]='primaryXAxis' [primaryYAxis]='primaryYAxis'>
+          <e-series-collection>
+            <e-series [dataSource]='chartData' type='Column' xName='project' yName='totalDays'></e-series>
+          </e-series-collection>
+        </ejs-chart>
+      </div>
+    </div>
+
+  </div>
+
+</div>
