@@ -113,7 +113,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
         return this.layout.name === 'Projects';
 
       case 'ProjectsListSelector':
-        return this.layout.name === 'Home';
+        return this.layout.name === 'Home' || this.layout.name === 'Dashboard' || this.layout.name === 'Data';
 
       case 'ResponsiblesListSelector':
         return this.layout.name === 'Home' || this.layout.name === 'Projects';
@@ -122,7 +122,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
         return this.layout.name === 'Home' || this.layout.name === 'Projects';
 
       case 'ThemesListSelector':
-        return this.layout.name !== 'Processes';
+        return this.layout.name !== 'Processes' && this.layout.name !== 'Dashboard' && this.layout.name !== 'Data';
     }
   }
 

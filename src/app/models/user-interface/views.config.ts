@@ -84,6 +84,52 @@ export const ProcessManagementViews: View[] = [
 ];
 
 
+export const DashboardViews: View[] = [
+  {
+    name: 'Dashboard.Main',
+    title: 'Main',
+    url: '/dashboard/main'
+  },
+  {
+    name: 'Dashboard.Compliance',
+    title: 'Compliance',
+    url: '/dashboard/compliance'
+  },
+  {
+    name: 'Dashboard.Financial',
+    title: 'Financial',
+    url: '/dashboard/financial'
+  },
+  {
+    name: 'Dashboard.Operations',
+    title: 'Operations',
+    url: '/dashboard/operations'
+  },
+  {
+    name: 'Dashboard.Engineering',
+    title: 'Engineering',
+    url: '/dashboard/engineering'
+  }
+];
+
+export const DataViews: View[] = [
+  {
+    name: 'Data.Presupuestos',
+    title: 'Presupuestos y costos',
+    url: '/data/main'
+  },
+  {
+    name: 'Data.FMP',
+    title: 'FMP',
+    url: '/data/fmp'
+  },
+  {
+    name: 'Data.CNIH',
+    title: 'CNIH',
+    url: '/data/cnih'
+  }
+];
+
 export const LibraryViews: View[] = [
   {
     name: 'Library.Contracts',

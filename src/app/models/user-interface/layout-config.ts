@@ -11,16 +11,20 @@ import { HomePageViews,
          ProjectManagementViews,
          StepsViews,
          ProcessManagementViews,
+         DashboardViews,
+         DataViews,
          LibraryViews,
          SearchViews} from './views.config';
 
 
-export type LayoutType = 'Home' | 'Projects' | 'Steps'| 'Processes' | 'Library' | 'Search';
+export type LayoutType = 'Home' | 'Projects' | 'Steps'| 'Processes' | 'Dashboard' | 'Data' | 'Library' | 'Search';
 
 
 export const APP_VIEWS: View[] = HomePageViews.concat(ProjectManagementViews,
                                                       StepsViews,
                                                       ProcessManagementViews,
+                                                      DashboardViews,
+                                                      DataViews,
                                                       LibraryViews,
                                                       SearchViews);
 
@@ -48,6 +52,18 @@ export const APP_LAYOUTS: Layout[] = [
     views: ProcessManagementViews,
     hint: 'Regulatory processes',
     defaultTitle: 'Please select a process'
+  },
+  {
+    name: 'Dashboard',
+    views: DashboardViews,
+    hint: 'Dashboard',
+    defaultTitle: 'Dashboards'
+  },
+  {
+    name: 'Data',
+    views: DataViews,
+    hint: 'Data',
+    defaultTitle: 'Data'
   },
   {
     name: 'Library',
