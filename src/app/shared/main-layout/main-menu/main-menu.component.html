@@ -1,9 +1,17 @@
 <div class="nav-bar">
   <ul>
-    <li><a routerLink='/home' routerLinkActive='selected' [routerLinkActiveOptions]="{exact:false}" i18n>HOME</a></li>
+    <li><a routerLink='/home' routerLinkActive='selected' [routerLinkActiveOptions]="{exact:false}" i18n>TASKS</a></li>
     <li><a routerLink='/contract-management' routerLinkActive='selected' [routerLinkActiveOptions]="{exact:false}" i18n>CONTRACT MANAGEMENT</a></li>
-    <li><a routerLink='/steps' routerLinkActive='selected' [routerLinkActiveOptions]="{exact:false}" i18n>REGULATORY PROCESSES</a></li>
+
+    <ng-container *ngIf='reportingTools | async'>
+      <li><a routerLink='/dashboard' routerLinkActive='selected' [routerLinkActiveOptions]="{exact:false}" i18n>DASHBOARDS</a></li>
+      <li><a routerLink='/data' routerLinkActive='selected' [routerLinkActiveOptions]="{exact:false}" i18n>DATA</a></li>
+    </ng-container>
+
+    <li><a routerLink='/regulatory-processes' routerLinkActive='selected' [routerLinkActiveOptions]="{exact:false}" i18n>REGULATORY PROCESSES</a></li>
+
+    <!-- <li><a routerLink='/steps' routerLinkActive='selected' [routerLinkActiveOptions]="{exact:false}" i18n>RP 3.0</a></li> -->
+
     <li><a routerLink='/library' routerLinkActive='selected' [routerLinkActiveOptions]="{exact:false}" i18n>LIBRARY</a></li>
-    <li><a routerLink='/regulatory-processes' routerLinkActive='selected' [routerLinkActiveOptions]="{exact:false}" i18n>RP OLD</a></li>
   </ul>
 </div>

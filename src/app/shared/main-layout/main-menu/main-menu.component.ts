@@ -6,6 +6,9 @@
  */
 
 import { Component } from '@angular/core';
+import { Observable, of } from 'rxjs';
+
+import { UserInterfaceStore } from '@app/store/ui.store';
 
 
 @Component({
@@ -13,4 +16,12 @@ import { Component } from '@angular/core';
   templateUrl: './main-menu.component.html',
   styleUrls: ['./main-menu.component.scss']
 })
-export class MainMenuComponent { }
+export class MainMenuComponent {
+
+  reportingTools: Observable<boolean> = of(false);
+
+  constructor(uistore: UserInterfaceStore) {
+    this.reportingTools = uistore.reportingTools;
+  }
+
+}

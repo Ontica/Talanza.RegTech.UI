@@ -22,7 +22,7 @@ export class ApplicationSettings {
     return this.get<string>('HTTP_API_BASE_ADDRESS');
   }
 
-  private get<T>(key: string): T {
+  get<T>(key: string): T {
     const index = this.settingsArray.findIndex((x) => x.key === key);
 
     if (index !== -1) {

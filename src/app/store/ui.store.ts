@@ -8,7 +8,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 
-import { Assertion, Exception } from '@app/core';
+import { Assertion, Exception, SessionService } from '@app/core';
 
 import {
   APP_LAYOUTS,
@@ -34,12 +34,16 @@ export class UserInterfaceStore {
   private _navigationHeader:
                 BehaviorSubject<NavigationHeader> = new BehaviorSubject(DefaultNavigationHeader);
 
-  private _valuesMap = new Map<string, BehaviorSubject<any>>();
+  private _reportingTools = new BehaviorSubject<boolean>(false);
 
   private _useForeignLanguage = new BehaviorSubject<boolean>(false);
 
+  private _valuesMap = new Map<string, BehaviorSubject<any>>();
 
-  constructor() { }
+
+  constructor(private service: SessionService) {
+    this.loadApplicationSettings();
+  }
 
 
   // select methods
@@ -57,6 +61,11 @@ export class UserInterfaceStore {
 
   get navigationHeader(): Observable<NavigationHeader> {
     return this._navigationHeader.asObservable();
+  }
+
+
+  get reportingTools(): Observable<boolean> {
+    return this._reportingTools.asObservable();
   }
 
 
@@ -154,6 +163,14 @@ export class UserInterfaceStore {
       }
     }
     throw Assertion.assertNoReachThisCode(`Unregistered view ${view.name}.`);
+  }
+
+
+  private loadApplicationSettings() {
+    this.service.getSettings()
+      .then(
+        (x) => this._reportingTools.next(x.get<boolean>('REPORTING_TOOLS'))
+      );
   }
 
 
