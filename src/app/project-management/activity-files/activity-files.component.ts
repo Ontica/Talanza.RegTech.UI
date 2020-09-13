@@ -6,6 +6,7 @@
  */
 
 import { Component, Input, OnChanges } from '@angular/core';
+import { Observable, of } from 'rxjs';
 
 import { EventInfo } from '@app/core/data-types';
 
@@ -14,6 +15,7 @@ import { EmptyActivity, ProjectItem } from '@app/models/project-management';
 import { MediaFile, FileToUpload, EmptyMediaFile } from '@app/models/knowledge-base';
 import { DataObject } from '@app/models/data-objects';
 
+import { UserInterfaceStore } from '@app/store/ui.store';
 import { FileStore } from '@app/store/file.store';
 
 import { ProjectFilesService } from '@app/services/project-management';
@@ -26,7 +28,6 @@ import { ProjectFilesService } from '@app/services/project-management';
 })
 export class ActivityFilesComponent implements OnChanges {
 
-
   @Input() projectItem: ProjectItem = EmptyActivity;
 
   filesList: MediaFile[] = [];
@@ -37,11 +38,14 @@ export class ActivityFilesComponent implements OnChanges {
   displayDataObjectEditor = false;
   displayFileEditor = false;
 
+  reportingTools: Observable<boolean> = of(false);
 
   uploading = false;
 
   constructor(private store: FileStore,
-              private service: ProjectFilesService) { }
+              private service: ProjectFilesService, uistore: UserInterfaceStore) {
+    this.reportingTools = uistore.reportingTools;
+  }
 
 
   ngOnChanges() {

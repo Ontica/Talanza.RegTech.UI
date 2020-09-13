@@ -1,18 +1,22 @@
 <div class="form">
 
-  <div class="form-section-title">
-    Forms and documents
+  <div *ngIf="reportingTools | async">
+
+    <div class="form-section-title">
+      Forms and documents
+    </div>
+
+    <div>
+      <emp-steps-activity-data-objects-list
+        [projectItem]="projectItem"
+        (listEvent)="onDataObjectsListEvent($event)">
+      </emp-steps-activity-data-objects-list>
+    </div>
+
   </div>
 
-  <div>
-    <emp-steps-activity-data-objects-list
-      [projectItem]="projectItem"
-      (listEvent)="onDataObjectsListEvent($event)">
-    </emp-steps-activity-data-objects-list>
-  </div>
 
-
-  <div class="form-section-title" style="margin-top: 48px">
+  <div *ngIf="reportingTools | async" class="form-section-title" style="margin-top: 48px">
     Additional files
   </div>
 
