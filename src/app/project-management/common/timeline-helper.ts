@@ -108,10 +108,6 @@ export class TimelineHelper {
       return use === 'border' ? COLORS.gray : COLORS.empty;
     }
 
-    if (!activity.trafficLight || activity.trafficLight.type === 'NA') {
-      return COLORS.empty;
-    }
-
     const remainingDays = DateStringLibrary.daysBetween(DateStringLibrary.today(), date);
 
     if (use === 'title') {
@@ -120,10 +116,10 @@ export class TimelineHelper {
 
     let trafficLightDaysFactor = 1;
 
-    if (activity.trafficLight.type === 'CalendarDays') {
+
+    if (activity.trafficLight && activity.trafficLight.type === 'CalendarDays') {
       trafficLightDaysFactor = (activity.trafficLight?.days || DEFAULT_BOUNDS.red_bound) / DEFAULT_BOUNDS.red_bound;
     }
-
 
     if (remainingDays <= DEFAULT_BOUNDS.red_bound * trafficLightDaysFactor) {
       return COLORS.red;
