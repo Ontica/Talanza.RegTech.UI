@@ -6,9 +6,6 @@
 
     <table class="form-section">
       <tr>
-        <td class="form-section-title" colspan="2" i18n>Associated data source</td>
-      </tr>
-      <tr>
         <td i18n>Search:</td>
         <td>
           <input type="text" class="text-box" style="width:380px" formControlName="keywords" (change)="setFilter()">
@@ -19,10 +16,10 @@
     <ejs-grid [dataSource]='filteredDataSources' (rowSelected)="selectDataSource($event.data.uid)"
               allowFiltering='true' allowPaging='true'
               [filterSettings]='{ type: "CheckBox" }' enableHover='true'
-              [pageSettings]='{ pageCount: 3, pageSize: 10 }' allowTextWrap='true' rowHeight='50' height='320' width='780'>
+              [pageSettings]='{ pageCount: 3, pageSize: 10 }' allowTextWrap='true' rowHeight='50' height='320' width='740'>
       <e-columns>
-        <e-column field='name' headerText='Data source' width='500' [allowFiltering]="false"></e-column>
-        <e-column field='family' headerText='Family'></e-column>
+        <e-column field='name' headerText='Data source' width='480' [allowFiltering]="false"></e-column>
+        <e-column field='family' headerText='Family' width='220'></e-column>
       </e-columns>
     </ejs-grid>
 
