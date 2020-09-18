@@ -303,8 +303,8 @@ export class ActivityTreeComponent implements OnChanges {
 
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    dialogConfig.height = '400px',
-    dialogConfig.width = '700px',
+    dialogConfig.height = '320px',
+    dialogConfig.width = '680px',
 
     this.dialog.open(ExportActivitiesDialogComponent, dialogConfig);
   }

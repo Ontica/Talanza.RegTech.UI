@@ -15,8 +15,6 @@ import { Contact, Empty } from '@app/models/core';
 
 import { Activity, Contract, Project, Stage, ProjectProcess } from '@app/models/project-management';
 
-import { ColoredTag } from '@app/models/user-interface';
-
 
 export class ProjectModel {
 
@@ -90,6 +88,11 @@ export class ProjectStore {
 
   get themes(): Observable<string[]> {
     return this._themes.asObservable();
+  }
+
+
+  exportToExcel(project: Project, branch?: Activity): Promise<string> {
+    return this.projectService.exportToExcel(project, branch);
   }
 
 
@@ -173,8 +176,7 @@ export class ProjectStore {
 
 
   insertActivity(project: Project,
-    newActivity: { name: string, position: number }): Promise<Activity> {
-
+                 newActivity: { name: string, position: number }): Promise<Activity> {
     return this.projectService.insertActivity(project, newActivity)
       .toPromise()
       .then(x => {

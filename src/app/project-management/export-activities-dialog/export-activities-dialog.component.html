@@ -1,61 +1,30 @@
 <h4 mat-dialog-title i18n>Export {{project.name}} processes</h4>
 
-<mat-dialog-content [formGroup]="form">
+<mat-dialog-content>
 
-  <div class="form-section column nowrap">
-    <div i18n>Processes in this contract:</div>
+  <div class="form">
+    <div i18n>Please select a process to export to Excel:</div>
+
     <div>
-      <select class="select-box" #process formControlName="selectedProcessUID">
-        <option value="" i18n>Export all processes</option>
-        <option *ngFor="let process of processesList"
-                [value]="process.uid">{{'-'.repeat(process.startActivity.level)}} {{process.name}}</option>
+      <select class="select-box" #activity>
+        <option value="" i18n>( Select a process to export )</option>
+        <option value="export-all" i18n>Export all processes</option>
+        <option *ngFor="let activity of activities"
+                [value]="activity.uid">{{'-'.repeat(activity.level)}} {{activity.name}}</option>
       </select>
-      <button class="btn" [disabled]="!this.form.valid" (click)="loadProcessChangesList(process.value)" i18n>Show</button>
     </div>
-  </div>
 
-  <div class="what-if-section">
-
-    <div *ngFor="let stateChange of (whatIfResult | async)?.stateChanges"
-         class="activity-row"
-         [class.selected-activity]="isSelected(stateChange)">
-
-      <div class="activity-container"
-           [style.border-left-color]="timelineHelper.getTimelineColor(stateChange, stateChange.deadline, 'border')"
-           [style.padding-left.pt]="stateChange.level * 14">
-
-          <div class="activity-name">
-            <a [class.blink]="timelineHelper.getTimelineColor(stateChange, stateChange.deadline, 'title')"
-               [style.color]="timelineHelper.getTimelineColor(stateChange, stateChange.deadline, 'title')">
-                {{stateChange.name}}
-            </a>
-          </div>
-
-          <div class="activity-status">
-              <div class="activity-theme" i18n>
-                {{stateChange.theme || 'No topic'}} | Match result: {{ stateChange.matchResult }}
-              </div>
-
-              <div class="right-column nowrap"
-                   [style.color]="timelineHelper.getTimelineColor(stateChange, stateChange.deadline)">
-                <div i18n>Deadline:</div>
-                <div i18n>
-                  {{stateChange.currentDeadline | date:('dd/LLL/yyyy')}}
-                </div>
-              </div>
-          </div>
-
-      </div>
-
+    <div style="margin-top:40px">
+      <button class="btn btn-margin-right" [class.btn-action]="activity.value" [disabled]="!activity.value"
+              (click)="export(activity.value)" i18n>Export</button>
+      &nbsp; &nbsp; &nbsp;
+      <a *ngIf="excelFileUrl" [href]="excelFileUrl">The Excel file is ready. Click to download it.</a>
     </div>
 
   </div>
 
-</mat-dialog-content>
+ </mat-dialog-content>
 
 <mat-dialog-actions>
-  <button class="btn-action btn-margin-right" [disabled]="!this.form.valid"
-          (click)="mergeProcessChanges(process.value)" i18n>Export</button>
-
   <button class="btn right" (click)="close()" i18n>Close</button>
 </mat-dialog-actions>

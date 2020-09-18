@@ -12,10 +12,9 @@ import { catchError } from 'rxjs/operators';
 import { Assertion, CoreService } from '@app/core';
 
 import { Activity, Contract, Project,
-         ProjectProcess, Resource, Stage } from '@app/models/project-management';
+         ProjectProcess, Stage } from '@app/models/project-management';
 
 import { Contact } from '@app/models/core';
-import { ColoredTag } from '@app/models/user-interface';
 
 
 enum Errors {
@@ -57,6 +56,16 @@ export class ProjectService {
   constructor(private core: CoreService) { }
 
 
+  exportToExcel(project: Project, branch?: Activity): Promise<string> {
+    Assertion.assertValue(project, 'project');
+
+    const path = `v3/empiria-steps/projects/${project.uid}/export-to-excel/${branch?.uid || ''}`;
+
+    return this.core.http.get<string>(path)
+            .toPromise();
+  }
+
+
   getAllActivities(): Observable<Activity[]> {
     const path = `v1/project-management/activities/all-activities`;
 
@@ -92,16 +101,7 @@ export class ProjectService {
   }
 
 
-  // getAllResponsiblesList(): Observable<Contact[]> {
-  //   const path = `v1/project-management/projects/166871D7-5CD7-40C7-AA47-618DB5E643B8/responsibles`;
-
-  //   return this.core.http.get<Contact[]>(path);
-  // }
-
-
   getResponsiblesList(project: Project): Observable<Contact[]> {
-    // Assertion.assertValue(project, 'project');
-
     const path = `v1/project-management/projects/166871D7-5CD7-40C7-AA47-618DB5E643B8/responsibles`;
 
     return this.core.http.get<Contact[]>(path);
