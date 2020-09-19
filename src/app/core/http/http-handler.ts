@@ -67,7 +67,7 @@ export class HttpHandler {
 
     const payloadDataField = this.getPayloadDataField(path, callerOptions, service);
 
-    const requestOptions = DefaultHttpClientOptions();
+    const requestOptions = Object.assign({}, DefaultHttpClientOptions(), callerOptions);
 
     if (body) {
       requestOptions.body = body;
@@ -81,7 +81,7 @@ export class HttpHandler {
 
         requestOptions.headers = headers;
 
-        return this.http.request(HttpMethod[method].toString(), url, callerOptions || requestOptions)
+        return this.http.request(HttpMethod[method].toString(), url, requestOptions)
                    .pipe(
                       map(response => (payloadDataField ? response.body[payloadDataField] : response) as T)
                     );
