@@ -25,6 +25,7 @@ export class ExportActivitiesDialogComponent implements OnInit {
   activities: Activity[] = [];
 
   excelFileUrl = '';
+  working = false;
 
   constructor(private projectStore: ProjectStore,
               private dialogRef: MatDialogRef<ExportActivitiesDialogComponent>,
@@ -35,7 +36,7 @@ export class ExportActivitiesDialogComponent implements OnInit {
     this.projectStore.selectedProject().subscribe (
       x => {
         this.project = x.project;
-        this.activities = x.activities
+        this.activities = x.activities.filter((x) => x.level <= 3);
       }
     );
   }
@@ -46,14 +47,21 @@ export class ExportActivitiesDialogComponent implements OnInit {
 
 
   export(selectedBranchUID: string) {
+    this.excelFileUrl = '';
+
     let branch: Activity = undefined;
 
     if (selectedBranchUID !== 'export-all') {
       branch = this.activities.find((x) => x.uid === selectedBranchUID);
     }
 
+    this.working = true;
+
     this.projectStore.exportToExcel(this.project, branch)
-                .then(x => this.excelFileUrl = x);
+      .then((x) => {
+          this.excelFileUrl = x;
+          this.working = false;
+      });
   }
 
 }
