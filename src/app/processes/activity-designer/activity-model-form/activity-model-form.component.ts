@@ -315,7 +315,7 @@ export class ActivityModelFormComponent extends AbstractForm implements OnInit, 
       return null;
     }
 
-    var periodicityRule = {
+    const periodicityRule = {
       notes: this.form.get('periodNotes').value,
       each: {
         value: this.form.get('periodValue').value,
@@ -327,7 +327,7 @@ export class ActivityModelFormComponent extends AbstractForm implements OnInit, 
       return periodicityRule;
     }
 
-    var dueOn = {
+    let dueOn = {
       type: this.form.get('periodDueOn').value
     };
 
@@ -383,11 +383,11 @@ export class ActivityModelFormComponent extends AbstractForm implements OnInit, 
       return false;
     }
 
-    if (periodDueOn === '' && controlName != 'periodDueOn') {
+    if (periodDueOn === '' && controlName !== 'periodDueOn') {
       return false;
     }
 
-    switch(controlName)  {
+    switch (controlName)  {
       case 'periodDueOn':
         return periodUnit !== 'CalendarDays';
 

@@ -29,9 +29,9 @@ export class DashboardMainPageComponent implements OnInit, OnDestroy {
 
   private subs: Subscription;
 
-  public primaryXAxis: Object;
-  public primaryYAxis: Object;
-  public chartData: Object[];
+  primaryXAxis: Object;
+  primaryYAxis: Object;
+  chartData: Object[];
 
 
   ngOnInit() {

@@ -5,7 +5,7 @@
  * See LICENSE.txt in the project root for complete license information.
  */
 
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { DataObjectDesignerComponent } from './data-object-designer.component';
 
@@ -13,7 +13,7 @@ describe('DataObjectDesignerComponent', () => {
   let component: DataObjectDesignerComponent;
   let fixture: ComponentFixture<DataObjectDesignerComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ DataObjectDesignerComponent ]
     })

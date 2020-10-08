@@ -34,9 +34,9 @@ export class ExportActivitiesDialogComponent implements OnInit {
 
   ngOnInit() {
     this.projectStore.selectedProject().subscribe (
-      x => {
+      (x) => {
         this.project = x.project;
-        this.activities = x.activities.filter((x) => x.level <= 3);
+        this.activities = x.activities.filter((y) => y.level <= 3);
       }
     );
   }
@@ -49,7 +49,7 @@ export class ExportActivitiesDialogComponent implements OnInit {
   export(selectedBranchUID: string) {
     this.excelFileUrl = '';
 
-    let branch: Activity = undefined;
+    let branch: Activity;
 
     if (selectedBranchUID !== 'export-all') {
       branch = this.activities.find((x) => x.uid === selectedBranchUID);

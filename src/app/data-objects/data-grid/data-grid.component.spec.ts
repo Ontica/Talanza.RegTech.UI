@@ -5,7 +5,7 @@
  * See LICENSE.txt in the project root for complete license information.
  */
 
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { DataGridComponent } from './data-grid.component';
 
@@ -14,7 +14,7 @@ describe('DataGridComponent', () => {
   let component: DataGridComponent;
   let fixture: ComponentFixture<DataGridComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ DataGridComponent ]
     })

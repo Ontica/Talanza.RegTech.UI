@@ -15,7 +15,7 @@ import { DataFormService } from '@app/services/data-objects';
 @Component({
   selector: 'emp-data-file-generator',
   templateUrl: './data-file-generator.component.html',
-  styleUrls: ["../../../styles/general-styles.scss"],
+  styleUrls: ['../../../styles/general-styles.scss'],
 })
 export class DataFileGeneratorComponent implements OnInit {
 
@@ -82,7 +82,7 @@ export class DataFileGeneratorComponent implements OnInit {
   }
 
   showUploadedFile() {
-    return this.dataObject.uploadedFileUrl
+    return this.dataObject.uploadedFileUrl;
   }
 
 }

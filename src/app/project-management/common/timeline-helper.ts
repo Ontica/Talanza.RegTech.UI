@@ -118,7 +118,8 @@ export class TimelineHelper {
 
 
     if (activity.trafficLight && activity.trafficLight.type === 'CalendarDays') {
-      trafficLightDaysFactor = (activity.trafficLight?.days || DEFAULT_BOUNDS.red_bound) / DEFAULT_BOUNDS.red_bound;
+      trafficLightDaysFactor =
+          (activity.trafficLight?.days || DEFAULT_BOUNDS.red_bound) / DEFAULT_BOUNDS.red_bound;
     }
 
     if (remainingDays <= DEFAULT_BOUNDS.red_bound * trafficLightDaysFactor) {

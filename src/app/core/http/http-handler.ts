@@ -8,7 +8,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, forkJoin } from 'rxjs';
-import { map, flatMap } from 'rxjs/operators';
+import { map, mergeMap } from 'rxjs/operators';
 
 import { SessionService } from '../general/session.service';
 
@@ -77,7 +77,7 @@ export class HttpHandler {
       this.getUrl(path, service),
       this.getHeaders(path, service)
     ).pipe(
-      flatMap(([url, headers]) => {
+      mergeMap(([url, headers]) => {
 
         requestOptions.headers = headers;
 

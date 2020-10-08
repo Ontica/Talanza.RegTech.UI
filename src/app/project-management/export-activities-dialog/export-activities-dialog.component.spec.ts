@@ -5,7 +5,7 @@
  * See LICENSE.txt in the project root for complete license information.
  */
 
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { ExportActivitiesDialogComponent } from './export-activities-dialog.component';
 
@@ -14,7 +14,7 @@ describe('ExportActivitiesDialogComponent', () => {
   let component: ExportActivitiesDialogComponent;
   let fixture: ComponentFixture<ExportActivitiesDialogComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ ExportActivitiesDialogComponent ]
     })

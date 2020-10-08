@@ -79,12 +79,13 @@ export class GanttChartComponent implements OnChanges {
     return this.activitySelect.emit(activity);
   }
 
+
   private loadGanttTasks() {
     this.ganttService.getActivitiesTree(this.project.project)
                      .toPromise()
-                     .then(x => {
+                     .then((x) => {
                        this.tasks = FilterHelper.applyFilter(this.filter, x);
-                       this.tasks = this.tasks.map(x => this.setForeignLanguageText(x));
+                       this.tasks = this.tasks.map((y) => this.setForeignLanguageText(y));
                      });
   }
 

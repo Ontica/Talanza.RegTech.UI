@@ -89,18 +89,23 @@ export class FilesGridComponent implements OnInit, OnDestroy {
 
 
   fileIcon(file: ProjectItemFile) {
-    switch(file.mediaFile.mediaType) {
+    switch (file.mediaFile.mediaType) {
       case 'application/pdf':
         return 'fa fa-file-pdf-o tile-icon';
+
       case 'application/vnd.ms-excel':
       case 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet':
         return 'fa fa-file-excel-o tile-icon';
+
       case 'application/vnd.openxmlformats-officedocument.wordprocessingml.document':
         return 'fa fa-file-word-o tile-icon';
+
       case 'application/x-zip-compressed':
         return 'fa fa-file-archive-o tile-icon';
+
       default:
         return 'fa fa-file-o tile-icon';
+
     }
   }
 

@@ -8,7 +8,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { Assertion, CoreService } from '@app/core';
+import { Assertion, HttpService } from '@app/core';
 
 import { MediaMetadata, MediaFile } from '@app/models/knowledge-base';
 
@@ -19,13 +19,13 @@ import { ProjectItem, Project, ProjectItemFile } from '@app/models/project-manag
 export class ProjectFilesService {
 
 
-  constructor(private core: CoreService) { }
+  constructor(private http: HttpService) { }
 
 
   getAllFiles(): Observable<ProjectItemFile[]> {
     const path = `v1/project-management/files`;
 
-    return this.core.http.get<ProjectItemFile[]>(path);
+    return this.http.get<ProjectItemFile[]>(path);
   }
 
 
@@ -34,7 +34,7 @@ export class ProjectFilesService {
 
     const path = `v1/project-management/projects/${project.uid}/files`;
 
-    return this.core.http.get<ProjectItemFile[]>(path);
+    return this.http.get<ProjectItemFile[]>(path);
   }
 
 
@@ -43,14 +43,14 @@ export class ProjectFilesService {
 
     const path = `v1/project-management/project-items/${projectItem.uid}/files`;
 
-    return this.core.http.get<MediaFile[]>(path);
+    return this.http.get<MediaFile[]>(path);
   }
 
 
   deleteProjectItemFile(projectItem: ProjectItem, mediaFile: MediaFile): Observable<void> {
     const path = `v1/project-management/project-items/${projectItem.uid}/files/${mediaFile.uid}`;
 
-    return this.core.http.delete<void>(path);
+    return this.http.delete<void>(path);
   }
 
 
@@ -73,11 +73,10 @@ export class ProjectFilesService {
     formData.append('tags', metadata.tags);
     formData.append('topics', metadata.topics);
 
-    return this.core.http.post<MediaFile>(path, formData, {
+    return this.http.post<MediaFile>(path, formData, {
       reportProgress: true,
       observe: 'events'
     });
   }
-
 
 }

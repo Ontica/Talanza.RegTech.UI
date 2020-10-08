@@ -19,7 +19,7 @@ import { DataObjectsService } from '@app/services/data-objects';
 @Component({
   selector: 'emp-steps-activity-data-objects-list',
   templateUrl: './activity-data-objects-list.component.html',
-  styleUrls: ["../../../styles/list.scss"]
+  styleUrls: ['../../../styles/list.scss']
 })
 export class ActivityDataObjectsListComponent implements OnChanges {
 
@@ -27,7 +27,7 @@ export class ActivityDataObjectsListComponent implements OnChanges {
 
   @Output() listEvent = new EventEmitter<EventInfo>();
 
-  dataObjects: DataObject[] = []
+  dataObjects: DataObject[] = [];
 
   constructor(private service: DataObjectsService) { }
 
@@ -43,7 +43,7 @@ export class ActivityDataObjectsListComponent implements OnChanges {
       payload: {
         dataObject
       }
-    }
+    };
 
     this.listEvent.emit(event);
   }

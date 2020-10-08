@@ -30,7 +30,7 @@ export class StepsMainPageComponent implements OnInit, OnDestroy {
   currentView: View;
   displayEditor = false;
 
-  processList: Process[] = []
+  processList: Process[] = [];
 
   selectedActivityTemplate = EmptyActivityTemplate;
 

@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { DataFormElementComponent } from './data-form-element.component';
 
@@ -6,7 +6,7 @@ describe('DataFormElementComponent', () => {
   let component: DataFormElementComponent;
   let fixture: ComponentFixture<DataFormElementComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ DataFormElementComponent ]
     })

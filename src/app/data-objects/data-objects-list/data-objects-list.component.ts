@@ -15,7 +15,7 @@ import { DataObject } from '@app/models/data-objects';
 @Component({
   selector: 'emp-data-objects-list',
   templateUrl: './data-objects-list.component.html',
-  styleUrls: ["../../../styles/list.scss"]
+  styleUrls: ['../../../styles/list.scss']
 })
 export class DataObjectsListComponent {
 

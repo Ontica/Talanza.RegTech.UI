@@ -5,7 +5,7 @@
  * See LICENSE.txt in the project root for complete license information.
  */
 
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { DataRequesterComponent } from './data-requester.component';
 
@@ -14,7 +14,7 @@ describe('DataRequesterComponent', () => {
   let component: DataRequesterComponent;
   let fixture: ComponentFixture<DataRequesterComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ DataRequesterComponent ]
     })

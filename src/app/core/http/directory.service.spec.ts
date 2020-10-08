@@ -1,4 +1,4 @@
-import { TestBed, inject, async } from '@angular/core/testing';
+import { TestBed, inject, waitForAsync } from '@angular/core/testing';
 import { HttpClientModule } from '@angular/common/http';
 
 import { DirectoryService } from './directory.service';
@@ -13,7 +13,7 @@ describe('DirectoryService', () => {
     });
   });
 
-  it(`should return undefined when it's called using a full url`, async(
+  it(`should return undefined when it's called using a full url`, waitForAsync(
     inject([DirectoryService], (directory: DirectoryService) => {
       directory.getService('https://no-domain.io/tests/collection')
                .subscribe((value) => {
@@ -21,7 +21,7 @@ describe('DirectoryService', () => {
                });
     })));
 
-  it(`should return a GET service using the service's UID`, async(
+  it(`should return a GET service using the service's UID`, waitForAsync(
     inject([DirectoryService], (directory: DirectoryService) => {
       directory.getService('System.GetLicense')
                .subscribe((value) => {
@@ -31,7 +31,7 @@ describe('DirectoryService', () => {
 
     })));
 
-  it(`should return a POST service using the service's UID`, async(
+  it(`should return a POST service using the service's UID`, waitForAsync(
     inject([DirectoryService], (directory: DirectoryService) => {
       directory.getService('Security.Login')
                .subscribe((value) => {
@@ -41,7 +41,7 @@ describe('DirectoryService', () => {
                });
     })));
 
-  it(`should return a GET service using the service's path`, async(
+  it(`should return a GET service using the service's path`, waitForAsync(
     inject([DirectoryService], (directory: DirectoryService) => {
       directory.getService('v1/system/license')
                .subscribe((value) => {
@@ -51,7 +51,7 @@ describe('DirectoryService', () => {
                });
     })));
 
-  it(`should return a POST service using the service's path`, async(
+  it(`should return a POST service using the service's path`, waitForAsync(
     inject([DirectoryService], (directory: DirectoryService) => {
       directory.getService('v1/security/login')
                .subscribe((value) => {
@@ -63,7 +63,7 @@ describe('DirectoryService', () => {
 
     })));
 
-  it(`should return an ambiguous GET service using the service's path and HttpMethod`, async(
+  it(`should return an ambiguous GET service using the service's path and HttpMethod`, waitForAsync(
     inject([DirectoryService], (directory: DirectoryService) => {
       directory.getService('v1/tests/collection', HttpMethod.GET)
                .subscribe((value) => {
@@ -75,7 +75,7 @@ describe('DirectoryService', () => {
 
     })));
 
-  it(`should return an ambiguous POST service using the service's path and HttpMethod`, async(
+  it(`should return an ambiguous POST service using the service's path and HttpMethod`, waitForAsync(
     inject([DirectoryService], (directory: DirectoryService) => {
       directory.getService('v1/tests/collection', HttpMethod.POST)
                .subscribe((value) => {
@@ -87,7 +87,7 @@ describe('DirectoryService', () => {
 
     })));
 
-  it(`should return a GET service with parameters using the service's uid`, async(
+  it(`should return a GET service with parameters using the service's uid`, waitForAsync(
     inject([DirectoryService], (directory: DirectoryService) => {
       directory.getService('Tests.GetCollectionItem')
                .subscribe((value) => {

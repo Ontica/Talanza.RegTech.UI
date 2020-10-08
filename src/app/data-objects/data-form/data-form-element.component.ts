@@ -14,7 +14,7 @@ import { DataFormField } from '@app/models/data-objects';
 @Component({
   selector: 'emp-data-form-element',
   templateUrl: './data-form-element.component.html',
-  styleUrls: ["../../../styles/form.scss"]
+  styleUrls: ['../../../styles/form.scss']
 })
 export class DataFormElementComponent {
 

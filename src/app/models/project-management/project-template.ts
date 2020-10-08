@@ -17,13 +17,14 @@ export interface PeriodicityRule {
   each: {
     unit: string;
     value?: number | '';
-  }
+  };
+
   dueOn?: {
     type: string;
     month?: number | '';
     day?: number | '';
     dayOfWeek?: number | '';
-  }
+  };
 
   notes: string;
 }

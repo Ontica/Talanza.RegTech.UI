@@ -65,7 +65,7 @@ export class DataGridComponent implements OnChanges {
       return;
     }
 
-    if (!confirm("Delete the selected record?")) {
+    if (!confirm('Delete the selected record?')) {
       return;
     }
 
@@ -123,7 +123,8 @@ export class DataGridComponent implements OnChanges {
         this.dataSource = x;
 
         if (!isEmpty(this.currentRow)) {
-          const findResult = this.dataSource.find(x => x.uid == this.currentRow.uid);
+          const findResult = this.dataSource.find((y) => y.uid === this.currentRow.uid);
+
           if (findResult) {
             this.selectRow(findResult);
           }

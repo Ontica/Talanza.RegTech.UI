@@ -21,7 +21,7 @@ import { FormGroupTransformer } from './form-group-transformer';
 @Component({
   selector: 'emp-data-form',
   templateUrl: './data-form.component.html',
-  styleUrls: ["../../../styles/form.scss"],
+  styleUrls: ['../../../styles/form.scss'],
   providers: [ FormGroupTransformer ]
 })
 export class DataFormComponent implements OnInit, OnChanges {
@@ -111,7 +111,7 @@ export class DataFormComponent implements OnInit, OnChanges {
     } else if (this.data !== null && !this.data.uid) {
       this.actionButtonLabel = 'Add clone';
     } else if (this.data !== null && this.data.uid) {
-      this.actionButtonLabel = 'Save changes'
+      this.actionButtonLabel = 'Save changes';
     }
   }
 

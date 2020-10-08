@@ -48,7 +48,7 @@ export class MainLayoutComponent implements OnInit {
           this.currentLanguage = 'Spanish';
         }
       }
-    )
+    );
   }
 
   onAction(event: any) {

@@ -69,7 +69,7 @@ export class StepsListComponent implements OnChanges {
 
 
   activityDisplayMode(activity: Activity): CollapsableTreeNodeDisplayMode {
-    return "collapsed";
+    return 'collapsed';
 
     // return this.collapsableTreeHandler.nodeDisplayMode(activity);
   }

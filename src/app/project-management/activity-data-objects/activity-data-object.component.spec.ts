@@ -5,7 +5,7 @@
  * See LICENSE.txt in the project root for complete license information.
  */
 
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { ActivityDataObjectComponent } from './activity-data-object.component';
 
@@ -14,7 +14,7 @@ describe('ActivityDataObjectComponent', () => {
   let component: ActivityDataObjectComponent;
   let fixture: ComponentFixture<ActivityDataObjectComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ ActivityDataObjectComponent ]
     })

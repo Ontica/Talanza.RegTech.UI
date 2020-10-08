@@ -21,7 +21,7 @@ import { DataObjectsService } from '@app/services/data-objects';
 @Component({
   selector: 'emp-steps-step-data-configuration',
   templateUrl: './step-data-configuration.component.html',
-  styleUrls: ["../../../styles/general-styles.scss"]
+  styleUrls: ['../../../styles/general-styles.scss']
 })
 export class StepDataConfigurationComponent implements OnChanges {
 
@@ -35,7 +35,7 @@ export class StepDataConfigurationComponent implements OnChanges {
 
   selectedDataObject: DataObject;
 
-  constructor(private service: DataObjectsService) {};
+  constructor(private service: DataObjectsService) {}
 
 
   ngOnChanges() {

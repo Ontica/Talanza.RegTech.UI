@@ -32,7 +32,8 @@ export class Exception extends Error {
     } else if (sourceErr instanceof HttpErrorResponse) {
             throw sourceErr;
 
-      //  return new Exception(defaultMessage || sourceErr.error?.message || sourceErr.message, sourceErr.error);
+      //  return new Exception(defaultMessage || sourceErr.error?.message ||
+      //                       sourceErr.message, sourceErr.error);
 
     } else if (sourceErr instanceof Exception) {
       return new Exception(defaultMessage || sourceErr.message, sourceErr);

@@ -5,7 +5,7 @@
  * See LICENSE.txt in the project root for complete license information.
  */
 
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { DataFileGeneratorComponent } from './data-file-generator.component';
 
@@ -14,7 +14,7 @@ describe('DataFileGeneratorComponent', () => {
   let component: DataFileGeneratorComponent;
   let fixture: ComponentFixture<DataFileGeneratorComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ DataFileGeneratorComponent ]
     })

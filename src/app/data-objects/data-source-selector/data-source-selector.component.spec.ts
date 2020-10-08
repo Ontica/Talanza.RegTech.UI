@@ -5,7 +5,7 @@
  * See LICENSE.txt in the project root for complete license information.
  */
 
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { DataSourceSelectorComponent } from './data-source-selector.component';
 
@@ -14,7 +14,7 @@ describe('DataSourceSelectorComponent', () => {
   let component: DataSourceSelectorComponent;
   let fixture: ComponentFixture<DataSourceSelectorComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ DataSourceSelectorComponent ]
     })

@@ -31,7 +31,7 @@ export interface DataObject {
   uid: string;
   type: string;
   name: string;
-  description : string;
+  description: string;
   entity: Identifiable;
   subject: Identifiable;
   action: string;
@@ -39,6 +39,6 @@ export interface DataObject {
   autofillFileUrl?: string;
   uploadedFileUrl?: string;
   templateUrl?: string;
-  status : string;
+  status: string;
   decorator: string;
 }

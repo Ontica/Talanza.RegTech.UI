@@ -63,9 +63,9 @@ export class ChangePasswordComponent {
 
     if (control === 'new') {
       if (value.length < 8 ) {
-        return "Must be at least 8 characters in length.";
+        return 'Must be at least 8 characters in length.';
       } else if (this.isEqualsThanCurrent()) {
-        return "Current and new password are the same.";
+        return 'Current and new password are the same.';
       }
     }
 
