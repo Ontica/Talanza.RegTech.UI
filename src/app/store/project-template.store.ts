@@ -104,6 +104,11 @@ export class ProjectTemplateStore {
   }
 
 
+  exportToExcel(project: ProjectTemplate, branch?: ActivityTemplate): Promise<string> {
+    return this.projectTemplateService.exportToExcel(project, branch);
+  }
+
+
   insert(projectTemplate: ProjectTemplate,
          newActivityTemplate: { name: string, position: number }): Promise<ActivityTemplate> {
     return this.projectTemplateService.insert(projectTemplate, newActivityTemplate)

@@ -1,0 +1,31 @@
+<h4 mat-dialog-title i18n>Export {{project.project.name}} processes</h4>
+
+<mat-dialog-content>
+
+  <div class="form">
+    <div i18n>Please select a process to export:</div>
+
+    <div>
+      <select class="select-box" #activity>
+        <option value="" i18n>( Select a process to export )</option>
+        <option value="export-all" i18n>Export all processes</option>
+        <option *ngFor="let activity of activities"
+                [value]="activity.uid">{{'-'.repeat(activity.level)}} {{activity.name}}</option>
+      </select>
+    </div>
+
+    <div style="margin-top:40px">
+      <button class="btn btn-margin-right" [class.btn-action]="activity.value" [disabled]="!activity.value"
+              (click)="export(activity.value)" i18n>Export</button>
+      &nbsp; &nbsp; &nbsp;
+      <a *ngIf="excelFileUrl" [href]="excelFileUrl">The Excel file is ready. Please click to download it.</a>
+      <span *ngIf="working">Generating the requested file ...</span>
+    </div>
+
+  </div>
+
+ </mat-dialog-content>
+
+<mat-dialog-actions>
+  <button class="btn right" (click)="close()" i18n>Close</button>
+</mat-dialog-actions>

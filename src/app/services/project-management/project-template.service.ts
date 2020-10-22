@@ -20,6 +20,16 @@ export class ProjectTemplateService {
 
   // GET methods
 
+  exportToExcel(process: ProjectTemplate, branch?: ActivityTemplate): Promise<string> {
+    Assertion.assertValue(process, 'process');
+
+    const path = `v3/empiria-steps/processes/${process.uid}/export-to-excel/${branch?.uid || ''}`;
+
+    return this.http.get<string>(path)
+               .toPromise();
+  }
+
+
   getProjectTemplatesList(): Observable<Project[]> {
     const path = 'v1/project-management/project-templates';
 

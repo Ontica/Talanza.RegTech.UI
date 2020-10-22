@@ -17,6 +17,7 @@ import { DataObjectsModule } from '@app/data-objects/data-objects.module';
 import { KnowledgeBaseModule } from '@app/knowledge-base/knowledge-base.module';
 import { ProceduresModule } from '@app/procedures/procedures.module';
 
+import { ExportProcessesDialogComponent } from './export-processes-dialog/export-processes-dialog.component';
 import { ProcessesMainPageComponent } from './main-page/processes-main-page.component';
 import { ProcessTreeDesignerComponent } from './tree-designer/tree-designer.component';
 import { ProcessDiagramEditorComponent } from './diagram-editor/diagram-editor.component';
@@ -60,6 +61,7 @@ import { ProcessesRoutingModule } from './processes-routing.module';
     ProcessTreeDesignerComponent,
     ProcessDiagramEditorComponent,
     StepDataConfigurationComponent,
+    ExportProcessesDialogComponent,
     BpmnModelerComponent
   ],
 

@@ -15,10 +15,10 @@ import { ProjectModel } from '@app/store/project.store';
 
 import { Activity, EmptyActivity, ActivityOperation } from '@app/models/project-management';
 
+import { ExportProcessesDialogComponent } from '../export-processes-dialog/export-processes-dialog.component';
 import { MoveActivityDialogComponent } from '../move-activity-dialog/move-activity-dialog.component';
 
 import { CollapsableTree, CollapsableTreeNodeDisplayMode } from '@app/project-management/common/collapsable-tree';
-
 
 
 @Component({
@@ -271,6 +271,18 @@ export class ProcessTreeDesignerComponent implements OnChanges {
       }
     );
 
+  }
+
+  openExportDataDialog() {
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.height = '320px',
+    dialogConfig.width = '680px',
+    dialogConfig.data = this.project;
+
+    this.dialog.open(ExportProcessesDialogComponent, dialogConfig);
   }
 
 
