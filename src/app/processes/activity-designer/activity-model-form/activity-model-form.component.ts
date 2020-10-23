@@ -353,7 +353,7 @@ export class ActivityModelFormComponent extends AbstractForm implements OnInit, 
 
     switch (periodDueOn) {
       case 'OnFixedDate':
-        return periodUnit === 'Years' || (periodUnit === 'Months' && periodValue > 1);
+        return periodUnit === 'Years';
 
       case 'OnFixedDayOfWeek':
         return periodUnit === 'Weeks';
@@ -363,6 +363,12 @@ export class ActivityModelFormComponent extends AbstractForm implements OnInit, 
 
       case 'OnFirstBusinessDays':
         return periodUnit === 'Years' || periodUnit === 'Months';
+
+      case 'AfterFixedPeriodOnFixedDate':
+        return periodUnit === 'Months';
+
+      case 'AfterFixedPeriodOnBusinessDate':
+        return periodUnit === 'Months';
 
       default:
         return true;
@@ -392,7 +398,9 @@ export class ActivityModelFormComponent extends AbstractForm implements OnInit, 
         return periodUnit !== 'CalendarDays';
 
       case 'periodMonth':
-        return (periodUnit === 'Years' || (periodUnit === 'Months' && periodValue > 1)) && (periodDueOn === 'OnFixedDate');
+        return (periodUnit === 'Years' || (periodUnit === 'Months' && periodValue > 1)) &&
+               (periodDueOn === 'OnFixedDate' || periodDueOn === 'AfterFixedPeriodOnFixedDate' ||
+                periodDueOn === 'AfterFixedPeriodOnBusinessDate');
 
       case 'periodDayOfWeek':
         return periodUnit === 'Weeks' && periodDueOn !== 'AfterTheGivenStep';
