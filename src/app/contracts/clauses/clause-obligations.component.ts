@@ -9,7 +9,7 @@ import { Component, Input } from '@angular/core';
 
 import { ContractsService } from '@app/services/regulation';
 
-import { ContractClauseRef, Rule } from '@app/models/regulation';
+import { ContractClauseRef, ContractObligation } from '@app/models/regulation';
 
 @Component({
   selector: 'emp-gov-clause-obligations',
@@ -22,7 +22,7 @@ export class ClauseObligationsComponent {
   procedureUID = '';
   isVisibleProcedureInfo = false;
 
-  rules: Rule[] = [];
+  obligations: ContractObligation[] = [];
 
   constructor(private contractService: ContractsService) { }
 
@@ -46,8 +46,9 @@ export class ClauseObligationsComponent {
 
 
   private loadObligations(clauseRef: ContractClauseRef): void {
-    this.contractService.getObligations(clauseRef.contractUID, clauseRef.uid).toPromise()
-      .then((x) => this.rules = x.rules);
+    this.contractService.getObligations(clauseRef.uid)
+      .toPromise()
+      .then((x) => this.obligations = x);
   }
 
 }

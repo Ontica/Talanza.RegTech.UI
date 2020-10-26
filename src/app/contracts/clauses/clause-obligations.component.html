@@ -1,35 +1,20 @@
-<div *ngIf="rules.length > 0">
+<div *ngIf="obligations.length > 0">
   <span class="clause-subtitle" i18n>
-    Obligations
   </span>
 
-  <div *ngFor="let rule of rules">
+  <div *ngFor="let obligation of obligations">
     <table class="grid" style='max-width:600pt;'>
       <thead>
         <tr>
           <th>
-            {{rule.name}}
+            {{obligation.name}}
           </th>
         </tr>
       </thead>
       <tbody>
         <tr>
           <td>
-            <span>{{rule.description}}</span>
-            <br/>
-            <br/>
-            <span class='clause-subtitle' *ngIf="rule.procedures.length !== 0" i18n>Related procedures</span>
-          </td>
-        </tr>
-        <tr *ngFor="let procedure of rule.procedures">
-          <td style='margin-left:12pt'>
-            <a (click)="onSelectedProcedure(procedure.uid)">» {{procedure.shortName}}</a>
-            <br>
-            <span *ngIf="procedure.modality.length !== 0">Modalidad: {{procedure.modality}}
-              <br/>
-            </span>
-            <span *ngIf="procedure.code !== 'No disponible'">{{procedure.code}}</span>
-            <span *ngIf="procedure.code === 'No disponible'">{{procedure.entity}}</span>
+            <span>{{obligation.process}}</span>
           </td>
         </tr>
       </tbody>
@@ -37,10 +22,12 @@
     <br />
   </div>
 
+
   <div class="procedure-info" *ngIf="isVisibleProcedureInfo">
     <emp-gov-procedure-viewer
          [procedure]="procedureUID"
          (close)="onCloseProcedureInfoModal()">
     </emp-gov-procedure-viewer>
   </div>
+
 </div>

@@ -30,6 +30,15 @@ export class ProjectTemplateService {
   }
 
 
+  getProjectTemplate(projectTemplateID: string): Observable<ActivityTemplate> {
+    Assertion.assertValue(projectTemplateID, 'projectTemplateID');
+
+    const path = `v1/project-management/project-templates/${projectTemplateID}`;
+
+    return this.http.get<ActivityTemplate>(path);
+  }
+
+
   getProjectTemplatesList(): Observable<Project[]> {
     const path = 'v1/project-management/project-templates';
 

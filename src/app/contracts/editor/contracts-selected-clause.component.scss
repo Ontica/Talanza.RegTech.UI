@@ -1,7 +1,6 @@
 @import "../../../styles/grid";
 
 .main-container {
-  float: left;
   outline: none;
   padding: 0;
   vertical-align: top;
@@ -21,48 +20,47 @@
   width: 35%;
 }
 
+.obligation {
+  font-size: 9.5pt;
+  padding: 4px;
+  margin-bottom: 12px;
+}
+
+.obligation {
+  font-size: 9.5pt;
+  padding: 4px;
+  margin-bottom: 12px;
+}
+
+.obligation-title,
+.obligation-title a:hover {
+  font-size: 10pt;
+  color: $primary-color;
+  font-weight: 600;
+  margin-bottom: 3px;
+}
+
 .clause-definition {
   padding: 2px;
-  color: black;
   text-align: justify;
-  font-size: 11pt;
   max-width: 600pt;
-}
-
-.procedure-info {
-  display: inline-block;
-  width: 90%;
-}
-
-table.grid td:nth-child(1), table.grid th:nth-child(1) {
-  width: 90%;
-}
-
-table.grid tbody tr {
-  height: auto;
-  display: block;
-  overflow: inline;
-}
-
-table.grid td {
-  padding: 8pt;
 }
 
 .clause-title {
   font-size: 14pt;
-  color: $text-color;
+  color: $primary-color;
   font-weight: 600;
   padding: 6pt;
   line-height: 22pt;
 }
 
 .clause-subtitle {
-  font-size: 10pt;
+  font-size: 12pt;
   color: $text-color;
-  font-weight: 500;
+  font-weight: 600;
+  line-height: 22pt;
 }
 
 .marked-text {
-  font-size: 10pt;
   color: $warning-color;
 }

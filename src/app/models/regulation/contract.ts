@@ -54,22 +54,14 @@ interface ProcedureRef {
   shortName: string;
 }
 
-export interface Rule {
+export interface ContractObligation {
   uid: string;
   name: string;
-  description: string;
-  workflowObjectUID: string;
-  procedures: ProcedureRef[];
+  legalBasis: string;
+  process: string;
+  stepUID: string;
 }
 
-export interface Obligation {
-  uid: string;
-  clauseNo: string;
-  contractUID: string;
-  rules: Rule[];
-  section: string;
-  title: string;
-}
 
 export function EmptyContract() {
 

@@ -12,6 +12,7 @@ import { FormsModule } from '@angular/forms';
 import { SharedModule } from '@app/shared/shared.module';
 
 import { ProceduresModule } from '@app/procedures/procedures.module';
+import { ProcessesModule } from '@app/processes/processes.module';
 
 import { ClauseDefinitionComponent } from './clauses/clause-definition.component';
 import { ClauseObligationsComponent } from './clauses/clause-obligations.component';
@@ -32,6 +33,8 @@ import { ContractsRoutingModule } from './contracts-routing.module';
     SharedModule,
 
     ProceduresModule,
+
+    ProcessesModule,
 
     ContractsRoutingModule
   ],

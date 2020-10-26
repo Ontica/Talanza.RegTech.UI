@@ -11,7 +11,7 @@ import { catchError } from 'rxjs/operators';
 
 import { CoreService } from '@app/core/core.service';
 
-import { Contract, ContractClause, RelatedProcedure, Obligation } from '@app/models/regulation';
+import { Contract, ContractClause, ContractObligation } from '@app/models/regulation';
 
 export enum ContractServiceErr {
   GET_CLAUSE_ERR =
@@ -72,17 +72,11 @@ export class ContractsService {
     return this.core.http.put<ContractClause>(path, clause);
   }
 
-  addRelatedProcedure(contractUID: string, clauseUID: string,
-                      relatedProcedure: RelatedProcedure): Observable<RelatedProcedure> {
-    const path = `v1/contracts/${contractUID}/clauses/${clauseUID}/related-procedures`;
 
-    return this.core.http.post<RelatedProcedure>(path, relatedProcedure);
-  }
+  getObligations(legalItemUID: string): Observable<ContractObligation[]> {
+    const path = `v3/empiria-steps/legal-data/${legalItemUID}/obligations`;
 
-  getObligations(contractUID: string, clauseUID: string): Observable<Obligation> {
-    const path = `v1/contracts/${contractUID}/clauses/${clauseUID}/rules`;
-
-    return this.core.http.get<Obligation>(path);
+    return this.core.http.get<ContractObligation[]>(path);
   }
 
 }

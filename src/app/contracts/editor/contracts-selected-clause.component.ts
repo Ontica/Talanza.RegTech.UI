@@ -6,13 +6,18 @@
  */
 
 import { Component, Input } from '@angular/core';
+import { Observable } from 'rxjs';
 
 import { ContractsService } from '@app/services/regulation';
 
 import {
   ContractClause, ContractClauseRef,
-  EmptyContractClause, Rule
+  EmptyContractClause, ContractObligation
 } from '@app/models/regulation';
+
+import { ActivityTemplate } from '@app/models/project-management';
+import { ProjectTemplateService } from '@app/services/project-management';
+import { CardSettings } from '@app/models/user-interface';
 
 
 @Component({
@@ -22,15 +27,22 @@ import {
 })
 export class ContractsSelectedClauseComponent {
 
-  procedureUID = '';
-  isVisibleProcedureInfo = false;
   clauseInfoWidth = '100%';
 
-  rules: Rule[] = [];
+  obligations: ContractObligation[] = [];
 
   clause: ContractClause = EmptyContractClause();
 
-  constructor(private contractService: ContractsService) { }
+  selectedObligation: ContractObligation;
+
+  selectedProcess: Observable<ActivityTemplate>;
+
+  readonly modalSettings = new CardSettings();
+
+  constructor(private contractService: ContractsService,
+             private templateService: ProjectTemplateService) {
+    this.modalSettings.readonly = true;
+  }
 
   @Input()
   set clauseRef(clauseRef: ContractClauseRef) {
@@ -40,14 +52,14 @@ export class ContractsSelectedClauseComponent {
   }
 
 
-  onSelectedProcedure(procedureUID: string): void {
-    this.isVisibleProcedureInfo = true;
-    this.procedureUID = procedureUID;
+  onSelectObligation(selected: ContractObligation) {
+    this.selectedObligation = selected;
+    this.selectedProcess = this.templateService.getProjectTemplate(this.selectedObligation.stepUID);
   }
 
 
-  onCloseProcedureInfoModal(): void {
-    this.isVisibleProcedureInfo = false;
+  closeModalWindow(): void {
+    this.selectedObligation = null;
   }
 
 
@@ -67,24 +79,24 @@ export class ContractsSelectedClauseComponent {
 
 
   private loadObligations(clauseRef: ContractClauseRef): void {
-    this.contractService.getObligations(clauseRef.contractUID, clauseRef.uid)
+    this.contractService.getObligations(clauseRef.uid)
       .toPromise()
       .then((x) => {
-        this.rules = x.rules;
+        this.obligations = x;
         this.setClauseInfoContainerWidth();
       });
   }
 
 
   private setClauseInfoContainerWidth(): void {
-    if (this.rules.length > 0) {
-      this.clauseInfoWidth = '50%';
+    if (this.obligations.length > 0) {
+      this.clauseInfoWidth = '40%';
       return;
     }
     if (this.clause.relatedProcedures.length === 0) {
       this.clauseInfoWidth = '100%';
     } else {
-      this.clauseInfoWidth = '50%';
+      this.clauseInfoWidth = '40%';
     }
   }
 
