@@ -38,6 +38,7 @@ export interface BaseProjectItem {
   resource: string;
   tags: string;
   responsible: Contact;
+  status: string;
 }
 
 
@@ -66,7 +67,6 @@ export interface Activity extends Identifiable, PartitionedType, BaseProjectItem
   position: number;
   level: number;
   stage: string;
-  status: string;
 
   theme: string;
   resource: string;

@@ -20,7 +20,9 @@ export class FilterHelper {
 
   static applyFilter(filter: ProjectItemFilter,
                      activities: BaseProjectItem[]): BaseProjectItem[] {
-    let filtered = this.applyResponsiblesFilter(filter, activities);
+    let filtered = this.applyStatusFilter(filter, activities);
+
+    filtered = this.applyResponsiblesFilter(filter, filtered);
 
     filtered = this.applyThemesFilter(filter, filtered);
     filtered = this.applyTagsFilter(filter, filtered);
@@ -88,6 +90,24 @@ export class FilterHelper {
     const uids = filter.responsibles.map(x => x.uid);
 
     return source.filter(x => uids.includes(x.responsible.uid));
+  }
+
+  private static applyStatusFilter(filter: ProjectItemFilter,
+                                   source: BaseProjectItem[]): BaseProjectItem[] {
+    if (!filter.status) {
+      return source;
+    }
+
+    switch (filter.status) {
+      case 'All tasks':
+        return source;
+
+      case 'Incomplete':
+        return source.filter(x => x.status !== 'Completed');
+
+      case 'Completed':
+        return source.filter(x => x.status === 'Completed');
+    }
   }
 
 

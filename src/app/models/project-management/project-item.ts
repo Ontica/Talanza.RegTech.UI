@@ -13,6 +13,7 @@ import { Contact } from '../core/contact';
 
 export type ProjectItem = Activity | Task;
 
+export type ProjectItemStatus = 'Incomplete' | 'Completed' | 'All tasks';
 
 export interface ProjectItemFilter {
   projects: Project[];
@@ -21,6 +22,7 @@ export interface ProjectItemFilter {
   tags: string[];
   themes: string[];
   keywords: string;
+  status: ProjectItemStatus;
 }
 
 
@@ -30,5 +32,6 @@ export const EmptyProjectItemFilter: ProjectItemFilter = {
   responsibles: [],
   tags: [],
   themes: [],
-  keywords: ''
+  keywords: '',
+  status: 'All tasks'
 };

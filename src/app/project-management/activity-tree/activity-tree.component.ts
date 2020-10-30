@@ -14,11 +14,10 @@ import { CdkDragDrop } from '@angular/cdk/drag-drop';
 import { ProjectModel } from '@app/store/project.store';
 
 import { Activity, EmptyActivity, ActivityOperation,
-         ProjectItemFilter, EmptyProjectItemFilter } from '@app/models/project-management';
+         ProjectItemFilter, EmptyProjectItemFilter, ProjectItemStatus } from '@app/models/project-management';
 
 import { AddEventDialogComponent } from '../add-event-dialog/add-event-dialog.component';
 import { CheckProcessesDialogComponent } from '../check-processes-dialog/check-processes-dialog.component';
-
 
 import { TimelineHelper } from '../common/timeline-helper';
 
@@ -50,6 +49,8 @@ export class ActivityTreeComponent implements OnChanges {
 
   filteredActivities: Activity[] = [];
   treeEditionMode = false;
+
+  statusFilter: ProjectItemStatus = 'Incomplete';
 
   private collapsableTreeHandler: CollapsableTree;
 
@@ -261,6 +262,12 @@ export class ActivityTreeComponent implements OnChanges {
   }
 
 
+  onChangeStatusFilter(filterType: ProjectItemStatus) {
+    this.statusFilter = filterType;
+    this.displayActivitiesTree();
+  }
+
+
   onSelectActivity(activity: Activity, emitEvent: boolean = false) {
     this.selectedActivity = activity;
 
@@ -336,6 +343,7 @@ export class ActivityTreeComponent implements OnChanges {
     if (this.treeEditionMode) {
       this.filteredActivities = this.project.activities;
     } else {
+      this.filter.status = this.statusFilter;
       this.filteredActivities = FilterHelper.applyFilter(this.filter, this.project.activities);
     }
 
