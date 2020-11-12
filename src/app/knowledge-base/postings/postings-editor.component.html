@@ -1,8 +1,27 @@
-<div style="width:80%;padding-left:32px" [formGroup]="form">
+<div style="width:80%;padding-left:32px;" [formGroup]="form">
   <input type="text" class='text-box' formControlName="title" placeholder="Title" />
-  <textarea class="text-area" rows="3" cols="20" formControlName="body" placeholder="Annotation text"></textarea>
-  <!-- <input type="text" class='text-box' formControlName="fileName" placeholder="Attached document (optional)" /> -->
-  <div>
-    <button mat-stroked-button color="primary" [disabled]="!form.valid" (click)="onSave()">Save</button>
+  <textarea class="text-area" rows="3" cols="20" formControlName="body" placeholder="Note text"></textarea>
+  <span style="margin-top:8px">
+    <input type="text" class='text-box' style="width:80%" formControlName="fileName" placeholder="Attachments ..." />
+    <button type="button" class="btn" i18n>Link file ...</button>
+  </span>
+  <span style="margin-top:8px">
+    <input type="text" class='text-box' style="width:80%" formControlName="shareWith" placeholder="Send note to ..." />
+    <button type="button" class="btn"
+            (click)="onShowSendToPicker()" i18n>Send to ...</button>
+  </span>
+  <div style="margin-top:8px">
+    <button class="btn-action" [disabled]="!form.valid" (click)="onSave()">Save</button>
   </div>
 </div>
+
+<emp-ng-modal-window *ngIf="showSendToPicker" [config]="{ width:'500px', height:'650px', disableClose: true }"
+                     (modalWindowClose)="closeSendToPicker()">
+  <emp-ng-card title='Send annotation to' hint="Persons that will receive information related to this annotation"
+               (cardClose)="closeSendToPicker()">
+    <emp-ng-contacts-picker [registered]="projectStore.allResponsibles | async" [selected]="sendTo.registered" [additional]="sendTo.additional"
+                            (close)="closeSendToPicker()" (selectionChange)="sendToListChanged($event)">
+
+    </emp-ng-contacts-picker>
+  </emp-ng-card>
+</emp-ng-modal-window>

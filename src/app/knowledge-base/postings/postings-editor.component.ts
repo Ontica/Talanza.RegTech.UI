@@ -14,6 +14,8 @@ import {
 
 import { Identifiable, Empty } from '@app/models/core';
 import { Posting, EmptyPosting } from '@app/models/knowledge-base';
+import { SelectedContacts } from '@app/shared/contacts-picker/contacts-picker.component';
+import { ProjectStore } from '@app/store/project.store';
 
 
 @Component({
@@ -30,7 +32,10 @@ export class PostingsEditorComponent implements OnInit {
 
   posting = EmptyPosting;
 
-  constructor(private fb: FormBuilder) {}
+  showSendToPicker = false;
+  sendTo: SelectedContacts = { registered: [], additional: '' };
+
+  constructor(public projectStore: ProjectStore, private fb: FormBuilder) {}
 
   ngOnInit() {
     if (!this.target) {
@@ -50,6 +55,18 @@ export class PostingsEditorComponent implements OnInit {
     this.reset();
   }
 
+  onShowSendToPicker() {
+    this.showSendToPicker = true;
+  }
+
+  closeSendToPicker() {
+    this.showSendToPicker = false;
+  }
+
+  sendToListChanged(data: SelectedContacts) {
+    this.sendTo = data;
+    this.closeSendToPicker();
+  }
 
   // private methods
 
@@ -57,7 +74,8 @@ export class PostingsEditorComponent implements OnInit {
     const formGroup = new FormGroup({
       title: new FormControl('', Validators.required),
       body: new FormControl('', Validators.required),
-      // fileName: new FormControl('')
+      fileName: new FormControl(''),
+      shareWith: new FormControl('')
     });
 
     this.form = formGroup;
@@ -69,8 +87,9 @@ export class PostingsEditorComponent implements OnInit {
 
     return {
       title: formModel.title,
-      body: formModel.body
+      body: formModel.body,
      // fileName: formModel.fileName
+      sendTo: this.sendTo
     };
   }
 

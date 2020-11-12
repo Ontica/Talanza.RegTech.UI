@@ -62,6 +62,8 @@ export interface Activity extends Identifiable, PartitionedType, BaseProjectItem
 
   reminder?: {
     days: number;
+    sendAlertsTo: Contact[];
+    sendAlertsToEMails: string;
   };
 
   position: number;

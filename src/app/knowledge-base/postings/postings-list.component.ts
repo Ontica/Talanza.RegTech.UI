@@ -51,6 +51,14 @@ export class PostingsListComponent implements OnInit, OnChanges {
   }
 
 
+  listForPosting(data: Posting) {
+    let list = data.sendTo.registered.map(x => x.name + '; ');
+
+    return list + data.sendTo.additional;
+  }
+
+
+
   onCreate(data: Posting) {
     if (!data) {
       return;

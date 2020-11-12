@@ -5,6 +5,8 @@
  * See LICENSE.txt in the project root for complete license information.
  */
 
+import { SelectedContacts } from '@app/shared/contacts-picker/contacts-picker.component';
+
 export interface Posting {
   uid: string;
   objectUID: string;
@@ -14,6 +16,7 @@ export interface Posting {
   authors?: string;
   tags?: string;
   date?: Date;
+  sendTo?: SelectedContacts;
   accessMode?: string;
   owner?: string;
   status?: string;
