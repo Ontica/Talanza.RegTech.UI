@@ -18,6 +18,7 @@ import { MainMenuComponent } from './main-layout/main-menu/main-menu.component';
 import { SidebarComponent } from './main-layout/sidebar/sidebar.component';
 
 import { CardComponent } from './card/card.component';
+import { ContactsPickerComponent } from './contacts-picker/contacts-picker.component';
 import { InlineEditorComponent } from './inline-editor/inline-editor.component';
 import { MessageBoxComponent } from './message-box/message-box.component';
 import { ModalWindowComponent } from './modal-window';
@@ -64,6 +65,7 @@ import { SecurityUIModule } from '@app/security-ui/security-ui.module';
     SidebarComponent,
 
     CardComponent,
+    ContactsPickerComponent,
     InlineEditorComponent,
     MessageBoxComponent,
     ModalWindowComponent,
@@ -81,6 +83,7 @@ import { SecurityUIModule } from '@app/security-ui/security-ui.module';
 
   exports: [
     CardComponent,
+    ContactsPickerComponent,
     DatepickerComponent,
     FileControlComponent,
     InlineEditorComponent,

@@ -1,0 +1,13 @@
+<div>
+  <emp-steps-responsibles-list-selector
+    [responsibles]="registered" [selected]="selected"
+    (selectedResponsiblesChange)="onRegisteredChanged($event)">
+  </emp-steps-responsibles-list-selector>
+</div>
+<div style="margin:12px">
+  Additional recipients: (email addresses)
+  <textarea class="text-area" rows="3" [(ngModel)]="additional"></textarea>
+  <br/><br/>
+  <button type="button" class="btn-action right" style="margin-right:12px"
+          (click)="onClickOkButton()" i18n>Ok</button>
+</div>
