@@ -11,6 +11,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 import { Observable, of } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
 
 import { ProjectTemplateStore } from '@app/store/project-template.store';
 import { ProjectStore } from '@app/store/project.store';
@@ -28,10 +29,12 @@ import { isEmpty } from '@app/models/core';
 })
 export class AddEventDialogComponent implements OnInit {
 
+  filteredEvents: Observable<ActivityTemplate[]>;
+
   form: FormGroup;
 
   project: Project;
-  events: Observable<ActivityTemplate[]> = of([]);
+  events: ActivityTemplate[] = [];
   whatIfResult: Observable<WhatIfResult> = of();
   insertionPoint: Activity;
 
@@ -45,18 +48,39 @@ export class AddEventDialogComponent implements OnInit {
 
 
   ngOnInit() {
-    this.projectStore.selectedProject().subscribe (
+    this.projectStore.selectedProject().subscribe(
       x => {
         this.project = x.project;
-        this.events = this.templateStore.startEvents(this.project);
+         this.templateStore.startEvents(this.project)
+          .toPromise().then((y) => this.events = y);
       }
     );
 
     this.createFormGroup();
 
     this.dialogRef.updateSize();
+
+    this.filteredEvents = this.form.get('selectedEvent').valueChanges
+      .pipe(
+        startWith(''),
+        map(value => this._filter(value))
+      );
+
   }
 
+
+  private _filter(value: string | ActivityTemplate): ActivityTemplate[] {
+    const filterValue = value && typeof value === 'string' ? value.toLowerCase() : '';
+
+    console.log('count events', this.events.length);
+
+    return this.events.filter(x => x.name.toLowerCase().includes(filterValue));
+  }
+
+
+  displayFn(value: ActivityTemplate): string {
+    return value && value.name ? value.name : '';
+  }
 
   get timelineHelper() {
     return TimelineHelper;
@@ -117,12 +141,12 @@ export class AddEventDialogComponent implements OnInit {
 
     if (isEmpty(this.insertionPoint)) {
       return {
-        activityTemplateUID: formModel.selectedEvent,
+        activityTemplateUID: formModel.selectedEvent.uid,
         eventDate: formModel.eventDate
       };
     }
     return {
-      activityTemplateUID: formModel.selectedEvent,
+      activityTemplateUID: formModel.selectedEvent.uid,
       eventDate: formModel.eventDate,
       insertionPointUID: this.insertionPoint.uid,
       insertionPosition: formModel.position
