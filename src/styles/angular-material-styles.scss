@@ -19,7 +19,6 @@
   margin-top: 12px;
 }
 
-
 .mat-tab-label  {
   height: 42px !important;
   min-width: 120px !important;
@@ -48,7 +47,6 @@
    height: 100%;
 }
 
-
 //
 // secondary tabs component
 //
@@ -63,7 +61,6 @@
 
 }
 
-
 //
 // dialog component
 //
@@ -76,13 +73,11 @@
   padding: 8pt;
 }
 
-
 .mat-dialog-actions {
   justify-content: flex-end;
   border-top: 1px solid $secondary-color;
   padding: 12px;
 }
-
 
 //
 // sidebar components
@@ -95,15 +90,17 @@
   scroll-padding-right: 2px;
 }
 
-
 .mat-drawer-inner-container::-webkit-scrollbar-thumb {
   background: $primary-color;
 }
 
-
-
 .mat-list-base .mat-list-item .mat-list-item-content,
 .mat-list-base .mat-list-option .mat-list-item-content {
-  padding-right: 0px !important;
-  padding-left: 0px !important;
+  padding-right: 0 !important;
+  padding-left: 0 !important;
+}
+
+.mat-option {
+  font: $control-font;
+  line-height: $font-size-base * 2;
 }
