@@ -92,8 +92,9 @@
         <td>
           <input type="number" class="text-box" maxlength="3" min="1" max="999" style="width:50px" formControlName="reminderDays">
           days before the deadline
-          &nbsp; &nbsp;&nbsp;
-          <!-- <button disabled="true" type="button" class="btn btn-right" i18n>Send to ...</button> -->
+          &nbsp; &nbsp;
+          <button *ngIf="!disabled" type="button" class="btn btn-right"
+                  (click)="onShowSendToPicker()" i18n>Send to ...</button>
         </td>
       </tr>
     </table>
@@ -172,3 +173,14 @@
   </div>
 
 </form>
+
+<emp-ng-modal-window *ngIf="showSendToPicker" [config]="{ width:'500px', height:'650px', disableClose: true }"
+                     (modalWindowClose)="closeSendToPicker()">
+  <emp-ng-card title='Send alerts to' hint="Persons that will receive alerts for this activity"
+               (cardClose)="closeSendToPicker()">
+    <emp-ng-contacts-picker [registered]="responsibles | async" [selected]="sendTo.registered" [additional]="sendTo.additional"
+                            (close)="closeSendToPicker()" (selectionChange)="saveSendToList($event)">
+
+    </emp-ng-contacts-picker>
+  </emp-ng-card>
+</emp-ng-modal-window>

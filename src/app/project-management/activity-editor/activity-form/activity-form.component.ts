@@ -8,6 +8,8 @@
 import { Component, EventEmitter, Input,
          OnChanges, OnInit, Output, OnDestroy } from '@angular/core';
 
+import { takeUntil } from 'rxjs/operators';
+
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
@@ -25,7 +27,8 @@ import { Contact, DateStringLibrary, isTypeOf } from '@app/models/core';
 import { AbstractForm } from '@app/shared/services';
 import { SharedService } from '@app/shared/shared.service';
 import { ChangeDateDialogComponent } from '@app/project-management/change-date-dialog/change-date-dialog.component';
-import { takeUntil } from 'rxjs/operators';
+
+import { SelectedContacts } from '@app/shared/contacts-picker/contacts-picker.component';
 
 
 enum FormMessages {
@@ -67,6 +70,8 @@ export class ActivityFormComponent extends AbstractForm implements OnInit, OnCha
   tagsList: Observable<string[]> = of([]);
   themesList: Observable<string[]> = of([]);
 
+  showSendToPicker = false;
+  sendTo: SelectedContacts = { registered: [], additional: '' };
 
   private unsubscribe: Subject<void> = new Subject();
 
@@ -181,9 +186,21 @@ export class ActivityFormComponent extends AbstractForm implements OnInit, OnCha
     return (this.activity.template && this.activity.template.uid);
   }
 
+  onShowSendToPicker() {
+    this.showSendToPicker = true;
+  }
+
+  closeSendToPicker() {
+    this.showSendToPicker = false;
+  }
+
+  saveSendToList(sendTo: SelectedContacts) {
+    this.sendTo = sendTo;
+    this.closeSendToPicker();
+  }
+
 
   // abstract methods implementation
-
 
   protected createFormGroup(): FormGroup {
     // ToDo fix: this.formBuilder.group ... can't be used because
@@ -404,12 +421,14 @@ export class ActivityFormComponent extends AbstractForm implements OnInit, OnCha
 
       trafficLight: {
         days: formModel.trafficLightDays,
-        type: formModel.trafficLightType,
+        type: formModel.trafficLightType
       },
 
 
       reminder: {
-        days: formModel.reminderDays
+        days: formModel.reminderDays,
+        sendAlertsTo: this.sendTo.registered,
+        sendAlertsToEMails: this.sendTo.additional
       },
 
       responsibleUID: formModel.responsibleUID,
@@ -452,6 +471,9 @@ export class ActivityFormComponent extends AbstractForm implements OnInit, OnCha
 
       responsibleUID: this.activity.responsible.uid
     });
+
+    this.sendTo.registered = this.activity.reminder?.sendAlertsTo;
+    this.sendTo.additional = this.activity.reminder?.sendAlertsToEMails;
 
     this.cleanExceptions();
   }
