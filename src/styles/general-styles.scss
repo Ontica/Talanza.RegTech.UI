@@ -98,7 +98,6 @@ button.btn-margin-left {
   margin-left:  32px;
 }
 
-
 @mixin input-settings {
   background-color: $control-background-color;
   border-top: $control-border;
@@ -152,7 +151,6 @@ input.text-box.number {
   @include input-settings;
 }
 
-
 div.text-box {
   @include input-settings;
 }
@@ -163,7 +161,6 @@ input:focus {
   background-color: $selected-control-background-color;
   border: $selected-control-border;
 }
-
 
 .input-icon {
   position: absolute;
@@ -186,13 +183,10 @@ input:focus {
   margin: 2px 8px 2px 0;
   padding: 2px 2px 2px 6px;
   vertical-align: middle;
-
   min-height: $control-height;
   width: $control-width;
-
   border-radius: 2px;
   transition: 0.3s ease-out;
-
   resize: vertical;
 }
 
@@ -234,7 +228,7 @@ textarea:focus {
 }
 
 .remove-min-width {
-  min-width: 0px;
+  min-width: 0;
 }
 
 .hint {
@@ -251,12 +245,9 @@ textarea:focus {
   color: $icon-color-dark;
 }
 
-
 @mixin raised-header {
-  box-shadow: 0 4px 5px 0px rgba(0,0,0,0.28);
+  box-shadow: 0 4px 5px 0 rgba(0,0,0,0.28);
 }
-
-
 
 .small-italic-notification {
   font: $control-small-font;
