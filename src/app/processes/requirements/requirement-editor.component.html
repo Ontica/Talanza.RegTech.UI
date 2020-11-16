@@ -1,0 +1,66 @@
+<form autocomplete="off" [empNgSpinnerHost]="spinner" [formGroup]="form">
+
+  <emp-ng-spinner #spinner [visible]="isLoading"></emp-ng-spinner>
+
+  <fieldset>
+
+    <table class="form-section">
+      <tr>
+        <td i18n>Requirement:</td>
+        <td>
+          <textarea class="text-area" rows="2" formControlName="name"></textarea>
+        </td>
+      </tr>
+      <tr>
+        <td i18n>Description:</td>
+        <td>
+          <textarea class="text-area" rows="4" formControlName="description"></textarea>
+        </td>
+      </tr>
+      <tr>
+        <td i18n>Associated<br/>form or document:</td>
+        <td>
+          <input class="text-box" type="text"
+                 placeholder="Search and pick the associated form or document"
+                 matInput
+                 formControlName="dataObject"
+                 [matAutocomplete]="auto">
+          <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+            <mat-option *ngFor="let dataObject of filteredDataObjects | async" [value]="dataObject">
+              {{dataObject.name}}
+            </mat-option>
+          </mat-autocomplete>
+        </td>
+      </tr>
+      <tr>
+        <td i18n>Optional:</td>
+        <td>
+          <select class="select-box" formControlName="optional">
+            <option value="" i18n>( Select )</option>
+            <option value="mandatory" i18n>Mandatory</option>
+            <option value="optional" i18n>Optional</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td i18n>Legal basis:</td>
+        <td>
+          <textarea class="text-area" rows="2" cols="25" formControlName="legalBasis"></textarea>
+        </td>
+      </tr>
+    </table>
+
+    <table class="form-section">
+      <tr>
+        <td>&nbsp;</td>
+        <td class="text-align-right">
+          <button type="button" class="btn right" [class.btn-action]="isValid"
+                  [disabled]="!isValid" (click)="saveStepRequirement()">Add requirement</button>
+        </td>
+      </tr>
+
+    </table>
+
+  </fieldset>
+
+</form>
