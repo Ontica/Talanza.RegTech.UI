@@ -1,0 +1,41 @@
+<div class="list-header">
+  <div class="column" i18n>
+    Requirement / Type
+  </div>
+
+  <div class="right-column expand" i18n>
+
+  </div>
+</div>
+
+<div *ngFor="let requirement of requirementsList"
+      class="list-item" matRipple [matRippleTrigger]="trigger">
+
+  <mat-icon class="material-icons-outlined" (click)="onSelectRequirement(requirement)">insert_drive_file_outline</mat-icon>
+
+  <div class="list-item-container">
+
+    <div class="item-name">
+      <a #trigger (click)="onSelectRequirement(requirement)">{{requirement.name}}</a>
+    </div>
+
+    <div class="list-item-columns">
+      <div class="column">
+        {{requirement?.dataObject?.type}}
+      </div>
+
+      <div class="right-column expand" *ngIf="!readonly">
+        <mat-icon class="material-icons-outlined" (click)="onDeleteRequirement(requirement)">delete_outline</mat-icon>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<div *ngIf="requirementsList && requirementsList.length === 0" class="list-item-container">
+  <div class="column" i18n>
+    There are not defined requirements for this obligation.
+  </div>
+</div>

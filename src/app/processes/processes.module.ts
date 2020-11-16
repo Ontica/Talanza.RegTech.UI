@@ -17,6 +17,9 @@ import { DataObjectsModule } from '@app/data-objects/data-objects.module';
 import { KnowledgeBaseModule } from '@app/knowledge-base/knowledge-base.module';
 import { ProceduresModule } from '@app/procedures/procedures.module';
 
+import { RequirementEditorComponent } from './requirements/requirement-editor.component';
+import { RequirementsListComponent } from './requirements/requirements-list.component';
+
 import { ExportProcessesDialogComponent } from './export-processes-dialog/export-processes-dialog.component';
 import { ProcessesMainPageComponent } from './main-page/processes-main-page.component';
 import { ProcessTreeDesignerComponent } from './tree-designer/tree-designer.component';
@@ -32,6 +35,7 @@ import {
 
 
 import { ProcessesRoutingModule } from './processes-routing.module';
+
 
 
 @NgModule({
@@ -60,6 +64,8 @@ import { ProcessesRoutingModule } from './processes-routing.module';
     ProcessesMainPageComponent,
     ProcessTreeDesignerComponent,
     ProcessDiagramEditorComponent,
+    RequirementEditorComponent,
+    RequirementsListComponent,
     StepDataConfigurationComponent,
     ExportProcessesDialogComponent,
     BpmnModelerComponent
