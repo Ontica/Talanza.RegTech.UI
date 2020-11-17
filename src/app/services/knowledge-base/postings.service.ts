@@ -39,7 +39,7 @@ export class PostingsService {
 
 
   getPosting(objectUID: string, postingUID: string): Observable<Posting> {
-    const path = `/v1/postings/${objectUID}/${postingUID}`;
+    const path = `v1/postings/${objectUID}/${postingUID}`;
 
     return this.core.http.get<Posting>(path)
       .pipe(
@@ -63,7 +63,7 @@ export class PostingsService {
 
 
   createPosting(objectUID: string, data: Posting): Observable<Posting> {
-    const path = `/v1/postings/${objectUID}`;
+    const path = `v1/postings-new/${objectUID}`;
 
     return this.core.http.post<Posting>(path, data)
       .pipe(
@@ -73,7 +73,7 @@ export class PostingsService {
 
 
   deletePosting(objectUID: string, postingUID: string): Observable<Posting[]> {
-    const path = `/v1/postings/${objectUID}/${postingUID}`;
+    const path = `v1/postings/${objectUID}/${postingUID}`;
 
     return this.core.http.delete<Posting[]>(path)
       .pipe(
@@ -84,7 +84,7 @@ export class PostingsService {
 
 
   updatePosting(objectUID: string, data: Posting): Observable<Posting> {
-    const path = `/v1/postings/${objectUID}/${data.uid}`;
+    const path = `v1/postings/${objectUID}/${data.uid}`;
 
     return this.core.http.put<Posting>(path, data)
       .pipe(
