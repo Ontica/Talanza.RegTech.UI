@@ -1,38 +1,40 @@
 <div class="form">
 
-  <div class="form-section-title" i18n>Linked forms and documents</div>
+  <div class="form-section-title" i18n>Obligation requirements list</div>
 
   <div>
-    <emp-data-objects-list [dataObjects]="dataObjects | async" [readonly]='readonly'
-                           (listEvent)="onDataObjectsListEvent($event)">
-    </emp-data-objects-list>
+    <emp-steps-requirements-list
+      [requirementsList]="requirementsList | async" [readonly]='readonly'
+      (listEvent)="onRequirementsListEvent($event)">
+    </emp-steps-requirements-list>
   </div>
 
   <div class="float-right">
     <button type="button" *ngIf="!readonly" class="btn-action"
-            (click)="showDataSourceSelector()" i18n>Link a form or document</button>
+            (click)="showRequirementEditor()" i18n>New requirement</button>
   </div>
 
-  <emp-ng-modal-window *ngIf="displayEditor && selectedDataObject"
+  <emp-ng-modal-window *ngIf="displayRequirementEditor && selectedRequirement"
                        [config]="{ width:'1200px', height: '90%', disableClose: true }"
                        (modalWindowClose)="hideEditor()">
 
-    <emp-data-object-designer *ngIf="selectedDataObject"
-      [dataObject]="selectedDataObject" (designerClose)="hideEditor()">
+    <emp-data-object-designer *ngIf="selectedRequirement"
+      [dataObject]="selectedRequirement.dataObject" (designerClose)="hideEditor()">
     </emp-data-object-designer>
+
   </emp-ng-modal-window>
 
 
-  <emp-ng-modal-window *ngIf="displayEditor && !selectedDataObject"
-                        [config]="{ width:'760px', height: '640px', disableClose: true }"
-                        (modalWindowClose)="hideEditor()">
-    <emp-ng-card title='Link a data source' [hint]="step.name" (cardClose)="hideEditor()">
+  <emp-ng-modal-window *ngIf="displayRequirementEditor && !selectedRequirement"
+                       [config]="{ width:'760px', height: '640px', disableClose: true }"
+                       (modalWindowClose)="hideEditor()">
 
-      <emp-data-source-selector
-        (selected)="linkStepToDataSource($event)">
-      </emp-data-source-selector>
+    <emp-ng-card title='Obligation requirement editor' [hint]="step.name" (cardClose)="hideEditor()">
+      <emp-steps-requirement-editor
+        (selected)="linkRequirement($event)">
+      </emp-steps-requirement-editor>
+    </emp-ng-card>
 
-     </emp-ng-card>
   </emp-ng-modal-window>
 
 </div>

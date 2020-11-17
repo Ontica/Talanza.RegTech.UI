@@ -13,11 +13,12 @@ import { HttpService, Assertion } from '@app/core';
 import { Identifiable } from '@app/models/core';
 
 import { DataObject, DataSource } from '@app/models/data-objects';
+import { StepRequirement } from '@app/models/steps';
+import { ProjectItem } from '@app/models/project-management';
 
 
 @Injectable()
 export class DataObjectsService {
-
 
   constructor(private http: HttpService) { }
 
@@ -38,12 +39,22 @@ export class DataObjectsService {
   }
 
 
-  getEntityDataObjects(entity: Identifiable): Observable<DataObject[]> {
+  getStepRequirements(entity: Identifiable): Observable<StepRequirement[]> {
     Assertion.assertValue(entity, 'entity');
 
-    const path = `v3/empiria-steps/steps/${entity.uid}/data-objects`;
+    const path = `v3/empiria-steps/steps/${entity.uid}/requirements`;
 
-    return this.http.get<DataObject[]>(path);
+    return this.http.get<StepRequirement[]>(path);
+  }
+
+
+  removeRequirement(requirement: StepRequirement) {
+    Assertion.assertValue(requirement, 'requirement');
+
+    const path = `v3/empiria-steps/requirements/${requirement.uid}`;
+
+    return this.http.delete<any>(path)
+               .toPromise();
   }
 
 
@@ -58,6 +69,17 @@ export class DataObjectsService {
     const path = `v3/empiria-steps/files/${fileUID}`;
 
     return this.http.get<Blob>(path, { responseType: 'blob' });
+  }
+
+
+  addStepRequirement(entity: Identifiable, requirement: StepRequirement): Promise<DataObject> {
+    Assertion.assertValue(entity, 'entity');
+    Assertion.assertValue(requirement, 'requirement');
+
+    const path = `v3/empiria-steps/steps/${entity.uid}/requirements`;
+
+    return this.http.post<DataObject>(path, requirement)
+               .toPromise();
   }
 
 

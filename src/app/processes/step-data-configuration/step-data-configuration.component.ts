@@ -12,8 +12,8 @@ import { Exception } from '@app/core';
 import { EventInfo } from '@app/core/data-types';
 
 import { ProjectItem } from '@app/models/project-management';
-
-import { DataObject, DataSource } from '@app/models/data-objects';
+import { DataObject } from '@app/models/data-objects';
+import { StepRequirement } from '@app/models/steps';
 
 import { DataObjectsService } from '@app/services/data-objects';
 
@@ -29,42 +29,42 @@ export class StepDataConfigurationComponent implements OnChanges {
 
   @Input() readonly = false;
 
-  dataObjects: Observable<DataObject[]> = of([]);
+  requirementsList: Observable<StepRequirement[]> = of([]);
 
-  displayEditor =  false;
-
-  selectedDataObject: DataObject;
+  displayRequirementEditor = false;
+  selectedRequirement: StepRequirement;
 
   constructor(private service: DataObjectsService) {}
 
-
   ngOnChanges() {
-    this.loadStepDataObjects();
+    this.loadStepRequirements();
   }
-
 
   hideEditor() {
-    this.displayEditor = false;
+    this.displayRequirementEditor = false;
+  }
+
+  linkRequirement(requirement: StepRequirement) {
+    this.selectedRequirement = null;
+    this.displayRequirementEditor = false;
+
+    this.service.addStepRequirement(this.step, requirement)
+        .then(() => this.loadStepRequirements());
+  }
+
+  showRequirementEditor() {
+    this.displayRequirementEditor = true;
   }
 
 
-  linkStepToDataSource(dataSource: DataSource) {
-    this.selectedDataObject = null;
-    this.displayEditor = false;
-
-    this.service.linkEntityWithDataSource(this.step, dataSource)
-      .then(() => this.loadStepDataObjects());
-  }
-
-
-  onDataObjectsListEvent(event: EventInfo) {
+  onRequirementsListEvent(event: EventInfo) {
     switch (event.type) {
-      case 'selectDataObject':
-        this.showStepDataObjectDesigner(event.payload.dataObject);
+      case 'selectRequirement':
+        this.showStepDataObjectDesigner(event.payload.requirement);
         return;
 
-      case 'deleteDataObject':
-        this.removeDataObjectLink(event.payload.dataObject);
+      case 'deleteRequirement':
+        this.removeRequirement(event.payload.requirement);
         return;
 
       default:
@@ -73,31 +73,25 @@ export class StepDataConfigurationComponent implements OnChanges {
   }
 
 
-  showDataSourceSelector() {
-    this.selectedDataObject = null;
-    this.displayEditor = true;
-  }
-
-
   // private methods
 
-  private loadStepDataObjects() {
-    this.dataObjects = this.service.getEntityDataObjects(this.step);
+  private loadStepRequirements() {
+    this.requirementsList = this.service.getStepRequirements(this.step);
   }
 
 
-  private removeDataObjectLink(dataObject: DataObject) {
-    if (!confirm(`¿Do you want to remove the format or document ${dataObject.name}?`)) {
+  private removeRequirement(requirement: StepRequirement) {
+    if (!confirm(`¿Do you want to remove this requirement ${requirement.name}?`)) {
       return;
     }
-    this.service.removeDataObject(dataObject)
-                .then(() => this.loadStepDataObjects());
+    this.service.removeRequirement(requirement)
+                .then(() => this.loadStepRequirements());
   }
 
 
   private showStepDataObjectDesigner(dataObject: DataObject) {
-    this.selectedDataObject = dataObject;
-    this.displayEditor = true;
+    // this.selectedRequirement = dataObject;
+    this.displayRequirementEditor = true;
   }
 
 }
