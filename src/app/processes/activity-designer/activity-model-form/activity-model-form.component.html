@@ -64,7 +64,7 @@
             <option value="Eventual" i18n>Eventual</option>
             <option value="Periodic" i18n>Periodic</option>
           </select>
-          <select class="select-box" style="width:98px" formControlName="isMandatory">
+          <select class="select-box" style="width:100px" formControlName="isMandatory">
             <option value="" i18n>( Mode ) </option>
             <option value="true" i18n>Mandatory</option>
             <option value="false" i18n>Optional</option>
@@ -146,17 +146,26 @@
         <td colspan="2">
           <span [hidden]="!showControl('periodDueOn')">
             Due on:
-            <select class="select-box" style="width:350px" #periodDueOn formControlName="periodDueOn">
+            <select class="select-box" style="width:360px" #periodDueOn formControlName="periodDueOn">
               <option value="" i18n>( Due on rule )</option>
-              <option [hidden]="!appliesPeriodDueOnOption('OnFixedDate')" value="OnFixedDate" i18n>On X calendar day</option>
-              <option [hidden]="!appliesPeriodDueOnOption('OnFixedDayOfWeek')" value="OnFixedDayOfWeek" i18n>On X day of the week</option>
-              <option [hidden]="!appliesPeriodDueOnOption('OnFirstCalendarDays')" value="OnFirstCalendarDays" i18n>During first X calendar days</option>
-              <option [hidden]="!appliesPeriodDueOnOption('OnFirstBusinessDays')" value="OnFirstBusinessDays" i18n>During first X business days</option>
-              <option [hidden]="!appliesPeriodDueOnOption('AfterFixedPeriodOnFixedDate')" value="AfterFixedPeriodOnFixedDate" i18n>After fixed period, during first calendar days</option>
-              <option [hidden]="!appliesPeriodDueOnOption('AfterFixedPeriodOnBusinessDate')" value="AfterFixedPeriodOnBusinessDate" i18n>After fixed period, during first business days</option>
-              <option [hidden]="!appliesPeriodDueOnOption('AfterAdjustablePeriodOnFixedDate')" value="AfterAdjustablePeriodOnFixedDate" i18n>After adjustable period, during first calendar days</option>
-              <option [hidden]="!appliesPeriodDueOnOption('AfterAdjustablePeriodOnBusinessDate')" value="AfterAdjustablePeriodOnBusinessDate" i18n>After adjustable period, during first business days</option>
-              <option [hidden]="!appliesPeriodDueOnOption('AfterTheGivenStep')" value="AfterTheGivenStep" i18n>After the given obligation</option>
+              <option [hidden]="!appliesPeriodDueOnOption('OnFixedDate')"
+                      value="OnFixedDate" i18n>On X calendar day</option>
+              <option [hidden]="!appliesPeriodDueOnOption('OnFixedDayOfWeek')"
+                      value="OnFixedDayOfWeek" i18n>On X day of the week</option>
+              <option [hidden]="!appliesPeriodDueOnOption('OnFirstCalendarDays')"
+                      value="OnFirstCalendarDays" i18n>During first X calendar days</option>
+              <option [hidden]="!appliesPeriodDueOnOption('OnFirstBusinessDays')"
+                      value="OnFirstBusinessDays" i18n>During first X business days</option>
+              <option [hidden]="!appliesPeriodDueOnOption('AfterFixedPeriodOnFixedDate')"
+                      value="AfterFixedPeriodOnFixedDate" i18n>After fixed period, during first calendar days</option>
+              <option [hidden]="!appliesPeriodDueOnOption('AfterFixedPeriodOnBusinessDate')"
+                      value="AfterFixedPeriodOnBusinessDate" i18n>After fixed period, during first business days</option>
+              <option [hidden]="!appliesPeriodDueOnOption('AfterAdjustablePeriodOnFixedDate')"
+                      value="AfterAdjustablePeriodOnFixedDate" i18n>After adjustable period, during first calendar days</option>
+              <option [hidden]="!appliesPeriodDueOnOption('AfterAdjustablePeriodOnBusinessDate')"
+                      value="AfterAdjustablePeriodOnBusinessDate" i18n>After adjustable period, during first business days</option>
+              <option [hidden]="!appliesPeriodDueOnOption('AfterTheGivenStep')"
+                      value="AfterTheGivenStep" i18n>After the given obligation</option>
             </select>
             <br />
           </span>
@@ -182,7 +191,7 @@
           </span>
           <span [hidden]="!showControl('periodDayOfWeek')">
             Day of the week: &nbsp;
-            <select class="select-box" style="width:110px"  formControlName="periodDayOfWeek">
+            <select class="select-box" style="width:110px" formControlName="periodDayOfWeek">
               <option value="" i18n>( Day )</option>
               <option value="1">Monday</option>
               <option value="2">Tuesday</option>
@@ -220,7 +229,7 @@
             <option value="Hours" i18n>Hours</option>
             <option value="Months" i18n>Months</option>
             <option value="Years" i18n>Years</option>
-            <option value="Undefined" i18n>Indefinite</option>
+            <option value="Undefined" i18n>Undefined</option>
             <option value="NA" i18n>Not applicable</option>
           </select>
         </td>

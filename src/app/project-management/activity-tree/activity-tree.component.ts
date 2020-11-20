@@ -282,8 +282,9 @@ export class ActivityTreeComponent implements OnChanges {
 
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    dialogConfig.height = '400px',
-    dialogConfig.width = '600px',
+    dialogConfig.height = '400px';
+    dialogConfig.minWidth = '980px';
+    dialogConfig.width = '980px';
 
     dialogConfig.data = {
       insertionPoint: this.selectedActivity
@@ -298,8 +299,8 @@ export class ActivityTreeComponent implements OnChanges {
 
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    dialogConfig.height = '400px',
-    dialogConfig.width = '700px',
+    dialogConfig.height = '400px';
+    dialogConfig.width = '700px';
 
     this.dialog.open(CheckProcessesDialogComponent, dialogConfig);
   }
@@ -310,8 +311,8 @@ export class ActivityTreeComponent implements OnChanges {
 
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    dialogConfig.height = '320px',
-    dialogConfig.width = '680px',
+    dialogConfig.height = '520px';
+    dialogConfig.width = '680px';
 
     this.dialog.open(ExportActivitiesDialogComponent, dialogConfig);
   }
