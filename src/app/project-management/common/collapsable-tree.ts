@@ -30,6 +30,9 @@ export class CollapsableTree {
     const mainNodes = this.allNodes.filter(x => isEmpty(x.parent) && this.hasChildren(x));
 
     this.collapsedNodes = Array.from(mainNodes.map(x => x.uid));
+
+    this.collapsedNodes = Array.from([]);
+
   }
 
   expandAll() {
