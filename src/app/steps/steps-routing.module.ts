@@ -22,9 +22,12 @@ import { StepsMainPageComponent } from './main-page/steps-main-page.component';
         path: 'steps', component: MainLayoutComponent,
         canActivate: [SecurityGuardService],
         children: [
-          { path: 'list', component: StepsMainPageComponent },
+          { path: 'all', component: StepsMainPageComponent },
+          { path: 'processes', component: StepsMainPageComponent },
+          { path: 'activities', component: StepsMainPageComponent },
+          { path: 'events', component: StepsMainPageComponent },
           { path: 'documentation', component: StepsMainPageComponent },
-          { path: '', redirectTo: 'list', pathMatch: 'full' }
+          { path: '', redirectTo: 'all', pathMatch: 'full' }
         ]
       }
     ])],

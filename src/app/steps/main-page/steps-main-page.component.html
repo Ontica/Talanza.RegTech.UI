@@ -5,7 +5,7 @@
         [class.primary]="currentView.name !== 'Steps.Diagram'"
         [class.primary-full]="currentView.name === 'Steps.Diagram'">
 
-    <ng-container *ngIf="currentView.name === 'Steps.List'">
+    <ng-container *ngIf="currentView.name === 'Steps.All'">
       <emp-steps-list
           [processList]="processList"
           (activityChange)="onActivityTreeEdited($event)"

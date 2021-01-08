@@ -44,8 +44,8 @@ export const APP_LAYOUTS: Layout[] = [
   {
     name: 'Steps',
     views: StepsViews,
-    hint: 'Regulatory processes',
-    defaultTitle: 'Processes list'
+    hint: 'Processes, activities and events definition',
+    defaultTitle: 'Steps definition'
   },
   {
     name: 'Processes',

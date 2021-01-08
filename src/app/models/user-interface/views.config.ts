@@ -52,9 +52,24 @@ export const ProjectManagementViews: View[] = [
 
 export const StepsViews: View[] = [
   {
-    name: 'Steps.List',
-    title: 'Processes List',
-    url: '/steps/list'
+    name: 'Steps.All',
+    title: 'Search all',
+    url: '/steps/all'
+  },
+  {
+    name: 'Steps.Processes',
+    title: 'Processes',
+    url: '/steps/processes'
+  },
+  {
+    name: 'Steps.ActivitiesList',
+    title: 'Activities',
+    url: '/steps/activities'
+  },
+  {
+    name: 'Steps.EventsList',
+    title: 'Events',
+    url: '/steps/events'
   },
   {
     name: 'Steps.Documentation',

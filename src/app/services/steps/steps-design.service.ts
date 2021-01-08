@@ -20,7 +20,7 @@ export class StepsDesignService {
 
 
   processList(): Observable<Process[]> {
-    const path = `/v3/steps/design/processes`;
+    const path = `v3/steps/processes/?keywords=cnh&pageSize=50`;
 
     return this.http.get<Process[]>(path);
   }
