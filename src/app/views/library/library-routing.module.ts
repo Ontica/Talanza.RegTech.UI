@@ -10,8 +10,8 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { ProceduresMainPageComponent } from '../procedures/main-page/procedures-main-page.component';
 import { ContractsMainPageComponent } from '../contracts/main-page/contracts-main-page.component';
-import { DocumentsMainPageComponent } from '@app/documents/main-page/documents-main-page.component';
-import { KnowledgeBaseMainPageComponent } from '@app/knowledge-base/main-page/kb-main-page.component';
+import { DocumentsMainPageComponent } from '../documents/main-page/documents-main-page.component';
+import { KnowledgeBaseMainPageComponent } from '../knowledge-base/main-page/kb-main-page.component';
 
 
 const routes: Routes = [

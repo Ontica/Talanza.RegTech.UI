@@ -13,7 +13,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { AngularMaterialModule } from '@app/shared/angular-material.module';
 import { SharedModule } from '@app/shared/shared.module';
 
-import { KnowledgeBaseModule } from '@app/knowledge-base/knowledge-base.module';
+import { KnowledgeBaseModule } from '@app/views/knowledge-base/knowledge-base.module';
 import { ProceduresModule } from '@app/views/procedures/procedures.module';
 
 import { StepsDesignerComponent } from './designer/steps-designer.component';

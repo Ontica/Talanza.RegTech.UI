@@ -12,8 +12,8 @@ import { FormsModule } from '@angular/forms';
 import { SharedModule } from '@app/shared/shared.module';
 
 import { ContractsModule } from '../contracts/contracts.module';
-import { DocumentsModule } from '../../documents/documents.module';
-import { KnowledgeBaseModule } from '@app/knowledge-base/knowledge-base.module';
+import { DocumentsModule } from '../documents/documents.module';
+import { KnowledgeBaseModule } from '@app/views/knowledge-base/knowledge-base.module';
 import { ProceduresModule } from '../procedures/procedures.module';
 
 import { GlobalSearchMainPageComponent } from './main-page/gs-main-page.component';

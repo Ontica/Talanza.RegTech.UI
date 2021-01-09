@@ -1,0 +1,42 @@
+
+@import "../../../../styles/grid";
+
+.faq-container{
+  width: 100%;
+  padding: 8pt 24pt 24pt 24pt;
+}
+
+.faq {
+  line-height: 22pt;
+  padding: 6pt;
+}
+
+.question {
+  text-align: justify;
+  max-width: 600pt;
+  display: inline-block;
+  font-weight: 600;
+  padding-bottom: 8pt;
+  color: $primary-color;
+}
+
+.answer {
+  text-align: justify;
+  max-width: 600pt;
+  display: inline-block;
+}
+
+.section-text {
+  color: brown;
+  font-size: 10pt;
+  border-bottom: 1pt dashed brown;
+  text-align: justify;
+  max-width: 600pt;
+  display: inline-block;
+}
+
+.pdf-control {
+  height: calc(100vh - 240px);
+  width: 100%;
+  overflow-y: hidden;
+}

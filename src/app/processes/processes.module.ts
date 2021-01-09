@@ -13,8 +13,8 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { AngularMaterialModule } from '@app/shared/angular-material.module';
 import { SharedModule } from '@app/shared/shared.module';
 
-import { DataObjectsModule } from '@app/data-objects/data-objects.module';
-import { KnowledgeBaseModule } from '@app/knowledge-base/knowledge-base.module';
+import { DataObjectsModule } from '@app/views/data-objects/data-objects.module';
+import { KnowledgeBaseModule } from '@app/views/knowledge-base/knowledge-base.module';
 import { ProceduresModule } from '@app/views/procedures/procedures.module';
 
 import { RequirementEditorComponent } from './requirements/requirement-editor.component';

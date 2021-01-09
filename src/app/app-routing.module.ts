@@ -22,6 +22,27 @@ const routes: Routes = [
                             .then(m => m.HomeModule)
   },
   {
+    path: 'dashboard',
+    component: MainLayoutComponent,
+    canActivate: [SecurityGuardService],
+    loadChildren: () => import('./views/dashboard/dashboard.module')
+                            .then(m => m.DashboardModule)
+  },
+  {
+    path: 'data',
+    component: MainLayoutComponent,
+    canActivate: [SecurityGuardService],
+    loadChildren: () => import('./views/analytics/data-analytics.module')
+                            .then(m => m.DataAnalyticsModule)
+  },
+  {
+    path: 'documents',
+    component: MainLayoutComponent,
+    canActivate: [SecurityGuardService],
+    loadChildren: () => import('./views/documents/documents.module')
+                            .then(m => m.DocumentsModule)
+  },
+  {
     path: 'library',
     component: MainLayoutComponent,
     canActivate: [SecurityGuardService],

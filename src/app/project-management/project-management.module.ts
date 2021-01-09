@@ -14,8 +14,8 @@ import { AngularMaterialModule } from '@app/shared/angular-material.module';
 import { SharedModule } from '@app/shared/shared.module';
 import { WidgetsModule } from '@app/views/main-layout/sidebar/widgets/widgets.module';
 
-import { DataObjectsModule } from '@app/data-objects/data-objects.module';
-import { KnowledgeBaseModule } from '@app/knowledge-base/knowledge-base.module';
+import { DataObjectsModule } from '@app/views/data-objects/data-objects.module';
+import { KnowledgeBaseModule } from '@app/views/knowledge-base/knowledge-base.module';
 import { ProceduresModule } from '@app/views/procedures/procedures.module';
 import { ProcessesModule } from '@app/processes/processes.module';
 

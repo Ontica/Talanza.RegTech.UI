@@ -16,12 +16,6 @@ import { MainLayoutModule } from './views/main-layout/main-layout.module';
 
 import { StoreModule } from './store/store.module';
 
-import { DocumentsModule } from './documents/documents.module';
-
-import { KnowledgeBaseModule } from './knowledge-base/knowledge-base.module';
-import { DashboardModule } from './dashboard/dashboard.module';
-import { DataAnalyticsModule } from './data-analytics/data-analytics.module';
-
 import { StepsModule } from './steps/steps.module';
 
 import { ProcessesModule } from './processes/processes.module';
@@ -55,11 +49,6 @@ const EXCEPTION_HANDLER_PROVIDER =  { provide: ErrorHandler, useClass: Exception
 
     StoreModule,
 
-    KnowledgeBaseModule,
-    DashboardModule,
-    DataAnalyticsModule,
-
-    DocumentsModule,
     ProcessesModule,
     StepsModule,
     ProjectManagementModule,
