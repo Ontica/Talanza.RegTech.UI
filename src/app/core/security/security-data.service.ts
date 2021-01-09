@@ -7,22 +7,30 @@
 
 import { Injectable } from '@angular/core';
 
-import { Cryptography } from '../security/cryptography';
+import { Cryptography } from './cryptography';
+
+import { EventInfo } from '../data-types/command';
+
+import { Assertion } from '../general/assertion';
 
 import { HttpHandler } from '../http/http-handler';
 
-import { EventInfo } from '../data-types';
-import { Assertion } from '../general/assertion';
 
 import { SessionToken, Identity, ClaimsList } from './security-types';
+
+
+interface ExternalSessionToken {
+  readonly access_token: string;
+  readonly expires_in: number;
+  readonly refresh_token: string;
+  readonly token_type: string;
+}
 
 
 @Injectable()
 export class SecurityDataService {
 
   constructor(private httpHandler: HttpHandler) { }
-
-
 
   changePassword(event: EventInfo): Promise<boolean> {
     Assertion.assertValue(event, 'event');
@@ -31,12 +39,10 @@ export class SecurityDataService {
                            .toPromise();
   }
 
-
   closeSession(): Promise<void> {
     return this.httpHandler.post<void>('v1/security/logout')
                .toPromise();
   }
-
 
   createSession(userID: string, userPassword: string): Promise<SessionToken> {
     const body = {
@@ -44,10 +50,10 @@ export class SecurityDataService {
       password: Cryptography.convertToMd5(userPassword)
     };
 
-    return this.httpHandler.post<SessionToken>('v2/security/login', body)
-               .toPromise();
+    return this.httpHandler.post<ExternalSessionToken>('v2/security/login', body)
+               .toPromise()
+               .then(x => this.mapToSessionToken(x));
   }
-
 
   getPrincipalIdentity(): Promise<Identity> {
     const fakeIdentity = {
@@ -59,7 +65,6 @@ export class SecurityDataService {
     return Promise.resolve(fakeIdentity);
   }
 
-
   getPrincipalClaimsList(): Promise<ClaimsList> {
     const list = [
       { type: 'token', value: 'abc' },
@@ -69,6 +74,15 @@ export class SecurityDataService {
     const claims = new ClaimsList(list);
 
     return Promise.resolve(claims);
+  }
+
+  private mapToSessionToken(source: ExternalSessionToken): SessionToken {
+    return {
+      accessToken: source.access_token,
+      expiresIn: source.expires_in,
+      refreshToken: source.refresh_token,
+      tokenType: source.token_type
+    };
   }
 
 }

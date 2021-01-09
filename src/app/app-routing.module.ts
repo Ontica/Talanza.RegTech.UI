@@ -6,19 +6,27 @@
  */
 
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
+import { Routes, RouterModule } from '@angular/router';
 
-import { NoContentComponent } from './shared/no-content/no-content.component';
+import { NoContentComponent } from './views/main-layout/no-content.component';
+
+// import { SecurityGuardService } from './core';
+// import { MainLayoutComponent, NoContentComponent } from './shared/';
 
 
-const ROUTES: Routes = [
+const routes: Routes = [
+  {
+    path: 'security',
+    loadChildren: () => import('./security-ui/security-ui.module')
+                            .then(m => m.SecurityUIModule)
+  },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: '**', component: NoContentComponent }
 ];
 
 
 @NgModule({
-  imports: [RouterModule.forRoot(ROUTES, { useHash: false, preloadingStrategy: PreloadAllModules })],
+  imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

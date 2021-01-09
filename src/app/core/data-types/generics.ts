@@ -17,8 +17,8 @@ export function resolve<U>(value?: U): Promise<U> {
 }
 
 
-export function to<U>(value: any): U {
-  return value as any as U;
+export function toObservable<U>(value: Observable<any>): Observable<U> {
+  return value as Observable<U>;
 }
 
 

@@ -10,24 +10,24 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { CommonModule } from '@angular/common';
 
-import { CoreService } from './core.service';
+import { DataServicesModule } from '@app/data-services/data.services.module';
+
+import { PresentationModule } from './presentation/presentation.module';
+
 import { ExceptionHandler } from './general/exception-handler';
-
 import { SessionService } from './general/session.service';
-
+import { LoggerService } from './general/logger.service';
 import { ApplicationSettingsService } from './general/application-settings.service';
+
 import { DirectoryService } from './http/directory.service';
-
-
 import { HttpHandler } from './http/http-handler';
 import { HttpService } from './http/http.service';
 import { HttpErrorInterceptor } from './http/http-error-interceptor';
 
-import { LoggerService } from './general/logger.service';
-
 import { SecurityDataService } from './security/security-data.service';
 import { AuthenticationService } from './security/authentication.service';
 import { SecurityGuardService } from './security/security-guard.service';
+
 import { throwIfAlreadyLoaded } from './module-import-guard';
 
 
@@ -35,7 +35,9 @@ import { throwIfAlreadyLoaded } from './module-import-guard';
 
   imports: [
     CommonModule,
-    HttpClientModule
+    HttpClientModule,
+    DataServicesModule,
+    PresentationModule
   ],
 
   declarations: [],
@@ -43,7 +45,6 @@ import { throwIfAlreadyLoaded } from './module-import-guard';
   exports: [],
 
   providers: [
-    CoreService,
     ExceptionHandler,
     SessionService,
     ApplicationSettingsService,

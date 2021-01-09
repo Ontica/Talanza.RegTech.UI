@@ -12,6 +12,9 @@ import { HttpErrorResponse } from '@angular/common/http';
 
 export class Exception extends Error {
 
+  readonly code: string;
+  readonly innerError: Error;
+
   constructor(message: string, innerError?: Error) {
     super(Exception.extractErrorMessage(message));
 
@@ -22,18 +25,13 @@ export class Exception extends Error {
     this.code = Exception.extractErrorCode(message);
   }
 
-  readonly code: string;
-  readonly innerError: Error;
-
   static convertTo(sourceErr: any, defaultMessage?: string): Exception {
     if (!sourceErr) {
       return new Exception(defaultMessage || `Error con valor 'undefined' o 'null'.`); // 'UNDEFINED_ERROR'
 
     } else if (sourceErr instanceof HttpErrorResponse) {
-            throw sourceErr;
-
-      //  return new Exception(defaultMessage || sourceErr.error?.message ||
-      //                       sourceErr.message, sourceErr.error);
+      return new Exception('Http server error: ' + (defaultMessage || sourceErr.error.message),
+                           sourceErr.error);
 
     } else if (sourceErr instanceof Exception) {
       return new Exception(defaultMessage || sourceErr.message, sourceErr);
@@ -42,7 +40,7 @@ export class Exception extends Error {
       return new Exception(defaultMessage || sourceErr.message, sourceErr);
 
     } else {
-      throw sourceErr;
+      return new Exception(defaultMessage || sourceErr.message, sourceErr);
     }
   }
 
@@ -90,14 +88,14 @@ export class HttpException extends Exception {
   readonly request: any;
   readonly response: any;
 
-  constructor(message: string, innerException?: Error, _initData?: HttpExceptionData) {
+  constructor(message: string, innerException?: Error, initData?: HttpExceptionData) {
     super(message, innerException);
 
     // This line is because a TypeScript to ECMA5 issue: https://goo.gl/jtiFyy
     Object.setPrototypeOf(this, HttpException.prototype);
 
-    this.request = _initData.request;
-    this.response = _initData.response;
+    this.request = initData.request;
+    this.response = initData.response;
   }
 
 }

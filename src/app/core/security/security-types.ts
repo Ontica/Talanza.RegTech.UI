@@ -6,38 +6,28 @@
  *
  */
 
+
 export interface SessionToken {
-
-  readonly access_token: string;
-
-  readonly expires_in: number;
-
-  readonly refresh_token: string;
-
-  readonly token_type: string;
-
+  readonly accessToken: string;
+  readonly expiresIn: number;
+  readonly refreshToken: string;
+  readonly tokenType: string;
 }
+
 
 export interface Identity {
-
   readonly username: string;
-
   readonly email: string;
-
   readonly fullname: string;
-
 }
+
 
 export interface Claim {
-
   readonly type: string;
-
   readonly value: any;
-
 }
 
+
 export class ClaimsList {
-
   constructor(public claims: Claim[]) { }
-
 }

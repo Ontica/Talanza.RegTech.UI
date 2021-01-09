@@ -68,7 +68,7 @@ export class DataObjectsService {
   getFileAsBlob(fileUID: string): Observable<Blob> {
     const path = `v3/empiria-steps/files/${fileUID}`;
 
-    return this.http.get<Blob>(path, { responseType: 'blob' });
+    return this.http.get<Blob>(path, { observe: 'response', responseType: 'blob' });
   }
 
 

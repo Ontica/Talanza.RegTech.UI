@@ -67,16 +67,16 @@ export class HttpHandler {
 
     const payloadDataField = this.getPayloadDataField(path, callerOptions, service);
 
-    const requestOptions = Object.assign({}, DefaultHttpClientOptions(), callerOptions);
+    const requestOptions = DefaultHttpClientOptions();
 
     if (body) {
       requestOptions.body = body;
     }
 
-    return forkJoin(
+    return forkJoin([
       this.getUrl(path, service),
       this.getHeaders(path, service)
-    ).pipe(
+    ]).pipe(
       mergeMap(([url, headers]) => {
 
         requestOptions.headers = headers;
@@ -114,7 +114,7 @@ export class HttpHandler {
 
     let headers = new HttpHeaders();
     if (service && service.isProtected && principal.isAuthenticated) {
-      headers = headers.set('Authorization', 'bearer ' + principal.sessionToken.access_token);
+      headers = headers.set('Authorization', 'bearer ' + principal.sessionToken.accessToken);
 
     } else if (service && service.isProtected && !principal.isAuthenticated) {
       throw new Error('Unauthenticated user');
@@ -126,7 +126,7 @@ export class HttpHandler {
       // no-op
 
     } else if (principal.isAuthenticated) {
-      headers = headers.set('Authorization', 'bearer ' + principal.sessionToken.access_token);
+      headers = headers.set('Authorization', 'bearer ' + principal.sessionToken.accessToken);
 
     } else {
       headers = headers.set('ApplicationKey', settings.applicationKey);
@@ -142,9 +142,6 @@ export class HttpHandler {
 
     } else if (service && service.payloadDataField) {
       return service.payloadDataField;
-
-    } else if (options && options.responseType !== 'json') {
-      return '';
 
     } else if (path.includes('http://') || path.includes('https://')) {
       return '';

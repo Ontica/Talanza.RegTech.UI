@@ -17,8 +17,10 @@ import {
 
 import { HttpException } from '../general/exception';
 
+
 @Injectable()
 export class HttpErrorInterceptor implements HttpInterceptor {
+
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(req)
@@ -27,6 +29,7 @@ export class HttpErrorInterceptor implements HttpInterceptor {
       );
 
   }
+
 
   private getNormalizedHttpErrorResponse(sourceErr: any,
                                          request: HttpRequest<any>): HttpErrorResponse {
@@ -45,7 +48,9 @@ export class HttpErrorInterceptor implements HttpInterceptor {
     return this.getUnknownHttpError(sourceErr, request);
   }
 
+
   // HttpErrorResponse normalization methods
+
 
   private getInternetDisconnectedError(sourceErr: HttpErrorResponse,
                                        request: HttpRequest<any>): HttpErrorResponse {
@@ -57,6 +62,7 @@ export class HttpErrorInterceptor implements HttpInterceptor {
 
     return new HttpErrorResponse(errorResponseData);
   }
+
 
   private getNormalizedErrorResponse(sourceErr: any,
                                      request: HttpRequest<any>): HttpErrorResponse {
@@ -72,6 +78,7 @@ export class HttpErrorInterceptor implements HttpInterceptor {
     return new HttpErrorResponse(errorResponseData);
   }
 
+
   private getUnknownHttpError(sourceErr: any,
                               request: HttpRequest<any>): HttpErrorResponse {
     const exception = new HttpException(
@@ -85,7 +92,9 @@ export class HttpErrorInterceptor implements HttpInterceptor {
     return new HttpErrorResponse(errorResponseData);
   }
 
+
   // Utility methods
+
 
   private getDefaultHttpErrorResponseData(sourceErr: any,
                                           request: HttpRequest<any>,
@@ -103,11 +112,12 @@ export class HttpErrorInterceptor implements HttpInterceptor {
     if (err.status === 0) {
       return false;
     }
-    if (err.error['payloadType'] === 'ExceptionModel') {
+    if ('payloadType' in err.error && err.error.payloadType === 'ExceptionModel') {
       return true;
     }
     return false;
   }
+
 
   private isInternetDisconnected(): boolean {
     return (!navigator.onLine);

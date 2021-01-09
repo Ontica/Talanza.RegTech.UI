@@ -21,7 +21,7 @@ export class SecurityGuardService implements CanActivate {
     const principal = this.session.getPrincipal();
 
     if (!principal.isAuthenticated) {
-      this.router.navigateByUrl('/login');
+      this.router.navigateByUrl('/security/login');
 
       return false;
     }

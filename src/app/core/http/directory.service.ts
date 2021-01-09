@@ -21,13 +21,15 @@ export class DirectoryService {
 
   private servicesList: Observable<Service[]>;
 
+
   constructor(private httpHandler: HttpHandler) {
     this.servicesList = this.getServicesList();
   }
 
+
   getService(servicePathOrUID: string,
              method?: HttpMethod): Observable<Service> {
-             Assertion.assertValue(servicePathOrUID, 'servicePathOrUID');
+    Assertion.assertValue(servicePathOrUID, 'servicePathOrUID');
 
     if (servicePathOrUID.includes('http://') || servicePathOrUID.includes('https://')) {
       return of<Service>(undefined);
@@ -36,7 +38,9 @@ export class DirectoryService {
     }
   }
 
+
   // Private methods
+
 
   private getServiceFromList(servicePathOrUID: string,
                              method: HttpMethod): Observable<Service> {
@@ -45,10 +49,10 @@ export class DirectoryService {
     if (servicePathOrUID.includes('/')) {
       return of<Service>(undefined);
 
-    } else if (!servicePathOrUID.includes('/') && method === undefined) {
+    } else if (!servicePathOrUID.includes('/') && (typeof method === 'undefined')) {
       condition = (service: Service) => (service.uid === servicePathOrUID);
 
-    } else if (!servicePathOrUID.includes('/') && method !== undefined) {
+    } else if (!servicePathOrUID.includes('/') && (typeof method !== 'undefined')) {
       condition = (service: Service) => (service.uid === servicePathOrUID &&
         service.method.toString() === HttpMethod[method]);
 
@@ -60,18 +64,22 @@ export class DirectoryService {
       const filteredServices = x.filter((service) => condition(service));
 
       if (filteredServices.length === 0) {
-        Assertion.assert(false, 'There are no services that satisfy the supplied search condition.');
+        Assertion.assertNoReachThisCode(
+          'There are no services that satisfy the supplied search condition.'
+        );
 
       } else if (filteredServices.length > 1) {
-        Assertion.assert(false,
+        Assertion.assertNoReachThisCode(
           `There are defined ${filteredServices.length} services that satisfy the ` +
-          'supplied search condition.');
+          'supplied search condition.'
+        );
 
       } else {
         return filteredServices[0];
       }
     }));
   }
+
 
   private getServicesList(): Observable<Service[]> {
     return this.httpHandler.get<Service[]>('v1/system/service-directory');

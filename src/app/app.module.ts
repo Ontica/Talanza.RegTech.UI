@@ -11,7 +11,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { CoreModule } from './core/core.module';
+
+import { MainLayoutModule } from './views/main-layout/main-layout.module';
+
 import { StoreModule } from './store/store.module';
+
 import { ServicesModule } from './services/services.module';
 
 import { HomeModule } from './home/home.module';
@@ -30,7 +34,7 @@ import { GlobalSearchModule } from './global-search/global-search.module';
 import { ProjectManagementModule } from './project-management/project-management.module';
 import { LibraryModule } from './library/library.module';
 
-import { SecurityUIModule } from './security-ui/security-ui.module';
+
 import { SharedModule } from './shared/shared.module';
 
 // App is our top level component
@@ -54,9 +58,10 @@ const EXCEPTION_HANDLER_PROVIDER =  { provide: ErrorHandler, useClass: Exception
     BrowserAnimationsModule,
 
     CoreModule,
+    MainLayoutModule,
+
     ServicesModule,
     StoreModule,
-    SecurityUIModule,
 
     HomeModule,
     KnowledgeBaseModule,

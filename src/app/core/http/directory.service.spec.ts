@@ -3,13 +3,17 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { DirectoryService } from './directory.service';
 import { HttpMethod } from './common-types';
+import { HttpHandler } from './http-handler';
+
+import { SessionService } from '../general/session.service';
+import { ApplicationSettingsService } from '../general/application-settings.service';
 
 describe('DirectoryService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientModule],
-      providers: [DirectoryService]
+      providers: [DirectoryService, HttpHandler, SessionService, ApplicationSettingsService]
     });
   });
 
@@ -37,7 +41,7 @@ describe('DirectoryService', () => {
                .subscribe((value) => {
                   expect(value).toBeDefined();
                   expect(value.path).toBe('v1/security/login');
-                  expect(value.method).toBe('POST');
+                  expect(value.method).toBe(HttpMethod.POST);
                });
     })));
 
@@ -58,7 +62,7 @@ describe('DirectoryService', () => {
                   expect(value).toBeDefined();
                   expect(value.path).toBe('v1/security/login');
                   expect(value.uid).toBe('Security.Login');
-                  expect(value.method).toBe('POST');
+                  expect(value.method).toBe(HttpMethod.POST);
                });
 
     })));
@@ -70,7 +74,7 @@ describe('DirectoryService', () => {
                   expect(value).toBeDefined();
                   expect(value.path).toBe('v1/tests/collection');
                   expect(value.uid).toBe('Tests.GetCollection');
-                  expect(value.method).toBe('GET');
+                  expect(value.method).toBe(HttpMethod.GET);
                });
 
     })));
@@ -82,7 +86,7 @@ describe('DirectoryService', () => {
                   expect(value).toBeDefined();
                   expect(value.path).toBe('v1/tests/collection');
                   expect(value.uid).toBe('Tests.PostCollection');
-                  expect(value.method).toBe('POST');
+                  expect(value.method).toBe(HttpMethod.POST);
                });
 
     })));
@@ -94,9 +98,7 @@ describe('DirectoryService', () => {
                   expect(value).toBeDefined();
                   expect(value.path).toBe('v1/tests/collection/{0}');
                   expect(value.uid).toBe('Tests.GetCollectionItem');
-                  // Parse parameter 'apple' then
-                  //     expect(value.mergedPath).toBe('v1/tests/collection/apple');
-                  expect(value.method).toBe('GET');
+                  expect(value.method).toBe(HttpMethod.GET);
                });
 
     })));

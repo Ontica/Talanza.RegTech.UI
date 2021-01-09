@@ -34,8 +34,8 @@ export class ApplicationSettingsService {
 
     this.settings = this.http.get('./assets/empiria.config.json')
                         .toPromise()
-                        .then((response) => {
-                          const data = response['settings'] as KeyValue[];
+                        .then((response: {settings: KeyValue[]}) => {
+                          const data = response.settings;
 
                           return new ApplicationSettings(data);
                         });

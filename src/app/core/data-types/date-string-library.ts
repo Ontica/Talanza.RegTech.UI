@@ -5,7 +5,7 @@
  * See LICENSE.txt in the project root for complete license information.
  */
 
-import { DateFormat, LocalizationLibrary, DEFAULT_LANGUAGE, Language } from '../../models/localization';
+import { DateFormat, LocalizationLibrary, DEFAULT_LANGUAGE, Language } from '../localization';
 import { Assertion } from '../general/assertion';
 
 import * as moment from 'moment';
@@ -86,12 +86,14 @@ export class DateStringLibrary {
 
 
   static isLeapYear(year: number): boolean {
-    if ((year % 4) !== 0) {
-      return false;
-    } else if (((year % 100) === 0) && ((year % 400) !== 0)) {
-      return false;
+    const divisibleBy4 = ((year % 4) === 0);
+    const divisibleBy100 = ((year % 100) === 0);
+    const divisibleBy400 = ((year % 400) === 0);
+
+    if (divisibleBy4 && (!divisibleBy100 || divisibleBy400)) {
+      return true;
     }
-    return true;
+    return false;
   }
 
 
@@ -106,14 +108,18 @@ export class DateStringLibrary {
     const month = LocalizationLibrary.shortMonthName(date.getMonth());
     const year = date.getFullYear();
 
-    if (returnedFormat === 'DMY') {
-      return `${day}/${month}/${year}`;
+    switch (returnedFormat) {
+      case 'DMY':
+        return `${day}/${month}/${year}`;
 
-    } else if (returnedFormat === 'YMD') {
-      return `${year}/${month}/${day}`;
+      case 'YMD':
+        return `${year}/${month}/${day}`;
 
-    } else if (returnedFormat === 'MDY') {
-      return `${month}/${day}/${year}`;
+      case 'MDY':
+        return `${month}/${day}/${year}`;
+
+      default:
+        Assertion.assertNoReachThisCode(`Unrecognized format ${returnedFormat}.`);
     }
   }
 

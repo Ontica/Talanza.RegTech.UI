@@ -55,10 +55,10 @@ export class AuthenticationService {
 
   private handleAuthenticationError(error): Promise<never> {
     if (error.status === 401) {
-      return Promise.reject(new Error('The username and password you entered did not match our records. ' +
-                                      'Please try again.'));
+      return Promise.reject(new Error('El nombre de usuario o contraseña no coinciden con los registrados. ' +
+                                      'Favor de intentar nuevamente.'));
     } else {
-      return Promise.reject(new Error(`There is a problem trying to access the system: ` +
+      return Promise.reject(new Error(`Tuve un problema al intentar acceder al sistema: ` +
                                       `${error.status} ${error.statusText} ${error.message}`));
     }
   }

@@ -5,7 +5,7 @@
  * See LICENSE.txt in the project root for complete license information.
  */
 
-export { CoreService } from './core.service';
+export * from './data-types';
 
 export { ExceptionHandler } from './general/exception-handler';
 export { Exception } from './general/exception';
@@ -19,3 +19,5 @@ export { LoggerService } from './general/logger.service';
 
 export { AuthenticationService } from './security/authentication.service';
 export { SecurityGuardService } from './security/security-guard.service';
+
+export * from './localization';
