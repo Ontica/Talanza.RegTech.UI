@@ -8,7 +8,7 @@
 import { Component, ElementRef,
          OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { interval, Subscription } from 'rxjs';
-import { DataObjectsService } from '@app/services/data-objects';
+import { DataObjectsService } from '@app/data-services/data-objects';
 
 
 @Component({

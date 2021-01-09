@@ -7,7 +7,7 @@
 
 import { Component, OnInit } from '@angular/core';
 
-import { PostingsService } from '@app/services/knowledge-base';
+import { PostingsService } from '@app/data-services/knowledge-base';
 
 import { DocumentFilter } from '@app/models/regulation';
 import { Posting, BASE_OBJECT_UID } from '@app/models/knowledge-base';

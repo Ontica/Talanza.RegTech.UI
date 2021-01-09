@@ -17,7 +17,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Observable, of, Subject } from 'rxjs';
 
 import { ProjectStore } from '@app/store/project.store';
-import { TaskService } from '@app/services/project-management/task.service';
+import { TaskService } from '@app/data-services/project-management/task.service';
 
 import { Activity, EmptyActivity, EmptyTask,
          Task, TASK_TYPE_NAME } from '@app/models/project-management';

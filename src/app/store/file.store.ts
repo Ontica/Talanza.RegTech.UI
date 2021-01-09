@@ -8,7 +8,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 
-import { ProjectFilesService } from '@app/services/project-management';
+import { ProjectFilesService } from '@app/data-services/project-management';
 
 import { ProjectItemFile, Project } from '@app/models/project-management';
 

@@ -7,7 +7,7 @@
 
 import { Component, Input, OnInit, OnChanges } from '@angular/core';
 
-import { PostingsService } from '@app/services/knowledge-base';
+import { PostingsService } from '@app/data-services/knowledge-base';
 
 import { Identifiable, Empty, isEmpty } from '@app/core/data-types';
 import { Posting, EmptyPosting } from '@app/models/knowledge-base';

@@ -14,7 +14,6 @@ import { Identifiable } from '@app/core/data-types';
 
 import { DataObject, DataSource } from '@app/models/data-objects';
 import { StepRequirement } from '@app/models/steps';
-import { ProjectItem } from '@app/models/project-management';
 
 
 @Injectable()

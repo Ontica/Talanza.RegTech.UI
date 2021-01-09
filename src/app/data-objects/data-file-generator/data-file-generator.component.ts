@@ -9,7 +9,7 @@ import { Component, OnInit, Input } from '@angular/core';
 
 import { DataObject } from '@app/models/data-objects';
 
-import { DataFormService } from '@app/services/data-objects';
+import { DataFormService } from '@app/data-services/data-objects';
 
 
 @Component({

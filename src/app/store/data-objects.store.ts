@@ -10,7 +10,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 
 import { DataSource } from '@app/models/data-objects';
 
-import { DataObjectsService } from '@app/services/data-objects';
+import { DataObjectsService } from '@app/data-services/data-objects';
 
 
 @Injectable()

@@ -7,7 +7,7 @@
 
 import { Component, Input } from '@angular/core';
 
-import { ContractsService } from '@app/services/regulation';
+import { ContractsService } from '@app/data-services/regulation';
 
 import {
   ContractClause, ContractClauseRef,

@@ -10,8 +10,8 @@ import { ActivatedRoute } from '@angular/router';
 
 import { SharedService } from '@app/shared/services';
 
-import { ContractsService, DocumentService, ProcedureService } from '@app/services/regulation';
-import { PostingsService } from '@app/services/knowledge-base';
+import { ContractsService, DocumentService, ProcedureService } from '@app/data-services/regulation';
+import { PostingsService } from '@app/data-services/knowledge-base';
 
 import { BaseProcedure, ContractClauseRef, Document,
          DocumentFilter, ProcedureFilter } from '@app/models/regulation';

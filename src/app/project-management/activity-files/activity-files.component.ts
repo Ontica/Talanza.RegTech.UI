@@ -18,7 +18,7 @@ import { DataObject } from '@app/models/data-objects';
 import { UserInterfaceStore } from '@app/views/main-layout/ui.store';
 import { FileStore } from '@app/store/file.store';
 
-import { ProjectFilesService } from '@app/services/project-management';
+import { ProjectFilesService } from '@app/data-services/project-management';
 
 
 @Component({

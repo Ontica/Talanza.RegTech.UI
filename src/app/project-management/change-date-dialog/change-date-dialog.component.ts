@@ -13,7 +13,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Observable, of } from 'rxjs';
 
 import { ProjectStore } from '@app/store/project.store';
-import { WhatIfService } from '@app/services/project-management';
+import { WhatIfService } from '@app/data-services/project-management';
 
 import { ActivityTemplate, StateChange, WhatIfResult, Activity } from '@app/models/project-management';
 import { TimelineHelper } from '../common/timeline-helper';

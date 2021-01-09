@@ -9,7 +9,7 @@ import { Component, OnInit, OnChanges, Input } from '@angular/core';
 
 import { Command, EventInfo } from '@app/core/data-types';
 
-import { ProcessService } from '@app/services/regulation';
+import { ProcessService } from '@app/data-services/regulation';
 
 import { ProjectModel } from '@app/store/project.store';
 

@@ -9,7 +9,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { List } from 'immutable';
 
-import { ProjectService } from '@app/services/project-management';
+import { ProjectService } from '@app/data-services/project-management';
 
 import { Contact, Empty } from '@app/core/data-types';
 

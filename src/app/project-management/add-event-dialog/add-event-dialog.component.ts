@@ -15,7 +15,7 @@ import { map, startWith } from 'rxjs/operators';
 
 import { ProjectTemplateStore } from '@app/store/project-template.store';
 import { ProjectStore } from '@app/store/project.store';
-import { WhatIfService } from '@app/services/project-management';
+import { WhatIfService } from '@app/data-services/project-management';
 
 import { ActivityTemplate, Project, StateChange, WhatIfResult, Activity } from '@app/models/project-management';
 import { TimelineHelper } from '../common/timeline-helper';

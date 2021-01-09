@@ -15,7 +15,7 @@ import { DataSource } from '@app/models/data-objects';
 
 import { StepRequirement } from '@app/models/steps';
 
-import { DataObjectsService } from '@app/services/data-objects';
+import { DataObjectsService } from '@app/data-services/data-objects';
 
 
 @Component({

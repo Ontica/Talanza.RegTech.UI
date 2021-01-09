@@ -13,7 +13,7 @@ import { EventInfo } from '@app/core/data-types';
 import { Identifiable, isEmpty } from '@app/core/data-types';
 import { DataFormField, DataObject } from '@app/models/data-objects';
 
-import { DataFormService } from '@app/services/data-objects';
+import { DataFormService } from '@app/data-services/data-objects';
 
 import { FormGroupTransformer } from './form-group-transformer';
 

@@ -7,7 +7,7 @@
 
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
-import { ContractsService } from '@app/services/regulation';
+import { ContractsService } from '@app/data-services/regulation';
 
 import { ContractClauseRef, ContractClause,
          EmptyContractClause } from '@app/models/regulation';

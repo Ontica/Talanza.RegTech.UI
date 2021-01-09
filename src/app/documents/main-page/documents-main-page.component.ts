@@ -7,7 +7,7 @@
 
 import { Component, OnInit } from '@angular/core';
 
-import { DocumentService } from '@app/services/regulation';
+import { DocumentService } from '@app/data-services/regulation';
 import { Document, DocumentFilter } from '@app/models/regulation';
 
 

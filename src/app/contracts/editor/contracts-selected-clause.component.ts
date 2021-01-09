@@ -8,7 +8,7 @@
 import { Component, Input } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { ContractsService } from '@app/services/regulation';
+import { ContractsService } from '@app/data-services/regulation';
 
 import {
   ContractClause, ContractClauseRef,
@@ -16,7 +16,7 @@ import {
 } from '@app/models/regulation';
 
 import { ActivityTemplate } from '@app/models/project-management';
-import { ProjectTemplateService } from '@app/services/project-management';
+import { ProjectTemplateService } from '@app/data-services/project-management';
 
 import { CardSettings } from '@app/shared/common-models';
 

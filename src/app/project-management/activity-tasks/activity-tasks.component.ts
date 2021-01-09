@@ -7,7 +7,7 @@
 
 import { Component, Input, OnChanges } from '@angular/core';
 
-import { TaskService } from '@app/services/project-management/task.service';
+import { TaskService } from '@app/data-services/project-management/task.service';
 
 import { Activity, EmptyActivity, Task, EmptyTask } from '@app/models/project-management';
 

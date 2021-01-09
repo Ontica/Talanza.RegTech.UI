@@ -8,7 +8,7 @@
 import { Component, Input, Output, EventEmitter, OnChanges } from '@angular/core';
 
 import { ProjectModel, ProjectStore } from '@app/store/project.store';
-import { GanttService } from '@app/services/project-management';
+import { GanttService } from '@app/data-services/project-management';
 
 import { Activity, GanttTask, ProjectItemFilter, EmptyProjectItemFilter } from '@app/models/project-management';
 import { FilterHelper } from '../common/filter-helper';

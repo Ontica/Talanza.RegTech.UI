@@ -9,7 +9,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, of, combineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { ProcedureService } from '@app/services/regulation';
+import { ProcedureService } from '@app/data-services/regulation';
 
 import { BaseProcedure, Entity, Procedure } from '@app/models/regulation';
 

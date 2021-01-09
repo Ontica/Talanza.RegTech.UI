@@ -7,7 +7,7 @@
 
 import { Component, Input } from '@angular/core';
 
-import { PostingsService } from '@app/services/knowledge-base';
+import { PostingsService } from '@app/data-services/knowledge-base';
 
 import { Posting, BASE_OBJECT_UID } from '@app/models/knowledge-base';
 

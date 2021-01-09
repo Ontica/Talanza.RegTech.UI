@@ -8,7 +8,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 
-import { PostingsService } from '@app/services/knowledge-base';
+import { PostingsService } from '@app/data-services/knowledge-base';
 
 import { Posting, EmptyPosting, BASE_OBJECT_UID } from '@app/models/knowledge-base';
 

@@ -7,7 +7,7 @@
 
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
-import { EntityService, ProcedureService } from '@app/services/regulation';
+import { EntityService, ProcedureService } from '@app/data-services/regulation';
 
 import { BaseProcedure, Entity, Office, ProcedureFilter } from '@app/models/regulation';
 

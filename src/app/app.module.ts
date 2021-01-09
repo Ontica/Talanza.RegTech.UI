@@ -16,8 +16,6 @@ import { MainLayoutModule } from './views/main-layout/main-layout.module';
 
 import { StoreModule } from './store/store.module';
 
-import { ServicesModule } from './services/services.module';
-
 import { HomeModule } from './home/home.module';
 import { ContractsModule } from './contracts/contracts.module';
 import { DocumentsModule } from './documents/documents.module';
@@ -60,7 +58,6 @@ const EXCEPTION_HANDLER_PROVIDER =  { provide: ErrorHandler, useClass: Exception
     CoreModule,
     MainLayoutModule,
 
-    ServicesModule,
     StoreModule,
 
     HomeModule,
