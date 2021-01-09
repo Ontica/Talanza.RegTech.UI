@@ -7,7 +7,7 @@
 
 import { Injectable } from '@angular/core';
 
-import { CoreService } from '@app/core/core.service';
+import { HttpService } from '@app/core';
 
 import { Document, DocumentFilter } from '@app/models/regulation';
 
@@ -15,13 +15,13 @@ import { Document, DocumentFilter } from '@app/models/regulation';
 @Injectable()
 export class DocumentService {
 
-  constructor(private core: CoreService) { }
+  constructor(private http: HttpService) { }
 
   getDocuments(filter: DocumentFilter): Promise<Document[]> {
     const qs = filter.isEmpty ? '' : '/?' + filter.toQueryString();
 
-    return this.core.http.get<Document[]>(`v1/documents${qs}`)
-                         .toPromise();
+    return this.http.get<Document[]>(`v1/documents${qs}`)
+      .toPromise();
   }
 
 }

@@ -7,9 +7,8 @@
 
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { catchError } from 'rxjs/operators';
 
-import { Assertion, CoreService } from '@app/core';
+import { Assertion, HttpService } from '@app/core';
 
 import { Activity, Contract, Project,
          ProjectProcess, Stage } from '@app/models/project-management';
@@ -17,61 +16,25 @@ import { Activity, Contract, Project,
 import { Contact } from '@app/models/core';
 
 
-enum Errors {
-  COMPLETE_ACTIVITY =
-  '[COMPLETE_ACTIVITY] Ocurrió un problema al cerrar la actividad.',
-
-  COPY_TO_PROJECT=
-  '[COPY_TO_PROJECT] Ocurrió un problema al intentar copiar la actividad.',
-
-  DELETE_ACTIVITY =
-  '[DELETE_ACTIVITY] Ocurrió un problema al intentar eliminar la actividad.',
-
-  GET_ACTIVITIES_ERR =
-  '[GET_ACTIVITIES_ERR] No pude leer la lista de actividades del proyecto.',
-
-  GET_ACTIVITIES_TREE =
-  '[GET_ACTIVITIES_TREE] Ocurrió un problema al leer el árbol de actividades del proyecto.',
-
-  INSERT_ACTIVITY =
-  '[INSERT_ACTIVITY] Ocurrió un problema al agregar la actividad en la lista.',
-
-  MOVE_ACTIVITY =
-  '[MOVE_ACTIVITY] Ocurrió un problema al intentar mover la actividad.',
-
-  MOVE_TO_PROJECT =
-  '[MOVE_TO_PROJECT] Ocurrió un problema al intentar mover la actividad a otro proyecto.',
-
-  REACTIVATE_ACTIVITY =
-  '[REACTIVATE_ACTIVITY] Ocurrió un problema al reactivar la actividad.',
-
-  UPDATE_ACTIVITY =
-  '[UPDATE_ACTIVITY] Ocurrió un problema al actualizar la actividad.'
-}
-
-
 @Injectable()
 export class ProjectService {
 
-  constructor(private core: CoreService) { }
-
+  constructor(private http: HttpService) { }
 
   exportToExcel(project: Project, branch?: Activity): Promise<string> {
     Assertion.assertValue(project, 'project');
 
     const path = `v3/empiria-steps/projects/${project.uid}/export-to-excel/${branch?.uid || ''}`;
 
-    return this.core.http.get<string>(path)
-            .toPromise();
+    return this.http.get<string>(path)
+      .toPromise();
   }
-
 
   getAllActivities(): Observable<Activity[]> {
     const path = `v1/project-management/activities/all-activities`;
 
-    return this.core.http.get<Activity[]>(path);
+    return this.http.get<Activity[]>(path);
   }
-
 
   getContracts(): Observable<Contract[]> {
     const CONTRACTS: Contract[] = [ { uid: '576', name: 'Ronda 2.4' } ];
@@ -79,34 +42,29 @@ export class ProjectService {
     return of(CONTRACTS);
   }
 
-
   getProjectList(): Observable<Project[]> {
     const path = 'v1/project-management/projects';
 
-    return this.core.http.get<Project[]>(path);
+    return this.http.get<Project[]>(path);
   }
-
 
   getRequestersList(projectUID: string): Observable<Contact[]> {
     const path = `v1/project-management/projects/${projectUID}/requesters`;
 
-    return this.core.http.get<Contact[]>(path);
+    return this.http.get<Contact[]>(path);
   }
-
 
   getResourcesList(): Observable<string[]> {
     const path = `v1/project-management/resources`;
 
-    return this.core.http.get<string[]>(path);
+    return this.http.get<string[]>(path);
   }
-
 
   getResponsiblesList(project: Project): Observable<Contact[]> {
     const path = `v1/project-management/projects/166871D7-5CD7-40C7-AA47-618DB5E643B8/responsibles`;
 
-    return this.core.http.get<Contact[]>(path);
+    return this.http.get<Contact[]>(path);
   }
-
 
   getStages(): Observable<Stage[]> {
     const STAGES: Stage[] = [
@@ -122,35 +80,28 @@ export class ProjectService {
     return of(STAGES);
   }
 
-
   getTags(): Observable<string[]> {
     const path = `v1/project-management/tags`;
 
-    return this.core.http.get<string[]>(path);
+    return this.http.get<string[]>(path);
   }
-
 
   getTaskManagers(projectUID: string): Observable<Contact[]> {
     const path = `v1/project-management/projects/${projectUID}/task-managers`;
 
-    return this.core.http.get<Contact[]>(path);
+    return this.http.get<Contact[]>(path);
   }
-
 
   getThemesList(): Observable<string[]> {
     const path = `v1/project-management/themes`;
 
-    return this.core.http.get<string[]>(path);
+    return this.http.get<string[]>(path);
   }
-
 
   getActivitiesTree(project: Project): Observable<Activity[]> {
     const path = `v1/project-management/projects/${project.uid}/as-tree`;
 
-    return this.core.http.get<Activity[]>(path)
-                         .pipe(
-                            catchError((e) => this.core.http.throw(e, Errors.GET_ACTIVITIES_TREE))
-                         );
+    return this.http.get<Activity[]>(path);
   }
 
   // update methods
@@ -160,12 +111,8 @@ export class ProjectService {
 
     const path = `v1/project-management/projects/${activity.project.uid}/activities/${activity.uid}/complete`;
 
-    return this.core.http.post<Activity>(path, updateData)
-                         .pipe(
-                            catchError(e => this.core.http.throw(e, Errors.COMPLETE_ACTIVITY))
-                         );
+    return this.http.post<Activity>(path, updateData);
   }
-
 
   changeParent(activity: Activity, newParent: Activity): Observable<Activity> {
     Assertion.assertValue(activity, 'activity');
@@ -173,9 +120,8 @@ export class ProjectService {
 
     const path = `v1/project-management/projects/${activity.project.uid}/activities/${activity.uid}/change-parent/${newParent.uid}`;
 
-    return this.core.http.post<Activity>(path);
+    return this.http.post<Activity>(path);
   }
-
 
   copyToProject(targetProjectUID: string, activity: Activity): any {
     Assertion.assertValue(targetProjectUID, 'targetProjectUID');
@@ -184,12 +130,8 @@ export class ProjectService {
     const path = `v1/project-management/projects/${activity.project.uid}/activities/` +
                  `${activity.uid}/copyTo/${targetProjectUID}`;
 
-    return this.core.http.post<Activity>(path)
-                         .pipe(
-                            catchError((e) => this.core.http.throw(e, Errors.COPY_TO_PROJECT))
-                         );
+    return this.http.post<Activity>(path);
   }
-
 
   createFromActivityTemplate(targetProject: Project,
                              createFromTemplateData: any): Observable<Activity> {
@@ -198,21 +140,16 @@ export class ProjectService {
 
     const path = `v1/project-management/projects/${targetProject.uid}/create-from-activity-template`;
 
-    return this.core.http.post<Activity>(path, createFromTemplateData);
+    return this.http.post<Activity>(path, createFromTemplateData);
   }
-
 
   deleteActivity(activity: Activity): Observable<void> {
     Assertion.assertValue(activity, 'activity');
 
     const path = `v1/project-management/projects/${activity.project.uid}/activities/${activity.uid}`;
 
-    return this.core.http.delete<any>(path)
-                         .pipe(
-                            catchError((e) => this.core.http.throw(e, Errors.DELETE_ACTIVITY))
-                         );
+    return this.http.delete<any>(path);
   }
-
 
   insertActivity(project: Project,
                  newActivity: { name: string, position: number }): Observable<Activity> {
@@ -224,12 +161,8 @@ export class ProjectService {
 
     const path = `v1/project-management/projects/${project.uid}/activities`;
 
-    return this.core.http.post<Activity>(path, newActivity)
-                         .pipe(
-                            catchError((e) => this.core.http.throw(e, Errors.INSERT_ACTIVITY))
-                         );
+    return this.http.post<Activity>(path, newActivity);
   }
-
 
   updateDeadlines(project: Project, process: ProjectProcess): Observable<Activity> {
     Assertion.assertValue(project, 'project');
@@ -238,9 +171,8 @@ export class ProjectService {
     const path =
         `v1/project-management/projects/${project.uid}/activities/${process.startActivity.uid}/update-deadlines`;
 
-    return this.core.http.post<Activity>(path);
+    return this.http.post<Activity>(path);
   }
-
 
   mergeProcessChanges(project: Project, process: ProjectProcess): Observable<Activity> {
     Assertion.assertValue(project, 'project');
@@ -249,9 +181,8 @@ export class ProjectService {
     const path =
         `v1/project-management/projects/${project.uid}/activities/${process.startActivity.uid}/update-with-last-process-changes`;
 
-    return this.core.http.post<Activity>(path);
+    return this.http.post<Activity>(path);
   }
-
 
   moveActivity(activity: Activity, newPosition: number): Observable<Activity> {
     Assertion.assertValue(activity, 'activity');
@@ -259,12 +190,8 @@ export class ProjectService {
 
     const path = `v1/project-management/projects/${activity.project.uid}/activities/${activity.uid}/change-position/${newPosition}`;
 
-    return this.core.http.post<Activity>(path)
-                         .pipe(
-                            catchError((e) => this.core.http.throw(e, Errors.MOVE_ACTIVITY))
-                         );
+    return this.http.post<Activity>(path);
   }
-
 
   moveToProject(targetProjectUID: string, activity: Activity): any {
     Assertion.assertValue(targetProjectUID, 'targetProjectUID');
@@ -273,12 +200,8 @@ export class ProjectService {
     const path = `v1/project-management/projects/${activity.project.uid}/activities/` +
                  `${activity.uid}/moveTo/${targetProjectUID}`;
 
-    return this.core.http.post<Activity>(path)
-                         .pipe(
-                            catchError((e) => this.core.http.throw(e, Errors.MOVE_TO_PROJECT))
-                         );
+    return this.http.post<Activity>(path);
   }
-
 
   reactivateActivity(activity: Activity): Observable<Activity> {
     Assertion.assertValue(activity, 'activity');
@@ -286,13 +209,8 @@ export class ProjectService {
     const path =
       `v1/project-management/projects/${activity.project.uid}/activities/${activity.uid}/reactivate`;
 
-    return this.core.http.post<Activity>(path)
-                         .pipe(
-                            catchError(e => this.core.http.throw(e, Errors.REACTIVATE_ACTIVITY))
-                         );
-
+    return this.http.post<Activity>(path);
   }
-
 
   updateActivity(activity: Activity, updateData: Partial<Activity>): Observable<Activity> {
     Assertion.assertValue(activity, 'activity');
@@ -300,11 +218,7 @@ export class ProjectService {
 
     const path = `v1/project-management/projects/${activity.project.uid}/activities/${activity.uid}`;
 
-    return this.core.http.patch<Activity>(path, updateData)
-                         .pipe(
-                            catchError(e => this.core.http.showAndThrow(e, Errors.UPDATE_ACTIVITY))
-                         );
-
+    return this.http.patch<Activity>(path, updateData);
   }
 
 }

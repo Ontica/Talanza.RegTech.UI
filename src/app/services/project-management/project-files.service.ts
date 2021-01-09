@@ -28,7 +28,6 @@ export class ProjectFilesService {
     return this.http.get<ProjectItemFile[]>(path);
   }
 
-
   getProjectFiles(project: Project): Observable<ProjectItemFile[]> {
     Assertion.assertValue(project, 'project');
 
@@ -36,7 +35,6 @@ export class ProjectFilesService {
 
     return this.http.get<ProjectItemFile[]>(path);
   }
-
 
   getProjectItemFiles(projectItem: ProjectItem): Observable<MediaFile[]> {
     Assertion.assertValue(projectItem, 'projectItem');
@@ -46,13 +44,11 @@ export class ProjectFilesService {
     return this.http.get<MediaFile[]>(path);
   }
 
-
   deleteProjectItemFile(projectItem: ProjectItem, mediaFile: MediaFile): Observable<void> {
     const path = `v1/project-management/project-items/${projectItem.uid}/files/${mediaFile.uid}`;
 
     return this.http.delete<void>(path);
   }
-
 
   uploadProjectItemFile(projectItem: ProjectItem,
                         fileToUpload: File, metadata: MediaMetadata): Observable<MediaFile> {

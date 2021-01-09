@@ -29,7 +29,6 @@ export class ProjectTemplateService {
                .toPromise();
   }
 
-
   getProjectTemplate(projectTemplateID: string): Observable<ActivityTemplate> {
     Assertion.assertValue(projectTemplateID, 'projectTemplateID');
 
@@ -38,20 +37,17 @@ export class ProjectTemplateService {
     return this.http.get<ActivityTemplate>(path);
   }
 
-
   getProjectTemplatesList(): Observable<Project[]> {
     const path = 'v1/project-management/project-templates';
 
     return this.http.get<Project[]>(path);
   }
 
-
   getStartEvents(project: Project): Observable<ActivityTemplate[]> {
     const path = `v1/project-management/project-templates/start-events/${project.uid}`;
 
     return this.http.get<ActivityTemplate[]>(path);
   }
-
 
   getTreeStructure(projectTemplate: ProjectTemplate): Observable<ActivityTemplate[]> {
     Assertion.assertValue(projectTemplate, 'projectTemplate');
@@ -73,7 +69,6 @@ export class ProjectTemplateService {
     return this.http.post<ActivityTemplate>(path);
   }
 
-
   copyTo(activityTemplate: ActivityTemplate,
          targetProjectTemplateUID: string): Observable<ActivityTemplate> {
     Assertion.assertValue(activityTemplate, 'activityTemplate');
@@ -84,7 +79,6 @@ export class ProjectTemplateService {
     return this.http.post<ActivityTemplate>(path);
   }
 
-
   delete(activityTemplate: ActivityTemplate): Observable<void> {
     Assertion.assertValue(activityTemplate, 'activityTemplate');
 
@@ -92,7 +86,6 @@ export class ProjectTemplateService {
 
     return this.http.delete<any>(path);
   }
-
 
   insert(projectTemplate: ProjectTemplate,
          newActivityTemplate: { name: string, position: number }): Observable<ActivityTemplate> {
@@ -108,7 +101,6 @@ export class ProjectTemplateService {
     return this.http.post<ActivityTemplate>(path, newActivityTemplate);
   }
 
-
   move(activityTemplate: ActivityTemplate,
        newPosition: number): Observable<ActivityTemplate> {
     Assertion.assertValue(activityTemplate, 'activityTemplate');
@@ -118,7 +110,6 @@ export class ProjectTemplateService {
 
     return this.http.post<ActivityTemplate>(path);
   }
-
 
   moveTo(activityTemplate: ActivityTemplate,
          targetProjectTemplateUID: string): Observable<ActivityTemplate> {
@@ -131,7 +122,6 @@ export class ProjectTemplateService {
     return this.http.post<ActivityTemplate>(path);
   }
 
-
   translate(text: string): Observable<string> {
     const path = 'v3/steps/services/translator/to-english';
 
@@ -139,7 +129,6 @@ export class ProjectTemplateService {
 
     return this.http.post<string>(path, body);
   }
-
 
   update(activityTemplate: ActivityTemplate,
          updateData: Partial<ActivityTemplate>): Observable<ActivityTemplate> {

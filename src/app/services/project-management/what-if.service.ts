@@ -19,7 +19,6 @@ export class WhatIfService {
 
   constructor(private http: HttpService) { }
 
-
   processesCheckList(project: Project): Observable<ProjectProcess[]> {
     Assertion.assertValue(project, 'project');
 
@@ -27,7 +26,6 @@ export class WhatIfService {
 
     return this.http.get<ProjectProcess[]>(path);
   }
-
 
   whatIfDeadlinesUpdated(project: Project, process: ProjectProcess): Observable<WhatIfResult> {
     Assertion.assertValue(project, 'project');
@@ -39,8 +37,6 @@ export class WhatIfService {
     return this.http.get<WhatIfResult>(path);
   }
 
-
-
   whatIfUpdatedWithLastProcessChanges(project: Project, process: ProjectProcess): Observable<WhatIfResult> {
     Assertion.assertValue(project, 'project');
     Assertion.assertValue(process, 'process');
@@ -50,7 +46,6 @@ export class WhatIfService {
 
     return this.http.get<WhatIfResult>(path);
   }
-
 
   whatIfCompleted(activity: Activity, completedDate: DateString): Observable<WhatIfResult> {
     Assertion.assertValue(activity, 'activity');
@@ -64,7 +59,6 @@ export class WhatIfService {
 
     return this.http.post<WhatIfResult>(path, body);
   }
-
 
   whatIfCreatedFromEvent(targetProject: Project,
     activityTemplateUID: string,
@@ -82,7 +76,6 @@ export class WhatIfService {
     return this.http.post<WhatIfResult>(path, body);
   }
 
-
   whatIfReactivated(activity: Activity): Observable<WhatIfResult> {
     Assertion.assertValue(activity, 'activity');
 
@@ -91,6 +84,5 @@ export class WhatIfService {
 
     return this.http.get<WhatIfResult>(path);
   }
-
 
 }

@@ -5,10 +5,9 @@
  * See LICENSE.txt in the project root for complete license information.
  */
 
-
 import { Injectable } from '@angular/core';
 
-import { CoreService } from '@app/core/core.service';
+import { HttpService } from '@app/core';
 
 import { Entity } from '@app/models/regulation';
 
@@ -16,16 +15,16 @@ import { Entity } from '@app/models/regulation';
 @Injectable()
 export class EntityService {
 
-  constructor(private core: CoreService) { }
+  constructor(private http: HttpService) { }
 
   getEntity(entityUID: string): Promise<Entity> {
-    return this.core.http.get<Entity>('v1/modeling/entities/' + entityUID)
-                         .toPromise();
+    return this.http.get<Entity>('v1/modeling/entities/' + entityUID)
+      .toPromise();
   }
 
   getEntities(): Promise<Entity[]> {
-    return this.core.http.get<Entity[]>('v1/modeling/entities')
-                         .toPromise();
+    return this.http.get<Entity[]>('v1/modeling/entities')
+      .toPromise();
   }
 
 }

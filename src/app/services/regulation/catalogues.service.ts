@@ -7,7 +7,7 @@
 
 import { Injectable } from '@angular/core';
 
-import { CoreService } from '@app/core';
+import { HttpService } from '@app/core';
 
 import { KeyValue } from '@app/models/core';
 
@@ -15,21 +15,19 @@ import { KeyValue } from '@app/models/core';
 @Injectable()
 export class CataloguesService {
 
-  constructor(private core: CoreService) {}
-
+  constructor(private http: HttpService) {}
 
   getStartsWhenList(): Promise<KeyValue[]> {
     const path = 'v1/catalogues/procedure-starts-when';
 
-    return this.core.http.get<KeyValue[]>(path)
+    return this.http.get<KeyValue[]>(path)
                          .toPromise();
   }
-
 
   getTermTimeUnitsList(): Promise<KeyValue[]> {
     const path = 'v1/catalogues/term-time-units';
 
-    return this.core.http.get<KeyValue[]>(path)
+    return this.http.get<KeyValue[]>(path)
                          .toPromise();
   }
 

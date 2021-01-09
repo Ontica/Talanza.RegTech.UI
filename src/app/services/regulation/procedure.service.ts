@@ -8,7 +8,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { CoreService } from '@app/core/core.service';
+import { HttpService } from '@app/core';
 
 import { BaseProcedure, Entity, Procedure, ProcedureFilter } from '@app/models/regulation';
 
@@ -16,27 +16,26 @@ import { BaseProcedure, Entity, Procedure, ProcedureFilter } from '@app/models/r
 @Injectable()
 export class ProcedureService {
 
-  constructor(private core: CoreService) { }
-
+  constructor(private http: HttpService) { }
 
   getBaseProcedures(): Observable<BaseProcedure[]> {
     const path = `v1/procedures`;
 
-    return this.core.http.get<BaseProcedure[]>(path);
+    return this.http.get<BaseProcedure[]>(path);
   }
 
 
   getEntities(): Observable<Entity[]> {
     const path = 'v1/modeling/entities';
 
-    return this.core.http.get<Entity[]>(path);
+    return this.http.get<Entity[]>(path);
   }
 
 
   getProcedure(uid: string | number): Observable<Procedure> {
     const path = `v1/procedures/${uid}`;
 
-    return this.core.http.get<Procedure>(path);
+    return this.http.get<Procedure>(path);
   }
 
 
@@ -61,27 +60,27 @@ export class ProcedureService {
 
     const path = `v1/procedures${filterAsString}`;
 
-    return this.core.http.get<BaseProcedure[]>(path)
-                         .toPromise();
+    return this.http.get<BaseProcedure[]>(path)
+      .toPromise();
   }
 
 
   getThemes(): Observable<string[]> {
     const path = 'v1/catalogues/procedure-themes';
 
-    return this.core.http.get<string[]>(path);
+    return this.http.get<string[]>(path);
   }
 
 
   createProcedure(procedure: Procedure): Promise<Procedure> {
-    return this.core.http.post<Procedure>('v1/procedures', procedure)
-                         .toPromise();
+    return this.http.post<Procedure>('v1/procedures', procedure)
+      .toPromise();
   }
 
 
   updateProcedure(procedure: Procedure): Promise<Procedure> {
-    return this.core.http.put<Procedure>(`v1/procedures/${procedure.uid}`, procedure)
-                         .toPromise();
+    return this.http.put<Procedure>(`v1/procedures/${procedure.uid}`, procedure)
+      .toPromise();
   }
 
 }

@@ -8,7 +8,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { CoreService } from '@app/core/core.service';
+import { HttpService } from '@app/core';
 
 import { Process } from '@app/models/regulation';
 
@@ -16,22 +16,20 @@ import { Process } from '@app/models/regulation';
 @Injectable()
 export class ProcessService {
 
-  constructor(private core: CoreService) { }
+  constructor(private http: HttpService) { }
 
   getProcesses(): Promise<Process[]> {
-    return this.core.http.get<Process[]>('v1/process-definitions')
-                         .toPromise();
+    return this.http.get<Process[]>('v1/process-definitions')
+      .toPromise();
   }
-
 
   getNewProcessDiagram(): Observable<Process> {
-    return this.core.http.get<Process>('v1/process-definitions/empty-process');
+    return this.http.get<Process>('v1/process-definitions/empty-process');
   }
 
-
   getProcessDiagram(uid: string): Promise<Process> {
-    return this.core.http.get<Process>('v1/process-definitions/' + uid)
-                         .toPromise();
+    return this.http.get<Process>('v1/process-definitions/' + uid)
+      .toPromise();
   }
 
   saveDiagramChanges(process: Process): Promise<Process> {
@@ -39,8 +37,8 @@ export class ProcessService {
       xml: process.xml
     };
 
-    return this.core.http.put<Process>('v1/process-definitions/' + process.uid, body)
-                         .toPromise();
+    return this.http.put<Process>('v1/process-definitions/' + process.uid, body)
+      .toPromise();
   }
 
   saveNewDiagram(process: Process): Promise<Process> {
@@ -50,8 +48,8 @@ export class ProcessService {
       xml: process.xml
     };
 
-    return this.core.http.post<Process>('v1/process-definitions', body)
-                         .toPromise();
+    return this.http.post<Process>('v1/process-definitions', body)
+      .toPromise();
   }
 
 }

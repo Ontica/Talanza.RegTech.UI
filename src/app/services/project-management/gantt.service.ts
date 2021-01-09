@@ -7,32 +7,21 @@
 
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { catchError } from 'rxjs/operators';
 
-import { CoreService } from '@app/core/core.service';
+import { HttpService } from '@app/core';
 
 import { GanttTask, Project } from '@app/models/project-management';
 
 
-enum Errors {
-
-  GET_GANTT_TREE =
-  '[GET_GANTT_TREE] Ocurrió un problema al leer la lista de actividades para el diagrama gantt.',
-
-}
-
 @Injectable()
 export class GanttService {
 
-  constructor(private core: CoreService) { }
+  constructor(private http: HttpService) { }
 
   getActivitiesTree(project: Project): Observable<GanttTask[]> {
     const path = `v1/project-management/projects/${project.uid}/as-gantt`;
 
-    return this.core.http.get<GanttTask[]>(path)
-               .pipe(
-                  catchError((e) => this.core.http.showAndThrow(e, Errors.GET_GANTT_TREE))
-               );
+    return this.http.get<GanttTask[]>(path);
   }
 
 }
