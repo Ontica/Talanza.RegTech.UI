@@ -16,7 +16,7 @@ import { EventInfo } from '@app/core/data-types';
 @Component({
   selector: 'emp-ng-change-password',
   templateUrl: './change-password.component.html',
-  styleUrls: ['../../../styles/form.scss']
+  styleUrls: ['../../../../styles/form.scss']
 })
 export class ChangePasswordComponent {
 

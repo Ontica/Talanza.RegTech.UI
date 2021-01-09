@@ -17,7 +17,7 @@ import { NoContentComponent } from './views/main-layout/no-content.component';
 const routes: Routes = [
   {
     path: 'security',
-    loadChildren: () => import('./security-ui/security-ui.module')
+    loadChildren: () => import('./views/security/security-ui.module')
                             .then(m => m.SecurityUIModule)
   },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
