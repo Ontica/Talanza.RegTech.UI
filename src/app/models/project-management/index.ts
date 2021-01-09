@@ -21,8 +21,6 @@ export * from './commands';
 
 export * from './gantt';
 
-export * from './meeting';
-
 export * from './project-template';
 
 export * from './what-if-result';

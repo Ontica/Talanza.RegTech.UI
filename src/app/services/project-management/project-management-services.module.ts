@@ -8,18 +8,17 @@
 import { NgModule } from '@angular/core';
 
 import { GanttService } from './gantt.service';
-import { ProjectMeetingService } from './project-meeting.service';
 import { ProjectTemplateService } from './project-template.service';
 import { ProjectService } from './project.service';
 import { ProjectFilesService } from './project-files.service';
 import { TaskService } from './task.service';
 import { WhatIfService } from './what-if.service';
 
+
 @NgModule({
 
   providers: [
     GanttService,
-    ProjectMeetingService,
     ProjectTemplateService,
     ProjectService,
     ProjectFilesService,
