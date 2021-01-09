@@ -15,7 +15,7 @@ import { SharedModule } from '@app/shared/shared.module';
 
 import { DataObjectsModule } from '@app/data-objects/data-objects.module';
 import { KnowledgeBaseModule } from '@app/knowledge-base/knowledge-base.module';
-import { ProceduresModule } from '@app/procedures/procedures.module';
+import { ProceduresModule } from '@app/views/procedures/procedures.module';
 
 import { RequirementEditorComponent } from './requirements/requirement-editor.component';
 import { RequirementsListComponent } from './requirements/requirements-list.component';

@@ -1,0 +1,57 @@
+@import "../../../../styles/grid";
+
+//local scss variables
+div {
+  float: left;
+  margin: 0px;
+  outline: none;
+  padding: 0;
+  vertical-align: top;
+}
+
+.main-container {
+  height: calc(100vh - 160px);
+  min-height: 30%;
+  width: 100%;
+}
+
+.left-panel {
+  background-color: #f8f8f8;
+  border: 0px solid #9b1b1f;
+  display: inline-block;
+  height: 100%;
+}
+
+.center-panel {
+  background-color: #f8f8f8;
+  border: 0px solid #9b1b1f;
+  display: inline-block;
+  height: 100%;
+}
+
+.left-resize {
+  background-color: white;
+  cursor: w-resize;
+  display: inline-block;
+  height: 100%;
+}
+
+.grid-search-table {
+  height: 30px;
+}
+
+.clauses-container {
+  height: 100%;
+  overflow-y: auto;
+  width: 100%;
+}
+
+.clause-info-container {
+  overflow-y: scroll;
+  height: 100%;
+  width: 100%;
+}
+
+.full-window-button:hover, .full-window-button:focus {
+  cursor: pointer;
+}

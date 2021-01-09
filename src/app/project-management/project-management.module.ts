@@ -16,7 +16,7 @@ import { WidgetsModule } from '@app/views/main-layout/sidebar/widgets/widgets.mo
 
 import { DataObjectsModule } from '@app/data-objects/data-objects.module';
 import { KnowledgeBaseModule } from '@app/knowledge-base/knowledge-base.module';
-import { ProceduresModule } from '@app/procedures/procedures.module';
+import { ProceduresModule } from '@app/views/procedures/procedures.module';
 import { ProcessesModule } from '@app/processes/processes.module';
 
 import { ActivityEditorComponent } from './activity-editor/activity-editor.component';

@@ -14,7 +14,7 @@ import { AngularMaterialModule } from '@app/shared/angular-material.module';
 import { SharedModule } from '@app/shared/shared.module';
 
 import { KnowledgeBaseModule } from '@app/knowledge-base/knowledge-base.module';
-import { ProceduresModule } from '@app/procedures/procedures.module';
+import { ProceduresModule } from '@app/views/procedures/procedures.module';
 
 import { StepsDesignerComponent } from './designer/steps-designer.component';
 import { StepElementFormComponent } from './designer/element-form/step-element-form.component';

@@ -1,0 +1,43 @@
+@import "../../../../styles/general-styles";
+@import "../../../../styles/card";
+
+.title-bar {
+  height: 32px;
+  background-color: $secondary-color;
+  color: $white;
+  text-align: center;
+}
+
+.close-global-search-icon  {
+  float: right;
+  padding-top: 8px;
+  padding-right: 8px;
+ }
+
+ .close-global-search-icon:hover {
+  font-size: 1.2em;
+  cursor: pointer;
+ }
+
+.gs-container {
+  height: 100%;
+  width: 100%;
+}
+
+.centered-container {
+  margin-left: 15%;
+  margin-right: 15%;
+  width: 70%;
+  height: 100%;
+  overflow-x: hidden;
+}
+
+.block-container {
+  display: inline-block;
+  margin-left: 16px;
+  margin-right: 16px;
+  width: 46%;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+}

@@ -16,8 +16,6 @@ import { MainLayoutModule } from './views/main-layout/main-layout.module';
 
 import { StoreModule } from './store/store.module';
 
-import { HomeModule } from './home/home.module';
-import { ContractsModule } from './contracts/contracts.module';
 import { DocumentsModule } from './documents/documents.module';
 
 import { KnowledgeBaseModule } from './knowledge-base/knowledge-base.module';
@@ -27,11 +25,8 @@ import { DataAnalyticsModule } from './data-analytics/data-analytics.module';
 import { StepsModule } from './steps/steps.module';
 
 import { ProcessesModule } from './processes/processes.module';
-import { GlobalSearchModule } from './global-search/global-search.module';
 
 import { ProjectManagementModule } from './project-management/project-management.module';
-import { LibraryModule } from './library/library.module';
-
 
 import { SharedModule } from './shared/shared.module';
 
@@ -60,19 +55,15 @@ const EXCEPTION_HANDLER_PROVIDER =  { provide: ErrorHandler, useClass: Exception
 
     StoreModule,
 
-    HomeModule,
     KnowledgeBaseModule,
     DashboardModule,
     DataAnalyticsModule,
 
-    ContractsModule,
     DocumentsModule,
     ProcessesModule,
     StepsModule,
     ProjectManagementModule,
-    LibraryModule,
     SharedModule,
-    GlobalSearchModule,
 
     AppRoutingModule,
   ],
