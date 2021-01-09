@@ -6,31 +6,7 @@
  */
 
 
-export interface Layout {
-  name: string;
-  views: View[];
-  hint: string;
-  defaultTitle: string;
-}
-
-
-export interface View {
-  name: string;
-  title: string;
-  url: string;
-  menuTitle?: string;
-  disabled?: boolean;
-}
-
-
-export const DefaultView: View = {
-  name: 'Default view',
-  title: 'Default view',
-  url: '/',
-};
-
-
-export interface ISelectable {
+export interface Selectable {
   selected: boolean;
 }
 
@@ -52,7 +28,7 @@ export class CardSettings {
 
 // colored tag
 
-export interface ColoredTag extends ISelectable {
+export interface ColoredTag extends Selectable {
   name: string;
   color: string;
 }

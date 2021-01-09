@@ -14,7 +14,7 @@ import { ProcedureStore } from '@app/store/procedure.store';
 import { ActivityTemplate, EmptyActivityTemplate } from '@app/models/project-management';
 import { Procedure } from '@app/models/regulation';
 
-import { CardSettings } from '@app/models/user-interface';
+import { CardSettings } from '@app/shared/common-models';
 
 
 @Component({

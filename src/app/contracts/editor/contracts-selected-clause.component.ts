@@ -17,7 +17,8 @@ import {
 
 import { ActivityTemplate } from '@app/models/project-management';
 import { ProjectTemplateService } from '@app/services/project-management';
-import { CardSettings } from '@app/models/user-interface';
+
+import { CardSettings } from '@app/shared/common-models';
 
 
 @Component({

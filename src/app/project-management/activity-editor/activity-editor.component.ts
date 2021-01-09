@@ -9,7 +9,8 @@ import { Component, EventEmitter, Input,
          OnChanges, Output } from '@angular/core';
 
 import { Activity, EmptyActivity } from '@app/models/project-management';
-import { CardSettings } from '@app/models/user-interface';
+
+import { CardSettings } from '@app/shared/common-models';
 
 
 @Component({
