@@ -1,0 +1,28 @@
+@import "../../../../styles/activity";
+
+.form-section {
+  border-bottom: 1px solid $border-color;
+  font-size: 10pt;
+
+  * {
+    margin: 4pt;
+  }
+}
+
+.what-if-section {
+  min-height: 380px;
+  margin-top: 6px;
+}
+
+.activity-container {
+  margin-left: 14pt;
+}
+
+.activity-row {
+  max-width: 680px;
+}
+
+.select-box {
+  max-width: 680px;
+  width: 98%;
+}

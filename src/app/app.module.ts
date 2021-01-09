@@ -16,12 +16,6 @@ import { MainLayoutModule } from './views/main-layout/main-layout.module';
 
 import { StoreModule } from './store/store.module';
 
-import { StepsModule } from './steps/steps.module';
-
-import { ProcessesModule } from './processes/processes.module';
-
-import { ProjectManagementModule } from './project-management/project-management.module';
-
 import { SharedModule } from './shared/shared.module';
 
 // App is our top level component
@@ -49,9 +43,6 @@ const EXCEPTION_HANDLER_PROVIDER =  { provide: ErrorHandler, useClass: Exception
 
     StoreModule,
 
-    ProcessesModule,
-    StepsModule,
-    ProjectManagementModule,
     SharedModule,
 
     AppRoutingModule,

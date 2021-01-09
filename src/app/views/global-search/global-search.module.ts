@@ -29,12 +29,12 @@ import { GlobalSearchRoutingModule } from './global-search-routing.module';
     FormsModule,
     SharedModule,
 
+    GlobalSearchRoutingModule,
+
     ContractsModule,
     DocumentsModule,
     KnowledgeBaseModule,
-    ProceduresModule,
-
-    GlobalSearchRoutingModule
+    ProceduresModule
   ],
 
   declarations: [

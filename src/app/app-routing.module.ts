@@ -22,6 +22,27 @@ const routes: Routes = [
                             .then(m => m.HomeModule)
   },
   {
+    path: 'steps',
+    component: MainLayoutComponent,
+    canActivate: [SecurityGuardService],
+    loadChildren: () => import('./views/steps/steps.module')
+                            .then(m => m.StepsModule)
+  },
+  {
+    path: 'contract-management',
+    component: MainLayoutComponent,
+    canActivate: [SecurityGuardService],
+    loadChildren: () => import('./views/project-management/project-management.module')
+                            .then(m => m.ProjectManagementModule)
+  },
+  {
+    path: 'regulatory-processes',
+    component: MainLayoutComponent,
+    canActivate: [SecurityGuardService],
+    loadChildren: () => import('./views/processes/processes.module')
+                            .then(m => m.ProcessesModule)
+  },
+  {
     path: 'dashboard',
     component: MainLayoutComponent,
     canActivate: [SecurityGuardService],

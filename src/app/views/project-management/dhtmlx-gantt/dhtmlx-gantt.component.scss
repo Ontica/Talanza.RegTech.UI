@@ -1,0 +1,58 @@
+@import "../../../../styles/variables";
+
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: auto;
+}
+
+.gantt-main-container {
+  flex: 1;
+  height: calc(100vh - 272px);
+}
+
+.gantt_container, .gantt_tooltip {
+  font-family: $font-family;
+}
+
+.gantt_grid_scale .gantt_grid_head_cell,
+.gantt_task .gantt_task_scale .gantt_scale_cell {
+  color: $text-color;
+}
+
+.gantt_grid_data .gantt_cell {
+  color: $text-color;
+}
+
+.gantt_task_line {
+  background-color: $action-color;
+  border: $control-border;
+  border-radius: 2px;
+  color: $text-color;
+
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -moz-user-select: -moz-none;
+}
+
+.gantt_task_line:hover {
+  background-color: $action-selected-color;
+  color: $text-color-dark;
+  transition: 0.3s ease-out;
+}
+
+.gantt_tree_icon {
+  width: 8px;
+}
+
+.gantt_grid_data .gantt_row:hover,
+.gantt_grid_data .gantt_row.odd:hover {
+  background-color: $grid-hover-background-color;
+}
+
+.gantt_grid_data .gantt_row.gantt_selected,
+.gantt_grid_data .gantt_row.odd.gantt_selected,
+.gantt_task_row.gantt_selected {
+  background-color: $grid-selected-background-color;
+}

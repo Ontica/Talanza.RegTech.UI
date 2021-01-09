@@ -8,7 +8,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { MultiProjectsMainPageComponent, ProjectFilesMainPageComponent } from '@app/project-management';
+import { MultiProjectsMainPageComponent, ProjectFilesMainPageComponent } from '@app/views/project-management';
 
 
 const routes: Routes = [
