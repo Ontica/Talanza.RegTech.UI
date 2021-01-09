@@ -13,7 +13,7 @@ import { Assertion, HttpService } from '@app/core';
 import { Activity, Contract, Project,
          ProjectProcess, Stage } from '@app/models/project-management';
 
-import { Contact } from '@app/models/core';
+import { Contact } from '@app/core/data-types';
 
 
 @Injectable()

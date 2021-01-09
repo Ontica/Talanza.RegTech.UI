@@ -11,7 +11,7 @@ import { List } from 'immutable';
 
 import { ProjectService } from '@app/services/project-management';
 
-import { Contact, Empty } from '@app/models/core';
+import { Contact, Empty } from '@app/core/data-types';
 
 import { Activity, Contract, Project, Stage, ProjectProcess } from '@app/models/project-management';
 

@@ -8,7 +8,7 @@
 import { Project, EmptyProject } from './project';
 import { Activity } from './activity';
 import { Task } from './task';
-import { Contact } from '../core/contact';
+import { Contact } from '../../core/data-types/contact';
 
 
 export type ProjectItem = Activity | Task;

@@ -5,7 +5,7 @@
  * See LICENSE.txt in the project root for complete license information.
  */
 
-import { Identifiable, PartitionedType } from '@app/models/core';
+import { Identifiable, PartitionedType } from '@app/core/data-types';
 
 
 export interface Contract extends Identifiable {

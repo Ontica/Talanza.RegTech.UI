@@ -5,7 +5,7 @@
  * See LICENSE.txt in the project root for complete license information.
  */
 
-import { Identifiable, isEmpty } from '@app/models/core';
+import { Identifiable, isEmpty } from '@app/core/data-types';
 
 
 export interface TreeNode extends Identifiable {

@@ -7,7 +7,7 @@
 
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
-import { Contact } from '@app/models/core';
+import { Contact } from '@app/core/data-types';
 
 export interface SelectedContacts {
   registered: Contact[];

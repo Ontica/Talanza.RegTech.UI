@@ -5,7 +5,7 @@
  * See LICENSE.txt in the project root for complete license information.
  */
 
-import { Contact } from '../core';
+import { Contact } from '../../core/data-types';
 
 import { BaseProjectItem } from './activity';
 

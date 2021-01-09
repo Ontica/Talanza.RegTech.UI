@@ -5,7 +5,7 @@
  * See LICENSE.txt in the project root for complete license information.
  */
 
-import { DateString } from '@app/models/core';
+import { DateString } from '@app/core/data-types';
 
 
 export class CloseActivityCommand {

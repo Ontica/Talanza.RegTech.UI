@@ -5,7 +5,7 @@
  * See LICENSE.txt in the project root for complete license information.
  */
 
-import { Empty, Identifiable, PartitionedType } from '@app/models/core';
+import { Empty, Identifiable, PartitionedType } from '@app/core/data-types';
 
 
 export interface ProjectTemplate extends Identifiable {

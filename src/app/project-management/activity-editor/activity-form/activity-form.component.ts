@@ -22,7 +22,7 @@ import { TaskService } from '@app/services/project-management/task.service';
 import { Activity, EmptyActivity, EmptyTask,
          Task, TASK_TYPE_NAME } from '@app/models/project-management';
 
-import { Contact, DateStringLibrary, isTypeOf } from '@app/models/core';
+import { Contact, DateStringLibrary, isTypeOf } from '@app/core/data-types';
 
 import { AbstractForm } from '@app/shared/services';
 import { SharedService } from '@app/shared/shared.service';

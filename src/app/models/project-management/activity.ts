@@ -6,7 +6,7 @@
  */
 
 import { Contact, DateString, Empty,
-         Identifiable, PartitionedType } from '@app/models/core';
+         Identifiable, PartitionedType } from '@app/core/data-types';
 
 import { Project } from './project';
 import { ActivityTemplate } from './project-template';

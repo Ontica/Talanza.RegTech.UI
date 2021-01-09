@@ -5,7 +5,7 @@
  * See LICENSE.txt in the project root for complete license information.
  */
 
-import { Identifiable, DateString } from '@app/models/core';
+import { Identifiable, DateString } from '@app/core/data-types';
 
 import { Activity } from './activity';
 import { ActivityTemplate } from './project-template';

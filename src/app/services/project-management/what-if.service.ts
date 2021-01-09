@@ -9,7 +9,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Assertion, HttpService } from '@app/core';
 
-import { DateString } from '@app/models/core';
+import { DateString } from '@app/core/data-types';
 
 import { Activity, Project, ProjectProcess, WhatIfResult } from '@app/models/project-management';
 

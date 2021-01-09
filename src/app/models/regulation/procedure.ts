@@ -5,7 +5,7 @@
  * See LICENSE.txt in the project root for complete license information.
  */
 
-import { Identifiable, PartitionedType } from '../core';
+import { Identifiable, PartitionedType } from '../../core/data-types';
 
 
 export interface BaseProcedure extends Identifiable {

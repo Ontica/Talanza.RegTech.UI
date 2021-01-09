@@ -17,7 +17,7 @@ import { WhatIfService } from '@app/services/project-management';
 
 import { ActivityTemplate, StateChange, WhatIfResult, Activity } from '@app/models/project-management';
 import { TimelineHelper } from '../common/timeline-helper';
-import { DateString } from '@app/models/core';
+import { DateString } from '@app/core/data-types';
 
 
 @Component({

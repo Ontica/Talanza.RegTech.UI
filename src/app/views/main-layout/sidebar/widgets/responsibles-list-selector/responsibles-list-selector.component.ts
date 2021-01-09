@@ -7,7 +7,7 @@
 
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 
-import { Contact } from '@app/models/core';
+import { Contact } from '@app/core/data-types';
 
 
 @Component({

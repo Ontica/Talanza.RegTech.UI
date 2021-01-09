@@ -9,7 +9,7 @@ import { AfterContentInit, Component, ElementRef,
          EventEmitter, Input, OnChanges,
          OnDestroy, Output, SimpleChanges, ViewChild } from '@angular/core';
 
-import { Action, EventData, createEventData } from '@app/models/core';
+import { Command, EventInfo } from '@app/core/data-types';
 
 import * as BpmnJS from 'bpmn-js/dist/bpmn-modeler.production.min.js';
 
@@ -29,9 +29,9 @@ export class BpmnModelerComponent implements AfterContentInit, OnDestroy, OnChan
 
   @Input() xml: string;
 
-  @Input() execute: Action;
+  @Input() execute: Command;
 
-  @Output() bpmnModelerEvent = new EventEmitter<EventData>();
+  @Output() bpmnModelerEvent = new EventEmitter<EventInfo>();
 
   @Output() bpmnModelerError = new EventEmitter<any>();
 
@@ -60,7 +60,7 @@ export class BpmnModelerComponent implements AfterContentInit, OnDestroy, OnChan
       this.modeler.importXML(this.xml, null);
 
     } else if (changes['execute']) {
-      this.executeAction(changes['execute'].currentValue as Action);
+      this.executeAction(changes['execute'].currentValue as Command);
 
     }
   }
@@ -74,12 +74,12 @@ export class BpmnModelerComponent implements AfterContentInit, OnDestroy, OnChan
   }
 
 
-  private executeAction(action: Action) {
-    if (!action) {
+  private executeAction(command: Command) {
+    if (!command) {
       return;
     }
 
-    switch (action.type) {
+    switch (command.type) {
       case 'save':
         this.save();
         return;
@@ -111,9 +111,12 @@ export class BpmnModelerComponent implements AfterContentInit, OnDestroy, OnChan
   private save() {
     this.modeler.saveXML((err: any, xml: any) => {
       if (!err) {
-        const eventData = createEventData('save', { xml: xml });
+        const eventInfo: EventInfo = {
+          type: 'save',
+          payload: { xml: xml }
+        };
 
-        this.bpmnModelerEvent.emit(eventData);
+        this.bpmnModelerEvent.emit(eventInfo);
 
       } else {
         this.bpmnModelerError.emit(err);

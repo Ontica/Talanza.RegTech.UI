@@ -18,7 +18,7 @@ import { View } from '@app/views/main-layout';
 
 import { Exception } from '@app/core';
 
-import { isEmpty } from '@app/models/core';
+import { isEmpty } from '@app/core/data-types';
 
 
 @Component({

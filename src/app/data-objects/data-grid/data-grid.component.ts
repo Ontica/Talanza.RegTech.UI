@@ -9,7 +9,7 @@ import { Component, Input, OnChanges } from '@angular/core';
 
 import { EventInfo } from '@app/core/data-types';
 
-import { Identifiable, isEmpty } from '@app/models/core';
+import { Identifiable, isEmpty } from '@app/core/data-types';
 import { DataObject } from '@app/models/data-objects';
 
 import { DataFormService } from '@app/services/data-objects';

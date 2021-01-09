@@ -7,7 +7,7 @@
 
 import { Component, OnInit, OnChanges, Input } from '@angular/core';
 
-import { Action, createAction, EventData } from '@app/models/core';
+import { Command, EventInfo } from '@app/core/data-types';
 
 import { ProcessService } from '@app/services/regulation';
 
@@ -23,7 +23,7 @@ export class ProcessDiagramEditorComponent implements OnInit, OnChanges {
 
   xml: string;
 
-  modelerAction: Action;
+  modelerAction: Command;
 
   @Input() project: ProjectModel;
 
@@ -45,13 +45,15 @@ export class ProcessDiagramEditorComponent implements OnInit, OnChanges {
   }
 
 
-  onModelerEvent(event: EventData) {
+  onModelerEvent(event: EventInfo) {
     console.log('Modeler event', event);
   }
 
 
   onSave() {
-    this.modelerAction = createAction('save');
+    this.modelerAction = {
+      type: 'save'
+    };
   }
 
 }

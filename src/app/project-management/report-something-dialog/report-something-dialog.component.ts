@@ -18,7 +18,7 @@ import { WhatIfService } from '@app/services/project-management';
 
 import { ActivityTemplate, Project, StateChange, WhatIfResult, Activity } from '@app/models/project-management';
 import { TimelineHelper } from '../common/timeline-helper';
-import { isEmpty } from '@app/models/core';
+import { isEmpty } from '@app/core/data-types';
 
 
 @Component({

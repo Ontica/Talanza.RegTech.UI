@@ -9,7 +9,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 
 import { EmptyProjectItemFilter,
          ProjectItemFilter, ProjectItemFile } from '@app/models/project-management';
-import { StringLibrary } from '@app/models/core';
+import { StringLibrary } from '@app/core/data-types';
 
 
 @Pipe({

@@ -12,7 +12,7 @@ import {
   FormGroup, Validators
 } from '@angular/forms';
 
-import { Identifiable, Empty } from '@app/models/core';
+import { Identifiable, Empty } from '@app/core/data-types';
 import { Posting, EmptyPosting } from '@app/models/knowledge-base';
 import { SelectedContacts } from '@app/shared/contacts-picker/contacts-picker.component';
 import { ProjectStore } from '@app/store/project.store';

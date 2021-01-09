@@ -17,7 +17,7 @@ import { ActivityTemplate, ActivityTemplateOperation,
 
 import { View } from '@app/views/main-layout';
 
-import { isEmpty } from '@app/models/core';
+import { isEmpty } from '@app/core/data-types';
 
 
 @Component({

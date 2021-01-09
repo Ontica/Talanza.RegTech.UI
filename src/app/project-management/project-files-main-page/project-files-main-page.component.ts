@@ -16,7 +16,7 @@ import { FileToUpload } from '@app/models/knowledge-base';
 
 import { View } from '@app/views/main-layout';
 
-import { isEmpty } from '@app/models/core';
+import { isEmpty } from '@app/core/data-types';
 
 
 @Component({

@@ -10,7 +10,7 @@ import { FormGroup } from '@angular/forms';
 
 import { EventInfo } from '@app/core/data-types';
 
-import { Identifiable, isEmpty } from '@app/models/core';
+import { Identifiable, isEmpty } from '@app/core/data-types';
 import { DataFormField, DataObject } from '@app/models/data-objects';
 
 import { DataFormService } from '@app/services/data-objects';

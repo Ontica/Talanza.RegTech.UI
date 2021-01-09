@@ -5,7 +5,7 @@
  * See LICENSE.txt in the project root for complete license information.
  */
 
-import { DateStringLibrary } from '@app/models/core';
+import { DateStringLibrary } from '@app/core/data-types';
 
 import { Activity } from '@app/models/project-management';
 

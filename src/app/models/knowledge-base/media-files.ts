@@ -5,7 +5,7 @@
  * See LICENSE.txt in the project root for complete license information.
  */
 
-import { Identifiable, DateString, Empty } from '../core';
+import { Identifiable, DateString, Empty } from '../../core/data-types';
 
 
 export interface FileToUpload {

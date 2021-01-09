@@ -10,7 +10,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { Assertion } from '@app/core';
 
 import { Activity } from '@app/models/project-management';
-import { DateString, DateStringLibrary } from '@app/models/core';
+import { DateString, DateStringLibrary } from '@app/core/data-types';
 
 export type GroupByDateProperty = 'actualEndDate' | 'plannedEndDate' | 'deadline' | 'actualStartDate';
 export type GroupByProperty = 'timeline' | 'responsible' | 'tag' | 'theme' | 'resource' | GroupByDateProperty;

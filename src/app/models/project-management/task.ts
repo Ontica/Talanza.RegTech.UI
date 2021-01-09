@@ -5,7 +5,7 @@
  * See LICENSE.txt in the project root for complete license information.
  */
 
-import { Empty, DateString, Identifiable, PartitionedType } from '@app/models/core';
+import { Empty, DateString, Identifiable, PartitionedType } from '@app/core/data-types';
 
 import { Duration, DefaultDuration } from './activity';
 

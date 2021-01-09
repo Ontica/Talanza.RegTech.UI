@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 
 import { HttpService, Assertion } from '@app/core';
 
-import { Identifiable } from '@app/models/core';
+import { Identifiable } from '@app/core/data-types';
 
 import { DataObject, DataSource } from '@app/models/data-objects';
 import { StepRequirement } from '@app/models/steps';
