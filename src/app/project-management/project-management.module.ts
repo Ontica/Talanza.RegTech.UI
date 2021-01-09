@@ -12,7 +12,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 
 import { AngularMaterialModule } from '@app/shared/angular-material.module';
 import { SharedModule } from '@app/shared/shared.module';
-import { WidgetsModule } from '@app/shared/widgets/widgets.module';
+import { WidgetsModule } from '@app/views/main-layout/sidebar/widgets/widgets.module';
 
 import { DataObjectsModule } from '@app/data-objects/data-objects.module';
 import { KnowledgeBaseModule } from '@app/knowledge-base/knowledge-base.module';

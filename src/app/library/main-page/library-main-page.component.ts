@@ -8,8 +8,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 
-import { UserInterfaceStore } from '@app/store/ui.store';
-import { View } from '@app/models/user-interface';
+import { UserInterfaceStore } from '@app/views/main-layout/ui.store';
+
+import { View } from '@app/views/main-layout';
 
 
 @Component({

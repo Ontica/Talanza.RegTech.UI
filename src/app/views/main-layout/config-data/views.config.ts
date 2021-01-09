@@ -5,7 +5,7 @@
  * See LICENSE.txt in the project root for complete license information.
  */
 
-import { View } from './user-interface';
+import { View } from "../common-models";
 
 
 export const HomePageViews: View[] = [

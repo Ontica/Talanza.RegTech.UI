@@ -9,11 +9,13 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription, Observable, of } from 'rxjs';
 
 import { FileStore } from '@app/store/file.store';
-import { UserInterfaceStore } from '@app/store/ui.store';
+import { UserInterfaceStore } from '@app/views/main-layout/ui.store';
 
 import { ProjectItemFile, ProjectItemFilter, EmptyProjectItemFilter } from '@app/models/project-management';
 import { FileToUpload } from '@app/models/knowledge-base';
-import { View } from '@app/models/user-interface';
+
+import { View } from '@app/views/main-layout';
+
 import { isEmpty } from '@app/models/core';
 
 

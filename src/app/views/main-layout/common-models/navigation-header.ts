@@ -5,7 +5,7 @@
  * See LICENSE.txt in the project root for complete license information.
  */
 
-import { Layout } from './user-interface';
+import { Layout } from './common';
 import { MenuItem, createMenuItemForView } from './menu-item';
 
 

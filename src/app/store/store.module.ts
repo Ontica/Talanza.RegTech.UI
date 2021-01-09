@@ -14,7 +14,7 @@ import { ProcedureStore } from './procedure.store';
 import { ProjectStore } from './project.store';
 import { ProjectTemplateStore } from './project-template.store';
 import { StepsStore } from './steps.store';
-import { UserInterfaceStore } from './ui.store';
+import { UserInterfaceStore } from '../views/main-layout/ui.store';
 
 
 @NgModule({

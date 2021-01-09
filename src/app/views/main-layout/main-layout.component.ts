@@ -8,7 +8,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivationEnd, Router } from '@angular/router';
 
-import { UserInterfaceStore } from '@app/store/ui.store';
+import { UserInterfaceStore } from './ui.store';
 
 
 @Component({

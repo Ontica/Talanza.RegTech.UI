@@ -9,13 +9,13 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { StepsStore } from '@app/store/steps.store';
-import { UserInterfaceStore } from '@app/store/ui.store';
+import { UserInterfaceStore } from '@app/views/main-layout/ui.store';
 
 import { ActivityTemplate, ActivityTemplateOperation,
          EmptyActivityTemplate,
          ProjectTemplate, } from '@app/models/project-management';
 
-import { View } from '@app/models/user-interface';
+import { View } from '@app/views/main-layout';
 
 import { Process } from '@app/models/steps';
 

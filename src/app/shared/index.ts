@@ -5,4 +5,4 @@
  * https://github.com/angular/angular.io/issues/1301
  */
 
-export { MainLayoutComponent } from './main-layout/main-layout.component';
+export { MainLayoutComponent } from '../views/main-layout/main-layout.component';

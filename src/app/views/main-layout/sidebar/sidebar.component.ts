@@ -8,16 +8,16 @@
 import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 
-import { UserInterfaceStore } from '@app/store/ui.store';
+import { UserInterfaceStore } from '@app/views/main-layout/ui.store';
 import { ProjectTemplateStore } from '@app/store/project-template.store';
 import { ProjectStore } from '@app/store/project.store';
-
-import { Layout } from '@app/models/user-interface';
 
 import { Project, ProjectTemplate,
          ProjectItemFilter, EmptyProjectItemFilter } from '@app/models/project-management';
 
 import { Contact } from '@app/models/regulation';
+
+import { Layout } from '../common-models';
 
 
 @Component({

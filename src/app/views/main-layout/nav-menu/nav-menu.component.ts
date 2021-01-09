@@ -8,7 +8,7 @@
 import { Component, EventEmitter,
          Input, Output } from '@angular/core';
 
-import { MenuItem } from '../../models/user-interface';
+import { MenuItem } from '../common-models';
 
 
 @Component({

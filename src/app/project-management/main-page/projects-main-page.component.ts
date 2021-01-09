@@ -9,12 +9,12 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { ProjectStore , ProjectModel } from '@app/store/project.store';
-import { UserInterfaceStore } from '@app/store/ui.store';
+import { UserInterfaceStore } from '@app/views/main-layout/ui.store';
 
 import { Activity, ActivityOperation, EmptyActivity,
          ProjectItemFilter, EmptyProjectItemFilter } from '@app/models/project-management';
 
-import { View } from '@app/models/user-interface';
+import { View } from '@app/views/main-layout';
 
 import { Exception } from '@app/core';
 

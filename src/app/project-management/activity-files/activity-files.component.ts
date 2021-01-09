@@ -15,7 +15,7 @@ import { EmptyActivity, ProjectItem } from '@app/models/project-management';
 import { MediaFile, FileToUpload, EmptyMediaFile } from '@app/models/knowledge-base';
 import { DataObject } from '@app/models/data-objects';
 
-import { UserInterfaceStore } from '@app/store/ui.store';
+import { UserInterfaceStore } from '@app/views/main-layout/ui.store';
 import { FileStore } from '@app/store/file.store';
 
 import { ProjectFilesService } from '@app/services/project-management';

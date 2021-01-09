@@ -11,7 +11,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AngularMaterialModule } from '@app/shared/angular-material.module';
-import { WidgetsModule } from '@app/shared/widgets/widgets.module';
+import { WidgetsModule } from '@app/views/main-layout/sidebar/widgets/widgets.module';
 
 import { SharedModule } from '@app/shared/shared.module';
 

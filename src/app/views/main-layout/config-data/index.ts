@@ -8,10 +8,6 @@
 
 export * from './layout-config';
 
-export * from './menu-item';
-
-export * from './navigation-header';
-
-export * from './user-interface';
+export * from './views.config';
 
 export * from './value-selectors';

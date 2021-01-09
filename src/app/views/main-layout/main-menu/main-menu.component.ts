@@ -8,7 +8,7 @@
 import { Component } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
-import { UserInterfaceStore } from '@app/store/ui.store';
+import { UserInterfaceStore } from '@app/views/main-layout/ui.store';
 
 
 @Component({

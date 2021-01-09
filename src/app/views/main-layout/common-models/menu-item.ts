@@ -5,58 +5,58 @@
  * See LICENSE.txt in the project root for complete license information.
  */
 
-import { View } from './user-interface';
+import { View } from './common';
 
 
 export class MenuItem {
 
-  readonly action: string = '';
+  readonly action: string;
 
-  readonly text: string = '';
+  readonly text: string;
 
-  readonly routerLink: string = '';
+  readonly routerLink: string;
 
-  private _disabled = false;
+  private disabledFlag = false;
 
-  private _selected = false;
+  private selectedFlag = false;
 
 
-  constructor(text: string, action: string = '', routerLink: string = '', disabled: boolean = false) {
+  constructor(text: string, action = '', routerLink = '', disabled = false) {
     this.text = text;
     this.action = action;
     this.routerLink = routerLink;
-    this._disabled = disabled;
+    this.disabledFlag = disabled;
   }
 
 
   get disabled(): boolean {
-    return this._disabled;
+    return this.disabledFlag;
   }
 
 
   get enabled(): boolean {
-    return !this._disabled;
+    return !this.disabledFlag;
   }
 
 
   get selected(): boolean {
-    return this._selected;
+    return this.selectedFlag;
   }
 
   enable() {
-    this._disabled = false;
+    this.disabledFlag = false;
   }
 
   disable() {
-    this._disabled = true;
+    this.disabledFlag = true;
   }
 
   select() {
-    this._selected = true;
+    this.selectedFlag = true;
   }
 
   unselect() {
-    this._selected = false;
+    this.selectedFlag = false;
   }
 
 }

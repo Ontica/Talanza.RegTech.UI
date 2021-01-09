@@ -10,7 +10,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
-import { AngularMaterialModule } from '../angular-material.module';
+import { AngularMaterialModule } from '../../../../shared/angular-material.module';
 
 import { ProcessSelectorComponent } from './process-selector/process-selector.component';
 import { ProjectSelectorComponent } from './project-selector/project-selector.component';

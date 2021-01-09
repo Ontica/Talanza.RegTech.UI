@@ -12,19 +12,13 @@ import { RouterModule } from '@angular/router';
 
 import { DatepickerComponent } from './datepicker/datepicker.component';
 import { FileControlComponent } from './file-control/file-control.component';
-import { MainLayoutComponent } from './main-layout/main-layout.component';
-import { MainMenuComponent } from './main-layout/main-menu/main-menu.component';
-
-import { SidebarComponent } from './main-layout/sidebar/sidebar.component';
 
 import { CardComponent } from './card/card.component';
+
 import { ContactsPickerComponent } from './contacts-picker/contacts-picker.component';
 import { InlineEditorComponent } from './inline-editor/inline-editor.component';
 import { MessageBoxComponent } from './message-box/message-box.component';
 import { ModalWindowComponent } from './modal-window';
-import { NavigationHeaderComponent } from './nav-header/nav-header.component';
-import { NavigationMenuComponent } from './nav-menu/nav-menu.component';
-import { NoContentComponent } from './no-content/no-content.component';
 import { ObjectComponent } from './object/object.component';
 import { RagStatusComponent } from './rag-status/rag-status.component';
 import { SafeHtmlPipe } from './pipes/safe-html.pipe';
@@ -35,12 +29,10 @@ import { SpinnerComponent } from './spinner/spinner.component';
 import { SpinnerHostDirective } from './spinner/spinner-host.directive';
 
 import { AngularMaterialModule } from './angular-material.module';
-import { WidgetsModule } from './widgets/widgets.module';
 
 import { MessageBoxService } from './message-box/message.box.service';
 import { SharedService } from './shared.service';
 import { SpinnerService } from './spinner/spinner.service';
-import { SecurityUIModule } from '@app/security-ui/security-ui.module';
 
 
 @NgModule({
@@ -50,28 +42,18 @@ import { SecurityUIModule } from '@app/security-ui/security-ui.module';
     RouterModule,
     FormsModule,
 
-    AngularMaterialModule,
-    WidgetsModule,
-
-    SecurityUIModule
+    AngularMaterialModule
   ],
 
   declarations: [
     DatepickerComponent,
     FileControlComponent,
-    MainLayoutComponent,
-    MainMenuComponent,
-
-    SidebarComponent,
 
     CardComponent,
     ContactsPickerComponent,
     InlineEditorComponent,
     MessageBoxComponent,
     ModalWindowComponent,
-    NavigationHeaderComponent,
-    NavigationMenuComponent,
-    NoContentComponent,
     ObjectComponent,
     RagStatusComponent,
     SafeHtmlPipe,
@@ -83,15 +65,12 @@ import { SecurityUIModule } from '@app/security-ui/security-ui.module';
 
   exports: [
     CardComponent,
-    ContactsPickerComponent,
     DatepickerComponent,
+    ContactsPickerComponent,
     FileControlComponent,
     InlineEditorComponent,
-    MainLayoutComponent,
     MessageBoxComponent,
     ModalWindowComponent,
-    NavigationHeaderComponent,
-    NoContentComponent,
     ObjectComponent,
     RagStatusComponent,
     SafeHtmlPipe,

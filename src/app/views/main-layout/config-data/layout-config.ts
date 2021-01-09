@@ -5,7 +5,7 @@
  * See LICENSE.txt in the project root for complete license information.
  */
 
-import { View, Layout } from './user-interface';
+import { View, Layout } from '../common-models/common';
 
 import { HomePageViews,
          ProjectManagementViews,
