@@ -14,7 +14,7 @@ import { CdkDragDrop } from '@angular/cdk/drag-drop';
 import { ProjectModel } from '@app/store/project.store';
 
 import { Activity, EmptyActivity, ActivityOperation,
-         ProjectItemFilter, EmptyProjectItemFilter, ProjectItemStatus } from '@app/models/project-management';
+         ProjectItemStatus } from '@app/models/project-management';
 
 import { AddEventDialogComponent } from '../add-event-dialog/add-event-dialog.component';
 import { CheckProcessesDialogComponent } from '../check-processes-dialog/check-processes-dialog.component';
@@ -25,6 +25,7 @@ import { CollapsableTree, CollapsableTreeNodeDisplayMode } from '../common/colla
 import { FilterHelper } from '../common/filter-helper';
 import { ExportActivitiesDialogComponent } from '../export-activities-dialog/export-activities-dialog.component';
 
+import { MainSidebarValues, DefaultSidebarValues} from '@app/views/main-layout';
 
 @Component({
   selector: 'emp-steps-activity-tree',
@@ -40,7 +41,7 @@ export class ActivityTreeComponent implements OnChanges {
   insertActivityEditorVisible = false;
 
   @Input() project: ProjectModel;
-  @Input() filter: ProjectItemFilter = EmptyProjectItemFilter;
+  @Input() filter: MainSidebarValues = DefaultSidebarValues;
   @Input() collapsedActivities = [];
   @Input() useForeignLanguage: false;
 

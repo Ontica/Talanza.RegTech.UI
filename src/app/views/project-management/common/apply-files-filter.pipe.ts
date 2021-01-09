@@ -7,9 +7,10 @@
 
 import { Pipe, PipeTransform } from '@angular/core';
 
-import { EmptyProjectItemFilter,
-         ProjectItemFilter, ProjectItemFile } from '@app/models/project-management';
+import { ProjectItemFile } from '@app/models/project-management';
 import { StringLibrary } from '@app/core/data-types';
+
+import { MainSidebarValues, DefaultSidebarValues} from '@app/views/main-layout';
 
 
 @Pipe({
@@ -17,11 +18,11 @@ import { StringLibrary } from '@app/core/data-types';
 })
 export class ApplyFilesFilterPipe implements PipeTransform {
 
-  filter: ProjectItemFilter = EmptyProjectItemFilter;
+  filter: MainSidebarValues = DefaultSidebarValues;
 
 
-  transform(data: ProjectItemFile[], filter: ProjectItemFilter): ProjectItemFile[] {
-    this.filter = filter || EmptyProjectItemFilter;
+  transform(data: ProjectItemFile[], filter: MainSidebarValues): ProjectItemFile[] {
+    this.filter = filter || DefaultSidebarValues;
 
     if (!data) {
       return [];

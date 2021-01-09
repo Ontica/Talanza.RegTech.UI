@@ -8,7 +8,8 @@
 import { Component } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
-import { UserInterfaceStore } from '@app/views/main-layout/ui.store';
+import { PresentationLayer } from '@app/core/presentation';
+import { MainUIStateSelector } from '@app/core/presentation/presentation-types';
 
 
 @Component({
@@ -20,8 +21,8 @@ export class MainMenuComponent {
 
   reportingTools: Observable<boolean> = of(false);
 
-  constructor(uistore: UserInterfaceStore) {
-    this.reportingTools = uistore.reportingTools;
+  constructor(uiLayer: PresentationLayer) {
+    this.reportingTools = uiLayer.select<boolean>(MainUIStateSelector.REPORTING_TOOLS);
   }
 
 }

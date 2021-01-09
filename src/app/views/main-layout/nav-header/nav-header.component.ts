@@ -8,9 +8,10 @@
 import { Component, EventEmitter, Output, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 
-import { UserInterfaceStore } from '@app/views/main-layout/ui.store';
+import { PresentationState } from '@app/core/presentation';
 
 import { MenuItem, NavigationHeader } from '@app/views/main-layout';
+import { MainUIStateSelector } from '@app/core/presentation/presentation-types';
 
 
 @Component({
@@ -26,15 +27,14 @@ export class NavigationHeaderComponent implements OnInit, OnDestroy {
 
   private subscription: Subscription;
 
-  constructor(protected uiStore: UserInterfaceStore) { }
-
+  constructor(protected state: PresentationState) { }
 
   ngOnInit() {
-    this.subscription = this.uiStore.navigationHeader.subscribe (
+    this.subscription = this.state.select<NavigationHeader>(MainUIStateSelector.NAVIGATION_HEADER)
+    .subscribe (
       value => this.navigationHeader = value
     );
   }
-
 
   ngOnDestroy() {
     if (this.subscription) {
@@ -42,10 +42,8 @@ export class NavigationHeaderComponent implements OnInit, OnDestroy {
     }
   }
 
-
   onClickMenu(menuItem: MenuItem) {
     this.action.emit(menuItem.action);
   }
-
 
 }

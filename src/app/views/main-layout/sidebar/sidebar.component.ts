@@ -6,18 +6,19 @@
  */
 
 import { Component, Input, OnInit, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs';
 
-import { UserInterfaceStore } from '@app/views/main-layout/ui.store';
+import { PresentationLayer, SubscriptionHelper } from '@app/core/presentation';
+
 import { ProjectTemplateStore } from '@app/store/project-template.store';
 import { ProjectStore } from '@app/store/project.store';
 
-import { Project, ProjectTemplate,
-         ProjectItemFilter, EmptyProjectItemFilter } from '@app/models/project-management';
+import { Project, ProjectTemplate } from '@app/models/project-management';
 
 import { Contact } from '@app/models/regulation';
 
-import { Layout } from '../common-models';
+import { DefaultSidebarValues, Layout, MainSidebarValues } from '../common-models';
+
+import { MainUIStateAction, MainUIStateSelector } from '@app/core/presentation/presentation-types';
 
 
 @Component({
@@ -29,55 +30,42 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
   @Input() layout: Layout;
 
-  filter: ProjectItemFilter = EmptyProjectItemFilter;
+  filter: MainSidebarValues = DefaultSidebarValues;
 
-  private subs1: Subscription;
-  private subs2: Subscription;
+  private subscriptionHelper: SubscriptionHelper;
 
-  constructor(public uiStore: UserInterfaceStore,
+  constructor(private uiLayer: PresentationLayer,
               public processStore: ProjectTemplateStore,
-              public projectStore: ProjectStore) {}
-
+              public projectStore: ProjectStore) {
+    this.subscriptionHelper = uiLayer.createSubscriptionHelper();
+  }
 
   ngOnInit() {
-    this.subs1 = this.uiStore.layout.subscribe(
-      value => this.layout = value
-    );
+    this.subscriptionHelper.select<Layout>(MainUIStateSelector.LAYOUT)
+      .subscribe(value => this.layout = value);
 
-    this.subs2 = this.uiStore.getValue<ProjectItemFilter>('Sidebar.ProjectFilter',
-                                                          EmptyProjectItemFilter).subscribe(
-      value => this.filter = value
-    );
-
+    this.subscriptionHelper.select<MainSidebarValues>(MainUIStateSelector.SIDEBAR_VALUES)
+      .subscribe(values => this.filter = values);
   }
-
 
   ngOnDestroy() {
-    if (this.subs1) {
-      this.subs1.unsubscribe();
-    }
-    if (this.subs2) {
-      this.subs2.unsubscribe();
-    }
+    this.subscriptionHelper.destroy();
   }
-
 
   onProcessChange(process: ProjectTemplate) {
     this.processStore.selectTemplate(process);
   }
 
-
   onMultiProjectsChange(multiProjectsList: Project[]) {
     this.filter = {...this.filter, projects: multiProjectsList };
 
-    this.uiStore.setValue<ProjectItemFilter>('Sidebar.ProjectFilter', this.filter);
+    this.uiLayer.dispatch(MainUIStateAction.SET_SIDEBAR_VALUES, this.filter);
   }
-
 
   onProjectChange(project: Project) {
     if (project && project.uid) {
       this.filter = {...this.filter, selectedProject: project };
-      this.uiStore.setValue<ProjectItemFilter>('Sidebar.ProjectFilter', this.filter);
+      this.uiLayer.dispatch(MainUIStateAction.SET_SIDEBAR_VALUES, this.filter);
       this.projectStore.selectProject(project);
     }
   }
@@ -86,21 +74,21 @@ export class SidebarComponent implements OnInit, OnDestroy {
   onResponsiblesChange(responsibleList: Contact[]) {
     this.filter = {...this.filter, responsibles: responsibleList };
 
-    this.uiStore.setValue<ProjectItemFilter>('Sidebar.ProjectFilter', this.filter);
+    this.uiLayer.dispatch(MainUIStateAction.SET_SIDEBAR_VALUES, this.filter);
   }
 
 
   onTagsChange(tagsList: string[]) {
     this.filter = {...this.filter, tags: tagsList };
 
-    this.uiStore.setValue<ProjectItemFilter>('Sidebar.ProjectFilter', this.filter);
+    this.uiLayer.dispatch(MainUIStateAction.SET_SIDEBAR_VALUES, this.filter);
   }
 
 
   onThemesChange(themesList: string[]) {
     this.filter = {...this.filter, themes: themesList };
 
-    this.uiStore.setValue<ProjectItemFilter>('Sidebar.ProjectFilter', this.filter);
+    this.uiLayer.dispatch(MainUIStateAction.SET_SIDEBAR_VALUES, this.filter);
   }
 
 
@@ -113,16 +101,22 @@ export class SidebarComponent implements OnInit, OnDestroy {
         return this.layout.name === 'Projects';
 
       case 'ProjectsListSelector':
-        return this.layout.name === 'Home' || this.layout.name === 'Dashboard' || this.layout.name === 'Data';
+        return this.layout.name === 'Home' ||
+               this.layout.name === 'Dashboard' ||
+               this.layout.name === 'Data';
 
       case 'ResponsiblesListSelector':
-        return this.layout.name === 'Home' || this.layout.name === 'Projects';
+        return this.layout.name === 'Home' ||
+               this.layout.name === 'Projects';
 
       case 'TagsListSelector':
-        return this.layout.name === 'Home' || this.layout.name === 'Projects';
+        return this.layout.name === 'Home' ||
+               this.layout.name === 'Projects';
 
       case 'ThemesListSelector':
-        return this.layout.name !== 'Processes' && this.layout.name !== 'Dashboard' && this.layout.name !== 'Data';
+        return this.layout.name !== 'Processes' &&
+               this.layout.name !== 'Dashboard' &&
+               this.layout.name !== 'Data';
     }
   }
 

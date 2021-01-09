@@ -6,19 +6,23 @@
  */
 
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Subscription, Observable, of } from 'rxjs';
+import { Observable, of } from 'rxjs';
+
+import { PresentationLayer, SubscriptionHelper } from '@app/core/presentation';
 
 import { FileStore } from '@app/store/file.store';
-import { UserInterfaceStore } from '@app/views/main-layout/ui.store';
 
-import { ProjectItemFile, ProjectItemFilter,
-         EmptyProjectItemFilter } from '@app/models/project-management';
+import { ProjectItemFile } from '@app/models/project-management';
 
 import { FileToUpload } from '@app/models/knowledge-base';
 
 import { View } from '@app/views/main-layout';
 
 import { isEmpty } from '@app/core/data-types';
+
+import { MainSidebarValues, DefaultSidebarValues} from '@app/views/main-layout';
+
+import { MainUIStateSelector } from '@app/core/presentation/presentation-types';
 
 
 @Component({
@@ -37,46 +41,35 @@ export class ProjectFilesMainPageComponent implements OnInit, OnDestroy {
 
   selectedFile: ProjectItemFile;
 
-  filter: ProjectItemFilter = EmptyProjectItemFilter;
+  filter: MainSidebarValues = DefaultSidebarValues;
 
-  private subs1: Subscription;
-  private subs2: Subscription;
-  private subs3: Subscription;
+  private subscriptionHelper: SubscriptionHelper;
 
-  constructor(private fileStore: FileStore,
-              private uiStore: UserInterfaceStore) { }
-
+  constructor(private uiLayer: PresentationLayer, private fileStore: FileStore) {
+    this.subscriptionHelper = this.uiLayer.createSubscriptionHelper();
+  }
 
   ngOnInit() {
-    this.subs1 = this.uiStore.currentView.subscribe(
-      value => {
+    this.subscriptionHelper.select<View>(MainUIStateSelector.CURRENT_VIEW)
+      .subscribe(value => {
         this.currentView = value;
         this.loadFiles();
-      }
-    );
+      });
 
-    this.subs2 = this.uiStore.getValue<ProjectItemFilter>('Sidebar.ProjectFilter').subscribe(
-      value => {
-        this.filter = value;
-        this.loadFiles();
-      }
-    );
+    this.subscriptionHelper.select<MainSidebarValues>(MainUIStateSelector.SIDEBAR_VALUES)
+      .subscribe(
+        value => {
+          this.filter = value;
+          this.loadFiles();
+        }
+      );
 
-    this.subs3 = this.uiStore.useForeignLanguage.subscribe(
-      x => this.useForeignLanguage = x
-    );
+    this.subscriptionHelper.select<boolean>(MainUIStateSelector.USE_FOREIGN_LANGUAGE)
+      .subscribe(x => this.useForeignLanguage = x);
   }
 
   ngOnDestroy() {
-    if (this.subs1) {
-      this.subs1.unsubscribe();
-    }
-    if (this.subs2) {
-      this.subs2.unsubscribe();
-    }
-    if (this.subs3) {
-      this.subs3.unsubscribe();
-    }
+    this.subscriptionHelper.destroy();
   }
 
   applyKeywordsFilter(keywords: string) {

@@ -8,9 +8,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 
-import { UserInterfaceStore } from '@app/views/main-layout/ui.store';
+import { PresentationLayer } from '@app/core/presentation';
 
 import { View } from '@app/views/main-layout';
+
+import { MainUIStateSelector } from '@app/core/presentation/presentation-types';
 
 
 @Component({
@@ -25,16 +27,12 @@ export class LibraryMainPageComponent implements OnInit, OnDestroy {
 
   private subs1: Subscription;
 
-
-  constructor(private uiStore: UserInterfaceStore)  { }
-
+  constructor(private uiLayer: PresentationLayer)  { }
 
   ngOnInit() {
-    this.subs1 = this.uiStore.currentView.subscribe(
-      x => this.currentView = x
-    );
+    this.subs1 = this.uiLayer.select<View>(MainUIStateSelector.CURRENT_VIEW)
+      .subscribe(x => this.currentView = x);
   }
-
 
   ngOnDestroy() {
     if (this.subs1) {

@@ -8,8 +8,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 
+import { PresentationLayer } from '@app/core/presentation';
+
 import { StepsStore } from '@app/store/steps.store';
-import { UserInterfaceStore } from '@app/views/main-layout/ui.store';
 
 import { ActivityTemplate, ActivityTemplateOperation,
          EmptyActivityTemplate,
@@ -18,6 +19,8 @@ import { ActivityTemplate, ActivityTemplateOperation,
 import { View } from '@app/views/main-layout';
 
 import { Process } from '@app/models/steps';
+
+import { MainUIStateSelector } from '@app/core/presentation/presentation-types';
 
 
 @Component({
@@ -37,13 +40,12 @@ export class StepsMainPageComponent implements OnInit, OnDestroy {
   private subs1: Subscription;
   private subs2: Subscription;
 
-  constructor(public store: StepsStore,
-              public uiStore: UserInterfaceStore) { }
+  constructor(private uiLayer: PresentationLayer,
+              public store: StepsStore) { }
 
   ngOnInit() {
-    this.subs1 = this.uiStore.currentView.subscribe(
-      x => this.currentView = x
-    );
+    this.subs1 = this.uiLayer.select<View>(MainUIStateSelector.CURRENT_VIEW)
+      .subscribe(x => this.currentView = x);
 
     this.subs2 = this.store.processList().subscribe (
       x => this.processList = x

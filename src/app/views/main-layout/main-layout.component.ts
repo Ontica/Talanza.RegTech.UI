@@ -8,8 +8,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivationEnd, Router } from '@angular/router';
 
-import { UserInterfaceStore } from './ui.store';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
+import { PresentationState } from '@app/core/presentation';
+
+import { MainUIStateAction, MainUIStateSelector } from '@app/core/presentation/presentation-types';
 
 @Component({
   selector: 'emp-ng-main-layout',
@@ -19,27 +23,34 @@ import { UserInterfaceStore } from './ui.store';
 export class MainLayoutComponent implements OnInit {
 
   keywords = '';
+  spinnerService = null;
 
   useForeignLanguage = false;
   currentLanguage = 'Spanish';
 
   displayEditor = false;
 
+  private unsubscribe: Subject<void> = new Subject();
 
-  constructor(private uiStore: UserInterfaceStore,
-              private router: Router) {
-    this.router.events.subscribe(val => {
-      if (val instanceof ActivationEnd) {
-        const url = this.router.routerState.snapshot.url.split(';')[0];
+  constructor(private state: PresentationState, private router: Router) {
 
-        uiStore.setCurrentViewFromUrl(url);
-      }
-    });
+    this.spinnerService = state.select<boolean>(MainUIStateSelector.IS_PROCESSING);
+
+    this.router.events
+      .pipe(takeUntil(this.unsubscribe))
+      .subscribe(val => {
+        if (val instanceof ActivationEnd) {
+          const url = this.router.routerState.snapshot.url.split(';')[0];
+
+          state.dispatch(MainUIStateAction.SET_CURRENT_VIEW_FROM_URL, { url });
+        }
+      });
   }
 
 
   ngOnInit(): void {
-    this.uiStore.useForeignLanguage.subscribe(
+    this.state.select<boolean>(MainUIStateSelector.USE_FOREIGN_LANGUAGE)
+    .subscribe(
       x => {
         this.useForeignLanguage = x;
         if (this.useForeignLanguage) {
@@ -73,7 +84,7 @@ export class MainLayoutComponent implements OnInit {
   }
 
   toggleLanguage() {
-    this.uiStore.toggleForeignLanguage();
+    this.state.dispatch(MainUIStateAction.TOGGLE_FOREIGN_LANGUAGE);
   }
 
 }

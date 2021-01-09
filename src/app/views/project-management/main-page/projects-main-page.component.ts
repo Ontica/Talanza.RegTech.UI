@@ -8,17 +8,20 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 
-import { ProjectStore , ProjectModel } from '@app/store/project.store';
-import { UserInterfaceStore } from '@app/views/main-layout/ui.store';
+import { PresentationLayer, SubscriptionHelper } from '@app/core/presentation';
 
-import { Activity, ActivityOperation, EmptyActivity,
-         ProjectItemFilter, EmptyProjectItemFilter } from '@app/models/project-management';
+import { ProjectStore , ProjectModel } from '@app/store/project.store';
+
+import { Activity, ActivityOperation, EmptyActivity } from '@app/models/project-management';
 
 import { View } from '@app/views/main-layout';
 
 import { Exception } from '@app/core';
-
 import { isEmpty } from '@app/core/data-types';
+
+import { MainUIStateAction, MainUIStateSelector } from '@app/core/presentation/presentation-types';
+
+import { MainSidebarValues, DefaultSidebarValues} from '@app/views/main-layout';
 
 
 @Component({
@@ -36,48 +39,36 @@ export class ProjectsMainPageComponent implements OnInit, OnDestroy {
   selectedProject: ProjectModel;
   selectedActivity = EmptyActivity;
 
-  filter: ProjectItemFilter = EmptyProjectItemFilter;
+  filter: MainSidebarValues = DefaultSidebarValues;
 
-  private subs1: Subscription;
-  private subs2: Subscription;
-  private subs3: Subscription;
-  private subs4: Subscription;
+  private subs: Subscription;
 
+  private subscriptionHelper: SubscriptionHelper;
 
-  constructor(private projectStore: ProjectStore,
-              private uiStore: UserInterfaceStore) { }
-
-
-  ngOnInit() {
-    this.subs1 = this.uiStore.currentView.subscribe(
-      x => this.onViewChanged(x)
-    );
-
-    this.subs2 = this.projectStore.selectedProject().subscribe(
-      x => this.onSelectedProjectChanged(x)
-    );
-
-    this.subs3 = this.uiStore.getValue<ProjectItemFilter>('Sidebar.ProjectFilter').subscribe(
-      x => this.filter = x
-    );
-
-    this.subs4 = this.uiStore.useForeignLanguage.subscribe(
-      x => this.useForeignLanguage = x
-    );
+  constructor(private uiLayer: PresentationLayer,
+              private projectStore: ProjectStore) {
+    this.subscriptionHelper = uiLayer.createSubscriptionHelper();
   }
 
+  ngOnInit() {
+    this.subscriptionHelper.select<View>(MainUIStateSelector.CURRENT_VIEW)
+      .subscribe(x => this.onViewChanged(x));
+
+    this.subscriptionHelper.select<MainSidebarValues>(MainUIStateSelector.SIDEBAR_VALUES)
+      .subscribe(x => this.filter = x);
+
+    this.subscriptionHelper.select<boolean>(MainUIStateSelector.USE_FOREIGN_LANGUAGE)
+      .subscribe(x => this.useForeignLanguage = x);
+
+    this.subs = this.projectStore.selectedProject()
+      .subscribe(x => this.onSelectedProjectChanged(x));
+  }
+
+
   ngOnDestroy() {
-    if (this.subs1) {
-      this.subs1.unsubscribe();
-    }
-    if (this.subs2) {
-      this.subs2.unsubscribe();
-    }
-    if (this.subs3) {
-      this.subs3.unsubscribe();
-    }
-    if (this.subs4) {
-      this.subs4.unsubscribe();
+    this.subscriptionHelper.destroy();
+    if (this.subs) {
+      this.subs.unsubscribe();
     }
   }
 
@@ -145,7 +136,7 @@ export class ProjectsMainPageComponent implements OnInit, OnDestroy {
     this.selectedProject = value;
 
     if (!isEmpty(this.selectedProject.project)) {
-      this.uiStore.setMainTitle(this.currentView.title);
+      this.uiLayer.dispatch(MainUIStateAction.SET_MAIN_TITLE,this.currentView.title);
     }
   }
 
@@ -153,9 +144,9 @@ export class ProjectsMainPageComponent implements OnInit, OnDestroy {
     this.currentView = view;
 
     if (!this.selectedProject) {
-      this.uiStore.setMainTitle('Please select a contract');
+      this.uiLayer.dispatch(MainUIStateAction.SET_MAIN_TITLE, 'Please select a contract');
     } else {
-      this.uiStore.setMainTitle(this.selectedProject.project.name);
+      this.uiLayer.dispatch(MainUIStateAction.SET_MAIN_TITLE, this.selectedProject.project.name);
     }
   }
 

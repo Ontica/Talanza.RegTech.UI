@@ -5,20 +5,22 @@
  * See LICENSE.txt in the project root for complete license information.
  */
 
-import { ProjectItemFilter, BaseProjectItem, GanttTask, Activity } from '@app/models/project-management';
+import { BaseProjectItem, GanttTask, Activity } from '@app/models/project-management';
+
+import { MainSidebarValues } from '@app/views/main-layout';
 
 
 export class FilterHelper {
 
 
-  static applyFilter(filter: ProjectItemFilter,
+  static applyFilter(filter: MainSidebarValues,
                      activities: Activity[]): Activity[];
 
-  static applyFilter(filter: ProjectItemFilter,
+  static applyFilter(filter: MainSidebarValues,
                      activities: GanttTask[]): GanttTask[];
 
 
-  static applyFilter(filter: ProjectItemFilter,
+  static applyFilter(filter: MainSidebarValues,
                      activities: BaseProjectItem[]): BaseProjectItem[] {
     let filtered = this.applyStatusFilter(filter, activities);
 
@@ -81,7 +83,7 @@ export class FilterHelper {
   }
 
 
-  private static applyResponsiblesFilter(filter: ProjectItemFilter,
+  private static applyResponsiblesFilter(filter: MainSidebarValues,
                                          source: BaseProjectItem[]): BaseProjectItem[] {
     if (!filter.responsibles || filter.responsibles.length === 0) {
       return source;
@@ -92,7 +94,7 @@ export class FilterHelper {
     return source.filter(x => uids.includes(x.responsible.uid));
   }
 
-  private static applyStatusFilter(filter: ProjectItemFilter,
+  private static applyStatusFilter(filter: MainSidebarValues,
                                    source: BaseProjectItem[]): BaseProjectItem[] {
     if (!filter.status) {
       return source;
@@ -111,7 +113,7 @@ export class FilterHelper {
   }
 
 
-  private static applyTagsFilter(filter: ProjectItemFilter,
+  private static applyTagsFilter(filter: MainSidebarValues,
                                  source: BaseProjectItem[]): BaseProjectItem[] {
     if (!filter.tags || filter.tags.length === 0) {
       return source;
@@ -121,7 +123,7 @@ export class FilterHelper {
   }
 
 
-  private static applyThemesFilter(filter: ProjectItemFilter,
+  private static applyThemesFilter(filter: MainSidebarValues,
                                    source: BaseProjectItem[]): BaseProjectItem[] {
     if (!filter.themes || filter.themes.length === 0) {
       return source;

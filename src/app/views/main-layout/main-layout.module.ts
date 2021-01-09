@@ -25,6 +25,8 @@ import { NavigationMenuComponent } from './nav-menu/nav-menu.component';
 import { NoContentComponent } from './no-content.component';
 import { SidebarModule } from './sidebar/sidebar.module';
 
+import { SecurityUIModule } from '../security/security-ui.module';
+
 
 @NgModule({
 
@@ -37,8 +39,9 @@ import { SidebarModule } from './sidebar/sidebar.module';
 
     SharedModule,
 
-    SidebarModule
+    SidebarModule,
 
+    SecurityUIModule,
     // SharedIndicatorsModule,
     // SharedFormControlsModule
   ],

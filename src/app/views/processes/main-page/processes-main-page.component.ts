@@ -8,8 +8,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 
+import { PresentationLayer, SubscriptionHelper } from '@app/core/presentation';
+
+import { isEmpty } from '@app/core/data-types';
+
 import { ProjectTemplateStore, ProjectTemplateModel } from '@app/store/project-template.store';
-import { UserInterfaceStore } from '@app/views/main-layout/ui.store';
 
 import { ActivityTemplate, ActivityTemplateOperation,
          EmptyActivityTemplate,
@@ -17,7 +20,7 @@ import { ActivityTemplate, ActivityTemplateOperation,
 
 import { View } from '@app/views/main-layout';
 
-import { isEmpty } from '@app/core/data-types';
+import { MainUIStateAction, MainUIStateSelector } from '@app/core/presentation/presentation-types';
 
 
 @Component({
@@ -34,38 +37,33 @@ export class ProcessesMainPageComponent implements OnInit, OnDestroy {
   model: ProjectTemplateModel;
   selectedActivityTemplate = EmptyActivityTemplate;
 
-  private subs1: Subscription;
-  private subs2: Subscription;
-  private subs3: Subscription;
+  private subs: Subscription;
 
-  constructor(public store: ProjectTemplateStore,
-              public uiStore: UserInterfaceStore) { }
+  private subscriptionHelper: SubscriptionHelper;
+
+  constructor(private uiLayer: PresentationLayer,
+              public store: ProjectTemplateStore) {
+    this.subscriptionHelper = uiLayer.createSubscriptionHelper();
+  }
 
 
   ngOnInit() {
-    this.subs1 = this.uiStore.currentView.subscribe(
-      x => this.onViewChanged(x)
-    );
+    this.subscriptionHelper.select<View>(MainUIStateSelector.CURRENT_VIEW)
+      .subscribe(x => this.onViewChanged(x));
 
-    this.subs2 = this.uiStore.useForeignLanguage.subscribe (
-      x => this.useForeignLanguage = x
-    );
+    this.subscriptionHelper.select<boolean>(MainUIStateSelector.USE_FOREIGN_LANGUAGE)
+      .subscribe(x => this.useForeignLanguage = x);
 
-    this.subs3 = this.store.selectedTemplate().subscribe (
+    this.subs = this.store.selectedTemplate().subscribe (
       x => this.onModelSelected(x)
     );
   }
 
 
   ngOnDestroy() {
-    if (this.subs1) {
-      this.subs1.unsubscribe();
-    }
-    if (this.subs2) {
-      this.subs2.unsubscribe();
-    }
-    if (this.subs3) {
-      this.subs3.unsubscribe();
+    this.subscriptionHelper.destroy();
+    if (this.subs) {
+      this.subs.unsubscribe();
     }
   }
 
@@ -141,7 +139,7 @@ export class ProcessesMainPageComponent implements OnInit, OnDestroy {
       if (this.model && this.model.project.uid !== x.project.uid) {
         this.displayEditor = false;
       }
-      this.uiStore.setMainTitle(this.currentView.title);
+      this.uiLayer.dispatch(MainUIStateAction.SET_MAIN_TITLE, this.currentView.title);
     }
     this.model = x;
   }
@@ -151,7 +149,7 @@ export class ProcessesMainPageComponent implements OnInit, OnDestroy {
     this.currentView = view;
 
     if (!this.model) {
-      this.uiStore.setMainTitle('Please select a process');
+      this.uiLayer.dispatch(MainUIStateAction.SET_MAIN_TITLE, 'Please select a process');
     }
   }
 

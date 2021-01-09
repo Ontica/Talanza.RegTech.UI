@@ -15,10 +15,11 @@ import { EmptyActivity, ProjectItem } from '@app/models/project-management';
 import { MediaFile, FileToUpload, EmptyMediaFile } from '@app/models/knowledge-base';
 import { DataObject } from '@app/models/data-objects';
 
-import { UserInterfaceStore } from '@app/views/main-layout/ui.store';
 import { FileStore } from '@app/store/file.store';
 
 import { ProjectFilesService } from '@app/data-services/project-management';
+import { PresentationLayer } from '@app/core/presentation';
+import { MainUIStateSelector } from '@app/core/presentation/presentation-types';
 
 
 @Component({
@@ -42,9 +43,10 @@ export class ActivityFilesComponent implements OnChanges {
 
   uploading = false;
 
-  constructor(private store: FileStore,
-              private service: ProjectFilesService, uistore: UserInterfaceStore) {
-    this.reportingTools = uistore.reportingTools;
+  constructor(uiLayer: PresentationLayer,
+              private store: FileStore,
+              private service: ProjectFilesService) {
+    this.reportingTools = uiLayer.select<boolean>(MainUIStateSelector.REPORTING_TOOLS);
   }
 
   ngOnChanges() {

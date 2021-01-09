@@ -7,8 +7,9 @@
 
 import { Pipe, PipeTransform } from '@angular/core';
 
-import { EmptyProjectItemFilter,
-         ProjectItem, ProjectItemFilter } from '@app/models/project-management';
+import { ProjectItem } from '@app/models/project-management';
+
+import { MainSidebarValues, DefaultSidebarValues} from '@app/views/main-layout';
 
 
 @Pipe({
@@ -16,11 +17,10 @@ import { EmptyProjectItemFilter,
 })
 export class ApplyFilterPipe implements PipeTransform {
 
-  filter: ProjectItemFilter = EmptyProjectItemFilter;
+  filter: MainSidebarValues = DefaultSidebarValues;
 
-
-  transform(data: ProjectItem[], filter: ProjectItemFilter): ProjectItem[] {
-    this.filter = filter || EmptyProjectItemFilter;
+  transform(data: ProjectItem[], filter: MainSidebarValues): ProjectItem[] {
+    this.filter = filter || DefaultSidebarValues;
 
     if (!data) {
       return [];
