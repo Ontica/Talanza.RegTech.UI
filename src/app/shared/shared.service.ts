@@ -8,7 +8,7 @@
 import { Injectable } from '@angular/core';
 
 import { MessageBoxService } from './message-box';
-import { SpinnerService } from './spinner/spinner.service';
+import { SpinnerService } from './indicators/spinner/spinner.service';
 
 
 @Injectable()

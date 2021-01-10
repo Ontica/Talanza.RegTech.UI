@@ -25,14 +25,12 @@ import { SafeHtmlPipe } from './pipes/safe-html.pipe';
 import { SafeUrlPipe } from './pipes/safe-url.pipe';
 import { SearchBoxComponent } from './search-box/search-box.component';
 
-import { SpinnerComponent } from './spinner/spinner.component';
-import { SpinnerHostDirective } from './spinner/spinner-host.directive';
-
 import { AngularMaterialModule } from './angular-material.module';
 
 import { MessageBoxService } from './message-box/message.box.service';
 import { SharedService } from './shared.service';
-import { SpinnerService } from './spinner/spinner.service';
+
+import { SharedIndicatorsModule } from './indicators/shared-indicators.module';
 
 
 @NgModule({
@@ -42,7 +40,9 @@ import { SpinnerService } from './spinner/spinner.service';
     RouterModule,
     FormsModule,
 
-    AngularMaterialModule
+    AngularMaterialModule,
+
+    SharedIndicatorsModule
   ],
 
   declarations: [
@@ -58,12 +58,12 @@ import { SpinnerService } from './spinner/spinner.service';
     RagStatusComponent,
     SafeHtmlPipe,
     SafeUrlPipe,
-    SearchBoxComponent,
-    SpinnerComponent,
-    SpinnerHostDirective
+    SearchBoxComponent
   ],
 
   exports: [
+    SharedIndicatorsModule,
+
     CardComponent,
     DatepickerComponent,
     ContactsPickerComponent,
@@ -75,15 +75,12 @@ import { SpinnerService } from './spinner/spinner.service';
     RagStatusComponent,
     SafeHtmlPipe,
     SafeUrlPipe,
-    SearchBoxComponent,
-    SpinnerComponent,
-    SpinnerHostDirective
+    SearchBoxComponent
   ],
 
   providers: [
     MessageBoxService,
-    SharedService,
-    SpinnerService
+    SharedService
   ],
 
   entryComponents: [

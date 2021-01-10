@@ -8,10 +8,8 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 
-export interface Displayable {
-  show(): void;
-  hide(): void;
-}
+import { Displayable } from '../../common-models';
+
 
 @Injectable()
 export class SpinnerService implements Displayable {
