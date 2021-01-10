@@ -13,8 +13,7 @@ import { MediaFile, MediaMetadata, FileToUpload, EmptyMediaFile } from '@app/mod
 
 @Component({
   selector: 'emp-kb-file-editor',
-  templateUrl: './file-editor.component.html',
-  styleUrls: ['../../../../../styles/form.scss']
+  templateUrl: './file-editor.component.html'
 })
 export class FileEditorComponent implements OnChanges {
 

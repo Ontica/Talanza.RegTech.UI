@@ -24,8 +24,7 @@ import { MainUIStateSelector } from '@app/core/presentation/presentation-types';
 
 @Component({
   selector: 'emp-steps-activity-files',
-  templateUrl: './activity-files.component.html',
-  styleUrls: ['../../../../styles/general-styles.scss']
+  templateUrl: './activity-files.component.html'
 })
 export class ActivityFilesComponent implements OnChanges {
 

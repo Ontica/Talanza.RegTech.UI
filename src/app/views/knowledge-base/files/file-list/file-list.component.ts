@@ -12,8 +12,7 @@ import { MediaFile } from '@app/models/knowledge-base';
 
 @Component({
   selector: 'emp-kb-file-list',
-  templateUrl: './file-list.component.html',
-  styleUrls: ['../../../../../styles/list.scss']
+  templateUrl: './file-list.component.html'
 })
 export class FileListComponent {
 

@@ -52,8 +52,7 @@ enum FormMessages {
 
 @Component({
   selector: 'emp-steps-activity-form',
-  templateUrl: './activity-form.component.html',
-  styleUrls: ['../../../../../styles/form.scss']
+  templateUrl: './activity-form.component.html'
 })
 export class ActivityFormComponent extends AbstractForm implements OnInit, OnChanges, OnDestroy {
 

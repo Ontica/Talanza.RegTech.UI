@@ -20,11 +20,7 @@ import { ProjectStore } from '@app/store/project.store';
 
 @Component({
   selector: 'emp-kb-postings-editor',
-  templateUrl: './postings-editor.component.html',
-  styleUrls: [
-    '../../../../styles/general-styles.scss',
-    '../../../../styles/form.scss'
-  ]
+  templateUrl: './postings-editor.component.html'
 })
 export class PostingsEditorComponent implements OnInit {
 

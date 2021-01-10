@@ -7,7 +7,7 @@
   <div *ngFor="let process of processes"
         class="list-item" matRipple [matRippleTrigger]="trigger"
         [class.list-item-selected]="isSelected(process)">
-    <div class="item-name">
+    <div class="list-item-name">
         <a #trigger (click)="onSelect(process)">{{process.name}}</a>
     </div>
   </div>

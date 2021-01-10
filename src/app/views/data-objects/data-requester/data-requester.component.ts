@@ -14,8 +14,7 @@ import { DataObject } from '@app/models/data-objects';
 
 @Component({
   selector: 'emp-data-requester',
-  templateUrl: './data-requester.component.html',
-  styleUrls: ['../../../../styles/card.scss']
+  templateUrl: './data-requester.component.html'
 })
 export class DataRequesterComponent {
 

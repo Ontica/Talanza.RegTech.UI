@@ -1,5 +1,11 @@
-@import "general-styles";
+/**
+ * @license
+ * Copyright (c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
+ *
+ * See LICENSE.txt in the project root for complete license information.
+ */
 
+@import "general-styles";
 
 .activity-row {
   @include row;
@@ -7,7 +13,6 @@
   border-bottom: 1px $border-color solid;
   min-height: 46px;
 }
-
 
 .activity-row:hover {
   background-color: $grid-hover-background-color;
@@ -17,11 +22,9 @@
   }
 }
 
-
 .selected-activity {
   background-color: $grid-selected-background-color;
 }
-
 
 .activity-container {
   margin-left: 4pt;
@@ -39,44 +42,38 @@
   width: 100%;
 }
 
-
 .activity-tree-controls {
   margin-right: 6pt;
   width: 18px;
 }
-
 
 .activity-tree-icon {
   color: #bcbcbc;
   font-size: 18px;
 }
 
-
 .timeline-padding {
   width: 26px;
   min-width: 26px;
 }
 
-
 .activity-status {
   @include row;
+
   justify-content: space-between;
   font-size: 8pt;
   width: 98%;
 }
 
-
 .column {
   padding-right: 36px;
 }
-
 
 .right-column {
   justify-content: flex-end;
   padding-right: 8pt;
   text-align: right;
 }
-
 
 .activity-group-name {
   vertical-align: -webkit-baseline-bottom;
@@ -87,7 +84,6 @@
   padding-left: 8px;
 }
 
-
 .activity-name {
   vertical-align: -webkit-baseline-middle;
   padding-right: 24pt;
@@ -97,27 +93,22 @@
   font-weight: 400;
 }
 
-
 .activity-name a:hover {
   text-decoration: underline;
 }
-
 
 .activity-name-level-1 {
   font-size: 11.5pt;
 }
 
-
 .activity-name-even-level {
   font-size: 10pt;
 }
-
 
 .activity-name-odd-level {
   font-size: 10pt;
   font-style: italic;
 }
-
 
 .activity-theme {
   @include expand;
@@ -125,7 +116,6 @@
   min-width: 200px;
   padding-right: 36px;
 }
-
 
 .completed-activity {
   text-decoration-line: line-through;

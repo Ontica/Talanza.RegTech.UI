@@ -15,8 +15,7 @@ import { ProjectTemplateModel, ProjectTemplateStore } from '@app/store/project-t
 
 @Component({
   selector: 'emp-steps-export-processes-dialog',
-  templateUrl: './export-processes-dialog.component.html',
-  styleUrls: ['../../../../styles/general-styles.scss']
+  templateUrl: './export-processes-dialog.component.html'
 })
 export class ExportProcessesDialogComponent {
 

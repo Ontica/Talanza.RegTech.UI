@@ -12,8 +12,7 @@ import { DataObject } from '@app/models/data-objects';
 
 @Component({
   selector: 'emp-data-object-designer',
-  templateUrl: './data-object-designer.component.html',
-  styleUrls: ['../../../../styles/card.scss']
+  templateUrl: './data-object-designer.component.html'
 })
 export class DataObjectDesignerComponent {
 

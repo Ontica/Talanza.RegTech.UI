@@ -1,5 +1,9 @@
-@import "../../../../styles/general-styles";
-@import "../../../../styles/form";
+/**
+ * @license
+ * Copyright (c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
+ *
+ * See LICENSE.txt in the project root for complete license information.
+ */
 
 .list {
   padding: 16px 32px;
@@ -21,14 +25,12 @@
   }
 }
 
-
 .posting-body {
   max-width: 600px;
   font-size: 8.5pt;
   font-weight: 400;
   text-align: justify;
 }
-
 
 input.inline-editor-text-box {
   height: 32px;

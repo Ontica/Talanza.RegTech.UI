@@ -21,10 +21,7 @@ import { ReportSomethingDialogComponent } from '../report-something-dialog/repor
 @Component({
   selector: 'emp-steps-activity-timeline',
   templateUrl: './activity-timeline.component.html',
-  styleUrls: [
-    '../../../../styles/card.scss',
-    '../../../../styles/activity.scss'
-  ],
+  styleUrls: ['../../../../styles/activity.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ActivityTimelineComponent implements OnChanges {

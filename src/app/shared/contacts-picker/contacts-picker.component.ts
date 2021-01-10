@@ -17,8 +17,7 @@ export interface SelectedContacts {
 
 @Component({
   selector: 'emp-ng-contacts-picker',
-  templateUrl: './contacts-picker.component.html',
-  styleUrls: ['../../../styles/general-styles.scss']
+  templateUrl: './contacts-picker.component.html'
 })
 export class ContactsPickerComponent {
 

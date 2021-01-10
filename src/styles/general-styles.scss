@@ -1,3 +1,10 @@
+/**
+ * @license
+ * Copyright (c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
+ *
+ * See LICENSE.txt in the project root for complete license information.
+ */
+
 @import "variables";
 @import "responsive";
 
@@ -95,6 +102,14 @@ button.btn-margin-right {
 
 
 button.btn-margin-left {
+  margin-left:  32px;
+}
+
+.margin-right {
+  margin-right: 32px;
+}
+
+.margin-left {
   margin-left:  32px;
 }
 
@@ -278,6 +293,32 @@ input[type=text]:disabled {
 
 input[type=number]:disabled {
   @include disabled-element;
+}
+
+.primary-text {
+  color: $primary-color;
+}
+
+.bold-text {
+  font-weight: 600;
+}
+
+.label {
+  color: $primary-color;
+}
+
+.lowercase {
+  text-transform: lowercase;
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+.ellipsis {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 select:disabled {

@@ -18,8 +18,7 @@ import { DataObjectsService } from '@app/data-services/data-objects';
 
 @Component({
   selector: 'emp-steps-activity-data-objects-list',
-  templateUrl: './activity-data-objects-list.component.html',
-  styleUrls: ['../../../../styles/list.scss']
+  templateUrl: './activity-data-objects-list.component.html'
 })
 export class ActivityDataObjectsListComponent implements OnChanges {
 

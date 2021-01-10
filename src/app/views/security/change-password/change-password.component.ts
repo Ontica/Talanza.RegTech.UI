@@ -12,11 +12,9 @@ import { SecurityDataService } from '@app/core/security/security-data.service';
 import { EventInfo } from '@app/core/data-types';
 
 
-
 @Component({
   selector: 'emp-ng-change-password',
-  templateUrl: './change-password.component.html',
-  styleUrls: ['../../../../styles/form.scss']
+  templateUrl: './change-password.component.html'
 })
 export class ChangePasswordComponent {
 

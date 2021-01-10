@@ -16,8 +16,7 @@ import { ProjectStore } from '@app/store/project.store';
 
 @Component({
   selector: 'emp-steps-export-activities-dialog',
-  templateUrl: './export-activities-dialog.component.html',
-  styleUrls: ['../../../../styles/general-styles.scss']
+  templateUrl: './export-activities-dialog.component.html'
 })
 export class ExportActivitiesDialogComponent implements OnInit {
 

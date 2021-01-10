@@ -12,9 +12,7 @@ import { MediaFile, FileToUpload } from '@app/models/knowledge-base';
 
 @Component({
   selector: 'emp-kb-media-file-viewer',
-  templateUrl: './media-file-viewer.component.html',
-  styleUrls: ['../../../../../styles/card.scss']
-
+  templateUrl: './media-file-viewer.component.html'
 })
 export class MediaFileViewerComponent implements AfterViewInit {
 

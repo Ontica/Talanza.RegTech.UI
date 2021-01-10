@@ -36,8 +36,7 @@ const ALL_ENTITIES = -1;
 
 @Component({
   selector: 'emp-steps-element-form',
-  templateUrl: './step-element-form.component.html',
-  styleUrls: ['../../../../../styles/form.scss']
+  templateUrl: './step-element-form.component.html'
 })
 export class StepElementFormComponent extends AbstractForm implements OnInit, OnChanges, OnDestroy {
 

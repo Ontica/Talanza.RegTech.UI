@@ -3,7 +3,7 @@
     Data object / Type / Format
   </div>
 
-  <div class="right-column expand" i18n>
+  <div class="list-item-right-column expand" i18n>
 
   </div>
 </div>
@@ -15,7 +15,7 @@
 
   <div class="list-item-container">
 
-    <div class="item-name">
+    <div class="list-item-name">
       <a #trigger (click)="onSelectDataObject(dataObject)">{{dataObject.name}}</a>
     </div>
 
@@ -24,7 +24,7 @@
         {{dataObject.type}}
       </div>
 
-      <div class="right-column expand" *ngIf="!readonly">
+      <div class="list-item-right-column expand" *ngIf="!readonly">
         <mat-icon class="material-icons-outlined" (click)="onDeleteDataObject(dataObject)">delete_outline</mat-icon>
       </div>
 

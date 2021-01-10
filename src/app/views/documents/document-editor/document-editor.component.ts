@@ -11,8 +11,7 @@ import { Document } from '@app/models/regulation';
 
 @Component({
   selector: 'emp-gov-document-editor',
-  templateUrl: './document-editor.component.html',
-  styleUrls: ['../../../../styles/card.scss']
+  templateUrl: './document-editor.component.html'
 })
 export class DocumentEditorComponent {
 

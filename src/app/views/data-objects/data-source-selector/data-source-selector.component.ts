@@ -19,8 +19,7 @@ import { DataObjectsService } from '@app/data-services/data-objects';
 
 @Component({
   selector: 'emp-data-source-selector',
-  templateUrl: './data-source-selector.component.html',
-  styleUrls: ['../../../../styles/form.scss']
+  templateUrl: './data-source-selector.component.html'
 })
 export class DataSourceSelectorComponent implements OnInit, OnDestroy {
 

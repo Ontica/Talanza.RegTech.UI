@@ -1,10 +1,15 @@
-@import "../../../styles/general-styles";
+/**
+ * @license
+ * Copyright (c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
+ *
+ * See LICENSE.txt in the project root for complete license information.
+ */
 
+ @import "../../../styles/general-styles";
 
 .mat-dialog-container {
   margin: 2px;
 }
-
 
 .mat-dialog-title {
   border-bottom: 2px solid $primary-color;
@@ -14,11 +19,9 @@
   margin-bottom: 16pt;
 }
 
-
 .mat-dialog-content {
   font-size: 10pt;
 }
-
 
 .mat-dialog-actions {
   border-bottom: 1px solid $secondary-color;
@@ -30,4 +33,3 @@
     margin-left: 24px;
   }
 }
-

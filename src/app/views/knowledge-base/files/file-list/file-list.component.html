@@ -3,7 +3,7 @@
     File / Type / Authors
   </div>
 
-  <div class="right-column expand" i18n>
+  <div class="list-item-right-column expand" i18n>
     Posted by
   </div>
 </div>
@@ -15,7 +15,7 @@
 
   <div class="list-item-container">
 
-    <div class="item-name">
+    <div class="list-item-name">
       <a #trigger (click)="onSelect(file)">{{file.name}}</a>
     </div>
 
@@ -25,7 +25,7 @@
         {{file.metadata.authors}}
       </div>
 
-      <div class="right-column expand">
+      <div class="list-item-right-column expand">
           {{file.postedBy.name}}<br>
           {{file.postingTime | date:'dd/LLL/yyyy'}}<br>
       </div>

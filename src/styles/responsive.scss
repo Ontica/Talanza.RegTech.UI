@@ -1,3 +1,10 @@
+/**
+ * @license
+ * Copyright (c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
+ *
+ * See LICENSE.txt in the project root for complete license information.
+ */
+
 // Responsive mixins and classes
 
 $margin-size: 8px;
@@ -17,13 +24,11 @@ $small-max-width: 540px;
   }
 }
 
-
 @mixin small-hide() {
   @media only screen and (max-width: $small-max-width) {
     display: none !important;
   }
 }
-
 
 @mixin medium-hide() {
   @media only screen and (max-width: $medium-max-width) {
@@ -43,7 +48,6 @@ $small-max-width: 540px;
   display: flex;
   flex-flow: row nowrap;
 }
-
 
 @mixin column() {
   display: flex;

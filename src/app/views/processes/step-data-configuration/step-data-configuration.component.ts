@@ -20,8 +20,7 @@ import { DataObjectsService } from '@app/data-services/data-objects';
 
 @Component({
   selector: 'emp-steps-step-data-configuration',
-  templateUrl: './step-data-configuration.component.html',
-  styleUrls: ['../../../../styles/general-styles.scss']
+  templateUrl: './step-data-configuration.component.html'
 })
 export class StepDataConfigurationComponent implements OnChanges {
 

@@ -14,8 +14,7 @@ import { DataObject } from '@app/models/data-objects';
 
 @Component({
   selector: 'emp-steps-activity-data-object',
-  templateUrl: './activity-data-object.component.html',
-  styleUrls: ['../../../../styles/card.scss']
+  templateUrl: './activity-data-object.component.html'
 })
 export class ActivityDataObjectComponent {
 

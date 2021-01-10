@@ -18,8 +18,7 @@ import { MainSidebarValues, DefaultSidebarValues} from '@app/views/main-layout';
 
 @Component({
   selector: 'emp-steps-gantt-chart',
-  templateUrl: './gantt-chart.component.html',
-  styleUrls: ['../../../../styles/card.scss']
+  templateUrl: './gantt-chart.component.html'
 })
 export class GanttChartComponent implements OnChanges {
 

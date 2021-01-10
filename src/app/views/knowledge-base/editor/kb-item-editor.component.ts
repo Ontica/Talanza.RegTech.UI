@@ -12,8 +12,7 @@ import { Posting } from '@app/models/knowledge-base';
 
 @Component({
   selector: 'emp-kb-item-editor',
-  templateUrl: './kb-item-editor.component.html',
-  styleUrls: ['../../../../styles/card.scss']
+  templateUrl: './kb-item-editor.component.html'
 })
 export class KBItemEditorComponent {
 

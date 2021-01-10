@@ -20,8 +20,7 @@ import { DataObjectsService } from '@app/data-services/data-objects';
 
 @Component({
   selector: 'emp-steps-requirement-editor',
-  templateUrl: './requirement-editor.component.html',
-  styleUrls: ['../../../../styles/form.scss']
+  templateUrl: './requirement-editor.component.html'
 })
 export class RequirementEditorComponent implements OnInit, OnDestroy {
 

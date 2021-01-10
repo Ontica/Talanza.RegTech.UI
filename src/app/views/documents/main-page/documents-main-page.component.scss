@@ -1,6 +1,11 @@
-@import "../../../../styles/explorer";
-@import "../../../../styles/card";
+/**
+ * @license
+ * Copyright (c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
+ *
+ * See LICENSE.txt in the project root for complete license information.
+ */
 
+@import "../../../../styles/explorer";
 
 $primary-panel-min-width: 480px;
 $secondary-panel-min-width: 820px;
@@ -32,5 +37,4 @@ $gap-width: 30px;
     min-width: $secondary-panel-min-width;
     margin-left: $gap-width;
   }
-
 }

@@ -1,5 +1,11 @@
-@import "../../../styles/general-styles";
+/**
+ * @license
+ * Copyright (c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
+ *
+ * See LICENSE.txt in the project root for complete license information.
+ */
 
+@import "../../../styles/general-styles";
 
 .main-layout {
   @include column;
@@ -9,7 +15,6 @@
   margin: 0;
 }
 
-
 mat-sidenav-container,
 mat-sidenav-content,
 mat-sidenav {
@@ -18,7 +23,6 @@ mat-sidenav {
   overflow: hidden;
 }
 
-
 .top-bar {
   display: none;
 
@@ -26,7 +30,6 @@ mat-sidenav {
   padding: $margin-size;
   height: 35px;
 }
-
 
 .nav-bar {
   @include row;
@@ -73,19 +76,15 @@ mat-sidenav {
     margin-left: 30px;
     margin-top: 12px;
   }
-
 }
-
 
 .content {
   @include column;
 }
 
-
 .workarea {
   @include expand;
 }
-
 
 .right-section {
   margin-top: 12px;
@@ -97,7 +96,6 @@ mat-sidenav {
   align-items: end;
 }
 
-
 .side-bar {
   background-color: $secondary-color;
   color: $white;
@@ -107,7 +105,6 @@ mat-sidenav {
   width: 300px;
 }
 
-
 .sidenav-toggle {
   background-color: #EDEEF0;
   height: 52px;
@@ -116,7 +113,6 @@ mat-sidenav {
   padding-top: 12px;
 }
 
-
 .right-bar {
   display: none;
 
@@ -124,7 +120,6 @@ mat-sidenav {
 
   width: 200px;
 }
-
 
 .footer {
   display: none;

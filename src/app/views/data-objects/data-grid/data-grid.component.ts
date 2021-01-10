@@ -19,7 +19,6 @@ import { DataFormService } from '@app/data-services/data-objects';
   selector: 'emp-data-grid',
   templateUrl: './data-grid.component.html',
   styleUrls: [
-    '../../../../styles/general-styles.scss',
     '../../../../styles/syncfusion-styles.scss'
   ]
 })

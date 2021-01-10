@@ -14,8 +14,7 @@ import { StepRequirement } from '@app/models/steps';
 
 @Component({
   selector: 'emp-steps-requirements-list',
-  templateUrl: './requirements-list.component.html',
-  styleUrls: ['../../../../styles/list.scss']
+  templateUrl: './requirements-list.component.html'
 })
 export class RequirementsListComponent {
 

@@ -12,8 +12,7 @@ import { ProjectTemplate } from '@app/models/project-management';
 
 @Component({
   selector: 'emp-steps-process-selector',
-  templateUrl: './process-selector.component.html',
-  styleUrls: ['./process-selector.component.scss']
+  templateUrl: './process-selector.component.html'
 })
 export class ProcessSelectorComponent {
 
@@ -23,11 +22,9 @@ export class ProcessSelectorComponent {
 
   @Output() selectedProcessChange = new EventEmitter<ProjectTemplate>();
 
-
   onSelect(process: ProjectTemplate) {
     this.selectedProcessChange.emit(process);
   }
-
 
   isSelected(process: ProjectTemplate) {
     return (this.selected && process.uid === this.selected.uid);

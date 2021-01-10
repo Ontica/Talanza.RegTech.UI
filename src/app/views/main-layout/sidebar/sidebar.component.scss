@@ -1,21 +1,22 @@
-@import "../../../../styles/general-styles";
-
+/**
+ * @license
+ * Copyright (c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
+ *
+ * See LICENSE.txt in the project root for complete license information.
+ */
 
 .mat-list-base, .mat-list-item, .mat-list-option {
   font-size: 9pt;
 }
 
-
 .mat-list-base .mat-list-item, .mat-list-base .mat-list-option {
   height: 34px;
 }
-
 
 .mat-expansion-panel-header {
   font-size: 10pt;
   height: 42px !important;
 }
-
 
 .panel-separator {
   height: 24px;

@@ -14,8 +14,7 @@ import { DataFormService } from '@app/data-services/data-objects';
 
 @Component({
   selector: 'emp-data-file-generator',
-  templateUrl: './data-file-generator.component.html',
-  styleUrls: ['../../../../styles/general-styles.scss'],
+  templateUrl: './data-file-generator.component.html'
 })
 export class DataFileGeneratorComponent implements OnInit {
 

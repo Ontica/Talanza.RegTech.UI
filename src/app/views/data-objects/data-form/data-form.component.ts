@@ -21,7 +21,6 @@ import { FormGroupTransformer } from './form-group-transformer';
 @Component({
   selector: 'emp-data-form',
   templateUrl: './data-form.component.html',
-  styleUrls: ['../../../../styles/form.scss'],
   providers: [ FormGroupTransformer ]
 })
 export class DataFormComponent implements OnInit, OnChanges {

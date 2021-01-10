@@ -1,12 +1,17 @@
-@import "../../../styles/general-styles";
+/**
+ * @license
+ * Copyright (c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
+ *
+ * See LICENSE.txt in the project root for complete license information.
+ */
 
+@import "../../../styles/general-styles";
 
 .file-drop-area {
   border: dashed 1px $primary-color !important;
   height: 90px !important;
   padding-top: 36px !important;
 }
-
 
 .remove-file-btn {
   margin-top: -26px;
