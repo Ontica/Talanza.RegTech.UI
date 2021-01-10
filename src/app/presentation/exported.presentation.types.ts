@@ -10,12 +10,16 @@ import { MainLayoutActions, MainLayoutSelectors } from './main-layout/_main-layo
 export * from './main-layout/_main-layout.presentation.types';
 
 
+import { StepsActions, StepsCommands, StepsEffects, StepsSelectors } from './steps/_steps.presentation.types';
+export * from './steps/_steps.presentation.types';
+
+
 /* Exportation types */
 
-export type ActionType = MainLayoutActions;
+export type ActionType = MainLayoutActions | StepsActions;
 
-export type CommandType = any;
+export type CommandType = StepsCommands;
 
-export type StateEffect = any;
+export type StateEffect = StepsEffects;
 
-export type StateSelector = MainLayoutSelectors;
+export type StateSelector = MainLayoutSelectors | StepsSelectors;

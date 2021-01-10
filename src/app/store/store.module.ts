@@ -13,8 +13,6 @@ import { FileStore } from './file.store';
 import { ProcedureStore } from './procedure.store';
 import { ProjectStore } from './project.store';
 import { ProjectTemplateStore } from './project-template.store';
-import { StepsStore } from './steps.store';
-
 
 @NgModule({
 
@@ -27,8 +25,7 @@ import { StepsStore } from './steps.store';
     FileStore,
     ProjectTemplateStore,
     ProjectStore,
-    ProcedureStore,
-    StepsStore
+    ProcedureStore
   ]
 })
 export class StoreModule { }

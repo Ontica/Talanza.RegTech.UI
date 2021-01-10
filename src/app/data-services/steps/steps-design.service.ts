@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 
 import { HttpService } from '@app/core';
 
-import { Process } from '@app/models/steps';
+import { Process, Step, StepsListFilter } from '@app/models/steps';
 
 
 @Injectable()
@@ -18,11 +18,26 @@ export class StepsDesignService {
 
   constructor(private http: HttpService) { }
 
+  getStep(stepUID: string): Observable<Step> {
+    const path = `v3/steps/processes/${stepUID}`;
 
-  processList(): Observable<Process[]> {
-    const path = `v3/steps/processes/?keywords=cnh&pageSize=50`;
+    return this.http.get<Step>(path);
+  }
 
-    return this.http.get<Process[]>(path);
+
+  stepsList(filter: StepsListFilter): Observable<Step[]> {
+    const filterAsPathString = this.convertStepsFilterToPath(filter);
+
+    const path = `v3/steps/processes/${filterAsPathString};`
+
+    return this.http.get<Step[]>(path);
+  }
+
+
+  // private methods
+
+  private convertStepsFilterToPath(filter: StepsListFilter) {
+    return `?keywords=${filter.keywords}&pageSize=50`;
   }
 
 }
