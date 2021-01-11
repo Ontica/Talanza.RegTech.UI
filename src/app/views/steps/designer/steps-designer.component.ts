@@ -5,16 +5,19 @@
  * See LICENSE.txt in the project root for complete license information.
  */
 
-import { Component, EventEmitter, Input,
-         OnChanges, Output } from '@angular/core';
-import { Observable } from 'rxjs';
-
-import { ProcedureStore } from '@app/store/procedure.store';
-
-import { ActivityTemplate, EmptyActivityTemplate } from '@app/models/project-management';
-import { Procedure } from '@app/models/regulation';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 import { CardSettings } from '@app/shared/common-models';
+
+import { EmptyStep, Step } from '@app/models/steps';
+import { EventInfo } from '@app/core';
+
+
+export enum StepsDesignerEventType {
+  EDITOR_CLOSED  = 'StepsListComponent.Event.CreateStepClicked',
+  STEP_DELETED   = 'StepsListComponent.Event.FilterChanged',
+  STEP_UPDATED   = 'StepsListComponent.Event.StepSelected'
+}
 
 
 @Component({
@@ -22,49 +25,36 @@ import { CardSettings } from '@app/shared/common-models';
   templateUrl: './steps-designer.component.html',
   styleUrls: ['./steps-designer.component.scss']
 })
-export class StepsDesignerComponent implements OnChanges {
+export class StepsDesignerComponent {
 
-  procedure: Observable<Procedure> = null;
-
-  @Output() activityDesignerClose = new EventEmitter();
-  @Output() activityTemplateChange = new EventEmitter<ActivityTemplate>();
-
-  @Input() activityTemplate = EmptyActivityTemplate;
+  @Input() step: Step = EmptyStep;
   @Input() settings = new CardSettings();
 
-  constructor(private store: ProcedureStore) { }
+  @Output() stepsDesignerEvent = new EventEmitter<EventInfo>();
 
-  ngOnChanges() {
-    if (!this.activityTemplate) {
-      this.activityTemplate = EmptyActivityTemplate;
-      this.procedure = null;
-      return;
-    }
-    if (this.hasProcedure) {
-      this.procedure = this.getProcedure();
-    } else {
-      this.procedure = null;
-    }
-  }
 
   onClose() {
-    this.activityDesignerClose.emit();
+    this.sendEvent(StepsDesignerEventType.EDITOR_CLOSED)
   }
 
   onDelete() {
-    this.onClose();
+    this.sendEvent(StepsDesignerEventType.STEP_DELETED)
   }
 
   onUpdate() {
-    this.activityTemplateChange.emit(this.activityTemplate);
+    this.sendEvent(StepsDesignerEventType.STEP_UPDATED)
   }
 
-  get hasProcedure() {
-    return (this.activityTemplate && this.activityTemplate.procedure !== -1);
-  }
 
-  private getProcedure(): Observable<Procedure> {
-    return this.store.getProcedure(this.activityTemplate.procedure);
+  // private methods
+
+  private sendEvent(eventType: StepsDesignerEventType, payload?: any) {
+    const event: EventInfo = {
+      type: eventType,
+      payload
+    };
+
+    this.stepsDesignerEvent.emit(event);
   }
 
 }

@@ -3,8 +3,8 @@
   <div *ngIf="settings.showTitle" class="card-header">
 
     <div class="card-title">
-      {{activityTemplate.name}}
-      <div class="card-hint">{{activityTemplate.project.name}}</div>
+      {{step.name}}
+      <div class="card-hint">{{step.typeName}}</div>
     </div>
 
     <div class="card-header-options">
@@ -15,17 +15,21 @@
 
   <mat-tab-group color="accent" [class.wide-margin]=!settings.showTitle>
 
-    <mat-tab label="Obligation" i18n-label>
+    <mat-tab label="Process" i18n-label>
       <emp-steps-element-form
-          [template]="activityTemplate" [readonly]="settings.readonly"
+          [template]="step" [readonly]="settings.readonly"
           (templateDelete)="onDelete()" (templateChange)="onUpdate()">
       </emp-steps-element-form>
     </mat-tab>
 
-    <mat-tab label="Procedure" [disabled]="!hasProcedure" i18n-label>
-      <emp-gov-procedure-viewer *ngIf="hasProcedure"
+    <mat-tab label="Steps" i18n-label>
+
+    </mat-tab>
+
+    <mat-tab label="Procedure" [disabled]="true" i18n-label>
+      <!-- <emp-gov-procedure-viewer *ngIf="hasProcedure"
           [procedure]="procedure | async">
-      </emp-gov-procedure-viewer>
+      </emp-gov-procedure-viewer> -->
     </mat-tab>
 
     <mat-tab label="Documentation" i18n-label>
@@ -33,9 +37,9 @@
     </mat-tab>
 
     <mat-tab label="Talanza Guidance" i18n-label [disabled]="true">
-      <emp-kb-postings-list
-          [target]="activityTemplate" [readonly]="settings.readonly">
-      </emp-kb-postings-list>
+      <!-- <emp-kb-postings-list
+          [target]="step" [readonly]="settings.readonly">
+      </emp-kb-postings-list> -->
     </mat-tab>
 
   </mat-tab-group>

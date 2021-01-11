@@ -6,21 +6,19 @@
  */
 
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs';
 
-import { PresentationLayer } from '@app/core/presentation';
-
-import { StepsStore } from '@app/store/steps.store';
-
-import { ActivityTemplate, ActivityTemplateOperation,
-         EmptyActivityTemplate,
-         ProjectTemplate, } from '@app/models/project-management';
+import { PresentationLayer, SubscriptionHelper } from '@app/core/presentation';
 
 import { View } from '@app/views/main-layout';
 
-import { Process } from '@app/models/steps';
+import { EmptyStep, EmptyStepsListFilter, Step } from '@app/models/steps';
 
-import { MainUIStateSelector } from '@app/core/presentation/presentation-types';
+import { MainUIStateSelector,
+         StepsMainPageAction, StepsMainPageSelector } from '@app/core/presentation/presentation-types';
+
+import { StepsListEventType } from '../list/steps-list.component';
+import { Assertion, EventInfo, isEmpty } from '@app/core';
+import { StepsDesignerEventType } from '../designer/steps-designer.component';
 
 
 @Component({
@@ -33,63 +31,100 @@ export class StepsMainPageComponent implements OnInit, OnDestroy {
   currentView: View;
   displayEditor = false;
 
-  processList: Process[] = [];
+  stepsList: Step[] = [];
 
-  selectedActivityTemplate = EmptyActivityTemplate;
+  selectedStep = EmptyStep;
 
-  private subs1: Subscription;
-  private subs2: Subscription;
+  private subscriptionHelper: SubscriptionHelper;
 
-  constructor(private uiLayer: PresentationLayer,
-              public store: StepsStore) { }
+  constructor(private uiLayer: PresentationLayer) {
+    this.subscriptionHelper = uiLayer.createSubscriptionHelper();
+  }
 
   ngOnInit() {
-    this.subs1 = this.uiLayer.select<View>(MainUIStateSelector.CURRENT_VIEW)
-      .subscribe(x => this.currentView = x);
+    this.subscriptionHelper.select<View>(MainUIStateSelector.CURRENT_VIEW)
+      .subscribe(x => this.onCurrentViewChanged(x));
 
-    this.subs2 = this.store.processList().subscribe (
-      x => this.processList = x
-    );
+    this.subscriptionHelper.select<Step[]>(StepsMainPageSelector.STEPS_LIST)
+      .subscribe(x => this.stepsList = x);
+
+    this.subscriptionHelper.select<Step>(StepsMainPageSelector.SELECTED_STEP)
+      .subscribe(x => this.showEditor(x));
+
   }
 
   ngOnDestroy() {
-    if (this.subs1) {
-      this.subs1.unsubscribe();
+    this.subscriptionHelper.destroy();
+  }
+
+  onStepsListEvent(event: EventInfo): void {
+    switch (event.type as StepsListEventType) {
+
+      case StepsListEventType.CREATE_STEP_CLICKED:
+        return;
+
+      case StepsListEventType.FILTER_CHANGED:
+        return this.applyStepsListFilter(event.payload);
+
+      case StepsListEventType.STEP_SELECTED:
+        return this.uiLayer.dispatch(StepsMainPageAction.SELECT_STEP, {'step': event.payload.step});
+
+      default:
+        throw Assertion.assertNoReachThisCode(`Unhandled StepsListEventType '${event.type}'.`);
     }
-    if (this.subs2) {
-      this.subs2.unsubscribe();
+  }
+
+  onStepsDesignerEvent(event: any) {
+    switch (event.type as StepsDesignerEventType) {
+
+      case StepsDesignerEventType.EDITOR_CLOSED:
+        this.displayEditor = false;
+        this.selectedStep = EmptyStep;
+        return;
+
+      case StepsDesignerEventType.STEP_DELETED:
+        return
+
+      case StepsDesignerEventType.STEP_UPDATED:
+        return
+
+      default:
+        throw Assertion.assertNoReachThisCode(`Unhandled StepsListEventType '${event.type}'.`);
     }
   }
 
-  onActivityUpdated(activityTemplate: ActivityTemplate) {
+  // private methods
 
+  private applyStepsListFilter(filter?: { keywords: string }) {
+
+    if (!filter) {
+      filter = EmptyStepsListFilter;
+    }
+
+    this.uiLayer.dispatch(StepsMainPageAction.SET_LIST_FILTER, { filter });
+
+    // const currentKeywords =
+    //     this.uiLayer.selectValue<TransactionFilter>(TransactionStateSelector.LIST_FILTER).keywords;
+
+    // const filter: TransactionFilter = {
+    //   stage: mapTransactionStageFromViewName(this.currentView.name),
+    //   status: mapTransactionStatusFromViewName(this.currentView.name),
+    //   keywords: data ? data.keywords : currentKeywords,
+    // };
+
+    // this.isLoading = true;
+
+    // this.uiLayer.dispatch(TransactionAction.SET_LIST_FILTER, { filter });
   }
 
-  onActivityTreeEdited(event: ActivityTemplateOperation) {
-    console.log('catched activity edition event', event);
-
-    return;
+  private onCurrentViewChanged(newView: View) {
+    this.currentView = newView;
+    this.applyStepsListFilter();
   }
 
-
-  onEditorClosed() {
-    this.displayEditor = false;
-  }
-
-
-  onProcessDiagramEdited(event: any) {
-
-  }
-
-
-  onProcessSelected(process: ProjectTemplate) {
-
-  }
-
-
-  showEditor(activityTemplate: ActivityTemplate) {
-    if (activityTemplate) {
-      this.selectedActivityTemplate = activityTemplate;
+  private showEditor(step: Step) {
+    if (!isEmpty(step)) {
+      this.selectedStep = step;
       this.displayEditor = true;
     }
   }

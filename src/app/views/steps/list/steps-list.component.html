@@ -4,87 +4,56 @@
 
     <div class="card-title">
       Search all steps
-      <div class="card-hint" i18n>
-        {{processList.length}} items found
-        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-      </div>
+      <div class="card-hint" empNgProgressText
+        loadingText="Loading data"
+        [finalText]="stepsList.length + ' items found'"
+        [isLoading]="isLoading"></div>
     </div>
 
     <div class="card-header-options">
+      <input type="search" class="text-box" style="width:50%;min-width:240px"
+             placeholder="Search items"
+             (search)="onChangeFilter()" [(ngModel)]="keywords">
+      <mat-icon (click)="onChangeFilter()">search</mat-icon>
+      &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+
       <button type="button" class="btn-action"
-              (click)="showInitialActivityInlineEditor()" i18n>New step</button>
+              (click)="onClickNew()" i18n>New step</button>
     </div>
 
   </div>
 
-  <div class="card-body drag-boundary">
+  <div class="card-body" [empNgSpinnerHost]="spinner">
 
-    <div *ngIf="addFirstActivityEditorVisible"
-          style="margin-left:68pt">
-          <emp-ng-inline-editor
-            placeholder='Activity or obligation name'
-            (inlineEditorInsertText)="insertActivity($event)"
-            (inlineEditorCancel)="hideInlineEditors()">
-          </emp-ng-inline-editor>
-    </div>
+    <emp-ng-spinner #spinner [visible]="isLoading"></emp-ng-spinner>
 
-    <div cdkDropList (cdkDropListDropped)="dropActivity($event)" class="drop-list">
+    <div *ngFor="let step of stepsList"
+          class="list-item" matRipple [matRippleTrigger]="trigger"
+          [class.list-item-selected]="isSelected(step)">
 
-      <div *ngFor="let activity of processList" class="drop-item"
-            cdkDrag cdkDragLockAxis="y" [cdkDragData]="activity" cdkDragBoundary=".drag-boundary">
+      <div class="list-item-container">
 
-        <div *ngIf="activityDisplayMode(activity); let displayMode"
-             class="activity-row" matRipple [matRippleTrigger]="trigger"
-             [class.selected-activity]="isActivitySelected(activity)"
-             (click)="onSelectActivity(activity)" >
-
-            <div class="edition-controls">
-              <mat-icon cdkDragHandle class="ghost-icon grabbable">drag_indicator</mat-icon>
-
-              &nbsp; &nbsp;
-              <mat-icon *ngIf="isIndentable(activity)"
-                         class="ghost-icon" (click)="indentActivity(activity)">subdirectory_arrow_right</mat-icon>
-              <mat-icon *ngIf="!isIndentable(activity) && isOutdentable(activity)"
-                         class="ghost-icon" (click)="outdentActivity(activity)">subdirectory_arrow_left</mat-icon>
-            </div>
-
-            <div class="activity-tree-container"
-                 [style.padding-left.pt]="activity.level * 14">
-
-                <div class="activity-tree-controls">
-                  <mat-icon *ngIf="displayMode !== 'leaf'" class='activity-tree-icon'
-                            (click)="toggleCollapse(activity)">
-                            {{displayMode === "expanded" ? "expand_less" : "expand_more"}}</mat-icon>
-                </div>
-
-                <div class="expand">
-                  <div class="activity-name" [class]="activityNameClass(activity)">
-                    <a #trigger (click)="onSelectActivity(activity, true)">{{activity.name}}</a>
-                  </div>
-
-                  <div class="activity-status">
-                    <div class="activity-theme" i18n>
-                      {{activity.theme || 'No topic'}}
-                    </div>
-
-                    <div class="right-column expand">
-                        <i class="fa fa-ellipsis-v ghost-icon" aria-hidden="true" (click)="openCopyOrMoveActivityDialog(activity)"></i>
-                    </div>
-
-                  </div>
-                </div>
-
-            </div>
-
+        <div class="list-item-main-name">
+          <a #trigger (click)="onSelect(step)">{{step.name}}</a>
         </div>
 
-        <div *ngIf="isActivitySelected(activity) && insertActivityEditorVisible"
-              [style.margin-left.pt]="activity.level * 14 + 54">
-          <emp-ng-inline-editor
-              placeholder='Activity or obligation name'
-              (inlineEditorInsertText)="insertActivity($event, activity.position)"
-              (inlineEditorCancel)="hideInlineEditors()">
-          </emp-ng-inline-editor>
+        <div class="list-item-columns" style="justify-content: left">
+
+          <div class="list-item-column" style="min-width:120px">
+            <div class="label">Type:</div>
+            {{step.typeName}}
+          </div>
+
+          <div class="list-item-column" style="min-width:140px">
+            <div class="label">Topic:</div>
+            {{step.topics || 'No topic'}}
+          </div>
+
+          <div class="list-item-column">
+            <div class="label">Entity:</div>
+            {{step.entity || 'No related entity'}}
+          </div>
+
         </div>
 
       </div>

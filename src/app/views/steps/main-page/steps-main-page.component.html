@@ -1,15 +1,13 @@
 <div class="explorer"
-      [class.remove-min-width]="!displayEditor">
+     [class.remove-min-width]="!displayEditor">
 
-  <div class="explorer-panel"
-        [class.primary]="currentView.name !== 'Steps.Diagram'"
-        [class.primary-full]="currentView.name === 'Steps.Diagram'">
+  <div class="explorer-panel primary">
 
     <ng-container *ngIf="currentView.name === 'Steps.All'">
       <emp-steps-list
-          [processList]="processList"
-          (activityChange)="onActivityTreeEdited($event)"
-          (activitySelect)="showEditor($event)">
+          [stepsList]="stepsList"
+          stepsListEvent
+          (stepsListEvent)="onStepsListEvent($event)">
       </emp-steps-list>
     </ng-container>
 
@@ -21,9 +19,8 @@
 
   <div *ngIf="displayEditor" class="explorer-panel secondary">
     <emp-steps-designer
-        [activityTemplate]="selectedActivityTemplate"
-        (activityTemplateChange)="onActivityUpdated($event)"
-        (activityDesignerClose)="onEditorClosed()">
+        [step]="selectedStep"
+        (stepsDesignerEvent)="onStepsDesignerEvent($event)">
     </emp-steps-designer>
   </div>
 
