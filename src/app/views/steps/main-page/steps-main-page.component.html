@@ -3,9 +3,10 @@
 
   <div class="explorer-panel primary">
 
-    <ng-container *ngIf="currentView.name === 'Steps.All'">
+    <ng-container *ngIf="currentView.name !== 'Steps.Documentation'">
       <emp-steps-list
           [stepsList]="stepsList"
+          [keywords]="filter.keywords"
           stepsListEvent
           (stepsListEvent)="onStepsListEvent($event)">
       </emp-steps-list>

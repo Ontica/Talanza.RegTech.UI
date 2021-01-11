@@ -27,11 +27,11 @@ export class StepsListComponent {
 
   @Input() stepsList: Step[] = [];
 
+  @Input() keywords: '';
+
   @Output() stepsListEvent = new EventEmitter<EventInfo>();
 
   private selectedStep: Step = EmptyStep;
-
-  keywords = '';
 
   isLoading: false;
 
@@ -49,6 +49,7 @@ export class StepsListComponent {
   }
 
   onSelect(step: Step) {
+    this.selectedStep = step;
     this.sendEvent(StepsListEventType.STEP_SELECTED, { step });
   }
 

@@ -12,12 +12,12 @@ import { StepsMainPageComponent } from './main-page/steps-main-page.component';
 
 
 const routes: Routes = [
-  { path: 'all', component: StepsMainPageComponent },
   { path: 'processes', component: StepsMainPageComponent },
   { path: 'activities', component: StepsMainPageComponent },
   { path: 'events', component: StepsMainPageComponent },
+  { path: 'all', component: StepsMainPageComponent },
   { path: 'documentation', component: StepsMainPageComponent },
-  { path: '', redirectTo: 'all', pathMatch: 'full' }
+  { path: '', redirectTo: 'processes', pathMatch: 'full' }
 ];
 
 

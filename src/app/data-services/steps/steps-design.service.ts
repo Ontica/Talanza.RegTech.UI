@@ -28,7 +28,7 @@ export class StepsDesignService {
   stepsList(filter: StepsListFilter): Observable<Step[]> {
     const filterAsPathString = this.convertStepsFilterToPath(filter);
 
-    const path = `v3/steps/processes/${filterAsPathString};`
+    const path = `v3/steps/processes/${filterAsPathString}`
 
     return this.http.get<Step[]>(path);
   }
@@ -37,7 +37,11 @@ export class StepsDesignService {
   // private methods
 
   private convertStepsFilterToPath(filter: StepsListFilter) {
-    return `?keywords=${filter.keywords}&pageSize=50`;
+    let temp = `?keywords=${filter.keywords}&pageSize=200`;
+
+    temp += `&stepsType=${filter.type}`;
+
+    return temp;
   }
 
 }
