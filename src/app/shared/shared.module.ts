@@ -15,7 +15,6 @@ import { FileControlComponent } from './file-control/file-control.component';
 
 import { CardComponent } from './card/card.component';
 
-import { ContactsPickerComponent } from './contacts-picker/contacts-picker.component';
 import { InlineEditorComponent } from './inline-editor/inline-editor.component';
 import { MessageBoxComponent } from './message-box/message-box.component';
 import { ModalWindowComponent } from './modal-window';
@@ -50,7 +49,6 @@ import { SharedIndicatorsModule } from './indicators/shared-indicators.module';
     FileControlComponent,
 
     CardComponent,
-    ContactsPickerComponent,
     InlineEditorComponent,
     MessageBoxComponent,
     ModalWindowComponent,
@@ -66,7 +64,6 @@ import { SharedIndicatorsModule } from './indicators/shared-indicators.module';
 
     CardComponent,
     DatepickerComponent,
-    ContactsPickerComponent,
     FileControlComponent,
     InlineEditorComponent,
     MessageBoxComponent,

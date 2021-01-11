@@ -14,7 +14,7 @@ import {
 
 import { Identifiable, Empty } from '@app/core/data-types';
 import { EmptyPosting } from '@app/models/knowledge-base';
-import { SelectedContacts } from '@app/shared/contacts-picker/contacts-picker.component';
+import { SelectedContacts } from "@app/views/project-management/contacts-picker/contacts-picker.component";
 import { ProjectStore } from '@app/store/project.store';
 
 

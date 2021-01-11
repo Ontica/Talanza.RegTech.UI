@@ -56,6 +56,7 @@ import { ActivityDataObjectComponent } from './activity-data-objects/activity-da
 import { ReportSomethingDialogComponent } from './report-something-dialog/report-something-dialog.component';
 
 import { ProjectManagementRoutingModule } from './project-management-routing.module';
+import { ContactsPickerComponent } from './contacts-picker/contacts-picker.component';
 
 
 @NgModule({
@@ -89,6 +90,7 @@ import { ProjectManagementRoutingModule } from './project-management-routing.mod
     ActivityTimelineComponent,
     ActivityTreeComponent,
     AddEventDialogComponent,
+    ContactsPickerComponent,
     ChangeDateDialogComponent,
     CheckProcessesDialogComponent,
     ExportActivitiesDialogComponent,

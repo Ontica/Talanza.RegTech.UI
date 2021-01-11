@@ -5,7 +5,7 @@
  * See LICENSE.txt in the project root for complete license information.
  */
 
-import { SelectedContacts } from '@app/shared/contacts-picker/contacts-picker.component';
+import { SelectedContacts } from "@app/views/project-management/contacts-picker/contacts-picker.component";
 
 export interface Posting {
   uid: string;

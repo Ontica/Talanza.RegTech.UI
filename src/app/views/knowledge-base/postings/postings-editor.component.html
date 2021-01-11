@@ -19,9 +19,9 @@
                      (modalWindowClose)="closeSendToPicker()">
   <emp-ng-card title='Send annotation to' hint="Persons that will receive information related to this annotation"
                (cardClose)="closeSendToPicker()">
-    <emp-ng-contacts-picker [registered]="projectStore.allResponsibles | async" [selected]="sendTo.registered" [additional]="sendTo.additional"
+    <!-- <emp-ng-contacts-picker [registered]="projectStore.allResponsibles | async" [selected]="sendTo.registered" [additional]="sendTo.additional"
                             (close)="closeSendToPicker()" (selectionChange)="sendToListChanged($event)">
 
-    </emp-ng-contacts-picker>
+    </emp-ng-contacts-picker> -->
   </emp-ng-card>
 </emp-ng-modal-window>

@@ -28,7 +28,7 @@ import { AbstractForm } from '@app/shared/services';
 import { SharedService } from '@app/shared/shared.service';
 import { ChangeDateDialogComponent } from '../../change-date-dialog/change-date-dialog.component';
 
-import { SelectedContacts } from '@app/shared/contacts-picker/contacts-picker.component';
+import { SelectedContacts } from "@app/views/project-management/contacts-picker/contacts-picker.component";
 
 
 enum FormMessages {
