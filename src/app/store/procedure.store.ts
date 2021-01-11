@@ -28,6 +28,11 @@ export class ProcedureStore {
   }
 
 
+  get allEntities(): Observable<string[]> {
+    return this._entities.asObservable()
+              .pipe(map(x => x.map(item => item.shortName)));
+  }
+
   entities(): Observable<Entity[]> {
     return this._entities.asObservable();
   }

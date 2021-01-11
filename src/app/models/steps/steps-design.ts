@@ -42,10 +42,10 @@ export enum StepsListType {
 
 
 export interface StepsListFilter {
-  type: StepsListType;
-  entities: string[],
-  topics: string[],
-  keywords: string;
+  type?: StepsListType;
+  entities?: string[],
+  topics?: string[],
+  keywords?: string;
 }
 
 

@@ -19,6 +19,7 @@ import { Contact } from '@app/models/regulation';
 import { DefaultSidebarValues, Layout, MainSidebarValues } from '../common-models';
 
 import { MainUIStateAction, MainUIStateSelector } from '@app/core/presentation/presentation-types';
+import { ProcedureStore } from '@app/store/procedure.store';
 
 
 @Component({
@@ -36,7 +37,8 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
   constructor(private uiLayer: PresentationLayer,
               public processStore: ProjectTemplateStore,
-              public projectStore: ProjectStore) {
+              public projectStore: ProjectStore,
+              public procedureStore: ProcedureStore) {
     this.subscriptionHelper = uiLayer.createSubscriptionHelper();
   }
 
@@ -50,6 +52,12 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.subscriptionHelper.destroy();
+  }
+
+  onEntitiesChange(entitiesList: string[]) {
+    this.filter = {...this.filter, entities: entitiesList };
+
+    this.uiLayer.dispatch(MainUIStateAction.SET_SIDEBAR_VALUES, this.filter);
   }
 
   onProcessChange(process: ProjectTemplate) {
@@ -94,6 +102,9 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
   showWidget(widgetName: string) {
     switch (widgetName) {
+      case 'EntitiesSelector':
+        return this.layout.name === 'Steps';
+
       case 'ProcessSelector':
         return this.layout.name === 'Processes';
 

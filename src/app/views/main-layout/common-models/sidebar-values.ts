@@ -15,6 +15,7 @@ export interface MainSidebarValues {
   responsibles: Contact[];
   tags: string[];
   themes: string[];
+  entities: string[];
   keywords: string;
   status: ProjectItemStatus;
 }
@@ -25,6 +26,7 @@ export const DefaultSidebarValues: MainSidebarValues = {
   responsibles: [],
   tags: [],
   themes: [],
+  entities: [],
   keywords: '',
   status: 'All tasks'
 };

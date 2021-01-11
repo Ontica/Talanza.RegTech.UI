@@ -12,12 +12,14 @@ import { RouterModule } from '@angular/router';
 
 import { AngularMaterialModule } from '../../../../shared/angular-material.module';
 
+import { EntitiesListSelectorComponent } from './entities-list-selector/entities-list-selector.component';
 import { ProcessSelectorComponent } from './process-selector/process-selector.component';
 import { ProjectSelectorComponent } from './project-selector/project-selector.component';
 import { ProjectsListSelectorComponent } from './projects-list-selector/projects-list-selector.component';
 import {
   ResponsiblesListSelectorComponent
 } from './responsibles-list-selector/responsibles-list-selector.component';
+
 import { ThemesListSelectorComponent } from './themes-list-selector/themes-list-selector.component';
 import { TagsListSelectorComponent } from './tags-list-selector/tags-list-selector.component';
 
@@ -33,15 +35,17 @@ import { TagsListSelectorComponent } from './tags-list-selector/tags-list-select
   ],
 
   declarations: [
+    EntitiesListSelectorComponent,
     ProcessSelectorComponent,
     ProjectSelectorComponent,
     ProjectsListSelectorComponent,
     ResponsiblesListSelectorComponent,
     TagsListSelectorComponent,
-    ThemesListSelectorComponent,
+    ThemesListSelectorComponent
   ],
 
   exports: [
+    EntitiesListSelectorComponent,
     ProcessSelectorComponent,
     ProjectSelectorComponent,
     ProjectsListSelectorComponent,
