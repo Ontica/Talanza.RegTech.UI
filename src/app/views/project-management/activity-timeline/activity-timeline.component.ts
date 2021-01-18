@@ -38,6 +38,8 @@ export class ActivityTimelineComponent implements OnChanges {
 
   filteredActivities: Activity[] = [];
 
+  keywords: '';
+
   constructor(private dialog: MatDialog) { }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -138,7 +140,7 @@ export class ActivityTimelineComponent implements OnChanges {
   }
 
   onSearch() {
-
+    this.applyFilters();
   }
 
   onSelectActivity(activity: Activity, emitEvent: boolean = false) {
@@ -168,7 +170,7 @@ export class ActivityTimelineComponent implements OnChanges {
 
   private applyFilters() {
     this.filteredActivities =
-              TimelineHelper.applyInboxTypeFilter(this.activities, this.inboxType);
+              TimelineHelper.applyInboxTypeFilter(this.activities, this.inboxType, this.keywords);
   }
 
   private resetSelectedActivity() {

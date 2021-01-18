@@ -37,13 +37,9 @@
 
         <div style="width:32px"></div>
 
-        <button *ngIf="false" type="button" class="btn btn-action" title="Report an event, task or activity"
-                (click)="openReportSomethingDialog()" i18n>Report event</button>
-
-        <div style="width:16px"></div>
-
-        <button type="button" class="btn disabled"
-                (click)="onSearch()" i18n>Search</button>
+        <input type="search" class="text-box" style="width:180px"
+               placeholder="Search tasks" (search)="onSearch()" [(ngModel)]="keywords">
+          <mat-icon (click)="onSearch()">search</mat-icon>
     </div>
 
   </div>

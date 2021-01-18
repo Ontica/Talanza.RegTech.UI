@@ -46,16 +46,18 @@ export class TimelineHelper {
   }
 
 
-  static applyInboxTypeFilter(source: Activity[], inboxType: InboxType): Activity[] {
+  static applyInboxTypeFilter(source: Activity[], inboxType: InboxType, keywords: string): Activity[] {
+    const temp = TimelineHelper.filterByKeywords(source, keywords);
+
     switch (inboxType) {
       case 'upcoming-tasks':
-        return TimelineHelper.filterUpcomingTasks(source);
+        return TimelineHelper.filterUpcomingTasks(temp);
 
       case 'active-tasks':
-        return TimelineHelper.filterActiveTasks(source);
+        return TimelineHelper.filterActiveTasks(temp);
 
       default:
-        return source;
+        return temp;
     }
   }
 
@@ -69,6 +71,17 @@ export class TimelineHelper {
   static filterActiveTasks(source: Activity[]) {
     return source.filter(x => x.status !== 'Completed' &&
                         (x.deadline || x.plannedEndDate || x.actualStartDate || x.actualEndDate));
+  }
+
+
+  static filterByKeywords(source: Activity[], keywords: string) {
+    if (!keywords) {
+      return source;
+    }
+
+    return source.filter(x => x.name.toLocaleLowerCase().includes(keywords.toLocaleLowerCase()) ||
+                              (x?.template.notes &&
+                               x.template.notes.toLocaleLowerCase().includes(keywords.toLocaleLowerCase())));
   }
 
 
