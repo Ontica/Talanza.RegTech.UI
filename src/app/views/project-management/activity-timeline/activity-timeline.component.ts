@@ -75,7 +75,7 @@ export class ActivityTimelineComponent implements OnChanges {
         return 'By Resource';
 
       case 'responsible':
-        return 'By Responsible';
+        return 'By Assignee';
 
       case 'tag':
         return 'By Tag';
@@ -91,13 +91,13 @@ export class ActivityTimelineComponent implements OnChanges {
   get inboxTypeTitle() {
     switch (this.inboxType) {
       case 'upcoming-tasks':
-        return 'Upcoming Tasks';
+        return 'Short term tasks';
 
       case 'active-tasks':
-        return 'Defined Tasks';
+        return 'Scheduled tasks';
 
       case 'all-tasks':
-        return 'All Tasks';
+        return 'All tasks';
 
       default:
         return 'Tasks';
