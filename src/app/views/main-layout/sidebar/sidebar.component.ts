@@ -102,8 +102,11 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
   showWidget(widgetName: string) {
     switch (widgetName) {
+
       case 'EntitiesSelector':
-        return this.layout.name === 'Steps';
+        return this.layout.name === 'Home' ||
+               this.layout.name === 'Projects' ||
+               this.layout.name === 'Steps';
 
       case 'ProcessSelector':
         return this.layout.name === 'Processes';

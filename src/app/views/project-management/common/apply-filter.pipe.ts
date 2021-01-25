@@ -36,6 +36,7 @@ export class ApplyFilterPipe implements PipeTransform {
     let filtered = this.applyProjectsFilter(data);
 
     filtered = this.applyResponsiblesFilter(filtered);
+    filtered = this.applyEntitiesFilter(filtered);
     filtered = this.applyTagsFilter(filtered);
     filtered = this.applyThemesFilter(filtered);
 
@@ -51,6 +52,15 @@ export class ApplyFilterPipe implements PipeTransform {
     const uids = this.filter.projects.map(x => x.uid);
 
     return source.filter(x => uids.includes(x.project.uid));
+  }
+
+
+  private applyEntitiesFilter(source: ProjectItem[]): ProjectItem[] {
+    if (!this.filter.entities || this.filter.entities.length === 0) {
+      return source;
+    }
+
+    return source.filter(x => x.entity && this.filter.entities.includes(x.entity));
   }
 
 

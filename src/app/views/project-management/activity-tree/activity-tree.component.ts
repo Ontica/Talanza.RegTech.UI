@@ -5,16 +5,20 @@
  * See LICENSE.txt in the project root for complete license information.
  */
 
-import { Component, EventEmitter,
-         Input, OnChanges, Output, ChangeDetectionStrategy } from '@angular/core';
+import {
+  Component, EventEmitter,
+  Input, OnChanges, Output, ChangeDetectionStrategy
+} from '@angular/core';
 
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { CdkDragDrop } from '@angular/cdk/drag-drop';
 
 import { ProjectModel } from '@app/store/project.store';
 
-import { Activity, EmptyActivity, ActivityOperation,
-         ProjectItemStatus } from '@app/models/project-management';
+import {
+  Activity, EmptyActivity, ActivityOperation,
+  ProjectItemStatus
+} from '@app/models/project-management';
 
 import { AddEventDialogComponent } from '../add-event-dialog/add-event-dialog.component';
 import { CheckProcessesDialogComponent } from '../check-processes-dialog/check-processes-dialog.component';
@@ -25,7 +29,7 @@ import { CollapsableTree, CollapsableTreeNodeDisplayMode } from '../common/colla
 import { FilterHelper } from '../common/filter-helper';
 import { ExportActivitiesDialogComponent } from '../export-activities-dialog/export-activities-dialog.component';
 
-import { MainSidebarValues, DefaultSidebarValues} from '@app/views/main-layout';
+import { MainSidebarValues, DefaultSidebarValues } from '@app/views/main-layout';
 
 @Component({
   selector: 'emp-steps-activity-tree',
@@ -123,7 +127,7 @@ export class ActivityTreeComponent implements OnChanges {
 
     const activity = event.item.data as Activity;
     const newPosition = event.currentIndex < event.previousIndex ?
-                                             event.currentIndex + 1 : event.currentIndex + 2;
+      event.currentIndex + 1 : event.currentIndex + 2;
 
     this.moveActivity(activity, newPosition);
   }
@@ -180,7 +184,7 @@ export class ActivityTreeComponent implements OnChanges {
       }
 
       const hasNextSiblings = this.project.activities.find(x => x.position > activity.position &&
-                                                           x.parent.uid === activity.parent.uid);
+        x.parent.uid === activity.parent.uid);
 
       if (hasNextSiblings) {
         return false;
@@ -246,9 +250,10 @@ export class ActivityTreeComponent implements OnChanges {
       position: position ? position + 1 : 1
     };
 
-    this.activityChange.emit({ operation: 'insertActivity',
-                       activity: newActivity
-                     });
+    this.activityChange.emit({
+      operation: 'insertActivity',
+      activity: newActivity
+    });
   }
 
 
@@ -334,10 +339,11 @@ export class ActivityTreeComponent implements OnChanges {
 
 
   private changeActivityParent(activity: Activity, newParent: Activity) {
-    this.activityChange.emit({ operation: 'changeParent',
-                       activity: activity,
-                       newParent: newParent
-                     });
+    this.activityChange.emit({
+      operation: 'changeParent',
+      activity: activity,
+      newParent: newParent
+    });
   }
 
 
@@ -350,7 +356,7 @@ export class ActivityTreeComponent implements OnChanges {
     }
 
     this.collapsableTreeHandler = new CollapsableTree(this.filteredActivities,
-                                                      this.collapsedActivities);
+      this.collapsedActivities);
 
     if (this.selectedActivity.project.uid !== this.project.project.uid) {
       this.selectedActivity = EmptyActivity;
@@ -360,10 +366,11 @@ export class ActivityTreeComponent implements OnChanges {
 
 
   private moveActivity(activity: Activity, newPosition: number) {
-    this.activityChange.emit({ operation: 'moveActivity',
-                       activity: activity,
-                       newPosition: newPosition
-                     });
+    this.activityChange.emit({
+      operation: 'moveActivity',
+      activity: activity,
+      newPosition: newPosition
+    });
   }
 
 }

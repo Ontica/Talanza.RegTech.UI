@@ -38,6 +38,7 @@ export interface BaseProjectItem {
   resource: string;
   tags: string;
   responsible: Contact;
+  entity: string;
   status: string;
 }
 
@@ -73,7 +74,9 @@ export interface Activity extends Identifiable, PartitionedType, BaseProjectItem
   theme: string;
   resource: string;
   tags: string;
+
   responsible: Contact;
+  entity: string;
 
   template?: ActivityTemplate;
 
@@ -91,8 +94,11 @@ export const EmptyActivity: Activity = {
   name: '',
   notes: '',
   project: Empty,
-  responsible: Empty,
+
   parent: Empty,
+
+  responsible: Empty,
+  entity: '',
 
   estimatedDuration: DefaultDuration,
   actualStartDate: '',

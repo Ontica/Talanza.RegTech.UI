@@ -26,6 +26,8 @@ export class FilterHelper {
 
     filtered = this.applyResponsiblesFilter(filter, filtered);
 
+    filtered = this.applyEntitiesFilter(filter, filtered);
+
     filtered = this.applyThemesFilter(filter, filtered);
     filtered = this.applyTagsFilter(filter, filtered);
 
@@ -93,6 +95,17 @@ export class FilterHelper {
 
     return source.filter(x => uids.includes(x.responsible.uid));
   }
+
+
+  private static applyEntitiesFilter(filter: MainSidebarValues,
+                                     source: BaseProjectItem[]): BaseProjectItem[] {
+    if (!filter.entities || filter.entities.length === 0) {
+      return source;
+    }
+
+    return source.filter(x => filter.entities.includes(x.entity));
+  }
+
 
   private static applyStatusFilter(filter: MainSidebarValues,
                                    source: BaseProjectItem[]): BaseProjectItem[] {

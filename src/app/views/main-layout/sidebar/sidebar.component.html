@@ -58,6 +58,18 @@
   <div class="panel-separator"></div>
 </div>
 
+
+<div *ngIf="showWidget('EntitiesSelector')">
+  <emp-steps-entities-list-selector
+      [entities]="procedureStore.allEntities | async"
+      [selected]="filter.entities"
+      (selectedEntitiesChange)="onEntitiesChange($event)">
+  </emp-steps-entities-list-selector>
+
+  <div class="panel-separator"></div>
+</div>
+
+
 <div *ngIf="showWidget('TagsListSelector')">
   <emp-steps-tags-list-selector
       [tags]="projectStore.tags | async"
@@ -66,16 +78,4 @@
   </emp-steps-tags-list-selector>
 
   <div class="panel-separator"></div>
-</div>
-
-<div *ngIf="showWidget('EntitiesSelector')">
-
-  <emp-steps-entities-list-selector
-      [entities]="procedureStore.allEntities | async"
-      [selected]="filter.entities"
-      (selectedEntitiesChange)="onEntitiesChange($event)">
-  </emp-steps-entities-list-selector>
-
-  <div class="panel-separator"></div>
-
 </div>
