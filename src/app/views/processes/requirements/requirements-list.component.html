@@ -1,6 +1,6 @@
 <div class="list-header">
   <div class="list-item-column" i18n>
-    Requirement / Type
+    Requisite / Type
   </div>
 
   <div class="list-item-right-column expand" i18n>
@@ -27,7 +27,6 @@
       <div class="list-item-right-column expand" *ngIf="!readonly">
         <mat-icon class="material-icons-outlined" (click)="onDeleteRequirement(requirement)">delete_outline</mat-icon>
       </div>
-
     </div>
 
   </div>
@@ -36,6 +35,6 @@
 
 <div *ngIf="requirementsList && requirementsList.length === 0" class="list-item-container">
   <div class="list-item-column" i18n>
-    There are not defined requirements for this obligation.
+    There are not defined requisites for this obligation.
   </div>
 </div>

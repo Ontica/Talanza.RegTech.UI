@@ -32,6 +32,7 @@ export interface DataObject {
   type: string;
   name: string;
   description: string;
+  isOptional: boolean
   entity: Identifiable;
   subject: Identifiable;
   action: string;

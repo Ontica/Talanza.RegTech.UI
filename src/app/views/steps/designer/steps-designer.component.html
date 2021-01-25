@@ -22,18 +22,21 @@
       </emp-steps-element-form>
     </mat-tab>
 
-    <mat-tab label="Steps" i18n-label>
+    <mat-tab label="Steps" [disabled]="true" i18n-label>
 
+    </mat-tab>
+
+    <mat-tab label="Requisites" [disabled]="true" i18n-label>
+      <!-- <emp-steps-element-form
+          [template]="step" [readonly]="settings.readonly"
+          (templateDelete)="onDelete()" (templateChange)="onUpdate()">
+      </emp-steps-element-form> -->
     </mat-tab>
 
     <mat-tab label="Procedure" [disabled]="true" i18n-label>
       <!-- <emp-gov-procedure-viewer *ngIf="hasProcedure"
           [procedure]="procedure | async">
       </emp-gov-procedure-viewer> -->
-    </mat-tab>
-
-    <mat-tab label="Documentation" i18n-label>
-
     </mat-tab>
 
     <mat-tab label="Talanza Guidance" i18n-label [disabled]="true">

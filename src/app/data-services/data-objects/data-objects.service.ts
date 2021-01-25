@@ -38,6 +38,15 @@ export class DataObjectsService {
   }
 
 
+  toggleSubjectDataRequestStatus(dataObject: DataObject): Observable<DataObject[]> {
+    Assertion.assertValue(dataObject, 'dataObject');
+
+    const path = `v3/empiria-steps/activities/${dataObject.subject.uid}/data-objects/${dataObject.uid}/toggle-status`;
+
+    return this.http.post<DataObject[]>(path);
+  }
+
+
   getStepRequirements(entity: Identifiable): Observable<StepRequirement[]> {
     Assertion.assertValue(entity, 'entity');
 

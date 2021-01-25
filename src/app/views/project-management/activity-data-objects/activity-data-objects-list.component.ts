@@ -34,6 +34,12 @@ export class ActivityDataObjectsListComponent implements OnChanges {
     this.loadDataObjects();
   }
 
+  onToggleCompleted(dataObject: DataObject) {
+    this.service.toggleSubjectDataRequestStatus(dataObject)
+    .toPromise()
+    .then (x => this.dataObjects = x);
+  }
+
   onSelectDataObject(dataObject: DataObject) {
     const event = {
       type: 'dataObjectSelected',
