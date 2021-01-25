@@ -45,7 +45,6 @@ export class StepsDesignerComponent {
     this.sendEvent(StepsDesignerEventType.STEP_UPDATED)
   }
 
-
   // private methods
 
   private sendEvent(eventType: StepsDesignerEventType, payload?: any) {

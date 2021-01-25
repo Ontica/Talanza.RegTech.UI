@@ -57,7 +57,6 @@ export interface StateChange extends Identifiable {
 
   deadline: DateString;
 
-
   plannedEndDate: DateString;
 
   actualStartDate: DateString;
