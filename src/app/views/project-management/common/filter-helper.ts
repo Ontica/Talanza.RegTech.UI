@@ -14,21 +14,24 @@ export class FilterHelper {
 
 
   static applyFilter(filter: MainSidebarValues,
-                     activities: Activity[]): Activity[];
+                     activities: Activity[], keywords: string): Activity[];
 
   static applyFilter(filter: MainSidebarValues,
-                     activities: GanttTask[]): GanttTask[];
+                     activities: GanttTask[], keywords: string): GanttTask[];
 
 
   static applyFilter(filter: MainSidebarValues,
-                     activities: BaseProjectItem[]): BaseProjectItem[] {
-    let filtered = this.applyStatusFilter(filter, activities);
+                     activities: BaseProjectItem[],  keywords: string): BaseProjectItem[] {
+    let filtered = this.applyKeywordsFilter(keywords, activities);
+
+    filtered = this.applyStatusFilter(filter, filtered);
 
     filtered = this.applyResponsiblesFilter(filter, filtered);
 
     filtered = this.applyEntitiesFilter(filter, filtered);
 
     filtered = this.applyThemesFilter(filter, filtered);
+
     filtered = this.applyTagsFilter(filter, filtered);
 
     filtered = this.addAncestorTasks(activities, filtered);
@@ -82,6 +85,17 @@ export class FilterHelper {
                                            !filtered.includes(x));
 
     return parents.concat(filtered);
+  }
+
+
+  private static applyKeywordsFilter(keywords: string,
+                                     source: BaseProjectItem[]): BaseProjectItem[] {
+    if (!keywords) {
+      return source;
+    }
+
+    return source.filter(x => x.name.toLocaleLowerCase().includes(keywords.toLocaleLowerCase()) ||
+                        (x.notes && x.notes.toLocaleLowerCase().includes(keywords.toLocaleLowerCase())));
   }
 
 

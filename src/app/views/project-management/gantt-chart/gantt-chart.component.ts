@@ -85,7 +85,7 @@ export class GanttChartComponent implements OnChanges {
     this.ganttService.getActivitiesTree(this.project.project)
                      .toPromise()
                      .then((x) => {
-                       this.tasks = FilterHelper.applyFilter(this.filter, x);
+                       this.tasks = FilterHelper.applyFilter(this.filter, x, '');
                        this.tasks = this.tasks.map((y) => this.setForeignLanguageText(y));
                      });
   }

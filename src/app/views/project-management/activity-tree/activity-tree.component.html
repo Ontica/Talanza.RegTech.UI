@@ -26,17 +26,26 @@
 
       <div style="width:24px"></div>
 
-      <button type="button" class="btn" [hidden]="treeEditionMode"
-              (click)="openExportDataDialog()" i18n>Export</button>
+      <ng-container *ngIf="!treeEditionMode">
+        <button type="button" class="btn"
+                (click)="openExportDataDialog()" i18n>Export</button>
+        &nbsp; &nbsp;
+        <input type="search" class="text-box" style="width:180px"
+              placeholder="Search tasks" (search)="onSearch()" [(ngModel)]="keywords">
+        <mat-icon (click)="onSearch()">search</mat-icon>
+      </ng-container>
 
-      <button type="button" class="btn-action" [hidden]="!treeEditionMode"
-              (click)="openAddEventDialog()" i18n>Add obligation</button>
-      &nbsp; &nbsp;
-      <button type="button" class="btn disabled" [hidden]="!treeEditionMode"
-              (click)="showInitialActivityInlineEditor()" i18n>Insert activity</button>
-      &nbsp; &nbsp;
-      <button type="button" class="btn disabled" [hidden]="!treeEditionMode"
-              (click)="openCheckProcessesDialog()" i18n>Check processes</button>
+      <ng-container *ngIf="treeEditionMode">
+        <button type="button" class="btn-action" [hidden]="!treeEditionMode"
+                (click)="openAddEventDialog()" i18n>Add obligation</button>
+        &nbsp; &nbsp;
+        <button type="button" class="btn disabled" [hidden]="!treeEditionMode"
+                (click)="showInitialActivityInlineEditor()" i18n>Insert activity</button>
+        &nbsp; &nbsp;
+        <button type="button" class="btn disabled" [hidden]="!treeEditionMode"
+                (click)="openCheckProcessesDialog()" i18n>Check processes</button>
+      </ng-container>
+
     </div>
 
   </div>

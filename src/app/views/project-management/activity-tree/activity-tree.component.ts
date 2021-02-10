@@ -57,6 +57,8 @@ export class ActivityTreeComponent implements OnChanges {
 
   statusFilter: ProjectItemStatus = 'Incomplete';
 
+  keywords: '';
+
   private collapsableTreeHandler: CollapsableTree;
 
   constructor(private dialog: MatDialog) { }
@@ -90,6 +92,9 @@ export class ActivityTreeComponent implements OnChanges {
     return this.collapsableTreeHandler.nodeDisplayMode(activity);
   }
 
+  onSearch() {
+    this.displayActivitiesTree();
+  }
 
   toggleCollapse(activity: Activity) {
     return this.collapsableTreeHandler.toggleCollapse(activity);
@@ -352,11 +357,12 @@ export class ActivityTreeComponent implements OnChanges {
       this.filteredActivities = this.project.activities;
     } else {
       this.filter.status = this.statusFilter;
-      this.filteredActivities = FilterHelper.applyFilter(this.filter, this.project.activities);
+      this.filteredActivities = FilterHelper.applyFilter(this.filter, this.project.activities,
+                                                         this.keywords);
     }
 
     this.collapsableTreeHandler = new CollapsableTree(this.filteredActivities,
-      this.collapsedActivities);
+                                                      this.collapsedActivities);
 
     if (this.selectedActivity.project.uid !== this.project.project.uid) {
       this.selectedActivity = EmptyActivity;

@@ -27,12 +27,14 @@ export const DefaultDuration: Duration = {
 };
 
 
-export interface BaseProjectItem {
+export interface BaseProjectItem extends Identifiable {
   readonly id: number;
-  readonly uid: string;
   readonly parent: Identifiable | number;
 
   position: number;
+
+  name: string;
+  notes: string;
 
   theme: string;
   resource: string;
@@ -43,9 +45,8 @@ export interface BaseProjectItem {
 }
 
 
-export interface Activity extends Identifiable, PartitionedType, BaseProjectItem  {
+export interface Activity extends PartitionedType, BaseProjectItem  {
   id: number;
-  notes: string;
   project: Project;
   parent: Identifiable;
 
