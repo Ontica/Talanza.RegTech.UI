@@ -34,7 +34,7 @@
 </div>
 
 
-<emp-ng-modal-window *ngIf="displayDataObjectEditor && selectedDataObject" [config]="{ width:'1200px', height: '90%', disableClose: true }"
+<emp-ng-modal-window *ngIf="displayDataObjectEditor && selectedDataObject" [config]="{ width:'800px', height: '600px', disableClose: true }"
                         (modalWindowClose)="hideEditors()">
     <emp-steps-activity-data-object
       [dataObject]="selectedDataObject" (designerClose)="hideEditors()">

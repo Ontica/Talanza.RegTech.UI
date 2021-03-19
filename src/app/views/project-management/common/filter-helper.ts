@@ -39,7 +39,7 @@ export class FilterHelper {
 
     filtered.sort((x, y) => (x.position < y.position) ? -1 : (x.position > y.position ? 1 : 0));
 
-    console.log('filter applied', filtered.length);
+    // console.log('filter applied', filtered.length);
 
     return filtered;
   }
