@@ -20,11 +20,21 @@ export class CardComponent {
 
   @Input() disableClose = false;
 
+  @Input() hideScrollbar = false;
+
   @Output() cardClose = new EventEmitter<void>();
 
 
   onClose() {
     this.cardClose.emit();
+  }
+
+
+  getOverflowClass() {
+    if (this.hideScrollbar) {
+      return "hideScrollbar";
+    }
+    return '';
   }
 
 }
