@@ -28,6 +28,13 @@ export class ActivityDataObjectsListComponent implements OnChanges {
 
   dataObjects: DataObject[] = [];
 
+  fileToUpload: File = null;
+
+  showTemplateViewer = false;
+  templateMode = true;
+
+  selectedDataObject: DataObject;
+
   constructor(private service: DataObjectsService) { }
 
   ngOnChanges() {
@@ -49,6 +56,42 @@ export class ActivityDataObjectsListComponent implements OnChanges {
     };
 
     this.listEvent.emit(event);
+  }
+
+  selectTemplate(dataObject: DataObject, templateMode: boolean) {
+    this.selectedDataObject = dataObject;
+    this.templateMode = templateMode;
+    this.showTemplateViewer = true;
+  }
+
+  hideTemplateViewer() {
+    this.showTemplateViewer = false;
+  }
+
+  removeUploadedFile(dataObject: DataObject) {
+    if (!confirm(`Do you want to remove the uploded file for requisite ${dataObject.name}?`)) {
+      return;
+    }
+    this.service.removeDataObject(dataObject)
+        .then(() => this.loadDataObjects());
+  }
+
+
+  uploadFile(dataObject: DataObject, files: FileList) {
+    if (!files || files.length === 0) {
+      return;
+    }
+
+    const file = files.item(0);
+
+    this.fileToUpload = file;
+    console.log('uploadFile', dataObject, file);
+
+    this.fileToUpload = file;
+
+    this.service.uploadFile(dataObject, this.fileToUpload)
+        .then(() => this.loadDataObjects());
+
   }
 
   private loadDataObjects() {

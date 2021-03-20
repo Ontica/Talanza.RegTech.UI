@@ -13,6 +13,7 @@ export interface DataSource {
   type: string;
   family: string;
   name: string;
+  mediaFormat: string;
   description: string;
   templateUrl?: string;
 }
@@ -23,6 +24,7 @@ export const EmptyDataSource: DataSource = {
   type: '',
   family: '',
   name: '',
+  mediaFormat: '',
   description: ''
 };
 
@@ -42,4 +44,7 @@ export interface DataObject {
   templateUrl?: string;
   status: string;
   decorator: string;
+  dataObject: DataSource,
+  optional: string;
+  legalBasis: string;
 }

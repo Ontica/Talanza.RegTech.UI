@@ -105,11 +105,25 @@ export class DataObjectsService {
                .toPromise();
   }
 
+  uploadFile(dataObject: DataObject, fileToUpload: File): Promise<DataObject> {
+    Assertion.assertValue(dataObject, 'dataObject');
+    Assertion.assertValue(fileToUpload, 'fileToUpload');
+
+    const path = `v3/empiria-steps/data-objects/${dataObject.uid}/upload-file/${dataObject.subject.uid}`;
+
+    const formData: FormData = new FormData();
+
+    formData.append('media', fileToUpload, fileToUpload.name);
+
+    return this.http.post<DataObject>(path, formData)
+               .toPromise();
+
+  }
 
   removeDataObject(dataObject: DataObject): Promise<any> {
     Assertion.assertValue(dataObject, 'dataObject');
 
-    const path = `v3/empiria-steps/data-objects/${dataObject.uid}`;
+    const path = `v3/empiria-steps/data-objects/${dataObject.uid}/upload-file/${dataObject.subject.uid}`;
 
     return this.http.delete<any>(path)
                .toPromise();

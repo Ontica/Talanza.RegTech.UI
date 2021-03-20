@@ -13,12 +13,11 @@
 
   <mat-tab-group color="accent">
 
-    <mat-tab [label]="dataObject.action" i18n-label>
-
-      <emp-data-requester [dataObject]="dataObject"
-                          (dataObjectEdition)="onDataObjectEdition($event)">
-      </emp-data-requester>
-
+    <mat-tab label="Requisite" i18n-label>
+      <emp-steps-requirement-editor
+        [requirement]="dataObject"
+        [readonly]="true">
+      </emp-steps-requirement-editor>
     </mat-tab>
 
     <mat-tab label="Annotations" i18n-label>

@@ -30,16 +30,32 @@
         {{dataObject.description}}
       </div>
 
-      <div class="list-item-right-column expand">
-        <a *ngIf="dataObject.templateUrl && !dataObject.uploadedFileUrl" [href]="dataObject.templateUrl" target="_blank">
-          <mat-icon class="material-icons">save_alt</mat-icon>Template
+      <div class="list-item-right-column expand" style="white-space: nowrap">
+        <a *ngIf="dataObject.templateUrl && dataObject.mediaFormat === 'PDF'" (click)="selectTemplate(dataObject, true)" i18n>
+          View Template
         </a>
-        <a *ngIf="dataObject.uploadedFileUrl" [href]="dataObject.uploadedFileUrl" target="_blank">
-          <mat-icon class="material-icons-outlined">insert_drive_file_outline</mat-icon>File
+        <a *ngIf="dataObject.templateUrl && dataObject.mediaFormat !== 'PDF'" [href]="dataObject.templateUrl" download i18n>
+          Download Template
         </a>
-        &nbsp; &nbsp; &nbsp;
-        <button *ngIf="dataObject.action != 'None'" type="button" class="btn right"
-                (click)="onSelectDataObject(dataObject)" i18n>{{dataObject.action}}</button>
+
+        <br><br>
+
+        <a *ngIf="dataObject.uploadedFileUrl && dataObject.mediaFormat === 'PDF'" (click)="selectTemplate(dataObject, false)" i18n>
+          Uploaded file
+        </a>
+        <a *ngIf="dataObject.uploadedFileUrl && dataObject.mediaFormat !== 'PDF'" [href]="dataObject.uploadedFileUrl" i18n>
+          Uploaded file
+        </a>
+        &nbsp;
+        <a *ngIf="dataObject.uploadedFileUrl" (click)="removeUploadedFile(dataObject)">
+          Remove
+        </a>
+
+        <button *ngIf="!dataObject.uploadedFileUrl" type="button" class="btn right"
+                (click)="fileInput.click()" i18n>Upload file</button>
+
+        <input #fileInput type="file"
+              (change)="uploadFile(dataObject, $event.target.files)" style='display:none'>
       </div>
 
     </div>
@@ -53,3 +69,13 @@
     This activity or obligation does not have defined requisites.
   </div>
 </div>
+
+<emp-ng-modal-window *ngIf="showTemplateViewer" [config]="{ width:'1200px', maxHeight: '95%', disableClose: true }"
+                     (modalWindowClose)="hideTemplateViewer()">
+    <emp-ng-card [title]="selectedDataObject.dataObject.name"
+                 [hint]="projectItem.name" [hideScrollbar]="true"
+                 (cardClose)="hideTemplateViewer()">
+    <emp-ng-object [data]="templateMode ? selectedDataObject.templateUrl : selectedDataObject.uploadedFileUrl"></emp-ng-object>
+  </emp-ng-card>
+
+</emp-ng-modal-window>

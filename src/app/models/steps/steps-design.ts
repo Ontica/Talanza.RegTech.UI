@@ -5,7 +5,7 @@
  * See LICENSE.txt in the project root for complete license information.
  */
 
-import { DataSource } from "../data-objects";
+import { DataSource, EmptyDataSource } from "../data-objects";
 
 
 export interface Step {
@@ -80,3 +80,13 @@ export interface StepRequirement {
   optional: string;
   legalBasis: string;
 }
+
+
+export const EmptyStepRequirement = {
+  uid: '',
+  name: '',
+  description: '',
+  dataObject: EmptyDataSource,
+  optional: '',
+  legalBasis: ''
+};
