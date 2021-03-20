@@ -14,23 +14,13 @@
             (click)="showRequirementEditor()" i18n>New requisite</button>
   </div>
 
-  <emp-ng-modal-window *ngIf="displayRequirementEditor && selectedRequirement"
-                       [config]="{ width:'1200px', height: '90%', disableClose: true }"
-                       (modalWindowClose)="hideEditor()">
-
-    <emp-data-object-designer *ngIf="selectedRequirement"
-      [dataObject]="selectedRequirement.dataObject" (designerClose)="hideEditor()">
-    </emp-data-object-designer>
-
-  </emp-ng-modal-window>
-
-
-  <emp-ng-modal-window *ngIf="displayRequirementEditor && !selectedRequirement"
+  <emp-ng-modal-window *ngIf="displayRequirementEditor"
                        [config]="{ width:'760px', height: '640px', disableClose: true }"
                        (modalWindowClose)="hideEditor()">
 
-    <emp-ng-card title='Obligation requirement editor' [hint]="step.name" (cardClose)="hideEditor()">
+    <emp-ng-card title='Obligation requisite editor' [hint]="step.name" (cardClose)="hideEditor()">
       <emp-steps-requirement-editor
+        [requirement]="selectedRequirement"
         (selected)="linkRequirement($event)">
       </emp-steps-requirement-editor>
     </emp-ng-card>

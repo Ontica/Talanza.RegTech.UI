@@ -5,7 +5,7 @@
  * See LICENSE.txt in the project root for complete license information.
  */
 
-import { Component, Output, EventEmitter, OnInit, OnDestroy } from '@angular/core';
+import { Component, Output, EventEmitter, OnInit, OnDestroy, Input, OnChanges } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { Observable, of, Subject } from 'rxjs';
@@ -13,16 +13,20 @@ import { map, startWith, takeUntil } from 'rxjs/operators';
 
 import { DataSource } from '@app/models/data-objects';
 
-import { StepRequirement } from '@app/models/steps';
+import { EmptyStepRequirement, StepRequirement } from '@app/models/steps';
 
 import { DataObjectsService } from '@app/data-services/data-objects';
+import { isEmpty } from '@app/core';
 
 
 @Component({
   selector: 'emp-steps-requirement-editor',
   templateUrl: './requirement-editor.component.html'
 })
-export class RequirementEditorComponent implements OnInit, OnDestroy {
+export class RequirementEditorComponent implements OnInit, OnChanges, OnDestroy {
+
+  @Input() requirement: StepRequirement = EmptyStepRequirement;
+  @Input() readonly = false;
 
   @Output() selected = new EventEmitter<StepRequirement>();
 
@@ -57,9 +61,31 @@ export class RequirementEditorComponent implements OnInit, OnDestroy {
   }
 
 
+  ngOnChanges() {
+    this.form.reset();
+    if (!isEmpty(this.requirement)) {
+      this.rebuildForm();
+    }
+    if (this.readonly) {
+      this.form.disable();
+    }
+  }
+
+
   ngOnDestroy() {
     this.destroyed.next();
     this.destroyed.complete();
+  }
+
+
+  private rebuildForm() {
+    this.form.reset({
+      name: this.requirement.name,
+      description: this.requirement.description,
+      dataObject: this.requirement.dataObject,
+      optional: this.requirement.optional,
+      legalBasis:this.requirement.legalBasis
+    });
   }
 
 
@@ -80,7 +106,7 @@ export class RequirementEditorComponent implements OnInit, OnDestroy {
 
 
   saveStepRequirement() {
-    if (!this.isValid) {
+    if (this.readonly || !this.isValid) {
       return;
     }
 
@@ -95,8 +121,10 @@ export class RequirementEditorComponent implements OnInit, OnDestroy {
   private getFormData(): StepRequirement {
     const formModel = this.form.value;
 
+    console.log(this.requirement.uid);
+
     const data = {
-      uid: null,
+      uid: this.requirement.uid,
       name: formModel.name,
       description: formModel.description,
       dataObject: formModel.dataObject,

@@ -14,7 +14,7 @@
       <tr>
         <td i18n>Description:</td>
         <td>
-          <textarea class="text-area" rows="4" formControlName="description"></textarea>
+          <textarea class="text-area" rows="6" formControlName="description"></textarea>
         </td>
       </tr>
       <tr>
@@ -45,17 +45,17 @@
       <tr>
         <td i18n>Legal basis:</td>
         <td>
-          <textarea class="text-area" rows="2" cols="25" formControlName="legalBasis"></textarea>
+          <textarea class="text-area" rows="4" cols="25" formControlName="legalBasis"></textarea>
         </td>
       </tr>
     </table>
 
-    <table class="form-section">
+    <table *ngIf="!readonly" class="form-section">
       <tr>
         <td>&nbsp;</td>
         <td class="text-align-right">
           <button type="button" class="btn right" [class.btn-action]="isValid"
-                  [disabled]="!isValid" (click)="saveStepRequirement()">Add requirement</button>
+                  [disabled]="!isValid" (click)="saveStepRequirement()">{{requirement.uid ? 'Save' : 'Add'}} requirement</button>
         </td>
       </tr>
 

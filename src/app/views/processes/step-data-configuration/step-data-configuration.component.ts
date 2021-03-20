@@ -12,8 +12,7 @@ import { Exception } from '@app/core';
 import { EventInfo } from '@app/core/data-types';
 
 import { ProjectItem } from '@app/models/project-management';
-import { DataObject } from '@app/models/data-objects';
-import { StepRequirement } from '@app/models/steps';
+import { EmptyStepRequirement, StepRequirement } from '@app/models/steps';
 
 import { DataObjectsService } from '@app/data-services/data-objects';
 
@@ -52,6 +51,7 @@ export class StepDataConfigurationComponent implements OnChanges {
   }
 
   showRequirementEditor() {
+    this.selectedRequirement = EmptyStepRequirement;
     this.displayRequirementEditor = true;
   }
 
@@ -88,7 +88,8 @@ export class StepDataConfigurationComponent implements OnChanges {
   }
 
 
-  private showStepDataObjectDesigner(dataObject: DataObject) {
+  private showStepDataObjectDesigner(requirement: StepRequirement) {
+    this.selectedRequirement = requirement;
     this.displayRequirementEditor = true;
   }
 

@@ -8,6 +8,7 @@
 import { Component, Input, EventEmitter, Output } from '@angular/core';
 
 import { EventInfo } from '@app/core/data-types';
+import { DataObject } from '@app/models/data-objects';
 
 import { StepRequirement } from '@app/models/steps';
 
@@ -24,6 +25,9 @@ export class RequirementsListComponent {
 
   @Output() listEvent = new EventEmitter<EventInfo>();
 
+  showTemplateViewer = false;
+
+  selectedDataObject: DataObject;
 
   onDeleteRequirement(requirement: StepRequirement) {
    const event = {
@@ -46,6 +50,26 @@ export class RequirementsListComponent {
     };
 
     this.listEvent.emit(event);
+  }
+
+  onSelectDataObject(dataObject: DataObject) {
+    const event = {
+      type: 'dataObjectSelected',
+      payload: {
+        dataObject
+      }
+    };
+
+    this.listEvent.emit(event);
+  }
+
+  selectTemplate(dataObject: DataObject) {
+    this.selectedDataObject = dataObject;
+    this.showTemplateViewer = true;
+  }
+
+  hideTemplateViewer() {
+    this.showTemplateViewer = false;
   }
 
 }

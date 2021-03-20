@@ -25,6 +25,13 @@
       </div>
 
       <div class="list-item-right-column expand" *ngIf="!readonly">
+        <a *ngIf="requirement.dataObject.templateUrl && requirement.dataObject.mediaFormat === 'PDF'" (click)="selectTemplate(requirement.dataObject)">
+          <mat-icon class="material-icons">description</mat-icon>Template
+        </a>
+        <a *ngIf="requirement.dataObject.templateUrl && requirement.dataObject.mediaFormat !== 'PDF'" [href]="requirement.dataObject.templateUrl" download>
+          <mat-icon class="material-icons">get_app</mat-icon>Download
+        </a>
+        &nbsp; &nbsp; &nbsp;
         <mat-icon class="material-icons-outlined" (click)="onDeleteRequirement(requirement)">delete_outline</mat-icon>
       </div>
     </div>
@@ -38,3 +45,12 @@
     There are not defined requisites for this obligation.
   </div>
 </div>
+
+<emp-ng-modal-window *ngIf="showTemplateViewer" [config]="{ width:'1200px', maxHeight: '95%', disableClose: true }"
+                     (modalWindowClose)="hideTemplateViewer()">
+    <emp-ng-card [title]="selectedDataObject.name"
+                 [hint]="selectedDataObject.name" [hideScrollbar]="true"
+                 (cardClose)="hideTemplateViewer()">
+    <emp-ng-object [data]="selectedDataObject.templateUrl"></emp-ng-object>
+  </emp-ng-card>
+</emp-ng-modal-window>

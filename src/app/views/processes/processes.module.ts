@@ -72,7 +72,8 @@ import { ProcessesRoutingModule } from './processes-routing.module';
   ],
 
   exports: [
-    ActivityDesignerComponent
+    ActivityDesignerComponent,
+    RequirementEditorComponent
   ],
 
   entryComponents: [
